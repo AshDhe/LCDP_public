@@ -20,7 +20,12 @@
 }
 
 .index-actions {
+  width: 100%;
   margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
 }
 
 @media (min-width: 768px) {
@@ -32,5 +37,9 @@
     width: 220px;
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .index-actions {
+    gap: var(--space-3);
   }
 }
