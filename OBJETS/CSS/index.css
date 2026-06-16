@@ -1,1 +1,36 @@
+/* PAGE INDEX PUBLIQUE */
 
+.index-section {
+  padding: var(--space-5) 0;
+}
+
+.index-content {
+  gap: var(--space-4);
+}
+
+.index-logo {
+  width: min(62vw, 220px);
+  height: auto;
+  margin: 0 auto;
+}
+
+.index-intro {
+  max-width: 620px;
+  margin-bottom: 0;
+}
+
+.index-actions {
+  margin-top: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .index-section {
+    padding: var(--space-6) 0;
+  }
+
+  .index-logo {
+    width: 220px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
