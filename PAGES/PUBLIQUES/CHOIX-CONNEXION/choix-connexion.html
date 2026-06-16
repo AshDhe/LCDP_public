@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="../../../OBJETS/CSS/base.css">
   <link rel="stylesheet" href="../../../OBJETS/CSS/bandeau-et-burger.css">
   <link rel="stylesheet" href="../../../OBJETS/CSS/footer.css">
+  <link rel="stylesheet" href="../../../OBJETS/CSS/index.css">
 </head>
 
 <body>
@@ -33,9 +34,9 @@
     <div id="lightbox-information-container"></div>
 
     <main class="site-main">
-      <section class="page-section" aria-label="Choix du profil de connexion">
+      <section class="page-section index-section" aria-label="Choix du profil de connexion">
         <div class="page-container">
-          <div class="page-content">
+          <div class="page-content index-content">
 
             <h1 class="site-title">
               Connexion
@@ -49,7 +50,7 @@
               Utilisez un onglet web différent pour vous connecter à plusieurs comptes en simultané.
             </p>
 
-            <div class="page-actions" aria-label="Choix du compte">
+            <div class="page-actions index-actions" aria-label="Choix du compte">
               <a
                 class="button"
                 href="../../../PAGES/PUBLIQUES/CONNEXION-MEMBRE/connexion-membre.html?source=connexion-choix"
@@ -116,6 +117,8 @@
 
         return siteRootRelative.replace(/\/?$/, "/") + chemin.replace(/^\//, "");
       }
+
+      window.construireUrlSite = construireUrlSite;
 
       document.querySelectorAll("[data-site-src]").forEach((element) => {
         element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
