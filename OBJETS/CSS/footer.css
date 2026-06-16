@@ -1,12 +1,13 @@
 /* FOOTER GLOBAL
    Compatible avec base.css.
-   Mobile first : liens empilés.
-   Desktop : liens alignés horizontalement.
+   Mobile first : liens empilés et centrés.
+   Desktop/tablette : liens alignés horizontalement et centrés.
 */
 
 
 #footer-container {
   width: 100%;
+  flex-shrink: 0;
 }
 
 .site-footer {
@@ -50,19 +51,19 @@
 }
 
 
-/* DESKTOP */
+/* TABLETTE ET DESKTOP */
 
 @media (min-width: 768px) {
   .site-footer {
     padding: var(--space-5) var(--page-padding-desktop);
-    text-align: left;
+    text-align: center;
   }
 
   .footer-links {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     gap: var(--space-2);
   }
 
