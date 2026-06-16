@@ -23,6 +23,14 @@
   color: var(--color-text);
 }
 
+.index-title span {
+  display: block;
+}
+
+.index-title span + span {
+  margin-top: 12px;
+}
+
 .index-actions {
   width: 100%;
   max-width: 760px;
