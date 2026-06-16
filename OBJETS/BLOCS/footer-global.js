@@ -11,44 +11,60 @@
     const container = document.getElementById("footer-container");
 
     if (!container) {
-      console.warn("Footer global : #footer-container introuvable.");
+      console.warn("Footer global : conteneur #footer-container introuvable.");
       return;
     }
 
-    const urlFooterHtml = construireUrlFooterHtml();
+    const urlsPossibles = construireUrlsPossiblesFooter();
 
-    try {
-      const response = await fetch(urlFooterHtml, {
-        method: "GET",
-        credentials: "same-origin",
-        cache: "no-cache"
-      });
+    for (const url of urlsPossibles) {
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          credentials: "same-origin",
+          cache: "no-cache"
+        });
 
-      if (!response.ok) {
-        throw new Error("Erreur HTTP " + response.status);
+        if (!response.ok) {
+          continue;
+        }
+
+        const html = await response.text();
+
+        if (!html.trim().startsWith("<footer")) {
+          continue;
+        }
+
+        container.innerHTML = html;
+        corrigerLiensFooterGlobal(container);
+        return;
+
+      } catch (error) {
+        console.warn("Footer global : tentative échouée :", url, error);
       }
-
-      const html = await response.text();
-
-      if (!html.trim().startsWith("<footer")) {
-        throw new Error("Le fichier chargé n'est pas le HTML du footer.");
-      }
-
-      container.innerHTML = html;
-      corrigerLiensFooterGlobal(container);
-
-    } catch (error) {
-      console.error("Footer global non chargé :", error);
-      console.error("URL footer-global.html appelée :", urlFooterHtml);
     }
+
+    console.error("Footer global : aucun fichier footer-global.html valide n'a été chargé.");
+    console.error("URLs essayées :", urlsPossibles);
   }
 
-  function construireUrlFooterHtml() {
+  function construireUrlsPossiblesFooter() {
+    const urls = [];
+
     if (scriptUrl) {
-      return new URL("footer-global.html", scriptUrl).href;
+      urls.push(new URL("footer-global.html", scriptUrl).href);
     }
 
-    return construireUrlSite("/OBJETS/BLOCS/footer-global.html");
+    urls.push(construireUrlSite("/OBJETS/BLOCS/footer-global.html"));
+
+    if (window.SITE_ROOT_RELATIVE) {
+      urls.push(
+        window.SITE_ROOT_RELATIVE.replace(/\/?$/, "/") +
+        "OBJETS/BLOCS/footer-global.html"
+      );
+    }
+
+    return [...new Set(urls)];
   }
 
   function corrigerLiensFooterGlobal(scope) {
