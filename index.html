@@ -41,10 +41,10 @@
               class="index-logo"
             >
 
-            <h1 class="site-title index-title">
-              La Clé du Parc vous donne accès à un réseau d'exception.
+            <h2 class="site-title index-title">
+              La Clé du Parc vous donne accès à un réseau d'exception.<br>
               Des parcs privés en plein air pour venir vous ressourcer dans de bonnes conditions.
-            </h1>
+            </h2>
 
             <div class="page-actions index-actions" aria-label="Accès principaux">
               <a class="button" href="./PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html">
@@ -72,6 +72,26 @@
     <div id="footer-container"></div>
 
   </div>
+
+  <script>
+    document.querySelectorAll("[data-site-src]").forEach((element) => {
+      const chemin = element.getAttribute("data-site-src");
+
+      const siteBase =
+        window.SITE_BASE ||
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        "";
+
+      if (!chemin) return;
+
+      if (siteBase) {
+        element.setAttribute("src", siteBase.replace(/\/$/, "") + chemin);
+      } else {
+        element.setAttribute("src", "." + chemin);
+      }
+    });
+  </script>
 
   <script src="./OBJETS/BLOCS/burger-public.js"></script>
   <script src="./OBJETS/BLOCS/footer-global.js"></script>
