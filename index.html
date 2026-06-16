@@ -18,11 +18,11 @@
       "";
   </script>
 
-  <!-- CSS : base commune navigation haute + burger puis pied de page et ensuite spécifique index -->
-   <link rel="stylesheet" href="./OBJETS/CSS/base.css">
-   <link rel="stylesheet" href="./OBJETS/CSS/bandeau-et-burger.css">
-   <link rel="stylesheet" href="./OBJETS/CSS/footer.css">
-   <link rel="stylesheet" href="./OBJETS/CSS/index.css">
+  <!-- CSS : base commune, bandeau/burger, footer, puis CSS spécifique index -->
+  <link rel="stylesheet" href="./OBJETS/CSS/base.css">
+  <link rel="stylesheet" href="./OBJETS/CSS/bandeau-et-burger.css">
+  <link rel="stylesheet" href="./OBJETS/CSS/footer.css">
+  <link rel="stylesheet" href="./OBJETS/CSS/index.css">
 </head>
 
 <body>
@@ -36,30 +36,46 @@
           <div class="page-content index-content">
 
             <img
-              src="./OBJETS/IMAGES/LOGO/logo.png"
+              data-site-src="/OBJETS/IMAGES/LOGO/logo.png"
               alt="Logo La Clé du Parc"
               class="index-logo"
             >
 
             <h2 class="site-title index-title">
-              La Clé du Parc vous donne accès à un réseau d'exception.<br>
-              Des parcs privés en plein air pour venir vous ressourcer dans de bonnes conditions.
+              <span>La Clé du Parc vous donne accès à un réseau d'exception.</span>
+              <span>Des parcs privés en plein air pour venir vous ressourcer dans de bonnes conditions.</span>
             </h2>
 
             <div class="page-actions index-actions" aria-label="Accès principaux">
-              <a class="button" href="./PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html">
+              <a
+                class="button"
+                href="./PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html"
+                data-site-href="/PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html"
+              >
                 Connexion
               </a>
 
-              <a class="button" href="./PAGES/PUBLIQUES/ACTUALITES/actualites.html">
+              <a
+                class="button"
+                href="./PAGES/PUBLIQUES/ACTUALITES/actualites.html"
+                data-site-href="/PAGES/PUBLIQUES/ACTUALITES/actualites.html"
+              >
                 Actualités
               </a>
 
-              <a class="button" href="./PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html">
+              <a
+                class="button"
+                href="./PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html"
+                data-site-href="/PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html"
+              >
                 Être invité(e)
               </a>
 
-              <a class="button" href="./PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html">
+              <a
+                class="button"
+                href="./PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html"
+                data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html"
+              >
                 Découvrir le club
               </a>
             </div>
@@ -74,23 +90,44 @@
   </div>
 
   <script>
-    document.querySelectorAll("[data-site-src]").forEach((element) => {
-      const chemin = element.getAttribute("data-site-src");
-
-      const siteBase =
+    (() => {
+      const siteBase = (
         window.SITE_BASE ||
         window.SITE_CONFIG?.publicBaseUrl ||
         window.SITE_CONFIG?.siteBase ||
-        "";
+        ""
+      ).replace(/\/$/, "");
 
-      if (!chemin) return;
+      function construireUrlSite(chemin) {
+        if (!chemin) return chemin;
 
-      if (siteBase) {
-        element.setAttribute("src", siteBase.replace(/\/$/, "") + chemin);
-      } else {
-        element.setAttribute("src", "." + chemin);
+        if (
+          chemin.startsWith("#") ||
+          chemin.startsWith("mailto:") ||
+          chemin.startsWith("tel:") ||
+          chemin.startsWith("http://") ||
+          chemin.startsWith("https://")
+        ) {
+          return chemin;
+        }
+
+        if (siteBase) {
+          return chemin.startsWith("/")
+            ? siteBase + chemin
+            : siteBase + "/" + chemin.replace(/^\.\//, "");
+        }
+
+        return chemin.startsWith("/") ? "." + chemin : chemin;
       }
-    });
+
+      document.querySelectorAll("[data-site-src]").forEach((element) => {
+        element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+      });
+
+      document.querySelectorAll("[data-site-href]").forEach((element) => {
+        element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+      });
+    })();
   </script>
 
   <script src="./OBJETS/BLOCS/burger-public.js"></script>
