@@ -15,10 +15,15 @@
 
 /* BANDEAU HAUT */
 
-.site-header {
+#bandeau-nav-container {
   position: sticky;
   top: 0;
   z-index: 1000;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.site-header {
   width: 100%;
   background: rgba(255, 255, 255, 0.96);
   border-bottom: 2px solid var(--color-logo-green);
@@ -151,6 +156,14 @@
   .site-header-inner {
     min-height: 72px;
     padding: 0 var(--page-padding-desktop);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .site-logo {
+    margin-right: auto;
   }
 
   .burger-button {
@@ -159,6 +172,7 @@
 
   .burger-nav {
     position: static;
+    width: auto;
     max-height: none;
     margin-left: auto;
     padding: 0;
@@ -166,16 +180,17 @@
     border-radius: 0;
     background: transparent;
     display: flex;
+    flex: 0 0 auto;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    gap: var(--space-4);
+    gap: 22px;
     overflow: visible;
   }
 
   .burger-nav a {
     min-height: 40px;
-    padding: 8px 0;
+    padding: 6px 0;
     font-size: 16px;
     white-space: nowrap;
   }
