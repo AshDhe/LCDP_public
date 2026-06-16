@@ -15,7 +15,7 @@
 }
 
 .index-title {
-  max-width: 720px;
+  max-width: 760px;
   margin-bottom: 0;
   font-size: clamp(24px, 5vw, 34px);
   line-height: 1.22;
@@ -31,7 +31,7 @@
   margin-top: 12px;
 }
 
-.index-actions {
+.page-actions.index-actions {
   width: 100%;
   max-width: 760px;
   margin-top: var(--space-4);
@@ -40,7 +40,7 @@
   gap: var(--space-3);
 }
 
-.index-actions .button {
+.page-actions.index-actions .button {
   width: 100%;
   max-width: none;
 }
@@ -56,7 +56,7 @@
     margin-right: auto;
   }
 
-  .index-actions {
+  .page-actions.index-actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-3);
   }

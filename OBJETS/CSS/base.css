@@ -8,6 +8,7 @@
   --color-primary-hover: #183229;
   --color-border: rgba(31, 42, 36, 0.22);
   --color-border-strong: rgba(31, 42, 36, 0.42);
+  --color-logo-green: #55733f;
 
   --font-main: Arial, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
@@ -146,7 +147,7 @@ p,
   max-width: 340px;
   min-height: 58px;
   padding: 15px 22px;
-  border: 1.5px solid var(--color-border-strong);
+  border: 2px solid var(--color-logo-green);
   border-radius: var(--radius-button);
   background: var(--color-surface);
   color: var(--color-text);
@@ -161,3 +162,12 @@ p,
   justify-content: center;
   cursor: pointer;
 }
+
+  .button:hover,
+  .button-group a:hover,
+  .button-group button:hover,
+  .page-actions a:hover,
+  .page-actions button:hover {
+    background: transparent;
+    color: var(--color-primary);
+  }
