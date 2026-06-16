@@ -12,12 +12,25 @@
   <script src="../../../config.js"></script>
 
   <script>
-    window.SITE_BASE =
-      window.SITE_CONFIG?.publicBaseUrl ||
-      window.SITE_CONFIG?.siteBase ||
-      "";
+    (() => {
+      const siteRootRelative = "../../../";
+      const baseDepuisChemin = new URL(siteRootRelative, window.location.href);
 
-    window.SITE_ROOT_RELATIVE = "../../../";
+      let siteBaseFallback = baseDepuisChemin.pathname.replace(/\/$/, "");
+
+      if (siteBaseFallback === "/") {
+        siteBaseFallback = "";
+      }
+
+      window.SITE_ROOT_RELATIVE = siteRootRelative;
+
+      window.SITE_BASE = (
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        siteBaseFallback ||
+        ""
+      ).replace(/\/$/, "");
+    })();
   </script>
 
   <!-- CSS communs -->
