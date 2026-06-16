@@ -76,7 +76,7 @@ a {
 
 #footer-container {
   width: 100%;
-  margin-top: var(--space-4);
+  margin-top: var(--space-1);
 }
 
 .page-container {
@@ -246,7 +246,7 @@ p,
   }
 
  #footer-container {
-    margin-top: var(--space-3);
+    margin-top: var(--space-4);
   }
 
 }

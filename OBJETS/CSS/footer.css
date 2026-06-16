@@ -56,7 +56,7 @@
 
 @media (min-width: 768px) {
   .site-footer {
-    padding: var(--space-5) var(--page-padding-desktop);
+    padding: var(--space-2) var(--page-padding-desktop);
     text-align: center;
   }
 
