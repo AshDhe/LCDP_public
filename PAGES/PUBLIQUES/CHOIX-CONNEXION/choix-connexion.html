@@ -1,1 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
 
+  <title>Me connecter - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choisir le type de compte pour se connecter à La Clé du Parc.">
+
+  <!-- SITEBASE : config.js est chargé avant les scripts métier -->
+  <script src="../../../config.js"></script>
+
+  <script>
+    window.SITE_BASE =
+      window.SITE_CONFIG?.publicBaseUrl ||
+      window.SITE_CONFIG?.siteBase ||
+      "";
+
+    window.SITE_ROOT_RELATIVE = "../../../";
+  </script>
+
+  <!-- CSS communs -->
+  <link rel="stylesheet" href="../../../OBJETS/CSS/base.css">
+  <link rel="stylesheet" href="../../../OBJETS/CSS/bandeau-et-burger.css">
+  <link rel="stylesheet" href="../../../OBJETS/CSS/footer.css">
+</head>
+
+<body>
+  <div class="site-page">
+
+    <div id="bandeau-nav-container"></div>
+    <div id="lightbox-information-container"></div>
+
+    <main class="site-main">
+      <section class="page-section" aria-label="Choix du profil de connexion">
+        <div class="page-container">
+          <div class="page-content">
+
+            <h1 class="site-title">
+              Connexion
+            </h1>
+
+            <p class="site-subtitle">
+              Choisissez votre compte.
+            </p>
+
+            <p>
+              Utilisez un onglet web différent pour vous connecter à plusieurs comptes en simultané.
+            </p>
+
+            <div class="page-actions" aria-label="Choix du compte">
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/CONNEXION-MEMBRE/connexion-membre.html?source=connexion-choix"
+                data-site-href="/PAGES/PUBLIQUES/CONNEXION-MEMBRE/connexion-membre.html?source=connexion-choix"
+              >
+                Membre du club
+              </a>
+
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/CONNEXION-PARC/connexion-parc.html?source=connexion-choix"
+                data-site-href="/PAGES/PUBLIQUES/CONNEXION-PARC/connexion-parc.html?source=connexion-choix"
+              >
+                Responsable de parc
+              </a>
+
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/CONNEXION-COACH/connexion-coach.html?source=connexion-choix"
+                data-site-href="/PAGES/PUBLIQUES/CONNEXION-COACH/connexion-coach.html?source=connexion-choix"
+              >
+                Organisateur d’activité
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+  </div>
+
+  <script>
+    (() => {
+      const siteBase = (
+        window.SITE_BASE ||
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        ""
+      ).replace(/\/$/, "");
+
+      const siteRootRelative = window.SITE_ROOT_RELATIVE || "../../../";
+
+      function construireUrlSite(chemin) {
+        if (!chemin) return chemin;
+
+        if (
+          chemin.startsWith("#") ||
+          chemin.startsWith("mailto:") ||
+          chemin.startsWith("tel:") ||
+          chemin.startsWith("http://") ||
+          chemin.startsWith("https://")
+        ) {
+          return chemin;
+        }
+
+        if (siteBase) {
+          return chemin.startsWith("/")
+            ? siteBase + chemin
+            : siteBase + "/" + chemin.replace(/^\.\//, "");
+        }
+
+        return siteRootRelative.replace(/\/?$/, "/") + chemin.replace(/^\//, "");
+      }
+
+      document.querySelectorAll("[data-site-src]").forEach((element) => {
+        element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+      });
+
+      document.querySelectorAll("[data-site-href]").forEach((element) => {
+        element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+      });
+    })();
+  </script>
+
+  <script src="../../../OBJETS/BLOCS/lightbox-information.js"></script>
+  <script src="../../../OBJETS/BLOCS/burger-public.js"></script>
+  <script src="../../../OBJETS/BLOCS/footer-global.js"></script>
+</body>
+</html>
