@@ -35,7 +35,14 @@
     scope.querySelectorAll(selector).forEach((element) => {
       const valeur = element.getAttribute(attribut);
 
-      if (!valeur || valeur.startsWith("#") || valeur.startsWith("mailto:") || valeur.startsWith("tel:")) {
+      if (
+        !valeur ||
+        valeur.startsWith("#") ||
+        valeur.startsWith("mailto:") ||
+        valeur.startsWith("tel:") ||
+        valeur.startsWith("http://") ||
+        valeur.startsWith("https://")
+      ) {
         return;
       }
 
@@ -46,19 +53,21 @@
   function construireUrlSite(chemin) {
     const siteBase = normaliserSiteBase();
 
-    if (!chemin || chemin.startsWith("http://") || chemin.startsWith("https://")) {
+    if (!chemin) return chemin;
+
+    if (chemin.startsWith("http://") || chemin.startsWith("https://")) {
       return chemin;
     }
 
     if (!siteBase) {
-      return chemin;
+      return chemin.startsWith("/") ? "." + chemin : chemin;
     }
 
     if (chemin.startsWith("/")) {
       return siteBase + chemin;
     }
 
-    return siteBase + "/" + chemin.replace(/^\\.\\//, "");
+    return siteBase + "/" + chemin.replace(/^\.\//, "");
   }
 
   function normaliserSiteBase() {
@@ -68,6 +77,6 @@
       window.SITE_CONFIG?.siteBase ||
       "";
 
-    return siteBase.replace(/\\/$/, "");
+    return siteBase.replace(/\/$/, "");
   }
 })();

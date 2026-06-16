@@ -109,14 +109,14 @@
     }
 
     if (!siteBase) {
-      return chemin;
+      return chemin.startsWith("/") ? "." + chemin : chemin;
     }
 
     if (chemin.startsWith("/")) {
       return siteBase + chemin;
     }
 
-    return siteBase + "/" + chemin.replace(/^\.//, "");
+    return siteBase + "/" + chemin.replace(/^\.\//, "");
   }
 
   function normaliserSiteBase() {
