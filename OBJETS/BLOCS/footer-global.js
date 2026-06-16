@@ -51,23 +51,34 @@
   }
 
   function construireUrlSite(chemin) {
+    if (typeof window.construireUrlSite === "function") {
+      return window.construireUrlSite(chemin);
+    }
+
     const siteBase = normaliserSiteBase();
+    const siteRootRelative = window.SITE_ROOT_RELATIVE || "./";
 
     if (!chemin) return chemin;
 
-    if (chemin.startsWith("http://") || chemin.startsWith("https://")) {
+    if (
+      chemin.startsWith("#") ||
+      chemin.startsWith("mailto:") ||
+      chemin.startsWith("tel:") ||
+      chemin.startsWith("http://") ||
+      chemin.startsWith("https://")
+    ) {
       return chemin;
     }
 
-    if (!siteBase) {
-      return chemin.startsWith("/") ? "." + chemin : chemin;
+    if (siteBase) {
+      return chemin.startsWith("/")
+        ? siteBase + chemin
+        : siteBase + "/" + chemin.replace(/^\.\//, "");
     }
 
-    if (chemin.startsWith("/")) {
-      return siteBase + chemin;
-    }
-
-    return siteBase + "/" + chemin.replace(/^\.\//, "");
+    return chemin.startsWith("/")
+      ? siteRootRelative.replace(/\/?$/, "/") + chemin.replace(/^\//, "")
+      : chemin;
   }
 
   function normaliserSiteBase() {
