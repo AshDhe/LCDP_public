@@ -211,6 +211,52 @@
   </div>
 
   <script>
+    const GALERIE_INSCRIPTION_MEMBRE = {
+      titre: "Pourquoi ouvrir votre compte membre invité ?",
+      classeSection: "section-galerie-compte",
+      ariaLabel: "Les avantages du compte invité",
+      cartes: [
+        {
+          titre: "Faites-vous inviter",
+          imageSrc: "/OBJETS/IMAGES/GALERIE/MEMBRE-INVITE/membre-invite.jpg",
+          imageAlt: "Membre invité La Clé du Parc",
+          texte: "Un membre abonné peut inviter un membre invité de son réseau à chaque invitation. Accédez à des espaces privés d'exception et rejoignez un réseau qui valorise les activités de plein air, les rencontres choisies et un usage respectueux des lieux."
+        },
+        {
+          titre: "Venez vous ressourcer",
+          imageSrc: "/OBJETS/IMAGES/GALERIE/OUVRIR-MON-COMPTE/petits-groupes.jpg",
+          imageAlt: "Se ressourcer seul ou en groupe avec La Clé du Parc",
+          texte: "Prenez le temps de vous ressourcer et de partager vos passions dans un cadre calme, naturel et sécurisé. La Clé du Parc vous donne accès à des parcs privés d'exception sélectionnés pour leur capacité à vous apporter une véritable respiration."
+        },
+        {
+          titre: "Partagez des moments uniques",
+          imageSrc: "/OBJETS/IMAGES/GALERIE/OUVRIR-MON-COMPTE/vous-ressourcer.jpg",
+          imageAlt: "Partager des moments uniques avec La Clé du Parc",
+          texte: "La Clé du Parc vous donne accès à des lieux d'exception pour vivre et partager des moments uniques. Autorisez-vous des accès privilégiés, sans excès, et toujours avec autorisation."
+        },
+        {
+          titre: "Venez en famille",
+          imageSrc: "/OBJETS/IMAGES/GALERIE/MEMBRE-INVITE/invite-famille.jpg",
+          imageAlt: "Invité famille La Clé du Parc",
+          texte: "Un membre abonné famille peut inviter les membres invités de sa famille à chaque réservation qu'il effectue sous son compte abonné dans l'application."
+        },
+        {
+          titre: "Invité(e) par un coach",
+          imageSrc: "/OBJETS/IMAGES/GALERIE/OUVRIR-MON-COMPTE/activite-coach.jpg",
+          imageAlt: "Activités et coachs avec La Clé du Parc",
+          texte: "Un coach peut inviter des membres invités de son réseau à chaque réservation qu'il effectue sous son compte coach dans l'application. En tant que membre invité, vous pouvez suivre votre coach dans le cadre des activités qu'il organise."
+        },
+        {
+          titre: "Des lieux forts en émotion",
+          imageSrc: "/OBJETS/IMAGES/GALERIE/OUVRIR-MON-COMPTE/lieux-inoubliables.jpg",
+          imageAlt: "Des parcs d'exception avec La Clé du Parc",
+          texte: "La Clé du Parc vous donne accès à des parcs privés d'exception sélectionnés pour leur qualité esthétique, leur environnement naturel remarquable et leur capacité à vous apporter une véritable respiration pour vos activités de plein air."
+        }
+      ]
+    };
+  </script>
+
+  <script>
     (() => {
       const siteBase = (
         window.SITE_BASE ||
@@ -287,6 +333,47 @@
         }
       }
 
+      function renseignerGalerie(configuration) {
+        const section = document.querySelector("#galerie-container .section-galerie");
+        const titre = document.querySelector("#galerie-container [data-galerie-titre]");
+        const grille = document.querySelector("#galerie-container [data-galerie-grid]");
+
+        if (!section || !titre || !grille || !configuration) return;
+
+        if (configuration.classeSection) {
+          section.classList.add(configuration.classeSection);
+        }
+
+        if (configuration.ariaLabel) {
+          section.setAttribute("aria-label", configuration.ariaLabel);
+        }
+
+        titre.textContent = configuration.titre || "";
+
+        grille.innerHTML = "";
+
+        configuration.cartes.forEach((carte) => {
+          const article = document.createElement("article");
+          article.className = "galerie-card";
+
+          const h3 = document.createElement("h3");
+          h3.textContent = carte.titre;
+
+          const image = document.createElement("img");
+          image.src = construireUrlSite(carte.imageSrc);
+          image.alt = carte.imageAlt || "";
+
+          const texte = document.createElement("p");
+          texte.textContent = carte.texte;
+
+          article.appendChild(h3);
+          article.appendChild(image);
+          article.appendChild(texte);
+
+          grille.appendChild(article);
+        });
+      }
+
       window.construireUrlSite = construireUrlSite;
 
       corrigerCheminsSite(document);
@@ -294,7 +381,9 @@
       chargerBlocHtml(
         "galerie-container",
         "/OBJETS/BLOCS/galerie.html"
-      );
+      ).then(() => {
+        renseignerGalerie(GALERIE_INSCRIPTION_MEMBRE);
+      });
     })();
   </script>
 
