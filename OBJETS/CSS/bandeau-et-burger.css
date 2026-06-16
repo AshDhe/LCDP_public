@@ -6,13 +6,17 @@
 /* CONTENEUR D'INJECTION */
 
 #bandeau-nav-container {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   z-index: 1000;
   width: 100%;
   flex-shrink: 0;
 }
 
+body {
+  padding-top: 64px;
+}
 
 /* BANDEAU HAUT */
 
@@ -154,5 +158,9 @@
   .burger-nav {
     right: var(--page-padding-desktop);
     width: 320px;
+  }
+
+    body {
+    padding-top: 72px;
   }
 }
