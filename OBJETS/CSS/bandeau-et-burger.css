@@ -1,11 +1,9 @@
 /* BANDEAU DE NAVIGATION ET BURGER MENU
-   Compatible avec base.css.
-   Mobile first : logo à gauche, bouton burger à droite.
-   Tablette/desktop : menu horizontal visible, bouton burger masqué.
+   Burger visible sur mobile, tablette et desktop.
 */
 
 
-/* BANDEAU HAUT */
+/* CONTENEUR D'INJECTION */
 
 #bandeau-nav-container {
   position: sticky;
@@ -15,10 +13,13 @@
   flex-shrink: 0;
 }
 
+
+/* BANDEAU HAUT */
+
 .site-header {
   width: 100%;
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 2px solid var(--color-logo-green);
+  background: var(--color-logo-green);
+  border-bottom: none;
 }
 
 .site-header-inner {
@@ -40,13 +41,13 @@
   font-size: 18px;
   line-height: 1.2;
   font-weight: 700;
-  color: var(--color-logo-green);
+  color: #ffffff;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .site-logo:visited {
-  color: var(--color-logo-green);
+  color: #ffffff;
 }
 
 
@@ -56,9 +57,9 @@
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 2px solid var(--color-logo-green);
+  border: 2px solid #ffffff;
   border-radius: var(--radius-button);
-  background: var(--color-surface);
+  background: #ffffff;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -91,14 +92,14 @@
 }
 
 
-/* MENU MOBILE */
+/* MENU DEROULANT */
 
 .burger-nav {
   position: absolute;
   top: calc(100% + var(--space-1));
-  left: var(--page-padding-mobile);
   right: var(--page-padding-mobile);
   z-index: 1001;
+  width: min(320px, calc(100vw - 36px));
   max-height: calc(100vh - 88px);
   padding: var(--space-2);
   border: 1px solid var(--color-border);
@@ -137,7 +138,7 @@
 
 .burger-button:focus-visible,
 .burger-nav a:focus-visible {
-  outline: 3px solid rgba(35, 68, 56, 0.22);
+  outline: 3px solid rgba(255, 255, 255, 0.45);
   outline-offset: 3px;
 }
 
@@ -148,47 +149,10 @@
   .site-header-inner {
     min-height: 72px;
     padding: 0 var(--page-padding-desktop);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .site-logo {
-    margin-right: auto;
-  }
-
-  .burger-button {
-    display: none;
   }
 
   .burger-nav {
-    position: static;
-    width: auto;
-    max-height: none;
-    margin-left: auto;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    display: flex;
-    flex: 0 0 auto;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 22px;
-    overflow: visible;
-  }
-
-  .burger-nav a {
-    min-height: 40px;
-    padding: 6px 0;
-    font-size: 16px;
-    white-space: nowrap;
-  }
-
-  .burger-nav a:hover {
-    background: transparent;
-    color: var(--color-primary);
+    right: var(--page-padding-desktop);
+    width: 320px;
   }
 }
