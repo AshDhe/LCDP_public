@@ -1,5 +1,5 @@
 (() => {
-  const scriptFooterGlobalUrl = document.currentScript?.src || "";
+  const scriptUrl = document.currentScript?.src || "";
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", chargerFooterGlobal);
@@ -10,44 +10,53 @@
   async function chargerFooterGlobal() {
     const container = document.getElementById("footer-container");
 
-    if (!container) return;
+    if (!container) {
+      console.warn("Footer global : #footer-container introuvable.");
+      return;
+    }
 
-    const urlFooterGlobal = construireUrlBlocFooter();
+    const urlFooterHtml = construireUrlFooterHtml();
 
     try {
-      const response = await fetch(urlFooterGlobal, {
+      const response = await fetch(urlFooterHtml, {
         method: "GET",
-        credentials: "same-origin"
+        credentials: "same-origin",
+        cache: "no-cache"
       });
 
       if (!response.ok) {
-        throw new Error("Impossible de charger le footer global : " + response.status);
+        throw new Error("Erreur HTTP " + response.status);
       }
 
       const html = await response.text();
-      container.innerHTML = html;
 
+      if (!html.trim().startsWith("<footer")) {
+        throw new Error("Le fichier chargé n'est pas le HTML du footer.");
+      }
+
+      container.innerHTML = html;
       corrigerLiensFooterGlobal(container);
+
     } catch (error) {
-      console.error("Erreur de chargement du footer global :", error);
-      console.error("URL footer demandée :", urlFooterGlobal);
+      console.error("Footer global non chargé :", error);
+      console.error("URL footer-global.html appelée :", urlFooterHtml);
     }
   }
 
-  function construireUrlBlocFooter() {
-    if (scriptFooterGlobalUrl) {
-      return new URL("footer-global.html", scriptFooterGlobalUrl).href;
+  function construireUrlFooterHtml() {
+    if (scriptUrl) {
+      return new URL("footer-global.html", scriptUrl).href;
     }
 
     return construireUrlSite("/OBJETS/BLOCS/footer-global.html");
   }
 
   function corrigerLiensFooterGlobal(scope) {
-    corrigerAttributsAvecSiteBase(scope, "a[href]", "href");
-    corrigerAttributsAvecSiteBase(scope, "img[src]", "src");
+    corrigerAttributs(scope, "a[href]", "href");
+    corrigerAttributs(scope, "img[src]", "src");
   }
 
-  function corrigerAttributsAvecSiteBase(scope, selector, attribut) {
+  function corrigerAttributs(scope, selector, attribut) {
     scope.querySelectorAll(selector).forEach((element) => {
       const valeur = element.getAttribute(attribut);
 
@@ -71,13 +80,12 @@
       return window.construireUrlSite(chemin);
     }
 
-    const siteBase =
-      (
-        window.SITE_BASE ||
-        window.SITE_CONFIG?.publicBaseUrl ||
-        window.SITE_CONFIG?.siteBase ||
-        ""
-      ).replace(/\/$/, "");
+    const siteBase = (
+      window.SITE_BASE ||
+      window.SITE_CONFIG?.publicBaseUrl ||
+      window.SITE_CONFIG?.siteBase ||
+      ""
+    ).replace(/\/$/, "");
 
     const siteRootRelative = window.SITE_ROOT_RELATIVE || "./";
 
