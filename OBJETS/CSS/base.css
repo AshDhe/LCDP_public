@@ -201,6 +201,30 @@ p,
 }
 
 
+/* LIENS D'ACTION SECONDAIRES */
+
+.page-invitation-compte {
+  margin-top: var(--space-4);
+  text-align: center;
+}
+
+.page-invitation-compte p {
+  margin-bottom: var(--space-2);
+}
+
+.lien-action-secondaire {
+  color: var(--color-logo-green);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lien-action-secondaire:hover {
+  color: var(--color-primary);
+}
+
+
+
 @media (min-width: 768px) {
   .page-container {
     padding: 0 var(--page-padding-desktop);
