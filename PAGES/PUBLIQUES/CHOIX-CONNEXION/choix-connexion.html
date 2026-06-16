@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Me connecter - La Clé du Parc</title>
+  <title>Connexion - La Clé du Parc</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Choisir le type de compte pour se connecter à La Clé du Parc.">
@@ -16,11 +16,9 @@
       window.SITE_CONFIG?.publicBaseUrl ||
       window.SITE_CONFIG?.siteBase ||
       "";
-
-    window.SITE_ROOT_RELATIVE = "../../../";
   </script>
 
-  <!-- CSS communs -->
+  <!-- CSS : base commune, bandeau/burger, footer, puis CSS spécifique index -->
   <link rel="stylesheet" href="../../../OBJETS/CSS/base.css">
   <link rel="stylesheet" href="../../../OBJETS/CSS/bandeau-et-burger.css">
   <link rel="stylesheet" href="../../../OBJETS/CSS/footer.css">
@@ -31,7 +29,6 @@
   <div class="site-page">
 
     <div id="bandeau-nav-container"></div>
-    <div id="lightbox-information-container"></div>
 
     <main class="site-main">
       <section class="page-section index-section" aria-label="Choix du profil de connexion">
@@ -94,8 +91,6 @@
         ""
       ).replace(/\/$/, "");
 
-      const siteRootRelative = window.SITE_ROOT_RELATIVE || "../../../";
-
       function construireUrlSite(chemin) {
         if (!chemin) return chemin;
 
@@ -115,10 +110,8 @@
             : siteBase + "/" + chemin.replace(/^\.\//, "");
         }
 
-        return siteRootRelative.replace(/\/?$/, "/") + chemin.replace(/^\//, "");
+        return chemin.startsWith("/") ? "../../.." + chemin : chemin;
       }
-
-      window.construireUrlSite = construireUrlSite;
 
       document.querySelectorAll("[data-site-src]").forEach((element) => {
         element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
@@ -130,7 +123,6 @@
     })();
   </script>
 
-  <script src="../../../OBJETS/BLOCS/lightbox-information.js"></script>
   <script src="../../../OBJETS/BLOCS/burger-public.js"></script>
   <script src="../../../OBJETS/BLOCS/footer-global.js"></script>
 </body>
