@@ -1,1 +1,304 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
 
+  <title>Ouvrir mon compte invité - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ouvrir gratuitement un compte invité La Clé du Parc.">
+
+  <!-- SITEBASE : config.js est chargé avant les scripts métier -->
+  <script src="../../../config.js"></script>
+
+  <script>
+    (() => {
+      const siteRootRelative = "../../../";
+      const baseDepuisChemin = new URL(siteRootRelative, window.location.href);
+
+      let siteBaseFallback = baseDepuisChemin.pathname.replace(/\/$/, "");
+
+      if (siteBaseFallback === "/") {
+        siteBaseFallback = "";
+      }
+
+      window.SITE_ROOT_RELATIVE = siteRootRelative;
+
+      window.SITE_BASE = (
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        siteBaseFallback ||
+        ""
+      ).replace(/\/$/, "");
+    })();
+  </script>
+
+  <!-- CSS communs -->
+  <link rel="stylesheet" href="../../../OBJETS/CSS/base.css">
+  <link rel="stylesheet" href="../../../OBJETS/CSS/bandeau-et-burger.css">
+  <link rel="stylesheet" href="../../../OBJETS/CSS/footer.css">
+
+  <!-- CSS spécifique galerie -->
+  <link rel="stylesheet" href="../../../OBJETS/CSS/galerie.css">
+</head>
+
+<body>
+  <div class="site-page">
+
+    <div id="bandeau-nav-container"></div>
+
+    <main class="site-main">
+
+      <section class="page-section page-section-large" aria-label="Ouverture du compte invité">
+        <div class="page-container">
+          <div class="page-content page-content-spaced">
+
+            <h1 class="site-title">
+              Ouvrir mon compte invité(e)
+            </h1>
+
+            <p class="site-subtitle">
+              Bénéficiez de La Clé du Parc sans payer d'abonnement.
+            </p>
+
+            <p>
+              En tant qu’invité(e), vous bénéficiez automatiquement du statut nominatif, gratuit et illimité de membre du club La Clé du Parc. Vous pouvez être invité(e) gratuitement, une ou plusieurs fois, par un même membre abonné ou par des membres abonnés différents. C’est l’occasion d’accéder à des lieux privés d’exception pour vous ressourcer toute l’année et prendre soin de vous.
+            </p>
+
+            <div class="page-actions page-actions-grid" aria-label="Ouverture ou connexion au compte membre">
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/FORMULAIRE-INSCRIPTION-MEMBRE/formulaire-inscription-membre.html?source=inscription-membre"
+                data-site-href="/PAGES/PUBLIQUES/FORMULAIRE-INSCRIPTION-MEMBRE/formulaire-inscription-membre.html?source=inscription-membre"
+              >
+                J’ouvre mon compte membre invité
+              </a>
+
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html?source=inscription-membre"
+                data-site-href="/PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html?source=inscription-membre"
+              >
+                J’ai déjà un compte membre La Clé du Parc
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" aria-label="Conditions du compte invité">
+        <div class="page-container">
+          <div class="page-content">
+
+            <p>
+              Un membre invité devient membre abonné à sa demande uniquement, et sous réserve d’acceptation par le club.<br>
+              Tout membre du club peut voir son compte suspendu ou supprimé à sa demande ou à l’initiative du club, conformément au règlement du club.<br>
+              Un membre invité est invité par un membre abonné. La présence du membre abonné qui invite est obligatoire durant toute la présence du membre invité dans le parc. L’abonnement du membre abonné qui invite doit être valable durant toute la présence du membre invité dans le parc.
+            </p>
+
+          </div>
+        </div>
+      </section>
+
+      <div
+        id="galerie-container"
+        aria-label="Les avantages du compte invité"
+      ></div>
+
+      <section class="page-section" aria-label="Devenir membre invité">
+        <div class="page-container">
+          <div class="page-content">
+
+            <div class="page-actions page-actions-grid">
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/FORMULAIRE-INSCRIPTION-MEMBRE/formulaire-inscription-membre.html?source=inscription-membre-bas"
+                data-site-href="/PAGES/PUBLIQUES/FORMULAIRE-INSCRIPTION-MEMBRE/formulaire-inscription-membre.html?source=inscription-membre-bas"
+              >
+                J’ouvre mon compte membre invité
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" aria-label="En savoir plus">
+        <div class="page-container">
+          <div class="page-content page-content-spaced">
+
+            <h2>
+              En savoir plus
+            </h2>
+
+            <div class="page-actions page-actions-grid" aria-label="Informations complémentaires">
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/CONTROLE-DES-ACCES/controle-des-acces.html?source=inscription-membre"
+                data-site-href="/PAGES/PUBLIQUES/CONTROLE-DES-ACCES/controle-des-acces.html?source=inscription-membre"
+              >
+                Comment ça marche ?
+              </a>
+
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html?source=inscription-membre"
+                data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html?source=inscription-membre"
+              >
+                Le club et l'association
+              </a>
+
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/LE-REGLEMENT-DU-CLUB/le-reglement-du-club.html?source=inscription-membre"
+                data-site-href="/PAGES/PUBLIQUES/LE-REGLEMENT-DU-CLUB/le-reglement-du-club.html?source=inscription-membre"
+              >
+                Le règlement du club
+              </a>
+
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/LE-REGLEMENT-DE-LAPPLICATION/le-reglement-de-lapplication.html?source=inscription-membre"
+                data-site-href="/PAGES/PUBLIQUES/LE-REGLEMENT-DE-LAPPLICATION/le-reglement-de-lapplication.html?source=inscription-membre"
+              >
+                Le règlement de l’application
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" aria-label="Responsables de parc et coachs">
+        <div class="page-container">
+          <div class="page-content page-content-spaced">
+
+            <h2>
+              Responsables de parc | Coachs d'activité
+            </h2>
+
+            <p>
+              Vous êtes responsable d’un parc ou vous proposez une activité de plein air ? Demandez à être rappelé par notre équipe à l’aide du formulaire ci-joint. Chaque demande fait l’objet d’une étude et d’une réponse personnalisée.
+            </p>
+
+            <div class="page-actions page-actions-grid" aria-label="Demandes de contact">
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/FORMULAIRE-CONTACT-PARC/formulaire-contact-parc.html?source=inscription-membre"
+                data-site-href="/PAGES/PUBLIQUES/FORMULAIRE-CONTACT-PARC/formulaire-contact-parc.html?source=inscription-membre"
+              >
+                Je suis en charge d’un parc
+              </a>
+
+              <a
+                class="button"
+                href="../../../PAGES/PUBLIQUES/FORMULAIRE-CONTACT-COACH/formulaire-contact-coach.html?source=inscription-membre"
+                data-site-href="/PAGES/PUBLIQUES/FORMULAIRE-CONTACT-COACH/formulaire-contact-coach.html?source=inscription-membre"
+              >
+                Je propose une activité
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+  </div>
+
+  <script>
+    (() => {
+      const siteBase = (
+        window.SITE_BASE ||
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        ""
+      ).replace(/\/$/, "");
+
+      const siteRootRelative = window.SITE_ROOT_RELATIVE || "../../../";
+
+      function construireUrlSite(chemin) {
+        if (!chemin) return chemin;
+
+        if (
+          chemin.startsWith("#") ||
+          chemin.startsWith("mailto:") ||
+          chemin.startsWith("tel:") ||
+          chemin.startsWith("http://") ||
+          chemin.startsWith("https://")
+        ) {
+          return chemin;
+        }
+
+        if (siteBase) {
+          return chemin.startsWith("/")
+            ? siteBase + chemin
+            : siteBase + "/" + chemin.replace(/^\.\//, "");
+        }
+
+        return chemin.startsWith("/")
+          ? siteRootRelative.replace(/\/?$/, "/") + chemin.replace(/^\//, "")
+          : chemin;
+      }
+
+      function corrigerCheminsSite(scope) {
+        scope.querySelectorAll("[data-site-src]").forEach((element) => {
+          element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+        });
+
+        scope.querySelectorAll("[data-site-href]").forEach((element) => {
+          element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+        });
+
+        scope.querySelectorAll("a[href^='/']").forEach((element) => {
+          element.setAttribute("href", construireUrlSite(element.getAttribute("href")));
+        });
+
+        scope.querySelectorAll("img[src^='/']").forEach((element) => {
+          element.setAttribute("src", construireUrlSite(element.getAttribute("src")));
+        });
+      }
+
+      async function chargerBlocHtml(idContainer, cheminBloc) {
+        const container = document.getElementById(idContainer);
+
+        if (!container) return;
+
+        try {
+          const reponse = await fetch(construireUrlSite(cheminBloc), {
+            method: "GET",
+            credentials: "same-origin",
+            cache: "no-cache"
+          });
+
+          if (!reponse.ok) {
+            throw new Error("Erreur HTTP " + reponse.status);
+          }
+
+          const html = await reponse.text();
+          container.innerHTML = html;
+          corrigerCheminsSite(container);
+        } catch (erreur) {
+          console.error("Erreur de chargement du bloc :", cheminBloc, erreur);
+        }
+      }
+
+      window.construireUrlSite = construireUrlSite;
+
+      corrigerCheminsSite(document);
+
+      chargerBlocHtml(
+        "galerie-container",
+        "/OBJETS/BLOCS/galerie.html"
+      );
+    })();
+  </script>
+
+  <script src="../../../OBJETS/BLOCS/burger-public.js"></script>
+  <script src="../../../OBJETS/BLOCS/footer-global.js"></script>
+</body>
+</html>
