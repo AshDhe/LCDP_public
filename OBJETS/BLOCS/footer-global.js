@@ -1,4 +1,6 @@
 (() => {
+  const scriptFooterGlobalUrl = document.currentScript?.src || "";
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", chargerFooterGlobal);
   } else {
@@ -10,11 +12,16 @@
 
     if (!container) return;
 
+    const urlFooterGlobal = construireUrlBlocFooter();
+
     try {
-      const response = await fetch(construireUrlSite("/OBJETS/BLOCS/footer-global.html"));
+      const response = await fetch(urlFooterGlobal, {
+        method: "GET",
+        credentials: "same-origin"
+      });
 
       if (!response.ok) {
-        throw new Error("Impossible de charger le footer global");
+        throw new Error("Impossible de charger le footer global : " + response.status);
       }
 
       const html = await response.text();
@@ -23,7 +30,16 @@
       corrigerLiensFooterGlobal(container);
     } catch (error) {
       console.error("Erreur de chargement du footer global :", error);
+      console.error("URL footer demandée :", urlFooterGlobal);
     }
+  }
+
+  function construireUrlBlocFooter() {
+    if (scriptFooterGlobalUrl) {
+      return new URL("footer-global.html", scriptFooterGlobalUrl).href;
+    }
+
+    return construireUrlSite("/OBJETS/BLOCS/footer-global.html");
   }
 
   function corrigerLiensFooterGlobal(scope) {
@@ -55,7 +71,14 @@
       return window.construireUrlSite(chemin);
     }
 
-    const siteBase = normaliserSiteBase();
+    const siteBase =
+      (
+        window.SITE_BASE ||
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        ""
+      ).replace(/\/$/, "");
+
     const siteRootRelative = window.SITE_ROOT_RELATIVE || "./";
 
     if (!chemin) return chemin;
@@ -79,15 +102,5 @@
     return chemin.startsWith("/")
       ? siteRootRelative.replace(/\/?$/, "/") + chemin.replace(/^\//, "")
       : chemin;
-  }
-
-  function normaliserSiteBase() {
-    const siteBase =
-      window.SITE_BASE ||
-      window.SITE_CONFIG?.publicBaseUrl ||
-      window.SITE_CONFIG?.siteBase ||
-      "";
-
-    return siteBase.replace(/\/$/, "");
   }
 })();
