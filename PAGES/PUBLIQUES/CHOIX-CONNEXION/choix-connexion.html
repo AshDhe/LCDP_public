@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Choix du type de compte La Clé du Parc</title>
+  <title>Choix du type de compte - La Clé du Parc</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Choisir le type de compte pour se connecter à La Clé du Parc.">
@@ -16,13 +16,14 @@
       window.SITE_CONFIG?.publicBaseUrl ||
       window.SITE_CONFIG?.siteBase ||
       "";
+
+    window.SITE_ROOT_RELATIVE = "../../../";
   </script>
 
-  <!-- CSS : base commune, bandeau/burger, footer, puis CSS spécifique index -->
+  <!-- CSS communs -->
   <link rel="stylesheet" href="../../../OBJETS/CSS/base.css">
   <link rel="stylesheet" href="../../../OBJETS/CSS/bandeau-et-burger.css">
   <link rel="stylesheet" href="../../../OBJETS/CSS/footer.css">
-  <link rel="stylesheet" href="../../../OBJETS/CSS/index.css">
 </head>
 
 <body>
@@ -31,9 +32,9 @@
     <div id="bandeau-nav-container"></div>
 
     <main class="site-main">
-      <section class="page-section index-section" aria-label="Choix du profil de connexion">
+      <section class="page-section page-section-large" aria-label="Choix du profil de connexion">
         <div class="page-container">
-          <div class="page-content index-content">
+          <div class="page-content page-content-spaced">
 
             <h1 class="site-title">
               Connexion à mon compte
@@ -43,7 +44,7 @@
               Ouvrez un nouvel onglet web pour utiliser plusieurs comptes en simultané.
             </p>
 
-            <div class="page-actions index-actions" aria-label="Choix du compte">
+            <div class="page-actions page-actions-grid" aria-label="Choix du compte">
               <a
                 class="button"
                 href="../../../PAGES/PUBLIQUES/CONNEXION-MEMBRE/connexion-membre.html?source=connexion-choix"
@@ -87,6 +88,8 @@
         ""
       ).replace(/\/$/, "");
 
+      const siteRootRelative = window.SITE_ROOT_RELATIVE || "../../../";
+
       function construireUrlSite(chemin) {
         if (!chemin) return chemin;
 
@@ -106,8 +109,12 @@
             : siteBase + "/" + chemin.replace(/^\.\//, "");
         }
 
-        return chemin.startsWith("/") ? "../../.." + chemin : chemin;
+        return chemin.startsWith("/")
+          ? siteRootRelative.replace(/\/?$/, "/") + chemin.replace(/^\//, "")
+          : chemin;
       }
+
+      window.construireUrlSite = construireUrlSite;
 
       document.querySelectorAll("[data-site-src]").forEach((element) => {
         element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
