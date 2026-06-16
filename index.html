@@ -6,168 +6,74 @@
   <title>La Clé du Parc</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="La Clé du Parc">
+  <meta name="description" content="La Clé du Parc donne accès à un réseau plein air de parcs privés d'exception.">
 
-  <!-- SITEBASE : config chargé avant tout script métier -->
+  <!-- SITEBASE : config.js est chargé avant les scripts métier -->
   <script src="./config.js"></script>
 
-  <!-- CSS global minimal -->
-  <link rel="stylesheet" href="./base.css">
-  <link rel="stylesheet" href="./index.css">
-</head>
-
-<body>
-
-  <header class="site-header">
-    <div class="site-header-inner">
-
-      <a class="site-logo" href="./index.html" aria-label="Accueil La Clé du Parc">
-        La Clé du Parc
-      </a>
-
-      <nav class="site-nav" aria-label="Navigation principale">
-        <a href="./index.html">Accueil</a>
-        <a href="./connexion-membre.html">Espace membre</a>
-        <a href="./connexion-parc.html">Espace parc</a>
-        <a href="./connexion-coach.html">Espace coach</a>
-      </nav>
-
-    </div>
-  </header>
-
-  <main class="site-page">
-
-    <section class="page-accueil" aria-labelledby="titre-accueil">
-
-      <div class="accueil-logo">
-        <img
-          src="./images/logo-cle-du-parc.png"
-          alt="Logo La Clé du Parc"
-          class="logo-accueil"
-        >
-      </div>
-
-      <div class="hero-text">
-        <h1 id="titre-accueil" class="site-title">
-          La Clé du Parc
-        </h1>
-
-        <p class="site-subtitle">
-          Première ligne de texte à remplacer.
-          Deuxième ligne de texte à remplacer.
-          Troisième ligne éventuelle à remplacer.
-        </p>
-      </div>
-
-      <div class="choix-comptes" aria-label="Choix principal">
-
-        <div class="choix-compte">
-          <a class="button" href="./connexion-membre.html">
-            Bouton membre
-          </a>
-        </div>
-
-        <div class="choix-compte">
-          <a class="button" href="./connexion-parc.html">
-            Bouton parc
-          </a>
-        </div>
-
-        <div class="choix-compte">
-          <a class="button" href="./connexion-coach.html">
-            Bouton coach
-          </a>
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-links">
-      <a href="./mentions-legales.html">Mentions légales</a>
-      <span class="footer-separator">|</span>
-      <a href="./confidentialite.html">Confidentialité</a>
-      <span class="footer-separator">|</span>
-      <a href="./contact.html">Contact</a>
-    </div>
-  </footer>
-
   <script>
-    /*
-      SITEBASE :
-      - config.js doit définir SITE_CONFIG.
-      - En production, SITE_CONFIG.publicBaseUrl permettra de remplacer les chemins relatifs.
-      - Sur GitHub natif temporaire, les chemins relatifs restent utilisables.
-    */
-
-    const SITE_BASE =
+    window.SITE_BASE =
       window.SITE_CONFIG?.publicBaseUrl ||
       window.SITE_CONFIG?.siteBase ||
       "";
-
-    function buildUrl(path) {
-      if (!SITE_BASE) return path;
-      return new URL(path, SITE_BASE).href;
-    }
-
-    /*
-      COOKIES :
-      Page publique, donc pas de blocage d'accès.
-      Vérification simple des cookies de session distincts.
-      Aucun cookie n'est posé ici.
-    */
-
-    function hasCookie(name) {
-      return document.cookie
-        .split(";")
-        .map(cookie => cookie.trim())
-        .some(cookie => cookie.startsWith(name + "="));
-    }
-
-    const sessionMembre = hasCookie("session_membre");
-    const sessionParc = hasCookie("session_parc");
-    const sessionCoach = hasCookie("session_coach");
-
-    /*
-      ROUTES :
-      Redirections internes centralisées ici.
-      À ajuster ensuite selon les vrais noms de pages.
-    */
-
-    const routes = {
-      accueil: buildUrl("./index.html"),
-      connexionMembre: buildUrl("./connexion-membre.html"),
-      connexionParc: buildUrl("./connexion-parc.html"),
-      connexionCoach: buildUrl("./connexion-coach.html"),
-      espaceMembre: buildUrl("./mon-compte-membre.html"),
-      espaceParc: buildUrl("./mon-compte-parc.html"),
-      espaceCoach: buildUrl("./mon-compte-coach.html")
-    };
-
-    /*
-      Si un cookie existe déjà, on peut envoyer l'utilisateur
-      vers son espace au lieu de la page de connexion.
-    */
-
-    const lienMembre = document.querySelector('a[href="./connexion-membre.html"]');
-    const lienParc = document.querySelector('a[href="./connexion-parc.html"]');
-    const lienCoach = document.querySelector('a[href="./connexion-coach.html"]');
-
-    if (lienMembre) {
-      lienMembre.href = sessionMembre ? routes.espaceMembre : routes.connexionMembre;
-    }
-
-    if (lienParc) {
-      lienParc.href = sessionParc ? routes.espaceParc : routes.connexionParc;
-    }
-
-    if (lienCoach) {
-      lienCoach.href = sessionCoach ? routes.espaceCoach : routes.connexionCoach;
-    }
   </script>
 
+  <!-- CSS : base commune navigation haute + burger puis pied de page et ensuite spécifique index -->
+   <link rel="stylesheet" href="./base.css">
+   <link rel="stylesheet" href="./bandeau-burger.css">
+   <link rel="stylesheet" href="./footer.css">
+   <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class="site-page">
+
+    <div id="bandeau-nav-container"></div>
+
+    <main class="site-main">
+      <section class="page-section index-section" aria-label="Accueil public">
+        <div class="page-container">
+          <div class="page-content index-content">
+
+            <img
+              src="./OBJETS/IMAGES/LOGO/logo.png"
+              alt="Logo La Clé du Parc"
+              class="index-logo"
+            >
+
+            <p class="site-subtitle index-intro">
+              La Clé du Parc vous donne accès à un réseau d'exception.
+              Des parcs privés en plein air pour venir vous ressourcer dans de bonnes conditions.
+            </p>
+
+            <div class="page-actions index-actions" aria-label="Accès principaux">
+              <a class="button" href="./PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html">
+                Connexion
+              </a>
+
+              <a class="button" href="./PAGES/PUBLIQUES/ACTUALITES/actualites.html">
+                Actualités
+              </a>
+
+              <a class="button" href="./PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html">
+                Être invité(e)
+              </a>
+
+              <a class="button" href="./PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html">
+                Découvrir le club
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+  </div>
+
+  <script src="./OBJETS/BLOCS/burger-public.js"></script>
+  <script src="./OBJETS/BLOCS/footer-global.js"></script>
 </body>
 </html>
