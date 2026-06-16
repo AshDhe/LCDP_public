@@ -85,6 +85,10 @@ a {
   padding: var(--space-5) 0;
 }
 
+.page-section-large {
+  padding: var(--space-5) 0;
+}
+
 .page-content {
   width: 100%;
   max-width: var(--text-width);
@@ -93,6 +97,10 @@ a {
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+.page-content-spaced {
+  gap: var(--space-4);
 }
 
 
@@ -171,4 +179,40 @@ p,
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: #ffffff;
+}
+
+
+/* GRILLE GENERIQUE DE BOUTONS */
+
+.page-actions-grid,
+.page-actions.index-actions {
+  width: 100%;
+  max-width: 760px;
+  margin-top: var(--space-4);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+.page-actions-grid .button,
+.page-actions.index-actions .button {
+  width: 100%;
+  max-width: none;
+}
+
+
+@media (min-width: 768px) {
+  .page-container {
+    padding: 0 var(--page-padding-desktop);
+  }
+
+  .page-section-large {
+    padding: var(--space-6) 0;
+  }
+
+  .page-actions-grid,
+  .page-actions.index-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
 }

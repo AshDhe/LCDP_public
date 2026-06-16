@@ -31,20 +31,6 @@
   margin-top: 12px;
 }
 
-.page-actions.index-actions {
-  width: 100%;
-  max-width: 760px;
-  margin-top: var(--space-4);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3);
-}
-
-.page-actions.index-actions .button {
-  width: 100%;
-  max-width: none;
-}
-
 @media (min-width: 768px) {
   .index-section {
     padding: var(--space-6) 0;
@@ -54,10 +40,5 @@
     width: 220px;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .page-actions.index-actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-3);
   }
 }
