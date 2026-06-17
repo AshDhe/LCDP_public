@@ -158,7 +158,7 @@ p,
 .button-group a,
 .button-group button,
 .page-actions > a,
-.page-actions button {
+.page-actions > button {
   width: 100%;
   max-width: 340px;
   min-height: 58px;
@@ -183,7 +183,7 @@ p,
 .button-group a:hover,
 .button-group button:hover,
 .page-actions > a:hover,
-.page-actions button:hover {
+.page-actions > button:hover {
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: #ffffff;
@@ -266,7 +266,7 @@ p,
   .button-group a,
   .button-group button,
   .page-actions > a,
-  .page-actions button {
+  .page-actions > button {
     font-size: 18px;
   }
 
