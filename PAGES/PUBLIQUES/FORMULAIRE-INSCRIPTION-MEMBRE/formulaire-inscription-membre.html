@@ -36,6 +36,9 @@
 
 <body>
 
+  <div id="lightbox-information-container">
+  </div>
+
   <main class="formulaire-page">
 
     <section class="page-section page-section-large" aria-label="Ouverture du formulaire">
@@ -184,9 +187,15 @@
   </script>
 
   <script>
-    document.write(
-      '<script src="' + window.SITE_BASE + '/PAGES/PUBLIQUES/FORMULAIRE-INSCRIPTION-MEMBRE/formulaire-inscription-membre.js"><\/script>'
-    );
+  document.write(
+    '<script src="' + window.SITE_BASE + '/OBJETS/BLOCS/lightbox-information.js"><\/script>'
+  );
+  </script>
+
+  <script>
+  document.write(
+    '<script src="' + window.SITE_BASE + '/PAGES/PUBLIQUES/FORMULAIRE-INSCRIPTION-MEMBRE/formulaire-inscription-membre.js"><\/script>'
+  );
   </script>
 
 </body>
