@@ -9,25 +9,6 @@
 }
 
 
-/* INTRODUCTION FORMULAIRE */
-
-.formulaire-intro {
-  width: 100%;
-  max-width: var(--text-width);
-  margin: 0 auto var(--space-4);
-  text-align: center;
-}
-
-.formulaire-intro h1 {
-  margin-bottom: var(--space-3);
-}
-
-.formulaire-intro p {
-  margin: 0 auto;
-  color: var(--color-text-muted);
-}
-
-
 /* STRUCTURE DU FORMULAIRE */
 
 .formulaire-inscription {
@@ -216,10 +197,6 @@
 @media (min-width: 768px) {
   .formulaire-page {
     padding: var(--space-5) var(--page-padding-desktop) var(--space-6);
-  }
-
-  .formulaire-intro {
-    margin-bottom: var(--space-5);
   }
 
   .formulaire-inscription {
