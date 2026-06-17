@@ -64,8 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
       submitButton.textContent = "Envoyer";
 
       await afficherValidation(
-        "Vos informations sont transmises, merci",
-        "Un e-mail a été envoyé à votre adresse mail pour sa validation. Votre adresse mail doit être validée pour devenir membre invité."
+        "Votre demande d'inscription est enregistrée, merci",
+        "Un e-mail vient de vous être envoyé. Cliquez sur le lien reçu pour confirmer votre adresse e-mail et finaliser votre inscription au club."
       );
 
     } catch (error) {
