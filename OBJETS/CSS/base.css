@@ -269,6 +269,11 @@ p,
     gap: var(--space-3);
   }
 
+  .page-actions-grid.page-actions-column {
+  max-width: 420px;
+  grid-template-columns: 1fr;
+  }
+
   .lien-action-secondaire {
     font-size: 17px;
   }
