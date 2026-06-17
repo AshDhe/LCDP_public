@@ -165,7 +165,7 @@ p,
   background: var(--color-logo-green);
   color: #ffffff;
   font-family: var(--font-main);
-  font-size: 18px;
+  font-size: 19px;
   line-height: 1.2;
   font-weight: 600;
   text-align: center;
@@ -252,6 +252,14 @@ p,
 
   .page-section-large {
     padding: var(--space-6) 0;
+  }
+
+  .button,
+  .button-group a,
+  .button-group button,
+  .page-actions a,
+  .page-actions button {
+    font-size: 18px;
   }
 
   .page-actions-grid,

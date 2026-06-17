@@ -42,7 +42,7 @@ body {
 
 .site-logo {
   font-family: var(--font-main);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.2;
   font-weight: 700;
   color: #ffffff;
@@ -125,7 +125,7 @@ body {
   border-radius: 12px;
   color: var(--color-text);
   font-family: var(--font-main);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.25;
   text-decoration: none;
   display: flex;
@@ -154,12 +154,19 @@ body {
     min-height: 72px;
     padding: 0 var(--page-padding-desktop);
   }
+  .site-logo {
+    font-size: 20px;
+  }
 
   .burger-nav {
     right: var(--page-padding-desktop);
     width: 320px;
   }
 
+  .burger-nav a {
+    font-size: 17px;
+  }
+  
     body {
     padding-top: 72px;
   }
