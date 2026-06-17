@@ -223,6 +223,23 @@ p,
   max-width: 420px;
 }
 
+/* BOUTON SECONDAIRE */
+
+.button-secondary,
+.page-actions > a.button-secondary,
+.page-actions > button.button-secondary {
+  background: #ffffff;
+  color: var(--color-logo-green);
+  border-color: var(--color-logo-green);
+}
+
+.button-secondary:hover,
+.page-actions > a.button-secondary:hover,
+.page-actions > button.button-secondary:hover {
+  background: var(--color-surface-soft);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
 
 /* LIENS D'ACTION SECONDAIRES */
 
