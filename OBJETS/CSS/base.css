@@ -279,7 +279,8 @@ p,
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  text-align: center;
+  text-align: justify;
+  text-align-last: center;
 }
 
 .page-intro-block p {
