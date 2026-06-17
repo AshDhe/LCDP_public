@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Formulaire d'inscription au club membre invité</title>
+  <title>Formulaire d'inscription au club | Membre invité</title>
 
   <script>
     (function () {
@@ -42,11 +42,11 @@
       <h1>Formulaire d’inscription au club La Clé du Parc | Membre invité</h1>
 
       <p>
-        L’inscription est gratuite ainsi que votre maintien en tant que membre invité.
+        L’inscription membre invité est gratuite. Ainsi que votre statut de membre invité.
       </p>
 
       <p>
-        La qualité de membre invité La Clé du Parc se conserve sans limitation de durée, sauf lorsque vous passez membre abonné, ou lorsque votre compte est suspendu ou supprimé à votre demande ou à l’initiative du club pour une raison prévue par le règlement du club. Il n’est pas nécessaire d’être parrainé pour remplir votre demande d’inscription.
+        La statut membre du club La Clé du Parc se conserve sans limitation sauf si votre compte est suspendu ou supprimé à votre demande ou à l’initiative du club pour une raison prévue au règlement. Il n’est pas nécessaire d’être parrainé pour être membre invité.
       </p>
     </section>
 
@@ -55,7 +55,8 @@
       <div class="formulaire-champ">
         <label for="nommembre">Votre NOM<span>*</span></label>
         <p>
-          Conforme à votre état civil et en majuscules de préférence. Votre nom est vérifié si vous décidez de prendre un abonnement personnel.
+          Conforme à votre état civil. En majuscules de préférence.<br>
+          Votre état civil est vérifié si vous faîtes une demande d'abonnement.
         </p>
         <input type="text" id="nommembre" name="nommembre" placeholder="Votre réponse" required />
       </div>
@@ -63,7 +64,9 @@
       <div class="formulaire-champ">
         <label for="prenommembre">Votre Prénom<span>*</span></label>
         <p>
-          Conforme à votre état civil et en minuscules de préférence, avec la première lettre du prénom en majuscule. Votre prénom est vérifié si vous décidez de prendre un abonnement personnel.
+          Conforme à votre état civil. En minuscules de préférence. La première lettre en majuscule.<br>
+          Votre nom est vérifié si vous faîtes une demande d'abonnement.
+          Votre état civil est vérifié si vous faîtes une demande d'abonnement.
         </p>
         <input type="text" id="prenommembre" name="prenommembre" placeholder="Votre réponse" required />
       </div>
@@ -71,7 +74,8 @@
       <div class="formulaire-champ">
         <label for="dptmtmembre">Numéro du département<span>*</span></label>
         <p>
-          Le numéro du département permet de sélectionner les informations proches de vous en priorité. Vous pouvez le modifier autant que nécessaire.
+          Un numéro du département est nécessaire pour sélectionner les informations proches de vous en priorité.<br>
+          Vous pouvez le modifier autant que nécessaire par la suite.
         </p>
         <input type="text" id="dptmtmembre" name="dptmtmembre" placeholder="Votre réponse" required />
       </div>
@@ -79,44 +83,50 @@
       <div class="formulaire-champ">
         <label for="emailmembre">Votre adresse e-mail d’identification<span>*</span></label>
         <p>
-          L’adresse e-mail est votre identifiant informatique de membre de l’association. Un mail de confirmation vous est envoyé après l’envoi du formulaire. Vous n’êtes pas membre du club tant que votre adresse e-mail n’est pas confirmée.
+          L’adresse e-mail est votre identifiant informatique de connexion à l'application.<br>
+          Un mail de confirmation vous est envoyé après l’envoi du formulaire.<br>
+          Votre adresse e-mail doit être confirmée pour être membre du club.<br>
+          Vous pouvez la modifier autant que nécessaire par la suite.
         </p>
         <input type="email" id="emailmembre" name="emailmembre" placeholder="Votre réponse" required />
       </div>
 
       <div class="formulaire-champ">
-        <label for="emailparrain">L’adresse e-mail du parrain si parrain</label>
+        <label for="emailparrain">L’adresse e-mail du parrain</label>
         <p>
-          L’adresse e-mail du parrain doit être son identifiant informatique de membre du club. Elle permet au parrain de vous inviter par la suite dans le cadre de son abonnement personnel.
+          Cette information n'est par obligatoire.<br>
+          Sinon, l’adresse e-mail du parrain doit être son identifiant informatique de connexion à l'application.<br>
+          Elle permet au parrain de vous inviter ensuite dans le cadre de son abonnement personnel.<br>
+          Vous pouvez la modifier autant que nécessaire par la suite.
         </p>
         <input type="email" id="emailparrain" name="emailparrain" placeholder="Votre réponse" />
       </div>
 
       <div class="formulaire-champ formulaire-checkbox">
-        <h2>Règlement du club membres<span>*</span></h2>
+        <h2>Règlement du club<span>*</span></h2>
         <p>
           En envoyant votre demande d’inscription, vous reconnaissez avoir pris connaissance du
           <a href="/PAGES/PUBLIQUES/LE-REGLEMENT-DU-CLUB/le-reglement-du-club.html?source=inscription-membre">règlement du club</a>
-          et accepter ce règlement en tant que membre du club.
+          et l'accepter en tant que membre du club après validation de votre adresse e-mail.
         </p>
 
         <label class="checkbox-ligne" for="regleclub_v1">
           <input type="checkbox" id="regleclub_v1" name="regleclub_v1" required />
-          <span>J’ai pris connaissance du règlement du club</span>
+          <span>J'accepte le règlement du club</span>
         </label>
       </div>
 
       <div class="formulaire-champ formulaire-checkbox">
-        <h2>Règlement de l’application membres<span>*</span></h2>
+        <h2>Règlement de l’application<span>*</span></h2>
         <p>
           En envoyant votre demande d’inscription, vous reconnaissez avoir pris connaissance du
           <a href="/PAGES/PUBLIQUES/LE-REGLEMENT-DE-LAPPLICATION/le-reglement-de-lapplication.html?source=inscription-membre">règlement de l’application</a>
-          et accepter ce règlement en tant que membre du club.
+          et l'accepter en tant que membre du club après validation de votre adresse e-mail.
         </p>
 
         <label class="checkbox-ligne" for="regleapp_v1">
           <input type="checkbox" id="regleapp_v1" name="regleapp_v1" required />
-          <span>J’ai pris connaissance du règlement de l’application</span>
+          <span>J'accepte le règlement de l'application</span>
         </label>
       </div>
 
