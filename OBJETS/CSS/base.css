@@ -235,6 +235,7 @@ p,
 .lien-action-secondaire {
   color: var(--color-logo-green);
   font-weight: 600;
+  font-size: 18px;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -268,7 +269,11 @@ p,
     gap: var(--space-3);
   }
 
- #footer-container {
+  .lien-action-secondaire {
+    font-size: 17px;
+  }
+
+  #footer-container {
     margin-top: var(--space-4);
   }
 
