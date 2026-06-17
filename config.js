@@ -35,6 +35,10 @@
     parcBaseUrl: active.parcBase,
     coachBaseUrl: active.coachBase,
 
+    workerMdptokenzUrl: isGithub
+  ? "https://w-mdptokenz.hugues-pavret.workers.dev"
+  : "https://mdptokenz-api.lacleduparc.fr",
+
     PUBLIC_BASE: active.publicBase,
     MEMBRE_BASE: active.membreBase,
     PARC_BASE: active.parcBase,
