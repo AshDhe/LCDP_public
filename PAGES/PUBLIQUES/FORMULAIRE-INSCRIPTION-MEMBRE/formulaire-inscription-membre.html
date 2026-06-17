@@ -96,7 +96,7 @@
           Vous pouvez ensuite modifier votre adresse e-mail depuis votre compte membre.
         </p>
         <input
-        type="email" id="emailmembre" name="emailmembre" placeholder="Votre identifiant e-mail" required
+        type="email" id="emailmembre" name="emailmembre" placeholder="Votre identifiant e-mail"
         autocomplete="email" autocapitalize="none" spellcheck="false" required
         />
       </div>
@@ -111,7 +111,9 @@
         </p>
         <input
         type="email" id="emailparrain" name="emailparrain" placeholder="Identifiant e-mail du parrain"
-        autocomplete="off" autocapitalize="none" spellcheck="false"
+        inputmode="email" autocomplete="new-password" autocapitalize="none" spellcheck="false"
+        readonly
+        onfocus="this.removeAttribute('readonly');"
         />
       </div>
 
