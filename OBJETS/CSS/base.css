@@ -247,6 +247,33 @@ p,
   color: var(--color-primary);
 }
 
+/* BLOCS D'INTRODUCTION DE PAGE */
+
+.page-lead {
+  margin-bottom: 0;
+  font-size: 19px;
+  line-height: 1.35;
+  color: var(--color-text-muted);
+}
+
+.page-intro-block {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  text-align: center;
+}
+
+.page-intro-block p {
+  max-width: 760px;
+  margin-bottom: 0;
+  color: var(--color-text-muted);
+}
+
+.page-intro-block .lien-action-secondaire {
+  font-size: inherit;
+}
 
 
 @media (min-width: 768px) {
@@ -283,6 +310,21 @@ p,
 
   .lien-action-secondaire {
     font-size: 17px;
+  }
+
+  .page-lead {
+    font-size: 20px;
+  }
+
+  .page-intro-block {
+    max-width: 820px;
+    gap: 6px;
+  }
+
+  .page-intro-block p {
+    max-width: 820px;
+    font-size: 18px;
+    line-height: 1.38;
   }
 
   #footer-container {
