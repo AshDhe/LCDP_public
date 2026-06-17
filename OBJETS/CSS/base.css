@@ -108,6 +108,9 @@ a {
   gap: var(--space-4);
 }
 
+.page-content-spaced > .site-title {
+  margin-bottom: 0;
+}
 
 /* TYPOGRAPHIE SIMPLE */
 
@@ -154,7 +157,7 @@ p,
 .button,
 .button-group a,
 .button-group button,
-.page-actions a,
+.page-actions > a,
 .page-actions button {
   width: 100%;
   max-width: 340px;
@@ -179,7 +182,7 @@ p,
 .button:hover,
 .button-group a:hover,
 .button-group button:hover,
-.page-actions a:hover,
+.page-actions > a:hover,
 .page-actions button:hover {
   background: var(--color-primary);
   border-color: var(--color-primary);
@@ -255,10 +258,14 @@ p,
     padding: var(--space-6) 0;
   }
 
+  .page-content-spaced > .site-title {
+  margin-bottom: var(--space-3);
+  }
+
   .button,
   .button-group a,
   .button-group button,
-  .page-actions a,
+  .page-actions > a,
   .page-actions button {
     font-size: 18px;
   }
