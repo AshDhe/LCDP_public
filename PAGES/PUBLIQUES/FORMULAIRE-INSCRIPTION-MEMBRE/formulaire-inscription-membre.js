@@ -184,3 +184,19 @@ async function afficherValidation(titre, message) {
   alert(message);
   window.location.href = (window.SITE_BASE || "") + REDIRECT_URL;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const emailMembre = document.getElementById("emailmembre");
+  const emailParrain = document.getElementById("emailparrain");
+
+  if (!emailMembre || !emailParrain) return;
+
+  setTimeout(() => {
+    const valeurMembre = emailMembre.value.trim().toLowerCase();
+    const valeurParrain = emailParrain.value.trim().toLowerCase();
+
+    if (valeurMembre && valeurParrain && valeurMembre === valeurParrain) {
+      emailParrain.value = "";
+    }
+  }, 300);
+});
