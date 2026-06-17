@@ -20,25 +20,52 @@
 #lightbox-information .lightbox-box {
   width: min(100%, 330px);
   padding: 24px 20px 22px;
-  border: 1px solid rgba(31, 42, 36, 0.14);
+  border: 1px solid var(--color-border);
   border-radius: calc(var(--radius-button) + 6px);
   background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
   text-align: center;
 }
 
+#lightbox-information .lightbox-information-simple {
+  border-color: var(--color-border);
+}
+
+#lightbox-information .lightbox-validation {
+  border-color: var(--color-border-strong);
+}
+
+#lightbox-information .lightbox-erreur {
+  border-color: #8a2d2d;
+}
+
 #lightbox-information .lightbox-box::before {
-  content: "i";
   width: 38px;
   height: 38px;
   margin: 0 auto 12px;
   border-radius: 50%;
-  background: rgba(31, 42, 36, 0.08);
-  color: var(--color-text);
   font-size: 22px;
   line-height: 38px;
   font-weight: 600;
   display: block;
+}
+
+#lightbox-information .lightbox-information-simple::before {
+  content: "i";
+  background: rgba(31, 42, 36, 0.08);
+  color: var(--color-text);
+}
+
+#lightbox-information .lightbox-validation::before {
+  content: "✓";
+  background: rgba(35, 68, 56, 0.1);
+  color: var(--color-primary);
+}
+
+#lightbox-information .lightbox-erreur::before {
+  content: "!";
+  background: rgba(138, 45, 45, 0.1);
+  color: #8a2d2d;
 }
 
 #lightbox-information h2 {
@@ -49,6 +76,10 @@
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--color-text);
+}
+
+#lightbox-information .lightbox-erreur h2 {
+  color: #8a2d2d;
 }
 
 #lightbox-information p {
