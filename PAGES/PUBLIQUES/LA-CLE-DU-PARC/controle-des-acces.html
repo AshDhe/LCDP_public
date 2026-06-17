@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Contrôle des accès - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Comprendre le principe du contrôle des accès aux parcs du réseau La Clé du Parc.">
+
+  <!-- SITEBASE : config.js est chargé avant les scripts métier -->
+  <script src="../../../config.js"></script>
+
+  <script>
+    (() => {
+      const siteRootRelative = "../../../";
+      const baseDepuisChemin = new URL(siteRootRelative, window.location.href);
+
+      let siteBaseFallback = baseDepuisChemin.pathname.replace(/\/$/, "");
+
+      if (siteBaseFallback === "/") {
+        siteBaseFallback = "";
+      }
+
+      window.SITE_ROOT_RELATIVE = siteRootRelative;
+
+      window.SITE_BASE = (
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        siteBaseFallback ||
+        ""
+      ).replace(/\/$/, "");
+    })();
+  </script>
+
+  <!-- CSS communs -->
+  <link rel="stylesheet" href="../../../OBJETS/CSS/base.css">
+  <link rel="stylesheet" href="../../../OBJETS/CSS/bandeau-et-burger.css">
+  <link rel="stylesheet" href="../../../OBJETS/CSS/footer.css">
+</head>
+
+<body>
+  <div class="site-page">
+
+    <div id="bandeau-nav-container"></div>
+
+    <main class="site-main">
+
+      <section class="page-section page-section-large" aria-label="Présentation du contrôle des accès">
+        <div class="page-container">
+          <div class="page-content page-content-spaced">
+
+            <h1 class="site-title">
+              Contrôle des accès
+            </h1>
+
+            <h3>
+              Un accès organisé, nominatif et respectueux des lieux
+            </h3>
+
+            <div class="page-intro-block">
+              <h2>
+                En bref
+              </h2>
+
+              <p>
+                La Clé du Parc ne propose pas un accès libre et anonyme aux parcs du réseau. Chaque accès repose sur un compte membre, une réservation ou une invitation, et un cadre d'utilisation clairement identifié.
+              </p>
+
+              <p>
+                Ce fonctionnement permet de préserver les lieux, de limiter la fréquentation selon leur capacité réelle et d'assurer une présence compatible avec le calme, la sécurité et le respect des espaces.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" aria-label="Un accès nominatif">
+        <div class="page-container">
+          <div class="page-content page-content-spaced">
+
+            <h2>
+              Un accès nominatif
+            </h2>
+
+            <div class="page-intro-block">
+              <p>
+                Chaque membre utilise un compte personnel. Les réservations, invitations et présences sont rattachées à ce compte, afin d'éviter les accès non identifiés et les usages non conformes au règlement du club.
+              </p>
+
+              <p>
+                L'accès nominatif permet aussi de distinguer les membres abonnés, les membres invités, les responsables de parc et les responsables d'activité.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" aria-label="Une fréquentation limitée">
+        <div class="page-container">
+          <div class="page-content page-content-spaced">
+
+            <h2>
+              Une fréquentation limitée
+            </h2>
+
+            <div class="page-intro-block">
+              <p>
+                Chaque parc dispose d'une capacité d'accueil propre. Cette capacité peut varier selon les jours, les horaires, les activités autorisées ou les contraintes du lieu.
+              </p>
+
+              <p>
+                L'application organise les disponibilités afin de ne pas dépasser les limites prévues et de maintenir une expérience agréable pour les membres comme pour les responsables de parc.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" aria-label="Un cadre commun">
+        <div class="page-container">
+          <div class="page-content page-content-spaced">
+
+            <h2>
+              Un cadre commun
+            </h2>
+
+            <div class="page-intro-block">
+              <p>
+                L'accès contrôlé repose sur un règlement commun, complété si nécessaire par les consignes propres à chaque parc. Les membres s'engagent à respecter les lieux, les horaires, les autres personnes présentes et les usages autorisés.
+              </p>
+
+              <p>
+                Ce cadre permet au réseau de se développer sans perdre l'exigence qui fonde La Clé du Parc : ouvrir davantage les espaces de plein air, tout en les protégeant.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+  </div>
+
+  <script>
+    (() => {
+      const siteBase = (
+        window.SITE_BASE ||
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        ""
+      ).replace(/\/$/, "");
+
+      const siteRootRelative = window.SITE_ROOT_RELATIVE || "../../../";
+
+      function construireUrlSite(chemin) {
+        if (!chemin) return chemin;
+
+        if (
+          chemin.startsWith("#") ||
+          chemin.startsWith("mailto:") ||
+          chemin.startsWith("tel:") ||
+          chemin.startsWith("http://") ||
+          chemin.startsWith("https://")
+        ) {
+          return chemin;
+        }
+
+        if (siteBase) {
+          return chemin.startsWith("/")
+            ? siteBase + chemin
+            : siteBase + "/" + chemin.replace(/^\.\//, "");
+        }
+
+        return chemin.startsWith("/")
+          ? siteRootRelative.replace(/\/?$/, "/") + chemin.replace(/^\//, "")
+          : chemin;
+      }
+
+      function corrigerCheminsSite(scope) {
+        scope.querySelectorAll("[data-site-src]").forEach((element) => {
+          element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+        });
+
+        scope.querySelectorAll("[data-site-href]").forEach((element) => {
+          element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+        });
+
+        scope.querySelectorAll("a[href^='/']").forEach((element) => {
+          element.setAttribute("href", construireUrlSite(element.getAttribute("href")));
+        });
+
+        scope.querySelectorAll("img[src^='/']").forEach((element) => {
+          element.setAttribute("src", construireUrlSite(element.getAttribute("src")));
+        });
+      }
+
+      window.construireUrlSite = construireUrlSite;
+
+      corrigerCheminsSite(document);
+    })();
+  </script>
+
+  <script src="../../../OBJETS/BLOCS/burger-public.js"></script>
+  <script src="../../../OBJETS/BLOCS/footer-global.js"></script>
+</body>
+</html>
