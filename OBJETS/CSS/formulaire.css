@@ -208,9 +208,11 @@
     margin-bottom: var(--space-5);
   }
 
-  .formulaire-champ > label:not(.checkbox-ligne),
-  .formulaire-champ h2 {
-    font-size: 28px;
+  .formulaire-inscription .formulaire-champ > label:not(.checkbox-ligne),
+  .formulaire-inscription .formulaire-champ h2 {
+    font-size: 21px;
+    line-height: 1.25;
+    font-weight: 600;
   }
 
   .formulaire-champ .checkbox-ligne {
