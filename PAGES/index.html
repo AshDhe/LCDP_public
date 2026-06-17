@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="La Clé du Parc donne accès à un réseau plein air de parcs privés d'exception.">
+
+  <!-- SITEBASE : config.js est chargé avant les scripts métier -->
+  <script src="./config.js"></script>
+
+  <script>
+    window.SITE_BASE =
+      window.SITE_CONFIG?.publicBaseUrl ||
+      window.SITE_CONFIG?.siteBase ||
+      "";
+  </script>
+
+  <!-- CSS : base commune, bandeau/burger, footer, puis CSS spécifique index -->
+  <link rel="stylesheet" href="./OBJETS/CSS/base.css">
+  <link rel="stylesheet" href="./OBJETS/CSS/bandeau-et-burger.css">
+  <link rel="stylesheet" href="./OBJETS/CSS/footer.css">
+  <link rel="stylesheet" href="./OBJETS/CSS/index.css">
+</head>
+
+<body>
+  <div class="site-page">
+
+    <div id="bandeau-nav-container"></div>
+
+    <main class="site-main">
+      <section class="page-section index-section" aria-label="Accueil public">
+        <div class="page-container">
+          <div class="page-content index-content">
+
+            <img
+              data-site-src="/OBJETS/IMAGES/LOGO/logo.png"
+              alt="Logo La Clé du Parc"
+              class="index-logo"
+            >
+
+            <h2 class="site-title index-title">
+              <span>La Clé du Parc vous donne accès à un réseau d'exception.</span>
+              <span>Des parcs privés de plein air pour vous ressourcer dans de bonnes conditions.</span>
+            </h2>
+
+            <div class="page-actions index-actions" aria-label="Accès principaux">
+              <a
+                class="button"
+                href="./PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html"
+                data-site-href="/PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html"
+              >
+                Me connecter
+              </a>
+
+              <a
+                class="button"
+                href="./PAGES/PUBLIQUES/ACTUALITES/actualites.html"
+                data-site-href="/PAGES/PUBLIQUES/ACTUALITES/actualites.html"
+              >
+                Les actualités
+              </a>
+
+              <a
+                class="button"
+                href="./PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html"
+                data-site-href="/PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html"
+              >
+                Être invité(e)
+              </a>
+
+              <a
+                class="button"
+                href="./PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html"
+                data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html"
+              >
+                Découvrir le club
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+  </div>
+
+  <script>
+    (() => {
+      const siteBase = (
+        window.SITE_BASE ||
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        ""
+      ).replace(/\/$/, "");
+
+      function construireUrlSite(chemin) {
+        if (!chemin) return chemin;
+
+        if (
+          chemin.startsWith("#") ||
+          chemin.startsWith("mailto:") ||
+          chemin.startsWith("tel:") ||
+          chemin.startsWith("http://") ||
+          chemin.startsWith("https://")
+        ) {
+          return chemin;
+        }
+
+        if (siteBase) {
+          return chemin.startsWith("/")
+            ? siteBase + chemin
+            : siteBase + "/" + chemin.replace(/^\.\//, "");
+        }
+
+        return chemin.startsWith("/") ? "." + chemin : chemin;
+      }
+
+      document.querySelectorAll("[data-site-src]").forEach((element) => {
+        element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+      });
+
+      document.querySelectorAll("[data-site-href]").forEach((element) => {
+        element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+      });
+    })();
+  </script>
+
+  <script src="./OBJETS/BLOCS/burger-public.js"></script>
+  <script src="./OBJETS/BLOCS/footer-global.js"></script>
+</body>
+</html>
