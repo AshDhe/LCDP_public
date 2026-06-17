@@ -36,7 +36,7 @@
   margin-bottom: var(--space-3);
   font-size: clamp(23px, 7vw, 31px);
   line-height: 1.18;
-  color: var(--color-text);
+  color: var(--color-logo-green);
   text-align: center;
 }
 
@@ -64,7 +64,7 @@
 
 .section-galerie-compte {
   padding-top: var(--space-5);
-  padding-bottom: var(--space-5);
+  padding-bottom: var(--space-2);
 }
 
 @media (min-width: 768px) {
