@@ -92,15 +92,11 @@
   }
 
   function construireUrlSite(chemin) {
-    if (typeof window.construireUrlSite === "function") {
-      return window.construireUrlSite(chemin);
-    }
-
     const siteBase = (
-      window.SITE_BASE ||
       window.SITE_CONFIG?.publicBaseUrl ||
       window.SITE_CONFIG?.PUBLIC_BASE ||
       window.SITE_CONFIG?.siteBase ||
+      window.SITE_BASE ||
       ""
     ).replace(/\/$/, "");
 
