@@ -119,6 +119,7 @@ a {
   margin-bottom: 0;
 }
 
+
 /* TYPOGRAPHIE SIMPLE */
 
 h1,
@@ -158,15 +159,21 @@ p,
   color: var(--color-text-muted);
 }
 
+
+/* LEGENDE SOUS IMAGE, CARROUSEL OU MEDIA */
+
 .image-legend {
   width: 100%;
   max-width: var(--text-width);
-  margin: var(--space-2) auto 0;
+  margin: 2px auto 0;
+  padding: 0;
   font-size: 12px;
-  line-height: 1.35;
+  line-height: 1.2;
+  font-style: italic;
   color: var(--color-text-muted);
   text-align: center;
 }
+
 
 /* BOUTONS ET GROUPES GENERIQUES */
 
@@ -239,6 +246,7 @@ p,
   max-width: 420px;
 }
 
+
 /* BOUTON SECONDAIRE */
 
 .button-secondary,
@@ -256,6 +264,7 @@ p,
   color: var(--color-primary);
   border-color: var(--color-primary);
 }
+
 
 /* LIENS D'ACTION SECONDAIRES */
 
@@ -279,6 +288,7 @@ p,
 .lien-action-secondaire:hover {
   color: var(--color-primary);
 }
+
 
 /* BLOCS D'INTRODUCTION DE PAGE */
 
@@ -325,7 +335,7 @@ p,
   }
 
   .page-content-spaced > .site-title {
-  margin-bottom: var(--space-3);
+    margin-bottom: var(--space-3);
   }
 
   .button,
@@ -343,8 +353,8 @@ p,
   }
 
   .page-actions-grid.page-actions-column {
-  max-width: 420px;
-  grid-template-columns: 1fr;
+    max-width: 420px;
+    grid-template-columns: 1fr;
   }
 
   .lien-action-secondaire {
@@ -367,13 +377,12 @@ p,
   }
 
   .image-legend {
-    margin-top: var(--space-2);
-    font-size: 14px;
-    line-height: 1.4;
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.25;
   }
 
   #footer-container {
     margin-top: var(--space-4);
   }
-
 }

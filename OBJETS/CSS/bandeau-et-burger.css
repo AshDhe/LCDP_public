@@ -59,11 +59,9 @@ body {
 }
 
 .site-logo-img {
-  width: 30px;
-  height: 30px;
-  padding: 3px;
+  width: 36px;
+  height: 36px;
   border-radius: 9px;
-  background: #ffffff;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -164,6 +162,10 @@ body {
 /* TABLETTE ET DESKTOP */
 
 @media (min-width: 768px) {
+  body {
+    padding-top: 72px;
+  }
+
   .site-header-inner {
     min-height: 72px;
     padding: 0 var(--page-padding-desktop);
@@ -174,9 +176,8 @@ body {
   }
 
   .site-logo-img {
-    width: 34px;
-    height: 34px;
-    padding: 4px;
+    width: 40px;
+    height: 40px;
   }
 
   .burger-nav {
@@ -186,9 +187,5 @@ body {
 
   .burger-nav a {
     font-size: 17px;
-  }
-
-  body {
-    padding-top: 72px;
   }
 }
