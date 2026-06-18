@@ -158,6 +158,14 @@ p,
   color: var(--color-text-muted);
 }
 
+.image-legend {
+  width: 100%;
+  margin: var(--space-2) auto 0;
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--color-text-muted);
+  text-align: center;
+}
 
 /* BOUTONS ET GROUPES GENERIQUES */
 
