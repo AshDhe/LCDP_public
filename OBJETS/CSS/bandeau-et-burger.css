@@ -48,10 +48,19 @@ body {
   color: #ffffff;
   text-decoration: none;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.site-logo:visited {
-  color: #ffffff;
+.site-logo img {
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  border-radius: 9px;
+  background: #ffffff;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 
@@ -156,6 +165,12 @@ body {
   }
   .site-logo {
     font-size: 20px;
+  }
+
+  .site-logo img {
+    width: 34px;
+    height: 34px;
+    padding: 4px;
   }
 
   .burger-nav {
