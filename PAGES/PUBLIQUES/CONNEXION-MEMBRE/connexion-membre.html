@@ -1,1 +1,141 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
 
+  <title>Connexion membre - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Connexion à votre compte membre La Clé du Parc.">
+
+  <script src="../../../config.js"></script>
+
+  <script>
+    (() => {
+      const siteRootRelative = "../../../";
+      const baseDepuisChemin = new URL(siteRootRelative, window.location.href);
+
+      let siteBaseFallback = baseDepuisChemin.pathname.replace(/\/$/, "");
+
+      if (siteBaseFallback === "/") {
+        siteBaseFallback = "";
+      }
+
+      window.SITE_ROOT_RELATIVE = siteRootRelative;
+
+      window.SITE_BASE = (
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.PUBLIC_BASE ||
+        window.SITE_CONFIG?.siteBase ||
+        siteBaseFallback ||
+        ""
+      ).replace(/\/$/, "");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="../../../OBJETS/CSS/base.css">
+  <link rel="stylesheet" href="../../../OBJETS/CSS/formulaire.css">
+  <link rel="stylesheet" href="../../../OBJETS/CSS/lightbox-information.css">
+</head>
+
+<body>
+  <div class="site-page">
+
+    <div id="lightbox-information-container"></div>
+
+    <main class="site-main">
+
+      <section class="page-section page-section-large" aria-label="Connexion au compte membre">
+        <div class="page-container">
+          <div class="page-content page-content-spaced">
+
+            <h1 class="titre-formulaire">
+              Connexion membre
+            </h1>
+
+            <p class="page-lead">
+              Accédez à votre compte membre.
+            </p>
+
+            <div class="formulaire-page">
+
+              <form
+                id="formulaire-connexion-membre"
+                class="formulaire-inscription"
+                novalidate
+              >
+
+                <div class="formulaire-champ">
+                  <label for="emailmembre">
+                    Identifiant du compte
+                  </label>
+
+                  <input
+                    type="email"
+                    id="emailmembre"
+                    name="emailmembre"
+                    placeholder="Email"
+                    autocomplete="username"
+                    required
+                  >
+                </div>
+
+                <div class="formulaire-champ">
+                  <label for="mdpmembre">
+                    Mot de passe
+                    <span style="font-weight: 400;">
+                      -
+                      <a
+                        id="lien-mot-de-passe-oublie"
+                        href="#"
+                        style="font-weight: 400; color: inherit;"
+                      >
+                        Mot de passe oublié ?
+                      </a>
+                    </span>
+                  </label>
+
+                  <input
+                    type="password"
+                    id="mdpmembre"
+                    name="mdpmembre"
+                    placeholder="Mot de passe"
+                    autocomplete="current-password"
+                    required
+                  >
+
+                  <label class="checkbox-ligne" for="afficher-mdp-membre">
+                    <input
+                      type="checkbox"
+                      id="afficher-mdp-membre"
+                    >
+                    <span>Afficher le mot de passe</span>
+                  </label>
+                </div>
+
+                <div class="formulaire-actions">
+                  <button
+                    type="submit"
+                    id="bouton-valider-formulaire"
+                    class="button"
+                  >
+                    Connexion
+                  </button>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="../../../OBJETS/BLOCS/lightbox-information.js"></script>
+  <script src="./connexion-membre.js"></script>
+</body>
+</html>
