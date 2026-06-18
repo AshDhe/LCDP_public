@@ -1,4 +1,6 @@
-/* PAGE FORMULAIRE */
+/* =========================================================
+   PAGE FORMULAIRE
+   ========================================================= */
 
 .formulaire-page {
   width: 100%;
@@ -9,7 +11,9 @@
 }
 
 
-/* STRUCTURE DU FORMULAIRE */
+/* =========================================================
+   STRUCTURE DU FORMULAIRE
+   ========================================================= */
 
 .formulaire-inscription {
   width: 100%;
@@ -19,17 +23,6 @@
   border: 1px solid var(--color-border);
   border-radius: calc(var(--radius-button) + 4px);
   background: var(--color-surface-soft);
-}
-
-.formulaire-inscription {
-  text-align: left;
-}
-
-.formulaire-inscription .formulaire-champ > label:not(.checkbox-ligne),
-.formulaire-inscription .formulaire-champ h2,
-.formulaire-inscription .formulaire-champ p,
-.formulaire-inscription .formulaire-note,
-.formulaire-inscription .checkbox-ligne {
   text-align: left;
 }
 
@@ -48,9 +41,15 @@
   text-align: center;
 }
 
+
+/* =========================================================
+   CHAMPS DU FORMULAIRE
+   ========================================================= */
+
 .formulaire-champ {
   width: 100%;
   margin-bottom: var(--space-3);
+  text-align: left;
 }
 
 .formulaire-champ:last-child {
@@ -65,6 +64,7 @@
   line-height: 1.2;
   font-weight: 600;
   color: var(--color-text);
+  text-align: left;
 }
 
 .formulaire-champ > label:not(.checkbox-ligne) span,
@@ -76,10 +76,13 @@
 .formulaire-champ p {
   margin: 0 0 var(--space-3);
   color: var(--color-text-muted);
+  text-align: left;
 }
 
 
-/* CHAMPS DE SAISIE */
+/* =========================================================
+   CHAMPS DE SAISIE
+   ========================================================= */
 
 .formulaire-champ input[type="text"],
 .formulaire-champ input[type="email"],
@@ -99,6 +102,7 @@
   line-height: 1.35;
   color: var(--color-text);
   background: var(--color-surface);
+  text-align: left;
   appearance: none;
   -webkit-appearance: none;
 }
@@ -122,7 +126,9 @@
 }
 
 
-/* CHECKBOX */
+/* =========================================================
+   CHECKBOX
+   ========================================================= */
 
 .formulaire-checkbox {
   margin-bottom: var(--space-3);
@@ -138,6 +144,7 @@
   font-weight: 400;
   color: var(--color-text-muted);
   cursor: pointer;
+  text-align: left;
 }
 
 .checkbox-ligne input[type="checkbox"] {
@@ -151,10 +158,13 @@
 
 .checkbox-ligne span {
   display: inline-block;
+  text-align: left;
 }
 
 
-/* LIENS DANS LES FORMULAIRES */
+/* =========================================================
+   LIENS DANS LES FORMULAIRES
+   ========================================================= */
 
 .formulaire-champ a,
 .formulaire-note a,
@@ -172,8 +182,9 @@
 }
 
 
-/* ACTIONS FORMULAIRE */
-/* Le style visuel du bouton vient de base.css via la classe .button */
+/* =========================================================
+   ACTIONS FORMULAIRE
+   ========================================================= */
 
 .formulaire-actions {
   width: 100%;
@@ -196,19 +207,23 @@
 }
 
 
-/* MESSAGES FORMULAIRE */
+/* =========================================================
+   MESSAGES FORMULAIRE
+   ========================================================= */
 
 .formulaire-note {
   margin: 0;
   font-size: 15px;
   line-height: 1.4;
   color: var(--color-text-muted);
+  text-align: left;
 }
 
 .formulaire-message {
   margin: var(--space-3) 0 0;
   font-size: 15px;
   line-height: 1.45;
+  text-align: left;
 }
 
 .formulaire-message-succes {
@@ -220,7 +235,9 @@
 }
 
 
-/* TABLETTE ET DESKTOP */
+/* =========================================================
+   TABLETTE ET DESKTOP
+   ========================================================= */
 
 @media (min-width: 768px) {
   .formulaire-page {
