@@ -56,6 +56,13 @@ img {
   display: block;
 }
 
+.logo-page {
+  width: min(160px, 48vw);
+  height: auto;
+  margin: 0 auto var(--space-3);
+  object-fit: contain;
+}
+
 a {
   color: inherit;
 }
@@ -301,6 +308,11 @@ p,
 
   .page-section-large {
     padding: var(--space-6) 0;
+  }
+
+  .logo-page {
+    width: 220px;
+    margin-bottom: var(--space-4);
   }
 
   .page-content-spaced > .site-title {
