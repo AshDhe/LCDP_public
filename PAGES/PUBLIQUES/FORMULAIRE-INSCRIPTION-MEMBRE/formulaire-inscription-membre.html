@@ -1,51 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
 
   <title>Formulaire d'inscription au club | Membre invité</title>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Formulaire d'inscription comme membre invité La Clé du Parc.">
+
+  <!-- SITEBASE : config.js est chargé avant les scripts métier -->
+  <script src="../../../config.js"></script>
+
   <script>
-    (function () {
-      const segments = window.location.pathname.split("/").filter(Boolean);
-      const isGitHubPages = window.location.hostname.endsWith("github.io");
+    (() => {
+      const siteRootRelative = "../../../";
+      const baseDepuisChemin = new URL(siteRootRelative, window.location.href);
 
-      window.SITE_BASE = isGitHubPages && segments.length > 0 ? "/" + segments[0] : "";
+      let siteBaseFallback = baseDepuisChemin.pathname.replace(/\/$/, "");
 
-      document.write(
-        '<script src="' + window.SITE_BASE + '/config.js"><\/script>'
-      );
+      if (siteBaseFallback === "/") {
+        siteBaseFallback = "";
+      }
+
+      window.SITE_ROOT_RELATIVE = siteRootRelative;
+
+      window.SITE_BASE = (
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.PUBLIC_BASE ||
+        window.SITE_CONFIG?.siteBase ||
+        siteBaseFallback ||
+        ""
+      ).replace(/\/$/, "");
     })();
   </script>
 
-  <script>
-    window.SITE_CONFIG = window.SITE_CONFIG || {};
-    window.SITE_BASE = window.SITE_CONFIG.SITE_BASE || window.SITE_BASE || "";
+  <!-- CSS communs -->
+  <link rel="stylesheet" href="../../../OBJETS/CSS/base.css">
 
-    document.write(
-      '<link rel="stylesheet" href="' + window.SITE_BASE + '/OBJETS/CSS/base.css">'
-    );
+  <!-- CSS formulaire -->
+  <link rel="stylesheet" href="../../../OBJETS/CSS/formulaire.css">
 
-    document.write(
-      '<link rel="stylesheet" href="' + window.SITE_BASE + '/OBJETS/CSS/lightbox-information.css">'
-    );
-
-    document.write(
-      '<link rel="stylesheet" href="' + window.SITE_BASE + '/OBJETS/CSS/formulaire.css">'
-    );
-  </script>
+  <!-- CSS lightbox information -->
+  <link rel="stylesheet" href="../../../OBJETS/CSS/lightbox-information.css">
 </head>
 
 <body>
+  <div class="site-page">
 
-  <div id="lightbox-information-container">
-  </div>
+    <div id="lightbox-information-container"></div>
 
-  <main class="formulaire-page">
+    <main class="site-main">
 
-    <section class="page-section page-section-large" aria-label="Ouverture du formulaire">
+      <section class="page-section page-section-large" aria-label="Formulaire d'inscription membre invité">
         <div class="page-container">
           <div class="page-content page-content-spaced">
 
@@ -62,145 +68,277 @@
                 Bénéficiez de La Clé du Parc sans payer d'abonnement. En devenant membre invité La Clé du Parc, vous bénéficiez gratuitement d'un accès nominatif à l'ensemble des parcs du club. Aucune limite ne s'applique au nombre d'invitations que vous recevez, ni au nombre de membres abonnés qui peuvent vous inviter. Vous restez membre aussi longtemps que vous souhaitez sous réserve de respecter le règlement du club. Il n’est pas nécessaire d’être parrainé pour être membre du club.
               </p>
             </div>
+
+            <div class="formulaire-page">
+
+              <form
+                class="formulaire-inscription"
+                novalidate
+              >
+
+                <div class="formulaire-champ">
+                  <label for="nommembre">
+                    Votre NOM<span>*</span>
+                  </label>
+
+                  <p>
+                    Conforme à votre état civil. En majuscules de préférence.
+                    Votre état civil est vérifié si vous faîtes une demande d'abonnement.
+                  </p>
+
+                  <input
+                    type="text"
+                    id="nommembre"
+                    name="nommembre"
+                    placeholder="NOM"
+                    autocomplete="family-name"
+                    required
+                  >
+                </div>
+
+                <div class="formulaire-champ">
+                  <label for="prenommembre">
+                    Votre Prénom<span>*</span>
+                  </label>
+
+                  <p>
+                    Conforme à votre état civil. En minuscules de préférence. La première lettre en majuscule.
+                    Votre nom est vérifié si vous faîtes une demande d'abonnement.
+                    Votre état civil est vérifié si vous faîtes une demande d'abonnement.
+                  </p>
+
+                  <input
+                    type="text"
+                    id="prenommembre"
+                    name="prenommembre"
+                    placeholder="Prénom"
+                    autocomplete="given-name"
+                    required
+                  >
+                </div>
+
+                <div class="formulaire-champ">
+                  <label for="dptmtmembre">
+                    Numéro du département<span>*</span>
+                  </label>
+
+                  <p>
+                    Un numéro du département est nécessaire pour sélectionner les informations proches de vous en priorité.
+                    Vous pouvez le modifier autant que nécessaire par la suite.
+                  </p>
+
+                  <input
+                    type="text"
+                    id="dptmtmembre"
+                    name="dptmtmembre"
+                    placeholder="Numéro (exemple 08)"
+                    inputmode="text"
+                    autocomplete="off"
+                    required
+                  >
+                </div>
+
+                <div class="formulaire-champ">
+                  <label for="emailmembre">
+                    Votre adresse e-mail d’identification<span>*</span>
+                  </label>
+
+                  <p>
+                    L’adresse e-mail est votre identifiant informatique de connexion à l'application.
+                    Un mail de confirmation vous est envoyé après l’envoi du formulaire.
+                    Votre adresse e-mail doit alors être confirmée pour être membre du club.
+                    Vous pouvez ensuite modifier votre adresse e-mail depuis votre compte membre.
+                  </p>
+
+                  <input
+                    type="email"
+                    id="emailmembre"
+                    name="emailmembre"
+                    placeholder="Votre identifiant e-mail"
+                    autocomplete="email"
+                    autocapitalize="none"
+                    spellcheck="false"
+                    required
+                  >
+                </div>
+
+                <div class="formulaire-champ">
+                  <label for="emailparrain">
+                    L’adresse e-mail du parrain
+                  </label>
+
+                  <p>
+                    Cette information n'est par obligatoire.
+                    L’adresse e-mail du parrain est son identifiant informatique de connexion à l'application.
+                    Elle permet ensuite au parrain de vous inviter dans le cadre de son abonnement personnel.
+                    Vous pouvez ensuite changer cette adresse e-mail depuis votre compte membre.
+                  </p>
+
+                  <input
+                    type="email"
+                    id="emailparrain"
+                    name="emailparrain"
+                    placeholder="Identifiant e-mail du parrain"
+                    inputmode="email"
+                    autocomplete="new-password"
+                    autocapitalize="none"
+                    spellcheck="false"
+                    readonly
+                    onfocus="this.removeAttribute('readonly');"
+                  >
+                </div>
+
+                <div class="formulaire-champ formulaire-checkbox">
+                  <h2>
+                    Règlement du club<span>*</span>
+                  </h2>
+
+                  <p>
+                    Vous devez accepter le
+                    <a
+                      href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=inscription-membre"
+                      data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=inscription-membre"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      règlement du club
+                    </a>
+                    pour envoyer le formulaire d'inscription.
+                  </p>
+
+                  <label class="checkbox-ligne" for="regleclub_v1">
+                    <input
+                      type="checkbox"
+                      id="regleclub_v1"
+                      name="regleclub_v1"
+                      required
+                    >
+                    <span>J'accepte le règlement du club</span>
+                  </label>
+                </div>
+
+                <div class="formulaire-champ formulaire-checkbox">
+                  <h2>
+                    Règlement de l’application<span>*</span>
+                  </h2>
+
+                  <p>
+                    Vous devez accepter le
+                    <a
+                      href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=inscription-membre"
+                      data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=inscription-membre"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      règlement de l’application
+                    </a>
+                    pour envoyer le formulaire d'inscription.
+                  </p>
+
+                  <label class="checkbox-ligne" for="regleapp_v1">
+                    <input
+                      type="checkbox"
+                      id="regleapp_v1"
+                      name="regleapp_v1"
+                      required
+                    >
+                    <span>J'accepte le règlement de l'application</span>
+                  </label>
+                </div>
+
+                <div class="formulaire-actions">
+                  <button
+                    type="button"
+                    id="bouton-envoyer-inscription"
+                    class="button"
+                  >
+                    Envoyer
+                  </button>
+                </div>
+
+                <p class="formulaire-note">
+                  * Votre réponse est obligatoire pour compléter le formulaire.<br>
+                  Ce formulaire et les données qu’il contient sont soumis au
+                  <a
+                    href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=inscription-membre"
+                    data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=inscription-membre"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    règlement du club
+                  </a>
+                  et au
+                  <a
+                    href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=inscription-membre"
+                    data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=inscription-membre"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    règlement de l'application.
+                  </a>
+                </p>
+
+              </form>
+
+            </div>
+
+          </div>
+        </div>
       </section>
-    
-    <form class="formulaire-inscription" novalidate>
 
-      <div class="formulaire-champ">
-        <label for="nommembre">Votre NOM<span>*</span></label>
-        <p>
-          Conforme à votre état civil. En majuscules de préférence.
-          Votre état civil est vérifié si vous faîtes une demande d'abonnement.
-        </p>
-        <input type="text" id="nommembre" name="nommembre" placeholder="NOM" required />
-      </div>
+    </main>
 
-      <div class="formulaire-champ">
-        <label for="prenommembre">Votre Prénom<span>*</span></label>
-        <p>
-          Conforme à votre état civil. En minuscules de préférence. La première lettre en majuscule.
-          Votre nom est vérifié si vous faîtes une demande d'abonnement.
-          Votre état civil est vérifié si vous faîtes une demande d'abonnement.
-        </p>
-        <input type="text" id="prenommembre" name="prenommembre" placeholder="Prénom" required />
-      </div>
-
-      <div class="formulaire-champ">
-        <label for="dptmtmembre">Numéro du département<span>*</span></label>
-        <p>
-          Un numéro du département est nécessaire pour sélectionner les informations proches de vous en priorité.
-          Vous pouvez le modifier autant que nécessaire par la suite.
-        </p>
-        <input type="text" id="dptmtmembre" name="dptmtmembre" placeholder="Numéro (exemple 08)" required />
-      </div>
-
-      <div class="formulaire-champ">
-        <label for="emailmembre">Votre adresse e-mail d’identification<span>*</span></label>
-        <p>
-          L’adresse e-mail est votre identifiant informatique de connexion à l'application.
-          Un mail de confirmation vous est envoyé après l’envoi du formulaire.
-          Votre adresse e-mail doit alors être confirmée pour être membre du club.
-          Vous pouvez ensuite modifier votre adresse e-mail depuis votre compte membre.
-        </p>
-        <input
-        type="email" id="emailmembre" name="emailmembre" placeholder="Votre identifiant e-mail"
-        autocomplete="email" autocapitalize="none" spellcheck="false" required
-        />
-      </div>
-
-      <div class="formulaire-champ">
-        <label for="emailparrain">L’adresse e-mail du parrain</label>
-        <p>
-          Cette information n'est par obligatoire.
-          L’adresse e-mail du parrain est son identifiant informatique de connexion à l'application.
-          Elle permet ensuite au parrain de vous inviter dans le cadre de son abonnement personnel.
-          Vous pouvez ensuite changer cette adresse e-mail depuis votre compte membre.
-        </p>
-        <input
-        type="email" id="emailparrain" name="emailparrain" placeholder="Identifiant e-mail du parrain"
-        inputmode="email" autocomplete="new-password" autocapitalize="none" spellcheck="false"
-        readonly
-        onfocus="this.removeAttribute('readonly');"
-        />
-      </div>
-
-      <div class="formulaire-champ formulaire-checkbox">
-        <h2>Règlement du club<span>*</span></h2>
-        <p>
-          Vous devez accepter le
-          <a href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=inscription-membre"
-          target="_blank"
-          rel="noopener noreferrer"
-          >règlement du club
-          </a>
-          pour envoyer le formulaire d'inscription.
-        </p>
-
-        <label class="checkbox-ligne" for="regleclub_v1">
-          <input type="checkbox" id="regleclub_v1" name="regleclub_v1" required />
-          <span>J'accepte le règlement du club</span>
-        </label>
-      </div>
-
-      <div class="formulaire-champ formulaire-checkbox">
-        <h2>Règlement de l’application<span>*</span></h2>
-        <p>
-          Vous devez accepter le
-          <a href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=inscription-membre"
-          target="_blank"
-          rel="noopener noreferrer"
-          >règlement de l’application
-          </a>
-          pour envoyer le formulaire d'inscription.
-        </p>
-
-        <label class="checkbox-ligne" for="regleapp_v1">
-          <input type="checkbox" id="regleapp_v1" name="regleapp_v1" required />
-          <span>J'accepte le règlement de l'application</span>
-        </label>
-      </div>
-
-      <div class="formulaire-actions">
-        <button type="button" id="bouton-envoyer-inscription" class="button">Envoyer</button>
-      </div>
-
-      <p class="formulaire-note">
-        * Votre réponse est obligatoire pour compléter le formulaire.<br>
-        Ce formulaire et les données qu’il contient sont soumis au
-        <a href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=inscription-membre"
-        target="_blank"
-        rel="noopener noreferrer"
-        >règlement du club
-        </a>
-        et au
-        <a href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=inscription-membre"
-        target="_blank"
-        rel="noopener noreferrer"
-        >règlement de l'application.
-        </a>
-      </p>
-
-    </form>
-
-  </main>
+  </div>
 
   <script>
-    document.querySelectorAll("a[href^='/']").forEach((lien) => {
-      lien.setAttribute("href", window.SITE_BASE + lien.getAttribute("href"));
-    });
+    (() => {
+      const siteBase = (
+        window.SITE_BASE ||
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.PUBLIC_BASE ||
+        window.SITE_CONFIG?.siteBase ||
+        ""
+      ).replace(/\/$/, "");
+
+      const siteRootRelative = window.SITE_ROOT_RELATIVE || "../../../";
+
+      function construireUrlSite(chemin) {
+        if (!chemin) return chemin;
+
+        if (
+          chemin.startsWith("#") ||
+          chemin.startsWith("mailto:") ||
+          chemin.startsWith("tel:") ||
+          chemin.startsWith("http://") ||
+          chemin.startsWith("https://")
+        ) {
+          return chemin;
+        }
+
+        if (siteBase) {
+          return chemin.startsWith("/")
+            ? siteBase + chemin
+            : siteBase + "/" + chemin.replace(/^\.\//, "");
+        }
+
+        return chemin.startsWith("/")
+          ? siteRootRelative.replace(/\/?$/, "/") + chemin.replace(/^\//, "")
+          : chemin;
+      }
+
+      window.construireUrlSite = construireUrlSite;
+
+      document.querySelectorAll("[data-site-href]").forEach((element) => {
+        element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+      });
+
+      document.querySelectorAll("[data-site-src]").forEach((element) => {
+        element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+      });
+    })();
   </script>
 
-  <script>
-  document.write(
-    '<script src="' + window.SITE_BASE + '/OBJETS/BLOCS/lightbox-information.js"><\/script>'
-  );
-  </script>
-
-  <script>
-  document.write(
-    '<script src="' + window.SITE_BASE + '/PAGES/PUBLIQUES/FORMULAIRE-INSCRIPTION-MEMBRE/formulaire-inscription-membre.js"><\/script>'
-  );
-  </script>
-
+  <script src="../../../OBJETS/BLOCS/lightbox-information.js"></script>
+  <script src="./formulaire-inscription-membre.js"></script>
 </body>
 </html>

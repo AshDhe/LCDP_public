@@ -1,27 +1,78 @@
-const WORKER_URL = "https://form-inscription-membre-api.lacleduparc.fr";
-const REDIRECT_URL = "/index.html?source=formulaire-inscription-membre";
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initialiserFormulaireInscriptionMembre);
+} else {
+  initialiserFormulaireInscriptionMembre();
+}
 
-document.addEventListener("DOMContentLoaded", () => {
+function initialiserFormulaireInscriptionMembre() {
   const form = document.querySelector(".formulaire-inscription");
+  const submitButton = document.getElementById("bouton-envoyer-inscription");
+  const emailMembre = document.getElementById("emailmembre");
+  const emailParrain = document.getElementById("emailparrain");
+
+  const workerUrl = nettoyerBaseUrl(
+    window.SITE_CONFIG?.workerFormInscriptionMembreUrl ||
+    window.SITE_CONFIG?.WORKER_FORM_INSCRIPTION_MEMBRE_URL ||
+    ""
+  );
+
+  const redirectUrl = construireUrlPublique(
+    "/index.html?source=formulaire-inscription-membre"
+  );
+
+  let envoiEnCours = false;
 
   if (!form) {
     console.error("Formulaire introuvable.");
+    afficherAlerte(
+      "Erreur technique",
+      "Le formulaire est introuvable. Veuillez réessayer plus tard."
+    );
     return;
   }
 
-  const submitButton = document.getElementById("bouton-envoyer-inscription");
-
   if (!submitButton) {
     console.error("Bouton d'envoi introuvable.");
+    afficherAlerte(
+      "Erreur technique",
+      "Le bouton d'envoi est introuvable. Veuillez réessayer plus tard."
+    );
+    return;
+  }
+
+  if (!workerUrl) {
+    submitButton.disabled = true;
+
+    afficherAlerte(
+      "Configuration manquante",
+      "L’adresse du service d'inscription membre n’est pas configurée."
+    );
     return;
   }
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+    envoyerFormulaire();
   });
 
-  submitButton.addEventListener("click", async () => {
-    if (submitButton.disabled) return;
+  submitButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    envoyerFormulaire();
+  });
+
+  if (emailMembre && emailParrain) {
+    setTimeout(() => {
+      const valeurMembre = emailMembre.value.trim().toLowerCase();
+      const valeurParrain = emailParrain.value.trim().toLowerCase();
+
+      if (valeurMembre && valeurParrain && valeurMembre === valeurParrain) {
+        emailParrain.value = "";
+      }
+    }, 300);
+  }
+
+  async function envoyerFormulaire() {
+    if (envoiEnCours || submitButton.disabled) return;
 
     const erreur = verifierFormulaire(form);
 
@@ -30,29 +81,32 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    envoiEnCours = true;
     submitButton.disabled = true;
     submitButton.textContent = "Envoi en cours...";
 
     const data = lireDonneesFormulaire(form);
 
     try {
-      const response = await fetch(WORKER_URL, {
+      const response = await fetch(workerUrl, {
         method: "POST",
+        credentials: "omit",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
       });
 
-      const result = await response.json();
+      const result = await response.json().catch(() => null);
 
-      if (!response.ok || !result.success) {
-        const messageErreur = result.erreurs
+      if (!response.ok || !result || result.success !== true) {
+        const messageErreur = result?.erreurs
           ? result.erreurs[0]
-          : result.message || "Erreur lors de l’envoi du formulaire.";
+          : result?.message || "Erreur lors de l’envoi du formulaire.";
 
         await afficherAlerte("Attention", messageErreur);
 
+        envoiEnCours = false;
         submitButton.disabled = false;
         submitButton.textContent = "Envoyer";
         return;
@@ -60,25 +114,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
       form.reset();
 
-      submitButton.disabled = false;
-      submitButton.textContent = "Envoyer";
-
       await afficherValidation(
         "Votre demande d'inscription est enregistrée, merci",
         "Un e-mail vient de vous être envoyé. Cliquez sur le lien reçu pour confirmer votre adresse e-mail et finaliser votre inscription au club."
       );
 
     } catch (error) {
+      console.error("Erreur formulaire inscription membre :", error);
+
       await afficherAlerte(
         "Information technique",
         "Il n'est pas possible d'envoyer le formulaire pour le moment."
       );
 
+      envoiEnCours = false;
       submitButton.disabled = false;
       submitButton.textContent = "Envoyer";
     }
-  });
-});
+  }
+
+  async function afficherValidation(titre, message) {
+    if (typeof window.afficherLightboxInformation === "function") {
+      const affichageOk = await window.afficherLightboxInformation(titre, message, {
+        type: "validation",
+        redirectUrl
+      });
+
+      if (affichageOk === true) {
+        return;
+      }
+    }
+
+    alert(message);
+    window.location.href = redirectUrl;
+  }
+}
 
 function lireDonneesFormulaire(form) {
   return {
@@ -140,6 +210,10 @@ function verifierFormulaire(form) {
     return "L’adresse e-mail du parrain n'est pas valide.";
   }
 
+  if (emailmembre && emailparrain && emailmembre.toLowerCase() === emailparrain.toLowerCase()) {
+    return "L’adresse e-mail du parrain doit être différente de votre adresse e-mail.";
+  }
+
   if (!regleclub || regleclub.checked !== true) {
     return "Le règlement du club doit être accepté.";
   }
@@ -169,34 +243,48 @@ async function afficherAlerte(titre, message) {
   alert(message);
 }
 
-async function afficherValidation(titre, message) {
-  if (typeof window.afficherLightboxInformation === "function") {
-    const affichageOk = await window.afficherLightboxInformation(titre, message, {
-      type: "validation",
-      redirectUrl: REDIRECT_URL
-    });
+function construireUrlPublique(chemin) {
+  const valeur = String(chemin || "");
 
-    if (affichageOk === true) {
-      return;
-    }
+  if (
+    valeur.startsWith("#") ||
+    valeur.startsWith("mailto:") ||
+    valeur.startsWith("tel:") ||
+    valeur.startsWith("http://") ||
+    valeur.startsWith("https://")
+  ) {
+    return valeur;
   }
 
-  alert(message);
-  window.location.href = (window.SITE_BASE || "") + REDIRECT_URL;
+  const publicBaseUrl = nettoyerBaseUrl(
+    window.SITE_CONFIG?.publicBaseUrl ||
+    window.SITE_CONFIG?.PUBLIC_BASE ||
+    window.SITE_BASE ||
+    ""
+  );
+
+  if (publicBaseUrl) {
+    return joindreBaseEtChemin(publicBaseUrl, valeur);
+  }
+
+  if (window.location.hostname.includes("github.io")) {
+    return joindreBaseEtChemin("/LCDP_public", valeur);
+  }
+
+  return valeur.startsWith("/") ? valeur : "/" + valeur;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const emailMembre = document.getElementById("emailmembre");
-  const emailParrain = document.getElementById("emailparrain");
+function joindreBaseEtChemin(baseUrl, chemin) {
+  const base = nettoyerBaseUrl(baseUrl);
+  const cheminNettoye = "/" + String(chemin || "").replace(/^\/+/, "");
 
-  if (!emailMembre || !emailParrain) return;
+  if (!base) {
+    return cheminNettoye;
+  }
 
-  setTimeout(() => {
-    const valeurMembre = emailMembre.value.trim().toLowerCase();
-    const valeurParrain = emailParrain.value.trim().toLowerCase();
+  return base + cheminNettoye;
+}
 
-    if (valeurMembre && valeurParrain && valeurMembre === valeurParrain) {
-      emailParrain.value = "";
-    }
-  }, 300);
-});
+function nettoyerBaseUrl(value) {
+  return String(value || "").replace(/\/+$/, "");
+}
