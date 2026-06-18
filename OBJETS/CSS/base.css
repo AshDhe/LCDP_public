@@ -265,6 +265,24 @@ p,
   border-color: var(--color-primary);
 }
 
+/* BOUTON ORANGE */
+
+.button-orange,
+.page-actions > a.button-orange,
+.page-actions > button.button-orange {
+  background: #f2a23a;
+  border-color: #f2a23a;
+  color: #1f2a24;
+}
+
+.button-orange:hover,
+.page-actions > a.button-orange:hover,
+.page-actions > button.button-orange:hover {
+  background: #e89223;
+  border-color: #e89223;
+  color: #1f2a24;
+}
+
 
 /* LIENS D'ACTION SECONDAIRES */
 
