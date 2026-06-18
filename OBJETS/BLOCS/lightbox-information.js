@@ -18,7 +18,13 @@ async function chargerLightboxInformation() {
     return false;
   }
 
-  const siteBase = window.SITE_BASE || "";
+  const siteBase = (
+  window.SITE_CONFIG?.publicBaseUrl ||
+  window.SITE_CONFIG?.PUBLIC_BASE ||
+  window.SITE_CONFIG?.siteBase ||
+  window.SITE_BASE ||
+  ""
+).replace(/\/$/, "");
 
   try {
     const response = await fetch(siteBase + "/OBJETS/BLOCS/lightbox-information.html");
