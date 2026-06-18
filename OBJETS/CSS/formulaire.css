@@ -21,6 +21,18 @@
   background: var(--color-surface-soft);
 }
 
+.formulaire-inscription {
+  text-align: left;
+}
+
+.formulaire-inscription .formulaire-champ > label:not(.checkbox-ligne),
+.formulaire-inscription .formulaire-champ h2,
+.formulaire-inscription .formulaire-champ p,
+.formulaire-inscription .formulaire-note,
+.formulaire-inscription .checkbox-ligne {
+  text-align: left;
+}
+
 .titre-formulaire {
   width: fit-content;
   max-width: 100%;
