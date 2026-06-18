@@ -36,9 +36,12 @@
           <div class="page-content index-content">
 
             <img
-              data-site-src="/OBJETS/IMAGES/LOGO/logo.png"
+              src="./OBJETS/IMAGES/LOGO/logo.png"
               alt="Logo La Clé du Parc"
               class="logo-page"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
             >
 
             <h2 class="site-title index-title">
@@ -119,10 +122,6 @@
 
         return chemin.startsWith("/") ? "." + chemin : chemin;
       }
-
-      document.querySelectorAll("[data-site-src]").forEach((element) => {
-        element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
-      });
 
       document.querySelectorAll("[data-site-href]").forEach((element) => {
         element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
