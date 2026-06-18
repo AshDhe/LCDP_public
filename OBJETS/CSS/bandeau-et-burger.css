@@ -66,11 +66,6 @@ body {
   background: #ffffff;
   object-fit: contain;
   flex-shrink: 0;
-  opacity: 0;
-}
-
-.site-logo-img.is-loaded {
-  opacity: 1;
 }
 
 
