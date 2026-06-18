@@ -18,6 +18,7 @@ body {
   padding-top: 64px;
 }
 
+
 /* BANDEAU HAUT */
 
 .site-header {
@@ -53,7 +54,11 @@ body {
   gap: 8px;
 }
 
-.site-logo img {
+.site-logo:visited {
+  color: #ffffff;
+}
+
+.site-logo-img {
   width: 30px;
   height: 30px;
   padding: 3px;
@@ -61,6 +66,11 @@ body {
   background: #ffffff;
   object-fit: contain;
   flex-shrink: 0;
+  opacity: 0;
+}
+
+.site-logo-img.is-loaded {
+  opacity: 1;
 }
 
 
@@ -163,11 +173,12 @@ body {
     min-height: 72px;
     padding: 0 var(--page-padding-desktop);
   }
+
   .site-logo {
     font-size: 20px;
   }
 
-  .site-logo img {
+  .site-logo-img {
     width: 34px;
     height: 34px;
     padding: 4px;
@@ -181,8 +192,8 @@ body {
   .burger-nav a {
     font-size: 17px;
   }
-  
-    body {
+
+  body {
     padding-top: 72px;
   }
 }
