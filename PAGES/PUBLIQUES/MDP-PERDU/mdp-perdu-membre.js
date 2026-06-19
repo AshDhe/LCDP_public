@@ -5,7 +5,11 @@
     const boutonValider = document.getElementById("bouton-valider-formulaire");
 
     if (!formulaire || !champEmail || !boutonValider) {
-      afficherMessage("Erreur technique : formulaire incomplet.");
+      afficherMessage(
+        "Erreur technique",
+        "Le formulaire est incomplet.",
+        { type: "erreur" }
+      );
       return;
     }
 
@@ -16,17 +20,29 @@
       const urlWorkerMdpPerdu = construireUrlWorkerMdpPerdu();
 
       if (!urlWorkerMdpPerdu) {
-        afficherMessage("Erreur technique : endpoint mot de passe perdu non configuré.");
+        await afficherMessage(
+          "Erreur technique",
+          "L’endpoint mot de passe perdu n’est pas configuré.",
+          { type: "erreur" }
+        );
         return;
       }
 
       if (!emailmembre) {
-        afficherMessage("Veuillez saisir votre adresse e-mail.");
+        await afficherMessage(
+          "Adresse e-mail manquante",
+          "Veuillez saisir votre adresse e-mail.",
+          { type: "erreur" }
+        );
         return;
       }
 
       if (!emailValide(emailmembre)) {
-        afficherMessage("L’adresse e-mail saisie n’est pas valide.");
+        await afficherMessage(
+          "Adresse e-mail invalide",
+          "L’adresse e-mail saisie n’est pas valide.",
+          { type: "erreur" }
+        );
         return;
       }
 
@@ -48,8 +64,10 @@
         const data = await response.json().catch(() => null);
 
         if (!response.ok || !data || data.success !== true) {
-          afficherMessage(
-            data?.message || "La demande n’a pas pu être enregistrée."
+          await afficherMessage(
+            "Demande impossible",
+            data?.message || "La demande n’a pas pu être enregistrée.",
+            { type: "erreur" }
           );
 
           boutonValider.disabled = false;
@@ -57,14 +75,21 @@
           return;
         }
 
-        afficherMessage(
-          "Si un compte membre correspond à cette adresse e-mail, un lien vient d’être envoyé."
+        await afficherMessage(
+          "Demande envoyée",
+          "Si un compte membre correspond à cette adresse e-mail, un lien vient d’être envoyé.",
+          {
+            type: "validation",
+            redirectUrl: construireUrlAccueil()
+          }
         );
 
-        redirigerAccueilAuClicLightbox();
-
       } catch (error) {
-        afficherMessage("Une erreur est survenue. Veuillez réessayer.");
+        await afficherMessage(
+          "Erreur d’envoi",
+          "Une erreur est survenue. Veuillez réessayer.",
+          { type: "erreur" }
+        );
 
         boutonValider.disabled = false;
         boutonValider.textContent = "Envoyer";
@@ -85,22 +110,6 @@
     return "";
   }
 
-  function redirigerAccueilAuClicLightbox() {
-    setTimeout(() => {
-      const boutonOk = document.querySelector(
-        ".lightbox-information .button, .lightbox-box .button"
-      );
-
-      if (!boutonOk) {
-        return;
-      }
-
-      boutonOk.addEventListener("click", () => {
-        window.location.href = construireUrlAccueil();
-      }, { once: true });
-    }, 0);
-  }
-
   function construireUrlAccueil() {
     const base =
       window.SITE_CONFIG?.publicBaseUrl ||
@@ -116,13 +125,24 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  function afficherMessage(message) {
+  async function afficherMessage(titre, message, options = {}) {
     if (typeof window.afficherLightboxInformation === "function") {
-      window.afficherLightboxInformation(message);
-      return;
+      const resultat = await window.afficherLightboxInformation(
+        titre,
+        message,
+        options
+      );
+
+      if (resultat !== false) {
+        return;
+      }
     }
 
-    alert(message);
+    alert(`${titre}\n\n${message}`);
+
+    if (options.redirectUrl) {
+      window.location.href = options.redirectUrl;
+    }
   }
 
   if (document.readyState === "loading") {
