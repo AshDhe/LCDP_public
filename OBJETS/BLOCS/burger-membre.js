@@ -69,13 +69,33 @@
   function corrigerLiensBandeauNavigation(scope) {
     scope.querySelectorAll("a[href]").forEach((element) => {
       const valeur = element.getAttribute("href");
-      element.setAttribute("href", construireUrlMembre(valeur));
+      const espace = element.dataset.space || "membre";
+
+      element.setAttribute("href", construireUrlEspace(espace, valeur));
     });
 
     scope.querySelectorAll("img[src]").forEach((element) => {
       const valeur = element.getAttribute("src");
+
       element.setAttribute("src", construireUrlPublic(valeur));
     });
+  }
+
+  function construireUrlEspace(espace, chemin) {
+    switch (espace) {
+      case "public":
+        return construireUrlPublic(chemin);
+
+      case "parc":
+        return construireUrlDepuisBase(normaliserBaseParc(), chemin);
+
+      case "coach":
+        return construireUrlDepuisBase(normaliserBaseCoach(), chemin);
+
+      case "membre":
+      default:
+        return construireUrlMembre(chemin);
+    }
   }
 
   function construireUrlPublic(chemin) {
@@ -124,6 +144,22 @@
       window.SITE_BASE ||
       window.SITE_CONFIG?.membreBaseUrl ||
       window.SITE_CONFIG?.MEMBRE_BASE ||
+      ""
+    ).replace(/\/$/, "");
+  }
+
+  function normaliserBaseParc() {
+    return String(
+      window.SITE_CONFIG?.parcBaseUrl ||
+      window.SITE_CONFIG?.PARC_BASE ||
+      ""
+    ).replace(/\/$/, "");
+  }
+
+  function normaliserBaseCoach() {
+    return String(
+      window.SITE_CONFIG?.coachBaseUrl ||
+      window.SITE_CONFIG?.COACH_BASE ||
       ""
     ).replace(/\/$/, "");
   }
