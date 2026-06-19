@@ -43,7 +43,7 @@
 .galerie-card img {
   width: 100%;
   aspect-ratio: 1 / 1;
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-1);
   border-radius: var(--radius-button);
   display: block;
   object-fit: cover;
@@ -51,7 +51,7 @@
   background: var(--color-surface-soft);
 }
 
-.galerie-card p {
+.galerie-card p:not(.image-legend) {
   max-width: none;
   margin-bottom: 0;
   font-size: 16px;
