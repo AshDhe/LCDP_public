@@ -11,11 +11,14 @@
     if (!container) return;
 
     try {
-      const response = await fetch(construireUrlMembre("/OBJETS/BLOCS/bandeau-nav.html"), {
-        method: "GET",
-        credentials: "same-origin",
-        cache: "no-cache"
-      });
+      const response = await fetch(
+        construireUrlPublic("/OBJETS/BLOCS/bandeau-nav-membre.html"),
+        {
+          method: "GET",
+          credentials: "omit",
+          cache: "no-cache"
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Impossible de charger le bandeau de navigation membre");
@@ -64,56 +67,64 @@
   }
 
   function corrigerLiensBandeauNavigation(scope) {
-    corrigerAttributsAvecSiteBase(scope, "a[href]", "href");
-    corrigerAttributsAvecSiteBase(scope, "img[src]", "src");
-  }
+    scope.querySelectorAll("a[href]").forEach((element) => {
+      const valeur = element.getAttribute("href");
+      element.setAttribute("href", construireUrlMembre(valeur));
+    });
 
-  function corrigerAttributsAvecSiteBase(scope, selector, attribut) {
-    scope.querySelectorAll(selector).forEach((element) => {
-      const valeur = element.getAttribute(attribut);
-
-      if (
-        !valeur ||
-        valeur.startsWith("#") ||
-        valeur.startsWith("mailto:") ||
-        valeur.startsWith("tel:") ||
-        valeur.startsWith("http://") ||
-        valeur.startsWith("https://")
-      ) {
-        return;
-      }
-
-      element.setAttribute(attribut, construireUrlMembre(valeur));
+    scope.querySelectorAll("img[src]").forEach((element) => {
+      const valeur = element.getAttribute("src");
+      element.setAttribute("src", construireUrlPublic(valeur));
     });
   }
 
-  function construireUrlMembre(chemin) {
-    const siteBase = normaliserSiteBase();
-
-    if (!chemin) return chemin;
-
-    if (chemin.startsWith("http://") || chemin.startsWith("https://")) {
-      return chemin;
-    }
-
-    if (!siteBase) {
-      return chemin.startsWith("/") ? "." + chemin : chemin;
-    }
-
-    if (chemin.startsWith("/")) {
-      return siteBase + chemin;
-    }
-
-    return siteBase + "/" + chemin.replace(/^\.\//, "");
+  function construireUrlPublic(chemin) {
+    return construireUrlDepuisBase(normaliserBasePublic(), chemin);
   }
 
-  function normaliserSiteBase() {
-    const siteBase =
+  function construireUrlMembre(chemin) {
+    return construireUrlDepuisBase(normaliserBaseMembre(), chemin);
+  }
+
+  function construireUrlDepuisBase(baseUrl, chemin) {
+    const valeur = String(chemin || "");
+
+    if (
+      !valeur ||
+      valeur.startsWith("#") ||
+      valeur.startsWith("mailto:") ||
+      valeur.startsWith("tel:") ||
+      valeur.startsWith("http://") ||
+      valeur.startsWith("https://")
+    ) {
+      return valeur;
+    }
+
+    const base = String(baseUrl || "").replace(/\/$/, "");
+
+    if (!base) {
+      return valeur.startsWith("/") ? valeur : "/" + valeur;
+    }
+
+    return valeur.startsWith("/")
+      ? base + valeur
+      : base + "/" + valeur.replace(/^\.\//, "");
+  }
+
+  function normaliserBasePublic() {
+    return String(
+      window.SITE_CONFIG?.publicBaseUrl ||
+      window.SITE_CONFIG?.PUBLIC_BASE ||
+      ""
+    ).replace(/\/$/, "");
+  }
+
+  function normaliserBaseMembre() {
+    return String(
       window.SITE_BASE ||
       window.SITE_CONFIG?.membreBaseUrl ||
       window.SITE_CONFIG?.MEMBRE_BASE ||
-      "";
-
-    return siteBase.replace(/\/$/, "");
+      ""
+    ).replace(/\/$/, "");
   }
 })();
