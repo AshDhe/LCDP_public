@@ -18,9 +18,9 @@ function initialiserConnexionMembre() {
     ""
   );
 
-  const urlMonCompteMembre = construireUrlMembre(
-    "/PAGES/PRIVEES/MON-COMPTE-MEMBRE/mon-compte-membre.html"
-  );
+const urlMonCompteMembre = construireUrlMembre(
+  "/index.html"
+);
 
   const urlMotDePasseOublie = construireUrlPublique(
     "/PAGES/PUBLIQUES/MDP-PERDU/mdp-perdu-membre.html"
