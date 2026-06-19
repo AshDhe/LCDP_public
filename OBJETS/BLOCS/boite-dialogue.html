@@ -1,0 +1,37 @@
+<div
+  class="dialog-overlay"
+  id="boite-dialogue"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="boite-dialogue-titre"
+  aria-describedby="boite-dialogue-contenu"
+  hidden
+>
+  <div class="dialog-box">
+    <h2 id="boite-dialogue-titre"></h2>
+
+    <form id="boite-dialogue-form" novalidate>
+      <div id="boite-dialogue-contenu"></div>
+
+      <p id="boite-dialogue-erreur" class="form-erreur" hidden></p>
+
+      <div class="dialog-actions">
+        <button
+          type="button"
+          class="button button-secondary"
+          id="boite-dialogue-annuler"
+        >
+          Annuler
+        </button>
+
+        <button
+          type="submit"
+          class="button"
+          id="boite-dialogue-valider"
+        >
+          Valider
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
