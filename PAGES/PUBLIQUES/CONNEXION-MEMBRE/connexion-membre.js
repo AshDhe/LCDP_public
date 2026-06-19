@@ -23,7 +23,7 @@ function initialiserConnexionMembre() {
   );
 
   const urlMotDePasseOublie = construireUrlPublique(
-    "/PAGES/PUBLIQUES/MDP-PERDU-MEMBRE/mdp-perdu-membre.html"
+    "/PAGES/PUBLIQUES/MDP-PERDU/mdp-perdu-membre.html"
   );
 
   let envoiEnCours = false;
