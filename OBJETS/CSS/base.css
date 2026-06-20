@@ -81,11 +81,6 @@ a {
   flex: 0 0 auto;
 }
 
-#footer-container {
-  width: 100%;
-  margin-top: var(--space-1);
-}
-
 .page-container {
   width: 100%;
   max-width: var(--page-width);
@@ -119,6 +114,10 @@ a {
   margin-bottom: 0;
 }
 
+#footer-container {
+  width: 100%;
+  margin-top: var(--space-1);
+}
 
 /* TYPOGRAPHIE SIMPLE */
 
