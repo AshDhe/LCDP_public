@@ -27,7 +27,11 @@ async function chargerBoiteDialogue() {
   ).replace(/\/$/, "");
 
   try {
-    const response = await fetch(siteBase + "/OBJETS/BLOCS/boite-dialogue.html");
+    const response = await fetch(siteBase + "/OBJETS/BLOCS/boite-dialogue.html", {
+      method: "GET",
+      credentials: "omit",
+      cache: "no-cache"
+    });
 
     if (!response.ok) {
       throw new Error("Impossible de charger la boîte de dialogue.");
@@ -139,6 +143,8 @@ function ajouterChampBoiteDialogue(champ, contenu) {
   wrapper.className = "dialog-field";
 
   const type = champ.type || "text";
+  const idChamp = champ.id || champ.name || "champ-dialogue";
+  const nameChamp = champ.name || idChamp;
 
   if (type === "radio" || type === "checkbox") {
     const label = document.createElement("label");
@@ -146,8 +152,8 @@ function ajouterChampBoiteDialogue(champ, contenu) {
 
     const input = document.createElement("input");
     input.type = type;
-    input.id = champ.id;
-    input.name = champ.name || champ.id;
+    input.id = idChamp;
+    input.name = nameChamp;
     input.value = champ.value || "";
 
     if (champ.required) input.required = true;
@@ -165,7 +171,8 @@ function ajouterChampBoiteDialogue(champ, contenu) {
   }
 
   const label = document.createElement("label");
-  label.setAttribute("for", champ.id);
+  label.className = "dialog-label";
+  label.setAttribute("for", idChamp);
   label.textContent = champ.label || "";
 
   let champFormulaire;
@@ -188,8 +195,9 @@ function ajouterChampBoiteDialogue(champ, contenu) {
     champFormulaire.type = type;
   }
 
-  champFormulaire.id = champ.id;
-  champFormulaire.name = champ.name || champ.id;
+  champFormulaire.className = "dialog-input";
+  champFormulaire.id = idChamp;
+  champFormulaire.name = nameChamp;
   champFormulaire.value = champ.value || "";
 
   if (champ.placeholder) champFormulaire.placeholder = champ.placeholder;
