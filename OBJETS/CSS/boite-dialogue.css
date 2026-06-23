@@ -169,6 +169,7 @@
   width: 100%;
   max-width: 240px;
   min-height: 44px;
+  margin: 0;
   padding: 11px 24px;
   border-width: 1px;
   border-radius: 999px;
@@ -230,3 +231,4 @@
     font-size: 16px;
   }
 }
+
