@@ -1,44 +1,28 @@
 (() => {
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", chargerBandeauNavigationMembre);
+    document.addEventListener("DOMContentLoaded", initialiserBandeauNavigationMembre);
   } else {
-    chargerBandeauNavigationMembre();
+    initialiserBandeauNavigationMembre();
   }
 
-  async function chargerBandeauNavigationMembre() {
+  function initialiserBandeauNavigationMembre() {
     const container = document.getElementById("bandeau-nav-container");
 
     if (!container) return;
 
-    try {
-      const response = await fetch(
-        construireUrlPublic("/OBJETS/BLOCS/bandeau-nav-membre.html"),
-        {
-          method: "GET",
-          credentials: "omit",
-          cache: "no-cache"
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Impossible de charger le bandeau de navigation membre");
-      }
-
-      const html = await response.text();
-      container.innerHTML = html;
-
-      corrigerLiensBandeauNavigation(container);
-      initialiserBurgerMembre(container);
-    } catch (error) {
-      console.error("Erreur de chargement du bandeau de navigation membre :", error);
-    }
+    corrigerLiensBandeauNavigation(container);
+    initialiserBurgerMembre(container);
   }
 
   function initialiserBurgerMembre(container) {
+    if (container.dataset.burgerMembreInitialise === "true") return;
+
     const burgerButton = container.querySelector(".burger-button");
     const burgerNavMembre = container.querySelector(".burger-nav-membre");
 
     if (!burgerButton || !burgerNavMembre) return;
+
+    container.dataset.burgerMembreInitialise = "true";
 
     burgerButton.addEventListener("click", () => {
       const isOpen = burgerButton.classList.toggle("is-open");
@@ -67,17 +51,26 @@
   }
 
   function corrigerLiensBandeauNavigation(scope) {
-    scope.querySelectorAll("a[href]").forEach((element) => {
-      const valeur = element.getAttribute("href");
+    scope.querySelectorAll("[data-site-href]").forEach((element) => {
+      const chemin = element.dataset.siteHref;
       const espace = element.dataset.space || "membre";
 
-      element.setAttribute("href", construireUrlEspace(espace, valeur));
+      element.setAttribute("href", construireUrlEspace(espace, chemin));
     });
 
-    scope.querySelectorAll("img[src]").forEach((element) => {
-      const valeur = element.getAttribute("src");
+    scope.querySelectorAll("a[href^='/']").forEach((element) => {
+      const chemin = element.getAttribute("href");
+      const espace = element.dataset.space || "membre";
 
-      element.setAttribute("src", construireUrlPublic(valeur));
+      element.setAttribute("href", construireUrlEspace(espace, chemin));
+    });
+
+    scope.querySelectorAll("[data-site-src]").forEach((element) => {
+      element.setAttribute("src", construireUrlPublic(element.dataset.siteSrc));
+    });
+
+    scope.querySelectorAll("img[src^='/']").forEach((element) => {
+      element.setAttribute("src", construireUrlPublic(element.getAttribute("src")));
     });
   }
 
