@@ -58,44 +58,18 @@ if (infosHoraire) {
 
 document.addEventListener("click", async (event) => {
   const boutonHeure = event.target.closest("[data-action='choisir-heure-arrivee']");
-  const boutonAnnuler = event.target.closest("[data-action='annuler-confirmation-heure']");
-  const boutonValider = event.target.closest("[data-action='valider-confirmation-heure']");
-  const boutonRetourPlanning = event.target.closest("[data-action='retour-mon-planning']");
 
-  if (boutonHeure) {
-    ouvrirConfirmationHeureHoraireParc(
-      boutonHeure.dataset.heure,
-      boutonHeure.dataset.plagebookd
-    );
+  if (!boutonHeure) {
     return;
   }
 
-  if (boutonAnnuler) {
-    fermerConfirmationHeureHoraireParc();
-    return;
-  }
+  event.preventDefault();
 
-  if (boutonRetourPlanning) {
-    allerMonPlanningHoraireParc();
-    return;
-  }
-
-  if (boutonValider) {
-    const heure = boutonValider.dataset.heure;
-    const plagebookd = boutonValider.dataset.plagebookd;
-
-    boutonValider.disabled = true;
-    boutonValider.textContent = "Enregistrement...";
-
-    try {
-      await enregistrerReservationHoraireParc(heure, plagebookd);
-      ouvrirConfirmationEnregistrementHoraireParc();
-    } catch (erreur) {
-      boutonValider.disabled = false;
-      boutonValider.textContent = "Confirmer";
-      alert(erreur.message);
-    }
-  }
+  await traiterChoixHeureHoraireParc(
+    boutonHeure,
+    boutonHeure.dataset.heure,
+    boutonHeure.dataset.plagebookd
+  );
 });
 
 initialiserHorairesParc();
@@ -343,93 +317,218 @@ function afficherBoutonFermerParentHoraireParc() {
   envoyerMessageParentHoraireParc("afficher-fermer-planning");
 }
 
-function supprimerConfirmationHeureHoraireParc() {
-  const lightbox = document.getElementById("dialog-confirmation-heure");
+async function traiterChoixHeureHoraireParc(boutonHeure, heure, plagebookd) {
+  if (!heure || !plagebookd) {
+    await afficherErreurHoraireParc("Heure ou plage de réservation manquante.");
+    return;
+  }
 
-  if (lightbox) {
-    lightbox.remove();
+  const confirmation = await ouvrirConfirmationHeureHoraireParc(heure);
+
+  if (confirmation !== true) {
+    return;
+  }
+
+  const texteInitial = boutonHeure ? boutonHeure.textContent : "";
+
+  if (boutonHeure) {
+    boutonHeure.disabled = true;
+    boutonHeure.textContent = "Enregistrement...";
+  }
+
+  try {
+    await enregistrerReservationHoraireParc(heure, plagebookd);
+    ouvrirConfirmationEnregistrementHoraireParc();
+  } catch (erreur) {
+    afficherBoutonFermerParentHoraireParc();
+
+    if (boutonHeure) {
+      boutonHeure.disabled = false;
+      boutonHeure.textContent = texteInitial;
+    }
+
+    await afficherErreurHoraireParc(
+      erreur.message || "Impossible d'enregistrer la réservation."
+    );
   }
 }
 
-function ouvrirConfirmationHeureHoraireParc(heure, plagebookd) {
-  masquerBoutonFermerParentHoraireParc();
-  supprimerConfirmationHeureHoraireParc();
-
-  const lightbox = document.createElement("div");
-  lightbox.id = "dialog-confirmation-heure";
-  lightbox.className = "dialog-overlay";
-
-  lightbox.innerHTML = `
-    <div class="dialog-box" role="dialog" aria-modal="true">
-
-      <h2>
-        Confirmer l'heure d'arrivée
-      </h2>
-
-      <p>
-        Vous avez choisi le ${formaterDateFrHoraireParc(dateChoisieHoraire)} à ${formaterHeureAfficheeHoraireParc(heure)}.
-      </p>
-
-      <div class="dialog-actions">
-
-        <button class="button button-secondary" type="button" data-action="annuler-confirmation-heure">
-          Annuler
-        </button>
-
-        <button
-          class="button"
-          type="button"
-          data-action="valider-confirmation-heure"
-          data-heure="${heure}"
-          data-plagebookd="${plagebookd}"
-        >
-          Confirmer
-        </button>
-
-      </div>
-
-    </div>
-  `;
-
-  document.body.appendChild(lightbox);
-}
-
-function fermerConfirmationHeureHoraireParc() {
-  supprimerConfirmationHeureHoraireParc();
-  afficherBoutonFermerParentHoraireParc();
-}
-
-function ouvrirConfirmationEnregistrementHoraireParc() {
-  supprimerConfirmationHeureHoraireParc();
+async function ouvrirConfirmationHeureHoraireParc(heure) {
   masquerBoutonFermerParentHoraireParc();
 
-  const lightbox = document.createElement("div");
-  lightbox.id = "dialog-confirmation-enregistrement";
-  lightbox.className = "dialog-overlay";
+  const elements = await obtenirElementsBoiteDialogueHoraireParc();
 
-  lightbox.innerHTML = `
-    <div class="dialog-box" role="dialog" aria-modal="true">
+  if (!elements) {
+    const confirmationFallback = window.confirm(
+      "Confirmer l'heure d'arrivée\n\n" +
+      "Vous avez choisi le " +
+      formaterDateFrHoraireParc(dateChoisieHoraire) +
+      " à " +
+      formaterHeureAfficheeHoraireParc(heure) +
+      "."
+    );
 
-      <h2>
-        Nouvelle date enregistrée
-      </h2>
+    if (!confirmationFallback) {
+      afficherBoutonFermerParentHoraireParc();
+    }
 
-      <p>
-        Votre nouvelle date a bien été enregistrée.
-      </p>
+    return confirmationFallback;
+  }
 
-      <div class="dialog-actions">
+  const {
+    boite,
+    titre,
+    form,
+    contenu,
+    erreur,
+    boutonAnnuler,
+    boutonValider
+  } = elements;
 
-        <button class="button" type="button" data-action="retour-mon-planning">
-          OK
-        </button>
+  titre.textContent = "Confirmer l'heure d'arrivée";
 
-      </div>
-
-    </div>
+  contenu.innerHTML = `
+    <p style="margin: 0; text-align: center; color: var(--color-text-muted);">
+      Vous avez choisi le ${echapperHtmlHoraireParc(formaterDateFrHoraireParc(dateChoisieHoraire))} à ${echapperHtmlHoraireParc(formaterHeureAfficheeHoraireParc(heure))}.
+    </p>
   `;
 
-  document.body.appendChild(lightbox);
+  erreur.textContent = "";
+  erreur.hidden = true;
+
+  boutonAnnuler.textContent = "Annuler";
+  boutonValider.textContent = "Confirmer";
+  boutonValider.disabled = false;
+
+  boite.hidden = false;
+  boutonAnnuler.focus();
+
+  return new Promise((resolve) => {
+    function fermer(resultat) {
+      boite.hidden = true;
+      form.reset();
+      contenu.innerHTML = "";
+      erreur.textContent = "";
+      erreur.hidden = true;
+
+      boutonAnnuler.onclick = null;
+      form.onsubmit = null;
+      boite.onclick = null;
+
+      resolve(resultat);
+    }
+
+    boutonAnnuler.onclick = () => {
+      afficherBoutonFermerParentHoraireParc();
+      fermer(false);
+    };
+
+    boite.onclick = (event) => {
+      if (event.target === boite) {
+        afficherBoutonFermerParentHoraireParc();
+        fermer(false);
+      }
+    };
+
+    form.onsubmit = (event) => {
+      event.preventDefault();
+      fermer(true);
+    };
+  });
+}
+
+async function ouvrirConfirmationEnregistrementHoraireParc() {
+  masquerBoutonFermerParentHoraireParc();
+
+  if (typeof window.afficherLightboxInformation === "function") {
+    await window.afficherLightboxInformation(
+      "Nouvelle date enregistrée",
+      "Votre nouvelle date a bien été enregistrée.",
+      {
+        type: "validation",
+        onClose: allerMonPlanningHoraireParc
+      }
+    );
+
+    return;
+  }
+
+  alert("Votre nouvelle date a bien été enregistrée.");
+  allerMonPlanningHoraireParc();
+}
+
+async function afficherErreurHoraireParc(message) {
+  const texte = message || "Erreur technique. Merci de réessayer.";
+
+  if (typeof window.afficherLightboxInformation === "function") {
+    await window.afficherLightboxInformation(
+      "Erreur",
+      texte,
+      { type: "erreur" }
+    );
+
+    return;
+  }
+
+  alert(texte);
+}
+
+async function obtenirElementsBoiteDialogueHoraireParc() {
+  const boite = await attendreElementHoraireParc("boite-dialogue", 2500);
+
+  if (!boite) {
+    return null;
+  }
+
+  const box = boite.querySelector(".dialog-box");
+  const titre = document.getElementById("boite-dialogue-titre");
+  const form = document.getElementById("boite-dialogue-form");
+  const contenu = document.getElementById("boite-dialogue-contenu");
+  const erreur = document.getElementById("boite-dialogue-erreur");
+  const boutonAnnuler = document.getElementById("boite-dialogue-annuler");
+  const boutonValider = document.getElementById("boite-dialogue-valider");
+
+  if (!box || !titre || !form || !contenu || !erreur || !boutonAnnuler || !boutonValider) {
+    return null;
+  }
+
+  return {
+    boite,
+    box,
+    titre,
+    form,
+    contenu,
+    erreur,
+    boutonAnnuler,
+    boutonValider
+  };
+}
+
+function attendreElementHoraireParc(idElement, delaiMaximum) {
+  const elementExistant = document.getElementById(idElement);
+
+  if (elementExistant) {
+    return Promise.resolve(elementExistant);
+  }
+
+  return new Promise((resolve) => {
+    const debut = Date.now();
+
+    const timer = window.setInterval(() => {
+      const element = document.getElementById(idElement);
+
+      if (element) {
+        window.clearInterval(timer);
+        resolve(element);
+        return;
+      }
+
+      if (Date.now() - debut >= delaiMaximum) {
+        window.clearInterval(timer);
+        resolve(null);
+      }
+    }, 40);
+  });
 }
 
 function construireDateBookdHoraireParc(dateIso, heure) {

@@ -86,12 +86,17 @@
       }
 
       ecrireCssAsset("/OBJETS/CSS/base.css");
+      ecrireCssAsset("/OBJETS/CSS/boite-dialogue.css");
+      ecrireCssAsset("/OBJETS/CSS/lightbox-information.css");
       ecrireCssAsset("/OBJETS/CSS/horaire-parc-nouvelle-date.css");
     })();
   </script>
 </head>
 
 <body>
+
+  <div id="boite-dialogue-container"></div>
+  <div id="lightbox-information-container"></div>
 
   <main class="site-page horaire-parc-nouvelle-date-page">
 
@@ -112,6 +117,21 @@
     </section>
 
   </main>
+
+  <script>
+    (() => {
+      function ecrireScriptAsset(chemin) {
+        const src = window.construireUrlAsset(chemin);
+
+        if (!src) return;
+
+        document.write('<script src="' + src + '"><\/script>');
+      }
+
+      ecrireScriptAsset("/OBJETS/BLOCS/boite-dialogue.js");
+      ecrireScriptAsset("/OBJETS/BLOCS/lightbox-information.js");
+    })();
+  </script>
 
   <script src="./horaire-parc-nouvelle-date.js"></script>
 </body>
