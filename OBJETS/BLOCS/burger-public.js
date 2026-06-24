@@ -150,6 +150,7 @@
       }
 
       const data = await response.json().catch(() => null);
+      alert(JSON.stringify(data, null, 2));
 
       if (data && data.redirectUrl) {
         window.location.href = data.redirectUrl;
