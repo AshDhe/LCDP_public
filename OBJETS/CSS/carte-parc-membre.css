@@ -1,0 +1,109 @@
+.carte-parc-membre {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: var(--space-3);
+  align-items: center;
+  min-height: 88px;
+  text-align: left;
+}
+
+.carte-parc-membre-image {
+  width: 110px;
+  height: 78px;
+  border-radius: var(--radius-medium);
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  background: var(--color-surface-soft);
+}
+
+.carte-parc-membre-contenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3px;
+  min-width: 0;
+  height: 78px;
+}
+
+.carte-parc-membre h3 {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.08;
+}
+
+.carte-parc-membre-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 34px;
+}
+
+.lien-fiche-parc {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: var(--font-main);
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.carte-parc-membre-actions .micro-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .carte-parc-membre {
+    grid-template-columns: 82px 1fr;
+    gap: var(--space-2);
+    min-height: 68px;
+    align-items: center;
+  }
+
+  .carte-parc-membre-image {
+    width: 82px;
+    height: 62px;
+    border-radius: var(--radius-small);
+  }
+
+  .carte-parc-membre-contenu {
+    height: 62px;
+    gap: 2px;
+  }
+
+  .carte-parc-membre h3 {
+    font-size: 15px;
+    line-height: 1.05;
+  }
+
+  .carte-parc-membre-actions {
+    gap: 8px;
+    min-height: 30px;
+  }
+
+  .lien-fiche-parc {
+    min-height: 30px;
+    font-size: 14px;
+  }
+
+  .carte-parc-membre-actions .micro-action {
+    min-height: 30px;
+    padding: 5px 10px;
+    font-size: 13px;
+    margin-top: 0;
+  }
+}
