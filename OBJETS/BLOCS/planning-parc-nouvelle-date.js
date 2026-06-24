@@ -73,23 +73,12 @@ if (boutonMoisSuivant) {
   });
 }
 
-document.addEventListener("click", (event) => {
-  const boutonAnnulerDate = event.target.closest("[data-action='annuler-confirmation-date']");
-  const boutonValiderDate = event.target.closest("[data-action='valider-confirmation-date']");
+document.addEventListener("click", async (event) => {
   const boutonJour = event.target.closest(".jour-planning[data-date]");
 
-  if (boutonAnnulerDate) {
-    fermerConfirmationDatePlanningParc();
-    return;
-  }
-
-  if (boutonValiderDate) {
-    ouvrirPageHorairePlanningParc(boutonValiderDate.dataset.date);
-    return;
-  }
-
   if (boutonJour && !boutonJour.disabled) {
-    ouvrirConfirmationDatePlanningParc(boutonJour.dataset.date);
+    event.preventDefault();
+    await traiterChoixDatePlanningParc(boutonJour.dataset.date);
   }
 });
 
@@ -300,59 +289,156 @@ function classeCouleurPlagePlanningParc(plage, estPasse) {
   return "plage-couleur-gris-clair";
 }
 
-function supprimerConfirmationDatePlanningParc() {
-  const lightbox = document.getElementById("dialog-confirmation-date");
+async function traiterChoixDatePlanningParc(dateIso) {
+  const confirmation = await ouvrirConfirmationDatePlanningParc(dateIso);
 
-  if (lightbox) {
-    lightbox.remove();
+  if (confirmation !== true) {
+    return;
   }
+
+  ouvrirPageHorairePlanningParc(dateIso);
 }
 
-function ouvrirConfirmationDatePlanningParc(dateIso) {
+async function ouvrirConfirmationDatePlanningParc(dateIso) {
   masquerBoutonFermerParentPlanningParc();
-  supprimerConfirmationDatePlanningParc();
 
-  const lightbox = document.createElement("div");
-  lightbox.id = "dialog-confirmation-date";
-  lightbox.className = "dialog-overlay";
+  const elements = await obtenirElementsBoiteDialoguePlanningParc();
 
-  lightbox.innerHTML = `
-    <div class="dialog-box" role="dialog" aria-modal="true">
+  if (!elements) {
+    const confirmationFallback = window.confirm(
+      "Confirmer la date\n\nVous avez choisi le " +
+      formaterDateFrPlanningParc(dateIso) +
+      "."
+    );
 
-      <h2>
-        Confirmer la date
-      </h2>
+    if (!confirmationFallback) {
+      afficherBoutonFermerParentPlanningParc();
+    }
 
-      <p>
-        Vous avez choisi le ${formaterDateFrPlanningParc(dateIso)}.
-      </p>
+    return confirmationFallback;
+  }
 
-      <div class="dialog-actions">
+  const {
+    boite,
+    titre,
+    form,
+    contenu,
+    erreur,
+    boutonAnnuler,
+    boutonValider
+  } = elements;
 
-        <button class="button button-secondary" type="button" data-action="annuler-confirmation-date">
-          Annuler
-        </button>
+  titre.textContent = "Confirmer la date";
 
-        <button class="button" type="button" data-action="valider-confirmation-date" data-date="${dateIso}">
-          Continuer
-        </button>
-
-      </div>
-
-    </div>
+  contenu.innerHTML = `
+    <p style="margin: 0; text-align: center; color: var(--color-text-muted);">
+      Vous avez choisi le ${echapperHtmlPlanningParc(formaterDateFrPlanningParc(dateIso))}.
+    </p>
   `;
 
-  document.body.appendChild(lightbox);
+  erreur.textContent = "";
+  erreur.hidden = true;
+
+  boutonAnnuler.textContent = "Annuler";
+  boutonValider.textContent = "Continuer";
+  boutonValider.disabled = false;
+
+  boite.hidden = false;
+  boutonAnnuler.focus();
+
+  return new Promise((resolve) => {
+    function fermer(resultat) {
+      boite.hidden = true;
+      form.reset();
+      contenu.innerHTML = "";
+      erreur.textContent = "";
+      erreur.hidden = true;
+
+      boutonAnnuler.onclick = null;
+      form.onsubmit = null;
+      boite.onclick = null;
+
+      resolve(resultat);
+    }
+
+    boutonAnnuler.onclick = () => {
+      afficherBoutonFermerParentPlanningParc();
+      fermer(false);
+    };
+
+    boite.onclick = (event) => {
+      if (event.target === boite) {
+        afficherBoutonFermerParentPlanningParc();
+        fermer(false);
+      }
+    };
+
+    form.onsubmit = (event) => {
+      event.preventDefault();
+      fermer(true);
+    };
+  });
 }
 
-function fermerConfirmationDatePlanningParc() {
-  supprimerConfirmationDatePlanningParc();
-  afficherBoutonFermerParentPlanningParc();
+async function obtenirElementsBoiteDialoguePlanningParc() {
+  const boite = await attendreElementPlanningParc("boite-dialogue", 2500);
+
+  if (!boite) {
+    return null;
+  }
+
+  const box = boite.querySelector(".dialog-box");
+  const titre = document.getElementById("boite-dialogue-titre");
+  const form = document.getElementById("boite-dialogue-form");
+  const contenu = document.getElementById("boite-dialogue-contenu");
+  const erreur = document.getElementById("boite-dialogue-erreur");
+  const boutonAnnuler = document.getElementById("boite-dialogue-annuler");
+  const boutonValider = document.getElementById("boite-dialogue-valider");
+
+  if (!box || !titre || !form || !contenu || !erreur || !boutonAnnuler || !boutonValider) {
+    return null;
+  }
+
+  return {
+    boite,
+    box,
+    titre,
+    form,
+    contenu,
+    erreur,
+    boutonAnnuler,
+    boutonValider
+  };
+}
+
+function attendreElementPlanningParc(idElement, delaiMaximum) {
+  const elementExistant = document.getElementById(idElement);
+
+  if (elementExistant) {
+    return Promise.resolve(elementExistant);
+  }
+
+  return new Promise((resolve) => {
+    const debut = Date.now();
+
+    const timer = window.setInterval(() => {
+      const element = document.getElementById(idElement);
+
+      if (element) {
+        window.clearInterval(timer);
+        resolve(element);
+        return;
+      }
+
+      if (Date.now() - debut >= delaiMaximum) {
+        window.clearInterval(timer);
+        resolve(null);
+      }
+    }, 40);
+  });
 }
 
 function ouvrirPageHorairePlanningParc(dateIso) {
-  fermerConfirmationDatePlanningParc();
-
   window.location.href =
     construireUrlAssetPlanningParc(
       DOSSIER_BLOCS_NOUVELLE_DATE +
