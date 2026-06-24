@@ -124,68 +124,44 @@
     await redirigerSelonComptePublic(resultat.compte);
   }
 
-async function redirigerSelonComptePublic(compte) {
-  const urlConnexionFallback = construireUrlSite(obtenirCheminConnexionCompte(compte));
-  const workerUrl = obtenirWorkerUserRouteurUrl();
+  async function redirigerSelonComptePublic(compte) {
+    const urlConnexionFallback = construireUrlSite(obtenirCheminConnexionCompte(compte));
+    const workerUrl = obtenirWorkerUserRouteurUrl();
 
-  if (!workerUrl) {
-    alert("DEBUG USER ROUTEUR\nworkerUrl absent\nRedirection fallback : " + urlConnexionFallback);
-    window.location.href = urlConnexionFallback;
-    return;
-  }
-
-  try {
-    const response = await fetch(workerUrl, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        compte
-      })
-    });
-
-    const texte = await response.text();
-
-    let data = null;
-
-    try {
-      data = JSON.parse(texte);
-    } catch {
-      data = null;
-    }
-
-    alert(
-      "DEBUG USER ROUTEUR\n" +
-      "workerUrl : " + workerUrl + "\n" +
-      "status : " + response.status + "\n" +
-      "compte : " + compte + "\n" +
-      "réponse brute : " + texte
-    );
-
-    if (!response.ok) {
-      throw new Error("Routeur utilisateur indisponible.");
-    }
-
-    if (data && data.redirectUrl) {
-      window.location.href = data.redirectUrl;
+    if (!workerUrl) {
+      window.location.href = urlConnexionFallback;
       return;
     }
 
-    window.location.href = urlConnexionFallback;
-  } catch (error) {
-    alert(
-      "DEBUG USER ROUTEUR - ERREUR\n" +
-      "workerUrl : " + workerUrl + "\n" +
-      "message : " + error.message + "\n" +
-      "fallback : " + urlConnexionFallback
-    );
+    try {
+      const response = await fetch(workerUrl, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          compte
+        })
+      });
 
-    console.error("Erreur routeur utilisateur :", error);
-    window.location.href = urlConnexionFallback;
+      if (!response.ok) {
+        throw new Error("Routeur utilisateur indisponible.");
+      }
+
+      const data = await response.json().catch(() => null);
+
+      if (data && data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+        return;
+      }
+
+      window.location.href = urlConnexionFallback;
+    } catch (error) {
+      console.error("Erreur routeur utilisateur :", error);
+      window.location.href = urlConnexionFallback;
+    }
   }
-}
 
   function obtenirCheminConnexionCompte(compte) {
     const cheminsConnexion = {
