@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Planning du parc - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choisir une date disponible dans le planning du parc.">
+
+  <script src="../../config.js"></script>
+
+  <script>
+    (() => {
+      const siteRootRelative = "../../";
+      const baseDepuisChemin = new URL(siteRootRelative, window.location.href);
+
+      let siteBaseFallback = baseDepuisChemin.pathname.replace(/\/$/, "");
+
+      if (siteBaseFallback === "/") {
+        siteBaseFallback = "";
+      }
+
+      function nettoyerBaseUrl(value) {
+        return String(value || "").replace(/\/+$/, "");
+      }
+
+      function joindreBaseEtChemin(baseUrl, chemin) {
+        const valeur = String(chemin || "");
+
+        if (
+          !valeur ||
+          valeur.startsWith("#") ||
+          valeur.startsWith("mailto:") ||
+          valeur.startsWith("tel:") ||
+          valeur.startsWith("http://") ||
+          valeur.startsWith("https://")
+        ) {
+          return valeur;
+        }
+
+        const base = nettoyerBaseUrl(baseUrl);
+        const cheminNettoye = "/" + valeur.replace(/^\/+/, "");
+
+        if (!base) {
+          return cheminNettoye;
+        }
+
+        return base + cheminNettoye;
+      }
+
+      window.SITE_ROOT_RELATIVE = siteRootRelative;
+
+      window.SITE_BASE = nettoyerBaseUrl(
+        window.SITE_CONFIG?.membreBaseUrl ||
+        window.SITE_CONFIG?.MEMBRE_BASE ||
+        siteBaseFallback ||
+        ""
+      );
+
+      window.ASSETS_BASE = nettoyerBaseUrl(
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.PUBLIC_BASE ||
+        siteBaseFallback ||
+        ""
+      );
+
+      window.construireUrlMembre = function construireUrlMembre(chemin) {
+        if (typeof window.SITE_CONFIG?.membreUrl === "function") {
+          return window.SITE_CONFIG.membreUrl(chemin);
+        }
+
+        return joindreBaseEtChemin(window.SITE_BASE, chemin);
+      };
+
+      window.construireUrlAsset = function construireUrlAsset(chemin) {
+        return joindreBaseEtChemin(window.ASSETS_BASE, chemin);
+      };
+
+      function ecrireCssAsset(chemin) {
+        const href = window.construireUrlAsset(chemin);
+
+        if (!href) return;
+
+        document.write('<link rel="stylesheet" href="' + href + '">');
+      }
+
+      ecrireCssAsset("/OBJETS/CSS/base.css");
+      ecrireCssAsset("/OBJETS/CSS/planning-parc-nouvelle-date.css");
+    })();
+  </script>
+</head>
+
+<body>
+
+  <main class="site-page planning-parc-nouvelle-date-page">
+
+    <section class="planning-parc-entete">
+
+      <h1 id="titre-planning-parc">
+        Planning du parc
+      </h1>
+
+      <p id="infos-planning-parc"></p>
+
+    </section>
+
+    <section class="planning-parc-calendrier" aria-label="Planning d'ouverture du parc">
+
+      <div class="planning-parc-navigation">
+
+        <button class="micro-action" type="button" id="bouton-mois-precedent">
+          ←
+        </button>
+
+        <h2 id="titre-mois-planning"></h2>
+
+        <button class="micro-action" type="button" id="bouton-mois-suivant">
+          →
+        </button>
+
+      </div>
+
+      <div class="planning-parc-jours-semaine" aria-hidden="true">
+        <span>Lun</span>
+        <span>Mar</span>
+        <span>Mer</span>
+        <span>Jeu</span>
+        <span>Ven</span>
+        <span>Sam</span>
+        <span>Dim</span>
+      </div>
+
+      <div class="planning-parc-grille" id="grille-planning-parc"></div>
+
+    </section>
+
+  </main>
+
+  <script src="./planning-parc-nouvelle-date.js"></script>
+</body>
+</html>

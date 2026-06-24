@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Fiche parc - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fiche du parc sélectionné pour une nouvelle date membre.">
+
+  <script src="../../config.js"></script>
+
+  <script>
+    (() => {
+      const siteRootRelative = "../../";
+      const baseDepuisChemin = new URL(siteRootRelative, window.location.href);
+
+      let siteBaseFallback = baseDepuisChemin.pathname.replace(/\/$/, "");
+
+      if (siteBaseFallback === "/") {
+        siteBaseFallback = "";
+      }
+
+      function nettoyerBaseUrl(value) {
+        return String(value || "").replace(/\/+$/, "");
+      }
+
+      function joindreBaseEtChemin(baseUrl, chemin) {
+        const valeur = String(chemin || "");
+
+        if (
+          !valeur ||
+          valeur.startsWith("#") ||
+          valeur.startsWith("mailto:") ||
+          valeur.startsWith("tel:") ||
+          valeur.startsWith("http://") ||
+          valeur.startsWith("https://")
+        ) {
+          return valeur;
+        }
+
+        const base = nettoyerBaseUrl(baseUrl);
+        const cheminNettoye = "/" + valeur.replace(/^\/+/, "");
+
+        if (!base) {
+          return cheminNettoye;
+        }
+
+        return base + cheminNettoye;
+      }
+
+      window.SITE_ROOT_RELATIVE = siteRootRelative;
+
+      window.SITE_BASE = nettoyerBaseUrl(
+        window.SITE_CONFIG?.membreBaseUrl ||
+        window.SITE_CONFIG?.MEMBRE_BASE ||
+        siteBaseFallback ||
+        ""
+      );
+
+      window.ASSETS_BASE = nettoyerBaseUrl(
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.PUBLIC_BASE ||
+        siteBaseFallback ||
+        ""
+      );
+
+      window.construireUrlMembre = function construireUrlMembre(chemin) {
+        if (typeof window.SITE_CONFIG?.membreUrl === "function") {
+          return window.SITE_CONFIG.membreUrl(chemin);
+        }
+
+        return joindreBaseEtChemin(window.SITE_BASE, chemin);
+      };
+
+      window.construireUrlAsset = function construireUrlAsset(chemin) {
+        return joindreBaseEtChemin(window.ASSETS_BASE, chemin);
+      };
+
+      function ecrireCssAsset(chemin) {
+        const href = window.construireUrlAsset(chemin);
+
+        if (!href) return;
+
+        document.write('<link rel="stylesheet" href="' + href + '">');
+      }
+
+      ecrireCssAsset("/OBJETS/CSS/base.css");
+      ecrireCssAsset("/OBJETS/CSS/fiche-parc-nouvelle-date.css");
+    })();
+  </script>
+</head>
+
+<body>
+
+  <main class="site-page fiche-parc-nouvelle-date-page">
+
+    <section class="fiche-parc-nouvelle-date-hero">
+
+      <h1 id="titre-fiche-parc-nouvelle-date">
+        Parc
+      </h1>
+
+      <p id="departement-fiche-parc-nouvelle-date"></p>
+
+    </section>
+
+    <section class="fiche-parc-nouvelle-date-section">
+      <h2>
+        Présentation
+      </h2>
+
+      <p>
+        La présentation du parc sera affichée ici.
+      </p>
+    </section>
+
+    <section class="fiche-parc-nouvelle-date-section">
+      <h2>
+        Galerie photo
+      </h2>
+
+      <p>
+        La galerie photo du parc sera affichée ici.
+      </p>
+    </section>
+
+    <section class="fiche-parc-nouvelle-date-section">
+      <h2>
+        Coordonnées
+      </h2>
+
+      <p>
+        La carte et les coordonnées du parc seront affichées ici.
+      </p>
+    </section>
+
+    <section class="fiche-parc-nouvelle-date-section">
+      <h2>
+        Contact La Clé du Parc
+      </h2>
+
+      <p>
+        Le contact référent sera affiché ici.
+      </p>
+    </section>
+
+  </main>
+
+  <script src="./fiche-parc-nouvelle-date.js"></script>
+</body>
+</html>
