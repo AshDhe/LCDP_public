@@ -4,9 +4,9 @@ body {
 }
 
 .planning-parc-nouvelle-date-page {
-  width: min(100% - 48px, 960px);
+  width: 100%;
   margin: 0 auto;
-  padding: var(--space-4) 0;
+  padding: var(--space-4) var(--page-padding-mobile);
 }
 
 .planning-parc-entete {
@@ -34,30 +34,30 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-3);
-  margin: var(--space-2) 0 var(--space-4);
+  gap: var(--space-2);
+  margin: var(--space-1) 0 var(--space-4);
 }
 
 .planning-parc-navigation h2 {
-  min-width: 210px;
+  min-width: 150px;
   margin: 0;
   text-align: center;
   text-transform: capitalize;
-  font-size: clamp(26px, 2.8vw, 38px);
+  font-size: 26px;
   line-height: 1.1;
 }
 
 .planning-parc-navigation .micro-action {
-  width: 44px;
-  height: 44px;
-  min-height: 44px;
+  width: 38px;
+  height: 38px;
+  min-height: 38px;
   padding: 0;
   border: 1px solid var(--color-border);
   border-radius: 999px;
   background: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-main);
-  font-size: 22px;
+  font-size: 18px;
   line-height: 1;
   cursor: pointer;
 }
@@ -70,10 +70,10 @@ body {
 .planning-parc-jours-semaine {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 7px;
+  gap: 5px;
   margin-bottom: 8px;
   text-align: center;
-  font-size: 15px;
+  font-size: 12px;
   color: var(--color-text-muted);
 }
 
@@ -85,18 +85,19 @@ body {
 .planning-parc-grille {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 7px;
+  gap: 5px;
 }
 
 .jour-planning {
   width: 100%;
   aspect-ratio: 1 / 1;
-  padding: 10px;
+  padding: 7px;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-button);
+  border-radius: 8px;
   background: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-main);
+  font-size: 14px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -110,16 +111,16 @@ body {
 
 .jour-planning-numero {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   text-align: center;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1;
 }
 
 .jour-planning-plages {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
-  gap: 4px;
+  gap: 3px;
   flex: 1;
   width: 100%;
 }
@@ -127,8 +128,8 @@ body {
 .jour-planning-plage {
   display: block;
   width: 100%;
-  min-height: 12px;
-  border-radius: 5px;
+  min-height: 8px;
+  border-radius: 4px;
 }
 
 .jour-planning-vide {
@@ -175,112 +176,56 @@ body {
   background: #5c5c5c;
 }
 
-.dialog-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
 
-.dialog-box {
-  width: min(100%, 360px);
-  padding: 24px 20px 22px;
-  border: 1px solid var(--color-border);
-  border-radius: calc(var(--radius-button) + 6px);
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
-  text-align: center;
-}
-
-.dialog-box h2 {
-  margin: 0 auto var(--space-2);
-  font-size: 24px;
-  line-height: 1.18;
-}
-
-.dialog-box p {
-  margin: 0 auto var(--space-3);
-}
-
-.dialog-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.dialog-actions .button {
-  width: 100%;
-  max-width: 240px;
-}
-
-@media (min-width: 768px) {
-  .dialog-actions {
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .dialog-actions .button {
-    width: auto;
-    min-width: 150px;
-  }
-}
-
-@media (max-width: 600px) {
+@media (min-width: 601px) {
   .planning-parc-nouvelle-date-page {
-    width: 100%;
-    padding: var(--space-4) var(--page-padding-mobile);
+    width: min(100% - 48px, 960px);
+    padding: var(--space-4) 0;
   }
 
   .planning-parc-navigation {
-    gap: var(--space-2);
-    margin-top: var(--space-1);
+    gap: var(--space-3);
+    margin: var(--space-2) 0 var(--space-4);
   }
 
   .planning-parc-navigation h2 {
-    min-width: 150px;
-    font-size: 26px;
+    min-width: 210px;
+    font-size: clamp(26px, 2.8vw, 38px);
   }
 
   .planning-parc-navigation .micro-action {
-    width: 38px;
-    height: 38px;
-    min-height: 38px;
-    font-size: 18px;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    font-size: 22px;
   }
 
   .planning-parc-jours-semaine,
   .planning-parc-grille {
-    gap: 5px;
+    gap: 7px;
   }
 
   .planning-parc-jours-semaine {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .jour-planning {
-    padding: 7px;
-    border-radius: 8px;
-    font-size: 14px;
+    padding: 10px;
+    border-radius: var(--radius-button);
+    font-size: inherit;
   }
 
   .jour-planning-numero {
-    margin-bottom: 5px;
-    font-size: 14px;
+    margin-bottom: 8px;
+    font-size: 18px;
   }
 
   .jour-planning-plages {
-    gap: 3px;
+    gap: 4px;
   }
 
   .jour-planning-plage {
-    min-height: 8px;
-    border-radius: 4px;
+    min-height: 12px;
+    border-radius: 5px;
   }
 }
