@@ -28,7 +28,77 @@
 <body>
   <div class="site-page">
 
-    <div id="bandeau-nav-container"></div>
+    <div id="bandeau-nav-container">
+      <header class="site-header">
+        <div class="site-header-inner">
+          <a
+            href="./index.html"
+            class="site-logo"
+            data-site-href="/index.html"
+          >
+            <img
+              class="site-logo-img"
+              src="./OBJETS/IMAGES/LOGO/logo-bandeau-96.webp"
+              data-site-src="/OBJETS/IMAGES/LOGO/logo-bandeau-96.webp"
+              width="96"
+              height="96"
+              alt=""
+              aria-hidden="true"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            >
+            <span>La Clé du Parc</span>
+          </a>
+
+          <button
+            class="burger-button"
+            type="button"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+            aria-controls="burger-nav-public"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <nav
+            id="burger-nav-public"
+            class="burger-nav burger-nav-public"
+            aria-label="Navigation publique"
+          >
+            <a
+              href="./index.html?source=menu"
+              data-site-href="/index.html?source=menu"
+            >Accueil</a>
+
+            <a
+              href="./PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html?source=menu-mon-compte"
+              data-site-href="/PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html?source=menu-mon-compte"
+              id="lien-mon-compte-public"
+            >
+              Mon compte
+            </a>
+
+            <a
+              href="./PAGES/PUBLIQUES/ACTUALITES/actualites.html?source=menu"
+              data-site-href="/PAGES/PUBLIQUES/ACTUALITES/actualites.html?source=menu"
+            >Actualités</a>
+
+            <a
+              href="./PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html?source=menu"
+              data-site-href="/PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html?source=menu"
+            >Être invité(e)</a>
+
+            <a
+              href="./PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html?source=menu"
+              data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html?source=menu"
+            >Le club</a>
+          </nav>
+        </div>
+      </header>
+    </div>
 
     <main class="site-main">
       <section class="page-section index-section" aria-label="Accueil public">
@@ -126,6 +196,10 @@
 
       document.querySelectorAll("[data-site-href]").forEach((element) => {
         element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+      });
+
+      document.querySelectorAll("[data-site-src]").forEach((element) => {
+        element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
       });
     })();
   </script>
