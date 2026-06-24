@@ -114,11 +114,11 @@ a {
   flex-direction: column;
   align-items: left;
   text-align: left;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
 .page-content-spaced {
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
 .page-content-spaced > .site-title {
@@ -246,7 +246,7 @@ p,
 
 .page-actions-single {
   width: 100%;
-  margin-top: var(--space-4);
+  margin-top: var(--space-3);
   display: flex;
   justify-content: center;
 }
@@ -395,7 +395,7 @@ p,
   .page-actions-grid,
   .page-actions.index-actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-3);
+    gap: var(--space-2);
   }
 
   .page-actions-grid.page-actions-column {
