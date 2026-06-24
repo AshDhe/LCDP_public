@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Formulaire d'inscription au club | Membre invité</title>
+  <title>Formulaire d'inscription membre - La Clé du Parc</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Formulaire d'inscription comme membre invité La Clé du Parc.">
+  <meta name="description" content="Formulaire d'inscription membre invité La Clé du Parc.">
 
   <!-- SITEBASE : config.js est chargé avant les scripts métier -->
   <script src="../../../config.js"></script>
@@ -34,18 +34,87 @@
     })();
   </script>
 
-  <!-- CSS communs -->
   <link rel="stylesheet" href="../../../OBJETS/CSS/base.css">
-
-  <!-- CSS formulaire -->
+  <link rel="stylesheet" href="../../../OBJETS/CSS/bandeau-et-burger.css">
+  <link rel="stylesheet" href="../../../OBJETS/CSS/footer.css">
   <link rel="stylesheet" href="../../../OBJETS/CSS/formulaire.css">
-
-  <!-- CSS lightbox information -->
   <link rel="stylesheet" href="../../../OBJETS/CSS/lightbox-information.css">
 </head>
 
 <body>
   <div class="site-page">
+
+    <div id="bandeau-nav-container">
+      <header class="site-header">
+        <div class="site-header-inner">
+          <a
+            href="../../../index.html"
+            class="site-logo"
+            data-site-href="/index.html"
+          >
+            <img
+              class="site-logo-img"
+              src="../../../OBJETS/IMAGES/LOGO/logo-bandeau-96.webp"
+              data-site-src="/OBJETS/IMAGES/LOGO/logo-bandeau-96.webp"
+              width="96"
+              height="96"
+              alt=""
+              aria-hidden="true"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            >
+            <span>La Clé du Parc</span>
+          </a>
+
+          <button
+            class="burger-button"
+            type="button"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+            aria-controls="burger-nav-public"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <nav
+            id="burger-nav-public"
+            class="burger-nav burger-nav-public"
+            aria-label="Navigation publique"
+          >
+            <a
+              href="../../../index.html?source=menu"
+              data-site-href="/index.html?source=menu"
+            >Accueil</a>
+
+            <a
+              href="../../../PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html?source=menu-mon-compte"
+              data-site-href="/PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html?source=menu-mon-compte"
+              id="lien-mon-compte-public"
+            >
+              Mon compte
+            </a>
+
+            <a
+              href="../../../PAGES/PUBLIQUES/ACTUALITES/actualites.html?source=menu"
+              data-site-href="/PAGES/PUBLIQUES/ACTUALITES/actualites.html?source=menu"
+            >Actualités</a>
+
+            <a
+              href="../../../PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html?source=menu"
+              data-site-href="/PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html?source=menu"
+            >Être invité(e)</a>
+
+            <a
+              href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html?source=menu"
+              data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html?source=menu"
+            >Le club</a>
+          </nav>
+        </div>
+      </header>
+    </div>
 
     <div id="lightbox-information-container"></div>
 
@@ -65,13 +134,14 @@
 
             <div class="page-intro-block">
               <p>
-                Bénéficiez de La Clé du Parc sans payer d'abonnement. En devenant membre invité La Clé du Parc, vous bénéficiez gratuitement d'un accès nominatif à l'ensemble des parcs du club. Aucune limite ne s'applique au nombre d'invitations que vous recevez, ni au nombre de membres abonnés qui peuvent vous inviter. Vous restez membre aussi longtemps que vous souhaitez sous réserve de respecter le règlement du club. Il n’est pas nécessaire d’être parrainé pour être membre du club.
+                Ouvrez votre compte de membre invité pour recevoir des invitations et accéder aux parcs du club dans les conditions prévues par La Clé du Parc.
               </p>
             </div>
 
             <div class="formulaire-page">
 
               <form
+                id="formulaire-inscription-membre"
                 class="formulaire-inscription"
                 novalidate
               >
@@ -83,7 +153,6 @@
 
                   <p>
                     Conforme à votre état civil. En majuscules de préférence.
-                    Votre état civil est vérifié si vous faîtes une demande d'abonnement.
                   </p>
 
                   <input
@@ -102,9 +171,7 @@
                   </label>
 
                   <p>
-                    Conforme à votre état civil. En minuscules de préférence. La première lettre en majuscule.
-                    Votre nom est vérifié si vous faîtes une demande d'abonnement.
-                    Votre état civil est vérifié si vous faîtes une demande d'abonnement.
+                    Conforme à votre état civil. En minuscules de préférence, avec la première lettre en majuscule.
                   </p>
 
                   <input
@@ -123,8 +190,7 @@
                   </label>
 
                   <p>
-                    Un numéro du département est nécessaire pour sélectionner les informations proches de vous en priorité.
-                    Vous pouvez le modifier autant que nécessaire par la suite.
+                    Le numéro du département permet de sélectionner les informations proches de vous en priorité.
                   </p>
 
                   <input
@@ -144,10 +210,7 @@
                   </label>
 
                   <p>
-                    L’adresse e-mail est votre identifiant informatique de connexion à l'application.
-                    Un mail de confirmation vous est envoyé après l’envoi du formulaire.
-                    Votre adresse e-mail doit alors être confirmée pour être membre du club.
-                    Vous pouvez ensuite modifier votre adresse e-mail depuis votre compte membre.
+                    L’adresse e-mail est votre identifiant de connexion à l'application. Un e-mail de confirmation vous sera envoyé après l’envoi du formulaire.
                   </p>
 
                   <input
@@ -164,27 +227,21 @@
 
                 <div class="formulaire-champ">
                   <label for="emailparrain">
-                    L’adresse e-mail du parrain
+                    Adresse e-mail du membre qui vous invite
                   </label>
 
                   <p>
-                    Cette information n'est par obligatoire.
-                    L’adresse e-mail du parrain est son identifiant informatique de connexion à l'application.
-                    Elle permet ensuite au parrain de vous inviter dans le cadre de son abonnement personnel.
-                    Vous pouvez ensuite changer cette adresse e-mail depuis votre compte membre.
+                    Cette information n'est pas obligatoire. Si vous la renseignez, elle doit être différente de votre adresse e-mail.
                   </p>
 
                   <input
                     type="email"
                     id="emailparrain"
                     name="emailparrain"
-                    placeholder="Identifiant e-mail du parrain"
-                    inputmode="email"
-                    autocomplete="new-password"
+                    placeholder="E-mail du membre qui vous invite"
+                    autocomplete="email"
                     autocapitalize="none"
                     spellcheck="false"
-                    readonly
-                    onfocus="this.removeAttribute('readonly');"
                   >
                 </div>
 
@@ -196,8 +253,8 @@
                   <p>
                     Vous devez accepter le
                     <a
-                      href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=inscription-membre"
-                      data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=inscription-membre"
+                      href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=formulaire-inscription-membre"
+                      data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=formulaire-inscription-membre"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -225,8 +282,8 @@
                   <p>
                     Vous devez accepter le
                     <a
-                      href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=inscription-membre"
-                      data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=inscription-membre"
+                      href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=formulaire-inscription-membre"
+                      data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=formulaire-inscription-membre"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -248,7 +305,7 @@
 
                 <div class="formulaire-actions">
                   <button
-                    type="button"
+                    type="submit"
                     id="bouton-envoyer-inscription"
                     class="button"
                   >
@@ -260,8 +317,8 @@
                   * Votre réponse est obligatoire pour compléter le formulaire.<br>
                   Ce formulaire et les données qu’il contient sont soumis au
                   <a
-                    href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=inscription-membre"
-                    data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=inscription-membre"
+                    href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=formulaire-inscription-membre"
+                    data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-du-club.html?source=formulaire-inscription-membre"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -269,8 +326,8 @@
                   </a>
                   et au
                   <a
-                    href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=inscription-membre"
-                    data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=inscription-membre"
+                    href="../../../PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=formulaire-inscription-membre"
+                    data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/le-reglement-de-lapplication.html?source=formulaire-inscription-membre"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -287,6 +344,8 @@
       </section>
 
     </main>
+
+    <div id="footer-container"></div>
 
   </div>
 
@@ -326,18 +385,32 @@
           : chemin;
       }
 
+      function corrigerCheminsSite(scope) {
+        scope.querySelectorAll("[data-site-src]").forEach((element) => {
+          element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+        });
+
+        scope.querySelectorAll("[data-site-href]").forEach((element) => {
+          element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+        });
+
+        scope.querySelectorAll("a[href^='/']").forEach((element) => {
+          element.setAttribute("href", construireUrlSite(element.getAttribute("href")));
+        });
+
+        scope.querySelectorAll("img[src^='/']").forEach((element) => {
+          element.setAttribute("src", construireUrlSite(element.getAttribute("src")));
+        });
+      }
+
       window.construireUrlSite = construireUrlSite;
 
-      document.querySelectorAll("[data-site-href]").forEach((element) => {
-        element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
-      });
-
-      document.querySelectorAll("[data-site-src]").forEach((element) => {
-        element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
-      });
+      corrigerCheminsSite(document);
     })();
   </script>
 
+  <script src="../../../OBJETS/BLOCS/burger-public.js"></script>
+  <script src="../../../OBJETS/BLOCS/footer-global.js"></script>
   <script src="../../../OBJETS/BLOCS/lightbox-information.js"></script>
   <script src="./formulaire-inscription-membre.js"></script>
 </body>
