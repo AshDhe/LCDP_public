@@ -121,19 +121,75 @@
       return;
     }
 
+    await redirigerSelonComptePublic(resultat.compte);
+  }
+
+  async function redirigerSelonComptePublic(compte) {
+    const urlConnexionFallback = construireUrlSite(obtenirCheminConnexionCompte(compte));
+    const workerUrl = obtenirWorkerUserRouteurUrl();
+
+    if (!workerUrl) {
+      window.location.href = urlConnexionFallback;
+      return;
+    }
+
+    try {
+      const response = await fetch(workerUrl, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          compte
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Routeur utilisateur indisponible.");
+      }
+
+      const data = await response.json().catch(() => null);
+
+      if (data && data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+        return;
+      }
+
+      window.location.href = urlConnexionFallback;
+    } catch (error) {
+      console.error("Erreur routeur utilisateur :", error);
+      window.location.href = urlConnexionFallback;
+    }
+  }
+
+  function obtenirCheminConnexionCompte(compte) {
     const cheminsConnexion = {
       membre: "/PAGES/PUBLIQUES/CONNEXION-MEMBRE/connexion-membre.html?source=menu-mon-compte",
       parc: "/PAGES/PUBLIQUES/CONNEXION-PARC/connexion-parc.html?source=menu-mon-compte",
       coach: "/PAGES/PUBLIQUES/CONNEXION-COACH/connexion-coach.html?source=menu-mon-compte"
     };
 
-    const cheminConnexion = cheminsConnexion[resultat.compte];
+    return cheminsConnexion[compte] ||
+      "/PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html?source=menu-mon-compte";
+  }
 
-    if (!cheminConnexion) {
-      return;
+  function obtenirWorkerUserRouteurUrl() {
+    const config = window.SITE_CONFIG || {};
+
+    if (config.workerUserRouteurUrl) {
+      return config.workerUserRouteurUrl;
     }
 
-    window.location.href = construireUrlSite(cheminConnexion);
+    if (config.WORKER_USER_ROUTEUR_URL) {
+      return config.WORKER_USER_ROUTEUR_URL;
+    }
+
+    if (typeof config.apiUrl === "function") {
+      return config.apiUrl("user-routeur-api");
+    }
+
+    return "https://user-routeur-api.lacleduparc.fr";
   }
 
   async function assurerBoiteDialogueDisponible() {
@@ -260,9 +316,9 @@
 
   function initialiserSessionsPubliques() {
     window.LCDP_SESSIONS = {
-      membre: cookieExiste("session_membre"),
-      parc: cookieExiste("session_parc"),
-      coach: cookieExiste("session_coach")
+      membre: cookieExiste("idsession_membre"),
+      parc: cookieExiste("idsession_parc"),
+      coach: cookieExiste("idsession_coach")
     };
   }
 
