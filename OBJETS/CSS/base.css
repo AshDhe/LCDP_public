@@ -118,7 +118,7 @@ a {
 }
 
 .page-content-spaced {
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .page-content-spaced > .site-title {
@@ -365,7 +365,7 @@ p,
   }
 
   .page-content-spaced > .site-title {
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
   }
 
   .button,
@@ -429,6 +429,6 @@ p,
   }
 
   #footer-container {
-    margin-top: var(--space-4);
+    margin-top: var(--space-3);
   }
 }
