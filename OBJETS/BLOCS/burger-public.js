@@ -2,39 +2,30 @@
   let chargementBoiteDialoguePublic = null;
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", chargerBandeauNavigationPublic);
+    document.addEventListener("DOMContentLoaded", initialiserBandeauNavigationPublic);
   } else {
-    chargerBandeauNavigationPublic();
+    initialiserBandeauNavigationPublic();
   }
 
-  async function chargerBandeauNavigationPublic() {
+  function initialiserBandeauNavigationPublic() {
     const container = document.getElementById("bandeau-nav-container");
 
     if (!container) return;
 
-    try {
-      const response = await fetch(construireUrlSite("/OBJETS/BLOCS/bandeau-nav.html"));
-
-      if (!response.ok) {
-        throw new Error("Impossible de charger le bandeau de navigation public");
-      }
-
-      const html = await response.text();
-      container.innerHTML = html;
-
-      corrigerLiensBandeauNavigation(container);
-      initialiserSessionsPubliques();
-      initialiserBurgerPublic(container);
-    } catch (error) {
-      console.error("Erreur de chargement du bandeau de navigation public :", error);
-    }
+    corrigerLiensBandeauNavigation(container);
+    initialiserSessionsPubliques();
+    initialiserBurgerPublic(container);
   }
 
   function initialiserBurgerPublic(container) {
+    if (container.dataset.burgerPublicInitialise === "true") return;
+
     const burgerButton = container.querySelector(".burger-button");
     const burgerNavPublic = container.querySelector(".burger-nav-public");
 
     if (!burgerButton || !burgerNavPublic) return;
+
+    container.dataset.burgerPublicInitialise = "true";
 
     burgerButton.addEventListener("click", () => {
       const isOpen = burgerButton.classList.toggle("is-open");
