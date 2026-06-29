@@ -7,9 +7,9 @@
 
 .lcdp-box-carousel__title {
   margin: 0;
-  font-size: clamp(1.25rem, 5vw, 1.75rem);
+  font-size: clamp(26px, 6vw, 34px);
   line-height: 1.18;
-  font-weight: 700;
+  font-weight: 600;
   text-align: left;
   color: var(--lcdp-color-text);
 }
@@ -21,14 +21,17 @@
 
 .lcdp-box-carousel__viewport {
   width: 100%;
+  min-height: 180px;
   overflow: hidden;
-  border-radius: var(--lcdp-radius-media);
+  border-radius: var(--lcdp-radius-button);
+  background: var(--lcdp-color-surface-soft);
+  box-shadow: 0 10px 24px rgba(31, 42, 36, 0.08);
 }
 
 .lcdp-box-carousel__list {
   width: 100%;
   display: flex;
-  gap: var(--lcdp-space-2);
+  gap: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
@@ -44,50 +47,63 @@
   flex: 0 0 100%;
   margin: 0;
   overflow: hidden;
-  border-radius: var(--lcdp-radius-media);
   background: var(--lcdp-color-surface-soft);
   scroll-snap-align: center;
 }
 
 .lcdp-box-carousel__image {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  object-position: center center;
+  background: var(--lcdp-color-surface-soft);
+  display: block;
 }
 
 .lcdp-box-carousel__button {
   position: absolute;
   top: 50%;
   z-index: 2;
-  width: 38px;
-  height: 38px;
-  border: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(31, 42, 36, 0.18);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--lcdp-color-text);
-  font-size: 2rem;
+  font-family: var(--lcdp-font-main);
+  font-size: 28px;
   line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transform: translateY(-50%);
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(31, 42, 36, 0.16);
+  box-shadow: 0 2px 8px rgba(31, 42, 36, 0.14);
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .lcdp-box-carousel__button--prev {
-  left: var(--lcdp-space-2);
+  left: 10px;
 }
 
 .lcdp-box-carousel__button--next {
-  right: var(--lcdp-space-2);
+  right: 10px;
 }
 
 .lcdp-box-carousel__button:hover {
   background: #ffffff;
+  border-color: var(--lcdp-color-border-strong);
+}
+
+.lcdp-box-carousel__button:active {
+  opacity: 0.75;
 }
 
 .lcdp-box-carousel__dots {
+  min-height: 16px;
+  margin-top: var(--lcdp-space-1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,23 +114,46 @@
   width: 9px;
   height: 9px;
   padding: 0;
-  border: 0;
+  border: 1px solid rgba(31, 42, 36, 0.18);
   border-radius: 999px;
-  background: var(--lcdp-color-border);
+  background: rgba(31, 42, 36, 0.35);
   cursor: pointer;
+  box-shadow: 0 1px 4px rgba(31, 42, 36, 0.12);
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .lcdp-box-carousel__dot.is-active {
-  background: var(--lcdp-color-primary);
+  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-logo-green);
 }
 
 @media (min-width: 768px) {
-  .lcdp-box-carousel__image {
-    aspect-ratio: 16 / 9;
+  .lcdp-box-carousel__viewport {
+    border-radius: calc(var(--lcdp-radius-button) + 8px);
   }
 
   .lcdp-box-carousel__button {
     width: 44px;
     height: 44px;
+    font-size: 34px;
+  }
+
+  .lcdp-box-carousel__button--prev {
+    left: 16px;
+  }
+
+  .lcdp-box-carousel__button--next {
+    right: 16px;
+  }
+
+  .lcdp-box-carousel__dots {
+    min-height: 18px;
+    gap: 9px;
+  }
+
+  .lcdp-box-carousel__dot {
+    width: 10px;
+    height: 10px;
   }
 }
