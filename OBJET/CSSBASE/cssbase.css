@@ -1,0 +1,337 @@
+:root {
+  --lcdp-color-bg: #ffffff;
+  --lcdp-color-surface: #ffffff;
+  --lcdp-color-surface-soft: #f7f7f4;
+  --lcdp-color-text: #1f2a24;
+  --lcdp-color-text-muted: #5f6861;
+  --lcdp-color-primary: #234438;
+  --lcdp-color-primary-hover: #183229;
+  --lcdp-color-border: rgba(31, 42, 36, 0.18);
+  --lcdp-color-shadow: rgba(31, 42, 36, 0.14);
+  --lcdp-color-orange: #f2a23a;
+  --lcdp-color-orange-hover: #e89223;
+  --lcdp-color-focus: rgba(35, 68, 56, 0.24);
+
+  --lcdp-font-main: Arial, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --lcdp-page-width: 1120px;
+  --lcdp-text-width: 720px;
+
+  --lcdp-page-padding-mobile: 18px;
+  --lcdp-page-padding-desktop: 32px;
+
+  --lcdp-space-1: 8px;
+  --lcdp-space-2: 12px;
+  --lcdp-space-3: 18px;
+  --lcdp-space-4: 24px;
+  --lcdp-space-5: 36px;
+  --lcdp-space-6: 48px;
+
+  --lcdp-radius-small: 10px;
+  --lcdp-radius-medium: 16px;
+  --lcdp-radius-large: 24px;
+  --lcdp-radius-media: 18px;
+
+  --lcdp-shadow-soft: 0 12px 32px var(--lcdp-color-shadow);
+}
+
+/* RESET GLOBAL */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: var(--lcdp-color-bg);
+}
+
+body {
+  font-family: var(--lcdp-font-main);
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--lcdp-color-text);
+}
+
+/* RESET TYPOGRAPHIQUE SANS EMPILEMENT DE MARGES */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+ul,
+ol,
+li {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ul,
+ol {
+  padding-left: 1.25rem;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border-radius: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+picture,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* FOCUS ACCESSIBLE GENERIQUE */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+
+/* STRUCTURE GENERIQUE DE PAGE */
+
+.lcdp-site-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.lcdp-site-main {
+  width: 100%;
+  flex: 1 0 auto;
+}
+
+.lcdp-page-section {
+  width: 100%;
+  padding-top: var(--lcdp-space-5);
+  padding-bottom: var(--lcdp-space-5);
+}
+
+.lcdp-page-container {
+  width: 100%;
+  max-width: var(--lcdp-page-width);
+  margin-inline: auto;
+  padding-inline: var(--lcdp-page-padding-mobile);
+}
+
+.lcdp-page-content {
+  width: 100%;
+  max-width: var(--lcdp-text-width);
+  margin-inline: auto;
+}
+
+/* TYPOGRAPHIE GENERIQUE SANS MARGES */
+
+.lcdp-title-page-center {
+  margin: 0;
+  font-size: clamp(2rem, 9vw, 3rem);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-text-strong-left {
+  width: 100%;
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.42;
+  font-weight: 700;
+  text-align: left;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-text-muted {
+  color: var(--lcdp-color-text-muted);
+}
+
+/* LIENS INTERNES SECONDAIRES */
+
+.lcdp-link-secondary {
+  color: var(--lcdp-color-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+
+.lcdp-link-secondary:hover {
+  color: var(--lcdp-color-primary-hover);
+}
+
+/* UTILITAIRES GENERIQUES */
+
+.lcdp-component {
+  width: 100%;
+}
+
+.lcdp-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-stack-small {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-stack-large {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-4);
+}
+
+.lcdp-hidden {
+  display: none !important;
+}
+
+.lcdp-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* BOUTONS GENERIQUES */
+
+.lcdp-button {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 20px;
+  border: 2px solid transparent;
+  border-radius: var(--lcdp-radius-medium);
+  font-family: var(--lcdp-font-main);
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lcdp-button-primary {
+  background: var(--lcdp-color-primary);
+  border-color: var(--lcdp-color-primary);
+  color: #ffffff;
+}
+
+.lcdp-button-primary:hover {
+  background: var(--lcdp-color-primary-hover);
+  border-color: var(--lcdp-color-primary-hover);
+  color: #ffffff;
+}
+
+.lcdp-button-secondary {
+  background: var(--lcdp-color-surface);
+  border-color: var(--lcdp-color-primary);
+  color: var(--lcdp-color-primary);
+}
+
+.lcdp-button-secondary:hover {
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-primary-hover);
+}
+
+.lcdp-button-orange {
+  background: var(--lcdp-color-orange);
+  border-color: var(--lcdp-color-orange);
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-button-orange:hover {
+  background: var(--lcdp-color-orange-hover);
+  border-color: var(--lcdp-color-orange-hover);
+  color: var(--lcdp-color-text);
+}
+
+/* MENU BOUTON GENERIQUE */
+
+.lcdp-box-menu-bouton__list {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-menu-bouton__list--single {
+  max-width: 420px;
+}
+
+/* RESPONSIVE */
+
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+
+  .lcdp-page-container {
+    padding-inline: var(--lcdp-page-padding-desktop);
+  }
+
+  .lcdp-page-section {
+    padding-top: var(--lcdp-space-6);
+    padding-bottom: var(--lcdp-space-6);
+  }
+
+  .lcdp-text-strong-left {
+    font-size: 1.12rem;
+  }
+
+  .lcdp-button {
+    min-height: 50px;
+  }
+
+  .lcdp-box-menu-bouton__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 680px;
+  }
+
+  .lcdp-box-menu-bouton__list--single {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+  }
+}
