@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Des parcs plein air d'exception près de chez vous. Vous ressourcer physiquement et mentalement.">
 
-  <!-- SITEBASE : config.js est chargé avant les scripts métier -->
   <script src="./config.js"></script>
 
   <script>
@@ -18,153 +17,23 @@
       "";
   </script>
 
-  <!-- CSS : base commune, bandeau/burger, footer, puis CSS spécifique index -->
-  <link rel="stylesheet" href="./OBJETS/CSS/base.css">
-  <link rel="stylesheet" href="./OBJETS/CSS/bandeau-et-burger.css">
-  <link rel="stylesheet" href="./OBJETS/CSS/footer.css">
-  <link rel="stylesheet" href="./OBJETS/CSS/index.css">
+  <link rel="stylesheet" href="./OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
+  <link rel="stylesheet" href="./OBJET/BOX/01-box-affiche.css" data-site-href="/OBJET/BOX/01-box-affiche.css">
+  <link rel="stylesheet" href="./OBJET/BOX/01-box-carrousel.css" data-site-href="/OBJET/BOX/01-box-carrousel.css">
+  <link rel="stylesheet" href="./OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
 </head>
 
 <body>
-  <div class="site-page">
-
-    <div id="bandeau-nav-container">
-      <header class="site-header">
-        <div class="site-header-inner">
-          <a
-            href="./index.html"
-            class="site-logo"
-            data-site-href="/index.html"
-          >
-            <img
-              class="site-logo-img"
-              src="./OBJETS/IMAGES/LOGO/logo-bandeau-96.webp"
-              data-site-src="/OBJETS/IMAGES/LOGO/logo-bandeau-96.webp"
-              width="96"
-              height="96"
-              alt=""
-              aria-hidden="true"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            >
-            <span>La Clé du Parc</span>
-          </a>
-
-          <button
-            class="burger-button"
-            type="button"
-            aria-label="Ouvrir le menu"
-            aria-expanded="false"
-            aria-controls="burger-nav-public"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-
-          <nav
-            id="burger-nav-public"
-            class="burger-nav burger-nav-public"
-            aria-label="Navigation publique"
-          >
-            <a
-              href="./index.html?source=menu"
-              data-site-href="/index.html?source=menu"
-            >Accueil</a>
-
-            <a
-              href="./PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html?source=menu-mon-compte"
-              data-site-href="/PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html?source=menu-mon-compte"
-              id="lien-mon-compte-public"
-            >
-              Mon compte
-            </a>
-
-            <a
-              href="./PAGES/PUBLIQUES/ACTUALITES/actualites.html?source=menu"
-              data-site-href="/PAGES/PUBLIQUES/ACTUALITES/actualites.html?source=menu"
-            >Actualités</a>
-
-            <a
-              href="./PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html?source=menu"
-              data-site-href="/PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html?source=menu"
-            >Être invité(e)</a>
-
-            <a
-              href="./PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html?source=menu"
-              data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html?source=menu"
-            >Le club</a>
-          </nav>
-        </div>
-      </header>
-    </div>
-
-    <main class="site-main">
-      <section class="page-section index-section" aria-label="Accueil public">
-        <div class="page-container">
-          <div class="page-content index-content">
-
-            <img
-              src="./OBJETS/IMAGES/LOGO/logo.png"
-              alt="Logo La Clé du Parc"
-              class="logo-page"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            >
-
-            <h2 class="site-title index-title">
-              <span>Des parcs plein air d'exception<br>
-              proches de vous</span>
-              <span>Pour se ressourcer toute l'année</span>
-            </h2>
-
-            <div class="page-actions index-actions" aria-label="Accès principaux">
-              <a
-                class="button"
-                href="./PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html"
-                data-site-href="/PAGES/PUBLIQUES/INSCRIPTION-MEMBRE/inscription-membre.html"
-              >
-                Être invité(e)
-              </a>
-
-              <a
-                class="button"
-                href="./PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html"
-                data-site-href="/PAGES/PUBLIQUES/CHOIX-CONNEXION/choix-connexion.html"
-              >
-                Me connecter
-              </a>
-
-              <a
-                class="button"
-                href="./PAGES/PUBLIQUES/ACTUALITES/actualites.html"
-                data-site-href="/PAGES/PUBLIQUES/ACTUALITES/actualites.html"
-              >
-                Les actualités
-              </a>
-
-              <a
-                class="button"
-                href="./PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html"
-                data-site-href="/PAGES/PUBLIQUES/LA-CLE-DU-PARC/la-cle-du-parc.html"
-              >
-                Découvrir le club
-              </a>
-            </div>
-
-          </div>
-        </div>
-      </section>
+  <div class="lcdp-site-page">
+    <main class="lcdp-site-main">
+      <div id="lcdp-index-root"></div>
     </main>
-
-    <div id="footer-container"></div>
-
   </div>
 
   <script>
     (() => {
+      "use strict";
+
       const siteBase = (
         window.SITE_BASE ||
         window.SITE_CONFIG?.publicBaseUrl ||
@@ -194,17 +63,134 @@
         return chemin.startsWith("/") ? "." + chemin : chemin;
       }
 
-      document.querySelectorAll("[data-site-href]").forEach((element) => {
-        element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
-      });
+      function construireUrlPublique(chemin) {
+        if (typeof window.SITE_CONFIG?.publicUrl === "function") {
+          return window.SITE_CONFIG.publicUrl(chemin);
+        }
 
-      document.querySelectorAll("[data-site-src]").forEach((element) => {
-        element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+        return construireUrlSite(chemin);
+      }
+
+      function appliquerRoutesSite(racine = document) {
+        racine.querySelectorAll("[data-site-href]").forEach((element) => {
+          element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+        });
+
+        racine.querySelectorAll("[data-site-src]").forEach((element) => {
+          element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+        });
+      }
+
+      function lireCookie(nom) {
+        return document.cookie
+          .split(";")
+          .map((part) => part.trim())
+          .some((part) => part.startsWith(nom + "="));
+      }
+
+      async function chargerFragment(chemin) {
+        const reponse = await fetch(construireUrlSite(chemin), {
+          method: "GET",
+          credentials: "same-origin",
+          cache: "no-cache"
+        });
+
+        if (!reponse.ok) {
+          throw new Error("Fragment introuvable : " + chemin);
+        }
+
+        const html = await reponse.text();
+        const template = document.createElement("template");
+        template.innerHTML = html.trim();
+
+        return template.content.cloneNode(true);
+      }
+
+      async function afficherAfficheAccueil() {
+        const root = document.getElementById("lcdp-index-root");
+
+        const affiche = await chargerFragment("/OBJET/BOX/01-box-affiche.html");
+        root.appendChild(affiche);
+
+        const box = root.querySelector("[data-lcdp-box-affiche]");
+
+        box.querySelector("[data-lcdp-affiche-title]").textContent = "La Clé du Parc";
+        box.querySelector("[data-lcdp-affiche-lead]").textContent =
+          "Des parcs plein air d’exception, proches de vous, pour vous ressourcer toute l’année.";
+
+        const carrouselSlot = box.querySelector("[data-lcdp-affiche-carrousel-slot]");
+        const carrousel = await chargerFragment("/OBJET/BOX/01-box-carrousel.html");
+        carrouselSlot.appendChild(carrousel);
+
+        const carrouselElement = carrouselSlot.querySelector("[data-lcdp-box-carousel]");
+        carrouselElement.querySelector("[data-lcdp-carousel-title]").textContent =
+          "Découvrir l’esprit du club";
+
+        const liste = carrouselElement.querySelector("[data-lcdp-carousel-list]");
+
+        const imagesCarrousel = [
+          /*
+            Ajouter ici les vrais fichiers présents dans :
+            /OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/
+
+            Exemple :
+            {
+              src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/image-01.jpg",
+              alt: "Parc privé La Clé du Parc"
+            }
+          */
+        ];
+
+        imagesCarrousel.forEach((image) => {
+          const figure = document.createElement("figure");
+          figure.className = "lcdp-box-carousel__item";
+
+          const img = document.createElement("img");
+          img.className = "lcdp-box-carousel__image";
+          img.src = construireUrlSite(image.src);
+          img.alt = image.alt || "";
+          img.loading = "lazy";
+          img.decoding = "async";
+
+          figure.appendChild(img);
+          liste.appendChild(figure);
+        });
+
+        const textSlot = box.querySelector("[data-lcdp-affiche-text-slot]");
+        const boxText = await chargerFragment("/OBJET/BOX/01-box-text.html");
+        textSlot.appendChild(boxText);
+
+        const boxTextElement = textSlot.querySelector("[data-lcdp-boxtext]");
+        boxTextElement.querySelector("[data-lcdp-boxtext-title]").textContent =
+          "Un club pour respirer autrement";
+
+        boxTextElement.querySelector("[data-lcdp-boxtext-content]").innerHTML =
+          "<p>La Clé du Parc permet à ses membres de se retrouver seuls ou en petit groupe dans des parcs privés sélectionnés.</p><p>Le club propose un cadre simple, apaisant et vivant pour des activités culturelles, sportives, artistiques ou conviviales.</p>";
+
+        box.querySelector("[data-lcdp-box-affiche-close]").addEventListener("click", () => {
+          box.remove();
+        });
+
+        box.addEventListener("click", (event) => {
+          if (event.target === box) {
+            box.remove();
+          }
+        });
+
+        appliquerRoutesSite(root);
+      }
+
+      appliquerRoutesSite(document);
+
+      if (lireCookie("userapp")) {
+        window.location.href = construireUrlPublique("/ESPACE-PUBLIC/accueil-public.html");
+        return;
+      }
+
+      afficherAfficheAccueil().catch((erreur) => {
+        console.error(erreur);
       });
     })();
   </script>
-
-  <script src="./OBJETS/BLOCS/burger-public.js"></script>
-  <script src="./OBJETS/BLOCS/footer-global.js"></script>
 </body>
 </html>
