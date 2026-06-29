@@ -6,6 +6,7 @@
   <title>Accueil public - La Clé du Parc</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Accueil public La Clé du Parc. Accès rapide aux fonctions membre.">
 
   <script src="../config.js"></script>
 
@@ -20,8 +21,8 @@
 
   <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
 </head>
 
@@ -68,7 +69,8 @@
           chemin.startsWith("mailto:") ||
           chemin.startsWith("tel:") ||
           chemin.startsWith("http://") ||
-          chemin.startsWith("https://")
+          chemin.startsWith("https://") ||
+          chemin.startsWith("data:")
         ) {
           return chemin;
         }
@@ -160,6 +162,11 @@
         slot.appendChild(fragment);
 
         const alerte = slot.querySelector("[data-lcdp-box-alerte]");
+
+        if (!alerte) {
+          throw new Error("Structure de l’alerte incomplète.");
+        }
+
         alerte.querySelector("[data-lcdp-alerte-message]").textContent = message;
 
         const fermer = () => {
@@ -174,62 +181,38 @@
             fermer();
           }
         });
-      }
 
-      async function afficherDialogueMonCompte() {
-        const slot = document.getElementById("lcdp-lightbox-slot");
-        slot.innerHTML = "";
-
-        const fragment = await chargerFragment("/OBJET/BOX/02-box-dialogue-bouton.html");
-        slot.appendChild(fragment);
-
-        const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
-
-        dialogue.querySelector("[data-lcdp-dialogue-title]").textContent = "Mon compte";
-        dialogue.querySelector("[data-lcdp-dialogue-text]").textContent =
-          "Choisissez l’espace de connexion adapté à votre situation.";
-
-        const actions = dialogue.querySelector("[data-lcdp-dialogue-actions]");
-
-        const boutons = [
-          {
-            label: "Me connecter",
-            href: "/ESPACE-PUBLIC/connexion.html",
-            style: "lcdp-button-primary"
+        document.addEventListener(
+          "keydown",
+          (event) => {
+            if (event.key === "Escape") {
+              fermer();
+            }
           },
-          {
-            label: "Être invité(e)",
-            href: "/ESPACE-PUBLIC/inscription.html",
-            style: "lcdp-button-secondary"
-          }
-        ];
-
-        boutons.forEach((bouton) => {
-          const lien = document.createElement("a");
-          lien.className = "lcdp-button " + bouton.style;
-          lien.textContent = bouton.label;
-          lien.href = construireUrlSite(bouton.href);
-          actions.appendChild(lien);
-        });
-
-        const fermer = () => {
-          slot.innerHTML = "";
-        };
-
-        dialogue.querySelector("[data-lcdp-dialogue-close]").addEventListener("click", fermer);
-
-        dialogue.addEventListener("click", (event) => {
-          if (event.target === dialogue) {
-            fermer();
-          }
-        });
+          { once: true }
+        );
       }
 
-      window.LCDP_ouvrirDialogueMonCompte = afficherDialogueMonCompte;
+      function verifierAcces(configurationBouton) {
+        if (configurationBouton.cookieSession && !lireCookie(configurationBouton.cookieSession)) {
+          return {
+            autorise: false,
+            message: "Vous devez être connecté à votre compte membre pour accéder à cette fonction."
+          };
+        }
 
-      document.addEventListener("lcdp:ouvrir-dialogue-mon-compte", () => {
-        afficherDialogueMonCompte().catch(console.error);
-      });
+        if (configurationBouton.cookieAbonnement && !lireCookie(configurationBouton.cookieAbonnement)) {
+          return {
+            autorise: false,
+            message: "Cette fonction est réservée aux membres abonnés."
+          };
+        }
+
+        return {
+          autorise: true,
+          message: ""
+        };
+      }
 
       async function initialiserBandeau() {
         const slot = document.getElementById("lcdp-bandeau-slot");
@@ -256,52 +239,55 @@
 
         const liste = slot.querySelector("[data-lcdp-menu-bouton-list]");
 
+        if (!liste) {
+          throw new Error("Structure du menu bouton incomplète.");
+        }
+
         const boutons = [
           {
             label: "VALIDER",
-            cookies: ["userapp", "abonne"],
-            target: "/ESPACE-MEMBRE/valider-membre.html",
-            message: "Cette fonction est réservée aux membres connectés et abonnés."
+            cookieSession: "userapp",
+            cookieAbonnement: "abonne",
+            target: "/ESPACE-MEMBRE/valider-membre.html"
           },
           {
-            label: "RESERVER",
-            cookies: ["userapp", "abonne"],
-            target: "/ESPACE-MEMBRE/reserver-membre.html",
-            message: "Cette fonction est réservée aux membres connectés et abonnés."
+            label: "RÉSERVER",
+            cookieSession: "userapp",
+            cookieAbonnement: "abonne",
+            target: "/ESPACE-MEMBRE/reserver-membre.html"
           },
           {
             label: "PLANNING",
-            cookies: ["userapp"],
-            target: "/ESPACE-MEMBRE/planning-membre.html",
-            message: "Vous devez être connecté pour accéder au planning."
+            cookieSession: "userapp",
+            cookieAbonnement: "",
+            target: "/ESPACE-MEMBRE/planning-membre.html"
           },
           {
             label: "INVITER",
-            cookies: ["userapp", "abonne"],
-            target: "/ESPACE-MEMBRE/inviter-membre.html",
-            message: "Cette fonction est réservée aux membres connectés et abonnés."
+            cookieSession: "userapp",
+            cookieAbonnement: "abonne",
+            target: "/ESPACE-MEMBRE/inviter-membre.html"
           }
         ];
 
-        boutons.forEach((bouton) => {
-          const element = document.createElement("button");
-          element.type = "button";
-          element.className = "lcdp-button lcdp-button-primary";
-          element.textContent = bouton.label;
+        boutons.forEach((configurationBouton) => {
+          const bouton = document.createElement("button");
+          bouton.type = "button";
+          bouton.className = "lcdp-button lcdp-button-primary";
+          bouton.textContent = configurationBouton.label;
 
-          element.addEventListener("click", () => {
-            const cookiesRequis = bouton.cookies || [];
-            const cookieManquant = cookiesRequis.some((nomCookie) => !lireCookie(nomCookie));
+          bouton.addEventListener("click", () => {
+            const acces = verifierAcces(configurationBouton);
 
-            if (cookieManquant) {
-              afficherAlerte(bouton.message).catch(console.error);
+            if (!acces.autorise) {
+              afficherAlerte(acces.message).catch(console.error);
               return;
             }
 
-            window.location.href = construireUrlMembre(bouton.target);
+            window.location.href = construireUrlMembre(configurationBouton.target);
           });
 
-          liste.appendChild(element);
+          liste.appendChild(bouton);
         });
       }
 
