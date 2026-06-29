@@ -1,0 +1,69 @@
+<article class="lcdp-box-card-reservation-membre" data-lcdp-box-card-reservation-membre>
+  <p
+    class="lcdp-box-card-reservation-membre__invitation"
+    data-lcdp-card-reservation-invitation
+    hidden
+  ></p>
+
+  <div class="lcdp-box-card-reservation-membre__content">
+    <div class="lcdp-box-card-reservation-membre__date">
+      <span class="lcdp-box-card-reservation-membre__date-label" data-lcdp-card-reservation-date></span>
+      <span class="lcdp-box-card-reservation-membre__hour" data-lcdp-card-reservation-heure></span>
+    </div>
+
+    <div class="lcdp-box-card-reservation-membre__place">
+      <span class="lcdp-box-card-reservation-membre__park" data-lcdp-card-reservation-parc></span>
+      <span class="lcdp-box-card-reservation-membre__department" data-lcdp-card-reservation-departement></span>
+    </div>
+  </div>
+
+  <div class="lcdp-box-card-reservation-membre__actions">
+    <button
+      class="lcdp-box-card-reservation-membre__micro-action"
+      type="button"
+      data-action="adresse"
+    >
+      Voir l’adresse
+    </button>
+
+    <button
+      class="lcdp-box-card-reservation-membre__micro-action"
+      type="button"
+      data-action="invitation"
+      data-lcdp-card-reservation-invitation-action
+    >
+      Invitation
+    </button>
+
+    <button
+      class="lcdp-box-card-reservation-membre__micro-action"
+      type="button"
+      data-action="annuler"
+      data-lcdp-card-reservation-annuler
+    >
+      Annuler
+    </button>
+
+    <button
+      class="lcdp-box-card-reservation-membre__picto-action"
+      type="button"
+      data-action="invitations-in"
+      data-lcdp-card-reservation-in-count-button
+      hidden
+      aria-label="Invitations envoyées"
+    >
+      ↗ <span data-lcdp-card-reservation-in-count>0</span>
+    </button>
+
+    <button
+      class="lcdp-box-card-reservation-membre__picto-action"
+      type="button"
+      data-action="invitations-out"
+      data-lcdp-card-reservation-out-count-button
+      hidden
+      aria-label="Invitations annulées"
+    >
+      ↘ <span data-lcdp-card-reservation-out-count>0</span>
+    </button>
+  </div>
+</article>

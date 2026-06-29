@@ -1,0 +1,104 @@
+.lcdp-box-card-jour-in-calendrier-mois {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 7px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: 8px;
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois:disabled {
+  cursor: default;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--past,
+.lcdp-box-card-jour-in-calendrier-mois--closed {
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text-muted);
+  opacity: 0.45;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--today {
+  outline: 2px solid var(--lcdp-color-primary);
+  outline-offset: 2px;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__number {
+  display: block;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slots {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+  flex: 1;
+  width: 100%;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot {
+  display: block;
+  width: 100%;
+  min-height: 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: #e6e6e6;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--gris-clair {
+  background: #e6e6e6;
+  border-color: #d6d6d6;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--vert {
+  background: #cfeecf;
+  border-color: #a9d9a9;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--orange {
+  background: #ffd8a8;
+  border-color: #f0b96f;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--gris-fonce {
+  background: #5c5c5c;
+  border-color: #4a4a4a;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-jour-in-calendrier-mois {
+    padding: 10px;
+    border-radius: var(--lcdp-radius-small);
+    font-size: 1rem;
+  }
+
+  .lcdp-box-card-jour-in-calendrier-mois__number {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+  }
+
+  .lcdp-box-card-jour-in-calendrier-mois__slots {
+    gap: 4px;
+  }
+
+  .lcdp-box-card-jour-in-calendrier-mois__slot {
+    min-height: 12px;
+    border-radius: 5px;
+  }
+}

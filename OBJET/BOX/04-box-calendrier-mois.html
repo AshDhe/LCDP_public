@@ -1,0 +1,58 @@
+<div class="lcdp-box-calendrier-mois" role="dialog" aria-modal="true" data-lcdp-box-calendrier-mois>
+  <div class="lcdp-box-calendrier-mois__card">
+    <button
+      class="lcdp-box-calendrier-mois__close"
+      type="button"
+      aria-label="Fermer"
+      data-lcdp-calendrier-mois-close
+    >
+      ×
+    </button>
+
+    <header class="lcdp-box-calendrier-mois__header">
+      <h2 class="lcdp-box-calendrier-mois__title" data-lcdp-calendrier-mois-title>
+        Planning du parc
+      </h2>
+
+      <p class="lcdp-box-calendrier-mois__meta" data-lcdp-calendrier-mois-meta></p>
+    </header>
+
+    <section class="lcdp-box-calendrier-mois__body" aria-label="Planning mensuel du parc">
+      <div class="lcdp-box-calendrier-mois__navigation">
+        <button
+          class="lcdp-box-calendrier-mois__nav-button"
+          type="button"
+          aria-label="Mois précédent"
+          data-lcdp-calendrier-mois-prev
+        >
+          ←
+        </button>
+
+        <h3 class="lcdp-box-calendrier-mois__month" data-lcdp-calendrier-mois-current></h3>
+
+        <button
+          class="lcdp-box-calendrier-mois__nav-button"
+          type="button"
+          aria-label="Mois suivant"
+          data-lcdp-calendrier-mois-next
+        >
+          →
+        </button>
+      </div>
+
+      <div class="lcdp-box-calendrier-mois__weekdays" aria-hidden="true">
+        <span>Lun</span>
+        <span>Mar</span>
+        <span>Mer</span>
+        <span>Jeu</span>
+        <span>Ven</span>
+        <span>Sam</span>
+        <span>Dim</span>
+      </div>
+
+      <p class="lcdp-box-calendrier-mois__message" data-lcdp-calendrier-mois-message hidden></p>
+
+      <div class="lcdp-box-calendrier-mois__grid" data-lcdp-calendrier-mois-grid></div>
+    </section>
+  </div>
+</div>

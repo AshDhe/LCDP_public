@@ -1,0 +1,106 @@
+.lcdp-box-dialogue-champ-inviter {
+  position: fixed;
+  inset: 0;
+  z-index: 5200;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.46);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lcdp-box-dialogue-champ-inviter__card {
+  position: relative;
+  width: min(100%, 430px);
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow: auto;
+  padding: 24px 20px 22px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  text-align: center;
+}
+
+.lcdp-box-dialogue-champ-inviter__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lcdp-box-dialogue-champ-inviter__title {
+  max-width: 320px;
+  margin: 0 auto var(--lcdp-space-2);
+  padding-right: 32px;
+  font-size: 1.45rem;
+  line-height: 1.18;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-dialogue-champ-inviter__text {
+  margin: 0 auto var(--lcdp-space-3);
+  color: var(--lcdp-color-text-muted);
+}
+
+.lcdp-box-dialogue-champ-inviter__form,
+.lcdp-box-dialogue-champ-inviter__fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-dialogue-champ-inviter__field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+  text-align: left;
+  font-weight: 700;
+}
+
+.lcdp-box-dialogue-champ-inviter__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+}
+
+.lcdp-box-dialogue-champ-inviter__error {
+  margin: 0;
+  color: #8a2d2d;
+  font-weight: 700;
+}
+
+.lcdp-box-dialogue-champ-inviter__actions {
+  width: 100%;
+  margin-top: var(--lcdp-space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-dialogue-champ-inviter__card {
+    padding: 26px 26px 24px;
+  }
+
+  .lcdp-box-dialogue-champ-inviter__actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
