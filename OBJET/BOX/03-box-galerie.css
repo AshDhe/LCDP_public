@@ -1,0 +1,99 @@
+.lcdp-box-galerie {
+  width: 100%;
+  padding-top: var(--lcdp-space-5);
+  padding-bottom: var(--lcdp-space-5);
+}
+
+.lcdp-box-galerie__header {
+  width: 100%;
+  max-width: var(--lcdp-text-width);
+  margin-inline: auto;
+  margin-bottom: var(--lcdp-space-4);
+  text-align: center;
+}
+
+.lcdp-box-galerie__title {
+  margin: 0;
+  font-size: clamp(1.5rem, 7vw, 2.1rem);
+  line-height: 1.12;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+  text-align: center;
+}
+
+.lcdp-box-galerie__list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-4);
+}
+
+.lcdp-box-galerie__card {
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: var(--lcdp-shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-galerie__card-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 6vw, 1.8rem);
+  line-height: 1.16;
+  font-weight: 700;
+  color: var(--lcdp-color-primary);
+  text-align: center;
+}
+
+.lcdp-box-galerie__image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--lcdp-radius-media);
+  object-fit: cover;
+  object-position: center center;
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-galerie__legend {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.3;
+  color: var(--lcdp-color-text-muted);
+  text-align: center;
+}
+
+.lcdp-box-galerie__text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--lcdp-color-text-muted);
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-galerie {
+    padding-top: var(--lcdp-space-6);
+    padding-bottom: var(--lcdp-space-6);
+  }
+
+  .lcdp-box-galerie__header {
+    margin-bottom: var(--lcdp-space-5);
+  }
+
+  .lcdp-box-galerie__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--lcdp-space-5);
+  }
+
+  .lcdp-box-galerie__card {
+    padding: var(--lcdp-space-4);
+  }
+
+  .lcdp-box-galerie__text {
+    font-size: 1.02rem;
+  }
+}
