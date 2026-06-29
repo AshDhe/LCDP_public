@@ -49,7 +49,8 @@
           chemin.startsWith("mailto:") ||
           chemin.startsWith("tel:") ||
           chemin.startsWith("http://") ||
-          chemin.startsWith("https://")
+          chemin.startsWith("https://") ||
+          chemin.startsWith("data:")
         ) {
           return chemin;
         }
@@ -106,15 +107,39 @@
         return template.content.cloneNode(true);
       }
 
+      function chargerScriptUneFois(chemin) {
+        const src = construireUrlSite(chemin);
+
+        if (document.querySelector(`script[data-lcdp-script="${chemin}"]`)) {
+          return Promise.resolve();
+        }
+
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.defer = true;
+          script.dataset.lcdpScript = chemin;
+          script.onload = resolve;
+          script.onerror = () => reject(new Error("Script introuvable : " + chemin));
+          document.body.appendChild(script);
+        });
+      }
+
       async function afficherAfficheAccueil() {
         const root = document.getElementById("lcdp-index-root");
+        root.innerHTML = "";
 
         const affiche = await chargerFragment("/OBJET/BOX/01-box-affiche.html");
         root.appendChild(affiche);
 
         const box = root.querySelector("[data-lcdp-box-affiche]");
 
+        if (!box) {
+          throw new Error("Structure affiche d'accueil incomplète.");
+        }
+
         box.querySelector("[data-lcdp-affiche-title]").textContent = "La Clé du Parc";
+
         box.querySelector("[data-lcdp-affiche-lead]").textContent =
           "Des parcs plein air d’exception, proches de vous, pour vous ressourcer toute l’année.";
 
@@ -155,6 +180,12 @@
           figure.appendChild(img);
           liste.appendChild(figure);
         });
+
+        await chargerScriptUneFois("/OBJET/BOX/01-box-carrousel.js");
+
+        if (typeof window.LCDP_initialiserCarrousels === "function") {
+          window.LCDP_initialiserCarrousels(carrouselSlot);
+        }
 
         const textSlot = box.querySelector("[data-lcdp-affiche-text-slot]");
         const boxText = await chargerFragment("/OBJET/BOX/01-box-text.html");
