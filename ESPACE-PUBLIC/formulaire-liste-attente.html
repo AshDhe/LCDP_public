@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Inscription liste d'attente - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Formulaire d'inscription sur la liste d'attente La Clé du Parc.">
+
+  <script src="../config.js"></script>
+
+  <script>
+    window.SITE_BASE =
+      window.SITE_CONFIG?.publicBaseUrl ||
+      window.SITE_CONFIG?.siteBase ||
+      "";
+  </script>
+
+  <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
+</head>
+
+<body>
+  <div class="lcdp-site-page">
+    <main class="lcdp-site-main">
+      <section class="lcdp-page-section" aria-label="Formulaire d'inscription sur liste d'attente">
+        <div class="lcdp-page-container">
+          <div class="lcdp-page-content">
+
+            <section class="lcdp-component lcdp-box-formulaire-page">
+              <div class="lcdp-box-formulaire-page__inner">
+                <form
+                  id="formulaire-liste-attente"
+                  class="lcdp-box-formulaire"
+                  novalidate
+                >
+                  <header class="lcdp-box-formulaire__header">
+                    <h1 class="lcdp-box-formulaire__title">
+                      Formulaire d'inscription
+                    </h1>
+
+                    <p class="lcdp-box-formulaire__subtitle">
+                      La Clé du Parc | Liste d'attente
+                    </p>
+
+                    <div class="lcdp-box-formulaire__intro">
+                      <p>
+                        Rejoignez la communauté des passionné(e)s de parcs plein air d'exception.
+                        La Clé du Parc ouvre un accès anticipé pour vous proposer de bénéficier
+                        des bonus réservés aux premiers inscrits de la liste.
+                      </p>
+                    </div>
+                  </header>
+
+                  <div class="lcdp-box-formulaire__fields">
+
+                    <div class="lcdp-box-champ-formulaire">
+                      <div class="lcdp-box-champ-formulaire__label-zone">
+                        <label class="lcdp-box-champ-formulaire__label" for="nom">
+                          NOM<span class="lcdp-box-champ-formulaire__required">*</span>
+                        </label>
+                      </div>
+                      <div class="lcdp-box-champ-formulaire__control">
+                        <input
+                          type="text"
+                          id="nom"
+                          name="nom"
+                          placeholder="Votre NOM"
+                          autocomplete="family-name"
+                          required
+                        >
+                      </div>
+                    </div>
+
+                    <div class="lcdp-box-champ-formulaire">
+                      <div class="lcdp-box-champ-formulaire__label-zone">
+                        <label class="lcdp-box-champ-formulaire__label" for="prenom">
+                          Prénom<span class="lcdp-box-champ-formulaire__required">*</span>
+                        </label>
+                      </div>
+                      <div class="lcdp-box-champ-formulaire__control">
+                        <input
+                          type="text"
+                          id="prenom"
+                          name="prenom"
+                          placeholder="Votre prénom"
+                          autocomplete="given-name"
+                          required
+                        >
+                      </div>
+                    </div>
+
+                    <div class="lcdp-box-champ-formulaire">
+                      <div class="lcdp-box-champ-formulaire__label-zone">
+                        <label class="lcdp-box-champ-formulaire__label" for="departement">
+                          Numéro de département<span class="lcdp-box-champ-formulaire__required">*</span>
+                        </label>
+                      </div>
+                      <div class="lcdp-box-champ-formulaire__control">
+                        <input
+                          type="text"
+                          id="departement"
+                          name="departement"
+                          placeholder="Numéro, exemple : 08"
+                          inputmode="text"
+                          autocomplete="off"
+                          required
+                        >
+                      </div>
+                    </div>
+
+                    <div class="lcdp-box-champ-formulaire">
+                      <div class="lcdp-box-champ-formulaire__label-zone">
+                        <label class="lcdp-box-champ-formulaire__label" for="age">
+                          Âge
+                        </label>
+                      </div>
+                      <div class="lcdp-box-champ-formulaire__control">
+                        <input
+                          type="number"
+                          id="age"
+                          name="age"
+                          placeholder="Votre âge, exemple : 40"
+                          inputmode="numeric"
+                          min="18"
+                          max="100"
+                        >
+                      </div>
+                    </div>
+
+                    <div class="lcdp-box-champ-formulaire">
+                      <div class="lcdp-box-champ-formulaire__label-zone">
+                        <label class="lcdp-box-champ-formulaire__label" for="email">
+                          E-mail<span class="lcdp-box-champ-formulaire__required">*</span>
+                        </label>
+                      </div>
+                      <div class="lcdp-box-champ-formulaire__control">
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          placeholder="Votre e-mail"
+                          autocomplete="email"
+                          autocapitalize="none"
+                          spellcheck="false"
+                          required
+                        >
+                      </div>
+                    </div>
+
+                    <div class="lcdp-box-champ-formulaire">
+                      <div class="lcdp-box-champ-formulaire__label-zone">
+                        <label class="lcdp-box-champ-formulaire__label" for="texte_libre">
+                          Quelle est votre motivation à bénéficier du club ?
+                        </label>
+                      </div>
+                      <div class="lcdp-box-champ-formulaire__control">
+                        <textarea
+                          id="texte_libre"
+                          name="texte_libre"
+                          placeholder="Vous pouvez préciser votre motivation à faire partie du club La Clé du Parc et à bénéficier de ses activités."
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div class="lcdp-box-champ-formulaire">
+                      <div class="lcdp-box-champ-formulaire__control">
+                        <label class="lcdp-box-champ-formulaire__checkbox-line" for="responsable_parc">
+                          <input
+                            type="checkbox"
+                            id="responsable_parc"
+                            name="responsable_parc"
+                          >
+                          <span>
+                            Êtes-vous par ailleurs responsable d'un parc de plein air adapté à des promenades privées en petits groupes ?
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="lcdp-box-champ-formulaire">
+                      <div class="lcdp-box-champ-formulaire__control">
+                        <label class="lcdp-box-champ-formulaire__checkbox-line" for="responsable_activite">
+                          <input
+                            type="checkbox"
+                            id="responsable_activite"
+                            name="responsable_activite"
+                          >
+                          <span>
+                            Êtes-vous par ailleurs responsable d'une activité artistique, sportive, sociale ou culturelle conciliable avec une pratique de plein air ?
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="lcdp-box-formulaire__actions">
+                    <button
+                      type="submit"
+                      id="bouton-envoyer-liste-attente"
+                      class="lcdp-button lcdp-button-orange"
+                    >
+                      M'inscrire sur liste d'attente
+                    </button>
+                  </div>
+
+                  <p class="lcdp-box-formulaire__note">
+                    * Votre réponse est nécessaire pour compléter le formulaire.<br>
+                    Ce formulaire est destiné aux personnes majeures. Les réponses obtenues sont exclusivement réservées au club La Clé du Parc pour identifier des personnes désireuses de bénéficier des bonus réservés aux premiers inscrits sur cette liste et liés à la période d'ouverture du club. Les données collectées ne sont pas destinées à un autre usage. Elles sont détruites chaque début d'année si les données ont plus d'un an.
+                  </p>
+                </form>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="lcdp-lightbox-slot"></div>
+  </div>
+
+  <script src="./formulaire-liste-attente.js"></script>
+</body>
+</html>

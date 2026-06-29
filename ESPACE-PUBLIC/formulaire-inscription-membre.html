@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Formulaire d'inscription membre - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Formulaire d'inscription membre invité La Clé du Parc.">
+
+  <script src="../config.js"></script>
+
+  <script>
+    window.SITE_BASE =
+      window.SITE_CONFIG?.publicBaseUrl ||
+      window.SITE_CONFIG?.siteBase ||
+      "";
+  </script>
+
+  <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
+
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
+</head>
+
+<body>
+  <div class="lcdp-site-page">
+
+    <main class="lcdp-site-main">
+      <section
+        class="lcdp-page-section"
+        aria-label="Formulaire d'inscription membre invité"
+      >
+        <div class="lcdp-page-container">
+          <div id="lcdp-formulaire-inscription-slot"></div>
+        </div>
+      </section>
+    </main>
+
+    <div id="lcdp-lightbox-slot"></div>
+
+  </div>
+
+  <script src="../OBJET/BOX/03-box-formulaire.js"></script>
+  <script src="./formulaire-inscription-membre.js"></script>
+</body>
+</html>

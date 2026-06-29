@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Mentions légales - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mentions légales du site et de l'application La Clé du Parc.">
+
+  <script src="../config.js"></script>
+
+  <script>
+    window.SITE_BASE =
+      window.SITE_CONFIG?.publicBaseUrl ||
+      window.SITE_CONFIG?.siteBase ||
+      "";
+  </script>
+
+  <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
+
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
+  <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
+</head>
+
+<body>
+  <div class="lcdp-site-page">
+
+    <div id="lcdp-bandeau-slot"></div>
+
+    <main class="lcdp-site-main">
+      <section class="lcdp-page-section" aria-label="Mentions légales">
+        <div class="lcdp-page-container">
+          <div class="lcdp-page-content lcdp-stack-large">
+
+            <h1 class="lcdp-title-page-center">Mentions légales</h1>
+
+            <div id="lcdp-boxtext-intro-slot"></div>
+            <div id="lcdp-boxtext-editeur-slot"></div>
+            <div id="lcdp-boxtext-publication-slot"></div>
+            <div id="lcdp-boxtext-hebergement-slot"></div>
+            <div id="lcdp-boxtext-propriete-slot"></div>
+            <div id="lcdp-boxtext-responsabilite-slot"></div>
+            <div id="lcdp-boxtext-donnees-slot"></div>
+            <div id="lcdp-boxtext-cookies-slot"></div>
+            <div id="lcdp-boxtext-acces-slot"></div>
+            <div id="lcdp-boxtext-contact-slot"></div>
+            <div id="lcdp-boxtext-maj-slot"></div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="lcdp-footer-slot"></div>
+    <div id="lcdp-lightbox-slot"></div>
+
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const siteBase = (
+        window.SITE_BASE ||
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        ""
+      ).replace(/\/$/, "");
+
+      function construireUrlSite(chemin) {
+        if (!chemin) return chemin;
+
+        if (
+          chemin.startsWith("#") ||
+          chemin.startsWith("mailto:") ||
+          chemin.startsWith("tel:") ||
+          chemin.startsWith("http://") ||
+          chemin.startsWith("https://") ||
+          chemin.startsWith("data:")
+        ) {
+          return chemin;
+        }
+
+        if (siteBase) {
+          return chemin.startsWith("/")
+            ? siteBase + chemin
+            : siteBase + "/" + chemin.replace(/^\.\//, "");
+        }
+
+        return chemin.startsWith("/") ? ".." + chemin : chemin;
+      }
+
+      function appliquerRoutesSite(racine = document) {
+        racine.querySelectorAll("[data-site-href]").forEach((element) => {
+          element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+        });
+
+        racine.querySelectorAll("[data-site-src]").forEach((element) => {
+          element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+        });
+      }
+
+      async function chargerFragment(chemin) {
+        const reponse = await fetch(construireUrlSite(chemin), {
+          method: "GET",
+          credentials: "same-origin",
+          cache: "force-cache"
+        });
+
+        if (!reponse.ok) {
+          throw new Error("Fragment introuvable : " + chemin);
+        }
+
+        const html = await reponse.text();
+        const template = document.createElement("template");
+        template.innerHTML = html.trim();
+
+        return template.content.cloneNode(true);
+      }
+
+      function chargerScriptUneFois(chemin) {
+        const src = construireUrlSite(chemin);
+
+        if (document.querySelector(`script[data-lcdp-script="${chemin}"]`)) {
+          return Promise.resolve();
+        }
+
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.defer = true;
+          script.dataset.lcdpScript = chemin;
+          script.onload = resolve;
+          script.onerror = () => reject(new Error("Script introuvable : " + chemin));
+          document.body.appendChild(script);
+        });
+      }
+
+      async function afficherDialogueMonCompte() {
+        const slot = document.getElementById("lcdp-lightbox-slot");
+        slot.innerHTML = "";
+
+        const fragment = await chargerFragment("/OBJET/BOX/02-box-dialogue-bouton.html");
+        slot.appendChild(fragment);
+
+        const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
+
+        dialogue.querySelector("[data-lcdp-dialogue-title]").textContent = "Mon compte";
+        dialogue.querySelector("[data-lcdp-dialogue-text]").textContent =
+          "Choisissez l’espace de connexion adapté à votre situation.";
+
+        const actions = dialogue.querySelector("[data-lcdp-dialogue-actions]");
+
+        const boutons = [
+          {
+            label: "Me connecter",
+            href: "/ESPACE-PUBLIC/connexion-membre.html",
+            style: "lcdp-button-primary"
+          },
+          {
+            label: "Être invité(e)",
+            href: "/ESPACE-PUBLIC/inscription.html",
+            style: "lcdp-button-secondary"
+          }
+        ];
+
+        boutons.forEach((bouton) => {
+          const lien = document.createElement("a");
+          lien.className = "lcdp-button " + bouton.style;
+          lien.textContent = bouton.label;
+          lien.href = construireUrlSite(bouton.href);
+          actions.appendChild(lien);
+        });
+
+        const fermer = () => {
+          slot.innerHTML = "";
+        };
+
+        dialogue.querySelector("[data-lcdp-dialogue-close]").addEventListener("click", fermer);
+
+        dialogue.addEventListener("click", (event) => {
+          if (event.target === dialogue) {
+            fermer();
+          }
+        });
+      }
+
+      window.LCDP_ouvrirDialogueMonCompte = afficherDialogueMonCompte;
+
+      document.addEventListener("lcdp:ouvrir-dialogue-mon-compte", () => {
+        afficherDialogueMonCompte().catch(console.error);
+      });
+
+      async function initialiserBandeau() {
+        const slot = document.getElementById("lcdp-bandeau-slot");
+        slot.innerHTML = "";
+
+        const bandeau = await chargerFragment("/OBJET/BOX/02-box-bandeau-nav.html");
+        slot.appendChild(bandeau);
+
+        appliquerRoutesSite(slot);
+
+        await chargerScriptUneFois("/ESPACE-PUBLIC/box-menu-burger-public.js");
+
+        if (typeof window.LCDP_initialiserMenuBurgerPublic === "function") {
+          await window.LCDP_initialiserMenuBurgerPublic();
+        }
+      }
+
+      async function ajouterBoxText(slotId, titre, contenuHtml) {
+        const slot = document.getElementById(slotId);
+        slot.innerHTML = "";
+
+        const fragment = await chargerFragment("/OBJET/BOX/01-box-text.html");
+        slot.appendChild(fragment);
+
+        const box = slot.querySelector("[data-lcdp-boxtext]");
+        box.querySelector("[data-lcdp-boxtext-title]").textContent = titre;
+        box.querySelector("[data-lcdp-boxtext-content]").innerHTML = contenuHtml;
+
+        appliquerRoutesSite(slot);
+      }
+
+      async function initialiserFooter() {
+        const slot = document.getElementById("lcdp-footer-slot");
+        slot.innerHTML = "";
+
+        const footer = await chargerFragment("/OBJET/BOX/02-box-footer.html");
+        slot.appendChild(footer);
+
+        appliquerRoutesSite(slot);
+      }
+
+      async function initialiserPage() {
+        appliquerRoutesSite(document);
+
+        await initialiserBandeau();
+
+        await ajouterBoxText(
+          "lcdp-boxtext-intro-slot",
+          "Informations générales",
+          `
+            <p>
+              Cette page rassemble les informations légales relatives au site et à l'application La Clé du Parc.
+            </p>
+            <p>
+              Les informations juridiques définitives devront être complétées avec les données exactes de la structure éditrice, de son représentant légal, de son hébergeur et de ses coordonnées officielles.
+            </p>
+          `
+        );
+
+        await ajouterBoxText(
+          "lcdp-boxtext-editeur-slot",
+          "Éditeur du site",
+          `
+            <p>
+              Le site La Clé du Parc est édité par la structure responsable du club.
+            </p>
+            <p>
+              Dénomination sociale, forme juridique, adresse du siège, numéro d’identification et coordonnées de contact : informations à compléter après validation juridique.
+            </p>
+          `
+        );
+
+        await ajouterBoxText(
+          "lcdp-boxtext-publication-slot",
+          "Responsable de la publication",
+          `
+            <p>
+              Le responsable de la publication est la personne physique ou morale représentant la structure éditrice.
+            </p>
+            <p>
+              Nom, qualité et coordonnées professionnelles : informations à compléter.
+            </p>
+          `
+        );
+
+        await ajouterBoxText(
+          "lcdp-boxtext-hebergement-slot",
+          "Hébergement",
+          `
+            <p>
+              Les informations relatives à l’hébergeur du site devront être indiquées dans cette rubrique.
+            </p>
+            <p>
+              Nom de l’hébergeur, adresse, coordonnées et localisation des services d’hébergement : informations à compléter.
+            </p>
+          `
+        );
+
+        await ajouterBoxText(
+          "lcdp-boxtext-propriete-slot",
+          "Propriété intellectuelle",
+          `
+            <p>
+              Les textes, éléments graphiques, interfaces, logos, images, composants et contenus du site sont destinés à présenter La Clé du Parc et son fonctionnement.
+            </p>
+            <p>
+              Toute reprise ou réutilisation devra respecter les droits attachés aux contenus, aux marques, aux visuels et aux éléments techniques utilisés.
+            </p>
+          `
+        );
+
+        await ajouterBoxText(
+          "lcdp-boxtext-responsabilite-slot",
+          "Responsabilité",
+          `
+            <p>
+              Les informations publiées sur le site ont pour objet de présenter le club, ses règles d’accès, ses services et son fonctionnement.
+            </p>
+            <p>
+              Elles peuvent être mises à jour afin de tenir compte de l’évolution du service, du réseau de parcs, des activités proposées ou du cadre applicable.
+            </p>
+          `
+        );
+
+        await ajouterBoxText(
+          "lcdp-boxtext-donnees-slot",
+          "Données personnelles",
+          `
+            <p>
+              Certaines fonctionnalités peuvent nécessiter la collecte de données personnelles, notamment lors de l’inscription, de la connexion, de la réservation ou de la gestion du compte membre.
+            </p>
+            <p>
+              Les finalités, durées de conservation, destinataires, droits des personnes et modalités de contact devront être précisés dans la politique de confidentialité ou dans une rubrique dédiée.
+            </p>
+          `
+        );
+
+        await ajouterBoxText(
+          "lcdp-boxtext-cookies-slot",
+          "Cookies et traceurs",
+          `
+            <p>
+              Le site et l'application peuvent utiliser des cookies strictement nécessaires au fonctionnement des espaces de connexion et des sessions utilisateur.
+            </p>
+            <p>
+              Si des cookies de mesure d’audience, de suivi ou de services tiers sont ajoutés, ils devront être décrits et encadrés conformément aux règles applicables.
+            </p>
+          `
+        );
+
+        await ajouterBoxText(
+          "lcdp-boxtext-acces-slot",
+          "Accès au service",
+          `
+            <p>
+              L’accès aux espaces privés de La Clé du Parc peut dépendre de la création d’un compte, de la validation d’une adresse e-mail, de l’acceptation des règlements applicables et des droits associés au statut du membre.
+            </p>
+            <p>
+              Les conditions détaillées d’accès et d’utilisation relèvent des règlements du club et de l'application.
+            </p>
+          `
+        );
+
+        await ajouterBoxText(
+          "lcdp-boxtext-contact-slot",
+          "Contact",
+          `
+            <p>
+              Les demandes relatives aux mentions légales, au site, à l'application ou aux droits des utilisateurs peuvent être adressées via la page de contact.
+            </p>
+            <p>
+              <a
+                class="lcdp-link-secondary"
+                href="../ESPACE-PUBLIC/contact.html"
+                data-site-href="/ESPACE-PUBLIC/contact.html"
+              >Accéder à la page contact</a>
+            </p>
+          `
+        );
+
+        await ajouterBoxText(
+          "lcdp-boxtext-maj-slot",
+          "Mise à jour des mentions légales",
+          `
+            <p>
+              Les présentes mentions légales sont susceptibles d’être complétées ou mises à jour.
+            </p>
+            <p>
+              Date de dernière mise à jour : à compléter.
+            </p>
+          `
+        );
+
+        await initialiserFooter();
+      }
+
+      initialiserPage().catch((erreur) => {
+        console.error(erreur);
+      });
+    })();
+  </script>
+</body>
+</html>

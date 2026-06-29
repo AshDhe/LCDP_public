@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Connexion membre - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Connexion à votre compte membre La Clé du Parc.">
+
+  <script src="../config.js"></script>
+
+  <script>
+    window.SITE_BASE =
+      window.SITE_CONFIG?.publicBaseUrl ||
+      window.SITE_CONFIG?.siteBase ||
+      "";
+  </script>
+
+  <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
+</head>
+
+<body>
+  <div class="lcdp-site-page">
+
+    <main class="lcdp-site-main">
+      <section
+        class="lcdp-page-section"
+        aria-label="Connexion au compte membre"
+      >
+        <div class="lcdp-page-container">
+
+          <section
+            class="lcdp-component lcdp-box-formulaire-page"
+            data-lcdp-box-formulaire-page
+          >
+            <div class="lcdp-box-formulaire-page__inner">
+
+              <form
+                id="formulaire-connexion-membre"
+                class="lcdp-box-formulaire"
+                novalidate
+              >
+                <header class="lcdp-box-formulaire__header">
+                  <h1 class="lcdp-box-formulaire__title">
+                    Connexion membre
+                  </h1>
+
+                  <p class="lcdp-box-formulaire__subtitle">
+                    Accédez à votre compte membre
+                  </p>
+                </header>
+
+                <div class="lcdp-box-formulaire__fields">
+
+                  <div class="lcdp-box-champ-formulaire">
+                    <div class="lcdp-box-champ-formulaire__label-zone">
+                      <label
+                        class="lcdp-box-champ-formulaire__label"
+                        for="emailmembre"
+                      >
+                        Identifiant du compte
+                      </label>
+                    </div>
+
+                    <div class="lcdp-box-champ-formulaire__control">
+                      <input
+                        type="email"
+                        id="emailmembre"
+                        name="emailmembre"
+                        placeholder="Email"
+                        autocomplete="username"
+                        autocapitalize="none"
+                        spellcheck="false"
+                        required
+                      >
+                    </div>
+                  </div>
+
+                  <div class="lcdp-box-champ-formulaire">
+                    <div class="lcdp-box-champ-formulaire__label-zone">
+                      <label
+                        class="lcdp-box-champ-formulaire__label"
+                        for="mdpmembre"
+                      >
+                        Mot de passe
+                      </label>
+                    </div>
+
+                    <div class="lcdp-box-champ-formulaire__control">
+                      <input
+                        type="password"
+                        id="mdpmembre"
+                        name="mdpmembre"
+                        placeholder="Mot de passe"
+                        autocomplete="current-password"
+                        required
+                      >
+
+                      <label
+                        class="lcdp-box-champ-formulaire__checkbox-line"
+                        for="afficher-mdp-membre"
+                      >
+                        <input
+                          type="checkbox"
+                          id="afficher-mdp-membre"
+                        >
+                        <span>Afficher le mot de passe</span>
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="lcdp-box-formulaire__actions">
+                  <button
+                    type="submit"
+                    id="bouton-valider-formulaire"
+                    class="lcdp-button lcdp-button-primary"
+                  >
+                    Connexion
+                  </button>
+                </div>
+
+                <p class="lcdp-box-formulaire__note">
+                  <a
+                    id="lien-mot-de-passe-oublie"
+                    href="./mdp-perdu-membre.html"
+                  >
+                    Mot de passe perdu ?
+                  </a>
+                </p>
+              </form>
+
+            </div>
+          </section>
+
+        </div>
+      </section>
+    </main>
+
+    <div id="lcdp-lightbox-slot"></div>
+
+  </div>
+
+  <script src="./connexion-membre.js"></script>
+</body>
+</html>
