@@ -4,10 +4,15 @@
   --lcdp-color-surface-soft: #f7f7f4;
   --lcdp-color-text: #1f2a24;
   --lcdp-color-text-muted: #5f6861;
+
   --lcdp-color-primary: #234438;
   --lcdp-color-primary-hover: #183229;
-  --lcdp-color-border: rgba(31, 42, 36, 0.18);
+  --lcdp-color-logo-green: #55733f;
+
+  --lcdp-color-border: rgba(31, 42, 36, 0.22);
+  --lcdp-color-border-strong: rgba(31, 42, 36, 0.42);
   --lcdp-color-shadow: rgba(31, 42, 36, 0.14);
+
   --lcdp-color-orange: #f2a23a;
   --lcdp-color-orange-hover: #e89223;
   --lcdp-color-focus: rgba(35, 68, 56, 0.24);
@@ -31,6 +36,7 @@
   --lcdp-radius-medium: 16px;
   --lcdp-radius-large: 24px;
   --lcdp-radius-media: 18px;
+  --lcdp-radius-button: 14px;
 
   --lcdp-shadow-soft: 0 12px 32px var(--lcdp-color-shadow);
 }
@@ -180,15 +186,15 @@ select:focus-visible {
 /* LIENS INTERNES SECONDAIRES */
 
 .lcdp-link-secondary {
-  color: var(--lcdp-color-primary);
-  font-weight: 700;
+  color: var(--lcdp-color-logo-green);
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 1.5px;
 }
 
 .lcdp-link-secondary:hover {
-  color: var(--lcdp-color-primary-hover);
+  color: var(--lcdp-color-primary);
 }
 
 /* UTILITAIRES GENERIQUES */
@@ -232,17 +238,21 @@ select:focus-visible {
 }
 
 /* BOUTONS GENERIQUES */
+/* Rendu repris de base.css V2, avec classes V3 */
 
 .lcdp-button {
   width: 100%;
+  max-width: 320px;
   min-height: 52px;
   padding: 12px 20px;
-  border: 2px solid transparent;
-  border-radius: var(--lcdp-radius-medium);
+  border: 2px solid var(--lcdp-color-logo-green);
+  border-radius: var(--lcdp-radius-button);
+  background: var(--lcdp-color-logo-green);
+  color: #ffffff;
   font-family: var(--lcdp-font-main);
-  font-size: 1rem;
+  font-size: 17px;
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
   display: inline-flex;
@@ -251,30 +261,39 @@ select:focus-visible {
   cursor: pointer;
 }
 
-.lcdp-button-primary {
+.lcdp-button:hover {
   background: var(--lcdp-color-primary);
   border-color: var(--lcdp-color-primary);
   color: #ffffff;
 }
 
+.lcdp-button-primary {
+  background: var(--lcdp-color-logo-green);
+  border-color: var(--lcdp-color-logo-green);
+  color: #ffffff;
+}
+
 .lcdp-button-primary:hover {
-  background: var(--lcdp-color-primary-hover);
-  border-color: var(--lcdp-color-primary-hover);
+  background: var(--lcdp-color-primary);
+  border-color: var(--lcdp-color-primary);
   color: #ffffff;
 }
 
 .lcdp-button-secondary {
-  background: var(--lcdp-color-surface);
-  border-color: var(--lcdp-color-primary);
-  color: var(--lcdp-color-primary);
+  margin-top: var(--lcdp-space-2);
+  background: #ffffff;
+  color: var(--lcdp-color-logo-green);
+  border-color: var(--lcdp-color-logo-green);
 }
 
 .lcdp-button-secondary:hover {
   background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-primary-hover);
+  color: var(--lcdp-color-primary);
+  border-color: var(--lcdp-color-primary);
 }
 
 .lcdp-button-orange {
+  margin-top: var(--lcdp-space-2);
   background: var(--lcdp-color-orange);
   border-color: var(--lcdp-color-orange);
   color: var(--lcdp-color-text);
@@ -290,15 +309,29 @@ select:focus-visible {
 
 .lcdp-box-menu-bouton__list {
   width: 100%;
-  max-width: 520px;
+  max-width: 760px;
+  margin-top: var(--lcdp-space-3);
   margin-inline: auto;
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--lcdp-space-2);
 }
 
+.lcdp-box-menu-bouton__list .lcdp-button {
+  width: 100%;
+  max-width: none;
+}
+
 .lcdp-box-menu-bouton__list--single {
   max-width: 420px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.lcdp-box-menu-bouton__list--single .lcdp-button {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
 }
 
 /* RESPONSIVE */
@@ -322,16 +355,32 @@ select:focus-visible {
   }
 
   .lcdp-button {
-    min-height: 50px;
+    width: auto;
+    min-width: 190px;
+    max-width: 300px;
+    min-height: 48px;
+    padding: 11px 18px;
+    font-size: 17px;
   }
 
   .lcdp-box-menu-bouton__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 680px;
+    max-width: 760px;
+    gap: var(--lcdp-space-2);
+  }
+
+  .lcdp-box-menu-bouton__list .lcdp-button {
+    width: 100%;
+    max-width: none;
   }
 
   .lcdp-box-menu-bouton__list--single {
-    grid-template-columns: 1fr;
     max-width: 420px;
+    grid-template-columns: 1fr;
+  }
+
+  .lcdp-box-menu-bouton__list--single .lcdp-button {
+    width: 100%;
+    max-width: 320px;
   }
 }
