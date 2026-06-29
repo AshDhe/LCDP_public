@@ -1,0 +1,71 @@
+.lcdp-box-dialogue-bouton {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.46);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lcdp-box-dialogue-bouton__card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-box-dialogue-bouton__close {
+  position: absolute;
+  top: var(--lcdp-space-2);
+  right: var(--lcdp-space-2);
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lcdp-box-dialogue-bouton__close:hover {
+  background: #ffffff;
+}
+
+.lcdp-box-dialogue-bouton__title {
+  margin: 0;
+  padding-right: 42px;
+  font-size: clamp(1.4rem, 6vw, 1.9rem);
+  line-height: 1.18;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-dialogue-bouton__text {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+}
+
+.lcdp-box-dialogue-bouton__actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-dialogue-bouton__card {
+    padding: var(--lcdp-space-5);
+  }
+}

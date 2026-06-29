@@ -1,0 +1,145 @@
+.lcdp-box-champ-formulaire {
+  width: 100%;
+  text-align: left;
+}
+
+.lcdp-box-champ-formulaire__label-zone {
+  width: 100%;
+  margin-bottom: var(--lcdp-space-2);
+}
+
+.lcdp-box-champ-formulaire__label,
+.lcdp-box-champ-formulaire__heading {
+  margin: 0;
+  display: block;
+  font-size: clamp(1.2rem, 5.5vw, 1.6rem);
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+  text-align: left;
+}
+
+.lcdp-box-champ-formulaire__required {
+  color: var(--lcdp-color-text-muted);
+  font-weight: 700;
+}
+
+.lcdp-box-champ-formulaire__description {
+  margin: 0 0 var(--lcdp-space-2);
+  color: var(--lcdp-color-text-muted);
+  text-align: left;
+}
+
+.lcdp-box-champ-formulaire__description a {
+  color: var(--lcdp-color-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+
+.lcdp-box-champ-formulaire__description a:hover {
+  color: var(--lcdp-color-primary-hover);
+}
+
+.lcdp-box-champ-formulaire__control {
+  width: 100%;
+}
+
+.lcdp-box-champ-formulaire input[type="text"],
+.lcdp-box-champ-formulaire input[type="email"],
+.lcdp-box-champ-formulaire input[type="password"],
+.lcdp-box-champ-formulaire input[type="tel"],
+.lcdp-box-champ-formulaire input[type="number"],
+.lcdp-box-champ-formulaire input[type="date"],
+.lcdp-box-champ-formulaire select,
+.lcdp-box-champ-formulaire textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  font-family: var(--lcdp-font-main);
+  font-size: 1rem;
+  line-height: 1.35;
+  color: var(--lcdp-color-text);
+  background: var(--lcdp-color-surface);
+  text-align: left;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lcdp-box-champ-formulaire textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.lcdp-box-champ-formulaire input::placeholder,
+.lcdp-box-champ-formulaire textarea::placeholder {
+  color: rgba(31, 42, 36, 0.45);
+}
+
+.lcdp-box-champ-formulaire input:focus,
+.lcdp-box-champ-formulaire select:focus,
+.lcdp-box-champ-formulaire textarea:focus {
+  outline: none;
+  border-color: var(--lcdp-color-primary);
+  box-shadow: 0 0 0 3px var(--lcdp-color-focus);
+}
+
+.lcdp-box-champ-formulaire__checkbox-line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lcdp-space-2);
+  margin-top: var(--lcdp-space-2);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--lcdp-color-text-muted);
+  cursor: pointer;
+  text-align: left;
+}
+
+.lcdp-box-champ-formulaire__checkbox-line input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+  accent-color: var(--lcdp-color-primary);
+  cursor: pointer;
+}
+
+.lcdp-box-champ-formulaire__checkbox-line span {
+  display: inline-block;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-champ-formulaire__label,
+  .lcdp-box-champ-formulaire__heading {
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
+
+  .lcdp-box-champ-formulaire input[type="text"],
+  .lcdp-box-champ-formulaire input[type="email"],
+  .lcdp-box-champ-formulaire input[type="password"],
+  .lcdp-box-champ-formulaire input[type="tel"],
+  .lcdp-box-champ-formulaire input[type="number"],
+  .lcdp-box-champ-formulaire input[type="date"],
+  .lcdp-box-champ-formulaire select {
+    min-height: 48px;
+    padding: 11px 14px;
+    font-size: 1rem;
+  }
+
+  .lcdp-box-champ-formulaire textarea {
+    min-height: 120px;
+    padding: 11px 14px;
+    font-size: 1rem;
+  }
+
+  .lcdp-box-champ-formulaire__checkbox-line {
+    font-size: 1rem;
+  }
+}
