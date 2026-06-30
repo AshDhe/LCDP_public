@@ -8,15 +8,16 @@
 .lcdp-box-menu-burger__button {
   width: 44px;
   height: 44px;
-  border: 1px solid var(--lcdp-color-border);
+  border: 1px solid rgba(255, 255, 255, 0.72);
   border-radius: var(--lcdp-radius-medium);
-  background: var(--lcdp-color-surface);
+  background: #ffffff;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 5px;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(31, 42, 36, 0.12);
 }
 
 .lcdp-box-menu-burger__button span {
