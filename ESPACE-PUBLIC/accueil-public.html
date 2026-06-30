@@ -35,7 +35,11 @@
         <div class="lcdp-page-container">
           <div class="lcdp-page-content lcdp-stack-large">
 
-            <h1 class="lcdp-title-page-center">La Clé du Parc</h1>
+            <h1 class="lcdp-title-page-center">Menu principal</h1>
+
+            <p class="lcdp-text-muted">
+              <small>[Vous n'êtes pas connecté(e)]</small>
+            </p>
 
             <div id="lcdp-menu-central-slot"></div>
 
@@ -192,6 +196,15 @@
         );
       }
 
+      function ouvrirDialogueConnexion() {
+        if (typeof window.LCDP_ouvrirDialogueMonCompte === "function") {
+          window.LCDP_ouvrirDialogueMonCompte();
+          return;
+        }
+
+        document.dispatchEvent(new CustomEvent("lcdp:ouvrir-dialogue-mon-compte"));
+      }
+
       function verifierAcces(configurationBouton) {
         const nomFonction = configurationBouton.nomFonction || "cette fonction";
 
@@ -219,7 +232,7 @@
         const slot = document.getElementById("lcdp-bandeau-slot");
         slot.innerHTML = "";
 
-        const bandeau = await chargerFragment("/OBJET/BOX/02-box-bandeau-nav.html");
+        const bandeau = await chargerFragment("/ESPACE-PUBLIC/box-bandeau-nav-public.html");
         slot.appendChild(bandeau);
 
         appliquerRoutesSite(slot);
@@ -248,6 +261,8 @@
           {
             label: "VALIDER",
             nomFonction: "valider",
+            type: "membre",
+            style: "lcdp-button-primary",
             cookieSession: "userapp",
             cookieAbonnement: "abonne",
             target: "/ESPACE-MEMBRE/valider-membre.html"
@@ -255,6 +270,8 @@
           {
             label: "RÉSERVER",
             nomFonction: "réserver",
+            type: "membre",
+            style: "lcdp-button-primary",
             cookieSession: "userapp",
             cookieAbonnement: "abonne",
             target: "/ESPACE-MEMBRE/reserver-membre.html"
@@ -262,6 +279,8 @@
           {
             label: "PLANNING",
             nomFonction: "planning",
+            type: "membre",
+            style: "lcdp-button-primary",
             cookieSession: "userapp",
             cookieAbonnement: "",
             target: "/ESPACE-MEMBRE/planning-membre.html"
@@ -269,19 +288,54 @@
           {
             label: "INVITER",
             nomFonction: "inviter",
+            type: "membre",
+            style: "lcdp-button-primary",
             cookieSession: "userapp",
             cookieAbonnement: "abonne",
             target: "/ESPACE-MEMBRE/inviter-membre.html"
+          },
+          {
+            label: "ÊTRE INVITÉ(E)",
+            type: "public",
+            style: "lcdp-button-orange",
+            target: "/ESPACE-PUBLIC/inscription.html"
+          },
+          {
+            label: "LE CLUB",
+            type: "public",
+            style: "lcdp-button-primary",
+            target: "/ESPACE-PUBLIC/la-cle-du-parc.html"
+          },
+          {
+            label: "ACTUALITÉ",
+            type: "public",
+            style: "lcdp-button-primary",
+            target: "/ESPACE-PUBLIC/actualite.html"
+          },
+          {
+            label: "CONNEXION",
+            type: "dialogue",
+            style: "lcdp-button-primary"
           }
         ];
 
         boutons.forEach((configurationBouton) => {
           const bouton = document.createElement("button");
           bouton.type = "button";
-          bouton.className = "lcdp-button lcdp-button-primary";
+          bouton.className = "lcdp-button " + configurationBouton.style;
           bouton.textContent = configurationBouton.label;
 
           bouton.addEventListener("click", () => {
+            if (configurationBouton.type === "dialogue") {
+              ouvrirDialogueConnexion();
+              return;
+            }
+
+            if (configurationBouton.type === "public") {
+              window.location.href = construireUrlSite(configurationBouton.target);
+              return;
+            }
+
             const acces = verifierAcces(configurationBouton);
 
             if (!acces.autorise) {
