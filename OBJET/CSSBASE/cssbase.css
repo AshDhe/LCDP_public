@@ -329,14 +329,11 @@ select:focus-visible {
 }
 
 /* MENU BOUTON GENERIQUE */
-
-.lcdp-box-menu-bouton {
-  width: 100%;
-}
+/* Une seule colonne en mobile, tablette et desktop */
 
 .lcdp-box-menu-bouton__list {
   width: 100%;
-  max-width: 420px;
+  max-width: 520px;
   margin-top: var(--lcdp-space-3);
   margin-inline: auto;
   display: grid;
@@ -347,6 +344,17 @@ select:focus-visible {
 .lcdp-box-menu-bouton__list .lcdp-button {
   width: 100%;
   max-width: none;
+}
+
+.lcdp-box-menu-bouton__list--single {
+  max-width: 420px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.lcdp-box-menu-bouton__list--single .lcdp-button {
+  width: 100%;
+  max-width: 420px;
   margin-inline: auto;
 }
 
@@ -392,13 +400,23 @@ select:focus-visible {
   }
 
   .lcdp-box-menu-bouton__list {
-    max-width: 420px;
     grid-template-columns: 1fr;
+    max-width: 520px;
     gap: var(--lcdp-space-2);
   }
 
   .lcdp-box-menu-bouton__list .lcdp-button {
     width: 100%;
     max-width: none;
+  }
+
+  .lcdp-box-menu-bouton__list--single {
+    max-width: 420px;
+    grid-template-columns: 1fr;
+  }
+
+  .lcdp-box-menu-bouton__list--single .lcdp-button {
+    width: 100%;
+    max-width: 320px;
   }
 }
