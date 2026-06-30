@@ -36,13 +36,18 @@
 }
 
 .lcdp-box-dialogue-champ__title {
-  max-width: 300px;
+  max-width: 100%;
   margin: 0 auto var(--lcdp-space-3);
-  padding-right: 28px;
-  font-size: 1.45rem;
-  line-height: 1.18;
-  font-weight: 700;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   color: var(--lcdp-color-text);
+  font-size: clamp(1.55rem, 6vw, 2rem);
+  line-height: 1.15;
+  font-weight: 700;
+  text-align: center;
 }
 
 .lcdp-box-dialogue-champ__form,

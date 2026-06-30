@@ -46,28 +46,22 @@
 
 .lcdp-box-dialogue-bouton__title {
   margin: 0;
-  padding-right: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--lcdp-color-text);
   font-size: clamp(1.4rem, 6vw, 1.9rem);
   line-height: 1.18;
   font-weight: 700;
-  color: var(--lcdp-color-text);
+  text-align: center;
 }
 
 .lcdp-box-dialogue-bouton__text {
   margin: 0;
   color: var(--lcdp-color-text-muted);
-}
-
-.lcdp-box-dialogue-bouton__actions {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--lcdp-space-2);
-}
-
-@media (min-width: 768px) {
-  .lcdp-box-dialogue-bouton__card {
-    padding: var(--lcdp-space-5);
-  }
+  text-align: center;
 }
 
 .lcdp-box-dialogue-bouton__actions {
@@ -80,4 +74,10 @@
 .lcdp-box-dialogue-bouton__actions .lcdp-button {
   width: 100%;
   max-width: 320px;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-dialogue-bouton__card {
+    padding: var(--lcdp-space-5);
+  }
 }

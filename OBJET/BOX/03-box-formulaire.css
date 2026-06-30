@@ -30,15 +30,16 @@
 }
 
 .lcdp-box-formulaire__title {
-  width: fit-content;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 12px 22px;
-  border-radius: var(--lcdp-radius-medium);
-  background: var(--lcdp-color-primary);
-  color: #ffffff;
-  font-size: clamp(1.65rem, 7vw, 2.25rem);
-  line-height: 1.15;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--lcdp-color-text);
+  font-size: clamp(1.75rem, 7vw, 2.4rem);
+  line-height: 1.12;
   font-weight: 700;
   letter-spacing: -0.02em;
   text-align: center;
@@ -126,7 +127,6 @@
   }
 
   .lcdp-box-formulaire__title {
-    padding: 11px 24px;
     font-size: 2.125rem;
   }
 
