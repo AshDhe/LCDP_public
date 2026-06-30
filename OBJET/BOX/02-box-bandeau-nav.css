@@ -29,12 +29,16 @@
 }
 
 .lcdp-box-bandeau-nav__logo-link {
+  width: 44px;
+  height: 44px;
   color: #ffffff;
   text-decoration: none;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .lcdp-box-bandeau-nav__logo-link:visited {
@@ -42,10 +46,11 @@
 }
 
 .lcdp-box-bandeau-nav__logo {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 9px;
   object-fit: contain;
+  object-position: center center;
   flex-shrink: 0;
   display: block;
 }
@@ -59,6 +64,8 @@
 }
 
 .lcdp-box-bandeau-nav__burger-slot {
+  width: 44px;
+  height: 44px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -79,8 +86,18 @@
     font-size: 20px;
   }
 
+  .lcdp-box-bandeau-nav__logo-link {
+    width: 44px;
+    height: 44px;
+  }
+
   .lcdp-box-bandeau-nav__logo {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .lcdp-box-bandeau-nav__burger-slot {
+    width: 44px;
+    height: 44px;
   }
 }
