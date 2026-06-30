@@ -18,6 +18,10 @@
   </script>
 
   <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
   <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
   <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
@@ -25,6 +29,8 @@
 
 <body>
   <div class="lcdp-site-page">
+
+    <div id="lcdp-bandeau-slot"></div>
 
     <main class="lcdp-site-main">
       <section
@@ -95,10 +101,138 @@
       </section>
     </main>
 
+    <div id="lcdp-footer-slot"></div>
     <div id="lcdp-lightbox-slot"></div>
 
   </div>
 
+  <script>
+    (() => {
+      "use strict";
+
+      const siteBase = (
+        window.SITE_BASE ||
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        ""
+      ).replace(/\/$/, "");
+
+      function construireUrlSite(chemin) {
+        if (!chemin) return chemin;
+
+        if (
+          chemin.startsWith("#") ||
+          chemin.startsWith("mailto:") ||
+          chemin.startsWith("tel:") ||
+          chemin.startsWith("http://") ||
+          chemin.startsWith("https://") ||
+          chemin.startsWith("data:")
+        ) {
+          return chemin;
+        }
+
+        if (siteBase) {
+          return chemin.startsWith("/")
+            ? siteBase + chemin
+            : siteBase + "/" + chemin.replace(/^\.\//, "");
+        }
+
+        return chemin.startsWith("/") ? ".." + chemin : chemin;
+      }
+
+      window.LCDP_construireUrlSite = construireUrlSite;
+
+      function appliquerRoutesSite(racine = document) {
+        racine.querySelectorAll("[data-site-href]").forEach((element) => {
+          element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+        });
+
+        racine.querySelectorAll("[data-site-src]").forEach((element) => {
+          element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+        });
+      }
+
+      async function chargerFragment(chemin) {
+        const reponse = await fetch(construireUrlSite(chemin), {
+          method: "GET",
+          credentials: "same-origin",
+          cache: "no-cache"
+        });
+
+        if (!reponse.ok) {
+          throw new Error("Fragment introuvable : " + chemin);
+        }
+
+        const html = await reponse.text();
+        const template = document.createElement("template");
+        template.innerHTML = html.trim();
+
+        return template.content.cloneNode(true);
+      }
+
+      function chargerScriptUneFois(chemin) {
+        const src = construireUrlSite(chemin);
+
+        if (document.querySelector(`script[data-lcdp-script="${chemin}"]`)) {
+          return Promise.resolve();
+        }
+
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.defer = true;
+          script.dataset.lcdpScript = chemin;
+          script.onload = resolve;
+          script.onerror = () => reject(new Error("Script introuvable : " + chemin));
+          document.body.appendChild(script);
+        });
+      }
+
+      async function initialiserBandeauPublic() {
+        const slot = document.getElementById("lcdp-bandeau-slot");
+
+        if (!slot) {
+          return;
+        }
+
+        slot.innerHTML = "";
+
+        const bandeau = await chargerFragment("/ESPACE-PUBLIC/box-bandeau-nav-public.html");
+        slot.appendChild(bandeau);
+
+        appliquerRoutesSite(slot);
+
+        await chargerScriptUneFois("/ESPACE-PUBLIC/box-menu-burger-public.js");
+
+        if (typeof window.LCDP_initialiserMenuBurgerPublic === "function") {
+          await window.LCDP_initialiserMenuBurgerPublic();
+        }
+      }
+
+      async function initialiserFooterPublic() {
+        const slot = document.getElementById("lcdp-footer-slot");
+
+        if (!slot) {
+          return;
+        }
+
+        slot.innerHTML = "";
+
+        const footer = await chargerFragment("/OBJET/BOX/02-box-footer.html");
+        slot.appendChild(footer);
+
+        appliquerRoutesSite(slot);
+      }
+
+      appliquerRoutesSite(document);
+
+      initialiserBandeauPublic()
+        .then(initialiserFooterPublic)
+        .catch((erreur) => {
+          console.error(erreur);
+        });
+    })();
+  </script>
   <script src="./mdp-perdu-membre.js"></script>
 </body>
 </html>
