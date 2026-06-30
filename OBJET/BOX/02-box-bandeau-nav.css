@@ -2,8 +2,8 @@
   position: relative;
   z-index: 4000;
   width: 100%;
-  background: var(--lcdp-color-surface);
-  border-bottom: 1px solid var(--lcdp-color-border);
+  background: var(--lcdp-color-primary);
+  border-bottom: none;
   overflow: visible;
 }
 
@@ -22,15 +22,22 @@
 }
 
 .lcdp-box-bandeau-nav__logo-link {
+  color: #ffffff;
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
-  text-decoration: none;
+  gap: var(--lcdp-space-1);
+}
+
+.lcdp-box-bandeau-nav__logo-link:visited {
+  color: #ffffff;
 }
 
 .lcdp-box-bandeau-nav__logo {
   width: 64px;
   height: 64px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .lcdp-box-bandeau-nav__burger-slot {
