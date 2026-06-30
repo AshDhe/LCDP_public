@@ -93,6 +93,58 @@
     return template.content.cloneNode(true);
   }
 
+  function construireUrlsRessource(chemin) {
+    if (!chemin) return [];
+
+    const urls = [];
+    const ajouterUrl = (url) => {
+      if (url && !urls.includes(url)) {
+        urls.push(url);
+      }
+    };
+
+    ajouterUrl(construireUrlRessource(chemin));
+
+    if (
+      chemin.startsWith("/OBJET/") ||
+      chemin.startsWith("OBJET/") ||
+      chemin.startsWith("/IMAG/") ||
+      chemin.startsWith("IMAG/")
+    ) {
+      const cheminObjet = chemin
+        .replace(/^\/+/, "")
+        .replace(/^OBJET\/+/, "");
+
+      ajouterUrl(construireUrlSite("/OBJET/" + cheminObjet));
+      ajouterUrl("../OBJET/" + cheminObjet);
+    }
+
+    return urls;
+  }
+
+  function appliquerSourceImage(image, chemin) {
+    const urls = construireUrlsRessource(chemin);
+    let indexUrl = 0;
+
+    if (urls.length === 0) {
+      image.removeAttribute("src");
+      return;
+    }
+
+    image.onerror = () => {
+      indexUrl += 1;
+
+      if (indexUrl >= urls.length) {
+        image.onerror = null;
+        return;
+      }
+
+      image.src = urls[indexUrl];
+    };
+
+    image.src = urls[0];
+  }
+
   function creerCarteGalerie(carte) {
     const article = document.createElement("article");
     article.className = "lcdp-box-galerie__card";
@@ -103,10 +155,10 @@
 
     const image = document.createElement("img");
     image.className = "lcdp-box-galerie__image";
-    image.src = construireUrlRessource(carte.imageSrc || "");
     image.alt = carte.imageAlt || "";
     image.loading = "lazy";
     image.decoding = "async";
+    appliquerSourceImage(image, carte.imageSrc || "");
 
     article.appendChild(titre);
     article.appendChild(image);
