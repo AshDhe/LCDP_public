@@ -1,14 +1,26 @@
 .lcdp-box-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2500;
   width: 100%;
+  height: 56px;
   border-top: 1px solid var(--lcdp-color-border);
   background: var(--lcdp-color-surface);
+}
+
+#lcdp-footer-slot {
+  height: 56px;
+  flex: 0 0 auto;
 }
 
 .lcdp-box-footer__inner {
   width: 100%;
   max-width: var(--lcdp-page-width);
+  height: 56px;
   margin-inline: auto;
-  padding: var(--lcdp-space-3) var(--lcdp-page-padding-mobile);
+  padding: 0 var(--lcdp-page-padding-mobile);
   display: flex;
   align-items: center;
   justify-content: center;
