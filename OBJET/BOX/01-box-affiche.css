@@ -1,7 +1,5 @@
 /* SCENE D'AFFICHAGE DE L'AFFICHE D'ACCUEIL */
-/* Utilisée par index.html pour afficher accueil-public.html floutée derrière la fiche */
 
-.lcdp-box-affiche-stage,
 .lcdp-index-stage {
   position: relative;
   width: 100%;
@@ -11,7 +9,6 @@
   overflow: hidden;
 }
 
-.lcdp-box-affiche-stage__background,
 .lcdp-index-stage__background {
   position: fixed;
   inset: 0;
@@ -27,7 +24,6 @@
   transform-origin: center center;
 }
 
-.lcdp-box-affiche-stage__overlay,
 .lcdp-index-stage__overlay {
   position: relative;
   z-index: 2;
@@ -144,7 +140,6 @@
 }
 
 @media (min-width: 768px) {
-  .lcdp-box-affiche-stage__background,
   .lcdp-index-stage__background {
     transform: scale(1.025);
   }
