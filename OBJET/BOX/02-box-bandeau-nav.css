@@ -3,7 +3,7 @@
   z-index: 4000;
   width: 100%;
   min-height: 64px;
-  background: var(--lcdp-color-primary);
+  background: var(--lcdp-color-logo-green);
   border-bottom: none;
   overflow: visible;
 }
