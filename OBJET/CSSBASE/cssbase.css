@@ -39,6 +39,9 @@
   --lcdp-radius-button: 14px;
 
   --lcdp-shadow-soft: 0 12px 32px var(--lcdp-color-shadow);
+
+  --lcdp-button-menu-width-mobile: 100%;
+  --lcdp-button-menu-width-desktop: 20rem;
 }
 
 /* RESET GLOBAL */
@@ -288,6 +291,8 @@ select:focus-visible {
   font-weight: 600;
   text-align: center;
   text-decoration: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -355,20 +360,16 @@ select:focus-visible {
 .lcdp-box-menu-bouton__list > a.lcdp-button,
 .lcdp-box-menu-bouton__list > button.lcdp-button,
 .lcdp-box-menu-bouton__list > .lcdp-button {
-  width: 100%;
+  width: var(--lcdp-button-menu-width-mobile);
   max-width: none;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
   align-self: center;
   justify-self: center;
 }
 
 .lcdp-box-menu-bouton__list--single {
-  max-width: 420px;
-}
-
-.lcdp-box-menu-bouton__list--single > a.lcdp-button,
-.lcdp-box-menu-bouton__list--single > button.lcdp-button,
-.lcdp-box-menu-bouton__list--single > .lcdp-button {
-  width: 100%;
   max-width: 420px;
 }
 
@@ -444,4 +445,28 @@ select:focus-visible {
 
 .lcdp-site-main {
   padding-bottom: 56px;
+}
+
+/* CORRECTIF GENERIQUE FINAL MENU BOUTON */
+
+@media (min-width: 768px) {
+  .lcdp-box-menu-bouton__list,
+  .lcdp-box-menu-bouton__list--single {
+    max-width: var(--lcdp-button-menu-width-desktop);
+    align-items: center;
+    justify-items: center;
+  }
+
+  .lcdp-box-menu-bouton__list > a.lcdp-button,
+  .lcdp-box-menu-bouton__list > button.lcdp-button,
+  .lcdp-box-menu-bouton__list > .lcdp-button,
+  .lcdp-box-menu-bouton__list--single > a.lcdp-button,
+  .lcdp-box-menu-bouton__list--single > button.lcdp-button,
+  .lcdp-box-menu-bouton__list--single > .lcdp-button {
+    width: var(--lcdp-button-menu-width-desktop);
+    max-width: var(--lcdp-button-menu-width-desktop);
+    min-width: 0;
+    align-self: center;
+    justify-self: center;
+  }
 }
