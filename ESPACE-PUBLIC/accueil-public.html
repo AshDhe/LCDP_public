@@ -193,17 +193,19 @@
       }
 
       function verifierAcces(configurationBouton) {
+        const nomFonction = configurationBouton.nomFonction || "cette fonction";
+
         if (configurationBouton.cookieSession && !lireCookie(configurationBouton.cookieSession)) {
           return {
             autorise: false,
-            message: "Vous devez être connecté à votre compte membre pour accéder à cette fonction."
+            message: "Vous devez être connecté à votre compte membre pour utiliser la fonction " + nomFonction + "."
           };
         }
 
         if (configurationBouton.cookieAbonnement && !lireCookie(configurationBouton.cookieAbonnement)) {
           return {
             autorise: false,
-            message: "Cette fonction est réservée aux membres abonnés."
+            message: "La fonction " + nomFonction + " est réservée aux membres abonnés."
           };
         }
 
@@ -245,24 +247,28 @@
         const boutons = [
           {
             label: "VALIDER",
+            nomFonction: "valider",
             cookieSession: "userapp",
             cookieAbonnement: "abonne",
             target: "/ESPACE-MEMBRE/valider-membre.html"
           },
           {
             label: "RÉSERVER",
+            nomFonction: "réserver",
             cookieSession: "userapp",
             cookieAbonnement: "abonne",
             target: "/ESPACE-MEMBRE/reserver-membre.html"
           },
           {
             label: "PLANNING",
+            nomFonction: "planning",
             cookieSession: "userapp",
             cookieAbonnement: "",
             target: "/ESPACE-MEMBRE/planning-membre.html"
           },
           {
             label: "INVITER",
+            nomFonction: "inviter",
             cookieSession: "userapp",
             cookieAbonnement: "abonne",
             target: "/ESPACE-MEMBRE/inviter-membre.html"
