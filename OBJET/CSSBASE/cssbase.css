@@ -185,7 +185,7 @@ select:focus-visible {
   margin: 0 auto;
   font-size: clamp(1.15rem, 4.4vw, 1.5rem);
   line-height: 1.38;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
   color: var(--lcdp-color-text);
 }
@@ -379,6 +379,8 @@ select:focus-visible {
 
   .lcdp-text-strong-lead {
     font-size: 1.35rem;
+    font-weight: 700;
+    text-align: center;
   }
 
     .lcdp-image-legend {
