@@ -330,9 +330,13 @@ select:focus-visible {
 
 /* MENU BOUTON GENERIQUE */
 
+.lcdp-box-menu-bouton {
+  width: 100%;
+}
+
 .lcdp-box-menu-bouton__list {
   width: 100%;
-  max-width: 760px;
+  max-width: 420px;
   margin-top: var(--lcdp-space-3);
   margin-inline: auto;
   display: grid;
@@ -343,17 +347,6 @@ select:focus-visible {
 .lcdp-box-menu-bouton__list .lcdp-button {
   width: 100%;
   max-width: none;
-}
-
-.lcdp-box-menu-bouton__list--single {
-  max-width: 420px;
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-.lcdp-box-menu-bouton__list--single .lcdp-button {
-  width: 100%;
-  max-width: 420px;
   margin-inline: auto;
 }
 
@@ -383,7 +376,7 @@ select:focus-visible {
     text-align: center;
   }
 
-    .lcdp-image-legend {
+  .lcdp-image-legend {
     margin-top: 4px;
     font-size: 13px;
     line-height: 1.25;
@@ -399,23 +392,13 @@ select:focus-visible {
   }
 
   .lcdp-box-menu-bouton__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 760px;
+    max-width: 420px;
+    grid-template-columns: 1fr;
     gap: var(--lcdp-space-2);
   }
 
   .lcdp-box-menu-bouton__list .lcdp-button {
     width: 100%;
     max-width: none;
-  }
-
-  .lcdp-box-menu-bouton__list--single {
-    max-width: 420px;
-    grid-template-columns: 1fr;
-  }
-
-  .lcdp-box-menu-bouton__list--single .lcdp-button {
-    width: 100%;
-    max-width: 320px;
   }
 }
