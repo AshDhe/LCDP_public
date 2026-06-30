@@ -31,6 +31,10 @@
     return chemin.startsWith("/") ? ".." + chemin : chemin;
   }
 
+  function cheminImageGalerie(nomFichier) {
+    return construireUrlSite("/OBJET/IMAG/GALERIE/INSCRIPTION-MEMBRE/" + nomFichier);
+  }
+
   function appliquerRoutesSite(racine = document) {
     racine.querySelectorAll("[data-site-href]").forEach((element) => {
       element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
@@ -144,6 +148,7 @@
     titreElement.textContent = titre;
 
     if (options.titreCentre === true) {
+      box.setAttribute("data-lcdp-boxtext-align", "center");
       titreElement.classList.add("lcdp-boxtext__title--center");
     }
 
@@ -154,19 +159,30 @@
     return contenuElement;
   }
 
+  function remplirLibelleBouton(element, bouton) {
+    element.textContent = "";
+
+    if (Array.isArray(bouton.labelLignes) && bouton.labelLignes.length > 0) {
+      bouton.labelLignes.forEach((ligne, index) => {
+        if (index > 0) {
+          element.appendChild(document.createElement("br"));
+        }
+        element.appendChild(document.createTextNode(ligne));
+      });
+      return;
+    }
+
+    element.textContent = bouton.label || "";
+  }
+
   async function ajouterMenuBoutonsDansElement(conteneur, boutons, options = {}) {
     if (!conteneur) {
       throw new Error("Conteneur menu bouton introuvable.");
     }
 
     const fragment = await chargerFragment("/OBJET/BOX/02-box-menu-bouton.html");
-    conteneur.appendChild(fragment);
-
-    const menus = conteneur.querySelectorAll("[data-lcdp-box-menu-bouton]");
-    const listes = conteneur.querySelectorAll("[data-lcdp-menu-bouton-list]");
-
-    const menu = menus[menus.length - 1];
-    const liste = listes[listes.length - 1];
+    const menu = fragment.querySelector("[data-lcdp-box-menu-bouton]");
+    const liste = fragment.querySelector("[data-lcdp-menu-bouton-list]");
 
     if (!menu || !liste) {
       throw new Error("Structure du menu bouton V3 incomplète.");
@@ -183,12 +199,13 @@
     boutons.forEach((bouton) => {
       const lien = document.createElement("a");
       lien.className = "lcdp-button " + bouton.style;
-      lien.textContent = bouton.label;
+      remplirLibelleBouton(lien, bouton);
       lien.href = construireUrlSite(bouton.href);
 
       liste.appendChild(lien);
     });
 
+    conteneur.appendChild(fragment);
     appliquerRoutesSite(conteneur);
   }
 
@@ -245,7 +262,7 @@
       boxHaut.querySelector("[data-inscription-menu-ouverture]"),
       [
         {
-          label: "J’ouvre mon compte de membre invité",
+          labelLignes: ["J’ouvre mon compte", "de membre invité"],
           href: "/ESPACE-PUBLIC/formulaire-inscription-membre.html?source=inscription-membre",
           style: "lcdp-button-primary"
         }
@@ -279,42 +296,42 @@
         cartes: [
           {
             titre: "Faites-vous inviter",
-            imageSrc: "/IMAG/GALERIE/INSCRIPTION-MEMBRE/membre-invite.jpg",
+            imageSrc: cheminImageGalerie("membre-invite.jpg"),
             imageAlt: "Membre invité La Clé du Parc",
             imageLegende: "Image recomposée d'illustration - Non contractuelle",
             texte: "Accédez gratuitement à des espaces plein air d'exception grâce aux invitations de membres abonnés. Vous pouvez rester membre du club autant que vous souhaitez sous réserve de respecter le règlement du club."
           },
           {
             titre: "Venez vous ressourcer",
-            imageSrc: "/IMAG/GALERIE/INSCRIPTION-MEMBRE/petit-groupe.jpg",
+            imageSrc: cheminImageGalerie("petit-groupe.jpg"),
             imageAlt: "Se ressourcer seul ou en groupe avec La Clé du Parc",
             imageLegende: "Image recomposée d'illustration - Non contractuelle",
             texte: "Prenez le temps de vous ressourcer et de partager vos passions dans un cadre calme, naturel et sécurisé. La Clé du Parc vous donne un accès contrôlé à des parcs plein air d'exception sélectionnés pour leur capacité à vous apporter une véritable respiration."
           },
           {
             titre: "Venez en famille",
-            imageSrc: "/IMAG/GALERIE/INSCRIPTION-MEMBRE/invite-famille.jpg",
+            imageSrc: cheminImageGalerie("invite-famille.jpg"),
             imageAlt: "Invité famille La Clé du Parc",
             imageLegende: "Image recomposée d'illustration - Non contractuelle",
             texte: "Partagez en famille des moments d'exception. Un membre qui est abonné famille peut inviter les membres de sa famille autant de fois que nécessaire. Sous réserve de respecter le règlement du club."
           },
           {
             titre: "Invité(e) par un coach",
-            imageSrc: "/IMAG/GALERIE/INSCRIPTION-MEMBRE/activite-coach.jpg",
+            imageSrc: cheminImageGalerie("activite-coach.jpg"),
             imageAlt: "Activités et coachs avec La Clé du Parc",
             imageLegende: "Image recomposée d'illustration - Non contractuelle",
             texte: "La Clé du Parc valorise les activités de plein air, les rencontres bénéfiques et un usage respectueux des lieux. En tant que membre invité, vous pouvez suivre votre coach dans le cadre d'activités qu'il organise à travers les parcs du réseau."
           },
           {
             titre: "Des moments uniques",
-            imageSrc: "/IMAG/GALERIE/INSCRIPTION-MEMBRE/vous-ressourcer.jpg",
+            imageSrc: cheminImageGalerie("vous-ressourcer.jpg"),
             imageAlt: "Partager des moments uniques avec La Clé du Parc",
             imageLegende: "Image recomposée d'illustration - Non contractuelle",
             texte: "La Clé du Parc donne à ses membres un accès contrôlé à des parcs plein air d'exception sélectionnés pour leur capacité à vous faire ressentir des moments uniques. Autorisez-vous à vivre de belles émotions le plus souvent possible."
           },
           {
             titre: "Des lieux d'émotion",
-            imageSrc: "/IMAG/GALERIE/INSCRIPTION-MEMBRE/lieux-inoubliables.jpg",
+            imageSrc: cheminImageGalerie("lieux-inoubliables.jpg"),
             imageAlt: "Des parcs d'exception avec La Clé du Parc",
             imageLegende: "Image recomposée d'illustration - Non contractuelle",
             texte: "La Clé du Parc sélectionne des parcs plein air d'exception choisis pour leur qualité esthétique remarquable et un environnement naturel et culturel à la fois original, préservé et prestigieux."
@@ -358,7 +375,7 @@
           style: "lcdp-button-primary"
         },
         {
-          label: "J’ouvre mon compte de membre invité",
+          labelLignes: ["J’ouvre mon compte", "de membre invité"],
           href: "/ESPACE-PUBLIC/formulaire-inscription-membre.html?source=inscription-membre",
           style: "lcdp-button-orange"
         }
