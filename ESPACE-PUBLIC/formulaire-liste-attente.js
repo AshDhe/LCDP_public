@@ -255,50 +255,8 @@ async function afficherInformationListeAttente(titre, message, type = "informati
   const slot = document.getElementById("lcdp-lightbox-slot");
   const texte = titre ? `${titre}\n\n${message}` : message;
 
-  if (slot) {
-    slot.innerHTML = `
-      <div class="lcdp-box-alerte" role="alertdialog" aria-modal="true" data-lcdp-box-alerte>
-        <div class="lcdp-box-alerte__card">
-          <button
-            class="lcdp-box-alerte__close"
-            type="button"
-            aria-label="Fermer"
-            data-lcdp-alerte-close
-          >×</button>
-          <p class="lcdp-box-alerte__message" data-lcdp-alerte-message></p>
-          <button class="lcdp-button lcdp-button-primary" type="button" data-lcdp-alerte-ok>OK</button>
-        </div>
-      </div>
-    `;
-
-    const alerte = slot.querySelector("[data-lcdp-box-alerte]");
-    const messageElement = slot.querySelector("[data-lcdp-alerte-message]");
-    const boutonsFermeture = slot.querySelectorAll("[data-lcdp-alerte-close], [data-lcdp-alerte-ok]");
-
-    if (alerte) {
-      alerte.dataset.type = type;
-    }
-
-    if (messageElement) {
-      messageElement.textContent = texte;
-    }
-
-    await new Promise((resolve) => {
-      const fermer = () => {
-        slot.innerHTML = "";
-        resolve();
-      };
-
-      boutonsFermeture.forEach((bouton) => {
-        bouton.addEventListener("click", fermer, { once: true });
-      });
-
-      alerte?.addEventListener("click", (event) => {
-        if (event.target === alerte) {
-          fermer();
-        }
-      }, { once: true });
-    });
+  if (!slot) {
+    alert(message);
 
     if (options.redirectUrl) {
       window.location.href = options.redirectUrl;
@@ -307,9 +265,121 @@ async function afficherInformationListeAttente(titre, message, type = "informati
     return;
   }
 
-  alert(message);
+  slot.innerHTML = "";
 
-  if (options.redirectUrl) {
-    window.location.href = options.redirectUrl;
+  try {
+    const fragment = await chargerFragmentObjetListeAttente("/BOX/02-box-alerte.html");
+    slot.appendChild(fragment);
+
+    const alerte = slot.querySelector("[data-lcdp-box-alerte]");
+    const messageElement = slot.querySelector("[data-lcdp-alerte-message]");
+    const boutonFermer = slot.querySelector("[data-lcdp-alerte-close]");
+    const boutonOk = slot.querySelector("[data-lcdp-alerte-ok]");
+
+    if (!alerte || !messageElement || !boutonFermer || !boutonOk) {
+      throw new Error("Structure de l'alerte V3 incomplète.");
+    }
+
+    alerte.dataset.type = type;
+    messageElement.textContent = texte;
+
+    await new Promise((resolve) => {
+      let ferme = false;
+
+      const fermer = () => {
+        if (ferme) return;
+        ferme = true;
+        slot.innerHTML = "";
+        resolve();
+      };
+
+      boutonFermer.addEventListener("click", fermer, { once: true });
+      boutonOk.addEventListener("click", fermer, { once: true });
+
+      alerte.addEventListener("click", (event) => {
+        if (event.target === alerte) {
+          fermer();
+        }
+      });
+
+      document.addEventListener(
+        "keydown",
+        (event) => {
+          if (event.key === "Escape") {
+            fermer();
+          }
+        },
+        { once: true }
+      );
+    });
+
+    if (options.redirectUrl) {
+      window.location.href = options.redirectUrl;
+    }
+
+  } catch (error) {
+    console.error("Erreur alerte liste d'attente :", error);
+
+    alert(message);
+
+    if (options.redirectUrl) {
+      window.location.href = options.redirectUrl;
+    }
   }
+}
+
+async function chargerFragmentObjetListeAttente(chemin) {
+  const reponse = await fetch(construireUrlObjetListeAttente(chemin), {
+    method: "GET",
+    credentials: "same-origin",
+    cache: "force-cache"
+  });
+
+  if (!reponse.ok) {
+    throw new Error("Fragment objet introuvable : " + chemin);
+  }
+
+  const html = await reponse.text();
+  const template = document.createElement("template");
+  template.innerHTML = html.trim();
+
+  return template.content.cloneNode(true);
+}
+
+function construireUrlObjetListeAttente(chemin) {
+  const valeur = String(chemin || "");
+
+  if (
+    !valeur ||
+    valeur.startsWith("#") ||
+    valeur.startsWith("mailto:") ||
+    valeur.startsWith("tel:") ||
+    valeur.startsWith("http://") ||
+    valeur.startsWith("https://") ||
+    valeur.startsWith("data:")
+  ) {
+    return valeur;
+  }
+
+  const config = window.SITE_CONFIG || {};
+
+  if (typeof config.objetUrl === "function") {
+    return config.objetUrl(valeur);
+  }
+
+  const objetBaseUrl = nettoyerBaseUrlListeAttente(
+    config.objetBaseUrl ||
+    config.OBJET_BASE ||
+    ""
+  );
+
+  const cheminNettoye = valeur
+    .replace(/^\/+/, "")
+    .replace(/^OBJET\/+/, "");
+
+  if (objetBaseUrl) {
+    return objetBaseUrl + "/" + cheminNettoye;
+  }
+
+  return "../OBJET/" + cheminNettoye;
 }
