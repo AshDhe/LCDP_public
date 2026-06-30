@@ -12,15 +12,15 @@
 
   const comptesPublics = {
     membre: {
-      label: "Compte membre",
+      label: "Espace MEMBRE",
       cheminConnexion: "/ESPACE-PUBLIC/connexion-membre.html?source=menu-mon-compte"
     },
     parc: {
-      label: "Compte parc",
+      label: "Espace PARC",
       cheminConnexion: "/ESPACE-PUBLIC/connexion-parc.html?source=menu-mon-compte"
     },
     coach: {
-      label: "Compte coach",
+      label: "Espace COACH",
       cheminConnexion: "/ESPACE-PUBLIC/connexion-coach.html?source=menu-mon-compte"
     }
   };
@@ -208,8 +208,8 @@
       throw new Error("Structure de dialogue Mon compte incomplète.");
     }
 
-    titre.textContent = "Mon compte";
-    texte.textContent = "Choisissez l’espace de connexion adapté à votre situation.";
+    titre.textContent = "Connexion";
+    texte.textContent = "Choisissez votre espace de connexion";
 
     actions.innerHTML = "";
 
