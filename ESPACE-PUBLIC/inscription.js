@@ -32,7 +32,7 @@
   }
 
   function cheminImageGalerie(nomFichier) {
-    return "/IMAG/GALERIE/INSCRIPTION-MEMBRE/" + nomFichier;
+    return "IMAG/GALERIE/INSCRIPTION-MEMBRE/" + nomFichier;
   }
 
   function appliquerRoutesSite(racine = document) {
