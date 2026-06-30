@@ -117,8 +117,28 @@
   }
 
   function fermerMenu(boutonBurger, navBurger) {
+    if (!boutonBurger || !navBurger) {
+      return;
+    }
+
     boutonBurger.setAttribute("aria-expanded", "false");
     navBurger.hidden = true;
+  }
+
+  function ouvrirMenu(boutonBurger, navBurger) {
+    boutonBurger.setAttribute("aria-expanded", "true");
+    navBurger.hidden = false;
+  }
+
+  function basculerMenu(boutonBurger, navBurger) {
+    const ouvert = boutonBurger.getAttribute("aria-expanded") === "true";
+
+    if (ouvert) {
+      fermerMenu(boutonBurger, navBurger);
+      return;
+    }
+
+    ouvrirMenu(boutonBurger, navBurger);
   }
 
   function fermerDialogue(slot) {
@@ -269,7 +289,7 @@
       return;
     }
 
-    if (slot.dataset.lcdpBurgerInitialise === "true") {
+    if (slot.dataset.lcdpBurgerInitialise === "true" && slot.querySelector("[data-lcdp-burger-button]")) {
       return;
     }
 
@@ -297,20 +317,20 @@
           href: "/ESPACE-PUBLIC/accueil-public.html"
         },
         {
-          label: "Le club",
-          href: "/ESPACE-PUBLIC/la-cle-du-parc.html"
-        },
-        {
           label: "Mon compte",
           action: "mon-compte"
+        },
+        {
+          label: "Actualité",
+          href: "/ESPACE-PUBLIC/actualité.html"
         },
         {
           label: "Être invité(e)",
           href: "/ESPACE-PUBLIC/inscription.html"
         },
         {
-          label: "Actualité",
-          href: "/ESPACE-PUBLIC/actualité.html"
+          label: "Le club",
+          href: "/ESPACE-PUBLIC/la-cle-du-parc.html"
         }
       ];
 
@@ -320,11 +340,10 @@
         );
       });
 
-      boutonBurger.addEventListener("click", () => {
-        const ouvert = boutonBurger.getAttribute("aria-expanded") === "true";
-
-        boutonBurger.setAttribute("aria-expanded", String(!ouvert));
-        navBurger.hidden = ouvert;
+      boutonBurger.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        basculerMenu(boutonBurger, navBurger);
       });
 
       document.addEventListener("click", (event) => {
