@@ -98,7 +98,6 @@
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = href;
-
     document.head.appendChild(link);
   }
 
@@ -116,18 +115,16 @@
     return slot;
   }
 
-  function fermerMenu(boutonBurger, navBurger) {
-    if (!boutonBurger || !navBurger) {
-      return;
-    }
-
-    boutonBurger.setAttribute("aria-expanded", "false");
-    navBurger.hidden = true;
-  }
-
   function ouvrirMenu(boutonBurger, navBurger) {
     boutonBurger.setAttribute("aria-expanded", "true");
     navBurger.hidden = false;
+    navBurger.removeAttribute("hidden");
+  }
+
+  function fermerMenu(boutonBurger, navBurger) {
+    boutonBurger.setAttribute("aria-expanded", "false");
+    navBurger.hidden = true;
+    navBurger.setAttribute("hidden", "");
   }
 
   function basculerMenu(boutonBurger, navBurger) {
@@ -261,6 +258,7 @@
 
       bouton.addEventListener("click", () => {
         fermerMenu(boutonBurger, navBurger);
+
         ouvrirDialogueMonComptePublic().catch((erreur) => {
           console.error("Erreur dialogue Mon compte :", erreur);
           window.location.href = construireUrlConnexion("membre");
@@ -289,7 +287,7 @@
       return;
     }
 
-    if (slot.dataset.lcdpBurgerInitialise === "true" && slot.querySelector("[data-lcdp-burger-button]")) {
+    if (slot.dataset.lcdpBurgerInitialise === "true") {
       return;
     }
 
@@ -311,28 +309,32 @@
         throw new Error("Structure du menu burger générique incomplète.");
       }
 
+      fermerMenu(boutonBurger, navBurger);
+
       const liensPublics = [
         {
           label: "Accueil",
           href: "/ESPACE-PUBLIC/accueil-public.html"
         },
         {
-          label: "Mon compte",
-          action: "mon-compte"
+          label: "Le club",
+          href: "/ESPACE-PUBLIC/la-cle-du-parc.html"
         },
         {
-          label: "Actualité",
-          href: "/ESPACE-PUBLIC/actualité.html"
+          label: "Mon compte",
+          action: "mon-compte"
         },
         {
           label: "Être invité(e)",
           href: "/ESPACE-PUBLIC/inscription.html"
         },
         {
-          label: "Le club",
-          href: "/ESPACE-PUBLIC/la-cle-du-parc.html"
+          label: "Actualité",
+          href: "/ESPACE-PUBLIC/actualite.html"
         }
       ];
+
+      listeBurger.innerHTML = "";
 
       liensPublics.forEach((item) => {
         listeBurger.appendChild(
@@ -344,6 +346,10 @@
         event.preventDefault();
         event.stopPropagation();
         basculerMenu(boutonBurger, navBurger);
+      });
+
+      navBurger.addEventListener("click", (event) => {
+        event.stopPropagation();
       });
 
       document.addEventListener("click", (event) => {
