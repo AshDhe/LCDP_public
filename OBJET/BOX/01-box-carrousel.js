@@ -46,6 +46,8 @@
     const boutonPrecedent = carrousel.querySelector("[data-lcdp-carousel-prev]");
     const boutonSuivant = carrousel.querySelector("[data-lcdp-carousel-next]");
     const dotsContainer = carrousel.querySelector("[data-lcdp-carousel-dots]");
+    const captionElement = carrousel.querySelector("[data-lcdp-carousel-caption]");
+    const noteElement = carrousel.querySelector("[data-lcdp-carousel-note]");
 
     if (!liste || !boutonPrecedent || !boutonSuivant || !dotsContainer) {
       return;
@@ -92,6 +94,19 @@
 
     const dots = Array.from(dotsContainer.querySelectorAll(".lcdp-box-carousel__dot"));
 
+    function mettreAJourLegende() {
+      if (!captionElement) {
+        return;
+      }
+
+      const imageActive = items[indexActif]?.querySelector("img");
+      captionElement.textContent = imageActive?.alt || "";
+
+      if (noteElement && !noteElement.textContent.trim()) {
+        noteElement.textContent = "Photos non contractuelles.";
+      }
+    }
+
     function afficherIndex(index) {
       if (!items[index]) {
         return;
@@ -108,6 +123,8 @@
       dots.forEach((dot, dotIndex) => {
         dot.classList.toggle("is-active", dotIndex === indexActif);
       });
+
+      mettreAJourLegende();
     }
 
     function afficherSuivant() {
@@ -153,6 +170,7 @@
     carrousel.addEventListener("mouseenter", arreterAutoplay);
     carrousel.addEventListener("mouseleave", lancerAutoplay);
 
+    mettreAJourLegende();
     lancerAutoplay();
   }
 
