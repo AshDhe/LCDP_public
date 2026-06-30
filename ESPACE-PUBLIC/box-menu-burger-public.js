@@ -321,7 +321,7 @@
           href: "/ESPACE-PUBLIC/la-cle-du-parc.html"
         },
         {
-          label: "Mon compte",
+          label: "Connexion",
           action: "mon-compte"
         },
         {
