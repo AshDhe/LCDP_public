@@ -32,7 +32,7 @@
   }
 
   function cheminImageGalerie(nomFichier) {
-    return construireUrlSite("/OBJET/IMAG/GALERIE/INSCRIPTION-MEMBRE/" + nomFichier);
+    return "/IMAG/GALERIE/INSCRIPTION-MEMBRE/" + nomFichier;
   }
 
   function appliquerRoutesSite(racine = document) {
@@ -167,8 +167,10 @@
         if (index > 0) {
           element.appendChild(document.createElement("br"));
         }
+
         element.appendChild(document.createTextNode(ligne));
       });
+
       return;
     }
 
