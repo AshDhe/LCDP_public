@@ -6,10 +6,10 @@
   min-height: 100vh;
   padding: var(--lcdp-space-3);
   background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow-y: auto;
 }
@@ -18,8 +18,7 @@
   position: relative;
   width: 100%;
   max-width: 760px;
-  max-height: calc(100vh - 36px);
-  margin: 0 auto;
+  margin: var(--lcdp-space-3) auto;
   padding: var(--lcdp-space-4);
   border: 1px solid var(--lcdp-color-border);
   border-radius: var(--lcdp-radius-large);
@@ -28,7 +27,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--lcdp-space-3);
-  overflow-y: auto;
 }
 
 .lcdp-box-affiche__card .lcdp-title-page-center {
@@ -48,6 +46,22 @@
   font-weight: 600;
   text-align: left;
   color: var(--lcdp-color-text);
+}
+
+.lcdp-box-affiche__slot {
+  width: 100%;
+}
+
+.lcdp-box-affiche__slot[data-lcdp-affiche-carrousel-slot] {
+  margin-top: var(--lcdp-space-1);
+}
+
+.lcdp-box-affiche__slot[data-lcdp-affiche-text-slot] {
+  margin-top: var(--lcdp-space-2);
+}
+
+.lcdp-box-affiche__slot:empty {
+  display: none;
 }
 
 .lcdp-box-affiche__close {
@@ -73,22 +87,12 @@
   background: #ffffff;
 }
 
-.lcdp-box-affiche__slot {
-  width: 100%;
-}
-
-.lcdp-box-affiche__slot:empty {
-  display: none;
-}
-
 @media (max-width: 480px) {
   .lcdp-box-affiche {
-    align-items: flex-start;
     padding: var(--lcdp-space-2);
   }
 
   .lcdp-box-affiche__card {
-    max-height: none;
     margin: var(--lcdp-space-2) auto;
     padding: var(--lcdp-space-3);
     gap: var(--lcdp-space-2);
@@ -102,15 +106,27 @@
   .lcdp-box-affiche__card .lcdp-text-strong-left {
     font-size: 17px;
   }
+
+  .lcdp-box-affiche__slot[data-lcdp-affiche-text-slot] {
+    margin-top: var(--lcdp-space-1);
+  }
 }
 
 @media (min-width: 768px) {
   .lcdp-box-affiche {
+    align-items: center;
     padding: var(--lcdp-space-5);
   }
 
   .lcdp-box-affiche__card {
+    max-height: calc(100vh - 72px);
+    margin: 0 auto;
     padding: var(--lcdp-space-5);
     gap: var(--lcdp-space-3);
+    overflow-y: auto;
+  }
+
+  .lcdp-box-affiche__slot[data-lcdp-affiche-text-slot] {
+    margin-top: var(--lcdp-space-2);
   }
 }

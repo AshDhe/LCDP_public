@@ -70,6 +70,8 @@
 
     items.forEach((item, index) => {
       item.dataset.lcdpCarouselIndex = String(index);
+      item.classList.toggle("is-active", index === 0);
+      item.setAttribute("aria-hidden", index === 0 ? "false" : "true");
 
       const dot = document.createElement("button");
       dot.type = "button";
@@ -97,10 +99,10 @@
 
       indexActif = index;
 
-      items[index].scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center"
+      items.forEach((item, itemIndex) => {
+        const actif = itemIndex === indexActif;
+        item.classList.toggle("is-active", actif);
+        item.setAttribute("aria-hidden", actif ? "false" : "true");
       });
 
       dots.forEach((dot, dotIndex) => {
@@ -119,7 +121,7 @@
     }
 
     function lancerAutoplay() {
-      if (items.length <= 1) {
+      if (items.length <= 1 || autoplay) {
         return;
       }
 

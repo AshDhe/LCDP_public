@@ -20,7 +20,9 @@
 }
 
 .lcdp-box-carousel__viewport {
+  position: relative;
   width: 100%;
+  aspect-ratio: 16 / 9;
   min-height: 180px;
   overflow: hidden;
   border-radius: var(--lcdp-radius-button);
@@ -29,31 +31,33 @@
 }
 
 .lcdp-box-carousel__list {
+  position: relative;
   width: 100%;
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.lcdp-box-carousel__list::-webkit-scrollbar {
-  display: none;
+  height: 100%;
 }
 
 .lcdp-box-carousel__item {
-  flex: 0 0 100%;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   margin: 0;
-  overflow: hidden;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
   background: var(--lcdp-color-surface-soft);
-  scroll-snap-align: center;
+  transition: opacity 1.2s ease;
+}
+
+.lcdp-box-carousel__item.is-active {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
 }
 
 .lcdp-box-carousel__image {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   object-fit: contain;
   object-position: center center;
   background: var(--lcdp-color-surface-soft);
