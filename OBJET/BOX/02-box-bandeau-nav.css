@@ -2,6 +2,7 @@
   position: relative;
   z-index: 4000;
   width: 100%;
+  min-height: 64px;
   background: var(--lcdp-color-primary);
   border-bottom: none;
   overflow: visible;
@@ -12,8 +13,9 @@
   z-index: 4001;
   width: 100%;
   max-width: var(--lcdp-page-width);
+  min-height: 64px;
   margin-inline: auto;
-  padding: var(--lcdp-space-2) var(--lcdp-page-padding-mobile);
+  padding: 0 var(--lcdp-page-padding-mobile);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -23,19 +25,27 @@
 
 .lcdp-box-bandeau-nav__logo-link {
   color: #ffffff;
+  font-family: var(--lcdp-font-main);
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
   text-decoration: none;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: var(--lcdp-space-1);
 }
 
-.lcdp-box-bandeau-nav__logo-link:visited {
+.lcdp-box-bandeau-nav__logo-link:visited,
+.lcdp-box-bandeau-nav__logo-link:hover {
   color: #ffffff;
+  text-decoration: none;
 }
 
 .lcdp-box-bandeau-nav__logo {
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -50,12 +60,17 @@
 }
 
 @media (min-width: 768px) {
+  .lcdp-box-bandeau-nav {
+    min-height: 72px;
+  }
+
   .lcdp-box-bandeau-nav__inner {
+    min-height: 72px;
     padding-inline: var(--lcdp-page-padding-desktop);
   }
 
   .lcdp-box-bandeau-nav__logo {
-    width: 76px;
-    height: 76px;
+    width: 44px;
+    height: 44px;
   }
 }
