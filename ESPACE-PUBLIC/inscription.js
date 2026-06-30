@@ -295,50 +295,50 @@
       {
         titre: "Pourquoi devenir membre invité ?",
         ariaLabel: "Pourquoi devenir membre invité ?",
-        cartes: [
-          {
-            titre: "Faites-vous inviter",
-            imageSrc: cheminImageGalerie("membre-invite.jpg"),
-            imageAlt: "Membre invité La Clé du Parc",
-            imageLegende: "Image recomposée d'illustration - Non contractuelle",
-            texte: "Accédez gratuitement à des espaces plein air d'exception grâce aux invitations de membres abonnés. Vous pouvez rester membre du club autant que vous souhaitez sous réserve de respecter le règlement du club."
-          },
-          {
-            titre: "Venez vous ressourcer",
-            imageSrc: cheminImageGalerie("petit-groupe.jpg"),
-            imageAlt: "Se ressourcer seul ou en groupe avec La Clé du Parc",
-            imageLegende: "Image recomposée d'illustration - Non contractuelle",
-            texte: "Prenez le temps de vous ressourcer et de partager vos passions dans un cadre calme, naturel et sécurisé. La Clé du Parc vous donne un accès contrôlé à des parcs plein air d'exception sélectionnés pour leur capacité à vous apporter une véritable respiration."
-          },
-          {
-            titre: "Venez en famille",
-            imageSrc: cheminImageGalerie("invite-famille.jpg"),
-            imageAlt: "Invité famille La Clé du Parc",
-            imageLegende: "Image recomposée d'illustration - Non contractuelle",
-            texte: "Partagez en famille des moments d'exception. Un membre qui est abonné famille peut inviter les membres de sa famille autant de fois que nécessaire. Sous réserve de respecter le règlement du club."
-          },
-          {
-            titre: "Invité(e) par un coach",
-            imageSrc: cheminImageGalerie("activite-coach.jpg"),
-            imageAlt: "Activités et coachs avec La Clé du Parc",
-            imageLegende: "Image recomposée d'illustration - Non contractuelle",
-            texte: "La Clé du Parc valorise les activités de plein air, les rencontres bénéfiques et un usage respectueux des lieux. En tant que membre invité, vous pouvez suivre votre coach dans le cadre d'activités qu'il organise à travers les parcs du réseau."
-          },
-          {
-            titre: "Des moments uniques",
-            imageSrc: cheminImageGalerie("vous-ressourcer.jpg"),
-            imageAlt: "Partager des moments uniques avec La Clé du Parc",
-            imageLegende: "Image recomposée d'illustration - Non contractuelle",
-            texte: "La Clé du Parc donne à ses membres un accès contrôlé à des parcs plein air d'exception sélectionnés pour leur capacité à vous faire ressentir des moments uniques. Autorisez-vous à vivre de belles émotions le plus souvent possible."
-          },
-          {
-            titre: "Des lieux d'émotion",
-            imageSrc: cheminImageGalerie("lieux-inoubliables.jpg"),
-            imageAlt: "Des parcs d'exception avec La Clé du Parc",
-            imageLegende: "Image recomposée d'illustration - Non contractuelle",
-            texte: "La Clé du Parc sélectionne des parcs plein air d'exception choisis pour leur qualité esthétique remarquable et un environnement naturel et culturel à la fois original, préservé et prestigieux."
-          }
-        ]
+      cartes: [
+        {
+          titre: "Faites-vous inviter",
+          imageSrc: cheminImageGalerie("membre-invite2.jpg"),
+          imageAlt: "Membre invité La Clé du Parc",
+          imageLegende: "Image recomposée d'illustration - Non contractuelle",
+          texte: "Accédez gratuitement à des espaces plein air d'exception grâce aux invitations de membres abonnés. Vous pouvez rester membre du club autant que vous souhaitez sous réserve de respecter le règlement du club."
+        },
+        {
+          titre: "Venez vous ressourcer",
+          imageSrc: cheminImageGalerie("petit-groupe2.jpg"),
+          imageAlt: "Se ressourcer seul ou en groupe avec La Clé du Parc",
+          imageLegende: "Image recomposée d'illustration - Non contractuelle",
+          texte: "Prenez le temps de vous ressourcer et de partager vos passions dans un cadre calme, naturel et sécurisé. La Clé du Parc vous donne un accès contrôlé à des parcs plein air d'exception sélectionnés pour leur capacité à vous apporter une véritable respiration."
+        },
+        {
+          titre: "Venez en famille",
+          imageSrc: cheminImageGalerie("invite-famille2.jpg"),
+          imageAlt: "Invité famille La Clé du Parc",
+          imageLegende: "Image recomposée d'illustration - Non contractuelle",
+          texte: "Partagez en famille des moments d'exception. Un membre qui est abonné famille peut inviter les membres de sa famille autant de fois que nécessaire. Sous réserve de respecter le règlement du club."
+        },
+        {
+          titre: "Invité(e) par un coach",
+          imageSrc: cheminImageGalerie("activite-coach2.jpg"),
+          imageAlt: "Activités et coachs avec La Clé du Parc",
+          imageLegende: "Image recomposée d'illustration - Non contractuelle",
+          texte: "La Clé du Parc valorise les activités de plein air, les rencontres bénéfiques et un usage respectueux des lieux. En tant que membre invité, vous pouvez suivre votre coach dans le cadre d'activités qu'il organise à travers les parcs du réseau."
+        },
+        {
+          titre: "Des moments uniques",
+          imageSrc: cheminImageGalerie("vous-ressourcer2.jpg"),
+          imageAlt: "Partager des moments uniques avec La Clé du Parc",
+          imageLegende: "Image recomposée d'illustration - Non contractuelle",
+          texte: "La Clé du Parc donne à ses membres un accès contrôlé à des parcs plein air d'exception sélectionnés pour leur capacité à vous faire ressentir des moments uniques. Autorisez-vous à vivre de belles émotions le plus souvent possible."
+        },
+        {
+          titre: "Des lieux d'émotion",
+          imageSrc: cheminImageGalerie("lieux-inoubliables2.jpg"),
+          imageAlt: "Des parcs d'exception avec La Clé du Parc",
+          imageLegende: "Image recomposée d'illustration - Non contractuelle",
+          texte: "La Clé du Parc sélectionne des parcs plein air d'exception choisis pour leur qualité esthétique remarquable et un environnement naturel et culturel à la fois original, préservé et prestigieux."
+        }
+      ]
       }
     );
 
