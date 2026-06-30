@@ -1,101 +1,54 @@
 .lcdp-box-bandeau-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
+  position: relative;
+  z-index: 4000;
   width: 100%;
-  flex-shrink: 0;
-  background: var(--lcdp-color-logo-green, var(--color-logo-green));
-  border-bottom: none;
-  overflow: hidden;
-}
-
-#lcdp-bandeau-slot {
-  height: 64px;
-  flex-shrink: 0;
+  background: var(--lcdp-color-surface);
+  border-bottom: 1px solid var(--lcdp-color-border);
+  overflow: visible;
 }
 
 .lcdp-box-bandeau-nav__inner {
   position: relative;
+  z-index: 4001;
   width: 100%;
-  max-width: var(--lcdp-page-width, var(--page-width));
-  min-height: 64px;
-  margin: 0 auto;
-  padding-left: max(var(--lcdp-page-padding-mobile, 18px), env(safe-area-inset-left));
-  padding-right: max(var(--lcdp-page-padding-mobile, 18px), env(safe-area-inset-right));
+  max-width: var(--lcdp-page-width);
+  margin-inline: auto;
+  padding: var(--lcdp-space-2) var(--lcdp-page-padding-mobile);
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: var(--lcdp-space-2, 12px);
+  gap: var(--lcdp-space-3);
+  overflow: visible;
 }
 
 .lcdp-box-bandeau-nav__logo-link {
-  min-width: 0;
-  max-width: calc(100% - 56px);
-  color: #ffffff;
-  text-decoration: none;
-  white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  flex: 1 1 auto;
-  overflow: hidden;
-}
-
-.lcdp-box-bandeau-nav__logo-link:visited {
-  color: #ffffff;
+  text-decoration: none;
 }
 
 .lcdp-box-bandeau-nav__logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 9px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
-  object-position: center center;
-  flex: 0 0 auto;
-  display: block;
-}
-
-.lcdp-box-bandeau-nav__space-label {
-  min-width: 0;
-  max-width: 100%;
-  font-family: var(--lcdp-font-main, var(--font-main));
-  font-size: 20px;
-  line-height: 1.2;
-  font-weight: 700;
-  color: #ffffff;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .lcdp-box-bandeau-nav__burger-slot {
-  width: 44px;
-  height: 44px;
-  flex: 0 0 44px;
+  position: relative;
+  z-index: 4002;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  overflow: visible;
 }
 
 @media (min-width: 768px) {
-  #lcdp-bandeau-slot {
-    height: 72px;
-  }
-
   .lcdp-box-bandeau-nav__inner {
-    min-height: 72px;
-    padding-left: var(--lcdp-page-padding-desktop, var(--page-padding-desktop));
-    padding-right: var(--lcdp-page-padding-desktop, var(--page-padding-desktop));
-    gap: var(--lcdp-space-3, var(--space-3));
+    padding-inline: var(--lcdp-page-padding-desktop);
   }
 
-  .lcdp-box-bandeau-nav__logo-link {
-    max-width: calc(100% - 60px);
-  }
-
-  .lcdp-box-bandeau-nav__space-label {
-    font-size: 20px;
+  .lcdp-box-bandeau-nav__logo {
+    width: 76px;
+    height: 76px;
   }
 }
