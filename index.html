@@ -183,8 +183,6 @@
         const variantes = construireVariantesImage(srcInitial);
         let indexTentative = 0;
 
-        imageElement.src = construireUrlSite(variantes[indexTentative]);
-
         imageElement.addEventListener("error", () => {
           indexTentative += 1;
 
@@ -192,6 +190,8 @@
             imageElement.src = construireUrlSite(variantes[indexTentative]);
           }
         });
+
+        imageElement.src = construireUrlSite(variantes[indexTentative]);
       }
 
       async function afficherAfficheAccueil() {
