@@ -428,6 +428,31 @@ select:focus-visible {
     width: 100%;
     max-width: 320px;
   }
+
+  .lcdp-box-menu-bouton__list {
+    align-items: center;
+    justify-items: center;
+  }
+
+  .lcdp-box-menu-bouton__list > .lcdp-button {
+    width: min(100%, 20rem);
+    max-width: 20rem;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .lcdp-box-menu-bouton__list--single {
+    align-items: center;
+    justify-items: center;
+  }
+
+  .lcdp-box-menu-bouton__list--single > .lcdp-button {
+    width: min(100%, 20rem);
+    max-width: 20rem;
+    align-self: center;
+    justify-self: center;
+  }
+
 }
 
 .lcdp-site-main {
