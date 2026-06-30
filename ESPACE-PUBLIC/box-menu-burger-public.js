@@ -209,7 +209,7 @@
     }
 
     titre.textContent = "Connexion";
-    texte.textContent = "Choisissez votre espace de connexion";
+    texte.textContent = "Choisissez votre espace de connexion.";
 
     actions.innerHTML = "";
 
