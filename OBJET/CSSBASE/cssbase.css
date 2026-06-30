@@ -338,7 +338,7 @@ select:focus-visible {
 }
 
 /* MENU BOUTON GENERIQUE */
-/* Une seule colonne en mobile, tablette et desktop */
+/* Mobile : boutons larges. Tablette/desktop : largeur réduite et centrée. */
 
 .lcdp-box-menu-bouton__list {
   width: 100%;
@@ -348,23 +348,28 @@ select:focus-visible {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--lcdp-space-2);
+  align-items: center;
+  justify-items: center;
 }
 
-.lcdp-box-menu-bouton__list .lcdp-button {
+.lcdp-box-menu-bouton__list > a.lcdp-button,
+.lcdp-box-menu-bouton__list > button.lcdp-button,
+.lcdp-box-menu-bouton__list > .lcdp-button {
   width: 100%;
   max-width: none;
+  align-self: center;
+  justify-self: center;
 }
 
 .lcdp-box-menu-bouton__list--single {
   max-width: 420px;
-  display: grid;
-  grid-template-columns: 1fr;
 }
 
-.lcdp-box-menu-bouton__list--single .lcdp-button {
+.lcdp-box-menu-bouton__list--single > a.lcdp-button,
+.lcdp-box-menu-bouton__list--single > button.lcdp-button,
+.lcdp-box-menu-bouton__list--single > .lcdp-button {
   width: 100%;
   max-width: 420px;
-  margin-inline: auto;
 }
 
 /* RESPONSIVE */
@@ -409,31 +414,13 @@ select:focus-visible {
   }
 
   .lcdp-box-menu-bouton__list {
-    grid-template-columns: 1fr;
     max-width: 520px;
-    gap: var(--lcdp-space-2);
-  }
-
-  .lcdp-box-menu-bouton__list .lcdp-button {
-    width: 100%;
-    max-width: none;
-  }
-
-  .lcdp-box-menu-bouton__list--single {
-    max-width: 420px;
-    grid-template-columns: 1fr;
-  }
-
-  .lcdp-box-menu-bouton__list--single .lcdp-button {
-    width: 100%;
-    max-width: 320px;
-  }
-
-  .lcdp-box-menu-bouton__list {
     align-items: center;
     justify-items: center;
   }
 
+  .lcdp-box-menu-bouton__list > a.lcdp-button,
+  .lcdp-box-menu-bouton__list > button.lcdp-button,
   .lcdp-box-menu-bouton__list > .lcdp-button {
     width: min(100%, 20rem);
     max-width: 20rem;
@@ -442,17 +429,17 @@ select:focus-visible {
   }
 
   .lcdp-box-menu-bouton__list--single {
-    align-items: center;
-    justify-items: center;
+    max-width: 420px;
   }
 
+  .lcdp-box-menu-bouton__list--single > a.lcdp-button,
+  .lcdp-box-menu-bouton__list--single > button.lcdp-button,
   .lcdp-box-menu-bouton__list--single > .lcdp-button {
     width: min(100%, 20rem);
     max-width: 20rem;
     align-self: center;
     justify-self: center;
   }
-
 }
 
 .lcdp-site-main {
