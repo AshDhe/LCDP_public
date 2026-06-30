@@ -39,16 +39,6 @@
   text-align: center;
 }
 
-.lcdp-box-affiche__card .lcdp-text-strong-left {
-  max-width: 680px;
-  margin: 0 auto;
-  font-size: clamp(1.18rem, 4.3vw, 1.5rem);
-  line-height: 1.38;
-  font-weight: 600;
-  text-align: center;
-  color: var(--lcdp-color-text);
-}
-
 .lcdp-box-affiche__slot {
   width: 100%;
 }
@@ -102,10 +92,6 @@
   .lcdp-box-affiche__card .lcdp-title-page-center {
     padding-right: 36px;
     font-size: clamp(30px, 10vw, 38px);
-  }
-
-  .lcdp-box-affiche__card .lcdp-text-strong-left {
-    font-size: clamp(1.08rem, 4.8vw, 1.25rem);
   }
 
   .lcdp-box-affiche__slot[data-lcdp-affiche-carrousel-slot] {
