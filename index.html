@@ -220,11 +220,6 @@
         carrouselElement.querySelector("[data-lcdp-carousel-title]").textContent =
           "L'esprit du club";
 
-        const note = carrouselElement.querySelector("[data-lcdp-carousel-note]");
-        if (note) {
-          note.textContent = "";
-        }
-
         const liste = carrouselElement.querySelector("[data-lcdp-carousel-list]");
 
         const imagesCarrousel = [
@@ -292,10 +287,12 @@
 
         const boxTextElement = textSlot.querySelector("[data-lcdp-boxtext]");
         boxTextElement.querySelector("[data-lcdp-boxtext-title]").textContent =
-          "Un club pour respirer autrement";
+          "Se ressourcer";
 
-        boxTextElement.querySelector("[data-lcdp-boxtext-content]").innerHTML =
-          "<p>La Clé du Parc permet à ses membres de se retrouver seuls ou en petit groupe dans des parcs privés sélectionnés.</p><p>Le club propose un cadre simple, apaisant et vivant pour des activités culturelles, sportives, artistiques ou conviviales.</p>";
+        boxTextElement.querySelector("[data-lcdp-boxtext-content]").innerHTML = `
+          <p>La Clé du Parc vous donne accès à des parcs privés d'exception.</p>
+          <p>Seul(e) ou en petit groupe, le club propose un cadre sécurisé, original et apaisant pour vivre des moments uniques et se ressourcer autrement, par des activités de plein air sportives, culturelles, artistiques ou conviviales.</p>
+          `;
 
         box.querySelector("[data-lcdp-box-affiche-close]").addEventListener("click", () => {
           box.remove();
