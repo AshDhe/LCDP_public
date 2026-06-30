@@ -179,6 +179,17 @@ select:focus-visible {
   color: var(--lcdp-color-text);
 }
 
+.lcdp-text-strong-lead {
+  width: 100%;
+  max-width: var(--lcdp-text-width);
+  margin: 0 auto;
+  font-size: clamp(1.15rem, 4.4vw, 1.5rem);
+  line-height: 1.38;
+  font-weight: 600;
+  text-align: center;
+  color: var(--lcdp-color-text);
+}
+
 .lcdp-text-muted {
   color: var(--lcdp-color-text-muted);
 }
@@ -352,6 +363,10 @@ select:focus-visible {
 
   .lcdp-text-strong-left {
     font-size: 1.12rem;
+  }
+
+  .lcdp-text-strong-lead {
+    font-size: 1.35rem;
   }
 
   .lcdp-button {
