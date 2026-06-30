@@ -36,11 +36,16 @@
   font-weight: 700;
 }
 
-.lcdp-boxtext__title--center {
+.lcdp-boxtext__title.lcdp-boxtext__title--center,
+.lcdp-boxtext[data-lcdp-boxtext-align="center"] .lcdp-boxtext__title {
+  width: 100%;
   text-align: center;
+  align-self: center;
 }
 
+.lcdp-boxtext__content .lcdp-boxtext__text--center,
 .lcdp-boxtext__text--center {
+  width: 100%;
   text-align: center;
 }
 
