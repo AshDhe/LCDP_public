@@ -1,5 +1,6 @@
 .lcdp-box-footer {
   width: 100%;
+  margin-top: auto;
   border-top: 1px solid var(--lcdp-color-border);
   background: var(--lcdp-color-surface);
 }
@@ -11,15 +12,17 @@
   padding: var(--lcdp-space-3) var(--lcdp-page-padding-mobile);
   display: flex;
   flex-direction: column;
-  gap: var(--lcdp-space-2);
+  gap: var(--lcdp-space-1);
   align-items: center;
   justify-content: center;
 }
 
 .lcdp-box-footer__inner a {
   color: var(--lcdp-color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.25;
+  font-weight: 500;
   text-decoration: none;
-  font-weight: 600;
 }
 
 .lcdp-box-footer__inner a:hover {
@@ -32,6 +35,10 @@
   .lcdp-box-footer__inner {
     padding-inline: var(--lcdp-page-padding-desktop);
     flex-direction: row;
-    gap: var(--lcdp-space-4);
+    gap: var(--lcdp-space-3);
+  }
+
+  .lcdp-box-footer__inner a {
+    font-size: 0.95rem;
   }
 }
