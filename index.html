@@ -21,32 +21,6 @@
   <link rel="stylesheet" href="./OBJET/BOX/01-box-affiche.css" data-site-href="/OBJET/BOX/01-box-affiche.css">
   <link rel="stylesheet" href="./OBJET/BOX/01-box-carrousel.css" data-site-href="/OBJET/BOX/01-box-carrousel.css">
   <link rel="stylesheet" href="./OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
-
-  <style>
-    .lcdp-index-stage {
-      position: relative;
-      min-height: 100vh;
-      background: #dfe4de;
-      overflow: hidden;
-    }
-
-    .lcdp-index-stage__background {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      background: #ffffff;
-      pointer-events: none;
-    }
-
-    .lcdp-index-stage__overlay {
-      position: relative;
-      z-index: 2;
-      min-height: 100vh;
-    }
-  </style>
 </head>
 
 <body>
@@ -56,6 +30,7 @@
         <iframe
           class="lcdp-index-stage__background"
           src="./ESPACE-PUBLIC/accueil-public.html?source=index-lightbox"
+          data-site-src="/ESPACE-PUBLIC/accueil-public.html?source=index-lightbox"
           title="Fond accueil public"
           aria-hidden="true"
           tabindex="-1"
@@ -126,6 +101,10 @@
           .split(";")
           .map((part) => part.trim())
           .some((part) => part.startsWith(nom + "="));
+      }
+
+      function allerAccueilPublic() {
+        window.location.href = construireUrlPublique("/ESPACE-PUBLIC/accueil-public.html");
       }
 
       async function chargerFragment(chemin) {
@@ -292,15 +271,13 @@
         boxTextElement.querySelector("[data-lcdp-boxtext-content]").innerHTML = `
           <p>La Clé du Parc vous donne accès à des parcs privés d'exception.</p>
           <p>Seul(e) ou en petit groupe, le club propose un cadre sécurisé, original et apaisant pour vivre des moments uniques et se ressourcer autrement, par des activités de plein air sportives, culturelles, artistiques ou conviviales.</p>
-          `;
+        `;
 
-        box.querySelector("[data-lcdp-box-affiche-close]").addEventListener("click", () => {
-          box.remove();
-        });
+        box.querySelector("[data-lcdp-box-affiche-close]").addEventListener("click", allerAccueilPublic);
 
         box.addEventListener("click", (event) => {
           if (event.target === box) {
-            box.remove();
+            allerAccueilPublic();
           }
         });
 
@@ -310,12 +287,13 @@
       appliquerRoutesSite(document);
 
       if (lireCookie("userapp")) {
-        window.location.href = construireUrlPublique("/ESPACE-PUBLIC/accueil-public.html");
+        allerAccueilPublic();
         return;
       }
 
       afficherAfficheAccueil().catch((erreur) => {
         console.error(erreur);
+        allerAccueilPublic();
       });
     })();
   </script>
