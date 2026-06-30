@@ -69,3 +69,15 @@
     padding: var(--lcdp-space-5);
   }
 }
+
+.lcdp-box-dialogue-bouton__actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+  justify-items: center;
+}
+
+.lcdp-box-dialogue-bouton__actions .lcdp-button {
+  width: 100%;
+  max-width: 320px;
+}
