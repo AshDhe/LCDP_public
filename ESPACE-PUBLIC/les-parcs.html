@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Les parcs - La Clé du Parc</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Découvrir les parcs La Clé du Parc.">
+
+  <script src="../config.js"></script>
+
+  <script>
+    window.SITE_BASE =
+      window.SITE_CONFIG?.publicBaseUrl ||
+      window.SITE_CONFIG?.siteBase ||
+      "";
+  </script>
+
+  <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
+  <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
+</head>
+
+<body>
+  <div class="lcdp-site-page">
+
+    <div id="lcdp-bandeau-slot"></div>
+
+    <main class="lcdp-site-main">
+      <section class="lcdp-page-section" aria-label="Les parcs">
+        <div class="lcdp-page-container">
+          <div class="lcdp-page-content lcdp-stack-large">
+
+            <h1 class="lcdp-title-page-center">Les parcs</h1>
+
+            <div id="lcdp-boxtext-les-parcs-slot"></div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="lcdp-footer-slot"></div>
+    <div id="lcdp-lightbox-slot"></div>
+
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const siteBase = (
+        window.SITE_BASE ||
+        window.SITE_CONFIG?.publicBaseUrl ||
+        window.SITE_CONFIG?.siteBase ||
+        ""
+      ).replace(/\/$/, "");
+
+      function construireUrlSite(chemin) {
+        if (!chemin) return chemin;
+        if (chemin.startsWith("#") || chemin.startsWith("mailto:") || chemin.startsWith("tel:") || chemin.startsWith("http://") || chemin.startsWith("https://") || chemin.startsWith("data:")) return chemin;
+        if (siteBase) return chemin.startsWith("/") ? siteBase + chemin : siteBase + "/" + chemin.replace(/^\.\//, "");
+        return chemin.startsWith("/") ? ".." + chemin : chemin;
+      }
+
+      function appliquerRoutesSite(racine = document) {
+        racine.querySelectorAll("[data-site-href]").forEach((element) => {
+          element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
+        });
+        racine.querySelectorAll("[data-site-src]").forEach((element) => {
+          element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
+        });
+      }
+
+      async function chargerFragment(chemin) {
+        const reponse = await fetch(construireUrlSite(chemin), {
+          method: "GET",
+          credentials: "same-origin",
+          cache: "no-cache"
+        });
+        if (!reponse.ok) throw new Error("Fragment introuvable : " + chemin);
+        const template = document.createElement("template");
+        template.innerHTML = (await reponse.text()).trim();
+        return template.content.cloneNode(true);
+      }
+
+      function chargerScriptUneFois(chemin) {
+        const src = construireUrlSite(chemin);
+        if (document.querySelector(`script[data-lcdp-script="${chemin}"]`)) return Promise.resolve();
+
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.defer = true;
+          script.dataset.lcdpScript = chemin;
+          script.onload = resolve;
+          script.onerror = () => reject(new Error("Script introuvable : " + chemin));
+          document.body.appendChild(script);
+        });
+      }
+
+      async function afficherDialogueMonCompte() {
+        const slot = document.getElementById("lcdp-lightbox-slot");
+        slot.innerHTML = "";
+
+        const fragment = await chargerFragment("/OBJET/BOX/02-box-dialogue-bouton.html");
+        slot.appendChild(fragment);
+
+        const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
+        dialogue.querySelector("[data-lcdp-dialogue-title]").textContent = "Mon compte";
+        dialogue.querySelector("[data-lcdp-dialogue-text]").textContent = "Choisissez l’espace de connexion adapté à votre situation.";
+
+        const actions = dialogue.querySelector("[data-lcdp-dialogue-actions]");
+
+        [
+          { label: "Me connecter", href: "/ESPACE-PUBLIC/connexion-membre.html", style: "lcdp-button-primary" },
+          { label: "Être invité(e)", href: "/ESPACE-PUBLIC/inscription.html", style: "lcdp-button-secondary" }
+        ].forEach((bouton) => {
+          const lien = document.createElement("a");
+          lien.className = "lcdp-button " + bouton.style;
+          lien.textContent = bouton.label;
+          lien.href = construireUrlSite(bouton.href);
+          actions.appendChild(lien);
+        });
+
+        const fermer = () => {
+          slot.innerHTML = "";
+        };
+
+        dialogue.querySelector("[data-lcdp-dialogue-close]").addEventListener("click", fermer);
+        dialogue.addEventListener("click", (event) => {
+          if (event.target === dialogue) fermer();
+        });
+      }
+
+      window.LCDP_ouvrirDialogueMonCompte = afficherDialogueMonCompte;
+      document.addEventListener("lcdp:ouvrir-dialogue-mon-compte", () => {
+        afficherDialogueMonCompte().catch(console.error);
+      });
+
+      async function initialiserBandeau() {
+        const slot = document.getElementById("lcdp-bandeau-slot");
+        slot.innerHTML = "";
+        slot.appendChild(await chargerFragment("/ESPACE-PUBLIC/box-bandeau-nav-public.html"));
+        appliquerRoutesSite(slot);
+        await chargerScriptUneFois("/ESPACE-PUBLIC/box-menu-burger-public.js");
+        if (typeof window.LCDP_initialiserMenuBurgerPublic === "function") {
+          await window.LCDP_initialiserMenuBurgerPublic();
+        }
+      }
+
+      async function ajouterBoxText(slotId, titre, contenuHtml) {
+        const slot = document.getElementById(slotId);
+        slot.innerHTML = "";
+        slot.appendChild(await chargerFragment("/OBJET/BOX/01-box-text.html"));
+        const box = slot.querySelector("[data-lcdp-boxtext]");
+        box.querySelector("[data-lcdp-boxtext-title]").textContent = titre;
+        box.querySelector("[data-lcdp-boxtext-content]").innerHTML = contenuHtml;
+        appliquerRoutesSite(slot);
+      }
+
+      async function initialiserFooter() {
+        const slot = document.getElementById("lcdp-footer-slot");
+        slot.innerHTML = "";
+        slot.appendChild(await chargerFragment("/OBJET/BOX/02-box-footer.html"));
+        appliquerRoutesSite(slot);
+      }
+
+      async function initialiserPage() {
+        appliquerRoutesSite(document);
+        await initialiserBandeau();
+        await ajouterBoxText("lcdp-boxtext-les-parcs-slot", "Contenu à intégrer", "<p>Le contenu réel de la page les parcs doit être réintégré ici.</p>");
+        await initialiserFooter();
+      }
+
+      initialiserPage().catch(console.error);
+    })();
+  </script>
+</body>
+</html>

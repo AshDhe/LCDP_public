@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Le club - La Clé du Parc</title>
+  <title>Les coachs - La Clé du Parc</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Découvrir La Clé du Parc, le club de parcs privés pour se ressourcer seul ou en petit groupe.">
+  <meta name="description" content="Découvrir les coachs La Clé du Parc.">
 
   <script src="../config.js"></script>
 
@@ -21,7 +21,6 @@
   <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
   <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
-  <link rel="stylesheet" href="../OBJET/BOX/01-box-carrousel.css" data-site-href="/OBJET/BOX/01-box-carrousel.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
 </head>
@@ -32,27 +31,13 @@
     <div id="lcdp-bandeau-slot"></div>
 
     <main class="lcdp-site-main">
-      <section class="lcdp-page-section">
+      <section class="lcdp-page-section" aria-label="Les coachs">
         <div class="lcdp-page-container">
           <div class="lcdp-page-content lcdp-stack-large">
 
-            <h1 class="lcdp-title-page-center">La Clé du Parc</h1>
+            <h1 class="lcdp-title-page-center">Les coachs</h1>
 
-            <div id="lcdp-boxtext-intro-slot"></div>
-            <div id="lcdp-boxtext-esprit-slot"></div>
-            <div id="lcdp-boxtext-usage-slot"></div>
-
-            <div id="lcdp-carrousel-ambiance-slot"></div>
-
-            <div id="lcdp-menu-bouton-invitation-slot"></div>
-
-            <div id="lcdp-boxtext-activites-slot"></div>
-            <div id="lcdp-boxtext-rythme-slot"></div>
-            <div id="lcdp-boxtext-acces-slot"></div>
-
-            <div id="lcdp-menu-bouton-contact-slot"></div>
-
-            <div id="lcdp-carrousel-fin-slot"></div>
+            <div id="lcdp-boxtext-les-coachs-slot"></div>
 
           </div>
         </div>
@@ -159,20 +144,10 @@
 
         const actions = dialogue.querySelector("[data-lcdp-dialogue-actions]");
 
-        const boutons = [
-          {
-            label: "Me connecter",
-            href: "/ESPACE-PUBLIC/connexion-membre.html",
-            style: "lcdp-button-primary"
-          },
-          {
-            label: "Être invité(e)",
-            href: "/ESPACE-PUBLIC/inscription.html",
-            style: "lcdp-button-secondary"
-          }
-        ];
-
-        boutons.forEach((bouton) => {
+        [
+          { label: "Me connecter", href: "/ESPACE-PUBLIC/connexion-membre.html", style: "lcdp-button-primary" },
+          { label: "Être invité(e)", href: "/ESPACE-PUBLIC/inscription.html", style: "lcdp-button-secondary" }
+        ].forEach((bouton) => {
           const lien = document.createElement("a");
           lien.className = "lcdp-button " + bouton.style;
           lien.textContent = bouton.label;
@@ -187,9 +162,7 @@
         dialogue.querySelector("[data-lcdp-dialogue-close]").addEventListener("click", fermer);
 
         dialogue.addEventListener("click", (event) => {
-          if (event.target === dialogue) {
-            fermer();
-          }
+          if (event.target === dialogue) fermer();
         });
       }
 
@@ -229,58 +202,6 @@
         appliquerRoutesSite(slot);
       }
 
-      async function ajouterCarrousel(slotId, titre, images) {
-        const slot = document.getElementById(slotId);
-        slot.innerHTML = "";
-
-        const fragment = await chargerFragment("/OBJET/BOX/01-box-carrousel.html");
-        slot.appendChild(fragment);
-
-        const carrousel = slot.querySelector("[data-lcdp-box-carousel]");
-        carrousel.querySelector("[data-lcdp-carousel-title]").textContent = titre;
-
-        const liste = carrousel.querySelector("[data-lcdp-carousel-list]");
-
-        if (Array.isArray(images)) {
-          images.forEach((image) => {
-            const figure = document.createElement("figure");
-            figure.className = "lcdp-box-carousel__item";
-
-            const img = document.createElement("img");
-            img.className = "lcdp-box-carousel__image";
-            img.src = construireUrlSite(image.src);
-            img.alt = image.alt || "";
-            img.loading = "lazy";
-            img.decoding = "async";
-
-            figure.appendChild(img);
-            liste.appendChild(figure);
-          });
-        }
-
-        if (typeof window.LCDP_initialiserCarrousels === "function") {
-          window.LCDP_initialiserCarrousels(slot);
-        }
-      }
-
-      async function ajouterMenuBoutonSimple(slotId, label, href, style) {
-        const slot = document.getElementById(slotId);
-        slot.innerHTML = "";
-
-        const fragment = await chargerFragment("/OBJET/BOX/02-box-menu-bouton.html");
-        slot.appendChild(fragment);
-
-        const liste = slot.querySelector("[data-lcdp-menu-bouton-list]");
-        liste.classList.add("lcdp-box-menu-bouton__list--single");
-
-        const lien = document.createElement("a");
-        lien.className = "lcdp-button " + style;
-        lien.textContent = label;
-        lien.href = construireUrlSite(href);
-
-        liste.appendChild(lien);
-      }
-
       async function initialiserFooter() {
         const slot = document.getElementById("lcdp-footer-slot");
         slot.innerHTML = "";
@@ -293,78 +214,18 @@
 
       async function initialiserPage() {
         appliquerRoutesSite(document);
-
-        await chargerScriptUneFois("/OBJET/BOX/01-box-carrousel.js");
         await initialiserBandeau();
 
         await ajouterBoxText(
-          "lcdp-boxtext-intro-slot",
-          "Lorem ipsum dolor sit amet",
-          "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere, lorem vitae placerat tempor, lectus neque fermentum arcu, vitae luctus sem justo sed libero.</p><p>Praesent sed lacus sed lorem consequat posuere. Donec euismod, mi sed consequat hendrerit, turpis purus elementum risus, vitae finibus purus velit non nibh.</p>"
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-esprit-slot",
-          "Vestibulum ante ipsum primis",
-          "<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Suspendisse potenti. Aenean mattis felis sed lectus vehicula, sed cursus lacus elementum.</p><p>Morbi vitae erat ac lacus blandit commodo. Proin a sem sit amet tortor consequat luctus.</p>"
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-usage-slot",
-          "Aliquam erat volutpat",
-          "<p>Aliquam erat volutpat. Donec facilisis, libero nec convallis dignissim, justo neque porttitor nulla, sit amet ullamcorper risus neque sed arcu.</p><p>Sed laoreet lorem a nulla convallis, nec interdum erat sollicitudin.</p>"
-        );
-
-        await ajouterCarrousel(
-          "lcdp-carrousel-ambiance-slot",
-          "Lorem ipsum en images",
-          []
-        );
-
-        await ajouterMenuBoutonSimple(
-          "lcdp-menu-bouton-invitation-slot",
-          "Découvrir l’invitation",
-          "/ESPACE-PUBLIC/inscription.html",
-          "lcdp-button-orange"
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-activites-slot",
-          "Curabitur vitae lorem",
-          "<p>Curabitur vitae lorem sit amet lacus posuere vestibulum. Mauris euismod mi a turpis varius, sed aliquet dolor ullamcorper. Nulla facilisi.</p><p>Nam sed neque non enim malesuada feugiat. Integer dignissim nisl non sapien hendrerit, non fermentum massa congue.</p>"
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-rythme-slot",
-          "Mauris luctus tempor",
-          "<p>Mauris luctus tempor velit, eget tincidunt quam tempor non. Vivamus imperdiet, ex id viverra malesuada, erat sapien porttitor purus, non fermentum enim erat vitae lectus.</p><p>Ut laoreet, nunc vitae efficitur consequat, lorem tellus finibus lectus, a pulvinar odio lorem sed orci.</p>"
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-acces-slot",
-          "Donec non magna",
-          "<p>Donec non magna in nisi vehicula sagittis. Integer ut ligula nec sem porttitor porttitor. Suspendisse faucibus, magna in tincidunt dignissim, enim ipsum tristique nunc, non viverra massa purus sed nisl.</p><p>Fusce gravida, nibh sed blandit pulvinar, enim erat suscipit lorem, sed bibendum enim orci vitae justo.</p>"
-        );
-
-        await ajouterMenuBoutonSimple(
-          "lcdp-menu-bouton-contact-slot",
-          "Nous contacter",
-          "/ESPACE-PUBLIC/contact.html",
-          "lcdp-button-secondary"
-        );
-
-        await ajouterCarrousel(
-          "lcdp-carrousel-fin-slot",
-          "Dernier carrousel lorem ipsum",
-          []
+          "lcdp-boxtext-les-coachs-slot",
+          "Contenu à intégrer",
+          "<p>Le contenu réel de la page les coachs doit être réintégré ici.</p>"
         );
 
         await initialiserFooter();
       }
 
-      initialiserPage().catch((erreur) => {
-        console.error(erreur);
-      });
+      initialiserPage().catch(console.error);
     })();
   </script>
 </body>
