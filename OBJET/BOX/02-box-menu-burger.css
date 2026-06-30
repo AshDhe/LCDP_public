@@ -1,5 +1,8 @@
 .lcdp-box-menu-burger {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lcdp-box-menu-burger__button {
@@ -40,7 +43,7 @@
   position: absolute;
   top: calc(100% + var(--lcdp-space-2));
   right: 0;
-  z-index: 2000;
+  z-index: 3100;
   min-width: 220px;
   padding: var(--lcdp-space-2);
   border: 1px solid var(--lcdp-color-border);

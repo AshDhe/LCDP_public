@@ -1,4 +1,7 @@
 .lcdp-box-bandeau-nav {
+  position: sticky;
+  top: 0;
+  z-index: 3000;
   width: 100%;
   background: var(--lcdp-color-surface);
   border-bottom: 1px solid var(--lcdp-color-border);
@@ -7,8 +10,9 @@
 .lcdp-box-bandeau-nav__inner {
   width: 100%;
   max-width: var(--lcdp-page-width);
+  min-height: 92px;
   margin-inline: auto;
-  padding: var(--lcdp-space-2) var(--lcdp-page-padding-mobile);
+  padding: var(--lcdp-space-1) var(--lcdp-page-padding-mobile);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,19 +20,23 @@
 }
 
 .lcdp-box-bandeau-nav__logo-link {
-  min-width: 76px;
-  min-height: 76px;
+  width: 76px;
+  height: 76px;
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   text-decoration: none;
+  flex: 0 0 auto;
 }
 
 .lcdp-box-bandeau-nav__logo {
   width: 76px;
   height: 76px;
   object-fit: contain;
-  object-position: center;
+  object-position: center center;
+  display: block;
+  color: transparent;
+  font-size: 0;
 }
 
 .lcdp-box-bandeau-nav__space-label {
@@ -41,23 +49,30 @@
 }
 
 .lcdp-box-bandeau-nav__burger-slot {
+  min-height: 76px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
+  flex: 0 0 auto;
 }
 
 @media (min-width: 768px) {
   .lcdp-box-bandeau-nav__inner {
+    min-height: 104px;
     padding-inline: var(--lcdp-page-padding-desktop);
   }
 
   .lcdp-box-bandeau-nav__logo-link {
-    min-width: 86px;
-    min-height: 86px;
+    width: 86px;
+    height: 86px;
   }
 
   .lcdp-box-bandeau-nav__logo {
     width: 86px;
     height: 86px;
+  }
+
+  .lcdp-box-bandeau-nav__burger-slot {
+    min-height: 86px;
   }
 }
