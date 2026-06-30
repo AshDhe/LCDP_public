@@ -26,7 +26,41 @@
 <body>
   <div class="lcdp-site-page">
     <main class="lcdp-site-main">
+
+      <section class="lcdp-page-section" id="lcdp-index-background">
+        <div class="lcdp-page-container">
+          <div class="lcdp-page-content lcdp-stack-large">
+
+            <h1 class="lcdp-title-page-center">La Clé du Parc</h1>
+
+            <p class="lcdp-text-strong-left">
+              Des parcs plein air d’exception, proches de vous, pour vous ressourcer toute l’année.
+            </p>
+
+            <div class="lcdp-box-menu-bouton__list">
+              <a class="lcdp-button lcdp-button-primary" href="/ESPACE-PUBLIC/inscription.html" data-site-href="/ESPACE-PUBLIC/inscription.html">
+                Être invité(e)
+              </a>
+
+              <a class="lcdp-button lcdp-button-secondary" href="/ESPACE-PUBLIC/connexion-membre.html" data-site-href="/ESPACE-PUBLIC/connexion-membre.html">
+                Me connecter
+              </a>
+
+              <a class="lcdp-button lcdp-button-secondary" href="/ESPACE-PUBLIC/actualité.html" data-site-href="/ESPACE-PUBLIC/actualité.html">
+                Les actualités
+              </a>
+
+              <a class="lcdp-button lcdp-button-secondary" href="/ESPACE-PUBLIC/la-cle-du-parc.html" data-site-href="/ESPACE-PUBLIC/la-cle-du-parc.html">
+                Découvrir le club
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       <div id="lcdp-index-root"></div>
+
     </main>
   </div>
 
@@ -154,16 +188,34 @@
         const liste = carrouselElement.querySelector("[data-lcdp-carousel-list]");
 
         const imagesCarrousel = [
-          /*
-            Ajouter ici les vrais fichiers présents dans :
-            /OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/
-
-            Exemple :
-            {
-              src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/image-01.jpg",
-              alt: "Parc privé La Clé du Parc"
-            }
-          */
+          {
+            src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_1.jpg",
+            alt: "Lieu privé d’exception"
+          },
+          {
+            src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_2.jpg",
+            alt: "Parc privé pour se ressourcer"
+          },
+          {
+            src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_3.jpg",
+            alt: "Activité en parc privé"
+          },
+          {
+            src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_4.jpg",
+            alt: "Parc accessible avec ou sans coach"
+          },
+          {
+            src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_5.jpg",
+            alt: "Cadre naturel adapté à chacun"
+          },
+          {
+            src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_6.jpg",
+            alt: "Espace extérieur pour adultes"
+          },
+          {
+            src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_7.jpg",
+            alt: "Parc proche de chez vous"
+          }
         ];
 
         imagesCarrousel.forEach((image) => {
