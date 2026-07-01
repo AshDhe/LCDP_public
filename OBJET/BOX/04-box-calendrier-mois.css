@@ -116,6 +116,8 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
+  min-height: calc((56px * 6) + (5px * 5));
+  align-content: start;
 }
 
 .lcdp-box-calendrier-mois__message {
@@ -159,6 +161,10 @@
   .lcdp-box-calendrier-mois__weekdays,
   .lcdp-box-calendrier-mois__grid {
     gap: 7px;
+  }
+
+  .lcdp-box-calendrier-mois__grid {
+    min-height: clamp(380px, 52vw, 620px);
   }
 
   .lcdp-box-calendrier-mois__weekdays {
