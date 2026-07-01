@@ -42,7 +42,7 @@
 
 .lcdp-box-galerie__card-title {
   margin: 0;
-  font-size: clamp(1.25rem, 6vw, 1.8rem);
+  font-size: clamp(1.15rem, 3.8vw, 1.35rem);
   line-height: 1.16;
   font-weight: 700;
   color: var(--lcdp-color-primary);
