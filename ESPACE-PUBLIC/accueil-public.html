@@ -264,16 +264,16 @@
         const boutons = [
           {
             label: "VALIDER",
-            nomFonction: "valider",
+            nomFonction: "VALIDER",
             type: "membre",
             style: "lcdp-button-primary",
             cookieSession: "userapp",
-            cookieAbonnement: "abonne",
+            cookieAbonnement: "",
             target: "/ESPACE-MEMBRE/valider-membre.html"
           },
           {
             label: "RÉSERVER",
-            nomFonction: "réserver",
+            nomFonction: "RÉSERVER",
             type: "membre",
             style: "lcdp-button-primary",
             cookieSession: "userapp",
@@ -282,7 +282,7 @@
           },
           {
             label: "PLANNING",
-            nomFonction: "planning",
+            nomFonction: "PLANNING",
             type: "membre",
             style: "lcdp-button-primary",
             cookieSession: "userapp",
@@ -291,7 +291,7 @@
           },
           {
             label: "INVITER",
-            nomFonction: "inviter",
+            nomFonction: "INVITER",
             type: "membre",
             style: "lcdp-button-primary",
             cookieSession: "userapp",
@@ -300,7 +300,8 @@
           },
           {
             label: "ÊTRE INVITÉ(E)",
-            type: "public",
+            nomFonction: "ÊTRE INVITÉ(E)",
+            type: "invitation",
             style: "lcdp-button-orange",
             target: "/ESPACE-PUBLIC/inscription.html"
           },
@@ -332,6 +333,18 @@
           bouton.addEventListener("click", () => {
             if (configurationBouton.type === "dialogue") {
               ouvrirDialogueConnexion();
+              return;
+            }
+
+            if (configurationBouton.type === "invitation") {
+              if (lireCookie("userapp")) {
+                afficherAlerte(
+                  "Vous êtes déjà connecté(e) à votre compte membre. Pour être invité(e), rapprochez-vous de votre parrain."
+                ).catch(console.error);
+                return;
+              }
+
+              window.location.href = construireUrlSite(configurationBouton.target);
               return;
             }
 
