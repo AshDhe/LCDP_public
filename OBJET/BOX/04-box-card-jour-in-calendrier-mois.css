@@ -1,17 +1,18 @@
 .lcdp-box-card-jour-in-calendrier-mois {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  padding: 7px;
+  min-height: 56px;
+  padding: 4px;
   border: 1px solid var(--lcdp-color-border);
-  border-radius: 8px;
+  border-radius: 7px;
   background: var(--lcdp-color-surface);
   color: var(--lcdp-color-text);
   font: inherit;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 3px;
   overflow: hidden;
 }
 
@@ -38,26 +39,28 @@
 
 .lcdp-box-card-jour-in-calendrier-mois__number {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   line-height: 1;
+  flex: 0 0 auto;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slots {
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  gap: 3px;
-  flex: 1;
+  grid-template-rows: repeat(3, minmax(5px, 1fr));
+  gap: 2px;
+  flex: 1 1 auto;
   width: 100%;
+  min-height: 22px;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot {
   display: block;
   width: 100%;
-  min-height: 8px;
+  min-height: 5px;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 3px;
   background: #e6e6e6;
 }
 
@@ -83,9 +86,13 @@
 
 @media (min-width: 768px) {
   .lcdp-box-card-jour-in-calendrier-mois {
+    min-height: auto;
+    aspect-ratio: 1 / 1;
     padding: 10px;
     border-radius: var(--lcdp-radius-small);
     font-size: 1rem;
+    gap: 0;
+    justify-content: space-between;
   }
 
   .lcdp-box-card-jour-in-calendrier-mois__number {
@@ -95,6 +102,7 @@
 
   .lcdp-box-card-jour-in-calendrier-mois__slots {
     gap: 4px;
+    min-height: 0;
   }
 
   .lcdp-box-card-jour-in-calendrier-mois__slot {
