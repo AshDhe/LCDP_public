@@ -64,6 +64,18 @@
         ""
       ).replace(/\/$/, "");
 
+      const CONFIG_PAGE = window.SITE_CONFIG || {};
+
+      const ENDPOINT_INDEX_MEMBRE = construireEndpointApi(
+        "workerIndexMembreUrl",
+        "WORKER_INDEX_MEMBRE_URL",
+        "W_INDEX_MEMBRE_URL",
+        "index-membre-api"
+      );
+
+      let etatMembrePublicCharge = false;
+      let etatMembrePublic = null;
+
       function construireUrlSite(chemin) {
         if (!chemin) return chemin;
 
@@ -205,31 +217,207 @@
         document.dispatchEvent(new CustomEvent("lcdp:ouvrir-dialogue-mon-compte"));
       }
 
-      function verifierAcces(configurationBouton) {
-        const nomFonction = String(
-          configurationBouton.label ||
-          configurationBouton.nomFonction ||
-          "CETTE FONCTION"
-        ).trim().toLocaleUpperCase("fr-FR");
-
-        if (configurationBouton.cookieSession && !lireCookie(configurationBouton.cookieSession)) {
-          return {
-            autorise: false,
-            message: "Vous devez être connecté(e) à votre compte membre pour utiliser la fonction " + nomFonction + "."
-          };
+      async function chargerEtatMembrePublic() {
+        if (etatMembrePublicCharge) {
+          return etatMembrePublic;
         }
 
-        if (configurationBouton.cookieAbonnement && !lireCookie(configurationBouton.cookieAbonnement)) {
-          return {
-            autorise: false,
-            message: "Vous devez être membre abonné pour utiliser la fonction " + nomFonction + "."
-          };
+        etatMembrePublicCharge = true;
+
+        if (!ENDPOINT_INDEX_MEMBRE) {
+          return null;
         }
 
-        return {
-          autorise: true,
-          message: ""
-        };
+        try {
+          const reponse = await fetch(ENDPOINT_INDEX_MEMBRE + "/index", {
+            method: "GET",
+            credentials: "include",
+            cache: "no-store",
+            headers: {
+              "Accept": "application/json"
+            }
+          });
+
+          const resultat = await reponse.json().catch(() => null);
+
+          if (reponse.status === 401) {
+            etatMembrePublic = null;
+            return null;
+          }
+
+          if (!reponse.ok || !resultat || resultat.success !== true || resultat.connected !== true) {
+            etatMembrePublic = null;
+            return null;
+          }
+
+          etatMembrePublic = {
+            abonne: valeurBooleenneVraie(resultat.abonne),
+            parrainRenseigne: valeurBooleenneVraie(resultat.parrainRenseigne),
+            aReservationEnCours: valeurBooleenneVraie(resultat.aReservationEnCours || resultat.aReservationValidable),
+            reservationEnCours: resultat.reservationEnCours || resultat.reservationValidable || null
+          };
+
+          return etatMembrePublic;
+
+        } catch (erreur) {
+          console.error("Erreur état membre depuis accueil public :", erreur);
+          etatMembrePublic = null;
+          return null;
+        }
+      }
+
+      async function ouvrirDialogueBoutons(options) {
+        const slot = document.getElementById("lcdp-lightbox-slot");
+        slot.innerHTML = "";
+
+        const fragment = await chargerFragment("/OBJET/BOX/02-box-dialogue-bouton.html");
+        slot.appendChild(fragment);
+
+        const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
+        const titre = slot.querySelector("[data-lcdp-dialogue-title]");
+        const texte = slot.querySelector("[data-lcdp-dialogue-text]");
+        const actions = slot.querySelector("[data-lcdp-dialogue-actions]");
+        const boutonFermer = slot.querySelector("[data-lcdp-dialogue-close]");
+
+        if (!dialogue || !titre || !texte || !actions || !boutonFermer) {
+          throw new Error("Structure de dialogue bouton incomplète.");
+        }
+
+        titre.textContent = options.titre || "";
+        texte.textContent = options.texte || "";
+        actions.innerHTML = "";
+
+        return new Promise((resolve) => {
+          let resolu = false;
+
+          function fermer(valeur) {
+            if (resolu) return;
+            resolu = true;
+            slot.innerHTML = "";
+            resolve(valeur || null);
+          }
+
+          (options.boutons || []).forEach((configuration) => {
+            const bouton = document.createElement("button");
+            bouton.type = "button";
+            bouton.className = "lcdp-button " + (configuration.style || "lcdp-button-primary");
+            bouton.textContent = configuration.label || "Valider";
+
+            bouton.addEventListener("click", () => {
+              fermer(configuration.valeur || configuration.label || true);
+            });
+
+            actions.appendChild(bouton);
+          });
+
+          boutonFermer.addEventListener("click", () => fermer(null));
+
+          dialogue.addEventListener("click", (event) => {
+            if (event.target === dialogue) fermer(null);
+          });
+
+          document.addEventListener(
+            "keydown",
+            (event) => {
+              if (event.key === "Escape") fermer(null);
+            },
+            { once: true }
+          );
+        });
+      }
+
+      async function gererValidationPresencePublic() {
+        const etat = await chargerEtatMembrePublic();
+
+        if (!etat) {
+          await afficherAlerte("Vous devez être connecté(e) à votre compte membre pour utiliser la fonction VALIDER.");
+          return;
+        }
+
+        if (!etat.aReservationEnCours) {
+          await afficherAlerte("Vous n'avez pas de réservation en cours");
+          return;
+        }
+
+        await ouvrirDialogueBoutons({
+          titre: "Valider ma présence",
+          texte: "Choisissez le mode de validation.",
+          boutons: [
+            {
+              label: "BALISER",
+              valeur: "baliser",
+              style: "lcdp-button-primary"
+            },
+            {
+              label: "DÉLÉGUER",
+              valeur: "deleguer",
+              style: "lcdp-button-secondary"
+            }
+          ]
+        });
+      }
+
+      async function ouvrirPageMembrePublic(fonction, chemin) {
+        const etat = await chargerEtatMembrePublic();
+
+        if (!etat) {
+          await afficherAlerte("Vous devez être connecté(e) à votre compte membre pour utiliser la fonction " + fonction + ".");
+          return;
+        }
+
+        window.location.href = construireUrlMembre(chemin);
+      }
+
+      async function ouvrirPageAbonnePublic(fonction, chemin) {
+        const etat = await chargerEtatMembrePublic();
+
+        if (!etat) {
+          await afficherAlerte("Vous devez être connecté(e) à votre compte membre pour utiliser la fonction " + fonction + ".");
+          return;
+        }
+
+        if (!etat.abonne) {
+          await afficherAlerte("Vous devez être membre abonné pour utiliser la fonction " + fonction);
+          return;
+        }
+
+        window.location.href = construireUrlMembre(chemin);
+      }
+
+      async function gererEtreInvitePublic() {
+        const etat = await chargerEtatMembrePublic();
+
+        if (!etat) {
+          window.location.href = construireUrlSite("/ESPACE-PUBLIC/inscription.html");
+          return;
+        }
+
+        if (!etat.parrainRenseigne) {
+          await afficherAlerte('Renseignez votre parrain dans la rubrique "Mes informations"');
+          return;
+        }
+
+        await afficherAlerte("Votre parrain peut vous inviter depuis son espace.");
+      }
+
+      function construireEndpointApi(cleModerne, cleLegacy, cleCourte, sousDomaineWorker) {
+        const depuisConfig =
+          (cleModerne ? CONFIG_PAGE?.[cleModerne] : "") ||
+          (cleLegacy ? CONFIG_PAGE?.[cleLegacy] : "") ||
+          (cleCourte ? CONFIG_PAGE?.[cleCourte] : "") ||
+          "";
+
+        if (depuisConfig) return String(depuisConfig).replace(/\/+$/, "");
+
+        if (typeof CONFIG_PAGE.apiUrl === "function") {
+          return CONFIG_PAGE.apiUrl(sousDomaineWorker).replace(/\/+$/, "");
+        }
+
+        return "";
+      }
+
+      function valeurBooleenneVraie(valeur) {
+        return valeur === true || valeur === "true" || valeur === 1 || valeur === "1";
       }
 
       async function initialiserBandeau() {
@@ -264,63 +452,47 @@
         const boutons = [
           {
             label: "VALIDER",
-            nomFonction: "VALIDER",
-            type: "membre",
             style: "lcdp-button-primary",
-            cookieSession: "userapp",
-            cookieAbonnement: "",
-            target: "/ESPACE-MEMBRE/valider-membre.html"
+            action: gererValidationPresencePublic
           },
           {
             label: "RÉSERVER",
-            nomFonction: "RÉSERVER",
-            type: "membre",
             style: "lcdp-button-primary",
-            cookieSession: "userapp",
-            cookieAbonnement: "abonne",
-            target: "/ESPACE-MEMBRE/reserver-membre.html"
+            action: () => ouvrirPageAbonnePublic("RESERVER", "/ESPACE-MEMBRE/reserver-membre.html")
           },
           {
             label: "PLANNING",
-            nomFonction: "PLANNING",
-            type: "membre",
             style: "lcdp-button-primary",
-            cookieSession: "userapp",
-            cookieAbonnement: "",
-            target: "/ESPACE-MEMBRE/planning-membre.html"
+            action: () => ouvrirPageMembrePublic("PLANNING", "/ESPACE-MEMBRE/planning-membre.html")
           },
           {
             label: "INVITER",
-            nomFonction: "INVITER",
-            type: "membre",
             style: "lcdp-button-primary",
-            cookieSession: "userapp",
-            cookieAbonnement: "abonne",
-            target: "/ESPACE-MEMBRE/inviter-membre.html"
+            action: () => ouvrirPageAbonnePublic("INVITER", "/ESPACE-MEMBRE/inviter-membre.html")
           },
           {
             label: "ÊTRE INVITÉ(E)",
-            nomFonction: "ÊTRE INVITÉ(E)",
-            type: "invitation",
             style: "lcdp-button-orange",
-            target: "/ESPACE-PUBLIC/inscription.html"
+            action: gererEtreInvitePublic
           },
           {
             label: "LE CLUB",
-            type: "public",
             style: "lcdp-button-primary",
-            target: "/ESPACE-PUBLIC/la-cle-du-parc.html"
+            action: () => {
+              window.location.href = construireUrlSite("/ESPACE-PUBLIC/la-cle-du-parc.html");
+            }
           },
           {
             label: "ACTUALITÉ",
-            type: "public",
             style: "lcdp-button-primary",
-            target: "/ESPACE-PUBLIC/actualite.html"
+            action: () => {
+              window.location.href = construireUrlSite("/ESPACE-PUBLIC/actualite.html");
+            }
           },
           {
             label: "CONNEXION",
-            type: "dialogue",
-            style: "lcdp-button-primary"
+            style: "lcdp-button-primary",
+            action: ouvrirDialogueConnexion
           }
         ];
 
@@ -331,36 +503,10 @@
           bouton.textContent = configurationBouton.label;
 
           bouton.addEventListener("click", () => {
-            if (configurationBouton.type === "dialogue") {
-              ouvrirDialogueConnexion();
-              return;
-            }
-
-            if (configurationBouton.type === "invitation") {
-              if (lireCookie("userapp")) {
-                afficherAlerte(
-                  "Vous êtes déjà connecté(e) à votre compte membre. Pour être invité(e), rapprochez-vous de votre parrain."
-                ).catch(console.error);
-                return;
-              }
-
-              window.location.href = construireUrlSite(configurationBouton.target);
-              return;
-            }
-
-            if (configurationBouton.type === "public") {
-              window.location.href = construireUrlSite(configurationBouton.target);
-              return;
-            }
-
-            const acces = verifierAcces(configurationBouton);
-
-            if (!acces.autorise) {
-              afficherAlerte(acces.message).catch(console.error);
-              return;
-            }
-
-            window.location.href = construireUrlMembre(configurationBouton.target);
+            Promise.resolve(configurationBouton.action()).catch((erreur) => {
+              console.error(erreur);
+              afficherAlerte(erreur.message || "Erreur technique. Merci de réessayer.").catch(console.error);
+            });
           });
 
           liste.appendChild(bouton);
