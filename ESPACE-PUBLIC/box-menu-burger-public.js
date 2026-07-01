@@ -208,8 +208,8 @@
       throw new Error("Structure de dialogue Mon compte incomplète.");
     }
 
-    titre.textContent = "Connexion";
-    texte.textContent = "Choisissez votre espace de connexion.";
+    titre.textContent = "Mon espace";
+    texte.textContent = "Choisissez votre espace.";
 
     actions.innerHTML = "";
 
@@ -321,7 +321,7 @@
           href: "/ESPACE-PUBLIC/la-cle-du-parc.html"
         },
         {
-          label: "Connexion",
+          label: "Mon espace",
           action: "mon-compte"
         },
         {
