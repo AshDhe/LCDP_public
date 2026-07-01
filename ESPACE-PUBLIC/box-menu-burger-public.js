@@ -209,7 +209,7 @@
     }
 
     titre.textContent = "Espace connecté";
-    texte.textContent = "Choisissez votre espace.";
+    texte.textContent = "Choisissez votre espace";
 
     actions.innerHTML = "";
 
