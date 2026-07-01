@@ -4,16 +4,20 @@
   border: 1px solid var(--lcdp-color-border);
   border-radius: var(--lcdp-radius-large);
   background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-shadow-soft);
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
   display: flex;
   flex-direction: column;
 }
 
 .lcdp-box-card-parc__image {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-card-parc--sans-image .lcdp-box-card-parc__image {
+  display: none;
 }
 
 .lcdp-box-card-parc__body {
@@ -25,6 +29,7 @@
 }
 
 .lcdp-box-card-parc__text {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--lcdp-space-1);
@@ -32,7 +37,7 @@
 
 .lcdp-box-card-parc__title {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   line-height: 1.2;
   font-weight: 700;
   color: var(--lcdp-color-text);
@@ -41,7 +46,14 @@
 .lcdp-box-card-parc__meta {
   margin: 0;
   color: var(--lcdp-color-text-muted);
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.lcdp-box-card-parc__description {
+  margin: var(--lcdp-space-1) 0 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.98rem;
+  line-height: 1.4;
 }
 
 .lcdp-box-card-parc__actions {
@@ -51,8 +63,47 @@
   gap: var(--lcdp-space-2);
 }
 
+.lcdp-box-card-parc__actions .lcdp-button {
+  width: 100%;
+  max-width: none;
+  margin-top: 0;
+}
+
 @media (min-width: 768px) {
+  .lcdp-box-card-parc {
+    min-height: 190px;
+    display: grid;
+    grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+  }
+
+  .lcdp-box-card-parc--sans-image {
+    display: flex;
+  }
+
+  .lcdp-box-card-parc__image {
+    height: 100%;
+    min-height: 190px;
+    aspect-ratio: auto;
+  }
+
   .lcdp-box-card-parc__body {
     padding: var(--lcdp-space-4);
+    justify-content: space-between;
+  }
+
+  .lcdp-box-card-parc__title {
+    font-size: 1.35rem;
+  }
+
+  .lcdp-box-card-parc__actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .lcdp-box-card-parc__actions .lcdp-button {
+    width: auto;
+    min-width: 160px;
+    max-width: 220px;
   }
 }
