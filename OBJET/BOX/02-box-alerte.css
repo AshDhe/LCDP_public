@@ -13,9 +13,8 @@
 
 .lcdp-box-alerte__card {
   position: relative;
-  width: 100%;
-  max-width: 400px;
-  padding: var(--lcdp-space-4);
+  width: min(100%, 320px);
+  padding: 20px 18px 18px;
   border: 1px solid var(--lcdp-color-border);
   border-radius: var(--lcdp-radius-large);
   background: rgba(255, 255, 255, 0.97);
@@ -51,8 +50,15 @@
   font-weight: 700;
 }
 
+.lcdp-box-alerte__card .lcdp-button {
+  width: 100%;
+  max-width: 220px;
+  min-height: 46px;
+}
+
 @media (min-width: 768px) {
   .lcdp-box-alerte__card {
-    padding: var(--lcdp-space-5);
+    width: min(100%, 340px);
+    padding: 22px 20px 20px;
   }
 }
