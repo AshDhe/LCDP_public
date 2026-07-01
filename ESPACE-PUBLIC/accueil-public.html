@@ -206,7 +206,11 @@
       }
 
       function verifierAcces(configurationBouton) {
-        const nomFonction = configurationBouton.nomFonction || "cette fonction";
+        const nomFonction = String(
+          configurationBouton.label ||
+          configurationBouton.nomFonction ||
+          "CETTE FONCTION"
+        ).trim().toLocaleUpperCase("fr-FR");
 
         if (configurationBouton.cookieSession && !lireCookie(configurationBouton.cookieSession)) {
           return {
