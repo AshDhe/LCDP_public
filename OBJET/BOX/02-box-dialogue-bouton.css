@@ -74,6 +74,7 @@
 .lcdp-box-dialogue-bouton__actions .lcdp-button {
   width: 100%;
   max-width: 320px;
+  margin-top: 0;
 }
 
 @media (min-width: 768px) {
