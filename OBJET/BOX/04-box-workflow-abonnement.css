@@ -25,12 +25,15 @@
   border-radius: var(--lcdp-radius-large);
   background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
-  transition: width 180ms ease, max-width 180ms ease;
+  transition: none;
 }
 
-.lcdp-box-workflow-abonnement--emails-famille .lcdp-box-workflow-abonnement__card,
+.lcdp-box-workflow-abonnement--emails-famille .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 860px);
+}
+
 .lcdp-box-workflow-abonnement--calendrier-mois .lcdp-box-workflow-abonnement__card {
-  width: min(100%, 900px);
+  width: min(100%, 760px);
 }
 
 .lcdp-box-workflow-abonnement--calendrier-an .lcdp-box-workflow-abonnement__card {
@@ -44,6 +47,12 @@
 
 .lcdp-box-workflow-abonnement__content {
   width: 100%;
+  opacity: 1;
+  transition: opacity 70ms ease-out;
+}
+
+.lcdp-box-workflow-abonnement__content--transition {
+  opacity: 0;
 }
 
 .lcdp-box-workflow-abonnement__content > .lcdp-box-dialogue-bouton,
@@ -81,12 +90,12 @@
 }
 
 .lcdp-workflow-abonnement-box {
-  animation: lcdp-workflow-abonnement-enter 170ms ease-out both;
-  will-change: opacity, transform;
+  animation: lcdp-workflow-abonnement-enter 90ms ease-out both;
+  will-change: opacity;
 }
 
 .lcdp-workflow-abonnement-box--sortie {
-  animation: lcdp-workflow-abonnement-exit 110ms ease-in both;
+  animation: lcdp-workflow-abonnement-exit 70ms ease-in both;
 }
 
 .lcdp-workflow-abonnement-box .lcdp-button:disabled,
@@ -100,7 +109,7 @@
 
 .lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__text {
   color: var(--lcdp-color-text-muted);
-  font-size: clamp(1.05rem, 3vw, 1.2rem);
+  font-size: clamp(1.12rem, 3vw, 1.32rem);
   font-weight: 700;
   line-height: 1.3;
 }
@@ -110,8 +119,8 @@
 .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__title,
 .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__title,
 .lcdp-workflow-abonnement-box .lcdp-box-card-recaporder__title {
-  font-size: clamp(1.45rem, 5vw, 2rem);
-  line-height: 1.12;
+  font-size: clamp(1.28rem, 4vw, 1.68rem);
+  line-height: 1.14;
   font-weight: 700;
 }
 
@@ -228,32 +237,77 @@
   margin-top: 0;
 }
 
-.lcdp-workflow-abonnement-alerte [data-lcdp-box-alerte] .lcdp-button,
+
+
+.lcdp-workflow-abonnement-box--emails-famille .lcdp-box-card-listemails__title {
+  font-size: clamp(1.28rem, 4vw, 1.68rem);
+  line-height: 1.14;
+  font-weight: 700;
+  margin-bottom: var(--lcdp-space-3);
+}
+
+.lcdp-workflow-abonnement__emails-actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+  justify-items: center;
+  margin-top: var(--lcdp-space-3);
+}
+
+.lcdp-workflow-abonnement__emails-actions .lcdp-workflow-abonnement__actions-full {
+  width: min(100%, 320px);
+}
+
+.lcdp-workflow-abonnement__emails-actions .lcdp-workflow-abonnement__actions-row {
+  width: min(100%, 520px);
+}
+
+.lcdp-workflow-abonnement__emails-actions .lcdp-button {
+  margin-top: 0;
+}
+
+.lcdp-workflow-abonnement-box--emails-famille .lcdp-box-card-listemails__message {
+  display: none;
+}
+
+.lcdp-workflow-abonnement-alerte [data-lcdp-box-alerte] {
+  align-items: center;
+  justify-content: center;
+}
+
+.lcdp-workflow-abonnement-alerte [data-lcdp-alerte-actions],
+.lcdp-workflow-abonnement-alerte .lcdp-box-alerte__actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .lcdp-workflow-abonnement-alerte [data-lcdp-alerte-ok] {
+  width: min(100%, 220px);
+  min-width: 0;
+  max-width: 220px;
+  min-height: 46px;
   margin-inline: auto;
 }
 
 @keyframes lcdp-workflow-abonnement-enter {
   from {
     opacity: 0;
-    transform: translateY(6px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 @keyframes lcdp-workflow-abonnement-exit {
   from {
     opacity: 1;
-    transform: translateY(0);
   }
 
   to {
     opacity: 0;
-    transform: translateY(-4px);
   }
 }
 
@@ -277,15 +331,3 @@
   }
 }
 
-.lcdp-workflow-abonnement-alerte [data-lcdp-alerte-actions],
-.lcdp-workflow-abonnement-alerte .lcdp-box-alerte__actions {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.lcdp-workflow-abonnement-alerte [data-lcdp-alerte-ok] {
-  width: 100%;
-  max-width: 320px;
-  margin-inline: auto;
-}
