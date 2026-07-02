@@ -79,6 +79,16 @@
   border-color: #f0b96f;
 }
 
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--rouge-clair {
+  background: #f7c9c9;
+  border-color: #eca8a8;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--rouge {
+  background: #e98282;
+  border-color: #d15f5f;
+}
 .lcdp-box-card-jour-in-calendrier-mois__slot--gris-fonce {
   background: #5c5c5c;
   border-color: #4a4a4a;

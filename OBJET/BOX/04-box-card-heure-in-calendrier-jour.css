@@ -42,6 +42,18 @@
   color: var(--lcdp-color-text);
 }
 
+
+.lcdp-box-card-heure-in-calendrier-jour--rouge-clair {
+  background: #f7c9c9;
+  border-color: #eca8a8;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--rouge {
+  background: #e98282;
+  border-color: #d15f5f;
+  color: var(--lcdp-color-text);
+}
 .lcdp-box-card-heure-in-calendrier-jour--gris-fonce {
   background: #5c5c5c;
   border-color: #4a4a4a;
