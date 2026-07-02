@@ -23,25 +23,8 @@
   box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
 }
 
-.lcdp-box-card-recaporder__close {
-  position: sticky;
-  top: var(--lcdp-space-2);
-  float: right;
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
-  border: 0;
-  border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font-size: 1.8rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
 .lcdp-box-card-recaporder__title {
-  margin: 0 44px var(--lcdp-space-3) 0;
+  margin: 0 0 var(--lcdp-space-3);
   color: var(--lcdp-color-text);
   font-size: clamp(1.45rem, 5vw, 2rem);
   line-height: 1.12;

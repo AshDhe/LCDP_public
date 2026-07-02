@@ -1,13 +1,5 @@
 <div class="lcdp-box-card-recaporder" role="dialog" aria-modal="true" data-lcdp-box-card-recaporder>
   <section class="lcdp-box-card-recaporder__card">
-    <button
-      class="lcdp-box-card-recaporder__close"
-      type="button"
-      aria-label="Fermer"
-      data-lcdp-recaporder-close
-    >
-      ×
-    </button>
 
     <h2 class="lcdp-box-card-recaporder__title">Récapitulatif</h2>
 
@@ -18,7 +10,7 @@
       </div>
 
       <div class="lcdp-box-card-recaporder__row" data-lcdp-recaporder-invites-row>
-        <dt>Invité(s) Famille</dt>
+        <dt data-lcdp-recaporder-invites-label>Invité(s) Famille</dt>
         <dd data-lcdp-recaporder-invites></dd>
       </div>
 
@@ -72,14 +64,14 @@
     <p class="lcdp-box-card-recaporder__message" data-lcdp-recaporder-message hidden></p>
 
     <div class="lcdp-box-card-recaporder__actions">
-      <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-recaporder-back>
-        Précédent
-      </button>
       <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-recaporder-cancel>
         Annuler
       </button>
       <button class="lcdp-button lcdp-button-primary" type="button" data-lcdp-recaporder-pay>
         Payer
+      </button>
+      <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-recaporder-back>
+        Précédent
       </button>
     </div>
   </section>
