@@ -1,36 +1,46 @@
 <div class="lcdp-box-dialogue-champ-inviter" role="dialog" aria-modal="true" data-lcdp-box-dialogue-champ-inviter>
-  <div class="lcdp-box-dialogue-champ-inviter__card">
+  <section class="lcdp-box-dialogue-champ-inviter__card">
     <button
       class="lcdp-box-dialogue-champ-inviter__close"
       type="button"
       aria-label="Fermer"
-      data-lcdp-inviter-close
+      data-lcdp-dialogue-inviter-close
     >
       ×
     </button>
 
-    <h2 class="lcdp-box-dialogue-champ-inviter__title" data-lcdp-inviter-title>
-      Inviter un membre
-    </h2>
+    <h2 class="lcdp-box-dialogue-champ-inviter__title" data-lcdp-dialogue-inviter-title></h2>
 
-    <p class="lcdp-box-dialogue-champ-inviter__text" data-lcdp-inviter-text>
-      Saisissez l’adresse e-mail du membre à inviter.
-    </p>
+    <form class="lcdp-box-dialogue-champ-inviter__form" data-lcdp-dialogue-inviter-form>
+      <label class="lcdp-box-dialogue-champ-inviter__label" for="lcdp-dialogue-inviter-email">
+        E-mail du membre invité
+      </label>
 
-    <form class="lcdp-box-dialogue-champ-inviter__form" data-lcdp-inviter-form novalidate>
-      <div class="lcdp-box-dialogue-champ-inviter__fields" data-lcdp-inviter-fields></div>
+      <input
+        id="lcdp-dialogue-inviter-email"
+        class="lcdp-box-dialogue-champ-inviter__input"
+        name="email"
+        type="email"
+        autocomplete="email"
+        placeholder="E-mail du membre invité"
+        data-lcdp-dialogue-inviter-email
+      >
 
-      <p class="lcdp-box-dialogue-champ-inviter__error" data-lcdp-inviter-error hidden></p>
+      <p class="lcdp-box-dialogue-champ-inviter__erreur" data-lcdp-dialogue-inviter-error hidden></p>
 
-      <div class="lcdp-box-dialogue-champ-inviter__actions">
-        <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-inviter-add>
-          Ajouter une adresse mail
+      <div class="lcdp-box-dialogue-champ-inviter__actions" data-lcdp-dialogue-inviter-actions>
+        <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-dialogue-inviter-back>
+          Retour
         </button>
 
-        <button class="lcdp-button lcdp-button-primary" type="submit">
-          Envoyer
+        <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-dialogue-inviter-skip hidden>
+          Passer cette étape
+        </button>
+
+        <button class="lcdp-button lcdp-button-primary" type="submit" data-lcdp-dialogue-inviter-next>
+          Suivant
         </button>
       </div>
     </form>
-  </div>
+  </section>
 </div>

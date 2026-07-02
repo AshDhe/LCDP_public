@@ -1,0 +1,86 @@
+<div class="lcdp-box-card-recaporder" role="dialog" aria-modal="true" data-lcdp-box-card-recaporder>
+  <section class="lcdp-box-card-recaporder__card">
+    <button
+      class="lcdp-box-card-recaporder__close"
+      type="button"
+      aria-label="Fermer"
+      data-lcdp-recaporder-close
+    >
+      ×
+    </button>
+
+    <h2 class="lcdp-box-card-recaporder__title">Récapitulatif</h2>
+
+    <dl class="lcdp-box-card-recaporder__list">
+      <div class="lcdp-box-card-recaporder__row">
+        <dt>Abonnement choisi</dt>
+        <dd data-lcdp-recaporder-abonnement></dd>
+      </div>
+
+      <div class="lcdp-box-card-recaporder__row" data-lcdp-recaporder-invites-row hidden>
+        <dt>Invités famille</dt>
+        <dd data-lcdp-recaporder-invites></dd>
+      </div>
+
+      <div class="lcdp-box-card-recaporder__row">
+        <dt>Début</dt>
+        <dd data-lcdp-recaporder-debut></dd>
+      </div>
+
+      <div class="lcdp-box-card-recaporder__row">
+        <dt>Fin</dt>
+        <dd data-lcdp-recaporder-fin></dd>
+      </div>
+
+      <div class="lcdp-box-card-recaporder__row">
+        <dt>Prix initial TTC <span data-lcdp-recaporder-tva-label></span></dt>
+        <dd data-lcdp-recaporder-prix-initial></dd>
+      </div>
+
+      <div class="lcdp-box-card-recaporder__row lcdp-box-card-recaporder__row--code">
+        <dt>Code remise</dt>
+        <dd>
+          <div class="lcdp-box-card-recaporder__code-zone">
+            <input
+              class="lcdp-box-card-recaporder__code-input"
+              type="text"
+              autocomplete="off"
+              data-lcdp-recaporder-code-remise
+            >
+            <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-recaporder-valider-code>
+              Valider
+            </button>
+          </div>
+        </dd>
+      </div>
+
+      <div class="lcdp-box-card-recaporder__row lcdp-box-card-recaporder__row--total">
+        <dt>Prix net TTC <span data-lcdp-recaporder-tva-net-label></span></dt>
+        <dd data-lcdp-recaporder-prix-net></dd>
+      </div>
+    </dl>
+
+    <div class="lcdp-box-card-recaporder__links">
+      <a href="#" target="_blank" rel="noopener noreferrer" data-lcdp-recaporder-reglement-club>
+        Règlement du club
+      </a>
+      <a href="#" target="_blank" rel="noopener noreferrer" data-lcdp-recaporder-reglement-application>
+        Règlement de l'application
+      </a>
+    </div>
+
+    <p class="lcdp-box-card-recaporder__message" data-lcdp-recaporder-message hidden></p>
+
+    <div class="lcdp-box-card-recaporder__actions">
+      <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-recaporder-back>
+        Précédent
+      </button>
+      <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-recaporder-cancel>
+        Annuler
+      </button>
+      <button class="lcdp-button lcdp-button-primary" type="button" data-lcdp-recaporder-pay>
+        Payer
+      </button>
+    </div>
+  </section>
+</div>

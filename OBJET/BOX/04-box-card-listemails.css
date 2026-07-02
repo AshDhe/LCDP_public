@@ -1,0 +1,45 @@
+.lcdp-box-card-listemails-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-card-listemails-item__input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+}
+
+.lcdp-box-card-listemails-item__input[readonly] {
+  background: transparent;
+  border-color: transparent;
+  font-weight: 700;
+}
+
+.lcdp-box-card-listemails-item__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lcdp-space-2);
+  justify-content: flex-end;
+}
+
+.lcdp-box-card-listemails-item__actions .lcdp-button {
+  margin-top: 0;
+  min-width: 120px;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-listemails-item {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}

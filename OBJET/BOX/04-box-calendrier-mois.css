@@ -171,3 +171,46 @@
     font-size: 0.95rem;
   }
 }
+
+.lcdp-box-calendrier-mois__day {
+  min-height: 54px;
+  padding: 6px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lcdp-box-calendrier-mois__day:hover:not(:disabled),
+.lcdp-box-calendrier-mois__day[aria-pressed="true"] {
+  border-color: var(--lcdp-color-border-strong);
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-calendrier-mois__day:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.lcdp-box-calendrier-mois__day--empty {
+  border-color: transparent;
+  background: transparent;
+  cursor: default;
+}
+
+.lcdp-box-calendrier-mois__footer-actions {
+  margin-top: var(--lcdp-space-4);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+  justify-items: center;
+}
+
+.lcdp-box-calendrier-mois__footer-actions .lcdp-button {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 0;
+}
