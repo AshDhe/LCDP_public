@@ -1,23 +1,113 @@
-/* Spécificités visuelles du tunnel abonnement membre.
-   Ne modifie pas les composants génériques : les règles ne s'appliquent
-   qu'aux boxes auxquelles abonnement-membre.js ajoute .lcdp-workflow-abonnement-box. */
+/* Coque visuelle du tunnel abonnement membre.
+   Ce fichier n'altère pas les composants génériques : il les encapsule
+   uniquement quand ils sont injectés dans 04-box-workflow-abonnement.html. */
 
-.lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__card,
-.lcdp-workflow-abonnement-box .lcdp-box-dialogue-champ-inviter__card,
-.lcdp-workflow-abonnement-box .lcdp-box-card-listemails__card,
-.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__card,
-.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__card,
-.lcdp-workflow-abonnement-box .lcdp-box-card-recaporder__card {
-  animation: lcdp-workflow-abonnement-enter 160ms ease-out both;
+.lcdp-box-workflow-abonnement {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.46);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lcdp-box-workflow-abonnement__card {
+  position: relative;
+  width: min(100%, 560px);
+  min-height: 300px;
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow: auto;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  transition:
+    width 180ms ease,
+    min-height 180ms ease,
+    max-width 180ms ease;
+}
+
+.lcdp-box-workflow-abonnement--emails-famille .lcdp-box-workflow-abonnement__card,
+.lcdp-box-workflow-abonnement--calendrier-an .lcdp-box-workflow-abonnement__card,
+.lcdp-box-workflow-abonnement--calendrier-mois .lcdp-box-workflow-abonnement__card,
+.lcdp-box-workflow-abonnement--recapitulatif .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 960px);
+  min-height: 420px;
+}
+
+.lcdp-box-workflow-abonnement--paiement .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 680px);
+  min-height: 360px;
+}
+
+
+.lcdp-box-workflow-abonnement__content {
+  width: 100%;
+  padding-top: 0;
+}
+
+/* Neutralisation locale des enveloppes génériques quand elles sont utilisées
+   comme contenu interne du tunnel abonnement. */
+
+.lcdp-box-workflow-abonnement__content > .lcdp-box-dialogue-bouton,
+.lcdp-box-workflow-abonnement__content > .lcdp-box-dialogue-champ-inviter,
+.lcdp-box-workflow-abonnement__content > .lcdp-box-card-listemails,
+.lcdp-box-workflow-abonnement__content > .lcdp-box-calendrier-an,
+.lcdp-box-workflow-abonnement__content > .lcdp-box-calendrier-mois,
+.lcdp-box-workflow-abonnement__content > .lcdp-box-card-recaporder {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  display: block;
+}
+
+.lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__card,
+.lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-champ-inviter__card,
+.lcdp-box-workflow-abonnement__content .lcdp-box-card-listemails__card,
+.lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-an__card,
+.lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-mois__card,
+.lcdp-box-workflow-abonnement__content .lcdp-box-card-recaporder__card {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+
+
+/* Les croix restent celles des composants injectés.
+   La coque abonnement ne fournit pas de croix propre. */
+
+.lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__close,
+.lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-champ-inviter__close,
+.lcdp-box-workflow-abonnement__content .lcdp-box-card-listemails__close,
+.lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-an__close,
+.lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-mois__close,
+.lcdp-box-workflow-abonnement__content .lcdp-box-card-recaporder__close {
+  display: inline-flex;
+}
+
+.lcdp-workflow-abonnement-box {
+  animation: lcdp-workflow-abonnement-enter 170ms ease-out both;
   will-change: opacity, transform;
 }
 
-.lcdp-workflow-abonnement-box--sortie .lcdp-box-dialogue-bouton__card,
-.lcdp-workflow-abonnement-box--sortie .lcdp-box-dialogue-champ-inviter__card,
-.lcdp-workflow-abonnement-box--sortie .lcdp-box-card-listemails__card,
-.lcdp-workflow-abonnement-box--sortie .lcdp-box-calendrier-an__card,
-.lcdp-workflow-abonnement-box--sortie .lcdp-box-calendrier-mois__card,
-.lcdp-workflow-abonnement-box--sortie .lcdp-box-card-recaporder__card {
+.lcdp-workflow-abonnement-box--sortie {
   animation: lcdp-workflow-abonnement-exit 120ms ease-in both;
 }
 
@@ -117,40 +207,43 @@
 @keyframes lcdp-workflow-abonnement-enter {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.985);
+    transform: translateY(8px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 @keyframes lcdp-workflow-abonnement-exit {
   from {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 
   to {
     opacity: 0;
-    transform: translateY(-6px) scale(0.985);
+    transform: translateY(-6px);
+  }
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-workflow-abonnement {
+    padding: var(--lcdp-space-4);
+  }
+
+  .lcdp-box-workflow-abonnement__card {
+    max-height: calc(100vh - (var(--lcdp-space-4) * 2));
+    padding: var(--lcdp-space-5);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__card,
-  .lcdp-workflow-abonnement-box .lcdp-box-dialogue-champ-inviter__card,
-  .lcdp-workflow-abonnement-box .lcdp-box-card-listemails__card,
-  .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__card,
-  .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__card,
-  .lcdp-workflow-abonnement-box .lcdp-box-card-recaporder__card,
-  .lcdp-workflow-abonnement-box--sortie .lcdp-box-dialogue-bouton__card,
-  .lcdp-workflow-abonnement-box--sortie .lcdp-box-dialogue-champ-inviter__card,
-  .lcdp-workflow-abonnement-box--sortie .lcdp-box-card-listemails__card,
-  .lcdp-workflow-abonnement-box--sortie .lcdp-box-calendrier-an__card,
-  .lcdp-workflow-abonnement-box--sortie .lcdp-box-calendrier-mois__card,
-  .lcdp-workflow-abonnement-box--sortie .lcdp-box-card-recaporder__card {
+  .lcdp-box-workflow-abonnement__card,
+  .lcdp-workflow-abonnement-box,
+  .lcdp-workflow-abonnement-box--sortie {
+    transition: none;
     animation: none;
   }
 }
