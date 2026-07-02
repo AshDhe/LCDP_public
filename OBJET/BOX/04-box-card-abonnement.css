@@ -1,0 +1,99 @@
+.lcdp-box-card-abonnement {
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
+}
+
+.lcdp-box-card-abonnement--passe {
+  opacity: 0.72;
+}
+
+.lcdp-box-card-abonnement__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+  width: 100%;
+}
+
+.lcdp-box-card-abonnement__row--links {
+  padding-top: var(--lcdp-space-1);
+  border-top: 1px solid var(--lcdp-color-border);
+}
+
+.lcdp-box-card-abonnement__item {
+  margin: 0;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-card-abonnement__label {
+  font-weight: 700;
+}
+
+.lcdp-box-card-abonnement__value {
+  font-weight: 700;
+}
+
+.lcdp-box-card-abonnement__suffix {
+  color: var(--lcdp-color-text-muted);
+}
+
+.lcdp-box-card-abonnement__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-card-abonnement__micro-action {
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: 999px;
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  cursor: pointer;
+}
+
+.lcdp-box-card-abonnement__micro-action:hover {
+  border-color: var(--lcdp-color-border-strong);
+  background: var(--lcdp-color-surface-soft);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-abonnement {
+    width: min(100%, 760px);
+    padding: var(--lcdp-space-4);
+  }
+
+  .lcdp-box-card-abonnement__row {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--lcdp-space-3);
+  }
+
+  .lcdp-box-card-abonnement__item {
+    flex: 1;
+  }
+
+  .lcdp-box-card-abonnement__actions {
+    justify-content: flex-end;
+    min-width: 170px;
+  }
+
+  .lcdp-box-card-abonnement__row--links {
+    align-items: center;
+  }
+}

@@ -1,0 +1,38 @@
+<div class="lcdp-box-facture" data-lcdp-box-facture role="dialog" aria-modal="true" aria-labelledby="lcdp-box-facture-title">
+  <section class="lcdp-box-facture__panel">
+    <button class="lcdp-box-facture__close" type="button" aria-label="Fermer" data-lcdp-facture-close>×</button>
+
+    <h2 class="lcdp-box-facture__title" id="lcdp-box-facture-title">Facture</h2>
+
+    <dl class="lcdp-box-facture__list">
+      <div class="lcdp-box-facture__row">
+        <dt>Commande n°</dt>
+        <dd data-lcdp-facture-orderid></dd>
+      </div>
+
+      <div class="lcdp-box-facture__row">
+        <dt>Date de commande</dt>
+        <dd data-lcdp-facture-orderdate></dd>
+      </div>
+
+      <div class="lcdp-box-facture__row">
+        <dt>Montant HT</dt>
+        <dd data-lcdp-facture-ht></dd>
+      </div>
+
+      <div class="lcdp-box-facture__row">
+        <dt>TVA</dt>
+        <dd data-lcdp-facture-tva></dd>
+      </div>
+
+      <div class="lcdp-box-facture__row lcdp-box-facture__row--total">
+        <dt>Montant TTC</dt>
+        <dd data-lcdp-facture-ttc></dd>
+      </div>
+    </dl>
+
+    <div class="lcdp-box-facture__actions">
+      <button class="lcdp-button lcdp-button-primary" type="button" data-lcdp-facture-ok>Fermer</button>
+    </div>
+  </section>
+</div>
