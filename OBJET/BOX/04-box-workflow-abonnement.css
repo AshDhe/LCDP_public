@@ -1,6 +1,6 @@
 /* Coque visuelle du tunnel abonnement membre.
-   Ce fichier n'altère pas les composants génériques : il les encapsule
-   uniquement quand ils sont injectés dans 04-box-workflow-abonnement.html. */
+   Ce fichier isole les spécificités du workflow abonnement sans modifier
+   les CSS génériques des composants injectés. */
 
 .lcdp-box-workflow-abonnement {
   position: fixed;
@@ -18,7 +18,6 @@
 .lcdp-box-workflow-abonnement__card {
   position: relative;
   width: min(100%, 560px);
-  min-height: 300px;
   max-height: calc(100vh - (var(--lcdp-space-3) * 2));
   overflow: auto;
   padding: var(--lcdp-space-4);
@@ -26,33 +25,26 @@
   border-radius: var(--lcdp-radius-large);
   background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
-  transition:
-    width 180ms ease,
-    min-height 180ms ease,
-    max-width 180ms ease;
+  transition: width 180ms ease, max-width 180ms ease;
 }
 
 .lcdp-box-workflow-abonnement--emails-famille .lcdp-box-workflow-abonnement__card,
-.lcdp-box-workflow-abonnement--calendrier-an .lcdp-box-workflow-abonnement__card,
-.lcdp-box-workflow-abonnement--calendrier-mois .lcdp-box-workflow-abonnement__card,
-.lcdp-box-workflow-abonnement--recapitulatif .lcdp-box-workflow-abonnement__card {
-  width: min(100%, 960px);
-  min-height: 420px;
+.lcdp-box-workflow-abonnement--calendrier-mois .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 900px);
 }
 
+.lcdp-box-workflow-abonnement--calendrier-an .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 820px);
+}
+
+.lcdp-box-workflow-abonnement--recapitulatif .lcdp-box-workflow-abonnement__card,
 .lcdp-box-workflow-abonnement--paiement .lcdp-box-workflow-abonnement__card {
-  width: min(100%, 680px);
-  min-height: 360px;
+  width: min(100%, 760px);
 }
-
 
 .lcdp-box-workflow-abonnement__content {
   width: 100%;
-  padding-top: 0;
 }
-
-/* Neutralisation locale des enveloppes génériques quand elles sont utilisées
-   comme contenu interne du tunnel abonnement. */
 
 .lcdp-box-workflow-abonnement__content > .lcdp-box-dialogue-bouton,
 .lcdp-box-workflow-abonnement__content > .lcdp-box-dialogue-champ-inviter,
@@ -88,34 +80,43 @@
   box-shadow: none;
 }
 
-
-
-/* Les croix restent celles des composants injectés.
-   La coque abonnement ne fournit pas de croix propre. */
-
-.lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__close,
-.lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-champ-inviter__close,
-.lcdp-box-workflow-abonnement__content .lcdp-box-card-listemails__close,
-.lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-an__close,
-.lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-mois__close,
-.lcdp-box-workflow-abonnement__content .lcdp-box-card-recaporder__close {
-  display: inline-flex;
-}
-
 .lcdp-workflow-abonnement-box {
   animation: lcdp-workflow-abonnement-enter 170ms ease-out both;
   will-change: opacity, transform;
 }
 
 .lcdp-workflow-abonnement-box--sortie {
-  animation: lcdp-workflow-abonnement-exit 120ms ease-in both;
+  animation: lcdp-workflow-abonnement-exit 110ms ease-in both;
 }
 
 .lcdp-workflow-abonnement-box .lcdp-button:disabled,
-.lcdp-workflow-abonnement-box .lcdp-button[aria-disabled="true"] {
+.lcdp-workflow-abonnement-box .lcdp-button[aria-disabled="true"],
+.lcdp-workflow-abonnement-alerte .lcdp-button:disabled,
+.lcdp-workflow-abonnement-alerte .lcdp-button[aria-disabled="true"] {
   opacity: 0.48;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+.lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__text {
+  color: var(--lcdp-color-text-muted);
+  font-size: clamp(1.05rem, 3vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.lcdp-workflow-abonnement-box .lcdp-box-dialogue-champ-inviter__title,
+.lcdp-workflow-abonnement-box .lcdp-box-card-listemails__title,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__title,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__title,
+.lcdp-workflow-abonnement-box .lcdp-box-card-recaporder__title {
+  font-size: clamp(1.45rem, 5vw, 2rem);
+  line-height: 1.12;
+  font-weight: 700;
+}
+
+.lcdp-workflow-abonnement-box--recapitulatif .lcdp-box-card-recaporder__title {
+  text-transform: uppercase;
 }
 
 .lcdp-workflow-abonnement__dialogue-actions {
@@ -134,6 +135,15 @@
   width: 100%;
   max-width: 320px;
   margin-top: 0;
+}
+
+.lcdp-workflow-abonnement__choice-zone .lcdp-button[aria-pressed="true"],
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month[aria-pressed="true"],
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day[aria-pressed="true"] {
+  border-color: var(--lcdp-color-orange);
+  background: var(--lcdp-color-orange);
+  color: var(--lcdp-color-text);
+  box-shadow: inset 0 0 0 2px var(--lcdp-color-orange-hover);
 }
 
 .lcdp-workflow-abonnement__actions-row {
@@ -204,10 +214,29 @@
   grid-column: 1 / -1;
 }
 
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__actions,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__actions {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__actions .lcdp-button,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__actions .lcdp-button {
+  width: 100%;
+  max-width: none;
+  margin-top: 0;
+}
+
+.lcdp-workflow-abonnement-alerte [data-lcdp-box-alerte] .lcdp-button,
+.lcdp-workflow-abonnement-alerte [data-lcdp-alerte-ok] {
+  margin-inline: auto;
+}
+
 @keyframes lcdp-workflow-abonnement-enter {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
 
   to {
@@ -224,7 +253,7 @@
 
   to {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateY(-4px);
   }
 }
 
@@ -246,4 +275,17 @@
     transition: none;
     animation: none;
   }
+}
+
+.lcdp-workflow-abonnement-alerte [data-lcdp-alerte-actions],
+.lcdp-workflow-abonnement-alerte .lcdp-box-alerte__actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.lcdp-workflow-abonnement-alerte [data-lcdp-alerte-ok] {
+  width: 100%;
+  max-width: 320px;
+  margin-inline: auto;
 }
