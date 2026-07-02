@@ -114,6 +114,10 @@
   text-align: left;
 }
 
+.lcdp-box-champ-formulaire__aide {
+  margin-top: var(--lcdp-space-1);
+}
+
 @media (min-width: 768px) {
   .lcdp-box-champ-formulaire__label,
   .lcdp-box-champ-formulaire__heading {
