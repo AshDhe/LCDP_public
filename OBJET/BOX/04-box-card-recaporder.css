@@ -147,9 +147,15 @@
   text-align: left;
 }
 
-.lcdp-workflow-paiement__option:has(input:checked) {
-  border-color: var(--lcdp-color-orange);
-  background: var(--lcdp-color-orange);
+.lcdp-workflow-paiement__option:has(input:checked),
+.lcdp-workflow-paiement__option--selected {
+  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-surface);
+  box-shadow: inset 0 0 0 2px rgba(85, 115, 63, 0.18);
+}
+
+.lcdp-workflow-paiement__option--disabled {
+  opacity: 0.52;
 }
 
 .lcdp-workflow-paiement__option small {
@@ -168,8 +174,10 @@
   grid-template-columns: auto 1fr;
   gap: var(--lcdp-space-2);
   align-items: start;
-  color: var(--lcdp-color-text);
-  font-weight: 700;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.35;
   text-align: left;
 }
 
