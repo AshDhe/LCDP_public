@@ -1,0 +1,21 @@
+.lcdp-box-card-mentions-facture {
+  border: 1px solid rgba(31, 44, 36, 0.17);
+  border-radius: 0.9rem;
+  background: #fff;
+  padding: 0.75rem 0.9rem;
+  color: rgba(31, 44, 36, 0.76);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.lcdp-box-card-mentions-facture p {
+  margin: 0;
+}
+
+@media print {
+  .lcdp-box-card-mentions-facture {
+    padding: 3mm;
+    font-size: 8pt;
+    break-inside: avoid;
+  }
+}

@@ -1,0 +1,48 @@
+.lcdp-box-card-coordonnees-facture {
+  border: 1px solid rgba(31, 44, 36, 0.17);
+  border-radius: 0.95rem;
+  background: #fff;
+  padding: 0.9rem;
+}
+
+.lcdp-box-card-coordonnees-facture__title {
+  margin: 0 0 0.55rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #567a41;
+}
+
+.lcdp-box-card-coordonnees-facture__name {
+  margin: 0 0 0.35rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.lcdp-box-card-coordonnees-facture__lines {
+  display: grid;
+  gap: 0.12rem;
+  margin: 0;
+  color: rgba(31, 44, 36, 0.76);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+@media print {
+  .lcdp-box-card-coordonnees-facture {
+    padding: 4mm;
+    break-inside: avoid;
+  }
+
+  .lcdp-box-card-coordonnees-facture__title {
+    font-size: 10pt;
+    margin-bottom: 3mm;
+  }
+
+  .lcdp-box-card-coordonnees-facture__name {
+    font-size: 10.5pt;
+  }
+
+  .lcdp-box-card-coordonnees-facture__lines {
+    font-size: 8.5pt;
+  }
+}
