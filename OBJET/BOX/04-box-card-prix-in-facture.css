@@ -53,24 +53,38 @@
 
 @media print {
   .lcdp-box-card-prix-in-facture {
-    padding: 3mm;
-    break-inside: avoid;
+    padding: 2mm !important;
+    border-radius: 2.5mm !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
   .lcdp-box-card-prix-in-facture__title {
-    font-size: 10pt;
-    margin-bottom: 2mm;
+    font-size: 8.6pt !important;
+    margin-bottom: 1.4mm !important;
   }
 
   .lcdp-box-card-prix-in-facture__row {
-    gap: 3mm;
-    padding: 1.6mm 0;
+    gap: 2mm !important;
+    padding: 1.05mm 0 !important;
+    border-bottom: 0.25pt solid rgba(31, 44, 36, 0.12) !important;
+  }
+
+  .lcdp-box-card-prix-in-facture__list--total {
+    margin-top: 1.3mm !important;
+    padding-top: 1.2mm !important;
+    border-top: 0.5pt solid rgba(31, 44, 36, 0.2) !important;
   }
 
   .lcdp-box-card-prix-in-facture__row dt,
   .lcdp-box-card-prix-in-facture__row span,
   .lcdp-box-card-prix-in-facture__row dd,
   .lcdp-box-card-prix-in-facture__row strong {
-    font-size: 8.6pt;
+    font-size: 7.25pt !important;
+    line-height: 1.1 !important;
+  }
+
+  .lcdp-box-card-prix-in-facture__row--total dd {
+    font-size: 8pt !important;
   }
 }

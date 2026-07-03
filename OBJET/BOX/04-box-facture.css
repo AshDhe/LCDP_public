@@ -92,36 +92,73 @@
 
 @page {
   size: A4;
-  margin: 8mm;
+  margin: 6mm;
 }
 
 @media print {
-  body.lcdp-print-facture-active * {
-    visibility: hidden !important;
+  html,
+  body {
+    width: 210mm !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
   }
 
-  body.lcdp-print-facture-active .lcdp-box-facture,
-  body.lcdp-print-facture-active .lcdp-box-facture * {
+  body.lcdp-print-facture-active {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.lcdp-print-facture-active > *:not(#lcdp-lightbox-slot) {
+    display: none !important;
+  }
+
+  body.lcdp-print-facture-active #lcdp-lightbox-slot {
+    display: block !important;
+    position: static !important;
+    inset: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  body.lcdp-print-facture-active #lcdp-lightbox-slot,
+  body.lcdp-print-facture-active #lcdp-lightbox-slot * {
     visibility: visible !important;
   }
 
   body.lcdp-print-facture-active .lcdp-box-facture {
-    position: absolute;
-    inset: 0;
-    display: block;
-    padding: 0;
-    background: #fff;
-    backdrop-filter: none;
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+    backdrop-filter: none !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
   }
 
   body.lcdp-print-facture-active .lcdp-box-facture__card {
-    width: 100%;
-    max-width: none;
-    max-height: none;
-    overflow: visible;
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none;
+    width: 198mm !important;
+    max-width: 198mm !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #fff !important;
   }
 
   body.lcdp-print-facture-active .lcdp-no-print,
@@ -130,17 +167,40 @@
     display: none !important;
   }
 
+  body.lcdp-print-facture-active .lcdp-box-facture__print-zone {
+    width: 100% !important;
+    max-width: 198mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 7.4pt !important;
+    line-height: 1.2 !important;
+    color: #1f2c24 !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  body.lcdp-print-facture-active .lcdp-box-facture__header {
+    margin: 0 0 3mm !important;
+    padding: 0 0 2.2mm !important;
+    border-bottom: 0.3pt solid rgba(31, 44, 36, 0.18) !important;
+  }
+
   body.lcdp-print-facture-active .lcdp-box-facture__title {
-    font-size: 24pt;
+    font-size: 19pt !important;
+    line-height: 0.95 !important;
+    letter-spacing: 0.01em !important;
   }
 
   body.lcdp-print-facture-active .lcdp-box-facture__date {
-    font-size: 9.5pt;
+    margin-top: 2mm !important;
+    font-size: 8.2pt !important;
   }
 
   body.lcdp-print-facture-active .lcdp-box-facture__coordonnees {
-    grid-template-columns: 1fr 1fr;
-    gap: 5mm;
-    margin-bottom: 5mm;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 3mm !important;
+    margin: 0 0 3mm !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 }

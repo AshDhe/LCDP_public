@@ -28,15 +28,17 @@
 
 @media print {
   .lcdp-box-card-facture {
-    gap: 4mm;
-    padding: 4mm;
-    margin-bottom: 4mm;
-    break-inside: avoid;
+    gap: 2.4mm !important;
+    padding: 2.8mm !important;
+    margin: 0 0 2.5mm !important;
+    border-radius: 3mm !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
   .lcdp-box-card-facture__bottom {
-    grid-template-columns: 1fr 0.92fr;
-    gap: 5mm;
-    align-items: start;
+    grid-template-columns: 0.95fr 1.05fr !important;
+    gap: 3mm !important;
+    align-items: start !important;
   }
 }

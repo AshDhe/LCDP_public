@@ -29,20 +29,26 @@
 
 @media print {
   .lcdp-box-card-coordonnees-facture {
-    padding: 4mm;
-    break-inside: avoid;
+    padding: 2.5mm !important;
+    border-radius: 2.5mm !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
   .lcdp-box-card-coordonnees-facture__title {
-    font-size: 10pt;
-    margin-bottom: 3mm;
+    font-size: 8.5pt !important;
+    margin-bottom: 1.6mm !important;
   }
 
   .lcdp-box-card-coordonnees-facture__name {
-    font-size: 10.5pt;
+    margin-bottom: 1.2mm !important;
+    font-size: 9pt !important;
+    line-height: 1.1 !important;
   }
 
   .lcdp-box-card-coordonnees-facture__lines {
-    font-size: 8.5pt;
+    gap: 0.6mm !important;
+    font-size: 7.6pt !important;
+    line-height: 1.16 !important;
   }
 }
