@@ -87,6 +87,51 @@
   border-radius: 0;
   background: transparent;
   box-shadow: none;
+  position: static;
+}
+
+/* Croix de fermeture : dans le workflow, les composants sont injectés dans
+   une coque commune. On sort donc les croix du contenu utile de chaque box
+   pour éviter qu'elles rognent sur les titres ou les boutons en mobile. */
+.lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__close,
+.lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-champ-inviter__close,
+.lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-an__close,
+.lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-mois__close {
+  position: absolute;
+  inset: auto var(--lcdp-space-2) auto auto;
+  top: var(--lcdp-space-4);
+  z-index: 6;
+  float: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  margin: 0;
+  padding: 0;
+  border-radius: 999px;
+  line-height: 1;
+}
+
+/* Même règle explicitement rappelée pour la box Paiement : la croix reste
+   dans la coque workflow, mais hors de la zone utile du contenu. */
+.lcdp-box-workflow-abonnement--paiement .lcdp-box-dialogue-bouton__close {
+  position: absolute;
+  top: var(--lcdp-space-4);
+  right: var(--lcdp-space-2);
+}
+
+.lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__title,
+.lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__text,
+.lcdp-workflow-abonnement-box .lcdp-box-dialogue-champ-inviter__title,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__title,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__meta,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__title,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__meta {
+  padding-inline: 42px;
+  box-sizing: border-box;
 }
 
 .lcdp-workflow-abonnement-box {
@@ -319,6 +364,39 @@
   .lcdp-box-workflow-abonnement__card {
     max-height: calc(100vh - (var(--lcdp-space-4) * 2));
     padding: var(--lcdp-space-5);
+  }
+
+  .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__close,
+  .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-champ-inviter__close,
+  .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-an__close,
+  .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-mois__close {
+    top: var(--lcdp-space-5);
+    right: var(--lcdp-space-3);
+  }
+}
+
+@media (max-width: 420px) {
+  .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__close,
+  .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-champ-inviter__close,
+  .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-an__close,
+  .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-mois__close {
+    top: var(--lcdp-space-3);
+    right: var(--lcdp-space-2);
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    font-size: 1.45rem;
+  }
+
+  .lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__title,
+  .lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__text,
+  .lcdp-workflow-abonnement-box .lcdp-box-dialogue-champ-inviter__title,
+  .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__title,
+  .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__meta,
+  .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__title,
+  .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__meta {
+    padding-inline: 36px;
   }
 }
 
