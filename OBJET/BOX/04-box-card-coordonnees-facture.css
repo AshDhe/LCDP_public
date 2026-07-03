@@ -1,54 +1,58 @@
 .lcdp-box-card-coordonnees-facture {
-  border: 1px solid rgba(31, 44, 36, 0.17);
-  border-radius: 0.95rem;
+  border: 1px solid rgba(31, 44, 36, 0.16);
+  border-radius: 0.8rem;
   background: #fff;
-  padding: 0.9rem;
+  padding: 0.78rem;
 }
 
 .lcdp-box-card-coordonnees-facture__title {
-  margin: 0 0 0.55rem;
-  font-size: 1rem;
-  font-weight: 800;
+  margin: 0 0 0.45rem;
+  font-size: 0.96rem;
+  font-weight: 650;
   color: #567a41;
 }
 
 .lcdp-box-card-coordonnees-facture__name {
-  margin: 0 0 0.35rem;
-  font-weight: 800;
-  line-height: 1.25;
+  margin: 0 0 0.3rem;
+  font-weight: 650;
+  line-height: 1.22;
 }
 
 .lcdp-box-card-coordonnees-facture__lines {
   display: grid;
-  gap: 0.12rem;
+  gap: 0.08rem;
   margin: 0;
-  color: rgba(31, 44, 36, 0.76);
-  font-size: 0.92rem;
-  line-height: 1.35;
+  color: rgba(31, 44, 36, 0.74);
+  font-size: 0.9rem;
+  line-height: 1.3;
 }
 
 @media print {
   .lcdp-box-card-coordonnees-facture {
-    padding: 2.5mm !important;
-    border-radius: 2.5mm !important;
-    break-inside: avoid !important;
+    padding: 1.8mm 2mm !important;
+    border-radius: 2mm !important;
+    border-width: 0.35pt !important;
     page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   .lcdp-box-card-coordonnees-facture__title {
-    font-size: 8.5pt !important;
-    margin-bottom: 1.6mm !important;
+    font-size: 7.5pt !important;
+    font-weight: 650 !important;
+    margin-bottom: 1mm !important;
+    line-height: 1.05 !important;
   }
 
   .lcdp-box-card-coordonnees-facture__name {
-    margin-bottom: 1.2mm !important;
-    font-size: 9pt !important;
-    line-height: 1.1 !important;
+    margin-bottom: 0.8mm !important;
+    font-size: 7.8pt !important;
+    font-weight: 620 !important;
+    line-height: 1.08 !important;
   }
 
   .lcdp-box-card-coordonnees-facture__lines {
-    gap: 0.6mm !important;
-    font-size: 7.6pt !important;
-    line-height: 1.16 !important;
+    gap: 0.35mm !important;
+    font-size: 6.6pt !important;
+    line-height: 1.08 !important;
   }
 }

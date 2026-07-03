@@ -12,13 +12,13 @@
 
 .lcdp-box-facture__card {
   position: relative;
-  width: min(100%, 58rem);
+  width: min(100%, 56rem);
   max-height: calc(100vh - 1.7rem);
   overflow: auto;
   background: #fff;
-  border-radius: 1.35rem;
+  border-radius: 1.1rem;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.22);
-  padding: 1.15rem;
+  padding: 1.1rem;
 }
 
 .lcdp-box-facture__close {
@@ -26,15 +26,15 @@
   top: 0;
   float: right;
   z-index: 5;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.35rem;
+  height: 2.35rem;
   margin: 0 0 0.25rem 0.5rem;
   border: 0;
   border-radius: 999px;
   background: rgba(245, 247, 244, 0.96);
   color: #1f2c24;
-  font-size: 1.85rem;
-  font-weight: 800;
+  font-size: 1.6rem;
+  font-weight: 650;
   line-height: 1;
   cursor: pointer;
 }
@@ -44,45 +44,49 @@
 }
 
 .lcdp-box-facture__header {
-  padding-right: 3.25rem;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.65rem;
-  border-bottom: 1px solid rgba(31, 44, 36, 0.17);
+  padding-right: 3rem;
+  margin-bottom: 0.7rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(31, 44, 36, 0.16);
 }
 
 .lcdp-box-facture__title {
   margin: 0;
-  font-size: clamp(2rem, 6vw, 3rem);
+  font-size: clamp(1.75rem, 5vw, 2.45rem);
   line-height: 1;
-  font-weight: 850;
-  letter-spacing: 0.02em;
+  font-weight: 720;
+  letter-spacing: 0.025em;
 }
 
 .lcdp-box-facture__date {
-  margin: 0.55rem 0 0;
-  color: rgba(31, 44, 36, 0.76);
-  font-size: 0.98rem;
+  margin: 0.45rem 0 0;
+  color: rgba(31, 44, 36, 0.72);
+  font-size: 0.94rem;
+}
+
+.lcdp-box-facture__date strong {
+  font-weight: 620;
 }
 
 .lcdp-box-facture__coordonnees {
   display: grid;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
+  gap: 0.65rem;
+  margin-bottom: 0.65rem;
 }
 
 .lcdp-box-facture__actions {
   display: flex;
   justify-content: center;
-  margin-top: 0.85rem;
+  margin-top: 0.75rem;
 }
 
 .lcdp-box-facture__actions .lcdp-button {
-  min-width: min(100%, 17rem);
+  min-width: min(100%, 16rem);
 }
 
 @media (min-width: 720px) {
   .lcdp-box-facture__card {
-    padding: 1.5rem;
+    padding: 1.35rem;
   }
 
   .lcdp-box-facture__coordonnees {
@@ -91,7 +95,7 @@
 }
 
 @page {
-  size: A4;
+  size: A4 portrait;
   margin: 6mm;
 }
 
@@ -99,21 +103,25 @@
   html,
   body {
     width: 210mm !important;
+    height: 297mm !important;
     min-height: 0 !important;
-    height: auto !important;
-    overflow: visible !important;
+    max-height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
     background: #fff !important;
   }
 
   body.lcdp-print-facture-active {
     margin: 0 !important;
     padding: 0 !important;
+    height: 297mm !important;
+    min-height: 0 !important;
+    max-height: 297mm !important;
+    overflow: hidden !important;
   }
 
-  body.lcdp-print-facture-active > *:not(#lcdp-lightbox-slot) {
-    display: none !important;
-  }
-
+  body.lcdp-print-facture-active .lcdp-site-page,
   body.lcdp-print-facture-active #lcdp-lightbox-slot {
     display: block !important;
     position: static !important;
@@ -121,29 +129,36 @@
     width: auto !important;
     height: auto !important;
     min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
     overflow: visible !important;
     background: #fff !important;
   }
 
-  body.lcdp-print-facture-active #lcdp-lightbox-slot,
-  body.lcdp-print-facture-active #lcdp-lightbox-slot * {
-    visibility: visible !important;
+  body.lcdp-print-facture-active .lcdp-site-page > *:not(#lcdp-lightbox-slot),
+  body.lcdp-print-facture-active #lcdp-bandeau-slot,
+  body.lcdp-print-facture-active #lcdp-footer-slot,
+  body.lcdp-print-facture-active .lcdp-site-main {
+    display: none !important;
   }
 
   body.lcdp-print-facture-active .lcdp-box-facture {
     position: static !important;
     inset: auto !important;
     display: block !important;
-    width: 100% !important;
+    width: 198mm !important;
     height: auto !important;
     min-height: 0 !important;
-    max-height: none !important;
-    margin: 0 !important;
+    max-height: 285mm !important;
+    margin: 0 auto !important;
     padding: 0 !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     background: #fff !important;
     backdrop-filter: none !important;
+    page-break-before: avoid !important;
     page-break-after: avoid !important;
+    break-before: avoid !important;
     break-after: avoid !important;
   }
 
@@ -152,13 +167,17 @@
     max-width: 198mm !important;
     height: auto !important;
     min-height: 0 !important;
-    max-height: none !important;
-    overflow: visible !important;
+    max-height: 285mm !important;
+    overflow: hidden !important;
     margin: 0 auto !important;
     padding: 0 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     background: #fff !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+    break-before: avoid !important;
+    break-after: avoid !important;
   }
 
   body.lcdp-print-facture-active .lcdp-no-print,
@@ -168,39 +187,47 @@
   }
 
   body.lcdp-print-facture-active .lcdp-box-facture__print-zone {
-    width: 100% !important;
+    width: 198mm !important;
     max-width: 198mm !important;
+    max-height: 283mm !important;
     margin: 0 !important;
     padding: 0 !important;
-    font-size: 7.4pt !important;
-    line-height: 1.2 !important;
+    overflow: hidden !important;
+    font-size: 7.1pt !important;
+    line-height: 1.12 !important;
     color: #1f2c24 !important;
+    page-break-before: avoid !important;
     page-break-after: avoid !important;
+    break-before: avoid !important;
     break-after: avoid !important;
   }
 
   body.lcdp-print-facture-active .lcdp-box-facture__header {
-    margin: 0 0 3mm !important;
-    padding: 0 0 2.2mm !important;
-    border-bottom: 0.3pt solid rgba(31, 44, 36, 0.18) !important;
+    margin: 0 0 2.4mm !important;
+    padding: 0 0 1.8mm !important;
+    border-bottom: 0.25pt solid rgba(31, 44, 36, 0.18) !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   body.lcdp-print-facture-active .lcdp-box-facture__title {
-    font-size: 19pt !important;
+    font-size: 16pt !important;
     line-height: 0.95 !important;
-    letter-spacing: 0.01em !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
   }
 
   body.lcdp-print-facture-active .lcdp-box-facture__date {
-    margin-top: 2mm !important;
-    font-size: 8.2pt !important;
+    margin-top: 1.2mm !important;
+    font-size: 7.4pt !important;
+    line-height: 1.1 !important;
   }
 
   body.lcdp-print-facture-active .lcdp-box-facture__coordonnees {
     grid-template-columns: 1fr 1fr !important;
-    gap: 3mm !important;
-    margin: 0 0 3mm !important;
-    break-inside: avoid !important;
+    gap: 2.4mm !important;
+    margin: 0 0 2.4mm !important;
     page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 }
