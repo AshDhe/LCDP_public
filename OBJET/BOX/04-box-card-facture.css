@@ -1,11 +1,11 @@
 .lcdp-box-card-facture {
   display: grid;
-  gap: 0.65rem;
-  margin-bottom: 0.65rem;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
   border: 1px solid rgba(31, 44, 36, 0.16);
-  border-radius: 0.8rem;
+  border-radius: 0.85rem;
   background: #fff;
-  padding: 0.78rem;
+  padding: 0.9rem;
 }
 
 .lcdp-box-card-facture__produit,
@@ -16,30 +16,38 @@
 
 .lcdp-box-card-facture__bottom {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.8rem;
+}
+
+.lcdp-box-card-facture__section-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.98rem;
+  font-weight: 650;
+  line-height: 1.2;
+  color: #567a41;
 }
 
 @media (min-width: 760px) {
   .lcdp-box-card-facture__bottom {
-    grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.92fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: start;
   }
 }
 
 @media print {
   .lcdp-box-card-facture {
-    gap: 1.9mm !important;
-    padding: 2mm !important;
-    margin: 0 0 2mm !important;
-    border-radius: 2.2mm !important;
+    gap: 3mm !important;
+    padding: 3mm !important;
+    margin: 0 0 3mm !important;
+    border-radius: 3mm !important;
     border-width: 0.35pt !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
 
   .lcdp-box-card-facture__bottom {
-    grid-template-columns: 0.96fr 1.04fr !important;
-    gap: 2.4mm !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4mm !important;
     align-items: start !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;

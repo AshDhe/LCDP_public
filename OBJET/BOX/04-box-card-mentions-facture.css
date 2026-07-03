@@ -2,9 +2,9 @@
   border: 1px solid rgba(31, 44, 36, 0.15);
   border-radius: 0.75rem;
   background: #fff;
-  padding: 0.62rem 0.75rem;
+  padding: 0.65rem 0.8rem;
   color: rgba(31, 44, 36, 0.74);
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   line-height: 1.3;
 }
 
@@ -14,11 +14,11 @@
 
 @media print {
   .lcdp-box-card-mentions-facture {
-    padding: 1.35mm 1.7mm !important;
-    border-radius: 1.8mm !important;
+    padding: 2mm 2.4mm !important;
+    border-radius: 2.4mm !important;
     border-width: 0.3pt !important;
-    font-size: 5.9pt !important;
-    line-height: 1.08 !important;
+    font-size: 7.8pt !important;
+    line-height: 1.18 !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }

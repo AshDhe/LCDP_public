@@ -1,57 +1,62 @@
 .lcdp-box-card-paiement-in-facture {
-  border: 1px solid rgba(31, 44, 36, 0.1);
-  border-radius: 0.7rem;
-  padding: 0.65rem;
+  border: 1px solid rgba(31, 44, 36, 0.13);
+  border-radius: 0.72rem;
+  padding: 0.75rem;
   background: rgba(250, 251, 249, 0.72);
 }
 
-.lcdp-box-card-paiement-in-facture__title {
-  margin: 0 0 0.45rem;
-  font-size: 0.96rem;
+.lcdp-box-card-paiement-in-facture__title,
+.lcdp-box-card-facture__section-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.98rem;
   font-weight: 650;
+  line-height: 1.2;
   color: #567a41;
 }
 
-.lcdp-box-card-paiement-in-facture__list,
+.lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__list,
 .lcdp-box-card-paiement-in-facture__echeances {
   display: grid;
   gap: 0;
   margin: 0;
 }
 
+.lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row,
 .lcdp-box-card-paiement-in-facture__row,
 .lcdp-box-card-paiement-in-facture__rib {
   display: grid;
-  grid-template-columns: minmax(7rem, 0.46fr) 1fr;
-  gap: 0.55rem;
+  grid-template-columns: minmax(8.5rem, 0.44fr) minmax(0, 1fr);
+  gap: 0.9rem;
   align-items: baseline;
-  padding: 0.36rem 0;
+  padding: 0.38rem 0;
   border-bottom: 1px solid rgba(31, 44, 36, 0.09);
 }
 
-.lcdp-box-card-paiement-in-facture__row dt,
+.lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row dt,
 .lcdp-box-card-paiement-in-facture__row span,
 .lcdp-box-card-paiement-in-facture__rib span {
   color: rgba(31, 44, 36, 0.72);
-  font-weight: 420;
+  font-weight: 400;
 }
 
-.lcdp-box-card-paiement-in-facture__row dd,
+.lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row dd,
 .lcdp-box-card-paiement-in-facture__row strong,
 .lcdp-box-card-paiement-in-facture__rib strong {
   margin: 0;
-  font-weight: 620;
+  color: #1f2c24;
+  font-weight: 400;
   overflow-wrap: anywhere;
 }
 
 .lcdp-box-card-paiement-in-facture__rib {
-  margin-top: 0.32rem;
-  padding-top: 0.45rem;
+  margin-top: 0.38rem;
+  padding-top: 0.5rem;
   border-top: 1px solid rgba(31, 44, 36, 0.16);
   border-bottom: 0;
 }
 
 @media (max-width: 560px) {
+  .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row,
   .lcdp-box-card-paiement-in-facture__row,
   .lcdp-box-card-paiement-in-facture__rib {
     grid-template-columns: 1fr;
@@ -61,54 +66,45 @@
 
 @media print {
   .lcdp-box-card-paiement-in-facture {
-    padding: 1.5mm 1.8mm !important;
-    border-radius: 2mm !important;
-    border-width: 0.3pt !important;
+    padding: 2.4mm !important;
+    border-radius: 2.5mm !important;
+    border-width: 0.35pt !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
 
-  .lcdp-box-card-paiement-in-facture__title {
-    font-size: 7.4pt !important;
+  .lcdp-box-card-paiement-in-facture__title,
+  .lcdp-box-card-facture__section-title {
+    margin-bottom: 1.3mm !important;
+    font-size: 9pt !important;
     font-weight: 650 !important;
-    margin-bottom: 0.9mm !important;
-    line-height: 1.05 !important;
+    line-height: 1.15 !important;
   }
 
+  .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row,
   .lcdp-box-card-paiement-in-facture__row,
   .lcdp-box-card-paiement-in-facture__rib {
-    grid-template-columns: 22mm 1fr !important;
-    gap: 1.5mm !important;
-    padding: 0.75mm 0 !important;
-    border-bottom: 0.2pt solid rgba(31, 44, 36, 0.12) !important;
+    grid-template-columns: 32mm minmax(0, 1fr) !important;
+    gap: 3mm !important;
+    padding: 1.05mm 0 !important;
+    border-bottom: 0.25pt solid rgba(31, 44, 36, 0.12) !important;
   }
 
   .lcdp-box-card-paiement-in-facture__rib {
-    margin-top: 0.8mm !important;
-    padding-top: 0.9mm !important;
+    margin-top: 1.2mm !important;
+    padding-top: 1.2mm !important;
     border-top: 0.35pt solid rgba(31, 44, 36, 0.2) !important;
     border-bottom: 0 !important;
   }
 
-  .lcdp-box-card-paiement-in-facture__row dt,
+  .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row dt,
+  .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row dd,
   .lcdp-box-card-paiement-in-facture__row span,
-  .lcdp-box-card-paiement-in-facture__row dd,
   .lcdp-box-card-paiement-in-facture__row strong,
   .lcdp-box-card-paiement-in-facture__rib span,
   .lcdp-box-card-paiement-in-facture__rib strong {
-    font-size: 6.65pt !important;
-    line-height: 1.06 !important;
-  }
-
-  .lcdp-box-card-paiement-in-facture__row dt,
-  .lcdp-box-card-paiement-in-facture__row span,
-  .lcdp-box-card-paiement-in-facture__rib span {
-    font-weight: 420 !important;
-  }
-
-  .lcdp-box-card-paiement-in-facture__row dd,
-  .lcdp-box-card-paiement-in-facture__row strong,
-  .lcdp-box-card-paiement-in-facture__rib strong {
-    font-weight: 620 !important;
+    font-size: 8.6pt !important;
+    line-height: 1.2 !important;
+    font-weight: 400 !important;
   }
 }

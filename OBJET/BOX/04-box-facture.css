@@ -231,3 +231,20 @@
     break-inside: avoid !important;
   }
 }
+
+/* Facture : alignement professionnel des valeurs dans la lightbox */
+.lcdp-box-facture .lcdp-box-card-facture__row,
+.lcdp-box-facture .lcdp-box-card-prix-in-facture__row,
+.lcdp-box-facture .lcdp-box-card-paiement-in-facture__row,
+.lcdp-box-facture .lcdp-box-card-paiement-in-facture__rib {
+  align-items: baseline;
+}
+
+.lcdp-box-facture .lcdp-box-card-facture__row dd,
+.lcdp-box-facture .lcdp-box-card-facture__row strong,
+.lcdp-box-facture .lcdp-box-card-prix-in-facture__row dd,
+.lcdp-box-facture .lcdp-box-card-prix-in-facture__row strong,
+.lcdp-box-facture .lcdp-box-card-paiement-in-facture__row strong,
+.lcdp-box-facture .lcdp-box-card-paiement-in-facture__rib strong {
+  font-weight: 400;
+}

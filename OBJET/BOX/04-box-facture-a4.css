@@ -21,7 +21,7 @@
   border-radius: 0.9rem;
   background: #fff;
   box-shadow: 0 0.7rem 2rem rgba(0, 0, 0, 0.12);
-  font-weight: 650;
+  font-weight: 500;
   text-align: center;
 }
 
@@ -53,16 +53,16 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.75rem;
   align-items: end;
-  padding-bottom: 0.55rem;
-  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
   border-bottom: 1px solid rgba(31, 44, 36, 0.18);
 }
 
 .lcdp-box-facture-a4__title {
   margin: 0;
-  font-size: 2.2rem;
+  font-size: 2.25rem;
   line-height: 1;
-  font-weight: 720;
+  font-weight: 680;
   letter-spacing: 0.03em;
 }
 
@@ -74,14 +74,14 @@
 }
 
 .lcdp-box-facture-a4__date strong {
-  font-weight: 620;
+  font-weight: 500;
 }
 
 .lcdp-box-facture-a4__coordonnees {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.65rem;
-  margin-bottom: 0.75rem;
+  gap: 0.7rem;
+  margin-bottom: 0.8rem;
 }
 
 @media (min-width: 720px) {
@@ -92,18 +92,16 @@
 
 @page {
   size: A4 portrait;
-  margin: 0;
+  margin: 8mm;
 }
 
 @media print {
   html,
   body {
-    width: 210mm !important;
-    height: 297mm !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow: hidden !important;
     background: #fff !important;
+    overflow: visible !important;
   }
 
   .lcdp-no-print,
@@ -113,45 +111,46 @@
 
   .lcdp-page-facture-a4__main {
     display: block !important;
-    width: 210mm !important;
-    height: 297mm !important;
+    width: auto !important;
+    min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     background: #fff !important;
   }
 
   .lcdp-box-facture-a4 {
-    width: 210mm !important;
-    height: 297mm !important;
-    min-height: 297mm !important;
-    max-height: 297mm !important;
-    margin: 0 !important;
-    padding: 9mm 10mm 8mm !important;
+    width: 194mm !important;
+    max-width: 194mm !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
     box-shadow: none !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+    font-size: 9pt !important;
+    line-height: 1.24 !important;
     page-break-before: avoid !important;
     page-break-after: avoid !important;
     break-before: avoid !important;
     break-after: avoid !important;
-    font-size: 8.8pt !important;
-    line-height: 1.22 !important;
   }
 
   .lcdp-box-facture-a4__header {
     grid-template-columns: minmax(0, 1fr) auto !important;
     gap: 4mm !important;
     margin-bottom: 4mm !important;
-    padding-bottom: 2.6mm !important;
+    padding-bottom: 2.7mm !important;
     border-bottom: 0.35pt solid rgba(31, 44, 36, 0.2) !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
 
   .lcdp-box-facture-a4__title {
-    font-size: 23pt !important;
-    line-height: 0.98 !important;
-    font-weight: 700 !important;
+    font-size: 24pt !important;
+    line-height: 1 !important;
+    font-weight: 680 !important;
   }
 
   .lcdp-box-facture-a4__date {
@@ -168,130 +167,5 @@
 
   .lcdp-box-facture-a4 * {
     box-sizing: border-box !important;
-  }
-}
-
-@media print {
-  .lcdp-box-facture-a4 .lcdp-box-card-coordonnees-facture,
-  .lcdp-box-facture-a4 .lcdp-box-card-facture,
-  .lcdp-box-facture-a4 .lcdp-box-card-produit-in-facture,
-  .lcdp-box-facture-a4 .lcdp-box-card-prix-in-facture,
-  .lcdp-box-facture-a4 .lcdp-box-card-paiement-in-facture,
-  .lcdp-box-facture-a4 .lcdp-box-card-mentions-facture {
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-coordonnees-facture {
-    padding: 3mm !important;
-    border-radius: 3mm !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-coordonnees-facture__title,
-  .lcdp-box-facture-a4 .lcdp-box-card-facture__section-title {
-    font-size: 9pt !important;
-    line-height: 1.12 !important;
-    font-weight: 650 !important;
-    margin-bottom: 1.5mm !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-coordonnees-facture__name {
-    font-size: 9.4pt !important;
-    line-height: 1.16 !important;
-    font-weight: 650 !important;
-    margin-bottom: 1mm !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-coordonnees-facture__lines,
-  .lcdp-box-facture-a4 .lcdp-box-card-coordonnees-facture__lines span {
-    font-size: 8.3pt !important;
-    line-height: 1.22 !important;
-    font-weight: 400 !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-facture {
-    gap: 3.2mm !important;
-    padding: 3.2mm !important;
-    margin: 0 0 3mm !important;
-    border-radius: 3mm !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-facture__bottom {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 4mm !important;
-    align-items: start !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-produit-in-facture,
-  .lcdp-box-facture-a4 .lcdp-box-card-prix-in-facture,
-  .lcdp-box-facture-a4 .lcdp-box-card-paiement-in-facture {
-    padding: 2.4mm !important;
-    border-radius: 2.5mm !important;
-    border-width: 0.35pt !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-facture__row,
-  .lcdp-box-facture-a4 .lcdp-box-card-prix-in-facture__row,
-  .lcdp-box-facture-a4 .lcdp-box-card-paiement-in-facture__row {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) max-content !important;
-    gap: 3mm !important;
-    align-items: baseline !important;
-    padding: 1mm 0 !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-facture__row dt,
-  .lcdp-box-facture-a4 .lcdp-box-card-facture__row span,
-  .lcdp-box-facture-a4 .lcdp-box-card-prix-in-facture__row dt,
-  .lcdp-box-facture-a4 .lcdp-box-card-prix-in-facture__row span,
-  .lcdp-box-facture-a4 .lcdp-box-card-paiement-in-facture__row span {
-    font-size: 8.4pt !important;
-    line-height: 1.18 !important;
-    font-weight: 410 !important;
-    color: rgba(31, 44, 36, 0.76) !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-facture__row dd,
-  .lcdp-box-facture-a4 .lcdp-box-card-facture__row strong,
-  .lcdp-box-facture-a4 .lcdp-box-card-prix-in-facture__row dd,
-  .lcdp-box-facture-a4 .lcdp-box-card-prix-in-facture__row strong,
-  .lcdp-box-facture-a4 .lcdp-box-card-paiement-in-facture__row strong {
-    font-size: 8.5pt !important;
-    line-height: 1.18 !important;
-    font-weight: 620 !important;
-    color: #1f2c24 !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-prix-in-facture__list--total {
-    margin-top: 1.4mm !important;
-    padding-top: 1.4mm !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-prix-in-facture__row--total dd {
-    font-size: 9pt !important;
-    font-weight: 660 !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-paiement-in-facture__rib {
-    display: grid !important;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr) !important;
-    gap: 2mm !important;
-    padding-top: 1.4mm !important;
-    margin-top: 1.4mm !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-paiement-in-facture__rib span,
-  .lcdp-box-facture-a4 .lcdp-box-card-paiement-in-facture__rib strong,
-  .lcdp-box-facture-a4 .lcdp-box-card-mentions-facture,
-  .lcdp-box-facture-a4 .lcdp-box-card-mentions-facture p {
-    font-size: 7.8pt !important;
-    line-height: 1.2 !important;
-    font-weight: 400 !important;
-  }
-
-  .lcdp-box-facture-a4 .lcdp-box-card-mentions-facture {
-    padding: 2.5mm 3mm !important;
-    border-radius: 2.5mm !important;
-    margin-top: 3mm !important;
   }
 }

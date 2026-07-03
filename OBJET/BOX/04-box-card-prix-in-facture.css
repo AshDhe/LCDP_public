@@ -1,105 +1,103 @@
 .lcdp-box-card-prix-in-facture {
-  border: 1px solid rgba(31, 44, 36, 0.1);
-  border-radius: 0.7rem;
-  padding: 0.65rem;
+  border: 1px solid rgba(31, 44, 36, 0.13);
+  border-radius: 0.72rem;
+  padding: 0.75rem;
   background: rgba(250, 251, 249, 0.72);
 }
 
-.lcdp-box-card-prix-in-facture__title {
-  margin: 0 0 0.45rem;
-  font-size: 0.96rem;
+.lcdp-box-card-prix-in-facture__title,
+.lcdp-box-card-facture__section-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.98rem;
   font-weight: 650;
+  line-height: 1.2;
   color: #567a41;
 }
 
-.lcdp-box-card-prix-in-facture__list,
+.lcdp-box-card-prix-in-facture .lcdp-box-card-facture__list,
 .lcdp-box-card-prix-in-facture__remises {
   display: grid;
   gap: 0;
   margin: 0;
 }
 
+.lcdp-box-card-prix-in-facture .lcdp-box-card-facture__row,
 .lcdp-box-card-prix-in-facture__row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) max-content;
-  gap: 0.6rem;
+  grid-template-columns: minmax(0, 1fr) minmax(5.8rem, max-content);
+  gap: 1rem;
   align-items: baseline;
-  padding: 0.36rem 0;
+  padding: 0.38rem 0;
   border-bottom: 1px solid rgba(31, 44, 36, 0.09);
 }
 
+.lcdp-box-card-prix-in-facture .lcdp-box-card-facture__row dt,
 .lcdp-box-card-prix-in-facture__row dt,
 .lcdp-box-card-prix-in-facture__row span {
   color: rgba(31, 44, 36, 0.72);
-  font-weight: 420;
+  font-weight: 400;
 }
 
+.lcdp-box-card-prix-in-facture .lcdp-box-card-facture__row dd,
 .lcdp-box-card-prix-in-facture__row dd,
 .lcdp-box-card-prix-in-facture__row strong {
   margin: 0;
-  font-weight: 620;
+  color: #1f2c24;
+  font-weight: 400;
+  text-align: right;
   white-space: nowrap;
 }
 
-.lcdp-box-card-prix-in-facture__list--total {
-  margin-top: 0.32rem;
-  padding-top: 0.3rem;
+.lcdp-box-card-prix-in-facture .lcdp-box-card-facture__list--total {
+  margin-top: 0.38rem;
+  padding-top: 0.28rem;
   border-top: 1px solid rgba(31, 44, 36, 0.18);
 }
 
-.lcdp-box-card-prix-in-facture__row--total dd {
-  font-size: 1.02em;
-  font-weight: 680;
+.lcdp-box-card-prix-in-facture__row--total dd,
+.lcdp-box-card-prix-in-facture .lcdp-box-card-facture__list--total .lcdp-box-card-facture__row:first-child dd {
+  font-weight: 500;
 }
 
 @media print {
   .lcdp-box-card-prix-in-facture {
-    padding: 1.5mm 1.8mm !important;
-    border-radius: 2mm !important;
-    border-width: 0.3pt !important;
+    padding: 2.4mm !important;
+    border-radius: 2.5mm !important;
+    border-width: 0.35pt !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
 
-  .lcdp-box-card-prix-in-facture__title {
-    font-size: 7.4pt !important;
+  .lcdp-box-card-prix-in-facture__title,
+  .lcdp-box-card-facture__section-title {
+    margin-bottom: 1.3mm !important;
+    font-size: 9pt !important;
     font-weight: 650 !important;
-    margin-bottom: 0.9mm !important;
-    line-height: 1.05 !important;
+    line-height: 1.15 !important;
   }
 
+  .lcdp-box-card-prix-in-facture .lcdp-box-card-facture__row,
   .lcdp-box-card-prix-in-facture__row {
-    gap: 1.4mm !important;
-    padding: 0.75mm 0 !important;
-    border-bottom: 0.2pt solid rgba(31, 44, 36, 0.12) !important;
+    grid-template-columns: minmax(0, 1fr) 24mm !important;
+    gap: 3mm !important;
+    padding: 1.05mm 0 !important;
+    border-bottom: 0.25pt solid rgba(31, 44, 36, 0.12) !important;
   }
 
-  .lcdp-box-card-prix-in-facture__list--total {
-    margin-top: 0.9mm !important;
-    padding-top: 0.9mm !important;
-    border-top: 0.35pt solid rgba(31, 44, 36, 0.22) !important;
-  }
-
+  .lcdp-box-card-prix-in-facture .lcdp-box-card-facture__row dt,
+  .lcdp-box-card-prix-in-facture .lcdp-box-card-facture__row dd,
   .lcdp-box-card-prix-in-facture__row dt,
   .lcdp-box-card-prix-in-facture__row span,
   .lcdp-box-card-prix-in-facture__row dd,
   .lcdp-box-card-prix-in-facture__row strong {
-    font-size: 6.65pt !important;
-    line-height: 1.06 !important;
+    font-size: 8.6pt !important;
+    line-height: 1.2 !important;
+    font-weight: 400 !important;
   }
 
-  .lcdp-box-card-prix-in-facture__row dt,
-  .lcdp-box-card-prix-in-facture__row span {
-    font-weight: 420 !important;
-  }
-
-  .lcdp-box-card-prix-in-facture__row dd,
-  .lcdp-box-card-prix-in-facture__row strong {
-    font-weight: 620 !important;
-  }
-
-  .lcdp-box-card-prix-in-facture__row--total dd {
-    font-size: 7.1pt !important;
-    font-weight: 680 !important;
+  .lcdp-box-card-prix-in-facture .lcdp-box-card-facture__list--total {
+    margin-top: 1.2mm !important;
+    padding-top: 1mm !important;
+    border-top: 0.35pt solid rgba(31, 44, 36, 0.2) !important;
   }
 }
