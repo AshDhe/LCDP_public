@@ -153,3 +153,45 @@
 .lcdp-box-card-abonnement__micro-action[hidden] {
   display: none;
 }
+
+
+.lcdp-box-card-abonnement__micro-action--alerte {
+  border-color: rgba(198, 102, 34, 0.72);
+  color: #b45d1e;
+  background: rgba(198, 102, 34, 0.08);
+  font-weight: 600;
+}
+
+.lcdp-box-card-abonnement__micro-action--alerte:hover {
+  border-color: rgba(198, 102, 34, 0.95);
+  background: rgba(198, 102, 34, 0.12);
+}
+
+.lcdp-dialogue-echeances-impayees {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+  width: 100%;
+}
+
+.lcdp-dialogue-echeances-impayees__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+  padding: var(--lcdp-space-2) 0;
+  border-bottom: 1px solid var(--lcdp-color-border);
+}
+
+.lcdp-dialogue-echeances-impayees__text {
+  margin: 0;
+  color: var(--lcdp-color-text);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 768px) {
+  .lcdp-dialogue-echeances-impayees__row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
