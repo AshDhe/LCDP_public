@@ -142,3 +142,14 @@
     text-align: right;
   }
 }
+
+
+.lcdp-box-card-abonnement__micro-action--disabled {
+  opacity: 0.48;
+  background: var(--lcdp-color-surface-soft);
+  cursor: not-allowed;
+}
+
+.lcdp-box-card-abonnement__micro-action[hidden] {
+  display: none;
+}
