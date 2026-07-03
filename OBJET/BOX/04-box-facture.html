@@ -1,38 +1,24 @@
-<div class="lcdp-box-facture" data-lcdp-box-facture role="dialog" aria-modal="true" aria-labelledby="lcdp-box-facture-title">
-  <section class="lcdp-box-facture__panel">
-    <button class="lcdp-box-facture__close" type="button" aria-label="Fermer" data-lcdp-facture-close>×</button>
+<div class="lcdp-box-facture" role="dialog" aria-modal="true" aria-labelledby="lcdp-facture-title" data-lcdp-box-facture>
+  <section class="lcdp-box-facture__card">
+    <button class="lcdp-box-facture__close" type="button" aria-label="Fermer la facture" data-lcdp-facture-close>×</button>
 
-    <h2 class="lcdp-box-facture__title" id="lcdp-box-facture-title">Facture</h2>
+    <div class="lcdp-box-facture__print-zone" data-lcdp-facture-print-zone>
+      <header class="lcdp-box-facture__header">
+        <h2 id="lcdp-facture-title" class="lcdp-box-facture__title">FACTURE</h2>
+        <p class="lcdp-box-facture__date">Date : <strong data-lcdp-facture-date>Non renseigné</strong></p>
+      </header>
 
-    <dl class="lcdp-box-facture__list">
-      <div class="lcdp-box-facture__row">
-        <dt>Commande n°</dt>
-        <dd data-lcdp-facture-orderid></dd>
+      <div class="lcdp-box-facture__coordonnees">
+        <div data-lcdp-facture-emetteur-slot></div>
+        <div data-lcdp-facture-destinataire-slot></div>
       </div>
 
-      <div class="lcdp-box-facture__row">
-        <dt>Date de commande</dt>
-        <dd data-lcdp-facture-orderdate></dd>
-      </div>
+      <div data-lcdp-facture-card-slot></div>
+      <div data-lcdp-facture-mentions-slot></div>
+    </div>
 
-      <div class="lcdp-box-facture__row">
-        <dt>Montant HT</dt>
-        <dd data-lcdp-facture-ht></dd>
-      </div>
-
-      <div class="lcdp-box-facture__row">
-        <dt>TVA</dt>
-        <dd data-lcdp-facture-tva></dd>
-      </div>
-
-      <div class="lcdp-box-facture__row lcdp-box-facture__row--total">
-        <dt>Montant TTC</dt>
-        <dd data-lcdp-facture-ttc></dd>
-      </div>
-    </dl>
-
-    <div class="lcdp-box-facture__actions">
-      <button class="lcdp-button lcdp-button-primary" type="button" data-lcdp-facture-ok>Fermer</button>
+    <div class="lcdp-box-facture__actions lcdp-no-print">
+      <button class="lcdp-button lcdp-button-primary" type="button" data-lcdp-facture-print>Imprimer / PDF</button>
     </div>
   </section>
 </div>
