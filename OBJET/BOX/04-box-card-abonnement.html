@@ -1,28 +1,30 @@
 <article class="lcdp-box-card-abonnement" data-lcdp-box-card-abonnement>
-  <div class="lcdp-box-card-abonnement__row">
-    <p class="lcdp-box-card-abonnement__item">
-      <span class="lcdp-box-card-abonnement__label">Nom de l'abonnement :</span>
+  <div class="lcdp-box-card-abonnement__row lcdp-box-card-abonnement__row--main">
+    <div class="lcdp-box-card-abonnement__item lcdp-box-card-abonnement__item--name">
+      <span class="lcdp-box-card-abonnement__label">Abonnement :</span>
       <span class="lcdp-box-card-abonnement__value" data-lcdp-card-abonnement-type></span>
-    </p>
+      <span class="lcdp-box-card-abonnement__mention" data-lcdp-card-abonnement-invites hidden></span>
+    </div>
 
-    <p class="lcdp-box-card-abonnement__item">
-      <span class="lcdp-box-card-abonnement__label">Débuté le :</span>
+    <p class="lcdp-box-card-abonnement__item lcdp-box-card-abonnement__item--date">
+      <span class="lcdp-box-card-abonnement__label">Début :</span>
       <span class="lcdp-box-card-abonnement__value" data-lcdp-card-abonnement-debut></span>
     </p>
   </div>
 
   <div class="lcdp-box-card-abonnement__row">
-    <p class="lcdp-box-card-abonnement__item">
+    <div class="lcdp-box-card-abonnement__item">
       <span class="lcdp-box-card-abonnement__label">Jusqu'au :</span>
       <span class="lcdp-box-card-abonnement__value" data-lcdp-card-abonnement-fin></span>
       <span class="lcdp-box-card-abonnement__suffix">inclus</span>
-    </p>
+      <span class="lcdp-box-card-abonnement__mention" data-lcdp-card-abonnement-suspension hidden></span>
+    </div>
 
     <div class="lcdp-box-card-abonnement__actions">
       <button
         class="lcdp-box-card-abonnement__micro-action"
         type="button"
-        data-action="prolonger"
+        data-action="prolonger-abonnement"
       >
         Prolonger
       </button>
@@ -30,10 +32,12 @@
   </div>
 
   <div class="lcdp-box-card-abonnement__row">
-    <p class="lcdp-box-card-abonnement__item">
-      <span class="lcdp-box-card-abonnement__label">Commande n°</span>
+    <div class="lcdp-box-card-abonnement__item lcdp-box-card-abonnement__item--commande">
+      <span class="lcdp-box-card-abonnement__label">Numéro de commande :</span>
       <span class="lcdp-box-card-abonnement__value" data-lcdp-card-abonnement-orderid></span>
-    </p>
+      <span class="lcdp-box-card-abonnement__mention" data-lcdp-card-abonnement-prix-paiement></span>
+      <span class="lcdp-box-card-abonnement__mention" data-lcdp-card-abonnement-code-remise hidden></span>
+    </div>
 
     <div class="lcdp-box-card-abonnement__actions">
       <button

@@ -443,3 +443,51 @@
   text-align: center;
   font-weight: 500;
 }
+
+/* Lisibilité des états du calendrier abonnement.
+   Clair = passé / mois en cours non sélectionnable.
+   Foncé = période déjà couverte par un abonnement.
+   Intermédiaire = choix incompatible avec les plages déjà abonnées. */
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--passe,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day--passe {
+  border-color: #e2e7df;
+  background: #f7f9f5;
+  color: #9ba39a;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--occupe,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day--occupe {
+  border-color: #7d9169;
+  background: #d3ddca;
+  color: #31402b;
+  opacity: 1;
+  box-shadow: inset 0 0 0 1px rgba(49, 64, 43, 0.16);
+  cursor: pointer;
+}
+
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--incompatible {
+  border-color: #c99f5b;
+  background: #f2e3cc;
+  color: #5e4729;
+  opacity: 1;
+  box-shadow: inset 0 0 0 1px rgba(94, 71, 41, 0.12);
+  cursor: pointer;
+}
+
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month[aria-disabled="true"]:not(:disabled),
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day[aria-disabled="true"]:not(:disabled) {
+  pointer-events: auto;
+}
+
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--occupe:hover,
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day--occupe:hover {
+  border-color: #5f754e;
+  background: #c5d2ba;
+}
+
+.lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--incompatible:hover {
+  border-color: #b58335;
+  background: #ead6b7;
+}

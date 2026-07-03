@@ -34,7 +34,8 @@
 }
 
 .lcdp-box-card-abonnement__label {
-  font-weight: 700;
+  font-weight: 400;
+  color: var(--lcdp-color-text-muted);
 }
 
 .lcdp-box-card-abonnement__value {
@@ -45,6 +46,19 @@
   color: var(--lcdp-color-text-muted);
 }
 
+.lcdp-box-card-abonnement__mention {
+  display: block;
+  margin-top: 3px;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.lcdp-box-card-abonnement__mention[hidden] {
+  display: none;
+}
+
 .lcdp-box-card-abonnement__actions {
   display: flex;
   align-items: center;
@@ -53,7 +67,8 @@
   gap: var(--lcdp-space-2);
 }
 
-.lcdp-box-card-abonnement__micro-action {
+.lcdp-box-card-abonnement__micro-action,
+.lcdp-workflow-micro-action {
   min-height: 38px;
   padding: 8px 14px;
   border: 1px solid var(--lcdp-color-border);
@@ -66,7 +81,8 @@
   cursor: pointer;
 }
 
-.lcdp-box-card-abonnement__micro-action:hover {
+.lcdp-box-card-abonnement__micro-action:hover,
+.lcdp-workflow-micro-action:hover {
   border-color: var(--lcdp-color-border-strong);
   background: var(--lcdp-color-surface-soft);
 }
@@ -79,13 +95,18 @@
 
   .lcdp-box-card-abonnement__row {
     flex-direction: row;
-    align-items: baseline;
+    align-items: flex-start;
     justify-content: space-between;
     gap: var(--lcdp-space-3);
   }
 
   .lcdp-box-card-abonnement__item {
     flex: 1;
+  }
+
+  .lcdp-box-card-abonnement__item--date {
+    text-align: right;
+    max-width: 260px;
   }
 
   .lcdp-box-card-abonnement__actions {
@@ -95,5 +116,29 @@
 
   .lcdp-box-card-abonnement__row--links {
     align-items: center;
+  }
+}
+
+/* Ajustements card abonnement - libellés sobres, valeurs en gras */
+.lcdp-box-card-abonnement__mention-label {
+  font-weight: 400;
+  color: var(--lcdp-color-text-muted);
+}
+
+.lcdp-box-card-abonnement__mention-value {
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-abonnement__item--date {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.35rem;
+  }
+
+  .lcdp-box-card-abonnement__item--date .lcdp-box-card-abonnement__value {
+    min-width: 110px;
+    text-align: right;
   }
 }

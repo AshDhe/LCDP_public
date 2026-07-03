@@ -37,10 +37,11 @@
               class="lcdp-box-card-recaporder__code-input"
               type="text"
               autocomplete="off"
+              maxlength="10"
               data-lcdp-recaporder-code-remise
             >
-            <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-recaporder-valider-code>
-              Valider
+            <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-recaporder-valider-code disabled aria-disabled="true">
+              Calculer
             </button>
           </div>
         </dd>
@@ -67,7 +68,7 @@
       <button class="lcdp-button lcdp-button-primary" type="button" data-lcdp-recaporder-pay>
         Payer
       </button>
-      <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-recaporder-cancel>
+      <button class="lcdp-button lcdp-button-secondary lcdp-workflow-micro-action" type="button" data-lcdp-recaporder-cancel>
         Annuler
       </button>
       <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-recaporder-back>
