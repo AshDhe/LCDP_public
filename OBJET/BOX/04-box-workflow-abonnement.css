@@ -409,3 +409,37 @@
   }
 }
 
+
+/* Ajustements workflow abonnement — boutons secondaires courts et confirmation commande. */
+.lcdp-workflow-abonnement-box .lcdp-workflow-micro-action {
+  width: auto;
+  max-width: 320px;
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: 999px;
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  box-shadow: none;
+}
+
+.lcdp-workflow-abonnement-box .lcdp-workflow-micro-action:hover {
+  border-color: var(--lcdp-color-border-strong);
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-workflow-abonnement-box--confirmation .lcdp-box-dialogue-bouton__title {
+  font-size: clamp(1.28rem, 4vw, 1.68rem);
+  line-height: 1.14;
+  font-weight: 700;
+  text-align: center;
+}
+
+.lcdp-workflow-abonnement-box--confirmation .lcdp-box-dialogue-bouton__text {
+  white-space: pre-line;
+  text-align: center;
+  font-weight: 500;
+}
