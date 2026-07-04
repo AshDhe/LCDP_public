@@ -196,3 +196,14 @@
     justify-content: space-between;
   }
 }
+
+/* Alignement de la ligne période avec les micro-actions. */
+@media (min-width: 768px) {
+  .lcdp-box-card-abonnement__row--periode {
+    align-items: center;
+  }
+
+  .lcdp-box-card-abonnement__row--periode .lcdp-box-card-abonnement__actions {
+    align-self: center;
+  }
+}
