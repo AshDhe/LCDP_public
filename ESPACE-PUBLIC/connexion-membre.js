@@ -125,7 +125,12 @@
           return;
         }
 
-        window.location.href = urlMonCompteMembre;
+        programmerProchaineVerificationSessionMembre(data);
+
+        const urlDestination = obtenirUrlDestinationApresConnexion(urlMonCompteMembre);
+        effacerRetourMembreApresConnexion();
+
+        window.location.href = urlDestination;
 
       } catch (error) {
         console.error("Erreur connexion membre :", error);
@@ -322,6 +327,171 @@
     }
 
     return base + cheminNettoye;
+  }
+
+
+
+  function obtenirUrlDestinationApresConnexion(urlDefaut) {
+    const params = new URLSearchParams(window.location.search);
+    const retourExplicite = normaliserUrlRetourMembre(params.get("retour"));
+
+    if (retourExplicite) {
+      return retourExplicite;
+    }
+
+    const session = String(params.get("session") || "").trim().toLowerCase();
+
+    if (session === "inactive" || session === "expiree" || session === "expirée") {
+      const retourMemorise = normaliserUrlRetourMembre(lireCookie("retour_membre"));
+
+      if (retourMemorise) {
+        return retourMemorise;
+      }
+    }
+
+    return urlDefaut;
+  }
+
+  function programmerProchaineVerificationSessionMembre(data) {
+    const delai = nombreSecondesValide(
+      data?.nextRefreshInSeconds,
+      60 * 60 * 8
+    );
+
+    if (typeof window.LCDP_programmerProchaineVerificationSessionMembre === "function") {
+      window.LCDP_programmerProchaineVerificationSessionMembre(delai);
+      return;
+    }
+
+    ecrireCookiePartage(
+      "lcdp_session_membre_next_refresh",
+      String(Date.now() + delai * 1000),
+      60 * 60 * 10
+    );
+  }
+
+  function effacerRetourMembreApresConnexion() {
+    if (typeof window.LCDP_effacerRetourMembre === "function") {
+      window.LCDP_effacerRetourMembre();
+      return;
+    }
+
+    supprimerCookiePartage("retour_membre");
+  }
+
+  function normaliserUrlRetourMembre(value) {
+    const texte = String(value || "").trim();
+
+    if (!texte) return "";
+
+    let url;
+
+    try {
+      url = new URL(texte, window.location.href);
+    } catch {
+      return "";
+    }
+
+    if (typeof window.LCDP_estUrlRetourMembreValide === "function") {
+      return window.LCDP_estUrlRetourMembreValide(url.href) ? url.href : "";
+    }
+
+    const config = window.SITE_CONFIG || {};
+    const membreBaseUrl = nettoyerBaseUrl(
+      config.membreBaseUrl ||
+      config.MEMBRE_BASE ||
+      ""
+    );
+
+    if (!membreBaseUrl) return "";
+
+    let membreBase;
+
+    try {
+      membreBase = new URL(membreBaseUrl);
+    } catch {
+      return "";
+    }
+
+    if (url.origin !== membreBase.origin) return "";
+
+    const basePath = membreBase.pathname.replace(/\/+$/, "");
+    let chemin = url.pathname;
+
+    if (basePath) {
+      if (chemin !== basePath && !chemin.startsWith(basePath + "/")) {
+        return "";
+      }
+
+      chemin = chemin.slice(basePath.length) || "/";
+    }
+
+    if (!chemin.startsWith("/ESPACE-MEMBRE/")) return "";
+    if (chemin === "/ESPACE-MEMBRE/accueil-membre.html") return "";
+    if (chemin === "/index.html" || chemin === "/") return "";
+
+    return url.href;
+  }
+
+  function lireCookie(nom) {
+    const valeur = document.cookie
+      .split(";")
+      .map((cookie) => cookie.trim())
+      .find((cookie) => cookie.startsWith(nom + "="))
+      ?.split("=")
+      .slice(1)
+      .join("=") || "";
+
+    try {
+      return decodeURIComponent(valeur);
+    } catch {
+      return valeur;
+    }
+  }
+
+  function ecrireCookiePartage(nom, valeur, maxAgeSecondes) {
+    document.cookie = nom + "=" + encodeURIComponent(valeur) + attributsCookiePartage(maxAgeSecondes);
+  }
+
+  function supprimerCookiePartage(nom) {
+    const secure = window.location.protocol === "https:" ? "; Secure" : "";
+    const domaine = attributDomaineCookie();
+
+    document.cookie = nom + "=; Path=/; Max-Age=0; SameSite=Lax" + secure;
+
+    if (domaine) {
+      document.cookie = nom + "=; Path=/; Max-Age=0; SameSite=Lax" + secure + domaine;
+    }
+  }
+
+  function attributsCookiePartage(maxAgeSecondes) {
+    const secure = window.location.protocol === "https:" ? "; Secure" : "";
+    const domaine = attributDomaineCookie();
+    const maxAge = Number.isFinite(Number(maxAgeSecondes))
+      ? "; Max-Age=" + String(Math.max(0, Math.floor(Number(maxAgeSecondes))))
+      : "";
+
+    return "; Path=/; SameSite=Lax" + secure + domaine + maxAge;
+  }
+
+  function attributDomaineCookie() {
+    const hostname = window.location.hostname;
+
+    if (hostname === "lacleduparc.fr" || hostname.endsWith(".lacleduparc.fr")) {
+      return "; Domain=.lacleduparc.fr";
+    }
+
+    return "";
+  }
+
+  function nombreSecondesValide(value, defaut) {
+    const nombre = Number(value);
+
+    if (!Number.isFinite(nombre) || nombre <= 0) {
+      return defaut;
+    }
+
+    return Math.floor(nombre);
   }
 
   function nettoyerBaseUrl(value) {
