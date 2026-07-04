@@ -13,31 +13,35 @@
 
 .lcdp-box-dialogue-bouton__card {
   position: relative;
-  width: 100%;
-  max-width: 440px;
-  padding: var(--lcdp-space-4);
+  width: min(100%, 470px);
+  padding: 28px 24px 24px;
   border: 1px solid var(--lcdp-color-border);
   border-radius: var(--lcdp-radius-large);
   background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--lcdp-space-3);
+  text-align: center;
 }
 
 .lcdp-box-dialogue-bouton__close {
   position: absolute;
-  top: var(--lcdp-space-2);
-  right: var(--lcdp-space-2);
-  width: 38px;
-  height: 38px;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
   border: 0;
   border-radius: 999px;
   background: var(--lcdp-color-surface-soft);
   color: var(--lcdp-color-text);
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   line-height: 1;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lcdp-box-dialogue-bouton__close:hover {
@@ -45,26 +49,32 @@
 }
 
 .lcdp-box-dialogue-bouton__title {
+  width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0 18px;
   border: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
   color: var(--lcdp-color-text);
-  font-size: clamp(1.4rem, 6vw, 1.9rem);
+  font-size: clamp(1.35rem, 5.2vw, 1.9rem);
   line-height: 1.18;
   font-weight: 700;
   text-align: center;
 }
 
 .lcdp-box-dialogue-bouton__text {
+  width: 100%;
   margin: 0;
+  padding: 0 18px;
   color: var(--lcdp-color-text-muted);
+  font-size: 1rem;
+  line-height: 1.45;
   text-align: center;
 }
 
 .lcdp-box-dialogue-bouton__actions {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--lcdp-space-2);
@@ -72,13 +82,27 @@
 }
 
 .lcdp-box-dialogue-bouton__actions .lcdp-button {
-  width: 100%;
-  max-width: 320px;
+  width: min(100%, 260px);
+  max-width: 260px;
   margin-top: 0;
 }
 
 @media (min-width: 768px) {
   .lcdp-box-dialogue-bouton__card {
-    padding: var(--lcdp-space-5);
+    width: min(100%, 520px);
+    padding: 30px 28px 26px;
+  }
+
+  .lcdp-box-dialogue-bouton__title {
+    padding: 0 26px;
+  }
+
+  .lcdp-box-dialogue-bouton__text {
+    padding: 0 26px;
+  }
+
+  .lcdp-box-dialogue-bouton__actions .lcdp-button {
+    width: min(100%, 230px);
+    max-width: 230px;
   }
 }
