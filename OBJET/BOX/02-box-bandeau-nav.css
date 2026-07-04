@@ -1,5 +1,6 @@
 .lcdp-box-bandeau-nav {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 4000;
   width: 100%;
   min-height: 64px;
