@@ -1,6 +1,12 @@
+#lcdp-bandeau-slot {
+  min-height: 64px;
+}
+
 .lcdp-box-bandeau-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 4000;
   width: 100%;
   min-height: 64px;
@@ -71,6 +77,10 @@
 }
 
 @media (min-width: 768px) {
+  #lcdp-bandeau-slot {
+    min-height: 72px;
+  }
+
   .lcdp-box-bandeau-nav {
     min-height: 72px;
   }
