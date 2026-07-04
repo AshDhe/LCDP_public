@@ -1,0 +1,56 @@
+/* CORRECTIF FINAL BOX ALERTE */
+/* Force l’harmonisation malgré les styles génériques de bouton ou de texte. */
+
+.lcdp-box-alerte .lcdp-box-alerte__card {
+  width: min(calc(100vw - 36px), 420px);
+  max-width: 420px;
+  padding: 30px 24px 24px;
+  align-items: center;
+  text-align: center;
+}
+
+.lcdp-box-alerte .lcdp-box-alerte__message {
+  width: 100%;
+  max-width: 330px;
+  margin: 0 auto;
+  padding: 0;
+  font-size: clamp(1rem, 4vw, 1.16rem);
+  line-height: 1.42;
+  font-weight: 500;
+  text-align: center;
+}
+
+.lcdp-box-alerte .lcdp-box-alerte__close {
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  font-size: 1.45rem;
+}
+
+.lcdp-box-alerte .lcdp-box-alerte__card .lcdp-button {
+  width: min(100%, 190px);
+  max-width: 190px;
+  min-width: 0;
+  min-height: 44px;
+  margin-inline: auto;
+  padding-inline: 18px;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-alerte .lcdp-box-alerte__card {
+    width: min(100%, 440px);
+    max-width: 440px;
+    padding: 32px 28px 26px;
+  }
+
+  .lcdp-box-alerte .lcdp-box-alerte__message {
+    max-width: 350px;
+    font-size: 1.08rem;
+  }
+
+  .lcdp-box-alerte .lcdp-box-alerte__card .lcdp-button {
+    width: 180px;
+    max-width: 180px;
+  }
+}
