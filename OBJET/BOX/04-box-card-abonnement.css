@@ -186,6 +186,7 @@
   margin: 0;
   color: var(--lcdp-color-text);
   font-size: 0.95rem;
+  white-space: pre-line;
 }
 
 @media (min-width: 768px) {
