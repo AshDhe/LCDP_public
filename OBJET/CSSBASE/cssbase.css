@@ -243,6 +243,22 @@ select:focus-visible {
   line-height: 1.1;
 }
 
+/* Bouton Payer de la mention abonnement suspendu : alerte paiement */
+
+#mention-suspension-abonnement-membre .lcdp-button,
+.lcdp-mention-suspension-abonnement .lcdp-button {
+  background: #ffffff;
+  border-color: var(--lcdp-color-orange);
+  color: var(--lcdp-color-orange);
+}
+
+#mention-suspension-abonnement-membre .lcdp-button:hover,
+.lcdp-mention-suspension-abonnement .lcdp-button:hover {
+  background: var(--lcdp-color-orange);
+  border-color: var(--lcdp-color-orange);
+  color: #ffffff;
+}
+
 .lcdp-image-legend {
   width: 100%;
   max-width: var(--lcdp-text-width);
