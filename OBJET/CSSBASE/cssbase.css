@@ -378,6 +378,20 @@ select:focus-visible {
   color: var(--lcdp-color-text);
 }
 
+/* Bouton filtre abonnement actif : retour "En cours" visible en orange */
+
+.lcdp-button-filtre-abonnement-actif {
+  background: var(--lcdp-color-orange);
+  border-color: var(--lcdp-color-orange);
+  color: #ffffff;
+}
+
+.lcdp-button-filtre-abonnement-actif:hover {
+  background: var(--lcdp-color-orange-hover);
+  border-color: var(--lcdp-color-orange-hover);
+  color: #ffffff;
+}
+
 /* MENU BOUTON GENERIQUE */
 /* Mobile : boutons larges. Tablette/desktop : largeur réduite et centrée. */
 
