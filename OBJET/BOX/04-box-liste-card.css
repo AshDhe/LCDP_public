@@ -112,3 +112,31 @@
     max-width: 260px;
   }
 }
+
+/* Ajustements planning membre : le titre de liste est supprimé en JS,
+   les actions deviennent le bloc utile du bandeau de liste. */
+.lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] {
+  align-items: center;
+  justify-content: center;
+}
+
+.lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] .lcdp-button {
+  width: min(100%, 320px);
+  max-width: 320px;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] {
+    width: 100%;
+    min-width: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] .lcdp-button {
+    width: auto;
+    min-width: 180px;
+    max-width: 320px;
+  }
+}
