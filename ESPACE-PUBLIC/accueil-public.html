@@ -376,7 +376,7 @@
           return;
         }
 
-        if (!etat.abonne) {
+        if (!etat.abonne || !lireCookie("abonne")) {
           await afficherAlerte("Vous devez être membre abonné pour utiliser la fonction " + fonction);
           return;
         }
