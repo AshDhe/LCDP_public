@@ -17,11 +17,12 @@
   border-color: #f0b96f;
 }
 
-.lcdp-box-card-reservation-membre--prochaine {
-  border-color: var(--lcdp-color-orange);
+.lcdp-box-card-reservation-membre.lcdp-box-card-reservation-membre--prochaine,
+.lcdp-box-card-reservation-membre[data-lcdp-prochaine-reservation="true"] {
+  border: 2px solid var(--lcdp-color-orange, #f2a23a) !important;
   box-shadow:
     0 12px 30px rgba(31, 42, 36, 0.08),
-    inset 0 0 0 1px rgba(242, 162, 58, 0.42);
+    0 0 0 1px rgba(242, 162, 58, 0.18);
 }
 
 .lcdp-box-card-reservation-membre__invitation {
