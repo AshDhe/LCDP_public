@@ -28,6 +28,7 @@
   color: var(--lcdp-color-orange);
 }
 
+
 .lcdp-box-liste-card__actions {
   width: 100%;
   display: flex;
@@ -40,6 +41,36 @@
   margin-top: 0;
   width: 100%;
   max-width: 320px;
+}
+
+
+.lcdp-box-liste-card__heading--action {
+  display: flex;
+  justify-content: center;
+}
+
+.lcdp-box-liste-card__heading--action .lcdp-box-liste-card__title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.lcdp-button-planning-nouvelle-date {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 0;
+}
+
+.lcdp-button-filtre-planning-actif {
+  background: #ffffff;
+  border-color: var(--lcdp-color-orange);
+  color: var(--lcdp-color-orange);
+}
+
+.lcdp-button-filtre-planning-actif:hover {
+  background: var(--lcdp-color-surface-soft);
+  border-color: var(--lcdp-color-orange-hover);
+  color: var(--lcdp-color-orange-hover);
 }
 
 .lcdp-box-liste-card__tools {
@@ -73,6 +104,20 @@
 }
 
 @media (min-width: 768px) {
+  .lcdp-box-liste-card__heading--action {
+    justify-content: flex-start;
+  }
+
+  .lcdp-box-liste-card__heading--action .lcdp-box-liste-card__title {
+    justify-content: flex-start;
+  }
+
+  .lcdp-button-planning-nouvelle-date {
+    width: auto;
+    min-width: 260px;
+    max-width: 320px;
+  }
+
   .lcdp-box-liste-card__header {
     flex-direction: row;
     align-items: center;
