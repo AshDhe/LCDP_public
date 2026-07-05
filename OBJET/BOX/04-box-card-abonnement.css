@@ -244,3 +244,20 @@
     align-self: center;
   }
 }
+
+
+.lcdp-box-card-abonnement__micro-action--paiement-depasse,
+.lcdp-workflow-micro-action--paiement-depasse {
+  opacity: 0.52;
+  border-color: rgba(100, 116, 139, 0.55);
+  color: #64748b;
+  background: rgba(100, 116, 139, 0.08);
+  cursor: help;
+}
+
+.lcdp-box-card-abonnement__micro-action--paiement-depasse:hover,
+.lcdp-workflow-micro-action--paiement-depasse:hover {
+  border-color: rgba(100, 116, 139, 0.7);
+  color: #64748b;
+  background: rgba(100, 116, 139, 0.12);
+}
