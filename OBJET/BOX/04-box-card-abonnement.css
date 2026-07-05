@@ -167,26 +167,59 @@
   background: rgba(198, 102, 34, 0.12);
 }
 
+
 .lcdp-dialogue-echeances-impayees {
   display: flex;
   flex-direction: column;
   gap: var(--lcdp-space-3);
   width: 100%;
+  align-items: stretch;
 }
 
 .lcdp-dialogue-echeances-impayees__row {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: var(--lcdp-space-2);
+  width: 100%;
   padding: var(--lcdp-space-2) 0;
   border-bottom: 1px solid var(--lcdp-color-border);
 }
 
 .lcdp-dialogue-echeances-impayees__text {
+  width: 100%;
   margin: 0;
   color: var(--lcdp-color-text);
   font-size: 0.95rem;
+  line-height: 1.35;
+  font-weight: 400;
+  text-align: left;
   white-space: pre-line;
+}
+
+.lcdp-dialogue-echeances-impayees .lcdp-workflow-micro-action {
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  min-height: 38px;
+  margin-top: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+
+.lcdp-dialogue-echeances-impayees .lcdp-workflow-micro-action--alerte-paiement {
+  border-color: rgba(198, 102, 34, 0.72);
+  color: #b45d1e;
+  background: rgba(198, 102, 34, 0.08);
+  font-weight: 600;
+}
+
+.lcdp-dialogue-echeances-impayees .lcdp-workflow-micro-action--alerte-paiement:hover {
+  border-color: rgba(198, 102, 34, 0.95);
+  background: rgba(198, 102, 34, 0.12);
 }
 
 @media (min-width: 768px) {
@@ -194,6 +227,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .lcdp-dialogue-echeances-impayees__text {
+    width: auto;
   }
 }
 
