@@ -66,6 +66,15 @@
   box-shadow: none;
 }
 
+.lcdp-box-card-heure-in-calendrier-jour--passee {
+  background: var(--lcdp-color-surface-soft);
+  border-color: var(--lcdp-color-border);
+  color: var(--lcdp-color-text-muted);
+  opacity: 0.52;
+  filter: grayscale(1);
+  box-shadow: none;
+}
+
 .lcdp-box-card-heure-in-calendrier-jour--deja-reserve {
   opacity: 1;
   filter: none;
@@ -81,6 +90,10 @@
 
 .lcdp-box-card-heure-in-calendrier-jour--deja-reserve:disabled:hover {
   border-color: #f0b96f;
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--passee:disabled:hover {
+  border-color: var(--lcdp-color-border);
 }
 
 @media (min-width: 768px) {
