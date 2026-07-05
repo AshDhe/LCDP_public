@@ -24,11 +24,6 @@
   color: var(--lcdp-color-text);
 }
 
-.lcdp-box-liste-card__title--filtre-actif {
-  color: var(--lcdp-color-orange);
-}
-
-
 .lcdp-box-liste-card__actions {
   width: 100%;
   display: flex;
@@ -44,33 +39,28 @@
 }
 
 
-.lcdp-box-liste-card__heading--action {
-  display: flex;
-  justify-content: center;
+.lcdp-box-liste-card__actions .lcdp-button-filtre-planning-passe {
+  background: #f4f4f4;
+  color: var(--lcdp-color-logo-green);
+  border-color: var(--lcdp-color-logo-green);
 }
 
-.lcdp-box-liste-card__heading--action .lcdp-box-liste-card__title {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.lcdp-button-planning-nouvelle-date {
-  width: 100%;
-  max-width: 320px;
-  margin-top: 0;
-}
-
-.lcdp-button-filtre-planning-actif {
-  background: #ffffff;
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-orange);
-}
-
-.lcdp-button-filtre-planning-actif:hover {
+.lcdp-box-liste-card__actions .lcdp-button-filtre-planning-passe:hover {
   background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-primary);
+  border-color: var(--lcdp-color-primary);
+}
+
+.lcdp-box-liste-card__actions .lcdp-button-filtre-planning-avenir {
+  background: var(--lcdp-color-orange);
+  border-color: var(--lcdp-color-orange);
+  color: #ffffff;
+}
+
+.lcdp-box-liste-card__actions .lcdp-button-filtre-planning-avenir:hover {
+  background: var(--lcdp-color-orange-hover);
   border-color: var(--lcdp-color-orange-hover);
-  color: var(--lcdp-color-orange-hover);
+  color: #ffffff;
 }
 
 .lcdp-box-liste-card__tools {
@@ -104,20 +94,6 @@
 }
 
 @media (min-width: 768px) {
-  .lcdp-box-liste-card__heading--action {
-    justify-content: flex-start;
-  }
-
-  .lcdp-box-liste-card__heading--action .lcdp-box-liste-card__title {
-    justify-content: flex-start;
-  }
-
-  .lcdp-button-planning-nouvelle-date {
-    width: auto;
-    min-width: 260px;
-    max-width: 320px;
-  }
-
   .lcdp-box-liste-card__header {
     flex-direction: row;
     align-items: center;
