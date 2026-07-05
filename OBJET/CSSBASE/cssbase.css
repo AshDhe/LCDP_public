@@ -243,21 +243,6 @@ select:focus-visible {
   line-height: 1.1;
 }
 
-/* Bouton Payer de la mention abonnement suspendu : alerte paiement */
-
-#mention-suspension-abonnement-membre .lcdp-button,
-.lcdp-mention-suspension-abonnement .lcdp-button {
-  background: #ffffff;
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-orange);
-}
-
-#mention-suspension-abonnement-membre .lcdp-button:hover,
-.lcdp-mention-suspension-abonnement .lcdp-button:hover {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: #ffffff;
-}
 
 .lcdp-image-legend {
   width: 100%;
@@ -550,6 +535,56 @@ select:focus-visible {
     align-self: center;
     justify-self: center;
   }
+}
+
+/* Mention abonnement suspendu : style V3 sans CSS inline JS */
+
+#mention-suspension-abonnement-membre,
+.lcdp-mention-suspension-abonnement {
+  width: 100%;
+  max-width: var(--lcdp-text-width);
+  margin: calc(var(--lcdp-space-2) * -1) auto 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.25;
+  font-weight: 400;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-1);
+}
+
+#mention-suspension-abonnement-membre .lcdp-button,
+#mention-suspension-abonnement-membre .lcdp-button-secondary,
+#mention-suspension-abonnement-membre .lcdp-workflow-micro-action,
+.lcdp-mention-suspension-abonnement .lcdp-button,
+.lcdp-mention-suspension-abonnement .lcdp-button-secondary,
+.lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action {
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  min-height: 34px;
+  margin-top: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  line-height: 1.1;
+  background: #ffffff;
+  border-color: var(--lcdp-color-orange);
+  color: var(--lcdp-color-orange);
+}
+
+#mention-suspension-abonnement-membre .lcdp-button:hover,
+#mention-suspension-abonnement-membre .lcdp-button-secondary:hover,
+#mention-suspension-abonnement-membre .lcdp-workflow-micro-action:hover,
+.lcdp-mention-suspension-abonnement .lcdp-button:hover,
+.lcdp-mention-suspension-abonnement .lcdp-button-secondary:hover,
+.lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action:hover {
+  background: var(--lcdp-color-orange);
+  border-color: var(--lcdp-color-orange);
+  color: #ffffff;
 }
 
 @media (min-width: 768px) {
