@@ -409,6 +409,21 @@ select:focus-visible {
   max-width: 420px;
 }
 
+/* Mentions statut membre : resserrage quand une mention de suspension est affichée */
+
+#mention-statut-membre.lcdp-mention-connexion {
+  margin-bottom: calc(var(--lcdp-space-3) * -1);
+}
+
+#mention-suspension-abonnement-membre.lcdp-mention-connexion {
+  margin-top: calc(var(--lcdp-space-4) * -1);
+  margin-bottom: calc(var(--lcdp-space-3) * -1);
+}
+
+#mention-suspension-abonnement-membre.lcdp-mention-connexion + * {
+  margin-top: calc(var(--lcdp-space-2) * -1);
+}
+
 /* RESPONSIVE */
 
 @media (min-width: 768px) {
