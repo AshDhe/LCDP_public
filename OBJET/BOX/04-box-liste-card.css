@@ -24,6 +24,11 @@
   color: var(--lcdp-color-text);
 }
 
+.lcdp-box-liste-card__title--filtre-actif {
+  color: var(--lcdp-color-orange);
+}
+
+
 .lcdp-box-liste-card__actions {
   width: 100%;
   display: flex;
