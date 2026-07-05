@@ -147,3 +147,22 @@
     font-size: 1rem;
   }
 }
+
+.lcdp-box-champ-formulaire--lecture-seule-info input[type="text"][readonly],
+.lcdp-box-champ-formulaire--lecture-seule-info input[type="email"][readonly],
+.lcdp-box-champ-formulaire--lecture-seule-info input[type="tel"][readonly],
+.lcdp-box-champ-formulaire--lecture-seule-info input[type="number"][readonly],
+.lcdp-box-champ-formulaire--lecture-seule-info input[type="date"][readonly] {
+  border-style: dashed;
+  border-color: #d8c8b8;
+  background: #f3ede4;
+  color: #5f5144;
+  font-weight: 700;
+  cursor: default;
+}
+
+.lcdp-box-champ-formulaire--lecture-seule-info input[readonly]:focus {
+  border-color: #d8c8b8;
+  box-shadow: none;
+}
+
