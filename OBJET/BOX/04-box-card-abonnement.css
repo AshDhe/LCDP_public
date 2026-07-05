@@ -16,6 +16,12 @@
   opacity: 0.72;
 }
 
+
+.lcdp-box-card-abonnement--encours {
+  border-color: var(--lcdp-color-orange);
+  border-width: 1.5px;
+}
+
 .lcdp-box-card-abonnement__row {
   display: flex;
   flex-direction: column;

@@ -28,11 +28,11 @@
   color: var(--lcdp-color-orange);
 }
 
-
 .lcdp-box-liste-card__actions {
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--lcdp-space-2);
 }
 
