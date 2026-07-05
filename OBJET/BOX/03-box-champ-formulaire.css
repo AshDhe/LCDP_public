@@ -87,6 +87,27 @@
   box-shadow: 0 0 0 3px var(--lcdp-color-focus);
 }
 
+/* Champs renseignés en lecture seule : affichage informatif, non blanc. */
+.lcdp-box-champ-formulaire input[type="text"][readonly],
+.lcdp-box-champ-formulaire input[type="email"][readonly],
+.lcdp-box-champ-formulaire input[type="password"][readonly],
+.lcdp-box-champ-formulaire input[type="tel"][readonly],
+.lcdp-box-champ-formulaire input[type="number"][readonly],
+.lcdp-box-champ-formulaire input[type="date"][readonly],
+.lcdp-box-champ-formulaire textarea[readonly] {
+  border-color: #d8c8b8;
+  background: #f3ede4;
+  color: var(--lcdp-color-text);
+  cursor: default;
+  box-shadow: inset 0 0 0 1px rgba(123, 105, 88, 0.08);
+}
+
+.lcdp-box-champ-formulaire input[readonly]:focus,
+.lcdp-box-champ-formulaire textarea[readonly]:focus {
+  border-color: #c7b6a6;
+  box-shadow: inset 0 0 0 1px rgba(123, 105, 88, 0.12);
+}
+
 .lcdp-box-champ-formulaire__checkbox-line {
   display: flex;
   align-items: flex-start;
@@ -147,22 +168,3 @@
     font-size: 1rem;
   }
 }
-
-.lcdp-box-champ-formulaire--lecture-seule-info input[type="text"][readonly],
-.lcdp-box-champ-formulaire--lecture-seule-info input[type="email"][readonly],
-.lcdp-box-champ-formulaire--lecture-seule-info input[type="tel"][readonly],
-.lcdp-box-champ-formulaire--lecture-seule-info input[type="number"][readonly],
-.lcdp-box-champ-formulaire--lecture-seule-info input[type="date"][readonly] {
-  border-style: dashed;
-  border-color: #d8c8b8;
-  background: #f3ede4;
-  color: #5f5144;
-  font-weight: 700;
-  cursor: default;
-}
-
-.lcdp-box-champ-formulaire--lecture-seule-info input[readonly]:focus {
-  border-color: #d8c8b8;
-  box-shadow: none;
-}
-
