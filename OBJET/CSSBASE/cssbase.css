@@ -378,20 +378,6 @@ select:focus-visible {
   color: var(--lcdp-color-text);
 }
 
-/* Bouton filtre abonnement actif : retour "En cours" visible en orange */
-
-.lcdp-button-filtre-abonnement-actif {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: #ffffff;
-}
-
-.lcdp-button-filtre-abonnement-actif:hover {
-  background: var(--lcdp-color-orange-hover);
-  border-color: var(--lcdp-color-orange-hover);
-  color: #ffffff;
-}
-
 /* MENU BOUTON GENERIQUE */
 /* Mobile : boutons larges. Tablette/desktop : largeur réduite et centrée. */
 
@@ -423,7 +409,7 @@ select:focus-visible {
   max-width: 420px;
 }
 
-/* Mentions statut membre : resserrage léger, sans chevauchement */
+/* Mentions statut membre : resserrage modéré, sans chevauchement */
 
 #mention-statut-membre.lcdp-mention-connexion {
   margin-bottom: 0;
@@ -431,7 +417,7 @@ select:focus-visible {
 
 #mention-suspension-abonnement-membre.lcdp-mention-connexion {
   margin-top: -0.35rem;
-  margin-bottom: 1rem;
+  margin-bottom: -0.35rem;
 }
 
 #mention-suspension-abonnement-membre.lcdp-mention-connexion + * {
