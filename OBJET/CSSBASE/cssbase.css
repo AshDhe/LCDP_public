@@ -424,6 +424,59 @@ select:focus-visible {
   max-width: 420px;
 }
 
+.lcdp-button-logo {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  min-width: 0;
+  max-width: none;
+  min-height: 0;
+  padding: 7px;
+  border: 2px solid var(--lcdp-color-logo-green);
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 10px 26px rgba(31, 42, 36, 0.16);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lcdp-button-logo:hover {
+  border-color: var(--lcdp-color-primary);
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.2);
+  transform: translateY(-1px);
+}
+
+.lcdp-button-logo:disabled {
+  opacity: 0.65;
+  cursor: wait;
+  transform: none;
+}
+
+.lcdp-button-logo__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.lcdp-button-logo.is-loading::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 2px solid rgba(85, 115, 63, 0.22);
+  border-top-color: var(--lcdp-color-logo-green);
+  border-radius: 999px;
+  animation: lcdp-button-logo-loading 0.8s linear infinite;
+}
+
+@keyframes lcdp-button-logo-loading {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Mentions statut membre : resserrage modéré, sans chevauchement */
 
 #mention-statut-membre.lcdp-mention-connexion {
@@ -512,6 +565,13 @@ select:focus-visible {
     align-self: center;
     justify-self: center;
   }
+
+  .lcdp-button-logo {
+    width: 84px;
+    height: 84px;
+    padding: 8px;
+  }
+
 }
 
 .lcdp-site-main {
