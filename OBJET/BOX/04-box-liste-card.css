@@ -140,3 +140,35 @@
     max-width: 320px;
   }
 }
+
+/* Correction planning membre mobile : les contrôles restent lisibles et ne dépendent
+   pas du comportement desktop du composant liste. */
+.lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+  align-items: stretch;
+  justify-items: center;
+}
+
+.lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] .lcdp-button {
+  width: min(100%, 320px);
+  min-width: 0;
+  max-width: 320px;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] {
+    grid-template-columns: minmax(0, 320px) minmax(0, 320px);
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] .lcdp-button {
+    width: 100%;
+    max-width: 320px;
+  }
+}
