@@ -42,6 +42,9 @@
 
   --lcdp-button-menu-width-mobile: 100%;
   --lcdp-button-menu-width-desktop: 20rem;
+
+  --lcdp-button-logo-size-mobile: 76px;
+  --lcdp-button-logo-size-desktop: 84px;
 }
 
 /* RESET GLOBAL */
@@ -139,6 +142,7 @@ select:focus-visible {
 .lcdp-site-main {
   width: 100%;
   flex: 1 0 auto;
+  padding-bottom: 56px;
 }
 
 .lcdp-page-section {
@@ -211,39 +215,6 @@ select:focus-visible {
   opacity: 1;
 }
 
-/* STATUT MEMBRE / ABONNEMENT SUSPENDU */
-
-#mention-suspension-abonnement-membre,
-.lcdp-mention-suspension-abonnement {
-  width: 100%;
-  max-width: var(--lcdp-text-width);
-  margin: calc(var(--lcdp-space-2) * -1) auto 0;
-  color: var(--lcdp-color-text-muted);
-  font-size: 0.95rem;
-  line-height: 1.25;
-  font-weight: 400;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--lcdp-space-1);
-}
-
-#mention-suspension-abonnement-membre .lcdp-button,
-.lcdp-mention-suspension-abonnement .lcdp-button {
-  width: auto;
-  min-width: 0;
-  max-width: none;
-  min-height: 34px;
-  margin-top: 0;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  line-height: 1.1;
-}
-
-
 .lcdp-image-legend {
   width: 100%;
   max-width: var(--lcdp-text-width);
@@ -311,7 +282,6 @@ select:focus-visible {
 }
 
 /* BOUTONS GENERIQUES */
-/* Rendu repris de base.css V2, avec classes V3 */
 
 .lcdp-button {
   width: 100%;
@@ -379,7 +349,7 @@ select:focus-visible {
   color: var(--lcdp-color-text);
 }
 
-/* Bouton filtre abonnement actif : "En cours" visible en orange */
+/* BOUTON FILTRE ABONNEMENT */
 
 .lcdp-button-filtre-abonnement-actif {
   background: var(--lcdp-color-orange);
@@ -391,6 +361,71 @@ select:focus-visible {
   background: var(--lcdp-color-orange-hover);
   border-color: var(--lcdp-color-orange-hover);
   color: #ffffff;
+}
+
+/* BOUTON LOGO GENERIQUE */
+
+.lcdp-button-logo {
+  position: relative;
+  width: var(--lcdp-button-logo-size-mobile);
+  height: var(--lcdp-button-logo-size-mobile);
+  min-width: 0;
+  max-width: none;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: 0 10px 26px rgba(31, 42, 36, 0.12);
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lcdp-button-logo:hover {
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.18);
+  transform: translateY(-1px);
+}
+
+.lcdp-button-logo:disabled {
+  opacity: 0.68;
+  cursor: wait;
+  transform: none;
+}
+
+.lcdp-button-logo__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 999px;
+  clip-path: circle(50%);
+  display: block;
+}
+
+.lcdp-button-logo.is-loading::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 2px solid rgba(85, 115, 63, 0.22);
+  border-top-color: var(--lcdp-color-logo-green);
+  border-radius: 999px;
+  animation: lcdp-button-logo-loading 0.8s linear infinite;
+}
+
+@keyframes lcdp-button-logo-loading {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* LOGO NAV GENERIQUE SI UTILISE PAR UN OBJET */
+
+.lcdp-logo-nav {
+  width: var(--lcdp-button-logo-size-mobile);
+  height: var(--lcdp-button-logo-size-mobile);
+  object-fit: contain;
 }
 
 /* MENU BOUTON GENERIQUE */
@@ -424,71 +459,7 @@ select:focus-visible {
   max-width: 420px;
 }
 
-.lcdp-button-logo {
-  position: relative;
-  width: 76px;
-  height: 76px;
-  min-width: 0;
-  max-width: none;
-  min-height: 0;
-  padding: 7px;
-  border: 2px solid var(--lcdp-color-logo-green);
-  border-radius: 999px;
-  background: #ffffff;
-  box-shadow: 0 10px 26px rgba(31, 42, 36, 0.16);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.lcdp-button-logo:hover {
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.2);
-  transform: translateY(-1px);
-}
-
-.lcdp-button-logo:disabled {
-  opacity: 0.65;
-  cursor: wait;
-  transform: none;
-}
-
-.lcdp-button-logo__image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.lcdp-button-logo.is-loading::after {
-  content: "";
-  position: absolute;
-  inset: -5px;
-  border: 2px solid rgba(85, 115, 63, 0.22);
-  border-top-color: var(--lcdp-color-logo-green);
-  border-radius: 999px;
-  animation: lcdp-button-logo-loading 0.8s linear infinite;
-}
-
-@keyframes lcdp-button-logo-loading {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.lcdp-button-logo {
-  overflow: hidden;
-}
-
-.lcdp-button-logo__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 999px;
-}
-
-/* Mentions statut membre : resserrage modéré, sans chevauchement */
+/* STATUT MEMBRE / ABONNEMENT SUSPENDU */
 
 #mention-statut-membre.lcdp-mention-connexion {
   margin-bottom: 0;
@@ -499,6 +470,23 @@ select:focus-visible {
   text-transform: uppercase;
 }
 
+#mention-suspension-abonnement-membre,
+.lcdp-mention-suspension-abonnement {
+  width: 100%;
+  max-width: var(--lcdp-text-width);
+  margin: calc(var(--lcdp-space-2) * -1) auto 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.25;
+  font-weight: 400;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-1);
+}
+
 #mention-suspension-abonnement-membre.lcdp-mention-connexion {
   margin-top: -0.35rem;
   margin-bottom: -0.35rem;
@@ -506,6 +494,37 @@ select:focus-visible {
 
 #mention-suspension-abonnement-membre.lcdp-mention-connexion + * {
   margin-top: 0;
+}
+
+#mention-suspension-abonnement-membre .lcdp-button,
+#mention-suspension-abonnement-membre .lcdp-button-secondary,
+#mention-suspension-abonnement-membre .lcdp-workflow-micro-action,
+.lcdp-mention-suspension-abonnement .lcdp-button,
+.lcdp-mention-suspension-abonnement .lcdp-button-secondary,
+.lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action {
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  min-height: 34px;
+  margin-top: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  line-height: 1.1;
+  background: #ffffff;
+  border-color: var(--lcdp-color-orange);
+  color: var(--lcdp-color-orange);
+}
+
+#mention-suspension-abonnement-membre .lcdp-button:hover,
+#mention-suspension-abonnement-membre .lcdp-button-secondary:hover,
+#mention-suspension-abonnement-membre .lcdp-workflow-micro-action:hover,
+.lcdp-mention-suspension-abonnement .lcdp-button:hover,
+.lcdp-mention-suspension-abonnement .lcdp-button-secondary:hover,
+.lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action:hover {
+  background: var(--lcdp-color-orange);
+  border-color: var(--lcdp-color-orange);
+  color: #ffffff;
 }
 
 /* RESPONSIVE */
@@ -549,49 +568,12 @@ select:focus-visible {
     font-size: 17px;
   }
 
-  .lcdp-box-menu-bouton__list {
-    max-width: 520px;
-    align-items: center;
-    justify-items: center;
+  .lcdp-button-logo,
+  .lcdp-logo-nav {
+    width: var(--lcdp-button-logo-size-desktop);
+    height: var(--lcdp-button-logo-size-desktop);
   }
 
-  .lcdp-box-menu-bouton__list > a.lcdp-button,
-  .lcdp-box-menu-bouton__list > button.lcdp-button,
-  .lcdp-box-menu-bouton__list > .lcdp-button {
-    width: min(100%, 20rem);
-    max-width: 20rem;
-    align-self: center;
-    justify-self: center;
-  }
-
-  .lcdp-box-menu-bouton__list--single {
-    max-width: 420px;
-  }
-
-  .lcdp-box-menu-bouton__list--single > a.lcdp-button,
-  .lcdp-box-menu-bouton__list--single > button.lcdp-button,
-  .lcdp-box-menu-bouton__list--single > .lcdp-button {
-    width: min(100%, 20rem);
-    max-width: 20rem;
-    align-self: center;
-    justify-self: center;
-  }
-
-  .lcdp-button-logo {
-    width: 84px;
-    height: 84px;
-    padding: 8px;
-  }
-
-}
-
-.lcdp-site-main {
-  padding-bottom: 56px;
-}
-
-/* CORRECTIF GENERIQUE FINAL MENU BOUTON */
-
-@media (min-width: 768px) {
   .lcdp-box-menu-bouton__list,
   .lcdp-box-menu-bouton__list--single {
     max-width: var(--lcdp-button-menu-width-desktop);
@@ -611,59 +593,7 @@ select:focus-visible {
     align-self: center;
     justify-self: center;
   }
-}
 
-/* Mention abonnement suspendu : style V3 sans CSS inline JS */
-
-#mention-suspension-abonnement-membre,
-.lcdp-mention-suspension-abonnement {
-  width: 100%;
-  max-width: var(--lcdp-text-width);
-  margin: calc(var(--lcdp-space-2) * -1) auto 0;
-  color: var(--lcdp-color-text-muted);
-  font-size: 0.95rem;
-  line-height: 1.25;
-  font-weight: 400;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--lcdp-space-1);
-}
-
-#mention-suspension-abonnement-membre .lcdp-button,
-#mention-suspension-abonnement-membre .lcdp-button-secondary,
-#mention-suspension-abonnement-membre .lcdp-workflow-micro-action,
-.lcdp-mention-suspension-abonnement .lcdp-button,
-.lcdp-mention-suspension-abonnement .lcdp-button-secondary,
-.lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action {
-  width: auto;
-  min-width: 0;
-  max-width: none;
-  min-height: 34px;
-  margin-top: 0;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  line-height: 1.1;
-  background: #ffffff;
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-orange);
-}
-
-#mention-suspension-abonnement-membre .lcdp-button:hover,
-#mention-suspension-abonnement-membre .lcdp-button-secondary:hover,
-#mention-suspension-abonnement-membre .lcdp-workflow-micro-action:hover,
-.lcdp-mention-suspension-abonnement .lcdp-button:hover,
-.lcdp-mention-suspension-abonnement .lcdp-button-secondary:hover,
-.lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action:hover {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: #ffffff;
-}
-
-@media (min-width: 768px) {
   #mention-suspension-abonnement-membre,
   .lcdp-mention-suspension-abonnement {
     flex-direction: row;
