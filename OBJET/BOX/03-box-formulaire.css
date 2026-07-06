@@ -163,3 +163,33 @@
     max-width: 300px;
   }
 }
+
+/* Variantes génériques de formulaire */
+
+.lcdp-box-formulaire-page--compact .lcdp-box-formulaire-page__inner {
+  max-width: 440px;
+}
+
+.lcdp-box-formulaire__note--after-control {
+  margin-top: var(--lcdp-space-2);
+}
+
+.lcdp-box-formulaire__note--intro-center {
+  margin: -4px auto 0;
+  max-width: 360px;
+  font-size: 0.98rem;
+  line-height: 1.35;
+  font-weight: 400;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-formulaire-page--compact .lcdp-box-formulaire-page__inner {
+    max-width: 440px;
+  }
+
+  .lcdp-box-formulaire-page--compact .lcdp-box-formulaire__actions .lcdp-button {
+    width: 100%;
+    max-width: 260px;
+  }
+}
