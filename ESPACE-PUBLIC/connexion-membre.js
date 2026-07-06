@@ -44,10 +44,19 @@
       return;
     }
 
+    function definirEtatBoutonConnexion(enCours) {
+      bouton.disabled = enCours;
+      bouton.classList.toggle("is-loading", enCours);
+      bouton.setAttribute("aria-label", enCours ? "Connexion en cours" : "Connexion");
+      bouton.setAttribute("title", enCours ? "Connexion en cours" : "Connexion");
+    }
+
+    definirEtatBoutonConnexion(false);
+
     if (!endpointConnexionMembre) {
       champEmail.disabled = true;
       champMdp.disabled = true;
-      bouton.disabled = true;
+      definirEtatBoutonConnexion(true);
 
       afficherInformation(
         "Configuration manquante",
@@ -93,8 +102,7 @@
       }
 
       envoiEnCours = true;
-      bouton.disabled = true;
-      bouton.textContent = "Connexion en cours...";
+      definirEtatBoutonConnexion(true);
 
       try {
         const response = await fetch(endpointConnexionMembre, {
@@ -120,8 +128,7 @@
           );
 
           envoiEnCours = false;
-          bouton.disabled = false;
-          bouton.textContent = "Connexion";
+          definirEtatBoutonConnexion(false);
           return;
         }
 
@@ -142,8 +149,7 @@
         );
 
         envoiEnCours = false;
-        bouton.disabled = false;
-        bouton.textContent = "Connexion";
+        definirEtatBoutonConnexion(false);
       }
     }
   }
@@ -328,8 +334,6 @@
 
     return base + cheminNettoye;
   }
-
-
 
   function obtenirUrlDestinationApresConnexion(urlDefaut) {
     const params = new URLSearchParams(window.location.search);
