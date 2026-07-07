@@ -8,8 +8,7 @@
     sousTitre: "Liste de membres invités",
     introHtml: `
       <p>
-        Inscrivez-vous sur notre liste d'attente. En tant que membre invité,
-        vous serez informé(e) des bonus abonnement 2027 pour vous-même et vos invités.
+        Partagez votre curiosité et votre passion du plein air. Bénéficiez des bonus abonnement 2027 pour tous nos membres invités.
       </p>
     `,
     champs: [
@@ -17,27 +16,27 @@
         type: "text",
         id: "nom",
         name: "nom",
-        label: "NOM",
+        label: "Votre NOM",
         required: true,
-        placeholder: "Votre NOM",
+        placeholder: "...",
         autocomplete: "family-name"
       },
       {
         type: "text",
         id: "prenom",
         name: "prenom",
-        label: "Prénom",
+        label: "Votre prénom",
         required: true,
-        placeholder: "Votre prénom",
+        placeholder: "...",
         autocomplete: "given-name"
       },
       {
         type: "text",
         id: "departement",
         name: "departement",
-        label: "Numéro de département",
+        label: "Département",
         required: true,
-        placeholder: "Numéro, exemple : 08",
+        placeholder: "Le numéro (par exemple : 08)",
         inputmode: "text",
         autocomplete: "off"
       },
@@ -45,9 +44,9 @@
         type: "number",
         id: "age",
         name: "age",
-        label: "Âge",
+        label: "Voulez-vous dire votre âge ?",
         required: false,
-        placeholder: "Votre âge, exemple : 40",
+        placeholder: "Par exemple : 40)",
         inputmode: "numeric",
         min: "18",
         max: "100"
@@ -56,9 +55,9 @@
         type: "email",
         id: "email",
         name: "email",
-        label: "E-mail",
+        label: "Votre e-mail",
         required: true,
-        placeholder: "Votre e-mail",
+        placeholder: "Celui auquel on peut vous écrire",
         autocomplete: "email",
         autocapitalize: "none",
         spellcheck: "false"
@@ -67,16 +66,16 @@
         type: "textarea",
         id: "texte_libre",
         name: "texte_libre",
-        label: "Quelle est votre motivation à bénéficier du club ?",
+        label: "Votre motivation pour le club",
         required: false,
-        placeholder: "Vous pouvez préciser votre motivation à faire partie du club La Clé du Parc et à bénéficier de ses activités."
+        placeholder: "Vous pouvez partager votre motivation à faire partie du club La Clé du Parc et à bénéficier de ses activités."
       },
       {
         type: "checkbox",
         id: "responsable_parc",
         name: "responsable_parc",
         label: "Responsable de parc",
-        checkboxLabel: "Êtes-vous par ailleurs responsable d'un parc de plein air adapté à des promenades privées en petits groupes ?",
+        checkboxLabel: "Êtes-vous responsable d'un parc plein air intéressé par nos activités ?",
         required: false
       },
       {
@@ -84,19 +83,18 @@
         id: "responsable_activite",
         name: "responsable_activite",
         label: "Responsable d'activité",
-        checkboxLabel: "Êtes-vous par ailleurs responsable d'une activité artistique, sportive, sociale ou culturelle conciliable avec une pratique de plein air ?",
+        checkboxLabel: "Êtes-vous responsable d'activité de plein air (artistique, sportive, conviviale, culturelle) ?",
         required: false
       }
     ],
     bouton: {
       id: "bouton-envoyer-liste-attente",
       type: "submit",
-      label: "M'inscrire sur liste d'attente",
+      label: "Me pré-inscrire",
       style: "lcdp-button-orange"
     },
     noteHtml: `
-      * Votre réponse est nécessaire pour compléter le formulaire.<br>
-      Ce formulaire est destiné aux personnes majeures. Les réponses obtenues sont exclusivement réservées au club La Clé du Parc pour identifier des personnes désireuses de bénéficier des bonus réservés aux premiers inscrits sur cette liste et liés à la période d'ouverture du club. Les données collectées ne sont pas destinées à un autre usage. Elles sont détruites chaque début d'année si les données ont plus d'un an.
+      * Votre réponse est nécessaire pour enregistre votre pré-inscription. Ce formulaire est destiné aux personnes majeures. Vos réponses sont exclusivement réservées au club La Clé du Parc. Elles sont conservées deux ans.
     `
   };
 
@@ -108,7 +106,6 @@
 
   async function initialiserPageListeAttente() {
     await initialiserBandeauListeAttente();
-    await initialiserFooterListeAttente();
 
     if (typeof window.LCDP_creerFormulaire !== "function") {
       console.error("Objet formulaire V3 introuvable.");
@@ -125,6 +122,7 @@
       FORMULAIRE_LISTE_ATTENTE_CONFIG
     );
 
+    appliquerSousTitreOrangeListeAttente();
     initialiserFormulaireListeAttente();
   }
 
@@ -375,6 +373,16 @@
     return String(value || "").replace(/\/+$/, "");
   }
 
+  function appliquerSousTitreOrangeListeAttente() {
+    const sousTitre = document.querySelector(
+      "#lcdp-formulaire-liste-attente-slot [data-lcdp-formulaire-subtitle]"
+    );
+
+    if (!sousTitre) return;
+
+    sousTitre.style.color = "var(--lcdp-color-orange)";
+  }
+
   async function initialiserBandeauListeAttente() {
     const slot = document.getElementById("lcdp-bandeau-slot");
 
@@ -388,22 +396,6 @@
       appliquerRoutesSiteListeAttente(slot);
     } catch (error) {
       console.error("Erreur bandeau liste d'attente :", error);
-    }
-  }
-
-  async function initialiserFooterListeAttente() {
-    const slot = document.getElementById("lcdp-footer-slot");
-
-    if (!slot) return;
-
-    slot.innerHTML = "";
-
-    try {
-      const fragment = await chargerFragmentObjetListeAttente("/BOX/02-box-footer.html");
-      slot.appendChild(fragment);
-      appliquerRoutesSiteListeAttente(slot);
-    } catch (error) {
-      console.error("Erreur footer liste d'attente :", error);
     }
   }
 
