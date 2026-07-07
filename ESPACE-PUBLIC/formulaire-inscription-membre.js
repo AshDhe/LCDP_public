@@ -148,7 +148,21 @@
       FORMULAIRE_INSCRIPTION_MEMBRE_CONFIG
     );
 
+    appliquerVarianteSousTitreFormulaireInscription();
+
     initialiserFormulaireInscriptionMembre();
+  }
+
+  function appliquerVarianteSousTitreFormulaireInscription() {
+    const sousTitre = document.querySelector(
+      "#formulaire-inscription-membre .lcdp-box-formulaire__subtitle"
+    );
+
+    if (!sousTitre) {
+      return;
+    }
+
+    sousTitre.classList.add("lcdp-box-formulaire__subtitle--accent");
   }
 
   function initialiserFormulaireInscriptionMembre() {
