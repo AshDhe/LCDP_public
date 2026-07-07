@@ -4,11 +4,11 @@
   const FORMULAIRE_INSCRIPTION_MEMBRE_CONFIG = {
     id: "formulaire-inscription-membre",
     ariaLabel: "Formulaire d'inscription membre invité",
-    titre: "Formulaire d'inscription",
-    sousTitre: "La Clé du Parc | Membre invité",
+    titre: "Membre invité",
+    sousTitre: "Formulaire d'inscription",
     introHtml: `
       <p>
-        Ouvrez votre compte de membre invité pour recevoir des invitations et accéder aux parcs du club dans les conditions prévues par La Clé du Parc.
+        Être membre invité du club est gratuit et vous permet d'être invité(e) par un membre abonné. Ouvrez votre compte pour recevoir des invitations et participer à la vie du club en tant que membre invité.
       </p>
     `,
     champs: [
@@ -20,7 +20,7 @@
         required: true,
         placeholder: "NOM",
         autocomplete: "family-name",
-        description: "Conforme à votre état civil. En majuscules de préférence."
+        description: "Conforme à votre état civil. En majuscules de préférence. Votre état civil est nécessaire si vous souhaitez devenir membre abonné."
       },
       {
         type: "text",
@@ -30,42 +30,42 @@
         required: true,
         placeholder: "Prénom",
         autocomplete: "given-name",
-        description: "Conforme à votre état civil. En minuscules de préférence, avec la première lettre en majuscule."
+        description: "Conforme à votre état civil. En minuscules de préférence, avec la première lettre en majuscule. Votre état civil est nécessaire si vous souhaitez devenir membre abonné."
       },
       {
         type: "text",
         id: "dptmtmembre",
         name: "dptmtmembre",
-        label: "Numéro du département",
+        label: "Quel est votre département ?",
         required: true,
-        placeholder: "Numéro (exemple 08)",
+        placeholder: "Numéro du département (exemple 08)",
         inputmode: "text",
         autocomplete: "off",
-        description: "Le numéro du département permet de sélectionner les informations proches de vous en priorité."
+        description: "Un numéro du département permet de sélectionner les informations proches de vous en priorité. Il est modifiable directement par la suite depuis votre espace personnel dans l'application."
       },
       {
         type: "email",
         id: "emailmembre",
         name: "emailmembre",
-        label: "Votre adresse e-mail d’identification",
+        label: "Votre adresse e-mail personnelle",
         required: true,
-        placeholder: "Votre identifiant e-mail",
+        placeholder: "Votre adresse e-mail personnelle",
         autocomplete: "email",
         autocapitalize: "none",
         spellcheck: "false",
-        description: "L’adresse e-mail est votre identifiant de connexion à l'application. Un e-mail de confirmation vous sera envoyé après l’envoi du formulaire."
+        description: "Une adresse e-mail que vous utilisez. C'est votre identifiant informatique de connexion à l'application. Elle est modifiable directement par la suite depuis votre espace personnel dans l'application."
       },
       {
         type: "email",
         id: "emailparrain",
         name: "emailparrain",
-        label: "Adresse e-mail du membre qui vous invite",
+        label: "Êtes-vous invité(e) par un membre ?",
         required: false,
         placeholder: "E-mail du membre qui vous invite",
         autocomplete: "email",
         autocapitalize: "none",
         spellcheck: "false",
-        description: "Cette information n'est pas obligatoire. Si vous la renseignez, elle doit être différente de votre adresse e-mail."
+        description: ""
       },
       {
         type: "checkbox",
@@ -75,14 +75,14 @@
         checkboxLabel: "J'accepte le règlement du club",
         required: true,
         descriptionHtml: `
-          Vous devez accepter le
+          L'acceptation du 
           <a
             href="../ESPACE-PUBLIC/le-reglement-du-club.html?source=formulaire-inscription-membre"
             data-site-href="/ESPACE-PUBLIC/le-reglement-du-club.html?source=formulaire-inscription-membre"
             target="_blank"
             rel="noopener noreferrer"
           >règlement du club</a>
-          pour envoyer le formulaire d'inscription.
+          est nécessaire pour être membre du club (invité ou abonné).
         `
       },
       {
@@ -93,26 +93,26 @@
         checkboxLabel: "J'accepte le règlement de l'application",
         required: true,
         descriptionHtml: `
-          Vous devez accepter le
+          L'acceptation du 
           <a
             href="../ESPACE-PUBLIC/le-reglement-de-lapplication.html?source=formulaire-inscription-membre"
             data-site-href="/ESPACE-PUBLIC/le-reglement-de-lapplication.html?source=formulaire-inscription-membre"
             target="_blank"
             rel="noopener noreferrer"
           >règlement de l’application</a>
-          pour envoyer le formulaire d'inscription.
+          est nécessaire pour être membre du club (invité ou abonné).
         `
       }
     ],
     bouton: {
       id: "bouton-envoyer-inscription",
       type: "submit",
-      label: "Envoyer",
+      label: "Devenir membre invité",
       style: "lcdp-button-primary"
     },
     noteHtml: `
-      * Votre réponse est obligatoire pour compléter le formulaire.<br>
-      Ce formulaire et les données qu’il contient sont soumis au
+      * Réponse nécessaire pour vous inscrire.<br>
+      Ce formulaire et ses informations sont soumis au
       <a
         href="../ESPACE-PUBLIC/le-reglement-du-club.html?source=formulaire-inscription-membre"
         data-site-href="/ESPACE-PUBLIC/le-reglement-du-club.html?source=formulaire-inscription-membre"
