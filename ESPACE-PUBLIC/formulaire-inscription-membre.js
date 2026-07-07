@@ -149,7 +149,6 @@
     );
 
     appliquerVarianteSousTitreFormulaireInscription();
-
     initialiserFormulaireInscriptionMembre();
   }
 
@@ -158,16 +157,15 @@
       "#formulaire-inscription-membre .lcdp-box-formulaire__subtitle"
     );
 
-    if (!sousTitre) {
-      return;
+    if (sousTitre) {
+      sousTitre.classList.add("lcdp-box-formulaire__subtitle--accent");
     }
-
-    sousTitre.classList.add("lcdp-box-formulaire__subtitle--accent");
   }
 
   function initialiserFormulaireInscriptionMembre() {
     const form = document.getElementById("formulaire-inscription-membre");
     const submitButton = document.getElementById("bouton-envoyer-inscription");
+
     const workerUrl = nettoyerBaseUrl(
       window.SITE_CONFIG?.workerFormInscriptionMembreUrl ||
       window.SITE_CONFIG?.WORKER_FORM_INSCRIPTION_MEMBRE_URL ||
@@ -179,6 +177,7 @@
     );
 
     let envoiEnCours = false;
+    let libelleBoutonInitial = "Devenir membre invité";
 
     if (!form) {
       console.error("Formulaire introuvable.");
@@ -198,12 +197,12 @@
       return;
     }
 
-    const libelleBoutonInitial = submitButton.textContent.trim() || "Devenir membre invité";
     form.noValidate = true;
+    form.setAttribute("novalidate", "novalidate");
+    libelleBoutonInitial = submitButton.textContent || libelleBoutonInitial;
 
     if (!workerUrl) {
       submitButton.disabled = true;
-
       afficherAlerte(
         "Configuration manquante",
         "L’adresse du service d'inscription membre n’est pas configurée."
@@ -211,20 +210,19 @@
       return;
     }
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      envoyerFormulaire();
-    });
+    form.addEventListener("submit", envoyerFormulaire);
 
-    async function envoyerFormulaire() {
+    async function envoyerFormulaire(event) {
+      if (event) {
+        event.preventDefault();
+      }
+
       if (envoiEnCours || submitButton.disabled) return;
-
-      reinitialiserValiditesPersonnalisees(form);
 
       const erreur = verifierFormulaire(form);
 
       if (erreur) {
-        await afficherErreurValidation(erreur);
+        await afficherAlerte("Attention", erreur);
         return;
       }
 
@@ -266,7 +264,6 @@
           "Un e-mail vient de vous être envoyé. Cliquez sur le lien reçu pour confirmer votre adresse e-mail et finaliser votre inscription au club.",
           redirectUrl
         );
-
       } catch (error) {
         console.error("Erreur formulaire inscription membre :", error);
 
@@ -317,93 +314,46 @@
     const regleapp = form.querySelector("#regleapp_v1");
 
     if (!nommembre) {
-      return creerErreurValidation("nommembre", "Votre nom est obligatoire.");
+      return "Votre nom est obligatoire.";
     }
 
     if (!prenommembre) {
-      return creerErreurValidation("prenommembre", "Votre prénom est obligatoire.");
+      return "Votre prénom est obligatoire.";
     }
 
     if (!dptmtmembre) {
-      return creerErreurValidation("dptmtmembre", "Un département est nécessaire.");
+      return "Un département est nécessaire.";
     }
 
     if (!/^(?:\d{2,3}|2A|2B)$/i.test(dptmtmembre)) {
-      return creerErreurValidation("dptmtmembre", "Le numéro de département n'est pas valide.");
+      return "Le numéro de département n'est pas valide.";
     }
 
-    if (!emailmembre) {
-      return creerErreurValidation("emailmembre", "Votre adresse e-mail est obligatoire.");
+    if (!emailmembreNormalise) {
+      return "Votre adresse e-mail est obligatoire.";
     }
 
     if (!isValidEmail(emailmembreNormalise)) {
-      return creerErreurValidation("emailmembre", "Votre adresse e-mail n'est pas valide.");
+      return "Votre adresse e-mail n'est pas valide.";
     }
 
     if (emailparrainNormalise && !isValidEmail(emailparrainNormalise)) {
-      return creerErreurValidation("emailparrain", "L’adresse e-mail du membre qui vous invite n'est pas valide.");
+      return "L’adresse e-mail du membre qui vous invite n'est pas valide.";
     }
 
     if (emailparrainNormalise && emailmembreNormalise === emailparrainNormalise) {
-      return creerErreurValidation(
-        "emailparrain",
-        "L’adresse e-mail du membre qui vous invite doit être différente de votre adresse e-mail."
-      );
+      return "L’adresse e-mail du membre qui vous invite doit être différente de votre adresse e-mail.";
     }
 
     if (!regleclub || regleclub.checked !== true) {
-      return creerErreurValidation("regleclub_v1", "Le règlement du club doit être accepté.");
+      return "Le règlement du club doit être accepté.";
     }
 
     if (!regleapp || regleapp.checked !== true) {
-      return creerErreurValidation("regleapp_v1", "Le règlement de l’application doit être accepté.");
+      return "Le règlement de l’application doit être accepté.";
     }
 
-    return null;
-  }
-
-  function creerErreurValidation(champId, message) {
-    return { champId, message };
-  }
-
-  function reinitialiserValiditesPersonnalisees(form) {
-    if (!form || typeof form.querySelectorAll !== "function") {
-      return;
-    }
-
-    form.querySelectorAll("input, textarea, select").forEach((champ) => {
-      if (typeof champ.setCustomValidity === "function") {
-        champ.setCustomValidity("");
-      }
-    });
-  }
-
-  async function afficherErreurValidation(erreur) {
-    const message = erreur?.message || "Le formulaire contient une erreur.";
-    const champ = erreur?.champId ? document.getElementById(erreur.champId) : null;
-
-    if (champ && typeof champ.setCustomValidity === "function") {
-      champ.setCustomValidity(message);
-    }
-
-    if (champ && typeof champ.focus === "function") {
-      champ.focus({ preventScroll: false });
-    }
-
-    if (champ && typeof champ.reportValidity === "function") {
-      champ.reportValidity();
-    }
-
-    if (champ && typeof champ.setCustomValidity === "function") {
-      const effacerErreur = () => {
-        champ.setCustomValidity("");
-      };
-
-      champ.addEventListener("input", effacerErreur, { once: true });
-      champ.addEventListener("change", effacerErreur, { once: true });
-    }
-
-    await afficherAlerte("Attention", message);
+    return "";
   }
 
   function normaliserEmailPourComparaison(email) {
@@ -475,7 +425,6 @@
       if (redirectUrl) {
         window.location.href = redirectUrl;
       }
-
     } catch (error) {
       console.error("Erreur alerte V3 :", error);
 
