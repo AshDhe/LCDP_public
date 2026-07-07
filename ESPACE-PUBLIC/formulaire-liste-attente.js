@@ -222,11 +222,13 @@
           return;
         }
 
+        const prenomConfirmation = String(payload.prenom || "").trim();
+
         formulaire.reset();
 
         await afficherInformationListeAttente(
-          "Merci",
-          "Votre inscription sur la liste d'attente est enregistrée. Un e-mail de confirmation vient de vous être envoyé avec le récapitulatif de vos informations.",
+          prenomConfirmation ? `Merci, ${prenomConfirmation}` : "Merci",
+          "Vous êtes pré-inscrit(e) pour 2027. Un e-mail de confirmation vous a été envoyé avec le récapitulatif de vos informations. Un petit cadeau vous attend !",
           "validation",
           {
             redirectUrl
