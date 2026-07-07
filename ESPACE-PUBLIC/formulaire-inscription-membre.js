@@ -167,12 +167,6 @@
     const form = obtenirElementFormulaireInscription(racineFormulaire);
     const submitButton = document.getElementById("bouton-envoyer-inscription");
 
-    const workerUrl = nettoyerBaseUrl(
-      window.SITE_CONFIG?.workerFormInscriptionMembreUrl ||
-      window.SITE_CONFIG?.WORKER_FORM_INSCRIPTION_MEMBRE_URL ||
-      ""
-    );
-
     const redirectUrl = construireUrlPublique(
       "/index.html?source=formulaire-inscription-membre"
     );
@@ -202,16 +196,8 @@
     form.setAttribute("novalidate", "novalidate");
     libelleBoutonInitial = submitButton.textContent || libelleBoutonInitial;
 
-    if (!workerUrl) {
-      submitButton.disabled = true;
-      afficherAlerte(
-        "Configuration manquante",
-        "L’adresse du service d'inscription membre n’est pas configurée."
-      );
-      return;
-    }
-
     form.addEventListener("submit", envoyerFormulaire);
+    submitButton.addEventListener("click", envoyerFormulaire);
 
     async function envoyerFormulaire(event) {
       if (event) {
@@ -225,6 +211,16 @@
 
       if (erreur) {
         await afficherAlerte("Attention", erreur);
+        return;
+      }
+
+      const workerUrl = obtenirWorkerInscriptionMembreUrl();
+
+      if (!workerUrl) {
+        await afficherAlerte(
+          "Configuration manquante",
+          "L’adresse du service d'inscription membre n’est pas configurée."
+        );
         return;
       }
 
@@ -279,6 +275,14 @@
         submitButton.textContent = libelleBoutonInitial;
       }
     }
+  }
+
+  function obtenirWorkerInscriptionMembreUrl() {
+    return nettoyerBaseUrl(
+      window.SITE_CONFIG?.workerFormInscriptionMembreUrl ||
+      window.SITE_CONFIG?.WORKER_FORM_INSCRIPTION_MEMBRE_URL ||
+      ""
+    );
   }
 
   function obtenirElementFormulaireInscription(racineFormulaire) {
