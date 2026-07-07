@@ -6,6 +6,7 @@
     ariaLabel: "Formulaire d'inscription membre invité",
     titre: "Membre invité",
     sousTitre: "Formulaire d'inscription",
+    sousTitreClasse: "lcdp-box-formulaire__subtitle--accent",
     introHtml: `
       <p>
         Être membre invité La Clé du Parc est gratuit et vous permet d'être invité(e) par un membre abonné. Ouvrez votre compte pour recevoir des invitations et participer à la vie du club en tant que membre invité.
@@ -146,14 +147,6 @@
       "lcdp-formulaire-inscription-slot",
       FORMULAIRE_INSCRIPTION_MEMBRE_CONFIG
     );
-
-    const sousTitreInscription = document.querySelector(
-      "#formulaire-inscription-membre .lcdp-box-formulaire__subtitle"
-    );
-
-    if (sousTitreInscription) {
-      sousTitreInscription.style.color = "var(--lcdp-color-orange)";
-    }
 
     initialiserFormulaireInscriptionMembre();
   }
