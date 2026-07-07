@@ -54,6 +54,10 @@
   text-align: center;
 }
 
+.lcdp-box-formulaire__subtitle.lcdp-box-formulaire__subtitle--accent {
+  color: var(--lcdp-color-orange);
+}
+
 .lcdp-box-formulaire__intro {
   color: var(--lcdp-color-text-muted);
   display: flex;
@@ -155,10 +159,6 @@
 
   .lcdp-box-formulaire__title {
     font-size: 2.125rem;
-  }
-
-  .lcdp-box-formulaire__intro {
-    font-size: var(--lcdp-font-size-paragraph-desktop);
   }
 
   .lcdp-box-formulaire__actions .lcdp-button {
