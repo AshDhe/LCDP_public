@@ -207,17 +207,6 @@
       envoyerFormulaire();
     });
 
-    if (emailMembre && emailParrain) {
-      setTimeout(() => {
-        const valeurMembre = emailMembre.value.trim().toLowerCase();
-        const valeurParrain = emailParrain.value.trim().toLowerCase();
-
-        if (valeurMembre && valeurParrain && valeurMembre === valeurParrain) {
-          emailParrain.value = "";
-        }
-      }, 300);
-    }
-
     async function envoyerFormulaire() {
       if (envoiEnCours || submitButton.disabled) return;
 
@@ -310,6 +299,8 @@
     const dptmtmembre = getValue(form, "dptmtmembre");
     const emailmembre = getValue(form, "emailmembre");
     const emailparrain = getValue(form, "emailparrain");
+    const emailmembreNormalise = normaliserEmailPourComparaison(emailmembre);
+    const emailparrainNormalise = normaliserEmailPourComparaison(emailparrain);
 
     const regleclub = form.querySelector("#regleclub_v1");
     const regleapp = form.querySelector("#regleapp_v1");
@@ -334,16 +325,16 @@
       return "Votre adresse e-mail est obligatoire.";
     }
 
-    if (!isValidEmail(emailmembre)) {
+    if (!isValidEmail(emailmembreNormalise)) {
       return "Votre adresse e-mail n'est pas valide.";
     }
 
-    if (emailparrain && !isValidEmail(emailparrain)) {
-      return "L’adresse e-mail du parrain n'est pas valide.";
+    if (emailparrainNormalise && !isValidEmail(emailparrainNormalise)) {
+      return "L’adresse e-mail du membre qui vous invite n'est pas valide.";
     }
 
-    if (emailmembre && emailparrain && emailmembre.toLowerCase() === emailparrain.toLowerCase()) {
-      return "L’adresse e-mail du parrain doit être différente de votre adresse e-mail.";
+    if (emailparrainNormalise && emailmembreNormalise === emailparrainNormalise) {
+      return "L’adresse e-mail du membre qui vous invite doit être différente de votre adresse e-mail.";
     }
 
     if (!regleclub || regleclub.checked !== true) {
@@ -357,8 +348,12 @@
     return "";
   }
 
+  function normaliserEmailPourComparaison(email) {
+    return String(email || "").trim().toLowerCase();
+  }
+
   function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
   }
 
   async function afficherAlerte(titre, message, redirectUrl = "") {
