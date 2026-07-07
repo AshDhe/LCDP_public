@@ -94,6 +94,6 @@
   }
 
   .lcdp-box-galerie__text {
-    font-size: 1.02rem;
+    font-size: var(--lcdp-font-size-paragraph-desktop);
   }
 }

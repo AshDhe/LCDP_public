@@ -125,6 +125,10 @@
     line-height: 1.25;
   }
 
+  .lcdp-box-champ-formulaire__description {
+    font-size: var(--lcdp-font-size-paragraph-desktop);
+  }
+
   .lcdp-box-champ-formulaire input[type="text"],
   .lcdp-box-champ-formulaire input[type="email"],
   .lcdp-box-champ-formulaire input[type="password"],

@@ -53,4 +53,8 @@
   .lcdp-boxtext {
     padding: var(--lcdp-space-5);
   }
+
+  .lcdp-boxtext__content {
+    font-size: var(--lcdp-font-size-paragraph-desktop);
+  }
 }
