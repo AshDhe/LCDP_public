@@ -226,9 +226,16 @@
 
         formulaire.reset();
 
+        const messageConfirmation = [
+          `Bonjour ${prenomConfirmation},`,
+          "Votre pré-inscription est bien enregistrée. Merci !",
+          "Nous vous avons envoyé un e-mail de confirmation.",
+          "Un cadeau vous y attend à l'intérieur 😀🗝️ !"
+        ].join("\n");
+
         await afficherInformationListeAttente(
-          prenomConfirmation ? `Merci, ${prenomConfirmation}` : "Merci",
-          "Vous êtes pré-inscrit(e) pour 2027. Un e-mail de confirmation vous a été envoyé avec le récapitulatif de vos informations. Un petit cadeau vous attend !",
+          "",
+          messageConfirmation,
           "validation",
           {
             redirectUrl
