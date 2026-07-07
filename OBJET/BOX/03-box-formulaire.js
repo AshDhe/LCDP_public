@@ -149,7 +149,7 @@
       autocapitalize: champ.autocapitalize,
       spellcheck: champ.spellcheck,
       inputmode: champ.inputmode,
-      required: champ.required
+      required: champ.validationNative === true && champ.required
     });
 
     return element;
@@ -166,7 +166,7 @@
     input.name = champ.name;
 
     ajouterAttributs(input, {
-      required: champ.required
+      required: champ.validationNative === true && champ.required
     });
 
     const span = document.createElement("span");
@@ -244,6 +244,14 @@
 
     if (configuration.ariaLabel) {
       form.setAttribute("aria-label", configuration.ariaLabel);
+    }
+
+    if (configuration.validationNative === true) {
+      form.noValidate = false;
+      form.removeAttribute("novalidate");
+    } else {
+      form.noValidate = true;
+      form.setAttribute("novalidate", "novalidate");
     }
 
     titre.textContent = configuration.titre || "";
