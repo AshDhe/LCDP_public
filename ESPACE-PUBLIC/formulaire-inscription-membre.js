@@ -163,7 +163,8 @@
   }
 
   function initialiserFormulaireInscriptionMembre() {
-    const form = document.getElementById("formulaire-inscription-membre");
+    const racineFormulaire = document.getElementById("formulaire-inscription-membre");
+    const form = obtenirElementFormulaireInscription(racineFormulaire);
     const submitButton = document.getElementById("bouton-envoyer-inscription");
 
     const workerUrl = nettoyerBaseUrl(
@@ -179,7 +180,7 @@
     let envoiEnCours = false;
     let libelleBoutonInitial = "Devenir membre invité";
 
-    if (!form) {
+    if (!racineFormulaire || !form) {
       console.error("Formulaire introuvable.");
       afficherAlerte(
         "Erreur technique",
@@ -215,6 +216,7 @@
     async function envoyerFormulaire(event) {
       if (event) {
         event.preventDefault();
+        event.stopPropagation();
       }
 
       if (envoiEnCours || submitButton.disabled) return;
@@ -277,6 +279,18 @@
         submitButton.textContent = libelleBoutonInitial;
       }
     }
+  }
+
+  function obtenirElementFormulaireInscription(racineFormulaire) {
+    if (!racineFormulaire) {
+      return null;
+    }
+
+    if (racineFormulaire.tagName && racineFormulaire.tagName.toUpperCase() === "FORM") {
+      return racineFormulaire;
+    }
+
+    return racineFormulaire.querySelector ? racineFormulaire.querySelector("form") : null;
   }
 
   function lireDonneesFormulaire(form) {
