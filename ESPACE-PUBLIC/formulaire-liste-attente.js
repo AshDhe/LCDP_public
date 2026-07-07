@@ -189,7 +189,7 @@
       const erreur = validerPayloadListeAttente(payload);
 
       if (erreur) {
-        await afficherInformationListeAttente("Formulaire incomplet", erreur, "erreur");
+        await afficherInformationListeAttente("", erreur, "erreur");
         return;
       }
 
@@ -294,15 +294,15 @@
 
   function validerPayloadListeAttente(payload) {
     if (!payload.nom) {
-      return "Veuillez renseigner votre nom.";
+      return "Votre nom n'est pas renseigné.";
     }
 
     if (!payload.prenom) {
-      return "Veuillez renseigner votre prénom.";
+      return "Votre prénom n'est pas renseigné.";
     }
 
     if (!payload.departement) {
-      return "Veuillez renseigner votre département.";
+      return "Vous n'avez pas indiqué de département.";
     }
 
     if (!/^(?:\d{2,3}|2A|2B)$/i.test(payload.departement)) {
@@ -317,15 +317,15 @@
         payload.age > 100
       )
     ) {
-      return "Veuillez renseigner un âge valide.";
+      return "Votre âge n'est pas conforme.";
     }
 
     if (!payload.email) {
-      return "Veuillez renseigner votre adresse e-mail.";
+      return "Votre adresse e-mail est nécessaire.";
     }
 
     if (!isValidEmailListeAttente(payload.email)) {
-      return "Veuillez renseigner une adresse e-mail valide.";
+      return "Votre adresse mail n'est pas conforme.";
     }
 
     return "";
