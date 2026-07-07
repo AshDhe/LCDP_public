@@ -362,6 +362,7 @@
 
   async function afficherAlerte(titre, message, redirectUrl = "") {
     const slot = document.getElementById("lcdp-lightbox-slot");
+    const alerteObligatoire = Boolean(redirectUrl);
 
     if (!slot || typeof window.LCDP_chargerFragmentObjet !== "function") {
       alert(message || titre);
@@ -392,20 +393,29 @@
         ? titre + " — " + message
         : titre || message || "";
 
+      if (alerteObligatoire) {
+        boutonFermer.hidden = true;
+        boutonFermer.setAttribute("aria-hidden", "true");
+        boutonFermer.tabIndex = -1;
+      }
+
       await new Promise((resolve) => {
         const fermer = () => {
           slot.innerHTML = "";
           resolve();
         };
 
-        boutonFermer.addEventListener("click", fermer, { once: true });
         boutonOk.addEventListener("click", fermer, { once: true });
 
-        alerte.addEventListener("click", (event) => {
-          if (event.target === alerte) {
-            fermer();
-          }
-        }, { once: true });
+        if (!alerteObligatoire) {
+          boutonFermer.addEventListener("click", fermer, { once: true });
+
+          alerte.addEventListener("click", (event) => {
+            if (event.target === alerte) {
+              fermer();
+            }
+          }, { once: true });
+        }
       });
 
       if (redirectUrl) {
