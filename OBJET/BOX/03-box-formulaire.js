@@ -253,6 +253,13 @@
       sousTitre.hidden = false;
     }
 
+    if (configuration.sousTitreClasse) {
+      String(configuration.sousTitreClasse)
+        .split(/\s+/)
+        .filter(Boolean)
+        .forEach((nomClasse) => sousTitre.classList.add(nomClasse));
+    }
+
     if (configuration.introHtml) {
       intro.innerHTML = configuration.introHtml;
       intro.hidden = false;
