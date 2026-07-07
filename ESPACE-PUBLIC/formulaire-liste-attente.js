@@ -3,14 +3,13 @@
 
   const FORMULAIRE_LISTE_ATTENTE_CONFIG = {
     id: "formulaire-liste-attente",
-    ariaLabel: "Formulaire d'inscription sur liste d'attente",
-    titre: "Formulaire d'inscription",
-    sousTitre: "La Clé du Parc | Liste d'attente",
+    ariaLabel: "Formulaire de pré-inscription 2027",
+    titre: "Pré-inscription 2027",
+    sousTitre: "Liste de membres invités",
     introHtml: `
       <p>
-        Rejoignez la communauté des passionné(e)s de parcs plein air d'exception.
-        La Clé du Parc ouvre un accès anticipé pour vous proposer de bénéficier
-        des bonus réservés aux premiers inscrits de la liste.
+        Inscrivez-vous sur notre liste d'attente. En tant que membre invité,
+        vous serez informé(e) des bonus abonnement 2027 pour vous-même et vos invités.
       </p>
     `,
     champs: [
@@ -108,6 +107,9 @@
   }
 
   async function initialiserPageListeAttente() {
+    await initialiserBandeauListeAttente();
+    await initialiserFooterListeAttente();
+
     if (typeof window.LCDP_creerFormulaire !== "function") {
       console.error("Objet formulaire V3 introuvable.");
       await afficherInformationListeAttente(
@@ -371,6 +373,83 @@
 
   function nettoyerBaseUrlListeAttente(value) {
     return String(value || "").replace(/\/+$/, "");
+  }
+
+  async function initialiserBandeauListeAttente() {
+    const slot = document.getElementById("lcdp-bandeau-slot");
+
+    if (!slot) return;
+
+    slot.innerHTML = "";
+
+    try {
+      const fragment = await chargerFragmentObjetListeAttente("/BOX/02-box-bandeau-nav.html");
+      slot.appendChild(fragment);
+      appliquerRoutesSiteListeAttente(slot);
+    } catch (error) {
+      console.error("Erreur bandeau liste d'attente :", error);
+    }
+  }
+
+  async function initialiserFooterListeAttente() {
+    const slot = document.getElementById("lcdp-footer-slot");
+
+    if (!slot) return;
+
+    slot.innerHTML = "";
+
+    try {
+      const fragment = await chargerFragmentObjetListeAttente("/BOX/02-box-footer.html");
+      slot.appendChild(fragment);
+      appliquerRoutesSiteListeAttente(slot);
+    } catch (error) {
+      console.error("Erreur footer liste d'attente :", error);
+    }
+  }
+
+  function appliquerRoutesSiteListeAttente(racine = document) {
+    racine.querySelectorAll("[data-site-href]").forEach((element) => {
+      element.setAttribute("href", construireUrlSiteListeAttente(element.dataset.siteHref));
+    });
+
+    racine.querySelectorAll("[data-site-src]").forEach((element) => {
+      element.setAttribute("src", construireUrlSiteListeAttente(element.dataset.siteSrc));
+    });
+  }
+
+  function construireUrlSiteListeAttente(chemin) {
+    const valeur = String(chemin || "");
+
+    if (
+      !valeur ||
+      valeur.startsWith("#") ||
+      valeur.startsWith("mailto:") ||
+      valeur.startsWith("tel:") ||
+      valeur.startsWith("http://") ||
+      valeur.startsWith("https://") ||
+      valeur.startsWith("data:")
+    ) {
+      return valeur;
+    }
+
+    const config = window.SITE_CONFIG || {};
+
+    if (typeof config.publicUrl === "function") {
+      return config.publicUrl(valeur);
+    }
+
+    const base = nettoyerBaseUrlListeAttente(
+      config.publicBaseUrl ||
+      config.PUBLIC_BASE ||
+      window.SITE_BASE ||
+      ""
+    );
+
+    if (base) {
+      return base + "/" + valeur.replace(/^\/+/, "");
+    }
+
+    return valeur.startsWith("/") ? ".." + valeur : valeur;
   }
 
   async function afficherInformationListeAttente(titre, message, type = "information", options = {}) {
