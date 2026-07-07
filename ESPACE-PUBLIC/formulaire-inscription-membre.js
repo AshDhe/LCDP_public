@@ -168,9 +168,6 @@
   function initialiserFormulaireInscriptionMembre() {
     const form = document.getElementById("formulaire-inscription-membre");
     const submitButton = document.getElementById("bouton-envoyer-inscription");
-    const emailMembre = document.getElementById("emailmembre");
-    const emailParrain = document.getElementById("emailparrain");
-
     const workerUrl = nettoyerBaseUrl(
       window.SITE_CONFIG?.workerFormInscriptionMembreUrl ||
       window.SITE_CONFIG?.WORKER_FORM_INSCRIPTION_MEMBRE_URL ||
@@ -201,6 +198,9 @@
       return;
     }
 
+    const libelleBoutonInitial = submitButton.textContent.trim() || "Devenir membre invité";
+    form.noValidate = true;
+
     if (!workerUrl) {
       submitButton.disabled = true;
 
@@ -216,18 +216,15 @@
       envoyerFormulaire();
     });
 
-    submitButton.addEventListener("click", (event) => {
-      event.preventDefault();
-      envoyerFormulaire();
-    });
-
     async function envoyerFormulaire() {
       if (envoiEnCours || submitButton.disabled) return;
+
+      reinitialiserValiditesPersonnalisees(form);
 
       const erreur = verifierFormulaire(form);
 
       if (erreur) {
-        await afficherAlerte("Attention", erreur);
+        await afficherErreurValidation(erreur);
         return;
       }
 
@@ -258,7 +255,7 @@
 
           envoiEnCours = false;
           submitButton.disabled = false;
-          submitButton.textContent = "Envoyer";
+          submitButton.textContent = libelleBoutonInitial;
           return;
         }
 
@@ -280,7 +277,7 @@
 
         envoiEnCours = false;
         submitButton.disabled = false;
-        submitButton.textContent = "Envoyer";
+        submitButton.textContent = libelleBoutonInitial;
       }
     }
   }
@@ -320,46 +317,93 @@
     const regleapp = form.querySelector("#regleapp_v1");
 
     if (!nommembre) {
-      return "Votre nom est obligatoire.";
+      return creerErreurValidation("nommembre", "Votre nom est obligatoire.");
     }
 
     if (!prenommembre) {
-      return "Votre prénom est obligatoire.";
+      return creerErreurValidation("prenommembre", "Votre prénom est obligatoire.");
     }
 
     if (!dptmtmembre) {
-      return "Un département est nécessaire.";
+      return creerErreurValidation("dptmtmembre", "Un département est nécessaire.");
     }
 
     if (!/^(?:\d{2,3}|2A|2B)$/i.test(dptmtmembre)) {
-      return "Le numéro de département n'est pas valide.";
+      return creerErreurValidation("dptmtmembre", "Le numéro de département n'est pas valide.");
     }
 
     if (!emailmembre) {
-      return "Votre adresse e-mail est obligatoire.";
+      return creerErreurValidation("emailmembre", "Votre adresse e-mail est obligatoire.");
     }
 
     if (!isValidEmail(emailmembreNormalise)) {
-      return "Votre adresse e-mail n'est pas valide.";
+      return creerErreurValidation("emailmembre", "Votre adresse e-mail n'est pas valide.");
     }
 
     if (emailparrainNormalise && !isValidEmail(emailparrainNormalise)) {
-      return "L’adresse e-mail du membre qui vous invite n'est pas valide.";
+      return creerErreurValidation("emailparrain", "L’adresse e-mail du membre qui vous invite n'est pas valide.");
     }
 
     if (emailparrainNormalise && emailmembreNormalise === emailparrainNormalise) {
-      return "L’adresse e-mail du membre qui vous invite doit être différente de votre adresse e-mail.";
+      return creerErreurValidation(
+        "emailparrain",
+        "L’adresse e-mail du membre qui vous invite doit être différente de votre adresse e-mail."
+      );
     }
 
     if (!regleclub || regleclub.checked !== true) {
-      return "Le règlement du club doit être accepté.";
+      return creerErreurValidation("regleclub_v1", "Le règlement du club doit être accepté.");
     }
 
     if (!regleapp || regleapp.checked !== true) {
-      return "Le règlement de l’application doit être accepté.";
+      return creerErreurValidation("regleapp_v1", "Le règlement de l’application doit être accepté.");
     }
 
-    return "";
+    return null;
+  }
+
+  function creerErreurValidation(champId, message) {
+    return { champId, message };
+  }
+
+  function reinitialiserValiditesPersonnalisees(form) {
+    if (!form || typeof form.querySelectorAll !== "function") {
+      return;
+    }
+
+    form.querySelectorAll("input, textarea, select").forEach((champ) => {
+      if (typeof champ.setCustomValidity === "function") {
+        champ.setCustomValidity("");
+      }
+    });
+  }
+
+  async function afficherErreurValidation(erreur) {
+    const message = erreur?.message || "Le formulaire contient une erreur.";
+    const champ = erreur?.champId ? document.getElementById(erreur.champId) : null;
+
+    if (champ && typeof champ.setCustomValidity === "function") {
+      champ.setCustomValidity(message);
+    }
+
+    if (champ && typeof champ.focus === "function") {
+      champ.focus({ preventScroll: false });
+    }
+
+    if (champ && typeof champ.reportValidity === "function") {
+      champ.reportValidity();
+    }
+
+    if (champ && typeof champ.setCustomValidity === "function") {
+      const effacerErreur = () => {
+        champ.setCustomValidity("");
+      };
+
+      champ.addEventListener("input", effacerErreur, { once: true });
+      champ.addEventListener("change", effacerErreur, { once: true });
+    }
+
+    await afficherAlerte("Attention", message);
   }
 
   function normaliserEmailPourComparaison(email) {
