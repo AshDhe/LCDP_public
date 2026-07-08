@@ -28,7 +28,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: var(--lcdp-space-2);
 }
 
@@ -36,31 +35,6 @@
   margin-top: 0;
   width: 100%;
   max-width: 320px;
-}
-
-
-.lcdp-box-liste-card__actions .lcdp-button-filtre-planning-avenir {
-  background: var(--lcdp-color-orange, #f2a23a) !important;
-  border-color: var(--lcdp-color-orange, #f2a23a) !important;
-  color: #ffffff !important;
-}
-
-.lcdp-box-liste-card__actions .lcdp-button-filtre-planning-avenir:hover {
-  background: var(--lcdp-color-orange-hover, #d98922) !important;
-  border-color: var(--lcdp-color-orange-hover, #d98922) !important;
-  color: #ffffff !important;
-}
-
-.lcdp-box-liste-card__actions .lcdp-button-filtre-planning-passe {
-  background: #f4f4f4 !important;
-  color: var(--lcdp-color-logo-green, #536f43) !important;
-  border-color: #e1e1e1 !important;
-}
-
-.lcdp-box-liste-card__actions .lcdp-button-filtre-planning-passe:hover {
-  background: var(--lcdp-color-surface-soft, #f7f7f5) !important;
-  color: var(--lcdp-color-primary, #536f43) !important;
-  border-color: var(--lcdp-color-primary, #536f43) !important;
 }
 
 .lcdp-box-liste-card__tools {
@@ -107,68 +81,8 @@
   }
 
   .lcdp-box-liste-card__actions .lcdp-button {
-    width: auto;
+    width: 260px;
     min-width: 180px;
     max-width: 260px;
-  }
-}
-
-/* Ajustements planning membre : le titre de liste est supprimé en JS,
-   les actions deviennent le bloc utile du bandeau de liste. */
-.lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] {
-  align-items: center;
-  justify-content: center;
-}
-
-.lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] .lcdp-button {
-  width: min(100%, 320px);
-  max-width: 320px;
-}
-
-@media (min-width: 768px) {
-  .lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] {
-    width: 100%;
-    min-width: 0;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] .lcdp-button {
-    width: auto;
-    min-width: 180px;
-    max-width: 320px;
-  }
-}
-
-/* Correction planning membre mobile : les contrôles restent lisibles et ne dépendent
-   pas du comportement desktop du composant liste. */
-.lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] {
-  width: 100%;
-  min-width: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--lcdp-space-2);
-  align-items: stretch;
-  justify-items: center;
-}
-
-.lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] .lcdp-button {
-  width: min(100%, 320px);
-  min-width: 0;
-  max-width: 320px;
-  margin-top: 0;
-}
-
-@media (min-width: 768px) {
-  .lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] {
-    grid-template-columns: minmax(0, 320px) minmax(0, 320px);
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .lcdp-box-liste-card__actions[data-lcdp-planning-actions="true"] .lcdp-button {
-    width: 100%;
-    max-width: 320px;
   }
 }
