@@ -148,7 +148,7 @@
   async function initialiserPage() {
     if (typeof window.LCDP_creerFormulaire !== "function") {
       console.error("Objet formulaire V3 introuvable.");
-      await afficherAlerte("Erreur technique", "Le composant formulaire est introuvable.");
+      await afficherAlerte("Le composant formulaire est introuvable.");
       return;
     }
 
@@ -186,7 +186,6 @@
     if (!racineFormulaire || !form) {
       console.error("Formulaire introuvable.");
       afficherAlerte(
-        "Erreur technique",
         "Le formulaire est introuvable. Veuillez réessayer plus tard."
       );
       return;
@@ -195,7 +194,6 @@
     if (!submitButton) {
       console.error("Bouton d'envoi introuvable.");
       afficherAlerte(
-        "Erreur technique",
         "Le bouton d'envoi est introuvable. Veuillez réessayer plus tard."
       );
       return;
@@ -219,7 +217,7 @@
       const erreur = verifierFormulaire(form);
 
       if (erreur) {
-        await afficherAlerte("Attention", erreur);
+        await afficherAlerte(erreur);
         return;
       }
 
@@ -227,7 +225,6 @@
 
       if (!workerUrl) {
         await afficherAlerte(
-          "Configuration manquante",
           "L’adresse du service d'inscription membre n’est pas configurée."
         );
         return;
@@ -256,7 +253,7 @@
             ? result.erreurs[0]
             : result?.message || "Erreur lors de l’envoi du formulaire.";
 
-          await afficherAlerte("Attention", messageErreur);
+          await afficherAlerte(messageErreur);
 
           envoiEnCours = false;
           submitButton.disabled = false;
@@ -267,15 +264,13 @@
         form.reset();
 
         await afficherAlerte(
-          "Votre demande d'inscription est enregistrée, merci",
-          "Un e-mail vient de vous être envoyé. Cliquez sur le lien reçu pour confirmer votre adresse e-mail et finaliser votre inscription au club.",
+          "Votre demande d'inscription est enregistrée. Un e-mail vient de vous être envoyé. Cliquez sur le lien reçu pour confirmer votre adresse e-mail et finaliser votre inscription au club.",
           redirectUrl
         );
       } catch (error) {
         console.error("Erreur formulaire inscription membre :", error);
 
         await afficherAlerte(
-          "Information technique",
           "Il n'est pas possible d'envoyer le formulaire pour le moment."
         );
 
@@ -397,12 +392,13 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
   }
 
-  async function afficherAlerte(titre, message, redirectUrl = "") {
+  async function afficherAlerte(message, redirectUrl = "") {
     const slot = document.getElementById("lcdp-lightbox-slot");
     const alerteObligatoire = Boolean(redirectUrl);
+    const texteMessage = message || "";
 
     if (!slot || typeof window.LCDP_chargerFragmentObjet !== "function") {
-      alert(message || titre);
+      alert(texteMessage);
 
       if (redirectUrl) {
         window.location.href = redirectUrl;
@@ -426,9 +422,7 @@
         throw new Error("Structure de l'alerte V3 incomplète.");
       }
 
-      messageElement.textContent = titre && message
-        ? titre + " — " + message
-        : titre || message || "";
+      messageElement.textContent = texteMessage;
 
       if (alerteObligatoire) {
         boutonFermer.hidden = true;
@@ -461,7 +455,7 @@
     } catch (error) {
       console.error("Erreur alerte V3 :", error);
 
-      alert(message || titre);
+      alert(texteMessage);
 
       if (redirectUrl) {
         window.location.href = redirectUrl;
