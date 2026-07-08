@@ -57,6 +57,15 @@
         description: "Une adresse e-mail que vous utilisez. C'est votre identifiant informatique de connexion à l'application. Elle est modifiable directement par la suite depuis votre espace personnel dans l'application."
       },
       {
+        type: "checkbox",
+        id: "unikuser",
+        name: "unikuser",
+        label: "Utilisateur unique de l'adresse e-mail",
+        checkboxLabel: "Je confirme être l'unique utilisateur de l'adresse e-mail.",
+        required: true,
+        description: ""
+      },
+      {
         type: "email",
         id: "emailparrain",
         name: "emailparrain",
@@ -304,6 +313,7 @@
       dptmtmembre: getValue(form, "dptmtmembre"),
       emailmembre: getValue(form, "emailmembre"),
       emailparrain: getValue(form, "emailparrain"),
+      unikuser: getChecked(form, "unikuser"),
       regleclub_v1: getChecked(form, "regleclub_v1"),
       regleapp_v1: getChecked(form, "regleapp_v1")
     };
@@ -328,6 +338,7 @@
     const emailmembreNormalise = normaliserEmailPourComparaison(emailmembre);
     const emailparrainNormalise = normaliserEmailPourComparaison(emailparrain);
 
+    const unikuser = form.querySelector("#unikuser");
     const regleclub = form.querySelector("#regleclub_v1");
     const regleapp = form.querySelector("#regleapp_v1");
 
@@ -361,6 +372,10 @@
 
     if (emailparrainNormalise && emailmembreNormalise === emailparrainNormalise) {
       return "L’adresse e-mail du membre qui vous invite doit être différente de votre adresse e-mail.";
+    }
+
+    if (!unikuser || unikuser.checked !== true) {
+      return "Vous devez confirmer être l'unique utilisateur.";
     }
 
     if (!regleclub || regleclub.checked !== true) {
