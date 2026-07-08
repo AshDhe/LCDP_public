@@ -461,6 +461,12 @@ select:focus-visible {
   max-width: 420px;
 }
 
+.lcdp-text-strong-lead + .lcdp-box-menu-bouton__list,
+.lcdp-text-strong-lead + .lcdp-box-menu-bouton__list--single {
+  margin-top: calc(var(--lcdp-space-2) * -1);
+  margin-bottom: var(--lcdp-space-3);
+}
+
 /* STATUT MEMBRE / ABONNEMENT SUSPENDU */
 
 #mention-statut-membre.lcdp-mention-connexion {
