@@ -105,3 +105,17 @@
     min-width: 0;
   }
 }
+
+/* Ajustement typographie desktop — texte de lecture uniquement. */
+@media (min-width: 768px) {
+  .lcdp-box-card-parc__description {
+    font-size: var(--lcdp-font-size-paragraph-desktop);
+  }
+}
+
+/* Trois actions parc : Le parc / Son planning / Nouvelle date. */
+@media (min-width: 768px) {
+  .lcdp-box-card-parc__actions [data-action="nouvelle-date-parc"] {
+    grid-column: 1 / -1;
+  }
+}

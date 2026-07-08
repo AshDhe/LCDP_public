@@ -100,3 +100,20 @@
     padding: var(--lcdp-space-5);
   }
 }
+
+.lcdp-box-card-listemails__input {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--lcdp-color-text);
+  background: var(--lcdp-color-surface);
+}
+
+.lcdp-box-card-listemails__input:focus {
+  outline: 2px solid rgba(35, 68, 56, 0.22);
+  outline-offset: 2px;
+}
