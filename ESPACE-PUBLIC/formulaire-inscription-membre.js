@@ -370,7 +370,7 @@
     }
 
     if (!unikuser || unikuser.checked !== true) {
-      return "Vous devez confirmer être l'unique utilisateur.";
+      return "Vous devez confirmer être l'unique utilisateur de l'adresse e-mail.";
     }
 
     if (!regleclub || regleclub.checked !== true) {
