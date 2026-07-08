@@ -1,7 +1,8 @@
 .lcdp-box-card-listemails {
+  box-sizing: border-box;
   position: fixed;
   inset: 0;
-  z-index: 5300;
+  z-index: 7000;
   padding: var(--lcdp-space-3);
   background: rgba(31, 42, 36, 0.46);
   backdrop-filter: blur(4px);

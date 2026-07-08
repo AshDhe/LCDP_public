@@ -224,3 +224,20 @@
     animation: none;
   }
 }
+
+@media (max-width: 767px) {
+  .lcdp-box-workflow-reservation--calendrier-mois .lcdp-box-workflow-reservation__card {
+    height: calc(100dvh - (var(--lcdp-space-3) * 2));
+    max-height: calc(100dvh - (var(--lcdp-space-3) * 2));
+    overflow: auto;
+  }
+}
+
+@supports not (height: 100dvh) {
+  @media (max-width: 767px) {
+    .lcdp-box-workflow-reservation--calendrier-mois .lcdp-box-workflow-reservation__card {
+      height: calc(100vh - (var(--lcdp-space-3) * 2));
+      max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+    }
+  }
+}
