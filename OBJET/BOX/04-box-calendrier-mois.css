@@ -172,15 +172,44 @@
   }
 }
 
-.lcdp-box-calendrier-mois__partage {
-  width: 100%;
-  margin-top: var(--lcdp-space-3);
+.lcdp-box-calendrier-mois__meta--partage {
+  margin-top: var(--lcdp-space-2);
+  color: var(--lcdp-color-text);
+  font-weight: 600;
   display: flex;
   justify-content: center;
 }
 
-.lcdp-box-calendrier-mois__partage .lcdp-button {
-  width: auto;
-  min-width: 0;
-  margin-top: 0;
+.lcdp-box-calendrier-mois__partage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-2);
+  color: var(--lcdp-color-text);
+  cursor: pointer;
+}
+
+.lcdp-box-calendrier-mois__partage-icone {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  border: 2px solid var(--lcdp-color-orange);
+  border-radius: var(--lcdp-radius-button);
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lcdp-box-calendrier-mois__partage-libelle {
+  color: var(--lcdp-color-text);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.lcdp-box-calendrier-mois__partage:hover .lcdp-box-calendrier-mois__partage-icone {
+  background: var(--lcdp-color-orange-hover);
+  border-color: var(--lcdp-color-orange-hover);
 }
