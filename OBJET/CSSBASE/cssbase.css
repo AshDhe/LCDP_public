@@ -523,13 +523,13 @@ select:focus-visible {
 .lcdp-page-accueil-public .lcdp-accueil-actions {
   width: 100%;
   max-width: 460px;
-  min-height: min(62vh, 540px);
+  min-height: auto;
   margin: 0 auto;
   align-self: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: clamp(28px, 7vh, 72px);
+  justify-content: center;
+  gap: clamp(16px, 3.5vh, 24px);
   align-items: stretch;
   justify-items: stretch;
 }
