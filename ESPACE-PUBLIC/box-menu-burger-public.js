@@ -317,7 +317,7 @@
           href: "/ESPACE-PUBLIC/accueil-public.html"
         },
         {
-          label: "Mon espace",
+          label: "Mon espace connecté",
           action: "mon-compte"
         },
         {
