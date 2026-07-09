@@ -249,7 +249,7 @@
 
 /* Variante générique : champ de donnée avec badge.
    Utilisée pour une donnée déjà enregistrée dont le statut est illustré
-   par une image non fonctionnelle placée à droite du champ. */
+   par une image non fonctionnelle placée au début du champ. */
 .lcdp-box-champ-formulaire--badge {
   --lcdp-champ-badge-size: 40px;
   --lcdp-champ-badge-offset: 7px;
@@ -267,7 +267,7 @@
 .lcdp-box-champ-formulaire--badge input[type="date"],
 .lcdp-box-champ-formulaire--badge select,
 .lcdp-box-champ-formulaire--badge textarea {
-  padding-right: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-3)) !important;
+  padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-3)) !important;
 }
 
 .lcdp-box-champ-formulaire__badge {
@@ -283,7 +283,7 @@
   background: transparent;
   position: absolute;
   top: 50%;
-  right: var(--lcdp-champ-badge-offset);
+  left: var(--lcdp-champ-badge-offset);
   transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
@@ -318,7 +318,7 @@
   .lcdp-box-champ-formulaire--badge input[type="date"],
   .lcdp-box-champ-formulaire--badge select,
   .lcdp-box-champ-formulaire--badge textarea {
-    padding-right: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-2)) !important;
+    padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-2)) !important;
   }
 }
 
