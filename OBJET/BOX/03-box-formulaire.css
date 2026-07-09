@@ -29,6 +29,11 @@
   gap: var(--lcdp-space-2);
 }
 
+.lcdp-box-formulaire__header[hidden],
+.lcdp-box-formulaire__header:not(:has(:not([hidden]))) {
+  display: none !important;
+}
+
 .lcdp-box-formulaire__title {
   width: 100%;
   margin: 0;
@@ -155,6 +160,7 @@
 
   .lcdp-box-formulaire {
     padding: var(--lcdp-space-4);
+    padding-top: var(--lcdp-space-3);
   }
 
   .lcdp-box-formulaire__title {

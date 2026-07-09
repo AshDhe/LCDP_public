@@ -211,6 +211,16 @@
     return element;
   }
 
+  function actualiserEnteteFormulaire(header) {
+    if (!header) return;
+
+    const contientElementVisible = Array.from(header.children).some((element) => {
+      return element.hidden !== true && !element.hasAttribute("hidden");
+    });
+
+    header.hidden = contientElementVisible !== true;
+  }
+
   async function creerFormulaire(slotId, configuration) {
     const slot =
       typeof slotId === "string"
@@ -227,6 +237,7 @@
     slot.appendChild(fragment);
 
     const form = slot.querySelector("[data-lcdp-box-formulaire]");
+    const header = slot.querySelector(".lcdp-box-formulaire__header");
     const titre = slot.querySelector("[data-lcdp-formulaire-title]");
     const sousTitre = slot.querySelector("[data-lcdp-formulaire-subtitle]");
     const intro = slot.querySelector("[data-lcdp-formulaire-intro]");
@@ -234,7 +245,7 @@
     const actions = slot.querySelector("[data-lcdp-formulaire-actions]");
     const note = slot.querySelector("[data-lcdp-formulaire-note]");
 
-    if (!form || !titre || !sousTitre || !intro || !fields || !actions || !note) {
+    if (!form || !header || !titre || !sousTitre || !intro || !fields || !actions || !note) {
       throw new Error("Structure du formulaire V3 incomplète.");
     }
 
@@ -254,12 +265,13 @@
       form.setAttribute("novalidate", "novalidate");
     }
 
-    titre.textContent = configuration.titre || "";
+    const texteTitre = String(configuration.titre || "").trim();
+    titre.textContent = texteTitre;
+    titre.hidden = !texteTitre;
 
-    if (configuration.sousTitre) {
-      sousTitre.textContent = configuration.sousTitre;
-      sousTitre.hidden = false;
-    }
+    const texteSousTitre = String(configuration.sousTitre || "").trim();
+    sousTitre.textContent = texteSousTitre;
+    sousTitre.hidden = !texteSousTitre;
 
     if (configuration.sousTitreClasse) {
       String(configuration.sousTitreClasse)
@@ -271,7 +283,12 @@
     if (configuration.introHtml) {
       intro.innerHTML = configuration.introHtml;
       intro.hidden = false;
+    } else {
+      intro.innerHTML = "";
+      intro.hidden = true;
     }
+
+    actualiserEnteteFormulaire(header);
 
     if (Array.isArray(configuration.champs)) {
       for (const champ of configuration.champs) {
