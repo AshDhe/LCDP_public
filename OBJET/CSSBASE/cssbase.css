@@ -231,6 +231,37 @@ select:focus-visible {
   text-align: center;
 }
 
+
+/* HAUT DE PAGE GENERIQUE */
+
+.lcdp-page-content--avec-entete {
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-page-header {
+  width: 100%;
+  max-width: var(--lcdp-text-width);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.lcdp-page-header .lcdp-title-page-center,
+.lcdp-page-header .lcdp-mention-connexion {
+  margin: 0 auto;
+}
+
+.lcdp-page-header #mention-statut-membre.lcdp-mention-connexion {
+  margin: 0 auto;
+}
+
+.lcdp-page-header + * {
+  margin-top: 0;
+}
+
 /* LIENS INTERNES SECONDAIRES */
 
 .lcdp-link-secondary {
@@ -687,6 +718,17 @@ select:focus-visible {
   background: var(--lcdp-color-orange);
   border-color: var(--lcdp-color-orange);
   color: #ffffff;
+}
+
+
+@media (min-width: 768px) {
+  .lcdp-page-content--avec-entete {
+    gap: var(--lcdp-space-3);
+  }
+
+  .lcdp-page-header {
+    gap: var(--lcdp-space-1);
+  }
 }
 
 /* RESPONSIVE */
