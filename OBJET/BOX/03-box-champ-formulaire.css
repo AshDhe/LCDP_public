@@ -360,3 +360,41 @@
   border-color: #c7b6a6 !important;
   box-shadow: inset 0 0 0 1px rgba(123, 105, 88, 0.14) !important;
 }
+
+/* Correctif de priorité : badge générique explicitement placé à gauche.
+   Cette règle doit rester après les règles read-only pour éviter toute reprise
+   d'une ancienne variante badge à droite. */
+.lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__control {
+  position: relative;
+}
+
+.lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__badge {
+  left: var(--lcdp-champ-badge-offset) !important;
+  right: auto !important;
+}
+
+.lcdp-box-champ-formulaire--badge input[type="text"],
+.lcdp-box-champ-formulaire--badge input[type="email"],
+.lcdp-box-champ-formulaire--badge input[type="password"],
+.lcdp-box-champ-formulaire--badge input[type="tel"],
+.lcdp-box-champ-formulaire--badge input[type="number"],
+.lcdp-box-champ-formulaire--badge input[type="date"],
+.lcdp-box-champ-formulaire--badge select,
+.lcdp-box-champ-formulaire--badge textarea {
+  padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-3)) !important;
+  padding-right: 14px !important;
+}
+
+@media (max-width: 380px) {
+  .lcdp-box-champ-formulaire--badge input[type="text"],
+  .lcdp-box-champ-formulaire--badge input[type="email"],
+  .lcdp-box-champ-formulaire--badge input[type="password"],
+  .lcdp-box-champ-formulaire--badge input[type="tel"],
+  .lcdp-box-champ-formulaire--badge input[type="number"],
+  .lcdp-box-champ-formulaire--badge input[type="date"],
+  .lcdp-box-champ-formulaire--badge select,
+  .lcdp-box-champ-formulaire--badge textarea {
+    padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-2)) !important;
+    padding-right: 14px !important;
+  }
+}
