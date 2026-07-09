@@ -153,3 +153,14 @@
 .lcdp-box-card-jour-in-calendrier-mois--reservation-membre {
   cursor: pointer;
 }
+
+
+/* Réservation membre hors période d'abonnement : invitation / réservation non couverte. */
+.lcdp-box-card-jour-in-calendrier-mois__slot--reservation-hors-abonnement {
+  border-color: var(--lcdp-color-blue) !important;
+  box-shadow: 0 0 0 2px var(--lcdp-color-blue);
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--reservation-hors-abonnement:focus-visible {
+  outline-color: var(--lcdp-color-blue);
+}

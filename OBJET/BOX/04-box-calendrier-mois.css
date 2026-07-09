@@ -215,3 +215,39 @@
   opacity: 0.72;
   pointer-events: none;
 }
+
+
+/* Variante planning membre : calendrier utilisé comme contenu de page dans le workflow. */
+.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__header {
+  display: none;
+}
+
+.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__body {
+  padding-top: 0;
+}
+
+.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__navigation {
+  margin-bottom: var(--lcdp-space-3);
+}
+
+.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__month {
+  font-size: clamp(1.45rem, 7vw, 2rem);
+  line-height: 1.08;
+}
+
+.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__message[hidden] {
+  display: none;
+}
+
+.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__nav-button:disabled,
+.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__nav-button[aria-disabled="true"] {
+  opacity: 0.42;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__month {
+    font-size: clamp(1.7rem, 2.6vw, 2.15rem);
+  }
+}
