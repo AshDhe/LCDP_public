@@ -49,6 +49,18 @@
   border-color: #c7b6a6;
 }
 
+/* Jour futur couvert par une période d'abonnement membre.
+   Le fond bleu clair signale la période d'abonnement sans modifier les plages. */
+.lcdp-box-card-jour-in-calendrier-mois--abonnement-avenir {
+  background: #edf5ff;
+  border-color: rgba(47, 111, 179, 0.34);
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--abonnement-avenir .lcdp-box-card-jour-in-calendrier-mois__number {
+  color: var(--lcdp-color-blue);
+  font-weight: 700;
+}
+
 .lcdp-box-card-jour-in-calendrier-mois--today {
   outline: 2px solid var(--lcdp-color-primary);
   outline-offset: 2px;
