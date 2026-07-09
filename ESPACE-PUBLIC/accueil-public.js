@@ -588,7 +588,7 @@
 
         const boutons = [
           {
-            label: "RESERVER",
+            label: "RÉSERVER",
             style: "lcdp-button-accueil lcdp-button-accueil-orange",
             variante: "reserver",
             action: () => ouvrirPageMembrePublic("RESERVER", "/ESPACE-MEMBRE/reserver-membre.html", "reserver")
