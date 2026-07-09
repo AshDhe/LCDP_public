@@ -8,9 +8,9 @@
   z-index: 4101;
   width: 44px;
   height: 44px;
-  border: 1px solid var(--lcdp-color-border);
+  border: 2px solid #EBA042;
   border-radius: var(--lcdp-radius-medium);
-  background: var(--lcdp-color-surface);
+  background: #ffffff;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -22,9 +22,14 @@
 .lcdp-box-menu-burger__button span {
   width: 22px;
   height: 2px;
-  background: var(--lcdp-color-text);
+  background: #3C71B1;
   border-radius: 999px;
-  transition: transform 180ms ease, opacity 180ms ease;
+  transition: transform 180ms ease, opacity 180ms ease, background 180ms ease;
+}
+
+.lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1),
+.lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(3) {
+  background: #4a4a4a;
 }
 
 .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1) {
@@ -48,9 +53,9 @@
   min-width: 220px;
   max-height: calc(100vh - 120px);
   padding: var(--lcdp-space-2);
-  border: 1px solid var(--lcdp-color-border);
+  border: 2px solid #EBA042;
   border-radius: var(--lcdp-radius-large);
-  background: var(--lcdp-color-surface);
+  background: #ffffff;
   box-shadow: var(--lcdp-shadow-soft);
   overflow-y: auto;
 }
