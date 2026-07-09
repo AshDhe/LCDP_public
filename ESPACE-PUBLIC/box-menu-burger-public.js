@@ -313,15 +313,11 @@
 
       const liensPublics = [
         {
-          label: "Accueil",
+          label: "La Clé",
           href: "/ESPACE-PUBLIC/accueil-public.html"
         },
         {
-          label: "Le club",
-          href: "/ESPACE-PUBLIC/la-cle-du-parc.html"
-        },
-        {
-          label: "Espace connecté",
+          label: "Connexion",
           action: "mon-compte"
         },
         {
@@ -331,6 +327,10 @@
         {
           label: "Actualité",
           href: "/ESPACE-PUBLIC/actualite.html"
+        },
+        {
+          label: "Le club",
+          href: "/ESPACE-PUBLIC/la-cle-du-parc.html"
         }
       ];
 
