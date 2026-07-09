@@ -25,19 +25,17 @@
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
 </head>
 
-<body>
+<body class="lcdp-page-accueil-public">
   <div class="lcdp-site-page">
 
     <div id="lcdp-bandeau-slot"></div>
 
-    <main class="lcdp-site-main">
-      <section class="lcdp-page-section">
-        <div class="lcdp-page-container">
-          <div class="lcdp-page-content lcdp-stack-large">
+    <main class="lcdp-site-main lcdp-accueil-main">
+      <section class="lcdp-page-section lcdp-accueil-section">
+        <div class="lcdp-page-container lcdp-accueil-container">
+          <div class="lcdp-page-content lcdp-accueil-content">
 
-            <h1 class="lcdp-title-page-center">Menu principal</h1>
-
-            <p class="lcdp-mention-connexion">
+            <p class="lcdp-mention-connexion lcdp-accueil-mention">
               [Espace public de l'application]
             </p>
 
@@ -449,50 +447,23 @@
           throw new Error("Structure du menu bouton incomplète.");
         }
 
+        liste.classList.add("lcdp-accueil-actions");
+
         const boutons = [
           {
-            label: "VALIDER",
-            style: "lcdp-button-primary",
-            action: gererValidationPresencePublic
-          },
-          {
-            label: "RÉSERVER",
-            style: "lcdp-button-primary",
+            label: "RESERVER",
+            style: "lcdp-button-accueil lcdp-button-accueil-orange",
             action: () => ouvrirPageMembrePublic("RESERVER", "/ESPACE-MEMBRE/reserver-membre.html")
           },
           {
             label: "PLANNING",
-            style: "lcdp-button-primary",
+            style: "lcdp-button-accueil lcdp-button-accueil-green",
             action: () => ouvrirPageMembrePublic("PLANNING", "/ESPACE-MEMBRE/planning-membre.html")
           },
           {
-            label: "INVITER",
-            style: "lcdp-button-primary",
-            action: () => ouvrirPageAbonnePublic("INVITER", "/ESPACE-MEMBRE/inviter-membre.html")
-          },
-          {
-            label: "ÊTRE INVITÉ(E)",
-            style: "lcdp-button-orange",
-            action: gererEtreInvitePublic
-          },
-          {
-            label: "LE CLUB",
-            style: "lcdp-button-primary",
-            action: () => {
-              window.location.href = construireUrlSite("/ESPACE-PUBLIC/la-cle-du-parc.html");
-            }
-          },
-          {
-            label: "ACTUALITÉ",
-            style: "lcdp-button-primary",
-            action: () => {
-              window.location.href = construireUrlSite("/ESPACE-PUBLIC/actualite.html");
-            }
-          },
-          {
-            label: "CONNEXION",
-            style: "lcdp-button-primary",
-            action: ouvrirDialogueConnexion
+            label: "OUVRIR",
+            style: "lcdp-button-accueil lcdp-button-accueil-blue",
+            action: gererValidationPresencePublic
           }
         ];
 
