@@ -208,7 +208,7 @@
       throw new Error("Structure de dialogue Mon compte incomplète.");
     }
 
-    titre.textContent = "Mon espace";
+    titre.textContent = "Mon espace connecté";
     texte.textContent = "Choisissez votre espace";
 
     actions.innerHTML = "";
