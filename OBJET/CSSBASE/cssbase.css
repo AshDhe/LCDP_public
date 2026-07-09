@@ -235,7 +235,7 @@ select:focus-visible {
 /* HAUT DE PAGE GENERIQUE */
 
 .lcdp-page-content--avec-entete {
-  gap: var(--lcdp-space-3);
+  gap: var(--lcdp-space-2);
 }
 
 .lcdp-page-header {
@@ -260,6 +260,11 @@ select:focus-visible {
 
 .lcdp-page-header + * {
   margin-top: 0;
+}
+
+.lcdp-page-content--avec-entete > .lcdp-page-header + * .lcdp-box-formulaire-page,
+.lcdp-page-content--avec-entete > .lcdp-page-header + .lcdp-box-formulaire-page {
+  padding-top: var(--lcdp-space-1);
 }
 
 /* LIENS INTERNES SECONDAIRES */
@@ -723,11 +728,16 @@ select:focus-visible {
 
 @media (min-width: 768px) {
   .lcdp-page-content--avec-entete {
-    gap: var(--lcdp-space-3);
+    gap: var(--lcdp-space-2);
   }
 
   .lcdp-page-header {
     gap: var(--lcdp-space-1);
+  }
+
+  .lcdp-page-content--avec-entete > .lcdp-page-header + * .lcdp-box-formulaire-page,
+  .lcdp-page-content--avec-entete > .lcdp-page-header + .lcdp-box-formulaire-page {
+    padding-top: var(--lcdp-space-2);
   }
 }
 
