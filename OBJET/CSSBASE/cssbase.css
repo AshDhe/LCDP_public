@@ -353,6 +353,34 @@ select:focus-visible {
   color: var(--lcdp-color-text);
 }
 
+.lcdp-button-mini {
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  min-height: 34px;
+  margin-top: var(--lcdp-space-2);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  line-height: 1.1;
+}
+
+.lcdp-button-mini-orange {
+  background: #ffffff;
+  border-color: var(--lcdp-color-orange);
+  color: var(--lcdp-color-orange);
+}
+
+.lcdp-button-mini-orange:hover {
+  background: var(--lcdp-color-orange);
+  border-color: var(--lcdp-color-orange);
+  color: #ffffff;
+}
+
+.lcdp-text-italic {
+  font-style: italic;
+}
+
 /* BOUTON FILTRE ABONNEMENT */
 
 .lcdp-button-filtre-abonnement-actif {
