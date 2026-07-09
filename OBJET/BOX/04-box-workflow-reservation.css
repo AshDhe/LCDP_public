@@ -241,3 +241,53 @@
     }
   }
 }
+
+
+/* Variante planning membre : réutilisation du workflow réservation en bloc de page. */
+.lcdp-box-workflow-reservation--planning-page {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  padding: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  display: block;
+}
+
+.lcdp-box-workflow-reservation--planning-page .lcdp-box-workflow-reservation__card {
+  width: 100%;
+  max-height: none;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.lcdp-box-workflow-reservation--planning-page .lcdp-box-workflow-reservation__content {
+  width: 100%;
+}
+
+.lcdp-box-workflow-reservation--planning-page .lcdp-box-calendrier-mois__close {
+  display: none !important;
+}
+
+.lcdp-box-workflow-reservation--planning-page .lcdp-box-workflow-reservation__content .lcdp-box-calendrier-mois__card {
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: none;
+}
+
+.lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-reservation-membre {
+  margin-top: var(--lcdp-space-2);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-workflow-reservation--planning-page .lcdp-box-workflow-reservation__content .lcdp-box-calendrier-mois__card {
+    padding: var(--lcdp-space-4);
+  }
+}

@@ -32,6 +32,23 @@
   opacity: 0.45;
 }
 
+.lcdp-box-card-jour-in-calendrier-mois--hors-abonnement {
+  background: #f3ede4;
+  color: #7b6958;
+  border-color: #d8c8b8;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--hors-abonnement .lcdp-box-card-jour-in-calendrier-mois__number {
+  font-weight: 700;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--hors-abonnement .lcdp-box-card-jour-in-calendrier-mois__slot {
+  background: #ded3c8;
+  border-color: #c7b6a6;
+}
+
 .lcdp-box-card-jour-in-calendrier-mois--today {
   outline: 2px solid var(--lcdp-color-primary);
   outline-offset: 2px;
@@ -119,4 +136,20 @@
     min-height: 12px;
     border-radius: 5px;
   }
+}
+
+
+/* Variante planning membre : réservation passée visible mais atténuée. */
+.lcdp-box-card-jour-in-calendrier-mois--reservation-membre-passee {
+  opacity: 1;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--vert-passe {
+  background: #d9edd9;
+  border-color: #bddabd;
+  opacity: 0.72;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--reservation-membre {
+  cursor: pointer;
 }
