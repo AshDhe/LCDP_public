@@ -476,12 +476,16 @@ select:focus-visible {
 .lcdp-page-accueil-public .lcdp-accueil-main {
   flex: 1 0 auto;
   display: flex;
+  align-items: stretch;
+  justify-content: center;
   padding-bottom: 0;
 }
 
 .lcdp-page-accueil-public .lcdp-accueil-section {
   flex: 1 1 auto;
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding-top: clamp(24px, 6vh, 56px);
   padding-bottom: clamp(24px, 6vh, 56px);
 }
@@ -494,11 +498,22 @@ select:focus-visible {
   width: 100%;
 }
 
+.lcdp-page-accueil-public .lcdp-accueil-container {
+  align-items: center;
+  justify-content: center;
+}
+
 .lcdp-page-accueil-public .lcdp-accueil-content {
   max-width: 460px;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
+  justify-content: center;
   gap: var(--lcdp-space-4);
+}
+
+.lcdp-page-accueil-public #lcdp-menu-central-slot {
+  align-items: center;
+  justify-content: center;
 }
 
 .lcdp-page-accueil-public .lcdp-accueil-mention {
@@ -510,6 +525,7 @@ select:focus-visible {
   max-width: 460px;
   min-height: min(62vh, 540px);
   margin: 0 auto;
+  align-self: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
