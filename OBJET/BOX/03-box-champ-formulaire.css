@@ -152,6 +152,99 @@
   }
 }
 
+
+/* Variante générique : champ de donnée modifiable.
+   Utilisée pour une donnée déjà enregistrée, affichée en lecture seule,
+   avec action de modification intégrée à droite du champ. */
+.lcdp-box-champ-formulaire--modifiable {
+  --lcdp-champ-modifiable-action-size: 40px;
+  --lcdp-champ-modifiable-action-offset: 7px;
+  --lcdp-champ-modifiable-icon-size: 19px;
+}
+
+.lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__control {
+  position: relative;
+}
+
+.lcdp-box-champ-formulaire--modifiable input[type="text"],
+.lcdp-box-champ-formulaire--modifiable input[type="email"],
+.lcdp-box-champ-formulaire--modifiable input[type="password"],
+.lcdp-box-champ-formulaire--modifiable input[type="tel"],
+.lcdp-box-champ-formulaire--modifiable input[type="number"],
+.lcdp-box-champ-formulaire--modifiable input[type="date"],
+.lcdp-box-champ-formulaire--modifiable select,
+.lcdp-box-champ-formulaire--modifiable textarea {
+  padding-right: calc(var(--lcdp-champ-modifiable-action-size) + var(--lcdp-space-3)) !important;
+}
+
+.lcdp-box-champ-formulaire__action-edit {
+  width: var(--lcdp-champ-modifiable-action-size);
+  height: var(--lcdp-champ-modifiable-action-size);
+  min-width: 0;
+  min-height: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 2px solid var(--lcdp-color-orange);
+  border-radius: 999px;
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  right: var(--lcdp-champ-modifiable-action-offset);
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 3px 10px rgba(31, 42, 36, 0.16);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lcdp-box-champ-formulaire__action-edit:hover {
+  background: var(--lcdp-color-orange-hover);
+  border-color: var(--lcdp-color-orange-hover);
+  color: #ffffff;
+}
+
+.lcdp-box-champ-formulaire__action-edit-icon {
+  width: var(--lcdp-champ-modifiable-icon-size);
+  height: var(--lcdp-champ-modifiable-icon-size);
+  display: block;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+@media (max-width: 380px) {
+  .lcdp-box-champ-formulaire--modifiable {
+    --lcdp-champ-modifiable-action-size: 38px;
+    --lcdp-champ-modifiable-action-offset: 6px;
+    --lcdp-champ-modifiable-icon-size: 18px;
+  }
+
+  .lcdp-box-champ-formulaire--modifiable input[type="text"],
+  .lcdp-box-champ-formulaire--modifiable input[type="email"],
+  .lcdp-box-champ-formulaire--modifiable input[type="password"],
+  .lcdp-box-champ-formulaire--modifiable input[type="tel"],
+  .lcdp-box-champ-formulaire--modifiable input[type="number"],
+  .lcdp-box-champ-formulaire--modifiable input[type="date"],
+  .lcdp-box-champ-formulaire--modifiable select,
+  .lcdp-box-champ-formulaire--modifiable textarea {
+    padding-right: calc(var(--lcdp-champ-modifiable-action-size) + var(--lcdp-space-2)) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-champ-formulaire--modifiable {
+    --lcdp-champ-modifiable-action-size: 44px;
+    --lcdp-champ-modifiable-action-offset: 8px;
+    --lcdp-champ-modifiable-icon-size: 21px;
+  }
+}
+
+
 /* Champs renseignés automatiquement / en lecture seule.
    Règle placée en fin de fichier pour éviter qu'un style générique
    d'input blanc reprenne le dessus. */
