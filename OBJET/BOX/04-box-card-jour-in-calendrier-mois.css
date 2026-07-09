@@ -155,12 +155,19 @@
 }
 
 
-/* Réservation membre hors période d'abonnement : invitation / réservation non couverte. */
+/* Réservation membre hors période d'abonnement : invitation / réservation non couverte.
+   Marquage intérieur bleu : ne modifie pas la taille de la plage horaire. */
 .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-hors-abonnement {
   border-color: var(--lcdp-color-blue) !important;
-  box-shadow: 0 0 0 2px var(--lcdp-color-blue);
+  box-shadow: inset 0 0 0 2px var(--lcdp-color-blue);
 }
 
 .lcdp-box-card-jour-in-calendrier-mois--reservation-hors-abonnement:focus-visible {
   outline-color: var(--lcdp-color-blue);
+}
+
+@media (max-width: 767px) {
+  .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-hors-abonnement {
+    box-shadow: inset 0 0 0 1.5px var(--lcdp-color-blue);
+  }
 }
