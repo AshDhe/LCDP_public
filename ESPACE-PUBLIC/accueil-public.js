@@ -600,7 +600,7 @@
             action: () => ouvrirPageMembrePublic("PLANNING", "/ESPACE-MEMBRE/planning-membre.html", "planning")
           },
           {
-            label: "OUVRIR",
+            label: "CLÉ DU PARC",
             style: "lcdp-button-accueil lcdp-button-accueil-blue",
             variante: "ouvrir",
             action: gererValidationPresencePublic
