@@ -94,7 +94,7 @@
   box-sizing: border-box;
   border: 1px solid transparent;
   border-radius: 3px;
-  background: #e6e6e6;
+  background: #f3f3f3;
   overflow: hidden;
 }
 
@@ -105,16 +105,16 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   color: var(--lcdp-color-text-muted);
-  font-size: 0.38rem;
-  line-height: 1;
+  font-size: 0.34rem;
+  line-height: 1.1;
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
   pointer-events: none;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--gris-clair {
-  background: #e6e6e6;
-  border-color: #d6d6d6;
+  background: #f3f3f3;
+  border-color: #e4e4e4;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--vert {
@@ -122,8 +122,12 @@
   border-color: #4e663b;
 }
 
-.lcdp-box-card-jour-in-calendrier-mois__slot--vert .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+.lcdp-box-card-jour-in-calendrier-mois__slot--vert .lcdp-box-card-jour-in-calendrier-mois__slot-label,
+.lcdp-box-card-jour-in-calendrier-mois__slot--vert-passe .lcdp-box-card-jour-in-calendrier-mois__slot-label {
   color: #ffffff;
+  font-weight: 400;
+  line-height: 1.15;
+  transform: translateY(0.6px);
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--orange {
@@ -174,8 +178,9 @@
   }
 
   .lcdp-box-card-jour-in-calendrier-mois__slot-label {
-    font-size: 0.47rem;
-    letter-spacing: -0.03em;
+    font-size: 0.42rem;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
   }
 }
 
@@ -191,25 +196,25 @@
   opacity: 0.72;
 }
 
-.lcdp-box-card-jour-in-calendrier-mois__slot--vert-passe .lcdp-box-card-jour-in-calendrier-mois__slot-label {
-  color: #ffffff;
-}
 
 .lcdp-box-card-jour-in-calendrier-mois--reservation-membre {
   cursor: pointer;
 }
 
 
-/* Réservation invitation / hors période d'abonnement : cellule neutre grise.
-   Pas de vert, pas de bleu. */
+/* Réservation invitation / hors période d'abonnement : violet planning membre.
+   Le corail reste disponible pour l'espace coach. */
 .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-invitation,
 .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-hors-abonnement {
-  background: #e6e6e6;
-  border-color: #d6d6d6 !important;
+  background: #7b5aa6;
+  border-color: #6d4d96 !important;
   box-shadow: none;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-invitation .lcdp-box-card-jour-in-calendrier-mois__slot-label,
 .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-hors-abonnement .lcdp-box-card-jour-in-calendrier-mois__slot-label {
-  color: var(--lcdp-color-text-muted);
+  color: #ffffff;
+  font-weight: 400;
+  line-height: 1.15;
+  transform: translateY(0.6px);
 }
