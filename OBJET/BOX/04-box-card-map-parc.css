@@ -1,0 +1,69 @@
+.lcdp-box-card-map-parc {
+  width: 100%;
+}
+
+.lcdp-box-card-map-parc__placeholder {
+  width: 100%;
+  min-height: 180px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background:
+    linear-gradient(135deg, rgba(88, 114, 66, 0.11), rgba(47, 111, 179, 0.10)),
+    var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-1);
+  padding: var(--lcdp-space-3);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.lcdp-box-card-map-parc__marker {
+  width: 42px;
+  height: 42px;
+  border: 2px solid var(--lcdp-color-logo-green, #587242);
+  border-radius: 999px;
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-logo-green, #587242);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.lcdp-box-card-map-parc__title,
+.lcdp-box-card-map-parc__coords,
+.lcdp-box-card-map-parc__note {
+  margin: 0;
+}
+
+.lcdp-box-card-map-parc__title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.lcdp-box-card-map-parc__coords {
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.lcdp-box-card-map-parc__note {
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.78rem;
+  line-height: 1.25;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-map-parc__placeholder {
+    min-height: 240px;
+    padding: var(--lcdp-space-4);
+  }
+}
