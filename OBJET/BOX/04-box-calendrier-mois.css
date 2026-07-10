@@ -50,7 +50,7 @@
   font-size: clamp(1.7rem, 7vw, 2.6rem);
   line-height: 1.08;
   font-weight: 700;
-  color: var(--lcdp-color-text);
+  color: var(--lcdp-color-orange);
 }
 
 .lcdp-box-calendrier-mois__meta {
@@ -238,8 +238,8 @@
   padding: 8px 16px;
   border: 2px solid var(--lcdp-color-orange);
   border-radius: 999px;
-  background: var(--lcdp-color-orange);
-  color: var(--lcdp-color-text);
+  background: #ffffff;
+  color: var(--lcdp-color-orange);
   font-family: var(--lcdp-font-main);
   font-size: 0.86rem;
   line-height: 1;
@@ -264,7 +264,7 @@
 .lcdp-planning-membre-reserver-button:hover {
   background: var(--lcdp-color-orange-hover);
   border-color: var(--lcdp-color-orange-hover);
-  color: var(--lcdp-color-text);
+  color: var(--lcdp-color-orange);
   text-decoration: none !important;
 }
 
@@ -288,5 +288,70 @@
     margin-top: var(--lcdp-space-1);
     margin-left: auto;
     margin-right: 0;
+  }
+}
+
+/* Correction ferme : bouton RÉSERVER en bouton secondaire orange, jamais lien texte. */
+.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__navigation {
+  position: relative !important;
+  width: 100% !important;
+  padding-right: 132px !important;
+  box-sizing: border-box !important;
+}
+
+.lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-button {
+  position: absolute !important;
+  top: 50% !important;
+  right: 0 !important;
+  transform: translateY(-50%) !important;
+  width: auto !important;
+  min-width: 112px !important;
+  max-width: none !important;
+  min-height: 38px !important;
+  margin: 0 !important;
+  padding: 8px 16px !important;
+  border: 2px solid var(--lcdp-color-orange) !important;
+  border-radius: 999px !important;
+  background: #ffffff !important;
+  color: var(--lcdp-color-orange) !important;
+  font: inherit !important;
+  font-size: 0.86rem !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.045em !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: none !important;
+}
+
+.lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-button:visited,
+.lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-button:hover {
+  color: var(--lcdp-color-orange) !important;
+  text-decoration: none !important;
+}
+
+.lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-button:hover {
+  background: rgba(242, 162, 58, 0.10) !important;
+  border-color: var(--lcdp-color-orange) !important;
+}
+
+@media (max-width: 560px) {
+  .lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__navigation {
+    padding-right: 0 !important;
+    flex-wrap: wrap !important;
+  }
+
+  .lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-button {
+    position: static !important;
+    transform: none !important;
+    order: 4 !important;
+    margin-top: var(--lcdp-space-1) !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
   }
 }

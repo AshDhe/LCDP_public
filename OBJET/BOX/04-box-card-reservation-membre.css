@@ -280,3 +280,19 @@
   background: var(--lcdp-color-primary) !important;
   color: #ffffff !important;
 }
+
+/* Correction ferme : bouton Accès vert plein. */
+.lcdp-box-card-reservation-membre [data-action="adresse"],
+.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces {
+  border-color: var(--lcdp-color-logo-green) !important;
+  background: var(--lcdp-color-logo-green) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.lcdp-box-card-reservation-membre [data-action="adresse"]:hover,
+.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces:hover {
+  border-color: var(--lcdp-color-primary) !important;
+  background: var(--lcdp-color-primary) !important;
+  color: #ffffff !important;
+}
