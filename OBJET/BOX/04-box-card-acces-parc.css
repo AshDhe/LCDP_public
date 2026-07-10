@@ -193,6 +193,15 @@
   gap: var(--lcdp-space-3);
 }
 
+
+.lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__retour-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 0 var(--lcdp-space-3);
+}
+
 .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__close--retour {
   position: static;
   width: auto;
