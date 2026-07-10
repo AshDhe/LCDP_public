@@ -122,6 +122,17 @@
   font-size: 0.78rem;
 }
 
+
+/* Galerie entrée : uniquement les photos, sans titre de galerie ni titre au-dessus des images. */
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__header,
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card-title {
+  display: none;
+}
+
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+  gap: 0;
+}
+
 @media (min-width: 768px) {
   .lcdp-box-card-acces-parc {
     padding: var(--lcdp-space-4);
