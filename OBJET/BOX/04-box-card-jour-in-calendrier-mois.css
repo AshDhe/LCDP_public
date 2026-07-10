@@ -85,12 +85,31 @@
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   min-height: 5px;
+  padding: 0 2px;
+  box-sizing: border-box;
   border: 1px solid transparent;
   border-radius: 3px;
   background: #e6e6e6;
+  overflow: hidden;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot-label {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.38rem;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  pointer-events: none;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--gris-clair {
@@ -99,8 +118,12 @@
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--vert {
-  background: #cfeecf;
-  border-color: #a9d9a9;
+  background: #587242;
+  border-color: #4e663b;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--vert .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+  color: #ffffff;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--orange {
@@ -146,7 +169,13 @@
 
   .lcdp-box-card-jour-in-calendrier-mois__slot {
     min-height: 12px;
+    padding: 0 3px;
     border-radius: 5px;
+  }
+
+  .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+    font-size: 0.58rem;
+    letter-spacing: -0.015em;
   }
 }
 
@@ -157,9 +186,13 @@
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--vert-passe {
-  background: #d9edd9;
-  border-color: #bddabd;
+  background: #7b9168;
+  border-color: #70855f;
   opacity: 0.72;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--vert-passe .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+  color: #ffffff;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois--reservation-membre {
@@ -167,19 +200,16 @@
 }
 
 
-/* Réservation membre hors période d'abonnement : invitation / réservation non couverte.
-   Marquage intérieur bleu : ne modifie pas la taille de la plage horaire. */
+/* Réservation invitation / hors période d'abonnement : cellule neutre grise.
+   Pas de vert, pas de bleu. */
+.lcdp-box-card-jour-in-calendrier-mois__slot--reservation-invitation,
 .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-hors-abonnement {
-  border-color: var(--lcdp-color-blue) !important;
-  box-shadow: inset 0 0 0 2px var(--lcdp-color-blue);
+  background: #e6e6e6;
+  border-color: #d6d6d6 !important;
+  box-shadow: none;
 }
 
-.lcdp-box-card-jour-in-calendrier-mois--reservation-hors-abonnement:focus-visible {
-  outline-color: var(--lcdp-color-blue);
-}
-
-@media (max-width: 767px) {
-  .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-hors-abonnement {
-    box-shadow: inset 0 0 0 1.5px var(--lcdp-color-blue);
-  }
+.lcdp-box-card-jour-in-calendrier-mois__slot--reservation-invitation .lcdp-box-card-jour-in-calendrier-mois__slot-label,
+.lcdp-box-card-jour-in-calendrier-mois__slot--reservation-hors-abonnement .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+  color: var(--lcdp-color-text-muted);
 }
