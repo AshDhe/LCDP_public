@@ -149,6 +149,19 @@
   background: var(--lcdp-color-surface-soft);
 }
 
+
+.lcdp-box-card-reservation-membre__micro-action[data-action="adresse"] {
+  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-logo-green);
+  color: #ffffff;
+}
+
+.lcdp-box-card-reservation-membre__micro-action[data-action="adresse"]:hover {
+  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-primary);
+  color: #ffffff;
+}
+
 .lcdp-box-card-reservation-membre__micro-action--inviter {
   border-color: var(--lcdp-reservation-invitation-color);
   color: var(--lcdp-reservation-invitation-color);
@@ -253,4 +266,17 @@
   .lcdp-box-card-reservation-membre__actions {
     justify-content: flex-start;
   }
+}
+
+/* Correction planning membre : bouton Accès vert plein. */
+.lcdp-box-card-reservation-membre__micro-action[data-action="adresse"] {
+  border-color: var(--lcdp-color-logo-green) !important;
+  background: var(--lcdp-color-logo-green) !important;
+  color: #ffffff !important;
+}
+
+.lcdp-box-card-reservation-membre__micro-action[data-action="adresse"]:hover {
+  border-color: var(--lcdp-color-primary) !important;
+  background: var(--lcdp-color-primary) !important;
+  color: #ffffff !important;
 }

@@ -217,37 +217,76 @@
 }
 
 
-/* Variante planning membre : calendrier utilisé comme contenu de page dans le workflow. */
-.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__header {
-  display: none;
-}
-
-.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__body {
-  padding-top: 0;
-}
-
+/* Planning membre : raccourci de réservation dans la ligne de navigation du mois. */
 .lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__navigation {
-  margin-bottom: var(--lcdp-space-3);
+  position: relative;
+  width: 100%;
+  padding-right: 116px;
+  box-sizing: border-box;
 }
 
-.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__month {
-  font-size: clamp(1.45rem, 7vw, 2rem);
-  line-height: 1.08;
+.lcdp-planning-membre-reserver-link,
+.lcdp-planning-membre-reserver-button {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: auto;
+  min-width: 104px;
+  min-height: 38px;
+  margin: 0;
+  padding: 8px 16px;
+  border: 2px solid var(--lcdp-color-orange);
+  border-radius: 999px;
+  background: var(--lcdp-color-orange);
+  color: var(--lcdp-color-text);
+  font-family: var(--lcdp-font-main);
+  font-size: 0.86rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-align: center;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
 }
 
-.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__message[hidden] {
-  display: none;
+.lcdp-planning-membre-reserver-link:visited,
+.lcdp-planning-membre-reserver-button:visited {
+  color: var(--lcdp-color-text);
 }
 
-.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__nav-button:disabled,
-.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__nav-button[aria-disabled="true"] {
-  opacity: 0.42;
-  cursor: not-allowed;
-  pointer-events: none;
+.lcdp-planning-membre-reserver-link:hover,
+.lcdp-planning-membre-reserver-button:hover {
+  background: var(--lcdp-color-orange-hover);
+  border-color: var(--lcdp-color-orange-hover);
+  color: var(--lcdp-color-text);
+  text-decoration: none !important;
 }
 
-@media (min-width: 768px) {
-  .lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__month {
-    font-size: clamp(1.7rem, 2.6vw, 2.15rem);
+.lcdp-planning-membre-reserver-link:focus-visible,
+.lcdp-planning-membre-reserver-button:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+  .lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__navigation {
+    padding-right: 0;
+    flex-wrap: wrap;
+  }
+
+  .lcdp-planning-membre-reserver-link,
+  .lcdp-planning-membre-reserver-button {
+    position: static;
+    transform: none;
+    order: 4;
+    margin-top: var(--lcdp-space-1);
+    margin-left: auto;
+    margin-right: 0;
   }
 }
