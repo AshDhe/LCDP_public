@@ -1,0 +1,170 @@
+/* Shift détail parc : coque commune fiche parc / planning parc / réservation. */
+.lcdp-box-shift-detail-parc {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.46);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.lcdp-box-shift-detail-parc__card {
+  position: relative;
+  width: 100%;
+  max-width: 1060px;
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow: auto;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  box-sizing: border-box;
+}
+
+.lcdp-box-shift-detail-parc__close {
+  position: sticky;
+  top: var(--lcdp-space-2);
+  float: right;
+  z-index: 4;
+  width: 40px;
+  height: 40px;
+  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lcdp-box-shift-detail-parc__close:hover {
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-shift-detail-parc__content {
+  width: 100%;
+  transition: opacity 150ms ease-out, transform 150ms ease-out;
+}
+
+.lcdp-box-shift-detail-parc__content--transition {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* Les objets fiche/calendrier deviennent des vues internes : pas de second overlay. */
+.lcdp-box-shift-detail-parc .lcdp-box-fiche-parc,
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  display: block;
+  align-items: initial;
+  justify-content: initial;
+}
+
+.lcdp-box-shift-detail-parc .lcdp-box-fiche-parc__card,
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__card {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.lcdp-box-shift-detail-parc .lcdp-box-fiche-parc__close,
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__close {
+  display: none;
+}
+
+.lcdp-box-shift-detail-parc .lcdp-box-fiche-parc__header,
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__header {
+  padding-right: 44px;
+}
+
+/* Alerte interne au wrapper : ne remplace pas la fiche ou le planning. */
+.lcdp-box-shift-detail-parc__alerte-slot {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--lcdp-space-3);
+  border-radius: var(--lcdp-radius-large);
+  background: rgba(31, 42, 36, 0.28);
+  box-sizing: border-box;
+}
+
+.lcdp-box-shift-detail-parc__alerte-slot:not(:empty) {
+  display: flex;
+}
+
+.lcdp-box-shift-detail-parc__alerte-box {
+  position: relative;
+  width: min(100%, 420px);
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.22);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.lcdp-box-shift-detail-parc__alerte-close {
+  position: absolute;
+  top: var(--lcdp-space-2);
+  right: var(--lcdp-space-2);
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lcdp-box-shift-detail-parc__alerte-message {
+  margin: var(--lcdp-space-3) 0 var(--lcdp-space-4);
+  color: var(--lcdp-color-text);
+  font-size: 1rem;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.lcdp-box-shift-detail-parc__alerte-ok {
+  min-width: 130px;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-shift-detail-parc {
+    padding: var(--lcdp-space-4);
+  }
+
+  .lcdp-box-shift-detail-parc__card {
+    max-height: calc(100vh - (var(--lcdp-space-4) * 2));
+    padding: var(--lcdp-space-5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lcdp-box-shift-detail-parc__content {
+    transition: none;
+  }
+}
