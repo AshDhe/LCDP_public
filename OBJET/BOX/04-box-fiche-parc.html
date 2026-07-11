@@ -1,5 +1,5 @@
 <div class="lcdp-box-fiche-parc" role="dialog" aria-modal="true" data-lcdp-box-fiche-parc>
-  <div class="lcdp-box-fiche-parc__card">
+  <article class="lcdp-box-fiche-parc__card">
     <button
       class="lcdp-box-fiche-parc__close"
       type="button"
@@ -9,44 +9,32 @@
       ×
     </button>
 
-    <header class="lcdp-box-fiche-parc__hero">
-      <img
-        class="lcdp-box-fiche-parc__image"
-        src=""
-        alt=""
-        loading="lazy"
-        decoding="async"
-        data-lcdp-fiche-parc-image
-      >
-
-      <div class="lcdp-box-fiche-parc__intro">
-        <h2 class="lcdp-box-fiche-parc__title" data-lcdp-fiche-parc-title>
-          Parc
-        </h2>
-
-        <p class="lcdp-box-fiche-parc__meta" data-lcdp-fiche-parc-meta></p>
-      </div>
+    <header class="lcdp-box-fiche-parc__header">
+      <h2 class="lcdp-box-fiche-parc__title" data-lcdp-fiche-parc-title>
+        Parc
+      </h2>
     </header>
 
-    <section class="lcdp-box-fiche-parc__section">
+    <section class="lcdp-box-fiche-parc__section" aria-label="Présentation du parc">
       <h3>Présentation</h3>
-      <p data-lcdp-fiche-parc-presentation>La présentation du parc sera affichée ici.</p>
+      <div class="lcdp-box-fiche-parc__box-text" data-lcdp-fiche-parc-presentation>
+        Présentation non renseignée.
+      </div>
     </section>
 
-    <section class="lcdp-box-fiche-parc__section">
-      <h3>Galerie photo</h3>
-      <p data-lcdp-fiche-parc-galerie>La galerie photo du parc sera affichée ici.</p>
+    <section class="lcdp-box-fiche-parc__section lcdp-box-fiche-parc__section--galerie" aria-label="Galerie photo du parc">
+      <div class="lcdp-box-fiche-parc__galerie" data-lcdp-fiche-parc-galerie-slot></div>
     </section>
 
-    <section class="lcdp-box-fiche-parc__section" aria-label="Adresse du parc">
-      <h3>Adresse</h3>
+    <section class="lcdp-box-fiche-parc__section lcdp-box-fiche-parc__section--map" aria-label="Carte du parc">
       <div class="lcdp-box-fiche-parc__map" data-lcdp-fiche-parc-map-slot></div>
-      <div class="lcdp-box-fiche-parc__adresse" data-lcdp-fiche-parc-adresse></div>
     </section>
 
-    <section class="lcdp-box-fiche-parc__section">
-      <h3>Contact La Clé du Parc</h3>
-      <p data-lcdp-fiche-parc-contact>Le contact référent sera affiché ici.</p>
+    <section class="lcdp-box-fiche-parc__section" aria-label="Contact La Clé du Parc">
+      <h3>Contact</h3>
+      <div class="lcdp-box-fiche-parc__box-text" data-lcdp-fiche-parc-contact>
+        Contact non renseigné.
+      </div>
     </section>
-  </div>
+  </article>
 </div>
