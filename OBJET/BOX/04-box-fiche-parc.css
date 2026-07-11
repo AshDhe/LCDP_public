@@ -103,6 +103,25 @@
   color: var(--lcdp-color-text-muted);
 }
 
+.lcdp-box-fiche-parc__map {
+  width: 100%;
+  margin: 0 0 var(--lcdp-space-3);
+}
+
+.lcdp-box-fiche-parc__adresse {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  color: var(--lcdp-color-text-muted);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.lcdp-box-fiche-parc__adresse p {
+  margin: 0;
+}
+
+
 @media (min-width: 768px) {
   .lcdp-box-fiche-parc {
     padding: var(--lcdp-space-4);
