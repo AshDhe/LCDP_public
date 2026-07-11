@@ -207,3 +207,68 @@
     font-size: var(--lcdp-font-size-paragraph-desktop);
   }
 }
+
+/* Fiche parc : actions mobile en colonne, tablette/desktop sur une seule ligne. */
+.lcdp-box-fiche-parc__action-reserver {
+  min-width: 112px;
+  padding: 8px 16px;
+  border: 2px solid var(--lcdp-color-orange);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--lcdp-color-orange);
+  font-family: var(--lcdp-font-main);
+  font-size: 0.86rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-align: center;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  box-shadow: none;
+}
+
+.lcdp-box-fiche-parc__action-reserver:hover {
+  background: rgba(242, 162, 58, 0.10);
+  border-color: var(--lcdp-color-orange);
+  color: var(--lcdp-color-orange);
+  text-decoration: none !important;
+}
+
+.lcdp-box-fiche-parc__action-reserver:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-fiche-parc__actions-list {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: var(--lcdp-space-2);
+  }
+
+  .lcdp-box-fiche-parc__actions-list .lcdp-button {
+    width: auto;
+    max-width: none;
+    min-height: 40px;
+    margin: 0;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .lcdp-box-fiche-parc__action-planning {
+    min-width: 142px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .lcdp-box-fiche-parc__partage {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  .lcdp-box-fiche-parc__partage .lcdp-box-calendrier-mois__partage-libelle {
+    white-space: nowrap;
+  }
+}
