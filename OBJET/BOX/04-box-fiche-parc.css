@@ -43,27 +43,10 @@
   background: var(--lcdp-color-surface-soft);
 }
 
-.lcdp-box-fiche-parc__hero {
+.lcdp-box-fiche-parc__header {
   padding-right: 44px;
   padding-bottom: var(--lcdp-space-3);
   border-bottom: 1px solid var(--lcdp-color-border);
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-3);
-}
-
-.lcdp-box-fiche-parc__image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: var(--lcdp-radius-media);
-  background: var(--lcdp-color-surface-soft);
-}
-
-.lcdp-box-fiche-parc__intro {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-1);
 }
 
 .lcdp-box-fiche-parc__title {
@@ -72,12 +55,6 @@
   line-height: 1.08;
   font-weight: 700;
   color: var(--lcdp-color-text);
-}
-
-.lcdp-box-fiche-parc__meta {
-  margin: 0;
-  color: var(--lcdp-color-text-muted);
-  font-weight: 600;
 }
 
 .lcdp-box-fiche-parc__section {
@@ -98,29 +75,118 @@
   color: var(--lcdp-color-text);
 }
 
-.lcdp-box-fiche-parc__section p {
-  margin: 0;
+.lcdp-box-fiche-parc__box-text {
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface);
   color: var(--lcdp-color-text-muted);
+  font-size: 1rem;
+  line-height: 1.45;
+  box-sizing: border-box;
+}
+
+.lcdp-box-fiche-parc__box-text p {
+  margin: 0;
+}
+
+.lcdp-box-fiche-parc__box-text p + p {
+  margin-top: var(--lcdp-space-2);
 }
 
 .lcdp-box-fiche-parc__map {
   width: 100%;
-  margin: 0 0 var(--lcdp-space-3);
 }
 
-.lcdp-box-fiche-parc__adresse {
+.lcdp-box-fiche-parc__galerie .lcdp-box-galerie,
+.lcdp-box-fiche-parc__galerie-box {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.lcdp-box-fiche-parc__galerie .lcdp-box-galerie__header,
+.lcdp-box-fiche-parc__galerie .lcdp-box-galerie__card-title,
+.lcdp-box-fiche-parc__galerie .lcdp-box-galerie__legend,
+.lcdp-box-fiche-parc__galerie .lcdp-box-galerie__text {
+  display: none;
+}
+
+.lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-box-fiche-parc__galerie-card {
+  padding: var(--lcdp-space-2);
+  gap: 0;
+}
+
+.lcdp-box-fiche-parc__galerie-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center center;
+}
+
+
+.lcdp-box-fiche-parc__actions {
+  width: 100%;
+  margin-top: var(--lcdp-space-3);
+}
+
+.lcdp-box-fiche-parc__actions-list {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.18rem;
-  color: var(--lcdp-color-text-muted);
+  align-items: flex-start;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-fiche-parc__action-reserver,
+.lcdp-box-fiche-parc__action-planning {
+  width: 100%;
+  max-width: 260px;
+  min-height: 44px;
+}
+
+.lcdp-box-fiche-parc__partage {
+  width: auto;
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--lcdp-space-2);
+  color: var(--lcdp-color-text);
+  cursor: pointer;
+}
+
+.lcdp-box-fiche-parc__partage .lcdp-box-calendrier-mois__partage-icone {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border: 2px solid var(--lcdp-color-orange);
+  border-radius: 999px;
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lcdp-box-fiche-parc__partage:hover .lcdp-box-calendrier-mois__partage-icone {
+  background: var(--lcdp-color-orange-hover);
+  border-color: var(--lcdp-color-orange-hover);
+  color: #ffffff;
+}
+
+.lcdp-box-fiche-parc__partage .lcdp-box-calendrier-mois__partage-libelle {
+  color: var(--lcdp-color-text);
+  font-weight: 600;
   font-size: 1rem;
-  line-height: 1.4;
+  line-height: 1.25;
 }
-
-.lcdp-box-fiche-parc__adresse p {
-  margin: 0;
-}
-
 
 @media (min-width: 768px) {
   .lcdp-box-fiche-parc {
@@ -132,20 +198,11 @@
     padding: var(--lcdp-space-5);
   }
 
-  .lcdp-box-fiche-parc__hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    align-items: center;
-    gap: var(--lcdp-space-4);
-  }
-
   .lcdp-box-fiche-parc__section {
     padding: var(--lcdp-space-4) 0;
   }
-}
 
-/* Ajustement typographie desktop — texte de lecture uniquement. */
-@media (min-width: 768px) {
+  .lcdp-box-fiche-parc__box-text,
   .lcdp-box-fiche-parc__section p {
     font-size: var(--lcdp-font-size-paragraph-desktop);
   }
