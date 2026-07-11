@@ -124,3 +124,10 @@
     padding: var(--lcdp-space-4) 0;
   }
 }
+
+/* Ajustement typographie desktop — texte de lecture uniquement. */
+@media (min-width: 768px) {
+  .lcdp-box-fiche-parc__section p {
+    font-size: var(--lcdp-font-size-paragraph-desktop);
+  }
+}
