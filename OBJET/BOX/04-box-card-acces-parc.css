@@ -447,3 +447,43 @@
     height: clamp(220px, 30vw, 340px);
   }
 }
+
+/* Accès parc : retour aligné à gauche et rapproché du titre. */
+.lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__retour-row {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+.lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__close--retour {
+  margin: 0 !important;
+  align-self: flex-start !important;
+}
+
+.lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__header {
+  margin-top: calc(-1 * var(--lcdp-space-2)) !important;
+}
+
+/* Accès parc : croix principale de fermeture visible pendant le scroll interne. */
+.lcdp-box-workflow-reservation--planning-reservation .lcdp-box-workflow-reservation__content > .lcdp-box-calendrier-mois__close {
+  position: sticky !important;
+  top: var(--lcdp-space-2) !important;
+  right: auto !important;
+  left: auto !important;
+  inset: auto !important;
+  z-index: 30 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  min-width: 38px !important;
+  min-height: 38px !important;
+  margin: 0 0 calc(-1 * var(--lcdp-space-1)) auto !important;
+  float: none !important;
+}
