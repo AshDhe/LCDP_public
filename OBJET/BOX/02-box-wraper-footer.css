@@ -8,6 +8,10 @@
   display: none !important;
 }
 
+.lcdp-box-wraper-footer__actions:not([hidden]) {
+  display: block;
+}
+
 .lcdp-box-wraper-footer__actions {
   width: 100%;
   box-sizing: border-box;
