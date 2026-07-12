@@ -285,3 +285,74 @@
     min-height: 300px;
   }
 }
+
+/* Accès parc : correction débordement galerie mobile/tablette/desktop. */
+.lcdp-box-card-acces-parc__galerie,
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie,
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list,
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.lcdp-box-card-acces-parc__galerie {
+  overflow: hidden;
+}
+
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) !important;
+  overflow: hidden;
+}
+
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+  overflow: hidden;
+}
+
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center center;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .lcdp-box-card-acces-parc {
+    padding: var(--lcdp-space-2);
+  }
+
+  .lcdp-box-card-acces-parc__card {
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100vh - (var(--lcdp-space-2) * 2));
+    padding: var(--lcdp-space-3);
+    overflow-x: hidden;
+  }
+
+  .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+    padding: var(--lcdp-space-1);
+  }
+
+  .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+    max-height: 56vh;
+  }
+
+  .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__card {
+    padding: var(--lcdp-space-3);
+    overflow-x: hidden;
+  }
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+    min-height: 300px;
+  }
+}
