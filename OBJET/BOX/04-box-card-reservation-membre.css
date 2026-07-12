@@ -335,3 +335,32 @@
     margin-top: var(--lcdp-space-1);
   }
 }
+
+
+/* Correctif alignement bouton Annuler la réservation. */
+.lcdp-box-card-reservation-membre__place {
+  display: grid !important;
+  grid-template-columns: minmax(0, max-content) auto max-content;
+  align-items: center !important;
+  justify-content: start !important;
+  justify-items: start !important;
+  column-gap: var(--lcdp-space-2);
+  row-gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
+  justify-self: start;
+  margin-left: var(--lcdp-space-2) !important;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .lcdp-box-card-reservation-membre__place {
+    grid-template-columns: auto auto;
+  }
+
+  .lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
+    grid-column: 1 / -1;
+    margin-left: 0 !important;
+  }
+}
