@@ -286,7 +286,7 @@
   }
 }
 
-/* Accès parc : confinement strict des photos d'entrée dans la card, mobile/tablette/desktop. */
+/* Accès parc : correction finale photos entrée, sans suppression des images. */
 .lcdp-box-card-acces-parc,
 .lcdp-box-card-acces-parc *,
 .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline,
@@ -325,9 +325,8 @@
 }
 
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
-  display: block !important;
   padding: var(--lcdp-space-2) !important;
-  border-radius: var(--lcdp-radius-large);
+  background: transparent !important;
 }
 
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
@@ -342,6 +341,9 @@
   object-fit: cover !important;
   object-position: center center !important;
   border-radius: var(--lcdp-radius-media);
+  background: transparent !important;
+  color: transparent !important;
+  font-size: 0 !important;
 }
 
 @media (max-width: 767px) {
@@ -396,25 +398,4 @@
     height: clamp(220px, 30vw, 340px) !important;
     max-height: 340px !important;
   }
-}
-
-/* Accès parc : ne pas afficher de fond de substitution derrière les photos d'entrée. */
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  background: transparent !important;
-  color: transparent !important;
-  font-size: 0 !important;
-}
-
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
-  background: transparent !important;
-}
-
-/* Correctif final accès parc : respecter l'attribut hidden posé par le JS quand une photo d'entrée est absente. */
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card[hidden],
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image[hidden] {
-  display: none !important;
-}
-
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  background-color: transparent !important;
 }
