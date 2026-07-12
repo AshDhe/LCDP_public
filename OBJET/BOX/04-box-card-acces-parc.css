@@ -397,14 +397,3 @@
     max-height: 340px !important;
   }
 }
-
-/* Accès parc : ne pas afficher de fond de substitution derrière les photos d'entrée. */
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  background: transparent !important;
-  color: transparent !important;
-  font-size: 0 !important;
-}
-
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
-  background: transparent !important;
-}
