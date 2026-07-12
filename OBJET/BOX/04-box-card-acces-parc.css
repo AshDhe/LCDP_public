@@ -400,3 +400,17 @@
     max-height: 340px !important;
   }
 }
+
+/* Accès parc : images visibles avec fond blanc, sans masquage de chargement. */
+.lcdp-box-card-acces-parc__galerie [data-lcdp-entree-parc-image-card="true"],
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+  background: #ffffff !important;
+}
+
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image,
+.lcdp-box-card-acces-parc__galerie img[data-lcdp-image-loading="true"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: #ffffff !important;
+}
