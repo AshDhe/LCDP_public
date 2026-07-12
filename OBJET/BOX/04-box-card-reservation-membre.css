@@ -364,3 +364,28 @@
     margin-left: 0 !important;
   }
 }
+
+/* Correctif ferme : alignement gauche Annuler la réservation. */
+.lcdp-box-card-reservation-membre__place {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: wrap !important;
+  column-gap: var(--lcdp-space-2);
+  row-gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
+  flex: 0 0 auto;
+  margin-left: 0 !important;
+  justify-self: start !important;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
+    flex-basis: 100%;
+    width: max-content;
+    margin-top: var(--lcdp-space-1);
+  }
+}
