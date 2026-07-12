@@ -286,73 +286,114 @@
   }
 }
 
-/* Accès parc : correction débordement galerie mobile/tablette/desktop. */
+/* Accès parc : confinement strict des photos d'entrée dans la card, mobile/tablette/desktop. */
+.lcdp-box-card-acces-parc,
+.lcdp-box-card-acces-parc *,
+.lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline,
+.lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline * {
+  box-sizing: border-box;
+}
+
+.lcdp-box-card-acces-parc__card,
+.lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__card {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+}
+
 .lcdp-box-card-acces-parc__galerie,
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie,
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list,
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
 }
 
-.lcdp-box-card-acces-parc__galerie {
-  overflow: hidden;
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie {
+  padding: 0 !important;
 }
 
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list {
-  display: grid;
+  display: grid !important;
   grid-template-columns: minmax(0, 1fr) !important;
-  overflow: hidden;
+  justify-items: stretch !important;
+  align-items: start !important;
+  gap: var(--lcdp-space-3) !important;
 }
 
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
-  overflow: hidden;
+  display: block !important;
+  padding: var(--lcdp-space-2) !important;
+  border-radius: var(--lcdp-radius-large);
 }
 
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  min-height: 0;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: center center;
-  box-sizing: border-box;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: clamp(150px, 48vw, 220px) !important;
+  min-height: 0 !important;
+  max-height: 220px !important;
+  aspect-ratio: auto !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: var(--lcdp-radius-media);
 }
 
 @media (max-width: 767px) {
   .lcdp-box-card-acces-parc {
+    align-items: center;
     padding: var(--lcdp-space-2);
   }
 
   .lcdp-box-card-acces-parc__card {
-    width: 100%;
-    max-width: 100%;
-    max-height: calc(100vh - (var(--lcdp-space-2) * 2));
-    padding: var(--lcdp-space-3);
-    overflow-x: hidden;
+    max-height: calc(100dvh - (var(--lcdp-space-2) * 2));
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-workflow-reservation__card {
+    max-height: calc(100dvh - (var(--lcdp-space-3) * 2));
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline,
+  .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__card {
+    max-height: none !important;
+    overflow-x: hidden !important;
   }
 
   .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
-    padding: var(--lcdp-space-1);
+    padding: var(--lcdp-space-1) !important;
   }
 
   .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-    max-height: 56vh;
+    height: clamp(132px, 46vw, 184px) !important;
+    max-height: 184px !important;
   }
+}
 
-  .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__card {
-    padding: var(--lcdp-space-3);
-    overflow-x: hidden;
+@supports not (height: 100dvh) {
+  @media (max-width: 767px) {
+    .lcdp-box-card-acces-parc__card {
+      max-height: calc(100vh - (var(--lcdp-space-2) * 2));
+    }
+
+    .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-workflow-reservation__card {
+      max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+    }
   }
 }
 
 @media (min-width: 768px) {
   .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-    min-height: 300px;
+    height: clamp(220px, 30vw, 340px) !important;
+    max-height: 340px !important;
   }
 }
