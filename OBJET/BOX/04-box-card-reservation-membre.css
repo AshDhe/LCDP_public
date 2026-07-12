@@ -297,18 +297,59 @@
   color: #ffffff !important;
 }
 
-/* V3 planning membre : Annuler sur la ligne parc, Fermer sur la ligne actions. */
-.lcdp-box-card-reservation-membre__place {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+/* V3 planning membre : lignes propres pour parc, annulation et actions. */
+.lcdp-box-card-reservation-membre__body {
   gap: var(--lcdp-space-2);
 }
 
-.lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
+.lcdp-box-card-reservation-membre__content {
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-card-reservation-membre__place {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.lcdp-box-card-reservation-membre__place-line {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.lcdp-box-card-reservation-membre__park {
+  min-width: 0;
+  max-width: 100%;
+  overflow: visible;
+  white-space: normal;
+  text-overflow: clip;
+}
+
+.lcdp-box-card-reservation-membre__department {
   flex: 0 0 auto;
-  margin-left: var(--lcdp-space-2);
+}
+
+.lcdp-box-card-reservation-membre__micro-action--annuler {
+  align-self: flex-start;
+  margin: 0 !important;
+  min-height: 34px;
+  padding: 7px 13px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.lcdp-box-card-reservation-membre__actions {
+  margin-top: 2px;
+  gap: 8px;
 }
 
 .lcdp-box-card-reservation-membre__actions .lcdp-box-card-reservation-membre__micro-action--fermer {
@@ -323,69 +364,39 @@
   color: var(--lcdp-color-text);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 420px) {
+  .lcdp-box-card-reservation-membre__body {
+    gap: var(--lcdp-space-2);
+  }
+
   .lcdp-box-card-reservation-membre__place {
-    align-items: flex-start;
+    gap: 8px;
   }
 
-  .lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
-    flex-basis: 100%;
-    width: max-content;
-    margin-left: 0;
-    margin-top: var(--lcdp-space-1);
+  .lcdp-box-card-reservation-membre__micro-action,
+  .lcdp-box-card-reservation-membre__picto-action,
+  .lcdp-box-card-reservation-membre__invitation-badge {
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: 0.86rem;
+  }
+
+  .lcdp-box-card-reservation-membre__micro-action--annuler {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
   }
 }
 
-
-/* Correctif alignement bouton Annuler la réservation. */
-.lcdp-box-card-reservation-membre__place {
-  display: grid !important;
-  grid-template-columns: minmax(0, max-content) auto max-content;
-  align-items: center !important;
-  justify-content: start !important;
-  justify-items: start !important;
-  column-gap: var(--lcdp-space-2);
-  row-gap: var(--lcdp-space-2);
-}
-
-.lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
-  justify-self: start;
-  margin-left: var(--lcdp-space-2) !important;
-  white-space: nowrap;
-}
-
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .lcdp-box-card-reservation-membre__place {
-    grid-template-columns: auto auto;
+    gap: 10px;
   }
 
-  .lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
-    grid-column: 1 / -1;
-    margin-left: 0 !important;
-  }
-}
-
-/* Correctif ferme : alignement gauche Annuler la réservation. */
-.lcdp-box-card-reservation-membre__place {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  flex-wrap: wrap !important;
-  column-gap: var(--lcdp-space-2);
-  row-gap: var(--lcdp-space-2);
-}
-
-.lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
-  flex: 0 0 auto;
-  margin-left: 0 !important;
-  justify-self: start !important;
-  white-space: nowrap;
-}
-
-@media (max-width: 767px) {
-  .lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
-    flex-basis: 100%;
-    width: max-content;
-    margin-top: var(--lcdp-space-1);
+  .lcdp-box-card-reservation-membre__micro-action,
+  .lcdp-box-card-reservation-membre__picto-action,
+  .lcdp-box-card-reservation-membre__invitation-badge {
+    min-height: 36px;
+    padding: 7px 13px;
   }
 }
