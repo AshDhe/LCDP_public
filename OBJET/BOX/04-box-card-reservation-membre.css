@@ -296,3 +296,42 @@
   background: var(--lcdp-color-primary) !important;
   color: #ffffff !important;
 }
+
+/* V3 planning membre : Annuler sur la ligne parc, Fermer sur la ligne actions. */
+.lcdp-box-card-reservation-membre__place {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
+  flex: 0 0 auto;
+  margin-left: var(--lcdp-space-2);
+}
+
+.lcdp-box-card-reservation-membre__actions .lcdp-box-card-reservation-membre__micro-action--fermer {
+  border-color: var(--lcdp-color-border);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-card-reservation-membre__actions .lcdp-box-card-reservation-membre__micro-action--fermer:hover {
+  border-color: var(--lcdp-color-border-strong);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+}
+
+@media (max-width: 767px) {
+  .lcdp-box-card-reservation-membre__place {
+    align-items: flex-start;
+  }
+
+  .lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
+    flex-basis: 100%;
+    width: max-content;
+    margin-left: 0;
+    margin-top: var(--lcdp-space-1);
+  }
+}
