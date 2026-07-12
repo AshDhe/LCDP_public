@@ -1,9 +1,9 @@
 body.lcdp-page-reserver {
-  --lcdp-reserver-wrapper-footer-height: 64px;
+  --lcdp-reserver-wrapper-footer-height: 56px;
 }
 
 body.lcdp-page-reserver .lcdp-site-main {
-  padding-bottom: calc(var(--lcdp-reserver-wrapper-footer-height, 64px) + 18px);
+  padding-bottom: calc(var(--lcdp-reserver-wrapper-footer-height, 56px) + 18px);
 }
 
 body.lcdp-page-reserver #lcdp-footer-slot {
@@ -21,7 +21,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer {
   max-width: none !important;
   height: auto !important;
   min-height: 0 !important;
-  z-index: 1200;
+  z-index: 2500;
   background: var(--lcdp-color-surface, #ffffff);
   box-shadow: 0 -8px 24px rgba(31, 42, 36, 0.12);
   box-sizing: border-box;
@@ -57,31 +57,30 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__footer {
   overflow: visible !important;
 }
 
-body.lcdp-page-reserver .lcdp-box-wraper-footer__footer > *,
-body.lcdp-page-reserver .lcdp-box-wraper-footer__footer footer,
-body.lcdp-page-reserver .lcdp-box-wraper-footer__footer [class*="footer"],
-body.lcdp-page-reserver .lcdp-box-wraper-footer__footer [class*="Footer"],
 body.lcdp-page-reserver .lcdp-box-wraper-footer .lcdp-box-footer,
 body.lcdp-page-reserver .lcdp-box-wraper-footer [data-lcdp-box-footer] {
   position: static !important;
-  inset: auto !important;
-  top: auto !important;
+  left: auto !important;
   right: auto !important;
   bottom: auto !important;
-  left: auto !important;
   width: 100% !important;
   max-width: none !important;
-  height: auto !important;
-  min-height: 0 !important;
+  height: 56px !important;
+  min-height: 56px !important;
   margin: 0 !important;
   transform: none !important;
   z-index: auto !important;
   box-sizing: border-box;
 }
 
+body.lcdp-page-reserver .lcdp-box-wraper-footer .lcdp-box-footer__inner {
+  height: 56px !important;
+  min-height: 56px !important;
+}
+
 @media (max-width: 767px) {
   body.lcdp-page-reserver .lcdp-site-main {
-    padding-bottom: calc(var(--lcdp-reserver-wrapper-footer-height, 64px) + 12px);
+    padding-bottom: calc(var(--lcdp-reserver-wrapper-footer-height, 56px) + 12px);
   }
 
   body.lcdp-page-reserver .lcdp-box-wraper-footer__actions {
