@@ -408,3 +408,13 @@
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
   background: transparent !important;
 }
+
+/* Correctif final accès parc : respecter l'attribut hidden posé par le JS quand une photo d'entrée est absente. */
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card[hidden],
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image[hidden] {
+  display: none !important;
+}
+
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  background-color: transparent !important;
+}
