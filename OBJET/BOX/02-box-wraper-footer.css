@@ -49,6 +49,8 @@
 
 @media (min-width: 768px) {
   .lcdp-box-wraper-footer__actions {
-    display: none !important;
+    padding: 10px var(--lcdp-space-3) 8px;
+    border-top: 1px solid var(--lcdp-color-border);
+    background: var(--lcdp-color-surface);
   }
 }
