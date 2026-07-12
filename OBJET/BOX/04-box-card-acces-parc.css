@@ -28,15 +28,14 @@
 }
 
 .lcdp-box-card-acces-parc__close {
-  position: sticky;
+  position: absolute;
   top: var(--lcdp-space-2);
-  float: right;
-  z-index: 5;
+  right: var(--lcdp-space-2);
+  z-index: 2;
   width: 38px;
   height: 38px;
   min-width: 38px;
   min-height: 38px;
-  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
   border: 0;
   border-radius: 999px;
   background: var(--lcdp-color-surface-soft);
@@ -401,16 +400,82 @@
   }
 }
 
-/* Accès parc : images visibles avec fond blanc, sans masquage de chargement. */
-.lcdp-box-card-acces-parc__galerie [data-lcdp-entree-parc-image-card="true"],
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+/* Accès parc : bloc dédié aux photos d'entrée, visible même avant chargement images. */
+.lcdp-box-card-acces-parc__bloc--acces {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.lcdp-box-card-acces-parc__text--acces {
+  margin-bottom: 0;
+}
+
+/* Accès parc : la croix de fermeture reste visible au scroll de la box overlay.
+   Le bouton retour inline garde son comportement séparé. */
+.lcdp-box-card-acces-parc__close:not(.lcdp-box-card-acces-parc__close--retour) {
+  position: sticky !important;
+  top: var(--lcdp-space-2) !important;
+  float: right;
+  z-index: 10;
+  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
+}
+
+/* Accès parc : galerie photos confinée, fond blanc, images jamais masquées par l'état loading. */
+.lcdp-box-card-acces-parc__bloc--acces .lcdp-box-card-acces-parc__galerie,
+.lcdp-box-card-acces-parc__bloc--acces .lcdp-box-galerie,
+.lcdp-box-card-acces-parc__bloc--acces .lcdp-box-galerie__list,
+.lcdp-box-card-acces-parc__bloc--acces .lcdp-box-galerie__card {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
   background: #ffffff !important;
 }
 
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image,
-.lcdp-box-card-acces-parc__galerie img[data-lcdp-image-loading="true"] {
+.lcdp-box-card-acces-parc__bloc--acces .lcdp-box-galerie {
+  padding: 0 !important;
+}
+
+.lcdp-box-card-acces-parc__bloc--acces .lcdp-box-galerie__list {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: var(--lcdp-space-3) !important;
+}
+
+.lcdp-box-card-acces-parc__bloc--acces .lcdp-box-galerie__card {
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.lcdp-box-card-acces-parc__bloc--acces .lcdp-box-galerie__image,
+.lcdp-box-card-acces-parc__bloc--acces img[data-lcdp-image-loading="true"] {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: clamp(140px, 48vw, 210px) !important;
+  min-height: 0 !important;
+  max-height: 210px !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: var(--lcdp-radius-media, 14px);
   background: #ffffff !important;
+  color: transparent !important;
+  font-size: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-acces-parc__bloc--acces .lcdp-box-galerie__image,
+  .lcdp-box-card-acces-parc__bloc--acces img[data-lcdp-image-loading="true"] {
+    height: clamp(220px, 30vw, 340px) !important;
+    max-height: 340px !important;
+  }
 }
