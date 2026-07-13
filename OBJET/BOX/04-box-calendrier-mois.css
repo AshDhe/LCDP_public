@@ -334,8 +334,8 @@
 
 
 
-/* Variante générique : calendrier intégré dans le flux d'une page. */
-.lcdp-box-calendrier-mois.lcdp-box-calendrier-mois--inline {
+/* Variante inline : calendrier du planning membre intégré dans Box Liste Card. */
+.lcdp-box-calendrier-mois.lcdp-box-calendrier-mois--planning-membre {
   position: static;
   inset: auto;
   z-index: auto;
@@ -347,12 +347,23 @@
   justify-content: initial;
 }
 
-.lcdp-box-calendrier-mois.lcdp-box-calendrier-mois--inline
+.lcdp-box-calendrier-mois.lcdp-box-calendrier-mois--planning-membre
   .lcdp-box-calendrier-mois__card {
   width: 100%;
   max-width: 960px;
   max-height: none;
   margin-inline: auto;
   overflow: visible;
+  box-shadow: none;
+}
+
+
+/* Variante générique : calendrier embarqué dans une card parente. */
+.lcdp-box-calendrier-mois.lcdp-box-calendrier-mois--embedded
+  .lcdp-box-calendrier-mois__card {
+  max-width: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
   box-shadow: none;
 }
