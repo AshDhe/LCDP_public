@@ -172,6 +172,16 @@
         alerte.classList.add("lcdp-alerte-accueil-" + variante);
       }
 
+
+        function normaliserPonctuationAlerte(message) {
+    const texte = String(message || "").trim();
+
+    if (!texte) return "";
+    if (/[.!?…]$/.test(texte)) return texte;
+
+    return texte + ".";
+  }
+
       async function afficherAlerte(message, options = {}) {
         const slot = document.getElementById("lcdp-lightbox-slot");
         slot.innerHTML = "";
@@ -185,7 +195,7 @@
           throw new Error("Structure de l’alerte incomplète.");
         }
 
-        alerte.querySelector("[data-lcdp-alerte-message]").textContent = message;
+        alerte.querySelector("[data-lcdp-alerte-message]").textContent = normaliserPonctuationAlerte(message);
 
         appliquerVarianteAlerteAccueil(alerte, options.variante);
 
