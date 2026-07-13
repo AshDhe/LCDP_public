@@ -1,9 +1,15 @@
 .lcdp-box-commande-bar {
   width: 100%;
+  min-width: 0;
+  max-width: none;
+  flex: 1 1 100%;
+  align-self: stretch;
 }
 
 .lcdp-box-commande-bar__actions {
   width: 100%;
+  min-width: 0;
+  max-width: none;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,13 +22,31 @@
   width: auto;
   min-width: 0;
   max-width: none;
+  min-height: 34px;
   margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
   flex: 0 0 auto;
+  font-size: 0.82rem;
+  line-height: 1.1;
   white-space: nowrap;
+}
+
+.lcdp-box-commande-bar__actions > :first-child {
+  margin-right: auto;
 }
 
 .lcdp-box-commande-bar__actions > :last-child {
   margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-commande-bar__actions .lcdp-button {
+    min-width: 0;
+    min-height: 34px;
+    padding: 6px 13px;
+    font-size: 0.82rem;
+  }
 }
 
 @media (max-width: 340px) {
@@ -30,7 +54,9 @@
     flex-wrap: wrap;
   }
 
+  .lcdp-box-commande-bar__actions > :first-child,
   .lcdp-box-commande-bar__actions > :last-child {
     margin-left: 0;
+    margin-right: 0;
   }
 }
