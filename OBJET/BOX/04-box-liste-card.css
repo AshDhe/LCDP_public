@@ -153,10 +153,6 @@
   transform: translateY(6px);
 }
 
-.lcdp-box-liste-card--planning-membre .lcdp-box-calendrier-mois {
-  width: 100%;
-}
-
 .lcdp-box-liste-card--planning-membre .lcdp-box-card-reservation-membre {
   width: 100%;
   max-width: none;
@@ -173,22 +169,3 @@
 }
 
 
-/* Planning membre : neutralisation du mode modal du calendrier dans le wrapper. */
-.lcdp-box-liste-card--planning-membre .lcdp-box-calendrier-mois {
-  position: static;
-  inset: auto;
-  z-index: auto;
-  width: 100%;
-  padding: 0;
-  background: transparent;
-  display: block;
-}
-
-.lcdp-box-liste-card--planning-membre .lcdp-box-calendrier-mois__card {
-  width: 100%;
-  max-width: 960px;
-  max-height: none;
-  margin-inline: auto;
-  overflow: visible;
-  box-shadow: none;
-}

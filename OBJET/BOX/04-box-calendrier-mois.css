@@ -332,3 +332,27 @@
   white-space: nowrap;
 }
 
+
+
+/* Variante générique : calendrier intégré dans le flux d'une page. */
+.lcdp-box-calendrier-mois.lcdp-box-calendrier-mois--inline {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  display: block;
+  align-items: initial;
+  justify-content: initial;
+}
+
+.lcdp-box-calendrier-mois.lcdp-box-calendrier-mois--inline
+  .lcdp-box-calendrier-mois__card {
+  width: 100%;
+  max-width: 960px;
+  max-height: none;
+  margin-inline: auto;
+  overflow: visible;
+  box-shadow: none;
+}
