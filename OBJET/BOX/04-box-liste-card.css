@@ -135,3 +135,19 @@
   .lcdp-box-liste-card__list {
   padding-top: var(--lcdp-space-3);
 }
+
+
+/* Variante générique : List Card avec encadrement visuel. */
+.lcdp-box-liste-card--encadree {
+  box-sizing: border-box;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-liste-card--encadree {
+    padding: var(--lcdp-space-4);
+  }
+}

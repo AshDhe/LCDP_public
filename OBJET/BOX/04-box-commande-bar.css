@@ -60,3 +60,19 @@
     margin-right: 0;
   }
 }
+
+
+/* Variante générique : Command Bar avec encadrement visuel. */
+.lcdp-box-commande-bar--encadree {
+  box-sizing: border-box;
+  padding: var(--lcdp-space-2);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-commande-bar--encadree {
+    padding: var(--lcdp-space-3);
+  }
+}
