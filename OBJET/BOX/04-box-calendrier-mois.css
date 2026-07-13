@@ -216,59 +216,6 @@
   pointer-events: none;
 }
 
-/* Planning membre : bouton RÉSERVER au-dessus du liseré, navigation mensuelle inchangée. */
-.lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-row {
-  width: 100%;
-  margin: 0 0 var(--lcdp-space-2);
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-button {
-  position: static;
-  transform: none;
-  width: auto;
-  min-width: 112px;
-  max-width: none;
-  min-height: 38px;
-  margin: 0;
-  padding: 8px 16px;
-  border: 2px solid var(--lcdp-color-orange);
-  border-radius: 999px;
-  background: #ffffff;
-  color: var(--lcdp-color-orange);
-  font-family: var(--lcdp-font-main);
-  font-size: 0.86rem;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: 0.045em;
-  text-align: center;
-  text-decoration: none !important;
-  text-transform: uppercase;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: none;
-}
-
-.lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-button:visited,
-.lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-button:hover {
-  color: var(--lcdp-color-orange);
-  text-decoration: none !important;
-}
-
-.lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-button:hover {
-  background: rgba(242, 162, 58, 0.10);
-  border-color: var(--lcdp-color-orange);
-}
-
-.lcdp-box-calendrier-mois--planning-membre .lcdp-planning-membre-reserver-button:focus-visible {
-  outline: 3px solid var(--lcdp-color-focus);
-  outline-offset: 3px;
-}
-
 /* Planning parc depuis Réserver : actions hautes Fiche parc / RÉSERVER / Partager. */
 .lcdp-box-calendrier-mois__actions-parc {
   width: 100%;
@@ -366,4 +313,22 @@
   border: 0;
   border-radius: 0;
   box-shadow: none;
+}
+
+
+/* Command Bar intégrée dans la card du calendrier mensuel. */
+.lcdp-box-calendrier-mois__commande {
+  width: 100%;
+  margin-bottom: var(--lcdp-space-3);
+}
+
+.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__header {
+  padding-right: 0;
+}
+
+.lcdp-box-calendrier-mois--planning-membre
+  .lcdp-box-calendrier-mois__title[hidden],
+.lcdp-box-calendrier-mois--planning-membre
+  .lcdp-box-calendrier-mois__meta[hidden] {
+  display: none;
 }

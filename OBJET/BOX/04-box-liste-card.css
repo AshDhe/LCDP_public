@@ -73,23 +73,6 @@
   display: none;
 }
 
-.lcdp-box-liste-card--planning-membre .lcdp-planning-membre-reserver-button {
-  border: 2px solid var(--lcdp-color-orange);
-  background: #ffffff;
-  color: var(--lcdp-color-orange);
-  font-weight: 700;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-.lcdp-box-liste-card--planning-membre .lcdp-planning-membre-reserver-button:hover,
-.lcdp-box-liste-card--planning-membre .lcdp-planning-membre-reserver-button:visited {
-  border-color: var(--lcdp-color-orange);
-  background: rgba(242, 162, 58, 0.10);
-  color: var(--lcdp-color-orange);
-  text-decoration: none;
-}
 
 .lcdp-box-liste-card--planning-membre .lcdp-box-liste-card__list {
   opacity: 1;
@@ -114,8 +97,18 @@
   width: 100%;
 }
 
-/* Variante planning : une seule card pour la commande et la vue active. */
-.lcdp-box-liste-card--planning-membre {
+/* Vue agenda : la card visuelle reste celle de l’objet calendrier. */
+.lcdp-box-liste-card--planning-membre.lcdp-box-liste-card--mode-agenda {
+  gap: 0;
+}
+
+.lcdp-box-liste-card--planning-membre.lcdp-box-liste-card--mode-agenda
+  .lcdp-box-liste-card__header {
+  display: none;
+}
+
+/* Vue liste : la List Card devient l’enveloppe visuelle commune. */
+.lcdp-box-liste-card--planning-membre.lcdp-box-liste-card--mode-liste {
   width: 100%;
   padding: var(--lcdp-space-3);
   border: 1px solid var(--lcdp-color-border);
@@ -123,12 +116,15 @@
   background: var(--lcdp-color-surface);
 }
 
-.lcdp-box-liste-card--planning-membre .lcdp-box-liste-card__header {
+.lcdp-box-liste-card--planning-membre.lcdp-box-liste-card--mode-liste
+  .lcdp-box-liste-card__header {
   width: 100%;
+  display: flex;
   padding-bottom: var(--lcdp-space-3);
   border-bottom: 1px solid var(--lcdp-color-border);
 }
 
-.lcdp-box-liste-card--planning-membre .lcdp-box-liste-card__list {
+.lcdp-box-liste-card--planning-membre.lcdp-box-liste-card--mode-liste
+  .lcdp-box-liste-card__list {
   padding-top: var(--lcdp-space-3);
 }
