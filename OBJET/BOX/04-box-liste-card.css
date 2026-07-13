@@ -119,9 +119,16 @@
 .lcdp-box-liste-card--planning-membre.lcdp-box-liste-card--mode-liste
   .lcdp-box-liste-card__header {
   width: 100%;
-  display: flex;
+  display: block;
   padding-bottom: var(--lcdp-space-3);
   border-bottom: 1px solid var(--lcdp-color-border);
+}
+
+.lcdp-box-liste-card--planning-membre.lcdp-box-liste-card--mode-liste
+  .lcdp-box-liste-card__commande {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
 }
 
 .lcdp-box-liste-card--planning-membre.lcdp-box-liste-card--mode-liste
