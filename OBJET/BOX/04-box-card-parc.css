@@ -10,6 +10,7 @@
 }
 
 .lcdp-box-card-parc__media {
+  position: relative;
   width: 100%;
   background: var(--lcdp-color-surface-soft);
 }
@@ -118,4 +119,23 @@
   .lcdp-box-card-parc__actions [data-action="nouvelle-date-parc"] {
     grid-column: 2 / 3;
   }
+}
+
+
+.lcdp-box-card-parc__badge-prepa {
+  position: absolute;
+  top: 14px;
+  left: -34px;
+  z-index: 1;
+  width: 120px;
+  padding: 5px 0;
+  transform: rotate(-45deg);
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+  font-size: 0.72rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  pointer-events: none;
 }
