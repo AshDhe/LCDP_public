@@ -1,0 +1,126 @@
+<div
+  class="lcdp-box-dialogue-upload-img"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="lcdp-upload-img-title"
+  data-lcdp-box-dialogue-upload-img
+>
+  <div class="lcdp-box-dialogue-upload-img__card">
+    <button
+      class="lcdp-box-dialogue-upload-img__close"
+      type="button"
+      aria-label="Fermer"
+      data-lcdp-upload-img-close
+    >
+      ×
+    </button>
+
+    <h2
+      id="lcdp-upload-img-title"
+      class="lcdp-box-dialogue-upload-img__title"
+    >
+      UploadIMG
+    </h2>
+
+    <form
+      class="lcdp-box-dialogue-upload-img__form"
+      data-lcdp-upload-img-form
+      novalidate
+    >
+      <p class="lcdp-box-dialogue-upload-img__intro">
+        Choisir un département, un parc, puis ajouter de une à six images.
+      </p>
+
+      <div class="lcdp-box-dialogue-upload-img__field">
+        <label
+          class="lcdp-box-dialogue-upload-img__label"
+          for="lcdp-upload-img-dptmt"
+        >
+          Département
+        </label>
+
+        <select
+          id="lcdp-upload-img-dptmt"
+          class="lcdp-box-dialogue-upload-img__select"
+          name="dptmt"
+          data-lcdp-upload-img-dptmt
+          disabled
+        >
+          <option value="">Chargement…</option>
+        </select>
+      </div>
+
+      <div class="lcdp-box-dialogue-upload-img__field">
+        <label
+          class="lcdp-box-dialogue-upload-img__label"
+          for="lcdp-upload-img-parc"
+        >
+          Parc
+        </label>
+
+        <select
+          id="lcdp-upload-img-parc"
+          class="lcdp-box-dialogue-upload-img__select"
+          name="idparc"
+          data-lcdp-upload-img-parc
+          disabled
+        >
+          <option value="">Choisir d’abord un département</option>
+        </select>
+      </div>
+
+      <div class="lcdp-box-dialogue-upload-img__field">
+        <label
+          class="lcdp-box-dialogue-upload-img__label"
+          for="lcdp-upload-img-images"
+        >
+          Images
+        </label>
+
+        <input
+          id="lcdp-upload-img-images"
+          class="lcdp-box-dialogue-upload-img__input-file"
+          name="images"
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/avif,image/gif,.jpg,.jpeg,.png,.webp,.avif,.gif"
+          multiple
+          data-lcdp-upload-img-images
+        >
+
+        <p class="lcdp-box-dialogue-upload-img__help">
+          De 1 à 6 images. Maximum : 15 Mo par image.
+        </p>
+
+        <ul
+          class="lcdp-box-dialogue-upload-img__files"
+          data-lcdp-upload-img-files
+          hidden
+        ></ul>
+      </div>
+
+      <p
+        class="lcdp-box-dialogue-upload-img__error"
+        data-lcdp-upload-img-error
+        hidden
+      ></p>
+
+      <div class="lcdp-box-dialogue-upload-img__actions">
+        <button
+          class="lcdp-button lcdp-button-secondary"
+          type="button"
+          data-lcdp-upload-img-cancel
+        >
+          Annuler
+        </button>
+
+        <button
+          class="lcdp-button lcdp-button-primary"
+          type="submit"
+          data-lcdp-upload-img-submit
+        >
+          OK
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
