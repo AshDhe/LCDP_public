@@ -1,0 +1,242 @@
+.lcdp-carte-dynamique {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.lcdp-carte-dynamique__header {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.lcdp-carte-dynamique__title,
+.lcdp-carte-dynamique__intro,
+.lcdp-carte-dynamique__status {
+  margin: 0;
+}
+
+.lcdp-carte-dynamique__filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(13rem, 18rem) auto;
+  gap: 1rem;
+  align-items: end;
+}
+
+.lcdp-carte-dynamique__fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.lcdp-carte-dynamique__legend,
+.lcdp-carte-dynamique__label {
+  display: block;
+  margin: 0 0 0.55rem;
+  font-weight: 700;
+}
+
+.lcdp-carte-dynamique__check {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  min-height: 2rem;
+  cursor: pointer;
+}
+
+.lcdp-carte-dynamique__check--all {
+  margin-bottom: 0.6rem;
+}
+
+.lcdp-carte-dynamique__departements {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  gap: 0.15rem 0.8rem;
+  max-height: 13rem;
+  padding: 0.65rem 0.8rem;
+  overflow: auto;
+  border: 1px solid rgba(70, 70, 70, 0.22);
+  border-radius: 0.65rem;
+  background: #fff;
+}
+
+.lcdp-carte-dynamique__select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgba(70, 70, 70, 0.32);
+  border-radius: 0.55rem;
+  background: #fff;
+  font: inherit;
+}
+
+.lcdp-carte-dynamique__actions {
+  display: flex;
+  align-items: end;
+}
+
+.lcdp-carte-dynamique__status {
+  min-height: 1.35rem;
+}
+
+.lcdp-carte-dynamique__status:empty {
+  display: none;
+}
+
+.lcdp-carte-dynamique__map-shell {
+  position: relative;
+  width: 100%;
+  min-height: 34rem;
+  overflow: hidden;
+  border: 1px solid rgba(70, 70, 70, 0.18);
+  border-radius: 0.85rem;
+  background: #fff;
+}
+
+.lcdp-carte-dynamique__map {
+  display: block;
+  width: 100%;
+  height: clamp(34rem, 70vh, 58rem);
+  background: #fff;
+}
+
+.lcdp-carte-dynamique__departement {
+  fill: #fafafa;
+  stroke: #c8c8c8;
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  transition: fill 160ms ease, stroke 160ms ease, stroke-width 160ms ease;
+}
+
+.lcdp-carte-dynamique__departement.is-selected {
+  fill: #f7fbf8;
+  stroke: #4f8d65;
+  stroke-width: 2.2;
+}
+
+.lcdp-carte-dynamique__marker {
+  stroke: rgba(40, 40, 40, 0.38);
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+
+.lcdp-carte-dynamique__marker[data-statut="recherche"],
+.lcdp-carte-dynamique__marker[data-statut="acreuserfautinfo"] {
+  fill: #d8d8d8;
+}
+
+.lcdp-carte-dynamique__marker[data-statut="prepa"] {
+  fill: #a9d7b6;
+}
+
+.lcdp-carte-dynamique__marker[data-statut="oui"] {
+  fill: #a9cfe5;
+}
+
+.lcdp-carte-dynamique__marker[data-statut="non"],
+.lcdp-carte-dynamique__marker[data-statut="nonconforme"] {
+  fill: #efc1c1;
+}
+
+.lcdp-carte-dynamique__legend-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+  font-size: 0.92rem;
+}
+
+.lcdp-carte-dynamique__legend-status span {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.lcdp-carte-dynamique__legend-status i {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 1px solid rgba(40, 40, 40, 0.28);
+  border-radius: 50%;
+}
+
+.lcdp-carte-dynamique__legend-status i[data-statut="recherche"] {
+  background: #d8d8d8;
+}
+
+.lcdp-carte-dynamique__legend-status i[data-statut="prepa"] {
+  background: #a9d7b6;
+}
+
+.lcdp-carte-dynamique__legend-status i[data-statut="oui"] {
+  background: #a9cfe5;
+}
+
+.lcdp-carte-dynamique__legend-status i[data-statut="non"] {
+  background: #efc1c1;
+}
+
+@media (max-width: 900px) {
+  .lcdp-carte-dynamique__filters {
+    grid-template-columns: 1fr;
+  }
+
+  .lcdp-carte-dynamique__actions {
+    justify-content: flex-start;
+  }
+
+  .lcdp-carte-dynamique__map-shell {
+    min-height: 28rem;
+  }
+
+  .lcdp-carte-dynamique__map {
+    height: 65vh;
+    min-height: 28rem;
+  }
+}
+
+.lcdp-carte-dynamique__zoom {
+  position: absolute;
+  z-index: 2;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: grid;
+  overflow: hidden;
+  border: 1px solid rgba(70, 70, 70, 0.24);
+  border-radius: 0.55rem;
+  background: #fff;
+  box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.08);
+}
+
+.lcdp-carte-dynamique__zoom-button {
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  background: #fff;
+  font: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lcdp-carte-dynamique__zoom-button +
+.lcdp-carte-dynamique__zoom-button {
+  border-top: 1px solid rgba(70, 70, 70, 0.18);
+}
+
+.lcdp-carte-dynamique__zoom-button:hover,
+.lcdp-carte-dynamique__zoom-button:focus-visible {
+  background: #f4f6f4;
+}
+
+.lcdp-carte-dynamique__map {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.lcdp-carte-dynamique__map.is-dragging {
+  cursor: grabbing;
+}
