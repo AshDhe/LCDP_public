@@ -6,69 +6,30 @@
   <title>Fiche parc - La Clé du Parc</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Consulter la présentation, les photos, la localisation et les informations d’un parc La Clé du Parc.">
+  <meta
+    name="description"
+    content="Consulter la présentation, les photos, la localisation et les informations d’un parc La Clé du Parc."
+  >
 
   <script src="../config.js"></script>
 
   <script>
-    (() => {
-      "use strict";
-
-      const config = window.SITE_CONFIG || {};
-
-      function nettoyerBaseUrl(value) {
-        return String(value || "").replace(/\/+$/, "");
-      }
-
-      function buildUrl(base, path) {
-        return nettoyerBaseUrl(base) + "/" + String(path || "").replace(/^\/+/, "");
-      }
-
-      const publicBase = nettoyerBaseUrl(
-        config.publicBaseUrl ||
-        config.PUBLIC_BASE ||
-        config.siteBase ||
-        ""
-      );
-
-      const objetBase = nettoyerBaseUrl(
-        config.objetBaseUrl ||
-        config.OBJET_BASE ||
-        buildUrl(publicBase, "/OBJET")
-      );
-
-      window.SITE_BASE = publicBase;
-      window.LCDP_PUBLIC_BASE = publicBase;
-      window.LCDP_OBJET_BASE = objetBase;
-
-      window.LCDP_urlPublic = function LCDP_urlPublic(path) {
-        if (typeof config.publicUrl === "function") {
-          return config.publicUrl(path);
-        }
-
-        return buildUrl(publicBase, path);
-      };
-
-      window.LCDP_urlObjet = function LCDP_urlObjet(path) {
-        if (typeof config.objetUrl === "function") {
-          return config.objetUrl(path);
-        }
-
-        return buildUrl(objetBase, path);
-      };
-    })();
+    window.SITE_BASE =
+      window.SITE_CONFIG?.publicBaseUrl ||
+      window.SITE_CONFIG?.siteBase ||
+      "";
   </script>
 
   <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
+  <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-wraper-footer.css" data-site-href="/OBJET/BOX/02-box-wraper-footer.css">
   <link rel="stylesheet" href="../OBJET/BOX/03-box-galerie.css" data-site-href="/OBJET/BOX/03-box-galerie.css">
   <link rel="stylesheet" href="../OBJET/BOX/04-box-card-map-parc.css" data-site-href="/OBJET/BOX/04-box-card-map-parc.css">
   <link rel="stylesheet" href="../OBJET/BOX/04-box-fiche-parc.css" data-site-href="/OBJET/BOX/04-box-fiche-parc.css">
+  <link rel="stylesheet" href="./fiche-parc.css">
 </head>
 
 <body>
@@ -79,7 +40,7 @@
     <main class="lcdp-site-main">
       <section class="lcdp-page-section" aria-label="Fiche parc">
         <div class="lcdp-page-container">
-          <div class="lcdp-page-content lcdp-page-content--avec-entete lcdp-stack-large">
+          <div class="lcdp-page-content lcdp-stack-large">
 
             <p
               class="lcdp-mention-connexion"
@@ -89,85 +50,7 @@
               [Chargement de la fiche parc]
             </p>
 
-            <article data-lcdp-fiche-parc-page>
-              <header class="lcdp-box-fiche-parc__header">
-                <h1
-                  class="lcdp-box-fiche-parc__title"
-                  id="lcdp-fiche-parc-title"
-                  data-lcdp-fiche-parc-title
-                >
-                  Parc
-                </h1>
-
-                <div
-                  class="lcdp-box-fiche-parc__actions"
-                  data-lcdp-fiche-parc-actions
-                  aria-label="Actions du parc"
-                ></div>
-              </header>
-
-              <section
-                class="lcdp-box-fiche-parc__section"
-                aria-label="Présentation du parc"
-              >
-                <h2>Présentation</h2>
-
-                <div
-                  class="lcdp-box-fiche-parc__box-text"
-                  data-lcdp-fiche-parc-presentation
-                >
-                  Présentation non renseignée.
-                </div>
-              </section>
-
-              <section
-                class="lcdp-box-fiche-parc__section lcdp-box-fiche-parc__section--galerie"
-                aria-label="Galerie photo du parc"
-              >
-                <div
-                  class="lcdp-box-fiche-parc__galerie"
-                  data-lcdp-fiche-parc-galerie-slot
-                ></div>
-              </section>
-
-              <section
-                class="lcdp-box-fiche-parc__section lcdp-box-fiche-parc__section--map"
-                aria-label="Carte du parc"
-              >
-                <div
-                  class="lcdp-box-fiche-parc__map"
-                  data-lcdp-fiche-parc-map-slot
-                ></div>
-              </section>
-
-              <section
-                class="lcdp-box-fiche-parc__section"
-                aria-label="Contact La Clé du Parc"
-              >
-                <h2>Contact</h2>
-
-                <div
-                  class="lcdp-box-fiche-parc__box-text"
-                  data-lcdp-fiche-parc-contact
-                >
-                  Contact non renseigné.
-                </div>
-              </section>
-
-              <section
-                class="lcdp-box-fiche-parc__section"
-                aria-label="Accès au parc"
-              >
-                <h2>Accès</h2>
-
-                <div
-                  class="lcdp-box-fiche-parc__box-text"
-                  data-lcdp-fiche-parc-acces
-                >
-                  <p>L’accès est communiqué dans votre carte de réservation associée à ce parc.</p>
-                </div>
-              </section>
-            </article>
+            <div id="lcdp-fiche-parc-slot"></div>
 
           </div>
         </div>
@@ -179,6 +62,7 @@
 
   </div>
 
+  <script src="../OBJET/BOX/03-box-galerie.js"></script>
   <script src="./fiche-parc.js"></script>
 </body>
 </html>

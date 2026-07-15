@@ -1,23 +1,17 @@
 (() => {
   "use strict";
 
-  const CONFIG_PAGE = window.SITE_CONFIG || {};
-  const DOSSIER_IMAGES_PARC_OBJET = "/IMAG/PARC";
-  const CLE_STOCKAGE_FICHE_PARC = "lcdp-fiche-parc";
+  const siteBase = (
+    window.SITE_BASE ||
+    window.SITE_CONFIG?.publicBaseUrl ||
+    window.SITE_CONFIG?.siteBase ||
+    ""
+  ).replace(/\/$/, "");
 
-  const ENDPOINT_NOUVELLE_DATE_MEMBRE = construireEndpointApi(
-    "workerNouvelleDateMembreUrl",
-    "WORKER_NOUVELLE_DATE_MEMBRE_URL",
-    "nouvelle-date-membre-api"
-  );
-
-  const PAGE_RESERVER_MEMBRE = construireUrlMembre(
-    "/ESPACE-MEMBRE/reserver-membre.html"
-  );
+  const config = window.SITE_CONFIG || {};
+  const dossierImagesParc = "/IMAG/PARC";
 
   let pageInitialisee = false;
-  let parcActif = null;
-  let templateMapParc = null;
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initialiserPage);
@@ -26,258 +20,239 @@
   }
 
   async function initialiserPage() {
-    if (pageInitialisee) return;
-    pageInitialisee = true;
+    if (pageInitialisee) {
+      return;
+    }
 
+    pageInitialisee = true;
     appliquerRoutesSite(document);
 
-    try {
-      await Promise.all([
-        initialiserBandeau(),
-        initialiserFooter(),
-        chargerTemplateCarteParc()
-      ]);
+    const promesseBandeau = initialiserBandeau().catch((erreur) => {
+      console.warn("Bandeau public indisponible.", erreur);
+    });
 
-      parcActif = await recupererParcPage();
-      afficherFicheParc(parcActif);
-    } catch (error) {
-      console.error("Erreur fiche parc :", error);
-      afficherEtatChargement(
-        error.message || "Impossible de charger la fiche du parc.",
+    const promesseFooter = initialiserFooter().catch((erreur) => {
+      console.warn("Footer indisponible.", erreur);
+    });
+
+    try {
+      const parc = lireParcDepuisUrl();
+      await afficherFicheParc(parc);
+      afficherStatut("", true);
+    } catch (erreur) {
+      console.error("Erreur fiche parc :", erreur);
+      afficherStatut(
+        erreur.message || "Impossible d’afficher la fiche du parc.",
         false
       );
     }
-  }
 
-  async function recupererParcPage() {
-    const parcTransmis = lireParcTransmis();
-    const idparc = nettoyerTexteFiche(
-      parcTransmis.idparc || parcTransmis.id || ""
-    );
-    const departement = nettoyerDepartement(
-      parcTransmis.dptmt || parcTransmis.departement || ""
-    );
-
-    if (idparc && departement && ENDPOINT_NOUVELLE_DATE_MEMBRE) {
-      try {
-        const parcWorker = await chargerParcDepuisDepartement(
-          idparc,
-          departement
-        );
-
-        if (parcWorker) {
-          return {
-            ...parcTransmis,
-            ...parcWorker
-          };
-        }
-      } catch (error) {
-        if (!parcContientDonneesAffichables(parcTransmis)) {
-          throw error;
-        }
-
-        console.warn(
-          "La fiche parc utilise les données transmises par la page d’origine.",
-          error
-        );
-      }
-    }
-
-    if (parcContientDonneesAffichables(parcTransmis)) {
-      return parcTransmis;
-    }
-
-    throw new Error("Aucun parc n’a été transmis à cette page.");
-  }
-
-  function lireParcTransmis() {
-    const depuisEtatNavigation =
-      window.history &&
-      window.history.state &&
-      typeof window.history.state.parc === "object"
-        ? window.history.state.parc
-        : null;
-
-    if (depuisEtatNavigation) {
-      return depuisEtatNavigation;
-    }
-
-    const depuisStockage = lireParcStocke();
-
-    if (depuisStockage) {
-      return depuisStockage;
-    }
-
-    return lireParcDepuisUrl();
-  }
-
-  function lireParcStocke() {
-    try {
-      const brut = window.sessionStorage.getItem(CLE_STOCKAGE_FICHE_PARC);
-
-      if (!brut) return null;
-
-      const parc = JSON.parse(brut);
-      return parc && typeof parc === "object" ? parc : null;
-    } catch {
-      return null;
-    }
+    await Promise.allSettled([
+      promesseBandeau,
+      promesseFooter
+    ]);
   }
 
   function lireParcDepuisUrl() {
-    const params = new URLSearchParams(window.location.search);
-    const parc = {};
+    const parametres = new URLSearchParams(window.location.search);
 
-    [
-      "idparc",
-      "id",
-      "nom",
-      "nomparc",
-      "dptmt",
-      "departement",
-      "prez",
-      "presentation",
-      "description",
-      "latparc",
-      "latitude",
-      "lngparc",
-      "longitude",
-      "contact",
-      "contactparc",
-      "emailparc",
-      "email",
-      "telephone",
-      "telparc",
-      "tel"
-    ].forEach((cle) => {
-      const valeur = params.get(cle);
-
-      if (valeur !== null && valeur !== "") {
-        parc[cle] = valeur;
-      }
-    });
-
-    return parc;
-  }
-
-  function parcContientDonneesAffichables(parc) {
-    if (!parc || typeof parc !== "object") return false;
-
-    return Boolean(
-      nettoyerTexteFiche(
-        parc.idparc ||
-        parc.id ||
-        parc.nom ||
-        parc.nomparc ||
-        parc.prez ||
-        parc.presentation ||
-        parc.description ||
-        ""
+    return {
+      idparc: nettoyerTexte(parametres.get("idparc")),
+      nom: nettoyerTexte(
+        parametres.get("nom") ||
+        parametres.get("nomparc")
+      ),
+      dptmt: nettoyerDepartement(
+        parametres.get("dptmt") ||
+        parametres.get("departement")
+      ),
+      prez: nettoyerTexte(
+        parametres.get("prez") ||
+        parametres.get("presentation") ||
+        parametres.get("description")
+      ),
+      latparc: nettoyerTexte(
+        parametres.get("latparc") ||
+        parametres.get("latitude")
+      ),
+      lngparc: nettoyerTexte(
+        parametres.get("lngparc") ||
+        parametres.get("longitude")
+      ),
+      contact: nettoyerTexte(
+        parametres.get("contact") ||
+        parametres.get("contactparc")
+      ),
+      emailparc: nettoyerTexte(
+        parametres.get("emailparc") ||
+        parametres.get("email")
+      ),
+      telparc: nettoyerTexte(
+        parametres.get("telparc") ||
+        parametres.get("telephone") ||
+        parametres.get("tel")
       )
-    );
+    };
   }
 
-  async function chargerParcDepuisDepartement(idparc, departement) {
-    const url =
-      ENDPOINT_NOUVELLE_DATE_MEMBRE +
-      "/departement?dptmt=" +
-      encodeURIComponent(departement);
+  async function afficherFicheParc(parc) {
+    const slot = document.getElementById("lcdp-fiche-parc-slot");
 
-    const reponse = await fetch(url, {
-      method: "GET",
-      credentials: "include",
-      cache: "no-store",
-      headers: {
-        "Accept": "application/json"
-      }
-    });
-
-    const resultat = await reponse.json().catch(() => null);
-
-    if (!reponse.ok || !resultat || !reponseApiOk(resultat)) {
-      throw new Error(
-        messageErreurApi(
-          resultat,
-          "Impossible de charger les informations du parc."
-        )
-      );
+    if (!slot) {
+      throw new Error("Slot fiche parc introuvable.");
     }
 
-    const parcs = Array.isArray(resultat.parcs) ? resultat.parcs : [];
+    slot.innerHTML = "";
 
-    return parcs.find((parc) => {
-      return String(parc.idparc || parc.id || "") === String(idparc);
-    }) || null;
-  }
+    const fragment = await chargerFragment(
+      "/OBJET/BOX/04-box-fiche-parc.html"
+    );
 
-  function afficherFicheParc(parc) {
-    const nom = nettoyerTexteFiche(
-      parc.nom || parc.nomparc || "Parc"
-    ) || "Parc";
+    const fiche = fragment.querySelector(
+      "[data-lcdp-box-fiche-parc]"
+    );
 
-    const titre = document.querySelector("[data-lcdp-fiche-parc-title]");
-    const actionsSlot = document.querySelector(
+    if (!fiche) {
+      throw new Error("Structure de la fiche parc incomplète.");
+    }
+
+    fiche.classList.add("lcdp-box-fiche-parc--page");
+    fiche.removeAttribute("role");
+    fiche.removeAttribute("aria-modal");
+
+    const boutonFermer = fiche.querySelector(
+      "[data-lcdp-fiche-parc-close]"
+    );
+
+    if (boutonFermer) {
+      boutonFermer.remove();
+    }
+
+    slot.appendChild(fiche);
+
+    const nom = parc.nom || "Parc";
+    const titre = fiche.querySelector(
+      "[data-lcdp-fiche-parc-title]"
+    );
+    const actionsSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-actions]"
     );
-    const presentation = document.querySelector(
+    const presentationElement = fiche.querySelector(
       "[data-lcdp-fiche-parc-presentation]"
     );
-    const galerieSlot = document.querySelector(
+    const galerieSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-galerie-slot]"
     );
-    const mapSlot = document.querySelector(
+    const carteSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-map-slot]"
     );
-    const contact = document.querySelector(
+    const contactElement = fiche.querySelector(
       "[data-lcdp-fiche-parc-contact]"
+    );
+    const accesElement = fiche.querySelector(
+      "[data-lcdp-fiche-parc-acces]"
     );
 
     if (titre) {
       titre.textContent = "Parc de " + nom;
     }
 
-    document.title = "Parc de " + nom + " - La Clé du Parc";
+    document.title =
+      "Parc de " + nom + " - La Clé du Parc";
 
     if (actionsSlot) {
-      actionsSlot.replaceChildren(creerActionsFicheParc(parc));
+      actionsSlot.innerHTML = "";
+      actionsSlot.appendChild(
+        creerActionsFicheParc(parc)
+      );
     }
 
-    remplirBlocTexteFiche(
-      presentation,
-      nettoyerTexteFiche(
-        parc.prez ||
-        parc.presentation ||
-        parc.description ||
-        ""
-      ) || "Présentation non renseignée."
+    await remplacerSectionParBoxText(
+      presentationElement?.closest(
+        ".lcdp-box-fiche-parc__section"
+      ),
+      "Présentation",
+      parc.prez || "Présentation non renseignée."
     );
 
-    afficherGalerieParcDansSlot(galerieSlot, parc);
-    afficherCarteParcDansSlot(mapSlot, parc);
+    await ajouterGalerieParc(galerieSlot, parc);
+    await ajouterCarteParc(carteSlot, parc);
 
-    remplirBlocTexteFiche(
-      contact,
+    await remplacerSectionParBoxText(
+      contactElement?.closest(
+        ".lcdp-box-fiche-parc__section"
+      ),
+      "Contact",
       construireTexteContactParc(parc)
     );
 
-    afficherEtatChargement("", true);
+    await remplacerSectionParBoxText(
+      accesElement?.closest(
+        ".lcdp-box-fiche-parc__section"
+      ),
+      "Accès",
+      "L’accès est communiqué dans votre carte de réservation associée à ce parc."
+    );
+
+    appliquerRoutesSite(slot);
   }
 
-  function remplirBlocTexteFiche(conteneur, texte) {
-    if (!conteneur) return;
+  async function remplacerSectionParBoxText(
+    section,
+    titre,
+    contenu
+  ) {
+    if (!section) {
+      throw new Error(
+        "Section " + titre + " introuvable."
+      );
+    }
 
+    section.innerHTML = "";
+
+    const titreSection = document.createElement("h3");
+    titreSection.textContent = titre;
+    section.appendChild(titreSection);
+
+    const fragment = await chargerFragment(
+      "/OBJET/BOX/01-box-text.html"
+    );
+
+    const box = fragment.querySelector(
+      "[data-lcdp-boxtext]"
+    );
+    const titreObjet = fragment.querySelector(
+      "[data-lcdp-boxtext-title]"
+    );
+    const contenuObjet = fragment.querySelector(
+      "[data-lcdp-boxtext-content]"
+    );
+
+    if (!box || !titreObjet || !contenuObjet) {
+      throw new Error(
+        "Structure de la Box Text incomplète."
+      );
+    }
+
+    titreObjet.textContent = titre;
+    box.classList.add(
+      "lcdp-box-fiche-parc__box-text"
+    );
+
+    remplirParagraphes(contenuObjet, contenu);
+    section.appendChild(fragment);
+  }
+
+  function remplirParagraphes(conteneur, texte) {
     conteneur.innerHTML = "";
 
     const lignes = String(texte || "")
       .split("\n")
-      .map(nettoyerTexteFiche)
+      .map(nettoyerTexte)
       .filter(Boolean);
 
     if (!lignes.length) {
-      const paragraphe = document.createElement("p");
-      paragraphe.textContent = "Non renseigné.";
-      conteneur.appendChild(paragraphe);
-      return;
+      lignes.push("Non renseigné.");
     }
 
     lignes.forEach((ligne) => {
@@ -287,141 +262,131 @@
     });
   }
 
-  function afficherGalerieParcDansSlot(slot, parc) {
-    if (!slot) return;
+  async function ajouterGalerieParc(slot, parc) {
+    if (!slot) {
+      throw new Error(
+        "Slot galerie fiche parc introuvable."
+      );
+    }
 
-    slot.innerHTML = "";
+    if (
+      typeof window.LCDP_ajouterGalerie !==
+      "function"
+    ) {
+      throw new Error(
+        "Objet galerie V3 introuvable."
+      );
+    }
 
-    const galerie = document.createElement("section");
-    galerie.className =
-      "lcdp-component lcdp-box-galerie lcdp-box-fiche-parc__galerie-box";
-    galerie.setAttribute("aria-label", "Galerie photo du parc");
-
-    const liste = document.createElement("div");
-    liste.className = "lcdp-box-galerie__list";
-
-    const nom = nettoyerTexteFiche(
-      parc.nom || parc.nomparc || "Parc"
-    ) || "Parc";
+    const nom = parc.nom || "Parc";
+    const cartes = [];
 
     for (let index = 1; index <= 6; index += 1) {
       const numero = String(index).padStart(2, "0");
-      const card = document.createElement("article");
-      card.className =
-        "lcdp-box-galerie__card lcdp-box-fiche-parc__galerie-card";
 
-      const image = document.createElement("img");
-      image.className =
-        "lcdp-box-galerie__image lcdp-box-fiche-parc__galerie-image";
-      image.src = construireUrlImageParcFichier(
-        parc,
-        numero + ".webp"
-      );
-      image.alt = "Photo " + numero + " du parc de " + nom;
-      image.loading = "lazy";
-      image.decoding = "async";
-
-      image.addEventListener("error", () => {
-        card.hidden = true;
+      cartes.push({
+        titre: "",
+        imageSrc: construireCheminImageParc(
+          parc,
+          numero + ".webp"
+        ),
+        imageAlt:
+          "Photo " +
+          numero +
+          " du parc de " +
+          nom,
+        imageLegende: "",
+        texte: ""
       });
-
-      card.appendChild(image);
-      liste.appendChild(card);
     }
 
-    galerie.appendChild(liste);
-    slot.appendChild(galerie);
+    await window.LCDP_ajouterGalerie(
+      slot,
+      {
+        titre: "",
+        ariaLabel: "Galerie photo du parc",
+        cartes
+      }
+    );
   }
 
-  function afficherCarteParcDansSlot(slot, parc) {
-    if (!slot) return;
+  async function ajouterCarteParc(slot, parc) {
+    if (!slot) {
+      throw new Error(
+        "Slot carte fiche parc introuvable."
+      );
+    }
 
     slot.innerHTML = "";
 
-    const carte = templateMapParc
-      ? templateMapParc.cloneNode(true)
-      : null;
+    const fragment = await chargerFragment(
+      "/OBJET/BOX/04-box-card-map-parc.html"
+    );
 
-    if (!carte) return;
-
-    const coords = carte.querySelector(
+    const carte = fragment.querySelector(
+      "[data-lcdp-box-card-map-parc]"
+    );
+    const coordonnees = fragment.querySelector(
       "[data-lcdp-card-map-parc-coords]"
     );
 
-    const latitude = nettoyerTexteFiche(
-      parc.latparc || parc.latitude || ""
-    );
-
-    const longitude = nettoyerTexteFiche(
-      parc.lngparc || parc.longitude || ""
-    );
-
-    if (coords) {
-      coords.textContent =
-        latitude && longitude
-          ? latitude + ", " + longitude
-          : "Coordonnées GPS non renseignées";
+    if (!carte || !coordonnees) {
+      throw new Error(
+        "Structure de la Box Card Map Parc incomplète."
+      );
     }
 
-    slot.appendChild(carte);
-  }
+    coordonnees.textContent =
+      parc.latparc && parc.lngparc
+        ? parc.latparc + ", " + parc.lngparc
+        : "Coordonnées GPS non renseignées";
 
-  function construireTexteContactParc(parc) {
-    const lignes = [
-      parc.contact,
-      parc.contactparc,
-      parc.emailparc,
-      parc.email,
-      parc.telephone,
-      parc.telparc,
-      parc.tel
-    ]
-      .map(nettoyerTexteFiche)
-      .filter(Boolean)
-      .filter((valeur, index, liste) => {
-        return liste.indexOf(valeur) === index;
-      });
-
-    return lignes.length
-      ? lignes.join("\n")
-      : "Contact non renseigné.";
+    slot.appendChild(fragment);
   }
 
   function creerActionsFicheParc(parc) {
     const actions = document.createElement("div");
-    actions.className = "lcdp-box-fiche-parc__actions-list";
+    actions.className =
+      "lcdp-box-fiche-parc__actions-list";
 
-    const boutonReserver = document.createElement("button");
+    const boutonReserver =
+      document.createElement("button");
+
     boutonReserver.type = "button";
     boutonReserver.className =
-      "lcdp-button lcdp-box-calendrier-mois__action-reserver " +
+      "lcdp-button " +
+      "lcdp-box-calendrier-mois__action-reserver " +
       "lcdp-box-fiche-parc__action-reserver";
     boutonReserver.textContent = "RÉSERVER";
+
     boutonReserver.addEventListener("click", () => {
-      ouvrirPageReserverMembre(parc, "reservation");
+      ouvrirReservationMembre(parc);
     });
 
-    const boutonPlanning = document.createElement("button");
+    const boutonPlanning =
+      document.createElement("button");
+
     boutonPlanning.type = "button";
     boutonPlanning.className =
       "lcdp-button lcdp-button-primary " +
       "lcdp-box-fiche-parc__action-planning";
     boutonPlanning.textContent = "Planning parc";
+
     boutonPlanning.addEventListener("click", () => {
-      ouvrirPageReserverMembre(parc, "planning");
+      ouvrirPlanningPublic(parc);
     });
 
-    const actionPartager = creerActionPartagerFicheParc();
-    actionPartager.addEventListener("click", () => {
-      partagerFicheParc(parc).catch(console.error);
-    });
+    const actionPartager =
+      creerActionPartagerFicheParc();
 
-    actionPartager.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        partagerFicheParc(parc).catch(console.error);
+    actionPartager.addEventListener(
+      "click",
+      () => {
+        partagerFicheParc(parc).catch(
+          console.error
+        );
       }
-    });
+    );
 
     actions.appendChild(boutonReserver);
     actions.appendChild(boutonPlanning);
@@ -432,13 +397,18 @@
 
   function creerActionPartagerFicheParc() {
     const action = document.createElement("span");
-    action.className = "lcdp-box-fiche-parc__partage";
+    action.className =
+      "lcdp-box-fiche-parc__partage";
     action.setAttribute("role", "button");
     action.setAttribute("tabindex", "0");
-    action.setAttribute("aria-label", "Partager la page");
+    action.setAttribute(
+      "aria-label",
+      "Partager la page"
+    );
 
     const bouton = document.createElement("span");
-    bouton.className = "lcdp-box-fiche-parc__partage-icone";
+    bouton.className =
+      "lcdp-box-fiche-parc__partage-icone";
     bouton.setAttribute("aria-hidden", "true");
 
     const icone = document.createElementNS(
@@ -452,10 +422,19 @@
     icone.setAttribute("aria-hidden", "true");
     icone.setAttribute("focusable", "false");
     icone.setAttribute("fill", "none");
-    icone.setAttribute("stroke", "currentColor");
+    icone.setAttribute(
+      "stroke",
+      "currentColor"
+    );
     icone.setAttribute("stroke-width", "2");
-    icone.setAttribute("stroke-linecap", "round");
-    icone.setAttribute("stroke-linejoin", "round");
+    icone.setAttribute(
+      "stroke-linecap",
+      "round"
+    );
+    icone.setAttribute(
+      "stroke-linejoin",
+      "round"
+    );
 
     const trace = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -471,7 +450,7 @@
 
     trace2.setAttribute(
       "d",
-      "m22 2-7 20-4-9-9-4Z"
+      "M22 2 15 22 11 13 2 9 22 2Z"
     );
 
     icone.appendChild(trace);
@@ -479,165 +458,159 @@
     bouton.appendChild(icone);
 
     const libelle = document.createElement("span");
-    libelle.className = "lcdp-box-fiche-parc__partage-libelle";
-    libelle.textContent = "Partager";
+    libelle.className =
+      "lcdp-box-fiche-parc__partage-libelle";
+    libelle.textContent = "Partager la page";
 
     action.appendChild(bouton);
     action.appendChild(libelle);
 
+    action.addEventListener(
+      "keydown",
+      (event) => {
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+          event.preventDefault();
+          action.click();
+        }
+      }
+    );
+
     return action;
   }
 
-  function ouvrirPageReserverMembre(parc, vue) {
-    const params = new URLSearchParams();
-    const idparc = nettoyerTexteFiche(
-      parc.idparc || parc.id || ""
-    );
-    const departement = nettoyerDepartement(
-      parc.dptmt || parc.departement || ""
+  function ouvrirReservationMembre(parc) {
+    const url = construireUrlAvecParc(
+      construireUrlMembre(
+        "/ESPACE-MEMBRE/reserver-membre.html"
+      ),
+      parc,
+      {
+        source: "fiche-parc"
+      }
     );
 
-    if (idparc) params.set("idparc", idparc);
-    if (departement) params.set("dptmt", departement);
-    params.set("source", "fiche-parc");
-    params.set("vue", vue || "reservation");
+    window.location.href = url;
+  }
 
-    const separateur = PAGE_RESERVER_MEMBRE.includes("?") ? "&" : "?";
-    window.location.href =
-      PAGE_RESERVER_MEMBRE +
-      separateur +
-      params.toString();
+  function ouvrirPlanningPublic(parc) {
+    const url = construireUrlAvecParc(
+      construireUrlSite(
+        "/ESPACE-PUBLIC/planning-parc.html"
+      ),
+      parc,
+      {
+        source: "fiche-parc"
+      }
+    );
+
+    window.location.href = url;
   }
 
   async function partagerFicheParc(parc) {
-    const nom = nettoyerTexteFiche(
-      parc.nom || parc.nomparc || "Parc"
-    ) || "Parc";
-
-    const donnees = {
-      title: "Parc de " + nom + " - La Clé du Parc",
-      text: "Découvrez le parc de " + nom + " sur La Clé du Parc.",
+    const nom = parc.nom || "ce parc";
+    const donneesPartage = {
+      title:
+        "Parc de " +
+        nom +
+        " - La Clé du Parc",
+      text:
+        "Découvrez le parc de " +
+        nom +
+        " sur La Clé du Parc.",
       url: window.location.href
     };
 
     if (navigator.share) {
-      await navigator.share(donnees);
+      await navigator.share(donneesPartage);
       return;
     }
 
-    const sujet = encodeURIComponent(donnees.title);
+    const sujet = encodeURIComponent(
+      donneesPartage.title
+    );
     const corps = encodeURIComponent(
-      donnees.text + "\n\n" + donnees.url
+      donneesPartage.text +
+      "\n\n" +
+      donneesPartage.url
     );
 
     window.location.href =
-      "mailto:?subject=" + sujet + "&body=" + corps;
+      "mailto:?subject=" +
+      sujet +
+      "&body=" +
+      corps;
   }
 
-  async function chargerTemplateCarteParc() {
-    const fragment = await chargerFragmentObjet(
-      "/BOX/04-box-card-map-parc.html"
+  function construireUrlAvecParc(
+    urlSource,
+    parc,
+    parametresComplementaires = {}
+  ) {
+    const url = new URL(
+      urlSource,
+      window.location.href
     );
 
-    templateMapParc = fragment.querySelector(
-      "[data-lcdp-box-card-map-parc]"
-    );
-
-    if (!templateMapParc) {
-      throw new Error("Template carte parc introuvable.");
-    }
-  }
-
-  async function initialiserBandeau() {
-    const slot = document.getElementById("lcdp-bandeau-slot");
-
-    if (!slot) return;
-
-    slot.innerHTML = "";
-
-    const bandeau = await chargerFragmentPublic(
-      "/ESPACE-PUBLIC/box-bandeau-nav-public.html"
-    );
-
-    slot.appendChild(bandeau);
-    appliquerRoutesSite(slot);
-
-    await chargerScriptPublicUneFois(
-      "/ESPACE-PUBLIC/box-menu-burger-public.js"
-    );
-
-    if (
-      typeof window.LCDP_initialiserMenuBurgerPublic === "function"
-    ) {
-      await window.LCDP_initialiserMenuBurgerPublic();
-    }
-  }
-
-  async function initialiserFooter() {
-    const slot = document.getElementById("lcdp-footer-slot");
-
-    if (!slot) return;
-
-    slot.innerHTML = "";
-
-    const fragmentWraper = await chargerFragmentObjet(
-      "/BOX/02-box-wraper-footer.html"
-    );
-
-    slot.appendChild(fragmentWraper);
-
-    const zoneFooter = slot.querySelector(
-      "[data-lcdp-wraper-footer-footer]"
-    );
-
-    if (!zoneFooter) {
-      throw new Error("Structure wrapper footer incomplète.");
-    }
-
-    const footer = await chargerFragmentObjet(
-      "/BOX/02-box-footer.html"
-    );
-
-    zoneFooter.appendChild(footer);
-    appliquerRoutesSite(slot);
-  }
-
-  function afficherEtatChargement(message, termine) {
-    const statut = document.getElementById(
-      "lcdp-fiche-parc-status"
-    );
-
-    if (!statut) return;
-
-    if (termine) {
-      statut.hidden = true;
-      statut.textContent = "";
-      return;
-    }
-
-    statut.hidden = false;
-    statut.textContent = message || "[Chargement de la fiche parc]";
-  }
-
-  function construireUrlImageParcFichier(parc, fichier) {
-    const departement = nettoyerDepartement(
-      parc && (parc.dptmt || parc.departement || "")
-    );
-
-    const dossierParc = normaliserNomParcPourChemin(
-      parc && (parc.nom || parc.nomparc || "")
-    );
-
-    const nomFichier = String(fichier || "").replace(/^\/+/, "");
-
-    if (!departement || !dossierParc || !nomFichier) {
-      return construireUrlObjet(
-        DOSSIER_IMAGES_PARC_OBJET + "/parc-defaut.webp"
+    if (parc.idparc) {
+      url.searchParams.set(
+        "idparc",
+        parc.idparc
       );
     }
 
-    return construireUrlObjet(
-      DOSSIER_IMAGES_PARC_OBJET +
+    if (parc.nom) {
+      url.searchParams.set("nom", parc.nom);
+    }
+
+    if (parc.dptmt) {
+      url.searchParams.set(
+        "dptmt",
+        parc.dptmt
+      );
+    }
+
+    Object.entries(
+      parametresComplementaires
+    ).forEach(([cle, valeur]) => {
+      if (valeur !== undefined && valeur !== null) {
+        url.searchParams.set(
+          cle,
+          String(valeur)
+        );
+      }
+    });
+
+    return url.toString();
+  }
+
+  function construireCheminImageParc(
+    parc,
+    fichier
+  ) {
+    const departement = nettoyerDepartement(
+      parc.dptmt
+    );
+    const dossierParc =
+      normaliserNomParcPourChemin(parc.nom);
+    const nomFichier = String(fichier || "")
+      .replace(/^\/+/, "");
+
+    if (
+      !departement ||
+      !dossierParc ||
+      !nomFichier
+    ) {
+      return (
+        dossierImagesParc +
+        "/parc-defaut.webp"
+      );
+    }
+
+    return (
+      dossierImagesParc +
       "/" +
       encodeURIComponent(departement) +
       "/" +
@@ -645,6 +618,23 @@
       "/" +
       encodeURIComponent(nomFichier)
     );
+  }
+
+  function construireTexteContactParc(parc) {
+    const lignes = [
+      parc.contact,
+      parc.emailparc,
+      parc.telparc
+    ]
+      .map(nettoyerTexte)
+      .filter(Boolean)
+      .filter((valeur, index, liste) => {
+        return liste.indexOf(valeur) === index;
+      });
+
+    return lignes.length
+      ? lignes.join("\n")
+      : "Contact non renseigné.";
   }
 
   function normaliserNomParcPourChemin(valeur) {
@@ -671,196 +661,248 @@
     return departement;
   }
 
-  function nettoyerTexteFiche(valeur) {
+  function nettoyerTexte(valeur) {
     return String(valeur || "")
       .replace(/\s+/g, " ")
       .trim();
   }
 
-  function construireEndpointApi(
-    cleMinuscule,
-    cleMajuscule,
-    sousDomaine
-  ) {
-    const endpoint = String(
-      CONFIG_PAGE[cleMinuscule] ||
-      CONFIG_PAGE[cleMajuscule] ||
-      ""
-    ).replace(/\/+$/, "");
+  function afficherStatut(message, termine) {
+    const statut = document.getElementById(
+      "lcdp-fiche-parc-status"
+    );
 
-    if (endpoint) return endpoint;
-
-    if (typeof CONFIG_PAGE.apiUrl === "function") {
-      return String(
-        CONFIG_PAGE.apiUrl(sousDomaine)
-      ).replace(/\/+$/, "");
+    if (!statut) {
+      return;
     }
 
-    return "";
+    if (termine) {
+      statut.hidden = true;
+      statut.textContent = "";
+      return;
+    }
+
+    statut.hidden = false;
+    statut.textContent =
+      message || "[Chargement de la fiche parc]";
   }
 
-  function construireUrlPublic(chemin) {
-    if (typeof window.LCDP_urlPublic === "function") {
-      return window.LCDP_urlPublic(chemin);
+  function construireUrlSite(chemin) {
+    if (!chemin) return chemin;
+
+    if (
+      chemin.startsWith("#") ||
+      chemin.startsWith("mailto:") ||
+      chemin.startsWith("tel:") ||
+      chemin.startsWith("http://") ||
+      chemin.startsWith("https://") ||
+      chemin.startsWith("data:")
+    ) {
+      return chemin;
     }
 
-    if (typeof CONFIG_PAGE.publicUrl === "function") {
-      return CONFIG_PAGE.publicUrl(chemin);
+    if (siteBase) {
+      return chemin.startsWith("/")
+        ? siteBase + chemin
+        : siteBase +
+            "/" +
+            chemin.replace(/^\.\//, "");
     }
 
-    return buildUrl(
-      CONFIG_PAGE.publicBaseUrl ||
-      CONFIG_PAGE.PUBLIC_BASE ||
-      CONFIG_PAGE.siteBase ||
-      "",
-      chemin
-    );
+    return chemin.startsWith("/")
+      ? ".." + chemin
+      : chemin;
   }
 
   function construireUrlMembre(chemin) {
-    if (typeof CONFIG_PAGE.membreUrl === "function") {
-      return CONFIG_PAGE.membreUrl(chemin);
+    const valeur = String(chemin || "");
+
+    if (
+      valeur.startsWith("http://") ||
+      valeur.startsWith("https://")
+    ) {
+      return valeur;
     }
 
-    return buildUrl(
-      CONFIG_PAGE.membreBaseUrl ||
-      CONFIG_PAGE.MEMBRE_BASE ||
-      CONFIG_PAGE.siteBase ||
-      "",
-      chemin
-    );
-  }
-
-  function construireUrlObjet(chemin) {
-    if (typeof window.LCDP_urlObjet === "function") {
-      return window.LCDP_urlObjet(chemin);
+    if (
+      typeof config.membreUrl === "function"
+    ) {
+      return config.membreUrl(valeur);
     }
 
-    if (typeof CONFIG_PAGE.objetUrl === "function") {
-      return CONFIG_PAGE.objetUrl(chemin);
+    const membreBase = String(
+      config.membreBaseUrl ||
+      config.MEMBRE_BASE ||
+      config.siteBase ||
+      siteBase ||
+      ""
+    ).replace(/\/$/, "");
+
+    if (membreBase) {
+      return valeur.startsWith("/")
+        ? membreBase + valeur
+        : membreBase +
+            "/" +
+            valeur.replace(/^\.\//, "");
     }
 
-    const objetBase =
-      CONFIG_PAGE.objetBaseUrl ||
-      CONFIG_PAGE.OBJET_BASE ||
-      buildUrl(
-        CONFIG_PAGE.publicBaseUrl ||
-        CONFIG_PAGE.PUBLIC_BASE ||
-        "",
-        "/OBJET"
-      );
-
-    return buildUrl(objetBase, chemin);
+    return valeur.startsWith("/")
+      ? ".." + valeur
+      : valeur;
   }
 
-  function buildUrl(base, chemin) {
-    return (
-      String(base || "").replace(/\/+$/, "") +
-      "/" +
-      String(chemin || "").replace(/^\/+/, "")
-    );
+  function appliquerRoutesSite(
+    racine = document
+  ) {
+    racine
+      .querySelectorAll("[data-site-href]")
+      .forEach((element) => {
+        element.setAttribute(
+          "href",
+          construireUrlSite(
+            element.dataset.siteHref
+          )
+        );
+      });
+
+    racine
+      .querySelectorAll("[data-site-src]")
+      .forEach((element) => {
+        element.setAttribute(
+          "src",
+          construireUrlSite(
+            element.dataset.siteSrc
+          )
+        );
+      });
+
+    racine
+      .querySelectorAll("a[href^='/']")
+      .forEach((element) => {
+        element.setAttribute(
+          "href",
+          construireUrlSite(
+            element.getAttribute("href")
+          )
+        );
+      });
+
+    racine
+      .querySelectorAll("img[src^='/']")
+      .forEach((element) => {
+        element.setAttribute(
+          "src",
+          construireUrlSite(
+            element.getAttribute("src")
+          )
+        );
+      });
   }
 
-  async function chargerFragmentPublic(chemin) {
-    return chargerFragmentDepuisUrl(
-      construireUrlPublic(chemin)
-    );
-  }
-
-  async function chargerFragmentObjet(chemin) {
-    return chargerFragmentDepuisUrl(
-      construireUrlObjet(chemin)
-    );
-  }
-
-  async function chargerFragmentDepuisUrl(url) {
-    const reponse = await fetch(url, {
-      method: "GET",
-      cache: "no-store",
-      headers: {
-        "Accept": "text/html"
+  async function chargerFragment(chemin) {
+    const reponse = await fetch(
+      construireUrlSite(chemin),
+      {
+        method: "GET",
+        credentials: "same-origin",
+        cache: "no-cache"
       }
-    });
+    );
 
     if (!reponse.ok) {
-      throw new Error("Fragment indisponible : " + url);
+      throw new Error(
+        "Fragment introuvable : " + chemin
+      );
     }
 
-    const texte = await reponse.text();
-    const template = document.createElement("template");
-    template.innerHTML = texte.trim();
+    const html = await reponse.text();
+    const template =
+      document.createElement("template");
+
+    template.innerHTML = html.trim();
 
     return template.content.cloneNode(true);
   }
 
-  async function chargerScriptPublicUneFois(chemin) {
-    const url = construireUrlPublic(chemin);
+  function chargerScriptUneFois(chemin) {
+    const src = construireUrlSite(chemin);
 
     if (
-      Array.from(document.scripts).some((script) => {
-        return script.src === url;
-      })
+      document.querySelector(
+        `script[data-lcdp-script="${chemin}"]`
+      )
     ) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+      const script =
+        document.createElement("script");
+
+      script.src = src;
+      script.defer = true;
+      script.dataset.lcdpScript = chemin;
+      script.onload = resolve;
+      script.onerror = () => {
+        reject(
+          new Error(
+            "Script introuvable : " + chemin
+          )
+        );
+      };
+
+      document.body.appendChild(script);
+    });
+  }
+
+  async function initialiserBandeau() {
+    const slot = document.getElementById(
+      "lcdp-bandeau-slot"
+    );
+
+    if (!slot) {
       return;
     }
 
-    await new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = url;
-      script.async = true;
-      script.addEventListener("load", resolve, { once: true });
-      script.addEventListener(
-        "error",
-        () => reject(
-          new Error("Script indisponible : " + url)
-        ),
-        { once: true }
-      );
-      document.head.appendChild(script);
-    });
-  }
+    slot.innerHTML = "";
 
-  function appliquerRoutesSite(racine) {
-    const zone = racine || document;
-
-    zone.querySelectorAll("[data-site-href]").forEach((element) => {
-      const chemin = element.getAttribute("data-site-href");
-
-      if (!chemin) return;
-
-      element.setAttribute(
-        "href",
-        chemin.startsWith("/OBJET/")
-          ? construireUrlObjet(chemin.replace(/^\/OBJET/, ""))
-          : construireUrlPublic(chemin)
-      );
-    });
-
-    zone.querySelectorAll("[data-site-src]").forEach((element) => {
-      const chemin = element.getAttribute("data-site-src");
-
-      if (!chemin) return;
-
-      element.setAttribute(
-        "src",
-        chemin.startsWith("/OBJET/")
-          ? construireUrlObjet(chemin.replace(/^\/OBJET/, ""))
-          : construireUrlPublic(chemin)
-      );
-    });
-  }
-
-  function reponseApiOk(resultat) {
-    return Boolean(
-      resultat &&
-      (resultat.success === true || resultat.ok === true)
+    const bandeau = await chargerFragment(
+      "/ESPACE-PUBLIC/box-bandeau-nav-public.html"
     );
+
+    slot.appendChild(bandeau);
+    appliquerRoutesSite(slot);
+
+    await chargerScriptUneFois(
+      "/ESPACE-PUBLIC/box-menu-burger-public.js"
+    );
+
+    if (
+      typeof window
+        .LCDP_initialiserMenuBurgerPublic ===
+      "function"
+    ) {
+      await window
+        .LCDP_initialiserMenuBurgerPublic();
+    }
   }
 
-  function messageErreurApi(resultat, fallback) {
-    return nettoyerTexteFiche(
-      resultat &&
-      (resultat.message || resultat.error || resultat.erreur)
-    ) || fallback;
+  async function initialiserFooter() {
+    const slot = document.getElementById(
+      "lcdp-footer-slot"
+    );
+
+    if (!slot) {
+      return;
+    }
+
+    slot.innerHTML = "";
+
+    const footer = await chargerFragment(
+      "/OBJET/BOX/02-box-footer.html"
+    );
+
+    slot.appendChild(footer);
+    appliquerRoutesSite(slot);
   }
 })();

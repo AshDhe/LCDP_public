@@ -1,0 +1,45 @@
+/*
+ * Adaptation de l’objet 04-box-fiche-parc au contexte d’une page publique.
+ * Le composant partagé conserve son zoning et ses classes internes,
+ * sans comportement de fenêtre modale.
+ */
+
+.lcdp-box-fiche-parc.lcdp-box-fiche-parc--page {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  display: block;
+}
+
+.lcdp-box-fiche-parc--page .lcdp-box-fiche-parc__card {
+  width: 100%;
+  max-width: 900px;
+  max-height: none;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.lcdp-box-fiche-parc--page .lcdp-box-fiche-parc__close {
+  display: none;
+}
+
+.lcdp-box-fiche-parc--page .lcdp-box-fiche-parc__header {
+  padding-right: 0;
+}
+
+.lcdp-box-fiche-parc--page .lcdp-boxtext__title {
+  display: none;
+}
+
+.lcdp-box-fiche-parc--page .lcdp-boxtext__content {
+  gap: var(--lcdp-space-2);
+}
+
+@media (max-width: 767px) {
+  .lcdp-box-fiche-parc--page .lcdp-box-fiche-parc__card {
+    padding: var(--lcdp-space-3);
+  }
+}
