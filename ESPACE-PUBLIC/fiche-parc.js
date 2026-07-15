@@ -10,6 +10,13 @@
 
   const config = window.SITE_CONFIG || {};
   const dossierImagesParc = "/IMAG/PARC";
+  const endpointNouvelleDateMembre = String(
+    config.workerNouvelleDateMembreUrl ||
+    config.WORKER_NOUVELLE_DATE_MEMBRE_URL ||
+    (typeof config.apiUrl === "function"
+      ? config.apiUrl("nouvelle-date-membre-api")
+      : "")
+  ).replace(/\/$/, "");
 
   let pageInitialisee = false;
 
@@ -36,7 +43,14 @@
     });
 
     try {
-      const parc = lireParcDepuisUrl();
+      const referenceParc = lireParcDepuisUrl();
+      const fiche = await chargerFicheParc(referenceParc.idparc);
+      const parc = {
+        ...referenceParc,
+        ...(fiche.parc || {}),
+        resparc: fiche.resparc || null
+      };
+
       await afficherFicheParc(parc);
       afficherStatut("", true);
     } catch (erreur) {
@@ -92,6 +106,50 @@
         parametres.get("telephone") ||
         parametres.get("tel")
       )
+    };
+  }
+
+  async function chargerFicheParc(idparc) {
+    const identifiant = nettoyerTexte(idparc);
+
+    if (!identifiant) {
+      throw new Error("Identifiant du parc manquant dans le lien partagé.");
+    }
+
+    if (!endpointNouvelleDateMembre) {
+      throw new Error("Le service de fiche parc n’est pas configuré.");
+    }
+
+    const reponse = await fetch(
+      endpointNouvelleDateMembre +
+        "/fiche-parc?idparc=" +
+        encodeURIComponent(identifiant),
+      {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+        headers: {
+          "Accept": "application/json"
+        }
+      }
+    );
+
+    const data = await reponse.json().catch(() => null);
+
+    if (
+      !reponse.ok ||
+      !data ||
+      (data.success !== true && data.ok !== true)
+    ) {
+      throw new Error(
+        nettoyerTexte(data?.message) ||
+        "Impossible de charger la fiche du parc."
+      );
+    }
+
+    return {
+      parc: data.parc || null,
+      resparc: data.resparc || null
     };
   }
 
@@ -191,7 +249,7 @@
         ".lcdp-box-fiche-parc__section"
       ),
       "Accès",
-      "L’accès est communiqué dans votre carte de réservation associée à ce parc."
+      parc.horaire || "Horaires d’accès non renseignés."
     );
 
     appliquerRoutesSite(slot);
@@ -288,7 +346,7 @@
         titre: "",
         imageSrc: construireCheminImageParc(
           parc,
-          numero + ".webp"
+          numero + ".jpg"
         ),
         imageAlt:
           "Photo " +
@@ -621,20 +679,12 @@
   }
 
   function construireTexteContactParc(parc) {
-    const lignes = [
-      parc.contact,
-      parc.emailparc,
-      parc.telparc
-    ]
-      .map(nettoyerTexte)
-      .filter(Boolean)
-      .filter((valeur, index, liste) => {
-        return liste.indexOf(valeur) === index;
-      });
+    const responsable = parc?.resparc || null;
+    const prenom = nettoyerTexte(responsable?.prenom);
+    const nom = nettoyerTexte(responsable?.nom);
+    const identite = [prenom, nom].filter(Boolean).join(" ");
 
-    return lignes.length
-      ? lignes.join("\n")
-      : "Contact non renseigné.";
+    return identite || "Contact non renseigné.";
   }
 
   function normaliserNomParcPourChemin(valeur) {
