@@ -257,9 +257,19 @@
   box-shadow: none;
 }
 
-.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__actions,
 .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__description {
   display: none !important;
+}
+
+.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__actions .lcdp-button {
+  width: 100%;
+  min-width: 0;
 }
 
 .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__media {
