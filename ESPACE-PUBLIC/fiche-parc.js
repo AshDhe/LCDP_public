@@ -680,8 +680,8 @@
 
   function construireTexteContactParc(parc) {
     const responsable = parc?.resparc || null;
-    const prenom = nettoyerTexte(responsable?.prenom);
-    const nom = nettoyerTexte(responsable?.nom);
+    const prenom = nettoyerTexte(responsable?.prenomresp || responsable?.prenom);
+    const nom = nettoyerTexte(responsable?.nomresp || responsable?.nom);
     const identite = [prenom, nom].filter(Boolean).join(" ");
 
     return identite || "Contact non renseigné.";
