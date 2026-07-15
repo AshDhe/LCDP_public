@@ -1,50 +1,34 @@
 <section class="lcdp-carte-dynamique" data-lcdp-carte-dynamique>
   <header class="lcdp-carte-dynamique__header">
     <h1 class="lcdp-carte-dynamique__title">CarteParc</h1>
-    <p class="lcdp-carte-dynamique__intro">
-      Filtrer les départements, puis afficher les parcs selon un statut unique.
-    </p>
   </header>
 
   <form class="lcdp-carte-dynamique__filters" data-lcdp-carte-filters novalidate>
-    <fieldset class="lcdp-carte-dynamique__fieldset">
-      <legend class="lcdp-carte-dynamique__legend">Départements</legend>
-
-      <label class="lcdp-carte-dynamique__check lcdp-carte-dynamique__check--all">
-        <input type="checkbox" value="tous" data-lcdp-carte-tous checked>
-        <span>Tous les départements</span>
-      </label>
-
-      <div
-        class="lcdp-carte-dynamique__departements"
-        data-lcdp-carte-departements
-        aria-label="Sélection des départements"
-      ></div>
-    </fieldset>
-
-    <div class="lcdp-carte-dynamique__status-field">
-      <label class="lcdp-carte-dynamique__label" for="lcdp-carte-statut">
-        Statut des parcs
-      </label>
-
-      <select
-        id="lcdp-carte-statut"
-        class="lcdp-carte-dynamique__select"
-        data-lcdp-carte-statut
+    <label class="lcdp-carte-dynamique__field">
+      <span class="lcdp-carte-dynamique__label">Filtre géo</span>
+      <input
+        class="lcdp-carte-dynamique__input"
+        type="text"
+        inputmode="text"
+        autocomplete="off"
+        placeholder="45 ou 31|42"
+        data-lcdp-carte-geo
       >
-        <option value="recherche">recherche</option>
-        <option value="prepa" selected>prepa</option>
-        <option value="non">non</option>
-        <option value="oui">oui</option>
-        <option value="nonconforme">nonconforme</option>
-        <option value="acreuserfautinfo">acreuserfautinfo</option>
-      </select>
-    </div>
+    </label>
+
+    <label class="lcdp-carte-dynamique__field">
+      <span class="lcdp-carte-dynamique__label">Filtre état</span>
+      <input
+        class="lcdp-carte-dynamique__input"
+        type="text"
+        autocomplete="off"
+        value="prepa"
+        data-lcdp-carte-etat
+      >
+    </label>
 
     <div class="lcdp-carte-dynamique__actions">
-      <button class="lcdp-button lcdp-button-primary" type="submit">
-        Afficher
-      </button>
+      <button class="lcdp-button lcdp-button-primary" type="submit">Afficher</button>
     </div>
   </form>
 
@@ -52,18 +36,8 @@
 
   <div class="lcdp-carte-dynamique__map-shell">
     <div class="lcdp-carte-dynamique__zoom" aria-label="Commandes de zoom">
-      <button
-        class="lcdp-carte-dynamique__zoom-button"
-        type="button"
-        data-lcdp-carte-zoom-plus
-        aria-label="Agrandir la carte"
-      >+</button>
-      <button
-        class="lcdp-carte-dynamique__zoom-button"
-        type="button"
-        data-lcdp-carte-zoom-moins
-        aria-label="Réduire la carte"
-      >−</button>
+      <button class="lcdp-carte-dynamique__zoom-button" type="button" data-lcdp-carte-zoom-plus aria-label="Agrandir la carte">+</button>
+      <button class="lcdp-carte-dynamique__zoom-button" type="button" data-lcdp-carte-zoom-moins aria-label="Réduire la carte">−</button>
     </div>
 
     <svg
@@ -77,12 +51,5 @@
       <g data-lcdp-carte-departements-layer></g>
       <g data-lcdp-carte-parcs-layer></g>
     </svg>
-  </div>
-
-  <div class="lcdp-carte-dynamique__legend-status" aria-label="Légende des statuts">
-    <span><i data-statut="recherche"></i> recherche / acreuserfautinfo</span>
-    <span><i data-statut="prepa"></i> prepa</span>
-    <span><i data-statut="oui"></i> oui</span>
-    <span><i data-statut="non"></i> non / nonconforme</span>
   </div>
 </section>
