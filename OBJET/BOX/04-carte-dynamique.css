@@ -1,12 +1,33 @@
 /* Objet : 04-carte-dynamique */
+
+/* La page CarteParc utilise l'objet comme unique box visible. */
+.lcdp-page-carte-parc .lcdp-page-container {
+  max-width: 1044px;
+}
+
+.lcdp-page-carte-parc .lcdp-admin-page-content {
+  width: 100%;
+  max-width: 980px;
+  min-width: 0;
+  margin-inline: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 .lcdp-carte-dynamique {
-  width: min(100%, 980px);
-  margin: 0 auto;
-  padding: 16px;
-  background: #ffffff;
-  border: 1px solid #d5d5d0;
-  border-radius: 18px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 980px;
+  min-width: 0;
+  margin-inline: auto;
+  padding: var(--lcdp-space-3);
+  background: var(--lcdp-color-surface);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  box-shadow: var(--lcdp-shadow-soft);
+  overflow: hidden;
 }
 
 .lcdp-carte-dynamique__header {
@@ -139,10 +160,9 @@
   font-family: inherit;
   font-weight: 700;
   letter-spacing: 0.04em;
-  paint-order: stroke fill;
-  stroke: rgba(255, 255, 255, 0.96);
-  stroke-width: 3px;
-  stroke-linejoin: round;
+  paint-order: normal;
+  stroke: none;
+  stroke-width: 0;
   pointer-events: none;
   user-select: none;
 }
