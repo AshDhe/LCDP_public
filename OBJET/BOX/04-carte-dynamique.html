@@ -11,7 +11,6 @@
         type="text"
         inputmode="text"
         autocomplete="off"
-        placeholder="45 ou 31|42"
         data-lcdp-carte-geo
       >
     </label>
@@ -46,7 +45,15 @@
       preserveAspectRatio="xMidYMid meet"
     >
       <g data-lcdp-carte-departements-layer></g>
+      <g data-lcdp-carte-selection-layer></g>
+      <g data-lcdp-carte-localites-layer></g>
       <g data-lcdp-carte-parcs-layer></g>
     </svg>
+
+    <div
+      class="lcdp-carte-dynamique__card-slot"
+      data-lcdp-carte-card-slot
+      hidden
+    ></div>
   </div>
 </section>

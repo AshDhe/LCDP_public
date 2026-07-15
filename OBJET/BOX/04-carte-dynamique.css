@@ -21,7 +21,7 @@
 
 .lcdp-carte-dynamique__filters {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   align-items: end;
   margin: 0 0 12px;
@@ -61,18 +61,16 @@
 }
 
 .lcdp-carte-dynamique__status {
-  min-height: 0;
+  min-height: 1.25rem;
   margin: 0 0 8px;
   font-size: 0.92rem;
-}
-
-.lcdp-carte-dynamique__status:empty {
-  display: none;
+  line-height: 1.25rem;
 }
 
 .lcdp-carte-dynamique__map-shell {
   position: relative;
   width: 100%;
+  height: min(72vh, 760px);
   min-height: 520px;
   overflow: hidden;
   border: 1px solid #d3d3ce;
@@ -83,7 +81,7 @@
 .lcdp-carte-dynamique__map {
   display: block;
   width: 100%;
-  height: min(72vh, 760px);
+  height: 100%;
   min-height: 520px;
   background: #f1f1ee;
   touch-action: none;
@@ -105,13 +103,48 @@
 
 .lcdp-carte-dynamique__departement.is-selected {
   fill: #f5f7f2;
-  stroke: #548044;
-  stroke-width: 2.3;
+}
+
+.lcdp-carte-dynamique__departement-selection {
+  fill: none;
+  stroke: #4f7f3f;
+  stroke-width: 2.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
 }
 
 .lcdp-carte-dynamique__marker {
   stroke-width: 1.4;
   vector-effect: non-scaling-stroke;
+  cursor: pointer;
+}
+
+.lcdp-carte-dynamique__marker:focus {
+  outline: none;
+  stroke-width: 2.4;
+}
+
+.lcdp-carte-dynamique__localite-marker {
+  fill: #111111;
+  stroke: #ffffff;
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.lcdp-carte-dynamique__localite-label {
+  fill: #111111;
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  paint-order: stroke fill;
+  stroke: rgba(255, 255, 255, 0.96);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  pointer-events: none;
+  user-select: none;
 }
 
 .lcdp-carte-dynamique__marker[data-statut="recherche"],
@@ -180,5 +213,76 @@
   .lcdp-carte-dynamique__map-shell,
   .lcdp-carte-dynamique__map {
     min-height: 430px;
+  }
+}
+
+
+.lcdp-carte-dynamique__card-slot[hidden] {
+  display: none !important;
+}
+
+.lcdp-carte-dynamique__card-slot {
+  position: absolute;
+  z-index: 4;
+  right: 14px;
+  bottom: 14px;
+  width: min(360px, calc(100% - 28px));
+  max-height: calc(100% - 28px);
+  overflow: auto;
+  padding: 42px 10px 10px;
+  box-sizing: border-box;
+  border: 1px solid #c8c8c2;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 12px 32px rgba(31, 42, 36, 0.22);
+}
+
+.lcdp-carte-dynamique__card-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #bdbdb7;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #172126;
+  font: 700 1rem/1 sans-serif;
+  cursor: pointer;
+}
+
+.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc {
+  flex-direction: column;
+  box-shadow: none;
+}
+
+.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__actions,
+.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__description {
+  display: none !important;
+}
+
+.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__media {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__image {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+}
+
+.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__body {
+  padding: 12px;
+}
+
+@media (max-width: 760px) {
+  .lcdp-carte-dynamique__card-slot {
+    right: 8px;
+    bottom: 8px;
+    width: calc(100% - 16px);
+    max-height: 62%;
   }
 }
