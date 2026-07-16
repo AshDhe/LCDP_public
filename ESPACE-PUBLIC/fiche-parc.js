@@ -12,6 +12,29 @@
   const ficheParcBuild = "20260716-0839";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
+
+  const CLES_PLAGES_AFFICHAGE = [
+    "plage1",
+    "plage2",
+    "plage3",
+    "plage4",
+    "plage5"
+  ];
+
+  const CLES_PLAGES_RESERVATION_ACTUELLES = [
+    "plage1",
+    "plage2",
+    "plage3"
+  ];
+
+  const COULEURS_CSS_PLANNING = {
+    "gris-moyen": "#9ca09e",
+    "bleu-clair": "#cfe3f7",
+    "bleu-fonce": "#2f6fb3",
+    "violet": "#7b5aa6",
+    "orange-clair": "#ffd8a8",
+    "orange-fonce": "#f2a23a"
+  };
   const endpointNouvelleDateMembre = String(
     config.workerNouvelleDateMembreUrl ||
     config.WORKER_NOUVELLE_DATE_MEMBRE_URL ||
@@ -1593,14 +1616,31 @@
   function creerCardJourCalendrier(etat, dateIso, numeroJour, planningJour) {
     const card = etatInteraction.templateJourMois.cloneNode(true);
     const numero = card.querySelector("[data-lcdp-card-jour-mois-number]");
+    const modeLecture = etat.mode !== "reservation";
     const ouvert = Boolean(planningJour?.ouvert);
     const estPasse = dateIso < dateAujourdhuiIso();
 
     card.dataset.date = dateIso;
-    card.dataset.idparc = nettoyerTexte(etat.parc.idparc || etat.parc.id);
-    card.setAttribute("aria-label", formaterDateFr(dateIso) + (ouvert ? " disponible" : " fermé"));
+    card.dataset.idparc = nettoyerTexte(
+      etat.parc.idparc || etat.parc.id
+    );
+    card.setAttribute(
+      "aria-label",
+      formaterDateFr(dateIso) +
+      (ouvert ? " disponible" : " fermé")
+    );
 
     if (numero) numero.textContent = String(numeroJour);
+
+    if (modeLecture) {
+      card.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois--planning-lecture"
+      );
+    } else {
+      card.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois--reservation-trois-plages"
+      );
+    }
 
     if (dateIso === dateAujourdhuiIso()) {
       card.classList.add("lcdp-box-card-jour-in-calendrier-mois--today");
@@ -1616,20 +1656,44 @@
       card.disabled = true;
     }
 
-    if (etat.mode !== "reservation") {
+    if (modeLecture) {
       card.disabled = true;
       card.setAttribute("aria-disabled", "true");
     }
 
-    ["plage1", "plage2", "plage3"].forEach((nomPlage) => {
-      const slot = card.querySelector('[data-lcdp-card-jour-mois-slot="' + nomPlage + '"]');
+    const clesActives = modeLecture
+      ? CLES_PLAGES_AFFICHAGE
+      : CLES_PLAGES_RESERVATION_ACTUELLES;
+
+    CLES_PLAGES_AFFICHAGE.forEach((nomPlage) => {
+      const slot = card.querySelector(
+        '[data-lcdp-card-jour-mois-slot="' + nomPlage + '"]'
+      );
+
       if (!slot) return;
 
-      const plage = planningJour?.plages?.[nomPlage];
-      const couleur = normaliserCouleurClasse(plage?.ouverte ? plage.couleur : "gris_clair");
-      slot.className =
-        "lcdp-box-card-jour-in-calendrier-mois__slot " +
-        "lcdp-box-card-jour-in-calendrier-mois__slot--" + couleur;
+      slot.hidden = !clesActives.includes(nomPlage);
+      slot.className = "lcdp-box-card-jour-in-calendrier-mois__slot";
+      slot.removeAttribute("style");
+      slot.removeAttribute("title");
+
+      if (slot.hidden) {
+        return;
+      }
+
+      const plage = planningJour?.plages?.[nomPlage] || null;
+
+      if (modeLecture) {
+        appliquerRenduPlageLecture(slot, nomPlage, plage);
+        return;
+      }
+
+      const couleur = normaliserCouleurClasse(
+        plage?.ouverte ? plage.couleur : "gris_clair"
+      );
+      slot.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois__slot--" + couleur
+      );
     });
 
     return card;
@@ -1902,13 +1966,162 @@
     return match ? String(Number(match[1])) + "h" + match[2] : heure;
   }
 
+
+  function appliquerRenduPlageLecture(slot, nomPlage, plage) {
+    const plageOuverte = plage && plage.ouverte === true;
+    const couleurs = plageOuverte
+      ? normaliserListeCouleursPlanning(plage)
+      : ["gris-moyen"];
+
+    if (couleurs.length > 1) {
+      slot.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois__slot--multicolore"
+      );
+      slot.style.setProperty(
+        "--lcdp-plage-fond",
+        construireDegradeCouleursPlanning(couleurs)
+      );
+    } else {
+      slot.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois__slot--" +
+        (couleurs[0] || "gris-moyen")
+      );
+    }
+
+    const largeurJauge = normaliserLargeurJauge(plage?.jauge);
+
+    if (largeurJauge > 0 && plageOuverte) {
+      slot.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge"
+      );
+      slot.style.setProperty(
+        "--lcdp-jauge-largeur",
+        largeurJauge + "%"
+      );
+    }
+
+    slot.title = construireTitrePlagePlanning(
+      nomPlage,
+      plageOuverte ? plage : null
+    );
+  }
+
+  function normaliserListeCouleursPlanning(plage) {
+    const valeurs = Array.isArray(plage?.couleurs)
+      ? plage.couleurs
+      : [plage?.couleur];
+
+    const couleurs = valeurs
+      .map(normaliserCouleurClasse)
+      .filter((couleur) => {
+        return Object.prototype.hasOwnProperty.call(
+          COULEURS_CSS_PLANNING,
+          couleur
+        );
+      });
+
+    return couleurs.length ? couleurs : ["gris-moyen"];
+  }
+
+  function construireDegradeCouleursPlanning(couleurs) {
+    const nombre = couleurs.length;
+    const segments = [];
+
+    couleurs.forEach((couleur, index) => {
+      const debut = (index * 100) / nombre;
+      const fin = ((index + 1) * 100) / nombre;
+      const valeurCss = COULEURS_CSS_PLANNING[couleur] ||
+        COULEURS_CSS_PLANNING["gris-moyen"];
+
+      segments.push(
+        valeurCss + " " + debut + "%",
+        valeurCss + " " + fin + "%"
+      );
+    });
+
+    return "linear-gradient(to right, " + segments.join(", ") + ")";
+  }
+
+  function normaliserLargeurJauge(value) {
+    const largeur = Number(value);
+
+    if (![0, 60, 80, 100].includes(largeur)) {
+      return 0;
+    }
+
+    return largeur;
+  }
+
+  function construireTitrePlagePlanning(nomPlage, plage) {
+    const numero = String(nomPlage || "").replace("plage", "");
+
+    if (!plage || plage.ouverte !== true) {
+      return "Plage " + numero + " fermée";
+    }
+
+    const categories = Array.isArray(plage.categories)
+      ? plage.categories
+      : [];
+
+    const libellesCategories = categories.map((categorie) => {
+      if (categorie === "DUO") return "Duo";
+      if (categorie === "COACH") return "Coach";
+      if (categorie === "FAMILLE") return "Famille";
+      return String(categorie || "");
+    }).filter(Boolean);
+
+    const morceaux = [
+      "Plage " + numero,
+      plage.debut && plage.fin
+        ? plage.debut + "–" + plage.fin
+        : "horaire ouvert",
+      libellesCategories.length
+        ? libellesCategories.join(" + ")
+        : "ouverte"
+    ];
+
+    if (plage.privatisation) {
+      morceaux.push("privatisation");
+    }
+
+    const ratio = Number(plage.ratio);
+
+    if (Number.isFinite(ratio) && ratio >= 0) {
+      morceaux.push(
+        "occupation " + Math.round(ratio * 100) + " %"
+      );
+    }
+
+    return morceaux.join(" · ");
+  }
+
   function normaliserCouleurClasse(couleur) {
-    const valeur = String(couleur || "gris_clair").trim().toLowerCase();
-    if (["vert", "orange", "rouge_clair", "rouge", "gris_fonce", "gris_clair"].includes(valeur)) {
+    const valeur = String(couleur || "gris_clair")
+      .trim()
+      .toLowerCase()
+      .replaceAll("_", "-");
+
+    if (
+      [
+        "gris-moyen",
+        "bleu-clair",
+        "bleu-fonce",
+        "violet",
+        "orange-clair",
+        "orange-fonce",
+        "vert",
+        "orange",
+        "rouge-clair",
+        "rouge",
+        "gris-fonce",
+        "gris-clair"
+      ].includes(valeur)
+    ) {
       return valeur;
     }
-    if (valeur === "fonce") return "gris_fonce";
-    return "gris_clair";
+
+    if (valeur === "fonce") return "gris-fonce";
+    return "gris-clair";
   }
 
   function attendre(delai) {
