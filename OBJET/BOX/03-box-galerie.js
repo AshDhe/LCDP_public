@@ -124,6 +124,16 @@
 
   function appliquerSourceImage(image, chemin) {
     const urls = construireUrlsRessource(chemin);
+    const urlsImageDefaut = construireUrlsRessource(
+      "/IMAG/PARC/galeriedefaut.jpg"
+    );
+
+    urlsImageDefaut.forEach((url) => {
+      if (url && !urls.includes(url)) {
+        urls.push(url);
+      }
+    });
+
     let indexUrl = 0;
 
     if (urls.length === 0) {
