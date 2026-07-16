@@ -374,8 +374,21 @@
 @media (max-width: 767px) {
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
-    min-height: 560px;
-    height: 620px;
+    min-height: 250px;
+    height: clamp(250px, 78vw, 330px);
+    max-height: 330px;
+  }
+
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
+    touch-action: pan-y;
+  }
+
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__localite-label {
+    paint-order: stroke fill;
+    stroke: rgba(255, 255, 255, 0.96);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
   }
 
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
