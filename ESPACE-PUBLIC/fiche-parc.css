@@ -1,10 +1,11 @@
 /*
- * Adaptation de l’objet 04-box-fiche-parc au contexte d’une page publique.
- * Le composant partagé conserve son zoning et ses classes internes,
- * sans comportement de fenêtre modale.
+ * Page publique Fiche Parc.
+ * Les objets Fiche Parc, Galerie, Box Text et Shift Detail conservent
+ * strictement leurs CSS partagés. Ce fichier ne modifie pas leurs éléments internes.
  */
 
-.lcdp-box-fiche-parc.lcdp-box-fiche-parc--page {
+/* Le Shift Detail partagé devient uniquement la coque de page. */
+.lcdp-box-shift-detail-parc.lcdp-box-shift-detail-parc--page {
   position: static;
   inset: auto;
   z-index: auto;
@@ -14,38 +15,20 @@
   display: block;
 }
 
-.lcdp-box-fiche-parc--page .lcdp-box-fiche-parc__card {
+.lcdp-box-shift-detail-parc--page .lcdp-box-shift-detail-parc__card {
   width: 100%;
-  max-width: 900px;
+  max-width: 1060px;
   max-height: none;
   margin-inline: auto;
   overflow: visible;
 }
 
-.lcdp-box-fiche-parc--page .lcdp-box-fiche-parc__close {
+.lcdp-box-shift-detail-parc--page .lcdp-box-shift-detail-parc__close,
+.lcdp-box-shift-detail-parc--page .lcdp-box-fiche-parc__close {
   display: none;
 }
 
-.lcdp-box-fiche-parc--page .lcdp-box-fiche-parc__header {
-  padding-right: 0;
-}
-
-.lcdp-box-fiche-parc--page .lcdp-boxtext__title {
-  display: none;
-}
-
-.lcdp-box-fiche-parc--page .lcdp-boxtext__content {
-  gap: var(--lcdp-space-2);
-}
-
-@media (max-width: 767px) {
-  .lcdp-box-fiche-parc--page .lcdp-box-fiche-parc__card {
-    padding: var(--lcdp-space-3);
-  }
-}
-
-
-/* Carte du parc : variante publique centrée sur le département du parc. */
+/* Carte publique : même objet et mêmes marqueurs que la carte admin. */
 .lcdp-carte-dynamique--fiche-parc {
   max-width: none;
   padding: 0;
@@ -60,21 +43,51 @@
   display: none !important;
 }
 
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot:not([hidden]) {
-  display: block !important;
-}
-
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
   min-height: 560px;
-  height: min(70vh, 680px);
+  height: min(72vh, 720px);
 }
 
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement.is-selected {
+  fill: #fafaf8;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement-selection {
+  fill: none;
+  stroke: #587242;
+}
+
+/* Seule différence demandée : le parc consulté est au premier plan et vert foncé. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
+  fill: #234438 !important;
+  stroke: #234438 !important;
+}
+
+/* Card Parc centrée dans la carte. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot[hidden] {
+  display: none !important;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  display: block !important;
+  width: min(430px, calc(100% - 32px));
+  max-height: calc(100% - 32px);
+  overflow: auto;
+}
 
 /* Navigation interne fiche / planning / réservation. */
 .lcdp-box-calendrier-mois--shift-detail .lcdp-box-calendrier-mois__commande,
 .lcdp-fiche-parc__navigation-shift,
-.lcdp-fiche-parc__dialogue-actions {
+.lcdp-fiche-parc__dialogue-actions,
+.lcdp-fiche-parc__commande-detail {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -115,34 +128,7 @@
   justify-content: center;
 }
 
-@media (max-width: 767px) {
-  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
-  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
-    min-height: 560px;
-    height: 620px;
-  }
-}
-
-
-/* Carte de la fiche : département seulement contouré, localité noire,
-   tous les parcs visibles et parc consulté en vert foncé. */
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement.is-selected {
-  fill: #fafaf8;
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement-selection {
-  fill: none;
-  stroke: #587242;
-  stroke-width: 2.8;
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
-  fill: #234438 !important;
-  stroke: none !important;
-  stroke-width: 0 !important;
-}
-
-/* Shift Detail : hauteur stable et transitions sans flash de chargement. */
+/* Transitions du Shift Detail. */
 #lcdp-lightbox-slot .lcdp-box-shift-detail-parc {
   opacity: 0;
   transition: opacity 160ms ease-out;
@@ -185,7 +171,6 @@
   position: relative;
 }
 
-/* Entête planning/réservation identique à celle de Réserver membre. */
 .lcdp-box-calendrier-mois--shift-detail .lcdp-box-calendrier-mois__header {
   display: flex;
   flex-direction: column;
@@ -203,11 +188,6 @@
   order: 2;
   width: 100%;
   margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: var(--lcdp-space-2);
 }
 
 .lcdp-box-calendrier-mois--shift-detail .lcdp-fiche-parc__commande-detail .lcdp-button {
@@ -223,13 +203,20 @@
 }
 
 @media (max-width: 767px) {
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
+    min-height: 560px;
+    height: 620px;
+  }
+
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
+    width: calc(100% - 20px);
+    max-height: calc(100% - 20px);
+  }
+
   #lcdp-lightbox-slot .lcdp-box-shift-detail-parc__card {
     height: calc(100dvh - (var(--lcdp-space-3) * 2));
     min-height: 0;
-  }
-
-  .lcdp-box-calendrier-mois--shift-detail .lcdp-fiche-parc__commande-detail {
-    align-items: stretch;
   }
 }
 
@@ -238,134 +225,4 @@
   .lcdp-fiche-parc__shift-view {
     transition: none;
   }
-}
-
-/* Parc consulté : toujours au premier plan, sans halo ni libellé. */
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
-  fill: #234438 !important;
-  stroke: none !important;
-  stroke-width: 0 !important;
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker-actif-label {
-  fill: #234438;
-  stroke: none;
-  paint-order: normal;
-  font-family: inherit;
-  font-weight: 800;
-  letter-spacing: 0.025em;
-  pointer-events: none;
-  user-select: none;
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker-actif-label {
-  display: none;
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__localite-marker {
-  fill: #111111;
-  stroke: #ffffff;
-  stroke-width: 1.4;
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__localite-label {
-  fill: #111111;
-  stroke: #ffffff;
-  stroke-width: 2.2px;
-  paint-order: stroke fill;
-  stroke-linejoin: round;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-}
-
-
-/* Correctif vérifié : aucun halo historique et Card Parc explicitement affichable. */
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker-actif-halo {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot[hidden] {
-  display: none !important;
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
-  position: absolute;
-  z-index: 4;
-  top: 50%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  transform: translate(-50%, -50%);
-  display: block !important;
-  width: min(430px, calc(100% - 32px));
-  max-height: none;
-  overflow: visible;
-  padding: 42px 10px 10px;
-  box-sizing: border-box;
-  border: 1px solid #c8c8c2;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 12px 32px rgba(31, 42, 36, 0.22);
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker {
-  pointer-events: all;
-}
-
-@media (max-width: 760px) {
-  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    width: calc(100% - 20px);
-    max-height: none;
-    overflow: visible;
-    padding: 40px 8px 8px;
-  }
-}
-
-
-/* Carte fiche parc : la Card Parc est centrée et entièrement contenue. */
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open .lcdp-box-card-parc {
-  width: 100%;
-  max-height: none;
-  overflow: hidden;
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open .lcdp-box-card-parc__image {
-  aspect-ratio: 16 / 9;
-}
-
-/* Neutralise le halo de focus SVG observé au clic sur les marqueurs. */
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker,
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker:focus,
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker:focus-visible {
-  outline: none !important;
-  filter: none !important;
-}
-
-
-/* Correctif Chrome : aucun marqueur SVG ne peut recevoir un focus visuel. */
-.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg],
-.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg] *,
-.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg]:focus,
-.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg] *:focus,
-.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg]:focus-visible,
-.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg] *:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-tap-highlight-color: transparent;
-}
-
-
-/* Correctif définitif : le parc actif est distingué par sa teinte et sa taille,
-   sans contour blanc SVG susceptible de s'agrandir avec le viewBox. */
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
-  fill: #234438 !important;
-  stroke: none !important;
-  stroke-width: 0 !important;
 }

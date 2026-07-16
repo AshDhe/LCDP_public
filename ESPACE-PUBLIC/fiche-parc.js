@@ -204,31 +204,41 @@
 
     slot.innerHTML = "";
 
-    const fragment = await chargerFragment(
-      "/OBJET/BOX/04-box-fiche-parc.html"
-    );
+    const [fragmentShift, fragmentFiche] = await Promise.all([
+      chargerFragment("/OBJET/BOX/04-box-shift-detail-parc.html"),
+      chargerFragment("/OBJET/BOX/04-box-fiche-parc.html")
+    ]);
 
-    const fiche = fragment.querySelector(
+    const shift = fragmentShift.querySelector(
+      "[data-lcdp-box-shift-detail-parc]"
+    );
+    const contenuShift = fragmentShift.querySelector(
+      "[data-lcdp-shift-detail-parc-content]"
+    );
+    const fiche = fragmentFiche.querySelector(
       "[data-lcdp-box-fiche-parc]"
     );
 
-    if (!fiche) {
+    if (!shift || !contenuShift || !fiche) {
       throw new Error("Structure de la fiche parc incomplète.");
     }
 
-    fiche.classList.add("lcdp-box-fiche-parc--page");
-    fiche.removeAttribute("role");
-    fiche.removeAttribute("aria-modal");
+    shift.classList.add("lcdp-box-shift-detail-parc--page");
+    shift.removeAttribute("role");
+    shift.removeAttribute("aria-modal");
 
-    const boutonFermer = fiche.querySelector(
+    const boutonFermerShift = shift.querySelector(
+      "[data-lcdp-shift-detail-parc-close]"
+    );
+    const boutonFermerFiche = fiche.querySelector(
       "[data-lcdp-fiche-parc-close]"
     );
 
-    if (boutonFermer) {
-      boutonFermer.remove();
-    }
+    if (boutonFermerShift) boutonFermerShift.remove();
+    if (boutonFermerFiche) boutonFermerFiche.remove();
 
-    slot.appendChild(fiche);
+    contenuShift.appendChild(fiche);
+    slot.appendChild(shift);
 
     const nom = parc.nom || "Parc";
     const titre = fiche.querySelector(
@@ -539,18 +549,13 @@
       const largeurEcran = Math.max(320, largeurMesuree);
       const uniteEcran = viewBoxCourante[2] / largeurEcran;
       const rayonParc = Math.max(0.04, uniteEcran * 6);
-      const rayonParcActif = rayonParc * 1.45;
       const rayonLocalite = Math.max(0.035, uniteEcran * 4.2);
-      const tailleLibelle = Math.max(0.14, uniteEcran * 12.5);
-      const decalageLibelle = Math.max(0.1, uniteEcran * 8);
+      const tailleLibelle = Math.max(0.12, uniteEcran * 11);
+      const decalageLibelle = Math.max(0.08, uniteEcran * 7);
 
       coucheParcs
-        .querySelectorAll(".lcdp-carte-dynamique__marker:not(.lcdp-carte-dynamique__marker--parc-actif)")
+        .querySelectorAll(".lcdp-carte-dynamique__marker")
         .forEach((marker) => marker.setAttribute("r", String(rayonParc)));
-
-      coucheParcs
-        .querySelectorAll(".lcdp-carte-dynamique__marker--parc-actif")
-        .forEach((marker) => marker.setAttribute("r", String(rayonParcActif)));
 
       coucheLocalites
         .querySelectorAll(".lcdp-carte-dynamique__localite-marker")
