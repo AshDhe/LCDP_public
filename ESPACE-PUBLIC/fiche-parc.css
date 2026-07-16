@@ -138,8 +138,8 @@
 
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
   fill: #234438 !important;
-  stroke: #ffffff !important;
-  stroke-width: 2.4 !important;
+  stroke: none !important;
+  stroke-width: 0 !important;
 }
 
 /* Shift Detail : hauteur stable et transitions sans flash de chargement. */
@@ -243,9 +243,8 @@
 /* Parc consulté : toujours au premier plan, sans halo ni libellé. */
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
   fill: #234438 !important;
-  stroke: #ffffff !important;
-  stroke-width: 1.5 !important;
-  vector-effect: non-scaling-stroke;
+  stroke: none !important;
+  stroke-width: 0 !important;
 }
 
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker-actif-label {
@@ -360,4 +359,13 @@
   outline: none !important;
   box-shadow: none !important;
   -webkit-tap-highlight-color: transparent;
+}
+
+
+/* Correctif définitif : le parc actif est distingué par sa teinte et sa taille,
+   sans contour blanc SVG susceptible de s'agrandir avec le viewBox. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
+  fill: #234438 !important;
+  stroke: none !important;
+  stroke-width: 0 !important;
 }
