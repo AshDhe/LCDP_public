@@ -845,14 +845,14 @@
         "lcdp-carte-dynamique__marker--parc-actif",
         estParcActif
       );
-      marker.setAttribute("tabindex", "0");
-      marker.setAttribute("role", "button");
+      marker.setAttribute("focusable", "false");
       marker.setAttribute(
         "aria-label",
         "Ouvrir la Card Parc de " + (parcCarte.nom || "Parc")
       );
 
       marker.addEventListener("pointerdown", (event) => {
+        event.preventDefault();
         event.stopPropagation();
       });
 
@@ -862,15 +862,6 @@
         ouvrirCardParc(parcCarte);
       });
 
-      marker.addEventListener("keydown", (event) => {
-        if (event.key !== "Enter" && event.key !== " ") {
-          return;
-        }
-
-        event.preventDefault();
-        event.stopPropagation();
-        ouvrirCardParc(parcCarte);
-      });
 
       groupe.appendChild(marker);
       coucheParcs.appendChild(groupe);

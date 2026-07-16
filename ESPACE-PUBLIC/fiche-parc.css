@@ -66,8 +66,8 @@
 
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
-  min-height: 320px;
-  height: min(52vh, 520px);
+  min-height: 560px;
+  height: min(70vh, 680px);
 }
 
 
@@ -118,8 +118,8 @@
 @media (max-width: 767px) {
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
-    min-height: 280px;
-    height: 360px;
+    min-height: 560px;
+    height: 620px;
   }
 }
 
@@ -295,12 +295,15 @@
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
   position: absolute;
   z-index: 4;
-  right: 14px;
-  bottom: 14px;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
   display: block !important;
-  width: min(360px, calc(100% - 28px));
-  max-height: calc(100% - 28px);
-  overflow: auto;
+  width: min(430px, calc(100% - 32px));
+  max-height: none;
+  overflow: visible;
   padding: 42px 10px 10px;
   box-sizing: border-box;
   border: 1px solid #c8c8c2;
@@ -315,9 +318,33 @@
 
 @media (max-width: 760px) {
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
-    right: 8px;
-    bottom: 8px;
-    width: calc(100% - 16px);
-    max-height: 62%;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    width: calc(100% - 20px);
+    max-height: none;
+    overflow: visible;
+    padding: 40px 8px 8px;
   }
+}
+
+
+/* Carte fiche parc : la Card Parc est centrée et entièrement contenue. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open .lcdp-box-card-parc {
+  width: 100%;
+  max-height: none;
+  overflow: hidden;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open .lcdp-box-card-parc__image {
+  aspect-ratio: 16 / 9;
+}
+
+/* Neutralise le halo de focus SVG observé au clic sur les marqueurs. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker,
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker:focus,
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker:focus-visible {
+  outline: none !important;
+  filter: none !important;
 }
