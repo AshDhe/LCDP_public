@@ -348,3 +348,16 @@
   outline: none !important;
   filter: none !important;
 }
+
+
+/* Correctif Chrome : aucun marqueur SVG ne peut recevoir un focus visuel. */
+.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg],
+.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg] *,
+.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg]:focus,
+.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg] *:focus,
+.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg]:focus-visible,
+.lcdp-carte-dynamique--fiche-parc [data-lcdp-carte-svg] *:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent;
+}

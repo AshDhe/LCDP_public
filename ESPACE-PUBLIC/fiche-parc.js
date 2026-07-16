@@ -470,6 +470,9 @@
     if (statut) statut.hidden = true;
     cardSlot.hidden = true;
 
+    svg.setAttribute("focusable", "false");
+    svg.setAttribute("tabindex", "-1");
+
     const codeDepartement = nettoyerDepartement(parc.dptmt || parc.departement);
     const features = Array.isArray(geojson?.features) ? geojson.features : [];
     const traces = [];
@@ -820,6 +823,51 @@
       }
     });
 
+    function obtenirMarqueurDepuisEvenement(event) {
+      const cible = event.target instanceof Element ? event.target : null;
+      return cible?.closest(".lcdp-carte-dynamique__marker") || null;
+    }
+
+    svg.addEventListener("pointerdown", (event) => {
+      if (!obtenirMarqueurDepuisEvenement(event)) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+    }, true);
+
+    svg.addEventListener("mousedown", (event) => {
+      if (!obtenirMarqueurDepuisEvenement(event)) {
+        return;
+      }
+
+      event.preventDefault();
+    }, true);
+
+    svg.addEventListener("click", (event) => {
+      const marker = obtenirMarqueurDepuisEvenement(event);
+
+      if (!marker) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      const idparc = nettoyerTexte(marker.dataset.idparc);
+      const parcCarte = parcsCarteParId.get(idparc);
+
+      if (parcCarte) {
+        ouvrirCardParc(parcCarte);
+      }
+
+      const elementActif = document.activeElement;
+      if (elementActif && typeof elementActif.blur === "function") {
+        elementActif.blur();
+      }
+    });
+
     function ajouterMarqueurParc(parcCarte, estParcActif) {
       const longitude = parcCarte.lngparc ?? parcCarte.longitude ?? parcCarte.lngloc;
       const latitude = parcCarte.latparc ?? parcCarte.latitude ?? parcCarte.latloc;
@@ -845,23 +893,15 @@
         "lcdp-carte-dynamique__marker--parc-actif",
         estParcActif
       );
+
+      /* Le marqueur reste un élément graphique pur.
+         Le clic est traité par délégation sur le SVG afin que Chrome
+         ne lui applique jamais de surface de focus blanche. */
       marker.setAttribute("focusable", "false");
-      marker.setAttribute(
-        "aria-label",
-        "Ouvrir la Card Parc de " + (parcCarte.nom || "Parc")
-      );
-
-      marker.addEventListener("pointerdown", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-      });
-
-      marker.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        ouvrirCardParc(parcCarte);
-      });
-
+      marker.setAttribute("tabindex", "-1");
+      marker.setAttribute("aria-hidden", "true");
+      marker.removeAttribute("role");
+      marker.removeAttribute("aria-label");
 
       groupe.appendChild(marker);
       coucheParcs.appendChild(groupe);
