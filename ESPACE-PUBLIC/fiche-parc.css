@@ -278,3 +278,46 @@
   font-weight: 800;
   letter-spacing: 0.03em;
 }
+
+
+/* Correctif vérifié : aucun halo historique et Card Parc explicitement affichable. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker-actif-halo {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot[hidden] {
+  display: none !important;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
+  position: absolute;
+  z-index: 4;
+  right: 14px;
+  bottom: 14px;
+  display: block !important;
+  width: min(360px, calc(100% - 28px));
+  max-height: calc(100% - 28px);
+  overflow: auto;
+  padding: 42px 10px 10px;
+  box-sizing: border-box;
+  border: 1px solid #c8c8c2;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 12px 32px rgba(31, 42, 36, 0.22);
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker {
+  pointer-events: all;
+}
+
+@media (max-width: 760px) {
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
+    right: 8px;
+    bottom: 8px;
+    width: calc(100% - 16px);
+    max-height: 62%;
+  }
+}
