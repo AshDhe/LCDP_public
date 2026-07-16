@@ -78,7 +78,13 @@
       const parc = {
         ...referenceParc,
         ...(fiche.parc || {}),
-        resparc: fiche.resparc || null
+        resparc: fiche.resparc || null,
+        parcsDepartement: Array.isArray(fiche.parcsDepartement)
+          ? fiche.parcsDepartement
+          : [],
+        localitesCarte: Array.isArray(fiche.localites)
+          ? fiche.localites
+          : []
       };
 
       parcActif = parc;
@@ -180,7 +186,9 @@
 
     return {
       parc: data.parc || null,
-      resparc: data.resparc || null
+      resparc: data.resparc || null,
+      parcsDepartement: Array.isArray(data.parcs) ? data.parcs : [],
+      localites: Array.isArray(data.localites) ? data.localites : []
     };
   }
 
@@ -398,7 +406,6 @@
       }
     );
   }
-
   async function ajouterCarteParc(slot, parc) {
     if (!slot) {
       throw new Error("Slot carte fiche parc introuvable.");
@@ -486,18 +493,26 @@
       path.setAttribute("d", trace.d);
       path.setAttribute("class", "lcdp-carte-dynamique__departement");
       path.dataset.code = code;
+      coucheDepartements.appendChild(path);
 
       if (code === codeDepartement) {
-        path.classList.add("is-selected", "lcdp-carte-dynamique__departement--fiche-parc");
+        const selection = creerElementSvg("path");
+        selection.setAttribute("d", trace.d);
+        selection.setAttribute(
+          "class",
+          "lcdp-carte-dynamique__departement-selection"
+        );
+        coucheSelection.appendChild(selection);
       }
-
-      coucheDepartements.appendChild(path);
     });
 
     const traceSelectionnee = traces.find((item) => item.code === codeDepartement);
     const bboxFrance = fusionnerBbox(traces.map((item) => item.trace.bbox));
     const bboxCible = traceSelectionnee?.trace?.bbox || bboxFrance;
-    const viewBoxInitiale = bboxVersViewBox(bboxCible, traceSelectionnee ? 0.16 : 0.045);
+    const viewBoxInitiale = bboxVersViewBox(
+      bboxCible,
+      traceSelectionnee ? 0.24 : 0.045
+    );
 
     if (!viewBoxInitiale) {
       throw new Error("Emprise cartographique inexploitable.");
@@ -508,21 +523,48 @@
 
     function appliquerViewBox() {
       svg.setAttribute("viewBox", viewBoxCourante.join(" "));
+      actualiserTailleElementsCarte();
+    }
+
+    function actualiserTailleElementsCarte() {
+      const largeurEcran = Math.max(1, svg.getBoundingClientRect().width);
+      const uniteEcran = viewBoxCourante[2] / largeurEcran;
+      const rayonParc = Math.max(0.04, uniteEcran * 6);
+      const rayonLocalite = Math.max(0.035, uniteEcran * 4.2);
+      const tailleLibelle = Math.max(0.12, uniteEcran * 11);
+      const decalageLibelle = Math.max(0.08, uniteEcran * 7);
+
+      coucheParcs
+        .querySelectorAll(".lcdp-carte-dynamique__marker")
+        .forEach((marker) => marker.setAttribute("r", String(rayonParc)));
+
+      coucheLocalites
+        .querySelectorAll(".lcdp-carte-dynamique__localite-marker")
+        .forEach((marker) => marker.setAttribute("r", String(rayonLocalite)));
+
+      coucheLocalites
+        .querySelectorAll(".lcdp-carte-dynamique__localite-label")
+        .forEach((libelle) => {
+          const x = Number(libelle.dataset.pointX);
+          libelle.setAttribute("font-size", String(tailleLibelle));
+          libelle.setAttribute("x", String(x + decalageLibelle));
+        });
     }
 
     function zoomer(facteur) {
       const [x, y, largeur, hauteur] = viewBoxCourante;
-      const nouvelleLargeur = largeur * facteur;
-      const nouvelleHauteur = hauteur * facteur;
       const centreX = x + largeur / 2;
       const centreY = y + hauteur / 2;
       const largeurMin = Math.max(0.25, viewBoxInitiale[2] / 12);
       const hauteurMin = Math.max(0.25, viewBoxInitiale[3] / 12);
-      const largeurMax = viewBoxLimite[2];
-      const hauteurMax = viewBoxLimite[3];
-
-      const largeurFinale = Math.min(largeurMax, Math.max(largeurMin, nouvelleLargeur));
-      const hauteurFinale = Math.min(hauteurMax, Math.max(hauteurMin, nouvelleHauteur));
+      const largeurFinale = Math.min(
+        viewBoxLimite[2],
+        Math.max(largeurMin, largeur * facteur)
+      );
+      const hauteurFinale = Math.min(
+        viewBoxLimite[3],
+        Math.max(hauteurMin, hauteur * facteur)
+      );
 
       viewBoxCourante = [
         centreX - largeurFinale / 2,
@@ -530,7 +572,6 @@
         largeurFinale,
         hauteurFinale
       ];
-
       appliquerViewBox();
     }
 
@@ -567,7 +608,11 @@
     });
 
     function terminerGlissement(event) {
-      if (glissement && event?.pointerId !== undefined && svg.hasPointerCapture(event.pointerId)) {
+      if (
+        glissement &&
+        event?.pointerId !== undefined &&
+        svg.hasPointerCapture(event.pointerId)
+      ) {
         svg.releasePointerCapture(event.pointerId);
       }
       glissement = null;
@@ -576,21 +621,81 @@
 
     svg.addEventListener("pointerup", terminerGlissement);
     svg.addEventListener("pointercancel", terminerGlissement);
+    window.addEventListener("resize", actualiserTailleElementsCarte);
 
-    const pointParc = projeterCoordonnee(parc.lngparc || parc.longitude, parc.latparc || parc.latitude);
+    (Array.isArray(parc.localitesCarte) ? parc.localitesCarte : [])
+      .forEach((localite) => {
+        const point = projeterCoordonnee(
+          localite.longitude,
+          localite.latitude
+        );
 
-    if (pointParc) {
+        if (!point) return;
+
+        const groupe = creerElementSvg("g");
+        groupe.setAttribute("aria-hidden", "true");
+
+        const marker = creerElementSvg("circle");
+        marker.setAttribute("cx", String(point.x));
+        marker.setAttribute("cy", String(point.y));
+        marker.setAttribute("r", "0.1");
+        marker.setAttribute(
+          "class",
+          "lcdp-carte-dynamique__localite-marker"
+        );
+
+        const libelle = creerElementSvg("text");
+        libelle.setAttribute("x", String(point.x));
+        libelle.setAttribute("y", String(point.y));
+        libelle.setAttribute("dominant-baseline", "middle");
+        libelle.setAttribute(
+          "class",
+          "lcdp-carte-dynamique__localite-label"
+        );
+        libelle.dataset.pointX = String(point.x);
+        libelle.textContent = String(localite.nom || "")
+          .trim()
+          .toLocaleUpperCase("fr");
+
+        groupe.appendChild(marker);
+        groupe.appendChild(libelle);
+        coucheLocalites.appendChild(groupe);
+      });
+
+    const idParcActif = nettoyerTexte(parc.idparc || parc.id);
+    const parcsDepartement = Array.isArray(parc.parcsDepartement) && parc.parcsDepartement.length
+      ? parc.parcsDepartement
+      : [parc];
+
+    parcsDepartement.forEach((parcCarte) => {
+      const longitude = parcCarte.lngparc ?? parcCarte.longitude ?? parcCarte.lngloc;
+      const latitude = parcCarte.latparc ?? parcCarte.latitude ?? parcCarte.latloc;
+      const point = projeterCoordonnee(longitude, latitude);
+
+      if (!point) return;
+
       const marker = creerElementSvg("circle");
-      marker.setAttribute("cx", String(pointParc.x));
-      marker.setAttribute("cy", String(pointParc.y));
-      marker.setAttribute("r", String(Math.max(0.08, viewBoxInitiale[2] / 75)));
-      marker.setAttribute(
-        "class",
-        "lcdp-carte-dynamique__marker lcdp-carte-dynamique__marker--fiche-parc"
+      const idparc = nettoyerTexte(parcCarte.idparc || parcCarte.id);
+      const estParcActif = idparc && idparc === idParcActif;
+
+      marker.setAttribute("cx", String(point.x));
+      marker.setAttribute("cy", String(point.y));
+      marker.setAttribute("r", "0.1");
+      marker.setAttribute("class", "lcdp-carte-dynamique__marker");
+      marker.dataset.idparc = idparc;
+      marker.dataset.statut = nettoyerTexte(parcCarte.statut).toLowerCase();
+      marker.classList.toggle("is-validcarte", parcCarte.validcarte === true);
+      marker.classList.toggle(
+        "lcdp-carte-dynamique__marker--parc-actif",
+        estParcActif
       );
-      marker.setAttribute("aria-label", "Localisation du parc de " + (parc.nom || "Parc"));
+      marker.setAttribute(
+        "aria-label",
+        (estParcActif ? "Parc affiché : " : "Parc du département : ") +
+          (parcCarte.nom || "Parc")
+      );
       coucheParcs.appendChild(marker);
-    }
+    });
 
     svg.setAttribute(
       "aria-label",
@@ -863,7 +968,6 @@
   function ouvrirPlanningPublic(parc) {
     ouvrirShiftDetailParc(parc, "planning").catch(console.error);
   }
-
   async function ouvrirShiftDetailParc(parc, vue) {
     const slot = document.getElementById("lcdp-lightbox-slot");
 
@@ -871,11 +975,7 @@
       throw new Error("Slot lightbox introuvable.");
     }
 
-    slot.innerHTML = "";
-
     const shift = etatInteraction.templateShiftDetail.cloneNode(true);
-    slot.appendChild(shift);
-
     const contenu = shift.querySelector("[data-lcdp-shift-detail-parc-content]");
     const boutonFermer = shift.querySelector("[data-lcdp-shift-detail-parc-close]");
 
@@ -884,8 +984,7 @@
     }
 
     const fermer = () => {
-      slot.innerHTML = "";
-      etatInteraction.calendrier = null;
+      fermerShiftDetailParcEnDouceur(slot, shift).catch(console.error);
     };
 
     boutonFermer.addEventListener("click", fermer);
@@ -902,17 +1001,52 @@
     );
 
     await afficherVueShiftDetailParc(contenu, parc, vue);
+    slot.replaceChildren(shift);
+    requestAnimationFrame(() => {
+      shift.classList.add("lcdp-box-shift-detail-parc--visible");
+    });
   }
-
   async function afficherVueShiftDetailParc(contenu, parc, vue) {
-    contenu.classList.add("lcdp-box-shift-detail-parc__content--transition");
-    await attendre(90);
-    contenu.innerHTML = "";
-    contenu.classList.remove("lcdp-box-shift-detail-parc__content--transition");
+    if (!contenu) return;
 
-    await afficherCalendrierMoisParcDansShift(contenu, parc, vue);
+    const ancienneVue = contenu.querySelector(
+      ":scope > .lcdp-fiche-parc__shift-view"
+    );
+    const nouvelleVue = document.createElement("div");
+    nouvelleVue.className =
+      "lcdp-fiche-parc__shift-view lcdp-fiche-parc__shift-view--enter";
+
+    await afficherCalendrierMoisParcDansShift(
+      nouvelleVue,
+      parc,
+      vue
+    );
+
+    const hauteurCourante = ancienneVue
+      ? ancienneVue.getBoundingClientRect().height
+      : contenu.getBoundingClientRect().height;
+
+    if (hauteurCourante > 0) {
+      contenu.style.minHeight = hauteurCourante + "px";
+    }
+
+    contenu.appendChild(nouvelleVue);
+
+    requestAnimationFrame(() => {
+      if (ancienneVue) {
+        ancienneVue.classList.add("lcdp-fiche-parc__shift-view--leave");
+      }
+      nouvelleVue.classList.remove("lcdp-fiche-parc__shift-view--enter");
+    });
+
+    await attendre(180);
+
+    if (ancienneVue) {
+      ancienneVue.remove();
+    }
+
+    contenu.style.minHeight = "";
   }
-
   async function afficherCalendrierMoisParcDansShift(contenu, parc, mode) {
     const fragment = await chargerFragment("/OBJET/BOX/04-box-calendrier-mois.html");
     contenu.appendChild(fragment);
@@ -939,21 +1073,52 @@
     const nomParc = parc.nom || parc.nomparc || "Parc";
     const departement = nettoyerDepartement(parc.dptmt || parc.departement);
 
-    titre.textContent = mode === "reservation" ? "Réserver au parc" : "Planning du parc";
-    meta.textContent = nomParc + (departement ? " · " + departement : "");
+    titre.textContent =
+      "Parc de " + nomParc + (departement ? " - " + departement : "");
+    meta.hidden = true;
+    meta.textContent = "";
     boutonFermer.hidden = true;
 
-    commande.replaceChildren(
-      creerBoutonCommande("Fiche parc", "lcdp-button-secondary", () => {
+    titre.insertAdjacentElement("afterend", commande);
+    commande.classList.add("lcdp-fiche-parc__commande-detail");
+    commande.innerHTML = "";
+
+    const boutonFiche = creerBoutonCommande(
+      "Fiche parc",
+      "lcdp-button-secondary",
+      () => {
         const slot = document.getElementById("lcdp-lightbox-slot");
-        if (slot) slot.innerHTML = "";
-      }),
-      creerBoutonCommande(
-        mode === "reservation" ? "Planning parc" : "RÉSERVER",
-        mode === "reservation" ? "lcdp-button-primary" : "lcdp-box-calendrier-mois__action-reserver",
-        () => afficherVueShiftDetailParc(contenu, parc, mode === "reservation" ? "planning" : "reservation")
-      )
+        const shift = slot?.querySelector("[data-lcdp-box-shift-detail-parc]");
+        if (slot && shift) {
+          fermerShiftDetailParcEnDouceur(slot, shift).catch(console.error);
+        }
+      }
     );
+
+    if (mode === "planning") {
+      const boutonReserver = creerBoutonCommande(
+        "RÉSERVER",
+        "lcdp-box-calendrier-mois__action-reserver",
+        () => afficherVueShiftDetailParc(contenu.parentElement, parc, "reservation")
+      );
+      const actionPartager = creerActionPartagerFicheParc();
+      actionPartager.addEventListener("click", () => {
+        partagerFicheParc(parc).catch(console.error);
+      });
+
+      commande.appendChild(boutonReserver);
+      commande.appendChild(actionPartager);
+      commande.appendChild(boutonFiche);
+    } else {
+      const boutonPlanning = creerBoutonCommande(
+        "Planning parc",
+        "lcdp-button-primary",
+        () => afficherVueShiftDetailParc(contenu.parentElement, parc, "planning")
+      );
+
+      commande.appendChild(boutonFiche);
+      commande.appendChild(boutonPlanning);
+    }
 
     const maintenant = new Date();
     etatInteraction.calendrier = {
@@ -984,6 +1149,19 @@
     await afficherCalendrierMoisActif();
   }
 
+  async function fermerShiftDetailParcEnDouceur(slot, shift) {
+    if (!slot || !shift) return;
+
+    shift.classList.add("lcdp-box-shift-detail-parc--closing");
+    await attendre(160);
+
+    if (slot.contains(shift)) {
+      slot.innerHTML = "";
+    }
+
+    etatInteraction.calendrier = null;
+  }
+
   function creerBoutonCommande(label, style, action) {
     const bouton = document.createElement("button");
     bouton.type = "button";
@@ -992,7 +1170,6 @@
     bouton.addEventListener("click", action);
     return bouton;
   }
-
   async function afficherCalendrierMoisActif() {
     const etat = etatInteraction.calendrier;
     if (!etat || !etat.contenu) return;
@@ -1004,16 +1181,14 @@
     if (!moisCourant || !message || !grille) return;
 
     moisCourant.textContent = formaterMoisAnnee(etat.annee, etat.mois);
-    message.hidden = false;
-    message.textContent = "Chargement du planning...";
+    message.hidden = true;
+    message.textContent = "";
     grille.classList.add("lcdp-box-calendrier-mois__grid--loading");
 
     try {
       const planning = await chargerPlanningParcMois(etat);
       etat.planning = planning;
       remplirGrilleCalendrier(grille, etat, planning);
-      message.hidden = true;
-      message.textContent = "";
     } catch (error) {
       console.error("Erreur planning parc :", error);
       message.hidden = false;

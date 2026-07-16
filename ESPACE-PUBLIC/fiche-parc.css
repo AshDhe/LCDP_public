@@ -67,18 +67,6 @@
   height: min(52vh, 520px);
 }
 
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement--fiche-parc {
-  fill: #234438;
-  stroke: #173128;
-  stroke-width: 2.2;
-}
-
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--fiche-parc {
-  fill: var(--lcdp-color-orange);
-  stroke: #ffffff;
-  stroke-width: 2.2;
-  pointer-events: none;
-}
 
 /* Navigation interne fiche / planning / réservation. */
 .lcdp-box-calendrier-mois--shift-detail .lcdp-box-calendrier-mois__commande,
@@ -129,5 +117,122 @@
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
     min-height: 280px;
     height: 360px;
+  }
+}
+
+
+/* Carte de la fiche : département seulement contouré, localité noire,
+   tous les parcs visibles et parc consulté en vert foncé. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement.is-selected {
+  fill: #fafaf8;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement-selection {
+  fill: none;
+  stroke: #587242;
+  stroke-width: 2.8;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
+  fill: #234438 !important;
+  stroke: #ffffff !important;
+  stroke-width: 2.4 !important;
+}
+
+/* Shift Detail : hauteur stable et transitions sans flash de chargement. */
+#lcdp-lightbox-slot .lcdp-box-shift-detail-parc {
+  opacity: 0;
+  transition: opacity 160ms ease-out;
+}
+
+#lcdp-lightbox-slot .lcdp-box-shift-detail-parc--visible {
+  opacity: 1;
+}
+
+#lcdp-lightbox-slot .lcdp-box-shift-detail-parc--closing {
+  opacity: 0;
+}
+
+#lcdp-lightbox-slot .lcdp-box-shift-detail-parc__card {
+  height: min(860px, calc(100dvh - (var(--lcdp-space-4) * 2)));
+  min-height: min(680px, calc(100dvh - (var(--lcdp-space-4) * 2)));
+}
+
+.lcdp-fiche-parc__shift-view {
+  width: 100%;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 180ms ease-out, transform 180ms ease-out;
+}
+
+.lcdp-fiche-parc__shift-view--enter {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.lcdp-fiche-parc__shift-view--leave {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+}
+
+.lcdp-box-shift-detail-parc__content {
+  position: relative;
+}
+
+/* Entête planning/réservation identique à celle de Réserver membre. */
+.lcdp-box-calendrier-mois--shift-detail .lcdp-box-calendrier-mois__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-calendrier-mois--shift-detail .lcdp-box-calendrier-mois__title {
+  order: 1;
+  width: 100%;
+  color: var(--lcdp-color-orange);
+}
+
+.lcdp-box-calendrier-mois--shift-detail .lcdp-fiche-parc__commande-detail {
+  order: 2;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-calendrier-mois--shift-detail .lcdp-fiche-parc__commande-detail .lcdp-button {
+  width: auto;
+  max-width: none;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.lcdp-box-calendrier-mois--shift-detail .lcdp-fiche-parc__commande-detail .lcdp-box-fiche-parc__partage {
+  width: auto;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  #lcdp-lightbox-slot .lcdp-box-shift-detail-parc__card {
+    height: calc(100dvh - (var(--lcdp-space-3) * 2));
+    min-height: 0;
+  }
+
+  .lcdp-box-calendrier-mois--shift-detail .lcdp-fiche-parc__commande-detail {
+    align-items: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #lcdp-lightbox-slot .lcdp-box-shift-detail-parc,
+  .lcdp-fiche-parc__shift-view {
+    transition: none;
   }
 }
