@@ -263,3 +263,23 @@
   pointer-events: none;
   user-select: none;
 }
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker-actif-label {
+  display: none;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__localite-marker {
+  fill: #111111;
+  stroke: #ffffff;
+  stroke-width: 1.4;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__localite-label {
+  fill: #111111;
+  stroke: #ffffff;
+  stroke-width: 2.2px;
+  paint-order: stroke fill;
+  stroke-linejoin: round;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}

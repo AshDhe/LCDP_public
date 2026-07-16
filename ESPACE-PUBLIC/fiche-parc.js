@@ -45,6 +45,7 @@
     templateShiftDetail: null,
     templateJourMois: null,
     templateHeureJour: null,
+    templateCardParc: null,
     calendrier: null
   };
 
@@ -456,7 +457,8 @@
       !coucheLocalites ||
       !coucheParcs ||
       !boutonZoomPlus ||
-      !boutonZoomMoins
+      !boutonZoomMoins ||
+      !cardSlot
     ) {
       throw new Error("Structure SVG de la carte dynamique incomplète.");
     }
@@ -464,7 +466,7 @@
     if (entete) entete.hidden = true;
     if (filtres) filtres.hidden = true;
     if (statut) statut.hidden = true;
-    if (cardSlot) cardSlot.hidden = true;
+    cardSlot.hidden = true;
 
     const codeDepartement = nettoyerDepartement(parc.dptmt || parc.departement);
     const features = Array.isArray(geojson?.features) ? geojson.features : [];
@@ -533,10 +535,8 @@
       const rayonParcActif = rayonParc * 1.45;
       const rayonHaloParcActif = rayonParcActif * 1.42;
       const rayonLocalite = Math.max(0.035, uniteEcran * 4.2);
-      const tailleLibelle = Math.max(0.12, uniteEcran * 11);
-      const decalageLibelle = Math.max(0.08, uniteEcran * 7);
-      const tailleLibelleParcActif = Math.max(0.14, uniteEcran * 12);
-      const decalageLibelleParcActif = Math.max(0.12, uniteEcran * 11);
+      const tailleLibelle = Math.max(0.14, uniteEcran * 12.5);
+      const decalageLibelle = Math.max(0.1, uniteEcran * 8);
 
       coucheParcs
         .querySelectorAll(".lcdp-carte-dynamique__marker:not(.lcdp-carte-dynamique__marker--parc-actif)")
@@ -549,14 +549,6 @@
       coucheParcs
         .querySelectorAll(".lcdp-carte-dynamique__marker-actif-halo")
         .forEach((marker) => marker.setAttribute("r", String(rayonHaloParcActif)));
-
-      coucheParcs
-        .querySelectorAll(".lcdp-carte-dynamique__marker-actif-label")
-        .forEach((libelle) => {
-          const x = Number(libelle.dataset.pointX);
-          libelle.setAttribute("font-size", String(tailleLibelleParcActif));
-          libelle.setAttribute("x", String(x + decalageLibelleParcActif));
-        });
 
       coucheLocalites
         .querySelectorAll(".lcdp-carte-dynamique__localite-marker")
@@ -682,6 +674,128 @@
         coucheLocalites.appendChild(groupe);
       });
 
+    function fermerCardParc() {
+      cardSlot.innerHTML = "";
+      cardSlot.hidden = true;
+    }
+
+    function ouvrirFicheParcDepuisCarte(parcCarte) {
+      const idparc = nettoyerTexte(parcCarte?.idparc || parcCarte?.id);
+
+      if (!idparc) {
+        return;
+      }
+
+      const url = construireUrlAvecParc(
+        construireUrlSite("/ESPACE-PUBLIC/fiche-parc.html"),
+        parcCarte,
+        {}
+      );
+
+      window.location.href = url;
+    }
+
+    function construireUrlImageCardParc(parcCarte) {
+      const chemin = construireCheminImageParc(parcCarte, "card1.webp");
+
+      if (!chemin || chemin.endsWith("/parc-defaut.webp")) {
+        return "";
+      }
+
+      return construireUrlSite("/OBJET" + chemin);
+    }
+
+    function ouvrirCardParc(parcCarte) {
+      const card = etatInteraction.templateCardParc.cloneNode(true);
+      const image = card.querySelector("[data-lcdp-card-parc-image]");
+      const media = card.querySelector(".lcdp-box-card-parc__media");
+      const titre = card.querySelector("[data-lcdp-card-parc-title]");
+      const meta = card.querySelector("[data-lcdp-card-parc-meta]");
+      const description = card.querySelector("[data-lcdp-card-parc-description]");
+      const badgePrepa = card.querySelector("[data-lcdp-card-parc-badge-prepa]");
+      const boutonFiche = card.querySelector("[data-action='ouvrir-fiche-parc']");
+      const boutonPlanning = card.querySelector("[data-action='voir-planning-parc']");
+      const boutonReserver = card.querySelector("[data-action='nouvelle-date-parc']");
+
+      if (titre) {
+        titre.textContent = nettoyerTexte(parcCarte?.nom) || "Parc";
+      }
+
+      if (meta) {
+        const departement = nettoyerDepartement(
+          parcCarte?.dptmt || parcCarte?.departement
+        );
+        meta.textContent = departement ? "Département " + departement : "";
+      }
+
+      if (description) {
+        description.hidden = true;
+        description.textContent = "";
+      }
+
+      if (badgePrepa) {
+        badgePrepa.hidden =
+          nettoyerTexte(parcCarte?.statut).toLowerCase() !== "prepa";
+      }
+
+      if (image) {
+        const src = construireUrlImageCardParc(parcCarte);
+
+        if (src) {
+          image.src = src;
+          image.alt = "Image du parc " + (nettoyerTexte(parcCarte?.nom) || "");
+          image.addEventListener(
+            "error",
+            () => {
+              if (media) {
+                media.hidden = true;
+              }
+            },
+            { once: true }
+          );
+        } else if (media) {
+          media.hidden = true;
+        }
+      }
+
+      if (boutonFiche) {
+        boutonFiche.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          ouvrirFicheParcDepuisCarte(parcCarte);
+        });
+      }
+
+      if (boutonPlanning) {
+        boutonPlanning.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          fermerCardParc();
+          ouvrirPlanningPublic(parcCarte);
+        });
+      }
+
+      if (boutonReserver) {
+        boutonReserver.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          fermerCardParc();
+          ouvrirReservationMembre(parcCarte);
+        });
+      }
+
+      const boutonFermerCard = document.createElement("button");
+      boutonFermerCard.type = "button";
+      boutonFermerCard.className = "lcdp-carte-dynamique__card-close";
+      boutonFermerCard.textContent = "×";
+      boutonFermerCard.setAttribute("aria-label", "Fermer la Card Parc");
+      boutonFermerCard.addEventListener("click", fermerCardParc);
+
+      cardSlot.replaceChildren(boutonFermerCard, card);
+      cardSlot.hidden = false;
+      boutonFermerCard.focus();
+    }
+
     const idParcActif = nettoyerTexte(parc.idparc || parc.id);
     const parcsDepartement = Array.isArray(parc.parcsDepartement) && parc.parcsDepartement.length
       ? parc.parcsDepartement
@@ -722,29 +836,34 @@
         "lcdp-carte-dynamique__marker--parc-actif",
         estParcActif
       );
+      marker.setAttribute("tabindex", "0");
+      marker.setAttribute("role", "button");
       marker.setAttribute(
         "aria-label",
-        (estParcActif ? "Parc affiché : " : "Parc du département : ") +
-          (parcCarte.nom || "Parc")
+        "Ouvrir la Card Parc de " + (parcCarte.nom || "Parc")
       );
+
+      marker.addEventListener("pointerdown", (event) => {
+        event.stopPropagation();
+      });
+
+      marker.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        ouvrirCardParc(parcCarte);
+      });
+
+      marker.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        ouvrirCardParc(parcCarte);
+      });
+
       groupe.appendChild(marker);
-
-      if (estParcActif) {
-        const libelle = creerElementSvg("text");
-        libelle.setAttribute("x", String(point.x));
-        libelle.setAttribute("y", String(point.y));
-        libelle.setAttribute("dominant-baseline", "middle");
-        libelle.setAttribute(
-          "class",
-          "lcdp-carte-dynamique__marker-actif-label"
-        );
-        libelle.dataset.pointX = String(point.x);
-        libelle.textContent = String(parcCarte.nom || parc.nom || "Parc")
-          .trim()
-          .toLocaleUpperCase("fr");
-        groupe.appendChild(libelle);
-      }
-
       coucheParcs.appendChild(groupe);
     }
 
@@ -772,6 +891,13 @@
       "aria-label",
       "Carte du département " + (codeDepartement || "du parc")
     );
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !cardSlot.hidden) {
+        fermerCardParc();
+      }
+    });
+
     appliquerViewBox();
   }
 
@@ -1007,10 +1133,11 @@
   }
 
   async function initialiserObjetsInteraction() {
-    const [fragmentShift, fragmentJour, fragmentHeure] = await Promise.all([
+    const [fragmentShift, fragmentJour, fragmentHeure, fragmentCardParc] = await Promise.all([
       chargerFragment("/OBJET/BOX/04-box-shift-detail-parc.html"),
       chargerFragment("/OBJET/BOX/04-box-card-jour-in-calendrier-mois.html"),
-      chargerFragment("/OBJET/BOX/04-box-card-heure-in-calendrier-jour.html")
+      chargerFragment("/OBJET/BOX/04-box-card-heure-in-calendrier-jour.html"),
+      chargerFragment("/OBJET/BOX/04-box-card-parc.html")
     ]);
 
     etatInteraction.templateShiftDetail = fragmentShift.querySelector(
@@ -1022,13 +1149,17 @@
     etatInteraction.templateHeureJour = fragmentHeure.querySelector(
       "[data-lcdp-card-heure-jour]"
     );
+    etatInteraction.templateCardParc = fragmentCardParc.querySelector(
+      "[data-lcdp-box-card-parc]"
+    );
 
     if (
       !etatInteraction.templateShiftDetail ||
       !etatInteraction.templateJourMois ||
-      !etatInteraction.templateHeureJour
+      !etatInteraction.templateHeureJour ||
+      !etatInteraction.templateCardParc
     ) {
-      throw new Error("Objets planning et réservation incomplets.");
+      throw new Error("Objets fiche, planning et réservation incomplets.");
     }
   }
 
