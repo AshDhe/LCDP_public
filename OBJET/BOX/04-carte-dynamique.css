@@ -379,8 +379,10 @@
     max-height: 330px;
   }
 
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
     touch-action: pan-y;
+    -ms-touch-action: pan-y;
   }
 
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__localite-label {
