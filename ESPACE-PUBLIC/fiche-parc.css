@@ -1,3 +1,11 @@
+/* Gabarit identique à la fiche ouverte depuis Réserver membre :
+   aucune limitation à la largeur éditoriale de 720 px. */
+.lcdp-fiche-parc-page-content {
+  width: 100%;
+  max-width: 1060px;
+  margin-inline: auto;
+}
+
 /*
  * Page publique Fiche Parc.
  * Les objets Fiche Parc, Galerie, Box Text et Shift Detail conservent
