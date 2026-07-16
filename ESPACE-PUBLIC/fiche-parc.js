@@ -529,11 +529,11 @@
     }
 
     function actualiserTailleElementsCarte() {
-      const largeurEcran = Math.max(1, svg.getBoundingClientRect().width);
+      const largeurMesuree = svg.getBoundingClientRect().width || svg.clientWidth || 800;
+      const largeurEcran = Math.max(320, largeurMesuree);
       const uniteEcran = viewBoxCourante[2] / largeurEcran;
       const rayonParc = Math.max(0.04, uniteEcran * 6);
       const rayonParcActif = rayonParc * 1.45;
-      const rayonHaloParcActif = rayonParcActif * 1.42;
       const rayonLocalite = Math.max(0.035, uniteEcran * 4.2);
       const tailleLibelle = Math.max(0.14, uniteEcran * 12.5);
       const decalageLibelle = Math.max(0.1, uniteEcran * 8);
@@ -545,10 +545,6 @@
       coucheParcs
         .querySelectorAll(".lcdp-carte-dynamique__marker--parc-actif")
         .forEach((marker) => marker.setAttribute("r", String(rayonParcActif)));
-
-      coucheParcs
-        .querySelectorAll(".lcdp-carte-dynamique__marker-actif-halo")
-        .forEach((marker) => marker.setAttribute("r", String(rayonHaloParcActif)));
 
       coucheLocalites
         .querySelectorAll(".lcdp-carte-dynamique__localite-marker")
@@ -793,6 +789,7 @@
 
       cardSlot.replaceChildren(boutonFermerCard, card);
       cardSlot.hidden = false;
+      cardSlot.removeAttribute("hidden");
       boutonFermerCard.focus();
     }
 
@@ -812,23 +809,13 @@
       const groupe = creerElementSvg("g");
       groupe.dataset.idparc = idparc;
 
-      if (estParcActif) {
-        const halo = creerElementSvg("circle");
-        halo.setAttribute("cx", String(point.x));
-        halo.setAttribute("cy", String(point.y));
-        halo.setAttribute("r", "0.1");
-        halo.setAttribute(
-          "class",
-          "lcdp-carte-dynamique__marker-actif-halo"
-        );
-        groupe.appendChild(halo);
-      }
-
       const marker = creerElementSvg("circle");
       marker.setAttribute("cx", String(point.x));
       marker.setAttribute("cy", String(point.y));
       marker.setAttribute("r", "0.1");
       marker.setAttribute("class", "lcdp-carte-dynamique__marker");
+      marker.style.pointerEvents = "all";
+      marker.style.cursor = "pointer";
       marker.dataset.idparc = idparc;
       marker.dataset.statut = nettoyerTexte(parcCarte.statut).toLowerCase();
       marker.classList.toggle("is-validcarte", parcCarte.validcarte === true);

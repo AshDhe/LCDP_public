@@ -56,9 +56,12 @@
 
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__header,
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__filters,
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__status,
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot {
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__status {
   display: none !important;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot:not([hidden]) {
+  display: block !important;
 }
 
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
@@ -237,15 +240,7 @@
   }
 }
 
-/* Parc consulté : toujours au premier plan, avec halo et libellé permanent. */
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker-actif-halo {
-  fill: #ffffff;
-  stroke: #234438;
-  stroke-width: 1.4;
-  vector-effect: non-scaling-stroke;
-  pointer-events: none;
-}
-
+/* Parc consulté : toujours au premier plan, sans halo ni libellé. */
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
   fill: #234438 !important;
   stroke: #ffffff !important;
