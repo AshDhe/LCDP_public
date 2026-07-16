@@ -316,3 +316,70 @@
     max-height: 62%;
   }
 }
+
+
+/* Variante Fiche Parc : même rendu dans l'espace public et l'espace membre. */
+.lcdp-carte-dynamique--fiche-parc {
+  max-width: none;
+  padding: 0;
+  border: 0;
+  border-radius: var(--lcdp-radius-large);
+  box-shadow: none;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__header,
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__filters,
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__status {
+  display: none !important;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
+  min-height: 560px;
+  height: min(72vh, 720px);
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement.is-selected {
+  fill: #fafaf8;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement-selection {
+  fill: none;
+  stroke: #587242;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
+  fill: #234438 !important;
+  stroke: #234438 !important;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot[hidden] {
+  display: none !important;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  display: block !important;
+  width: min(430px, calc(100% - 32px));
+  max-height: calc(100% - 32px);
+  overflow: auto;
+}
+
+@media (max-width: 767px) {
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
+    min-height: 560px;
+    height: 620px;
+  }
+
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot.is-open {
+    width: calc(100% - 20px);
+    max-height: calc(100% - 20px);
+  }
+}
