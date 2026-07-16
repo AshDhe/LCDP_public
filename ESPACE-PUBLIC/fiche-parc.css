@@ -43,3 +43,91 @@
     padding: var(--lcdp-space-3);
   }
 }
+
+
+/* Carte du parc : variante publique centrée sur le département du parc. */
+.lcdp-carte-dynamique--fiche-parc {
+  max-width: none;
+  padding: 0;
+  border: 0;
+  border-radius: var(--lcdp-radius-large);
+  box-shadow: none;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__header,
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__filters,
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__status,
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot {
+  display: none !important;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
+  min-height: 320px;
+  height: min(52vh, 520px);
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement--fiche-parc {
+  fill: #234438;
+  stroke: #173128;
+  stroke-width: 2.2;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--fiche-parc {
+  fill: var(--lcdp-color-orange);
+  stroke: #ffffff;
+  stroke-width: 2.2;
+  pointer-events: none;
+}
+
+/* Navigation interne fiche / planning / réservation. */
+.lcdp-box-calendrier-mois--shift-detail .lcdp-box-calendrier-mois__commande,
+.lcdp-fiche-parc__navigation-shift,
+.lcdp-fiche-parc__dialogue-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-calendrier-mois--shift-detail .lcdp-box-calendrier-mois__commande {
+  margin-bottom: var(--lcdp-space-3);
+}
+
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  display: block;
+}
+
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour__card {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour__close {
+  display: none !important;
+}
+
+.lcdp-fiche-parc__dialogue-actions {
+  justify-content: center;
+}
+
+@media (max-width: 767px) {
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
+    min-height: 280px;
+    height: 360px;
+  }
+}

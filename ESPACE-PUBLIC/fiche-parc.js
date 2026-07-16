@@ -18,7 +18,35 @@
       : "")
   ).replace(/\/$/, "");
 
+  const endpointPlanningParc = String(
+    config.workerPlanningParcUrl ||
+    config.WORKER_PLANNING_PARC_URL ||
+    (typeof config.apiUrl === "function"
+      ? config.apiUrl("planning-parc-api")
+      : "")
+  ).replace(/\/$/, "");
+
+  const endpointFluxm = String(
+    config.workerFluxmUrl ||
+    config.WORKER_FLUXM_URL ||
+    (typeof config.apiUrl === "function"
+      ? config.apiUrl("fluxm-api")
+      : "")
+  ).replace(/\/$/, "");
+
+  const pageConnexionMembre = construireUrlSite(
+    "/ESPACE-PUBLIC/connexion-membre.html"
+  );
+
   let pageInitialisee = false;
+  let parcActif = null;
+
+  const etatInteraction = {
+    templateShiftDetail: null,
+    templateJourMois: null,
+    templateHeureJour: null,
+    calendrier: null
+  };
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initialiserPage);
@@ -43,6 +71,8 @@
     });
 
     try {
+      await initialiserObjetsInteraction();
+
       const referenceParc = lireParcDepuisUrl();
       const fiche = await chargerFicheParc(referenceParc.idparc);
       const parc = {
@@ -51,6 +81,7 @@
         resparc: fiche.resparc || null
       };
 
+      parcActif = parc;
       await afficherFicheParc(parc);
       afficherStatut("", true);
     } catch (erreur) {
@@ -370,36 +401,296 @@
 
   async function ajouterCarteParc(slot, parc) {
     if (!slot) {
-      throw new Error(
-        "Slot carte fiche parc introuvable."
-      );
+      throw new Error("Slot carte fiche parc introuvable.");
     }
 
     slot.innerHTML = "";
 
-    const fragment = await chargerFragment(
-      "/OBJET/BOX/04-box-card-map-parc.html"
-    );
+    const [fragment, reponseGeojson] = await Promise.all([
+      chargerFragment("/OBJET/BOX/04-carte-dynamique.html"),
+      fetch(construireUrlSite("/OBJET/BOX/04-carte-dynamique.geojson"), {
+        method: "GET",
+        credentials: "same-origin",
+        cache: "no-cache",
+        headers: { "Accept": "application/geo+json, application/json" }
+      })
+    ]);
 
-    const carte = fragment.querySelector(
-      "[data-lcdp-box-card-map-parc]"
-    );
-    const coordonnees = fragment.querySelector(
-      "[data-lcdp-card-map-parc-coords]"
-    );
+    if (!reponseGeojson.ok) {
+      throw new Error("GeoJSON de la carte introuvable.");
+    }
 
-    if (!carte || !coordonnees) {
-      throw new Error(
-        "Structure de la Box Card Map Parc incomplète."
+    const geojson = await reponseGeojson.json();
+    const carte = fragment.querySelector("[data-lcdp-carte-dynamique]");
+
+    if (!carte) {
+      throw new Error("Structure de la carte dynamique incomplète.");
+    }
+
+    carte.classList.add("lcdp-carte-dynamique--fiche-parc");
+    slot.appendChild(carte);
+
+    const entete = carte.querySelector(".lcdp-carte-dynamique__header");
+    const filtres = carte.querySelector("[data-lcdp-carte-filters]");
+    const statut = carte.querySelector("[data-lcdp-carte-status]");
+    const svg = carte.querySelector("[data-lcdp-carte-svg]");
+    const coucheDepartements = carte.querySelector("[data-lcdp-carte-departements-layer]");
+    const coucheSelection = carte.querySelector("[data-lcdp-carte-selection-layer]");
+    const coucheLocalites = carte.querySelector("[data-lcdp-carte-localites-layer]");
+    const coucheParcs = carte.querySelector("[data-lcdp-carte-parcs-layer]");
+    const boutonZoomPlus = carte.querySelector("[data-lcdp-carte-zoom-plus]");
+    const boutonZoomMoins = carte.querySelector("[data-lcdp-carte-zoom-moins]");
+    const cardSlot = carte.querySelector("[data-lcdp-carte-card-slot]");
+
+    if (
+      !svg ||
+      !coucheDepartements ||
+      !coucheSelection ||
+      !coucheLocalites ||
+      !coucheParcs ||
+      !boutonZoomPlus ||
+      !boutonZoomMoins
+    ) {
+      throw new Error("Structure SVG de la carte dynamique incomplète.");
+    }
+
+    if (entete) entete.hidden = true;
+    if (filtres) filtres.hidden = true;
+    if (statut) statut.hidden = true;
+    if (cardSlot) cardSlot.hidden = true;
+
+    const codeDepartement = nettoyerDepartement(parc.dptmt || parc.departement);
+    const features = Array.isArray(geojson?.features) ? geojson.features : [];
+    const traces = [];
+
+    features.forEach((feature) => {
+      const code = nettoyerDepartement(feature?.properties?.code);
+      const trace = construireTraceGeometrie(feature?.geometry);
+
+      if (code && trace) {
+        traces.push({ feature, code, trace });
+      }
+    });
+
+    if (!traces.length) {
+      throw new Error("Données cartographiques incomplètes.");
+    }
+
+    coucheDepartements.innerHTML = "";
+    coucheSelection.innerHTML = "";
+    coucheLocalites.innerHTML = "";
+    coucheParcs.innerHTML = "";
+
+    traces.forEach(({ code, trace }) => {
+      const path = creerElementSvg("path");
+      path.setAttribute("d", trace.d);
+      path.setAttribute("class", "lcdp-carte-dynamique__departement");
+      path.dataset.code = code;
+
+      if (code === codeDepartement) {
+        path.classList.add("is-selected", "lcdp-carte-dynamique__departement--fiche-parc");
+      }
+
+      coucheDepartements.appendChild(path);
+    });
+
+    const traceSelectionnee = traces.find((item) => item.code === codeDepartement);
+    const bboxFrance = fusionnerBbox(traces.map((item) => item.trace.bbox));
+    const bboxCible = traceSelectionnee?.trace?.bbox || bboxFrance;
+    const viewBoxInitiale = bboxVersViewBox(bboxCible, traceSelectionnee ? 0.16 : 0.045);
+
+    if (!viewBoxInitiale) {
+      throw new Error("Emprise cartographique inexploitable.");
+    }
+
+    let viewBoxCourante = [...viewBoxInitiale];
+    const viewBoxLimite = bboxVersViewBox(bboxFrance, 0.045) || [...viewBoxInitiale];
+
+    function appliquerViewBox() {
+      svg.setAttribute("viewBox", viewBoxCourante.join(" "));
+    }
+
+    function zoomer(facteur) {
+      const [x, y, largeur, hauteur] = viewBoxCourante;
+      const nouvelleLargeur = largeur * facteur;
+      const nouvelleHauteur = hauteur * facteur;
+      const centreX = x + largeur / 2;
+      const centreY = y + hauteur / 2;
+      const largeurMin = Math.max(0.25, viewBoxInitiale[2] / 12);
+      const hauteurMin = Math.max(0.25, viewBoxInitiale[3] / 12);
+      const largeurMax = viewBoxLimite[2];
+      const hauteurMax = viewBoxLimite[3];
+
+      const largeurFinale = Math.min(largeurMax, Math.max(largeurMin, nouvelleLargeur));
+      const hauteurFinale = Math.min(hauteurMax, Math.max(hauteurMin, nouvelleHauteur));
+
+      viewBoxCourante = [
+        centreX - largeurFinale / 2,
+        centreY - hauteurFinale / 2,
+        largeurFinale,
+        hauteurFinale
+      ];
+
+      appliquerViewBox();
+    }
+
+    boutonZoomPlus.addEventListener("click", () => zoomer(0.82));
+    boutonZoomMoins.addEventListener("click", () => zoomer(1.22));
+
+    let glissement = null;
+
+    svg.addEventListener("pointerdown", (event) => {
+      svg.setPointerCapture(event.pointerId);
+      glissement = {
+        x: event.clientX,
+        y: event.clientY,
+        viewBox: [...viewBoxCourante]
+      };
+      svg.classList.add("is-dragging");
+    });
+
+    svg.addEventListener("pointermove", (event) => {
+      if (!glissement) return;
+
+      const largeurEcran = Math.max(1, svg.getBoundingClientRect().width);
+      const hauteurEcran = Math.max(1, svg.getBoundingClientRect().height);
+      const dx = (event.clientX - glissement.x) * glissement.viewBox[2] / largeurEcran;
+      const dy = (event.clientY - glissement.y) * glissement.viewBox[3] / hauteurEcran;
+
+      viewBoxCourante = [
+        glissement.viewBox[0] - dx,
+        glissement.viewBox[1] - dy,
+        glissement.viewBox[2],
+        glissement.viewBox[3]
+      ];
+      appliquerViewBox();
+    });
+
+    function terminerGlissement(event) {
+      if (glissement && event?.pointerId !== undefined && svg.hasPointerCapture(event.pointerId)) {
+        svg.releasePointerCapture(event.pointerId);
+      }
+      glissement = null;
+      svg.classList.remove("is-dragging");
+    }
+
+    svg.addEventListener("pointerup", terminerGlissement);
+    svg.addEventListener("pointercancel", terminerGlissement);
+
+    const pointParc = projeterCoordonnee(parc.lngparc || parc.longitude, parc.latparc || parc.latitude);
+
+    if (pointParc) {
+      const marker = creerElementSvg("circle");
+      marker.setAttribute("cx", String(pointParc.x));
+      marker.setAttribute("cy", String(pointParc.y));
+      marker.setAttribute("r", String(Math.max(0.08, viewBoxInitiale[2] / 75)));
+      marker.setAttribute(
+        "class",
+        "lcdp-carte-dynamique__marker lcdp-carte-dynamique__marker--fiche-parc"
+      );
+      marker.setAttribute("aria-label", "Localisation du parc de " + (parc.nom || "Parc"));
+      coucheParcs.appendChild(marker);
+    }
+
+    svg.setAttribute(
+      "aria-label",
+      "Carte du département " + (codeDepartement || "du parc")
+    );
+    appliquerViewBox();
+  }
+
+  function projeterCoordonnee(longitude, latitude) {
+    const lon = Number(longitude);
+    const lat = Number(latitude);
+
+    if (!Number.isFinite(lon) || !Number.isFinite(lat)) {
+      return null;
+    }
+
+    const latitudeBornee = Math.max(-85.05112878, Math.min(85.05112878, lat));
+    const latitudeRadians = latitudeBornee * Math.PI / 180;
+    const sinus = Math.sin(latitudeRadians);
+
+    return {
+      x: ((lon + 180) / 360) * 1000,
+      y: (0.5 - Math.log((1 + sinus) / (1 - sinus)) / (4 * Math.PI)) * 1000
+    };
+  }
+
+  function construireTraceGeometrie(geometry) {
+    const type = String(geometry?.type || "");
+    const coordinates = geometry?.coordinates;
+    const parties = [];
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+
+    function ajouterAnneau(anneau) {
+      if (!Array.isArray(anneau) || anneau.length < 3) return;
+
+      const points = anneau
+        .map((coord) => projeterCoordonnee(coord?.[0], coord?.[1]))
+        .filter(Boolean);
+
+      if (points.length < 3) return;
+
+      points.forEach((point) => {
+        minX = Math.min(minX, point.x);
+        minY = Math.min(minY, point.y);
+        maxX = Math.max(maxX, point.x);
+        maxY = Math.max(maxY, point.y);
+      });
+
+      parties.push(
+        "M " + points.map((point) => point.x.toFixed(4) + " " + point.y.toFixed(4)).join(" L ") + " Z"
       );
     }
 
-    coordonnees.textContent =
-      parc.latparc && parc.lngparc
-        ? parc.latparc + ", " + parc.lngparc
-        : "Coordonnées GPS non renseignées";
+    if (type === "Polygon" && Array.isArray(coordinates)) {
+      coordinates.forEach(ajouterAnneau);
+    } else if (type === "MultiPolygon" && Array.isArray(coordinates)) {
+      coordinates.forEach((polygone) => {
+        if (Array.isArray(polygone)) polygone.forEach(ajouterAnneau);
+      });
+    }
 
-    slot.appendChild(fragment);
+    if (!parties.length || ![minX, minY, maxX, maxY].every(Number.isFinite)) {
+      return null;
+    }
+
+    return { d: parties.join(" "), bbox: [minX, minY, maxX, maxY] };
+  }
+
+  function fusionnerBbox(boxes) {
+    const valides = boxes.filter((bbox) => Array.isArray(bbox) && bbox.length === 4 && bbox.every(Number.isFinite));
+    if (!valides.length) return null;
+
+    return [
+      Math.min(...valides.map((bbox) => bbox[0])),
+      Math.min(...valides.map((bbox) => bbox[1])),
+      Math.max(...valides.map((bbox) => bbox[2])),
+      Math.max(...valides.map((bbox) => bbox[3]))
+    ];
+  }
+
+  function bboxVersViewBox(bbox, ratioMarge = 0.12) {
+    if (!bbox) return null;
+
+    const largeur = Math.max(0.5, bbox[2] - bbox[0]);
+    const hauteur = Math.max(0.5, bbox[3] - bbox[1]);
+    const marge = Math.max(0.35, Math.max(largeur, hauteur) * ratioMarge);
+
+    return [
+      bbox[0] - marge,
+      bbox[1] - marge,
+      largeur + marge * 2,
+      hauteur + marge * 2
+    ];
+  }
+
+  function creerElementSvg(nom) {
+    return document.createElementNS("http://www.w3.org/2000/svg", nom);
   }
 
   function creerActionsFicheParc(parc) {
@@ -539,32 +830,586 @@
     return action;
   }
 
-  function ouvrirReservationMembre(parc) {
-    const url = construireUrlAvecParc(
-      construireUrlMembre(
-        "/ESPACE-MEMBRE/reserver-membre.html"
-      ),
-      parc,
-      {
-        source: "fiche-parc"
-      }
+  async function initialiserObjetsInteraction() {
+    const [fragmentShift, fragmentJour, fragmentHeure] = await Promise.all([
+      chargerFragment("/OBJET/BOX/04-box-shift-detail-parc.html"),
+      chargerFragment("/OBJET/BOX/04-box-card-jour-in-calendrier-mois.html"),
+      chargerFragment("/OBJET/BOX/04-box-card-heure-in-calendrier-jour.html")
+    ]);
+
+    etatInteraction.templateShiftDetail = fragmentShift.querySelector(
+      "[data-lcdp-box-shift-detail-parc]"
+    );
+    etatInteraction.templateJourMois = fragmentJour.querySelector(
+      "[data-lcdp-card-jour-mois]"
+    );
+    etatInteraction.templateHeureJour = fragmentHeure.querySelector(
+      "[data-lcdp-card-heure-jour]"
     );
 
-    window.location.href = url;
+    if (
+      !etatInteraction.templateShiftDetail ||
+      !etatInteraction.templateJourMois ||
+      !etatInteraction.templateHeureJour
+    ) {
+      throw new Error("Objets planning et réservation incomplets.");
+    }
+  }
+
+  function ouvrirReservationMembre(parc) {
+    ouvrirShiftDetailParc(parc, "reservation").catch(console.error);
   }
 
   function ouvrirPlanningPublic(parc) {
-    const url = construireUrlAvecParc(
-      construireUrlSite(
-        "/ESPACE-PUBLIC/planning-parc.html"
-      ),
-      parc,
-      {
-        source: "fiche-parc"
-      }
+    ouvrirShiftDetailParc(parc, "planning").catch(console.error);
+  }
+
+  async function ouvrirShiftDetailParc(parc, vue) {
+    const slot = document.getElementById("lcdp-lightbox-slot");
+
+    if (!slot) {
+      throw new Error("Slot lightbox introuvable.");
+    }
+
+    slot.innerHTML = "";
+
+    const shift = etatInteraction.templateShiftDetail.cloneNode(true);
+    slot.appendChild(shift);
+
+    const contenu = shift.querySelector("[data-lcdp-shift-detail-parc-content]");
+    const boutonFermer = shift.querySelector("[data-lcdp-shift-detail-parc-close]");
+
+    if (!contenu || !boutonFermer) {
+      throw new Error("Structure Shift Detail Parc incomplète.");
+    }
+
+    const fermer = () => {
+      slot.innerHTML = "";
+      etatInteraction.calendrier = null;
+    };
+
+    boutonFermer.addEventListener("click", fermer);
+    shift.addEventListener("click", (event) => {
+      if (event.target === shift) fermer();
+    });
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape" && slot.contains(shift)) fermer();
+      },
+      { once: true }
     );
 
-    window.location.href = url;
+    await afficherVueShiftDetailParc(contenu, parc, vue);
+  }
+
+  async function afficherVueShiftDetailParc(contenu, parc, vue) {
+    contenu.classList.add("lcdp-box-shift-detail-parc__content--transition");
+    await attendre(90);
+    contenu.innerHTML = "";
+    contenu.classList.remove("lcdp-box-shift-detail-parc__content--transition");
+
+    await afficherCalendrierMoisParcDansShift(contenu, parc, vue);
+  }
+
+  async function afficherCalendrierMoisParcDansShift(contenu, parc, mode) {
+    const fragment = await chargerFragment("/OBJET/BOX/04-box-calendrier-mois.html");
+    contenu.appendChild(fragment);
+
+    const calendrier = contenu.querySelector("[data-lcdp-box-calendrier-mois]");
+    const commande = contenu.querySelector("[data-lcdp-calendrier-mois-commande]");
+    const titre = contenu.querySelector("[data-lcdp-calendrier-mois-title]");
+    const meta = contenu.querySelector("[data-lcdp-calendrier-mois-meta]");
+    const boutonFermer = contenu.querySelector("[data-lcdp-calendrier-mois-close]");
+    const boutonPrecedent = contenu.querySelector("[data-lcdp-calendrier-mois-prev]");
+    const boutonSuivant = contenu.querySelector("[data-lcdp-calendrier-mois-next]");
+    const grille = contenu.querySelector("[data-lcdp-calendrier-mois-grid]");
+
+    if (
+      !calendrier || !commande || !titre || !meta || !boutonFermer ||
+      !boutonPrecedent || !boutonSuivant || !grille
+    ) {
+      throw new Error("Structure calendrier mensuel incomplète.");
+    }
+
+    calendrier.classList.add("lcdp-box-calendrier-mois--shift-detail");
+    calendrier.dataset.lcdpModeFicheParc = mode;
+
+    const nomParc = parc.nom || parc.nomparc || "Parc";
+    const departement = nettoyerDepartement(parc.dptmt || parc.departement);
+
+    titre.textContent = mode === "reservation" ? "Réserver au parc" : "Planning du parc";
+    meta.textContent = nomParc + (departement ? " · " + departement : "");
+    boutonFermer.hidden = true;
+
+    commande.replaceChildren(
+      creerBoutonCommande("Fiche parc", "lcdp-button-secondary", () => {
+        const slot = document.getElementById("lcdp-lightbox-slot");
+        if (slot) slot.innerHTML = "";
+      }),
+      creerBoutonCommande(
+        mode === "reservation" ? "Planning parc" : "RÉSERVER",
+        mode === "reservation" ? "lcdp-button-primary" : "lcdp-box-calendrier-mois__action-reserver",
+        () => afficherVueShiftDetailParc(contenu, parc, mode === "reservation" ? "planning" : "reservation")
+      )
+    );
+
+    const maintenant = new Date();
+    etatInteraction.calendrier = {
+      parc,
+      mode,
+      annee: maintenant.getFullYear(),
+      mois: maintenant.getMonth() + 1,
+      planning: [],
+      contenu
+    };
+
+    boutonPrecedent.addEventListener("click", () => {
+      changerMois(etatInteraction.calendrier, -1);
+      afficherCalendrierMoisActif().catch(console.error);
+    });
+
+    boutonSuivant.addEventListener("click", () => {
+      changerMois(etatInteraction.calendrier, 1);
+      afficherCalendrierMoisActif().catch(console.error);
+    });
+
+    grille.addEventListener("click", (event) => {
+      const card = event.target.closest("[data-lcdp-card-jour-mois]");
+      if (!card || card.disabled || mode !== "reservation") return;
+      ouvrirCalendrierJourDepuisCard(card).catch(console.error);
+    });
+
+    await afficherCalendrierMoisActif();
+  }
+
+  function creerBoutonCommande(label, style, action) {
+    const bouton = document.createElement("button");
+    bouton.type = "button";
+    bouton.className = "lcdp-button " + style;
+    bouton.textContent = label;
+    bouton.addEventListener("click", action);
+    return bouton;
+  }
+
+  async function afficherCalendrierMoisActif() {
+    const etat = etatInteraction.calendrier;
+    if (!etat || !etat.contenu) return;
+
+    const moisCourant = etat.contenu.querySelector("[data-lcdp-calendrier-mois-current]");
+    const message = etat.contenu.querySelector("[data-lcdp-calendrier-mois-message]");
+    const grille = etat.contenu.querySelector("[data-lcdp-calendrier-mois-grid]");
+
+    if (!moisCourant || !message || !grille) return;
+
+    moisCourant.textContent = formaterMoisAnnee(etat.annee, etat.mois);
+    message.hidden = false;
+    message.textContent = "Chargement du planning...";
+    grille.classList.add("lcdp-box-calendrier-mois__grid--loading");
+
+    try {
+      const planning = await chargerPlanningParcMois(etat);
+      etat.planning = planning;
+      remplirGrilleCalendrier(grille, etat, planning);
+      message.hidden = true;
+      message.textContent = "";
+    } catch (error) {
+      console.error("Erreur planning parc :", error);
+      message.hidden = false;
+      message.textContent = error.message || "Impossible de charger le planning du parc.";
+    } finally {
+      grille.classList.remove("lcdp-box-calendrier-mois__grid--loading");
+    }
+  }
+
+  async function chargerPlanningParcMois(etat) {
+    const endpoint = etat.mode === "reservation"
+      ? endpointNouvelleDateMembre
+      : endpointPlanningParc;
+
+    if (!endpoint) {
+      throw new Error("Le service planning parc n’est pas configuré.");
+    }
+
+    const idparc = nettoyerTexte(etat.parc.idparc || etat.parc.id);
+    if (!idparc) throw new Error("Identifiant du parc manquant.");
+
+    const url =
+      endpoint +
+      "/planning-parc-mois?idparc=" + encodeURIComponent(idparc) +
+      "&annee=" + encodeURIComponent(etat.annee) +
+      "&mois=" + encodeURIComponent(etat.mois);
+
+    const reponse = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+      headers: { "Accept": "application/json" }
+    });
+
+    const data = await reponse.json().catch(() => null);
+
+    if (reponse.status === 401) {
+      throw new Error("Cette fonction nécessite une session membre active.");
+    }
+
+    if (!reponse.ok || !data || (data.ok !== true && data.success !== true)) {
+      throw new Error(nettoyerTexte(data?.message) || "Impossible de charger le planning du parc.");
+    }
+
+    return Array.isArray(data.planning) ? data.planning : [];
+  }
+
+  function remplirGrilleCalendrier(grille, etat, planning) {
+    grille.innerHTML = "";
+
+    const planningParDate = new Map(
+      planning.map((jour) => [String(jour.date || ""), jour])
+    );
+    const premierJour = new Date(etat.annee, etat.mois - 1, 1);
+    const nombreJours = new Date(etat.annee, etat.mois, 0).getDate();
+    const decalageLundi = (premierJour.getDay() + 6) % 7;
+
+    for (let index = 0; index < decalageLundi; index += 1) {
+      const vide = etatInteraction.templateJourMois.cloneNode(true);
+      vide.classList.add("lcdp-box-card-jour-in-calendrier-mois--empty");
+      vide.disabled = true;
+      vide.setAttribute("aria-hidden", "true");
+      grille.appendChild(vide);
+    }
+
+    for (let jour = 1; jour <= nombreJours; jour += 1) {
+      const dateIso = construireDateIso(etat.annee, etat.mois, jour);
+      grille.appendChild(
+        creerCardJourCalendrier(etat, dateIso, jour, planningParDate.get(dateIso))
+      );
+    }
+  }
+
+  function creerCardJourCalendrier(etat, dateIso, numeroJour, planningJour) {
+    const card = etatInteraction.templateJourMois.cloneNode(true);
+    const numero = card.querySelector("[data-lcdp-card-jour-mois-number]");
+    const ouvert = Boolean(planningJour?.ouvert);
+    const estPasse = dateIso < dateAujourdhuiIso();
+
+    card.dataset.date = dateIso;
+    card.dataset.idparc = nettoyerTexte(etat.parc.idparc || etat.parc.id);
+    card.setAttribute("aria-label", formaterDateFr(dateIso) + (ouvert ? " disponible" : " fermé"));
+
+    if (numero) numero.textContent = String(numeroJour);
+
+    if (dateIso === dateAujourdhuiIso()) {
+      card.classList.add("lcdp-box-card-jour-in-calendrier-mois--today");
+    }
+
+    if (estPasse) {
+      card.classList.add("lcdp-box-card-jour-in-calendrier-mois--past");
+      card.disabled = true;
+    }
+
+    if (!ouvert) {
+      card.classList.add("lcdp-box-card-jour-in-calendrier-mois--closed");
+      card.disabled = true;
+    }
+
+    if (etat.mode !== "reservation") {
+      card.disabled = true;
+      card.setAttribute("aria-disabled", "true");
+    }
+
+    ["plage1", "plage2", "plage3"].forEach((nomPlage) => {
+      const slot = card.querySelector('[data-lcdp-card-jour-mois-slot="' + nomPlage + '"]');
+      if (!slot) return;
+
+      const plage = planningJour?.plages?.[nomPlage];
+      const couleur = normaliserCouleurClasse(plage?.ouverte ? plage.couleur : "gris_clair");
+      slot.className =
+        "lcdp-box-card-jour-in-calendrier-mois__slot " +
+        "lcdp-box-card-jour-in-calendrier-mois__slot--" + couleur;
+    });
+
+    return card;
+  }
+
+  async function ouvrirCalendrierJourDepuisCard(card) {
+    const etat = etatInteraction.calendrier;
+    const dateIso = nettoyerTexte(card.dataset.date);
+    const planningJour = etat?.planning?.find((jour) => String(jour.date || "") === dateIso);
+
+    if (!etat || !planningJour?.ouvert) {
+      throw new Error("Aucun horaire disponible pour cette date.");
+    }
+
+    const contenu = etat.contenu;
+    contenu.innerHTML = "";
+
+    const fragment = await chargerFragment("/OBJET/BOX/04-box-calendrier-jour.html");
+    contenu.appendChild(fragment);
+
+    const calendrier = contenu.querySelector("[data-lcdp-box-calendrier-jour]");
+    const titre = contenu.querySelector("[data-lcdp-calendrier-jour-title]");
+    const meta = contenu.querySelector("[data-lcdp-calendrier-jour-meta]");
+    const message = contenu.querySelector("[data-lcdp-calendrier-jour-message]");
+    const grille = contenu.querySelector("[data-lcdp-calendrier-jour-grid]");
+    const boutonFermer = contenu.querySelector("[data-lcdp-calendrier-jour-close]");
+
+    if (!calendrier || !titre || !meta || !message || !grille || !boutonFermer) {
+      throw new Error("Structure calendrier journalier incomplète.");
+    }
+
+    calendrier.classList.add("lcdp-box-calendrier-jour--shift-detail");
+    boutonFermer.hidden = true;
+    titre.textContent = "Votre heure d’arrivée";
+    meta.textContent = formaterDateFr(dateIso) + " · " + (etat.parc.nom || "Parc");
+
+    const navigation = document.createElement("div");
+    navigation.className = "lcdp-fiche-parc__navigation-shift";
+    navigation.appendChild(
+      creerBoutonCommande("Retour au planning", "lcdp-button-secondary", () => {
+        afficherVueShiftDetailParc(contenu, etat.parc, "reservation").catch(console.error);
+      })
+    );
+    calendrier.querySelector(".lcdp-box-calendrier-jour__header")?.prepend(navigation);
+
+    const plages = construirePlagesJour(planningJour);
+    const heures = genererHeuresDisponibles();
+
+    heures.forEach((heure) => {
+      const plage = trouverPlagePourHeure(plages, heure);
+      if (!plage) return;
+
+      const bouton = etatInteraction.templateHeureJour.cloneNode(true);
+      const label = bouton.querySelector("[data-lcdp-card-heure-jour-label]");
+      bouton.classList.add(
+        "lcdp-box-card-heure-in-calendrier-jour--" + normaliserCouleurClasse(plage.couleur)
+      );
+      bouton.dataset.idparc = nettoyerTexte(etat.parc.idparc || etat.parc.id);
+      bouton.dataset.date = dateIso;
+      bouton.dataset.heure = heure;
+      bouton.dataset.plagebookd = plage.nom;
+      if (label) label.textContent = formaterHeureAffichee(heure);
+
+      bouton.addEventListener("click", () => {
+        traiterChoixHeure(bouton, etat.parc).catch(console.error);
+      });
+      grille.appendChild(bouton);
+    });
+
+    message.hidden = grille.children.length > 0;
+    message.textContent = grille.children.length
+      ? ""
+      : "Aucun horaire d’arrivée n’est disponible pour cette date.";
+  }
+
+  function construirePlagesJour(planningJour) {
+    const plages = [];
+    const definitions = {
+      plage1: { debut: "06:00", fin: "13:00" },
+      plage2: { debut: "13:00", fin: "19:00" },
+      plage3: { debut: "19:00", fin: "21:30" }
+    };
+
+    Object.entries(definitions).forEach(([nom, defaut]) => {
+      const plage = planningJour?.plages?.[nom];
+      if (!plage?.ouverte) return;
+
+      plages.push({
+        nom,
+        debut: plage.debut || defaut.debut,
+        fin: plage.fin || defaut.fin,
+        couleur: normaliserCouleurClasse(plage.couleur)
+      });
+    });
+
+    return plages;
+  }
+
+  function genererHeuresDisponibles() {
+    const heures = [];
+    for (let minutes = 6 * 60; minutes <= 21 * 60; minutes += 30) {
+      heures.push(
+        String(Math.floor(minutes / 60)).padStart(2, "0") + ":" +
+        String(minutes % 60).padStart(2, "0")
+      );
+    }
+    return heures;
+  }
+
+  function trouverPlagePourHeure(plages, heure) {
+    const minutes = convertirHeureEnMinutes(heure);
+    return plages.find((plage) => {
+      return minutes >= convertirHeureEnMinutes(plage.debut) &&
+        minutes < convertirHeureEnMinutes(plage.fin);
+    }) || null;
+  }
+
+  function convertirHeureEnMinutes(heure) {
+    const [h, m] = String(heure || "00:00").split(":").map(Number);
+    return Number.isFinite(h) && Number.isFinite(m) ? h * 60 + m : 0;
+  }
+
+  async function traiterChoixHeure(bouton, parc) {
+    const dateIso = nettoyerTexte(bouton.dataset.date);
+    const heure = nettoyerTexte(bouton.dataset.heure);
+    const plagebookd = nettoyerTexte(bouton.dataset.plagebookd);
+    const idparc = nettoyerTexte(bouton.dataset.idparc);
+
+    const confirme = await ouvrirConfirmationShift(
+      "Confirmer l’heure d’arrivée",
+      "Vous avez choisi le " + formaterDateFr(dateIso) + " à " + formaterHeureAffichee(heure) + "."
+    );
+
+    if (!confirme) return;
+
+    bouton.disabled = true;
+
+    try {
+      await enregistrerReservation({
+        idparc,
+        datebookd: new Date(dateIso + "T" + heure + ":00").toISOString(),
+        plagebookd
+      });
+
+      await afficherMessageShift("Votre nouvelle date a bien été enregistrée.");
+      const slot = document.getElementById("lcdp-lightbox-slot");
+      if (slot) slot.innerHTML = "";
+    } catch (error) {
+      bouton.disabled = false;
+      await afficherMessageShift(error.message || "Impossible d’enregistrer la réservation.");
+    }
+  }
+
+  async function enregistrerReservation(payload) {
+    if (!endpointFluxm) {
+      throw new Error("Le service de réservation n’est pas configuré.");
+    }
+
+    const reponse = await fetch(endpointFluxm + "/creer-reservation", {
+      method: "POST",
+      credentials: "include",
+      cache: "no-store",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await reponse.json().catch(() => null);
+
+    if (reponse.status === 401) {
+      window.location.href = pageConnexionMembre + "?source=fiche-parc&motif=inactive";
+      return null;
+    }
+
+    if (!reponse.ok || !data || (data.ok !== true && data.success !== true)) {
+      throw new Error(nettoyerTexte(data?.message) || "Impossible d’enregistrer la réservation.");
+    }
+
+    return data.reservation || null;
+  }
+
+  async function ouvrirConfirmationShift(titre, texte) {
+    const detail = document.querySelector("[data-lcdp-box-shift-detail-parc]");
+    const slot = detail?.querySelector("[data-lcdp-shift-detail-parc-alerte-slot]");
+    if (!slot) return window.confirm(texte);
+
+    slot.innerHTML = "";
+    const box = document.createElement("div");
+    box.className = "lcdp-box-shift-detail-parc__alerte-box";
+
+    const heading = document.createElement("h3");
+    heading.textContent = titre;
+    const message = document.createElement("p");
+    message.className = "lcdp-box-shift-detail-parc__alerte-message";
+    message.textContent = texte;
+    const actions = document.createElement("div");
+    actions.className = "lcdp-fiche-parc__dialogue-actions";
+
+    const annuler = creerBoutonCommande("Annuler", "lcdp-button-secondary", () => fermer(false));
+    const confirmer = creerBoutonCommande("Confirmer", "lcdp-button-primary", () => fermer(true));
+    actions.append(annuler, confirmer);
+    box.append(heading, message, actions);
+    slot.appendChild(box);
+
+    let resoudre;
+    const promesse = new Promise((resolve) => { resoudre = resolve; });
+
+    function fermer(valeur) {
+      slot.innerHTML = "";
+      resoudre(valeur);
+    }
+
+    return promesse;
+  }
+
+  async function afficherMessageShift(message) {
+    const detail = document.querySelector("[data-lcdp-box-shift-detail-parc]");
+    const slot = detail?.querySelector("[data-lcdp-shift-detail-parc-alerte-slot]");
+    if (!slot) {
+      window.alert(message);
+      return;
+    }
+
+    slot.innerHTML = "";
+    const box = document.createElement("div");
+    box.className = "lcdp-box-shift-detail-parc__alerte-box";
+    const texte = document.createElement("p");
+    texte.className = "lcdp-box-shift-detail-parc__alerte-message";
+    texte.textContent = message;
+    const ok = creerBoutonCommande("OK", "lcdp-button-primary", () => {
+      slot.innerHTML = "";
+    });
+    box.append(texte, ok);
+    slot.appendChild(box);
+  }
+
+  function changerMois(etat, delta) {
+    const date = new Date(etat.annee, etat.mois - 1 + delta, 1);
+    etat.annee = date.getFullYear();
+    etat.mois = date.getMonth() + 1;
+  }
+
+  function construireDateIso(annee, mois, jour) {
+    return String(annee) + "-" + String(mois).padStart(2, "0") + "-" + String(jour).padStart(2, "0");
+  }
+
+  function dateAujourdhuiIso() {
+    const maintenant = new Date();
+    return construireDateIso(maintenant.getFullYear(), maintenant.getMonth() + 1, maintenant.getDate());
+  }
+
+  function formaterMoisAnnee(annee, mois) {
+    return new Intl.DateTimeFormat("fr-FR", {
+      month: "long",
+      year: "numeric"
+    }).format(new Date(annee, mois - 1, 1));
+  }
+
+  function formaterDateFr(dateIso) {
+    const date = new Date(dateIso + "T12:00:00");
+    return Number.isNaN(date.getTime())
+      ? dateIso
+      : date.toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" });
+  }
+
+  function formaterHeureAffichee(heure) {
+    const match = String(heure || "").match(/^(\d{2}):(\d{2})$/);
+    return match ? String(Number(match[1])) + "h" + match[2] : heure;
+  }
+
+  function normaliserCouleurClasse(couleur) {
+    const valeur = String(couleur || "gris_clair").trim().toLowerCase();
+    if (["vert", "orange", "rouge_clair", "rouge", "gris_fonce", "gris_clair"].includes(valeur)) {
+      return valeur;
+    }
+    if (valeur === "fonce") return "gris_fonce";
+    return "gris_clair";
+  }
+
+  function attendre(delai) {
+    return new Promise((resolve) => window.setTimeout(resolve, delai));
   }
 
   async function partagerFicheParc(parc) {
