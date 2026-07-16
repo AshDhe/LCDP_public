@@ -255,9 +255,8 @@
 
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker-actif-label {
   fill: #234438;
-  stroke: #ffffff;
-  stroke-width: 3px;
-  paint-order: stroke fill;
+  stroke: none;
+  paint-order: normal;
   font-family: inherit;
   font-weight: 800;
   letter-spacing: 0.025em;
