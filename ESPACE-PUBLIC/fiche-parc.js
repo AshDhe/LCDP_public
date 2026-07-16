@@ -9,7 +9,7 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
-  const ficheParcBuild = "20260716-0055";
+  const ficheParcBuild = "20260716-0839";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
   const endpointNouvelleDateMembre = String(
@@ -42,6 +42,8 @@
 
   let pageInitialisee = false;
   let parcActif = null;
+  let accesPublic = null;
+  const tokenPartage = nettoyerTexte(new URLSearchParams(window.location.search).get("token"));
 
   const etatInteraction = {
     templateShiftDetail: null,
@@ -87,8 +89,11 @@
           : [],
         localitesCarte: Array.isArray(fiche.localites)
           ? fiche.localites
-          : []
+          : [],
+        acces: fiche.acces || null
       };
+
+      accesPublic = fiche.acces || null;
 
       parcActif = parc;
       await afficherFicheParc(parc);
@@ -163,7 +168,8 @@
     const reponse = await fetch(
       endpointNouvelleDateMembre +
         "/fiche-parc?idparc=" +
-        encodeURIComponent(identifiant),
+        encodeURIComponent(identifiant) +
+        "&token=" + encodeURIComponent(tokenPartage),
       {
         method: "GET",
         credentials: "include",
@@ -191,7 +197,8 @@
       parc: data.parc || null,
       resparc: data.resparc || null,
       parcsDepartement: Array.isArray(data.parcs) ? data.parcs : [],
-      localites: Array.isArray(data.localites) ? data.localites : []
+      localites: Array.isArray(data.localites) ? data.localites : [],
+      acces: data.acces || null
     };
   }
 
@@ -1227,8 +1234,62 @@
     }
   }
 
-  function ouvrirReservationMembre(parc) {
-    ouvrirShiftDetailParc(parc, "reservation").catch(console.error);
+  async function ouvrirReservationMembre(parc) {
+    const acces = parc?.acces || accesPublic || {};
+
+    if (acces.peutReserver === true) {
+      const page = construireUrlSite("/ESPACE-MEMBRE/reserver-membre.html");
+      const url = new URL(page, window.location.href);
+      url.searchParams.set("idparc", nettoyerTexte(parc?.idparc || parc?.id));
+      url.searchParams.set("source", "fiche-parc");
+      window.location.href = url.toString();
+      return;
+    }
+
+    await afficherBlocageReservationPublique(acces);
+  }
+
+  async function afficherBlocageReservationPublique(acces) {
+    const message = "Vous devez être membre abonné pour utiliser la fonction RESERVER. Et être à jour du paiement de vos échéances si cela n'est pas votre cas.";
+    const detail = document.querySelector("[data-lcdp-box-shift-detail-parc]");
+    const slot = detail?.querySelector("[data-lcdp-shift-detail-parc-alerte-slot]");
+
+    if (!slot) {
+      window.alert(message);
+      return;
+    }
+
+    slot.innerHTML = "";
+    const box = document.createElement("div");
+    box.className = "lcdp-box-shift-detail-parc__alerte-box";
+    const texte = document.createElement("p");
+    texte.className = "lcdp-box-shift-detail-parc__alerte-message";
+    texte.textContent = message;
+    const actions = document.createElement("div");
+    actions.className = "lcdp-fiche-parc__dialogue-actions";
+
+    if (acces?.actionSecondaire === "abonnement") {
+      actions.appendChild(creerBoutonCommande("Abonnement", "lcdp-button-secondary", () => {
+        window.location.href = construireUrlSite("/ESPACE-MEMBRE/abonnement-membre.html");
+      }));
+    }
+
+    if (acces?.actionSecondaire === "regulariser" && acces?.orderid) {
+      actions.appendChild(creerBoutonCommande("Régulariser", "lcdp-button-secondary", () => {
+        const page = construireUrlSite("/ESPACE-MEMBRE/paiement-cb.html");
+        const url = new URL(page, window.location.href);
+        url.searchParams.set("orderid", acces.orderid);
+        url.searchParams.set("echeance", String(acces.echeance || 1));
+        url.searchParams.set("source", "suspension");
+        window.location.href = url.toString();
+      }));
+    }
+
+    actions.appendChild(creerBoutonCommande("OK", "lcdp-button-primary", () => {
+      slot.innerHTML = "";
+    }));
+    box.append(texte, actions);
+    slot.appendChild(box);
   }
 
   function ouvrirPlanningPublic(parc) {
@@ -1480,7 +1541,8 @@
       endpoint +
       "/planning-parc-mois?idparc=" + encodeURIComponent(idparc) +
       "&annee=" + encodeURIComponent(etat.annee) +
-      "&mois=" + encodeURIComponent(etat.mois);
+      "&mois=" + encodeURIComponent(etat.mois) +
+      "&token=" + encodeURIComponent(tokenPartage);
 
     const reponse = await fetch(url, {
       method: "GET",
