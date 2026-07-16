@@ -116,7 +116,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
-  min-height: calc((56px * 6) + (5px * 5));
+  min-height: calc((68px * 6) + (5px * 5));
   align-content: start;
 }
 
