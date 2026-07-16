@@ -236,3 +236,31 @@
     transition: none;
   }
 }
+
+/* Parc consulté : toujours au premier plan, avec halo et libellé permanent. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker-actif-halo {
+  fill: #ffffff;
+  stroke: #234438;
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
+  fill: #234438 !important;
+  stroke: #ffffff !important;
+  stroke-width: 1.5 !important;
+  vector-effect: non-scaling-stroke;
+}
+
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker-actif-label {
+  fill: #234438;
+  stroke: #ffffff;
+  stroke-width: 3px;
+  paint-order: stroke fill;
+  font-family: inherit;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+  pointer-events: none;
+  user-select: none;
+}

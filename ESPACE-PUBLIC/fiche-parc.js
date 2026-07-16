@@ -530,13 +530,33 @@
       const largeurEcran = Math.max(1, svg.getBoundingClientRect().width);
       const uniteEcran = viewBoxCourante[2] / largeurEcran;
       const rayonParc = Math.max(0.04, uniteEcran * 6);
+      const rayonParcActif = rayonParc * 1.45;
+      const rayonHaloParcActif = rayonParcActif * 1.42;
       const rayonLocalite = Math.max(0.035, uniteEcran * 4.2);
       const tailleLibelle = Math.max(0.12, uniteEcran * 11);
       const decalageLibelle = Math.max(0.08, uniteEcran * 7);
+      const tailleLibelleParcActif = Math.max(0.14, uniteEcran * 12);
+      const decalageLibelleParcActif = Math.max(0.12, uniteEcran * 11);
 
       coucheParcs
-        .querySelectorAll(".lcdp-carte-dynamique__marker")
+        .querySelectorAll(".lcdp-carte-dynamique__marker:not(.lcdp-carte-dynamique__marker--parc-actif)")
         .forEach((marker) => marker.setAttribute("r", String(rayonParc)));
+
+      coucheParcs
+        .querySelectorAll(".lcdp-carte-dynamique__marker--parc-actif")
+        .forEach((marker) => marker.setAttribute("r", String(rayonParcActif)));
+
+      coucheParcs
+        .querySelectorAll(".lcdp-carte-dynamique__marker-actif-halo")
+        .forEach((marker) => marker.setAttribute("r", String(rayonHaloParcActif)));
+
+      coucheParcs
+        .querySelectorAll(".lcdp-carte-dynamique__marker-actif-label")
+        .forEach((libelle) => {
+          const x = Number(libelle.dataset.pointX);
+          libelle.setAttribute("font-size", String(tailleLibelleParcActif));
+          libelle.setAttribute("x", String(x + decalageLibelleParcActif));
+        });
 
       coucheLocalites
         .querySelectorAll(".lcdp-carte-dynamique__localite-marker")
@@ -667,17 +687,30 @@
       ? parc.parcsDepartement
       : [parc];
 
-    parcsDepartement.forEach((parcCarte) => {
+    function ajouterMarqueurParc(parcCarte, estParcActif) {
       const longitude = parcCarte.lngparc ?? parcCarte.longitude ?? parcCarte.lngloc;
       const latitude = parcCarte.latparc ?? parcCarte.latitude ?? parcCarte.latloc;
       const point = projeterCoordonnee(longitude, latitude);
 
       if (!point) return;
 
-      const marker = creerElementSvg("circle");
       const idparc = nettoyerTexte(parcCarte.idparc || parcCarte.id);
-      const estParcActif = idparc && idparc === idParcActif;
+      const groupe = creerElementSvg("g");
+      groupe.dataset.idparc = idparc;
 
+      if (estParcActif) {
+        const halo = creerElementSvg("circle");
+        halo.setAttribute("cx", String(point.x));
+        halo.setAttribute("cy", String(point.y));
+        halo.setAttribute("r", "0.1");
+        halo.setAttribute(
+          "class",
+          "lcdp-carte-dynamique__marker-actif-halo"
+        );
+        groupe.appendChild(halo);
+      }
+
+      const marker = creerElementSvg("circle");
       marker.setAttribute("cx", String(point.x));
       marker.setAttribute("cy", String(point.y));
       marker.setAttribute("r", "0.1");
@@ -694,8 +727,46 @@
         (estParcActif ? "Parc affiché : " : "Parc du département : ") +
           (parcCarte.nom || "Parc")
       );
-      coucheParcs.appendChild(marker);
+      groupe.appendChild(marker);
+
+      if (estParcActif) {
+        const libelle = creerElementSvg("text");
+        libelle.setAttribute("x", String(point.x));
+        libelle.setAttribute("y", String(point.y));
+        libelle.setAttribute("dominant-baseline", "middle");
+        libelle.setAttribute(
+          "class",
+          "lcdp-carte-dynamique__marker-actif-label"
+        );
+        libelle.dataset.pointX = String(point.x);
+        libelle.textContent = String(parcCarte.nom || parc.nom || "Parc")
+          .trim()
+          .toLocaleUpperCase("fr");
+        groupe.appendChild(libelle);
+      }
+
+      coucheParcs.appendChild(groupe);
+    }
+
+    const parcsSecondaires = [];
+    let parcCourant = null;
+
+    parcsDepartement.forEach((parcCarte) => {
+      const idparc = nettoyerTexte(parcCarte.idparc || parcCarte.id);
+
+      if (idparc && idparc === idParcActif) {
+        parcCourant = parcCarte;
+        return;
+      }
+
+      parcsSecondaires.push(parcCarte);
     });
+
+    parcsSecondaires.forEach((parcCarte) => {
+      ajouterMarqueurParc(parcCarte, false);
+    });
+
+    ajouterMarqueurParc(parcCourant || parc, true);
 
     svg.setAttribute(
       "aria-label",
