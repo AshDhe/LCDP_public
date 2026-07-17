@@ -117,34 +117,29 @@
   border-color: #e4e4e4;
 }
 
-.lcdp-box-card-jour-in-calendrier-mois__slot--gris-moyen {
-  background: #9ca09e;
-  border-color: #9ca09e;
-}
-
 .lcdp-box-card-jour-in-calendrier-mois__slot--bleu-clair {
   background: #cfe3f7;
-  border-color: #cfe3f7;
+  border-color: #a9cbea;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--bleu-fonce {
   background: #2f6fb3;
-  border-color: #2f6fb3;
+  border-color: #255c96;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--violet {
   background: #7b5aa6;
-  border-color: #7b5aa6;
+  border-color: #684993;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--orange-clair {
   background: #ffd8a8;
-  border-color: #ffd8a8;
+  border-color: #f0b96f;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--orange-fonce {
   background: #f2a23a;
-  border-color: #f2a23a;
+  border-color: #d98b24;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot--multicolore {
