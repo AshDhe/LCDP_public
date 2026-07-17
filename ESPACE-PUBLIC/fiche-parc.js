@@ -12,29 +12,6 @@
   const ficheParcBuild = "20260716-0839";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
-
-  const CLES_PLAGES_AFFICHAGE = [
-    "plage1",
-    "plage2",
-    "plage3",
-    "plage4",
-    "plage5"
-  ];
-
-  const CLES_PLAGES_RESERVATION_ACTUELLES = [
-    "plage1",
-    "plage2",
-    "plage3"
-  ];
-
-  const COULEURS_CSS_PLANNING = {
-    "gris-moyen": "#9ca09e",
-    "bleu-clair": "#cfe3f7",
-    "bleu-fonce": "#2f6fb3",
-    "violet": "#7b5aa6",
-    "orange-clair": "#ffd8a8",
-    "orange-fonce": "#f2a23a"
-  };
   const endpointNouvelleDateMembre = String(
     config.workerNouvelleDateMembreUrl ||
     config.WORKER_NOUVELLE_DATE_MEMBRE_URL ||
@@ -66,7 +43,10 @@
   let pageInitialisee = false;
   let parcActif = null;
   let accesPublic = null;
-  const tokenPartage = nettoyerTexte(new URLSearchParams(window.location.search).get("token"));
+  const parametresPartage = new URLSearchParams(window.location.search);
+  const tokenPartage = nettoyerTexte(parametresPartage.get("token"));
+  const contextePartage = nettoyerTexte(parametresPartage.get("ctx"));
+  const vuePartage = nettoyerTexte(parametresPartage.get("vue")).toLowerCase();
 
   const etatInteraction = {
     templateShiftDetail: null,
@@ -120,6 +100,11 @@
 
       parcActif = parc;
       await afficherFicheParc(parc);
+
+      if (vuePartage === "planning") {
+        await ouvrirShiftDetailParc(parc, "planning");
+      }
+
       afficherStatut("", true);
     } catch (erreur) {
       console.error("Erreur fiche parc :", erreur);
@@ -192,7 +177,8 @@
       endpointNouvelleDateMembre +
         "/fiche-parc?idparc=" +
         encodeURIComponent(identifiant) +
-        "&token=" + encodeURIComponent(tokenPartage),
+        "&token=" + encodeURIComponent(tokenPartage) +
+        "&ctx=" + encodeURIComponent(contextePartage),
       {
         method: "GET",
         credentials: "include",
@@ -580,9 +566,8 @@
       const uniteEcran = viewBoxCourante[2] / largeurEcran;
       const rayonParc = Math.max(0.04, uniteEcran * 6);
       const rayonLocalite = Math.max(0.035, uniteEcran * 4.2);
-      const carteMobile = largeurMesuree <= 520;
-      const tailleLibelle = Math.max(0.12, uniteEcran * (carteMobile ? 12.5 : 11));
-      const decalageLibelle = Math.max(0.08, uniteEcran * (carteMobile ? 10 : 7));
+      const tailleLibelle = Math.max(0.12, uniteEcran * 11);
+      const decalageLibelle = Math.max(0.08, uniteEcran * 7);
 
       coucheParcs
         .querySelectorAll(".lcdp-carte-dynamique__marker")
@@ -596,19 +581,8 @@
         .querySelectorAll(".lcdp-carte-dynamique__localite-label")
         .forEach((libelle) => {
           const x = Number(libelle.dataset.pointX);
-          const y = Number(libelle.dataset.pointY);
-
           libelle.setAttribute("font-size", String(tailleLibelle));
-
-          if (carteMobile) {
-            libelle.setAttribute("x", String(x));
-            libelle.setAttribute("y", String(y - decalageLibelle));
-            libelle.setAttribute("text-anchor", "middle");
-          } else {
-            libelle.setAttribute("x", String(x + decalageLibelle));
-            libelle.setAttribute("y", String(y));
-            libelle.setAttribute("text-anchor", "start");
-          }
+          libelle.setAttribute("x", String(x + decalageLibelle));
         });
     }
 
@@ -640,73 +614,8 @@
     boutonZoomMoins.addEventListener("click", () => zoomer(1.22));
 
     let glissement = null;
-    let pincementTactile = null;
-
-    function distanceEntrePointeurs(a, b) {
-      return Math.hypot(b.x - a.x, b.y - a.y);
-    }
-
-    function centreEntrePointeurs(a, b) {
-      return {
-        x: (a.x + b.x) / 2,
-        y: (a.y + b.y) / 2
-      };
-    }
-
-    function bornerDimensionsViewBox(largeur, hauteur) {
-      const largeurMin = Math.max(0.25, viewBoxInitiale[2] / 12);
-      const hauteurMin = Math.max(0.25, viewBoxInitiale[3] / 12);
-
-      return {
-        largeur: Math.min(viewBoxLimite[2], Math.max(largeurMin, largeur)),
-        hauteur: Math.min(viewBoxLimite[3], Math.max(hauteurMin, hauteur))
-      };
-    }
-
-    function convertirTouchEnPoint(touch) {
-      return {
-        x: touch.clientX,
-        y: touch.clientY
-      };
-    }
-
-    function demarrerPincementTactile(touches) {
-      if (!touches || touches.length < 2) {
-        pincementTactile = null;
-        return;
-      }
-
-      const premier = convertirTouchEnPoint(touches[0]);
-      const second = convertirTouchEnPoint(touches[1]);
-      const distance = distanceEntrePointeurs(premier, second);
-
-      if (!(distance > 0)) {
-        pincementTactile = null;
-        return;
-      }
-
-      const centre = centreEntrePointeurs(premier, second);
-      const rect = svg.getBoundingClientRect();
-      const largeurEcran = Math.max(1, rect.width);
-      const hauteurEcran = Math.max(1, rect.height);
-
-      pincementTactile = {
-        distance,
-        viewBox: [...viewBoxCourante],
-        ancreX:
-          viewBoxCourante[0] +
-          ((centre.x - rect.left) / largeurEcran) * viewBoxCourante[2],
-        ancreY:
-          viewBoxCourante[1] +
-          ((centre.y - rect.top) / hauteurEcran) * viewBoxCourante[3]
-      };
-    }
 
     svg.addEventListener("pointerdown", (event) => {
-      if (event.pointerType === "touch") {
-        return;
-      }
-
       const cible = event.target instanceof Element ? event.target : null;
 
       if (cible?.closest(".lcdp-carte-dynamique__marker")) {
@@ -723,9 +632,7 @@
     });
 
     svg.addEventListener("pointermove", (event) => {
-      if (event.pointerType === "touch" || !glissement) {
-        return;
-      }
+      if (!glissement) return;
 
       const largeurEcran = Math.max(1, svg.getBoundingClientRect().width);
       const hauteurEcran = Math.max(1, svg.getBoundingClientRect().height);
@@ -741,11 +648,7 @@
       appliquerViewBox();
     });
 
-    function terminerInteractionPointeur(event) {
-      if (event?.pointerType === "touch") {
-        return;
-      }
-
+    function terminerGlissement(event) {
       if (
         glissement &&
         event?.pointerId !== undefined &&
@@ -753,99 +656,12 @@
       ) {
         svg.releasePointerCapture(event.pointerId);
       }
-
       glissement = null;
       svg.classList.remove("is-dragging");
     }
 
-    svg.addEventListener("pointerup", terminerInteractionPointeur);
-    svg.addEventListener("pointercancel", terminerInteractionPointeur);
-
-    svg.addEventListener("touchstart", (event) => {
-      if (event.touches.length < 2) {
-        pincementTactile = null;
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-      demarrerPincementTactile(event.touches);
-    }, { passive: false });
-
-    svg.addEventListener("touchmove", (event) => {
-      if (event.touches.length < 2) {
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (!pincementTactile) {
-        demarrerPincementTactile(event.touches);
-      }
-
-      if (!pincementTactile) {
-        return;
-      }
-
-      const premier = convertirTouchEnPoint(event.touches[0]);
-      const second = convertirTouchEnPoint(event.touches[1]);
-      const distance = distanceEntrePointeurs(premier, second);
-      const centre = centreEntrePointeurs(premier, second);
-
-      if (!(distance > 0)) {
-        return;
-      }
-
-      const facteur = pincementTactile.distance / distance;
-      const dimensions = bornerDimensionsViewBox(
-        pincementTactile.viewBox[2] * facteur,
-        pincementTactile.viewBox[3] * facteur
-      );
-
-      const rect = svg.getBoundingClientRect();
-      const largeurEcran = Math.max(1, rect.width);
-      const hauteurEcran = Math.max(1, rect.height);
-
-      viewBoxCourante = [
-        pincementTactile.ancreX -
-          ((centre.x - rect.left) / largeurEcran) * dimensions.largeur,
-        pincementTactile.ancreY -
-          ((centre.y - rect.top) / hauteurEcran) * dimensions.hauteur,
-        dimensions.largeur,
-        dimensions.hauteur
-      ];
-
-      appliquerViewBox();
-    }, { passive: false });
-
-    svg.addEventListener("touchend", (event) => {
-      if (event.touches.length >= 2) {
-        demarrerPincementTactile(event.touches);
-      } else {
-        pincementTactile = null;
-      }
-    }, { passive: true });
-
-    svg.addEventListener("touchcancel", () => {
-      pincementTactile = null;
-    }, { passive: true });
-
-    const bloquerZoomNavigateurDansCarte = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-    };
-
-    svg.addEventListener("gesturestart", bloquerZoomNavigateurDansCarte, {
-      passive: false
-    });
-    svg.addEventListener("gesturechange", bloquerZoomNavigateurDansCarte, {
-      passive: false
-    });
-    svg.addEventListener("gestureend", bloquerZoomNavigateurDansCarte, {
-      passive: false
-    });
-
+    svg.addEventListener("pointerup", terminerGlissement);
+    svg.addEventListener("pointercancel", terminerGlissement);
     window.addEventListener("resize", actualiserTailleElementsCarte);
 
     (Array.isArray(parc.localitesCarte) ? parc.localitesCarte : [])
@@ -878,7 +694,6 @@
           "lcdp-carte-dynamique__localite-label"
         );
         libelle.dataset.pointX = String(point.x);
-        libelle.dataset.pointY = String(point.y);
         libelle.textContent = String(localite.nom || "")
           .trim()
           .toLocaleUpperCase("fr");
@@ -1736,7 +1551,8 @@
       "/planning-parc-mois?idparc=" + encodeURIComponent(idparc) +
       "&annee=" + encodeURIComponent(etat.annee) +
       "&mois=" + encodeURIComponent(etat.mois) +
-      "&token=" + encodeURIComponent(tokenPartage);
+      "&token=" + encodeURIComponent(tokenPartage) +
+      "&ctx=" + encodeURIComponent(contextePartage);
 
     const reponse = await fetch(url, {
       method: "GET",
@@ -1787,31 +1603,14 @@
   function creerCardJourCalendrier(etat, dateIso, numeroJour, planningJour) {
     const card = etatInteraction.templateJourMois.cloneNode(true);
     const numero = card.querySelector("[data-lcdp-card-jour-mois-number]");
-    const modeLecture = etat.mode !== "reservation";
     const ouvert = Boolean(planningJour?.ouvert);
     const estPasse = dateIso < dateAujourdhuiIso();
 
     card.dataset.date = dateIso;
-    card.dataset.idparc = nettoyerTexte(
-      etat.parc.idparc || etat.parc.id
-    );
-    card.setAttribute(
-      "aria-label",
-      formaterDateFr(dateIso) +
-      (ouvert ? " disponible" : " fermé")
-    );
+    card.dataset.idparc = nettoyerTexte(etat.parc.idparc || etat.parc.id);
+    card.setAttribute("aria-label", formaterDateFr(dateIso) + (ouvert ? " disponible" : " fermé"));
 
     if (numero) numero.textContent = String(numeroJour);
-
-    if (modeLecture) {
-      card.classList.add(
-        "lcdp-box-card-jour-in-calendrier-mois--planning-lecture"
-      );
-    } else {
-      card.classList.add(
-        "lcdp-box-card-jour-in-calendrier-mois--reservation-trois-plages"
-      );
-    }
 
     if (dateIso === dateAujourdhuiIso()) {
       card.classList.add("lcdp-box-card-jour-in-calendrier-mois--today");
@@ -1827,44 +1626,20 @@
       card.disabled = true;
     }
 
-    if (modeLecture) {
+    if (etat.mode !== "reservation") {
       card.disabled = true;
       card.setAttribute("aria-disabled", "true");
     }
 
-    const clesActives = modeLecture
-      ? CLES_PLAGES_AFFICHAGE
-      : CLES_PLAGES_RESERVATION_ACTUELLES;
-
-    CLES_PLAGES_AFFICHAGE.forEach((nomPlage) => {
-      const slot = card.querySelector(
-        '[data-lcdp-card-jour-mois-slot="' + nomPlage + '"]'
-      );
-
+    ["plage1", "plage2", "plage3"].forEach((nomPlage) => {
+      const slot = card.querySelector('[data-lcdp-card-jour-mois-slot="' + nomPlage + '"]');
       if (!slot) return;
 
-      slot.hidden = !clesActives.includes(nomPlage);
-      slot.className = "lcdp-box-card-jour-in-calendrier-mois__slot";
-      slot.removeAttribute("style");
-      slot.removeAttribute("title");
-
-      if (slot.hidden) {
-        return;
-      }
-
-      const plage = planningJour?.plages?.[nomPlage] || null;
-
-      if (modeLecture) {
-        appliquerRenduPlageLecture(slot, nomPlage, plage);
-        return;
-      }
-
-      const couleur = normaliserCouleurClasse(
-        plage?.ouverte ? plage.couleur : "gris_clair"
-      );
-      slot.classList.add(
-        "lcdp-box-card-jour-in-calendrier-mois__slot--" + couleur
-      );
+      const plage = planningJour?.plages?.[nomPlage];
+      const couleur = normaliserCouleurClasse(plage?.ouverte ? plage.couleur : "gris_clair");
+      slot.className =
+        "lcdp-box-card-jour-in-calendrier-mois__slot " +
+        "lcdp-box-card-jour-in-calendrier-mois__slot--" + couleur;
     });
 
     return card;
@@ -2137,162 +1912,13 @@
     return match ? String(Number(match[1])) + "h" + match[2] : heure;
   }
 
-
-  function appliquerRenduPlageLecture(slot, nomPlage, plage) {
-    const plageOuverte = plage && plage.ouverte === true;
-    const couleurs = plageOuverte
-      ? normaliserListeCouleursPlanning(plage)
-      : ["gris-moyen"];
-
-    if (couleurs.length > 1) {
-      slot.classList.add(
-        "lcdp-box-card-jour-in-calendrier-mois__slot--multicolore"
-      );
-      slot.style.setProperty(
-        "--lcdp-plage-fond",
-        construireDegradeCouleursPlanning(couleurs)
-      );
-    } else {
-      slot.classList.add(
-        "lcdp-box-card-jour-in-calendrier-mois__slot--" +
-        (couleurs[0] || "gris-moyen")
-      );
-    }
-
-    const largeurJauge = normaliserLargeurJauge(plage?.jauge);
-
-    if (largeurJauge > 0 && plageOuverte) {
-      slot.classList.add(
-        "lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge"
-      );
-      slot.style.setProperty(
-        "--lcdp-jauge-largeur",
-        largeurJauge + "%"
-      );
-    }
-
-    slot.title = construireTitrePlagePlanning(
-      nomPlage,
-      plageOuverte ? plage : null
-    );
-  }
-
-  function normaliserListeCouleursPlanning(plage) {
-    const valeurs = Array.isArray(plage?.couleurs)
-      ? plage.couleurs
-      : [plage?.couleur];
-
-    const couleurs = valeurs
-      .map(normaliserCouleurClasse)
-      .filter((couleur) => {
-        return Object.prototype.hasOwnProperty.call(
-          COULEURS_CSS_PLANNING,
-          couleur
-        );
-      });
-
-    return couleurs.length ? couleurs : ["gris-moyen"];
-  }
-
-  function construireDegradeCouleursPlanning(couleurs) {
-    const nombre = couleurs.length;
-    const segments = [];
-
-    couleurs.forEach((couleur, index) => {
-      const debut = (index * 100) / nombre;
-      const fin = ((index + 1) * 100) / nombre;
-      const valeurCss = COULEURS_CSS_PLANNING[couleur] ||
-        COULEURS_CSS_PLANNING["gris-moyen"];
-
-      segments.push(
-        valeurCss + " " + debut + "%",
-        valeurCss + " " + fin + "%"
-      );
-    });
-
-    return "linear-gradient(to right, " + segments.join(", ") + ")";
-  }
-
-  function normaliserLargeurJauge(value) {
-    const largeur = Number(value);
-
-    if (![0, 60, 80, 100].includes(largeur)) {
-      return 0;
-    }
-
-    return largeur;
-  }
-
-  function construireTitrePlagePlanning(nomPlage, plage) {
-    const numero = String(nomPlage || "").replace("plage", "");
-
-    if (!plage || plage.ouverte !== true) {
-      return "Plage " + numero + " fermée";
-    }
-
-    const categories = Array.isArray(plage.categories)
-      ? plage.categories
-      : [];
-
-    const libellesCategories = categories.map((categorie) => {
-      if (categorie === "DUO") return "Duo";
-      if (categorie === "COACH") return "Coach";
-      if (categorie === "FAMILLE") return "Famille";
-      return String(categorie || "");
-    }).filter(Boolean);
-
-    const morceaux = [
-      "Plage " + numero,
-      plage.debut && plage.fin
-        ? plage.debut + "–" + plage.fin
-        : "horaire ouvert",
-      libellesCategories.length
-        ? libellesCategories.join(" + ")
-        : "ouverte"
-    ];
-
-    if (plage.privatisation) {
-      morceaux.push("privatisation");
-    }
-
-    const ratio = Number(plage.ratio);
-
-    if (Number.isFinite(ratio) && ratio >= 0) {
-      morceaux.push(
-        "occupation " + Math.round(ratio * 100) + " %"
-      );
-    }
-
-    return morceaux.join(" · ");
-  }
-
   function normaliserCouleurClasse(couleur) {
-    const valeur = String(couleur || "gris_clair")
-      .trim()
-      .toLowerCase()
-      .replaceAll("_", "-");
-
-    if (
-      [
-        "gris-moyen",
-        "bleu-clair",
-        "bleu-fonce",
-        "violet",
-        "orange-clair",
-        "orange-fonce",
-        "vert",
-        "orange",
-        "rouge-clair",
-        "rouge",
-        "gris-fonce",
-        "gris-clair"
-      ].includes(valeur)
-    ) {
+    const valeur = String(couleur || "gris_clair").trim().toLowerCase();
+    if (["vert", "orange", "rouge_clair", "rouge", "gris_fonce", "gris_clair"].includes(valeur)) {
       return valeur;
     }
-
-    if (valeur === "fonce") return "gris-fonce";
-    return "gris-clair";
+    if (valeur === "fonce") return "gris_fonce";
+    return "gris_clair";
   }
 
   function attendre(delai) {
