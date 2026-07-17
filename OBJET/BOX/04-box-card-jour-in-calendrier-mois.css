@@ -1,6 +1,6 @@
 .lcdp-box-card-jour-in-calendrier-mois {
   width: 100%;
-  min-height: 68px;
+  min-height: 56px;
   padding: 4px;
   border: 1px solid var(--lcdp-color-border);
   border-radius: 7px;
@@ -25,21 +25,11 @@
   pointer-events: none;
 }
 
-.lcdp-box-card-jour-in-calendrier-mois--past {
-  background: #f7f3ea;
-  color: var(--lcdp-color-text-muted);
-  opacity: 1;
-}
-
-.lcdp-box-card-jour-in-calendrier-mois--past
-  .lcdp-box-card-jour-in-calendrier-mois__slot {
-  opacity: 0.55;
-}
-
+.lcdp-box-card-jour-in-calendrier-mois--past,
 .lcdp-box-card-jour-in-calendrier-mois--closed {
-  background: var(--lcdp-color-surface);
+  background: var(--lcdp-color-surface-soft);
   color: var(--lcdp-color-text-muted);
-  opacity: 1;
+  opacity: 0.45;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois--hors-abonnement {
@@ -91,12 +81,10 @@
   gap: 2px;
   flex: 1 1 auto;
   width: 100%;
-  min-height: 34px;
+  min-height: 22px;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot {
-  position: relative;
-  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,66 +96,6 @@
   border-radius: 3px;
   background: #f3f3f3;
   overflow: hidden;
-}
-
-.lcdp-box-card-jour-in-calendrier-mois__slot[hidden] {
-  display: none;
-}
-
-.lcdp-box-card-jour-in-calendrier-mois--reservation-trois-plages
-  .lcdp-box-card-jour-in-calendrier-mois__slots {
-  grid-template-rows: repeat(3, minmax(5px, 1fr));
-}
-
-.lcdp-box-card-jour-in-calendrier-mois--planning-lecture {
-  cursor: default;
-}
-
-.lcdp-box-card-jour-in-calendrier-mois__slot--gris-moyen {
-  background: #9ca09e;
-  border-color: #858a87;
-}
-
-.lcdp-box-card-jour-in-calendrier-mois__slot--bleu-clair {
-  background: #cfe3f7;
-  border-color: #9fc4e8;
-}
-
-.lcdp-box-card-jour-in-calendrier-mois__slot--bleu-fonce {
-  background: var(--lcdp-color-blue);
-  border-color: var(--lcdp-color-blue-hover);
-}
-
-.lcdp-box-card-jour-in-calendrier-mois__slot--violet {
-  background: #7b5aa6;
-  border-color: #6d4d96;
-}
-
-.lcdp-box-card-jour-in-calendrier-mois__slot--orange-clair {
-  background: #ffd8a8;
-  border-color: #f0b96f;
-}
-
-.lcdp-box-card-jour-in-calendrier-mois__slot--orange-fonce {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange-hover);
-}
-
-.lcdp-box-card-jour-in-calendrier-mois__slot--multicolore {
-  background: var(--lcdp-plage-fond, #9ca09e);
-  border-color: rgba(31, 42, 36, 0.24);
-}
-
-.lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge::after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  inset: 0 auto 0 0;
-  width: var(--lcdp-jauge-largeur, 0%);
-  max-width: 100%;
-  border-radius: inherit;
-  background: rgba(31, 42, 36, 0.82);
-  pointer-events: none;
 }
 
 .lcdp-box-card-jour-in-calendrier-mois__slot-label {
@@ -207,7 +135,6 @@
   border-color: #f0b96f;
 }
 
-
 .lcdp-box-card-jour-in-calendrier-mois__slot--rouge-clair {
   background: #f7c9c9;
   border-color: #eca8a8;
@@ -217,9 +144,11 @@
   background: #e98282;
   border-color: #d15f5f;
 }
+
+/* Parc fermé : gris volontairement plus clair. */
 .lcdp-box-card-jour-in-calendrier-mois__slot--gris-fonce {
-  background: #5c5c5c;
-  border-color: #4a4a4a;
+  background: #d4d7d4;
+  border-color: #c2c6c2;
 }
 
 @media (min-width: 768px) {
@@ -256,7 +185,6 @@
   }
 }
 
-
 /* Variante planning membre : réservation passée visible mais atténuée. */
 .lcdp-box-card-jour-in-calendrier-mois--reservation-membre-passee {
   opacity: 1;
@@ -268,11 +196,9 @@
   opacity: 0.72;
 }
 
-
 .lcdp-box-card-jour-in-calendrier-mois--reservation-membre {
   cursor: pointer;
 }
-
 
 /* Réservation invitation / hors période d'abonnement : violet planning membre.
    Le corail reste disponible pour l'espace coach. */
