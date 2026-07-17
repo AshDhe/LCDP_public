@@ -117,6 +117,11 @@
   border-color: #e4e4e4;
 }
 
+.lcdp-box-card-jour-in-calendrier-mois__slot--bleu-clair {
+  background: #cfe3f7;
+  border-color: #a9cbea;
+}
+
 .lcdp-box-card-jour-in-calendrier-mois__slot--vert {
   background: #587242;
   border-color: #4e663b;
@@ -149,6 +154,31 @@
 .lcdp-box-card-jour-in-calendrier-mois__slot--gris-fonce {
   background: #d4d7d4;
   border-color: #c2c6c2;
+}
+
+/* Vue Planning Parc :
+   - jour passé légèrement teinté, sans détail des plages ;
+   - jour futur entièrement fermé blanc, sans détail des plages. */
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--past {
+  background: #f4f2ec;
+  color: var(--lcdp-color-text-muted);
+  opacity: 1;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--past
+.lcdp-box-card-jour-in-calendrier-mois__slots {
+  visibility: hidden;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--closed:not(.lcdp-box-card-jour-in-calendrier-mois--past) {
+  background: #ffffff;
+  color: var(--lcdp-color-text);
+  opacity: 1;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--closed:not(.lcdp-box-card-jour-in-calendrier-mois--past)
+.lcdp-box-card-jour-in-calendrier-mois__slots {
+  visibility: hidden;
 }
 
 @media (min-width: 768px) {
