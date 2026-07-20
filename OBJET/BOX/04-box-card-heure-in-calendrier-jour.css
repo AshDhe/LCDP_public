@@ -102,3 +102,56 @@
     font-size: 1.1rem;
   }
 }
+
+
+/* Planning parc en lecture : couleurs métier et cards non interactives. */
+.lcdp-box-card-heure-in-calendrier-jour--planning-lecture {
+  min-height: 72px;
+  padding: 12px 14px;
+  cursor: default;
+  text-align: left;
+  line-height: 1.35;
+  white-space: normal;
+  opacity: 1;
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--planning-lecture:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--bleu-clair {
+  background: #cfe3f7;
+  border-color: #9fc6ea;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--bleu-fonce {
+  background: #2f6fb3;
+  border-color: #255a91;
+  color: #ffffff;
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--violet {
+  background: #7b5aa6;
+  border-color: #654889;
+  color: #ffffff;
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--orange-clair {
+  background: #ffd8a8;
+  border-color: #f0b96f;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--orange-fonce {
+  background: #f2a23a;
+  border-color: #d98c27;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--multicolore {
+  background: var(--lcdp-heure-fond);
+  border-color: var(--lcdp-color-border-strong);
+  color: var(--lcdp-color-text);
+}
