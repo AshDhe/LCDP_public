@@ -313,7 +313,7 @@
 
       const liensPublics = [
         {
-          label: "La Clé du Parc",
+          label: "Accueil La Clé du Parc",
           href: "/ESPACE-PUBLIC/accueil-public.html"
         },
         {
