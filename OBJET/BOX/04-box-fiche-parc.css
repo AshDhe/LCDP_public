@@ -390,3 +390,9 @@
     white-space: nowrap;
   }
 }
+
+/* Fiche parc : date de dernière actualisation des horaires. */
+.lcdp-box-fiche-parc__box-text p.lcdp-box-fiche-parc__actualisation {
+  font-size: 0.88em;
+  font-style: italic;
+}
