@@ -317,7 +317,7 @@
         ".lcdp-box-fiche-parc__section"
       ),
       "Accès",
-      parc.horaire || "Horaires d’accès non renseignés."
+      construireTexteAccesParc(parc)
     );
 
     appliquerRoutesSite(slot);
@@ -384,6 +384,13 @@
     lignes.forEach((ligne) => {
       const paragraphe = document.createElement("p");
       paragraphe.textContent = ligne;
+
+      if (ligne.startsWith("Actualisation :")) {
+        paragraphe.classList.add(
+          "lcdp-box-fiche-parc__actualisation"
+        );
+      }
+
       conteneur.appendChild(paragraphe);
     });
   }
@@ -2033,6 +2040,54 @@
       encodeURIComponent(dossierParc) +
       "/" +
       encodeURIComponent(nomFichier)
+    );
+  }
+
+  function construireTexteAccesParc(parc) {
+    const horaire = String(parc?.horaire || "").trim() ||
+      "Horaires d’accès non renseignés.";
+    const dateActualisation = formaterDateMajHoraire(
+      parc?.datemajhoraire
+    );
+    const mentionActualisation = dateActualisation
+      ? "Actualisation : " + dateActualisation + "."
+      : "Actualisation : date non disponible.";
+
+    return horaire + "\n" + mentionActualisation;
+  }
+
+  function formaterDateMajHoraire(value) {
+    const date = new Date(value || "");
+
+    if (Number.isNaN(date.getTime())) {
+      return "";
+    }
+
+    const morceaux = new Intl.DateTimeFormat(
+      "fr-FR",
+      {
+        timeZone: "Europe/Paris",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23"
+      }
+    ).formatToParts(date);
+    const lire = (type) =>
+      morceaux.find((item) => item.type === type)?.value || "";
+
+    return (
+      lire("day") +
+      " " +
+      lire("month") +
+      " " +
+      lire("year") +
+      " à " +
+      lire("hour") +
+      " h " +
+      lire("minute")
     );
   }
 
