@@ -11,26 +11,6 @@
   box-sizing: border-box;
 }
 
-
-.lcdp-box-shift-detail-parc[hidden],
-.lcdp-box-shift-detail-parc--preparation {
-  display: none !important;
-}
-
-.lcdp-box-shift-detail-parc--apparition {
-  animation: lcdp-shift-detail-parc-apparition 170ms ease-out both;
-}
-
-@keyframes lcdp-shift-detail-parc-apparition {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
 .lcdp-box-shift-detail-parc__card {
   position: relative;
   width: 100%;
@@ -79,7 +59,8 @@
 
 /* Les objets fiche/calendrier deviennent des vues internes : pas de second overlay. */
 .lcdp-box-shift-detail-parc .lcdp-box-fiche-parc,
-.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois {
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois,
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour {
   position: static;
   inset: auto;
   z-index: auto;
@@ -92,7 +73,8 @@
 }
 
 .lcdp-box-shift-detail-parc .lcdp-box-fiche-parc__card,
-.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__card {
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__card,
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour__card {
   width: 100%;
   max-width: none;
   max-height: none;
@@ -105,12 +87,14 @@
 }
 
 .lcdp-box-shift-detail-parc .lcdp-box-fiche-parc__close,
-.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__close {
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__close,
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour__close {
   display: none;
 }
 
 .lcdp-box-shift-detail-parc .lcdp-box-fiche-parc__header,
-.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__header {
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__header,
+.lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour__header {
   padding-right: 44px;
 }
 
@@ -186,9 +170,5 @@
 @media (prefers-reduced-motion: reduce) {
   .lcdp-box-shift-detail-parc__content {
     transition: none;
-  }
-
-  .lcdp-box-shift-detail-parc--apparition {
-    animation: none;
   }
 }

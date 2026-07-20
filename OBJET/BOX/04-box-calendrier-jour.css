@@ -101,20 +101,3 @@
     gap: 10px;
   }
 }
-
-
-/* Planning parc en lecture : détail journalier lisible dans le même shift. */
-.lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__grid {
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  align-items: stretch;
-}
-
-.lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__message {
-  font-weight: 600;
-}
-
-.lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__retour-mois {
-  width: auto;
-  min-height: 38px;
-  margin: var(--lcdp-space-2) 0 0;
-}
