@@ -316,8 +316,9 @@
       accesElement?.closest(
         ".lcdp-box-fiche-parc__section"
       ),
-      "Accès",
-      construireTexteAccesParc(parc)
+      "Horaire d’accès La Clé du Parc",
+      construireTexteAccesParc(parc),
+      false
     );
 
     appliquerRoutesSite(slot);
@@ -326,7 +327,8 @@
   async function remplacerSectionParBoxText(
     section,
     titre,
-    contenu
+    contenu,
+    afficherTitreObjet = true
   ) {
     if (!section) {
       throw new Error(
@@ -360,7 +362,12 @@
       );
     }
 
-    titreObjet.textContent = titre;
+    if (afficherTitreObjet) {
+      titreObjet.textContent = titre;
+    } else {
+      titreObjet.remove();
+    }
+
     box.classList.add(
       "lcdp-box-fiche-parc__box-text"
     );
