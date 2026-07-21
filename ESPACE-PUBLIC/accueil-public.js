@@ -598,19 +598,19 @@
 
         const boutons = [
           {
-            label: "RÉSERVER",
+            label: "PLANIFIER",
             style: "lcdp-button-accueil lcdp-button-accueil-orange",
             variante: "reserver",
             action: () => ouvrirPageMembrePublic("RESERVER", "/ESPACE-MEMBRE/reserver-membre.html", "reserver")
           },
           {
-            label: "PLANNING",
+            label: "AGENDA",
             style: "lcdp-button-accueil lcdp-button-accueil-green",
             variante: "planning",
             action: () => ouvrirPageMembrePublic("PLANNING", "/ESPACE-MEMBRE/planning-membre.html", "planning")
           },
           {
-            label: "CLÉ DU PARC",
+            label: "LA CLÉ DU PARC",
             style: "lcdp-button-accueil lcdp-button-accueil-blue",
             variante: "ouvrir",
             action: gererValidationPresencePublic
