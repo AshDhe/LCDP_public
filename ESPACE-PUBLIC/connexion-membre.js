@@ -14,6 +14,10 @@
       console.error("Erreur bandeau public connexion membre :", erreur);
     });
 
+    initialiserFooter().catch((erreur) => {
+      console.error("Erreur footer connexion membre :", erreur);
+    });
+
     const formulaire = document.getElementById("formulaire-connexion-membre");
     const champEmail = document.getElementById("emailmembre");
     const champMdp = document.getElementById("mdpmembre");
@@ -231,6 +235,21 @@
     if (typeof window.LCDP_initialiserMenuBurgerPublic === "function") {
       await window.LCDP_initialiserMenuBurgerPublic();
     }
+  }
+
+  async function initialiserFooter() {
+    const slot = document.getElementById("lcdp-footer-slot");
+
+    if (!slot) {
+      return;
+    }
+
+    slot.innerHTML = "";
+
+    const footer = await chargerFragmentObjet("/BOX/02-box-footer.html");
+    slot.appendChild(footer);
+
+    appliquerRoutesSite(slot);
   }
 
   async function afficherInformation(titre, message, type = "information", redirectUrl = null) {
