@@ -66,10 +66,16 @@
   stroke: #587242;
 }
 
-/* Seule différence demandée : le parc consulté est au premier plan et vert foncé. */
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
+/* Carte de la fiche : les autres parcs sont en vert foncé. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker {
   fill: #234438 !important;
   stroke: #234438 !important;
+}
+
+/* Carte de la fiche : le parc actuellement consulté est en orange. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
+  fill: var(--lcdp-color-orange, #f2a23a) !important;
+  stroke: var(--lcdp-color-orange, #f2a23a) !important;
 }
 
 /* Card Parc centrée dans la carte. */
