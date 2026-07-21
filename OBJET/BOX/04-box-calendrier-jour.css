@@ -101,3 +101,33 @@
     gap: 10px;
   }
 }
+
+
+/* Planning parc en lecture : l'objet jour conserve son gabarit natif. */
+.lcdp-box-calendrier-jour--planning-lecture
+.lcdp-box-calendrier-jour__title {
+  font-size: clamp(1.7rem, 7vw, 2.6rem);
+  line-height: 1.08;
+  color: var(--lcdp-color-orange);
+}
+
+.lcdp-box-calendrier-jour--planning-lecture
+.lcdp-box-calendrier-jour__meta--actions {
+  margin-top: var(--lcdp-space-1);
+}
+
+.lcdp-box-calendrier-jour--planning-lecture
+.lcdp-box-calendrier-jour__navigation-planning {
+  margin-bottom: var(--lcdp-space-3);
+}
+
+.lcdp-box-calendrier-jour--planning-lecture
+.lcdp-box-calendrier-jour__navigation-placeholder {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.lcdp-box-calendrier-jour--planning-lecture
+.lcdp-box-calendrier-jour__message {
+  font-weight: 600;
+}

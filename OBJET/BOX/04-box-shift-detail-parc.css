@@ -11,6 +11,10 @@
   box-sizing: border-box;
 }
 
+.lcdp-box-shift-detail-parc[hidden] {
+  display: none !important;
+}
+
 .lcdp-box-shift-detail-parc__card {
   position: relative;
   width: 100%;
