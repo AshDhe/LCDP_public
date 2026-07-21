@@ -331,16 +331,16 @@
         });
       }
 
-      function normaliserLibelleBouton(libelle) {
-        return String(libelle || "").trim() || "cette fonction";
+      function normaliserNomFonction(libelle) {
+        return (String(libelle || "").trim() || "cette fonction").toLocaleUpperCase("fr-FR");
       }
 
       function messageConnexionRequise(libelleBouton) {
-        return "Vous devez être connecté(e) à votre compte membre pour utiliser « " + normaliserLibelleBouton(libelleBouton) + " ».";
+        return "Vous devez être connecté(e) à votre compte membre pour utiliser la fonction " + normaliserNomFonction(libelleBouton) + ".";
       }
 
       function messageAbonnementRequis(libelleBouton) {
-        return "Vous devez être membre abonné pour utiliser « " + normaliserLibelleBouton(libelleBouton) + " ».";
+        return "Vous devez être membre abonné pour utiliser la fonction " + normaliserNomFonction(libelleBouton) + ".";
       }
 
       async function gererValidationPresencePublic(libelleBouton = "La clé du parc") {
