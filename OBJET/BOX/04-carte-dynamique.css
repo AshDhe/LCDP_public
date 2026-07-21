@@ -348,9 +348,16 @@
   stroke: #587242;
 }
 
-.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
+/* Fiche Parc : les autres parcs du département sont en vert foncé. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker {
   fill: #234438 !important;
   stroke: #234438 !important;
+}
+
+/* Fiche Parc : le parc actuellement consulté est en orange. */
+.lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
+  fill: var(--lcdp-color-orange, #f2a23a) !important;
+  stroke: var(--lcdp-color-orange, #f2a23a) !important;
 }
 
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot[hidden] {
@@ -379,10 +386,8 @@
     max-height: 330px;
   }
 
-  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
     touch-action: pan-y;
-    -ms-touch-action: pan-y;
   }
 
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__localite-label {
