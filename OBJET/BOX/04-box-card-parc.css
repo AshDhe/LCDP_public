@@ -114,13 +114,6 @@
   }
 }
 
-/* Trois actions parc : Le parc / Son planning / Nouvelle date. */
-@media (min-width: 768px) {
-  .lcdp-box-card-parc__actions [data-action="nouvelle-date-parc"] {
-    grid-column: 2 / 3;
-  }
-}
-
 
 .lcdp-box-card-parc__badge-prepa {
   position: absolute;
