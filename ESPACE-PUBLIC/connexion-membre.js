@@ -10,6 +10,10 @@
   function initialiserConnexionMembre() {
     appliquerRoutesSite(document);
 
+    initialiserBandeau().catch((erreur) => {
+      console.error("Erreur bandeau public connexion membre :", erreur);
+    });
+
     const formulaire = document.getElementById("formulaire-connexion-membre");
     const champEmail = document.getElementById("emailmembre");
     const champMdp = document.getElementById("mdpmembre");
@@ -162,6 +166,71 @@
     racine.querySelectorAll("[data-site-src]").forEach((element) => {
       element.setAttribute("src", construireUrlPublique(element.dataset.siteSrc));
     });
+
+    racine.querySelectorAll("a[href^='/']").forEach((element) => {
+      element.setAttribute("href", construireUrlPublique(element.getAttribute("href")));
+    });
+
+    racine.querySelectorAll("img[src^='/']").forEach((element) => {
+      element.setAttribute("src", construireUrlPublique(element.getAttribute("src")));
+    });
+  }
+
+  async function chargerFragmentSite(chemin) {
+    const reponse = await fetch(construireUrlPublique(chemin), {
+      method: "GET",
+      credentials: "same-origin",
+      cache: "no-cache"
+    });
+
+    if (!reponse.ok) {
+      throw new Error("Fragment introuvable : " + chemin);
+    }
+
+    const html = await reponse.text();
+    const template = document.createElement("template");
+    template.innerHTML = html.trim();
+
+    return template.content.cloneNode(true);
+  }
+
+  function chargerScriptUneFois(chemin) {
+    const src = construireUrlPublique(chemin);
+
+    if (document.querySelector(`script[data-lcdp-script="${chemin}"]`)) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.defer = true;
+      script.dataset.lcdpScript = chemin;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error("Script introuvable : " + chemin));
+      document.body.appendChild(script);
+    });
+  }
+
+  async function initialiserBandeau() {
+    const slot = document.getElementById("lcdp-bandeau-slot");
+
+    if (!slot) {
+      return;
+    }
+
+    slot.innerHTML = "";
+
+    const bandeau = await chargerFragmentSite("/ESPACE-PUBLIC/box-bandeau-nav-public.html");
+    slot.appendChild(bandeau);
+
+    appliquerRoutesSite(slot);
+
+    await chargerScriptUneFois("/ESPACE-PUBLIC/box-menu-burger-public.js");
+
+    if (typeof window.LCDP_initialiserMenuBurgerPublic === "function") {
+      await window.LCDP_initialiserMenuBurgerPublic();
+    }
   }
 
   async function afficherInformation(titre, message, type = "information", redirectUrl = null) {
