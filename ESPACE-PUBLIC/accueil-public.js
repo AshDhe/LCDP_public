@@ -172,16 +172,6 @@
         alerte.classList.add("lcdp-alerte-accueil-" + variante);
       }
 
-
-        function normaliserPonctuationAlerte(message) {
-    const texte = String(message || "").trim();
-
-    if (!texte) return "";
-    if (/[.!?…]$/.test(texte)) return texte;
-
-    return texte + ".";
-  }
-
       async function afficherAlerte(message, options = {}) {
         const slot = document.getElementById("lcdp-lightbox-slot");
         slot.innerHTML = "";
@@ -195,7 +185,7 @@
           throw new Error("Structure de l’alerte incomplète.");
         }
 
-        alerte.querySelector("[data-lcdp-alerte-message]").textContent = normaliserPonctuationAlerte(message);
+        alerte.querySelector("[data-lcdp-alerte-message]").textContent = message;
 
         appliquerVarianteAlerteAccueil(alerte, options.variante);
 
@@ -265,20 +255,11 @@
             return null;
           }
 
-          const abonnementEnCours = extraireAbonnementEnCours(resultat);
-          const affichageStatut = determinerAffichageStatutMembre(abonnementEnCours);
-
           etatMembrePublic = {
-            abonne: affichageStatut.abonne,
+            abonne: valeurBooleenneVraie(resultat.abonne),
             parrainRenseigne: valeurBooleenneVraie(resultat.parrainRenseigne),
             aReservationEnCours: valeurBooleenneVraie(resultat.aReservationEnCours || resultat.aReservationValidable),
-            reservationEnCours: resultat.reservationEnCours || resultat.reservationValidable || null,
-            statutabo: abonnementEnCours?.statutabo || "",
-            debut: abonnementEnCours?.debut || "",
-            fin: abonnementEnCours?.fin || "",
-            abonnementSuspendu: affichageStatut.suspendu,
-            abonnementAnnule: affichageStatut.annule,
-            mentionAbonnement: affichageStatut.mention
+            reservationEnCours: resultat.reservationEnCours || resultat.reservationValidable || null
           };
 
           return etatMembrePublic;
@@ -350,11 +331,23 @@
         });
       }
 
-      async function gererValidationPresencePublic() {
+      function normaliserLibelleBouton(libelle) {
+        return String(libelle || "").trim() || "cette fonction";
+      }
+
+      function messageConnexionRequise(libelleBouton) {
+        return "Vous devez être connecté(e) à votre compte membre pour utiliser « " + normaliserLibelleBouton(libelleBouton) + " ».";
+      }
+
+      function messageAbonnementRequis(libelleBouton) {
+        return "Vous devez être membre abonné pour utiliser « " + normaliserLibelleBouton(libelleBouton) + " ».";
+      }
+
+      async function gererValidationPresencePublic(libelleBouton = "La clé du parc") {
         const etat = await chargerEtatMembrePublic();
 
         if (!etat) {
-          await afficherAlerte("Vous devez être connecté(e) à votre compte membre pour utiliser la fonction OUVRIR.", { variante: "ouvrir" });
+          await afficherAlerte(messageConnexionRequise(libelleBouton), { variante: "ouvrir" });
           return;
         }
 
@@ -381,27 +374,27 @@
         });
       }
 
-      async function ouvrirPageMembrePublic(fonction, chemin, variante = "") {
+      async function ouvrirPageMembrePublic(libelleBouton, chemin, variante = "") {
         const etat = await chargerEtatMembrePublic();
 
         if (!etat) {
-          await afficherAlerte("Vous devez être connecté(e) à votre compte membre pour utiliser la fonction " + fonction + ".", { variante });
+          await afficherAlerte(messageConnexionRequise(libelleBouton), { variante });
           return;
         }
 
         window.location.href = construireUrlMembre(chemin);
       }
 
-      async function ouvrirPageAbonnePublic(fonction, chemin, variante = "") {
+      async function ouvrirPageAbonnePublic(libelleBouton, chemin, variante = "") {
         const etat = await chargerEtatMembrePublic();
 
         if (!etat) {
-          await afficherAlerte("Vous devez être connecté(e) à votre compte membre pour utiliser la fonction " + fonction + ".", { variante });
+          await afficherAlerte(messageConnexionRequise(libelleBouton), { variante });
           return;
         }
 
         if (!etat.abonne || !lireCookie("abonne")) {
-          await afficherAlerte("Vous devez être membre abonné pour utiliser la fonction " + fonction, { variante });
+          await afficherAlerte(messageAbonnementRequis(libelleBouton), { variante });
           return;
         }
 
@@ -444,127 +437,6 @@
         return valeur === true || valeur === "true" || valeur === 1 || valeur === "1";
       }
 
-      function extraireAbonnementEnCours(resultat) {
-        const candidats = [
-          resultat?.abonnementEnCours,
-          resultat?.abonnementCourant,
-          resultat?.abonnementActuel,
-          resultat?.abonnement
-        ].filter((item) => item && typeof item === "object");
-
-        if (resultat && (resultat.statutabo || resultat.debut || resultat.fin)) {
-          candidats.push({
-            statutabo: resultat.statutabo,
-            debut: resultat.debut,
-            fin: resultat.fin
-          });
-        }
-
-        if (Array.isArray(resultat?.abonnements)) {
-          candidats.push(...resultat.abonnements.filter((item) => item && typeof item === "object"));
-        }
-
-        return candidats.find((abonnement) => abonnementEnCoursSelonDates(abonnement)) || null;
-      }
-
-      function determinerAffichageStatutMembre(abonnement) {
-        if (!abonnement || !abonnementEnCoursSelonDates(abonnement)) {
-          return { abonne: false, suspendu: false, annule: false, mention: "" };
-        }
-
-        const statutabo = normaliserStatutabo(abonnement.statutabo);
-
-        if (statutabo === "paye") {
-          return { abonne: true, suspendu: false, annule: false, mention: "" };
-        }
-
-        if (statutabo === "impaye") {
-          return { abonne: true, suspendu: true, annule: false, mention: "[Votre abonnement est suspendu (non payé)]" };
-        }
-
-        if (statutabo === "cancd") {
-          return { abonne: true, suspendu: false, annule: true, mention: "[Votre abonnement est annulé]" };
-        }
-
-        return { abonne: false, suspendu: false, annule: false, mention: "" };
-      }
-
-      function abonnementEnCoursSelonDates(abonnement) {
-        const debut = dateIsoDepuisValeurStatut(abonnement?.debut);
-        const fin = dateIsoDepuisValeurStatut(abonnement?.fin);
-        const aujourdHui = dateIsoAujourdhuiParisStatut();
-
-        return Boolean(debut && fin && debut <= aujourdHui && fin >= aujourdHui);
-      }
-
-      function normaliserStatutabo(value) {
-        const statut = String(value || "").trim().toLowerCase();
-        return ["paye", "impaye", "cancd", "cree"].includes(statut) ? statut : "";
-      }
-
-      function dateIsoDepuisValeurStatut(value) {
-        const texte = String(value || "").trim();
-        const match = texte.match(/^(\d{4})-(\d{2})-(\d{2})/);
-        return match ? match[1] + "-" + match[2] + "-" + match[3] : "";
-      }
-
-      function dateIsoAujourdhuiParisStatut() {
-        const morceaux = new Intl.DateTimeFormat("fr-FR", {
-          timeZone: "Europe/Paris",
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit"
-        }).formatToParts(new Date());
-
-        const valeur = (type) => morceaux.find((item) => item.type === type)?.value || "";
-        return valeur("year") + "-" + valeur("month") + "-" + valeur("day");
-      }
-
-      function afficherEtatMembrePublic(etat) {
-        const mention = document.getElementById("mention-statut-membre");
-        if (!mention) return;
-
-        if (!etat) {
-          mention.hidden = true;
-          supprimerMentionAbonnementPublic();
-          return;
-        }
-
-        mention.hidden = false;
-        mention.textContent = etat.abonne
-          ? "MEMBRE ABONNÉ"
-          : "MEMBRE INVITÉ";
-
-        afficherMentionAbonnementPublic(etat);
-      }
-
-      function afficherMentionAbonnementPublic(etat) {
-        const mention = document.getElementById("mention-statut-membre");
-        if (!mention || !mention.parentNode) return;
-
-        let bloc = document.getElementById("mention-suspension-abonnement-membre");
-        const texteMention = etat?.mentionAbonnement || "";
-
-        if (!texteMention) {
-          if (bloc) bloc.remove();
-          return;
-        }
-
-        if (!bloc) {
-          bloc = document.createElement("div");
-          bloc.id = "mention-suspension-abonnement-membre";
-          bloc.className = "lcdp-mention-connexion lcdp-mention-suspension-abonnement";
-          mention.insertAdjacentElement("afterend", bloc);
-        }
-
-        bloc.textContent = texteMention;
-      }
-
-      function supprimerMentionAbonnementPublic() {
-        const bloc = document.getElementById("mention-suspension-abonnement-membre");
-        if (bloc) bloc.remove();
-      }
-
       async function initialiserBandeau() {
         const slot = document.getElementById("lcdp-bandeau-slot");
         slot.innerHTML = "";
@@ -598,19 +470,19 @@
 
         const boutons = [
           {
-            label: "PLANIFIER",
+            label: "Planifier",
             style: "lcdp-button-accueil lcdp-button-accueil-orange",
             variante: "reserver",
-            action: () => ouvrirPageMembrePublic("RESERVER", "/ESPACE-MEMBRE/reserver-membre.html", "reserver")
+            action: (libelleBouton) => ouvrirPageMembrePublic(libelleBouton, "/ESPACE-MEMBRE/reserver-membre.html", "reserver")
           },
           {
-            label: "MON AGENDA",
+            label: "Mon agenda",
             style: "lcdp-button-accueil lcdp-button-accueil-green",
             variante: "planning",
-            action: () => ouvrirPageMembrePublic("PLANNING", "/ESPACE-MEMBRE/planning-membre.html", "planning")
+            action: (libelleBouton) => ouvrirPageMembrePublic(libelleBouton, "/ESPACE-MEMBRE/planning-membre.html", "planning")
           },
           {
-            label: "LA CLÉ DU PARC",
+            label: "La clé du parc",
             style: "lcdp-button-accueil lcdp-button-accueil-blue",
             variante: "ouvrir",
             action: gererValidationPresencePublic
@@ -624,7 +496,9 @@
           bouton.textContent = configurationBouton.label;
 
           bouton.addEventListener("click", () => {
-            Promise.resolve(configurationBouton.action()).catch((erreur) => {
+            const libelleBouton = bouton.textContent.trim() || configurationBouton.label || "";
+
+            Promise.resolve(configurationBouton.action(libelleBouton)).catch((erreur) => {
               console.error(erreur);
               afficherAlerte(erreur.message || "Erreur technique. Merci de réessayer.", { variante: configurationBouton.variante }).catch(console.error);
             });
@@ -648,8 +522,6 @@
 
       initialiserBandeau()
         .then(initialiserMenuCentral)
-        .then(() => chargerEtatMembrePublic())
-        .then(afficherEtatMembrePublic)
         .then(initialiserFooter)
         .catch((erreur) => {
           console.error(erreur);
