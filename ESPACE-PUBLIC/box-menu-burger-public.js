@@ -208,7 +208,7 @@
       throw new Error("Structure de dialogue Mon compte incomplète.");
     }
 
-    titre.textContent = "Mon espace connecté";
+    titre.textContent = "Connexion";
     texte.textContent = "Choisissez votre espace";
 
     actions.innerHTML = "";
@@ -317,7 +317,7 @@
           href: "/ESPACE-PUBLIC/accueil-public.html"
         },
         {
-          label: "Mon espace connecté",
+          label: "Connexion",
           action: "mon-compte"
         },
         {
