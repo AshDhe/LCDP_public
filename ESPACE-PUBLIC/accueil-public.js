@@ -604,7 +604,7 @@
             action: () => ouvrirPageMembrePublic("RESERVER", "/ESPACE-MEMBRE/reserver-membre.html", "reserver")
           },
           {
-            label: "AGENDA",
+            label: "MON AGENDA",
             style: "lcdp-button-accueil lcdp-button-accueil-green",
             variante: "planning",
             action: () => ouvrirPageMembrePublic("PLANNING", "/ESPACE-MEMBRE/planning-membre.html", "planning")
