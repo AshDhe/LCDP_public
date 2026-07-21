@@ -308,8 +308,9 @@
       contactElement?.closest(
         ".lcdp-box-fiche-parc__section"
       ),
-      "Contact",
-      construireTexteContactParc(parc)
+      "Votre contact La Clé du Parc",
+      construireTexteContactParc(parc),
+      false
     );
 
     await remplacerSectionParBoxText(
@@ -2100,11 +2101,22 @@
 
   function construireTexteContactParc(parc) {
     const responsable = parc?.resparc || null;
-    const prenom = nettoyerTexte(responsable?.prenomresp || responsable?.prenom);
-    const nom = nettoyerTexte(responsable?.nomresp || responsable?.nom);
-    const identite = [prenom, nom].filter(Boolean).join(" ");
+    const email = nettoyerTexte(responsable?.emailresp);
+    const telephone = nettoyerTexte(responsable?.telresp);
 
-    return identite || "Contact non renseigné.";
+    if (email && telephone) {
+      return email + " | Standard téléphonique : " + telephone;
+    }
+
+    if (email) {
+      return email;
+    }
+
+    if (telephone) {
+      return "Standard téléphonique : " + telephone;
+    }
+
+    return "Contact non renseigné.";
   }
 
   function normaliserNomParcPourChemin(valeur) {
