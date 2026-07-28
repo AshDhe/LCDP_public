@@ -6,11 +6,13 @@
 .lcdp-box-menu-burger__button {
   position: relative;
   z-index: 4101;
-  width: 44px;
-  height: 44px;
-  border: 2px solid #EBA042;
-  border-radius: var(--lcdp-radius-medium);
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 3px solid #587242;
+  border-radius: 999px;
   background: #ffffff;
+  box-shadow: 0 0 0 4px #ffffff;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +24,7 @@
 .lcdp-box-menu-burger__button span {
   width: 22px;
   height: 2px;
-  background: #3C71B1;
+  background: #EBA042;
   border-radius: 999px;
   transition: transform 180ms ease, opacity 180ms ease, background 180ms ease;
 }
@@ -53,7 +55,7 @@
   min-width: 220px;
   max-height: calc(100vh - 120px);
   padding: var(--lcdp-space-2);
-  border: 2px solid #EBA042;
+  border: 2px solid #587242;
   border-radius: var(--lcdp-radius-large);
   background: #ffffff;
   box-shadow: var(--lcdp-shadow-soft);
