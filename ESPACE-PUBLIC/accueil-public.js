@@ -172,6 +172,18 @@
         alerte.classList.add("lcdp-alerte-accueil-" + variante);
       }
 
+      function construireUrlConnexionMembrePublic() {
+        return construireUrlSite("/ESPACE-PUBLIC/connexion-membre.html");
+      }
+
+      function optionsAlerteConnexionRequise(variante) {
+        return {
+          variante,
+          boutonOkLabel: "Me connecter",
+          redirectionOk: construireUrlConnexionMembrePublic()
+        };
+      }
+
       async function afficherAlerte(message, options = {}) {
         const slot = document.getElementById("lcdp-lightbox-slot");
         slot.innerHTML = "";
@@ -180,12 +192,19 @@
         slot.appendChild(fragment);
 
         const alerte = slot.querySelector("[data-lcdp-box-alerte]");
+        const texte = slot.querySelector("[data-lcdp-alerte-message]");
+        const boutonFermer = slot.querySelector("[data-lcdp-alerte-close]");
+        const boutonOk = slot.querySelector("[data-lcdp-alerte-ok]");
 
-        if (!alerte) {
+        if (!alerte || !texte || !boutonFermer || !boutonOk) {
           throw new Error("Structure de l’alerte incomplète.");
         }
 
-        alerte.querySelector("[data-lcdp-alerte-message]").textContent = message;
+        texte.textContent = message;
+
+        if (options.boutonOkLabel) {
+          boutonOk.textContent = options.boutonOkLabel;
+        }
 
         appliquerVarianteAlerteAccueil(alerte, options.variante);
 
@@ -193,8 +212,16 @@
           slot.innerHTML = "";
         };
 
-        alerte.querySelector("[data-lcdp-alerte-close]").addEventListener("click", fermer);
-        alerte.querySelector("[data-lcdp-alerte-ok]").addEventListener("click", fermer);
+        const fermerEtRediriger = () => {
+          fermer();
+
+          if (options.redirectionOk) {
+            window.location.href = options.redirectionOk;
+          }
+        };
+
+        boutonFermer.addEventListener("click", fermer);
+        boutonOk.addEventListener("click", options.redirectionOk ? fermerEtRediriger : fermer);
 
         alerte.addEventListener("click", (event) => {
           if (event.target === alerte) {
@@ -347,7 +374,7 @@
         const etat = await chargerEtatMembrePublic();
 
         if (!etat) {
-          await afficherAlerte(messageConnexionRequise(libelleBouton), { variante: "ouvrir" });
+          await afficherAlerte(messageConnexionRequise(libelleBouton), optionsAlerteConnexionRequise("ouvrir"));
           return;
         }
 
@@ -378,7 +405,7 @@
         const etat = await chargerEtatMembrePublic();
 
         if (!etat) {
-          await afficherAlerte(messageConnexionRequise(libelleBouton), { variante });
+          await afficherAlerte(messageConnexionRequise(libelleBouton), optionsAlerteConnexionRequise(variante));
           return;
         }
 
@@ -389,7 +416,7 @@
         const etat = await chargerEtatMembrePublic();
 
         if (!etat) {
-          await afficherAlerte(messageConnexionRequise(libelleBouton), { variante });
+          await afficherAlerte(messageConnexionRequise(libelleBouton), optionsAlerteConnexionRequise(variante));
           return;
         }
 
