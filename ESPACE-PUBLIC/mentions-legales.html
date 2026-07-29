@@ -292,109 +292,74 @@
         appliquerRoutesSite(slot);
       }
 
-      function endpointEditingAdmin() {
-        return String(
-          window.SITE_CONFIG?.workerEditingAdminUrl ||
-          window.SITE_CONFIG?.WORKER_EDITING_ADMIN_URL ||
-          ""
-        ).replace(/\/+$/, "");
+      function endpointsEditingAdmin() {
+        return Array.from(new Set([
+          window.SITE_CONFIG?.workerEditingAdminUrl,
+          window.SITE_CONFIG?.WORKER_EDITING_ADMIN_URL,
+          window.SITE_CONFIG?.workerEditingAdminFallbackUrl,
+          window.SITE_CONFIG?.WORKER_EDITING_ADMIN_FALLBACK_URL
+        ]
+          .map((value) => String(value || "").replace(/\/+$/, ""))
+          .filter(Boolean)));
       }
 
       async function chargerMentionsLegales() {
-        const endpoint = endpointEditingAdmin();
+        const endpoints = endpointsEditingAdmin();
 
-        if (!endpoint) {
+        if (endpoints.length < 1) {
           console.error(
             "Worker des mentions légales non configuré."
           );
           return CONTENU_SECOURS;
         }
 
-        try {
-          const response = await fetch(
-            endpoint + "/public/mentions-legales",
-            {
-              method: "GET",
-              credentials: "omit",
-              cache: "no-store",
-              headers: {
-                Accept: "application/json"
+        let derniereErreur = null;
+
+        for (const endpoint of endpoints) {
+          try {
+            const response = await fetch(
+              endpoint + "/public/mentions-legales",
+              {
+                method: "GET",
+                credentials: "omit",
+                cache: "no-store",
+                headers: {
+                  Accept: "application/json"
+                }
               }
+            );
+
+            const data = await response.json().catch(() => null);
+
+            if (
+              !response.ok ||
+              !data ||
+              data.success !== true ||
+              !Array.isArray(data.blocs) ||
+              data.blocs.length < 1
+            ) {
+              throw new Error(
+                data?.message ||
+                data?.detail ||
+                "Réponse publique inexploitable."
+              );
             }
-          );
 
-          const data = await response.json().catch(() => null);
-
-          if (
-            !response.ok ||
-            !data ||
-            data.success !== true ||
-            !Array.isArray(data.blocs) ||
-            data.blocs.length < 1
-          ) {
-            throw new Error(
-              data?.message ||
-              data?.detail ||
-              "Réponse publique inexploitable."
-            );
+            return {
+              titre: String(data.titre || "Mentions légales"),
+              blocs: data.blocs
+            };
+          } catch (error) {
+            derniereErreur = error;
           }
-
-          return {
-            titre: String(data.titre || "Mentions légales"),
-            blocs: data.blocs
-          };
-        } catch (error) {
-          console.error(
-            "Chargement des mentions légales impossible :",
-            error
-          );
-
-          return CONTENU_SECOURS;
         }
-      }
 
-      async function afficherMentionsLegales(documentMentions) {
-        const conteneur = document.getElementById(
-          "lcdp-mentions-legales-contenu"
-        );
-        const titrePage = document.getElementById(
-          "lcdp-mentions-legales-titre"
+        console.error(
+          "Chargement des mentions légales impossible :",
+          derniereErreur
         );
 
-        if (!conteneur) {
-          throw new Error(
-            "Conteneur des mentions légales introuvable."
-          );
-        }
-
-        conteneur.innerHTML = "";
-
-        if (titrePage) {
-          titrePage.textContent =
-            String(
-              documentMentions?.titre ||
-              "Mentions légales"
-            );
-        }
-
-        for (
-          const bloc of documentMentions?.blocs || []
-        ) {
-          const titre = String(bloc?.titre || "").trim();
-          const html = nettoyerHtmlAffichage(
-            String(bloc?.html || "")
-          );
-
-          if (!titre || !extraireTexteHtml(html)) {
-            continue;
-          }
-
-          await ajouterBoxText(
-            conteneur,
-            titre,
-            html
-          );
-        }
+        return CONTENU_SECOURS;
       }
 
       function nettoyerHtmlAffichage(htmlBrut) {
