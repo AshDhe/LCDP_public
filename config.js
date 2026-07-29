@@ -1,27 +1,25 @@
 (function () {
-  "use strict";
-
   const host = window.location.hostname;
 
   const isGithub =
     host === "ashdhe.github.io" ||
     host === "huguespavret.github.io";
 
-  const githubOwner = host === "huguespavret.github.io"
-    ? "huguespavret"
-    : "ashdhe";
+  const githubOrigin = "https://" + host;
 
   const CONFIG = {
     github: {
-      publicBase: "https://" + githubOwner + ".github.io/LCDP_public",
-      membreBase: "https://" + githubOwner + ".github.io/LCDP_membre",
-      parcBase: "https://" + githubOwner + ".github.io/LCDP_parc",
-      coachBase: "https://" + githubOwner + ".github.io/LCDP_coach",
-      adminBase: "https://" + githubOwner + ".github.io/LCDP_admin"
+      publicBase: githubOrigin + "/LCDP_public",
+      objetBase: githubOrigin + "/LCDP_public/OBJET",
+      membreBase: githubOrigin + "/LCDP_membre",
+      parcBase: githubOrigin + "/LCDP_parc",
+      coachBase: githubOrigin + "/LCDP_coach",
+      adminBase: githubOrigin + "/LCDP_admin"
     },
 
     production: {
       publicBase: "https://lacleduparc.fr",
+      objetBase: "https://lacleduparc.fr/OBJET",
       membreBase: "https://membre.lacleduparc.fr",
       parcBase: "https://parc.lacleduparc.fr",
       coachBase: "https://coach.lacleduparc.fr",
@@ -35,80 +33,54 @@
     mdptokenz: "https://mdptokenz-api.lacleduparc.fr",
     connexionMembre: "https://connexion-membre-api.lacleduparc.fr",
     formInscriptionMembre: "https://form-inscription-membre-api.lacleduparc.fr",
+    la: "https://la-api.lacleduparc.fr",
     userRouteur: "https://user-routeur-api.lacleduparc.fr",
-
-    nouvelleDateMembre: "https://nouvelle-date-membre-api.lacleduparc.fr",
-    fluxm: "https://worker-fluxm-api.lacleduparc.fr",
-    planningMembre: "https://planning-membre-api.lacleduparc.fr",
-    inviterMembre: "https://inviter-membre-api.lacleduparc.fr",
-    invitationMembre: "https://invitation-membre-api.lacleduparc.fr",
-
-    monCompteMembre: "https://mon-compte-membre-api.lacleduparc.fr",
-    majEmailMembre: "https://maj-email-membre-api.lacleduparc.fr",
-    majParrainMembre: "https://maj-parrain-membre-api.lacleduparc.fr",
-    majDepartementMembre: "https://maj-dptmt-membre-api.lacleduparc.fr"
+    editingAdmin: "https://editing-admin-api.lacleduparc.fr"
   };
 
   function buildUrl(base, path) {
-    return String(base || "").replace(/\/+$/, "") + "/" + String(path || "").replace(/^\/+/, "");
+    return base.replace(/\/$/, "") + "/" + String(path || "").replace(/^\/+/, "");
   }
-
-  const objetBase = buildUrl(active.publicBase, "/OBJET");
-
-  window.SITE_BASE = active.membreBase;
 
   window.SITE_CONFIG = {
     publicBaseUrl: active.publicBase,
+    siteBase: active.publicBase,
+    objetBaseUrl: active.objetBase,
+
     membreBaseUrl: active.membreBase,
     parcBaseUrl: active.parcBase,
     coachBaseUrl: active.coachBase,
     adminBaseUrl: active.adminBase,
 
-    objetBaseUrl: objetBase,
-
-    siteBase: active.membreBase,
-
     workerMdptokenzUrl: WORKERS.mdptokenz,
     workerConnexionMembreUrl: WORKERS.connexionMembre,
     workerFormInscriptionMembreUrl: WORKERS.formInscriptionMembre,
     workerUserRouteurUrl: WORKERS.userRouteur,
+    workerLaUrl: WORKERS.la,
+    workerEditingAdminUrl: WORKERS.editingAdmin,
+    WORKER_LA_URL: WORKERS.la,
+    WORKER_EDITING_ADMIN_URL: WORKERS.editingAdmin,
 
-    workerNouvelleDateMembreUrl: WORKERS.nouvelleDateMembre,
-    workerFluxmUrl: WORKERS.fluxm,
-    workerPlanningMembreUrl: WORKERS.planningMembre,
-    workerInviterMembreUrl: WORKERS.inviterMembre,
-    workerInvitationMembreUrl: WORKERS.invitationMembre,
-
-    workerMonCompteMembreUrl: WORKERS.monCompteMembre,
-    workerMajEmailMembreUrl: WORKERS.majEmailMembre,
-    workerMajParrainMembreUrl: WORKERS.majParrainMembre,
-    workerMajDepartementMembreUrl: WORKERS.majDepartementMembre,
 
     PUBLIC_BASE: active.publicBase,
+    SITE_BASE: active.publicBase,
+    OBJET_BASE: active.objetBase,
     MEMBRE_BASE: active.membreBase,
     PARC_BASE: active.parcBase,
     COACH_BASE: active.coachBase,
     ADMIN_BASE: active.adminBase,
-    OBJET_BASE: objetBase,
 
     WORKER_MDPTOKENZ_URL: WORKERS.mdptokenz,
     WORKER_CONNEXION_MEMBRE_URL: WORKERS.connexionMembre,
     WORKER_FORM_INSCRIPTION_MEMBRE_URL: WORKERS.formInscriptionMembre,
     WORKER_USER_ROUTEUR_URL: WORKERS.userRouteur,
 
-    WORKER_NOUVELLE_DATE_MEMBRE_URL: WORKERS.nouvelleDateMembre,
-    WORKER_FLUXM_URL: WORKERS.fluxm,
-    WORKER_PLANNING_MEMBRE_URL: WORKERS.planningMembre,
-    WORKER_INVITER_MEMBRE_URL: WORKERS.inviterMembre,
-    WORKER_INVITATION_MEMBRE_URL: WORKERS.invitationMembre,
-
-    WORKER_MON_COMPTE_MEMBRE_URL: WORKERS.monCompteMembre,
-    WORKER_MAJ_EMAIL_MEMBRE_URL: WORKERS.majEmailMembre,
-    WORKER_MAJ_PARRAIN_MEMBRE_URL: WORKERS.majParrainMembre,
-    WORKER_MAJ_DEPARTEMENT_MEMBRE_URL: WORKERS.majDepartementMembre,
-
     publicUrl(path) {
       return buildUrl(active.publicBase, path);
+    },
+
+    objetUrl(path) {
+      return buildUrl(active.objetBase, path);
     },
 
     membreUrl(path) {
@@ -125,10 +97,6 @@
 
     adminUrl(path) {
       return buildUrl(active.adminBase, path);
-    },
-
-    objetUrl(path) {
-      return buildUrl(objetBase, path);
     },
 
     apiUrl(workerSubdomain) {
