@@ -35,7 +35,8 @@
     formInscriptionMembre: "https://form-inscription-membre-api.lacleduparc.fr",
     la: "https://la-api.lacleduparc.fr",
     userRouteur: "https://user-routeur-api.lacleduparc.fr",
-    editingAdmin: "https://editing-admin-api.lacleduparc.fr"
+    editingAdmin: "https://editing-admin-api.lacleduparc.fr",
+    editingAdminFallback: "https://w-editing-admin.hugues-pavret.workers.dev"
   };
 
   function buildUrl(base, path) {
@@ -58,8 +59,10 @@
     workerUserRouteurUrl: WORKERS.userRouteur,
     workerLaUrl: WORKERS.la,
     workerEditingAdminUrl: WORKERS.editingAdmin,
+    workerEditingAdminFallbackUrl: WORKERS.editingAdminFallback,
     WORKER_LA_URL: WORKERS.la,
     WORKER_EDITING_ADMIN_URL: WORKERS.editingAdmin,
+    WORKER_EDITING_ADMIN_FALLBACK_URL: WORKERS.editingAdminFallback,
 
 
     PUBLIC_BASE: active.publicBase,
