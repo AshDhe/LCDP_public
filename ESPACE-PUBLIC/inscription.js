@@ -125,6 +125,24 @@
     appliquerRoutesSite(slot);
   }
 
+  function remplirTitreBoxText(element, titre) {
+    element.textContent = "";
+
+    if (Array.isArray(titre) && titre.length > 0) {
+      titre.forEach((ligne, index) => {
+        if (index > 0) {
+          element.appendChild(document.createElement("br"));
+        }
+
+        element.appendChild(document.createTextNode(ligne));
+      });
+
+      return;
+    }
+
+    element.textContent = titre || "";
+  }
+
   async function ajouterBoxText(slotId, titre, contenuHtml, options = {}) {
     const slot = document.getElementById(slotId);
 
@@ -145,7 +163,7 @@
       throw new Error("Structure du bloc texte V3 incomplète.");
     }
 
-    titreElement.textContent = titre;
+    remplirTitreBoxText(titreElement, titre);
 
     if (options.titreCentre === true) {
       box.setAttribute("data-lcdp-boxtext-align", "center");
@@ -226,7 +244,10 @@
 
     const boxHaut = await ajouterBoxText(
       "lcdp-boxtext-haut-slot",
-      "Bénéficiez de La Clé du Parc sans payer d'abonnement",
+      [
+        "Bénéficiez de La Clé du Parc",
+        "sans payer d'abonnement"
+      ],
       `
         <p>
           En devenant membre invité La Clé du Parc, vous bénéficiez gratuitement d'un accès nominatif à l'ensemble des parcs du club. Aucune limite ne s'applique au nombre d'invitations que vous recevez, ni au nombre de membres abonnés qui peuvent vous inviter et vous restez membre aussi longtemps que vous souhaitez, sous réserve de respecter le règlement du club.
