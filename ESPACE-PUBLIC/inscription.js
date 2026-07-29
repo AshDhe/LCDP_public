@@ -246,11 +246,11 @@
       "lcdp-boxtext-haut-slot",
       [
         "Bénéficiez de La Clé du Parc",
-        "sans payer d'abonnement"
+        "sans être abonné(e)"
       ],
       `
         <p>
-          En devenant membre invité La Clé du Parc, vous bénéficiez gratuitement d'un accès nominatif à l'ensemble des parcs du club. Aucune limite ne s'applique au nombre d'invitations que vous recevez, ni au nombre de membres abonnés qui peuvent vous inviter et vous restez membre aussi longtemps que vous souhaitez, sous réserve de respecter le règlement du club.
+          En vous inscrivant comme membre invité La Clé du Parc, vous bénéficiez d'un accès gratuit, nominatif, sécurisé et contrôlé, à l'ensemble des parcs du club, dans la limite des invitations que vous recevez. Cela sans engagement financier ni obligation d'abonnement. En tant que membre invité, vous pouvez être invité(e) autant de fois que vous souhaitez, dans la limite des invitations que vous recevez, et par qui vous voulez, dans la limite des invitations que vous recevez. Vous pouvez aussi changer de parrain "invitant" autant que vous le souhaites et sans limitation de nombre ni de durée. Et vous pourrez rester membre invité sans limitation de temps, sous serve de respecter, en tant que membre invité, le règlement du club.
         </p>
 
         <p>
