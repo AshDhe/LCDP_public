@@ -35,23 +35,16 @@
         <div class="lcdp-page-container">
           <div class="lcdp-page-content lcdp-stack-large">
 
-            <h1 class="lcdp-title-page-center">Mentions légales</h1>
+            <h1 class="lcdp-title-page-center" id="lcdp-mentions-legales-titre">Mentions légales</h1>
 
             <p class="lcdp-mention-connexion">
               [Espace public de l'application]
             </p>
 
-            <div id="lcdp-boxtext-intro-slot"></div>
-            <div id="lcdp-boxtext-editeur-slot"></div>
-            <div id="lcdp-boxtext-publication-slot"></div>
-            <div id="lcdp-boxtext-hebergement-slot"></div>
-            <div id="lcdp-boxtext-propriete-slot"></div>
-            <div id="lcdp-boxtext-responsabilite-slot"></div>
-            <div id="lcdp-boxtext-donnees-slot"></div>
-            <div id="lcdp-boxtext-cookies-slot"></div>
-            <div id="lcdp-boxtext-acces-slot"></div>
-            <div id="lcdp-boxtext-contact-slot"></div>
-            <div id="lcdp-boxtext-maj-slot"></div>
+            <div
+              id="lcdp-mentions-legales-contenu"
+              class="lcdp-stack-large"
+            ></div>
 
           </div>
         </div>
@@ -73,6 +66,67 @@
         window.SITE_CONFIG?.siteBase ||
         ""
       ).replace(/\/$/, "");
+
+      const CONTENU_SECOURS = {
+        "titre": "Mentions légales",
+        "blocs": [
+                {
+                        "id": "informations-generales",
+                        "titre": "Informations générales",
+                        "html": "<p>\n  Cette page rassemble les informations légales relatives au site et à l'application La Clé du Parc.\n</p>\n<p>\n  Les informations juridiques définitives devront être complétées avec les données exactes de la structure éditrice, de son représentant légal, de son hébergeur et de ses coordonnées officielles.\n</p>"
+                },
+                {
+                        "id": "editeur-site",
+                        "titre": "Éditeur du site",
+                        "html": "<p>\n  Le site La Clé du Parc est édité par la structure responsable du club.\n</p>\n<p>\n  Dénomination sociale, forme juridique, adresse du siège, numéro d’identification et coordonnées de contact : informations à compléter après validation juridique.\n</p>"
+                },
+                {
+                        "id": "responsable-publication",
+                        "titre": "Responsable de la publication",
+                        "html": "<p>\n  Le responsable de la publication est la personne physique ou morale représentant la structure éditrice.\n</p>\n<p>\n  Nom, qualité et coordonnées professionnelles : informations à compléter.\n</p>"
+                },
+                {
+                        "id": "hebergement",
+                        "titre": "Hébergement",
+                        "html": "<p>\n  Les informations relatives à l’hébergeur du site devront être indiquées dans cette rubrique.\n</p>\n<p>\n  Nom de l’hébergeur, adresse, coordonnées et localisation des services d’hébergement : informations à compléter.\n</p>"
+                },
+                {
+                        "id": "propriete-intellectuelle",
+                        "titre": "Propriété intellectuelle",
+                        "html": "<p>\n  Les textes, éléments graphiques, interfaces, logos, images, composants et contenus du site sont destinés à présenter La Clé du Parc et son fonctionnement.\n</p>\n<p>\n  Toute reprise ou réutilisation devra respecter les droits attachés aux contenus, aux marques, aux visuels et aux éléments techniques utilisés.\n</p>"
+                },
+                {
+                        "id": "responsabilite",
+                        "titre": "Responsabilité",
+                        "html": "<p>\n  Les informations publiées sur le site ont pour objet de présenter le club, ses règles d’accès, ses services et son fonctionnement.\n</p>\n<p>\n  Elles peuvent être mises à jour afin de tenir compte de l’évolution du service, du réseau de parcs, des activités proposées ou du cadre applicable.\n</p>"
+                },
+                {
+                        "id": "donnees-personnelles",
+                        "titre": "Données personnelles",
+                        "html": "<p>\n  Certaines fonctionnalités peuvent nécessiter la collecte de données personnelles, notamment lors de l’inscription, de la connexion, de la réservation ou de la gestion du compte membre.\n</p>\n<p>\n  Les finalités, durées de conservation, destinataires, droits des personnes et modalités de contact devront être précisés dans la politique de confidentialité ou dans une rubrique dédiée.\n</p>"
+                },
+                {
+                        "id": "cookies-traceurs",
+                        "titre": "Cookies et traceurs",
+                        "html": "<p>\n  Le site et l'application peuvent utiliser des cookies strictement nécessaires au fonctionnement des espaces de connexion et des sessions utilisateur.\n</p>\n<p>\n  Si des cookies de mesure d’audience, de suivi ou de services tiers sont ajoutés, ils devront être décrits et encadrés conformément aux règles applicables.\n</p>"
+                },
+                {
+                        "id": "acces-service",
+                        "titre": "Accès au service",
+                        "html": "<p>\n  L’accès aux espaces privés de La Clé du Parc peut dépendre de la création d’un compte, de la validation d’une adresse e-mail, de l’acceptation des règlements applicables et des droits associés au statut du membre.\n</p>\n<p>\n  Les conditions détaillées d’accès et d’utilisation relèvent des règlements du club et de l'application.\n</p>"
+                },
+                {
+                        "id": "contact",
+                        "titre": "Contact",
+                        "html": "<p>\n  Les demandes relatives aux mentions légales, au site, à l'application ou aux droits des utilisateurs peuvent être adressées via la page de contact.\n</p>\n<p>\n  <a\n    class=\"lcdp-link-secondary\"\n    href=\"../ESPACE-PUBLIC/contact.html\"\n    data-site-href=\"/ESPACE-PUBLIC/contact.html\"\n  >Accéder à la page contact</a>\n</p>"
+                },
+                {
+                        "id": "mise-a-jour",
+                        "titre": "Mise à jour des mentions légales",
+                        "html": "<p>\n  Les présentes mentions légales sont susceptibles d’être complétées ou mises à jour.\n</p>\n<p>\n  Date de dernière mise à jour : à compléter.\n</p>"
+                }
+        ]
+};
 
       function construireUrlSite(chemin) {
         if (!chemin) return chemin;
@@ -214,18 +268,239 @@
         }
       }
 
-      async function ajouterBoxText(slotId, titre, contenuHtml) {
-        const slot = document.getElementById(slotId);
-        slot.innerHTML = "";
+      async function ajouterBoxText(
+        conteneur,
+        titre,
+        contenuHtml
+      ) {
+        const slot = document.createElement("div");
+        conteneur.appendChild(slot);
 
-        const fragment = await chargerFragment("/OBJET/BOX/01-box-text.html");
+        const fragment = await chargerFragment(
+          "/OBJET/BOX/01-box-text.html"
+        );
         slot.appendChild(fragment);
 
         const box = slot.querySelector("[data-lcdp-boxtext]");
-        box.querySelector("[data-lcdp-boxtext-title]").textContent = titre;
-        box.querySelector("[data-lcdp-boxtext-content]").innerHTML = contenuHtml;
+        box.querySelector(
+          "[data-lcdp-boxtext-title]"
+        ).textContent = titre;
+        box.querySelector(
+          "[data-lcdp-boxtext-content]"
+        ).innerHTML = nettoyerHtmlAffichage(contenuHtml);
 
         appliquerRoutesSite(slot);
+      }
+
+      function endpointEditingAdmin() {
+        return String(
+          window.SITE_CONFIG?.workerEditingAdminUrl ||
+          window.SITE_CONFIG?.WORKER_EDITING_ADMIN_URL ||
+          ""
+        ).replace(/\/+$/, "");
+      }
+
+      async function chargerMentionsLegales() {
+        const endpoint = endpointEditingAdmin();
+
+        if (!endpoint) {
+          console.error(
+            "Worker des mentions légales non configuré."
+          );
+          return CONTENU_SECOURS;
+        }
+
+        try {
+          const response = await fetch(
+            endpoint + "/public/mentions-legales",
+            {
+              method: "GET",
+              credentials: "omit",
+              cache: "no-store",
+              headers: {
+                Accept: "application/json"
+              }
+            }
+          );
+
+          const data = await response.json().catch(() => null);
+
+          if (
+            !response.ok ||
+            !data ||
+            data.success !== true ||
+            !Array.isArray(data.blocs) ||
+            data.blocs.length < 1
+          ) {
+            throw new Error(
+              data?.message ||
+              data?.detail ||
+              "Réponse publique inexploitable."
+            );
+          }
+
+          return {
+            titre: String(data.titre || "Mentions légales"),
+            blocs: data.blocs
+          };
+        } catch (error) {
+          console.error(
+            "Chargement des mentions légales impossible :",
+            error
+          );
+
+          return CONTENU_SECOURS;
+        }
+      }
+
+      async function afficherMentionsLegales(documentMentions) {
+        const conteneur = document.getElementById(
+          "lcdp-mentions-legales-contenu"
+        );
+        const titrePage = document.getElementById(
+          "lcdp-mentions-legales-titre"
+        );
+
+        if (!conteneur) {
+          throw new Error(
+            "Conteneur des mentions légales introuvable."
+          );
+        }
+
+        conteneur.innerHTML = "";
+
+        if (titrePage) {
+          titrePage.textContent =
+            String(
+              documentMentions?.titre ||
+              "Mentions légales"
+            );
+        }
+
+        for (
+          const bloc of documentMentions?.blocs || []
+        ) {
+          const titre = String(bloc?.titre || "").trim();
+          const html = nettoyerHtmlAffichage(
+            String(bloc?.html || "")
+          );
+
+          if (!titre || !extraireTexteHtml(html)) {
+            continue;
+          }
+
+          await ajouterBoxText(
+            conteneur,
+            titre,
+            html
+          );
+        }
+      }
+
+      function nettoyerHtmlAffichage(htmlBrut) {
+        const template = document.createElement("template");
+        template.innerHTML = String(htmlBrut || "");
+
+        template.content
+          .querySelectorAll(
+            "script,style,iframe,object,embed,svg,math,form,input,button,textarea,select,template"
+          )
+          .forEach((element) => element.remove());
+
+        const autorisees = new Set([
+          "P",
+          "BR",
+          "STRONG",
+          "EM",
+          "UL",
+          "OL",
+          "LI",
+          "A"
+        ]);
+
+        Array.from(
+          template.content.querySelectorAll("*")
+        ).forEach((element) => {
+          if (!autorisees.has(element.tagName)) {
+            element.replaceWith(...element.childNodes);
+            return;
+          }
+
+          Array.from(element.attributes).forEach((attribut) => {
+            const nom = attribut.name.toLowerCase();
+
+            if (
+              element.tagName === "A" &&
+              (
+                nom === "href" ||
+                nom === "data-site-href"
+              )
+            ) {
+              const url = normaliserUrlLien(
+                attribut.value
+              );
+
+              if (url) {
+                element.setAttribute(
+                  attribut.name,
+                  url
+                );
+              } else {
+                element.removeAttribute(
+                  attribut.name
+                );
+              }
+
+              return;
+            }
+
+            if (
+              element.tagName === "A" &&
+              nom === "class" &&
+              attribut.value === "lcdp-link-secondary"
+            ) {
+              return;
+            }
+
+            element.removeAttribute(attribut.name);
+          });
+        });
+
+        return template.innerHTML.trim();
+      }
+
+      function normaliserUrlLien(value) {
+        const url = String(value || "").trim();
+
+        if (!url || url.startsWith("//")) {
+          return "";
+        }
+
+        const compact = url
+          .replace(/[\u0000-\u0020\u007f]+/g, "")
+          .toLowerCase();
+
+        return (
+          compact.startsWith("http://") ||
+          compact.startsWith("https://") ||
+          compact.startsWith("mailto:") ||
+          compact.startsWith("tel:") ||
+          compact.startsWith("/") ||
+          compact.startsWith("#") ||
+          compact.startsWith("../") ||
+          compact.startsWith("./")
+        )
+          ? url
+          : "";
+      }
+
+      function extraireTexteHtml(htmlBrut) {
+        const template = document.createElement("template");
+        template.innerHTML = String(htmlBrut || "");
+
+        return String(
+          template.content.textContent || ""
+        ).replace(/\s+/g, " ").trim();
       }
 
       async function initialiserFooter() {
@@ -243,151 +518,11 @@
 
         await initialiserBandeau();
 
-        await ajouterBoxText(
-          "lcdp-boxtext-intro-slot",
-          "Informations générales",
-          `
-            <p>
-              Cette page rassemble les informations légales relatives au site et à l'application La Clé du Parc.
-            </p>
-            <p>
-              Les informations juridiques définitives devront être complétées avec les données exactes de la structure éditrice, de son représentant légal, de son hébergeur et de ses coordonnées officielles.
-            </p>
-          `
-        );
+        const documentMentions =
+          await chargerMentionsLegales();
 
-        await ajouterBoxText(
-          "lcdp-boxtext-editeur-slot",
-          "Éditeur du site",
-          `
-            <p>
-              Le site La Clé du Parc est édité par la structure responsable du club.
-            </p>
-            <p>
-              Dénomination sociale, forme juridique, adresse du siège, numéro d’identification et coordonnées de contact : informations à compléter après validation juridique.
-            </p>
-          `
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-publication-slot",
-          "Responsable de la publication",
-          `
-            <p>
-              Le responsable de la publication est la personne physique ou morale représentant la structure éditrice.
-            </p>
-            <p>
-              Nom, qualité et coordonnées professionnelles : informations à compléter.
-            </p>
-          `
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-hebergement-slot",
-          "Hébergement",
-          `
-            <p>
-              Les informations relatives à l’hébergeur du site devront être indiquées dans cette rubrique.
-            </p>
-            <p>
-              Nom de l’hébergeur, adresse, coordonnées et localisation des services d’hébergement : informations à compléter.
-            </p>
-          `
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-propriete-slot",
-          "Propriété intellectuelle",
-          `
-            <p>
-              Les textes, éléments graphiques, interfaces, logos, images, composants et contenus du site sont destinés à présenter La Clé du Parc et son fonctionnement.
-            </p>
-            <p>
-              Toute reprise ou réutilisation devra respecter les droits attachés aux contenus, aux marques, aux visuels et aux éléments techniques utilisés.
-            </p>
-          `
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-responsabilite-slot",
-          "Responsabilité",
-          `
-            <p>
-              Les informations publiées sur le site ont pour objet de présenter le club, ses règles d’accès, ses services et son fonctionnement.
-            </p>
-            <p>
-              Elles peuvent être mises à jour afin de tenir compte de l’évolution du service, du réseau de parcs, des activités proposées ou du cadre applicable.
-            </p>
-          `
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-donnees-slot",
-          "Données personnelles",
-          `
-            <p>
-              Certaines fonctionnalités peuvent nécessiter la collecte de données personnelles, notamment lors de l’inscription, de la connexion, de la réservation ou de la gestion du compte membre.
-            </p>
-            <p>
-              Les finalités, durées de conservation, destinataires, droits des personnes et modalités de contact devront être précisés dans la politique de confidentialité ou dans une rubrique dédiée.
-            </p>
-          `
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-cookies-slot",
-          "Cookies et traceurs",
-          `
-            <p>
-              Le site et l'application peuvent utiliser des cookies strictement nécessaires au fonctionnement des espaces de connexion et des sessions utilisateur.
-            </p>
-            <p>
-              Si des cookies de mesure d’audience, de suivi ou de services tiers sont ajoutés, ils devront être décrits et encadrés conformément aux règles applicables.
-            </p>
-          `
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-acces-slot",
-          "Accès au service",
-          `
-            <p>
-              L’accès aux espaces privés de La Clé du Parc peut dépendre de la création d’un compte, de la validation d’une adresse e-mail, de l’acceptation des règlements applicables et des droits associés au statut du membre.
-            </p>
-            <p>
-              Les conditions détaillées d’accès et d’utilisation relèvent des règlements du club et de l'application.
-            </p>
-          `
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-contact-slot",
-          "Contact",
-          `
-            <p>
-              Les demandes relatives aux mentions légales, au site, à l'application ou aux droits des utilisateurs peuvent être adressées via la page de contact.
-            </p>
-            <p>
-              <a
-                class="lcdp-link-secondary"
-                href="../ESPACE-PUBLIC/contact.html"
-                data-site-href="/ESPACE-PUBLIC/contact.html"
-              >Accéder à la page contact</a>
-            </p>
-          `
-        );
-
-        await ajouterBoxText(
-          "lcdp-boxtext-maj-slot",
-          "Mise à jour des mentions légales",
-          `
-            <p>
-              Les présentes mentions légales sont susceptibles d’être complétées ou mises à jour.
-            </p>
-            <p>
-              Date de dernière mise à jour : à compléter.
-            </p>
-          `
+        await afficherMentionsLegales(
+          documentMentions
         );
 
         await initialiserFooter();
