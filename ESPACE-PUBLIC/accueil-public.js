@@ -482,7 +482,7 @@
             action: (libelleBouton) => ouvrirPageMembrePublic(libelleBouton, "/ESPACE-MEMBRE/planning-membre.html", "planning")
           },
           {
-            label: "La clé du parc",
+            label: "Ma clé",
             style: "lcdp-button-accueil lcdp-button-accueil-blue",
             variante: "ouvrir",
             action: gererValidationPresencePublic
