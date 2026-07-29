@@ -343,7 +343,7 @@
         return "Vous devez être membre abonné pour utiliser la fonction " + normaliserNomFonction(libelleBouton) + ".";
       }
 
-      async function gererValidationPresencePublic(libelleBouton = "La clé du parc") {
+      async function gererValidationPresencePublic(libelleBouton = "Ma Clé") {
         const etat = await chargerEtatMembrePublic();
 
         if (!etat) {
