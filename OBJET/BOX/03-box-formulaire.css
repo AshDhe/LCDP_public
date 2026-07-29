@@ -84,7 +84,9 @@
 .lcdp-box-formulaire__actions {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: var(--lcdp-space-2);
 }
 
 .lcdp-box-formulaire__actions .lcdp-button {

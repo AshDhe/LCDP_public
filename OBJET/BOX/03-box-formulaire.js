@@ -101,6 +101,21 @@
     });
   }
 
+  function ajouterClasses(element, classes) {
+    String(classes || "")
+      .split(/\s+/)
+      .filter(Boolean)
+      .forEach((nomClasse) => element.classList.add(nomClasse));
+  }
+
+  function appliquerValeurControle(element, champ) {
+    if (champ.value === undefined || champ.value === null) {
+      return;
+    }
+
+    element.value = String(champ.value);
+  }
+
   function creerLabel(champ) {
     const label = document.createElement("label");
     label.className = "lcdp-box-champ-formulaire__label";
@@ -134,7 +149,9 @@
 
   function creerControleStandard(champ) {
     const type = champ.type || "text";
-    const element = document.createElement(type === "textarea" ? "textarea" : "input");
+    const element = document.createElement(
+      type === "textarea" ? "textarea" : "input"
+    );
 
     if (type !== "textarea") {
       element.type = type;
@@ -149,10 +166,64 @@
       autocapitalize: champ.autocapitalize,
       spellcheck: champ.spellcheck,
       inputmode: champ.inputmode,
+      min: champ.min,
+      max: champ.max,
+      step: champ.step,
+      maxlength: champ.maxlength,
+      readonly: champ.readonly === true,
+      disabled: champ.disabled === true,
       required: champ.validationNative === true && champ.required
     });
 
+    if (champ.readonly === true) {
+      element.setAttribute("aria-readonly", "true");
+    }
+
+    appliquerValeurControle(element, champ);
+
     return element;
+  }
+
+  function creerControleSelect(champ) {
+    const select = document.createElement("select");
+
+    select.id = champ.id || champ.name;
+    select.name = champ.name;
+
+    ajouterAttributs(select, {
+      disabled: champ.disabled === true,
+      required: champ.validationNative === true && champ.required
+    });
+
+    (Array.isArray(champ.options) ? champ.options : [])
+      .forEach((option) => {
+        const element = document.createElement("option");
+        const valeur =
+          option && typeof option === "object"
+            ? option.value
+            : option;
+        const label =
+          option && typeof option === "object"
+            ? option.label
+            : option;
+
+        element.value = valeur === null || valeur === undefined
+          ? ""
+          : String(valeur);
+        element.textContent = label === null || label === undefined
+          ? element.value
+          : String(label);
+
+        if (option && typeof option === "object") {
+          element.disabled = option.disabled === true;
+        }
+
+        select.appendChild(element);
+      });
+
+    appliquerValeurControle(select, champ);
+
+    return select;
   }
 
   function creerControleCheckbox(champ) {
@@ -164,8 +235,10 @@
     input.type = "checkbox";
     input.id = champ.id || champ.name;
     input.name = champ.name;
+    input.checked = champ.checked === true || champ.value === true;
 
     ajouterAttributs(input, {
+      disabled: champ.disabled === true,
       required: champ.validationNative === true && champ.required
     });
 
@@ -190,12 +263,18 @@
       throw new Error("Structure du champ formulaire V3 incomplète.");
     }
 
+    ajouterClasses(element, champ.className);
+
     if (champ.type === "checkbox") {
       labelZone.appendChild(creerHeading(champ));
       control.appendChild(creerControleCheckbox(champ));
     } else {
       labelZone.appendChild(creerLabel(champ));
-      control.appendChild(creerControleStandard(champ));
+      control.appendChild(
+        champ.type === "select"
+          ? creerControleSelect(champ)
+          : creerControleStandard(champ)
+      );
     }
 
     if (champ.descriptionHtml) {
@@ -257,6 +336,10 @@
       form.setAttribute("aria-label", configuration.ariaLabel);
     }
 
+    ajouterClasses(form, configuration.formClassName);
+    ajouterClasses(fields, configuration.fieldsClassName);
+    ajouterClasses(actions, configuration.actionsClassName);
+
     if (configuration.validationNative === true) {
       form.noValidate = false;
       form.removeAttribute("novalidate");
@@ -296,19 +379,32 @@
       }
     }
 
-    if (configuration.bouton) {
-      const bouton = document.createElement("button");
-      bouton.type = configuration.bouton.type || "submit";
+    const boutons = Array.isArray(configuration.boutons)
+      ? configuration.boutons
+      : configuration.bouton
+        ? [configuration.bouton]
+        : [];
 
-      if (configuration.bouton.id) {
-        bouton.id = configuration.bouton.id;
+    boutons.forEach((configurationBouton) => {
+      const bouton = document.createElement("button");
+      bouton.type = configurationBouton.type || "submit";
+
+      if (configurationBouton.id) {
+        bouton.id = configurationBouton.id;
       }
 
-      bouton.className = "lcdp-button " + (configuration.bouton.style || "lcdp-button-primary");
-      bouton.textContent = configuration.bouton.label || "Envoyer";
+      bouton.className =
+        "lcdp-button " +
+        (configurationBouton.style || "lcdp-button-primary");
+      bouton.textContent =
+        configurationBouton.label || "Envoyer";
+
+      if (configurationBouton.disabled === true) {
+        bouton.disabled = true;
+      }
 
       actions.appendChild(bouton);
-    }
+    });
 
     if (configuration.noteHtml) {
       note.innerHTML = configuration.noteHtml;
