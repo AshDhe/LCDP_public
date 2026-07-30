@@ -157,14 +157,170 @@
         }
       }
 
-      async function ajouterBoxText(slotId, titre, contenuHtml) {
-        const slot = document.getElementById(slotId);
-        slot.innerHTML = "";
-        slot.appendChild(await chargerFragment("/OBJET/BOX/01-box-text.html"));
-        const box = slot.querySelector("[data-lcdp-boxtext]");
-        box.querySelector("[data-lcdp-boxtext-title]").textContent = titre;
-        box.querySelector("[data-lcdp-boxtext-content]").innerHTML = contenuHtml;
-        appliquerRoutesSite(slot);
+      function endpointsEditingAdmin() {
+        return Array.from(new Set([
+          window.SITE_CONFIG?.workerEditingAdminUrl,
+          window.SITE_CONFIG?.WORKER_EDITING_ADMIN_URL,
+          window.SITE_CONFIG?.workerEditingAdminFallbackUrl,
+          window.SITE_CONFIG?.WORKER_EDITING_ADMIN_FALLBACK_URL
+        ]
+          .map((value) => String(value || "").replace(/\/+$/, ""))
+          .filter(Boolean)));
+      }
+
+      async function chargerDocumentPublic(code, titreParDefaut) {
+        const endpoints = endpointsEditingAdmin();
+
+        if (endpoints.length < 1) {
+          console.error("Worker de contenu public non configuré.");
+          return {
+            titre: titreParDefaut,
+            blocs: []
+          };
+        }
+
+        let derniereErreur = null;
+
+        for (const endpoint of endpoints) {
+          try {
+            const response = await fetch(
+              endpoint + "/public/" + encodeURIComponent(code),
+              {
+                method: "GET",
+                credentials: "omit",
+                cache: "no-store",
+                headers: {
+                  Accept: "application/json"
+                }
+              }
+            );
+
+            const data = await response.json().catch(() => null);
+
+            if (
+              !response.ok ||
+              !data ||
+              data.success !== true ||
+              !Array.isArray(data.blocs)
+            ) {
+              throw new Error(
+                data?.message ||
+                data?.detail ||
+                "Réponse publique inexploitable."
+              );
+            }
+
+            return {
+              titre: String(data.titre || titreParDefaut),
+              blocs: data.blocs
+            };
+          } catch (error) {
+            derniereErreur = error;
+          }
+        }
+
+        console.error(
+          "Chargement du contenu public impossible :",
+          derniereErreur
+        );
+
+        return {
+          titre: titreParDefaut,
+          blocs: []
+        };
+      }
+
+      function nettoyerHtmlAffichage(htmlBrut) {
+        const template = document.createElement("template");
+        template.innerHTML = String(htmlBrut || "");
+
+        template.content
+          .querySelectorAll(
+            "script,style,iframe,object,embed,svg,math,form,input,button,textarea,select,template"
+          )
+          .forEach((element) => element.remove());
+
+        const autorisees = new Set([
+          "P",
+          "BR",
+          "STRONG",
+          "EM",
+          "UL",
+          "OL",
+          "LI",
+          "A"
+        ]);
+
+        Array.from(
+          template.content.querySelectorAll("*")
+        ).forEach((element) => {
+          if (!autorisees.has(element.tagName)) {
+            element.replaceWith(...element.childNodes);
+            return;
+          }
+
+          Array.from(element.attributes).forEach((attribut) => {
+            const nom = attribut.name.toLowerCase();
+
+            if (
+              element.tagName === "A" &&
+              (
+                nom === "href" ||
+                nom === "data-site-href" ||
+                (
+                  nom === "class" &&
+                  attribut.value === "lcdp-link-secondary"
+                )
+              )
+            ) {
+              return;
+            }
+
+            element.removeAttribute(attribut.name);
+          });
+        });
+
+        return template.innerHTML.trim();
+      }
+
+      async function afficherDocumentPublic(slotId, documentPublic) {
+        const conteneur = document.getElementById(slotId);
+
+        if (!conteneur) {
+          throw new Error("Conteneur du document public introuvable.");
+        }
+
+        conteneur.innerHTML = "";
+        conteneur.classList.add("lcdp-stack-large");
+
+        for (const bloc of documentPublic.blocs || []) {
+          const enveloppe = document.createElement("div");
+          enveloppe.appendChild(
+            await chargerFragment("/OBJET/BOX/01-box-text.html")
+          );
+
+          const box = enveloppe.querySelector(
+            "[data-lcdp-boxtext]"
+          );
+
+          if (!box) {
+            throw new Error("Objet BoxText incomplet.");
+          }
+
+          box.querySelector(
+            "[data-lcdp-boxtext-title]"
+          ).textContent = String(bloc?.titre || "");
+
+          box.querySelector(
+            "[data-lcdp-boxtext-content]"
+          ).innerHTML = nettoyerHtmlAffichage(
+            String(bloc?.html || "")
+          );
+
+          conteneur.appendChild(enveloppe);
+        }
+
+        appliquerRoutesSite(conteneur);
       }
 
       async function initialiserFooter() {
@@ -177,7 +333,17 @@
       async function initialiserPage() {
         appliquerRoutesSite(document);
         await initialiserBandeau();
-        await ajouterBoxText("lcdp-boxtext-reglement-club-slot", "Contenu à intégrer", "<p>Le contenu réel du règlement club doit être réintégré ici.</p>");
+
+        const documentPublic = await chargerDocumentPublic(
+          "reglement-club",
+          "Règlement club"
+        );
+
+        await afficherDocumentPublic(
+          "lcdp-boxtext-reglement-club-slot",
+          documentPublic
+        );
+
         await initialiserFooter();
       }
 
