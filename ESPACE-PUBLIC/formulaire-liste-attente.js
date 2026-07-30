@@ -105,7 +105,8 @@
   }
 
   async function initialiserPageListeAttente() {
-    await initialiserBandeauListeAttente();
+    appliquerRoutesSiteListeAttente(document);
+    initialiserBoutonMentionsLegalesListeAttente();
 
     if (typeof window.LCDP_creerFormulaire !== "function") {
       console.error("Objet formulaire V3 introuvable.");
@@ -365,7 +366,7 @@
     const config = window.SITE_CONFIG || {};
 
     if (typeof config.publicUrl === "function") {
-      return config.publicUrl("/index.html");
+      return config.publicUrl("/ESPACE-PUBLIC/hello.html");
     }
 
     const base = nettoyerBaseUrlListeAttente(
@@ -375,7 +376,7 @@
       ""
     );
 
-    return base ? base + "/index.html" : "/index.html";
+    return base ? base + "/ESPACE-PUBLIC/hello.html" : "/ESPACE-PUBLIC/hello.html";
   }
 
   function nettoyerBaseUrlListeAttente(value) {
@@ -389,7 +390,7 @@
 
     if (!sousTitre) return;
 
-    sousTitre.style.color = "var(--lcdp-color-orange)";
+    sousTitre.classList.add("lcdp-formulaire-liste-attente__subtitle--orange");
   }
 
   async function initialiserBandeauListeAttente() {
@@ -451,6 +452,151 @@
     }
 
     return valeur.startsWith("/") ? ".." + valeur : valeur;
+  }
+
+  function initialiserBoutonMentionsLegalesListeAttente() {
+    const bouton = document.getElementById("bouton-mentions-legales");
+    if (!bouton) return;
+
+    bouton.addEventListener("click", () => {
+      ouvrirMentionsLegalesRestreintes().catch(console.error);
+    });
+  }
+
+  function obtenirEndpointEditingAdmin() {
+    const config = window.SITE_CONFIG || {};
+    const direct = nettoyerBaseUrlListeAttente(
+      config.workerEditingAdminUrl ||
+      config.WORKER_EDITING_ADMIN_URL ||
+      config.W_EDITING_ADMIN_URL ||
+      config.editingAdminUrl ||
+      ""
+    );
+
+    if (direct) return direct;
+
+    if (typeof config.apiUrl === "function") {
+      return nettoyerBaseUrlListeAttente(config.apiUrl("editing-admin-api"));
+    }
+
+    return "https://editing-admin-api.lacleduparc.fr";
+  }
+
+  async function chargerMentionsLegales() {
+    const endpoint = obtenirEndpointEditingAdmin();
+
+    if (!endpoint) {
+      throw new Error("Endpoint mentions légales non configuré.");
+    }
+
+    const reponse = await fetch(endpoint + "/public/mentions-legales", {
+      method: "GET",
+      credentials: "omit",
+      cache: "no-store",
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    const data = await reponse.json().catch(() => null);
+
+    if (!reponse.ok || !data || data.success !== true) {
+      throw new Error(data?.message || "Mentions légales indisponibles.");
+    }
+
+    return data;
+  }
+
+  async function ouvrirMentionsLegalesRestreintes() {
+    const slot = document.getElementById("lcdp-lightbox-slot");
+    if (!slot) return;
+
+    slot.innerHTML = "";
+
+    const overlay = document.createElement("div");
+    overlay.className = "lcdp-restricted-lightbox";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "Mentions légales");
+
+    const card = document.createElement("div");
+    card.className = "lcdp-restricted-legal-card";
+
+    const boutonFermer = document.createElement("button");
+    boutonFermer.className = "lcdp-restricted-legal-close";
+    boutonFermer.type = "button";
+    boutonFermer.setAttribute("aria-label", "Fermer");
+    boutonFermer.textContent = "×";
+
+    const section = document.createElement("section");
+    section.className = "lcdp-box-liste-card";
+    section.setAttribute("data-lcdp-box-liste-card", "");
+    section.innerHTML =
+      '<div class="lcdp-box-liste-card__header">' +
+        '<div class="lcdp-box-liste-card__heading">' +
+          '<h2 class="lcdp-box-liste-card__title">Mentions légales</h2>' +
+        '</div>' +
+      '</div>' +
+      '<div class="lcdp-box-liste-card__list" data-mentions-legales-list>' +
+        '<p class="lcdp-box-liste-card__message">Chargement...</p>' +
+      '</div>';
+
+    card.appendChild(boutonFermer);
+    card.appendChild(section);
+    overlay.appendChild(card);
+    slot.appendChild(overlay);
+
+    const fermer = () => {
+      slot.innerHTML = "";
+    };
+
+    boutonFermer.addEventListener("click", fermer, { once: true });
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) fermer();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") fermer();
+    }, { once: true });
+
+    const liste = section.querySelector("[data-mentions-legales-list]");
+
+    try {
+      const documentLegal = await chargerMentionsLegales();
+      const titre = section.querySelector(".lcdp-box-liste-card__title");
+      if (titre) titre.textContent = documentLegal.titre || "Mentions légales";
+
+      liste.innerHTML = "";
+      const blocs = Array.isArray(documentLegal.blocs) ? documentLegal.blocs : [];
+
+      if (blocs.length === 0) {
+        const message = document.createElement("p");
+        message.className = "lcdp-box-liste-card__message";
+        message.textContent = "Mentions légales non publiées.";
+        liste.appendChild(message);
+      } else {
+        blocs.forEach((bloc) => {
+          const article = document.createElement("section");
+          article.className = "lcdp-component lcdp-boxtext";
+
+          const titreBloc = document.createElement("h3");
+          titreBloc.className = "lcdp-boxtext__title";
+          titreBloc.textContent = bloc.titre || "";
+
+          const contenu = document.createElement("div");
+          contenu.className = "lcdp-boxtext__content";
+          contenu.innerHTML = bloc.html || "";
+
+          article.appendChild(titreBloc);
+          article.appendChild(contenu);
+          liste.appendChild(article);
+        });
+      }
+
+      appliquerRoutesSiteListeAttente(liste);
+    } catch (error) {
+      console.error("Erreur mentions légales :", error);
+      liste.innerHTML = '<p class="lcdp-box-liste-card__message" data-lcdp-message-type="erreur">Les mentions légales ne sont pas disponibles pour le moment.</p>';
+    }
   }
 
   async function afficherInformationListeAttente(titre, message, type = "information", options = {}) {
