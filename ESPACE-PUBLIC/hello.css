@@ -2,13 +2,8 @@
   position: fixed;
 }
 
-.lcdp-page-hello .lcdp-hello-nav .lcdp-box-bandeau-nav__inner {
+.lcdp-page-hello .lcdp-box-bandeau-nav__inner {
   justify-content: flex-start;
-}
-
-.lcdp-page-hello .lcdp-hello-logo--nav {
-  width: 44px;
-  height: 44px;
 }
 
 .lcdp-page-hello .lcdp-bandeau-restreint-label {
@@ -22,14 +17,14 @@
 .lcdp-page-hello .lcdp-bandeau-restreint-title {
   color: #ffffff;
   font-size: 20px;
-  line-height: 1.05;
+  line-height: 1.08;
   font-weight: 700;
 }
 
 .lcdp-page-hello .lcdp-bandeau-restreint-subtitle {
   color: #ffffff;
   font-size: 0.86rem;
-  line-height: 1.05;
+  line-height: 1.08;
   font-weight: 400;
 }
 
@@ -39,7 +34,12 @@
 }
 
 .lcdp-page-hello .lcdp-hello-main .lcdp-page-section {
-  padding-top: var(--lcdp-space-2);
+  padding-top: var(--lcdp-space-3);
+  padding-bottom: var(--lcdp-space-5);
+}
+
+.lcdp-page-hello .lcdp-page-content.lcdp-stack-large {
+  gap: var(--lcdp-space-3);
 }
 
 .lcdp-page-hello #acces-24h {
@@ -150,7 +150,7 @@
 }
 
 @media (min-width: 768px) {
-  .lcdp-page-hello .lcdp-hello-main {
-    padding-top: 0;
+  .lcdp-page-hello .lcdp-hello-main .lcdp-page-section {
+    padding-top: var(--lcdp-space-4);
   }
 }

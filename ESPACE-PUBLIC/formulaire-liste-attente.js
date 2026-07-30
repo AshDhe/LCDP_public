@@ -424,9 +424,18 @@
 
     if (libelle) {
       libelle.textContent = "";
-      libelle.appendChild(document.createTextNode("La Clé du Parc |"));
-      libelle.appendChild(document.createElement("br"));
-      libelle.appendChild(document.createTextNode("Accueil restreint"));
+      libelle.classList.add("lcdp-bandeau-restreint-label");
+
+      const titre = document.createElement("span");
+      titre.className = "lcdp-bandeau-restreint-title";
+      titre.textContent = "La Clé du Parc";
+
+      const sousTitre = document.createElement("span");
+      sousTitre.className = "lcdp-bandeau-restreint-subtitle";
+      sousTitre.textContent = "Accès restreint à l'application";
+
+      libelle.appendChild(titre);
+      libelle.appendChild(sousTitre);
     }
 
     if (burgerSlot) {

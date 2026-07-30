@@ -1,10 +1,37 @@
-.lcdp-page-formulaire-liste-attente .lcdp-formulaire-liste-attente-nav .lcdp-box-bandeau-nav__inner {
+.lcdp-page-formulaire-liste-attente .lcdp-box-bandeau-nav__inner {
   justify-content: flex-start;
 }
 
+.lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  white-space: normal;
+}
+
+.lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-title {
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1.08;
+  font-weight: 700;
+}
+
+.lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-subtitle {
+  color: #ffffff;
+  font-size: 0.86rem;
+  line-height: 1.08;
+  font-weight: 400;
+}
+
 .lcdp-page-formulaire-liste-attente .lcdp-formulaire-liste-attente-main {
-  padding-top: 64px;
+  padding-top: 0;
   padding-bottom: 72px;
+}
+
+.lcdp-page-formulaire-liste-attente .lcdp-formulaire-liste-attente-main .lcdp-page-section {
+  padding-top: var(--lcdp-space-3);
+  padding-bottom: var(--lcdp-space-5);
 }
 
 .lcdp-page-formulaire-liste-attente [data-lcdp-formulaire-subtitle].lcdp-formulaire-liste-attente__subtitle--orange {
@@ -75,7 +102,7 @@
 }
 
 @media (min-width: 768px) {
-  .lcdp-page-formulaire-liste-attente .lcdp-formulaire-liste-attente-main {
-    padding-top: 72px;
+  .lcdp-page-formulaire-liste-attente .lcdp-formulaire-liste-attente-main .lcdp-page-section {
+    padding-top: var(--lcdp-space-4);
   }
 }
