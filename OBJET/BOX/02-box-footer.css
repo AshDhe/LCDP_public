@@ -40,7 +40,9 @@
 }
 
 .lcdp-box-footer__inner a:hover,
-.lcdp-box-footer__inner button:hover {
+.lcdp-box-footer__inner button:hover,
+.lcdp-box-footer__inner a:focus-visible,
+.lcdp-box-footer__inner button:focus-visible {
   color: var(--lcdp-color-primary);
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -88,75 +90,56 @@
 }
 
 .lcdp-footer-legal-title {
-  margin: 0 44px var(--lcdp-space-3) 0;
-  font-size: 1.35rem;
-  line-height: 1.2;
-  font-weight: 700;
-  color: var(--lcdp-color-text);
+  margin: 0 44px var(--lcdp-space-4) 0;
+  color: var(--lcdp-color-title);
+  font-size: clamp(1.35rem, 5vw, 1.85rem);
+  line-height: 1.15;
+  text-align: center;
 }
 
 .lcdp-footer-legal-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-3);
+  display: block;
 }
 
 .lcdp-footer-legal-message {
-  width: 100%;
   margin: 0;
-  padding: var(--lcdp-space-3);
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-medium);
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font-weight: 400;
+  color: var(--lcdp-color-text-muted);
+  text-align: center;
 }
 
 .lcdp-footer-legal-section {
-  width: 100%;
   margin: 0;
-  padding: var(--lcdp-space-4);
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
-  background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-shadow-soft);
+  padding: 0;
+}
+
+.lcdp-footer-legal-section + .lcdp-footer-legal-section {
+  margin-top: 1.5rem;
 }
 
 .lcdp-footer-legal-section-title {
   margin: 0 0 0.65rem;
-  font-size: clamp(1.2rem, 5vw, 1.55rem);
-  line-height: 1.18;
-  font-weight: 700;
-  color: var(--lcdp-color-text);
+  color: var(--lcdp-color-title);
+  font-size: 1.1rem;
+  line-height: 1.2;
 }
 
 .lcdp-footer-legal-section-content {
+  margin: 0;
+  padding: 0;
   color: var(--lcdp-color-text);
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
+  line-height: 1.55;
 }
 
-.lcdp-footer-legal-section-content p,
-.lcdp-footer-legal-section-content ul,
-.lcdp-footer-legal-section-content ol {
+.lcdp-footer-legal-section-content > p {
   margin: 0;
 }
 
-.lcdp-footer-legal-section-content a {
-  color: var(--lcdp-color-primary);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1.5px;
+.lcdp-footer-legal-section-content > p + p {
+  margin-top: 0.9rem;
 }
 
 @media (min-width: 768px) {
   .lcdp-box-footer__inner {
     padding-inline: var(--lcdp-page-padding-desktop);
-  }
-
-  .lcdp-footer-legal-card {
-    padding: var(--lcdp-space-5);
   }
 }

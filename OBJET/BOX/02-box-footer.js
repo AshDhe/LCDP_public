@@ -23,9 +23,7 @@
   });
 
   window.LCDP_ouvrirMentionsLegalesFooter = ouvrirMentionsLegalesFooter;
-  window.LCDP_initialiserFooterMentionsLegales = function () {
-    return true;
-  };
+  window.LCDP_initialiserFooterMentionsLegales = () => true;
 
   async function ouvrirMentionsLegalesFooter() {
     const slot = obtenirSlotLightbox();
@@ -81,42 +79,14 @@
     );
 
     try {
-      const documentLegal = await chargerMentionsLegales();
-      const blocs = Array.isArray(documentLegal.blocs) ? documentLegal.blocs : [];
+      const documentLegal = await chargerMentionsLegalesFooter();
 
       titre.textContent = documentLegal.titre || "Mentions légales";
-      liste.innerHTML = "";
-
-      if (blocs.length === 0) {
-        const message = document.createElement("p");
-        message.className = "lcdp-footer-legal-message";
-        message.textContent = "Mentions légales non publiées.";
-        liste.appendChild(message);
-        return;
-      }
-
-      blocs.forEach((bloc) => {
-        const article = document.createElement("section");
-        article.className = "lcdp-footer-legal-section";
-
-        const titreBloc = document.createElement("h3");
-        titreBloc.className = "lcdp-footer-legal-section-title";
-        titreBloc.textContent = bloc && bloc.titre ? bloc.titre : "";
-
-        const contenu = document.createElement("div");
-        contenu.className = "lcdp-footer-legal-section-content";
-        contenu.innerHTML = bloc && bloc.html ? bloc.html : "";
-        supprimerParagraphesVides(contenu);
-
-        article.appendChild(titreBloc);
-        article.appendChild(contenu);
-        liste.appendChild(article);
-      });
-
-      appliquerRoutesSite(liste);
-    } catch (erreur) {
-      console.error("Erreur chargement mentions légales footer :", erreur);
-      liste.innerHTML = '<p class="lcdp-footer-legal-message">Les mentions légales ne sont pas disponibles pour le moment.</p>';
+      rendreMentionsLegalesFooter(liste, documentLegal);
+      appliquerRoutesFooter(liste);
+    } catch (error) {
+      console.error("Erreur chargement mentions légales footer :", error);
+      liste.innerHTML = '<p class="lcdp-footer-legal-message" data-lcdp-message-type="erreur">Les mentions légales ne sont pas disponibles pour le moment.</p>';
     }
   }
 
@@ -132,8 +102,12 @@
     return slot;
   }
 
-  async function chargerMentionsLegales() {
+  async function chargerMentionsLegalesFooter() {
     const endpoint = obtenirEndpointEditingAdmin();
+
+    if (!endpoint) {
+      throw new Error("Endpoint mentions légales non configuré.");
+    }
 
     const reponse = await fetch(endpoint + "/public/mentions-legales", {
       method: "GET",
@@ -151,6 +125,52 @@
     }
 
     return data;
+  }
+
+  function rendreMentionsLegalesFooter(liste, documentLegal) {
+    const blocs = Array.isArray(documentLegal?.blocs) ? documentLegal.blocs : [];
+    liste.innerHTML = "";
+
+    if (blocs.length === 0) {
+      const message = document.createElement("p");
+      message.className = "lcdp-footer-legal-message";
+      message.textContent = "Mentions légales non publiées.";
+      liste.appendChild(message);
+      return;
+    }
+
+    blocs.forEach((bloc) => {
+      const article = document.createElement("section");
+      article.className = "lcdp-footer-legal-section";
+
+      const titreBloc = document.createElement("h3");
+      titreBloc.className = "lcdp-footer-legal-section-title";
+      titreBloc.textContent = String(bloc?.titre || "");
+
+      const contenu = document.createElement("div");
+      contenu.className = "lcdp-footer-legal-section-content";
+      contenu.innerHTML = String(bloc?.html || "");
+      supprimerParagraphesVides(contenu);
+
+      article.appendChild(titreBloc);
+      article.appendChild(contenu);
+      liste.appendChild(article);
+    });
+  }
+
+  function supprimerParagraphesVides(conteneur) {
+    conteneur.querySelectorAll("p").forEach((paragraphe) => {
+      const contenuHtml = String(paragraphe.innerHTML || "")
+        .replace(/&nbsp;/gi, "")
+        .replace(/<br\s*\/?>/gi, "")
+        .replace(/\s+/g, "");
+
+      const contenuTexte = String(paragraphe.textContent || "").trim();
+
+      if (!contenuHtml && !contenuTexte) {
+        paragraphe.remove();
+      }
+    });
   }
 
   function obtenirEndpointEditingAdmin() {
@@ -174,17 +194,23 @@
     return "https://editing-admin-api.lacleduparc.fr";
   }
 
-  function appliquerRoutesSite(racine = document) {
-    racine.querySelectorAll("[data-site-href]").forEach((element) => {
+  function appliquerRoutesFooter(racine) {
+    const zone = racine || document;
+
+    zone.querySelectorAll("[data-site-href]").forEach((element) => {
       element.setAttribute("href", construireUrlSite(element.getAttribute("data-site-href")));
     });
 
-    racine.querySelectorAll("[data-site-src]").forEach((element) => {
+    zone.querySelectorAll("[data-site-src]").forEach((element) => {
       element.setAttribute("src", construireUrlSite(element.getAttribute("data-site-src")));
     });
 
-    racine.querySelectorAll("a[href^='/']").forEach((element) => {
+    zone.querySelectorAll("a[href^='/']").forEach((element) => {
       element.setAttribute("href", construireUrlSite(element.getAttribute("href")));
+    });
+
+    zone.querySelectorAll("img[src^='/']").forEach((element) => {
+      element.setAttribute("src", construireUrlSite(element.getAttribute("src")));
     });
   }
 
@@ -201,9 +227,14 @@
       return config.publicUrl(valeur);
     }
 
+    if (typeof window.LCDP_urlPublic === "function") {
+      return window.LCDP_urlPublic(valeur);
+    }
+
     const base = nettoyerBaseUrl(
       config.publicBaseUrl ||
       config.PUBLIC_BASE ||
+      window.LCDP_PUBLIC_BASE ||
       window.SITE_BASE ||
       ""
     );
@@ -215,18 +246,8 @@
     return valeur.startsWith("/") ? ".." + valeur : valeur;
   }
 
-  function supprimerParagraphesVides(conteneur) {
-    conteneur.querySelectorAll("p").forEach((paragraphe) => {
-      const contenuHtml = String(paragraphe.innerHTML || "")
-        .replace(/&nbsp;/gi, "")
-        .replace(/<br\s*\/?>/gi, "")
-        .replace(/\s+/g, "");
-      const contenuTexte = String(paragraphe.textContent || "").trim();
-
-      if (!contenuHtml && !contenuTexte) {
-        paragraphe.remove();
-      }
-    });
+  function nettoyerBaseUrl(value) {
+    return String(value || "").replace(/\/+$/, "");
   }
 
   function urlTechniqueOuAbsolue(value) {
@@ -239,9 +260,5 @@
       value.startsWith("https://") ||
       value.startsWith("data:")
     );
-  }
-
-  function nettoyerBaseUrl(value) {
-    return String(value || "").replace(/\/+$/, "");
   }
 })();
