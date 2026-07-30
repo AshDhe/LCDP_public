@@ -753,8 +753,17 @@
       ).catch(console.error);
     });
 
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
+    const boutonEnvoyer = form.querySelector(
+      "#bouton-envoyer-demande-juridique"
+    );
+    let traitementEnCours = false;
+
+    async function traiterEnvoiDemandeJuridique(event) {
+      event?.preventDefault();
+
+      if (traitementEnCours) {
+        return;
+      }
 
       if (!form.reportValidity()) {
         return;
@@ -774,24 +783,26 @@
         return;
       }
 
-      const confirme =
-        await demanderConfirmationDemandeJuridique(
-          overlay
+      try {
+        const confirme =
+          await demanderConfirmationDemandeJuridique(
+            overlay
+          );
+
+        if (!confirme) {
+          return;
+        }
+
+        traitementEnCours = true;
+
+        const boutons = Array.from(
+          form.querySelectorAll("button")
         );
 
-      if (!confirme) {
-        return;
-      }
+        boutons.forEach((bouton) => {
+          bouton.disabled = true;
+        });
 
-      const boutons = Array.from(
-        form.querySelectorAll("button")
-      );
-
-      boutons.forEach((bouton) => {
-        bouton.disabled = true;
-      });
-
-      try {
         await envoyerDemandeJuridique(payload);
         form.reset();
 
@@ -807,21 +818,45 @@
           overlay
         );
       } catch (error) {
-        boutons.forEach((bouton) => {
-          bouton.disabled = false;
-        });
-
-        await afficherAlerteDemandeJuridique(
-          String(
-            error?.message ||
-            error ||
-            "La demande n’a pas pu être envoyée."
-          ),
-          "erreur",
-          overlay
+        form.querySelectorAll("button").forEach(
+          (bouton) => {
+            bouton.disabled = false;
+          }
         );
+
+        const message = String(
+          error?.message ||
+          error ||
+          "La demande n’a pas pu être envoyée."
+        );
+
+        try {
+          await afficherAlerteDemandeJuridique(
+            message,
+            "erreur",
+            overlay
+          );
+        } catch (erreurAlerte) {
+          console.error(
+            "Erreur affichage demande juridique :",
+            erreurAlerte
+          );
+          window.alert(message);
+        }
+      } finally {
+        traitementEnCours = false;
       }
-    });
+    }
+
+    form.addEventListener(
+      "submit",
+      traiterEnvoiDemandeJuridique
+    );
+
+    boutonEnvoyer?.addEventListener(
+      "click",
+      traiterEnvoiDemandeJuridique
+    );
   }
 
   function configurationDemandeJuridique() {
@@ -981,42 +1016,46 @@
       );
     }
 
-    if (overlay) {
-      overlay.hidden = true;
-    }
-
     const fragment = await chargerFragmentObjetListeAttente(
       "/BOX/02-box-dialogue-bouton.html"
     );
-    const dialogue = fragment.querySelector(
+    const couche = document.createElement("div");
+    couche.dataset.lcdpDialogueBoutonOverlay = "true";
+    couche.appendChild(fragment);
+
+    const dialogue = couche.querySelector(
       "[data-lcdp-box-dialogue-bouton]"
     );
+    const titre = couche.querySelector(
+      "[data-lcdp-dialogue-title]"
+    );
+    const texte = couche.querySelector(
+      "[data-lcdp-dialogue-text]"
+    );
+    const actions = couche.querySelector(
+      "[data-lcdp-dialogue-actions]"
+    );
+    const fermer = couche.querySelector(
+      "[data-lcdp-dialogue-close]"
+    );
 
-    if (!dialogue) {
-      if (overlay) {
-        overlay.hidden = false;
-      }
-
+    if (
+      !dialogue ||
+      !titre ||
+      !texte ||
+      !actions ||
+      !fermer
+    ) {
+      couche.remove();
       throw new Error(
         "Objet dialogue incomplet."
       );
     }
 
-    dialogue.querySelector(
-      "[data-lcdp-dialogue-title]"
-    ).textContent = "Envoyer la demande ?";
-
-    dialogue.querySelector(
-      "[data-lcdp-dialogue-text]"
-    ).textContent =
+    titre.textContent = "Envoyer la demande ?";
+    texte.textContent =
       "Confirmez-vous l’envoi de votre demande juridique ?";
-
-    const actions = dialogue.querySelector(
-      "[data-lcdp-dialogue-actions]"
-    );
-    const fermer = dialogue.querySelector(
-      "[data-lcdp-dialogue-close]"
-    );
+    actions.innerHTML = "";
 
     const annuler = document.createElement("button");
     annuler.type = "button";
@@ -1032,7 +1071,11 @@
 
     actions.appendChild(annuler);
     actions.appendChild(envoyer);
-    slot.appendChild(fragment);
+
+    const hote = overlay?.isConnected
+      ? overlay
+      : slot;
+    hote.appendChild(couche);
 
     return new Promise((resolve) => {
       let termine = false;
@@ -1047,12 +1090,7 @@
           "keydown",
           gererClavier
         );
-        dialogue.remove();
-
-        if (overlay?.isConnected) {
-          overlay.hidden = false;
-        }
-
+        couche.remove();
         resolve(valeur);
       }
 
@@ -1068,7 +1106,7 @@
         gererClavier
       );
 
-      fermer?.addEventListener(
+      fermer.addEventListener(
         "click",
         () => terminer(false)
       );
@@ -1106,41 +1144,40 @@
       );
     }
 
-    if (overlay) {
-      overlay.hidden = true;
-    }
-
     const fragment = await chargerFragmentObjetListeAttente(
       "/BOX/02-box-alerte.html"
     );
-    const alerte = fragment.querySelector(
+    const couche = document.createElement("div");
+    couche.dataset.lcdpAlerteOverlay = "true";
+    couche.appendChild(fragment);
+
+    const alerte = couche.querySelector(
       "[data-lcdp-box-alerte]"
     );
+    const texte = couche.querySelector(
+      "[data-lcdp-alerte-message]"
+    );
+    const fermer = couche.querySelector(
+      "[data-lcdp-alerte-close]"
+    );
+    const ok = couche.querySelector(
+      "[data-lcdp-alerte-ok]"
+    );
 
-    if (!alerte) {
-      if (overlay) {
-        overlay.hidden = false;
-      }
-
+    if (!alerte || !texte || !fermer || !ok) {
+      couche.remove();
       throw new Error(
         "Objet alerte incomplet."
       );
     }
 
     alerte.dataset.type = type || "information";
+    texte.textContent = String(message || "");
 
-    alerte.querySelector(
-      "[data-lcdp-alerte-message]"
-    ).textContent = String(message || "");
-
-    const fermer = alerte.querySelector(
-      "[data-lcdp-alerte-close]"
-    );
-    const ok = alerte.querySelector(
-      "[data-lcdp-alerte-ok]"
-    );
-
-    slot.appendChild(fragment);
+    const hote = overlay?.isConnected
+      ? overlay
+      : slot;
+    hote.appendChild(couche);
 
     return new Promise((resolve) => {
       let termine = false;
@@ -1155,12 +1192,7 @@
           "keydown",
           gererClavier
         );
-        alerte.remove();
-
-        if (overlay?.isConnected) {
-          overlay.hidden = false;
-        }
-
+        couche.remove();
         resolve();
       }
 
@@ -1176,11 +1208,11 @@
         gererClavier
       );
 
-      fermer?.addEventListener(
+      fermer.addEventListener(
         "click",
         terminer
       );
-      ok?.addEventListener(
+      ok.addEventListener(
         "click",
         terminer
       );
