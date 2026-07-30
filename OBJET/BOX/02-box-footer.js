@@ -18,11 +18,23 @@
 
     ouvrirMentionsLegalesFooter().catch((erreur) => {
       console.error("Erreur mentions légales footer :", erreur);
-      window.location.href = construireUrlSite("/ESPACE-PUBLIC/mentions-legales.html");
+      alert("Les mentions légales ne sont pas disponibles pour le moment.");
     });
   });
 
   window.LCDP_ouvrirMentionsLegalesFooter = ouvrirMentionsLegalesFooter;
+  window.LCDP_chargerMentionsLegalesFooterDepuisObjet = function LCDP_chargerMentionsLegalesFooterDepuisObjet(event) {
+    if (event && typeof event.preventDefault === "function") {
+      event.preventDefault();
+    }
+
+    ouvrirMentionsLegalesFooter().catch((erreur) => {
+      console.error("Erreur mentions légales footer :", erreur);
+      alert("Les mentions légales ne sont pas disponibles pour le moment.");
+    });
+
+    return false;
+  };
   window.LCDP_initialiserFooterMentionsLegales = () => true;
 
   async function ouvrirMentionsLegalesFooter() {

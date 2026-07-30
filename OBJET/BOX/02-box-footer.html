@@ -1,12 +1,13 @@
 <footer class="lcdp-box-footer" data-lcdp-box-footer>
   <div class="lcdp-box-footer__inner">
-    <a
+    <button
+      class="lcdp-footer-mentions-button"
+      type="button"
       id="bouton-mentions-legales"
-      href="../ESPACE-PUBLIC/mentions-legales.html"
-      data-site-href="/ESPACE-PUBLIC/mentions-legales.html"
       data-lcdp-footer-mentions-legales
+      onclick="return window.LCDP_chargerMentionsLegalesFooterDepuisObjet ? window.LCDP_chargerMentionsLegalesFooterDepuisObjet(event) : (function(event) { event.preventDefault(); const lancer = function() { if (typeof window.LCDP_ouvrirMentionsLegalesFooter === 'function') { window.LCDP_ouvrirMentionsLegalesFooter().catch(function(erreur) { console.error('Erreur mentions légales footer :', erreur); alert('Les mentions légales ne sont pas disponibles pour le moment.'); }); } }; if (typeof window.LCDP_ouvrirMentionsLegalesFooter === 'function') { lancer(); return false; } const src = typeof window.LCDP_urlObjet === 'function' ? window.LCDP_urlObjet('/BOX/02-box-footer.js') : ((window.SITE_CONFIG && typeof window.SITE_CONFIG.objetUrl === 'function') ? window.SITE_CONFIG.objetUrl('/BOX/02-box-footer.js') : '../OBJET/BOX/02-box-footer.js'); let script = document.querySelector('script[data-lcdp-footer-js=&quot;mentions-legales&quot;]'); if (!script) { script = document.createElement('script'); script.src = src; script.defer = true; script.dataset.lcdpFooterJs = 'mentions-legales'; script.onload = lancer; script.onerror = function() { alert('Les mentions légales ne sont pas disponibles pour le moment.'); }; document.body.appendChild(script); } else { script.addEventListener('load', lancer, { once: true }); setTimeout(lancer, 80); } return false; })(event);"
     >
       Mentions légales
-    </a>
+    </button>
   </div>
 </footer>
