@@ -190,7 +190,7 @@
 
     slot.innerHTML = "";
 
-    const fragment = await chargerFragmentObjet("/BOX/02-box-bandeau-nav.html");
+    const fragment = await chargerFragmentSite("/ESPACE-PUBLIC/box-bandeau-nav-public.html");
     slot.appendChild(fragment);
     configurerBandeauRestreint(slot);
     appliquerRoutesSite(slot);

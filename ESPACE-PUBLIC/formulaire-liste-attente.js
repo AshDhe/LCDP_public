@@ -405,7 +405,7 @@
 
     slot.innerHTML = "";
 
-    const fragment = await chargerFragmentObjetListeAttente("/BOX/02-box-bandeau-nav.html");
+    const fragment = await chargerFragmentSiteListeAttente("/ESPACE-PUBLIC/box-bandeau-nav-public.html");
     slot.appendChild(fragment);
     configurerBandeauRestreintListeAttente(slot);
     appliquerRoutesSiteListeAttente(slot);
@@ -699,6 +699,24 @@
         window.location.href = options.redirectUrl;
       }
     }
+  }
+
+  async function chargerFragmentSiteListeAttente(chemin) {
+    const reponse = await fetch(construireUrlSiteListeAttente(chemin), {
+      method: "GET",
+      credentials: "same-origin",
+      cache: "no-cache"
+    });
+
+    if (!reponse.ok) {
+      throw new Error("Fragment introuvable : " + chemin);
+    }
+
+    const html = await reponse.text();
+    const template = document.createElement("template");
+    template.innerHTML = html.trim();
+
+    return template.content.cloneNode(true);
   }
 
   async function chargerFragmentObjetListeAttente(chemin) {
