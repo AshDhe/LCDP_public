@@ -1,14 +1,35 @@
 (() => {
   "use strict";
 
-  const imagesCarrouselHello = [
-    { src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_1.jpg", alt: "Parc plein air d'exception La Clé du Parc" },
-    { src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_2.jpg", alt: "Moment de ressourcement en plein air" },
-    { src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_3.jpg", alt: "Accès à un parc d'exception" },
-    { src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_4.jpg", alt: "Activité de plein air dans un parc" },
-    { src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_5.jpg", alt: "Lieu naturel sélectionné par La Clé du Parc" },
-    { src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_6.jpg", alt: "Expérience en parc plein air" },
-    { src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_7.jpg", alt: "Parc d'exception près de chez vous" }
+  const IMAGES_CARROUSEL_HELLO = [
+    {
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_1.jpg",
+      alt: "Parc plein air d'exception La Clé du Parc"
+    },
+    {
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_2.jpg",
+      alt: "Moment de ressourcement en plein air"
+    },
+    {
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_3.jpg",
+      alt: "Accès à un parc d'exception"
+    },
+    {
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_4.jpg",
+      alt: "Activité de plein air dans un parc"
+    },
+    {
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_5.jpg",
+      alt: "Lieu naturel sélectionné par La Clé du Parc"
+    },
+    {
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_6.jpg",
+      alt: "Expérience en parc plein air"
+    },
+    {
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_7.jpg",
+      alt: "Parc d'exception près de chez vous"
+    }
   ];
 
   if (document.readyState === "loading") {
@@ -23,22 +44,28 @@
     initialiserBandeauRestreint().catch((erreur) => {
       console.error("Erreur bandeau restreint hello :", erreur);
     });
+
     renseignerNextHello();
     initialiserFormulaireAccesPublic();
     initialiserBoutonMentionsLegales();
-    initialiserCarrouselHello().catch(console.error);
+    initialiserCarrouselHello().catch((erreur) => {
+      console.error("Erreur carrousel hello :", erreur);
+    });
     afficherErreurAccesSiNecessaire();
   }
 
   async function initialiserBandeauRestreint() {
     const slot = document.getElementById("lcdp-bandeau-slot");
 
-    if (!slot) return;
+    if (!slot) {
+      return;
+    }
 
     slot.innerHTML = "";
 
-    const fragment = await chargerFragmentObjet("/BOX/02-box-bandeau-nav.html");
+    const fragment = await chargerFragmentSite("/ESPACE-PUBLIC/box-bandeau-nav-public.html");
     slot.appendChild(fragment);
+
     configurerBandeauRestreint(slot);
     appliquerRoutesSite(slot);
   }
@@ -50,7 +77,7 @@
 
     if (lien) {
       lien.setAttribute("href", construireUrlSite("/ESPACE-PUBLIC/hello.html"));
-      lien.dataset.siteHref = "/ESPACE-PUBLIC/hello.html";
+      lien.setAttribute("data-site-href", "/ESPACE-PUBLIC/hello.html");
       lien.setAttribute("aria-label", "Accueil restreint La Clé du Parc");
     }
 
@@ -61,14 +88,17 @@
       libelle.appendChild(document.createTextNode("Accueil restreint"));
     }
 
-    if (burgerSlot) {
-      burgerSlot.remove();
+    if (burgerSlot && burgerSlot.parentNode) {
+      burgerSlot.parentNode.removeChild(burgerSlot);
     }
   }
 
   function renseignerNextHello() {
     const champNext = document.getElementById("hello-next");
-    if (!champNext) return;
+
+    if (!champNext) {
+      return;
+    }
 
     const params = new URLSearchParams(window.location.search);
     champNext.value = normaliserNext(params.get("next"));
@@ -88,15 +118,6 @@
     return texte;
   }
 
-  function initialiserBoutonMentionsLegales() {
-    const bouton = document.getElementById("bouton-mentions-legales");
-    if (!bouton) return;
-
-    bouton.addEventListener("click", () => {
-      ouvrirMentionsLegalesRestreintes().catch(console.error);
-    });
-  }
-
   function initialiserFormulaireAccesPublic() {
     const formulaire = document.getElementById("formulaire-acces-public");
     const champEmail = document.getElementById("emailmembre");
@@ -109,9 +130,11 @@
       });
     }
 
-    if (!formulaire || !champEmail || !champMotDePasse) return;
+    if (!formulaire || !champEmail || !champMotDePasse) {
+      return;
+    }
 
-    formulaire.action = construireUrlSite("/__lcdp-public-login");
+    formulaire.setAttribute("action", construireUrlSite("/__lcdp-public-login"));
 
     formulaire.addEventListener("submit", (event) => {
       const email = String(champEmail.value || "").trim().toLowerCase();
@@ -119,16 +142,34 @@
 
       if (!email || !emailValidePourAccesPublic(email)) {
         event.preventDefault();
-        afficherAlerte("E-mail invalide", "Veuillez renseigner une adresse e-mail valide.").catch(console.error);
+        afficherAlerte("E-mail invalide", "Veuillez renseigner une adresse e-mail valide.").catch((erreur) => {
+          console.error("Erreur alerte email hello :", erreur);
+        });
         champEmail.focus();
         return;
       }
 
       if (!motDePasse) {
         event.preventDefault();
-        afficherAlerte("Champ manquant", "Veuillez renseigner le mot de passe d'accès.").catch(console.error);
+        afficherAlerte("Champ manquant", "Veuillez renseigner le mot de passe d'accès.").catch((erreur) => {
+          console.error("Erreur alerte mot de passe hello :", erreur);
+        });
         champMotDePasse.focus();
       }
+    });
+  }
+
+  function initialiserBoutonMentionsLegales() {
+    const bouton = document.getElementById("bouton-mentions-legales");
+
+    if (!bouton) {
+      return;
+    }
+
+    bouton.addEventListener("click", () => {
+      ouvrirMentionsLegalesRestreintes().catch((erreur) => {
+        console.error("Erreur ouverture mentions légales :", erreur);
+      });
     });
   }
 
@@ -136,20 +177,36 @@
     const params = new URLSearchParams(window.location.search);
     const erreurAccesPublic = String(params.get("erreur") || "").trim();
 
-    if (!erreurAccesPublic) return;
+    if (!erreurAccesPublic) {
+      return;
+    }
 
     window.addEventListener("load", () => {
       const messages = {
-        email: { titre: "E-mail invalide", message: "Veuillez renseigner une adresse e-mail valide." },
-        password_empty: { titre: "Champ manquant", message: "Veuillez renseigner le mot de passe d'accès." },
-        password: { titre: "Mot de passe incorrect", message: "Le mot de passe saisi est incorrect." },
-        base: { titre: "Erreur", message: "L'accès n'a pas pu être enregistré. Veuillez réessayer." }
+        email: {
+          titre: "E-mail invalide",
+          message: "Veuillez renseigner une adresse e-mail valide."
+        },
+        password_empty: {
+          titre: "Champ manquant",
+          message: "Veuillez renseigner le mot de passe d'accès."
+        },
+        password: {
+          titre: "Mot de passe incorrect",
+          message: "Le mot de passe saisi est incorrect."
+        },
+        base: {
+          titre: "Erreur",
+          message: "L'accès n'a pas pu être enregistré. Veuillez réessayer."
+        }
       };
 
       const erreur = messages[erreurAccesPublic];
 
       if (erreur) {
-        afficherAlerte(erreur.titre, erreur.message).catch(console.error);
+        afficherAlerte(erreur.titre, erreur.message).catch((erreurAlerte) => {
+          console.error("Erreur alerte accès hello :", erreurAlerte);
+        });
       }
 
       const champEmail = document.getElementById("emailmembre");
@@ -167,9 +224,10 @@
 
   async function afficherAlerte(titre, message) {
     const slot = document.getElementById("lcdp-lightbox-slot");
+    const texte = titre ? titre + "\n\n" + message : message;
 
     if (!slot) {
-      alert((titre ? titre + "\n\n" : "") + message);
+      alert(texte);
       return;
     }
 
@@ -187,7 +245,7 @@
         throw new Error("Structure de l'alerte V3 incomplète.");
       }
 
-      messageElement.textContent = titre ? titre + "\n\n" + message : message;
+      messageElement.textContent = texte;
 
       const fermer = () => {
         slot.innerHTML = "";
@@ -198,17 +256,22 @@
       });
 
       alerte.addEventListener("click", (event) => {
-        if (event.target === alerte) fermer();
+        if (event.target === alerte) {
+          fermer();
+        }
       });
     } catch (error) {
       console.error("Erreur alerte hello :", error);
-      alert((titre ? titre + "\n\n" : "") + message);
+      alert(texte);
     }
   }
 
   async function initialiserCarrouselHello() {
     const slot = document.getElementById("lcdp-carrousel-hello-slot");
-    if (!slot) return;
+
+    if (!slot) {
+      return;
+    }
 
     slot.innerHTML =
       '<section class="lcdp-component lcdp-box-carousel" data-lcdp-box-carousel>' +
@@ -228,7 +291,7 @@
     const liste = slot.querySelector("[data-lcdp-carousel-list]");
 
     if (liste) {
-      imagesCarrouselHello.forEach((image, index) => {
+      IMAGES_CARROUSEL_HELLO.forEach((image, index) => {
         const figure = document.createElement("figure");
         figure.className = "lcdp-box-carousel__item";
 
@@ -247,7 +310,7 @@
 
         if (index === 0) {
           img.loading = "eager";
-          img.fetchPriority = "high";
+          img.setAttribute("fetchpriority", "high");
         } else {
           img.loading = "lazy";
         }
@@ -264,9 +327,21 @@
 
   function construireVariantesImage(src) {
     const valeur = String(src || "");
-    if (!valeur.toLowerCase().endsWith(".jpg")) return [src];
+
+    if (!valeur.toLowerCase().endsWith(".jpg")) {
+      return [src];
+    }
+
     const base = valeur.slice(0, -4);
-    return [valeur, base + ".JPG", base + ".jpeg", base + ".JPEG", base + ".webp", base + ".WEBP"];
+
+    return [
+      valeur,
+      base + ".JPG",
+      base + ".jpeg",
+      base + ".JPEG",
+      base + ".webp",
+      base + ".WEBP"
+    ];
   }
 
   function appliquerFallbackImage(imageElement, srcInitial) {
@@ -275,6 +350,7 @@
 
     imageElement.addEventListener("error", () => {
       indexTentative += 1;
+
       if (variantes[indexTentative]) {
         imageElement.src = construireUrlSite(variantes[indexTentative]);
       }
@@ -287,18 +363,66 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
   }
 
+  async function chargerFragmentSite(chemin) {
+    const reponse = await fetch(construireUrlSite(chemin), {
+      method: "GET",
+      credentials: "same-origin",
+      cache: "no-cache"
+    });
+
+    if (!reponse.ok) {
+      throw new Error("Fragment introuvable : " + chemin);
+    }
+
+    const html = await reponse.text();
+    const template = document.createElement("template");
+    template.innerHTML = html.trim();
+
+    return template.content.cloneNode(true);
+  }
+
+  async function chargerFragmentObjet(chemin) {
+    const reponse = await fetch(construireUrlObjet(chemin), {
+      method: "GET",
+      credentials: "same-origin",
+      cache: "force-cache"
+    });
+
+    if (!reponse.ok) {
+      throw new Error("Fragment objet introuvable : " + chemin);
+    }
+
+    const html = await reponse.text();
+    const template = document.createElement("template");
+    template.innerHTML = html.trim();
+
+    return template.content.cloneNode(true);
+  }
+
+  function appliquerRoutesSite(racine) {
+    const zone = racine || document;
+
+    zone.querySelectorAll("[data-site-href]").forEach((element) => {
+      element.setAttribute("href", construireUrlSite(element.getAttribute("data-site-href")));
+    });
+
+    zone.querySelectorAll("[data-site-src]").forEach((element) => {
+      element.setAttribute("src", construireUrlSite(element.getAttribute("data-site-src")));
+    });
+
+    zone.querySelectorAll("a[href^='/']").forEach((element) => {
+      element.setAttribute("href", construireUrlSite(element.getAttribute("href")));
+    });
+
+    zone.querySelectorAll("img[src^='/']").forEach((element) => {
+      element.setAttribute("src", construireUrlSite(element.getAttribute("src")));
+    });
+  }
+
   function construireUrlSite(chemin) {
     const valeur = String(chemin || "");
 
-    if (
-      !valeur ||
-      valeur.startsWith("#") ||
-      valeur.startsWith("mailto:") ||
-      valeur.startsWith("tel:") ||
-      valeur.startsWith("http://") ||
-      valeur.startsWith("https://") ||
-      valeur.startsWith("data:")
-    ) {
+    if (urlTechniqueOuAbsolue(valeur)) {
       return valeur;
     }
 
@@ -322,54 +446,10 @@
     return valeur.startsWith("/") ? ".." + valeur : valeur;
   }
 
-  function appliquerRoutesSite(racine = document) {
-    racine.querySelectorAll("[data-site-href]").forEach((element) => {
-      element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
-    });
-
-    racine.querySelectorAll("[data-site-src]").forEach((element) => {
-      element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
-    });
-
-    racine.querySelectorAll("a[href^='/']").forEach((element) => {
-      element.setAttribute("href", construireUrlSite(element.getAttribute("href")));
-    });
-
-    racine.querySelectorAll("img[src^='/']").forEach((element) => {
-      element.setAttribute("src", construireUrlSite(element.getAttribute("src")));
-    });
-  }
-
-  async function chargerFragmentObjet(chemin) {
-    const reponse = await fetch(construireUrlObjet(chemin), {
-      method: "GET",
-      credentials: "same-origin",
-      cache: "force-cache"
-    });
-
-    if (!reponse.ok) {
-      throw new Error("Fragment objet introuvable : " + chemin);
-    }
-
-    const html = await reponse.text();
-    const template = document.createElement("template");
-    template.innerHTML = html.trim();
-
-    return template.content.cloneNode(true);
-  }
-
   function construireUrlObjet(chemin) {
     const valeur = String(chemin || "");
 
-    if (
-      !valeur ||
-      valeur.startsWith("#") ||
-      valeur.startsWith("mailto:") ||
-      valeur.startsWith("tel:") ||
-      valeur.startsWith("http://") ||
-      valeur.startsWith("https://") ||
-      valeur.startsWith("data:")
-    ) {
+    if (urlTechniqueOuAbsolue(valeur)) {
       return valeur;
     }
 
@@ -406,7 +486,9 @@
       ""
     );
 
-    if (direct) return direct;
+    if (direct) {
+      return direct;
+    }
 
     if (typeof config.apiUrl === "function") {
       return nettoyerBaseUrl(config.apiUrl("editing-admin-api"));
@@ -427,14 +509,15 @@
       credentials: "omit",
       cache: "no-store",
       headers: {
-        "Accept": "application/json"
+        Accept: "application/json"
       }
     });
 
     const data = await reponse.json().catch(() => null);
 
     if (!reponse.ok || !data || data.success !== true) {
-      throw new Error(data?.message || "Mentions légales indisponibles.");
+      const message = data && data.message ? data.message : "Mentions légales indisponibles.";
+      throw new Error(message);
     }
 
     return data;
@@ -442,7 +525,10 @@
 
   async function ouvrirMentionsLegalesRestreintes() {
     const slot = document.getElementById("lcdp-lightbox-slot");
-    if (!slot) return;
+
+    if (!slot) {
+      return;
+    }
 
     slot.innerHTML = "";
 
@@ -486,21 +572,32 @@
 
     boutonFermer.addEventListener("click", fermer, { once: true });
     overlay.addEventListener("click", (event) => {
-      if (event.target === overlay) fermer();
+      if (event.target === overlay) {
+        fermer();
+      }
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") fermer();
+      if (event.key === "Escape") {
+        fermer();
+      }
     }, { once: true });
 
     const liste = section.querySelector("[data-mentions-legales-list]");
 
+    if (!liste) {
+      return;
+    }
+
     try {
       const documentLegal = await chargerMentionsLegales();
       const titre = section.querySelector(".lcdp-box-liste-card__title");
-      if (titre) titre.textContent = documentLegal.titre || "Mentions légales";
+      const blocs = Array.isArray(documentLegal.blocs) ? documentLegal.blocs : [];
+
+      if (titre) {
+        titre.textContent = documentLegal.titre || "Mentions légales";
+      }
 
       liste.innerHTML = "";
-      const blocs = Array.isArray(documentLegal.blocs) ? documentLegal.blocs : [];
 
       if (blocs.length === 0) {
         const message = document.createElement("p");
@@ -514,11 +611,11 @@
 
           const titreBloc = document.createElement("h3");
           titreBloc.className = "lcdp-boxtext__title";
-          titreBloc.textContent = bloc.titre || "";
+          titreBloc.textContent = bloc && bloc.titre ? bloc.titre : "";
 
           const contenu = document.createElement("div");
           contenu.className = "lcdp-boxtext__content";
-          contenu.innerHTML = bloc.html || "";
+          contenu.innerHTML = bloc && bloc.html ? bloc.html : "";
 
           article.appendChild(titreBloc);
           article.appendChild(contenu);
@@ -533,8 +630,19 @@
     }
   }
 
+  function urlTechniqueOuAbsolue(value) {
+    return (
+      !value ||
+      value.startsWith("#") ||
+      value.startsWith("mailto:") ||
+      value.startsWith("tel:") ||
+      value.startsWith("http://") ||
+      value.startsWith("https://") ||
+      value.startsWith("data:")
+    );
+  }
+
   function nettoyerBaseUrl(value) {
     return String(value || "").replace(/\/+$/, "");
   }
-
 })();
