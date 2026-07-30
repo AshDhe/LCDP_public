@@ -41,6 +41,8 @@
 
     if (lienMotDePasseOublie) {
       lienMotDePasseOublie.href = urlMotDePasseOublie;
+      lienMotDePasseOublie.target = "_blank";
+      lienMotDePasseOublie.rel = "noopener noreferrer";
     }
 
     if (!formulaire || !champEmail || !champMdp || !bouton) {
