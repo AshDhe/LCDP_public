@@ -106,6 +106,11 @@
 
   async function initialiserPageListeAttente() {
     appliquerRoutesSiteListeAttente(document);
+
+    initialiserBandeauListeAttente().catch((erreur) => {
+      console.error("Erreur bandeau liste d'attente :", erreur);
+    });
+
     initialiserBoutonMentionsLegalesListeAttente();
 
     if (typeof window.LCDP_creerFormulaire !== "function") {
@@ -400,12 +405,32 @@
 
     slot.innerHTML = "";
 
-    try {
-      const fragment = await chargerFragmentObjetListeAttente("/BOX/02-box-bandeau-nav.html");
-      slot.appendChild(fragment);
-      appliquerRoutesSiteListeAttente(slot);
-    } catch (error) {
-      console.error("Erreur bandeau liste d'attente :", error);
+    const fragment = await chargerFragmentObjetListeAttente("/BOX/02-box-bandeau-nav.html");
+    slot.appendChild(fragment);
+    configurerBandeauRestreintListeAttente(slot);
+    appliquerRoutesSiteListeAttente(slot);
+  }
+
+  function configurerBandeauRestreintListeAttente(slot) {
+    const lien = slot.querySelector(".lcdp-box-bandeau-nav__logo-link");
+    const libelle = slot.querySelector("[data-lcdp-bandeau-nav-label], .lcdp-box-bandeau-nav__space-label");
+    const burgerSlot = slot.querySelector("[data-lcdp-burger-slot], .lcdp-box-bandeau-nav__burger-slot");
+
+    if (lien) {
+      lien.setAttribute("href", construireUrlSiteListeAttente("/ESPACE-PUBLIC/hello.html"));
+      lien.dataset.siteHref = "/ESPACE-PUBLIC/hello.html";
+      lien.setAttribute("aria-label", "Accueil restreint La Clé du Parc");
+    }
+
+    if (libelle) {
+      libelle.textContent = "";
+      libelle.appendChild(document.createTextNode("La Clé du Parc |"));
+      libelle.appendChild(document.createElement("br"));
+      libelle.appendChild(document.createTextNode("Accueil restreint"));
+    }
+
+    if (burgerSlot) {
+      burgerSlot.remove();
     }
   }
 
