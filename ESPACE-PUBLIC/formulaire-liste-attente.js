@@ -5,10 +5,10 @@
     id: "formulaire-liste-attente",
     ariaLabel: "Formulaire de pré-inscription 2027",
     titre: "Pré-inscription 2027",
-    sousTitre: "Liste de membres invités",
+    sousTitre: "Sans engagement",
     introHtml: `
       <p>
-        Partagez votre curiosité et votre passion du plein air. Bénéficiez des bonus abonnement 2027 pour tous nos membres invités.
+        Partagez partager votre passion du plein air d'exception et gagnez 10 "points passion" La Clé du Parc pour 2027. Sans aucun engagement de votre part. Soyez informé(e) de l'actualité du club avant l'ouverture de la saison 2027 pour vous et vos proches.
       </p>
     `,
     champs: [
@@ -34,7 +34,7 @@
         type: "text",
         id: "departement",
         name: "departement",
-        label: "Département",
+        label: "Votre département de coeur ou de résidence",
         required: true,
         placeholder: "Le numéro (par exemple : 08)",
         inputmode: "text",
@@ -46,7 +46,7 @@
         name: "age",
         label: "Voulez-vous dire votre âge ?",
         required: false,
-        placeholder: "Par exemple : 40)",
+        placeholder: "Par exemple : 40",
         inputmode: "numeric",
         min: "18",
         max: "100"
@@ -57,7 +57,7 @@
         name: "email",
         label: "Votre e-mail",
         required: true,
-        placeholder: "Celui auquel on peut vous écrire",
+        placeholder: "Celui auquel on peut vous écrire personnellement :)",
         autocomplete: "email",
         autocapitalize: "none",
         spellcheck: "false"
@@ -66,16 +66,16 @@
         type: "textarea",
         id: "texte_libre",
         name: "texte_libre",
-        label: "Votre motivation pour le club",
+        label: "Votre passion pour le plein air d'exception",
         required: false,
-        placeholder: "Vous pouvez partager votre motivation à faire partie du club La Clé du Parc et à bénéficier de ses activités."
+        placeholder: "Dîtes-en nous un peu plus sur votre passion du plein air d'exception et votre motivation à bénéficier de La Clé du Parc."
       },
       {
         type: "checkbox",
         id: "responsable_parc",
         name: "responsable_parc",
         label: "Responsable de parc",
-        checkboxLabel: "Êtes-vous responsable d'un parc plein air intéressé par nos activités ?",
+        checkboxLabel: "Êtes-vous responsable d'un parc plein air et intéressé par nos activités ?",
         required: false
       },
       {
@@ -83,18 +83,18 @@
         id: "responsable_activite",
         name: "responsable_activite",
         label: "Responsable d'activité",
-        checkboxLabel: "Êtes-vous responsable d'activité de plein air (artistique, sportive, conviviale, culturelle) ?",
+        checkboxLabel: "Êtes-vous responsable d'activité de plein air ou coach dans les domaines artistiques, sportifs ou culturels et intéressé par nos activités ?",
         required: false
       }
     ],
     bouton: {
       id: "bouton-envoyer-liste-attente",
       type: "submit",
-      label: "Me pré-inscrire",
+      label: "Pré-inscription",
       style: "lcdp-button-orange"
     },
     noteHtml: `
-      * Votre réponse est nécessaire pour enregistre votre pré-inscription. Ce formulaire est destiné aux personnes majeures. Vos réponses sont exclusivement réservées au club La Clé du Parc. Elles sont conservées deux ans.
+      * Votre réponse est nécessaire pour enregistrer votre pré-inscription. Les informations que vous partagez dans ce formulaire sont soumises à l'application des mentions légales. En particulier, elles sont exclusivement réservées au club La Clé du Parc et ne font l'objet d'aucun partage avec un tiers. Consultez les memtions légales pour en savoir plus à propos du traitement appliqué à ces informations.
     `
   };
 
