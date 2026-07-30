@@ -648,6 +648,9 @@
       const contenu = document.createElement("div");
       contenu.className = "lcdp-boxtext__content";
       contenu.innerHTML = String(bloc?.html || "");
+      supprimerParagraphesVidesMentionsLegales(
+        contenu
+      );
 
       article.appendChild(titreBloc);
       article.appendChild(contenu);
@@ -667,6 +670,29 @@
     }
 
     appliquerRoutesSiteListeAttente(liste);
+  }
+
+  function supprimerParagraphesVidesMentionsLegales(
+    conteneur
+  ) {
+    conteneur.querySelectorAll("p").forEach(
+      (paragraphe) => {
+        const contenuHtml = String(
+          paragraphe.innerHTML || ""
+        )
+          .replace(/&nbsp;/gi, "")
+          .replace(/<br\s*\/?>/gi, "")
+          .replace(/\s+/g, "");
+
+        const contenuTexte = String(
+          paragraphe.textContent || ""
+        ).trim();
+
+        if (!contenuHtml && !contenuTexte) {
+          paragraphe.remove();
+        }
+      }
+    );
   }
 
   function ajouterBoutonDemandeJuridique(

@@ -107,6 +107,29 @@
   }
 }
 
+.lcdp-restricted-legal-card [data-mentions-legales-list] {
+  display: block;
+  gap: 0;
+}
+
+.lcdp-restricted-legal-card [data-mentions-legales-list] > .lcdp-boxtext {
+  margin: 0;
+  padding: 0;
+}
+
+.lcdp-restricted-legal-card [data-mentions-legales-list] > .lcdp-boxtext + .lcdp-boxtext {
+  margin-top: 1.5rem;
+}
+
+.lcdp-restricted-legal-card .lcdp-boxtext__title {
+  margin: 0 0 0.65rem;
+}
+
+.lcdp-restricted-legal-card .lcdp-boxtext__content {
+  margin: 0;
+  padding: 0;
+}
+
 .lcdp-restricted-legal-card .lcdp-boxtext__content > p {
   margin: 0;
 }
