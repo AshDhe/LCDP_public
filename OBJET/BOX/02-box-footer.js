@@ -7,6 +7,8 @@
 
   window.LCDP_footerMentionsLegalesInitialise = true;
 
+  let ouvertureEnCours = false;
+
   document.addEventListener("click", (event) => {
     const declencheur = event.target.closest("[data-lcdp-footer-mentions-legales]");
 
@@ -15,11 +17,7 @@
     }
 
     event.preventDefault();
-
-    ouvrirMentionsLegalesFooter().catch((erreur) => {
-      console.error("Erreur mentions légales footer :", erreur);
-      alert("Les mentions légales ne sont pas disponibles pour le moment.");
-    });
+    lancerOuvertureMentionsLegalesFooter(declencheur);
   });
 
   window.LCDP_ouvrirMentionsLegalesFooter = ouvrirMentionsLegalesFooter;
@@ -28,16 +26,45 @@
       event.preventDefault();
     }
 
-    ouvrirMentionsLegalesFooter().catch((erreur) => {
-      console.error("Erreur mentions légales footer :", erreur);
-      alert("Les mentions légales ne sont pas disponibles pour le moment.");
-    });
-
+    lancerOuvertureMentionsLegalesFooter(event?.currentTarget || null);
     return false;
   };
   window.LCDP_initialiserFooterMentionsLegales = () => true;
 
-  async function ouvrirMentionsLegalesFooter() {
+  function lancerOuvertureMentionsLegalesFooter(declencheur) {
+    ouvrirMentionsLegalesFooter(declencheur).catch((erreur) => {
+      console.error("Erreur mentions légales footer :", erreur);
+      alert("Les mentions légales ne sont pas disponibles pour le moment.");
+    });
+  }
+
+  async function ouvrirMentionsLegalesFooter(declencheur = null) {
+    if (ouvertureEnCours) {
+      return;
+    }
+
+    ouvertureEnCours = true;
+    definirChargementDeclencheur(declencheur, true);
+
+    try {
+      const documentLegal = await chargerMentionsLegalesFooter();
+      afficherLightboxMentionsLegalesFooter(documentLegal);
+    } finally {
+      definirChargementDeclencheur(declencheur, false);
+      ouvertureEnCours = false;
+    }
+  }
+
+  function definirChargementDeclencheur(declencheur, enCours) {
+    if (!declencheur) {
+      return;
+    }
+
+    declencheur.disabled = enCours;
+    declencheur.setAttribute("aria-busy", enCours ? "true" : "false");
+  }
+
+  function afficherLightboxMentionsLegalesFooter(documentLegal) {
     const slot = obtenirSlotLightbox();
     slot.innerHTML = "";
 
@@ -58,11 +85,10 @@
 
     const titre = document.createElement("h2");
     titre.className = "lcdp-footer-legal-title";
-    titre.textContent = "Mentions légales";
+    titre.textContent = documentLegal?.titre || "Mentions légales";
 
     const liste = document.createElement("div");
     liste.className = "lcdp-footer-legal-list";
-    liste.innerHTML = '<p class="lcdp-footer-legal-message">Chargement...</p>';
 
     card.appendChild(boutonFermer);
     card.appendChild(titre);
@@ -90,16 +116,8 @@
       { once: true }
     );
 
-    try {
-      const documentLegal = await chargerMentionsLegalesFooter();
-
-      titre.textContent = documentLegal.titre || "Mentions légales";
-      rendreMentionsLegalesFooter(liste, documentLegal);
-      appliquerRoutesFooter(liste);
-    } catch (error) {
-      console.error("Erreur chargement mentions légales footer :", error);
-      liste.innerHTML = '<p class="lcdp-footer-legal-message" data-lcdp-message-type="erreur">Les mentions légales ne sont pas disponibles pour le moment.</p>';
-    }
+    rendreMentionsLegalesFooter(liste, documentLegal, overlay);
+    appliquerRoutesFooter(liste);
   }
 
   function obtenirSlotLightbox() {
@@ -139,7 +157,7 @@
     return data;
   }
 
-  function rendreMentionsLegalesFooter(liste, documentLegal) {
+  function rendreMentionsLegalesFooter(liste, documentLegal, overlay) {
     const blocs = Array.isArray(documentLegal?.blocs) ? documentLegal.blocs : [];
     liste.innerHTML = "";
 
@@ -168,6 +186,173 @@
       article.appendChild(contenu);
       liste.appendChild(article);
     });
+
+    ajouterBoutonDemandeJuridiqueFooter(liste, documentLegal, overlay);
+  }
+
+  function ajouterBoutonDemandeJuridiqueFooter(liste, documentLegal, overlay) {
+    const actions = document.createElement("div");
+    actions.className = "lcdp-footer-legal-actions lcdp-box-formulaire__actions";
+
+    const bouton = document.createElement("button");
+    bouton.type = "button";
+    bouton.className = "lcdp-button lcdp-button-secondary";
+    bouton.textContent = "Demande juridique";
+    bouton.addEventListener("click", () => {
+      ouvrirFormulaireDemandeJuridiqueFooter(liste, documentLegal, overlay).catch((erreur) => {
+        console.error("Erreur formulaire demande juridique footer :", erreur);
+        alert("Le formulaire de demande juridique n'est pas disponible pour le moment.");
+      });
+    });
+
+    actions.appendChild(bouton);
+    liste.appendChild(actions);
+  }
+
+  async function ouvrirFormulaireDemandeJuridiqueFooter(liste, documentLegal, overlay) {
+    liste.innerHTML = "";
+
+    const section = document.createElement("section");
+    section.className = "lcdp-footer-legal-section";
+
+    const titre = document.createElement("h3");
+    titre.className = "lcdp-footer-legal-section-title";
+    titre.textContent = "Demande juridique";
+
+    const intro = document.createElement("p");
+    intro.className = "lcdp-footer-legal-message";
+    intro.textContent = "Renseignez vos coordonnées et la raison de votre demande.";
+
+    const form = document.createElement("form");
+    form.className = "lcdp-footer-legal-form";
+    form.noValidate = true;
+    form.innerHTML =
+      '<div class="lcdp-footer-legal-field">' +
+        '<label for="demande-juridique-footer-nom">Votre nom</label>' +
+        '<input id="demande-juridique-footer-nom" name="nom" type="text" autocomplete="family-name" maxlength="120" required>' +
+      '</div>' +
+      '<div class="lcdp-footer-legal-field">' +
+        '<label for="demande-juridique-footer-prenom">Votre prénom</label>' +
+        '<input id="demande-juridique-footer-prenom" name="prenom" type="text" autocomplete="given-name" maxlength="120" required>' +
+      '</div>' +
+      '<div class="lcdp-footer-legal-field">' +
+        '<label for="demande-juridique-footer-email">Votre e-mail</label>' +
+        '<input id="demande-juridique-footer-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" maxlength="254" required>' +
+      '</div>' +
+      '<div class="lcdp-footer-legal-field">' +
+        '<label for="demande-juridique-footer-motif">Raison de votre demande juridique</label>' +
+        '<textarea id="demande-juridique-footer-motif" name="motif" maxlength="4000" required></textarea>' +
+      '</div>' +
+      '<p class="lcdp-footer-legal-message" data-lcdp-footer-demande-statut aria-live="polite"></p>' +
+      '<div class="lcdp-footer-legal-actions lcdp-box-formulaire__actions">' +
+        '<button class="lcdp-button lcdp-button-orange" type="submit">Envoyer</button>' +
+        '<button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-footer-retour-mentions>Retour aux mentions légales</button>' +
+      '</div>';
+
+    section.appendChild(titre);
+    section.appendChild(intro);
+    section.appendChild(form);
+    liste.appendChild(section);
+
+    const retour = form.querySelector("[data-lcdp-footer-retour-mentions]");
+    const statut = form.querySelector("[data-lcdp-footer-demande-statut]");
+
+    retour?.addEventListener("click", () => {
+      rendreMentionsLegalesFooter(liste, documentLegal, overlay);
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const payload = lireFormulaireDemandeJuridiqueFooter(form);
+      const erreur = validerDemandeJuridiqueFooter(payload);
+
+      if (erreur) {
+        statut.textContent = erreur;
+        return;
+      }
+
+      const boutons = Array.from(form.querySelectorAll("button"));
+      boutons.forEach((bouton) => {
+        bouton.disabled = true;
+      });
+      statut.textContent = "Envoi en cours...";
+
+      try {
+        await envoyerDemandeJuridiqueFooter(payload);
+        form.reset();
+        statut.textContent = "Votre demande est envoyée.";
+
+        window.setTimeout(() => {
+          if (liste.isConnected) {
+            rendreMentionsLegalesFooter(liste, documentLegal, overlay);
+          }
+        }, 900);
+      } catch (error) {
+        console.error("Erreur envoi demande juridique footer :", error);
+        boutons.forEach((bouton) => {
+          bouton.disabled = false;
+        });
+        statut.textContent = String(error?.message || error || "La demande n’a pas pu être envoyée.");
+      }
+    });
+  }
+
+  function lireFormulaireDemandeJuridiqueFooter(form) {
+    return {
+      nom: String(form.elements.namedItem("nom")?.value || "").trim(),
+      prenom: String(form.elements.namedItem("prenom")?.value || "").trim(),
+      email: String(form.elements.namedItem("email")?.value || "").trim().toLowerCase(),
+      motif: String(form.elements.namedItem("motif")?.value || "").trim(),
+      source: "footer-site"
+    };
+  }
+
+  function validerDemandeJuridiqueFooter(payload) {
+    if (!payload.nom) {
+      return "Votre nom est obligatoire.";
+    }
+
+    if (!payload.prenom) {
+      return "Votre prénom est obligatoire.";
+    }
+
+    if (!payload.email || !emailValideFooter(payload.email)) {
+      return "Votre adresse e-mail n’est pas valide.";
+    }
+
+    if (!payload.motif) {
+      return "La raison de votre demande est obligatoire.";
+    }
+
+    return "";
+  }
+
+  async function envoyerDemandeJuridiqueFooter(payload) {
+    const endpoint = obtenirEndpointEditingAdmin();
+
+    if (!endpoint) {
+      throw new Error("Service de demande juridique non configuré.");
+    }
+
+    const response = await fetch(endpoint + "/public/demande-juridique", {
+      method: "POST",
+      credentials: "omit",
+      cache: "no-store",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json().catch(() => null);
+
+    if (!response.ok || !data || data.success !== true) {
+      throw new Error(data?.message || data?.detail || "La demande n’a pas pu être envoyée.");
+    }
+
+    return data;
   }
 
   function supprimerParagraphesVides(conteneur) {
@@ -256,6 +441,10 @@
     }
 
     return valeur.startsWith("/") ? ".." + valeur : valeur;
+  }
+
+  function emailValideFooter(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
   }
 
   function nettoyerBaseUrl(value) {
