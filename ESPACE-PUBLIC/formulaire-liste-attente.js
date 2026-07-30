@@ -8,7 +8,7 @@
     sousTitre: "Sans engagement",
     introHtml: `
       <p>
-        Partagez partager votre passion du plein air d'exception et gagnez 10 "points passion" La Clé du Parc pour 2027. Sans aucun engagement de votre part. Soyez informé(e) de l'actualité du club avant l'ouverture de la saison 2027 pour vous et vos proches.
+        Partagez votre passion du plein air d'exception et gagnez 10 "points passion" La Clé du Parc pour 2027. Soyez informé(e) de l'actualité du club avant l'ouverture de la saison 2027 pour vous et vos proches.
       </p>
     `,
     champs: [
