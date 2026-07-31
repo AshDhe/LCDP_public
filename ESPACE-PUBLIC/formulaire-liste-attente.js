@@ -545,6 +545,16 @@
     const slot = document.getElementById("lcdp-lightbox-slot");
     if (!slot) return;
 
+    let documentLegal = null;
+    let erreurChargement = null;
+
+    try {
+      documentLegal = await chargerMentionsLegales();
+    } catch (error) {
+      console.error("Erreur mentions légales :", error);
+      erreurChargement = error;
+    }
+
     slot.innerHTML = "";
 
     const overlay = document.createElement("div");
@@ -571,9 +581,7 @@
           '<h2 class="lcdp-box-liste-card__title">Mentions légales</h2>' +
         '</div>' +
       '</div>' +
-      '<div class="lcdp-box-liste-card__list" data-mentions-legales-list>' +
-        '<p class="lcdp-box-liste-card__message">Chargement...</p>' +
-      '</div>';
+      '<div class="lcdp-box-liste-card__list" data-mentions-legales-list></div>';
 
     card.appendChild(boutonFermer);
     card.appendChild(section);
@@ -594,26 +602,29 @@
 
     const liste = section.querySelector("[data-mentions-legales-list]");
 
-    try {
-      const documentLegal = await chargerMentionsLegales();
-      const titre = section.querySelector(
-        ".lcdp-box-liste-card__title"
-      );
-
-      if (titre) {
-        titre.textContent =
-          documentLegal.titre || "Mentions légales";
-      }
-
-      await rendreMentionsLegalesRestreintes(
-        liste,
-        documentLegal,
-        overlay
-      );
-    } catch (error) {
-      console.error("Erreur mentions légales :", error);
-      liste.innerHTML = '<p class="lcdp-box-liste-card__message" data-lcdp-message-type="erreur">Les mentions légales ne sont pas disponibles pour le moment.</p>';
+    if (!liste) {
+      return;
     }
+
+    if (!documentLegal) {
+      liste.innerHTML = '<p class="lcdp-box-liste-card__message" data-lcdp-message-type="erreur">Les mentions légales ne sont pas disponibles pour le moment.</p>';
+      return;
+    }
+
+    const titre = section.querySelector(
+      ".lcdp-box-liste-card__title"
+    );
+
+    if (titre) {
+      titre.textContent =
+        documentLegal.titre || "Mentions légales";
+    }
+
+    await rendreMentionsLegalesRestreintes(
+      liste,
+      documentLegal,
+      overlay
+    );
   }
 
 
