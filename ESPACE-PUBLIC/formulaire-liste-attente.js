@@ -448,7 +448,9 @@
   async function initialiserFooterListeAttente() {
     const slot = document.getElementById("lcdp-footer-slot");
 
-    if (!slot) return;
+    if (!slot) {
+      return;
+    }
 
     slot.innerHTML = "";
 
