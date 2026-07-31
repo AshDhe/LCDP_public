@@ -44,25 +44,15 @@
     }
 
     ouvertureEnCours = true;
-    definirChargementDeclencheur(declencheur, true);
 
     try {
       const documentLegal = await chargerMentionsLegalesFooter();
       afficherLightboxMentionsLegalesFooter(documentLegal);
     } finally {
-      definirChargementDeclencheur(declencheur, false);
       ouvertureEnCours = false;
     }
   }
 
-  function definirChargementDeclencheur(declencheur, enCours) {
-    if (!declencheur) {
-      return;
-    }
-
-    declencheur.disabled = enCours;
-    declencheur.setAttribute("aria-busy", enCours ? "true" : "false");
-  }
 
   function afficherLightboxMentionsLegalesFooter(documentLegal) {
     const slot = obtenirSlotLightbox();
