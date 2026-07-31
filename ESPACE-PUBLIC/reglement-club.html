@@ -21,11 +21,12 @@
   <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
   <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
+  <link rel="stylesheet" href="./documents-legaux.css" data-site-href="/ESPACE-PUBLIC/documents-legaux.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
 </head>
 
-<body>
+<body class="lcdp-page-document-legal">
   <div class="lcdp-site-page">
 
     <div id="lcdp-bandeau-slot"></div>
@@ -33,15 +34,15 @@
     <main class="lcdp-site-main">
       <section class="lcdp-page-section" aria-label="Règlement club">
         <div class="lcdp-page-container">
-          <div class="lcdp-page-content lcdp-stack-large">
+          <div class="lcdp-page-content lcdp-stack-large lcdp-document-legal">
 
-            <h1 class="lcdp-title-page-center">Règlement club</h1>
+            <h1 class="lcdp-title-page-center lcdp-document-legal__title">Règlement club</h1>
 
-            <p class="lcdp-mention-connexion">
+            <p class="lcdp-mention-connexion lcdp-document-legal__context">
               [Espace public de l'application]
             </p>
 
-            <div id="lcdp-boxtext-reglement-club-slot"></div>
+            <div id="lcdp-boxtext-reglement-club-slot" class="lcdp-document-legal__content"></div>
 
           </div>
         </div>
@@ -52,6 +53,11 @@
     <div id="lcdp-lightbox-slot"></div>
 
   </div>
+
+  <script
+    src="./documents-legaux.js"
+    data-site-src="/ESPACE-PUBLIC/documents-legaux.js"
+  ></script>
 
   <script>
     (() => {
@@ -231,56 +237,19 @@
       }
 
       function nettoyerHtmlAffichage(htmlBrut) {
-        const template = document.createElement("template");
-        template.innerHTML = String(htmlBrut || "");
+        const moduleLegal =
+          window.LCDP_DOCUMENTS_LEGAUX;
 
-        template.content
-          .querySelectorAll(
-            "script,style,iframe,object,embed,svg,math,form,input,button,textarea,select,template"
-          )
-          .forEach((element) => element.remove());
+        if (
+          !moduleLegal ||
+          typeof moduleLegal.nettoyerHtml !== "function"
+        ) {
+          throw new Error(
+            "Normaliseur des documents légaux indisponible."
+          );
+        }
 
-        const autorisees = new Set([
-          "P",
-          "BR",
-          "STRONG",
-          "EM",
-          "UL",
-          "OL",
-          "LI",
-          "A"
-        ]);
-
-        Array.from(
-          template.content.querySelectorAll("*")
-        ).forEach((element) => {
-          if (!autorisees.has(element.tagName)) {
-            element.replaceWith(...element.childNodes);
-            return;
-          }
-
-          Array.from(element.attributes).forEach((attribut) => {
-            const nom = attribut.name.toLowerCase();
-
-            if (
-              element.tagName === "A" &&
-              (
-                nom === "href" ||
-                nom === "data-site-href" ||
-                (
-                  nom === "class" &&
-                  attribut.value === "lcdp-link-secondary"
-                )
-              )
-            ) {
-              return;
-            }
-
-            element.removeAttribute(attribut.name);
-          });
-        });
-
-        return template.innerHTML.trim();
+        return moduleLegal.nettoyerHtml(htmlBrut);
       }
 
       async function afficherDocumentPublic(slotId, documentPublic) {
