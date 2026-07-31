@@ -8,7 +8,7 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: var(--lcdp-space-2);
 }
 
 .lcdp-boxtext__title {
@@ -25,11 +25,27 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: var(--lcdp-space-2);
+  gap: 0.9rem;
+  line-height: 1.55;
 }
 
-.lcdp-boxtext__content p {
+.lcdp-boxtext__content > p,
+.lcdp-boxtext__content > ul,
+.lcdp-boxtext__content > ol {
   margin: 0;
+}
+
+.lcdp-boxtext__content > ul,
+.lcdp-boxtext__content > ol {
+  padding-left: 1.55rem;
+}
+
+.lcdp-boxtext__content li {
+  padding-left: 0.12rem;
+}
+
+.lcdp-boxtext__content li + li {
+  margin-top: 0.18rem;
 }
 
 .lcdp-boxtext__content strong {
