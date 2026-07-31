@@ -5,7 +5,7 @@
       type="button"
       id="bouton-mentions-legales"
       style="border:0;background:transparent;color:var(--lcdp-color-text-muted);font:inherit;font-size:.95rem;line-height:1.3;font-weight:500;text-decoration:none;cursor:pointer;padding:0;"
-      onclick="event.preventDefault(); event.stopImmediatePropagation(); const footer=this.closest('[data-lcdp-box-footer]'); if (!window.LCDP_ouvrirMentionsLegalesFooterObjet) { const code=footer && footer.querySelector('[data-lcdp-footer-code]') ? footer.querySelector('[data-lcdp-footer-code]').textContent : ''; const script=document.createElement('script'); script.textContent=code; document.body.appendChild(script); } if (typeof window.LCDP_ouvrirMentionsLegalesFooterObjet === 'function') { window.LCDP_ouvrirMentionsLegalesFooterObjet(this); } return false;"
+      onclick="event.preventDefault(); event.stopPropagation(); const footer=this.closest('[data-lcdp-box-footer]'); if (!window.LCDP_ouvrirMentionsLegalesFooterObjet) { const code=footer && footer.querySelector('[data-lcdp-footer-code]') ? footer.querySelector('[data-lcdp-footer-code]').textContent : ''; if (code) { const script=document.createElement('script'); script.text=code; document.head.appendChild(script); } } if (typeof window.LCDP_ouvrirMentionsLegalesFooterObjet === 'function') { window.LCDP_ouvrirMentionsLegalesFooterObjet(); } return false;"
     >
       Mentions légales
     </button>
@@ -20,8 +20,9 @@
   }
 
   let ouvertureEnCours = false;
+  let documentLegalCache = null;
 
-  window.LCDP_ouvrirMentionsLegalesFooterObjet = async function LCDP_ouvrirMentionsLegalesFooterObjet(declencheur) {
+  window.LCDP_ouvrirMentionsLegalesFooterObjet = async function LCDP_ouvrirMentionsLegalesFooterObjet() {
     if (ouvertureEnCours) {
       return false;
     }
@@ -29,7 +30,8 @@
     ouvertureEnCours = true;
 
     try {
-      const documentLegal = await chargerMentionsLegalesFooterObjet();
+      const documentLegal = documentLegalCache || await chargerMentionsLegalesFooterObjet();
+      documentLegalCache = documentLegal;
       afficherMentionsLegalesFooterObjet(documentLegal);
     } catch (error) {
       console.error("Erreur mentions légales footer :", error);
