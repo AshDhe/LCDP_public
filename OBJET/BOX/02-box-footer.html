@@ -1,13 +1,517 @@
 <footer class="lcdp-box-footer" data-lcdp-box-footer>
   <div class="lcdp-box-footer__inner">
     <button
-      class="lcdp-footer-mentions-button"
+      class="lcdp-footer-mentions-button lcdp-restricted-footer-button"
       type="button"
       id="bouton-mentions-legales"
-      data-lcdp-footer-mentions-legales
-      onclick="return window.LCDP_chargerMentionsLegalesFooterDepuisObjet ? window.LCDP_chargerMentionsLegalesFooterDepuisObjet(event) : (function(event) { event.preventDefault(); const lancer = function() { if (typeof window.LCDP_ouvrirMentionsLegalesFooter === 'function') { window.LCDP_ouvrirMentionsLegalesFooter().catch(function(erreur) { console.error('Erreur mentions légales footer :', erreur); alert('Les mentions légales ne sont pas disponibles pour le moment.'); }); } }; if (typeof window.LCDP_ouvrirMentionsLegalesFooter === 'function') { lancer(); return false; } const src = typeof window.LCDP_urlObjet === 'function' ? window.LCDP_urlObjet('/BOX/02-box-footer.js') : ((window.SITE_CONFIG && typeof window.SITE_CONFIG.objetUrl === 'function') ? window.SITE_CONFIG.objetUrl('/BOX/02-box-footer.js') : '../OBJET/BOX/02-box-footer.js'); let script = document.querySelector('script[data-lcdp-footer-js=&quot;mentions-legales&quot;]'); if (!script) { script = document.createElement('script'); script.src = src; script.defer = true; script.dataset.lcdpFooterJs = 'mentions-legales'; script.onload = lancer; script.onerror = function() { alert('Les mentions légales ne sont pas disponibles pour le moment.'); }; document.body.appendChild(script); } else { script.addEventListener('load', lancer, { once: true }); setTimeout(lancer, 80); } return false; })(event);"
+      style="border:0;background:transparent;color:var(--lcdp-color-text-muted);font:inherit;font-size:.95rem;line-height:1.3;font-weight:500;text-decoration:none;cursor:pointer;padding:0;"
+      onclick="event.preventDefault(); event.stopImmediatePropagation(); const footer=this.closest('[data-lcdp-box-footer]'); if (!window.LCDP_ouvrirMentionsLegalesFooterObjet) { const code=footer && footer.querySelector('[data-lcdp-footer-code]') ? footer.querySelector('[data-lcdp-footer-code]').textContent : ''; const script=document.createElement('script'); script.textContent=code; document.body.appendChild(script); } if (typeof window.LCDP_ouvrirMentionsLegalesFooterObjet === 'function') { window.LCDP_ouvrirMentionsLegalesFooterObjet(this); } return false;"
     >
       Mentions légales
     </button>
   </div>
+
+  <script type="text/plain" data-lcdp-footer-code>
+(() => {
+  "use strict";
+
+  if (window.LCDP_ouvrirMentionsLegalesFooterObjet) {
+    return;
+  }
+
+  let ouvertureEnCours = false;
+
+  window.LCDP_ouvrirMentionsLegalesFooterObjet = async function LCDP_ouvrirMentionsLegalesFooterObjet(declencheur) {
+    if (ouvertureEnCours) {
+      return false;
+    }
+
+    ouvertureEnCours = true;
+
+    const texteInitial = declencheur ? declencheur.textContent : "";
+
+    if (declencheur) {
+      declencheur.disabled = true;
+      declencheur.setAttribute("aria-busy", "true");
+      declencheur.textContent = "Chargement...";
+    }
+
+    try {
+      const documentLegal = await chargerMentionsLegalesFooterObjet();
+      afficherMentionsLegalesFooterObjet(documentLegal);
+    } catch (error) {
+      console.error("Erreur mentions légales footer :", error);
+      alert("Les mentions légales ne sont pas disponibles pour le moment.");
+    } finally {
+      if (declencheur) {
+        declencheur.disabled = false;
+        declencheur.setAttribute("aria-busy", "false");
+        declencheur.textContent = texteInitial || "Mentions légales";
+      }
+
+      ouvertureEnCours = false;
+    }
+
+    return false;
+  };
+
+  function obtenirSlotLightboxFooterObjet() {
+    let slot = document.getElementById("lcdp-lightbox-slot");
+
+    if (!slot) {
+      slot = document.createElement("div");
+      slot.id = "lcdp-lightbox-slot";
+      document.body.appendChild(slot);
+    }
+
+    return slot;
+  }
+
+  function obtenirEndpointEditingAdminFooterObjet() {
+    const config = window.SITE_CONFIG || {};
+    const direct = nettoyerBaseUrlFooterObjet(
+      config.workerEditingAdminUrl ||
+      config.WORKER_EDITING_ADMIN_URL ||
+      config.W_EDITING_ADMIN_URL ||
+      config.editingAdminUrl ||
+      ""
+    );
+
+    if (direct) {
+      return direct;
+    }
+
+    if (typeof config.apiUrl === "function") {
+      return nettoyerBaseUrlFooterObjet(config.apiUrl("editing-admin-api"));
+    }
+
+    return "https://editing-admin-api.lacleduparc.fr";
+  }
+
+  async function chargerMentionsLegalesFooterObjet() {
+    const endpoint = obtenirEndpointEditingAdminFooterObjet();
+
+    if (!endpoint) {
+      throw new Error("Endpoint mentions légales non configuré.");
+    }
+
+    const response = await fetch(endpoint + "/public/mentions-legales", {
+      method: "GET",
+      credentials: "omit",
+      cache: "no-store",
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    const data = await response.json().catch(() => null);
+
+    if (!response.ok || !data || data.success !== true) {
+      throw new Error(data?.message || "Mentions légales indisponibles.");
+    }
+
+    return data;
+  }
+
+  function afficherMentionsLegalesFooterObjet(documentLegal) {
+    const slot = obtenirSlotLightboxFooterObjet();
+    slot.innerHTML = "";
+
+    const overlay = document.createElement("div");
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "Mentions légales");
+    appliquerStyleFooterObjet(overlay, {
+      position: "fixed",
+      inset: "0",
+      zIndex: "6000",
+      padding: "16px",
+      background: "rgba(31, 42, 36, 0.46)",
+      backdropFilter: "blur(4px)",
+      webkitBackdropFilter: "blur(4px)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      boxSizing: "border-box"
+    });
+
+    const card = document.createElement("div");
+    appliquerStyleFooterObjet(card, {
+      position: "relative",
+      width: "min(100%, 820px)",
+      maxHeight: "calc(100svh - 36px)",
+      padding: "24px",
+      border: "1px solid var(--lcdp-color-border, #ddd6cc)",
+      borderRadius: "var(--lcdp-radius-large, 18px)",
+      background: "rgba(255, 255, 255, 0.98)",
+      boxShadow: "0 18px 50px rgba(31, 42, 36, 0.18)",
+      overflowY: "auto",
+      boxSizing: "border-box"
+    });
+
+    const boutonFermer = document.createElement("button");
+    boutonFermer.type = "button";
+    boutonFermer.setAttribute("aria-label", "Fermer");
+    boutonFermer.textContent = "×";
+    appliquerStyleFooterObjet(boutonFermer, {
+      position: "absolute",
+      top: "10px",
+      right: "10px",
+      width: "38px",
+      height: "38px",
+      border: "0",
+      borderRadius: "999px",
+      background: "var(--lcdp-color-surface-soft, #f7f4ee)",
+      color: "var(--lcdp-color-text, #1f2a24)",
+      fontSize: "1.8rem",
+      lineHeight: "1",
+      cursor: "pointer"
+    });
+
+    const titre = document.createElement("h2");
+    titre.textContent = documentLegal?.titre || "Mentions légales";
+    appliquerStyleFooterObjet(titre, {
+      margin: "0 46px 18px 0",
+      color: "var(--lcdp-color-title, #31473a)",
+      fontSize: "clamp(1.35rem, 4vw, 1.9rem)",
+      lineHeight: "1.15"
+    });
+
+    const liste = document.createElement("div");
+
+    card.appendChild(boutonFermer);
+    card.appendChild(titre);
+    card.appendChild(liste);
+    overlay.appendChild(card);
+    slot.appendChild(overlay);
+
+    const fermer = () => {
+      slot.innerHTML = "";
+    };
+
+    boutonFermer.addEventListener("click", fermer, { once: true });
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) {
+        fermer();
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        fermer();
+      }
+    }, { once: true });
+
+    rendreMentionsLegalesFooterObjet(liste, documentLegal);
+  }
+
+  function rendreMentionsLegalesFooterObjet(liste, documentLegal) {
+    const blocs = Array.isArray(documentLegal?.blocs) ? documentLegal.blocs : [];
+    liste.innerHTML = "";
+
+    if (blocs.length === 0) {
+      const message = document.createElement("p");
+      message.textContent = "Mentions légales non publiées.";
+      liste.appendChild(message);
+      return;
+    }
+
+    blocs.forEach((bloc) => {
+      const article = document.createElement("section");
+      appliquerStyleFooterObjet(article, {
+        margin: "0 0 24px 0",
+        padding: "0"
+      });
+
+      const titreBloc = document.createElement("h3");
+      titreBloc.textContent = String(bloc?.titre || "");
+      appliquerStyleFooterObjet(titreBloc, {
+        margin: "0 0 10px 0",
+        color: "var(--lcdp-color-title, #31473a)",
+        fontSize: "1.12rem",
+        lineHeight: "1.25"
+      });
+
+      const contenu = document.createElement("div");
+      contenu.innerHTML = String(bloc?.html || "");
+      appliquerStyleFooterObjet(contenu, {
+        color: "var(--lcdp-color-text, #1f2a24)",
+        lineHeight: "1.55"
+      });
+
+      supprimerParagraphesVidesFooterObjet(contenu);
+      article.appendChild(titreBloc);
+      article.appendChild(contenu);
+      liste.appendChild(article);
+    });
+
+    ajouterBoutonDemandeJuridiqueFooterObjet(liste, documentLegal);
+  }
+
+  function ajouterBoutonDemandeJuridiqueFooterObjet(liste, documentLegal) {
+    const actions = document.createElement("div");
+    appliquerStyleFooterObjet(actions, {
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "22px",
+      paddingTop: "18px",
+      borderTop: "1px solid var(--lcdp-color-border, #ddd6cc)"
+    });
+
+    const bouton = document.createElement("button");
+    bouton.type = "button";
+    bouton.className = "lcdp-button lcdp-button-secondary";
+    bouton.textContent = "Demande juridique";
+    appliquerStyleFooterObjet(bouton, {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: "44px",
+      padding: "10px 18px",
+      border: "1px solid var(--lcdp-color-border, #ddd6cc)",
+      borderRadius: "999px",
+      background: "var(--lcdp-color-surface, #ffffff)",
+      color: "var(--lcdp-color-text, #1f2a24)",
+      fontWeight: "700",
+      cursor: "pointer"
+    });
+
+    bouton.addEventListener("click", () => {
+      ouvrirFormulaireDemandeJuridiqueFooterObjet(liste, documentLegal);
+    });
+
+    actions.appendChild(bouton);
+    liste.appendChild(actions);
+  }
+
+  function ouvrirFormulaireDemandeJuridiqueFooterObjet(liste, documentLegal) {
+    liste.innerHTML = "";
+
+    const titre = document.createElement("h3");
+    titre.textContent = "Demande juridique";
+    appliquerStyleFooterObjet(titre, {
+      margin: "0 0 12px 0",
+      color: "var(--lcdp-color-title, #31473a)",
+      fontSize: "1.25rem"
+    });
+
+    const intro = document.createElement("p");
+    intro.textContent = "Renseignez vos coordonnées et la raison de votre demande.";
+    appliquerStyleFooterObjet(intro, {
+      margin: "0 0 18px 0",
+      lineHeight: "1.45"
+    });
+
+    const form = document.createElement("form");
+    form.noValidate = true;
+
+    const statut = document.createElement("p");
+    statut.setAttribute("aria-live", "polite");
+    appliquerStyleFooterObjet(statut, {
+      minHeight: "1.4em",
+      margin: "12px 0 0 0",
+      fontWeight: "700"
+    });
+
+    form.appendChild(champDemandeFooterObjet("nom", "Votre nom", "text", "family-name"));
+    form.appendChild(champDemandeFooterObjet("prenom", "Votre prénom", "text", "given-name"));
+    form.appendChild(champDemandeFooterObjet("email", "Votre e-mail", "email", "email"));
+    form.appendChild(champDemandeFooterObjet("motif", "Raison de votre demande juridique", "textarea", ""));
+    form.appendChild(statut);
+
+    const actions = document.createElement("div");
+    appliquerStyleFooterObjet(actions, {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "12px",
+      justifyContent: "center",
+      marginTop: "18px"
+    });
+
+    const envoyer = document.createElement("button");
+    envoyer.type = "submit";
+    envoyer.className = "lcdp-button lcdp-button-orange";
+    envoyer.textContent = "Envoyer";
+    appliquerStyleFooterObjet(envoyer, {
+      minHeight: "44px",
+      padding: "10px 18px",
+      border: "0",
+      borderRadius: "999px",
+      background: "var(--lcdp-color-orange, #e58a2a)",
+      color: "#ffffff",
+      fontWeight: "700",
+      cursor: "pointer"
+    });
+
+    const retour = document.createElement("button");
+    retour.type = "button";
+    retour.className = "lcdp-button lcdp-button-secondary";
+    retour.textContent = "Retour aux mentions légales";
+    appliquerStyleFooterObjet(retour, {
+      minHeight: "44px",
+      padding: "10px 18px",
+      border: "1px solid var(--lcdp-color-border, #ddd6cc)",
+      borderRadius: "999px",
+      background: "var(--lcdp-color-surface, #ffffff)",
+      color: "var(--lcdp-color-text, #1f2a24)",
+      fontWeight: "700",
+      cursor: "pointer"
+    });
+
+    retour.addEventListener("click", () => {
+      rendreMentionsLegalesFooterObjet(liste, documentLegal);
+    });
+
+    actions.appendChild(envoyer);
+    actions.appendChild(retour);
+    form.appendChild(actions);
+
+    liste.appendChild(titre);
+    liste.appendChild(intro);
+    liste.appendChild(form);
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const payload = lireDemandeJuridiqueFooterObjet(form);
+      const erreur = validerDemandeJuridiqueFooterObjet(payload);
+
+      if (erreur) {
+        statut.textContent = erreur;
+        return;
+      }
+
+      envoyer.disabled = true;
+      retour.disabled = true;
+      statut.textContent = "Envoi en cours...";
+
+      try {
+        await envoyerDemandeJuridiqueFooterObjet(payload);
+        form.reset();
+        statut.textContent = "Votre demande est envoyée.";
+        window.setTimeout(() => {
+          if (liste.isConnected) {
+            rendreMentionsLegalesFooterObjet(liste, documentLegal);
+          }
+        }, 900);
+      } catch (error) {
+        console.error("Erreur demande juridique footer :", error);
+        envoyer.disabled = false;
+        retour.disabled = false;
+        statut.textContent = String(error?.message || "La demande n’a pas pu être envoyée.");
+      }
+    });
+  }
+
+  function champDemandeFooterObjet(name, label, type, autocomplete) {
+    const bloc = document.createElement("div");
+    appliquerStyleFooterObjet(bloc, {
+      marginBottom: "14px"
+    });
+
+    const id = "demande-juridique-footer-" + name;
+
+    const etiquette = document.createElement("label");
+    etiquette.setAttribute("for", id);
+    etiquette.textContent = label;
+    appliquerStyleFooterObjet(etiquette, {
+      display: "block",
+      marginBottom: "6px",
+      fontWeight: "700"
+    });
+
+    const champ = type === "textarea" ? document.createElement("textarea") : document.createElement("input");
+    champ.id = id;
+    champ.name = name;
+    champ.required = true;
+
+    if (type !== "textarea") {
+      champ.type = type;
+      if (autocomplete) {
+        champ.autocomplete = autocomplete;
+      }
+    } else {
+      champ.rows = 5;
+    }
+
+    appliquerStyleFooterObjet(champ, {
+      width: "100%",
+      boxSizing: "border-box",
+      border: "1px solid var(--lcdp-color-border, #ddd6cc)",
+      borderRadius: "12px",
+      padding: "12px 14px",
+      font: "inherit",
+      background: "#ffffff",
+      color: "var(--lcdp-color-text, #1f2a24)"
+    });
+
+    bloc.appendChild(etiquette);
+    bloc.appendChild(champ);
+    return bloc;
+  }
+
+  function lireDemandeJuridiqueFooterObjet(form) {
+    return {
+      nom: String(form.elements.namedItem("nom")?.value || "").trim(),
+      prenom: String(form.elements.namedItem("prenom")?.value || "").trim(),
+      email: String(form.elements.namedItem("email")?.value || "").trim().toLowerCase(),
+      motif: String(form.elements.namedItem("motif")?.value || "").trim(),
+      source: "footer-site"
+    };
+  }
+
+  function validerDemandeJuridiqueFooterObjet(payload) {
+    if (!payload.nom) return "Votre nom est obligatoire.";
+    if (!payload.prenom) return "Votre prénom est obligatoire.";
+    if (!payload.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) return "Votre adresse e-mail n’est pas valide.";
+    if (!payload.motif) return "La raison de votre demande est obligatoire.";
+    return "";
+  }
+
+  async function envoyerDemandeJuridiqueFooterObjet(payload) {
+    const endpoint = obtenirEndpointEditingAdminFooterObjet();
+
+    const response = await fetch(endpoint + "/public/demande-juridique", {
+      method: "POST",
+      credentials: "omit",
+      cache: "no-store",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json().catch(() => null);
+
+    if (!response.ok || !data || data.success !== true) {
+      throw new Error(data?.message || data?.detail || "La demande n’a pas pu être envoyée.");
+    }
+
+    return data;
+  }
+
+  function supprimerParagraphesVidesFooterObjet(conteneur) {
+    conteneur.querySelectorAll("p").forEach((paragraphe) => {
+      const contenuHtml = String(paragraphe.innerHTML || "")
+        .replace(/&nbsp;/gi, "")
+        .replace(/<br\s*\/?>/gi, "")
+        .replace(/\s+/g, "");
+
+      const contenuTexte = String(paragraphe.textContent || "").trim();
+
+      if (!contenuHtml && !contenuTexte) {
+        paragraphe.remove();
+      }
+    });
+  }
+
+  function appliquerStyleFooterObjet(element, styles) {
+    Object.assign(element.style, styles);
+  }
+
+  function nettoyerBaseUrlFooterObjet(value) {
+    return String(value || "").replace(/\/+$/, "");
+  }
+})();
+  </script>
 </footer>
