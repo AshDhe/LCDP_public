@@ -28,14 +28,6 @@
 
     ouvertureEnCours = true;
 
-    const texteInitial = declencheur ? declencheur.textContent : "";
-
-    if (declencheur) {
-      declencheur.disabled = true;
-      declencheur.setAttribute("aria-busy", "true");
-      declencheur.textContent = "Chargement...";
-    }
-
     try {
       const documentLegal = await chargerMentionsLegalesFooterObjet();
       afficherMentionsLegalesFooterObjet(documentLegal);
@@ -43,12 +35,6 @@
       console.error("Erreur mentions légales footer :", error);
       alert("Les mentions légales ne sont pas disponibles pour le moment.");
     } finally {
-      if (declencheur) {
-        declencheur.disabled = false;
-        declencheur.setAttribute("aria-busy", "false");
-        declencheur.textContent = texteInitial || "Mentions légales";
-      }
-
       ouvertureEnCours = false;
     }
 
