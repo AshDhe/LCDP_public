@@ -158,6 +158,7 @@
     });
 
     const titre = document.createElement("h2");
+    titre.dataset.lcdpFooterLegalMainTitle = "true";
     titre.textContent = documentLegal?.titre || "Mentions légales";
     appliquerStyleFooterObjet(titre, {
       margin: "0 46px 18px 0",
@@ -194,6 +195,8 @@
   }
 
   function rendreMentionsLegalesFooterObjet(liste, documentLegal) {
+    afficherTitrePrincipalFooterObjet(liste, documentLegal, true);
+
     const blocs = Array.isArray(documentLegal?.blocs) ? documentLegal.blocs : [];
     liste.innerHTML = "";
 
@@ -236,6 +239,26 @@
     ajouterBoutonDemandeJuridiqueFooterObjet(liste, documentLegal);
   }
 
+  function afficherTitrePrincipalFooterObjet(liste, documentLegal, visible) {
+    const titrePrincipal = liste
+      ?.parentElement
+      ?.querySelector("[data-lcdp-footer-legal-main-title]");
+
+    if (!titrePrincipal) {
+      return;
+    }
+
+    if (visible) {
+      titrePrincipal.textContent = documentLegal?.titre || "Mentions légales";
+      titrePrincipal.hidden = false;
+      titrePrincipal.style.display = "";
+      return;
+    }
+
+    titrePrincipal.hidden = true;
+    titrePrincipal.style.display = "none";
+  }
+
   function ajouterBoutonDemandeJuridiqueFooterObjet(liste, documentLegal) {
     const actions = document.createElement("div");
     appliquerStyleFooterObjet(actions, {
@@ -273,6 +296,8 @@
   }
 
   function ouvrirFormulaireDemandeJuridiqueFooterObjet(liste, documentLegal) {
+    afficherTitrePrincipalFooterObjet(liste, documentLegal, false);
+
     liste.innerHTML = "";
 
     const titre = document.createElement("h3");

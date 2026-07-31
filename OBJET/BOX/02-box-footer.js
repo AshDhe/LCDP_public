@@ -75,6 +75,7 @@
 
     const titre = document.createElement("h2");
     titre.className = "lcdp-footer-legal-title";
+    titre.dataset.lcdpFooterLegalMainTitle = "true";
     titre.textContent = documentLegal?.titre || "Mentions légales";
 
     const liste = document.createElement("div");
@@ -148,6 +149,8 @@
   }
 
   function rendreMentionsLegalesFooter(liste, documentLegal, overlay) {
+    afficherTitrePrincipalFooter(liste, documentLegal, true);
+
     const blocs = Array.isArray(documentLegal?.blocs) ? documentLegal.blocs : [];
     liste.innerHTML = "";
 
@@ -180,6 +183,26 @@
     ajouterBoutonDemandeJuridiqueFooter(liste, documentLegal, overlay);
   }
 
+  function afficherTitrePrincipalFooter(liste, documentLegal, visible) {
+    const titrePrincipal = liste
+      ?.closest(".lcdp-footer-legal-card")
+      ?.querySelector("[data-lcdp-footer-legal-main-title]");
+
+    if (!titrePrincipal) {
+      return;
+    }
+
+    if (visible) {
+      titrePrincipal.textContent = documentLegal?.titre || "Mentions légales";
+      titrePrincipal.hidden = false;
+      titrePrincipal.style.display = "";
+      return;
+    }
+
+    titrePrincipal.hidden = true;
+    titrePrincipal.style.display = "none";
+  }
+
   function ajouterBoutonDemandeJuridiqueFooter(liste, documentLegal, overlay) {
     const actions = document.createElement("div");
     actions.className = "lcdp-footer-legal-actions lcdp-box-formulaire__actions";
@@ -200,6 +223,8 @@
   }
 
   async function ouvrirFormulaireDemandeJuridiqueFooter(liste, documentLegal, overlay) {
+    afficherTitrePrincipalFooter(liste, documentLegal, false);
+
     liste.innerHTML = "";
 
     const section = document.createElement("section");
