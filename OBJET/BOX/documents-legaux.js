@@ -143,6 +143,44 @@
       });
     }
 
+    function ajouterTexteNormalise(token) {
+      const texte = String(token || "").replace(/\r\n?/g, "\n");
+      const lignes = texte.split("\n");
+      const lignesUtiles = lignes
+        .map((ligne) => String(ligne).replace(/&nbsp;/gi, " ").trim())
+        .filter(Boolean);
+
+      if (lignesUtiles.length <= 1) {
+        if (
+          dansParagraphe ||
+          texte.replace(/&nbsp;/gi, " ").trim()
+        ) {
+          ouvrirParagraphe();
+          resultat.push(texte);
+        }
+
+        return;
+      }
+
+      let premiereLigne = true;
+
+      lignes.forEach((ligne) => {
+        const contenu = String(ligne)
+          .replace(/&nbsp;/gi, " ")
+          .trim();
+
+        if (!contenu) return;
+
+        if (!premiereLigne) {
+          scinderParagraphe();
+        }
+
+        ouvrirParagraphe();
+        resultat.push(contenu);
+        premiereLigne = false;
+      });
+    }
+
     tokens.forEach((token) => {
       const balise = token.match(
         /^<\/?([a-z0-9]+)\b[^>]*>$/i
@@ -154,14 +192,7 @@
           return;
         }
 
-        if (
-          dansParagraphe ||
-          String(token).replace(/&nbsp;/gi, " ").trim()
-        ) {
-          ouvrirParagraphe();
-          resultat.push(token);
-        }
-
+        ajouterTexteNormalise(token);
         return;
       }
 

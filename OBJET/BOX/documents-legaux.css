@@ -141,3 +141,25 @@
     font-size: var(--lcdp-font-size-paragraph-desktop);
   }
 }
+
+/* Espacement impératif des paragraphes, y compris après les CSS génériques. */
+.lcdp-page-document-legal .lcdp-boxtext__content p,
+.lcdp-restricted-legal-card .lcdp-boxtext__content p,
+.lcdp-footer-legal-section-content p {
+  margin: 0 0 1rem !important;
+}
+
+.lcdp-page-document-legal .lcdp-boxtext__content ul,
+.lcdp-page-document-legal .lcdp-boxtext__content ol,
+.lcdp-restricted-legal-card .lcdp-boxtext__content ul,
+.lcdp-restricted-legal-card .lcdp-boxtext__content ol,
+.lcdp-footer-legal-section-content ul,
+.lcdp-footer-legal-section-content ol {
+  margin: 0 0 1rem !important;
+}
+
+.lcdp-page-document-legal .lcdp-boxtext__content > :last-child,
+.lcdp-restricted-legal-card .lcdp-boxtext__content > :last-child,
+.lcdp-footer-legal-section-content > :last-child {
+  margin-bottom: 0 !important;
+}
