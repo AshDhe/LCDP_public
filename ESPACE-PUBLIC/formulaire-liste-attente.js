@@ -446,7 +446,7 @@
   }
 
   async function initialiserFooterListeAttente() {
-    const fragment = await chargerFragmentObjetListeAttente("/BOX/02-box-footer.html");
+    const fragment = await chargerFragmentSiteListeAttente("/OBJET/BOX/02-box-footer.html");
     const slot = document.getElementById("lcdp-footer-slot");
 
     if (slot) {

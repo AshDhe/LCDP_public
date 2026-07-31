@@ -113,7 +113,7 @@
 
     slot.innerHTML = "";
 
-    const fragment = await chargerFragmentObjet("/BOX/02-box-footer.html");
+    const fragment = await chargerFragmentSite("/OBJET/BOX/02-box-footer.html");
     slot.appendChild(fragment);
     appliquerRoutesSite(slot);
   }
