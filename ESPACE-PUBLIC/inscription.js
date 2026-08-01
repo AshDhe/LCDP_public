@@ -222,6 +222,7 @@
       remplirLibelleBouton(lien, bouton);
       lien.href = construireUrlSite(bouton.href);
 
+
       liste.appendChild(lien);
     });
 
@@ -258,11 +259,15 @@
           <a
             class="lcdp-link-secondary"
             href="/ESPACE-PUBLIC/reglement-club.html?source=inscription-membre"
+            target="_blank"
+            rel="noopener noreferrer"
           >règlement du club</a>
           et le
           <a
             class="lcdp-link-secondary"
             href="/ESPACE-PUBLIC/reglement-app.html?source=inscription-membre"
+            target="_blank"
+            rel="noopener noreferrer"
           >règlement de l'application</a>
           pour en savoir plus.
         </p>
