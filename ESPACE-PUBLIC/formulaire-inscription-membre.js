@@ -87,8 +87,8 @@
         descriptionHtml: `
           L'acceptation du 
           <a
-            href="../ESPACE-PUBLIC/le-reglement-du-club.html?source=formulaire-inscription-membre"
-            data-site-href="/ESPACE-PUBLIC/le-reglement-du-club.html?source=formulaire-inscription-membre"
+            href="../ESPACE-PUBLIC/reglement-club.html"
+            data-site-href="/ESPACE-PUBLIC/reglement-club.html"
             target="_blank"
             rel="noopener noreferrer"
           >règlement du club</a>
@@ -105,8 +105,8 @@
         descriptionHtml: `
           L'acceptation du 
           <a
-            href="../ESPACE-PUBLIC/le-reglement-de-lapplication.html?source=formulaire-inscription-membre"
-            data-site-href="/ESPACE-PUBLIC/le-reglement-de-lapplication.html?source=formulaire-inscription-membre"
+            href="../ESPACE-PUBLIC/reglement-app.html"
+            data-site-href="/ESPACE-PUBLIC/reglement-app.html"
             target="_blank"
             rel="noopener noreferrer"
           >règlement de l’application</a>
@@ -124,15 +124,15 @@
       * Réponse nécessaire pour vous inscrire.<br>
       Ce formulaire et ses informations sont soumis au
       <a
-        href="../ESPACE-PUBLIC/le-reglement-du-club.html?source=formulaire-inscription-membre"
-        data-site-href="/ESPACE-PUBLIC/le-reglement-du-club.html?source=formulaire-inscription-membre"
+        href="../ESPACE-PUBLIC/reglement-club.html"
+        data-site-href="/ESPACE-PUBLIC/reglement-club.html"
         target="_blank"
         rel="noopener noreferrer"
       >règlement du club</a>
       et au
       <a
-        href="../ESPACE-PUBLIC/le-reglement-de-lapplication.html?source=formulaire-inscription-membre"
-        data-site-href="/ESPACE-PUBLIC/le-reglement-de-lapplication.html?source=formulaire-inscription-membre"
+        href="../ESPACE-PUBLIC/reglement-app.html"
+        data-site-href="/ESPACE-PUBLIC/reglement-app.html"
         target="_blank"
         rel="noopener noreferrer"
       >règlement de l'application</a>.
