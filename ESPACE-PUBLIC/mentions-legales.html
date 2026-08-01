@@ -449,6 +449,100 @@
         conteneur.appendChild(actions);
       }
 
+      function creerBoxDemandeJuridiquePage() {
+        const slot = document.getElementById(
+          "lcdp-lightbox-slot"
+        );
+
+        if (!slot) {
+          throw new Error(
+            "Slot de fenêtre introuvable."
+          );
+        }
+
+        slot.innerHTML = "";
+
+        const overlay = document.createElement("div");
+        overlay.className = "lcdp-legal-lightbox";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute(
+          "aria-label",
+          "Demande juridique"
+        );
+
+        const carte = document.createElement("section");
+        carte.className = "lcdp-legal-lightbox__card";
+
+        const boutonFermer = document.createElement("button");
+        boutonFermer.type = "button";
+        boutonFermer.className = "lcdp-legal-lightbox__close";
+        boutonFermer.setAttribute(
+          "aria-label",
+          "Fermer la demande juridique"
+        );
+        boutonFermer.textContent = "×";
+
+        const contenu = document.createElement("div");
+        contenu.className = "lcdp-legal-lightbox__content";
+
+        carte.appendChild(boutonFermer);
+        carte.appendChild(contenu);
+        overlay.appendChild(carte);
+        slot.appendChild(overlay);
+        document.body.classList.add("lcdp-legal-lightbox-open");
+
+        let ferme = false;
+
+        const fermer = () => {
+          if (ferme) {
+            return;
+          }
+
+          ferme = true;
+          document.removeEventListener(
+            "keydown",
+            gererClavier
+          );
+          overlay.remove();
+          document.body.classList.remove(
+            "lcdp-legal-lightbox-open"
+          );
+        };
+
+        const gererClavier = (event) => {
+          if (event.key !== "Escape") {
+            return;
+          }
+
+          if (
+            overlay.querySelector(
+              "[data-lcdp-box-dialogue-bouton], " +
+              "[data-lcdp-box-alerte]"
+            )
+          ) {
+            return;
+          }
+
+          event.preventDefault();
+          fermer();
+        };
+
+        boutonFermer.addEventListener("click", fermer);
+        overlay.addEventListener("click", (event) => {
+          if (event.target === overlay) {
+            fermer();
+          }
+        });
+        document.addEventListener("keydown", gererClavier);
+
+        return {
+          overlay,
+          contenu,
+          fermer
+        };
+      }
+
       async function ouvrirFormulaireDemandeJuridiquePage(
         conteneur,
         documentMentions
@@ -462,11 +556,12 @@
           );
         }
 
-        conteneur.innerHTML = "";
+        const boxDemande =
+          creerBoxDemandeJuridiquePage();
 
         const slotFormulaire =
           document.createElement("div");
-        conteneur.appendChild(slotFormulaire);
+        boxDemande.contenu.appendChild(slotFormulaire);
 
         const form =
           await window.LCDP_creerFormulaire(
@@ -475,6 +570,7 @@
           );
 
         if (!form) {
+          boxDemande.fermer();
           throw new Error(
             "Formulaire de demande juridique non créé."
           );
@@ -483,9 +579,7 @@
         form.querySelector(
           "#bouton-retour-mentions-legales"
         )?.addEventListener("click", () => {
-          afficherMentionsLegales(
-            documentMentions
-          ).catch(console.error);
+          boxDemande.fermer();
         });
 
         form.addEventListener(
@@ -509,13 +603,16 @@
             if (erreur) {
               await afficherAlerteDemandeJuridiquePage(
                 erreur,
-                "erreur"
+                "erreur",
+                boxDemande
               );
               return;
             }
 
             const confirme =
-              await demanderConfirmationDemandeJuridiquePage();
+              await demanderConfirmationDemandeJuridiquePage(
+                boxDemande
+              );
 
             if (!confirme) {
               return;
@@ -537,12 +634,11 @@
 
               await afficherAlerteDemandeJuridiquePage(
                 "Votre demande est envoyée.",
-                "validation"
+                "validation",
+                boxDemande
               );
 
-              await afficherMentionsLegales(
-                documentMentions
-              );
+              boxDemande.fermer();
             } catch (error) {
               boutons.forEach((bouton) => {
                 bouton.disabled = false;
@@ -554,12 +650,14 @@
                   error ||
                   "La demande n’a pas pu être envoyée."
                 ),
-                "erreur"
+                "erreur",
+                boxDemande
               );
             }
           }
         );
       }
+
 
       function configurationDemandeJuridiquePage() {
         return {
@@ -728,7 +826,7 @@
         return data;
       }
 
-      async function demanderConfirmationDemandeJuridiquePage() {
+      async function demanderConfirmationDemandeJuridiquePage(boxDemande = null) {
         const slot = document.getElementById(
           "lcdp-lightbox-slot"
         );
@@ -785,7 +883,7 @@
 
         actions.appendChild(annuler);
         actions.appendChild(envoyer);
-        slot.appendChild(fragment);
+        (boxDemande?.overlay || slot).appendChild(fragment);
 
         return new Promise((resolve) => {
           let termine = false;
@@ -841,7 +939,8 @@
 
       async function afficherAlerteDemandeJuridiquePage(
         message,
-        type
+        type,
+        boxDemande = null
       ) {
         const slot = document.getElementById(
           "lcdp-lightbox-slot"
@@ -880,7 +979,7 @@
           "[data-lcdp-alerte-ok]"
         );
 
-        slot.appendChild(fragment);
+        (boxDemande?.overlay || slot).appendChild(fragment);
 
         return new Promise((resolve) => {
           let termine = false;
