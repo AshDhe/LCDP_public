@@ -1,0 +1,58 @@
+<section
+  class="lcdp-component lcdp-stack"
+  data-lcdp-wraper-onglets
+  aria-label="Navigation par onglets"
+>
+  <div
+    class="lcdp-box-menu-bouton__list"
+    role="tablist"
+    aria-label="Sections"
+    data-lcdp-wraper-onglets-navigation
+  >
+    <button
+      type="button"
+      class="lcdp-button lcdp-button-primary"
+      role="tab"
+      aria-selected="true"
+      aria-controls="lcdp-onglet-referent"
+      id="lcdp-tab-referent"
+      data-lcdp-onglet="referent"
+    >
+      Référent
+    </button>
+
+    <button
+      type="button"
+      class="lcdp-button lcdp-button-secondary"
+      role="tab"
+      aria-selected="false"
+      aria-controls="lcdp-onglet-passion"
+      id="lcdp-tab-passion"
+      data-lcdp-onglet="passion"
+      tabindex="-1"
+    >
+      Passion
+    </button>
+  </div>
+
+  <section
+    id="lcdp-onglet-referent"
+    class="lcdp-component"
+    role="tabpanel"
+    aria-labelledby="lcdp-tab-referent"
+    data-lcdp-panneau-onglet="referent"
+  >
+    <div data-lcdp-contenu-onglet="referent"></div>
+  </section>
+
+  <section
+    id="lcdp-onglet-passion"
+    class="lcdp-component"
+    role="tabpanel"
+    aria-labelledby="lcdp-tab-passion"
+    data-lcdp-panneau-onglet="passion"
+    hidden
+  >
+    <div data-lcdp-contenu-onglet="passion"></div>
+  </section>
+</section>
