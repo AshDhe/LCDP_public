@@ -1,17 +1,17 @@
 <section
-  class="lcdp-component lcdp-stack"
+  class="lcdp-wraper-onglets"
   data-lcdp-wraper-onglets
   aria-label="Navigation par onglets"
 >
   <div
-    class="lcdp-box-menu-bouton__list"
+    class="lcdp-wraper-onglets__navigation"
     role="tablist"
-    aria-label="Sections"
+    aria-label="Sections Mes points"
     data-lcdp-wraper-onglets-navigation
   >
     <button
       type="button"
-      class="lcdp-button lcdp-button-primary"
+      class="lcdp-wraper-onglets__tab"
       role="tab"
       aria-selected="true"
       aria-controls="lcdp-onglet-referent"
@@ -23,7 +23,7 @@
 
     <button
       type="button"
-      class="lcdp-button lcdp-button-secondary"
+      class="lcdp-wraper-onglets__tab"
       role="tab"
       aria-selected="false"
       aria-controls="lcdp-onglet-passion"
@@ -35,24 +35,26 @@
     </button>
   </div>
 
-  <section
-    id="lcdp-onglet-referent"
-    class="lcdp-component"
-    role="tabpanel"
-    aria-labelledby="lcdp-tab-referent"
-    data-lcdp-panneau-onglet="referent"
-  >
-    <div data-lcdp-contenu-onglet="referent"></div>
-  </section>
+  <div class="lcdp-wraper-onglets__contenu">
+    <section
+      id="lcdp-onglet-referent"
+      class="lcdp-wraper-onglets__panneau"
+      role="tabpanel"
+      aria-labelledby="lcdp-tab-referent"
+      data-lcdp-panneau-onglet="referent"
+    >
+      <div data-lcdp-contenu-onglet="referent"></div>
+    </section>
 
-  <section
-    id="lcdp-onglet-passion"
-    class="lcdp-component"
-    role="tabpanel"
-    aria-labelledby="lcdp-tab-passion"
-    data-lcdp-panneau-onglet="passion"
-    hidden
-  >
-    <div data-lcdp-contenu-onglet="passion"></div>
-  </section>
+    <section
+      id="lcdp-onglet-passion"
+      class="lcdp-wraper-onglets__panneau"
+      role="tabpanel"
+      aria-labelledby="lcdp-tab-passion"
+      data-lcdp-panneau-onglet="passion"
+      hidden
+    >
+      <div data-lcdp-contenu-onglet="passion"></div>
+    </section>
+  </div>
 </section>

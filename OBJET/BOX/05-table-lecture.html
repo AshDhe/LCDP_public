@@ -1,10 +1,10 @@
 <section
-  class="lcdp-component lcdp-stack-small"
+  class="lcdp-table-lecture"
   data-lcdp-table-lecture
   aria-label="Table de lecture"
 >
   <p
-    class="lcdp-text-muted"
+    class="lcdp-table-lecture__status"
     data-lcdp-table-lecture-loading
     role="status"
   >
@@ -12,11 +12,14 @@
   </p>
 
   <div
-    class="lcdp-component"
+    class="lcdp-table-lecture__scroll"
     data-lcdp-table-lecture-scroll
     hidden
   >
-    <table data-lcdp-table-lecture-table>
+    <table
+      class="lcdp-table-lecture__table"
+      data-lcdp-table-lecture-table
+    >
       <thead>
         <tr data-lcdp-table-lecture-head></tr>
       </thead>
@@ -25,7 +28,7 @@
   </div>
 
   <p
-    class="lcdp-text-muted"
+    class="lcdp-table-lecture__status"
     data-lcdp-table-lecture-empty
     hidden
   >
@@ -33,7 +36,7 @@
   </p>
 
   <p
-    class="lcdp-text-muted"
+    class="lcdp-table-lecture__status lcdp-table-lecture__status--error"
     data-lcdp-table-lecture-error
     role="alert"
     hidden
