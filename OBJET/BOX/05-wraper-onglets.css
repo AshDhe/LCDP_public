@@ -1,4 +1,4 @@
-#lcdp-mes-points-slot,
+[data-lcdp-wraper-onglets-slot],
 .lcdp-wraper-onglets,
 .lcdp-wraper-onglets__contenu,
 .lcdp-wraper-onglets__panneau,
@@ -20,6 +20,19 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: end;
   gap: 2px;
+}
+
+
+.lcdp-wraper-onglets--2 .lcdp-wraper-onglets__navigation {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lcdp-wraper-onglets--3 .lcdp-wraper-onglets__navigation {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lcdp-wraper-onglets--4 .lcdp-wraper-onglets__navigation {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .lcdp-wraper-onglets__tab {
