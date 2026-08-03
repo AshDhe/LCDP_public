@@ -116,6 +116,24 @@
     element.value = String(champ.value);
   }
 
+  function normaliserModeFormulaire(value) {
+    return String(value || "").trim().toLowerCase() === "lecture"
+      ? "lecture"
+      : "saisie";
+  }
+
+  function resoudreModeChamp(champ, modeFormulaire) {
+    const modeChamp = String(champ?.mode || "")
+      .trim()
+      .toLowerCase();
+
+    if (modeChamp === "lecture" || modeChamp === "saisie") {
+      return modeChamp;
+    }
+
+    return modeFormulaire;
+  }
+
   function creerLabel(champ) {
     const label = document.createElement("label");
     label.className = "lcdp-box-champ-formulaire__label";
@@ -182,6 +200,24 @@
     appliquerValeurControle(element, champ);
 
     return element;
+  }
+
+  function creerControleLecture(champ) {
+    const output = document.createElement("output");
+
+    output.id = champ.id || champ.name;
+
+    if (champ.name) {
+      output.name = champ.name;
+    }
+
+    output.className = "lcdp-box-champ-formulaire__lecture";
+    output.setAttribute("aria-readonly", "true");
+
+    ajouterClasses(output, champ.controlClassName);
+    appliquerValeurControle(output, champ);
+
+    return output;
   }
 
   function creerControleSelect(champ) {
@@ -251,7 +287,7 @@
     return label;
   }
 
-  async function creerChamp(champ) {
+  async function creerChamp(champ, modeFormulaire = "saisie") {
     const fragment = await chargerFragmentObjet("/BOX/03-box-champ-formulaire.html");
 
     const element = fragment.querySelector("[data-lcdp-box-champ-formulaire]");
@@ -265,16 +301,24 @@
 
     ajouterClasses(element, champ.className);
 
+    const modeChamp = resoudreModeChamp(champ, modeFormulaire);
+
     if (champ.type === "checkbox") {
       labelZone.appendChild(creerHeading(champ));
       control.appendChild(creerControleCheckbox(champ));
     } else {
       labelZone.appendChild(creerLabel(champ));
-      control.appendChild(
-        champ.type === "select"
-          ? creerControleSelect(champ)
-          : creerControleStandard(champ)
-      );
+
+      if (modeChamp === "lecture") {
+        element.classList.add("lcdp-box-champ-formulaire--lecture");
+        control.appendChild(creerControleLecture(champ));
+      } else {
+        control.appendChild(
+          champ.type === "select"
+            ? creerControleSelect(champ)
+            : creerControleStandard(champ)
+        );
+      }
     }
 
     if (champ.descriptionHtml) {
@@ -340,6 +384,14 @@
     ajouterClasses(fields, configuration.fieldsClassName);
     ajouterClasses(actions, configuration.actionsClassName);
 
+    const modeFormulaire = normaliserModeFormulaire(
+      configuration.mode
+    );
+
+    if (modeFormulaire === "lecture") {
+      form.classList.add("lcdp-box-formulaire--lecture");
+    }
+
     if (configuration.validationNative === true) {
       form.noValidate = false;
       form.removeAttribute("novalidate");
@@ -375,7 +427,9 @@
 
     if (Array.isArray(configuration.champs)) {
       for (const champ of configuration.champs) {
-        fields.appendChild(await creerChamp(champ));
+        fields.appendChild(
+          await creerChamp(champ, modeFormulaire)
+        );
       }
     }
 
