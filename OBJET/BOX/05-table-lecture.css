@@ -1,52 +1,71 @@
-.lcdp-table-lecture {
+.lcdp-table-lecture,
+.lcdp-table-lecture__scroll,
+.lcdp-table-lecture__month-content {
   width: 100%;
+  max-width: 100%;
   min-width: 0;
 }
 
 .lcdp-table-lecture__scroll {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
 }
 
 .lcdp-table-lecture__table {
   width: 100%;
-  min-width: 520px;
+  min-width: 0;
+  table-layout: fixed;
   border-collapse: collapse;
   color: var(--lcdp-color-text);
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   line-height: 1.25;
 }
 
 .lcdp-table-lecture__table th,
 .lcdp-table-lecture__table td {
-  padding: 8px 9px;
+  min-width: 0;
+  padding: 6px 4px;
   border-bottom: 1px solid var(--lcdp-color-border);
   text-align: left;
   vertical-align: middle;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .lcdp-table-lecture__table th {
   background: var(--lcdp-color-surface-soft);
-  font-size: 0.8rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  white-space: nowrap;
+}
+
+.lcdp-table-lecture__table th:nth-child(1),
+.lcdp-table-lecture__table td:nth-child(1) {
+  width: 26%;
+}
+
+.lcdp-table-lecture__table th:nth-child(2),
+.lcdp-table-lecture__table td:nth-child(2) {
+  width: 38%;
+}
+
+.lcdp-table-lecture__table th:nth-child(3),
+.lcdp-table-lecture__table td:nth-child(3) {
+  width: 20%;
+}
+
+.lcdp-table-lecture__table th:nth-child(4),
+.lcdp-table-lecture__table td:nth-child(4) {
+  width: 16%;
+  text-align: center;
 }
 
 .lcdp-table-lecture__table tbody tr:last-child td {
   border-bottom: 0;
 }
 
-.lcdp-table-lecture__table td:last-child,
-.lcdp-table-lecture__table th:last-child {
-  text-align: center;
-}
-
 .lcdp-table-lecture__table img {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin-inline: auto;
   object-fit: contain;
 }
@@ -55,7 +74,7 @@
   margin: 0;
   padding: var(--lcdp-space-2);
   color: var(--lcdp-color-text-muted);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   line-height: 1.35;
   text-align: center;
 }
@@ -65,46 +84,20 @@
   font-weight: 700;
 }
 
-@media (min-width: 600px) {
-  .lcdp-table-lecture__table {
-    min-width: 0;
-    font-size: 0.88rem;
-  }
-
-  .lcdp-table-lecture__table th,
-  .lcdp-table-lecture__table td {
-    padding: 10px 12px;
-  }
-
-  .lcdp-table-lecture__table img {
-    width: 44px;
-    height: 44px;
-  }
-}
-
-@media (min-width: 900px) {
-  .lcdp-table-lecture__table {
-    font-size: 0.92rem;
-  }
-
-  .lcdp-table-lecture__table img {
-    width: 48px;
-    height: 48px;
-  }
-}
-
 .lcdp-table-lecture__month-navigation {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin: 0 0 var(--lcdp-space-2);
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr) 42px;
+  grid-template-columns: 38px minmax(0, 1fr) 38px;
   align-items: center;
-  gap: var(--lcdp-space-1);
+  gap: 6px;
 }
 
 .lcdp-table-lecture__month-button {
-  width: 42px;
-  height: 38px;
+  width: 38px;
+  height: 36px;
   min-width: 0;
   min-height: 0;
   margin: 0;
@@ -114,7 +107,7 @@
   background: var(--lcdp-color-surface);
   color: var(--lcdp-color-logo-green);
   font: inherit;
-  font-size: 1.55rem;
+  font-size: 1.4rem;
   line-height: 1;
   font-weight: 700;
   display: inline-flex;
@@ -138,18 +131,42 @@
   min-width: 0;
   margin: 0;
   color: var(--lcdp-color-text);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.2;
   font-weight: 700;
   text-align: center;
-}
-
-.lcdp-table-lecture__month-content {
-  width: 100%;
-  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 @media (min-width: 600px) {
+  .lcdp-table-lecture__scroll {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .lcdp-table-lecture__table {
+    table-layout: auto;
+    font-size: 0.88rem;
+  }
+
+  .lcdp-table-lecture__table th,
+  .lcdp-table-lecture__table td {
+    width: auto !important;
+    padding: 10px 12px;
+    overflow-wrap: normal;
+  }
+
+  .lcdp-table-lecture__table th {
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .lcdp-table-lecture__table img {
+    width: 44px;
+    height: 44px;
+  }
+
   .lcdp-table-lecture__month-navigation {
     grid-template-columns: 46px minmax(0, 1fr) 46px;
     gap: var(--lcdp-space-2);
@@ -163,5 +180,16 @@
 
   .lcdp-table-lecture__month-label {
     font-size: 1rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .lcdp-table-lecture__table {
+    font-size: 0.92rem;
+  }
+
+  .lcdp-table-lecture__table img {
+    width: 48px;
+    height: 48px;
   }
 }
