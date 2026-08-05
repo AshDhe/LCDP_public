@@ -507,3 +507,11 @@
   text-decoration: none;
   white-space: nowrap;
 }
+
+/* Vue planning : le bouton Partager s'ajuste strictement à son contenu. */
+.lcdp-fiche-parc__commande-detail .lcdp-box-fiche-parc__partage {
+  width: fit-content !important;
+  max-width: 100% !important;
+  flex: 0 0 auto !important;
+  white-space: nowrap;
+}

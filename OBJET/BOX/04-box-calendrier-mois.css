@@ -365,7 +365,7 @@
   align-items: center;
   gap: 6px;
   min-width: 0;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .lcdp-box-calendrier-mois__legende-carre {
@@ -417,3 +417,8 @@
   }
 }
 
+/* Vue Planning Parc : titre toujours noir. */
+.lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
+  .lcdp-box-calendrier-mois__title {
+  color: var(--lcdp-color-text) !important;
+}
