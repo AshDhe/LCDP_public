@@ -1654,8 +1654,8 @@
     commande.innerHTML = "";
 
     const boutonFiche = creerBoutonCommande(
-      "Fiche parc",
-      "lcdp-button-secondary",
+      "Retour Présentation",
+      "lcdp-fiche-parc__action-retour-presentation",
       () => {
         const slot = document.getElementById("lcdp-lightbox-slot");
         const shift = slot?.querySelector("[data-lcdp-box-shift-detail-parc]");
