@@ -616,3 +616,56 @@
     grid-column: auto;
   }
 }
+
+/* Ajustement final : boutons de la fiche parc plus compacts et proportionnés. */
+.lcdp-box-fiche-parc__actions-list,
+.lcdp-fiche-parc__commande-detail
+  .lcdp-box-calendrier-mois__actions-parc {
+  gap: 7px !important;
+}
+
+.lcdp-box-fiche-parc__action {
+  min-height: 42px !important;
+  padding: 7px 10px !important;
+  gap: 6px !important;
+  font-size: 0.9rem !important;
+  line-height: 1.08 !important;
+}
+
+.lcdp-box-fiche-parc__action-icone {
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-fiche-parc__actions-list,
+  .lcdp-fiche-parc__commande-detail
+    .lcdp-box-calendrier-mois__actions-parc {
+    width: auto !important;
+    max-width: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .lcdp-box-fiche-parc__action {
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 38px !important;
+    padding: 7px 13px !important;
+    gap: 6px !important;
+    flex: 0 0 auto !important;
+    align-self: center !important;
+    font-size: 0.88rem !important;
+  }
+
+  .lcdp-box-fiche-parc__action-icone {
+    width: 17px !important;
+    height: 17px !important;
+    flex-basis: 17px !important;
+  }
+}
