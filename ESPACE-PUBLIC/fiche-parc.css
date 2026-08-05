@@ -68,7 +68,7 @@
 
 /* Carte de la fiche : les autres parcs sont en vert foncé. */
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker {
-  fill: #234438 !important;
+  fill: #ffffff !important;
   stroke: #234438 !important;
 }
 
