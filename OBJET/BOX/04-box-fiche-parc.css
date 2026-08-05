@@ -515,3 +515,39 @@
   flex: 0 0 auto !important;
   white-space: nowrap;
 }
+
+/* Présentation et planning : dimensions et disposition strictement communes. */
+.lcdp-box-fiche-parc__actions-list,
+.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-fiche-parc__actions-list .lcdp-button,
+.lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,
+.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,
+.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage {
+  width: fit-content !important;
+  max-width: 100% !important;
+  min-height: 44px !important;
+  margin: 0 !important;
+  padding: 10px 18px !important;
+  flex: 0 0 auto !important;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-fiche-parc__actions-list,
+  .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc {
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: var(--lcdp-space-2) !important;
+  }
+}
