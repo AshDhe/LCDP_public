@@ -9,8 +9,6 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
-  const ficheParcBuild = "20260805-1432";
-  document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
     "plage1",
@@ -81,7 +79,6 @@
   };
 
   window.LCDP_FicheParc = {
-    version: ficheParcBuild,
     chargerFicheParc,
     rendreDansConteneur: rendreFicheParcDansConteneur,
     rendrePlanningDansConteneur: rendrePlanningParcDansConteneur
@@ -464,30 +461,15 @@
     return construireUrlSite("/OBJET" + chemin);
   }
 
-  function ajouterVersionUrl(urlSource, version) {
-    const url = new URL(urlSource, window.location.href);
-    url.searchParams.set("v", version);
-    return url.toString();
-  }
-
   function chargerStyleObjetFiche(options, chemin) {
-    const versionsStyles = {
-      "/BOX/04-box-legende.css": "20260805-1423",
-      "/BOX/04-box-calendrier-jour.css": "20260805-1432"
-    };
-    const versionStyle = versionsStyles[chemin] || "";
-    const hrefBase = construireUrlObjetFiche(options, chemin);
-    const href = versionStyle
-      ? ajouterVersionUrl(hrefBase, versionStyle)
-      : hrefBase;
+    const href = construireUrlObjetFiche(options, chemin);
     const styleExistant = Array.from(
       document.querySelectorAll('link[rel="stylesheet"]')
     ).find((link) => {
       const cheminDeclare = link.dataset.siteHref || "";
-      const cheminDeclareSansVersion = cheminDeclare.split(/[?#]/, 1)[0];
       const cheminObjet = "/OBJET" + chemin;
 
-      if (cheminDeclareSansVersion === cheminObjet) {
+      if (cheminDeclare === cheminObjet) {
         return true;
       }
 
