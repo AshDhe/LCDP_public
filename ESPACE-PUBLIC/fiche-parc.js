@@ -1392,34 +1392,7 @@
     actions.className =
       "lcdp-box-fiche-parc__actions-list";
 
-    const boutonReserver = document.createElement("button");
-    boutonReserver.type = "button";
-    boutonReserver.className =
-      "lcdp-button " +
-      "lcdp-box-calendrier-mois__action-reserver " +
-      "lcdp-box-fiche-parc__action-reserver";
-    boutonReserver.textContent = "RÉSERVER";
-    boutonReserver.addEventListener("click", () => {
-      executerActionFiche(
-        options.onReserver || ouvrirReservationMembre,
-        parc
-      );
-    });
-
-    const boutonPlanning = document.createElement("button");
-    boutonPlanning.type = "button";
-    boutonPlanning.className =
-      "lcdp-button lcdp-button-primary " +
-      "lcdp-box-fiche-parc__action-planning";
-    boutonPlanning.textContent = "Planning";
-    boutonPlanning.addEventListener("click", () => {
-      executerActionFiche(
-        options.onPlanning || ouvrirPlanningPublic,
-        parc
-      );
-    });
-
-    const actionPartager = creerActionPartagerFicheParc();
+    const actionPartager = creerActionPartagerFicheParc(options);
     actionPartager.addEventListener("click", () => {
       executerActionFiche(
         options.onPartager || partagerFicheParc,
@@ -1427,98 +1400,102 @@
       );
     });
 
-    actions.appendChild(boutonReserver);
-    actions.appendChild(boutonPlanning);
+    const boutonPlanning = creerBoutonActionFicheParc(
+      {
+        libelle: "Planning",
+        ariaLabel: "Afficher le planning du parc",
+        icone: "planning",
+        variante: "orange-contour"
+      },
+      options
+    );
+    boutonPlanning.addEventListener("click", () => {
+      executerActionFiche(
+        options.onPlanning || ouvrirPlanningPublic,
+        parc
+      );
+    });
+
+    const boutonReserver = creerBoutonActionFicheParc(
+      {
+        libelle: "RÉSERVER",
+        ariaLabel: "Réserver dans ce parc",
+        icone: "reserver",
+        variante: "orange-plein"
+      },
+      options
+    );
+    boutonReserver.addEventListener("click", () => {
+      executerActionFiche(
+        options.onReserver || ouvrirReservationMembre,
+        parc
+      );
+    });
+
     actions.appendChild(actionPartager);
+    actions.appendChild(boutonPlanning);
+    actions.appendChild(boutonReserver);
 
     return actions;
   }
 
 
-  function creerActionPartagerFicheParc() {
-    const action = document.createElement("span");
-    action.className =
-      "lcdp-box-fiche-parc__partage";
-    action.setAttribute("role", "button");
-    action.setAttribute("tabindex", "0");
-    action.setAttribute(
-      "aria-label",
-      "Partager"
-    );
-
-    const bouton = document.createElement("span");
+  function creerBoutonActionFicheParc(
+    configuration,
+    options = {}
+  ) {
+    const bouton = document.createElement("button");
+    bouton.type = "button";
     bouton.className =
-      "lcdp-box-fiche-parc__partage-icone";
-    bouton.setAttribute("aria-hidden", "true");
-
-    const icone = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
+      "lcdp-button " +
+      "lcdp-box-fiche-parc__action " +
+      "lcdp-box-fiche-parc__action--" +
+      configuration.variante;
+    bouton.setAttribute(
+      "aria-label",
+      configuration.ariaLabel || configuration.libelle
     );
+    bouton.title =
+      configuration.ariaLabel || configuration.libelle;
 
-    icone.setAttribute("viewBox", "0 0 24 24");
-    icone.setAttribute("width", "20");
-    icone.setAttribute("height", "20");
+    const icone = document.createElement("img");
+    icone.className =
+      "lcdp-box-fiche-parc__action-icone";
+    icone.src = construireUrlObjetFiche(
+      options,
+      "/IMAG/PICTO/picto-" +
+        configuration.icone +
+        ".svg"
+    );
+    icone.alt = "";
+    icone.width = 22;
+    icone.height = 22;
+    icone.decoding = "async";
+    icone.draggable = false;
     icone.setAttribute("aria-hidden", "true");
-    icone.setAttribute("focusable", "false");
-    icone.setAttribute("fill", "none");
-    icone.setAttribute(
-      "stroke",
-      "currentColor"
-    );
-    icone.setAttribute("stroke-width", "2");
-    icone.setAttribute(
-      "stroke-linecap",
-      "round"
-    );
-    icone.setAttribute(
-      "stroke-linejoin",
-      "round"
-    );
-
-    const trace = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "path"
-    );
-
-    trace.setAttribute("d", "M22 2 11 13");
-
-    const trace2 = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "path"
-    );
-
-    trace2.setAttribute(
-      "d",
-      "M22 2 15 22 11 13 2 9 22 2Z"
-    );
-
-    icone.appendChild(trace);
-    icone.appendChild(trace2);
-    bouton.appendChild(icone);
 
     const libelle = document.createElement("span");
     libelle.className =
-      "lcdp-box-fiche-parc__partage-libelle";
-    libelle.textContent = "Partager";
+      "lcdp-box-fiche-parc__action-libelle";
+    libelle.textContent = configuration.libelle;
 
-    action.appendChild(bouton);
-    action.appendChild(libelle);
+    bouton.appendChild(icone);
+    bouton.appendChild(libelle);
 
-    action.addEventListener(
-      "keydown",
-      (event) => {
-        if (
-          event.key === "Enter" ||
-          event.key === " "
-        ) {
-          event.preventDefault();
-          action.click();
-        }
-      }
+    return bouton;
+  }
+
+
+  function creerActionPartagerFicheParc(options = {}) {
+    return creerBoutonActionFicheParc(
+      {
+        libelle: "Partager",
+        ariaLabel: "Partager la page du parc",
+        icone: "partager",
+        variante: "vert-contour"
+      },
+      options
     );
-
-    return action;
   }
 
 
@@ -1780,18 +1757,7 @@
     actions.className =
       "lcdp-box-calendrier-mois__actions-parc";
 
-    const boutonReserver = creerBoutonCommande(
-      "RÉSERVER",
-      "lcdp-box-calendrier-mois__action-reserver",
-      () => {
-        executerActionFiche(
-          options.onReserver || ouvrirReservationMembre,
-          parc
-        );
-      }
-    );
-
-    const actionPartager = creerActionPartagerFicheParc();
+    const actionPartager = creerActionPartagerFicheParc(options);
     actionPartager.addEventListener("click", () => {
       executerActionFiche(
         options.onPartager || partagerFicheParc,
@@ -1799,20 +1765,41 @@
       );
     });
 
-    const boutonPresentation = creerBoutonCommande(
-      "Présentation du parc",
-      "lcdp-fiche-parc__action-retour-presentation",
-      () => {
-        executerActionFiche(
-          options.onRetourPresentation,
-          parc
-        );
-      }
+    const boutonPresentation = creerBoutonActionFicheParc(
+      {
+        libelle: "Le parc",
+        ariaLabel: "Revenir à la présentation du parc",
+        icone: "presentation",
+        variante: "vert-plein"
+      },
+      options
     );
+    boutonPresentation.addEventListener("click", () => {
+      executerActionFiche(
+        options.onRetourPresentation,
+        parc
+      );
+    });
 
-    actions.appendChild(boutonReserver);
+    const boutonReserver = creerBoutonActionFicheParc(
+      {
+        libelle: "RÉSERVER",
+        ariaLabel: "Réserver dans ce parc",
+        icone: "reserver",
+        variante: "orange-plein"
+      },
+      options
+    );
+    boutonReserver.addEventListener("click", () => {
+      executerActionFiche(
+        options.onReserver || ouvrirReservationMembre,
+        parc
+      );
+    });
+
     actions.appendChild(actionPartager);
     actions.appendChild(boutonPresentation);
+    actions.appendChild(boutonReserver);
 
     return actions;
   }
