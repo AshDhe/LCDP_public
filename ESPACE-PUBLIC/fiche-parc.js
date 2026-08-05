@@ -1336,7 +1336,7 @@
     boutonPlanning.className =
       "lcdp-button lcdp-button-primary " +
       "lcdp-box-fiche-parc__action-planning";
-    boutonPlanning.textContent = "Planning Parc";
+    boutonPlanning.textContent = "Planning";
     boutonPlanning.addEventListener("click", () => {
       executerActionFiche(
         options.onPlanning || ouvrirPlanningPublic,
@@ -1368,7 +1368,7 @@
     action.setAttribute("tabindex", "0");
     action.setAttribute(
       "aria-label",
-      "Partager la page"
+      "Partager"
     );
 
     const bouton = document.createElement("span");
@@ -1425,7 +1425,7 @@
     const libelle = document.createElement("span");
     libelle.className =
       "lcdp-box-fiche-parc__partage-libelle";
-    libelle.textContent = "Partager la page";
+    libelle.textContent = "Partager";
 
     action.appendChild(bouton);
     action.appendChild(libelle);
@@ -1681,7 +1681,7 @@
       commande.appendChild(boutonFiche);
     } else {
       const boutonPlanning = creerBoutonCommande(
-        "Planning parc",
+        "Planning",
         "lcdp-button-primary",
         () => afficherVueShiftDetailParc(contenu.parentElement, parc, "planning")
       );
