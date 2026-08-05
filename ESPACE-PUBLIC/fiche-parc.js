@@ -1437,6 +1437,23 @@
   function creerActionsFicheParc(parc, options = {}) {
     const structure = creerConteneurActionsFicheParc();
 
+    const boutonLeParc = creerBoutonActionFicheParc(
+      {
+        libelle: "Le parc",
+        ariaLabel: "Afficher la présentation du parc",
+        icone: "presentation",
+        variante: "vert-plein"
+      },
+      options
+    );
+    boutonLeParc.classList.add(
+      "lcdp-box-fiche-parc__action-le-parc-reference"
+    );
+    boutonLeParc.setAttribute("aria-current", "page");
+    boutonLeParc.addEventListener("click", (event) => {
+      event.preventDefault();
+    });
+
     const actionPartager = creerActionPartagerFicheParc(options);
     actionPartager.addEventListener("click", () => {
       executerActionFiche(
@@ -1477,6 +1494,7 @@
       );
     });
 
+    structure.actions.appendChild(boutonLeParc);
     structure.actions.appendChild(actionPartager);
     structure.actions.appendChild(boutonPlanning);
     structure.actions.appendChild(boutonReserver);
