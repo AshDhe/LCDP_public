@@ -106,16 +106,29 @@
 .lcdp-box-shift-detail-parc--planning-jour
   .lcdp-box-shift-detail-parc__card {
   width: min(100%, 820px);
-  height: auto;
+  height: fit-content;
   min-height: 0;
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow-y: auto;
 }
 
 .lcdp-box-shift-detail-parc--planning-jour
   .lcdp-box-shift-detail-parc__content,
 .lcdp-box-shift-detail-parc--planning-jour
-  .lcdp-fiche-parc__shift-view {
+  .lcdp-fiche-parc__shift-view,
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-box-calendrier-jour,
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-box-calendrier-jour__card,
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-box-calendrier-jour__body {
   min-height: 0 !important;
-  height: auto;
+  height: auto !important;
+}
+
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-box-calendrier-jour__body {
+  padding-bottom: var(--lcdp-space-2);
 }
 
 /* Alerte interne au wrapper : ne remplace pas la fiche ou le planning. */
