@@ -755,3 +755,80 @@
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 }
+
+/* Fiche parc : premier bouton de présentation strictement identique à la Card Parc. */
+.lcdp-box-fiche-parc__actions-style
+  .lcdp-box-fiche-parc__actions-grid
+  .lcdp-box-fiche-parc__action-le-parc-reference {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: 50px !important;
+  margin: 0 !important;
+  padding: 10px 9px !important;
+  border: 2px solid var(--lcdp-color-logo-green) !important;
+  border-radius: var(--lcdp-radius-button) !important;
+  background: var(--lcdp-color-logo-green) !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  flex: 0 0 auto !important;
+  font-size: clamp(0.9072rem, 4.32vw, 1.0584rem) !important;
+  line-height: 1.12 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+  text-transform: none !important;
+  white-space: normal !important;
+  box-shadow: none !important;
+}
+
+.lcdp-box-fiche-parc__actions-style
+  .lcdp-box-fiche-parc__actions-grid
+  .lcdp-box-fiche-parc__action-le-parc-reference:hover {
+  border-color: var(--lcdp-color-primary) !important;
+  background: var(--lcdp-color-primary) !important;
+  color: #ffffff !important;
+}
+
+.lcdp-box-fiche-parc__actions-style
+  .lcdp-box-fiche-parc__actions-grid
+  .lcdp-box-fiche-parc__action-le-parc-reference
+  .lcdp-box-card-parc__action-icone {
+  width: 27.72px !important;
+  height: 27.72px !important;
+  flex: 0 0 27.72px !important;
+  display: block !important;
+  object-fit: contain !important;
+  pointer-events: none !important;
+}
+
+.lcdp-box-fiche-parc__actions-style
+  .lcdp-box-fiche-parc__actions-grid
+  .lcdp-box-fiche-parc__action-le-parc-reference
+  .lcdp-box-card-parc__action-libelle {
+  min-width: 0 !important;
+  overflow-wrap: anywhere !important;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-fiche-parc__actions-style
+    .lcdp-box-fiche-parc__actions-grid
+    .lcdp-box-fiche-parc__action-le-parc-reference {
+    min-height: 52px !important;
+    padding: 10px 13px !important;
+    font-size: 1.16424rem !important;
+  }
+
+  .lcdp-box-fiche-parc__actions-style
+    .lcdp-box-fiche-parc__actions-grid
+    .lcdp-box-fiche-parc__action-le-parc-reference
+    .lcdp-box-card-parc__action-icone {
+    width: 29.04px !important;
+    height: 29.04px !important;
+    flex: 0 0 29.04px !important;
+  }
+}
+
