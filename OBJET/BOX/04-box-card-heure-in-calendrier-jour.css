@@ -106,12 +106,12 @@
 
 /* Planning parc en lecture : couleurs métier et cards non interactives. */
 .lcdp-box-card-heure-in-calendrier-jour--planning-lecture {
-  min-height: 72px;
-  padding: 12px 14px;
+  min-height: 52px;
+  padding: 10px 8px;
   cursor: default;
-  text-align: left;
-  line-height: 1.35;
-  white-space: normal;
+  text-align: center;
+  line-height: 1.15;
+  white-space: nowrap;
   opacity: 1;
 }
 

@@ -101,6 +101,15 @@
   background: var(--lcdp-color-surface-soft);
 }
 
+.lcdp-box-calendrier-mois__nav-button:disabled,
+.lcdp-box-calendrier-mois__nav-button[aria-disabled="true"] {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text-muted);
+}
+
 .lcdp-box-calendrier-mois__weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);

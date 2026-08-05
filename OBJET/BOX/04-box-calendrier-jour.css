@@ -117,6 +117,16 @@
 }
 
 .lcdp-box-calendrier-jour--planning-lecture
+.lcdp-box-calendrier-jour__body {
+  padding-top: var(--lcdp-space-3);
+}
+
+.lcdp-box-calendrier-jour--planning-lecture
+.lcdp-box-calendrier-jour__grid {
+  max-width: 660px;
+}
+
+.lcdp-box-calendrier-jour--planning-lecture
 .lcdp-box-calendrier-jour__date-planning {
   margin: 0 0 var(--lcdp-space-3);
   color: var(--lcdp-color-text);

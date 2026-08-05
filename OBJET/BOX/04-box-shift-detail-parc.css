@@ -102,6 +102,22 @@
   padding-right: 44px;
 }
 
+/* Vue journalière du planning : coque ajustée au contenu réel. */
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-box-shift-detail-parc__card {
+  width: min(100%, 820px);
+  height: auto;
+  min-height: 0;
+}
+
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-box-shift-detail-parc__content,
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-fiche-parc__shift-view {
+  min-height: 0 !important;
+  height: auto;
+}
+
 /* Alerte interne au wrapper : ne remplace pas la fiche ou le planning. */
 .lcdp-box-shift-detail-parc__alerte-slot {
   position: absolute;
