@@ -9,7 +9,7 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
-  const ficheParcBuild = "20260805-1423";
+  const ficheParcBuild = "20260805-1432";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
@@ -473,7 +473,7 @@
   function chargerStyleObjetFiche(options, chemin) {
     const versionsStyles = {
       "/BOX/04-box-legende.css": "20260805-1423",
-      "/BOX/04-box-calendrier-jour.css": "20260805-1423"
+      "/BOX/04-box-calendrier-jour.css": "20260805-1432"
     };
     const versionStyle = versionsStyles[chemin] || "";
     const hrefBase = construireUrlObjetFiche(options, chemin);
@@ -1636,6 +1636,13 @@
       "lcdp-box-calendrier-mois--shift-detail"
     );
 
+    const shiftDetail = calendrier.closest(
+      "[data-lcdp-box-shift-detail-parc]"
+    );
+    shiftDetail?.classList.remove(
+      "lcdp-box-shift-detail-parc--planning-jour"
+    );
+
     const nomParc = nettoyerTexte(
       etatPlanning.parc?.nom ||
       etatPlanning.parc?.nomparc ||
@@ -1666,15 +1673,21 @@
         etatPlanning,
         etatPlanning.moisMinimum
       );
+      const moisPrecedentEntierementPasse =
+        moisPrecedentPlanningCommunEntierementPasse(
+          etatPlanning
+        );
+      const precedentInterdit =
+        auMinimum || moisPrecedentEntierementPasse;
       const auMaximum = moisPlanningCommunIdentique(
         etatPlanning,
         etatPlanning.moisMaximum
       );
 
-      boutonPrecedent.disabled = auMinimum;
+      boutonPrecedent.disabled = precedentInterdit;
       boutonPrecedent.setAttribute(
         "aria-disabled",
-        auMinimum ? "true" : "false"
+        precedentInterdit ? "true" : "false"
       );
       boutonSuivant.disabled = auMaximum;
       boutonSuivant.setAttribute(
@@ -1736,6 +1749,9 @@
         moisPlanningCommunIdentique(
           etatPlanning,
           etatPlanning.moisMinimum
+        ) ||
+        moisPrecedentPlanningCommunEntierementPasse(
+          etatPlanning
         )
       ) {
         return;
@@ -2337,6 +2353,13 @@
       "lcdp-box-calendrier-jour--planning-lecture"
     );
 
+    const shiftDetail = calendrier.closest(
+      "[data-lcdp-box-shift-detail-parc]"
+    );
+    shiftDetail?.classList.add(
+      "lcdp-box-shift-detail-parc--planning-jour"
+    );
+
     const nomParc = nettoyerTexte(
       etatPlanning.parc?.nom ||
       etatPlanning.parc?.nomparc ||
@@ -2528,43 +2551,11 @@
   }
 
   function construireLibelleSegmentPlanningCommun(segment) {
-    const categories = Array.isArray(segment?.categories)
-      ? segment.categories
-      : [];
-    const libelles = categories.map((categorie) => {
-      if (categorie === "DUO") return "Duo";
-      if (categorie === "COACH") return "Coach";
-      if (categorie === "FAMILLE") return "Famille";
-      return String(categorie || "");
-    }).filter(Boolean);
-    const morceaux = [
+    return (
       formaterHeureAffichee(segment?.debut) +
-        "–" +
-        formaterHeureAffichee(segment?.fin),
-      libelles.length
-        ? libelles.join(" + ")
-        : "Ouvert"
-    ];
-
-    if (segment?.privatisation) {
-      morceaux.push("Privatisation");
-    }
-
-    const capacite = Number(segment?.capacite);
-
-    if (Number.isFinite(capacite) && capacite > 0) {
-      morceaux.push("capacité " + String(capacite));
-    }
-
-    const ratio = Number(segment?.ratio);
-
-    if (Number.isFinite(ratio) && ratio >= 0) {
-      morceaux.push(
-        "occupation " + Math.round(ratio * 100) + " %"
-      );
-    }
-
-    return morceaux.join(" · ");
+      "–" +
+      formaterHeureAffichee(segment?.fin)
+    );
   }
 
   function construireLibelleJourPlanning(dateIso, ouvert) {
@@ -2593,6 +2584,26 @@
           month: "long",
           year: "numeric"
         });
+  }
+
+  function moisPrecedentPlanningCommunEntierementPasse(etat) {
+    if (!etat) {
+      return true;
+    }
+
+    const dernierJourMoisPrecedent = new Date(
+      Number(etat.annee),
+      Number(etat.mois) - 1,
+      0
+    );
+    const maintenant = new Date();
+    const aujourdHui = new Date(
+      maintenant.getFullYear(),
+      maintenant.getMonth(),
+      maintenant.getDate()
+    );
+
+    return dernierJourMoisPrecedent < aujourdHui;
   }
 
   function moisPlanningCommunIdentique(etat, borne) {
