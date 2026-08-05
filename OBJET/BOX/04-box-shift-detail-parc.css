@@ -106,7 +106,7 @@
 .lcdp-box-shift-detail-parc--planning-jour
   .lcdp-box-shift-detail-parc__card {
   width: min(100%, 820px);
-  height: fit-content;
+  height: auto;
   min-height: 0;
   max-height: calc(100vh - (var(--lcdp-space-3) * 2));
   overflow-y: auto;
@@ -189,6 +189,28 @@
   min-width: 130px;
 }
 
+/*
+ * Réserver membre — vue Fiche Parc :
+ * la croix de la coque ne flotte pas dans la largeur du contenu.
+ * La fiche conserve ainsi toute sa largeur utile et ses boutons Card Parc
+ * gardent strictement leurs dimensions et leur grille d'origine.
+ */
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]
+  .lcdp-box-shift-detail-parc__close {
+  position: absolute;
+  top: var(--lcdp-space-4);
+  right: var(--lcdp-space-4);
+  float: none;
+  margin: 0;
+}
+
+/* Réserver membre — vue Planning : même espace titre/boutons que la vue Le parc. */
+.lcdp-page-reserver
+  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="planning"]
+  .lcdp-box-calendrier-mois__commande {
+  margin-top: 6px !important;
+}
+
 @media (min-width: 768px) {
   .lcdp-box-shift-detail-parc {
     padding: var(--lcdp-space-4);
@@ -197,6 +219,12 @@
   .lcdp-box-shift-detail-parc__card {
     max-height: calc(100vh - (var(--lcdp-space-4) * 2));
     padding: var(--lcdp-space-5);
+  }
+
+  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]
+    .lcdp-box-shift-detail-parc__close {
+    top: var(--lcdp-space-5);
+    right: var(--lcdp-space-5);
   }
 }
 
