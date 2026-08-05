@@ -504,7 +504,26 @@
 
     lignes.forEach((ligne) => {
       const paragraphe = document.createElement("p");
-      paragraphe.textContent = ligne;
+      const prefixeContact =
+        "Votre contact La Clé du Parc :";
+
+      if (ligne.startsWith(prefixeContact)) {
+        const libelleContact =
+          document.createElement("span");
+
+        libelleContact.className =
+          "lcdp-box-fiche-parc__contact-label";
+        libelleContact.textContent = prefixeContact;
+
+        paragraphe.appendChild(libelleContact);
+        paragraphe.appendChild(
+          document.createTextNode(
+            ligne.slice(prefixeContact.length)
+          )
+        );
+      } else {
+        paragraphe.textContent = ligne;
+      }
 
       conteneur.appendChild(paragraphe);
     });
