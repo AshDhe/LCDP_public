@@ -486,3 +486,24 @@
   }
 }
 
+/* Vue planning de la fiche parc : titre et commandes harmonisés avec la présentation. */
+.lcdp-fiche-parc__shift-view .lcdp-box-calendrier-mois__title {
+  color: var(--lcdp-color-text) !important;
+}
+
+.lcdp-fiche-parc__commande-detail .lcdp-fiche-parc__action-retour-presentation,
+.lcdp-fiche-parc__commande-detail .lcdp-fiche-parc__action-retour-presentation:hover {
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 2px solid #587242 !important;
+  border-radius: var(--lcdp-radius-button) !important;
+  background: #587242 !important;
+  color: #ffffff !important;
+  box-shadow: none;
+  font-family: var(--lcdp-font-main);
+  font-size: 0.95rem;
+  line-height: 1.1;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
