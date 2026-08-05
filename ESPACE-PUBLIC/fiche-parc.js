@@ -9,7 +9,7 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
-  const ficheParcBuild = "20260805-1316";
+  const ficheParcBuild = "20260805-1408";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
@@ -2330,57 +2330,20 @@
     titre.textContent = "Parc de " + nomParc;
     meta.textContent = "";
     meta.classList.add(
-      "lcdp-box-calendrier-jour__meta--actions"
+      "lcdp-box-calendrier-jour__meta--legende",
+      "lcdp-box-legende-host"
     );
-
-    const actions = creerActionsPlanningParcCommun(
-      etatPlanning.parc,
-      options
+    meta.appendChild(
+      await chargerLegendePlanningParcCommun(options)
     );
-    actions.classList.add(
-      "lcdp-fiche-parc__commande-detail"
-    );
-    meta.appendChild(actions);
     boutonFermer.hidden = true;
-
-    const navigation = document.createElement("div");
-    navigation.className =
-      "lcdp-box-calendrier-mois__navigation " +
-      "lcdp-box-calendrier-jour__navigation-planning";
-
-    const boutonRetour = document.createElement("button");
-    boutonRetour.type = "button";
-    boutonRetour.className =
-      "lcdp-box-calendrier-mois__nav-button";
-    boutonRetour.setAttribute(
-      "aria-label",
-      "Retour au planning mensuel"
-    );
-    boutonRetour.textContent = "←";
-    boutonRetour.addEventListener("click", () => {
-      afficherMoisPlanningParcCommun(
-        slot,
-        etatPlanning,
-        options
-      ).catch(console.error);
-    });
 
     const dateCourante = document.createElement("h3");
     dateCourante.className =
-      "lcdp-box-calendrier-mois__month";
+      "lcdp-box-calendrier-jour__date-planning";
     dateCourante.textContent =
       formaterDatePlanningLongue(jour.date);
-
-    const espaceNavigation = document.createElement("span");
-    espaceNavigation.className =
-      "lcdp-box-calendrier-mois__nav-button " +
-      "lcdp-box-calendrier-jour__navigation-placeholder";
-    espaceNavigation.setAttribute("aria-hidden", "true");
-
-    navigation.appendChild(boutonRetour);
-    navigation.appendChild(dateCourante);
-    navigation.appendChild(espaceNavigation);
-    corps.insertBefore(navigation, message);
+    corps.insertBefore(dateCourante, message);
 
     const segments = Array.isArray(jour?.segments)
       ? jour.segments
