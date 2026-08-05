@@ -2981,19 +2981,39 @@
     );
 
     if (mode === "planning") {
-      const boutonReserver = creerBoutonCommande(
-        "RÉSERVER",
-        "lcdp-box-calendrier-mois__action-reserver",
-        () => afficherVueShiftDetailParc(contenu.parentElement, parc, "reservation")
-      );
-      const actionPartager = creerActionPartagerFicheParc();
-      actionPartager.addEventListener("click", () => {
-        partagerFicheParc(parc, "planning").catch(console.error);
-      });
+      const barreActionsPlanning = creerActionsPlanningParcCommun(
+        parc,
+        {
+          onRetourPresentation: () => {
+            const slot = document.getElementById(
+              "lcdp-lightbox-slot"
+            );
+            const shift = slot?.querySelector(
+              "[data-lcdp-box-shift-detail-parc]"
+            );
 
-      commande.appendChild(boutonReserver);
-      commande.appendChild(actionPartager);
-      commande.appendChild(boutonFiche);
+            if (slot && shift) {
+              fermerShiftDetailParcEnDouceur(
+                slot,
+                shift
+              ).catch(console.error);
+            }
+          },
+          onPartager: (parcCible) =>
+            partagerFicheParc(
+              parcCible,
+              "planning"
+            ),
+          onReserver: (parcCible) =>
+            afficherVueShiftDetailParc(
+              contenu.parentElement,
+              parcCible,
+              "reservation"
+            )
+        }
+      );
+
+      commande.appendChild(barreActionsPlanning);
     } else {
       const boutonPlanning = creerBoutonCommande(
         "Planning",
