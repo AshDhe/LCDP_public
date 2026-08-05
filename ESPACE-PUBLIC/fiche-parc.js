@@ -1766,7 +1766,7 @@
     });
 
     const boutonPresentation = creerBoutonCommande(
-      "Retour Présentation",
+      "Présentation du parc",
       "lcdp-fiche-parc__action-retour-presentation",
       () => {
         executerActionFiche(
@@ -2824,7 +2824,7 @@
     commande.innerHTML = "";
 
     const boutonFiche = creerBoutonCommande(
-      "Retour Présentation",
+      "Présentation du parc",
       "lcdp-fiche-parc__action-retour-presentation",
       () => {
         const slot = document.getElementById("lcdp-lightbox-slot");
