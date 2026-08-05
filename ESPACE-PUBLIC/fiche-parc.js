@@ -58,6 +58,16 @@
       : "")
   ).replace(/\/$/, "");
 
+  const endpointPartagePages = String(
+    config.workerPartagePagesUrl ||
+    config.WORKER_PARTAGE_PAGES_URL ||
+    config.workerPartagePageUrl ||
+    config.WORKER_PARTAGE_PAGE_URL ||
+    (typeof config.apiUrl === "function"
+      ? config.apiUrl("partage-pages-api")
+      : "")
+  ).replace(/\/$/, "");
+
   const pageConnexionMembre = construireUrlSite(
     "/ESPACE-PUBLIC/connexion-membre.html"
   );
@@ -69,6 +79,7 @@
   const tokenPartage = nettoyerTexte(parametresPartage.get("token"));
   const contextePartage = nettoyerTexte(parametresPartage.get("ctx"));
   const vuePartage = nettoyerTexte(parametresPartage.get("vue")).toLowerCase();
+  const sessionPartage = initialiserSessionPartageNavigateur();
 
   const etatInteraction = {
     templateShiftDetail: null,
@@ -222,9 +233,9 @@
         method: "GET",
         credentials: "include",
         cache: "no-store",
-        headers: {
+        headers: construireHeadersAccesPartage({
           "Accept": "application/json"
-        }
+        })
       }
     );
 
@@ -296,7 +307,8 @@
         masquerBoutonFermer: true,
         onReserver: ouvrirReservationMembre,
         onPlanning: ouvrirPlanningPublic,
-        onPartager: partagerFicheParc,
+        onPartager: (parcCible) =>
+          partagerFicheParc(parcCible, "fiche"),
         onOuvrirFicheParc: ouvrirFicheParcDepuisCarte,
         onOuvrirPlanningParc: ouvrirPlanningPublic,
         onReserverParc: ouvrirReservationMembre
@@ -1904,9 +1916,9 @@
       method: "GET",
       credentials: "include",
       cache: "no-store",
-      headers: {
+      headers: construireHeadersAccesPartage({
         "Accept": "application/json"
-      }
+      })
     });
     const data = await reponse.json().catch(() => null);
 
@@ -2258,9 +2270,9 @@
       method: "GET",
       credentials: "include",
       cache: "no-store",
-      headers: {
+      headers: construireHeadersAccesPartage({
         "Accept": "application/json"
-      }
+      })
     });
     const data = await reponse.json().catch(() => null);
 
@@ -2752,7 +2764,8 @@
               parcCible,
               "reservation"
             ),
-          onPartager: partagerFicheParc,
+          onPartager: (parcCible) =>
+            partagerFicheParc(parcCible, "planning"),
           onRetourPresentation: () => {
             const slot = document.getElementById(
               "lcdp-lightbox-slot"
@@ -2859,7 +2872,7 @@
       );
       const actionPartager = creerActionPartagerFicheParc();
       actionPartager.addEventListener("click", () => {
-        partagerFicheParc(parc).catch(console.error);
+        partagerFicheParc(parc, "planning").catch(console.error);
       });
 
       commande.appendChild(boutonReserver);
@@ -2978,7 +2991,9 @@
       method: "GET",
       credentials: "include",
       cache: "no-store",
-      headers: { "Accept": "application/json" }
+      headers: construireHeadersAccesPartage({
+        "Accept": "application/json"
+      })
     });
 
     const data = await reponse.json().catch(() => null);
@@ -3345,39 +3360,330 @@
     return new Promise((resolve) => window.setTimeout(resolve, delai));
   }
 
-  async function partagerFicheParc(parc) {
-    const nom = parc.nom || "ce parc";
-    const donneesPartage = {
-      title:
-        "Parc de " +
-        nom +
-        " - La Clé du Parc",
-      text:
-        "Découvrez le parc de " +
-        nom +
-        " sur La Clé du Parc.",
-      url: window.location.href
-    };
+  async function partagerFicheParc(
+    parc,
+    typepartage = "fiche"
+  ) {
+    const emails = await ouvrirDialoguePartageEmailsPublic();
 
-    if (navigator.share) {
-      await navigator.share(donneesPartage);
+    if (!emails) {
       return;
     }
 
-    const sujet = encodeURIComponent(
-      donneesPartage.title
+    try {
+      const resultat = await envoyerPartagePublic(
+        parc,
+        emails,
+        typepartage
+      );
+
+      await afficherMessageShift(
+        nettoyerTexte(resultat?.message) ||
+        "Le partage a bien été envoyé."
+      );
+    } catch (error) {
+      await afficherMessageShift(
+        normaliserMessageErreurPartagePublic(error?.message)
+      );
+    }
+  }
+
+  async function ouvrirDialoguePartageEmailsPublic() {
+    const conteneur = document.createElement("div");
+    document.body.appendChild(conteneur);
+
+    const fragment = await chargerFragment(
+      "/OBJET/BOX/04-box-listemails.html"
     );
-    const corps = encodeURIComponent(
-      donneesPartage.text +
-      "\n\n" +
-      donneesPartage.url
+    conteneur.appendChild(fragment);
+
+    const box = conteneur.querySelector(
+      "[data-lcdp-box-card-listemails]"
+    );
+    const titre = conteneur.querySelector(
+      "[data-lcdp-listemails-title]"
+    );
+    const message = conteneur.querySelector(
+      "[data-lcdp-listemails-message]"
+    );
+    const liste = conteneur.querySelector(
+      "[data-lcdp-listemails-list]"
+    );
+    const actions = conteneur.querySelector(
+      "[data-lcdp-listemails-actions]"
+    );
+    const boutonFermer = conteneur.querySelector(
+      "[data-lcdp-listemails-close]"
     );
 
-    window.location.href =
-      "mailto:?subject=" +
-      sujet +
-      "&body=" +
-      corps;
+    if (!box || !titre || !message || !liste || !actions) {
+      conteneur.remove();
+      throw new Error("Structure liste e-mails incomplète.");
+    }
+
+    titre.textContent = "Partager la page";
+    message.hidden = true;
+    message.textContent = "";
+
+    const ajouterChamp = (valeur = "") => {
+      const item = document.createElement("li");
+      item.className = "lcdp-box-card-listemails__item";
+
+      const input = document.createElement("input");
+      input.type = "email";
+      input.value = valeur;
+      input.placeholder = "Adresse e-mail";
+      input.autocomplete = "email";
+      input.className = "lcdp-box-card-listemails__input";
+
+      item.appendChild(input);
+      liste.appendChild(item);
+      input.focus();
+    };
+
+    ajouterChamp();
+    actions.innerHTML = "";
+    actions.appendChild(
+      creerBoutonPartagePublic(
+        "Ajouter un e-mail",
+        "lcdp-button-secondary",
+        () => ajouterChamp()
+      )
+    );
+
+    return new Promise((resolve) => {
+      let resolu = false;
+
+      function fermer(valeur) {
+        if (resolu) {
+          return;
+        }
+
+        resolu = true;
+        conteneur.remove();
+        resolve(valeur);
+      }
+
+      actions.appendChild(
+        creerBoutonPartagePublic(
+          "Envoyer",
+          "lcdp-button-primary",
+          () => {
+            const emailsSaisis = Array.from(
+              liste.querySelectorAll("input[type='email']")
+            )
+              .map((input) => nettoyerEmailPartage(input.value))
+              .filter(Boolean);
+            const emailsInvalides = emailsSaisis.filter(
+              (email) => !emailValidePartage(email)
+            );
+
+            if (!emailsSaisis.length) {
+              message.hidden = false;
+              message.textContent =
+                "Renseignez au moins une adresse e-mail.";
+              return;
+            }
+
+            if (emailsInvalides.length) {
+              message.hidden = false;
+              message.textContent =
+                "Une adresse e-mail est invalide.";
+              return;
+            }
+
+            const emails = emailsSaisis.filter(
+              (email, index, array) =>
+                array.indexOf(email) === index
+            );
+
+            if (emails.length > 10) {
+              message.hidden = false;
+              message.textContent =
+                "Le partage est limité à 10 adresses e-mail.";
+              return;
+            }
+
+            fermer(emails);
+          }
+        )
+      );
+
+      actions.appendChild(
+        creerBoutonPartagePublic(
+          "Annuler",
+          "lcdp-button-secondary",
+          () => fermer(null)
+        )
+      );
+
+      if (boutonFermer) {
+        boutonFermer.addEventListener(
+          "click",
+          () => fermer(null)
+        );
+      }
+
+      box.addEventListener("click", (event) => {
+        if (event.target === box) {
+          fermer(null);
+        }
+      });
+    });
+  }
+
+  function creerBoutonPartagePublic(label, style, action) {
+    const bouton = document.createElement("button");
+    bouton.type = "button";
+    bouton.className =
+      "lcdp-button " +
+      (style || "lcdp-button-primary");
+    bouton.textContent = label;
+    bouton.addEventListener("click", action);
+    return bouton;
+  }
+
+  async function envoyerPartagePublic(
+    parc,
+    emails,
+    typepartage
+  ) {
+    if (!endpointPartagePages) {
+      throw new Error(
+        "Le service de partage est temporairement indisponible."
+      );
+    }
+
+    const typeNormalise = typepartage === "planning"
+      ? "planning"
+      : "fiche";
+    const idparc = nettoyerTexte(
+      parc?.idparc || parc?.id
+    );
+    const nomparc = nettoyerTexte(
+      parc?.nom || parc?.nomparc
+    );
+    const dptmt = nettoyerDepartement(
+      parc?.dptmt || parc?.departement
+    );
+
+    if (!idparc || !nomparc) {
+      throw new Error("Le parc à partager est incomplet.");
+    }
+
+    const reponse = await fetch(endpointPartagePages, {
+      method: "POST",
+      credentials: "include",
+      cache: "no-store",
+      headers: construireHeadersAccesPartage({
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify({
+        typepartage: typeNormalise,
+        idparc,
+        nomparc,
+        dptmt,
+        emails,
+        tokenPartage,
+        contextePartage
+      })
+    });
+    const data = await reponse.json().catch(() => null);
+
+    if (
+      !reponse.ok ||
+      !data ||
+      (data.ok !== true && data.success !== true)
+    ) {
+      throw new Error(
+        nettoyerTexte(data?.message) ||
+        "Le partage n’a pas pu être envoyé."
+      );
+    }
+
+    return data;
+  }
+
+  function normaliserMessageErreurPartagePublic(message) {
+    const texte = nettoyerTexte(message);
+
+    if (!texte) {
+      return "Le partage n’a pas pu être envoyé pour le moment. Merci de réessayer dans quelques instants.";
+    }
+
+    if (
+      texte.includes("session membre") ||
+      texte.includes("session de partage") ||
+      texte.includes("Lien de partage") ||
+      texte.includes("lien de partage")
+    ) {
+      return "Ce lien de partage n’est plus valide. Demandez un nouveau partage de cette page.";
+    }
+
+    if (
+      texte.includes("Variables manquantes") ||
+      texte.includes("configuration") ||
+      texte.includes("service de partage")
+    ) {
+      return "Le service de partage est temporairement indisponible.";
+    }
+
+    return texte;
+  }
+
+  function nettoyerEmailPartage(value) {
+    return String(value || "")
+      .trim()
+      .toLowerCase();
+  }
+
+  function emailValidePartage(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+      String(email || "")
+    );
+  }
+
+  function initialiserSessionPartageNavigateur() {
+    const cleStockage = "lcdp_partage_parc";
+    let valeur = "";
+
+    try {
+      const fragment = String(window.location.hash || "")
+        .replace(/^#/, "");
+      const parametresFragment = new URLSearchParams(fragment);
+      valeur = nettoyerTexte(
+        parametresFragment.get("partage_session")
+      );
+
+      if (valeur) {
+        window.sessionStorage.setItem(cleStockage, valeur);
+        window.history.replaceState(
+          null,
+          document.title,
+          window.location.pathname +
+            window.location.search
+        );
+      } else {
+        valeur = nettoyerTexte(
+          window.sessionStorage.getItem(cleStockage)
+        );
+      }
+    } catch {
+      valeur = "";
+    }
+
+    return valeur;
+  }
+
+  function construireHeadersAccesPartage(headers = {}) {
+    const resultat = { ...headers };
+
+    if (sessionPartage) {
+      resultat["X-LCDP-Partage-Session"] = sessionPartage;
+    }
+
+    return resultat;
   }
 
   function construireUrlAvecParc(
