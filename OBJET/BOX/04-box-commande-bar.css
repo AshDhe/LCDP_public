@@ -25,7 +25,7 @@
   min-height: 34px;
   margin: 0;
   padding: 6px 12px;
-  border-radius: var(--lcdp-radius-button);
+  border-radius: 6px;
   flex: 0 0 auto;
   font-size: 0.82rem;
   line-height: 1.1;
