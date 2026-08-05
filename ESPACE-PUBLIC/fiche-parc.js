@@ -29,16 +29,11 @@
   };
   const contenuLegendePlanningParc = [
     [
-      { libelle: "Réservé DUO", couleur: "bleu-fonce" },
+      { libelle: "Accessible :  DUO", couleur: "bleu-fonce" },
       { libelle: "COACH", couleur: "violet" },
-      { libelle: "FAMILLE", couleur: "orange-fonce" }
-    ],
-    [
-      { libelle: "FAMILLE autorisé", couleur: "orange-clair" },
-      {
-        libelle: "DUO + COACH uniquement",
-        couleur: "bleu-clair"
-      }
+      { libelle: "FAMILLE", couleur: "orange-fonce" },
+      { libelle: "DUO + COACH + FAMILLE", couleur: "orange-clair" },
+      {  libelle: "DUO + COACH", couleur: "bleu-clair" }
     ]
   ];
   const endpointNouvelleDateMembre = String(
