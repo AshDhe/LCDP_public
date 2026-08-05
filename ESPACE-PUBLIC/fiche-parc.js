@@ -470,7 +470,37 @@
       return options.construireUrlObjet(chemin);
     }
 
-    return construireUrlSite("/OBJET" + chemin);
+    const valeur = String(chemin || "");
+
+    if (
+      valeur.startsWith("http://") ||
+      valeur.startsWith("https://") ||
+      valeur.startsWith("data:")
+    ) {
+      return valeur;
+    }
+
+    if (typeof window.LCDP_urlObjet === "function") {
+      return window.LCDP_urlObjet(valeur);
+    }
+
+    if (typeof config.objetUrl === "function") {
+      return config.objetUrl(valeur);
+    }
+
+    const objetBase = String(
+      config.objetBaseUrl ||
+      config.OBJET_BASE ||
+      ""
+    ).replace(/\/$/, "");
+
+    if (objetBase) {
+      return objetBase + "/" + valeur.replace(/^\/+/, "");
+    }
+
+    return construireUrlSite(
+      "/OBJET/" + valeur.replace(/^\/+/, "")
+    );
   }
 
   function chargerStyleObjetFiche(options, chemin) {
@@ -1387,10 +1417,25 @@
     return document.createElementNS("http://www.w3.org/2000/svg", nom);
   }
 
-  function creerActionsFicheParc(parc, options = {}) {
+  function creerConteneurActionsFicheParc() {
+    const conteneur = document.createElement("div");
+    conteneur.className =
+      "lcdp-box-fiche-parc__actions-style " +
+      "lcdp-box-card-parc--reserver";
+
     const actions = document.createElement("div");
     actions.className =
-      "lcdp-box-fiche-parc__actions-list";
+      "lcdp-box-card-parc__actions " +
+      "lcdp-box-card-parc__actions--reserver " +
+      "lcdp-box-fiche-parc__actions-grid";
+
+    conteneur.appendChild(actions);
+
+    return { conteneur, actions };
+  }
+
+  function creerActionsFicheParc(parc, options = {}) {
+    const structure = creerConteneurActionsFicheParc();
 
     const actionPartager = creerActionPartagerFicheParc(options);
     actionPartager.addEventListener("click", () => {
@@ -1432,13 +1477,12 @@
       );
     });
 
-    actions.appendChild(actionPartager);
-    actions.appendChild(boutonPlanning);
-    actions.appendChild(boutonReserver);
+    structure.actions.appendChild(actionPartager);
+    structure.actions.appendChild(boutonPlanning);
+    structure.actions.appendChild(boutonReserver);
 
-    return actions;
+    return structure.conteneur;
   }
-
 
   function creerBoutonActionFicheParc(
     configuration,
@@ -1448,8 +1492,8 @@
     bouton.type = "button";
     bouton.className =
       "lcdp-button " +
-      "lcdp-box-fiche-parc__action " +
-      "lcdp-box-fiche-parc__action--" +
+      "lcdp-box-card-parc__action " +
+      "lcdp-box-card-parc__action--" +
       configuration.variante;
     bouton.setAttribute(
       "aria-label",
@@ -1460,7 +1504,9 @@
 
     const icone = document.createElement("img");
     icone.className =
-      "lcdp-box-fiche-parc__action-icone";
+      "lcdp-box-card-parc__action-icone " +
+      "lcdp-box-card-parc__action-icone--" +
+      configuration.icone;
     icone.src = construireUrlObjetFiche(
       options,
       "/IMAG/PICTO/picto-" +
@@ -1476,7 +1522,7 @@
 
     const libelle = document.createElement("span");
     libelle.className =
-      "lcdp-box-fiche-parc__action-libelle";
+      "lcdp-box-card-parc__action-libelle";
     libelle.textContent = configuration.libelle;
 
     bouton.appendChild(icone);
@@ -1484,7 +1530,6 @@
 
     return bouton;
   }
-
 
   function creerActionPartagerFicheParc(options = {}) {
     return creerBoutonActionFicheParc(
@@ -1753,9 +1798,7 @@
   }
 
   function creerActionsPlanningParcCommun(parc, options) {
-    const actions = document.createElement("div");
-    actions.className =
-      "lcdp-box-calendrier-mois__actions-parc";
+    const structure = creerConteneurActionsFicheParc();
 
     const actionPartager = creerActionPartagerFicheParc(options);
     actionPartager.addEventListener("click", () => {
@@ -1797,11 +1840,11 @@
       );
     });
 
-    actions.appendChild(actionPartager);
-    actions.appendChild(boutonPresentation);
-    actions.appendChild(boutonReserver);
+    structure.actions.appendChild(actionPartager);
+    structure.actions.appendChild(boutonPresentation);
+    structure.actions.appendChild(boutonReserver);
 
-    return actions;
+    return structure.conteneur;
   }
 
   async function chargerLegendePlanningParcCommun(options) {
