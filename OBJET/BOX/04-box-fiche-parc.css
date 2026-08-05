@@ -585,143 +585,34 @@
   }
 }
 
-/* Fiche parc : boutons d'action harmonisés avec la Card Parc, mobile first. */
-.lcdp-box-fiche-parc__actions-list,
-.lcdp-fiche-parc__commande-detail
-  .lcdp-box-calendrier-mois__actions-parc {
+/* Fiche parc : réutilisation stricte des boutons de la Card Parc. */
+.lcdp-box-fiche-parc__actions-style {
   width: 100%;
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: stretch !important;
-  gap: var(--lcdp-space-2) !important;
 }
 
-.lcdp-box-fiche-parc__actions-list
-  > .lcdp-box-fiche-parc__action:last-child,
-.lcdp-fiche-parc__commande-detail
-  .lcdp-box-calendrier-mois__actions-parc
-  > .lcdp-box-fiche-parc__action:last-child {
+.lcdp-box-fiche-parc__actions-style
+  .lcdp-box-fiche-parc__actions-grid {
+  width: 100%;
+  max-width: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lcdp-box-fiche-parc__actions-style
+  .lcdp-box-fiche-parc__actions-grid
+  > .lcdp-box-card-parc__action:last-child {
   grid-column: 1 / -1;
 }
 
-.lcdp-box-fiche-parc__action {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  min-height: 50px !important;
-  margin: 0 !important;
-  padding: 10px 9px !important;
-  border: 2px solid currentColor !important;
-  border-radius: var(--lcdp-radius-button) !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  align-self: stretch !important;
-  box-sizing: border-box;
-  font-family: var(--lcdp-font-main);
-  font-size: clamp(0.84rem, 4vw, 0.98rem) !important;
-  line-height: 1.12 !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.01em !important;
-  text-align: center;
-  text-decoration: none !important;
-  text-transform: none;
-  white-space: nowrap;
-  box-shadow: none !important;
-}
-
-.lcdp-box-fiche-parc__action-icone {
-  width: 21px;
-  height: 21px;
-  flex: 0 0 21px;
-  display: block;
-  object-fit: contain;
-  pointer-events: none;
-}
-
-.lcdp-box-fiche-parc__action-libelle {
-  min-width: 0;
-}
-
-.lcdp-box-fiche-parc__action--vert-plein,
-.lcdp-box-fiche-parc__action--vert-plein:hover {
-  border-color: var(--lcdp-color-logo-green) !important;
-  background: var(--lcdp-color-logo-green) !important;
-  color: #ffffff !important;
-}
-
-.lcdp-box-fiche-parc__action--vert-plein:hover {
-  border-color: var(--lcdp-color-primary) !important;
-  background: var(--lcdp-color-primary) !important;
-}
-
-.lcdp-box-fiche-parc__action--vert-contour {
-  border-color: var(--lcdp-color-logo-green) !important;
-  background: #ffffff !important;
-  color: var(--lcdp-color-logo-green) !important;
-}
-
-.lcdp-box-fiche-parc__action--vert-contour:hover {
-  border-color: var(--lcdp-color-primary) !important;
-  background: var(--lcdp-color-surface-soft) !important;
-  color: var(--lcdp-color-primary) !important;
-}
-
-.lcdp-box-fiche-parc__action--orange-plein,
-.lcdp-box-fiche-parc__action--orange-plein:hover {
-  border-color: var(--lcdp-color-orange) !important;
-  background: var(--lcdp-color-orange) !important;
-  color: #ffffff !important;
-}
-
-.lcdp-box-fiche-parc__action--orange-plein:hover {
-  border-color: var(--lcdp-color-orange-hover) !important;
-  background: var(--lcdp-color-orange-hover) !important;
-}
-
-.lcdp-box-fiche-parc__action--orange-contour {
-  border-color: var(--lcdp-color-orange) !important;
-  background: #ffffff !important;
-  color: var(--lcdp-color-orange) !important;
-}
-
-.lcdp-box-fiche-parc__action--orange-contour:hover {
-  border-color: var(--lcdp-color-orange-hover) !important;
-  background: var(--lcdp-color-surface-soft) !important;
-  color: var(--lcdp-color-orange-hover) !important;
-}
-
-.lcdp-box-fiche-parc__action:focus-visible {
-  outline: 3px solid var(--lcdp-color-focus);
-  outline-offset: 3px;
-}
-
 @media (min-width: 768px) {
-  .lcdp-box-fiche-parc__actions-list,
-  .lcdp-fiche-parc__commande-detail
-    .lcdp-box-calendrier-mois__actions-parc {
+  .lcdp-box-fiche-parc__actions-style
+    .lcdp-box-fiche-parc__actions-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: 720px;
   }
 
-  .lcdp-box-fiche-parc__actions-list
-    > .lcdp-box-fiche-parc__action:last-child,
-  .lcdp-fiche-parc__commande-detail
-    .lcdp-box-calendrier-mois__actions-parc
-    > .lcdp-box-fiche-parc__action:last-child {
+  .lcdp-box-fiche-parc__actions-style
+    .lcdp-box-fiche-parc__actions-grid
+    > .lcdp-box-card-parc__action:last-child {
     grid-column: auto;
-  }
-
-  .lcdp-box-fiche-parc__action {
-    min-height: 52px !important;
-    padding-inline: 13px !important;
-    font-size: 0.98rem !important;
-  }
-
-  .lcdp-box-fiche-parc__action-icone {
-    width: 22px;
-    height: 22px;
-    flex-basis: 22px;
   }
 }
