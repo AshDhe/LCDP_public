@@ -205,9 +205,9 @@
 }
 
 /* Réserver membre — vue Planning : même espace titre/boutons que la vue Le parc. */
-.lcdp-page-reserver
-  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="planning"]
-  .lcdp-box-calendrier-mois__commande {
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="planning"]
+  .lcdp-box-calendrier-mois--shift-detail
+  .lcdp-fiche-parc__commande-detail {
   margin-top: 6px !important;
 }
 
