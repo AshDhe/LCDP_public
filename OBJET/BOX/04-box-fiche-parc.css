@@ -438,15 +438,16 @@
   color: #ffffff !important;
 }
 
-/* Partager : même forme rectangulaire arrondie, orangé et texte blanc. */
+/* Partager : version allégée, contour et contenu orangés sur fond blanc. */
 .lcdp-box-fiche-parc__partage,
 .lcdp-fiche-parc__commande-detail .lcdp-box-fiche-parc__partage {
   width: 100%;
   max-width: 260px;
   margin: 0;
-  border-color: #EBA042;
-  background: #EBA042;
-  color: #ffffff;
+  border: 2px solid #EBA042;
+  border-radius: var(--lcdp-radius-button);
+  background: #ffffff;
+  color: #EBA042;
   justify-content: center;
   gap: var(--lcdp-space-1);
 }
@@ -454,8 +455,8 @@
 .lcdp-box-fiche-parc__partage:hover,
 .lcdp-fiche-parc__commande-detail .lcdp-box-fiche-parc__partage:hover {
   border-color: #EBA042;
-  background: #EBA042;
-  color: #ffffff;
+  background: rgba(235, 160, 66, 0.10);
+  color: #EBA042;
 }
 
 .lcdp-box-fiche-parc__partage-icone,
@@ -465,13 +466,13 @@
   min-width: 22px;
   min-height: 22px;
   border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: #ffffff;
+  border-radius: var(--lcdp-radius-small);
+  background: #ffffff;
+  color: #EBA042;
 }
 
 .lcdp-box-fiche-parc__partage-libelle {
-  color: #ffffff;
+  color: #EBA042;
   font-size: 0.95rem;
   line-height: 1.1;
   font-weight: 700;
