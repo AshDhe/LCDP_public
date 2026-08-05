@@ -857,7 +857,7 @@
   text-underline-offset: 2px;
 }
 
-/* Planning fiche parc : boutons en ligne sur mobile, avec retour naturel à la ligne. */
+/* Planning fiche parc : boutons compacts en ligne sur mobile, avec retour naturel à la ligne. */
 @media (max-width: 767px) {
   .lcdp-fiche-parc__commande-detail
     .lcdp-box-fiche-parc__actions-barre {
@@ -874,7 +874,19 @@
     width: auto !important;
     min-width: 0 !important;
     max-width: 100% !important;
+    min-height: 36px !important;
+    padding: 5px 9px !important;
+    gap: 5px !important;
     flex: 0 0 auto !important;
+    font-size: 0.84rem !important;
+  }
+
+  .lcdp-fiche-parc__commande-detail
+    .lcdp-box-fiche-parc__actions-barre
+    .lcdp-box-card-parc__action-icone {
+    width: 16px !important;
+    height: 16px !important;
+    flex: 0 0 16px !important;
   }
 }
 
