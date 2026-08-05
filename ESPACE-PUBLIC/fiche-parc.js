@@ -506,12 +506,6 @@
       const paragraphe = document.createElement("p");
       paragraphe.textContent = ligne;
 
-      if (ligne.startsWith("Actualisation :")) {
-        paragraphe.classList.add(
-          "lcdp-box-fiche-parc__actualisation"
-        );
-      }
-
       conteneur.appendChild(paragraphe);
     });
   }
@@ -1172,7 +1166,8 @@
         "[data-lcdp-card-parc-badge-prepa]"
       );
       const nomParc =
-        nettoyerTexte(parcCarte?.nom || parcCarte?.nomparc) ||
+        nettoyerTexte(parcCarte?.nom || parcCarte?.nomparc)
+          .replace(/^(?:parc\s+de\s+)+/i, "") ||
         "Parc";
       const departement = nettoyerDepartement(
         parcCarte?.dptmt || parcCarte?.departement
@@ -3883,59 +3878,12 @@
   function construireTexteAccesParc(parc) {
     const horaire = String(parc?.horaire || "").trim() ||
       "Horaires d’accès non renseignés.";
-    const dateActualisation = formaterDateMajHoraire(
-      parc?.datemajhoraire
-    );
-    const mentionActualisation = dateActualisation
-      ? "Actualisation : " + dateActualisation + "."
-      : "Actualisation : date non disponible.";
     const contact =
       "Votre contact La Clé du Parc : " +
       "camille@lacleduparc.fr - " +
       "Standard téléphonique : 02.34.46.51.14";
 
-    return (
-      horaire +
-      "\n" +
-      mentionActualisation +
-      "\n" +
-      contact
-    );
-  }
-
-  function formaterDateMajHoraire(value) {
-    const date = new Date(value || "");
-
-    if (Number.isNaN(date.getTime())) {
-      return "";
-    }
-
-    const morceaux = new Intl.DateTimeFormat(
-      "fr-FR",
-      {
-        timeZone: "Europe/Paris",
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hourCycle: "h23"
-      }
-    ).formatToParts(date);
-    const lire = (type) =>
-      morceaux.find((item) => item.type === type)?.value || "";
-
-    return (
-      lire("day") +
-      " " +
-      lire("month") +
-      " " +
-      lire("year") +
-      " à " +
-      lire("hour") +
-      " h " +
-      lire("minute")
-    );
+    return horaire + "\n" + contact;
   }
 
   function normaliserNomParcPourChemin(valeur) {
