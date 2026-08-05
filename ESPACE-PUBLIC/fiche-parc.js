@@ -351,8 +351,29 @@
     const titre = fiche.querySelector(
       "[data-lcdp-fiche-parc-title]"
     );
-    const actionsSlot = fiche.querySelector(
-      "[data-lcdp-fiche-parc-actions]"
+    const boutonLeParc = fiche.querySelector(
+      "[data-lcdp-fiche-parc-action-le-parc]"
+    );
+    const boutonPartager = fiche.querySelector(
+      "[data-lcdp-fiche-parc-action-partager]"
+    );
+    const boutonPlanning = fiche.querySelector(
+      "[data-lcdp-fiche-parc-action-planning]"
+    );
+    const boutonPlanifier = fiche.querySelector(
+      "[data-lcdp-fiche-parc-action-planifier]"
+    );
+    const iconeLeParc = fiche.querySelector(
+      "[data-lcdp-fiche-parc-action-le-parc-icone]"
+    );
+    const iconePartager = fiche.querySelector(
+      "[data-lcdp-fiche-parc-action-partager-icone]"
+    );
+    const iconePlanning = fiche.querySelector(
+      "[data-lcdp-fiche-parc-action-planning-icone]"
+    );
+    const iconePlanifier = fiche.querySelector(
+      "[data-lcdp-fiche-parc-action-planifier-icone]"
     );
     const presentation = fiche.querySelector(
       "[data-lcdp-fiche-parc-presentation]"
@@ -377,12 +398,58 @@
       titre.textContent = "Parc de " + nom;
     }
 
-    if (actionsSlot) {
-      actionsSlot.innerHTML = "";
-      actionsSlot.appendChild(
-        creerActionsFicheParc(parc, options)
-      );
+    if (boutonLeParc) {
+      boutonLeParc.setAttribute("aria-current", "page");
+      boutonLeParc.addEventListener("click", (event) => {
+        event.preventDefault();
+      });
     }
+
+    if (boutonPartager) {
+      boutonPartager.addEventListener("click", (event) => {
+        event.preventDefault();
+        executerActionFiche(
+          options.onPartager || partagerFicheParc,
+          parc
+        );
+      });
+    }
+
+    if (boutonPlanning) {
+      boutonPlanning.addEventListener("click", (event) => {
+        event.preventDefault();
+        executerActionFiche(
+          options.onPlanning || ouvrirPlanningPublic,
+          parc
+        );
+      });
+    }
+
+    if (boutonPlanifier) {
+      boutonPlanifier.addEventListener("click", (event) => {
+        event.preventDefault();
+        executerActionFiche(
+          options.onReserver || ouvrirReservationMembre,
+          parc
+        );
+      });
+    }
+
+    [
+      [iconeLeParc, "presentation"],
+      [iconePartager, "partager"],
+      [iconePlanning, "planning"],
+      [iconePlanifier, "reserver"]
+    ].forEach(([icone, nomIcone]) => {
+      if (!icone) {
+        return;
+      }
+
+      icone.src = construireUrlObjetFiche(
+        options,
+        "/IMAG/PICTO/picto-" + nomIcone + ".svg"
+      );
+    });
 
     remplirBlocTexteFiche(
       presentation,
@@ -1437,23 +1504,6 @@
   function creerActionsFicheParc(parc, options = {}) {
     const structure = creerConteneurActionsFicheParc();
 
-    const boutonLeParc = creerBoutonActionFicheParc(
-      {
-        libelle: "Le parc",
-        ariaLabel: "Afficher la présentation du parc",
-        icone: "presentation",
-        variante: "vert-plein"
-      },
-      options
-    );
-    boutonLeParc.classList.add(
-      "lcdp-box-fiche-parc__action-le-parc-reference"
-    );
-    boutonLeParc.setAttribute("aria-current", "page");
-    boutonLeParc.addEventListener("click", (event) => {
-      event.preventDefault();
-    });
-
     const actionPartager = creerActionPartagerFicheParc(options);
     actionPartager.addEventListener("click", () => {
       executerActionFiche(
@@ -1494,7 +1544,6 @@
       );
     });
 
-    structure.actions.appendChild(boutonLeParc);
     structure.actions.appendChild(actionPartager);
     structure.actions.appendChild(boutonPlanning);
     structure.actions.appendChild(boutonReserver);
