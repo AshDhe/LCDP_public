@@ -857,33 +857,14 @@
   text-underline-offset: 2px;
 }
 
-/* Fiche parc : boutons compacts en ligne sur mobile, avec retour naturel à la ligne. */
+/* Fiche parc : deux actions par ligne sur mobile, sans modifier les boutons. */
 @media (max-width: 767px) {
   .lcdp-box-fiche-parc__actions-barre {
-    display: flex !important;
-    flex-direction: row !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, max-content) !important;
     align-items: center !important;
-    justify-content: flex-start !important;
-    flex-wrap: wrap !important;
-  }
-
-  .lcdp-box-fiche-parc__actions-barre
-    .lcdp-box-card-parc__action {
-    width: auto !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    min-height: 36px !important;
-    padding: 5px 9px !important;
-    gap: 5px !important;
-    flex: 0 0 auto !important;
-    font-size: 0.84rem !important;
-  }
-
-  .lcdp-box-fiche-parc__actions-barre
-    .lcdp-box-card-parc__action-icone {
-    width: 16px !important;
-    height: 16px !important;
-    flex: 0 0 16px !important;
+    justify-content: start !important;
+    gap: var(--lcdp-space-2) !important;
   }
 }
 
