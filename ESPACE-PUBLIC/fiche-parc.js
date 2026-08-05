@@ -9,9 +9,24 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
-  const ficheParcBuild = "20260805-0952";
+  const ficheParcBuild = "20260805-1122";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
+  const clesPlagesPlanning = [
+    "plage1",
+    "plage2",
+    "plage3",
+    "plage4",
+    "plage5"
+  ];
+  const couleursCssPlanning = {
+    "gris-moyen": "#9ca09e",
+    "bleu-clair": "#cfe3f7",
+    "bleu-fonce": "#2f6fb3",
+    "violet": "#7b5aa6",
+    "orange-clair": "#ffd8a8",
+    "orange-fonce": "#f2a23a"
+  };
   const endpointNouvelleDateMembre = String(
     config.workerNouvelleDateMembreUrl ||
     config.WORKER_NOUVELLE_DATE_MEMBRE_URL ||
@@ -59,7 +74,8 @@
   window.LCDP_FicheParc = {
     version: ficheParcBuild,
     chargerFicheParc,
-    rendreDansConteneur: rendreFicheParcDansConteneur
+    rendreDansConteneur: rendreFicheParcDansConteneur,
+    rendrePlanningDansConteneur: rendrePlanningParcDansConteneur
   };
 
   if (document.readyState === "loading") {
@@ -1446,6 +1462,1077 @@
     return action;
   }
 
+
+  async function rendrePlanningParcDansConteneur(
+    slot,
+    parc,
+    options = {}
+  ) {
+    if (!slot) {
+      throw new Error("Slot planning parc introuvable.");
+    }
+
+    const maintenant = new Date();
+    const moisMinimum = new Date(
+      maintenant.getFullYear(),
+      maintenant.getMonth(),
+      1
+    );
+    const moisMaximum = new Date(
+      maintenant.getFullYear(),
+      maintenant.getMonth() + 3,
+      1
+    );
+    const etatPlanning = {
+      parc,
+      annee: moisMinimum.getFullYear(),
+      mois: moisMinimum.getMonth() + 1,
+      planning: [],
+      moisMinimum: {
+        annee: moisMinimum.getFullYear(),
+        mois: moisMinimum.getMonth() + 1
+      },
+      moisMaximum: {
+        annee: moisMaximum.getFullYear(),
+        mois: moisMaximum.getMonth() + 1
+      }
+    };
+
+    await afficherMoisPlanningParcCommun(
+      slot,
+      etatPlanning,
+      options
+    );
+
+    return etatPlanning;
+  }
+
+  async function afficherMoisPlanningParcCommun(
+    slot,
+    etatPlanning,
+    options
+  ) {
+    slot.innerHTML = "";
+
+    const fragment = await chargerFragmentObjetFiche(
+      options,
+      "/BOX/04-box-calendrier-mois.html"
+    );
+    slot.appendChild(fragment);
+
+    const calendrier = slot.querySelector(
+      "[data-lcdp-box-calendrier-mois]"
+    );
+    const commande = slot.querySelector(
+      "[data-lcdp-calendrier-mois-commande]"
+    );
+    const titre = slot.querySelector(
+      "[data-lcdp-calendrier-mois-title]"
+    );
+    const meta = slot.querySelector(
+      "[data-lcdp-calendrier-mois-meta]"
+    );
+    const boutonFermer = slot.querySelector(
+      "[data-lcdp-calendrier-mois-close]"
+    );
+    const boutonPrecedent = slot.querySelector(
+      "[data-lcdp-calendrier-mois-prev]"
+    );
+    const boutonSuivant = slot.querySelector(
+      "[data-lcdp-calendrier-mois-next]"
+    );
+    const moisCourant = slot.querySelector(
+      "[data-lcdp-calendrier-mois-current]"
+    );
+    const message = slot.querySelector(
+      "[data-lcdp-calendrier-mois-message]"
+    );
+    const grille = slot.querySelector(
+      "[data-lcdp-calendrier-mois-grid]"
+    );
+
+    if (
+      !calendrier ||
+      !commande ||
+      !titre ||
+      !meta ||
+      !boutonFermer ||
+      !boutonPrecedent ||
+      !boutonSuivant ||
+      !moisCourant ||
+      !message ||
+      !grille
+    ) {
+      throw new Error("Structure calendrier mensuel incomplète.");
+    }
+
+    calendrier.dataset.lcdpPlanningParcLecture = "true";
+    calendrier.classList.add(
+      "lcdp-box-calendrier-mois--shift-detail"
+    );
+
+    const nomParc = nettoyerTexte(
+      etatPlanning.parc?.nom ||
+      etatPlanning.parc?.nomparc ||
+      "Parc"
+    ) || "Parc";
+    const departement = nettoyerDepartement(
+      etatPlanning.parc?.dptmt ||
+      etatPlanning.parc?.departement
+    );
+
+    titre.textContent =
+      "Parc de " +
+      nomParc +
+      (departement ? " - " + departement : "");
+    meta.hidden = true;
+    meta.textContent = "";
+    boutonFermer.hidden = true;
+
+    titre.insertAdjacentElement("afterend", commande);
+    commande.classList.add(
+      "lcdp-fiche-parc__commande-detail"
+    );
+    commande.replaceChildren(
+      creerActionsPlanningParcCommun(
+        etatPlanning.parc,
+        options
+      )
+    );
+
+    function actualiserNavigation() {
+      const auMinimum = moisPlanningCommunIdentique(
+        etatPlanning,
+        etatPlanning.moisMinimum
+      );
+      const auMaximum = moisPlanningCommunIdentique(
+        etatPlanning,
+        etatPlanning.moisMaximum
+      );
+
+      boutonPrecedent.disabled = auMinimum;
+      boutonPrecedent.setAttribute(
+        "aria-disabled",
+        auMinimum ? "true" : "false"
+      );
+      boutonSuivant.disabled = auMaximum;
+      boutonSuivant.setAttribute(
+        "aria-disabled",
+        auMaximum ? "true" : "false"
+      );
+    }
+
+    async function actualiserMois() {
+      moisCourant.textContent = formaterMoisAnnee(
+        etatPlanning.annee,
+        etatPlanning.mois
+      );
+      message.hidden = true;
+      message.textContent = "";
+      grille.classList.add(
+        "lcdp-box-calendrier-mois__grid--loading"
+      );
+      grille.setAttribute("aria-busy", "true");
+
+      try {
+        const planning = await chargerPlanningMoisCommun(
+          etatPlanning,
+          options
+        );
+        etatPlanning.planning = planning;
+        remplirGrillePlanningParcCommun(
+          grille,
+          etatPlanning,
+          planning,
+          options,
+          slot
+        );
+      } catch (erreur) {
+        console.error(
+          "Erreur planning parc commun :",
+          erreur
+        );
+        message.hidden = false;
+        message.textContent =
+          erreur?.message ||
+          "Impossible de charger le planning du parc.";
+
+        if (typeof options.onErreur === "function") {
+          Promise.resolve(
+            options.onErreur(message.textContent)
+          ).catch(console.error);
+        }
+      } finally {
+        grille.classList.remove(
+          "lcdp-box-calendrier-mois__grid--loading"
+        );
+        grille.removeAttribute("aria-busy");
+      }
+    }
+
+    boutonPrecedent.addEventListener("click", () => {
+      if (
+        moisPlanningCommunIdentique(
+          etatPlanning,
+          etatPlanning.moisMinimum
+        )
+      ) {
+        return;
+      }
+
+      changerMois(etatPlanning, -1);
+      actualiserNavigation();
+      actualiserMois().catch(console.error);
+    });
+
+    boutonSuivant.addEventListener("click", () => {
+      if (
+        moisPlanningCommunIdentique(
+          etatPlanning,
+          etatPlanning.moisMaximum
+        )
+      ) {
+        return;
+      }
+
+      changerMois(etatPlanning, 1);
+      actualiserNavigation();
+      actualiserMois().catch(console.error);
+    });
+
+    actualiserNavigation();
+    await actualiserMois();
+  }
+
+  function creerActionsPlanningParcCommun(parc, options) {
+    const actions = document.createElement("div");
+    actions.className =
+      "lcdp-box-calendrier-mois__actions-parc";
+
+    const boutonReserver = creerBoutonCommande(
+      "RÉSERVER",
+      "lcdp-box-calendrier-mois__action-reserver",
+      () => {
+        executerActionFiche(
+          options.onReserver || ouvrirReservationMembre,
+          parc
+        );
+      }
+    );
+
+    const actionPartager = creerActionPartagerFicheParc();
+    actionPartager.addEventListener("click", () => {
+      executerActionFiche(
+        options.onPartager || partagerFicheParc,
+        parc
+      );
+    });
+
+    const boutonPresentation = creerBoutonCommande(
+      "Retour Présentation",
+      "lcdp-fiche-parc__action-retour-presentation",
+      () => {
+        executerActionFiche(
+          options.onRetourPresentation,
+          parc
+        );
+      }
+    );
+
+    actions.appendChild(boutonReserver);
+    actions.appendChild(actionPartager);
+    actions.appendChild(boutonPresentation);
+
+    return actions;
+  }
+
+  async function chargerPlanningMoisCommun(
+    etatPlanning,
+    options
+  ) {
+    if (typeof options.chargerPlanningMois === "function") {
+      const planning = await options.chargerPlanningMois(
+        etatPlanning
+      );
+      return Array.isArray(planning) ? planning : [];
+    }
+
+    if (!endpointPlanningParc) {
+      throw new Error(
+        "Le service planning parc n’est pas configuré."
+      );
+    }
+
+    const idparc = nettoyerTexte(
+      etatPlanning.parc?.idparc ||
+      etatPlanning.parc?.id
+    );
+
+    if (!idparc) {
+      throw new Error("Identifiant du parc manquant.");
+    }
+
+    const url =
+      endpointPlanningParc +
+      "/planning-parc-mois?idparc=" +
+      encodeURIComponent(idparc) +
+      "&annee=" +
+      encodeURIComponent(etatPlanning.annee) +
+      "&mois=" +
+      encodeURIComponent(etatPlanning.mois) +
+      "&token=" +
+      encodeURIComponent(tokenPartage) +
+      "&ctx=" +
+      encodeURIComponent(contextePartage);
+    const reponse = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+    const data = await reponse.json().catch(() => null);
+
+    if (
+      !reponse.ok ||
+      !data ||
+      (data.ok !== true && data.success !== true)
+    ) {
+      throw new Error(
+        nettoyerTexte(data?.message) ||
+        "Impossible de charger le planning du parc."
+      );
+    }
+
+    return Array.isArray(data.planning)
+      ? data.planning
+      : [];
+  }
+
+  function remplirGrillePlanningParcCommun(
+    grille,
+    etatPlanning,
+    planning,
+    options,
+    slotRacine
+  ) {
+    grille.innerHTML = "";
+
+    const planningParDate = new Map(
+      (Array.isArray(planning) ? planning : []).map(
+        (jour) => [String(jour.date || ""), jour]
+      )
+    );
+    const premierJour = new Date(
+      etatPlanning.annee,
+      etatPlanning.mois - 1,
+      1
+    );
+    const nombreJours = new Date(
+      etatPlanning.annee,
+      etatPlanning.mois,
+      0
+    ).getDate();
+    const decalageLundi =
+      (premierJour.getDay() + 6) % 7;
+
+    for (
+      let index = 0;
+      index < decalageLundi;
+      index += 1
+    ) {
+      const vide = obtenirTemplateJourPlanning(options)
+        .cloneNode(true);
+      vide.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois--empty"
+      );
+      vide.disabled = true;
+      vide.setAttribute("aria-hidden", "true");
+      grille.appendChild(vide);
+    }
+
+    for (
+      let numeroJour = 1;
+      numeroJour <= nombreJours;
+      numeroJour += 1
+    ) {
+      const dateIso = construireDateIso(
+        etatPlanning.annee,
+        etatPlanning.mois,
+        numeroJour
+      );
+      const planningJour = planningParDate.get(dateIso);
+      const card = creerCardJourPlanningParcCommun(
+        etatPlanning,
+        dateIso,
+        numeroJour,
+        planningJour,
+        options
+      );
+
+      if (!card.disabled) {
+        card.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          ouvrirJourPlanningParcCommun(
+            slotRacine,
+            etatPlanning,
+            dateIso,
+            options
+          ).catch(console.error);
+        });
+      }
+
+      grille.appendChild(card);
+    }
+  }
+
+  function obtenirTemplateJourPlanning(options) {
+    const template =
+      options.templateJourMois ||
+      etatInteraction.templateJourMois;
+
+    if (!template) {
+      throw new Error(
+        "Template jour du planning introuvable."
+      );
+    }
+
+    return template;
+  }
+
+  function obtenirTemplateHeurePlanning(options) {
+    const template =
+      options.templateHeureJour ||
+      etatInteraction.templateHeureJour;
+
+    if (!template) {
+      throw new Error(
+        "Template horaire du planning introuvable."
+      );
+    }
+
+    return template;
+  }
+
+  function creerCardJourPlanningParcCommun(
+    etatPlanning,
+    dateIso,
+    numeroJour,
+    planningJour,
+    options
+  ) {
+    const card = obtenirTemplateJourPlanning(options)
+      .cloneNode(true);
+    const numero = card.querySelector(
+      "[data-lcdp-card-jour-mois-number]"
+    );
+    const ouvert = Boolean(planningJour?.ouvert);
+    const estPasse = dateIso < dateAujourdhuiIso();
+    const estAujourdhui =
+      dateIso === dateAujourdhuiIso();
+
+    card.dataset.date = dateIso;
+    card.dataset.idparc = nettoyerTexte(
+      etatPlanning.parc?.idparc ||
+      etatPlanning.parc?.id
+    );
+    card.dataset.lcdpPlanningCommun = "true";
+    card.classList.add(
+      "lcdp-box-card-jour-in-calendrier-mois--planning-lecture"
+    );
+    card.setAttribute(
+      "aria-label",
+      construireLibelleJourPlanning(dateIso, ouvert)
+    );
+
+    if (numero) {
+      numero.textContent = String(numeroJour);
+    }
+
+    if (estAujourdhui) {
+      card.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois--today"
+      );
+    }
+
+    card.disabled = estPasse || !ouvert;
+
+    if (estPasse) {
+      card.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois--past"
+      );
+    }
+
+    if (!ouvert) {
+      card.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois--closed"
+      );
+    }
+
+    if (!card.disabled) {
+      card.title =
+        "Afficher le détail horaire de la journée";
+      card.removeAttribute("aria-disabled");
+    } else {
+      card.setAttribute("aria-disabled", "true");
+    }
+
+    clesPlagesPlanning.forEach((nomPlage) => {
+      const slot = card.querySelector(
+        '[data-lcdp-card-jour-mois-slot="' +
+        nomPlage +
+        '"]'
+      );
+
+      if (!slot) {
+        return;
+      }
+
+      slot.hidden = false;
+      slot.className =
+        "lcdp-box-card-jour-in-calendrier-mois__slot";
+      slot.removeAttribute("style");
+      slot.removeAttribute("title");
+      appliquerRenduPlagePlanningCommun(
+        slot,
+        nomPlage,
+        planningJour?.plages?.[nomPlage] || null
+      );
+    });
+
+    return card;
+  }
+
+  function appliquerRenduPlagePlanningCommun(
+    slot,
+    nomPlage,
+    plage
+  ) {
+    if (!plage || plage.ouverte !== true) {
+      slot.style.visibility = "hidden";
+      slot.title = construireTitrePlagePlanningCommun(
+        nomPlage,
+        null
+      );
+      return;
+    }
+
+    slot.style.removeProperty("visibility");
+    const couleurs = normaliserListeCouleursPlanningCommun(
+      plage
+    );
+
+    if (couleurs.length > 1) {
+      slot.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois__slot--multicolore"
+      );
+      slot.style.setProperty(
+        "--lcdp-plage-fond",
+        construireDegradeCouleursPlanningCommun(couleurs)
+      );
+    } else {
+      slot.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois__slot--" +
+        (couleurs[0] || "bleu-clair")
+      );
+    }
+
+    const largeurJauge = normaliserLargeurJaugePlanning(
+      plage.jauge
+    );
+
+    if (largeurJauge > 0) {
+      slot.classList.add(
+        "lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge"
+      );
+      slot.style.setProperty(
+        "--lcdp-jauge-largeur",
+        largeurJauge + "%"
+      );
+    }
+
+    slot.title = construireTitrePlagePlanningCommun(
+      nomPlage,
+      plage
+    );
+  }
+
+  async function ouvrirJourPlanningParcCommun(
+    slot,
+    etatPlanning,
+    dateIso,
+    options
+  ) {
+    const planningJour =
+      (etatPlanning.planning || []).find(
+        (jour) => String(jour.date || "") === dateIso
+      );
+
+    if (!planningJour?.ouvert) {
+      return;
+    }
+
+    try {
+      const jour = await chargerPlanningJourCommun(
+        etatPlanning,
+        dateIso,
+        options
+      );
+      await afficherJourPlanningParcCommun(
+        slot,
+        etatPlanning,
+        jour,
+        options
+      );
+    } catch (erreur) {
+      console.error(
+        "Erreur détail journalier du planning parc :",
+        erreur
+      );
+
+      if (typeof options.onErreur === "function") {
+        await options.onErreur(
+          erreur?.message ||
+          "Impossible de charger le détail de cette journée."
+        );
+      }
+    }
+  }
+
+  async function chargerPlanningJourCommun(
+    etatPlanning,
+    dateIso,
+    options
+  ) {
+    if (typeof options.chargerPlanningJour === "function") {
+      return options.chargerPlanningJour(
+        etatPlanning,
+        dateIso
+      );
+    }
+
+    if (!endpointPlanningParc) {
+      throw new Error(
+        "Le service planning parc n’est pas configuré."
+      );
+    }
+
+    const idparc = nettoyerTexte(
+      etatPlanning.parc?.idparc ||
+      etatPlanning.parc?.id
+    );
+
+    if (!idparc || !dateIso) {
+      throw new Error("Parc ou date manquant.");
+    }
+
+    const url =
+      endpointPlanningParc +
+      "/planning-parc-jour?idparc=" +
+      encodeURIComponent(idparc) +
+      "&date=" +
+      encodeURIComponent(dateIso) +
+      "&token=" +
+      encodeURIComponent(tokenPartage) +
+      "&ctx=" +
+      encodeURIComponent(contextePartage);
+    const reponse = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+    const data = await reponse.json().catch(() => null);
+
+    if (
+      !reponse.ok ||
+      !data ||
+      (data.ok !== true && data.success !== true)
+    ) {
+      throw new Error(
+        nettoyerTexte(data?.message) ||
+        "Impossible de charger le détail de cette journée."
+      );
+    }
+
+    return data.jour || {
+      date: dateIso,
+      ouvert: false,
+      segments: []
+    };
+  }
+
+  async function afficherJourPlanningParcCommun(
+    slot,
+    etatPlanning,
+    jour,
+    options
+  ) {
+    slot.innerHTML = "";
+
+    const fragment = await chargerFragmentObjetFiche(
+      options,
+      "/BOX/04-box-calendrier-jour.html"
+    );
+    slot.appendChild(fragment);
+
+    const calendrier = slot.querySelector(
+      "[data-lcdp-box-calendrier-jour]"
+    );
+    const titre = slot.querySelector(
+      "[data-lcdp-calendrier-jour-title]"
+    );
+    const meta = slot.querySelector(
+      "[data-lcdp-calendrier-jour-meta]"
+    );
+    const message = slot.querySelector(
+      "[data-lcdp-calendrier-jour-message]"
+    );
+    const grille = slot.querySelector(
+      "[data-lcdp-calendrier-jour-grid]"
+    );
+    const boutonFermer = slot.querySelector(
+      "[data-lcdp-calendrier-jour-close]"
+    );
+    const corps = slot.querySelector(
+      ".lcdp-box-calendrier-jour__body"
+    );
+
+    if (
+      !calendrier ||
+      !titre ||
+      !meta ||
+      !message ||
+      !grille ||
+      !boutonFermer ||
+      !corps
+    ) {
+      throw new Error("Structure calendrier jour incomplète.");
+    }
+
+    calendrier.classList.add(
+      "lcdp-box-calendrier-jour--shift-detail",
+      "lcdp-box-calendrier-jour--planning-lecture"
+    );
+
+    const nomParc = nettoyerTexte(
+      etatPlanning.parc?.nom ||
+      etatPlanning.parc?.nomparc ||
+      "Parc"
+    ) || "Parc";
+    const departement = nettoyerDepartement(
+      etatPlanning.parc?.dptmt ||
+      etatPlanning.parc?.departement
+    );
+
+    titre.textContent =
+      "Parc de " +
+      nomParc +
+      (departement ? " - " + departement : "");
+    meta.textContent = "";
+    meta.classList.add(
+      "lcdp-box-calendrier-jour__meta--actions"
+    );
+
+    const actions = creerActionsPlanningParcCommun(
+      etatPlanning.parc,
+      options
+    );
+    actions.classList.add(
+      "lcdp-fiche-parc__commande-detail"
+    );
+    meta.appendChild(actions);
+    boutonFermer.hidden = true;
+
+    const navigation = document.createElement("div");
+    navigation.className =
+      "lcdp-box-calendrier-mois__navigation " +
+      "lcdp-box-calendrier-jour__navigation-planning";
+
+    const boutonRetour = document.createElement("button");
+    boutonRetour.type = "button";
+    boutonRetour.className =
+      "lcdp-box-calendrier-mois__nav-button";
+    boutonRetour.setAttribute(
+      "aria-label",
+      "Retour au planning mensuel"
+    );
+    boutonRetour.textContent = "←";
+    boutonRetour.addEventListener("click", () => {
+      afficherMoisPlanningParcCommun(
+        slot,
+        etatPlanning,
+        options
+      ).catch(console.error);
+    });
+
+    const dateCourante = document.createElement("h3");
+    dateCourante.className =
+      "lcdp-box-calendrier-mois__month";
+    dateCourante.textContent =
+      formaterDatePlanningLongue(jour.date);
+
+    const espaceNavigation = document.createElement("span");
+    espaceNavigation.className =
+      "lcdp-box-calendrier-mois__nav-button " +
+      "lcdp-box-calendrier-jour__navigation-placeholder";
+    espaceNavigation.setAttribute("aria-hidden", "true");
+
+    navigation.appendChild(boutonRetour);
+    navigation.appendChild(dateCourante);
+    navigation.appendChild(espaceNavigation);
+    corps.insertBefore(navigation, message);
+
+    const segments = Array.isArray(jour?.segments)
+      ? jour.segments
+      : [];
+
+    segments.forEach((segment) => {
+      grille.appendChild(
+        creerCardSegmentPlanningCommun(segment, options)
+      );
+    });
+
+    message.hidden = grille.children.length > 0;
+    message.textContent = grille.children.length
+      ? ""
+      : "Aucun horaire n’est disponible pour cette date.";
+  }
+
+  function creerCardSegmentPlanningCommun(segment, options) {
+    const card = obtenirTemplateHeurePlanning(options)
+      .cloneNode(true);
+    const label = card.querySelector(
+      "[data-lcdp-card-heure-jour-label]"
+    );
+    const couleurs = normaliserListeCouleursPlanningCommun(
+      segment
+    );
+    const libelle = construireLibelleSegmentPlanningCommun(
+      segment
+    );
+
+    card.removeAttribute("data-action");
+    card.disabled = true;
+    card.setAttribute("aria-disabled", "true");
+    card.classList.add(
+      "lcdp-box-card-heure-in-calendrier-jour--planning-lecture"
+    );
+
+    if (couleurs.length > 1) {
+      card.classList.add(
+        "lcdp-box-card-heure-in-calendrier-jour--multicolore"
+      );
+      card.style.setProperty(
+        "--lcdp-heure-fond",
+        construireDegradeCouleursPlanningCommun(couleurs)
+      );
+    } else {
+      card.classList.add(
+        "lcdp-box-card-heure-in-calendrier-jour--" +
+        (couleurs[0] || "bleu-clair")
+      );
+    }
+
+    card.title = libelle;
+    card.setAttribute("aria-label", libelle);
+
+    if (label) {
+      label.textContent = libelle;
+    }
+
+    return card;
+  }
+
+  function normaliserCouleurPlanningCommun(couleur) {
+    const valeur = String(couleur || "gris-clair")
+      .trim()
+      .toLowerCase()
+      .replaceAll("_", "-");
+    const autorisees = [
+      "gris-moyen",
+      "bleu-clair",
+      "bleu-fonce",
+      "violet",
+      "orange-clair",
+      "orange-fonce"
+    ];
+
+    return autorisees.includes(valeur)
+      ? valeur
+      : "bleu-clair";
+  }
+
+  function normaliserListeCouleursPlanningCommun(plage) {
+    const valeurs = Array.isArray(plage?.couleurs)
+      ? plage.couleurs
+      : [plage?.couleur];
+    const couleurs = valeurs
+      .map(normaliserCouleurPlanningCommun)
+      .filter(Boolean);
+
+    return couleurs.length
+      ? [...new Set(couleurs)]
+      : ["bleu-clair"];
+  }
+
+  function construireDegradeCouleursPlanningCommun(couleurs) {
+    const nombre = couleurs.length;
+    const segments = [];
+
+    couleurs.forEach((couleur, index) => {
+      const debut = (index * 100) / nombre;
+      const fin = ((index + 1) * 100) / nombre;
+      const valeurCss =
+        couleursCssPlanning[couleur] ||
+        couleursCssPlanning["bleu-clair"];
+
+      segments.push(
+        valeurCss + " " + debut + "%",
+        valeurCss + " " + fin + "%"
+      );
+    });
+
+    return "linear-gradient(to right, " +
+      segments.join(", ") +
+      ")";
+  }
+
+  function normaliserLargeurJaugePlanning(valeur) {
+    const largeur = Number(valeur);
+    return [0, 60, 80, 100].includes(largeur)
+      ? largeur
+      : 0;
+  }
+
+  function construireTitrePlagePlanningCommun(
+    nomPlage,
+    plage
+  ) {
+    const numero = String(nomPlage || "")
+      .replace("plage", "");
+
+    if (!plage?.ouverte) {
+      return "Plage " + numero + " fermée";
+    }
+
+    const categories = Array.isArray(plage.categories)
+      ? plage.categories
+      : [];
+    const libelles = categories.map((categorie) => {
+      if (categorie === "DUO") return "Duo";
+      if (categorie === "COACH") return "Coach";
+      if (categorie === "FAMILLE") return "Famille";
+      return String(categorie || "");
+    }).filter(Boolean);
+    const morceaux = [
+      "Plage " + numero,
+      plage.debut && plage.fin
+        ? plage.debut + "–" + plage.fin
+        : "horaire ouvert",
+      libelles.length
+        ? libelles.join(" + ")
+        : "ouverte"
+    ];
+
+    if (plage.privatisation) {
+      morceaux.push("privatisation");
+    }
+
+    const ratio = Number(plage.ratio);
+
+    if (Number.isFinite(ratio) && ratio >= 0) {
+      morceaux.push(
+        "occupation " + Math.round(ratio * 100) + " %"
+      );
+    }
+
+    return morceaux.join(" · ");
+  }
+
+  function construireLibelleSegmentPlanningCommun(segment) {
+    const categories = Array.isArray(segment?.categories)
+      ? segment.categories
+      : [];
+    const libelles = categories.map((categorie) => {
+      if (categorie === "DUO") return "Duo";
+      if (categorie === "COACH") return "Coach";
+      if (categorie === "FAMILLE") return "Famille";
+      return String(categorie || "");
+    }).filter(Boolean);
+    const morceaux = [
+      formaterHeureAffichee(segment?.debut) +
+        "–" +
+        formaterHeureAffichee(segment?.fin),
+      libelles.length
+        ? libelles.join(" + ")
+        : "Ouvert"
+    ];
+
+    if (segment?.privatisation) {
+      morceaux.push("Privatisation");
+    }
+
+    const capacite = Number(segment?.capacite);
+
+    if (Number.isFinite(capacite) && capacite > 0) {
+      morceaux.push("capacité " + String(capacite));
+    }
+
+    const ratio = Number(segment?.ratio);
+
+    if (Number.isFinite(ratio) && ratio >= 0) {
+      morceaux.push(
+        "occupation " + Math.round(ratio * 100) + " %"
+      );
+    }
+
+    return morceaux.join(" · ");
+  }
+
+  function construireLibelleJourPlanning(dateIso, ouvert) {
+    const date = new Date(dateIso + "T00:00:00");
+    const libelle = Number.isNaN(date.getTime())
+      ? dateIso
+      : date.toLocaleDateString("fr-FR", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        });
+
+    return libelle +
+      (ouvert ? " disponible" : " indisponible");
+  }
+
+  function formaterDatePlanningLongue(dateIso) {
+    const date = new Date(dateIso + "T12:00:00");
+
+    return Number.isNaN(date.getTime())
+      ? dateIso
+      : date.toLocaleDateString("fr-FR", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        });
+  }
+
+  function moisPlanningCommunIdentique(etat, borne) {
+    if (!etat || !borne) {
+      return false;
+    }
+
+    return (
+      Number(etat.annee) === Number(borne.annee) &&
+      Number(etat.mois) === Number(borne.mois)
+    );
+  }
+
   async function initialiserObjetsInteraction() {
     const [fragmentShift, fragmentJour, fragmentHeure, fragmentCardParc] = await Promise.all([
       chargerFragment("/OBJET/BOX/04-box-shift-detail-parc.html"),
@@ -1586,11 +2673,44 @@
     nouvelleVue.className =
       "lcdp-fiche-parc__shift-view lcdp-fiche-parc__shift-view--enter";
 
-    await afficherCalendrierMoisParcDansShift(
-      nouvelleVue,
-      parc,
-      vue
-    );
+    if (vue === "planning") {
+      await rendrePlanningParcDansConteneur(
+        nouvelleVue,
+        parc,
+        {
+          templateJourMois: etatInteraction.templateJourMois,
+          templateHeureJour: etatInteraction.templateHeureJour,
+          onReserver: (parcCible) =>
+            afficherVueShiftDetailParc(
+              contenu,
+              parcCible,
+              "reservation"
+            ),
+          onPartager: partagerFicheParc,
+          onRetourPresentation: () => {
+            const slot = document.getElementById(
+              "lcdp-lightbox-slot"
+            );
+            const shift = slot?.querySelector(
+              "[data-lcdp-box-shift-detail-parc]"
+            );
+
+            if (slot && shift) {
+              fermerShiftDetailParcEnDouceur(
+                slot,
+                shift
+              ).catch(console.error);
+            }
+          }
+        }
+      );
+    } else {
+      await afficherCalendrierMoisParcDansShift(
+        nouvelleVue,
+        parc,
+        vue
+      );
+    }
 
     const hauteurCourante = ancienneVue
       ? ancienneVue.getBoundingClientRect().height
