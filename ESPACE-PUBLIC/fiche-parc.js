@@ -1865,15 +1865,11 @@
   }
 
   function creerActionsPlanningParcCommun(parc, options) {
-    const structure = creerConteneurActionsFicheParc();
-
-    const actionPartager = creerActionPartagerFicheParc(options);
-    actionPartager.addEventListener("click", () => {
-      executerActionFiche(
-        options.onPartager || partagerFicheParc,
-        parc
-      );
-    });
+    const barre = document.createElement("div");
+    barre.className =
+      "lcdp-box-fiche-parc__actions-barre " +
+      "lcdp-box-card-parc--reserver";
+    barre.setAttribute("aria-label", "Actions du parc");
 
     const boutonPresentation = creerBoutonActionFicheParc(
       {
@@ -1891,27 +1887,50 @@
       );
     });
 
-    const boutonReserver = creerBoutonActionFicheParc(
+    const actionPartager = creerActionPartagerFicheParc(options);
+    actionPartager.addEventListener("click", () => {
+      executerActionFiche(
+        options.onPartager || partagerFicheParc,
+        parc
+      );
+    });
+
+    const boutonPlanning = creerBoutonActionFicheParc(
       {
-        libelle: "RÉSERVER",
-        ariaLabel: "Réserver dans ce parc",
+        libelle: "Planning",
+        ariaLabel: "Afficher le planning du parc",
+        icone: "planning",
+        variante: "orange-contour"
+      },
+      options
+    );
+    boutonPlanning.setAttribute("aria-current", "page");
+    boutonPlanning.addEventListener("click", (event) => {
+      event.preventDefault();
+    });
+
+    const boutonPlanifier = creerBoutonActionFicheParc(
+      {
+        libelle: "Planifier",
+        ariaLabel: "Planifier dans ce parc",
         icone: "reserver",
         variante: "orange-plein"
       },
       options
     );
-    boutonReserver.addEventListener("click", () => {
+    boutonPlanifier.addEventListener("click", () => {
       executerActionFiche(
         options.onReserver || ouvrirReservationMembre,
         parc
       );
     });
 
-    structure.actions.appendChild(actionPartager);
-    structure.actions.appendChild(boutonPresentation);
-    structure.actions.appendChild(boutonReserver);
+    barre.appendChild(boutonPresentation);
+    barre.appendChild(actionPartager);
+    barre.appendChild(boutonPlanning);
+    barre.appendChild(boutonPlanifier);
 
-    return structure.conteneur;
+    return barre;
   }
 
   async function chargerLegendePlanningParcCommun(options) {
