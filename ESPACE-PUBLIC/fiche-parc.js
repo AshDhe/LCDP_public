@@ -1155,6 +1155,9 @@
 
     async function ouvrirCardParc(parcCarte) {
       const card = (await obtenirTemplateCardParcFiche(options)).cloneNode(true);
+      card.classList.add("lcdp-box-card-parc--carte-publique");
+      card.removeAttribute("data-action");
+      card.removeAttribute("tabindex");
       const image = card.querySelector("[data-lcdp-card-parc-image]");
       const media = card.querySelector(".lcdp-box-card-parc__media");
       const titre = card.querySelector("[data-lcdp-card-parc-title]");
