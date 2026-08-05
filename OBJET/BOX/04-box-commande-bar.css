@@ -2,77 +2,71 @@
   width: 100%;
   min-width: 0;
   max-width: none;
-  flex: 1 1 100%;
+  flex: 0 0 auto;
   align-self: stretch;
+  box-sizing: border-box;
 }
 
 .lcdp-box-commande-bar__actions {
   width: 100%;
   min-width: 0;
-  max-width: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
+  max-width: 620px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   gap: var(--lcdp-space-2);
+  box-sizing: border-box;
 }
 
 .lcdp-box-commande-bar__actions .lcdp-button {
-  width: auto;
-  min-width: 0;
-  max-width: none;
-  min-height: 34px;
-  margin: 0;
-  padding: 6px 12px;
-  border-radius: 6px;
-  flex: 0 0 auto;
-  font-size: 0.82rem;
-  line-height: 1.1;
-  white-space: nowrap;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: 44px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: var(--lcdp-font-main) !important;
+  font-size: 0.86rem !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  white-space: normal !important;
+  overflow-wrap: normal;
+  text-wrap: balance;
+  box-sizing: border-box;
 }
 
-.lcdp-box-commande-bar__actions > :first-child {
-  margin-right: auto;
-}
-
+.lcdp-box-commande-bar__actions > :first-child,
 .lcdp-box-commande-bar__actions > :last-child {
-  margin-left: auto;
+  margin: 0 !important;
 }
-
-@media (min-width: 768px) {
-  .lcdp-box-commande-bar__actions .lcdp-button {
-    min-width: 0;
-    min-height: 34px;
-    padding: 6px 13px;
-    font-size: 0.82rem;
-  }
-}
-
-@media (max-width: 340px) {
-  .lcdp-box-commande-bar__actions {
-    flex-wrap: wrap;
-  }
-
-  .lcdp-box-commande-bar__actions > :first-child,
-  .lcdp-box-commande-bar__actions > :last-child {
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-
 
 /* Variante générique : Command Bar avec encadrement visuel. */
 .lcdp-box-commande-bar--encadree {
-  box-sizing: border-box;
-  padding: var(--lcdp-space-2);
+  padding: 10px;
   border: 1px solid var(--lcdp-color-border);
   border-radius: var(--lcdp-radius-large);
   background: var(--lcdp-color-surface);
 }
 
-@media (min-width: 768px) {
-  .lcdp-box-commande-bar--encadree {
-    padding: var(--lcdp-space-3);
-  }
+/* La barre persistante réutilise strictement le même objet visuel. */
+.lcdp-actions-footer-reserver[hidden] {
+  display: none !important;
+}
+
+.lcdp-actions-footer-reserver {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lcdp-actions-footer-reserver .lcdp-box-commande-bar--persistante {
+  width: min(100%, 660px);
+  margin-inline: auto;
 }
