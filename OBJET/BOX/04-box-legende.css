@@ -1,0 +1,74 @@
+.lcdp-box-legende-host {
+  margin-bottom: 0;
+}
+
+.lcdp-box-legende {
+  width: 100%;
+  margin: 12px 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--lcdp-color-text);
+  font-family: var(--lcdp-font-main);
+  font-size: 0.85rem;
+  line-height: 1.25;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+.lcdp-box-legende__ligne {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  row-gap: 6px;
+}
+
+.lcdp-box-legende__item {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+}
+
+.lcdp-box-legende__libelle {
+  font-weight: 400;
+}
+
+.lcdp-box-legende__carre {
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  min-height: 12px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.lcdp-box-legende__carre--bleu-fonce {
+  background: #2f6fb3;
+  border-color: #255c96;
+}
+
+.lcdp-box-legende__carre--violet {
+  background: #7b5aa6;
+  border-color: #684993;
+}
+
+.lcdp-box-legende__carre--orange-fonce {
+  background: #f2a23a;
+  border-color: #d98b24;
+}
+
+.lcdp-box-legende__carre--orange-clair {
+  background: #ffd8a8;
+  border-color: #f0b96f;
+}
+
+.lcdp-box-legende__carre--bleu-clair {
+  background: #cfe3f7;
+  border-color: #a9cbea;
+}
