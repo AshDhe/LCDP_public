@@ -332,3 +332,88 @@
   .lcdp-box-calendrier-mois__meta[hidden] {
   display: none;
 }
+
+/* Vue Planning Parc : légende des couleurs, mobile first. */
+.lcdp-box-calendrier-mois__commande--avec-legende {
+  margin-bottom: var(--lcdp-space-2);
+}
+
+.lcdp-box-calendrier-mois__legende-planning {
+  width: 100%;
+  margin: 0 0 var(--lcdp-space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--lcdp-space-2);
+  color: var(--lcdp-color-text);
+  font-family: var(--lcdp-font-main);
+  font-size: 0.78rem;
+  line-height: 1.25;
+  box-sizing: border-box;
+}
+
+.lcdp-box-calendrier-mois__legende-ligne {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.lcdp-box-calendrier-mois__legende-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.lcdp-box-calendrier-mois__legende-carre {
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  min-height: 12px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.lcdp-box-calendrier-mois__legende-carre--bleu-fonce {
+  background: #2f6fb3;
+  border-color: #255c96;
+}
+
+.lcdp-box-calendrier-mois__legende-carre--violet {
+  background: #7b5aa6;
+  border-color: #684993;
+}
+
+.lcdp-box-calendrier-mois__legende-carre--orange-fonce {
+  background: #f2a23a;
+  border-color: #d98b24;
+}
+
+.lcdp-box-calendrier-mois__legende-carre--orange-clair {
+  background: #ffd8a8;
+  border-color: #f0b96f;
+}
+
+.lcdp-box-calendrier-mois__legende-carre--bleu-clair {
+  background: #cfe3f7;
+  border-color: #a9cbea;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-calendrier-mois__legende-planning {
+    font-size: 0.9rem;
+  }
+
+  .lcdp-box-calendrier-mois__legende-ligne {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: var(--lcdp-space-3);
+    row-gap: var(--lcdp-space-1);
+  }
+}
+
