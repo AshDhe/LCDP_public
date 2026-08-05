@@ -9,7 +9,7 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
-  const ficheParcBuild = "20260716-0839";
+  const ficheParcBuild = "20260805-0952";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
   const endpointNouvelleDateMembre = String(
@@ -56,9 +56,26 @@
     calendrier: null
   };
 
+  window.LCDP_FicheParc = {
+    version: ficheParcBuild,
+    chargerFicheParc,
+    rendreDansConteneur: rendreFicheParcDansConteneur
+  };
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initialiserPage);
+    document.addEventListener(
+      "DOMContentLoaded",
+      initialiserPagePubliqueSiPresente
+    );
   } else {
+    initialiserPagePubliqueSiPresente();
+  }
+
+  function initialiserPagePubliqueSiPresente() {
+    if (!document.getElementById("lcdp-fiche-parc-slot")) {
+      return;
+    }
+
     initialiserPage();
   }
 
@@ -220,22 +237,18 @@
 
     slot.innerHTML = "";
 
-    const [fragmentShift, fragmentFiche] = await Promise.all([
-      chargerFragment("/OBJET/BOX/04-box-shift-detail-parc.html"),
-      chargerFragment("/OBJET/BOX/04-box-fiche-parc.html")
-    ]);
-
+    const fragmentShift = await chargerFragmentObjetFiche(
+      {},
+      "/BOX/04-box-shift-detail-parc.html"
+    );
     const shift = fragmentShift.querySelector(
       "[data-lcdp-box-shift-detail-parc]"
     );
     const contenuShift = fragmentShift.querySelector(
       "[data-lcdp-shift-detail-parc-content]"
     );
-    const fiche = fragmentFiche.querySelector(
-      "[data-lcdp-box-fiche-parc]"
-    );
 
-    if (!shift || !contenuShift || !fiche) {
+    if (!shift || !contenuShift) {
       throw new Error("Structure de la fiche parc incomplète.");
     }
 
@@ -246,24 +259,68 @@
     const boutonFermerShift = shift.querySelector(
       "[data-lcdp-shift-detail-parc-close]"
     );
-    const boutonFermerFiche = fiche.querySelector(
-      "[data-lcdp-fiche-parc-close]"
-    );
 
-    if (boutonFermerShift) boutonFermerShift.remove();
-    if (boutonFermerFiche) boutonFermerFiche.remove();
+    if (boutonFermerShift) {
+      boutonFermerShift.remove();
+    }
 
-    contenuShift.appendChild(fiche);
     slot.appendChild(shift);
 
+    await rendreFicheParcDansConteneur(
+      contenuShift,
+      parc,
+      {
+        templateCardParc: etatInteraction.templateCardParc,
+        masquerBoutonFermer: true,
+        onReserver: ouvrirReservationMembre,
+        onPlanning: ouvrirPlanningPublic,
+        onPartager: partagerFicheParc,
+        onOuvrirFicheParc: ouvrirFicheParcDepuisCarte,
+        onOuvrirPlanningParc: ouvrirPlanningPublic,
+        onReserverParc: ouvrirReservationMembre
+      }
+    );
+
     const nom = parc.nom || "Parc";
+    document.title = "Parc de " + nom + " - La Clé du Parc";
+    appliquerRoutesSite(slot);
+  }
+
+  async function rendreFicheParcDansConteneur(
+    slot,
+    parc,
+    options = {}
+  ) {
+    if (!slot) {
+      throw new Error("Slot fiche parc introuvable.");
+    }
+
+    slot.innerHTML = "";
+
+    const fragmentFiche = await chargerFragmentObjetFiche(
+      options,
+      "/BOX/04-box-fiche-parc.html"
+    );
+    const fiche = fragmentFiche.querySelector(
+      "[data-lcdp-box-fiche-parc]"
+    );
+
+    if (!fiche) {
+      throw new Error("Structure de la fiche parc incomplète.");
+    }
+
+    fiche.classList.add("lcdp-box-fiche-parc--shift-detail");
+
+    const nom = nettoyerTexte(
+      parc?.nom || parc?.nomparc || "Parc"
+    ) || "Parc";
     const titre = fiche.querySelector(
       "[data-lcdp-fiche-parc-title]"
     );
     const actionsSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-actions]"
     );
-    const presentationElement = fiche.querySelector(
+    const presentation = fiche.querySelector(
       "[data-lcdp-fiche-parc-presentation]"
     );
     const galerieSlot = fiche.querySelector(
@@ -272,112 +329,75 @@
     const carteSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-map-slot]"
     );
-    const contactElement = fiche.querySelector(
+    const contact = fiche.querySelector(
       "[data-lcdp-fiche-parc-contact]"
     );
-    const accesElement = fiche.querySelector(
+    const acces = fiche.querySelector(
       "[data-lcdp-fiche-parc-acces]"
+    );
+    const boutonFermer = fiche.querySelector(
+      "[data-lcdp-fiche-parc-close]"
     );
 
     if (titre) {
       titre.textContent = "Parc de " + nom;
     }
 
-    document.title =
-      "Parc de " + nom + " - La Clé du Parc";
-
     if (actionsSlot) {
       actionsSlot.innerHTML = "";
       actionsSlot.appendChild(
-        creerActionsFicheParc(parc)
+        creerActionsFicheParc(parc, options)
       );
     }
 
-    await remplacerSectionParBoxText(
-      presentationElement?.closest(
-        ".lcdp-box-fiche-parc__section"
-      ),
-      "Présentation",
-      parc.prez || "Présentation non renseignée."
+    remplirBlocTexteFiche(
+      presentation,
+      nettoyerTexte(
+        parc?.prez ||
+        parc?.presentation ||
+        parc?.description ||
+        ""
+      ) || "Présentation non renseignée."
     );
 
-    await ajouterGalerieParc(galerieSlot, parc);
-    await ajouterCarteParc(carteSlot, parc);
+    await ajouterGalerieParc(galerieSlot, parc, options);
+    await ajouterCarteParc(carteSlot, parc, options);
 
-    await remplacerSectionParBoxText(
-      contactElement?.closest(
-        ".lcdp-box-fiche-parc__section"
-      ),
-      "Votre contact La Clé du Parc",
-      construireTexteContactParc(parc),
-      false
+    remplirBlocTexteFiche(
+      acces,
+      construireTexteAccesParc(parc)
+    );
+    remplirBlocTexteFiche(
+      contact,
+      construireTexteContactParc(parc)
     );
 
-    await remplacerSectionParBoxText(
-      accesElement?.closest(
-        ".lcdp-box-fiche-parc__section"
-      ),
-      "Horaire d’accès La Clé du Parc",
-      construireTexteAccesParc(parc),
-      false
-    );
+    if (boutonFermer) {
+      if (options.masquerBoutonFermer === true) {
+        boutonFermer.remove();
+      } else if (typeof options.onFermer === "function") {
+        boutonFermer.addEventListener("click", () => {
+          options.onFermer();
+        });
+      }
+    }
 
-    appliquerRoutesSite(slot);
+    slot.appendChild(fiche);
+
+    const appliquerRoutes =
+      typeof options.appliquerRoutes === "function"
+        ? options.appliquerRoutes
+        : appliquerRoutesSite;
+
+    appliquerRoutes(fiche);
+    return fiche;
   }
 
-  async function remplacerSectionParBoxText(
-    section,
-    titre,
-    contenu,
-    afficherTitreObjet = true
-  ) {
-    if (!section) {
-      throw new Error(
-        "Section " + titre + " introuvable."
-      );
+  function remplirBlocTexteFiche(conteneur, texte) {
+    if (!conteneur) {
+      return;
     }
 
-    section.innerHTML = "";
-
-    const titreSection = document.createElement("h3");
-    titreSection.textContent = titre;
-    section.appendChild(titreSection);
-
-    const fragment = await chargerFragment(
-      "/OBJET/BOX/01-box-text.html"
-    );
-
-    const box = fragment.querySelector(
-      "[data-lcdp-boxtext]"
-    );
-    const titreObjet = fragment.querySelector(
-      "[data-lcdp-boxtext-title]"
-    );
-    const contenuObjet = fragment.querySelector(
-      "[data-lcdp-boxtext-content]"
-    );
-
-    if (!box || !titreObjet || !contenuObjet) {
-      throw new Error(
-        "Structure de la Box Text incomplète."
-      );
-    }
-
-    if (afficherTitreObjet) {
-      titreObjet.textContent = titre;
-    } else {
-      titreObjet.remove();
-    }
-
-    box.classList.add(
-      "lcdp-box-fiche-parc__box-text"
-    );
-
-    remplirParagraphes(contenuObjet, contenu);
-    section.appendChild(fragment);
-  }
-
-  function remplirParagraphes(conteneur, texte) {
     conteneur.innerHTML = "";
 
     const lignes = String(texte || "")
@@ -403,23 +423,100 @@
     });
   }
 
-  async function ajouterGalerieParc(slot, parc) {
-    if (!slot) {
-      throw new Error(
-        "Slot galerie fiche parc introuvable."
+  async function chargerFragmentObjetFiche(options, chemin) {
+    if (typeof options?.chargerFragmentObjet === "function") {
+      return options.chargerFragmentObjet(chemin);
+    }
+
+    return chargerFragment("/OBJET" + chemin);
+  }
+
+  function construireUrlObjetFiche(options, chemin) {
+    if (typeof options?.construireUrlObjet === "function") {
+      return options.construireUrlObjet(chemin);
+    }
+
+    return construireUrlSite("/OBJET" + chemin);
+  }
+
+  async function obtenirTemplateCardParcFiche(options) {
+    if (options?.templateCardParc) {
+      return options.templateCardParc;
+    }
+
+    const fragment = await chargerFragmentObjetFiche(
+      options,
+      "/BOX/04-box-card-parc.html"
+    );
+    const template = fragment.querySelector(
+      "[data-lcdp-box-card-parc]"
+    );
+
+    if (!template) {
+      throw new Error("Template Card Parc introuvable.");
+    }
+
+    return template;
+  }
+
+  function construireUrlImageGalerieFiche(
+    options,
+    parc,
+    fichier
+  ) {
+    if (
+      typeof options?.construireUrlImageParcFichier ===
+      "function"
+    ) {
+      return options.construireUrlImageParcFichier(
+        parc,
+        fichier
       );
     }
+
+    return construireCheminImageParc(parc, fichier);
+  }
+
+  function construireUrlImageCardParcFiche(options, parc) {
+    if (
+      typeof options?.construireUrlImageCardParc ===
+      "function"
+    ) {
+      return options.construireUrlImageCardParc(parc);
+    }
+
+    return construireUrlImageCardParc(parc);
+  }
+
+  function executerActionFiche(action, parc) {
+    if (typeof action !== "function") {
+      return;
+    }
+
+    Promise.resolve(action(parc)).catch(console.error);
+  }
+
+  async function ajouterGalerieParc(
+    slot,
+    parc,
+    options = {}
+  ) {
+    if (!slot) {
+      throw new Error("Slot galerie fiche parc introuvable.");
+    }
+
+    slot.innerHTML = "";
 
     if (
       typeof window.LCDP_ajouterGalerie !==
       "function"
     ) {
-      throw new Error(
-        "Objet galerie V3 introuvable."
-      );
+      throw new Error("Objet galerie V3 introuvable.");
     }
 
-    const nom = parc.nom || "Parc";
+    const nom = nettoyerTexte(
+      parc?.nom || parc?.nomparc || "Parc"
+    ) || "Parc";
     const cartes = [];
 
     for (let index = 1; index <= 6; index += 1) {
@@ -427,43 +524,39 @@
 
       cartes.push({
         titre: "",
-        imageSrc: construireCheminImageParc(
+        imageSrc: construireUrlImageGalerieFiche(
+          options,
           parc,
           numero + ".jpg"
         ),
         imageAlt:
-          "Photo " +
-          numero +
-          " du parc de " +
-          nom,
+          "Photo " + numero + " du parc de " + nom,
         imageLegende: "",
         texte: ""
       });
     }
 
-    await window.LCDP_ajouterGalerie(
-      slot,
-      {
-        titre: "",
-        ariaLabel: "Galerie photo du parc",
-        cartes
-      }
-    );
+    await window.LCDP_ajouterGalerie(slot, {
+      titre: "",
+      ariaLabel: "Galerie photo du parc",
+      cartes
+    });
   }
-  async function ajouterCarteParc(slot, parc) {
-    if (!slot) {
-      throw new Error("Slot carte fiche parc introuvable.");
-    }
+
+  async function ajouterCarteParc(slot, parc, options = {}) {
+    if (!slot) return;
 
     slot.innerHTML = "";
 
     const [fragment, reponseGeojson] = await Promise.all([
-      chargerFragment("/OBJET/BOX/04-carte-dynamique.html"),
-      fetch(construireUrlSite("/OBJET/BOX/04-carte-dynamique.geojson"), {
+      chargerFragmentObjetFiche(options, "/BOX/04-carte-dynamique.html"),
+      fetch(construireUrlObjetFiche(options, "/BOX/04-carte-dynamique.geojson"), {
         method: "GET",
-        credentials: "same-origin",
+        credentials: "omit",
         cache: "no-cache",
-        headers: { "Accept": "application/geo+json, application/json" }
+        headers: {
+          "Accept": "application/geo+json, application/json"
+        }
       })
     ]);
 
@@ -524,7 +617,7 @@
       const trace = construireTraceGeometrie(feature?.geometry);
 
       if (code && trace) {
-        traces.push({ feature, code, trace });
+        traces.push({ code, trace });
       }
     });
 
@@ -536,7 +629,6 @@
     coucheSelection.innerHTML = "";
     coucheLocalites.innerHTML = "";
     coucheParcs.innerHTML = "";
-    carte.querySelectorAll(".lcdp-carte-dynamique__marker-actif-halo").forEach((element) => element.remove());
 
     traces.forEach(({ code, trace }) => {
       const path = creerElementSvg("path");
@@ -582,8 +674,9 @@
       const uniteEcran = viewBoxCourante[2] / largeurEcran;
       const rayonParc = Math.max(0.04, uniteEcran * 6);
       const rayonLocalite = Math.max(0.035, uniteEcran * 4.2);
-      const tailleLibelle = Math.max(0.12, uniteEcran * 11);
-      const decalageLibelle = Math.max(0.08, uniteEcran * 7);
+      const carteMobile = largeurMesuree <= 520;
+      const tailleLibelle = Math.max(0.12, uniteEcran * (carteMobile ? 12.5 : 11));
+      const decalageLibelle = Math.max(0.08, uniteEcran * (carteMobile ? 10 : 7));
 
       coucheParcs
         .querySelectorAll(".lcdp-carte-dynamique__marker")
@@ -597,8 +690,19 @@
         .querySelectorAll(".lcdp-carte-dynamique__localite-label")
         .forEach((libelle) => {
           const x = Number(libelle.dataset.pointX);
+          const y = Number(libelle.dataset.pointY);
+
           libelle.setAttribute("font-size", String(tailleLibelle));
-          libelle.setAttribute("x", String(x + decalageLibelle));
+
+          if (carteMobile) {
+            libelle.setAttribute("x", String(x));
+            libelle.setAttribute("y", String(y - decalageLibelle));
+            libelle.setAttribute("text-anchor", "middle");
+          } else {
+            libelle.setAttribute("x", String(x + decalageLibelle));
+            libelle.setAttribute("y", String(y));
+            libelle.setAttribute("text-anchor", "start");
+          }
         });
     }
 
@@ -630,8 +734,73 @@
     boutonZoomMoins.addEventListener("click", () => zoomer(1.22));
 
     let glissement = null;
+    let pincementTactile = null;
+
+    function distanceEntrePointeurs(a, b) {
+      return Math.hypot(b.x - a.x, b.y - a.y);
+    }
+
+    function centreEntrePointeurs(a, b) {
+      return {
+        x: (a.x + b.x) / 2,
+        y: (a.y + b.y) / 2
+      };
+    }
+
+    function bornerDimensionsViewBox(largeur, hauteur) {
+      const largeurMin = Math.max(0.25, viewBoxInitiale[2] / 12);
+      const hauteurMin = Math.max(0.25, viewBoxInitiale[3] / 12);
+
+      return {
+        largeur: Math.min(viewBoxLimite[2], Math.max(largeurMin, largeur)),
+        hauteur: Math.min(viewBoxLimite[3], Math.max(hauteurMin, hauteur))
+      };
+    }
+
+    function convertirTouchEnPoint(touch) {
+      return {
+        x: touch.clientX,
+        y: touch.clientY
+      };
+    }
+
+    function demarrerPincementTactile(touches) {
+      if (!touches || touches.length < 2) {
+        pincementTactile = null;
+        return;
+      }
+
+      const premier = convertirTouchEnPoint(touches[0]);
+      const second = convertirTouchEnPoint(touches[1]);
+      const distance = distanceEntrePointeurs(premier, second);
+
+      if (!(distance > 0)) {
+        pincementTactile = null;
+        return;
+      }
+
+      const centre = centreEntrePointeurs(premier, second);
+      const rect = svg.getBoundingClientRect();
+      const largeurEcran = Math.max(1, rect.width);
+      const hauteurEcran = Math.max(1, rect.height);
+
+      pincementTactile = {
+        distance,
+        viewBox: [...viewBoxCourante],
+        ancreX:
+          viewBoxCourante[0] +
+          ((centre.x - rect.left) / largeurEcran) * viewBoxCourante[2],
+        ancreY:
+          viewBoxCourante[1] +
+          ((centre.y - rect.top) / hauteurEcran) * viewBoxCourante[3]
+      };
+    }
 
     svg.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "touch") {
+        return;
+      }
+
       const cible = event.target instanceof Element ? event.target : null;
 
       if (cible?.closest(".lcdp-carte-dynamique__marker")) {
@@ -648,7 +817,9 @@
     });
 
     svg.addEventListener("pointermove", (event) => {
-      if (!glissement) return;
+      if (event.pointerType === "touch" || !glissement) {
+        return;
+      }
 
       const largeurEcran = Math.max(1, svg.getBoundingClientRect().width);
       const hauteurEcran = Math.max(1, svg.getBoundingClientRect().height);
@@ -664,7 +835,11 @@
       appliquerViewBox();
     });
 
-    function terminerGlissement(event) {
+    function terminerInteractionPointeur(event) {
+      if (event?.pointerType === "touch") {
+        return;
+      }
+
       if (
         glissement &&
         event?.pointerId !== undefined &&
@@ -672,12 +847,99 @@
       ) {
         svg.releasePointerCapture(event.pointerId);
       }
+
       glissement = null;
       svg.classList.remove("is-dragging");
     }
 
-    svg.addEventListener("pointerup", terminerGlissement);
-    svg.addEventListener("pointercancel", terminerGlissement);
+    svg.addEventListener("pointerup", terminerInteractionPointeur);
+    svg.addEventListener("pointercancel", terminerInteractionPointeur);
+
+    svg.addEventListener("touchstart", (event) => {
+      if (event.touches.length < 2) {
+        pincementTactile = null;
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      demarrerPincementTactile(event.touches);
+    }, { passive: false });
+
+    svg.addEventListener("touchmove", (event) => {
+      if (event.touches.length < 2) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!pincementTactile) {
+        demarrerPincementTactile(event.touches);
+      }
+
+      if (!pincementTactile) {
+        return;
+      }
+
+      const premier = convertirTouchEnPoint(event.touches[0]);
+      const second = convertirTouchEnPoint(event.touches[1]);
+      const distance = distanceEntrePointeurs(premier, second);
+      const centre = centreEntrePointeurs(premier, second);
+
+      if (!(distance > 0)) {
+        return;
+      }
+
+      const facteur = pincementTactile.distance / distance;
+      const dimensions = bornerDimensionsViewBox(
+        pincementTactile.viewBox[2] * facteur,
+        pincementTactile.viewBox[3] * facteur
+      );
+
+      const rect = svg.getBoundingClientRect();
+      const largeurEcran = Math.max(1, rect.width);
+      const hauteurEcran = Math.max(1, rect.height);
+
+      viewBoxCourante = [
+        pincementTactile.ancreX -
+          ((centre.x - rect.left) / largeurEcran) * dimensions.largeur,
+        pincementTactile.ancreY -
+          ((centre.y - rect.top) / hauteurEcran) * dimensions.hauteur,
+        dimensions.largeur,
+        dimensions.hauteur
+      ];
+
+      appliquerViewBox();
+    }, { passive: false });
+
+    svg.addEventListener("touchend", (event) => {
+      if (event.touches.length >= 2) {
+        demarrerPincementTactile(event.touches);
+      } else {
+        pincementTactile = null;
+      }
+    }, { passive: true });
+
+    svg.addEventListener("touchcancel", () => {
+      pincementTactile = null;
+    }, { passive: true });
+
+    const bloquerZoomNavigateurDansCarte = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    };
+
+    svg.addEventListener("gesturestart", bloquerZoomNavigateurDansCarte, {
+      passive: false
+    });
+    svg.addEventListener("gesturechange", bloquerZoomNavigateurDansCarte, {
+      passive: false
+    });
+    svg.addEventListener("gestureend", bloquerZoomNavigateurDansCarte, {
+      passive: false
+    });
+
     window.addEventListener("resize", actualiserTailleElementsCarte);
 
     (Array.isArray(parc.localitesCarte) ? parc.localitesCarte : [])
@@ -710,6 +972,7 @@
           "lcdp-carte-dynamique__localite-label"
         );
         libelle.dataset.pointX = String(point.x);
+        libelle.dataset.pointY = String(point.y);
         libelle.textContent = String(localite.nom || "")
           .trim()
           .toLocaleUpperCase("fr");
@@ -726,34 +989,8 @@
       cardSlot.style.removeProperty("display");
     }
 
-    function ouvrirFicheParcDepuisCarte(parcCarte) {
-      const idparc = nettoyerTexte(parcCarte?.idparc || parcCarte?.id);
-
-      if (!idparc) {
-        return;
-      }
-
-      const url = construireUrlAvecParc(
-        construireUrlSite("/ESPACE-PUBLIC/fiche-parc.html"),
-        parcCarte,
-        {}
-      );
-
-      window.location.href = url;
-    }
-
-    function construireUrlImageCardParc(parcCarte) {
-      const chemin = construireCheminImageParc(parcCarte, "card1.webp");
-
-      if (!chemin || chemin.endsWith("/parc-defaut.webp")) {
-        return "";
-      }
-
-      return construireUrlSite("/OBJET" + chemin);
-    }
-
-    function ouvrirCardParc(parcCarte) {
-      const card = etatInteraction.templateCardParc.cloneNode(true);
+    async function ouvrirCardParc(parcCarte) {
+      const card = (await obtenirTemplateCardParcFiche(options)).cloneNode(true);
       const image = card.querySelector("[data-lcdp-card-parc-image]");
       const media = card.querySelector(".lcdp-box-card-parc__media");
       const titre = card.querySelector("[data-lcdp-card-parc-title]");
@@ -762,7 +999,6 @@
       const badgePrepa = card.querySelector("[data-lcdp-card-parc-badge-prepa]");
       const boutonFiche = card.querySelector("[data-action='ouvrir-fiche-parc']");
       const boutonPlanning = card.querySelector("[data-action='voir-planning-parc']");
-      const boutonReserver = card.querySelector("[data-action='nouvelle-date-parc']");
 
       if (titre) {
         titre.textContent = nettoyerTexte(parcCarte?.nom) || "Parc";
@@ -786,39 +1022,49 @@
       }
 
       if (image) {
-        const src = construireUrlImageCardParc(parcCarte);
+        const src = construireUrlImageCardParcFiche(options, parcCarte);
 
-        if (src) {
-          image.src = src;
-          image.alt = "Image du parc " + (nettoyerTexte(parcCarte?.nom) || "");
-          image.addEventListener(
-            "error",
-            () => {
-              if (media) {
-                media.hidden = true;
-              }
-            },
-            { once: true }
-          );
-        } else if (media) {
-          media.hidden = true;
-        }
+        image.src = src;
+        image.alt = "Image du parc " + (nettoyerTexte(parcCarte?.nom) || "");
+        image.addEventListener(
+          "error",
+          () => {
+            if (media) media.hidden = true;
+          },
+          { once: true }
+        );
       }
 
+      const boutonReserver = card.querySelector(
+        "[data-action='nouvelle-date-parc']"
+      );
+      const actionFiche =
+        options.onOuvrirFicheParc ||
+        ouvrirFicheParcDepuisCarte;
+      const actionPlanning =
+        options.onOuvrirPlanningParc ||
+        ouvrirPlanningPublic;
+      const actionReserver =
+        options.onReserverParc ||
+        ouvrirReservationMembre;
+
       if (boutonFiche) {
+        boutonFiche.textContent = "Présentation";
         boutonFiche.addEventListener("click", (event) => {
           event.preventDefault();
           event.stopPropagation();
-          ouvrirFicheParcDepuisCarte(parcCarte);
+          fermerCardParc();
+          executerActionFiche(actionFiche, parcCarte);
         });
       }
 
       if (boutonPlanning) {
+        boutonPlanning.textContent = "Planning";
         boutonPlanning.addEventListener("click", (event) => {
           event.preventDefault();
           event.stopPropagation();
           fermerCardParc();
-          ouvrirPlanningPublic(parcCarte);
+          executerActionFiche(actionPlanning, parcCarte);
         });
       }
 
@@ -827,7 +1073,7 @@
           event.preventDefault();
           event.stopPropagation();
           fermerCardParc();
-          ouvrirReservationMembre(parcCarte);
+          executerActionFiche(actionReserver, parcCarte);
         });
       }
 
@@ -843,7 +1089,6 @@
       cardSlot.removeAttribute("hidden");
       cardSlot.classList.add("is-open");
       cardSlot.style.display = "block";
-      boutonFermerCard.focus({ preventScroll: true });
     }
 
     const idParcActif = nettoyerTexte(parc.idparc || parc.id);
@@ -857,51 +1102,6 @@
 
       if (idparc) {
         parcsCarteParId.set(idparc, parcCarte);
-      }
-    });
-
-    function obtenirMarqueurDepuisEvenement(event) {
-      const cible = event.target instanceof Element ? event.target : null;
-      return cible?.closest(".lcdp-carte-dynamique__marker") || null;
-    }
-
-    svg.addEventListener("pointerdown", (event) => {
-      if (!obtenirMarqueurDepuisEvenement(event)) {
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-    }, true);
-
-    svg.addEventListener("mousedown", (event) => {
-      if (!obtenirMarqueurDepuisEvenement(event)) {
-        return;
-      }
-
-      event.preventDefault();
-    }, true);
-
-    svg.addEventListener("click", (event) => {
-      const marker = obtenirMarqueurDepuisEvenement(event);
-
-      if (!marker) {
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      const idparc = nettoyerTexte(marker.dataset.idparc);
-      const parcCarte = parcsCarteParId.get(idparc);
-
-      if (parcCarte) {
-        ouvrirCardParc(parcCarte);
-      }
-
-      const elementActif = document.activeElement;
-      if (elementActif && typeof elementActif.blur === "function") {
-        elementActif.blur();
       }
     });
 
@@ -930,15 +1130,9 @@
         "lcdp-carte-dynamique__marker--parc-actif",
         estParcActif
       );
-
-      /* Le marqueur reste un élément graphique pur.
-         Le clic est traité par délégation sur le SVG afin que Chrome
-         ne lui applique jamais de surface de focus blanche. */
       marker.setAttribute("focusable", "false");
       marker.setAttribute("tabindex", "-1");
       marker.setAttribute("aria-hidden", "true");
-      marker.removeAttribute("role");
-      marker.removeAttribute("aria-label");
 
       groupe.appendChild(marker);
       coucheParcs.appendChild(groupe);
@@ -964,37 +1158,64 @@
 
     ajouterMarqueurParc(parcCourant || parc, true);
 
+    svg.addEventListener("click", (event) => {
+      const cible = event.target instanceof Element ? event.target : null;
+      const marker = cible?.closest(".lcdp-carte-dynamique__marker");
+
+      if (!marker) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      const parcCarte = parcsCarteParId.get(
+        nettoyerTexte(marker.dataset.idparc)
+      );
+
+      if (parcCarte) {
+        ouvrirCardParc(parcCarte).catch(console.error);
+      }
+    });
+
     svg.setAttribute(
       "aria-label",
       "Carte du département " + (codeDepartement || "du parc")
     );
 
-    coucheParcs.addEventListener("click", (event) => {
-      const cible = event.target instanceof Element ? event.target : null;
-      const marker = cible?.closest(".lcdp-carte-dynamique__marker");
-
-      if (!marker) {
-        return;
-      }
-
-      const parcCarte = parcsCarteParId.get(nettoyerTexte(marker.dataset.idparc));
-
-      if (!parcCarte) {
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-      ouvrirCardParc(parcCarte);
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !cardSlot.hidden) {
-        fermerCardParc();
-      }
-    });
-
     appliquerViewBox();
+  }
+
+
+  function ouvrirFicheParcDepuisCarte(parcCarte) {
+    const idparc = nettoyerTexte(
+      parcCarte?.idparc || parcCarte?.id
+    );
+
+    if (!idparc) {
+      return;
+    }
+
+    const url = construireUrlAvecParc(
+      construireUrlSite(
+        "/ESPACE-PUBLIC/fiche-parc.html"
+      ),
+      parcCarte,
+      {}
+    );
+
+    window.location.href = url;
+  }
+
+  function construireUrlImageCardParc(parcCarte) {
+    const chemin = construireCheminImageParc(
+      parcCarte,
+      "card1.webp"
+    );
+
+    if (!chemin || chemin.endsWith("/parc-defaut.webp")) {
+      return "";
+    }
+
+    return construireUrlSite("/OBJET" + chemin);
   }
 
   function projeterCoordonnee(longitude, latitude) {
@@ -1091,49 +1312,45 @@
     return document.createElementNS("http://www.w3.org/2000/svg", nom);
   }
 
-  function creerActionsFicheParc(parc) {
+  function creerActionsFicheParc(parc, options = {}) {
     const actions = document.createElement("div");
     actions.className =
       "lcdp-box-fiche-parc__actions-list";
 
-    const boutonReserver =
-      document.createElement("button");
-
+    const boutonReserver = document.createElement("button");
     boutonReserver.type = "button";
     boutonReserver.className =
       "lcdp-button " +
       "lcdp-box-calendrier-mois__action-reserver " +
       "lcdp-box-fiche-parc__action-reserver";
     boutonReserver.textContent = "RÉSERVER";
-
     boutonReserver.addEventListener("click", () => {
-      ouvrirReservationMembre(parc);
+      executerActionFiche(
+        options.onReserver || ouvrirReservationMembre,
+        parc
+      );
     });
 
-    const boutonPlanning =
-      document.createElement("button");
-
+    const boutonPlanning = document.createElement("button");
     boutonPlanning.type = "button";
     boutonPlanning.className =
       "lcdp-button lcdp-button-primary " +
       "lcdp-box-fiche-parc__action-planning";
-    boutonPlanning.textContent = "Planning parc";
-
+    boutonPlanning.textContent = "Planning Parc";
     boutonPlanning.addEventListener("click", () => {
-      ouvrirPlanningPublic(parc);
+      executerActionFiche(
+        options.onPlanning || ouvrirPlanningPublic,
+        parc
+      );
     });
 
-    const actionPartager =
-      creerActionPartagerFicheParc();
-
-    actionPartager.addEventListener(
-      "click",
-      () => {
-        partagerFicheParc(parc).catch(
-          console.error
-        );
-      }
-    );
+    const actionPartager = creerActionPartagerFicheParc();
+    actionPartager.addEventListener("click", () => {
+      executerActionFiche(
+        options.onPartager || partagerFicheParc,
+        parc
+      );
+    });
 
     actions.appendChild(boutonReserver);
     actions.appendChild(boutonPlanning);
@@ -1141,6 +1358,7 @@
 
     return actions;
   }
+
 
   function creerActionPartagerFicheParc() {
     const action = document.createElement("span");
