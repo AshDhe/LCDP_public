@@ -152,7 +152,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: clamp(0.84rem, 4vw, 0.98rem);
+  font-size: clamp(1.008rem, 4.8vw, 1.176rem);
   line-height: 1.12;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -162,9 +162,9 @@
 }
 
 .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
-  width: 21px;
-  height: 21px;
-  flex: 0 0 21px;
+  width: 25.2px;
+  height: 25.2px;
+  flex: 0 0 25.2px;
   display: block;
   object-fit: contain;
   pointer-events: none;
@@ -245,13 +245,13 @@
   .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
     min-height: 52px;
     padding-inline: 13px;
-    font-size: 0.98rem;
+    font-size: 1.176rem;
   }
 
   .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
-    width: 22px;
-    height: 22px;
-    flex-basis: 22px;
+    width: 26.4px;
+    height: 26.4px;
+    flex-basis: 26.4px;
   }
 }
 
