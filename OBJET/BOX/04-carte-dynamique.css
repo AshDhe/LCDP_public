@@ -387,7 +387,7 @@
   }
 
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
-    touch-action: pan-y;
+    touch-action: none;
   }
 
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__localite-label {
