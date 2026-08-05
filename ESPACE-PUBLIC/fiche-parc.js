@@ -9,7 +9,7 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
-  const ficheParcBuild = "20260805-1305";
+  const ficheParcBuild = "20260805-1316";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
@@ -27,6 +27,20 @@
     "orange-clair": "#ffd8a8",
     "orange-fonce": "#f2a23a"
   };
+  const contenuLegendePlanningParc = [
+    [
+      { libelle: "Réservé DUO", couleur: "bleu-fonce" },
+      { libelle: "COACH", couleur: "violet" },
+      { libelle: "FAMILLE", couleur: "orange-fonce" }
+    ],
+    [
+      { libelle: "FAMILLE autorisé", couleur: "orange-clair" },
+      {
+        libelle: "DUO + COACH uniquement",
+        couleur: "bleu-clair"
+      }
+    ]
+  ];
   const endpointNouvelleDateMembre = String(
     config.workerNouvelleDateMembreUrl ||
     config.WORKER_NOUVELLE_DATE_MEMBRE_URL ||
@@ -1796,10 +1810,46 @@
     const legende = fragment.querySelector(
       "[data-lcdp-box-legende]"
     );
+    const contenu = fragment.querySelector(
+      "[data-lcdp-legende-contenu]"
+    );
 
-    if (!legende) {
+    if (!legende || !contenu) {
       throw new Error("Structure Box Légende incomplète.");
     }
+
+    legende.setAttribute("role", "group");
+    legende.setAttribute(
+      "aria-label",
+      "Légende des couleurs du planning"
+    );
+
+    contenuLegendePlanningParc.forEach((configurationLigne) => {
+      const ligne = document.createElement("div");
+      ligne.className = "lcdp-box-legende__ligne";
+
+      configurationLigne.forEach((configurationItem) => {
+        const item = document.createElement("span");
+        item.className = "lcdp-box-legende__item";
+
+        const libelle = document.createElement("span");
+        libelle.className = "lcdp-box-legende__libelle";
+        libelle.textContent = configurationItem.libelle;
+
+        const carre = document.createElement("span");
+        carre.className =
+          "lcdp-box-legende__carre " +
+          "lcdp-box-legende__carre--" +
+          configurationItem.couleur;
+        carre.setAttribute("aria-hidden", "true");
+
+        item.appendChild(libelle);
+        item.appendChild(carre);
+        ligne.appendChild(item);
+      });
+
+      contenu.appendChild(ligne);
+    });
 
     return legende;
   }
