@@ -513,6 +513,7 @@
 
     svg.setAttribute("focusable", "false");
     svg.setAttribute("tabindex", "-1");
+    svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
 
     const codeDepartement = nettoyerDepartement(parc.dptmt || parc.departement);
     const features = Array.isArray(geojson?.features) ? geojson.features : [];
@@ -560,7 +561,7 @@
     const bboxCible = traceSelectionnee?.trace?.bbox || bboxFrance;
     const viewBoxInitiale = bboxVersViewBox(
       bboxCible,
-      traceSelectionnee ? 0.24 : 0.045
+      traceSelectionnee ? 0.04 : 0.045
     );
 
     if (!viewBoxInitiale) {
