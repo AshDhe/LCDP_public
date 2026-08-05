@@ -617,28 +617,76 @@
   }
 }
 
-/* Ajustement final : boutons de la fiche parc plus compacts et proportionnés. */
+/* Ajustement final : espacement et boutons réellement affichés. */
+
+/*
+ * Dans Réserver membre, la fiche est affichée dans le Shift Detail.
+ * On réduit uniquement l'espace entre son titre et ses boutons,
+ * sans modifier la fiche parc publique.
+ */
+.lcdp-page-reserver
+  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]
+  .lcdp-box-fiche-parc__actions {
+  margin-top: 6px !important;
+}
+
+/* Espacement commun des boutons dans les vues Le parc et Planning. */
+.lcdp-box-fiche-parc__actions-style
+  .lcdp-box-fiche-parc__actions-grid,
 .lcdp-box-fiche-parc__actions-list,
 .lcdp-fiche-parc__commande-detail
   .lcdp-box-calendrier-mois__actions-parc {
-  gap: 7px !important;
-}
-
-.lcdp-box-fiche-parc__action {
-  min-height: 42px !important;
-  padding: 7px 10px !important;
   gap: 6px !important;
-  font-size: 0.9rem !important;
-  line-height: 1.08 !important;
 }
 
-.lcdp-box-fiche-parc__action-icone {
+/*
+ * Les versions successives de la fiche ont utilisé soit les classes
+ * dédiées à la fiche, soit les classes reprises de la Card Parc.
+ * Les deux sélecteurs sont volontairement couverts pour garantir
+ * le même rendu dans la présentation et dans le planning.
+ */
+.lcdp-box-fiche-parc__actions-style
+  .lcdp-box-fiche-parc__actions-grid
+  .lcdp-box-card-parc__action,
+.lcdp-box-fiche-parc__actions-list
+  .lcdp-box-card-parc__action,
+.lcdp-fiche-parc__commande-detail
+  .lcdp-box-calendrier-mois__actions-parc
+  .lcdp-box-card-parc__action,
+.lcdp-box-fiche-parc__actions-list
+  .lcdp-box-fiche-parc__action,
+.lcdp-fiche-parc__commande-detail
+  .lcdp-box-calendrier-mois__actions-parc
+  .lcdp-box-fiche-parc__action {
+  min-height: 42px !important;
+  padding: 6px 10px !important;
+  gap: 5px !important;
+  font-size: 0.88rem !important;
+  line-height: 1.06 !important;
+}
+
+.lcdp-box-fiche-parc__actions-style
+  .lcdp-box-fiche-parc__actions-grid
+  .lcdp-box-card-parc__action-icone,
+.lcdp-box-fiche-parc__actions-list
+  .lcdp-box-card-parc__action-icone,
+.lcdp-fiche-parc__commande-detail
+  .lcdp-box-calendrier-mois__actions-parc
+  .lcdp-box-card-parc__action-icone,
+.lcdp-box-fiche-parc__actions-list
+  .lcdp-box-fiche-parc__action-icone,
+.lcdp-fiche-parc__commande-detail
+  .lcdp-box-calendrier-mois__actions-parc
+  .lcdp-box-fiche-parc__action-icone {
   width: 18px !important;
   height: 18px !important;
   flex: 0 0 18px !important;
 }
 
 @media (min-width: 768px) {
+  /* Sur PC, les trois boutons s'ajustent à leur contenu. */
+  .lcdp-box-fiche-parc__actions-style
+    .lcdp-box-fiche-parc__actions-grid,
   .lcdp-box-fiche-parc__actions-list,
   .lcdp-fiche-parc__commande-detail
     .lcdp-box-calendrier-mois__actions-parc {
@@ -649,23 +697,53 @@
     align-items: center !important;
     justify-content: flex-start !important;
     flex-wrap: wrap !important;
-    gap: 8px !important;
+    gap: 7px !important;
   }
 
-  .lcdp-box-fiche-parc__action {
+  .lcdp-box-fiche-parc__actions-style
+    .lcdp-box-fiche-parc__actions-grid
+    > :last-child {
+    grid-column: auto !important;
+  }
+
+  .lcdp-box-fiche-parc__actions-style
+    .lcdp-box-fiche-parc__actions-grid
+    .lcdp-box-card-parc__action,
+  .lcdp-box-fiche-parc__actions-list
+    .lcdp-box-card-parc__action,
+  .lcdp-fiche-parc__commande-detail
+    .lcdp-box-calendrier-mois__actions-parc
+    .lcdp-box-card-parc__action,
+  .lcdp-box-fiche-parc__actions-list
+    .lcdp-box-fiche-parc__action,
+  .lcdp-fiche-parc__commande-detail
+    .lcdp-box-calendrier-mois__actions-parc
+    .lcdp-box-fiche-parc__action {
     width: auto !important;
     min-width: 0 !important;
-    min-height: 38px !important;
-    padding: 7px 13px !important;
-    gap: 6px !important;
+    min-height: 36px !important;
+    padding: 5px 11px !important;
+    gap: 5px !important;
     flex: 0 0 auto !important;
     align-self: center !important;
-    font-size: 0.88rem !important;
+    font-size: 0.84rem !important;
   }
 
-  .lcdp-box-fiche-parc__action-icone {
-    width: 17px !important;
-    height: 17px !important;
-    flex-basis: 17px !important;
+  .lcdp-box-fiche-parc__actions-style
+    .lcdp-box-fiche-parc__actions-grid
+    .lcdp-box-card-parc__action-icone,
+  .lcdp-box-fiche-parc__actions-list
+    .lcdp-box-card-parc__action-icone,
+  .lcdp-fiche-parc__commande-detail
+    .lcdp-box-calendrier-mois__actions-parc
+    .lcdp-box-card-parc__action-icone,
+  .lcdp-box-fiche-parc__actions-list
+    .lcdp-box-fiche-parc__action-icone,
+  .lcdp-fiche-parc__commande-detail
+    .lcdp-box-calendrier-mois__actions-parc
+    .lcdp-box-fiche-parc__action-icone {
+    width: 16px !important;
+    height: 16px !important;
+    flex-basis: 16px !important;
   }
 }
