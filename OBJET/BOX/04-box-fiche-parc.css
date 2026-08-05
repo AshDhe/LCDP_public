@@ -851,3 +851,9 @@
   }
 }
 
+/* Fiche parc : intitulé du contact souligné. */
+.lcdp-box-fiche-parc__contact-label {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
