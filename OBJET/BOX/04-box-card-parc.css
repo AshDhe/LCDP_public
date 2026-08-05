@@ -167,6 +167,8 @@
   flex: 0 0 21px;
   display: inline-block;
   background-color: currentColor;
+  -webkit-mask-image: var(--lcdp-action-icone-url);
+  mask-image: var(--lcdp-action-icone-url);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
@@ -175,29 +177,6 @@
   mask-size: contain;
 }
 
-.lcdp-box-card-parc--reserver
-  .lcdp-box-card-parc__action-icone--presentation {
-  -webkit-mask-image: url("/IMAG/PICTO/picto-presentation.svg");
-  mask-image: url("/IMAG/PICTO/picto-presentation.svg");
-}
-
-.lcdp-box-card-parc--reserver
-  .lcdp-box-card-parc__action-icone--partager {
-  -webkit-mask-image: url("/IMAG/PICTO/picto-partager.svg");
-  mask-image: url("/IMAG/PICTO/picto-partager.svg");
-}
-
-.lcdp-box-card-parc--reserver
-  .lcdp-box-card-parc__action-icone--planning {
-  -webkit-mask-image: url("/IMAG/PICTO/picto-planning.svg");
-  mask-image: url("/IMAG/PICTO/picto-planning.svg");
-}
-
-.lcdp-box-card-parc--reserver
-  .lcdp-box-card-parc__action-icone--reserver {
-  -webkit-mask-image: url("/IMAG/PICTO/picto-reserver.svg");
-  mask-image: url("/IMAG/PICTO/picto-reserver.svg");
-}
 
 .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-libelle {
   min-width: 0;
