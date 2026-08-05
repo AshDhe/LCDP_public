@@ -34,19 +34,25 @@
   min-width: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  column-gap: 7px;
   font-weight: 400;
 }
 
 .lcdp-box-legende__libelle {
+  order: 2;
   font-weight: 400;
+  line-height: 1.25;
 }
 
 .lcdp-box-legende__carre {
-  width: 12px;
-  height: 12px;
-  min-width: 12px;
-  min-height: 12px;
+  order: 1;
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  min-height: 15px;
+  flex: 0 0 15px;
+  align-self: center;
+  margin: 0;
   border: 1px solid transparent;
   border-radius: 3px;
   box-sizing: border-box;
