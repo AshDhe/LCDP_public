@@ -82,7 +82,8 @@
   margin-left: 4px;
   display: inline-block;
   vertical-align: -2px;
-  opacity: 0.55;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.45;
   object-fit: contain;
   pointer-events: none;
 }
