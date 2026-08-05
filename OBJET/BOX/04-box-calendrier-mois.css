@@ -422,3 +422,40 @@
   .lcdp-box-calendrier-mois__title {
   color: var(--lcdp-color-text) !important;
 }
+
+/* Vue Planning Parc : ordre éditorial identique sur mobile, tablette et ordinateur. */
+.lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
+  .lcdp-box-calendrier-mois__header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
+  .lcdp-box-calendrier-mois__title {
+  order: 1;
+  color: var(--lcdp-color-text) !important;
+}
+
+.lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
+  .lcdp-box-calendrier-mois__commande {
+  order: 2;
+}
+
+.lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
+  .lcdp-box-calendrier-mois__legende-planning {
+  order: 3;
+  position: static !important;
+  float: none !important;
+  clear: both;
+}
+
+.lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
+  .lcdp-box-calendrier-mois__meta {
+  order: 4;
+}
+
+.lcdp-box-calendrier-mois__legende-planning,
+.lcdp-box-calendrier-mois__legende-planning * {
+  font-weight: 400 !important;
+}

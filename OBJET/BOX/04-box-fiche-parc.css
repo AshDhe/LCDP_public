@@ -551,3 +551,36 @@
     gap: var(--lcdp-space-2) !important;
   }
 }
+
+/* Présentation et planning : commandes strictement homogènes sur tous les écrans. */
+.lcdp-box-fiche-parc__actions-list .lcdp-button,
+.lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,
+.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,
+.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 44px !important;
+  margin: 0 !important;
+  padding: 10px 18px !important;
+  align-self: flex-start !important;
+  flex: 0 0 auto !important;
+  box-sizing: border-box;
+  font-size: 0.95rem !important;
+  line-height: 1.1 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-fiche-parc__actions-list .lcdp-button,
+  .lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,
+  .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,
+  .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    align-self: center !important;
+  }
+}
