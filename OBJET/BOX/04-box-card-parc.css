@@ -132,3 +132,153 @@
   text-align: center;
   pointer-events: none;
 }
+
+/* Card Parc — actions spécifiques à la page Réserver, mobile first. */
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__actions--reserver {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--lcdp-space-2);
+  max-width: none;
+}
+
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  margin-top: 0;
+  padding: 9px 8px;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: clamp(0.76rem, 3.7vw, 0.9rem);
+  line-height: 1;
+  font-weight: 700;
+  text-align: center;
+  text-transform: none;
+  box-shadow: none;
+}
+
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action-icone--presentation {
+  -webkit-mask-image: url("/IMAG/PICTO/picto-presentation.svg");
+  mask-image: url("/IMAG/PICTO/picto-presentation.svg");
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action-icone--partager {
+  -webkit-mask-image: url("/IMAG/PICTO/picto-partager.svg");
+  mask-image: url("/IMAG/PICTO/picto-partager.svg");
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action-icone--planning {
+  -webkit-mask-image: url("/IMAG/PICTO/picto-planning.svg");
+  mask-image: url("/IMAG/PICTO/picto-planning.svg");
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action-icone--reserver {
+  -webkit-mask-image: url("/IMAG/PICTO/picto-reserver.svg");
+  mask-image: url("/IMAG/PICTO/picto-reserver.svg");
+}
+
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-libelle {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-plein {
+  border-color: var(--lcdp-color-primary, #234438);
+  background: var(--lcdp-color-primary, #234438);
+  color: #ffffff;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-plein:hover {
+  border-color: var(--lcdp-color-primary-hover, #1b352c);
+  background: var(--lcdp-color-primary-hover, #1b352c);
+  color: #ffffff;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-contour {
+  border-color: var(--lcdp-color-primary, #234438);
+  background: #ffffff;
+  color: var(--lcdp-color-primary, #234438);
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-contour:hover {
+  border-color: var(--lcdp-color-primary, #234438);
+  background: rgba(35, 68, 56, 0.08);
+  color: var(--lcdp-color-primary, #234438);
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-plein {
+  border-color: var(--lcdp-color-orange, #f2a23a);
+  background: var(--lcdp-color-orange, #f2a23a);
+  color: #ffffff;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-plein:hover {
+  border-color: var(--lcdp-color-orange-hover, #d98922);
+  background: var(--lcdp-color-orange-hover, #d98922);
+  color: #ffffff;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-contour {
+  border-color: var(--lcdp-color-orange, #f2a23a);
+  background: #ffffff;
+  color: var(--lcdp-color-orange, #f2a23a);
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-contour:hover {
+  border-color: var(--lcdp-color-orange, #f2a23a);
+  background: rgba(242, 162, 58, 0.10);
+  color: var(--lcdp-color-orange, #f2a23a);
+}
+
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-parc--reserver .lcdp-box-card-parc__actions--reserver {
+    max-width: 460px;
+  }
+
+  .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+    min-height: 50px;
+    padding-inline: 12px;
+    font-size: 0.9rem;
+  }
+
+  .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+  }
+}
+
