@@ -165,16 +165,9 @@
   width: 21px;
   height: 21px;
   flex: 0 0 21px;
-  display: inline-block;
-  background-color: currentColor;
-  -webkit-mask-image: var(--lcdp-action-icone-url);
-  mask-image: var(--lcdp-action-icone-url);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 
