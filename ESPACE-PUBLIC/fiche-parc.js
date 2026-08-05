@@ -9,7 +9,7 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
-  const ficheParcBuild = "20260805-1122";
+  const ficheParcBuild = "20260805-1219";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
@@ -1576,15 +1576,7 @@
       etatPlanning.parc?.nomparc ||
       "Parc"
     ) || "Parc";
-    const departement = nettoyerDepartement(
-      etatPlanning.parc?.dptmt ||
-      etatPlanning.parc?.departement
-    );
-
-    titre.textContent =
-      "Parc de " +
-      nomParc +
-      (departement ? " - " + departement : "");
+    titre.textContent = "Parc de " + nomParc;
     meta.hidden = true;
     meta.textContent = "";
     boutonFermer.hidden = true;
@@ -1600,8 +1592,7 @@
         options
       )
     );
-    commande.insertAdjacentElement(
-      "afterend",
+    commande.appendChild(
       creerLegendePlanningParcCommun()
     );
 
@@ -2291,15 +2282,7 @@
       etatPlanning.parc?.nomparc ||
       "Parc"
     ) || "Parc";
-    const departement = nettoyerDepartement(
-      etatPlanning.parc?.dptmt ||
-      etatPlanning.parc?.departement
-    );
-
-    titre.textContent =
-      "Parc de " +
-      nomParc +
-      (departement ? " - " + departement : "");
+    titre.textContent = "Parc de " + nomParc;
     meta.textContent = "";
     meta.classList.add(
       "lcdp-box-calendrier-jour__meta--actions"
