@@ -396,3 +396,92 @@
   font-size: 0.88em;
   font-style: italic;
 }
+
+/* Fiche parc : harmonisation des commandes de navigation. */
+.lcdp-box-fiche-parc__actions-list .lcdp-button,
+.lcdp-fiche-parc__commande-detail .lcdp-button,
+.lcdp-box-fiche-parc__partage,
+.lcdp-fiche-parc__commande-detail .lcdp-box-fiche-parc__partage {
+  min-height: 44px;
+  padding: 10px 18px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: var(--lcdp-radius-button);
+  box-shadow: none;
+  font-family: var(--lcdp-font-main);
+  font-size: 0.95rem;
+  line-height: 1.1;
+  font-weight: 700;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+/* Réserver : bleu de la charte, texte blanc. */
+.lcdp-box-fiche-parc__action-reserver,
+.lcdp-box-fiche-parc__action-reserver:hover,
+.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__action-reserver,
+.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__action-reserver:hover {
+  border-color: #3C71B1 !important;
+  border-radius: var(--lcdp-radius-button) !important;
+  background: #3C71B1 !important;
+  color: #ffffff !important;
+}
+
+/* Planning : orangé de la charte, texte blanc. */
+.lcdp-box-fiche-parc__action-planning,
+.lcdp-box-fiche-parc__action-planning:hover,
+.lcdp-fiche-parc__commande-detail .lcdp-button-primary,
+.lcdp-fiche-parc__commande-detail .lcdp-button-primary:hover {
+  border-color: #EBA042 !important;
+  border-radius: var(--lcdp-radius-button) !important;
+  background: #EBA042 !important;
+  color: #ffffff !important;
+}
+
+/* Partager : même forme rectangulaire arrondie, orangé et texte blanc. */
+.lcdp-box-fiche-parc__partage,
+.lcdp-fiche-parc__commande-detail .lcdp-box-fiche-parc__partage {
+  width: 100%;
+  max-width: 260px;
+  margin: 0;
+  border-color: #EBA042;
+  background: #EBA042;
+  color: #ffffff;
+  justify-content: center;
+  gap: var(--lcdp-space-1);
+}
+
+.lcdp-box-fiche-parc__partage:hover,
+.lcdp-fiche-parc__commande-detail .lcdp-box-fiche-parc__partage:hover {
+  border-color: #EBA042;
+  background: #EBA042;
+  color: #ffffff;
+}
+
+.lcdp-box-fiche-parc__partage-icone,
+.lcdp-box-fiche-parc__partage:hover .lcdp-box-fiche-parc__partage-icone {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #ffffff;
+}
+
+.lcdp-box-fiche-parc__partage-libelle {
+  color: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-fiche-parc__partage,
+  .lcdp-fiche-parc__commande-detail .lcdp-box-fiche-parc__partage {
+    width: auto !important;
+    max-width: none !important;
+  }
+}
+
