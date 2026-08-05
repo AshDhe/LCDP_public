@@ -27,7 +27,7 @@
   };
   const contenuLegendePlanningParc = [
     [
-      { libelle: "Accessible :  DUO", couleur: "bleu-fonce" },
+      { libelle: "Accès autorisé :  DUO", couleur: "bleu-fonce" },
       { libelle: "COACH", couleur: "violet" },
       { libelle: "FAMILLE", couleur: "orange-fonce" },
       { libelle: "DUO + COACH + FAMILLE", couleur: "orange-clair" },
@@ -1727,7 +1727,7 @@
       etatPlanning.parc?.nomparc ||
       "Parc"
     ) || "Parc";
-    titre.textContent = "Parc de " + nomParc;
+    titre.textContent = "Planning du parc : " + nomParc;
     meta.hidden = true;
     meta.textContent = "";
     boutonFermer.hidden = true;
@@ -1891,20 +1891,6 @@
       );
     });
 
-    const boutonPlanning = creerBoutonActionFicheParc(
-      {
-        libelle: "Planning",
-        ariaLabel: "Afficher le planning du parc",
-        icone: "planning",
-        variante: "orange-contour"
-      },
-      options
-    );
-    boutonPlanning.setAttribute("aria-current", "page");
-    boutonPlanning.addEventListener("click", (event) => {
-      event.preventDefault();
-    });
-
     const boutonPlanifier = creerBoutonActionFicheParc(
       {
         libelle: "Planifier",
@@ -1923,7 +1909,6 @@
 
     barre.appendChild(boutonPresentation);
     barre.appendChild(actionPartager);
-    barre.appendChild(boutonPlanning);
     barre.appendChild(boutonPlanifier);
 
     return barre;
