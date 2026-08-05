@@ -1591,13 +1591,18 @@
 
     titre.insertAdjacentElement("afterend", commande);
     commande.classList.add(
-      "lcdp-fiche-parc__commande-detail"
+      "lcdp-fiche-parc__commande-detail",
+      "lcdp-box-calendrier-mois__commande--avec-legende"
     );
     commande.replaceChildren(
       creerActionsPlanningParcCommun(
         etatPlanning.parc,
         options
       )
+    );
+    commande.insertAdjacentElement(
+      "afterend",
+      creerLegendePlanningParcCommun()
     );
 
     function actualiserNavigation() {
@@ -1744,6 +1749,68 @@
     actions.appendChild(boutonPresentation);
 
     return actions;
+  }
+
+  function creerLegendePlanningParcCommun() {
+    const legende = document.createElement("div");
+    legende.className =
+      "lcdp-box-calendrier-mois__legende-planning";
+    legende.setAttribute("role", "group");
+    legende.setAttribute(
+      "aria-label",
+      "Légende des couleurs du planning"
+    );
+
+    const creerCarre = (couleur) => {
+      const carre = document.createElement("span");
+      carre.className =
+        "lcdp-box-calendrier-mois__legende-carre " +
+        "lcdp-box-calendrier-mois__legende-carre--" +
+        couleur;
+      carre.setAttribute("aria-hidden", "true");
+      return carre;
+    };
+
+    const creerItem = (couleur, libelle) => {
+      const item = document.createElement("span");
+      item.className =
+        "lcdp-box-calendrier-mois__legende-item";
+
+      const texte = document.createElement("span");
+      texte.textContent = libelle;
+
+      item.appendChild(texte);
+      item.appendChild(creerCarre(couleur));
+      return item;
+    };
+
+    const ligneReservations = document.createElement("div");
+    ligneReservations.className =
+      "lcdp-box-calendrier-mois__legende-ligne";
+
+    ligneReservations.appendChild(
+      creerItem("bleu-fonce", "Réservé DUO")
+    );
+    ligneReservations.appendChild(
+      creerItem("violet", "COACH")
+    );
+    ligneReservations.appendChild(
+      creerItem("orange-fonce", "FAMILLE")
+    );
+
+    const ligneAutorisations = document.createElement("div");
+    ligneAutorisations.className =
+      "lcdp-box-calendrier-mois__legende-ligne";
+    ligneAutorisations.appendChild(
+      creerItem("orange-clair", "FAMILLE autorisé")
+    );
+    ligneAutorisations.appendChild(
+      creerItem("bleu-clair", "DUO + COACH uniquement")
+    );
+
+    legende.appendChild(ligneReservations);
+    legende.appendChild(ligneAutorisations);
+    return legende;
   }
 
   async function chargerPlanningMoisCommun(
