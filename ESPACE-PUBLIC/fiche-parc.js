@@ -9,7 +9,7 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
-  const ficheParcBuild = "20260805-1219";
+  const ficheParcBuild = "20260805-1305";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
@@ -453,6 +453,47 @@
     }
 
     return construireUrlSite("/OBJET" + chemin);
+  }
+
+  function chargerStyleObjetFiche(options, chemin) {
+    const href = construireUrlObjetFiche(options, chemin);
+    const styleExistant = Array.from(
+      document.querySelectorAll('link[rel="stylesheet"]')
+    ).find((link) => {
+      const cheminDeclare = link.dataset.siteHref || "";
+      const cheminObjet = "/OBJET" + chemin;
+
+      if (cheminDeclare === cheminObjet) {
+        return true;
+      }
+
+      try {
+        return new URL(link.href, window.location.href).href ===
+          new URL(href, window.location.href).href;
+      } catch {
+        return false;
+      }
+    });
+
+    if (styleExistant) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+      link.dataset.lcdpStyleObjet = chemin;
+      link.addEventListener("load", resolve, { once: true });
+      link.addEventListener(
+        "error",
+        () => reject(
+          new Error("Style OBJET introuvable : " + chemin)
+        ),
+        { once: true }
+      );
+      document.head.appendChild(link);
+    });
   }
 
   async function obtenirTemplateCardParcFiche(options) {
@@ -1584,7 +1625,7 @@
     titre.insertAdjacentElement("afterend", commande);
     commande.classList.add(
       "lcdp-fiche-parc__commande-detail",
-      "lcdp-box-calendrier-mois__commande--avec-legende"
+      "lcdp-box-legende-host"
     );
     commande.replaceChildren(
       creerActionsPlanningParcCommun(
@@ -1593,7 +1634,7 @@
       )
     );
     commande.appendChild(
-      creerLegendePlanningParcCommun()
+      await chargerLegendePlanningParcCommun(options)
     );
 
     function actualiserNavigation() {
@@ -1742,65 +1783,24 @@
     return actions;
   }
 
-  function creerLegendePlanningParcCommun() {
-    const legende = document.createElement("div");
-    legende.className =
-      "lcdp-box-calendrier-mois__legende-planning";
-    legende.setAttribute("role", "group");
-    legende.setAttribute(
-      "aria-label",
-      "Légende des couleurs du planning"
+  async function chargerLegendePlanningParcCommun(options) {
+    await chargerStyleObjetFiche(
+      options,
+      "/BOX/04-box-legende.css"
     );
 
-    const creerCarre = (couleur) => {
-      const carre = document.createElement("span");
-      carre.className =
-        "lcdp-box-calendrier-mois__legende-carre " +
-        "lcdp-box-calendrier-mois__legende-carre--" +
-        couleur;
-      carre.setAttribute("aria-hidden", "true");
-      return carre;
-    };
-
-    const creerItem = (couleur, libelle) => {
-      const item = document.createElement("span");
-      item.className =
-        "lcdp-box-calendrier-mois__legende-item";
-
-      const texte = document.createElement("span");
-      texte.textContent = libelle;
-
-      item.appendChild(texte);
-      item.appendChild(creerCarre(couleur));
-      return item;
-    };
-
-    const ligneReservations = document.createElement("div");
-    ligneReservations.className =
-      "lcdp-box-calendrier-mois__legende-ligne";
-
-    ligneReservations.appendChild(
-      creerItem("bleu-fonce", "Réservé DUO")
+    const fragment = await chargerFragmentObjetFiche(
+      options,
+      "/BOX/04-box-legende.html"
     );
-    ligneReservations.appendChild(
-      creerItem("violet", "COACH")
-    );
-    ligneReservations.appendChild(
-      creerItem("orange-fonce", "FAMILLE")
+    const legende = fragment.querySelector(
+      "[data-lcdp-box-legende]"
     );
 
-    const ligneAutorisations = document.createElement("div");
-    ligneAutorisations.className =
-      "lcdp-box-calendrier-mois__legende-ligne";
-    ligneAutorisations.appendChild(
-      creerItem("orange-clair", "FAMILLE autorisé")
-    );
-    ligneAutorisations.appendChild(
-      creerItem("bleu-clair", "DUO + COACH uniquement")
-    );
+    if (!legende) {
+      throw new Error("Structure Box Légende incomplète.");
+    }
 
-    legende.appendChild(ligneReservations);
-    legende.appendChild(ligneAutorisations);
     return legende;
   }
 
