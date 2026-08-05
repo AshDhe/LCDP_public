@@ -384,9 +384,6 @@
     const carteSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-map-slot]"
     );
-    const contact = fiche.querySelector(
-      "[data-lcdp-fiche-parc-contact]"
-    );
     const acces = fiche.querySelector(
       "[data-lcdp-fiche-parc-acces]"
     );
@@ -468,11 +465,6 @@
       acces,
       construireTexteAccesParc(parc)
     );
-    remplirBlocTexteFiche(
-      contact,
-      construireTexteContactParc(parc)
-    );
-
     if (boutonFermer) {
       if (options.masquerBoutonFermer === true) {
         boutonFermer.remove();
@@ -1167,25 +1159,39 @@
       const media = card.querySelector(".lcdp-box-card-parc__media");
       const titre = card.querySelector("[data-lcdp-card-parc-title]");
       const meta = card.querySelector("[data-lcdp-card-parc-meta]");
-      const description = card.querySelector("[data-lcdp-card-parc-description]");
-      const badgePrepa = card.querySelector("[data-lcdp-card-parc-badge-prepa]");
-      const boutonFiche = card.querySelector("[data-action='ouvrir-fiche-parc']");
-      const boutonPlanning = card.querySelector("[data-action='voir-planning-parc']");
+      const description = card.querySelector(
+        "[data-lcdp-card-parc-description]"
+      );
+      const actions = card.querySelector(
+        ".lcdp-box-card-parc__actions"
+      );
+      const badgePrepa = card.querySelector(
+        "[data-lcdp-card-parc-badge-prepa]"
+      );
+      const nomParc =
+        nettoyerTexte(parcCarte?.nom || parcCarte?.nomparc) ||
+        "Parc";
+      const departement = nettoyerDepartement(
+        parcCarte?.dptmt || parcCarte?.departement
+      );
 
       if (titre) {
-        titre.textContent = nettoyerTexte(parcCarte?.nom) || "Parc";
+        titre.textContent =
+          "Parc de " +
+          nomParc +
+          (departement ? " (" + departement + ")" : "");
       }
 
       if (meta) {
-        const departement = nettoyerDepartement(
-          parcCarte?.dptmt || parcCarte?.departement
-        );
-        meta.textContent = departement ? "Département " + departement : "";
+        meta.remove();
       }
 
       if (description) {
-        description.hidden = true;
-        description.textContent = "";
+        description.remove();
+      }
+
+      if (actions) {
+        actions.remove();
       }
 
       if (badgePrepa) {
@@ -1194,69 +1200,42 @@
       }
 
       if (image) {
-        const src = construireUrlImageCardParcFiche(options, parcCarte);
+        const src = construireUrlImageCardParcFiche(
+          options,
+          parcCarte
+        );
 
         image.src = src;
-        image.alt = "Image du parc " + (nettoyerTexte(parcCarte?.nom) || "");
+        image.alt = "Image du parc " + nomParc;
         image.addEventListener(
           "error",
           () => {
-            if (media) media.hidden = true;
+            if (media) {
+              media.hidden = true;
+            }
           },
           { once: true }
         );
       }
 
-      const boutonReserver = card.querySelector(
-        "[data-action='nouvelle-date-parc']"
-      );
-      const actionFiche =
-        options.onOuvrirFicheParc ||
-        ouvrirFicheParcDepuisCarte;
-      const actionPlanning =
-        options.onOuvrirPlanningParc ||
-        ouvrirPlanningPublic;
-      const actionReserver =
-        options.onReserverParc ||
-        ouvrirReservationMembre;
-
-      if (boutonFiche) {
-        boutonFiche.textContent = "Présentation";
-        boutonFiche.addEventListener("click", (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          fermerCardParc();
-          executerActionFiche(actionFiche, parcCarte);
-        });
-      }
-
-      if (boutonPlanning) {
-        boutonPlanning.textContent = "Planning";
-        boutonPlanning.addEventListener("click", (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          fermerCardParc();
-          executerActionFiche(actionPlanning, parcCarte);
-        });
-      }
-
-      if (boutonReserver) {
-        boutonReserver.addEventListener("click", (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          fermerCardParc();
-          executerActionFiche(actionReserver, parcCarte);
-        });
-      }
-
       const boutonFermerCard = document.createElement("button");
       boutonFermerCard.type = "button";
-      boutonFermerCard.className = "lcdp-carte-dynamique__card-close";
+      boutonFermerCard.className =
+        "lcdp-carte-dynamique__card-close";
       boutonFermerCard.textContent = "×";
-      boutonFermerCard.setAttribute("aria-label", "Fermer la Card Parc");
-      boutonFermerCard.addEventListener("click", fermerCardParc);
+      boutonFermerCard.setAttribute(
+        "aria-label",
+        "Fermer la Card Parc"
+      );
+      boutonFermerCard.addEventListener(
+        "click",
+        fermerCardParc
+      );
 
-      cardSlot.replaceChildren(boutonFermerCard, card);
+      cardSlot.replaceChildren(
+        boutonFermerCard,
+        card
+      );
       cardSlot.hidden = false;
       cardSlot.removeAttribute("hidden");
       cardSlot.classList.add("is-open");
@@ -3907,8 +3886,18 @@
     const mentionActualisation = dateActualisation
       ? "Actualisation : " + dateActualisation + "."
       : "Actualisation : date non disponible.";
+    const contact =
+      "Votre contact La Clé du Parc : " +
+      "camille@lacleduparc.fr - " +
+      "Standard téléphonique : 02.34.46.51.14";
 
-    return horaire + "\n" + mentionActualisation;
+    return (
+      horaire +
+      "\n" +
+      mentionActualisation +
+      "\n" +
+      contact
+    );
   }
 
   function formaterDateMajHoraire(value) {
@@ -3944,26 +3933,6 @@
       " h " +
       lire("minute")
     );
-  }
-
-  function construireTexteContactParc(parc) {
-    const responsable = parc?.resparc || null;
-    const email = nettoyerTexte(responsable?.emailresp);
-    const telephone = nettoyerTexte(responsable?.telresp);
-
-    if (email && telephone) {
-      return email + " | Standard téléphonique : " + telephone;
-    }
-
-    if (email) {
-      return email;
-    }
-
-    if (telephone) {
-      return "Standard téléphonique : " + telephone;
-    }
-
-    return "Contact non renseigné.";
   }
 
   function normaliserNomParcPourChemin(valeur) {
