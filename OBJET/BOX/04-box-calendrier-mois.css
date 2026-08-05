@@ -335,12 +335,16 @@
 
 /* Vue Planning Parc : légende des couleurs, mobile first. */
 .lcdp-box-calendrier-mois__commande--avec-legende {
-  margin-bottom: var(--lcdp-space-2);
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--lcdp-space-2);
 }
 
 .lcdp-box-calendrier-mois__legende-planning {
   width: 100%;
-  margin: 0 0 var(--lcdp-space-3);
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -426,9 +430,27 @@
 /* Vue Planning Parc : ordre éditorial identique sur mobile, tablette et ordinateur. */
 .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
   .lcdp-box-calendrier-mois__header {
+  position: relative;
+  width: 100%;
+  margin-inline: auto;
+  padding-right: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+
+.lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
+  .lcdp-box-calendrier-mois__header::after {
+  content: "";
+  order: 5;
+  width: 100%;
+  height: 1px;
+  margin: var(--lcdp-space-2) auto 0;
+  background: var(--lcdp-color-border);
+  flex: 0 0 auto;
 }
 
 .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
