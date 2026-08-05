@@ -9,7 +9,7 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
-  const ficheParcBuild = "20260805-1408";
+  const ficheParcBuild = "20260805-1423";
   document.documentElement.dataset.lcdpFicheParcBuild = ficheParcBuild;
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
@@ -464,15 +464,30 @@
     return construireUrlSite("/OBJET" + chemin);
   }
 
+  function ajouterVersionUrl(urlSource, version) {
+    const url = new URL(urlSource, window.location.href);
+    url.searchParams.set("v", version);
+    return url.toString();
+  }
+
   function chargerStyleObjetFiche(options, chemin) {
-    const href = construireUrlObjetFiche(options, chemin);
+    const versionsStyles = {
+      "/BOX/04-box-legende.css": "20260805-1423",
+      "/BOX/04-box-calendrier-jour.css": "20260805-1423"
+    };
+    const versionStyle = versionsStyles[chemin] || "";
+    const hrefBase = construireUrlObjetFiche(options, chemin);
+    const href = versionStyle
+      ? ajouterVersionUrl(hrefBase, versionStyle)
+      : hrefBase;
     const styleExistant = Array.from(
       document.querySelectorAll('link[rel="stylesheet"]')
     ).find((link) => {
       const cheminDeclare = link.dataset.siteHref || "";
+      const cheminDeclareSansVersion = cheminDeclare.split(/[?#]/, 1)[0];
       const cheminObjet = "/OBJET" + chemin;
 
-      if (cheminDeclare === cheminObjet) {
+      if (cheminDeclareSansVersion === cheminObjet) {
         return true;
       }
 
