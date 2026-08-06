@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
+  gap: 4px;
 }
 
 .lcdp-box-legende__ligne {
@@ -26,8 +26,8 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  column-gap: 16px;
-  row-gap: 6px;
+  column-gap: 10px;
+  row-gap: 4px;
 }
 
 .lcdp-box-legende__item {
@@ -50,7 +50,7 @@
   height: 15px;
   min-width: 15px;
   min-height: 15px;
-  margin: 0 0 0 7px;
+  margin: 0 0 0 4px;
   border: 1px solid transparent;
   border-radius: 3px;
   vertical-align: baseline;
