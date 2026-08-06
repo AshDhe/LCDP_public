@@ -3,7 +3,7 @@
   position: fixed;
   inset: 0;
   z-index: 5000;
-  padding: var(--lcdp-space-3);
+  padding: var(--lcdp-space-2);
   background: rgba(31, 42, 36, 0.46);
   display: flex;
   align-items: center;
@@ -19,7 +19,10 @@
   position: relative;
   width: 100%;
   max-width: 1060px;
-  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  max-height: calc(100vh - (var(--lcdp-space-2) * 2));
+  max-height: calc(100dvh - (var(--lcdp-space-2) * 2));
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   overflow: auto;
   padding: var(--lcdp-space-4);
   border: 1px solid var(--lcdp-color-border);
@@ -52,7 +55,6 @@
 }
 
 .lcdp-box-shift-detail-parc__content {
-  position: relative;
   width: 100%;
   transition: opacity 150ms ease-out, transform 150ms ease-out;
 }
@@ -103,32 +105,124 @@
   padding-right: 44px;
 }
 
-/* Vue journalière du planning : coque ajustée au contenu réel. */
+/* Vue journalière du planning : fenêtre indépendante du scroll mensuel. */
 .lcdp-box-shift-detail-parc--planning-jour
   .lcdp-box-shift-detail-parc__card {
   width: min(100%, 820px);
-  height: auto;
+  height: calc(100vh - (var(--lcdp-space-2) * 2));
+  height: calc(100dvh - (var(--lcdp-space-2) * 2));
   min-height: 0;
-  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
-  overflow-y: auto;
+  max-height: calc(100vh - (var(--lcdp-space-2) * 2));
+  max-height: calc(100dvh - (var(--lcdp-space-2) * 2));
+  overflow: hidden;
 }
 
 .lcdp-box-shift-detail-parc--planning-jour
-  .lcdp-box-shift-detail-parc__content,
+  .lcdp-box-shift-detail-parc__content {
+  min-height: 0 !important;
+  height: 100% !important;
+}
+
 .lcdp-box-shift-detail-parc--planning-jour
-  .lcdp-fiche-parc__shift-view,
+  .lcdp-fiche-parc__planning-jour-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.65rem, 2vw, 1.25rem);
+  border-radius: inherit;
+  background: rgba(31, 42, 36, 0.28);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
 .lcdp-box-shift-detail-parc--planning-jour
-  .lcdp-box-calendrier-jour,
+  .lcdp-fiche-parc__planning-jour-box {
+  width: min(100%, 560px);
+  max-height: calc(100% - 0.5rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface, #ffffff);
+  box-shadow: 0 18px 46px rgba(31, 42, 36, 0.24);
+}
+
 .lcdp-box-shift-detail-parc--planning-jour
-  .lcdp-box-calendrier-jour__card,
+  .lcdp-fiche-parc__planning-jour-box
+  .lcdp-box-calendrier-jour {
+  position: static;
+  inset: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  display: block;
+}
+
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-fiche-parc__planning-jour-box
+  .lcdp-box-calendrier-jour__card {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  min-height: 0;
+  overflow: visible;
+  padding: clamp(0.95rem, 2.4vw, 1.25rem);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-fiche-parc__planning-jour-box
+  .lcdp-box-calendrier-jour__close {
+  display: inline-flex !important;
+}
+
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-fiche-parc__planning-jour-box
+  .lcdp-box-calendrier-jour__header {
+  gap: 0.45rem;
+}
+
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-fiche-parc__planning-jour-box
+  .lcdp-box-calendrier-jour__meta--legende {
+  font-size: 0.72rem;
+  line-height: 1.15;
+}
+
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-fiche-parc__planning-jour-box
+  .lcdp-box-calendrier-jour__date-planning {
+  margin-block: 0.65rem 0.55rem;
+  text-align: center;
+}
+
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-fiche-parc__planning-jour-box
+  .lcdp-box-calendrier-jour__grid {
+  width: min(100%, 340px);
+  margin-inline: auto;
+  gap: 0.42rem;
+}
+
+.lcdp-box-shift-detail-parc--planning-jour
+  .lcdp-fiche-parc__planning-jour-box
+  .lcdp-box-card-heure-in-calendrier-jour {
+  min-height: 32px;
+}
+
 .lcdp-box-shift-detail-parc--planning-jour
   .lcdp-box-calendrier-jour__body {
   min-height: 0 !important;
   height: auto !important;
-}
-
-.lcdp-box-shift-detail-parc--planning-jour
-  .lcdp-box-calendrier-jour__body {
   padding-bottom: var(--lcdp-space-2);
 }
 
@@ -214,11 +308,12 @@
 
 @media (min-width: 768px) {
   .lcdp-box-shift-detail-parc {
-    padding: var(--lcdp-space-4);
+    padding: var(--lcdp-space-2);
   }
 
   .lcdp-box-shift-detail-parc__card {
-    max-height: calc(100vh - (var(--lcdp-space-4) * 2));
+    max-height: calc(100vh - (var(--lcdp-space-2) * 2));
+    max-height: calc(100dvh - (var(--lcdp-space-2) * 2));
     padding: var(--lcdp-space-5);
   }
 
@@ -229,324 +324,21 @@
   }
 }
 
+@media (max-width: 520px) {
+  .lcdp-box-shift-detail-parc--planning-jour
+    .lcdp-fiche-parc__planning-jour-overlay {
+    align-items: flex-start;
+    padding: 0.5rem;
+  }
+
+  .lcdp-box-shift-detail-parc--planning-jour
+    .lcdp-fiche-parc__planning-jour-box {
+    max-height: 100%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .lcdp-box-shift-detail-parc,
-  .lcdp-box-shift-detail-parc__content,
-  .lcdp-fiche-parc__shift-view {
+  .lcdp-box-shift-detail-parc__content {
     transition: none;
   }
 }
-
-/*
- * Parcours Fiche Parc commun.
- * Ces règles appartiennent aux objets rendus dans la coque Shift Detail :
- * elles sont utilisées à l’identique par la page publique et l’espace membre.
- */
-
-/* Carte dynamique de la Fiche Parc. */
-.lcdp-carte-dynamique--fiche-parc {
-  max-width: none;
-  padding: 0;
-  border: 0;
-  border-radius: var(--lcdp-radius-large);
-  box-shadow: none;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__header,
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__filters,
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__status {
-  display: none !important;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__map-shell,
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__map {
-  min-height: 560px;
-  height: min(72vh, 720px);
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__departement.is-selected {
-  fill: #fafaf8;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__departement-selection {
-  fill: none;
-  stroke: #587242;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__marker {
-  fill: #ffffff !important;
-  stroke: #234438 !important;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__marker--parc-actif {
-  fill: var(--lcdp-color-orange, #f2a23a) !important;
-  stroke: var(--lcdp-color-orange, #f2a23a) !important;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__card-slot[hidden] {
-  display: none !important;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__card-slot.is-open {
-  position: absolute;
-  z-index: 4;
-  top: 50%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  transform: translate(-50%, -50%);
-  display: block !important;
-  width: min(430px, calc(100% - 32px));
-  max-height: calc(100% - 32px);
-  overflow: auto;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__map-shell {
-  box-sizing: border-box;
-  padding: 6px;
-  border: 1px solid #d5d9d3;
-  border-radius: var(--lcdp-radius-large);
-  background: #f0f2ef;
-  overflow: hidden;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__map {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100% !important;
-  min-height: 0 !important;
-  border: 1px solid #e1e4df;
-  border-radius: calc(var(--lcdp-radius-large) - 4px);
-  overflow: hidden;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__card-slot.is-open
-  .lcdp-box-card-parc__meta,
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__card-slot.is-open
-  .lcdp-box-card-parc__description,
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__card-slot.is-open
-  .lcdp-box-card-parc__actions {
-  display: none !important;
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__card-slot.is-open
-  .lcdp-box-card-parc__body {
-  padding-bottom: var(--lcdp-space-3);
-}
-
-.lcdp-carte-dynamique--fiche-parc
-  .lcdp-carte-dynamique__card-slot.is-open
-  .lcdp-box-card-parc__text {
-  gap: 0;
-}
-
-/* Navigation Fiche Parc / planning / réservation. */
-.lcdp-box-calendrier-mois--shift-detail
-  .lcdp-box-calendrier-mois__commande,
-.lcdp-fiche-parc__navigation-shift,
-.lcdp-fiche-parc__dialogue-actions,
-.lcdp-fiche-parc__commande-detail {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--lcdp-space-2);
-}
-
-.lcdp-box-calendrier-mois--shift-detail
-  .lcdp-box-calendrier-mois__commande {
-  margin-bottom: var(--lcdp-space-3);
-}
-
-.lcdp-fiche-parc__dialogue-actions {
-  justify-content: center;
-}
-
-.lcdp-box-calendrier-mois--shift-detail
-  .lcdp-box-calendrier-mois__header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--lcdp-space-2);
-}
-
-.lcdp-box-calendrier-mois--shift-detail
-  .lcdp-box-calendrier-mois__title {
-  order: 1;
-  width: 100%;
-  color: var(--lcdp-color-orange);
-}
-
-.lcdp-box-calendrier-mois--shift-detail
-  .lcdp-fiche-parc__commande-detail {
-  order: 2;
-  width: 100%;
-  margin: 0;
-}
-
-.lcdp-box-calendrier-mois--shift-detail
-  .lcdp-fiche-parc__commande-detail
-  .lcdp-button {
-  width: auto;
-  max-width: none;
-  margin: 0;
-  white-space: nowrap;
-}
-
-.lcdp-box-calendrier-mois--shift-detail
-  .lcdp-fiche-parc__commande-detail
-  .lcdp-box-fiche-parc__partage {
-  width: auto;
-  margin: 0;
-}
-
-/* Détail journalier : overlay local au planning mensuel. */
-.lcdp-fiche-parc__planning-slot {
-  position: relative;
-}
-
-.lcdp-fiche-parc__planning-jour-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 12;
-  box-sizing: border-box;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: clamp(0.75rem, 2vw, 1.25rem);
-  background: rgba(31, 42, 36, 0.18);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  overflow: auto;
-}
-
-.lcdp-fiche-parc__planning-jour-box {
-  width: min(100%, 520px);
-  max-height: min(620px, calc(100% - 1rem));
-  overflow: auto;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
-  background: var(--lcdp-color-surface, #ffffff);
-  box-shadow: 0 18px 46px rgba(31, 42, 36, 0.22);
-}
-
-/* Ouverture et changement de vue du Shift Detail. */
-#lcdp-lightbox-slot .lcdp-box-shift-detail-parc {
-  opacity: 0;
-  transition: opacity 160ms ease-out;
-}
-
-#lcdp-lightbox-slot
-  .lcdp-box-shift-detail-parc--visible {
-  opacity: 1;
-}
-
-#lcdp-lightbox-slot
-  .lcdp-box-shift-detail-parc--closing {
-  opacity: 0;
-}
-
-#lcdp-lightbox-slot
-  .lcdp-box-shift-detail-parc__card {
-  height: min(
-    860px,
-    calc(100dvh - (var(--lcdp-space-4) * 2))
-  );
-  min-height: min(
-    680px,
-    calc(100dvh - (var(--lcdp-space-4) * 2))
-  );
-}
-
-.lcdp-fiche-parc__shift-view {
-  width: 100%;
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity 180ms ease-out,
-    transform 180ms ease-out;
-}
-
-.lcdp-fiche-parc__shift-view--enter {
-  opacity: 0;
-  transform: translateY(6px);
-}
-
-.lcdp-fiche-parc__shift-view--leave {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transform: translateY(-4px);
-  pointer-events: none;
-}
-
-@media (max-width: 767px) {
-  .lcdp-carte-dynamique--fiche-parc
-    .lcdp-carte-dynamique__map-shell,
-  .lcdp-carte-dynamique--fiche-parc
-    .lcdp-carte-dynamique__map {
-    min-height: 560px;
-    height: 620px;
-  }
-
-  .lcdp-carte-dynamique--fiche-parc
-    .lcdp-carte-dynamique__card-slot.is-open {
-    width: calc(100% - 20px);
-    max-height: calc(100% - 20px);
-  }
-
-  .lcdp-fiche-parc__planning-jour-overlay {
-    padding: 0.75rem;
-  }
-
-  .lcdp-fiche-parc__planning-jour-box {
-    width: min(100%, 440px);
-    max-height: calc(100% - 0.5rem);
-  }
-
-  #lcdp-lightbox-slot
-    .lcdp-box-shift-detail-parc__card {
-    height: calc(
-      100dvh - (var(--lcdp-space-3) * 2)
-    );
-    min-height: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  .lcdp-carte-dynamique--fiche-parc
-    .lcdp-carte-dynamique__map-shell {
-    min-height: 500px;
-    height: min(64vh, 620px);
-    padding: 24px;
-    border-width: 2px;
-    border-color: #cfd4cd;
-    border-radius:
-      calc(var(--lcdp-radius-large) + 5px);
-    background: #e8ebe6;
-  }
-
-  .lcdp-carte-dynamique--fiche-parc
-    .lcdp-carte-dynamique__map {
-    min-height: 0 !important;
-    height: 100% !important;
-    border-radius: var(--lcdp-radius-large);
-  }
-}
-
