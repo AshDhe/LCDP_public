@@ -70,3 +70,21 @@
   width: min(100%, 660px);
   margin-inline: auto;
 }
+
+/* Correction : le bouton de recherche IA reste lisible sur fond orange. */
+.lcdp-box-commande-bar__actions #bouton-demander-ia,
+.lcdp-box-commande-bar__actions #bouton-demander-ia:hover,
+.lcdp-box-commande-bar__actions #bouton-demander-ia:focus,
+.lcdp-box-commande-bar__actions #bouton-demander-ia:active,
+.lcdp-actions-footer-reserver .lcdp-button-orange,
+.lcdp-actions-footer-reserver .lcdp-button-orange:hover,
+.lcdp-actions-footer-reserver .lcdp-button-orange:focus,
+.lcdp-actions-footer-reserver .lcdp-button-orange:active {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.lcdp-box-commande-bar__actions #bouton-demander-ia svg,
+.lcdp-actions-footer-reserver .lcdp-button-orange svg {
+  color: inherit !important;
+}
