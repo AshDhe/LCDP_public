@@ -294,11 +294,12 @@
   margin: 0;
 }
 
-/* Réserver membre — vue Planning : même espace titre/boutons que la vue Le parc. */
-.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="planning"]
+/* Vue Planning commune : espace sous le titre,
+   depuis la Fiche Parc publique comme depuis Réserver membre. */
+.lcdp-box-shift-detail-parc
   .lcdp-box-calendrier-mois--shift-detail
   .lcdp-fiche-parc__commande-detail {
-  margin-top: 6px !important;
+  margin-top: 12px !important;
 }
 
 @media (min-width: 768px) {
