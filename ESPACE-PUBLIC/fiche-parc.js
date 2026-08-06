@@ -9,6 +9,12 @@
   ).replace(/\/$/, "");
 
   const config = window.SITE_CONFIG || {};
+  const MODE_USAGE_PUBLIC =
+    "consultation-publique";
+  const MODE_USAGE_MEMBRE =
+    "reservation-membre";
+  const MESSAGE_PLANIFICATION_PUBLIQUE =
+    "Vous devez être membre abonné et utiliser la rubrique Réserver de votre espace membre pour planifier votre activité.";
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
     "plage1",
@@ -307,13 +313,14 @@
       {
         templateCardParc: etatInteraction.templateCardParc,
         masquerBoutonFermer: true,
-        onReserver: ouvrirReservationMembre,
+        modeUsage: MODE_USAGE_PUBLIC,
+        onReserver: afficherBlocageReservationPublique,
         onPlanning: ouvrirPlanningPublic,
         onPartager: (parcCible) =>
           partagerFicheParc(parcCible, "fiche"),
         onOuvrirFicheParc: ouvrirFicheParcDepuisCarte,
         onOuvrirPlanningParc: ouvrirPlanningPublic,
-        onReserverParc: ouvrirReservationMembre
+        onReserverParc: afficherBlocageReservationPublique
       }
     );
 
@@ -612,6 +619,13 @@
 
     async function verifierPlanification(parc) {
       const parcCible = actualiserParc(parc);
+      const modeUsage =
+        normaliserModeUsagePlanning(options);
+
+      if (modeUsage !== MODE_USAGE_MEMBRE) {
+        await afficherBlocageReservationPublique();
+        return false;
+      }
 
       if (
         typeof options.verifierReservation ===
@@ -625,9 +639,8 @@
         ) !== false;
       }
 
-      return autoriserPlanificationFicheParc(
-        parcCible
-      );
+      await afficherBlocageReservationPublique();
+      return false;
     }
 
     async function ouvrirPlanningPourPlanification(
@@ -1983,6 +1996,149 @@
   }
 
 
+  function normaliserModeUsagePlanning(options = {}) {
+    return options.modeUsage === MODE_USAGE_MEMBRE
+      ? MODE_USAGE_MEMBRE
+      : MODE_USAGE_PUBLIC;
+  }
+
+  function contexteApiDepuisModeUsage(options = {}) {
+    return normaliserModeUsagePlanning(options) ===
+      MODE_USAGE_MEMBRE
+      ? "membre"
+      : "public";
+  }
+
+  function convertirCleMoisPlanning(valeur) {
+    const match = String(valeur || "")
+      .trim()
+      .match(/^(\d{4})-(\d{2})$/);
+
+    if (!match) {
+      return null;
+    }
+
+    const annee = Number(match[1]);
+    const mois = Number(match[2]);
+
+    if (
+      !Number.isInteger(annee) ||
+      !Number.isInteger(mois) ||
+      mois < 1 ||
+      mois > 12
+    ) {
+      return null;
+    }
+
+    return { annee, mois };
+  }
+
+  async function chargerDroitsPlanningCommun(
+    parc,
+    options = {}
+  ) {
+    if (
+      typeof options.chargerDroitsPlanning ===
+      "function"
+    ) {
+      return options.chargerDroitsPlanning(parc);
+    }
+
+    if (!endpointPlanningParc) {
+      throw new Error(
+        "Le service planning parc n’est pas configuré."
+      );
+    }
+
+    const idparc = nettoyerTexte(
+      parc?.idparc ||
+      parc?.id
+    );
+
+    if (!idparc) {
+      throw new Error("Identifiant du parc manquant.");
+    }
+
+    const contexte =
+      contexteApiDepuisModeUsage(options);
+    const url =
+      endpointPlanningParc +
+      "/droits-planning?idparc=" +
+      encodeURIComponent(idparc) +
+      "&contexte=" +
+      encodeURIComponent(contexte) +
+      "&token=" +
+      encodeURIComponent(tokenPartage) +
+      "&ctx=" +
+      encodeURIComponent(contextePartage);
+    const reponse = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+      headers: construireHeadersAccesPartage({
+        "Accept": "application/json"
+      })
+    });
+    const data =
+      await reponse.json().catch(() => null);
+
+    if (
+      !reponse.ok ||
+      !data ||
+      (data.ok !== true &&
+        data.success !== true) ||
+      !data.droitsPlanning
+    ) {
+      throw new Error(
+        nettoyerTexte(data?.message) ||
+        "Impossible de déterminer la période consultable."
+      );
+    }
+
+    return data.droitsPlanning;
+  }
+
+  async function afficherLimiteHorizonPlanning(
+    etatPlanning,
+    options = {}
+  ) {
+    const droits =
+      etatPlanning?.droitsPlanning || {};
+    let message = "";
+
+    if (
+      etatPlanning?.modeUsage ===
+      MODE_USAGE_PUBLIC
+    ) {
+      message =
+        droits.sessionMembreActive === true
+          ? "Les mois suivants sont consultables depuis la rubrique Réserver de votre espace membre."
+          : "Vous devez être connecté à votre espace membre pour consulter les mois suivants.";
+    } else if (
+      droits.motifLimite ===
+      "fin_abonnement"
+    ) {
+      message =
+        "La période consultable s’arrête à la fin de votre abonnement.";
+    } else {
+      message =
+        "Votre accès permet de consulter le mois en cours et le mois suivant.";
+    }
+
+    if (
+      typeof options.onInformation ===
+      "function"
+    ) {
+      await options.onInformation(message);
+      return;
+    }
+
+    await afficherAlerteFicheParc(
+      message,
+      "orange"
+    );
+  }
+
   async function rendrePlanningParcDansConteneur(
     slot,
     parc,
@@ -1992,30 +2148,36 @@
       throw new Error("Slot planning parc introuvable.");
     }
 
-    const maintenant = new Date();
-    const moisMinimum = new Date(
-      maintenant.getFullYear(),
-      maintenant.getMonth(),
-      1
-    );
-    const moisMaximum = new Date(
-      maintenant.getFullYear(),
-      maintenant.getMonth() + 3,
-      1
-    );
+    const droitsPlanning =
+      await chargerDroitsPlanningCommun(
+        parc,
+        options
+      );
+    const moisMinimum =
+      convertirCleMoisPlanning(
+        droitsPlanning.moisMinimum
+      );
+    const moisMaximum =
+      convertirCleMoisPlanning(
+        droitsPlanning.moisMaximum
+      );
+
+    if (!moisMinimum || !moisMaximum) {
+      throw new Error(
+        "Bornes de consultation du planning indisponibles."
+      );
+    }
+
     const etatPlanning = {
       parc,
-      annee: moisMinimum.getFullYear(),
-      mois: moisMinimum.getMonth() + 1,
+      annee: moisMinimum.annee,
+      mois: moisMinimum.mois,
       planning: [],
-      moisMinimum: {
-        annee: moisMinimum.getFullYear(),
-        mois: moisMinimum.getMonth() + 1
-      },
-      moisMaximum: {
-        annee: moisMaximum.getFullYear(),
-        mois: moisMaximum.getMonth() + 1
-      }
+      droitsPlanning,
+      modeUsage:
+        normaliserModeUsagePlanning(options),
+      moisMinimum,
+      moisMaximum
     };
 
     await afficherMoisPlanningParcCommun(
@@ -2026,6 +2188,7 @@
 
     return etatPlanning;
   }
+
 
   async function afficherMoisPlanningParcCommun(
     slot,
@@ -2145,11 +2308,13 @@
         "aria-disabled",
         precedentInterdit ? "true" : "false"
       );
-      boutonSuivant.disabled = auMaximum;
+      boutonSuivant.disabled = false;
       boutonSuivant.setAttribute(
         "aria-disabled",
-        auMaximum ? "true" : "false"
+        "false"
       );
+      boutonSuivant.dataset.lcdpHorizonLimite =
+        auMaximum ? "true" : "false";
     }
 
     async function actualiserMois() {
@@ -2218,20 +2383,27 @@
       actualiserMois().catch(console.error);
     });
 
-    boutonSuivant.addEventListener("click", () => {
-      if (
-        moisPlanningCommunIdentique(
-          etatPlanning,
-          etatPlanning.moisMaximum
-        )
-      ) {
-        return;
-      }
+    boutonSuivant.addEventListener(
+      "click",
+      () => {
+        if (
+          moisPlanningCommunIdentique(
+            etatPlanning,
+            etatPlanning.moisMaximum
+          )
+        ) {
+          afficherLimiteHorizonPlanning(
+            etatPlanning,
+            options
+          ).catch(console.error);
+          return;
+        }
 
-      changerMois(etatPlanning, 1);
-      actualiserNavigation();
-      actualiserMois().catch(console.error);
-    });
+        changerMois(etatPlanning, 1);
+        actualiserNavigation();
+        actualiserMois().catch(console.error);
+      }
+    );
 
     actualiserNavigation();
     await actualiserMois();
@@ -2391,7 +2563,11 @@
       "&token=" +
       encodeURIComponent(tokenPartage) +
       "&ctx=" +
-      encodeURIComponent(contextePartage);
+      encodeURIComponent(contextePartage) +
+      "&contexte=" +
+      encodeURIComponent(
+        contexteApiDepuisModeUsage(options)
+      );
     const reponse = await fetch(url, {
       method: "GET",
       credentials: "include",
@@ -2745,7 +2921,11 @@
       "&token=" +
       encodeURIComponent(tokenPartage) +
       "&ctx=" +
-      encodeURIComponent(contextePartage);
+      encodeURIComponent(contextePartage) +
+      "&contexte=" +
+      encodeURIComponent(
+        contexteApiDepuisModeUsage(options)
+      );
     const reponse = await fetch(url, {
       method: "GET",
       credentials: "include",
@@ -3817,14 +3997,28 @@
     const libelle = construireLibelleSegmentPlanningCommun(
       segment
     );
+    const modeReservationMembre =
+      normaliserModeUsagePlanning(options) ===
+      MODE_USAGE_MEMBRE;
 
     card.removeAttribute("data-action");
-    card.disabled = false;
-    card.removeAttribute("aria-disabled");
     card.classList.add(
-      "lcdp-box-card-heure-in-calendrier-jour--planning-lecture",
-      "lcdp-box-card-heure-in-calendrier-jour--planning-action"
+      "lcdp-box-card-heure-in-calendrier-jour--planning-lecture"
     );
+
+    if (modeReservationMembre) {
+      card.disabled = false;
+      card.removeAttribute("aria-disabled");
+      card.classList.add(
+        "lcdp-box-card-heure-in-calendrier-jour--planning-action"
+      );
+    } else {
+      card.disabled = true;
+      card.setAttribute(
+        "aria-disabled",
+        "true"
+      );
+    }
 
     if (couleurs.length > 1) {
       card.classList.add(
@@ -3856,45 +4050,51 @@
       );
     }
 
-    card.title =
-      "Choisir la plage " + libelle;
+    card.title = modeReservationMembre
+      ? "Choisir la plage " + libelle
+      : libelle;
     card.setAttribute(
       "aria-label",
-      "Choisir la plage " + libelle
+      modeReservationMembre
+        ? "Choisir la plage " + libelle
+        : libelle
     );
 
     if (label) {
       label.textContent = libelle;
     }
 
-    card.addEventListener(
-      "click",
-      (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+    if (modeReservationMembre) {
+      card.addEventListener(
+        "click",
+        (event) => {
+          event.preventDefault();
+          event.stopPropagation();
 
-        const action =
-          typeof options.onPlanifierJour ===
-          "function"
-            ? options.onPlanifierJour
-            : planifierJourDepuisPlanningPublic;
-        const jourCible = {
-          ...contexte.jour,
-          segments: [segment]
-        };
+          const action =
+            typeof options.onPlanifierJour ===
+            "function"
+              ? options.onPlanifierJour
+              : afficherBlocageReservationPublique;
+          const jourCible = {
+            ...contexte.jour,
+            segments: [segment]
+          };
 
-        Promise.resolve(
-          action({
-            ...contexte,
-            jour: jourCible,
-            segment
-          })
-        ).catch(console.error);
-      }
-    );
+          Promise.resolve(
+            action({
+              ...contexte,
+              jour: jourCible,
+              segment
+            })
+          ).catch(console.error);
+        }
+      );
+    }
 
     return card;
   }
+
 
   function normaliserCouleurPlanningCommun(couleur) {
     const valeur = String(couleur || "gris-clair")
@@ -4092,122 +4292,30 @@
     }
   }
 
-  async function chargerEligibiliteReservationFicheParc() {
-    if (!endpointFluxm) {
-      throw new Error(
-        "Le service de réservation n’est pas configuré."
-      );
-    }
-
-    const reponse = await fetch(
-      endpointFluxm +
-      "/eligibilite-reservation",
-      {
-        method: "GET",
-        credentials: "include",
-        cache: "no-store",
-        headers: {
-          "Accept": "application/json"
-        }
-      }
-    );
-    const data =
-      await reponse.json().catch(() => null);
-
-    if (
-      !reponse.ok ||
-      !data ||
-      (data.success !== true &&
-        data.ok !== true)
-    ) {
-      throw new Error(
-        nettoyerTexte(data?.message) ||
-        "Impossible de vérifier votre droit à planifier."
-      );
-    }
-
-    return data;
-  }
-
   async function autoriserPlanificationFicheParc() {
-    try {
-      const eligibilite =
-        await chargerEligibiliteReservationFicheParc();
-
-      if (eligibilite.peutPlanifier === true) {
-        return true;
-      }
-
-      await afficherAlerteFicheParc(
-        nettoyerTexte(
-          eligibilite.message
-        ) ||
-        "Vous devez être membre abonné pour planifier votre activité.",
-        "orange"
-      );
-      return false;
-    } catch (error) {
-      await afficherAlerteFicheParc(
-        error?.message ||
-        "Impossible de vérifier votre droit à planifier.",
-        "orange"
-      );
-      return false;
-    }
+    await afficherBlocageReservationPublique();
+    return false;
   }
 
-  async function ouvrirReservationMembre(parc) {
-    if (
-      !(await autoriserPlanificationFicheParc(
-        parc
-      ))
-    ) {
-      return;
-    }
-
-    ouvrirPlanningPublic(parc);
+  async function ouvrirReservationMembre() {
+    await afficherBlocageReservationPublique();
   }
 
-  async function informerChoixJourDepuisPlanningPublic(
-    parc
-  ) {
-    if (
-      !(await autoriserPlanificationFicheParc(
-        parc
-      ))
-    ) {
-      return;
-    }
-
-    await afficherAlerteFicheParc(
-      "Choisissez votre journée.",
-      "orange"
-    );
+  async function informerChoixJourDepuisPlanningPublic() {
+    await afficherBlocageReservationPublique();
   }
 
-  async function planifierJourDepuisPlanningPublic(
-    contexte
-  ) {
-    if (
-      !(await autoriserPlanificationFicheParc(
-        contexte?.parc
-      ))
-    ) {
-      return;
-    }
-
-    await rendreChoixHeureReservationCommune(
-      contexte,
-      {}
-    );
+  async function planifierJourDepuisPlanningPublic() {
+    await afficherBlocageReservationPublique();
   }
 
   async function afficherBlocageReservationPublique() {
     await afficherAlerteFicheParc(
-      "Vous devez être membre abonné pour planifier votre activité.",
+      MESSAGE_PLANIFICATION_PUBLIQUE,
       "orange"
     );
   }
+
 
   function ouvrirPlanningPublic(parc) {
     ouvrirShiftDetailParc(parc, "planning").catch(console.error);
@@ -4267,6 +4375,7 @@
         {
           templateJourMois: etatInteraction.templateJourMois,
           templateHeureJour: etatInteraction.templateHeureJour,
+          modeUsage: MODE_USAGE_PUBLIC,
           onReserver: (parcCible) =>
             informerChoixJourDepuisPlanningPublic(
               parcCible
