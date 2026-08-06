@@ -166,8 +166,9 @@
   color: var(--lcdp-color-text);
 }
 
-/* Taux d’occupation du segment journalier.
-   La jauge conserve intégralement la couleur métier de la card. */
+/* Taux d’occupation du segment journalier :
+   le gris foncé recouvre toute la card depuis la gauche.
+   La largeur restante conserve la couleur métier du segment. */
 .lcdp-box-card-heure-in-calendrier-jour--avec-jauge {
   position: relative;
   isolation: isolate;
@@ -178,11 +179,10 @@
   content: "";
   position: absolute;
   z-index: 1;
-  left: 0;
-  bottom: 0;
+  inset: 0 auto 0 0;
   width: var(--lcdp-jauge-largeur, 0%);
-  height: 5px;
-  background: rgba(31, 42, 36, 0.52);
+  height: 100%;
+  background: #343836;
   pointer-events: none;
 }
 
