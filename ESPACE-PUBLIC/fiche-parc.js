@@ -3863,7 +3863,7 @@
 
       await afficherAlerteFicheParc(
         "Votre nouvelle date a bien été enregistrée.",
-        "vert-plein"
+        "orange"
       );
 
       if (
@@ -4009,7 +4009,7 @@
         document.createElement("button");
       confirmer.type = "button";
       confirmer.className =
-        "lcdp-button lcdp-button-primary";
+        "lcdp-button lcdp-button-orange";
       confirmer.textContent = "Confirmer";
       confirmer.addEventListener(
         "click",
