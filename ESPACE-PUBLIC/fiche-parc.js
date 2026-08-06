@@ -3112,14 +3112,34 @@
       );
     }
 
-    const [fragment, reservations] =
-      await Promise.all([
-        chargerFragmentObjetFiche(
-          options,
-          "/BOX/04-box-calendrier-jour.html"
-        ),
-        chargerReservationsActivesFicheParc()
-      ]);
+    const reservations =
+      await chargerReservationsActivesFicheParc();
+    const reservationsJour =
+      (Array.isArray(reservations)
+        ? reservations
+        : []
+      ).filter((reservation) => {
+        return (
+          reservation?.statut !== "cancd" &&
+          extraireDateParisReservation(
+            reservation?.datebookd
+          ) === jour.date
+        );
+      });
+
+    if (reservationsJour.length >= 2) {
+      await afficherInformationReservationFicheParc(
+        options,
+        "Vous avez déjà deux réservations actives sur cette journée."
+      );
+      return;
+    }
+
+    const fragment =
+      await chargerFragmentObjetFiche(
+        options,
+        "/BOX/04-box-calendrier-jour.html"
+      );
 
     conteneurJour.replaceChildren(fragment);
 
@@ -3513,6 +3533,25 @@
       : [];
   }
 
+  function construireLibellePlageReservation(
+    plagebookd
+  ) {
+    const libelles = {
+      plage1: "6 h–10 h",
+      plage2: "10 h–13 h",
+      plage3: "13 h–17 h",
+      plage4: "17 h–21 h",
+      plage5: "21 h–2 h"
+    };
+
+    return (
+      libelles[
+        nettoyerTexte(plagebookd)
+      ] ||
+      "horaire concernée"
+    );
+  }
+
   async function afficherInformationReservationFicheParc(
     options,
     message
@@ -3569,23 +3608,33 @@
     const dateIso = nettoyerTexte(
       bouton?.dataset?.date
     );
-    const reservationsJour =
+    const plagebookd = nettoyerTexte(
+      bouton?.dataset?.plagebookd
+    );
+    const reservationMemePlage =
       (Array.isArray(reservations)
         ? reservations
         : []
-      ).filter((reservation) => {
+      ).find((reservation) => {
         return (
           reservation?.statut !== "cancd" &&
           extraireDateParisReservation(
             reservation?.datebookd
-          ) === dateIso
+          ) === dateIso &&
+          nettoyerTexte(
+            reservation?.plagebookd
+          ) === plagebookd
         );
       });
 
-    if (reservationsJour.length >= 2) {
+    if (reservationMemePlage) {
       await afficherInformationReservationFicheParc(
         options,
-        "Vous avez déjà deux réservations actives sur cette journée."
+        "Vous avez déjà une réservation sur la plage " +
+        construireLibellePlageReservation(
+          plagebookd
+        ) +
+        "."
       );
       return;
     }
@@ -4110,9 +4159,7 @@
     return data;
   }
 
-  async function autoriserPlanificationFicheParc(
-    parc
-  ) {
+  async function autoriserPlanificationFicheParc() {
     try {
       const eligibilite =
         await chargerEligibiliteReservationFicheParc();
@@ -4121,43 +4168,11 @@
         return true;
       }
 
-      const acces =
-        parc?.acces ||
-        accesPublic ||
-        {};
-      const message =
+      await afficherAlerteFicheParc(
         nettoyerTexte(
           eligibilite.message
         ) ||
-        "Vous devez être membre abonné pour planifier votre activité.";
-
-      if (
-        eligibilite.code ===
-          "ABONNEMENT_SUSPENDU_NON_PAYE" &&
-        acces.actionSecondaire ===
-          "regulariser" &&
-        nettoyerTexte(acces.orderid)
-      ) {
-        const payer =
-          await afficherAlerteFicheParc(
-            message,
-            "orange",
-            {
-              libelleAction: "Payer"
-            }
-          );
-
-        if (payer) {
-          ouvrirPaiementSuspensionFicheParc(
-            acces
-          );
-        }
-
-        return false;
-      }
-
-      await afficherAlerteFicheParc(
-        message,
+        "Vous devez être membre abonné pour planifier votre activité.",
         "orange"
       );
       return false;
@@ -4169,43 +4184,6 @@
       );
       return false;
     }
-  }
-
-  function ouvrirPaiementSuspensionFicheParc(
-    acces
-  ) {
-    const orderid = nettoyerTexte(
-      acces?.orderid
-    );
-
-    if (!orderid) {
-      return;
-    }
-
-    const page = construireUrlMembre(
-      "/ESPACE-MEMBRE/paiement-cb.html"
-    );
-    const url = new URL(
-      page,
-      window.location.href
-    );
-
-    url.searchParams.set(
-      "orderid",
-      orderid
-    );
-    url.searchParams.set(
-      "echeance",
-      String(
-        Number(acces?.echeance) || 1
-      )
-    );
-    url.searchParams.set(
-      "source",
-      "suspension"
-    );
-
-    window.location.href = url.toString();
   }
 
   async function ouvrirReservationMembre(parc) {
@@ -4882,8 +4860,7 @@
 
   async function afficherAlerteFicheParc(
     message,
-    couleurAction = "orange",
-    options = {}
+    couleurAction = "orange"
   ) {
     await chargerStyleObjetFiche(
       {},
@@ -4918,11 +4895,6 @@
     }
 
     texte.textContent = message || "";
-
-    if (nettoyerTexte(options.libelleAction)) {
-      boutonOk.textContent =
-        nettoyerTexte(options.libelleAction);
-    }
 
     boutonOk.classList.remove(
       "lcdp-button-primary",
