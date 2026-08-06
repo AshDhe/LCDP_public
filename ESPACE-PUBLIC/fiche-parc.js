@@ -2801,7 +2801,8 @@
 
   async function afficherBlocageReservationPublique() {
     await afficherAlerteFicheParc(
-      "Vous devez être membre abonné pour planifier votre activité."
+      "Vous devez être membre abonné pour planifier votre activité.",
+      "orange"
     );
   }
 
@@ -3418,15 +3419,27 @@
   }
 
   async function afficherMessageShift(message) {
-    await afficherAlerteFicheParc(message);
+    await afficherAlerteFicheParc(
+      message,
+      "orange"
+    );
   }
 
-  async function afficherAlerteFicheParc(message) {
+  async function afficherAlerteFicheParc(
+    message,
+    couleurAction = "orange"
+  ) {
+    await chargerStyleObjetFiche(
+      {},
+      "/BOX/02-box-alerte.css"
+    );
+
     const conteneur = document.createElement("div");
     document.body.appendChild(conteneur);
 
-    const fragment = await chargerFragment(
-      "/OBJET/BOX/02-box-alerte.html"
+    const fragment = await chargerFragmentObjetFiche(
+      {},
+      "/BOX/02-box-alerte.html"
     );
     conteneur.appendChild(fragment);
 
@@ -3449,8 +3462,16 @@
     }
 
     texte.textContent = message || "";
-    boutonOk.classList.remove("lcdp-button-primary");
-    boutonOk.classList.add("lcdp-button-orange");
+    boutonOk.classList.remove(
+      "lcdp-button-primary",
+      "lcdp-button-secondary",
+      "lcdp-button-orange"
+    );
+    boutonOk.classList.add(
+      couleurAction === "vert"
+        ? "lcdp-button-secondary"
+        : "lcdp-button-orange"
+    );
 
     return new Promise((resolve) => {
       let resolu = false;
@@ -3545,13 +3566,15 @@
         typepartage
       );
 
-      await afficherMessageShift(
+      await afficherAlerteFicheParc(
         nettoyerTexte(resultat?.message) ||
-        "Le partage a bien été envoyé."
+        "Le partage a bien été envoyé.",
+        "vert"
       );
     } catch (error) {
-      await afficherMessageShift(
-        normaliserMessageErreurPartagePublic(error?.message)
+      await afficherAlerteFicheParc(
+        normaliserMessageErreurPartagePublic(error?.message),
+        "vert"
       );
     }
   }
