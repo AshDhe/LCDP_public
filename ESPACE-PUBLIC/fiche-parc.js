@@ -3187,10 +3187,6 @@
       }
     );
 
-    const reservationsParPlage =
-      construireReservationsParPlage(
-        reservations
-      );
     const creneaux =
       construireCreneauxReservationJour(jour);
 
@@ -3201,20 +3197,6 @@
       const label = card.querySelector(
         "[data-lcdp-card-heure-jour-label]"
       );
-      const reservationPlage =
-        reservationsParPlage.get(
-          creneau.dateIso +
-          "|" +
-          creneau.plagebookd
-        ) || null;
-      const heureReservee = reservationPlage
-        ? extraireHeureParisReservation(
-            reservationPlage.datebookd
-          )
-        : "";
-      const dejaReserve =
-        reservationPlage &&
-        heureReservee === creneau.heure;
       const complet =
         Number(creneau.ratio) >= 1;
 
@@ -3239,45 +3221,26 @@
           );
       }
 
-      if (reservationPlage || complet) {
+      if (complet) {
         card.disabled = true;
         card.setAttribute(
           "aria-disabled",
           "true"
         );
-
-        if (reservationPlage) {
-          card.classList.add(
-            dejaReserve
-              ? "lcdp-box-card-heure-in-calendrier-jour--deja-reserve"
-              : "lcdp-box-card-heure-in-calendrier-jour--plage-bloquee"
-          );
-          card.setAttribute(
-            "aria-label",
-            dejaReserve
-              ? formaterHeureAffichee(
-                  creneau.heure
-                ) + " déjà réservé"
-              : formaterHeureAffichee(
-                  creneau.heure
-                ) +
-                " indisponible : une réservation existe déjà sur cette plage"
-          );
-        } else {
-          card.setAttribute(
-            "aria-label",
-            formaterHeureAffichee(
-              creneau.heure
-            ) + " complet"
-          );
-        }
+        card.setAttribute(
+          "aria-label",
+          formaterHeureAffichee(
+            creneau.heure
+          ) + " complet"
+        );
       } else {
         card.addEventListener(
           "click",
           () => {
             traiterChoixHeureReservationCommune(
               card,
-              options
+              options,
+              reservations
             ).catch(console.error);
           }
         );
@@ -3460,55 +3423,12 @@
       : date.toISOString();
   }
 
-  function construireReservationsParPlage(
-    reservations
-  ) {
-    const resultat = new Map();
-
-    (Array.isArray(reservations)
-      ? reservations
-      : []
-    ).forEach((reservation) => {
-      if (
-        !reservation ||
-        reservation.statut === "cancd"
-      ) {
-        return;
-      }
-
-      const dateIso =
-        extraireDateParisReservation(
-          reservation.datebookd
-        );
-      const plagebookd = nettoyerTexte(
-        reservation.plagebookd
-      );
-
-      if (dateIso && plagebookd) {
-        resultat.set(
-          dateIso + "|" + plagebookd,
-          reservation
-        );
-      }
-    });
-
-    return resultat;
-  }
-
   function extraireDateParisReservation(
     timestamp
   ) {
     return extrairePartiesParisReservation(
       timestamp
     ).dateIso;
-  }
-
-  function extraireHeureParisReservation(
-    timestamp
-  ) {
-    return extrairePartiesParisReservation(
-      timestamp
-    ).heure;
   }
 
   function extrairePartiesParisReservation(
@@ -3593,9 +3513,28 @@
       : [];
   }
 
+  async function afficherInformationReservationFicheParc(
+    options,
+    message
+  ) {
+    if (
+      typeof options?.onInformation ===
+      "function"
+    ) {
+      await options.onInformation(message);
+      return;
+    }
+
+    await afficherAlerteFicheParc(
+      message,
+      "orange"
+    );
+  }
+
   async function traiterChoixHeureReservationCommune(
     bouton,
-    options = {}
+    options = {},
+    reservations = []
   ) {
     const payload = {
       idparc: nettoyerTexte(
@@ -3623,6 +3562,30 @@
       await afficherAlerteFicheParc(
         "Heure, date ou parc manquant.",
         "orange"
+      );
+      return;
+    }
+
+    const dateIso = nettoyerTexte(
+      bouton?.dataset?.date
+    );
+    const reservationsJour =
+      (Array.isArray(reservations)
+        ? reservations
+        : []
+      ).filter((reservation) => {
+        return (
+          reservation?.statut !== "cancd" &&
+          extraireDateParisReservation(
+            reservation?.datebookd
+          ) === dateIso
+        );
+      });
+
+    if (reservationsJour.length >= 2) {
+      await afficherInformationReservationFicheParc(
+        options,
+        "Vous avez déjà deux réservations actives sur cette journée."
       );
       return;
     }
@@ -3867,6 +3830,21 @@
       );
     }
 
+    const largeurJauge =
+      normaliserLargeurJaugePlanning(
+        segment?.jauge
+      );
+
+    if (largeurJauge > 0) {
+      card.classList.add(
+        "lcdp-box-card-heure-in-calendrier-jour--avec-jauge"
+      );
+      card.style.setProperty(
+        "--lcdp-jauge-largeur",
+        largeurJauge + "%"
+      );
+    }
+
     card.title = libelle;
     card.setAttribute("aria-label", libelle);
 
@@ -3984,10 +3962,24 @@
   }
 
   function construireLibelleSegmentPlanningCommun(segment) {
-    return (
+    const horaire =
       formaterHeureAffichee(segment?.debut) +
       "–" +
-      formaterHeureAffichee(segment?.fin)
+      formaterHeureAffichee(segment?.fin);
+    const ratio = Number(segment?.ratio);
+
+    if (
+      !Number.isFinite(ratio) ||
+      ratio < 0
+    ) {
+      return horaire;
+    }
+
+    return (
+      horaire +
+      " · occupation " +
+      Math.round(ratio * 100) +
+      " %"
     );
   }
 
@@ -4118,7 +4110,9 @@
     return data;
   }
 
-  async function autoriserPlanificationFicheParc() {
+  async function autoriserPlanificationFicheParc(
+    parc
+  ) {
     try {
       const eligibilite =
         await chargerEligibiliteReservationFicheParc();
@@ -4127,11 +4121,43 @@
         return true;
       }
 
-      await afficherAlerteFicheParc(
+      const acces =
+        parc?.acces ||
+        accesPublic ||
+        {};
+      const message =
         nettoyerTexte(
           eligibilite.message
         ) ||
-        "Vous devez être membre abonné pour planifier votre activité.",
+        "Vous devez être membre abonné pour planifier votre activité.";
+
+      if (
+        eligibilite.code ===
+          "ABONNEMENT_SUSPENDU_NON_PAYE" &&
+        acces.actionSecondaire ===
+          "regulariser" &&
+        nettoyerTexte(acces.orderid)
+      ) {
+        const payer =
+          await afficherAlerteFicheParc(
+            message,
+            "orange",
+            {
+              libelleAction: "Payer"
+            }
+          );
+
+        if (payer) {
+          ouvrirPaiementSuspensionFicheParc(
+            acces
+          );
+        }
+
+        return false;
+      }
+
+      await afficherAlerteFicheParc(
+        message,
         "orange"
       );
       return false;
@@ -4143,6 +4169,43 @@
       );
       return false;
     }
+  }
+
+  function ouvrirPaiementSuspensionFicheParc(
+    acces
+  ) {
+    const orderid = nettoyerTexte(
+      acces?.orderid
+    );
+
+    if (!orderid) {
+      return;
+    }
+
+    const page = construireUrlMembre(
+      "/ESPACE-MEMBRE/paiement-cb.html"
+    );
+    const url = new URL(
+      page,
+      window.location.href
+    );
+
+    url.searchParams.set(
+      "orderid",
+      orderid
+    );
+    url.searchParams.set(
+      "echeance",
+      String(
+        Number(acces?.echeance) || 1
+      )
+    );
+    url.searchParams.set(
+      "source",
+      "suspension"
+    );
+
+    window.location.href = url.toString();
   }
 
   async function ouvrirReservationMembre(parc) {
@@ -4157,9 +4220,13 @@
     ouvrirPlanningPublic(parc);
   }
 
-  async function informerChoixJourDepuisPlanningPublic() {
+  async function informerChoixJourDepuisPlanningPublic(
+    parc
+  ) {
     if (
-      !(await autoriserPlanificationFicheParc())
+      !(await autoriserPlanificationFicheParc(
+        parc
+      ))
     ) {
       return;
     }
@@ -4252,8 +4319,10 @@
         {
           templateJourMois: etatInteraction.templateJourMois,
           templateHeureJour: etatInteraction.templateHeureJour,
-          onReserver: () =>
-            informerChoixJourDepuisPlanningPublic(),
+          onReserver: (parcCible) =>
+            informerChoixJourDepuisPlanningPublic(
+              parcCible
+            ),
           onPlanifierJour:
             planifierJourDepuisPlanningPublic,
           onPartager: (parcCible) =>
@@ -4380,8 +4449,10 @@
               parcCible,
               "planning"
             ),
-          onReserver: () =>
-            informerChoixJourDepuisPlanningPublic(),
+          onReserver: (parcCible) =>
+            informerChoixJourDepuisPlanningPublic(
+              parcCible
+            ),
           onPlanifierJour:
             planifierJourDepuisPlanningPublic
         }
@@ -4811,7 +4882,8 @@
 
   async function afficherAlerteFicheParc(
     message,
-    couleurAction = "orange"
+    couleurAction = "orange",
+    options = {}
   ) {
     await chargerStyleObjetFiche(
       {},
@@ -4846,6 +4918,12 @@
     }
 
     texte.textContent = message || "";
+
+    if (nettoyerTexte(options.libelleAction)) {
+      boutonOk.textContent =
+        nettoyerTexte(options.libelleAction);
+    }
+
     boutonOk.classList.remove(
       "lcdp-button-primary",
       "lcdp-button-secondary",
