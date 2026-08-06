@@ -400,3 +400,79 @@
     padding: 7px 13px;
   }
 }
+
+/* Mon agenda — Card Réservation inspirée de la Card Parc.
+   L'image est bord à bord et le contenu conserve ses actions propres. */
+.lcdp-box-card-reservation-membre {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
+}
+
+.lcdp-box-card-reservation-membre--avec-image {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.lcdp-box-card-reservation-membre__media {
+  width: 100%;
+  min-width: 0;
+  border-radius: 0;
+  display: flex;
+}
+
+.lcdp-box-card-reservation-membre__image {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.lcdp-box-card-reservation-membre__body {
+  flex: 1;
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  justify-content: space-between;
+}
+
+.lcdp-box-card-reservation-membre--annulee {
+  opacity: 0.68;
+  border-style: dashed;
+}
+
+.lcdp-box-card-reservation-membre--annulee
+  .lcdp-box-card-reservation-membre__invitation {
+  color: var(--lcdp-color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-reservation-membre,
+  .lcdp-box-card-reservation-membre--avec-image {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .lcdp-box-card-reservation-membre__media {
+    width: 34%;
+    min-width: 220px;
+    max-width: 280px;
+  }
+
+  .lcdp-box-card-reservation-membre__image {
+    height: 100%;
+    min-height: 210px;
+    aspect-ratio: auto;
+  }
+
+  .lcdp-box-card-reservation-membre__body {
+    padding: var(--lcdp-space-4);
+  }
+}
+

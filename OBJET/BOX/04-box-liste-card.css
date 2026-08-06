@@ -151,3 +151,36 @@
     padding: var(--lcdp-space-4);
   }
 }
+
+/* Mon agenda : onglets À venir / Passés et bascule Liste / Planning. */
+.lcdp-box-liste-card--planning-membre
+  [data-lcdp-commande-bar-actions] {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-planning-membre-periode-tabs {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-planning-membre-periode-button,
+.lcdp-planning-membre-affichage-button {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-liste-card--planning-membre
+    [data-lcdp-commande-bar-actions] {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(180px, 0.72fr);
+    align-items: stretch;
+  }
+}
+
