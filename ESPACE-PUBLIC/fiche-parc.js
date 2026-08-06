@@ -2960,7 +2960,16 @@
     jour,
     options
   ) {
-    const ancienneOverlay = slot.querySelector(
+    const shiftDetail = slot.closest(
+      "[data-lcdp-box-shift-detail-parc]"
+    );
+    const carteShift = slot.closest(
+      ".lcdp-box-shift-detail-parc__card"
+    );
+    const hoteOverlay = carteShift || slot;
+    const ancienneOverlay = hoteOverlay.querySelector(
+      ":scope > .lcdp-fiche-parc__planning-jour-overlay"
+    ) || slot.querySelector(
       ":scope > .lcdp-fiche-parc__planning-jour-overlay"
     );
 
@@ -2975,11 +2984,23 @@
       }
     }
 
+    const positionScrollAvantJour =
+      carteShift?.scrollTop || 0;
+    const elementFocusAvantJour =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+
     slot.classList.add("lcdp-fiche-parc__planning-slot");
 
     const overlay = document.createElement("div");
     overlay.className = "lcdp-fiche-parc__planning-jour-overlay";
-    overlay.setAttribute("role", "presentation");
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute(
+      "aria-label",
+      "Détail horaire du parc"
+    );
 
     const conteneurJour = document.createElement("div");
     conteneurJour.className = "lcdp-fiche-parc__planning-jour-box";
@@ -2990,7 +3011,7 @@
     );
     conteneurJour.appendChild(fragment);
     overlay.appendChild(conteneurJour);
-    slot.appendChild(overlay);
+    hoteOverlay.appendChild(overlay);
 
     const calendrier = conteneurJour.querySelector(
       "[data-lcdp-box-calendrier-jour]"
@@ -3032,9 +3053,6 @@
       "lcdp-box-calendrier-jour--planning-overlay"
     );
 
-    const shiftDetail = calendrier.closest(
-      "[data-lcdp-box-shift-detail-parc]"
-    );
     const boutonFermerShift = shiftDetail?.querySelector(
       "[data-lcdp-shift-detail-parc-close]"
     );
@@ -3053,7 +3071,7 @@
       : null;
     const vuesMensuelles = Array.from(
       slot.children
-    ).filter((element) => element !== overlay);
+    );
     const etatsVuesMensuelles = vuesMensuelles.map(
       (element) => ({
         element,
@@ -3064,6 +3082,10 @@
     shiftDetail?.classList.add(
       "lcdp-box-shift-detail-parc--planning-jour"
     );
+
+    if (carteShift) {
+      carteShift.scrollTop = 0;
+    }
 
     if (boutonFermerShift) {
       boutonFermerShift.disabled = true;
@@ -3139,6 +3161,22 @@
       shiftDetail?.classList.remove(
         "lcdp-box-shift-detail-parc--planning-jour"
       );
+
+      if (carteShift) {
+        carteShift.scrollTop =
+          positionScrollAvantJour;
+      }
+
+      if (
+        elementFocusAvantJour &&
+        document.body.contains(
+          elementFocusAvantJour
+        )
+      ) {
+        elementFocusAvantJour.focus({
+          preventScroll: true
+        });
+      }
     };
 
     function gererEchapJour(event) {
@@ -3237,6 +3275,12 @@
     message.textContent = grille.children.length
       ? ""
       : "Aucun horaire n’est disponible pour cette date.";
+
+    window.requestAnimationFrame(() => {
+      boutonFermer.focus({
+        preventScroll: true
+      });
+    });
   }
 
   async function rendreChoixHeureReservationCommune(
