@@ -3432,6 +3432,14 @@
       const label = card.querySelector(
         "[data-lcdp-card-heure-jour-label]"
       );
+
+      /*
+       * Le template générique porte encore l'ancien data-action
+       * "choisir-heure-arrivee". Dans Réserver membre, cet attribut
+       * déclenchait aussi l'ancien workflow global en parallèle du
+       * workflow commun de la Fiche Parc.
+       */
+      card.removeAttribute("data-action");
       const complet =
         Number(creneau.ratio) >= 1;
 
@@ -3471,7 +3479,10 @@
       } else {
         card.addEventListener(
           "click",
-          () => {
+          (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
             traiterChoixHeureReservationCommune(
               card,
               options,
@@ -3852,7 +3863,7 @@
 
       await afficherAlerteFicheParc(
         "Votre nouvelle date a bien été enregistrée.",
-        "orange"
+        "vert-plein"
       );
 
       if (
@@ -3998,7 +4009,7 @@
         document.createElement("button");
       confirmer.type = "button";
       confirmer.className =
-        "lcdp-button lcdp-button-orange";
+        "lcdp-button lcdp-button-primary";
       confirmer.textContent = "Confirmer";
       confirmer.addEventListener(
         "click",
@@ -5025,9 +5036,11 @@
       "lcdp-button-orange"
     );
     boutonOk.classList.add(
-      couleurAction === "vert"
-        ? "lcdp-button-secondary"
-        : "lcdp-button-orange"
+      couleurAction === "vert-plein"
+        ? "lcdp-button-primary"
+        : couleurAction === "vert"
+          ? "lcdp-button-secondary"
+          : "lcdp-button-orange"
     );
 
     return new Promise((resolve) => {
