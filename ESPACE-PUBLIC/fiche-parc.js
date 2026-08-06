@@ -2750,7 +2750,14 @@
     );
 
     if (ancienneOverlay) {
-      ancienneOverlay.remove();
+      if (
+        typeof ancienneOverlay._lcdpFermerJour ===
+        "function"
+      ) {
+        ancienneOverlay._lcdpFermerJour();
+      } else {
+        ancienneOverlay.remove();
+      }
     }
 
     slot.classList.add("lcdp-fiche-parc__planning-slot");
@@ -2813,19 +2820,137 @@
     const shiftDetail = calendrier.closest(
       "[data-lcdp-box-shift-detail-parc]"
     );
+    const boutonFermerShift = shiftDetail?.querySelector(
+      "[data-lcdp-shift-detail-parc-close]"
+    );
+    const etatBoutonFermerShift = boutonFermerShift
+      ? {
+          disabled: boutonFermerShift.disabled,
+          ariaDisabled:
+            boutonFermerShift.getAttribute(
+              "aria-disabled"
+            ),
+          tabindex:
+            boutonFermerShift.getAttribute(
+              "tabindex"
+            )
+        }
+      : null;
+    const vuesMensuelles = Array.from(
+      slot.children
+    ).filter((element) => element !== overlay);
+    const etatsVuesMensuelles = vuesMensuelles.map(
+      (element) => ({
+        element,
+        inert: element.hasAttribute("inert")
+      })
+    );
+
     shiftDetail?.classList.add(
       "lcdp-box-shift-detail-parc--planning-jour"
     );
 
+    if (boutonFermerShift) {
+      boutonFermerShift.disabled = true;
+      boutonFermerShift.setAttribute(
+        "aria-disabled",
+        "true"
+      );
+      boutonFermerShift.setAttribute(
+        "tabindex",
+        "-1"
+      );
+    }
+
+    etatsVuesMensuelles.forEach(({ element }) => {
+      element.setAttribute("inert", "");
+    });
+
+    let jourFerme = false;
+
     const fermerJour = () => {
+      if (jourFerme) {
+        return;
+      }
+
+      jourFerme = true;
+      document.removeEventListener(
+        "keydown",
+        gererEchapJour,
+        true
+      );
       overlay.remove();
+
+      etatsVuesMensuelles.forEach(
+        ({ element, inert }) => {
+          if (!inert) {
+            element.removeAttribute("inert");
+          }
+        }
+      );
+
+      if (boutonFermerShift && etatBoutonFermerShift) {
+        boutonFermerShift.disabled =
+          etatBoutonFermerShift.disabled;
+
+        if (
+          etatBoutonFermerShift.ariaDisabled ===
+          null
+        ) {
+          boutonFermerShift.removeAttribute(
+            "aria-disabled"
+          );
+        } else {
+          boutonFermerShift.setAttribute(
+            "aria-disabled",
+            etatBoutonFermerShift.ariaDisabled
+          );
+        }
+
+        if (
+          etatBoutonFermerShift.tabindex === null
+        ) {
+          boutonFermerShift.removeAttribute(
+            "tabindex"
+          );
+        } else {
+          boutonFermerShift.setAttribute(
+            "tabindex",
+            etatBoutonFermerShift.tabindex
+          );
+        }
+      }
+
       shiftDetail?.classList.remove(
         "lcdp-box-shift-detail-parc--planning-jour"
       );
     };
 
+    function gererEchapJour(event) {
+      if (
+        event.key !== "Escape" ||
+        !document.body.contains(overlay)
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      fermerJour();
+    }
+
+    overlay._lcdpFermerJour = fermerJour;
+
+    document.addEventListener(
+      "keydown",
+      gererEchapJour,
+      true
+    );
+
     overlay.addEventListener("click", (event) => {
       if (event.target === overlay) {
+        event.preventDefault();
+        event.stopPropagation();
         fermerJour();
       }
     });
@@ -3205,12 +3330,8 @@
         {
           templateJourMois: etatInteraction.templateJourMois,
           templateHeureJour: etatInteraction.templateHeureJour,
-          onReserver: (parcCible) =>
-            afficherVueShiftDetailParc(
-              contenu,
-              parcCible,
-              "reservation"
-            ),
+          onReserver: () =>
+            afficherBlocageReservationPublique(),
           onPartager: (parcCible) =>
             partagerFicheParc(parcCible, "planning"),
           onRetourPresentation: () => {
@@ -3335,12 +3456,8 @@
               parcCible,
               "planning"
             ),
-          onReserver: (parcCible) =>
-            afficherVueShiftDetailParc(
-              contenu.parentElement,
-              parcCible,
-              "reservation"
-            )
+          onReserver: () =>
+            afficherBlocageReservationPublique()
         }
       );
 
