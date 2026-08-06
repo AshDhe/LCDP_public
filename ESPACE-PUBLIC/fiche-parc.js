@@ -610,38 +610,84 @@
       );
     }
 
-    async function ouvrirReservation(parc) {
+    async function verifierPlanification(parc) {
       const parcCible = actualiserParc(parc);
 
       if (
-        typeof options.verifierReservation === "function"
+        typeof options.verifierReservation ===
+        "function"
       ) {
-        const autorise = await options.verifierReservation(
-          parcCible,
-          api
-        );
-
-        if (autorise === false) {
-          return;
-        }
+        return (
+          await options.verifierReservation(
+            parcCible,
+            api
+          )
+        ) !== false;
       }
 
+      return autoriserPlanificationFicheParc(
+        parcCible
+      );
+    }
+
+    async function ouvrirPlanningPourPlanification(
+      parc
+    ) {
+      const parcCible = actualiserParc(parc);
+
       if (
-        typeof options.rendreReservation === "function"
+        !(await verifierPlanification(parcCible))
       ) {
-        await afficherVue(
-          "reservation",
-          parcCible
-        );
+        return;
+      }
+
+      await afficherVue(
+        "planning",
+        parcCible
+      );
+    }
+
+    async function informerChoixJour(parc) {
+      const parcCible = actualiserParc(parc);
+
+      if (
+        !(await verifierPlanification(parcCible))
+      ) {
         return;
       }
 
       const action =
-        typeof options.onReserver === "function"
-          ? options.onReserver
-          : ouvrirReservationMembre;
+        typeof options.onInformation === "function"
+          ? options.onInformation
+          : (message) =>
+              afficherAlerteFicheParc(
+                message,
+                "orange"
+              );
 
-      await action(parcCible, api);
+      await action(
+        "Choisissez votre journée."
+      );
+    }
+
+    async function planifierJour(contexte) {
+      const parcCible = actualiserParc(
+        contexte?.parc || parcCourant
+      );
+
+      if (
+        !(await verifierPlanification(parcCible))
+      ) {
+        return;
+      }
+
+      await rendreChoixHeureReservationCommune(
+        {
+          ...contexte,
+          parc: parcCible
+        },
+        options
+      );
     }
 
     async function afficherVueSecurisee(vue, parc) {
@@ -657,7 +703,7 @@
     }
 
     async function afficherVue(vueDemandee, parc) {
-      const vue = ["fiche", "planning", "reservation"]
+      const vue = ["fiche", "planning"]
         .includes(vueDemandee)
         ? vueDemandee
         : "fiche";
@@ -689,7 +735,7 @@
           {
             ...options,
             masquerBoutonFermer: true,
-            onReserver: ouvrirReservation,
+            onReserver: ouvrirPlanningPourPlanification,
             onPlanning: (parcCible) =>
               afficherVueSecurisee(
                 "planning",
@@ -707,7 +753,7 @@
                 "planning",
                 parcCible
               ),
-            onReserverParc: ouvrirReservation
+            onReserverParc: ouvrirPlanningPourPlanification
           }
         );
       } else if (vue === "planning") {
@@ -716,7 +762,8 @@
           parcAffiche,
           {
             ...options,
-            onReserver: ouvrirReservation,
+            onReserver: informerChoixJour,
+            onPlanifierJour: planifierJour,
             onPartager: (parcCible) =>
               partager(parcCible, "planning"),
             onRetourPresentation: (parcCible) =>
@@ -726,20 +773,6 @@
               ),
             onErreur: options.onErreur
           }
-        );
-      } else {
-        if (
-          typeof options.rendreReservation !== "function"
-        ) {
-          throw new Error(
-            "Le rendu de réservation n’est pas configuré."
-          );
-        }
-
-        await options.rendreReservation(
-          nouvelleVue,
-          parcAffiche,
-          api
         );
       }
 
@@ -808,7 +841,9 @@
       afficherPlanning: (parc) =>
         afficherVue("planning", parc || parcCourant),
       afficherReservation: (parc) =>
-        ouvrirReservation(parc || parcCourant),
+        ouvrirPlanningPourPlanification(
+          parc || parcCourant
+        ),
       getParc: () => parcCourant,
       getVue: () => vueCourante,
       detruire: () => {
@@ -2985,6 +3020,63 @@
       formaterDatePlanningLongue(jour.date);
     corps.insertBefore(dateCourante, message);
 
+    const actionsJour = document.createElement("div");
+    actionsJour.className =
+      "lcdp-box-fiche-parc__actions-barre " +
+      "lcdp-box-card-parc--reserver";
+    actionsJour.setAttribute(
+      "aria-label",
+      "Planification de la journée"
+    );
+
+    const boutonPlanifierJour =
+      creerBoutonActionFicheParc(
+        {
+          libelle: "Planifier",
+          ariaLabel:
+            "Planifier une heure d’arrivée pour cette journée",
+          icone: "reserver",
+          variante: "orange-plein"
+        },
+        options
+      );
+
+    boutonPlanifierJour.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const action =
+          typeof options.onPlanifierJour ===
+          "function"
+            ? options.onPlanifierJour
+            : planifierJourDepuisPlanningPublic;
+
+        Promise.resolve(
+          action({
+            conteneurJour,
+            calendrier,
+            corps,
+            grille,
+            message,
+            parc: etatPlanning.parc,
+            jour,
+            dateIso: jour.date,
+            fermerJour
+          })
+        ).catch(console.error);
+      }
+    );
+
+    actionsJour.appendChild(
+      boutonPlanifierJour
+    );
+    corps.insertBefore(
+      actionsJour,
+      message
+    );
+
     const segments = Array.isArray(jour?.segments)
       ? jour.segments
       : [];
@@ -2999,6 +3091,745 @@
     message.textContent = grille.children.length
       ? ""
       : "Aucun horaire n’est disponible pour cette date.";
+  }
+
+  async function rendreChoixHeureReservationCommune(
+    contexte,
+    options = {}
+  ) {
+    const conteneurJour = contexte?.conteneurJour;
+    const parc = contexte?.parc;
+    const jour = contexte?.jour;
+    const fermerJour = contexte?.fermerJour;
+
+    if (
+      !conteneurJour ||
+      !parc ||
+      !jour?.date
+    ) {
+      throw new Error(
+        "Contexte de réservation journalier incomplet."
+      );
+    }
+
+    const [fragment, reservations] =
+      await Promise.all([
+        chargerFragmentObjetFiche(
+          options,
+          "/BOX/04-box-calendrier-jour.html"
+        ),
+        chargerReservationsActivesFicheParc()
+      ]);
+
+    conteneurJour.replaceChildren(fragment);
+
+    const calendrier = conteneurJour.querySelector(
+      "[data-lcdp-box-calendrier-jour]"
+    );
+    const titre = conteneurJour.querySelector(
+      "[data-lcdp-calendrier-jour-title]"
+    );
+    const meta = conteneurJour.querySelector(
+      "[data-lcdp-calendrier-jour-meta]"
+    );
+    const message = conteneurJour.querySelector(
+      "[data-lcdp-calendrier-jour-message]"
+    );
+    const grille = conteneurJour.querySelector(
+      "[data-lcdp-calendrier-jour-grid]"
+    );
+    const boutonFermer = conteneurJour.querySelector(
+      "[data-lcdp-calendrier-jour-close]"
+    );
+
+    if (
+      !calendrier ||
+      !titre ||
+      !meta ||
+      !message ||
+      !grille ||
+      !boutonFermer
+    ) {
+      throw new Error(
+        "Structure de choix de l’heure incomplète."
+      );
+    }
+
+    calendrier.classList.add(
+      "lcdp-box-calendrier-jour--shift-detail",
+      "lcdp-box-calendrier-jour--planning-overlay"
+    );
+
+    const nomParc = nettoyerTexte(
+      parc?.nom ||
+      parc?.nomparc ||
+      "Parc"
+    ) || "Parc";
+
+    titre.textContent =
+      "Votre heure d’arrivée";
+    meta.textContent =
+      formaterDatePlanningLongue(jour.date) +
+      " · Parc de " +
+      nomParc;
+
+    boutonFermer.hidden = false;
+    boutonFermer.removeAttribute("hidden");
+    boutonFermer.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (typeof fermerJour === "function") {
+          fermerJour();
+        }
+      }
+    );
+
+    const reservationsParPlage =
+      construireReservationsParPlage(
+        reservations
+      );
+    const creneaux =
+      construireCreneauxReservationJour(jour);
+
+    creneaux.forEach((creneau) => {
+      const card =
+        obtenirTemplateHeurePlanning(options)
+          .cloneNode(true);
+      const label = card.querySelector(
+        "[data-lcdp-card-heure-jour-label]"
+      );
+      const reservationPlage =
+        reservationsParPlage.get(
+          creneau.dateIso +
+          "|" +
+          creneau.plagebookd
+        ) || null;
+      const heureReservee = reservationPlage
+        ? extraireHeureParisReservation(
+            reservationPlage.datebookd
+          )
+        : "";
+      const dejaReserve =
+        reservationPlage &&
+        heureReservee === creneau.heure;
+      const complet =
+        Number(creneau.ratio) >= 1;
+
+      card.classList.add(
+        "lcdp-box-card-heure-in-calendrier-jour--" +
+        normaliserCouleurPlanningCommun(
+          creneau.couleur
+        )
+      );
+      card.dataset.idparc = nettoyerTexte(
+        parc?.idparc || parc?.id
+      );
+      card.dataset.date = creneau.dateIso;
+      card.dataset.heure = creneau.heure;
+      card.dataset.plagebookd =
+        creneau.plagebookd;
+
+      if (label) {
+        label.textContent =
+          formaterHeureAffichee(
+            creneau.heure
+          );
+      }
+
+      if (reservationPlage || complet) {
+        card.disabled = true;
+        card.setAttribute(
+          "aria-disabled",
+          "true"
+        );
+
+        if (reservationPlage) {
+          card.classList.add(
+            dejaReserve
+              ? "lcdp-box-card-heure-in-calendrier-jour--deja-reserve"
+              : "lcdp-box-card-heure-in-calendrier-jour--plage-bloquee"
+          );
+          card.setAttribute(
+            "aria-label",
+            dejaReserve
+              ? formaterHeureAffichee(
+                  creneau.heure
+                ) + " déjà réservé"
+              : formaterHeureAffichee(
+                  creneau.heure
+                ) +
+                " indisponible : une réservation existe déjà sur cette plage"
+          );
+        } else {
+          card.setAttribute(
+            "aria-label",
+            formaterHeureAffichee(
+              creneau.heure
+            ) + " complet"
+          );
+        }
+      } else {
+        card.addEventListener(
+          "click",
+          () => {
+            traiterChoixHeureReservationCommune(
+              card,
+              options
+            ).catch(console.error);
+          }
+        );
+      }
+
+      grille.appendChild(card);
+    });
+
+    message.hidden =
+      grille.children.length > 0;
+    message.textContent =
+      grille.children.length > 0
+        ? ""
+        : "Aucun horaire d’arrivée n’est disponible pour cette date.";
+  }
+
+  function construireCreneauxReservationJour(jour) {
+    const resultat = [];
+    const cles = new Set();
+    const maintenant = Date.now();
+
+    (Array.isArray(jour?.segments)
+      ? jour.segments
+      : []
+    ).forEach((segment) => {
+      const plagebookd = nettoyerTexte(
+        segment?.plage
+      );
+      const debut =
+        convertirHeureReservationEnMinutes(
+          segment?.debut
+        );
+      let fin =
+        convertirHeureReservationEnMinutes(
+          segment?.fin
+        );
+
+      if (
+        !/^plage[1-5]$/.test(plagebookd) ||
+        debut === null ||
+        fin === null
+      ) {
+        return;
+      }
+
+      if (fin <= debut) {
+        fin += 24 * 60;
+      }
+
+      const premierCreneau =
+        Math.ceil(debut / 30) * 30;
+
+      for (
+        let total = premierCreneau;
+        total < fin;
+        total += 30
+      ) {
+        const decalageJour =
+          Math.floor(total / (24 * 60));
+        const minutesJour =
+          total % (24 * 60);
+        const heure =
+          convertirMinutesReservationEnHeure(
+            minutesJour
+          );
+        const dateIso = ajouterJoursDateIso(
+          jour.date,
+          decalageJour
+        );
+        const datebookd =
+          construireDateBookdFicheParc(
+            dateIso,
+            heure
+          );
+        const cle =
+          dateIso +
+          "|" +
+          heure +
+          "|" +
+          plagebookd;
+
+        if (
+          !datebookd ||
+          new Date(datebookd).getTime() <=
+            maintenant ||
+          cles.has(cle)
+        ) {
+          continue;
+        }
+
+        cles.add(cle);
+        resultat.push({
+          dateIso,
+          heure,
+          plagebookd,
+          couleur:
+            segment?.couleur ||
+            segment?.couleurs?.[0] ||
+            "bleu-clair",
+          ratio: segment?.ratio
+        });
+      }
+    });
+
+    return resultat;
+  }
+
+  function convertirHeureReservationEnMinutes(
+    valeur
+  ) {
+    const match = String(valeur || "")
+      .trim()
+      .match(/^(\d{2}):(\d{2})$/);
+
+    if (!match) {
+      return null;
+    }
+
+    const heure = Number(match[1]);
+    const minute = Number(match[2]);
+
+    if (
+      !Number.isInteger(heure) ||
+      !Number.isInteger(minute) ||
+      heure < 0 ||
+      heure > 23 ||
+      minute < 0 ||
+      minute > 59
+    ) {
+      return null;
+    }
+
+    return heure * 60 + minute;
+  }
+
+  function convertirMinutesReservationEnHeure(
+    total
+  ) {
+    const heure = Math.floor(total / 60);
+    const minute = total % 60;
+
+    return (
+      String(heure).padStart(2, "0") +
+      ":" +
+      String(minute).padStart(2, "0")
+    );
+  }
+
+  function ajouterJoursDateIso(
+    dateIso,
+    nombreJours
+  ) {
+    const date = new Date(
+      String(dateIso || "") +
+      "T12:00:00.000Z"
+    );
+
+    if (Number.isNaN(date.getTime())) {
+      return "";
+    }
+
+    date.setUTCDate(
+      date.getUTCDate() +
+      Number(nombreJours || 0)
+    );
+
+    return date.toISOString().slice(0, 10);
+  }
+
+  function construireDateBookdFicheParc(
+    dateIso,
+    heure
+  ) {
+    const date = new Date(
+      dateIso + "T" + heure + ":00"
+    );
+
+    return Number.isNaN(date.getTime())
+      ? ""
+      : date.toISOString();
+  }
+
+  function construireReservationsParPlage(
+    reservations
+  ) {
+    const resultat = new Map();
+
+    (Array.isArray(reservations)
+      ? reservations
+      : []
+    ).forEach((reservation) => {
+      if (
+        !reservation ||
+        reservation.statut === "cancd"
+      ) {
+        return;
+      }
+
+      const dateIso =
+        extraireDateParisReservation(
+          reservation.datebookd
+        );
+      const plagebookd = nettoyerTexte(
+        reservation.plagebookd
+      );
+
+      if (dateIso && plagebookd) {
+        resultat.set(
+          dateIso + "|" + plagebookd,
+          reservation
+        );
+      }
+    });
+
+    return resultat;
+  }
+
+  function extraireDateParisReservation(
+    timestamp
+  ) {
+    return extrairePartiesParisReservation(
+      timestamp
+    ).dateIso;
+  }
+
+  function extraireHeureParisReservation(
+    timestamp
+  ) {
+    return extrairePartiesParisReservation(
+      timestamp
+    ).heure;
+  }
+
+  function extrairePartiesParisReservation(
+    timestamp
+  ) {
+    const date = new Date(timestamp);
+
+    if (Number.isNaN(date.getTime())) {
+      return {
+        dateIso: "",
+        heure: ""
+      };
+    }
+
+    const parties =
+      new Intl.DateTimeFormat("fr-FR", {
+        timeZone: "Europe/Paris",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        hourCycle: "h23"
+      }).formatToParts(date);
+    const valeur = (type) =>
+      parties.find(
+        (item) => item.type === type
+      )?.value || "";
+
+    return {
+      dateIso:
+        valeur("year") +
+        "-" +
+        valeur("month") +
+        "-" +
+        valeur("day"),
+      heure:
+        valeur("hour") +
+        ":" +
+        valeur("minute")
+    };
+  }
+
+  async function chargerReservationsActivesFicheParc() {
+    if (!endpointFluxm) {
+      throw new Error(
+        "Le service de réservation n’est pas configuré."
+      );
+    }
+
+    const reponse = await fetch(
+      endpointFluxm + "/mes-reservations",
+      {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+        headers: {
+          "Accept": "application/json"
+        }
+      }
+    );
+    const data =
+      await reponse.json().catch(() => null);
+
+    if (
+      !reponse.ok ||
+      !data ||
+      (data.success !== true &&
+        data.ok !== true)
+    ) {
+      throw new Error(
+        reponse.status === 401
+          ? "Vous devez être membre abonné pour planifier votre activité."
+          : nettoyerTexte(data?.message) ||
+            "Impossible de charger vos réservations."
+      );
+    }
+
+    return Array.isArray(data.reservations)
+      ? data.reservations
+      : [];
+  }
+
+  async function traiterChoixHeureReservationCommune(
+    bouton,
+    options = {}
+  ) {
+    const payload = {
+      idparc: nettoyerTexte(
+        bouton?.dataset?.idparc
+      ),
+      datebookd:
+        construireDateBookdFicheParc(
+          nettoyerTexte(
+            bouton?.dataset?.date
+          ),
+          nettoyerTexte(
+            bouton?.dataset?.heure
+          )
+        ),
+      plagebookd: nettoyerTexte(
+        bouton?.dataset?.plagebookd
+      )
+    };
+
+    if (
+      !payload.idparc ||
+      !payload.datebookd ||
+      !payload.plagebookd
+    ) {
+      await afficherAlerteFicheParc(
+        "Heure, date ou parc manquant.",
+        "orange"
+      );
+      return;
+    }
+
+    const confirme =
+      await ouvrirConfirmationReservationFicheParc(
+        options,
+        "Confirmer l’heure d’arrivée",
+        "Vous avez choisi le " +
+        formaterDatePlanningLongue(
+          nettoyerTexte(
+            bouton.dataset.date
+          )
+        ) +
+        " à " +
+        formaterHeureAffichee(
+          nettoyerTexte(
+            bouton.dataset.heure
+          )
+        ) +
+        "."
+      );
+
+    if (!confirme) {
+      return;
+    }
+
+    bouton.disabled = true;
+
+    try {
+      await enregistrerReservationFicheParc(
+        payload
+      );
+
+      await afficherAlerteFicheParc(
+        "Votre nouvelle date a bien été enregistrée.",
+        "orange"
+      );
+
+      if (
+        typeof options.onReservationCreee ===
+        "function"
+      ) {
+        await options.onReservationCreee(
+          payload
+        );
+        return;
+      }
+
+      window.location.href =
+        construireUrlMembre(
+          "/ESPACE-MEMBRE/planning-membre.html"
+        );
+    } catch (error) {
+      bouton.disabled = false;
+      await afficherAlerteFicheParc(
+        error?.message ||
+        "Impossible d’enregistrer la réservation.",
+        "orange"
+      );
+    }
+  }
+
+  async function enregistrerReservationFicheParc(
+    payload
+  ) {
+    if (!endpointFluxm) {
+      throw new Error(
+        "Le service de réservation n’est pas configuré."
+      );
+    }
+
+    const reponse = await fetch(
+      endpointFluxm + "/creer-reservation",
+      {
+        method: "POST",
+        credentials: "include",
+        cache: "no-store",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+    const data =
+      await reponse.json().catch(() => null);
+
+    if (
+      !reponse.ok ||
+      !data ||
+      (data.success !== true &&
+        data.ok !== true)
+    ) {
+      throw new Error(
+        reponse.status === 401
+          ? "Vous devez être membre abonné pour planifier votre activité."
+          : nettoyerTexte(data?.message) ||
+            "Impossible d’enregistrer la réservation."
+      );
+    }
+
+    return data.reservation || null;
+  }
+
+  async function ouvrirConfirmationReservationFicheParc(
+    options,
+    titreValeur,
+    texteValeur
+  ) {
+    const conteneur =
+      document.createElement("div");
+    document.body.appendChild(conteneur);
+
+    const fragment =
+      await chargerFragmentObjetFiche(
+        options,
+        "/BOX/02-box-dialogue-bouton.html"
+      );
+    conteneur.appendChild(fragment);
+
+    const dialogue = conteneur.querySelector(
+      "[data-lcdp-box-dialogue-bouton]"
+    );
+    const titre = conteneur.querySelector(
+      "[data-lcdp-dialogue-title]"
+    );
+    const texte = conteneur.querySelector(
+      "[data-lcdp-dialogue-text]"
+    );
+    const actions = conteneur.querySelector(
+      "[data-lcdp-dialogue-actions]"
+    );
+    const boutonFermer = conteneur.querySelector(
+      "[data-lcdp-dialogue-close]"
+    );
+
+    if (
+      !dialogue ||
+      !titre ||
+      !texte ||
+      !actions ||
+      !boutonFermer
+    ) {
+      conteneur.remove();
+      throw new Error(
+        "Structure de confirmation incomplète."
+      );
+    }
+
+    titre.textContent = titreValeur || "";
+    texte.textContent = texteValeur || "";
+    actions.innerHTML = "";
+
+    return new Promise((resolve) => {
+      let resolu = false;
+
+      function fermer(valeur) {
+        if (resolu) {
+          return;
+        }
+
+        resolu = true;
+        conteneur.remove();
+        resolve(valeur);
+      }
+
+      const annuler =
+        document.createElement("button");
+      annuler.type = "button";
+      annuler.className =
+        "lcdp-button lcdp-button-secondary";
+      annuler.textContent = "Annuler";
+      annuler.addEventListener(
+        "click",
+        () => fermer(false)
+      );
+
+      const confirmer =
+        document.createElement("button");
+      confirmer.type = "button";
+      confirmer.className =
+        "lcdp-button lcdp-button-orange";
+      confirmer.textContent = "Confirmer";
+      confirmer.addEventListener(
+        "click",
+        () => fermer(true)
+      );
+
+      actions.append(
+        annuler,
+        confirmer
+      );
+
+      boutonFermer.addEventListener(
+        "click",
+        () => fermer(false)
+      );
+      dialogue.addEventListener(
+        "click",
+        (event) => {
+          if (event.target === dialogue) {
+            fermer(false);
+          }
+        }
+      );
+    });
   }
 
   function creerCardSegmentPlanningCommun(segment, options) {
@@ -3250,19 +4081,110 @@
     }
   }
 
-  async function ouvrirReservationMembre(parc) {
-    const acces = parc?.acces || accesPublic || {};
+  async function chargerEligibiliteReservationFicheParc() {
+    if (!endpointFluxm) {
+      throw new Error(
+        "Le service de réservation n’est pas configuré."
+      );
+    }
 
-    if (acces.peutReserver === true) {
-      const page = construireUrlSite("/ESPACE-MEMBRE/reserver-membre.html");
-      const url = new URL(page, window.location.href);
-      url.searchParams.set("idparc", nettoyerTexte(parc?.idparc || parc?.id));
-      url.searchParams.set("source", "fiche-parc");
-      window.location.href = url.toString();
+    const reponse = await fetch(
+      endpointFluxm +
+      "/eligibilite-reservation",
+      {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+        headers: {
+          "Accept": "application/json"
+        }
+      }
+    );
+    const data =
+      await reponse.json().catch(() => null);
+
+    if (
+      !reponse.ok ||
+      !data ||
+      (data.success !== true &&
+        data.ok !== true)
+    ) {
+      throw new Error(
+        nettoyerTexte(data?.message) ||
+        "Impossible de vérifier votre droit à planifier."
+      );
+    }
+
+    return data;
+  }
+
+  async function autoriserPlanificationFicheParc() {
+    try {
+      const eligibilite =
+        await chargerEligibiliteReservationFicheParc();
+
+      if (eligibilite.peutPlanifier === true) {
+        return true;
+      }
+
+      await afficherAlerteFicheParc(
+        nettoyerTexte(
+          eligibilite.message
+        ) ||
+        "Vous devez être membre abonné pour planifier votre activité.",
+        "orange"
+      );
+      return false;
+    } catch (error) {
+      await afficherAlerteFicheParc(
+        error?.message ||
+        "Impossible de vérifier votre droit à planifier.",
+        "orange"
+      );
+      return false;
+    }
+  }
+
+  async function ouvrirReservationMembre(parc) {
+    if (
+      !(await autoriserPlanificationFicheParc(
+        parc
+      ))
+    ) {
       return;
     }
 
-    await afficherBlocageReservationPublique(acces);
+    ouvrirPlanningPublic(parc);
+  }
+
+  async function informerChoixJourDepuisPlanningPublic() {
+    if (
+      !(await autoriserPlanificationFicheParc())
+    ) {
+      return;
+    }
+
+    await afficherAlerteFicheParc(
+      "Choisissez votre journée.",
+      "orange"
+    );
+  }
+
+  async function planifierJourDepuisPlanningPublic(
+    contexte
+  ) {
+    if (
+      !(await autoriserPlanificationFicheParc(
+        contexte?.parc
+      ))
+    ) {
+      return;
+    }
+
+    await rendreChoixHeureReservationCommune(
+      contexte,
+      {}
+    );
   }
 
   async function afficherBlocageReservationPublique() {
@@ -3331,7 +4253,9 @@
           templateJourMois: etatInteraction.templateJourMois,
           templateHeureJour: etatInteraction.templateHeureJour,
           onReserver: () =>
-            afficherBlocageReservationPublique(),
+            informerChoixJourDepuisPlanningPublic(),
+          onPlanifierJour:
+            planifierJourDepuisPlanningPublic,
           onPartager: (parcCible) =>
             partagerFicheParc(parcCible, "planning"),
           onRetourPresentation: () => {
@@ -3457,7 +4381,9 @@
               "planning"
             ),
           onReserver: () =>
-            afficherBlocageReservationPublique()
+            informerChoixJourDepuisPlanningPublic(),
+          onPlanifierJour:
+            planifierJourDepuisPlanningPublic
         }
       );
 
