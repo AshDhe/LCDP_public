@@ -3999,36 +3999,14 @@
       morceaux.push("privatisation");
     }
 
-    const ratio = Number(plage.ratio);
-
-    if (Number.isFinite(ratio) && ratio >= 0) {
-      morceaux.push(
-        "occupation " + Math.round(ratio * 100) + " %"
-      );
-    }
-
     return morceaux.join(" · ");
   }
 
   function construireLibelleSegmentPlanningCommun(segment) {
-    const horaire =
+    return (
       formaterHeureAffichee(segment?.debut) +
       "–" +
-      formaterHeureAffichee(segment?.fin);
-    const ratio = Number(segment?.ratio);
-
-    if (
-      !Number.isFinite(ratio) ||
-      ratio < 0
-    ) {
-      return horaire;
-    }
-
-    return (
-      horaire +
-      " · occupation " +
-      Math.round(ratio * 100) +
-      " %"
+      formaterHeureAffichee(segment?.fin)
     );
   }
 
