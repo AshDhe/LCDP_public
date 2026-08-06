@@ -105,22 +105,17 @@
   padding-right: 44px;
 }
 
-/* Vue journalière du planning : fenêtre indépendante du scroll mensuel. */
+/* Vue journalière du planning :
+   la coque conserve strictement les dimensions du planning mensuel.
+   Seule la superposition compacte du détail est ajoutée. */
 .lcdp-box-shift-detail-parc--planning-jour
   .lcdp-box-shift-detail-parc__card {
-  width: min(100%, 820px);
-  height: calc(100vh - (var(--lcdp-space-2) * 2));
-  height: calc(100dvh - (var(--lcdp-space-2) * 2));
-  min-height: 0;
-  max-height: calc(100vh - (var(--lcdp-space-2) * 2));
-  max-height: calc(100dvh - (var(--lcdp-space-2) * 2));
   overflow: hidden;
 }
 
 .lcdp-box-shift-detail-parc--planning-jour
   .lcdp-box-shift-detail-parc__content {
   min-height: 0 !important;
-  height: 100% !important;
 }
 
 .lcdp-box-shift-detail-parc--planning-jour
