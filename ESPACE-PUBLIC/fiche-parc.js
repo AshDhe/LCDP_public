@@ -91,6 +91,8 @@
 
   window.LCDP_FicheParc = {
     chargerFicheParc,
+    monterDansConteneur:
+      monterParcoursFicheParcDansConteneur,
     rendreDansConteneur: rendreFicheParcDansConteneur,
     rendrePlanningDansConteneur: rendrePlanningParcDansConteneur
   };
@@ -485,6 +487,345 @@
     appliquerRoutes(fiche);
     return fiche;
   }
+
+
+  async function monterParcoursFicheParcDansConteneur(
+    slot,
+    parcSource,
+    options = {}
+  ) {
+    if (!slot) {
+      throw new Error("Slot du parcours Fiche Parc introuvable.");
+    }
+
+    let actif = true;
+    let operationCourante = 0;
+    let vueCourante = "";
+    let parcCourant = {
+      ...(parcSource || {})
+    };
+    let promesseFicheComplete = null;
+
+    function identifiantParc(parc) {
+      return nettoyerTexte(
+        parc?.idparc ||
+        parc?.id
+      );
+    }
+
+    function actualiserParc(parc) {
+      const identifiantActuel = identifiantParc(parcCourant);
+      const nouvelIdentifiant = identifiantParc(parc);
+
+      if (
+        nouvelIdentifiant &&
+        identifiantActuel &&
+        nouvelIdentifiant !== identifiantActuel
+      ) {
+        promesseFicheComplete = null;
+      }
+
+      parcCourant = {
+        ...parcCourant,
+        ...(parc || {})
+      };
+
+      return parcCourant;
+    }
+
+    async function obtenirFicheComplete(parc) {
+      actualiserParc(parc);
+
+      const idparc = identifiantParc(parcCourant);
+
+      if (!idparc) {
+        throw new Error("Identifiant du parc manquant.");
+      }
+
+      if (!promesseFicheComplete) {
+        const chargeur =
+          typeof options.chargerFicheParc === "function"
+            ? options.chargerFicheParc
+            : chargerFicheParc;
+
+        const identifiantCharge = idparc;
+
+        promesseFicheComplete = Promise.resolve(
+          chargeur(identifiantCharge)
+        ).then((fiche) => {
+          if (
+            identifiantParc(parcCourant) !==
+            identifiantCharge
+          ) {
+            return parcCourant;
+          }
+
+          parcCourant = {
+            ...parcCourant,
+            ...(fiche?.parc || {}),
+            resparc: fiche?.resparc || null,
+            parcsDepartement: Array.isArray(
+              fiche?.parcsDepartement
+            )
+              ? fiche.parcsDepartement
+              : [],
+            localitesCarte: Array.isArray(
+              fiche?.localites
+            )
+              ? fiche.localites
+              : [],
+            acces: fiche?.acces || null
+          };
+
+          return parcCourant;
+        }).catch((erreur) => {
+          promesseFicheComplete = null;
+          throw erreur;
+        });
+      }
+
+      return promesseFicheComplete;
+    }
+
+    async function signalerErreur(erreur) {
+      if (typeof options.onErreur !== "function") {
+        return;
+      }
+
+      await options.onErreur(
+        erreur?.message ||
+        "Impossible d’afficher la Fiche Parc."
+      );
+    }
+
+    async function partager(parc, typePartage) {
+      const action =
+        typeof options.onPartager === "function"
+          ? options.onPartager
+          : partagerFicheParc;
+
+      await action(
+        actualiserParc(parc),
+        typePartage
+      );
+    }
+
+    async function ouvrirReservation(parc) {
+      const parcCible = actualiserParc(parc);
+
+      if (
+        typeof options.verifierReservation === "function"
+      ) {
+        const autorise = await options.verifierReservation(
+          parcCible,
+          api
+        );
+
+        if (autorise === false) {
+          return;
+        }
+      }
+
+      if (
+        typeof options.rendreReservation === "function"
+      ) {
+        await afficherVue(
+          "reservation",
+          parcCible
+        );
+        return;
+      }
+
+      const action =
+        typeof options.onReserver === "function"
+          ? options.onReserver
+          : ouvrirReservationMembre;
+
+      await action(parcCible, api);
+    }
+
+    async function afficherVueSecurisee(vue, parc) {
+      try {
+        await afficherVue(vue, parc);
+      } catch (erreur) {
+        console.error(
+          "Erreur navigation Fiche Parc commune :",
+          erreur
+        );
+        await signalerErreur(erreur);
+      }
+    }
+
+    async function afficherVue(vueDemandee, parc) {
+      const vue = ["fiche", "planning", "reservation"]
+        .includes(vueDemandee)
+        ? vueDemandee
+        : "fiche";
+      const operation = ++operationCourante;
+
+      actualiserParc(parc);
+
+      const parcAffiche =
+        vue === "fiche"
+          ? await obtenirFicheComplete(parcCourant)
+          : parcCourant;
+
+      if (!actif || operation !== operationCourante) {
+        return;
+      }
+
+      const ancienneVue = slot.querySelector(
+        ":scope > .lcdp-fiche-parc__shift-view"
+      );
+      const nouvelleVue = document.createElement("div");
+      nouvelleVue.className =
+        "lcdp-fiche-parc__shift-view " +
+        "lcdp-fiche-parc__shift-view--enter";
+
+      if (vue === "fiche") {
+        await rendreFicheParcDansConteneur(
+          nouvelleVue,
+          parcAffiche,
+          {
+            ...options,
+            masquerBoutonFermer: true,
+            onReserver: ouvrirReservation,
+            onPlanning: (parcCible) =>
+              afficherVueSecurisee(
+                "planning",
+                parcCible
+              ),
+            onPartager: (parcCible) =>
+              partager(parcCible, "fiche"),
+            onOuvrirFicheParc: (parcCible) =>
+              afficherVueSecurisee(
+                "fiche",
+                parcCible
+              ),
+            onOuvrirPlanningParc: (parcCible) =>
+              afficherVueSecurisee(
+                "planning",
+                parcCible
+              ),
+            onReserverParc: ouvrirReservation
+          }
+        );
+      } else if (vue === "planning") {
+        await rendrePlanningParcDansConteneur(
+          nouvelleVue,
+          parcAffiche,
+          {
+            ...options,
+            onReserver: ouvrirReservation,
+            onPartager: (parcCible) =>
+              partager(parcCible, "planning"),
+            onRetourPresentation: (parcCible) =>
+              afficherVueSecurisee(
+                "fiche",
+                parcCible || parcAffiche
+              ),
+            onErreur: options.onErreur
+          }
+        );
+      } else {
+        if (
+          typeof options.rendreReservation !== "function"
+        ) {
+          throw new Error(
+            "Le rendu de réservation n’est pas configuré."
+          );
+        }
+
+        await options.rendreReservation(
+          nouvelleVue,
+          parcAffiche,
+          api
+        );
+      }
+
+      if (!actif || operation !== operationCourante) {
+        return;
+      }
+
+      const hauteurCourante = ancienneVue
+        ? ancienneVue.getBoundingClientRect().height
+        : slot.getBoundingClientRect().height;
+
+      if (ancienneVue && hauteurCourante > 0) {
+        slot.style.minHeight =
+          hauteurCourante + "px";
+      }
+
+      if (ancienneVue) {
+        slot.appendChild(nouvelleVue);
+      } else {
+        slot.replaceChildren(nouvelleVue);
+      }
+
+      window.requestAnimationFrame(() => {
+        if (!actif) {
+          return;
+        }
+
+        if (ancienneVue) {
+          ancienneVue.classList.add(
+            "lcdp-fiche-parc__shift-view--leave"
+          );
+        }
+
+        nouvelleVue.classList.remove(
+          "lcdp-fiche-parc__shift-view--enter"
+        );
+      });
+
+      if (ancienneVue) {
+        await attendre(180);
+      }
+
+      if (!actif || operation !== operationCourante) {
+        return;
+      }
+
+      if (ancienneVue) {
+        ancienneVue.remove();
+      }
+
+      slot.style.removeProperty("min-height");
+      vueCourante = vue;
+
+      if (typeof options.onVueChange === "function") {
+        await options.onVueChange(
+          vueCourante,
+          parcCourant,
+          api
+        );
+      }
+    }
+
+    const api = {
+      afficherFiche: (parc) =>
+        afficherVue("fiche", parc || parcCourant),
+      afficherPlanning: (parc) =>
+        afficherVue("planning", parc || parcCourant),
+      afficherReservation: (parc) =>
+        ouvrirReservation(parc || parcCourant),
+      getParc: () => parcCourant,
+      getVue: () => vueCourante,
+      detruire: () => {
+        actif = false;
+        operationCourante += 1;
+        slot.style.removeProperty("min-height");
+      }
+    };
+
+    await afficherVue(
+      options.vueInitiale || "fiche",
+      parcCourant
+    );
+
+    return api;
+  }
+
 
   function remplirBlocTexteFiche(conteneur, texte) {
     if (!conteneur) {
