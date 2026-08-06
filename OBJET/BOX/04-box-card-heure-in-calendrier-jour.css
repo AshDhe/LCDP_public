@@ -130,6 +130,19 @@
   opacity: 1;
 }
 
+.lcdp-box-card-heure-in-calendrier-jour--planning-action {
+  cursor: pointer;
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--planning-action:hover {
+  border-color: var(--lcdp-color-primary);
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--planning-action:focus-visible {
+  outline: 3px solid var(--lcdp-color-primary);
+  outline-offset: 2px;
+}
+
 .lcdp-box-card-heure-in-calendrier-jour--bleu-clair {
   background: #cfe3f7;
   border-color: #9fc6ea;
