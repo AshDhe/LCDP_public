@@ -1657,6 +1657,7 @@
     options
   ) {
     slot.innerHTML = "";
+    slot.classList.add("lcdp-fiche-parc__planning-slot");
 
     const fragment = await chargerFragmentObjetFiche(
       options,
@@ -2403,33 +2404,50 @@
     jour,
     options
   ) {
-    slot.innerHTML = "";
+    const ancienneOverlay = slot.querySelector(
+      ":scope > .lcdp-fiche-parc__planning-jour-overlay"
+    );
+
+    if (ancienneOverlay) {
+      ancienneOverlay.remove();
+    }
+
+    slot.classList.add("lcdp-fiche-parc__planning-slot");
+
+    const overlay = document.createElement("div");
+    overlay.className = "lcdp-fiche-parc__planning-jour-overlay";
+    overlay.setAttribute("role", "presentation");
+
+    const conteneurJour = document.createElement("div");
+    conteneurJour.className = "lcdp-fiche-parc__planning-jour-box";
 
     const fragment = await chargerFragmentObjetFiche(
       options,
       "/BOX/04-box-calendrier-jour.html"
     );
-    slot.appendChild(fragment);
+    conteneurJour.appendChild(fragment);
+    overlay.appendChild(conteneurJour);
+    slot.appendChild(overlay);
 
-    const calendrier = slot.querySelector(
+    const calendrier = conteneurJour.querySelector(
       "[data-lcdp-box-calendrier-jour]"
     );
-    const titre = slot.querySelector(
+    const titre = conteneurJour.querySelector(
       "[data-lcdp-calendrier-jour-title]"
     );
-    const meta = slot.querySelector(
+    const meta = conteneurJour.querySelector(
       "[data-lcdp-calendrier-jour-meta]"
     );
-    const message = slot.querySelector(
+    const message = conteneurJour.querySelector(
       "[data-lcdp-calendrier-jour-message]"
     );
-    const grille = slot.querySelector(
+    const grille = conteneurJour.querySelector(
       "[data-lcdp-calendrier-jour-grid]"
     );
-    const boutonFermer = slot.querySelector(
+    const boutonFermer = conteneurJour.querySelector(
       "[data-lcdp-calendrier-jour-close]"
     );
-    const corps = slot.querySelector(
+    const corps = conteneurJour.querySelector(
       ".lcdp-box-calendrier-jour__body"
     );
 
@@ -2447,7 +2465,8 @@
 
     calendrier.classList.add(
       "lcdp-box-calendrier-jour--shift-detail",
-      "lcdp-box-calendrier-jour--planning-lecture"
+      "lcdp-box-calendrier-jour--planning-lecture",
+      "lcdp-box-calendrier-jour--planning-overlay"
     );
 
     const shiftDetail = calendrier.closest(
@@ -2456,6 +2475,27 @@
     shiftDetail?.classList.add(
       "lcdp-box-shift-detail-parc--planning-jour"
     );
+
+    const fermerJour = () => {
+      overlay.remove();
+      shiftDetail?.classList.remove(
+        "lcdp-box-shift-detail-parc--planning-jour"
+      );
+    };
+
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) {
+        fermerJour();
+      }
+    });
+
+    boutonFermer.hidden = false;
+    boutonFermer.removeAttribute("hidden");
+    boutonFermer.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      fermerJour();
+    });
 
     const nomParc = nettoyerTexte(
       etatPlanning.parc?.nom ||
@@ -2471,7 +2511,6 @@
     meta.appendChild(
       await chargerLegendePlanningParcCommun(options)
     );
-    boutonFermer.hidden = true;
 
     const dateCourante = document.createElement("h3");
     dateCourante.className =

@@ -142,6 +142,98 @@
   justify-content: center;
 }
 
+
+/* Détail journalier du planning public : surimpression locale au planning. */
+.lcdp-fiche-parc__planning-slot {
+  position: relative;
+}
+
+.lcdp-fiche-parc__planning-jour-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  background: rgba(31, 42, 36, 0.18);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  overflow: auto;
+}
+
+.lcdp-fiche-parc__planning-jour-box {
+  width: min(100%, 520px);
+  max-height: min(620px, calc(100% - 1rem));
+  overflow: auto;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface, #ffffff);
+  box-shadow: 0 18px 46px rgba(31, 42, 36, 0.22);
+}
+
+.lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour {
+  position: static;
+  inset: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  display: block;
+}
+
+.lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__card {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  min-height: 0;
+  overflow: visible;
+  padding: clamp(0.95rem, 2.4vw, 1.25rem);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__close {
+  display: inline-flex !important;
+}
+
+.lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__header {
+  gap: 0.45rem;
+}
+
+.lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__meta--legende {
+  font-size: 0.72rem;
+  line-height: 1.15;
+}
+
+.lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__date-planning {
+  margin-block: 0.65rem 0.55rem;
+  text-align: center;
+}
+
+.lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__grid {
+  width: min(100%, 320px);
+  margin-inline: auto;
+  gap: 0.42rem;
+}
+
+.lcdp-fiche-parc__planning-jour-box .lcdp-box-card-heure-in-calendrier-jour {
+  min-height: 32px;
+}
+
+@media (max-width: 767px) {
+  .lcdp-fiche-parc__planning-jour-overlay {
+    padding: 0.75rem;
+  }
+
+  .lcdp-fiche-parc__planning-jour-box {
+    width: min(100%, 440px);
+    max-height: calc(100% - 0.5rem);
+  }
+}
+
 /* Transitions du Shift Detail. */
 #lcdp-lightbox-slot .lcdp-box-shift-detail-parc {
   opacity: 0;
