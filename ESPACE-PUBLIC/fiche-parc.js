@@ -1968,6 +1968,12 @@
       contenu.appendChild(ligne);
     });
 
+    const instruction = document.createElement("strong");
+    instruction.dataset.lcdpPlanningInstructionDetail = "";
+    instruction.textContent =
+      "Cliquez sur la journée pour voir le détail";
+    legende.appendChild(instruction);
+
     return legende;
   }
 
@@ -2754,47 +2760,10 @@
     await afficherBlocageReservationPublique(acces);
   }
 
-  async function afficherBlocageReservationPublique(acces) {
-    const message = "Vous devez être membre abonné pour utiliser la fonction RESERVER. Et être à jour du paiement de vos échéances si cela n'est pas votre cas.";
-    const detail = document.querySelector("[data-lcdp-box-shift-detail-parc]");
-    const slot = detail?.querySelector("[data-lcdp-shift-detail-parc-alerte-slot]");
-
-    if (!slot) {
-      window.alert(message);
-      return;
-    }
-
-    slot.innerHTML = "";
-    const box = document.createElement("div");
-    box.className = "lcdp-box-shift-detail-parc__alerte-box";
-    const texte = document.createElement("p");
-    texte.className = "lcdp-box-shift-detail-parc__alerte-message";
-    texte.textContent = message;
-    const actions = document.createElement("div");
-    actions.className = "lcdp-fiche-parc__dialogue-actions";
-
-    if (acces?.actionSecondaire === "abonnement") {
-      actions.appendChild(creerBoutonCommande("Abonnement", "lcdp-button-secondary", () => {
-        window.location.href = construireUrlSite("/ESPACE-MEMBRE/abonnement-membre.html");
-      }));
-    }
-
-    if (acces?.actionSecondaire === "regulariser" && acces?.orderid) {
-      actions.appendChild(creerBoutonCommande("Régulariser", "lcdp-button-secondary", () => {
-        const page = construireUrlSite("/ESPACE-MEMBRE/paiement-cb.html");
-        const url = new URL(page, window.location.href);
-        url.searchParams.set("orderid", acces.orderid);
-        url.searchParams.set("echeance", String(acces.echeance || 1));
-        url.searchParams.set("source", "suspension");
-        window.location.href = url.toString();
-      }));
-    }
-
-    actions.appendChild(creerBoutonCommande("OK", "lcdp-button-primary", () => {
-      slot.innerHTML = "";
-    }));
-    box.append(texte, actions);
-    slot.appendChild(box);
+  async function afficherBlocageReservationPublique() {
+    await afficherAlerteFicheParc(
+      "Vous devez être membre abonné pour planifier votre activité."
+    );
   }
 
   function ouvrirPlanningPublic(parc) {
@@ -3410,24 +3379,67 @@
   }
 
   async function afficherMessageShift(message) {
-    const detail = document.querySelector("[data-lcdp-box-shift-detail-parc]");
-    const slot = detail?.querySelector("[data-lcdp-shift-detail-parc-alerte-slot]");
-    if (!slot) {
-      window.alert(message);
-      return;
+    await afficherAlerteFicheParc(message);
+  }
+
+  async function afficherAlerteFicheParc(message) {
+    const conteneur = document.createElement("div");
+    document.body.appendChild(conteneur);
+
+    const fragment = await chargerFragment(
+      "/OBJET/BOX/02-box-alerte.html"
+    );
+    conteneur.appendChild(fragment);
+
+    const alerte = conteneur.querySelector(
+      "[data-lcdp-box-alerte]"
+    );
+    const texte = conteneur.querySelector(
+      "[data-lcdp-alerte-message]"
+    );
+    const boutonFermer = conteneur.querySelector(
+      "[data-lcdp-alerte-close]"
+    );
+    const boutonOk = conteneur.querySelector(
+      "[data-lcdp-alerte-ok]"
+    );
+
+    if (!alerte || !texte || !boutonFermer || !boutonOk) {
+      conteneur.remove();
+      throw new Error("Structure de l’alerte incomplète.");
     }
 
-    slot.innerHTML = "";
-    const box = document.createElement("div");
-    box.className = "lcdp-box-shift-detail-parc__alerte-box";
-    const texte = document.createElement("p");
-    texte.className = "lcdp-box-shift-detail-parc__alerte-message";
-    texte.textContent = message;
-    const ok = creerBoutonCommande("OK", "lcdp-button-primary", () => {
-      slot.innerHTML = "";
+    texte.textContent = message || "";
+    boutonOk.classList.remove("lcdp-button-primary");
+    boutonOk.classList.add("lcdp-button-orange");
+
+    return new Promise((resolve) => {
+      let resolu = false;
+
+      function fermer(valeur) {
+        if (resolu) {
+          return;
+        }
+
+        resolu = true;
+        conteneur.remove();
+        resolve(valeur);
+      }
+
+      boutonFermer.addEventListener(
+        "click",
+        () => fermer(false)
+      );
+      boutonOk.addEventListener(
+        "click",
+        () => fermer(true)
+      );
+      alerte.addEventListener("click", (event) => {
+        if (event.target === alerte) {
+          fermer(false);
+        }
+      });
     });
-    box.append(texte, ok);
-    slot.appendChild(box);
   }
 
   function changerMois(etat, delta) {
