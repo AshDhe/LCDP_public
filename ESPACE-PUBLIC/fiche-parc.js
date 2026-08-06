@@ -3013,6 +3013,15 @@
       await chargerLegendePlanningParcCommun(options)
     );
 
+    const instructionJour = meta.querySelector(
+      "[data-lcdp-planning-instruction-detail]"
+    );
+
+    if (instructionJour) {
+      instructionJour.textContent =
+        "Choisissez votre horaire d’arrivée.";
+    }
+
     const dateCourante = document.createElement("h3");
     dateCourante.className =
       "lcdp-box-calendrier-jour__date-planning";
@@ -3020,41 +3029,16 @@
       formaterDatePlanningLongue(jour.date);
     corps.insertBefore(dateCourante, message);
 
-    const actionsJour = document.createElement("div");
-    actionsJour.className =
-      "lcdp-box-fiche-parc__actions-barre " +
-      "lcdp-box-card-parc--reserver";
-    actionsJour.setAttribute(
-      "aria-label",
-      "Planification de la journée"
-    );
+    const segments = Array.isArray(jour?.segments)
+      ? jour.segments
+      : [];
 
-    const boutonPlanifierJour =
-      creerBoutonActionFicheParc(
-        {
-          libelle: "Planifier",
-          ariaLabel:
-            "Planifier une heure d’arrivée pour cette journée",
-          icone: "reserver",
-          variante: "orange-plein"
-        },
-        options
-      );
-
-    boutonPlanifierJour.addEventListener(
-      "click",
-      (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const action =
-          typeof options.onPlanifierJour ===
-          "function"
-            ? options.onPlanifierJour
-            : planifierJourDepuisPlanningPublic;
-
-        Promise.resolve(
-          action({
+    segments.forEach((segment) => {
+      grille.appendChild(
+        creerCardSegmentPlanningCommun(
+          segment,
+          options,
+          {
             conteneurJour,
             calendrier,
             corps,
@@ -3064,26 +3048,8 @@
             jour,
             dateIso: jour.date,
             fermerJour
-          })
-        ).catch(console.error);
-      }
-    );
-
-    actionsJour.appendChild(
-      boutonPlanifierJour
-    );
-    corps.insertBefore(
-      actionsJour,
-      message
-    );
-
-    const segments = Array.isArray(jour?.segments)
-      ? jour.segments
-      : [];
-
-    segments.forEach((segment) => {
-      grille.appendChild(
-        creerCardSegmentPlanningCommun(segment, options)
+          }
+        )
       );
     });
 
@@ -3131,6 +3097,31 @@
       await afficherInformationReservationFicheParc(
         options,
         "Vous avez déjà deux réservations actives sur cette journée."
+      );
+      return;
+    }
+
+    const plagebookd = nettoyerTexte(
+      contexte?.segment?.plage ||
+      jour?.segments?.[0]?.plage
+    );
+    const reservationMemePlage =
+      reservationsJour.find((reservation) => {
+        return (
+          nettoyerTexte(
+            reservation?.plagebookd
+          ) === plagebookd
+        );
+      });
+
+    if (reservationMemePlage) {
+      await afficherInformationReservationFicheParc(
+        options,
+        "Vous avez déjà une réservation sur la plage " +
+        construireLibellePlageReservation(
+          plagebookd
+        ) +
+        "."
       );
       return;
     }
@@ -3605,40 +3596,6 @@
       return;
     }
 
-    const dateIso = nettoyerTexte(
-      bouton?.dataset?.date
-    );
-    const plagebookd = nettoyerTexte(
-      bouton?.dataset?.plagebookd
-    );
-    const reservationMemePlage =
-      (Array.isArray(reservations)
-        ? reservations
-        : []
-      ).find((reservation) => {
-        return (
-          reservation?.statut !== "cancd" &&
-          extraireDateParisReservation(
-            reservation?.datebookd
-          ) === dateIso &&
-          nettoyerTexte(
-            reservation?.plagebookd
-          ) === plagebookd
-        );
-      });
-
-    if (reservationMemePlage) {
-      await afficherInformationReservationFicheParc(
-        options,
-        "Vous avez déjà une réservation sur la plage " +
-        construireLibellePlageReservation(
-          plagebookd
-        ) +
-        "."
-      );
-      return;
-    }
-
     const confirme =
       await ouvrirConfirmationReservationFicheParc(
         options,
@@ -3844,7 +3801,11 @@
     });
   }
 
-  function creerCardSegmentPlanningCommun(segment, options) {
+  function creerCardSegmentPlanningCommun(
+    segment,
+    options,
+    contexte
+  ) {
     const card = obtenirTemplateHeurePlanning(options)
       .cloneNode(true);
     const label = card.querySelector(
@@ -3858,10 +3819,11 @@
     );
 
     card.removeAttribute("data-action");
-    card.disabled = true;
-    card.setAttribute("aria-disabled", "true");
+    card.disabled = false;
+    card.removeAttribute("aria-disabled");
     card.classList.add(
-      "lcdp-box-card-heure-in-calendrier-jour--planning-lecture"
+      "lcdp-box-card-heure-in-calendrier-jour--planning-lecture",
+      "lcdp-box-card-heure-in-calendrier-jour--planning-action"
     );
 
     if (couleurs.length > 1) {
@@ -3894,12 +3856,42 @@
       );
     }
 
-    card.title = libelle;
-    card.setAttribute("aria-label", libelle);
+    card.title =
+      "Choisir la plage " + libelle;
+    card.setAttribute(
+      "aria-label",
+      "Choisir la plage " + libelle
+    );
 
     if (label) {
       label.textContent = libelle;
     }
+
+    card.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const action =
+          typeof options.onPlanifierJour ===
+          "function"
+            ? options.onPlanifierJour
+            : planifierJourDepuisPlanningPublic;
+        const jourCible = {
+          ...contexte.jour,
+          segments: [segment]
+        };
+
+        Promise.resolve(
+          action({
+            ...contexte,
+            jour: jourCible,
+            segment
+          })
+        ).catch(console.error);
+      }
+    );
 
     return card;
   }
