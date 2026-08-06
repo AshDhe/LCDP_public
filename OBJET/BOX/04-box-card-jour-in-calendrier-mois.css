@@ -147,6 +147,31 @@
   border-color: transparent;
 }
 
+/* Taux d’occupation : jauge discrète superposée à la couleur métier. */
+.lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge {
+  position: relative;
+  isolation: isolate;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  width: var(--lcdp-jauge-largeur, 0%);
+  height: clamp(2px, 28%, 4px);
+  border-radius: 0 2px 2px 0;
+  background: rgba(31, 42, 36, 0.52);
+  pointer-events: none;
+}
+
+.lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge
+  .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+  position: relative;
+  z-index: 2;
+}
+
 .lcdp-box-card-jour-in-calendrier-mois__slot--vert {
   background: #587242;
   border-color: #4e663b;

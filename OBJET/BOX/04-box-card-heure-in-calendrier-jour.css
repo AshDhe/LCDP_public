@@ -165,3 +165,29 @@
   border-color: var(--lcdp-color-border-strong);
   color: var(--lcdp-color-text);
 }
+
+/* Taux d’occupation du segment journalier.
+   La jauge conserve intégralement la couleur métier de la card. */
+.lcdp-box-card-heure-in-calendrier-jour--avec-jauge {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--avec-jauge::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  width: var(--lcdp-jauge-largeur, 0%);
+  height: 5px;
+  background: rgba(31, 42, 36, 0.52);
+  pointer-events: none;
+}
+
+.lcdp-box-card-heure-in-calendrier-jour--avec-jauge
+  [data-lcdp-card-heure-jour-label] {
+  position: relative;
+  z-index: 2;
+}
