@@ -31,6 +31,7 @@
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  gap: 8px !important;
   font-family: var(--lcdp-font-main) !important;
   font-size: 0.86rem !important;
   line-height: 1.15 !important;
@@ -41,6 +42,24 @@
   overflow-wrap: normal;
   text-wrap: balance;
   box-sizing: border-box;
+}
+
+
+.lcdp-box-commande-bar__icone {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  display: block;
+  object-fit: contain;
+}
+
+.lcdp-box-commande-bar__libelle {
+  min-width: 0;
+}
+
+.lcdp-box-commande-bar__actions .lcdp-button-primary .lcdp-box-commande-bar__icone,
+.lcdp-box-commande-bar__actions .lcdp-button-orange .lcdp-box-commande-bar__icone {
+  filter: brightness(0) invert(1);
 }
 
 .lcdp-box-commande-bar__actions > :first-child,
