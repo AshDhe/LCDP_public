@@ -56,6 +56,28 @@
   object-fit: contain;
 }
 
+/* Filet de sécurité : conserve les pictos même si le JS n’a pas injecté les <img>. */
+.lcdp-box-commande-bar__actions #bouton-changer-departement:not(:has(.lcdp-box-commande-bar__icone))::before,
+.lcdp-box-commande-bar__actions #bouton-demander-ia:not(:has(.lcdp-box-commande-bar__icone))::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: brightness(0) invert(1);
+}
+
+.lcdp-box-commande-bar__actions #bouton-changer-departement:not(:has(.lcdp-box-commande-bar__icone))::before {
+  background-image: url("../IMAG/PICTO/picto-changer-donnees.svg");
+}
+
+.lcdp-box-commande-bar__actions #bouton-demander-ia:not(:has(.lcdp-box-commande-bar__icone))::before {
+  background-image: url("../IMAG/PICTO/picto-recherche-ia.svg");
+}
+
 .lcdp-box-commande-bar__libelle {
   min-width: 0;
 }
