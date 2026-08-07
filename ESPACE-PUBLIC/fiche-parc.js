@@ -3302,54 +3302,6 @@
       );
     }
 
-    const reservations =
-      await chargerReservationsActivesFicheParc();
-    const reservationsJour =
-      (Array.isArray(reservations)
-        ? reservations
-        : []
-      ).filter((reservation) => {
-        return (
-          reservation?.statut !== "cancd" &&
-          extraireDateParisReservation(
-            reservation?.datebookd
-          ) === jour.date
-        );
-      });
-
-    if (reservationsJour.length >= 2) {
-      await afficherInformationReservationFicheParc(
-        options,
-        "Vous avez déjà deux réservations actives sur cette journée."
-      );
-      return;
-    }
-
-    const plagebookd = nettoyerTexte(
-      contexte?.segment?.plage ||
-      jour?.segments?.[0]?.plage
-    );
-    const reservationMemePlage =
-      reservationsJour.find((reservation) => {
-        return (
-          nettoyerTexte(
-            reservation?.plagebookd
-          ) === plagebookd
-        );
-      });
-
-    if (reservationMemePlage) {
-      await afficherInformationReservationFicheParc(
-        options,
-        "Vous avez déjà une réservation sur la plage " +
-        construireLibellePlageReservation(
-          plagebookd
-        ) +
-        "."
-      );
-      return;
-    }
-
     const fragment =
       await chargerFragmentObjetFiche(
         options,
@@ -3483,10 +3435,10 @@
             event.preventDefault();
             event.stopPropagation();
 
-            traiterChoixHeureReservationCommune(
+            transmettreChoixHeureReservationCommune(
               card,
-              options,
-              reservations
+              parc,
+              options
             ).catch(console.error);
           }
         );
@@ -3669,371 +3621,59 @@
       : date.toISOString();
   }
 
-  function extraireDateParisReservation(
-    timestamp
-  ) {
-    return extrairePartiesParisReservation(
-      timestamp
-    ).dateIso;
-  }
 
-  function extrairePartiesParisReservation(
-    timestamp
-  ) {
-    const date = new Date(timestamp);
-
-    if (Number.isNaN(date.getTime())) {
-      return {
-        dateIso: "",
-        heure: ""
-      };
-    }
-
-    const parties =
-      new Intl.DateTimeFormat("fr-FR", {
-        timeZone: "Europe/Paris",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-        hourCycle: "h23"
-      }).formatToParts(date);
-    const valeur = (type) =>
-      parties.find(
-        (item) => item.type === type
-      )?.value || "";
-
-    return {
-      dateIso:
-        valeur("year") +
-        "-" +
-        valeur("month") +
-        "-" +
-        valeur("day"),
-      heure:
-        valeur("hour") +
-        ":" +
-        valeur("minute")
-    };
-  }
-
-  async function chargerReservationsActivesFicheParc() {
-    if (!endpointFluxm) {
-      throw new Error(
-        "Le service de réservation n’est pas configuré."
-      );
-    }
-
-    const reponse = await fetch(
-      endpointFluxm + "/mes-reservations",
-      {
-        method: "GET",
-        credentials: "include",
-        cache: "no-store",
-        headers: {
-          "Accept": "application/json"
-        }
-      }
-    );
-    const data =
-      await reponse.json().catch(() => null);
-
-    if (
-      !reponse.ok ||
-      !data ||
-      (data.success !== true &&
-        data.ok !== true)
-    ) {
-      throw new Error(
-        reponse.status === 401
-          ? "Vous devez être membre abonné pour planifier votre activité."
-          : nettoyerTexte(data?.message) ||
-            "Impossible de charger vos réservations."
-      );
-    }
-
-    return Array.isArray(data.reservations)
-      ? data.reservations
-      : [];
-  }
-
-  function construireLibellePlageReservation(
-    plagebookd
-  ) {
-    const libelles = {
-      plage1: "6 h–10 h",
-      plage2: "10 h–13 h",
-      plage3: "13 h–17 h",
-      plage4: "17 h–21 h",
-      plage5: "21 h–2 h"
-    };
-
-    return (
-      libelles[
-        nettoyerTexte(plagebookd)
-      ] ||
-      "horaire concernée"
-    );
-  }
-
-  async function afficherInformationReservationFicheParc(
-    options,
-    message
-  ) {
-    if (
-      typeof options?.onInformation ===
-      "function"
-    ) {
-      await options.onInformation(message);
-      return;
-    }
-
-    await afficherAlerteFicheParc(
-      message,
-      "orange"
-    );
-  }
-
-  async function traiterChoixHeureReservationCommune(
+  async function transmettreChoixHeureReservationCommune(
     bouton,
-    options = {},
-    reservations = []
+    parc,
+    options = {}
   ) {
-    const payload = {
-      idparc: nettoyerTexte(
-        bouton?.dataset?.idparc
+    const choix = {
+      parc,
+      dateIso: nettoyerTexte(
+        bouton?.dataset?.date
       ),
-      datebookd:
-        construireDateBookdFicheParc(
-          nettoyerTexte(
-            bouton?.dataset?.date
-          ),
-          nettoyerTexte(
-            bouton?.dataset?.heure
-          )
-        ),
+      heure: nettoyerTexte(
+        bouton?.dataset?.heure
+      ),
       plagebookd: nettoyerTexte(
         bouton?.dataset?.plagebookd
       )
     };
 
     if (
-      !payload.idparc ||
-      !payload.datebookd ||
-      !payload.plagebookd
+      !nettoyerTexte(
+        choix.parc?.idparc ||
+        choix.parc?.id
+      ) ||
+      !choix.dateIso ||
+      !choix.heure ||
+      !choix.plagebookd
     ) {
-      await afficherAlerteFicheParc(
-        "Heure, date ou parc manquant.",
-        "orange"
+      throw new Error(
+        "Heure, date ou parc manquant."
       );
-      return;
     }
 
-    const confirme =
-      await ouvrirConfirmationReservationFicheParc(
-        options,
-        "Confirmer l’heure d’arrivée",
-        "Vous avez choisi le " +
-        formaterDatePlanningLongue(
-          nettoyerTexte(
-            bouton.dataset.date
-          )
-        ) +
-        " à " +
-        formaterHeureAffichee(
-          nettoyerTexte(
-            bouton.dataset.heure
-          )
-        ) +
-        "."
+    if (
+      typeof options.onChoixReservation !==
+      "function"
+    ) {
+      throw new Error(
+        "La finalisation de la réservation n’est pas disponible."
       );
-
-    if (!confirme) {
-      return;
     }
 
     bouton.disabled = true;
 
     try {
-      await enregistrerReservationFicheParc(
-        payload
+      await options.onChoixReservation(
+        choix
       );
-
-      await afficherAlerteFicheParc(
-        "Votre nouvelle date a bien été enregistrée.",
-        "orange"
-      );
-
-      if (
-        typeof options.onReservationCreee ===
-        "function"
-      ) {
-        await options.onReservationCreee(
-          payload
-        );
-        return;
+    } finally {
+      if (document.body.contains(bouton)) {
+        bouton.disabled = false;
       }
-
-      window.location.href =
-        construireUrlMembre(
-          "/ESPACE-MEMBRE/planning-membre.html"
-        );
-    } catch (error) {
-      bouton.disabled = false;
-      await afficherAlerteFicheParc(
-        error?.message ||
-        "Impossible d’enregistrer la réservation.",
-        "orange"
-      );
     }
-  }
-
-  async function enregistrerReservationFicheParc(
-    payload
-  ) {
-    if (!endpointFluxm) {
-      throw new Error(
-        "Le service de réservation n’est pas configuré."
-      );
-    }
-
-    const reponse = await fetch(
-      endpointFluxm + "/creer-reservation",
-      {
-        method: "POST",
-        credentials: "include",
-        cache: "no-store",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      }
-    );
-    const data =
-      await reponse.json().catch(() => null);
-
-    if (
-      !reponse.ok ||
-      !data ||
-      (data.success !== true &&
-        data.ok !== true)
-    ) {
-      throw new Error(
-        reponse.status === 401
-          ? "Vous devez être membre abonné pour planifier votre activité."
-          : nettoyerTexte(data?.message) ||
-            "Impossible d’enregistrer la réservation."
-      );
-    }
-
-    return data.reservation || null;
-  }
-
-  async function ouvrirConfirmationReservationFicheParc(
-    options,
-    titreValeur,
-    texteValeur
-  ) {
-    const conteneur =
-      document.createElement("div");
-    document.body.appendChild(conteneur);
-
-    const fragment =
-      await chargerFragmentObjetFiche(
-        options,
-        "/BOX/02-box-dialogue-bouton.html"
-      );
-    conteneur.appendChild(fragment);
-
-    const dialogue = conteneur.querySelector(
-      "[data-lcdp-box-dialogue-bouton]"
-    );
-    const titre = conteneur.querySelector(
-      "[data-lcdp-dialogue-title]"
-    );
-    const texte = conteneur.querySelector(
-      "[data-lcdp-dialogue-text]"
-    );
-    const actions = conteneur.querySelector(
-      "[data-lcdp-dialogue-actions]"
-    );
-    const boutonFermer = conteneur.querySelector(
-      "[data-lcdp-dialogue-close]"
-    );
-
-    if (
-      !dialogue ||
-      !titre ||
-      !texte ||
-      !actions ||
-      !boutonFermer
-    ) {
-      conteneur.remove();
-      throw new Error(
-        "Structure de confirmation incomplète."
-      );
-    }
-
-    titre.textContent = titreValeur || "";
-    texte.textContent = texteValeur || "";
-    actions.innerHTML = "";
-
-    return new Promise((resolve) => {
-      let resolu = false;
-
-      function fermer(valeur) {
-        if (resolu) {
-          return;
-        }
-
-        resolu = true;
-        conteneur.remove();
-        resolve(valeur);
-      }
-
-      const annuler =
-        document.createElement("button");
-      annuler.type = "button";
-      annuler.className =
-        "lcdp-button lcdp-button-secondary";
-      annuler.textContent = "Annuler";
-      annuler.addEventListener(
-        "click",
-        () => fermer(false)
-      );
-
-      const confirmer =
-        document.createElement("button");
-      confirmer.type = "button";
-      confirmer.className =
-        "lcdp-button lcdp-button-orange";
-      confirmer.textContent = "Confirmer";
-      confirmer.addEventListener(
-        "click",
-        () => fermer(true)
-      );
-
-      actions.append(
-        annuler,
-        confirmer
-      );
-
-      boutonFermer.addEventListener(
-        "click",
-        () => fermer(false)
-      );
-      dialogue.addEventListener(
-        "click",
-        (event) => {
-          if (event.target === dialogue) {
-            fermer(false);
-          }
-        }
-      );
-    });
   }
 
   function creerCardSegmentPlanningCommun(
