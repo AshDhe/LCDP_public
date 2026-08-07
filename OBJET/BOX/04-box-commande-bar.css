@@ -17,7 +17,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 10px 16px;
+  gap: var(--lcdp-space-2);
   box-sizing: border-box;
 }
 
@@ -29,26 +29,29 @@
   min-height: 40px !important;
   height: auto !important;
   margin: 0 !important;
-  padding: 8px 14px !important;
+  padding: 7px 12px !important;
   border-radius: 8px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
   font-family: var(--lcdp-font-main) !important;
-  font-size: 0.8rem !important;
+  font-size: 0.82rem !important;
   line-height: 1.15 !important;
   font-weight: 700 !important;
   letter-spacing: 0 !important;
   text-align: center !important;
   white-space: nowrap !important;
+  overflow-wrap: normal;
+  text-wrap: balance;
   box-sizing: border-box;
 }
 
+
 .lcdp-box-commande-bar__icone {
-  width: 18px;
-  height: 18px;
-  flex: 0 0 18px;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
   display: block;
   object-fit: contain;
 }
@@ -106,15 +109,4 @@
 .lcdp-box-commande-bar__actions #bouton-demander-ia svg,
 .lcdp-actions-footer-reserver .lcdp-button-orange svg {
   color: inherit !important;
-}
-
-@media (max-width: 379px) {
-  .lcdp-box-commande-bar__actions {
-    justify-content: center;
-  }
-
-  .lcdp-box-commande-bar__actions .lcdp-button {
-    width: 100% !important;
-    justify-content: center !important;
-  }
 }
