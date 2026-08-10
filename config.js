@@ -35,6 +35,7 @@
     formInscriptionMembre: "https://form-inscription-membre-api.lacleduparc.fr",
     la: "https://la-api.lacleduparc.fr",
     userRouteur: "https://user-routeur-api.lacleduparc.fr",
+    laCleDuParc: "https://la-cle-du-parc-api.lacleduparc.fr",
     editingAdmin: "https://editing-admin-api.lacleduparc.fr",
     editingAdminFallback: "https://w-editing-admin.hugues-pavret.workers.dev"
   };
@@ -57,6 +58,7 @@
     workerConnexionMembreUrl: WORKERS.connexionMembre,
     workerFormInscriptionMembreUrl: WORKERS.formInscriptionMembre,
     workerUserRouteurUrl: WORKERS.userRouteur,
+    workerLaCleDuParcUrl: WORKERS.laCleDuParc,
     workerLaUrl: WORKERS.la,
     workerEditingAdminUrl: WORKERS.editingAdmin,
     workerEditingAdminFallbackUrl: WORKERS.editingAdminFallback,
@@ -77,6 +79,8 @@
     WORKER_CONNEXION_MEMBRE_URL: WORKERS.connexionMembre,
     WORKER_FORM_INSCRIPTION_MEMBRE_URL: WORKERS.formInscriptionMembre,
     WORKER_USER_ROUTEUR_URL: WORKERS.userRouteur,
+    WORKER_LA_CLE_DU_PARC_URL: WORKERS.laCleDuParc,
+    W_LA_CLE_DU_PARC_URL: WORKERS.laCleDuParc,
 
     publicUrl(path) {
       return buildUrl(active.publicBase, path);
@@ -106,4 +110,71 @@
       return "https://" + workerSubdomain + ".lacleduparc.fr";
     }
   };
+
+  initialiserVerrouillageCleActive();
+
+  function initialiserVerrouillageCleActive() {
+    if (!WORKERS.laCleDuParc || estPageMaCle(window.location.href)) return;
+    if (!cookiePresent("userapp")) return;
+
+    verifierVerrouillageCleActive();
+
+    window.addEventListener("pageshow", verifierVerrouillageCleActive);
+    window.addEventListener("focus", verifierVerrouillageCleActive);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        verifierVerrouillageCleActive();
+      }
+    });
+  }
+
+  async function verifierVerrouillageCleActive() {
+    try {
+      const reponse = await fetch(
+        String(WORKERS.laCleDuParc).replace(/\/+$/, "") + "/status",
+        {
+          method: "GET",
+          credentials: "include",
+          cache: "no-store",
+          headers: { Accept: "application/json" }
+        }
+      );
+
+      if (!reponse.ok) return;
+
+      const statut = await reponse.json().catch(() => null);
+
+      if (
+        statut?.success === true &&
+        (statut.screen === "active" || statut.checkinActive === true)
+      ) {
+        const destination = buildUrl(
+          active.membreBase,
+          "/ESPACE-MEMBRE/lacleduparc.html"
+        );
+
+        if (window.location.href !== destination) {
+          window.location.replace(destination);
+        }
+      }
+    } catch (error) {
+      console.error("Verrouillage Ma clé :", error);
+    }
+  }
+
+  function cookiePresent(nom) {
+    return document.cookie
+      .split(";")
+      .map((cookie) => cookie.trim())
+      .some((cookie) => cookie.startsWith(String(nom) + "="));
+  }
+
+  function estPageMaCle(value) {
+    try {
+      const url = new URL(String(value || ""), window.location.href);
+      return url.pathname.endsWith("/ESPACE-MEMBRE/lacleduparc.html");
+    } catch {
+      return false;
+    }
+  }
 })();
