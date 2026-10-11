@@ -2,11 +2,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--lcdp-space-2);
+  gap: 0;
 }
 
 .lcdp-box-carousel__title {
-  margin: 0;
+  margin: 0 0 var(--lcdp-space-2);
   font-size: clamp(26px, 6vw, 34px);
   line-height: 1.18;
   font-weight: 600;
@@ -105,9 +105,13 @@
   opacity: 0.75;
 }
 
+.lcdp-box-carousel > .lcdp-image-legend {
+  margin: 4px 0 0;
+}
+
 .lcdp-box-carousel__dots {
   min-height: 16px;
-  margin-top: var(--lcdp-space-1);
+  margin-top: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
