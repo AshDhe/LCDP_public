@@ -42,6 +42,19 @@
   gap: var(--lcdp-space-3);
 }
 
+.lcdp-page-hello .lcdp-boxtext__content {
+  gap: 1rem;
+  line-height: 1.6;
+}
+
+.lcdp-page-hello .lcdp-hello-illustration {
+  display: block;
+  width: 280px;
+  max-width: 100%;
+  height: auto;
+  align-self: center;
+}
+
 .lcdp-page-hello #acces-24h {
   scroll-margin-top: 88px;
 }
