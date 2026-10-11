@@ -3,33 +3,29 @@
 
   const IMAGES_CARROUSEL_HELLO = [
     {
-      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_1.jpg",
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_1.webp",
       alt: "Parc plein air d'exception La Clé du Parc"
     },
     {
-      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_2.jpg",
-      alt: "Moment de ressourcement en plein air"
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_2.webp",
+      alt: "Activité de loisir plein air avec coach La Clé du Parc"
     },
     {
-      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_3.jpg",
-      alt: "Accès à un parc d'exception"
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_3.webp",
+      alt: "Activité de loisir plein air en famille La Clé du Parc"
     },
     {
-      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_4.jpg",
-      alt: "Activité de plein air dans un parc"
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_4.webp",
+      alt: "Activité de loisir plein air en duo couple La Clé du Parc"
     },
     {
-      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_5.jpg",
-      alt: "Lieu naturel sélectionné par La Clé du Parc"
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_5.webp",
+      alt: "Un parc près de chez vous La Clé du Parc"
     },
     {
-      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_6.jpg",
-      alt: "Expérience en parc plein air"
+      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_6.webp",
+      alt: "Des activités de loisir plein air pour tous La Clé du Parc"
     },
-    {
-      src: "/OBJET/IMAG/CARROUSEL/AFFICHE-ACCUEIL/IMAG_7.jpg",
-      alt: "Parc d'exception près de chez vous"
-    }
   ];
 
   if (document.readyState === "loading") {
