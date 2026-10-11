@@ -93,7 +93,7 @@
 
       const sousTitre = document.createElement("span");
       sousTitre.className = "lcdp-bandeau-restreint-subtitle";
-      sousTitre.textContent = "Accès restreint à l'application";
+      sousTitre.textContent = "Accès restreint";
 
       libelle.appendChild(titre);
       libelle.appendChild(sousTitre);
@@ -286,7 +286,7 @@
 
     slot.innerHTML =
       '<section class="lcdp-component lcdp-box-carousel" data-lcdp-box-carousel>' +
-        '<h2 class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-carousel-title>Demandez la clé</h2>' +
+        '<h2 class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-carousel-title>Seul(e) ou en groupe</h2>' +
         '<div class="lcdp-box-carousel__frame" data-lcdp-carousel-frame>' +
           '<div class="lcdp-box-carousel__viewport">' +
             '<div class="lcdp-box-carousel__list" data-lcdp-carousel-list></div>' +
