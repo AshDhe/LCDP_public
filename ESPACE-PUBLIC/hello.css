@@ -55,6 +55,21 @@
   align-self: center;
 }
 
+.lcdp-page-hello .lcdp-hello-map {
+  width: 480px;
+  max-width: 100%;
+  margin: 0;
+  align-self: center;
+}
+
+.lcdp-page-hello .lcdp-hello-map > .lcdp-hello-illustration {
+  width: 100%;
+}
+
+.lcdp-page-hello .lcdp-hello-map > .lcdp-image-legend {
+  margin: 4px 0 0;
+}
+
 .lcdp-page-hello #acces-24h {
   scroll-margin-top: 88px;
 }
