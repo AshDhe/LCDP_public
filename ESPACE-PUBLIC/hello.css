@@ -232,3 +232,11 @@
   color: #d64b68;
   background: #fff1f4;
 }
+
+/* Espacement entre les citations et couleur des signatures. */
+.lcdp-page-hello .lcdp-hello-testimonial {
+  margin-bottom: 1rem;
+}
+.lcdp-page-hello .lcdp-hello-testimonial--membre footer { color: #57754c; }
+.lcdp-page-hello .lcdp-hello-testimonial--coach footer { color: #8660c8; }
+.lcdp-page-hello .lcdp-hello-testimonial--parc footer { color: #d64b68; }
