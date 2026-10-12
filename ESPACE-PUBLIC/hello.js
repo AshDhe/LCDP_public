@@ -282,7 +282,6 @@
 
     slot.innerHTML =
       '<section class="lcdp-component lcdp-box-carousel" data-lcdp-box-carousel>' +
-        '<h2 class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-carousel-title>En solo, en duo ou en groupe</h2>' +
         '<div class="lcdp-box-carousel__frame" data-lcdp-carousel-frame>' +
           '<div class="lcdp-box-carousel__viewport">' +
             '<div class="lcdp-box-carousel__list" data-lcdp-carousel-list></div>' +

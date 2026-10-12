@@ -251,3 +251,8 @@
 .lcdp-page-hello .lcdp-hello-access-frame .lcdp-box-formulaire-page__inner {
   margin: 0 auto;
 }
+
+/* Respiration avant les titres des sections principales de Hello. */
+.lcdp-page-hello .lcdp-page-content.lcdp-stack-large > .lcdp-box-carousel:not(:first-child) {
+  margin-top: 12px;
+}
