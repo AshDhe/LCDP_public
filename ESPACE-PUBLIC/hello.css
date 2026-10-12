@@ -240,3 +240,14 @@
 .lcdp-page-hello .lcdp-hello-testimonial--membre footer { color: #57754c; }
 .lcdp-page-hello .lcdp-hello-testimonial--coach footer { color: #8660c8; }
 .lcdp-page-hello .lcdp-hello-testimonial--parc footer { color: #d64b68; }
+
+/* Encadrement du formulaire d'accès identique aux blocs de la page Hello. */
+.lcdp-page-hello .lcdp-hello-access-frame #acces-24h {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.lcdp-page-hello .lcdp-hello-access-frame .lcdp-box-formulaire-page__inner {
+  margin: 0 auto;
+}
