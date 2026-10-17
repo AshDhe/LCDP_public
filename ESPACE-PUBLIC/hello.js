@@ -30,7 +30,7 @@
     {
       src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_6.webp",
       alt: "Un parc près de chez soi avec La Clé du Parc",
-      texte: "Un parc près de chez vous ?"
+      texte: "Un parc près de chez vous\u00a0?"
     },
   ];
 
