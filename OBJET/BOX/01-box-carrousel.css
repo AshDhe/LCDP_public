@@ -2,11 +2,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: var(--lcdp-space-2);
 }
 
 .lcdp-box-carousel__title {
-  margin: 0 0 var(--lcdp-space-2);
+  margin: 0;
   font-size: clamp(26px, 6vw, 34px);
   line-height: 1.18;
   font-weight: 600;
@@ -105,13 +105,9 @@
   opacity: 0.75;
 }
 
-.lcdp-box-carousel > .lcdp-image-legend {
-  margin: 4px 0 0;
-}
-
 .lcdp-box-carousel__dots {
   min-height: 16px;
-  margin-top: 4px;
+  margin-top: var(--lcdp-space-1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,4 +160,59 @@
     width: 10px;
     height: 10px;
   }
+}
+/* TITRE SUR IMAGE — composant générique, utilisable sur toutes les pages.
+   Le texte est un figcaption dans la figure ; aucun texte n'est intégré à l'image.
+   Position de référence : bas gauche, avec marges adaptatives PC/mobile. */
+.lcdp-box-carousel__item--with-title::after {
+  content: "";
+  position: absolute;
+  inset: 42% 0 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.12) 34%,
+    rgba(0, 0, 0, 0.56) 100%
+  );
+}
+
+.lcdp-box-carousel__overlay-title {
+  position: absolute;
+  z-index: 2;
+  left: clamp(16px, 5%, 76px);
+  bottom: clamp(18px, 6%, 64px);
+  width: calc(100% - 2 * clamp(16px, 5%, 76px));
+  max-width: 88%;
+  margin: 0;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(27px, 5.8vw, 76px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-align: left;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .lcdp-box-carousel__overlay-title {
+    left: 5%;
+    bottom: 7%;
+    width: 90%;
+    max-width: 90%;
+    font-size: clamp(23px, 6.6vw, 46px);
+    line-height: 1.1;
+  }
+  .lcdp-box-carousel__item--with-title::after {
+    inset: 35% 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lcdp-box-carousel__item { transition-duration: 0.01ms; }
 }

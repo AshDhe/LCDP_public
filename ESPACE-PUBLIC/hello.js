@@ -4,27 +4,33 @@
   const IMAGES_CARROUSEL_HELLO = [
     {
       src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_1.webp",
-      alt: "Parc plein air d'exception La Clé du Parc"
+      alt: "Lieux remarquables et parcs d'exception avec La Clé du Parc",
+      texte: "Des lieux d'exception"
     },
     {
       src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_2.webp",
-      alt: "Activité de loisir plein air avec coach La Clé du Parc"
+      alt: "Prendre soin de soi et de ses proches La Clé du Parc",
+      texte: "Prendre soin de soi"
     },
     {
       src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_3.webp",
-      alt: "Activité de loisir plein air en famille La Clé du Parc"
+      alt: "Se réunir en famille avec La Clé du Parc",
+      texte: "Se réunir en famille"
     },
     {
       src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_4.webp",
-      alt: "Activité de loisir plein air en duo couple La Clé du Parc"
+      alt: "Réunir ses amis avec La Clé du Parc",
+      texte: "Réunir ses amis"
     },
     {
       src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_5.webp",
-      alt: "Un parc près de chez vous La Clé du Parc"
+      alt: "Activités de loisir plein air avec La Clé du Parc",
+      texte: "Organiser son activité"
     },
     {
       src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_6.webp",
-      alt: "Des activités de loisir plein air pour tous La Clé du Parc"
+      alt: "Un parc près de chez soi avec La Clé du Parc",
+      texte: "Un parc près de chez vous ?"
     },
   ];
 
@@ -322,6 +328,22 @@
         }
 
         figure.appendChild(img);
+
+        // Titre éditorial superposé à l'image : six mots maximum.
+        // Le contenu est inséré comme texte, jamais comme HTML.
+        const motsTitre = String(image.texte || "").trim().split(/\s+/).filter(Boolean);
+        if (motsTitre.length > 6) {
+          console.warn("Carrousel Hello : titre limité à six mots pour l'image", index + 1);
+        }
+        const titre = motsTitre.slice(0, 6).join(" ");
+        if (titre) {
+          const legende = document.createElement("figcaption");
+          legende.className = "lcdp-box-carousel__overlay-title";
+          legende.textContent = titre;
+          figure.appendChild(legende);
+          figure.classList.add("lcdp-box-carousel__item--with-title");
+        }
+
         liste.appendChild(figure);
       });
     }
