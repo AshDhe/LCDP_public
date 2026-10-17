@@ -256,3 +256,20 @@
 .lcdp-page-hello .lcdp-page-content.lcdp-stack-large > .lcdp-box-carousel:not(:first-child) {
   margin-top: 12px;
 }
+
+/* Images 960 × 739 de Hello : réduction sans modifier le HTML ni le carrousel. */
+.lcdp-page-hello img[width="960"][height="739"]:not(.lcdp-box-carousel img) {
+  display: block;
+  width: 80%;
+  max-width: 768px;
+  height: auto;
+  margin-inline: auto;
+  align-self: center;
+}
+
+@media (min-width: 768px) {
+  .lcdp-page-hello img[width="960"][height="739"]:not(.lcdp-box-carousel img) {
+    width: 70%;
+    max-width: 672px;
+  }
+}
