@@ -196,6 +196,11 @@
   padding-right: 44px;
 }
 
+.lcdp-page-hello h3.lcdp-boxtext__title:not(:first-child) {
+  font-size: 1.15rem;
+  margin-top: var(--lcdp-space-4);
+}
+
 @media (min-width: 768px) {
   .lcdp-page-hello .lcdp-hello-main .lcdp-page-section {
     padding-top: var(--lcdp-space-4);
