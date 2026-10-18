@@ -76,7 +76,7 @@
         id: "responsable_parc",
         name: "responsable_parc",
         label: "Responsable de parc",
-        checkboxLabel: "Êtes-vous responsable d'un parc et intéressé(e) par le réseau La Clé du Parc ?",
+        checkboxLabel: "Êtes-vous responsable de parc et souhaitez-vous être contacté(e) ?",
         required: false
       },
       {
@@ -84,7 +84,7 @@
         id: "responsable_activite",
         name: "responsable_activite",
         label: "Responsable d'activité",
-        checkboxLabel: "Êtes-vous responsable d'activité plein air de loisir et intéressé(e) par La Clé du Parc ?",
+        checkboxLabel: "Êtes-vous coach d'activité et souhaitez-vous être contacté(e) ?",
         required: false
       }
     ],
