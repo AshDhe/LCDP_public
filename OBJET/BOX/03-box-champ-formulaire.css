@@ -12,10 +12,10 @@
 .lcdp-box-champ-formulaire__heading {
   margin: 0;
   display: block;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.35;
-  font-weight: 500;
-  color: var(--lcdp-color-text-muted);
+  font-weight: 600;
+  color: var(--lcdp-color-text);
   text-align: left;
 }
 
@@ -431,12 +431,4 @@
     padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-2)) !important;
     padding-right: 14px !important;
   }
-}
-
-.lcdp-box-champ-formulaire__label,
-.lcdp-box-champ-formulaire__heading {
-  font-size: 1rem;
-  line-height: 1.35;
-  font-weight: 600;
-  color: var(--lcdp-color-text);
 }
