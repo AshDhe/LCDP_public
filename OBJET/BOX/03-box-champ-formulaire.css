@@ -432,3 +432,11 @@
     padding-right: 14px !important;
   }
 }
+
+.lcdp-box-champ-formulaire__label,
+.lcdp-box-champ-formulaire__heading {
+  font-size: 1rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--lcdp-color-text);
+}
