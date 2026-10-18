@@ -121,7 +121,7 @@
     if (!WORKERS.laCleDuParc || estPageMaCle(window.location.href)) return;
     if (!cookiePresent("userapp")) return;
 
-    verifierVerrouillageCleActive();
+    verifierVerrouillageCleActive({ masquerPage: true });
 
     window.addEventListener("pageshow", verifierVerrouillageCleActive);
     window.addEventListener("focus", verifierVerrouillageCleActive);
@@ -151,12 +151,15 @@
     document.documentElement.classList.remove(CLASSE_CONTROLE_CLE);
   }
 
-  async function verifierVerrouillageCleActive() {
+  async function verifierVerrouillageCleActive(options = {}) {
     if (verificationVerrouillageClePromise) {
       return verificationVerrouillageClePromise;
     }
 
-    masquerPagePendantControleCle();
+    // Garder les controles au retour de focus sans masquer la page affichee.
+    if (options.masquerPage === true) {
+      masquerPagePendantControleCle();
+    }
 
     verificationVerrouillageClePromise = (async () => {
       let conserverMasquage = false;
