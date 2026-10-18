@@ -3,13 +3,14 @@
 
   const FORMULAIRE_LISTE_ATTENTE_CONFIG = {
     id: "formulaire-liste-attente",
-    ariaLabel: "Formulaire de pré-inscription 2027",
-    titre: "Pré-inscription 2027",
-    sousTitre: "Sans engagement",
+    ariaLabel: "Formulaire de pré-inscription",
+    titre: "Pré-inscription",
+    sousTitre: "",
     introHtml: `
       <p>
-        Partagez votre passion du plein air d'exception et gagnez 10 "points passion" La Clé du Parc pour 2027. Soyez informé(e) de l'actualité du club avant l'ouverture de la saison 2027 pour vous et vos proches.
-      </p>
+        Partagez dès maintenant votre passion du plein air d'exception et soyez informé(e) de l'actualité du club avant l'ouverture de la prochaine saison.
+        Cette pré-inscription n'implique aucun engagement de votre part.
+        </p>
     `,
     champs: [
       {
@@ -75,7 +76,7 @@
         id: "responsable_parc",
         name: "responsable_parc",
         label: "Responsable de parc",
-        checkboxLabel: "Êtes-vous responsable d'un parc plein air et intéressé par nos activités ?",
+        checkboxLabel: "Êtes-vous responsable d'un parc et intéressé(e) par le réseau La Clé du Parc ?",
         required: false
       },
       {
@@ -83,7 +84,7 @@
         id: "responsable_activite",
         name: "responsable_activite",
         label: "Responsable d'activité",
-        checkboxLabel: "Êtes-vous responsable d'activité de plein air ou coach dans les domaines artistiques, sportifs ou culturels et intéressé par nos activités ?",
+        checkboxLabel: "Êtes-vous responsable d'activité plein air de loisir et intéressé(e) par La Clé du Parc ?",
         required: false
       }
     ],
@@ -94,7 +95,8 @@
       style: "lcdp-button-orange"
     },
     noteHtml: `
-      * Votre réponse est nécessaire pour enregistrer votre pré-inscription. Les informations que vous partagez dans ce formulaire sont soumises à l'application des mentions légales. En particulier, elles sont exclusivement réservées au club La Clé du Parc et ne font l'objet d'aucun partage avec un tiers. Consultez les memtions légales pour en savoir plus à propos du traitement appliqué à ces informations.
+      * Votre réponse est nécessaire pour enregistrer votre pré-inscription.<br>
+      Les informations que vous partagez dans ce formulaire sont soumises à l'application des mentions légales et sont exclusivement réservées au club La Clé du Parc. Consultez les mentions légales pour en savoir plus sur le traitement de vos données personnelles par La Clé du Parc.
     `
   };
 
