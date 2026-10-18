@@ -74,6 +74,8 @@
   margin: 0;
   font-size: 15px;
   line-height: 1.45;
+  font-weight: 500;
+  color: var(--lcdp-color-text);
 }
 
 .lcdp-box-formulaire__fields {
