@@ -12,10 +12,10 @@
 .lcdp-box-champ-formulaire__heading {
   margin: 0;
   display: block;
-  font-size: clamp(1.2rem, 5.5vw, 1.6rem);
-  line-height: 1.2;
-  font-weight: 700;
-  color: var(--lcdp-color-text);
+  font-size: 0.95rem;
+  line-height: 1.35;
+  font-weight: 500;
+  color: var(--lcdp-color-text-muted);
   text-align: left;
 }
 
@@ -143,8 +143,8 @@
 @media (min-width: 768px) {
   .lcdp-box-champ-formulaire__label,
   .lcdp-box-champ-formulaire__heading {
-    font-size: 1.25rem;
-    line-height: 1.25;
+    font-size: 1rem;
+    line-height: 1.35;
   }
 
   .lcdp-box-champ-formulaire__description {
