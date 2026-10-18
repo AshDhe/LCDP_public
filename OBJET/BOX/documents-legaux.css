@@ -305,5 +305,46 @@ body.lcdp-legal-lightbox-open {
     max-height: 100svh;
     border: 0;
     border-radius: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 42px;
+    align-content: start;
+    align-items: start;
+    column-gap: 12px;
+    padding: 12px;
+  }
+
+  /* La croix partage uniquement la ligne du titre. */
+  .lcdp-legal-lightbox__close {
+    grid-column: 2;
+    grid-row: 1;
+    float: none;
+    margin: 0;
+    justify-self: end;
+  }
+
+  .lcdp-legal-lightbox__header {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    padding-right: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* Tous les contenus suivants passent sous le titre ET la croix. */
+  .lcdp-legal-lightbox__card > :not(.lcdp-legal-lightbox__close):not(.lcdp-legal-lightbox__header) {
+    grid-column: 1 / -1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .lcdp-legal-lightbox__content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lcdp-legal-lightbox__section {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    padding: 12px;
   }
 }
