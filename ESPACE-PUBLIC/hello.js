@@ -335,7 +335,7 @@
         if (motsTitre.length > 6) {
           console.warn("Carrousel Hello : titre limité à six mots pour l'image", index + 1);
         }
-        const titre = motsTitre.slice(0, 6).join(" ");
+        const titre = String(image.texte || "").trim();
         if (titre) {
           const legende = document.createElement("figcaption");
           legende.className = "lcdp-box-carousel__overlay-title";
