@@ -115,6 +115,7 @@
       definirEtatBoutonConnexion(true);
 
       try {
+        const navigateur = obtenirIdentiteNavigateurMobile();
         const response = await fetch(endpointConnexionMembre, {
           method: "POST",
           credentials: "include",
@@ -124,7 +125,8 @@
           },
           body: JSON.stringify({
             emailmembre,
-            mdpmembre
+            mdpmembre,
+            navigateur
           })
         });
 
@@ -235,6 +237,33 @@
     slot.appendChild(footer);
 
     appliquerRoutesSite(slot);
+  }
+
+
+  // Identité persistante du navigateur, commune aux sous-domaines de production.
+  // L'effacement du cookie ne supprime jamais le propriétaire côté serveur.
+  function obtenirIdentiteNavigateurMobile() {
+    const ua = navigator.userAgent || "";
+    if (!/iPhone|iPod|Android.*Mobile|Windows Phone/i.test(ua)) return null;
+    const nom = "lcdp_navigateur_proprietaire";
+    const lire = () => {
+      const prefixe = nom + "=";
+      const cookie = document.cookie.split(";").map(v => v.trim()).find(v => v.startsWith(prefixe));
+      return cookie ? cookie.slice(prefixe.length) : "";
+    };
+    let identite = lire();
+    if (!/^[a-f0-9]{64}$/.test(identite)) {
+      const octets = crypto.getRandomValues(new Uint8Array(32));
+      identite = Array.from(octets, v => v.toString(16).padStart(2, "0")).join("");
+    }
+    const domaine = /(^|\.)lacleduparc\.fr$/i.test(window.location.hostname)
+      ? "; Domain=.lacleduparc.fr" : "";
+    const secure = window.location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = nom + "=" + identite + "; Path=/; Max-Age=34560000; SameSite=Lax" + domaine + secure;
+    if (lire() !== identite) {
+      throw new Error("Autorisez les cookies de l’application pour enregistrer ce navigateur.");
+    }
+    return identite;
   }
 
   async function afficherInformation(titre, message, type = "information", redirectUrl = null) {
