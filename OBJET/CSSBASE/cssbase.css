@@ -954,3 +954,14 @@ select:focus-visible {
     font-size: 2.05rem;
   }
 }
+
+/* Variante générique : exclusivité du compte pendant Ma clé. */
+html.lcdp-compte-bloque, html.lcdp-compte-bloque body { background: #000 !important; color: #fff !important; }
+html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) { display: none !important; }
+#lcdp-compte-bloque { position: fixed; inset: 0; z-index: 2147483647; overflow: auto; background: #000; color: #fff; padding: 24px; box-sizing: border-box; }
+#lcdp-compte-bloque p { color: #fff; }
+#lcdp-compte-bloque button { display: block; margin-top: 16px; }
+
+#lcdp-compte-bloque { display: flex; flex-direction: column; }
+#lcdp-compte-bloque p { color: #fff !important; }
+#lcdp-compte-bloque .lcdp-compte-bloque-actions { margin-top: auto; padding-top: 24px; padding-bottom: env(safe-area-inset-bottom); }

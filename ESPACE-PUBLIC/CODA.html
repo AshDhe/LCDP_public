@@ -30,7 +30,6 @@
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
   <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
   <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
-  <link rel="stylesheet" href="./codes-securite.css">
 </head>
 
 <body data-code-type="coda">
@@ -57,12 +56,12 @@
                   <p class="lcdp-box-formulaire__subtitle">Finalisez la sécurité de votre compte</p>
                 </header>
                 <ul class="lcdp-box-formulaire__note"><li>Quatre chiffres.</li><li>La même paire de chiffres ne peut pas être répétée.</li><li>Un même chiffre apparaît au maximum deux fois.</li><li>Deux chiffres côte à côte ne doivent pas se suivre, dans un sens ou dans l’autre.</li></ul>
-                <div class="lcdp-box-formulaire__fields"><fieldset class="lcdp-box-champ-formulaire lcdp-code-groupe"><legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Votre code d’accès</legend><div class="lcdp-code-cases"><input type="password" id="code-1" name="code-1" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="new-password" aria-label="Chiffre 1" data-code-value required>
+                <div class="lcdp-box-formulaire__fields"><fieldset class="lcdp-box-champ-formulaire lcdp-box-champ-formulaire--code"><legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Votre code d’accès</legend><div class="lcdp-box-champ-formulaire__code-cases"><input type="password" id="code-1" name="code-1" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="new-password" aria-label="Chiffre 1" data-code-value required>
 <input type="password" id="code-2" name="code-2" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="new-password" aria-label="Chiffre 2" data-code-value required>
 <input type="password" id="code-3" name="code-3" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="new-password" aria-label="Chiffre 3" data-code-value required>
 <input type="password" id="code-4" name="code-4" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="new-password" aria-label="Chiffre 4" data-code-value required>
 </div></fieldset>
-<fieldset class="lcdp-box-champ-formulaire lcdp-code-groupe"><legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Confirmez votre code d’accès</legend><div class="lcdp-code-cases"><input type="password" id="confirmation-1" name="confirmation-1" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="new-password" aria-label="Chiffre 1 de confirmation" data-code-confirmation required>
+<fieldset class="lcdp-box-champ-formulaire lcdp-box-champ-formulaire--code"><legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Confirmez votre code d’accès</legend><div class="lcdp-box-champ-formulaire__code-cases"><input type="password" id="confirmation-1" name="confirmation-1" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="new-password" aria-label="Chiffre 1 de confirmation" data-code-confirmation required>
 <input type="password" id="confirmation-2" name="confirmation-2" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="new-password" aria-label="Chiffre 2 de confirmation" data-code-confirmation required>
 <input type="password" id="confirmation-3" name="confirmation-3" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="new-password" aria-label="Chiffre 3 de confirmation" data-code-confirmation required>
 <input type="password" id="confirmation-4" name="confirmation-4" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="new-password" aria-label="Chiffre 4 de confirmation" data-code-confirmation required>
@@ -77,7 +76,7 @@
                     <span class="lcdp-sr-only">Enregistrer</span>
                   </button>
                 </div>
-                <p class="lcdp-box-formulaire__note">Gardez ce code personnel. Le lien sert uniquement à sa première création.</p>
+                <p id="note-creation-code" class="lcdp-box-formulaire__note">Gardez ce code personnel. Le lien sert uniquement à sa première création.</p>
                 <p class="lcdp-box-formulaire__note"><a href="./connexion-membre.html" data-site-href="/ESPACE-PUBLIC/connexion-membre.html">Se connecter au compte</a></p>
               </form>
 

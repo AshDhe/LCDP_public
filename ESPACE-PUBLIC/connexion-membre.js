@@ -132,6 +132,10 @@
 
         const data = await response.json().catch(() => null);
 
+        if (data?.reason === "security_setup_required") {
+          await finaliserSecuriteAvantConnexion(data);
+          return;
+        }
         if (!response.ok || !data || data.success !== true) {
           afficherInformation(
             "Connexion impossible",
@@ -164,6 +168,41 @@
         definirEtatBoutonConnexion(false);
       }
     }
+  }
+
+  async function finaliserSecuriteAvantConnexion(data) {
+    const slot=document.getElementById("lcdp-lightbox-slot");
+    let renvoyer=false;
+    try {
+      const fragment=await chargerFragmentObjet("/BOX/02-box-dialogue-bouton.html");
+      slot.innerHTML="";slot.appendChild(fragment);
+      slot.querySelector("[data-lcdp-dialogue-title]").textContent="Sécurité du compte";
+      slot.querySelector("[data-lcdp-dialogue-text]").textContent=data.message;
+      const actions=slot.querySelector("[data-lcdp-dialogue-actions]");
+      renvoyer=await new Promise(resolve=>{
+        const fermer=valeur=>{slot.innerHTML="";resolve(valeur);};
+        for (const [texte,valeur] of [["OK",false],["Renvoyer les liens",true],["Annuler",false]]) {
+          const bouton=document.createElement("button");bouton.type="button";
+          bouton.className="lcdp-button "+(valeur?"lcdp-button-primary":"lcdp-button-secondary");
+          bouton.textContent=texte;bouton.addEventListener("click",()=>fermer(valeur),{once:true});actions.appendChild(bouton);
+        }
+        slot.querySelector("[data-lcdp-dialogue-close]").addEventListener("click",()=>fermer(false),{once:true});
+      });
+    } catch {
+      await afficherInformation("Sécurité du compte",data.message,"information");
+    }
+    if (renvoyer) {
+      try {
+        const config=window.SITE_CONFIG||{};
+        const endpoint=nettoyerBaseUrl(config.workerMdptokenzUrl||config.WORKER_MDPTOKENZ_URL||(typeof config.apiUrl==="function"?config.apiUrl("mdptokenz-api"):""));
+        if (!endpoint) throw new Error("Service non configuré");
+        const reponse=await fetch(endpoint,{method:"POST",credentials:"omit",cache:"no-store",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"setup-resend",autorisationSecurite:data.autorisationSecurite})});
+        const resultat=await reponse.json().catch(()=>null);
+        await afficherInformation("Sécurité du compte",resultat?.message||"L’envoi n’a pas pu être confirmé.",reponse.ok?"information":"erreur");
+      } catch { await afficherInformation("Sécurité du compte","L’envoi n’a pas pu être confirmé. Reconnectez-vous pour réessayer.","erreur"); }
+    }
+    data.autorisationSecurite="";
+    window.location.replace(construireUrlPublique("/ESPACE-PUBLIC/hello.html"));
   }
 
   function appliquerRoutesSite(racine = document) {

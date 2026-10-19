@@ -18,9 +18,15 @@
     const endpoint = nettoyerBaseUrl(window.SITE_CONFIG?.workerMdptokenzUrl || window.SITE_CONFIG?.WORKER_MDPTOKENZ_URL ||
       (typeof window.SITE_CONFIG?.apiUrl === "function" ? window.SITE_CONFIG.apiUrl("mdptokenz-api") : ""));
     let enCours = false, autorise = false;
-    const normaliser = v => type === "coda" ? v : v.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+    const normaliser = v => v;
     const afficher = texte => { message.textContent = texte; };
     const etat = actif => { [...saisie, ...confirmation].forEach(champ => { champ.disabled = !actif; }); bouton.disabled = !actif; };
+    let operation = "creation";
+    async function erreurSaisie(detail) {
+      enCours=true;
+      try { await afficherInformation("", "Votre code n’est pas conforme à ce qui est demandé. " + detail, "erreur"); }
+      finally { enCours=false; saisie[0].focus(); }
+    }
     etat(false);
     document.getElementById("afficher-code").addEventListener("change", event => {
       [...saisie,...confirmation].forEach(champ => { champ.type = event.target.checked ? "text" : "password"; });
@@ -42,43 +48,52 @@
       return { reponse, resultat };
     }
     if (!endpoint || !/^[a-f0-9]{64}$/.test(token) || !["coda","codr"].includes(type)) {
-      afficher("Ouvrez cette page depuis le lien reçu par e-mail."); return;
+      await afficherInformation("", "Ouvrez cette page depuis le lien reçu par e-mail.", "erreur"); return;
     }
     try {
       const { reponse, resultat } = await appeler("setup-status");
       if (!reponse.ok || !resultat.success) {
-        afficher(resultat.message || "Le lien est invalide ou expiré."); return;
+        await afficherInformation("", resultat.message || "Le lien est invalide ou expiré.", "erreur"); return;
+      }
+      operation = resultat.operation || "creation";
+      if (operation === "modification") {
+        const titre=document.querySelector(".lcdp-box-formulaire__title");
+        if (titre) titre.textContent="Modifier le code d’accès (CODA)";
+        const note=document.getElementById("note-creation-code");
+        if (note) note.textContent="Gardez ce code personnel. Ce lien sert uniquement à la modification autorisée de votre CODA.";
       }
       autorise = true; etat(true); afficher("Choisissez votre code, puis confirmez-le.");
-    } catch { afficher("La vérification est indisponible. Rouvrez le lien reçu par e-mail pour réessayer."); }
+    } catch { await afficherInformation("", "La vérification est indisponible. Rouvrez le lien reçu par e-mail pour réessayer.", "erreur"); }
     form.addEventListener("submit", async event => {
       event.preventDefault();
       if (enCours || !autorise) return;
       const valeurs = saisie.map(champ => normaliser(champ.value));
       const confirmations = confirmation.map(champ => normaliser(champ.value));
       const format = type === "coda" ? /^[0-9]$/ : /^[A-Z]{4}$/;
-      if (valeurs.some(v => !format.test(v))) { afficher(type === "coda" ? "Saisissez les quatre chiffres." : "Saisissez quatre mots de quatre lettres."); return; }
-      if (valeurs.some((v,i) => v !== confirmations[i])) { afficher("La confirmation ne correspond pas. Vérifiez la saisie et l’ordre."); return; }
-      if (valeurs.some(v => valeurs.filter(x => x === v).length > 2)) { afficher(type === "coda" ? "Un même chiffre apparaît au maximum deux fois." : "Répétition d'un même mot autorisée une fois."); return; }
+      if (valeurs.some(v => !format.test(v))) { await erreurSaisie(type === "coda" ? "Saisissez les quatre chiffres." : "Saisissez quatre mots de quatre lettres, en majuscules et sans accent."); return; }
+      if (valeurs.some((v,i) => v !== confirmations[i])) { await erreurSaisie("La confirmation ne correspond pas. Vérifiez la saisie et l’ordre."); return; }
+      if (valeurs.some(v => valeurs.filter(x => x === v).length > 2)) { await erreurSaisie(type === "coda" ? "Un même chiffre apparaît au maximum deux fois." : "Répétition d'un même mot autorisée une fois."); return; }
       if (type === "coda" && valeurs[0] === valeurs[2] && valeurs[1] === valeurs[3]) {
-        afficher("La même paire de chiffres ne peut pas être répétée."); return;
+        await erreurSaisie("La même paire de chiffres ne peut pas être répétée."); return;
       }
       if (type === "coda" && valeurs.some((v,i) => i < 3 && Math.abs(Number(v) - Number(valeurs[i+1])) === 1)) {
-        afficher("Deux chiffres côte à côte ne doivent pas se suivre, dans un sens ou dans l’autre."); return;
+        await erreurSaisie("Deux chiffres côte à côte ne doivent pas se suivre, dans un sens ou dans l’autre."); return;
       }
       enCours = true; etat(false);
       try {
         const { reponse, resultat } = await appeler("setup-save", type === "coda" ? { coda: valeurs.join("") } : { mots: valeurs });
         if (!reponse.ok || !resultat.success) {
-          afficher(resultat.message || "Le code n’a pas pu être enregistré.");
+          await afficherInformation("",resultat.message || "Le code n’a pas pu être enregistré.","erreur");
           if (![400,409,503].includes(reponse.status)) etat(true);
           else autorise = false;
           return;
         }
         token = ""; autorise = false;
         [...saisie,...confirmation].forEach(champ => { champ.value = ""; });
-        afficher(type === "coda" ? "Votre code d’accès (CODA) est enregistré." : "Votre code de récupération (CODR) est enregistré.");
-      } catch { afficher("La réponse n’a pas pu être confirmée. Rouvrez le lien reçu par e-mail pour vérifier si le code a été enregistré."); autorise = false; }
+        const nom=type==="coda"?"CODA":"CODR";
+        const texte=operation==="modification" ? "Votre CODA est mis à jour. Vous pouvez vous reconnecter à votre compte." : "Votre " + nom + " est enregistré. Retrouvez les informations relatives à vos codes de sécurité depuis votre page Mon Compte dans l’application.";
+        await afficherInformation("",texte,"information",construireUrlPublique("/ESPACE-PUBLIC/hello.html"));
+      } catch { autorise = false; await afficherInformation("","La réponse n’a pas pu être confirmée. Rouvrez le lien reçu par e-mail pour vérifier si le code a été enregistré.","erreur"); }
       finally { enCours = false; }
     });
   }
@@ -194,14 +209,9 @@
           resolve();
         };
 
-        boutonFermer.addEventListener("click", fermer, { once: true });
+        boutonFermer.hidden = true;
         boutonOk.addEventListener("click", fermer, { once: true });
 
-        alerte.addEventListener("click", (event) => {
-          if (event.target === alerte) {
-            fermer();
-          }
-        }, { once: true });
       });
 
       if (redirectUrl) {

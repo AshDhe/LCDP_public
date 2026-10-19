@@ -30,7 +30,6 @@
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
   <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
   <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
-  <link rel="stylesheet" href="./codes-securite.css">
 </head>
 
 <body data-code-type="codr">
@@ -57,13 +56,13 @@
                   <p class="lcdp-box-formulaire__subtitle">Finalisez la sécurité de votre compte</p>
                 </header>
                 <ul class="lcdp-box-formulaire__note"><li>4 mots ou groupes de lettres de votre choix.</li><li>4 lettres exactement par mot.</li><li>Répétition d'un même mot autorisée une fois.</li><li>Ordre des mots obligatoire.</li></ul>
-                <p class="lcdp-box-formulaire__note">Aucune vérification dans un dictionnaire. Les accents et la casse sont normalisés.</p>
-                <div class="lcdp-box-formulaire__fields"><fieldset class="lcdp-box-champ-formulaire lcdp-code-groupe"><legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Votre code de récupération</legend><div class="lcdp-code-cases"><input type="password" id="code-1" name="code-1" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 1" data-code-value required>
+                <p class="lcdp-box-formulaire__note">Les mots doivent être écrits en majuscules et sans accent. Aucune vérification dans un dictionnaire.</p>
+                <div class="lcdp-box-formulaire__fields"><fieldset class="lcdp-box-champ-formulaire lcdp-box-champ-formulaire--code"><legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Votre code de récupération</legend><div class="lcdp-box-champ-formulaire__code-cases"><input type="password" id="code-1" name="code-1" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 1" data-code-value required>
 <input type="password" id="code-2" name="code-2" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 2" data-code-value required>
 <input type="password" id="code-3" name="code-3" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 3" data-code-value required>
 <input type="password" id="code-4" name="code-4" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 4" data-code-value required>
 </div></fieldset>
-<fieldset class="lcdp-box-champ-formulaire lcdp-code-groupe"><legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Confirmez votre code de récupération</legend><div class="lcdp-code-cases"><input type="password" id="confirmation-1" name="confirmation-1" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 1 de confirmation" data-code-confirmation required>
+<fieldset class="lcdp-box-champ-formulaire lcdp-box-champ-formulaire--code"><legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Confirmez votre code de récupération</legend><div class="lcdp-box-champ-formulaire__code-cases"><input type="password" id="confirmation-1" name="confirmation-1" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 1 de confirmation" data-code-confirmation required>
 <input type="password" id="confirmation-2" name="confirmation-2" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 2 de confirmation" data-code-confirmation required>
 <input type="password" id="confirmation-3" name="confirmation-3" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 3 de confirmation" data-code-confirmation required>
 <input type="password" id="confirmation-4" name="confirmation-4" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 4 de confirmation" data-code-confirmation required>
@@ -78,7 +77,7 @@
                     <span class="lcdp-sr-only">Enregistrer</span>
                   </button>
                 </div>
-                <p class="lcdp-box-formulaire__note">Gardez ce code personnel. Le lien sert uniquement à sa première création.</p>
+                <p id="note-creation-code" class="lcdp-box-formulaire__note">Gardez ce code personnel. Le lien sert uniquement à sa première création.</p>
                 <p class="lcdp-box-formulaire__note"><a href="./connexion-membre.html" data-site-href="/ESPACE-PUBLIC/connexion-membre.html">Se connecter au compte</a></p>
               </form>
 

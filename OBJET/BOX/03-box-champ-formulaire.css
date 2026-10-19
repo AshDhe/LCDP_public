@@ -432,3 +432,22 @@
     padding-right: 14px !important;
   }
 }
+
+/* Variante générique : saisie de code en quatre cases.
+   L’habillage et le focus restent ceux du champ commun. */
+.lcdp-box-champ-formulaire--code {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.lcdp-box-champ-formulaire__code-cases {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--lcdp-space-2);
+}
+.lcdp-box-champ-formulaire .lcdp-box-champ-formulaire__code-cases input {
+  min-width: 0;
+  padding-inline: 4px;
+  text-align: center;
+}
