@@ -1,0 +1,19 @@
+/* Disposition spécifique des quatre cases uniquement.
+   Habillage des champs : objet commun 03-box-champ-formulaire.css.
+   Espacement entre groupes et état désactivé : 03-box-formulaire.css. */
+.lcdp-code-groupe {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.lcdp-code-cases {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--lcdp-space-2);
+}
+.lcdp-code-cases input {
+  min-width: 0;
+  padding-inline: 4px;
+  text-align: center;
+}
