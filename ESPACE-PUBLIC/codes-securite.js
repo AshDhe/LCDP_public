@@ -167,21 +167,22 @@
   const footer = await chargerFragmentObjet("/BOX/02-box-footer.html");
   slot.appendChild(footer);
 
-  const lien = slot.querySelector(
-    'a[data-site-href="/ESPACE-PUBLIC/mentions-legales.html"]'
-  );
+  appliquerRoutesSite(slot);
+
+  const lien = slot.querySelector('a[href*="mentions-legales.html"]');
 
   if (lien) {
-    const source = encodeURIComponent(window.location.pathname);
-    const destination =
-      "/ESPACE-PUBLIC/mentions-legales.html?source=" + source;
+    const url = new URL(lien.getAttribute("href"), document.baseURI);
+    url.searchParams.set("source", window.location.pathname);
 
-    lien.dataset.siteHref = destination;
+    lien.setAttribute("href", url.href);
+    lien.setAttribute(
+      "data-site-href",
+      url.pathname + url.search + url.hash
+    );
     lien.target = "_blank";
     lien.rel = "noopener noreferrer";
   }
-
-  appliquerRoutesSite(slot);
 }
 
 
