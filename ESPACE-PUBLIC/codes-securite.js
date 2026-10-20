@@ -156,29 +156,33 @@
 
 
   async function initialiserFooter() {
-    const slot = document.getElementById("lcdp-footer-slot");
+  const slot = document.getElementById("lcdp-footer-slot");
 
-    if (!slot) {
-      return;
-    }
-
-    slot.innerHTML = "";
-
-    const footer = await chargerFragmentObjet("/BOX/02-box-footer.html");
-    slot.appendChild(footer);
-
-    appliquerRoutesSite(slot);
-    const lien = slot.querySelector('a[href*="mentions-legales.html"]');
-
-      if (lien) {
-        const url = new URL(lien.href);
-        url.searchParams.set("source", window.location.pathname);
-
-        lien.href = url.href;
-        lien.target = "_blank";
-        lien.rel = "noopener noreferrer";
-      }
+  if (!slot) {
+    return;
   }
+
+  slot.innerHTML = "";
+
+  const footer = await chargerFragmentObjet("/BOX/02-box-footer.html");
+  slot.appendChild(footer);
+
+  const lien = slot.querySelector(
+    'a[data-site-href="/ESPACE-PUBLIC/mentions-legales.html"]'
+  );
+
+  if (lien) {
+    const source = encodeURIComponent(window.location.pathname);
+    const destination =
+      "/ESPACE-PUBLIC/mentions-legales.html?source=" + source;
+
+    lien.dataset.siteHref = destination;
+    lien.target = "_blank";
+    lien.rel = "noopener noreferrer";
+  }
+
+  appliquerRoutesSite(slot);
+}
 
 
   async function afficherInformation(titre, message, type = "information", redirectUrl = null) {
