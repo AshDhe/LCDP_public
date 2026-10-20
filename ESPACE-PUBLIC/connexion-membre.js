@@ -177,11 +177,16 @@
       const fragment=await chargerFragmentObjet("/BOX/02-box-dialogue-bouton.html");
       slot.innerHTML="";slot.appendChild(fragment);
       slot.querySelector("[data-lcdp-dialogue-title]").textContent="Sécurité du compte";
-      slot.querySelector("[data-lcdp-dialogue-text]").textContent=data.message;
+      
+      // OPTIMISATION : Mise à jour du texte selon vos indications (au singulier)
+      slot.querySelector("[data-lcdp-dialogue-text]").textContent="Vos codes de sécurité de compte ne sont pas définis. Consultez l'email reçu pour plus d'informations.";
+      
       const actions=slot.querySelector("[data-lcdp-dialogue-actions]");
       renvoyer=await new Promise(resolve=>{
         const fermer=valeur=>{slot.innerHTML="";resolve(valeur);};
-        for (const [texte,valeur] of [["OK",false],["Renvoyer les liens",true],["Annuler",false]]) {
+        
+        // OPTIMISATION : Suppression du bouton "OK". Modification du texte "Renvoyer les liens" par "Renvoyer l'email"
+        for (const [texte,valeur] of [["Renvoyer l'email",true], ["Annuler",false]]) {
           const bouton=document.createElement("button");bouton.type="button";
           bouton.className="lcdp-button "+(valeur?"lcdp-button-primary":"lcdp-button-secondary");
           bouton.textContent=texte;bouton.addEventListener("click",()=>fermer(valeur),{once:true});actions.appendChild(bouton);
@@ -189,7 +194,8 @@
         slot.querySelector("[data-lcdp-dialogue-close]").addEventListener("click",()=>fermer(false),{once:true});
       });
     } catch {
-      await afficherInformation("Sécurité du compte",data.message,"information");
+      // Version de secours (fallback) également mise à jour au singulier
+      await afficherInformation("Sécurité du compte","Vos codes de sécurité de compte ne sont pas définis. Consultez l'email reçu pour plus d'informations.","information");
     }
     if (renvoyer) {
       try {
