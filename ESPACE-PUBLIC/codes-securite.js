@@ -168,6 +168,16 @@
     slot.appendChild(footer);
 
     appliquerRoutesSite(slot);
+    const lien = slot.querySelector('a[href*="mentions-legales.html"]');
+
+      if (lien) {
+        const url = new URL(lien.href);
+        url.searchParams.set("source", window.location.pathname);
+
+        lien.href = url.href;
+        lien.target = "_blank";
+        lien.rel = "noopener noreferrer";
+      }
   }
 
 
