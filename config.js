@@ -115,7 +115,23 @@
   const ID_STYLE_CONTROLE_CLE = "lcdp-style-controle-cle-en-cours";
   let verificationVerrouillageClePromise = null;
 
-  initialiserVerrouillageCleActive();
+  // Le verrou Ma Clé concerne les espaces authentifiés, jamais le site public.
+  // Sur GitHub, plusieurs espaces partagent le même hôte : distinguer par dépôt.
+  if (!estEspacePublic()) {
+    initialiserVerrouillageCleActive();
+  }
+
+  function estEspacePublic() {
+    const nomHote = window.location.hostname.toLowerCase();
+    if (nomHote === "lacleduparc.fr" || nomHote === "www.lacleduparc.fr") {
+      return true;
+    }
+    if (nomHote === "ashdhe.github.io" || nomHote === "huguespavret.github.io") {
+      return window.location.pathname === "/LCDP_public" ||
+        window.location.pathname.startsWith("/LCDP_public/");
+    }
+    return false;
+  }
 
   function initialiserVerrouillageCleActive() {
     const fetchBrut = window.fetch.bind(window);
