@@ -162,7 +162,7 @@
 
 @media (min-width: 768px) {
   .lcdp-box-formulaire-page {
-    padding-top: var(--lcdp-space-5);
+    padding-top: var(--lcdp-space-2);
     padding-bottom: var(--lcdp-space-5);
   }
 

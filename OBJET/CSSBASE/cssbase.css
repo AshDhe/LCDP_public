@@ -761,7 +761,7 @@ select:focus-visible {
   }
 
   .lcdp-page-section {
-    padding-top: var(--lcdp-space-6);
+    padding-top: var(--lcdp-space-4);
     padding-bottom: var(--lcdp-space-6);
   }
 
