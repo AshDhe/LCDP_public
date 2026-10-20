@@ -62,7 +62,7 @@
         const note=document.getElementById("note-creation-code");
         if (note) note.textContent="Gardez ce code personnel. Ce lien sert uniquement à la modification autorisée de votre CODA.";
       }
-      autorise = true; etat(true); afficher("Choisissez votre code, puis confirmez-le.");
+      autorise = true; etat(true); afficher("Choisissez votre code, puis confirmez-le avec le bouton La Clé.");
     } catch { await afficherInformation("", "La vérification est indisponible. Rouvrez le lien reçu par e-mail pour réessayer.", "erreur"); }
     form.addEventListener("submit", async event => {
       event.preventDefault();
