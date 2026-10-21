@@ -132,6 +132,15 @@
 
         const data = await response.json().catch(() => null);
 
+        // Compte en récupération ou bloqué : redirection après authentification.
+        if (data?.reason === "account_recovery_in_progress" || data?.reason === "account_blocked") {
+          const chemin = data.reason === "account_recovery_in_progress"
+            ? "/ESPACE-MEMBRE/compte-en-recuperation.html"
+            : "/ESPACE-MEMBRE/compte-bloque.html";
+          window.location.replace(construireUrlMembre(chemin));
+          return;
+        }
+
         if (data?.reason === "security_setup_required") {
           await finaliserSecuriteAvantConnexion(data);
           return;
