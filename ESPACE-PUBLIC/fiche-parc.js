@@ -14,7 +14,7 @@
   const MODE_USAGE_MEMBRE =
     "reservation-membre";
   const MESSAGE_PLANIFICATION_PUBLIQUE =
-    "Vous devez être membre abonné et utiliser la rubrique Réserver de votre espace membre pour planifier votre activité.";
+    "Vous devez vous connecter à l’espace membre pour réserver.";
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
     "plage1",
@@ -2150,6 +2150,11 @@
       throw new Error("Slot planning parc introuvable.");
     }
 
+    if (normaliserModeUsagePlanning(options) !== MODE_USAGE_MEMBRE) {
+      await afficherBlocageReservationPublique();
+      return;
+    }
+
     const droitsPlanning =
       await chargerDroitsPlanningCommun(
         parc,
@@ -4032,10 +4037,15 @@
   }
 
 
-  function ouvrirPlanningPublic(parc) {
-    ouvrirShiftDetailParc(parc, "planning").catch(console.error);
+  async function ouvrirPlanningPublic(parc) {
+    await afficherBlocageReservationPublique();
   }
   async function ouvrirShiftDetailParc(parc, vue) {
+    // Le lien partagé ?vue=planning affiche aussi le teasing de connexion.
+    if (vue === "planning") {
+      await afficherBlocageReservationPublique();
+      return;
+    }
     const slot = document.getElementById("lcdp-lightbox-slot");
 
     if (!slot) {
