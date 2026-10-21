@@ -36,7 +36,7 @@
       { libelle: "Accès autorisé :  DUO", couleur: "bleu-fonce" },
       { libelle: "COACH", couleur: "violet" },
       { libelle: "FAMILLE", couleur: "orange-fonce" },
-      { libelle: "DUO + COACH + FAMILLE", couleur: "orange-clair" },
+      { libelle: "FAMILLE + DUO et/ou COACH", couleur: "orange-clair" },
       {  libelle: "DUO + COACH", couleur: "bleu-clair" }
     ]
   ];
@@ -422,7 +422,9 @@
       });
     }
 
-    if (boutonPlanning) {
+    if (boutonPlanning && normaliserModeUsagePlanning(options) === MODE_USAGE_MEMBRE) {
+      boutonPlanning.remove();
+    } else if (boutonPlanning) {
       boutonPlanning.addEventListener("click", (event) => {
         event.preventDefault();
         executerActionFiche(
@@ -2284,7 +2286,7 @@
       )
     );
     commande.appendChild(
-      await chargerLegendePlanningParcCommun(options)
+      await chargerLegendePlanningParcCommun(options, true)
     );
 
     function actualiserNavigation() {
@@ -2463,7 +2465,7 @@
     return barre;
   }
 
-  async function chargerLegendePlanningParcCommun(options) {
+  async function chargerLegendePlanningParcCommun(options, expliquerSynthese = false) {
     await chargerStyleObjetFiche(
       options,
       "/BOX/04-box-legende.css"
@@ -2516,6 +2518,14 @@
 
       contenu.appendChild(ligne);
     });
+
+    if (expliquerSynthese) {
+      const precision = document.createElement("p");
+      precision.className = "lcdp-box-legende__ligne";
+      precision.textContent =
+        "Les couleurs résument les restrictions de chaque plage. Les accès autorisés peuvent varier selon l’heure. Consultez le détail de la journée.";
+      legende.appendChild(precision);
+    }
 
     const instruction = document.createElement("strong");
     instruction.dataset.lcdpPlanningInstructionDetail = "";
@@ -3608,19 +3618,29 @@
     return date.toISOString().slice(0, 10);
   }
 
-  function construireDateBookdFicheParc(
-    dateIso,
-    heure
-  ) {
-    const date = new Date(
-      dateIso + "T" + heure + ":00"
-    );
-
-    return Number.isNaN(date.getTime())
-      ? ""
-      : date.toISOString();
+  function construireDateBookdFicheParc(dateIso, heure) {
+    // Les horaires du parc sont toujours interprétés en Europe/Paris,
+    // indépendamment du fuseau configuré sur le téléphone.
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(dateIso || "")) ||
+        !/^\d{2}:\d{2}$/.test(String(heure || ""))) return "";
+    const cible = Date.parse(dateIso + "T" + heure + ":00Z");
+    if (!Number.isFinite(cible) || new Date(cible).toISOString().slice(0, 16) !== dateIso + "T" + heure) return "";
+    const format = new Intl.DateTimeFormat("fr-FR", {
+      timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23"
+    });
+    const lireLocal = (instant) => {
+      const p = Object.fromEntries(format.formatToParts(new Date(instant)).map(part => [part.type, part.value]));
+      return p.year + "-" + p.month + "-" + p.day + "T" + p.hour + ":" + p.minute + ":" + p.second;
+    };
+    let instant = cible;
+    for (let i = 0; i < 3; i += 1) {
+      instant += cible - Date.parse(lireLocal(instant) + "Z");
+    }
+    // Refuse notamment une heure qui n'existe pas au passage à l'heure d'été.
+    if (lireLocal(instant).slice(0, 16) !== dateIso + "T" + heure) return "";
+    return new Date(instant).toISOString();
   }
-
 
   async function transmettreChoixHeureReservationCommune(
     bouton,

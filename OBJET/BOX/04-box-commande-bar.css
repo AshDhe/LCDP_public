@@ -132,3 +132,11 @@
 .lcdp-actions-footer-reserver .lcdp-button-orange svg {
   color: inherit !important;
 }
+
+/* Planifier : centre chaque ligne de boutons sur mobile,
+   dans la barre initiale comme dans sa copie persistante. */
+@media (max-width: 767px) {
+  body.lcdp-page-reserver .lcdp-box-commande-bar__actions {
+    justify-content: center;
+  }
+}
