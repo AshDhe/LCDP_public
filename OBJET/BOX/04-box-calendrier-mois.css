@@ -490,3 +490,8 @@
 .lcdp-box-calendrier-mois__legende-planning * {
   font-weight: 400 !important;
 }
+
+.lcdp-box-calendrier-mois__date-reelle {
+  display: block; font-size: 0.8em; font-weight: 700; margin-top: 0.3rem;
+}
+

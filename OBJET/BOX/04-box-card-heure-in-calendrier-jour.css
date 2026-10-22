@@ -204,3 +204,10 @@
   position: relative;
   z-index: 2;
 }
+
+/* Le libellé reste lisible devant l’occupation ; le marqueur membre occupe les 20 % de gauche. */
+.lcdp-box-card-heure-in-calendrier-jour--avec-jauge [data-lcdp-card-heure-jour-label] {
+  color: #fff; text-shadow: 0 1px 2px #111, 0 0 2px #111;
+}
+.lcdp-box-card-heure-in-calendrier-jour.lcdp-planning-avec-membre { padding-inline: 22% 4%; }
+

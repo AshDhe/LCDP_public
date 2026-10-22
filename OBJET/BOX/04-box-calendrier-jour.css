@@ -208,3 +208,15 @@
   min-height: 32px;
 }
 
+
+/* Date du détail uniquement : -10 % sur mobile, -20 % sur PC. */
+.lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__date-planning {
+  font-size: clamp(1.215rem, 4.5vw, 1.8rem);
+}
+.lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__grid { margin-top: 1.25rem; }
+@media (min-width: 768px) {
+  .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__date-planning {
+    font-size: clamp(1.08rem, 4vw, 1.6rem);
+  }
+}
+

@@ -31,15 +31,6 @@
     "orange-clair": "#ffd8a8",
     "orange-fonce": "#f2a23a"
   };
-  const contenuLegendePlanningParc = [
-    [
-      { libelle: "Accès autorisé :  DUO", couleur: "bleu-fonce" },
-      { libelle: "COACH", couleur: "violet" },
-      { libelle: "FAMILLE", couleur: "orange-fonce" },
-      { libelle: "FAMILLE + DUO et/ou COACH", couleur: "orange-clair" },
-      {  libelle: "DUO + COACH", couleur: "bleu-clair" }
-    ]
-  ];
   const endpointNouvelleDateMembre = String(
     config.workerNouvelleDateMembreUrl ||
     config.WORKER_NOUVELLE_DATE_MEMBRE_URL ||
@@ -696,13 +687,19 @@
         return;
       }
 
-      await rendreChoixHeureReservationCommune(
-        {
-          ...contexte,
-          parc: parcCible
-        },
-        options
-      );
+      const segment = contexte.segment;
+      await options.onChoixReservation({
+        parc: parcCible, dateIso: contexte.jour.date, heure: segment.debut,
+        heureFin: segment.fin, plagebookd: segment.plage,
+        retourMois: contexte.fermerJour,
+        planningMembre: segment.planningMembre || [],
+        actualiser: async () => {
+          const frais = await chargerPlanningJourCommun({parc:parcCible}, contexte.jour.date, options);
+          contexte.fermerJour();
+          await afficherMoisPlanningParcCommun(slot, contexte.etatPlanning, options);
+          await afficherJourPlanningParcCommun(slot, contexte.etatPlanning, frais, options);
+        }
+      });
     }
 
     async function afficherVueSecurisee(vue, parc) {
@@ -722,6 +719,7 @@
         .includes(vueDemandee)
         ? vueDemandee
         : "fiche";
+      if (vue === "planning" && !(await verifierPlanification(parc))) return;
       const operation = ++operationCourante;
 
       actualiserParc(parc);
@@ -2116,15 +2114,8 @@
         droits.sessionMembreActive === true
           ? "Les mois suivants sont consultables depuis la rubrique Réserver de votre espace membre."
           : "Vous devez être connecté à votre espace membre pour consulter les mois suivants.";
-    } else if (
-      droits.motifLimite ===
-      "fin_abonnement"
-    ) {
-      message =
-        "La période consultable s’arrête à la fin de votre abonnement.";
     } else {
-      message =
-        "Votre accès permet de consulter le mois en cours et le mois suivant.";
+      message = "La planification est ouverte du mois en cours au mois M+12.";
     }
 
     if (
@@ -2290,6 +2281,7 @@
         options
       )
     );
+    commande.appendChild(creerEtapePlanning("Etape 1 - Date à planifier"));
     commande.appendChild(
       await chargerLegendePlanningParcCommun(options, true)
     );
@@ -2315,20 +2307,25 @@
         "aria-disabled",
         precedentInterdit ? "true" : "false"
       );
-      boutonSuivant.disabled = false;
+      boutonSuivant.disabled = auMaximum;
       boutonSuivant.setAttribute(
         "aria-disabled",
-        "false"
+        auMaximum ? "true" : "false"
       );
       boutonSuivant.dataset.lcdpHorizonLimite =
         auMaximum ? "true" : "false";
     }
 
     async function actualiserMois() {
-      moisCourant.textContent = formaterMoisAnnee(
-        etatPlanning.annee,
-        etatPlanning.mois
-      );
+      const courant = dateAujourdhuiIso().slice(0, 7).split("-").map(Number);
+      const decalage = (etatPlanning.annee - courant[0]) * 12 + etatPlanning.mois - courant[1];
+      const libelle = document.createElement("span");
+      libelle.textContent = decalage === 0 ? "Mois M" : "Mois M+" + decalage;
+      const dateMois = document.createElement("strong");
+      dateMois.className = "lcdp-box-calendrier-mois__date-reelle";
+      const dateTexte = formaterMoisAnnee(etatPlanning.annee, etatPlanning.mois);
+      dateMois.textContent = dateTexte.charAt(0).toUpperCase() + dateTexte.slice(1);
+      moisCourant.replaceChildren(libelle, dateMois);
       message.hidden = true;
       message.textContent = "";
       grille.classList.add(
@@ -2447,25 +2444,8 @@
       );
     });
 
-    const boutonPlanifier = creerBoutonActionFicheParc(
-      {
-        libelle: "Planifier",
-        ariaLabel: "Planifier dans ce parc",
-        icone: "reserver",
-        variante: "orange-plein"
-      },
-      options
-    );
-    boutonPlanifier.addEventListener("click", () => {
-      executerActionFiche(
-        options.onReserver || ouvrirReservationMembre,
-        parc
-      );
-    });
-
     barre.appendChild(boutonPresentation);
     barre.appendChild(actionPartager);
-    barre.appendChild(boutonPlanifier);
 
     return barre;
   }
@@ -2497,46 +2477,27 @@
       "Légende des couleurs du planning"
     );
 
-    contenuLegendePlanningParc.forEach((configurationLigne) => {
-      const ligne = document.createElement("div");
-      ligne.className = "lcdp-box-legende__ligne";
-
-      configurationLigne.forEach((configurationItem) => {
-        const item = document.createElement("span");
-        item.className = "lcdp-box-legende__item";
-
-        const libelle = document.createElement("span");
-        libelle.className = "lcdp-box-legende__libelle";
-        libelle.textContent = configurationItem.libelle;
-
-        const carre = document.createElement("span");
-        carre.className =
-          "lcdp-box-legende__carre " +
-          "lcdp-box-legende__carre--" +
-          configurationItem.couleur;
-        carre.setAttribute("aria-hidden", "true");
-
-        item.appendChild(libelle);
-        item.appendChild(carre);
-        ligne.appendChild(item);
-      });
-
-      contenu.appendChild(ligne);
-    });
-
-    if (expliquerSynthese) {
-      const precision = document.createElement("p");
-      precision.className = "lcdp-box-legende__ligne";
-      precision.textContent =
-        "Les couleurs résument les restrictions de chaque plage. Les accès autorisés peuvent varier selon l’heure. Consultez le détail de la journée.";
-      legende.appendChild(precision);
+    contenu.replaceChildren();
+    const lignes = [
+      [{libelle:"Accès des invités :"}],
+      [{libelle:"Réservé"}, {libelle:"DUO",couleur:"bleu-fonce"}, {libelle:"COACH",couleur:"violet"}, {libelle:"FAMILLE",couleur:"orange-fonce"}],
+      [{libelle:"Mixte"}, {libelle:"DUO/COACH",couleur:"bleu-clair"}, {libelle:"DUO/COACH/FAMILLE",couleur:"orange-clair"}],
+      [{libelle:"vous avez déjà planifié cet horaire dans un parc",couleur:"vert",avant:true}],
+      [{libelle:"membres qui ont planifié",couleur:"gris-fonce",avant:true}]
+    ];
+    for (const configurations of lignes) {
+      const ligne = document.createElement("div"); ligne.className="lcdp-box-legende__ligne";
+      for (const c of configurations) {
+        const item=document.createElement("span"); item.className="lcdp-box-legende__item";
+        const texte=document.createElement("span"); texte.className="lcdp-box-legende__libelle"; texte.textContent=c.libelle;
+        const carre=document.createElement("span"); carre.className="lcdp-box-legende__carre lcdp-box-legende__carre--"+c.couleur;
+        carre.setAttribute("aria-hidden","true");
+        if(c.avant && c.couleur)item.append(carre,document.createTextNode(" "));
+        item.append(texte); if(!c.avant && c.couleur)item.append(carre);
+        ligne.append(item);
+      }
+      contenu.append(ligne);
     }
-
-    const instruction = document.createElement("strong");
-    instruction.dataset.lcdpPlanningInstructionDetail = "";
-    instruction.textContent =
-      "Cliquez sur la journée pour voir le détail";
-    legende.appendChild(instruction);
 
     return legende;
   }
@@ -2756,7 +2717,10 @@
       );
     }
 
-    card.disabled = estPasse || !ouvert;
+    const plagesOuvertes = Object.values(planningJour?.plages || {}).filter(p => p.ouverte === true);
+    const complet = plagesOuvertes.length > 0 && plagesOuvertes.every(p => Number(p.jauge) >= 100);
+    card.disabled = estPasse || !ouvert || complet;
+    if (complet) card.title = "Toutes les plages sont complètes.";
 
     if (estPasse) {
       card.classList.add(
@@ -2852,6 +2816,7 @@
       );
     }
 
+    ajouterJaugePersonnelle(slot, plage.planningMembre, false);
     slot.title = construireTitrePlagePlanningCommun(
       nomPlage,
       plage
@@ -3195,6 +3160,7 @@
     };
 
     function gererEchapJour(event) {
+      if (document.querySelector("[data-lcdp-box-dialogue-bouton], [data-lcdp-box-alerte]")) return;
       if (
         event.key !== "Escape" ||
         !document.body.contains(overlay)
@@ -3242,18 +3208,10 @@
       "lcdp-box-calendrier-jour__meta--legende",
       "lcdp-box-legende-host"
     );
+    meta.appendChild(creerEtapePlanning("Etape 2 - Horaire"));
     meta.appendChild(
       await chargerLegendePlanningParcCommun(options)
     );
-
-    const instructionJour = meta.querySelector(
-      "[data-lcdp-planning-instruction-detail]"
-    );
-
-    if (instructionJour) {
-      instructionJour.textContent =
-        "Choisissez votre horaire d’arrivée.";
-    }
 
     const dateCourante = document.createElement("h3");
     dateCourante.className =
@@ -3273,6 +3231,7 @@
           options,
           {
             conteneurJour,
+            etatPlanning,
             calendrier,
             corps,
             grille,
@@ -3286,6 +3245,10 @@
       );
     });
 
+    const note = document.createElement("p");
+    note.className = "lcdp-box-legende lcdp-planning-checkin";
+    note.textContent = "Votre check in est actif 15 minutes avant le démarrage de la plage horaire choisie et 30 minutes après";
+    grille.insertAdjacentElement("afterend", note);
     message.hidden = grille.children.length > 0;
     message.textContent = grille.children.length
       ? ""
@@ -3296,331 +3259,6 @@
         preventScroll: true
       });
     });
-  }
-
-  async function rendreChoixHeureReservationCommune(
-    contexte,
-    options = {}
-  ) {
-    const conteneurJour = contexte?.conteneurJour;
-    const parc = contexte?.parc;
-    const jour = contexte?.jour;
-    const fermerJour = contexte?.fermerJour;
-
-    if (
-      !conteneurJour ||
-      !parc ||
-      !jour?.date
-    ) {
-      throw new Error(
-        "Contexte de réservation journalier incomplet."
-      );
-    }
-
-    const fragment =
-      await chargerFragmentObjetFiche(
-        options,
-        "/BOX/04-box-calendrier-jour.html"
-      );
-
-    conteneurJour.replaceChildren(fragment);
-
-    const calendrier = conteneurJour.querySelector(
-      "[data-lcdp-box-calendrier-jour]"
-    );
-    const titre = conteneurJour.querySelector(
-      "[data-lcdp-calendrier-jour-title]"
-    );
-    const meta = conteneurJour.querySelector(
-      "[data-lcdp-calendrier-jour-meta]"
-    );
-    const message = conteneurJour.querySelector(
-      "[data-lcdp-calendrier-jour-message]"
-    );
-    const grille = conteneurJour.querySelector(
-      "[data-lcdp-calendrier-jour-grid]"
-    );
-    const boutonFermer = conteneurJour.querySelector(
-      "[data-lcdp-calendrier-jour-close]"
-    );
-
-    if (
-      !calendrier ||
-      !titre ||
-      !meta ||
-      !message ||
-      !grille ||
-      !boutonFermer
-    ) {
-      throw new Error(
-        "Structure de choix de l’heure incomplète."
-      );
-    }
-
-    calendrier.classList.add(
-      "lcdp-box-calendrier-jour--shift-detail",
-      "lcdp-box-calendrier-jour--planning-overlay"
-    );
-
-    const nomParc = nettoyerTexte(
-      parc?.nom ||
-      parc?.nomparc ||
-      "Parc"
-    ) || "Parc";
-
-    titre.textContent =
-      "Votre heure d’arrivée";
-    meta.textContent =
-      formaterDatePlanningLongue(jour.date) +
-      " · Parc de " +
-      nomParc;
-
-    boutonFermer.hidden = false;
-    boutonFermer.removeAttribute("hidden");
-    boutonFermer.addEventListener(
-      "click",
-      (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (typeof fermerJour === "function") {
-          fermerJour();
-        }
-      }
-    );
-
-    const creneaux =
-      construireCreneauxReservationJour(jour);
-
-    creneaux.forEach((creneau) => {
-      const card =
-        obtenirTemplateHeurePlanning(options)
-          .cloneNode(true);
-      const label = card.querySelector(
-        "[data-lcdp-card-heure-jour-label]"
-      );
-
-      /*
-       * Le template générique porte encore l'ancien data-action
-       * "choisir-heure-arrivee". Dans Réserver membre, cet attribut
-       * déclenchait aussi l'ancien workflow global en parallèle du
-       * workflow commun de la Fiche Parc.
-       */
-      card.removeAttribute("data-action");
-      const complet =
-        Number(creneau.ratio) >= 1;
-
-      card.classList.add(
-        "lcdp-box-card-heure-in-calendrier-jour--" +
-        normaliserCouleurPlanningCommun(
-          creneau.couleur
-        )
-      );
-      card.dataset.idparc = nettoyerTexte(
-        parc?.idparc || parc?.id
-      );
-      card.dataset.date = creneau.dateIso;
-      card.dataset.heure = creneau.heure;
-      card.dataset.plagebookd =
-        creneau.plagebookd;
-
-      if (label) {
-        label.textContent =
-          formaterHeureAffichee(
-            creneau.heure
-          );
-      }
-
-      if (complet) {
-        card.disabled = true;
-        card.setAttribute(
-          "aria-disabled",
-          "true"
-        );
-        card.setAttribute(
-          "aria-label",
-          formaterHeureAffichee(
-            creneau.heure
-          ) + " complet"
-        );
-      } else {
-        card.addEventListener(
-          "click",
-          (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-
-            transmettreChoixHeureReservationCommune(
-              card,
-              parc,
-              options
-            ).catch(console.error);
-          }
-        );
-      }
-
-      grille.appendChild(card);
-    });
-
-    message.hidden =
-      grille.children.length > 0;
-    message.textContent =
-      grille.children.length > 0
-        ? ""
-        : "Aucun horaire d’arrivée n’est disponible pour cette date.";
-  }
-
-  function construireCreneauxReservationJour(jour) {
-    const resultat = [];
-    const cles = new Set();
-    const maintenant = Date.now();
-
-    (Array.isArray(jour?.segments)
-      ? jour.segments
-      : []
-    ).forEach((segment) => {
-      const plagebookd = nettoyerTexte(
-        segment?.plage
-      );
-      const debut =
-        convertirHeureReservationEnMinutes(
-          segment?.debut
-        );
-      let fin =
-        convertirHeureReservationEnMinutes(
-          segment?.fin
-        );
-
-      if (
-        !/^plage[1-5]$/.test(plagebookd) ||
-        debut === null ||
-        fin === null
-      ) {
-        return;
-      }
-
-      if (fin <= debut) {
-        fin += 24 * 60;
-      }
-
-      const premierCreneau =
-        Math.ceil(debut / 30) * 30;
-
-      for (
-        let total = premierCreneau;
-        total < fin;
-        total += 30
-      ) {
-        const decalageJour =
-          Math.floor(total / (24 * 60));
-        const minutesJour =
-          total % (24 * 60);
-        const heure =
-          convertirMinutesReservationEnHeure(
-            minutesJour
-          );
-        const dateIso = ajouterJoursDateIso(
-          jour.date,
-          decalageJour
-        );
-        const datebookd =
-          construireDateBookdFicheParc(
-            dateIso,
-            heure
-          );
-        const cle =
-          dateIso +
-          "|" +
-          heure +
-          "|" +
-          plagebookd;
-
-        if (
-          !datebookd ||
-          new Date(datebookd).getTime() <=
-            maintenant ||
-          cles.has(cle)
-        ) {
-          continue;
-        }
-
-        cles.add(cle);
-        resultat.push({
-          dateIso,
-          heure,
-          plagebookd,
-          couleur:
-            segment?.couleur ||
-            segment?.couleurs?.[0] ||
-            "bleu-clair",
-          ratio: segment?.ratio
-        });
-      }
-    });
-
-    return resultat;
-  }
-
-  function convertirHeureReservationEnMinutes(
-    valeur
-  ) {
-    const match = String(valeur || "")
-      .trim()
-      .match(/^(\d{2}):(\d{2})$/);
-
-    if (!match) {
-      return null;
-    }
-
-    const heure = Number(match[1]);
-    const minute = Number(match[2]);
-
-    if (
-      !Number.isInteger(heure) ||
-      !Number.isInteger(minute) ||
-      heure < 0 ||
-      heure > 23 ||
-      minute < 0 ||
-      minute > 59
-    ) {
-      return null;
-    }
-
-    return heure * 60 + minute;
-  }
-
-  function convertirMinutesReservationEnHeure(
-    total
-  ) {
-    const heure = Math.floor(total / 60);
-    const minute = total % 60;
-
-    return (
-      String(heure).padStart(2, "0") +
-      ":" +
-      String(minute).padStart(2, "0")
-    );
-  }
-
-  function ajouterJoursDateIso(
-    dateIso,
-    nombreJours
-  ) {
-    const date = new Date(
-      String(dateIso || "") +
-      "T12:00:00.000Z"
-    );
-
-    if (Number.isNaN(date.getTime())) {
-      return "";
-    }
-
-    date.setUTCDate(
-      date.getUTCDate() +
-      Number(nombreJours || 0)
-    );
-
-    return date.toISOString().slice(0, 10);
   }
 
   function construireDateBookdFicheParc(dateIso, heure) {
@@ -3647,58 +3285,17 @@
     return new Date(instant).toISOString();
   }
 
-  async function transmettreChoixHeureReservationCommune(
-    bouton,
-    parc,
-    options = {}
-  ) {
-    const choix = {
-      parc,
-      dateIso: nettoyerTexte(
-        bouton?.dataset?.date
-      ),
-      heure: nettoyerTexte(
-        bouton?.dataset?.heure
-      ),
-      plagebookd: nettoyerTexte(
-        bouton?.dataset?.plagebookd
-      )
-    };
+  function creerEtapePlanning(texte) {
+    const etape=document.createElement("p"); etape.className="lcdp-planning-etape"; etape.textContent=texte; return etape;
+  }
 
-    if (
-      !nettoyerTexte(
-        choix.parc?.idparc ||
-        choix.parc?.id
-      ) ||
-      !choix.dateIso ||
-      !choix.heure ||
-      !choix.plagebookd
-    ) {
-      throw new Error(
-        "Heure, date ou parc manquant."
-      );
-    }
-
-    if (
-      typeof options.onChoixReservation !==
-      "function"
-    ) {
-      throw new Error(
-        "La finalisation de la réservation n’est pas disponible."
-      );
-    }
-
-    bouton.disabled = true;
-
-    try {
-      await options.onChoixReservation(
-        choix
-      );
-    } finally {
-      if (document.body.contains(bouton)) {
-        bouton.disabled = false;
-      }
-    }
+  function ajouterJaugePersonnelle(element, reservations, avecTexte) {
+    if (!Array.isArray(reservations) || !reservations.length) return;
+    const jauge=document.createElement("span"); jauge.className="lcdp-planning-jauge-membre";
+    const resa=reservations.some(r=>r.invitation !== true), invit=reservations.some(r=>r.invitation === true);
+    const types=[resa ? "Résa" : "",invit ? "Invit" : ""].filter(Boolean).join(" / ");
+    jauge.textContent=avecTexte ? types : ""; jauge.setAttribute("aria-label",types);
+    element.classList.add("lcdp-planning-avec-membre"); element.appendChild(jauge);
   }
 
   function creerCardSegmentPlanningCommun(
@@ -3755,6 +3352,25 @@
       );
     }
 
+    if (Array.isArray(segment.segmentsDetail) && segment.segmentsDetail.length > 1) {
+      const minutes = heure => { const [h,m]=heure.split(":").map(Number); return h*60+m+(segment.plage === "plage5" && h<6 ? 1440:0); };
+      const debut=minutes(segment.debut), fin=minutes(segment.fin), points=[];
+      let curseur=debut;
+      for(const detail of segment.segmentsDetail) {
+        const a=minutes(detail.debut), b=minutes(detail.fin);
+        if(a>curseur)points.push("#fff "+((curseur-debut)/(fin-debut)*100)+"%", "#fff "+((a-debut)/(fin-debut)*100)+"%");
+        const couleurs=normaliserListeCouleursPlanningCommun(detail);
+        couleurs.forEach((c,i)=>{
+          const couleur=couleursCssPlanning[c] || couleursCssPlanning["bleu-clair"];
+          points.push(couleur+" "+((a+(b-a)*i/couleurs.length-debut)/(fin-debut)*100)+"%",
+            couleur+" "+((a+(b-a)*(i+1)/couleurs.length-debut)/(fin-debut)*100)+"%");
+        });
+        curseur=b;
+      }
+      card.classList.add("lcdp-box-card-heure-in-calendrier-jour--multicolore");
+      card.style.setProperty("--lcdp-heure-fond","linear-gradient(to right, "+points.join(", ")+")");
+    }
+
     const largeurJauge =
       normaliserLargeurJaugePlanning(
         segment?.jauge
@@ -3784,6 +3400,12 @@
       label.textContent = libelle;
     }
 
+    ajouterJaugePersonnelle(card, segment.planningMembre, true);
+    const occupes = (segment.planningMembre || []).length > 0;
+    const dateDebut = construireDateBookdFicheParc(contexte.jour.date, segment.debut);
+    if (modeReservationMembre && !occupes && (Number(segment.jauge) >= 100 || !dateDebut || Date.parse(dateDebut) <= Date.now())) {
+      card.disabled = true; card.setAttribute("aria-disabled", "true");
+    }
     if (modeReservationMembre) {
       card.addEventListener(
         "click",
@@ -3872,9 +3494,7 @@
 
   function normaliserLargeurJaugePlanning(valeur) {
     const largeur = Number(valeur);
-    return [0, 60, 80, 100].includes(largeur)
-      ? largeur
-      : 0;
+    return Number.isFinite(largeur) ? Math.max(0, Math.min(100, largeur)) : 0;
   }
 
   function construireTitrePlagePlanningCommun(
@@ -4753,8 +4373,8 @@
   }
 
   function dateAujourdhuiIso() {
-    const maintenant = new Date();
-    return construireDateIso(maintenant.getFullYear(), maintenant.getMonth() + 1, maintenant.getDate());
+    const p=Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Paris",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date()).map(p=>[p.type,p.value]));
+    return p.year+"-"+p.month+"-"+p.day;
   }
 
   function formaterMoisAnnee(annee, mois) {

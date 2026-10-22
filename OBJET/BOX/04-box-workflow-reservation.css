@@ -291,3 +291,49 @@
     padding: var(--lcdp-space-4);
   }
 }
+
+.lcdp-planning-en-cours { display: grid; gap: 1rem; max-height: 55vh; overflow-y: auto; }
+.lcdp-planning-en-cours__carte { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 0.5rem; text-align: left; align-items: center; }
+.lcdp-planning-en-cours__photo { width: 72px; height: 64px; object-fit: cover; border-radius: var(--lcdp-radius-small); }
+.lcdp-planning-en-cours__carte > button { grid-column: 1 / -1; justify-self: center; }
+
+
+/* Votre planning utilise la box de dialogue et les boutons génériques. */
+.lcdp-panier-planning .lcdp-box-dialogue-bouton__card {
+  width: min(calc(100vw - 24px), 620px); max-height: calc(100dvh - 24px); overflow-y: auto;
+  box-sizing: border-box; padding-inline: 12px;
+}
+.lcdp-panier-planning .lcdp-box-dialogue-bouton__text { max-width: none; color: var(--lcdp-color-text); }
+.lcdp-panier-planning__sous-titre { margin: 0; font-size: 1rem; }
+.lcdp-panier-planning__compte { margin: 0.4rem 0 1rem; font-size: 0.9rem; }
+.lcdp-panier-planning__table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 0.8rem; }
+.lcdp-panier-planning__caption {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+.lcdp-panier-planning__table th, .lcdp-panier-planning__table td {
+  padding: 0.55rem 0.2rem; border-bottom: 1px solid var(--lcdp-color-border); vertical-align: middle;
+  text-align: center; overflow-wrap: anywhere;
+}
+.lcdp-panier-planning__table th:first-child, .lcdp-panier-planning__table td:first-child { width: 54%; text-align: left; }
+.lcdp-panier-planning__table th:nth-child(2) { width: 16%; }
+.lcdp-panier-planning__table th:nth-child(3) { width: 30%; }
+.lcdp-panier-planning__table td:first-child > strong, .lcdp-panier-planning__table td:first-child > span { display: block; }
+.lcdp-panier-planning__table td:first-child > strong { font-size: 0.9rem; }
+.lcdp-panier-planning__couverture { font-size: 1.35rem; font-weight: 700; }
+.lcdp-panier-planning__couverture--oui { color: #587242; }
+.lcdp-panier-planning__couverture--non { color: #c66a00; }
+.lcdp-panier-planning__couverture--inconnue { color: var(--lcdp-color-text-muted); }
+.lcdp-panier-planning__table .lcdp-panier-planning__retirer {
+  width: auto; min-width: 0; min-height: 36px; margin-top: 0.25rem; padding: 0.3rem 0.6rem; font-size: 0.75rem;
+}
+.lcdp-panier-planning .lcdp-box-dialogue-bouton__actions { margin-top: 0.5rem; }
+@media (min-width: 768px) {
+  .lcdp-panier-planning .lcdp-box-dialogue-bouton__card { padding-inline: 24px; }
+  .lcdp-panier-planning__table { font-size: 0.95rem; }
+}
+
+/* Offres du panier — styles limités à cette box. */
+.lcdp-panier-planning__offres { margin-bottom: var(--lcdp-space-3, 1rem); }
+.lcdp-panier-planning__offre { text-align: left; padding: var(--lcdp-space-3, 1rem); margin-bottom: var(--lcdp-space-2, .5rem); border: 1px solid var(--lcdp-color-border); border-radius: var(--lcdp-radius-small); background: var(--lcdp-color-surface); }
+.lcdp-panier-planning__offre h3 { margin: 0 0 .5rem; font-size: 1rem; }
+.lcdp-panier-planning__offre p { margin: .5rem 0; font-size: .9rem; }

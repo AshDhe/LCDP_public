@@ -81,3 +81,17 @@
   background: #cfe3f7;
   border-color: #a9cbea;
 }
+
+/* Indicateurs personnels et occupation, communs aux deux calendriers. */
+.lcdp-box-legende__carre--vert { background: #587242; border-color: #4e663b; }
+.lcdp-box-legende__carre--gris-fonce { background: #343836; border-color: #343836; }
+.lcdp-planning-etape { margin: 1.25rem 0 0.75rem; font-weight: 700; }
+.lcdp-planning-checkin { margin-top: 1.25rem; }
+.lcdp-planning-avec-membre { position: relative; isolation: isolate; overflow: hidden; }
+.lcdp-planning-jauge-membre {
+  position: absolute; z-index: 3; inset: 0 auto 0 0; width: 20%; height: 100%;
+  box-sizing: border-box; background: #587242; color: #fff; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 700; line-height: 1.1; overflow-wrap: normal;
+}
+
