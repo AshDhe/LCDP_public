@@ -170,7 +170,7 @@
     box.setAttribute('popover', 'manual');
     box.setAttribute('role', 'dialog');
     box.setAttribute('aria-label', message || 'Adresse enregistrée');
-    box.style.cssText = 'height:auto!important;min-height:0!important;width:min(360px,calc(100% - 36px));padding:32px!important;text-align:center;overflow:hidden;';
+    box.style.cssText = 'position:fixed!important;inset:auto!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important;margin:0!important;box-sizing:border-box!important;height:fit-content!important;min-height:0!important;max-height:calc(100svh - 36px)!important;width:min(280px,calc(100% - 36px))!important;padding:24px!important;text-align:center;overflow:auto;';
     if (message) {
       const texte = document.createElement('p');
       texte.textContent = message;
