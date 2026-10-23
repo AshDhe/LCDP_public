@@ -258,3 +258,10 @@
   align-self: center;
   line-height: 1;
 }
+
+/* Boîte de saisie email : largeur compacte sur PC, mobile inchangé. */
+@media (min-width: 640px) {
+  #lcdp-footer-verification-info {
+    width: min(380px, calc(100% - 36px));
+  }
+}
