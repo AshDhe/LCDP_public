@@ -11,13 +11,7 @@
   </div>
   <div id="lcdp-footer-verification-info" class="lcdp-contact-info" popover="auto" role="dialog" aria-label="Vérification" style="height:176px!important;min-height:0!important;max-height:calc(100svh - 36px);padding:56px 20px 6px;overflow:hidden!important;box-sizing:border-box;">
     <button class="lcdp-contact-info__close" type="button" popovertarget="lcdp-footer-verification-info" popovertargetaction="hide" aria-label="Fermer">×</button>
-    <iframe
-      title="Saisir votre adresse email"
-      src="https://script.google.com/macros/s/AKfycbz4PBr97qQBPrXcBc8jGE5560b3LBhmEwGXBw5H3YIqiGvExilaUK-ORCLK3NV2hZu3xA/exec"
-      loading="lazy"
-      scrolling="no"
-      referrerpolicy="no-referrer"
-      style="display:block;width:100%;height:112px;min-height:0;border:0;margin:0;overflow:hidden;"
-    ></iframe>
+    <div data-verification-slot data-verification-url="https://script.google.com/macros/s/AKfycbz4PBr97qQBPrXcBc8jGE5560b3LBhmEwGXBw5H3YIqiGvExilaUK-ORCLK3NV2hZu3xA/exec"></div>
   </div>
+<iframe title="Initialisation du footer" aria-hidden="true" tabindex="-1" style="display:none" srcdoc="&lt;script&gt;const w=parent,d=w.document;if(!d.querySelector(&#x27;script[data-lcdp-footer-autonome]&#x27;)){const c=w.SITE_CONFIG||{},p=&#x27;/BOX/02-box-footer.js&#x27;,s=d.createElement(&#x27;script&#x27;);s.dataset.lcdpFooterAutonome=&#x27;&#x27;;s.src=typeof c.objetUrl===&#x27;function&#x27;?c.objetUrl(p):typeof w.LCDP_urlObjet===&#x27;function&#x27;?w.LCDP_urlObjet(p):String(c.objetBaseUrl||c.OBJET_BASE||w.LCDP_OBJET_BASE||&#x27;/OBJET&#x27;).replace(/\/+$/,&#x27;&#x27;)+p;d.head.append(s);}&lt;/script&gt;"></iframe>
 </footer>
