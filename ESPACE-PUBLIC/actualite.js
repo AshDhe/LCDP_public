@@ -25,9 +25,13 @@
       more.style.margin='0';
       header.append(title,more);
       article.style.gap='0';
-      article.append(header,image(a));
+      const illustration=image(a);
+      illustration.style.cssText='width:100%;max-width:480px;min-width:0;align-self:center;margin:0 auto;flex-shrink:0';
+      article.append(header,illustration);
     }
-    article.append(texte(a.texte));
+    const corps=texte(a.texte);
+    if(!popup)corps.style.paddingTop='1.25rem';
+    article.append(corps);
     if(!popup && a.contact)article.append(node('p',a.contact,'lcdp-text-strong-left'));
     return article;
   }
