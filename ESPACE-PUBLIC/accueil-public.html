@@ -34,7 +34,14 @@
   <div class="lcdp-site-page">
 
     <div id="lcdp-bandeau-slot"></div>
-    <div id="lcdp-actualite-bandeau"></div>
+    <div id="lcdp-actualite-bandeau">
+      <div class="lcdp-page-container">
+        <div class="lcdp-page-content">
+          <!-- Réserver deux lignes avant le chargement des actualités. -->
+          <div class="lcdp-boxtext__text--center" aria-hidden="true" style="height:3em;min-height:3em;line-height:1.5;overflow:hidden"></div>
+        </div>
+      </div>
+    </div>
 
     <main class="lcdp-site-main lcdp-accueil-main">
       <section class="lcdp-page-section lcdp-accueil-section">
@@ -57,6 +64,6 @@
 
   </div>
   <script src="./accueil-public.js?v=20260729-1545"></script>
-  <script src="./actualite.js" defer></script>
+  <script src="./actualite.js?v=20261023-2lignes" defer></script>
 </body>
 </html>
