@@ -112,7 +112,7 @@
     const calque = document.createElement('div');
     calque.setAttribute('popover', 'manual');
     calque.setAttribute('role', 'status');
-    calque.setAttribute('aria-label', 'Chargement du formulaire');
+    calque.setAttribute('aria-label', 'Chargement en cours');
     calque.dataset.lcdpVerificationCalque = '';
     calque.style.cssText = 'position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(255,255,255,.96);overflow:hidden;';
     const centre = document.createElement('div');
@@ -136,10 +136,28 @@
     return calque;
   }
 
+  const attentes = new Set();
+  let calqueCommun = null;
+  window.LCDP_chargement = {
+    afficher() {
+      const jeton = {};
+      attentes.add(jeton);
+      if (!calqueCommun) calqueCommun = creerCalque();
+      return jeton;
+    },
+    masquer(jeton) {
+      if (!attentes.delete(jeton)) return;
+      if (!attentes.size && calqueCommun) {
+        calqueCommun.hidePopover();
+        calqueCommun.remove();
+        calqueCommun = null;
+      }
+    }
+  };
+
   function terminer(etat) {
     if (etat.calque) {
-      etat.calque.hidePopover();
-      etat.calque.remove();
+      window.LCDP_chargement.masquer(etat.calque);
       etat.calque = null;
     }
     clearTimeout(etat.delai);
@@ -156,7 +174,7 @@
     if (actif) return;
     if (slot.dataset.pret === 'oui') { boite.showPopover(); return; }
 
-    const etat = {boite, bouton, calque:creerCalque(), delai:null};
+    const etat = {boite, bouton, calque:window.LCDP_chargement.afficher(), delai:null};
     actif = etat;
     const formulaire = document.createElement('iframe');
     formulaire.title = 'Saisir votre adresse email';
