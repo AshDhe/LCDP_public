@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
+  <link rel="stylesheet" href="../OBJET/BOX/01-box-actualite.css">
 </head>
 
 <body>
@@ -35,13 +36,13 @@
         <div class="lcdp-page-container">
           <div class="lcdp-page-content lcdp-stack-large">
 
-            <h1 class="lcdp-title-page-center">Actualité</h1>
+            
 
             <p class="lcdp-mention-connexion">
               [Espace public de l'application]
             </p>
 
-            <div id="lcdp-boxtext-actualite-slot"></div>
+            <div id="lcdp-actualite-page" aria-live="polite">Chargement…</div>
 
           </div>
         </div>
@@ -220,17 +221,12 @@
         appliquerRoutesSite(document);
         await initialiserBandeau();
 
-        await ajouterBoxText(
-          "lcdp-boxtext-actualite-slot",
-          "Contenu à intégrer",
-          "<p>Le contenu réel de la page actualité doit être réintégré ici.</p>"
-        );
-
         await initialiserFooter();
       }
 
       initialiserPage().catch(console.error);
     })();
   </script>
+  <script src="./actualite.js" defer></script>
 </body>
 </html>
