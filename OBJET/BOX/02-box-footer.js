@@ -263,9 +263,9 @@
         height:auto; min-height:0; margin:auto; padding:52px 12px 18px;
         border:1px solid #cbd1cc; border-radius:24px; background:#fff; color:#1f2a24;
         font:16px/1.4 Arial,sans-serif; box-shadow:0 18px 50px rgba(31,42,36,.18); }
-      form { display:flex; align-items:center; gap:8px; margin:0; }
+      form { position:relative; z-index:1; display:flex; align-items:center; gap:8px; margin:0; border:0; outline:0; box-shadow:none; }
       input { box-sizing:border-box; flex:1; width:0; min-width:0; height:46px;
-        padding:10px; border:1px solid #57754c; border-radius:8px;
+        padding:10px; border:0; outline:0; box-shadow:none; border-radius:8px;
         background:#fff; color:#1f2a24; font:16px Arial,sans-serif; }
       button { box-sizing:border-box; min-height:46px; padding:10px 12px;
         border:1px solid #57754c; border-radius:8px;
@@ -277,7 +277,8 @@
       .statut { margin:8px 0 0; text-align:center; font-size:14px; }
       .statut:empty { display:none; }
       button:focus-visible { outline:2px solid #1f2a24; outline-offset:3px; }
-      input:focus-visible { outline:none; }
+      input:focus,input:focus-visible { outline:none; box-shadow:none; }
+      .protection { position:relative; z-index:0; overflow:hidden; isolation:isolate; }
     `;
     const carte = document.createElement('div'); carte.className = 'carte';
     const fermer = document.createElement('button'); fermer.type = 'button';
@@ -288,22 +289,25 @@
     email.autocomplete = 'email';
     email.setAttribute('aria-label','Adresse email');
     const envoyer = document.createElement('button'); envoyer.type = 'submit';
-    envoyer.textContent = 'Envoyer'; envoyer.disabled = true;
+    envoyer.textContent = 'Envoyer'; envoyer.disabled = false;
     form.append(email,envoyer);
     const statut = document.createElement('p'); statut.className = 'statut';
     statut.setAttribute('role','status'); statut.setAttribute('aria-live','polite');
-    statut.textContent = 'Vérification en cours…';
+    statut.textContent = '';
     // Turnstile est rendu dans le DOM public, projeté dans la carte isolée.
     const challenge = document.createElement('div'); challenge.slot = 'challenge';
-    challenge.style.cssText = 'all:initial!important;display:block!important;width:100%!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;box-sizing:border-box!important;';
+    challenge.style.cssText = 'position:relative;margin:0;padding:0;border:0;';
     const emplacement = document.createElement('slot'); emplacement.name = 'challenge';
-    carte.append(fermer,form,emplacement,statut);
+    const protection = document.createElement('div'); protection.className = 'protection';
+    protection.append(emplacement);
+    carte.append(fermer,form,protection,statut);
     racine.append(style,carte); box.append(challenge); document.body.append(box);
     box.showPopover(); box.style.setProperty('display','flex','important');
     const etat = {phase:'formulaire',box,form,email,envoyer,statut,fermer,challenge,
-      widget:null,token:'',retour:boutonRetour};
+      widget:null,token:'',retour:boutonRetour,delaiProtection:null,relances:0};
     etat.fermerBoite = () => {
       if (etat.phase === 'envoi') return;
+      clearTimeout(etat.delaiProtection);
       if (etat.widget !== null && window.turnstile) window.turnstile.remove(etat.widget);
       box.hidePopover(); box.remove();
       if (actif === etat) actif = null;
@@ -311,7 +315,12 @@
     };
     fermer.addEventListener('click',etat.fermerBoite);
     box.addEventListener('click',event => {
-      if (event.composedPath()[0] === box) etat.fermerBoite();
+      // Dans un Shadow DOM fermé, les clics internes sont reciblés sur box.
+      // La position du clic, et non event.target, distingue le fond de la carte.
+      if (!Number.isFinite(event.clientX) || !Number.isFinite(event.clientY) || !event.detail) return;
+      const r = carte.getBoundingClientRect();
+      if (event.clientX < r.left || event.clientX > r.right ||
+          event.clientY < r.top || event.clientY > r.bottom) etat.fermerBoite();
     });
     box.addEventListener('keydown',event => {
       if (event.key === 'Escape') {event.preventDefault();etat.fermerBoite();}
@@ -319,7 +328,10 @@
     form.addEventListener('submit',async event => {
       event.preventDefault();
       if (etat.phase === 'envoi' || !form.reportValidity()) return;
-      if (!etat.token) {statut.textContent = 'Patientez pendant la vérification.';return;}
+      if (!etat.token) {
+        statut.textContent = 'La protection antirobot n’est pas encore validée. Patientez ou fermez puis réessayez.';
+        return;
+      }
       etat.phase = 'envoi'; envoyer.disabled = true; fermer.disabled = true;
       const token = etat.token; etat.token = '';
       box.hidePopover();
@@ -337,13 +349,13 @@
           (typeof data?.message === 'string' ? data.message : 'Envoi impossible. Réessayez plus tard.');
       } catch {statut.textContent = 'Envoi non confirmé. Réessayez plus tard.';}
       finally {window.LCDP_chargement.masquer(attente);}
-      etat.phase = 'formulaire'; fermer.disabled = false;
+      etat.phase = 'formulaire'; fermer.disabled = false; envoyer.disabled = false;
       if (succes) {
         etat.fermerBoite();
         afficherConfirmation('',boutonRetour);
       } else {
         box.showPopover();
-        if (etat.widget !== null) window.turnstile.reset(etat.widget);
+        if (etat.widget !== null) {window.turnstile.reset(etat.widget);etat.surveillerProtection();}
         email.focus();
       }
     });
@@ -366,24 +378,49 @@
     }
     window.LCDP_chargement.masquer(attente);
     const etat = creerFormulaire(bouton); actif = etat;
+    etat.surveillerProtection = () => {
+      clearTimeout(etat.delaiProtection);
+      etat.delaiProtection = setTimeout(() => {
+        if (!etat.box.isConnected || etat.token || etat.phase === 'envoi') return;
+        if (etat.relances < 1 && etat.widget !== null) {
+          etat.relances++;
+          api.reset(etat.widget);
+          etat.surveillerProtection();
+        } else {
+          etat.statut.textContent = 'La protection antirobot ne répond pas. Fermez puis réessayez.';
+        }
+      },20000);
+    };
     try {
       etat.widget = api.render(etat.challenge,{
         sitekey:CLE_PUBLIQUE,action:'verification',theme:'light',appearance:'interaction-only',
+        retry:'auto','retry-interval':8000,
         size:window.innerWidth < 350 ? 'compact' : 'flexible',
         callback:token => {
           if (!etat.box.isConnected) return;
-          etat.token = token; etat.envoyer.disabled = false;
-          if (etat.statut.textContent === 'Vérification en cours…') etat.statut.textContent = '';
+          clearTimeout(etat.delaiProtection);
+          etat.token = token;
+          etat.statut.textContent = '';
         },
-        'expired-callback':() => {etat.token = '';etat.envoyer.disabled = true;api.reset(etat.widget);},
+        'expired-callback':() => {
+          etat.token = '';
+          if (etat.phase !== 'envoi' && etat.box.isConnected) {
+            api.reset(etat.widget); etat.surveillerProtection();
+          }
+        },
+        'timeout-callback':() => {
+          etat.token = '';
+          etat.statut.textContent = 'La protection antirobot a expiré. Fermez puis réessayez.';
+        },
         'error-callback':() => {
-          etat.token = '';etat.envoyer.disabled = true;
-          etat.statut.textContent = 'Vérification indisponible. Fermez puis réessayez.';
+          etat.token = '';
+          etat.statut.textContent = 'Protection antirobot indisponible. Fermez puis réessayez.';
           return true;
         }
       });
+      if (!etat.token) etat.surveillerProtection();
     } catch {
-      etat.statut.textContent = 'Vérification indisponible. Fermez puis réessayez.';
+      etat.statut.textContent = 'Protection antirobot indisponible. Fermez puis réessayez.';
     }
   },true);
 })();
