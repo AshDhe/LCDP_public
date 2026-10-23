@@ -24,12 +24,18 @@
   <link rel="stylesheet" href="../OBJET/BOX/documents-legaux.css" data-site-href="/OBJET/BOX/documents-legaux.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
-  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
-  <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-contact.css" data-site-href="/OBJET/BOX/02-box-contact.css">
 </head>
 
 <body class="lcdp-page-document-legal">
+  <dialog id="lcdp-juridique-page-info" class="lcdp-contact-info" aria-labelledby="lcdp-juridique-page-titre" aria-describedby="lcdp-juridique-page-texte">
+    <button class="lcdp-contact-info__close" type="button" data-juridique-fermer aria-label="Fermer">×</button>
+    <h2 id="lcdp-juridique-page-titre" class="lcdp-contact-info__title">Demande juridique</h2>
+    <p id="lcdp-juridique-page-texte" class="lcdp-contact-info__text">Pour toute question concernant les mentions légales ou vos données personnelles, écrivez à l’administrateur depuis votre messagerie personnelle. Si votre demande concerne votre compte membre, indiquez l’email associé à ce compte.</p>
+    <a class="lcdp-contact-info__email" href="mailto:juridique@lacleduparc.fr">juridique@lacleduparc.fr</a>
+    <div class="lcdp-contact-info__actions"><button type="button" class="lcdp-button lcdp-button-primary" data-juridique-fermer>OK</button></div>
+  </dialog>
   <div class="lcdp-site-page">
 
     <div id="lcdp-bandeau-slot"></div>
@@ -60,12 +66,7 @@
 
   </div>
 
-  <script
-    src="../OBJET/BOX/03-box-formulaire.js"
-    data-site-src="/OBJET/BOX/03-box-formulaire.js"
-  ></script>
-
-  <script
+<script
     src="../OBJET/BOX/documents-legaux.js"
     data-site-src="/OBJET/BOX/documents-legaux.js"
   ></script>
@@ -420,7 +421,7 @@
         if (dernierContenu) {
           ajouterBoutonDemandeJuridiquePage(
             dernierContenu,
-            () => ouvrirFormulaireDemandeJuridiquePage(
+            () => ouvrirInfoboxDemandeJuridiquePage(
               conteneur,
               documentMentions
             )
@@ -435,7 +436,7 @@
       ) {
         const actions = document.createElement("div");
         actions.className =
-          "lcdp-box-formulaire__actions";
+          "lcdp-contact-juridique-actions";
 
         const bouton =
           document.createElement("button");
@@ -449,584 +450,25 @@
         conteneur.appendChild(actions);
       }
 
-      function creerBoxDemandeJuridiquePage() {
-        const slot = document.getElementById(
-          "lcdp-lightbox-slot"
-        );
-
-        if (!slot) {
-          throw new Error(
-            "Slot de fenêtre introuvable."
-          );
+      function ouvrirInfoboxDemandeJuridiquePage() {
+        // Contact local à la page : aucune délégation au module juridique global.
+        const dialogue = document.getElementById("lcdp-juridique-page-info");
+        if (!dialogue || dialogue.open) return;
+        const precedent = document.activeElement;
+        if (!dialogue.dataset.initialise) {
+          dialogue.querySelectorAll("[data-juridique-fermer]").forEach(bouton => {
+            bouton.addEventListener("click", () => dialogue.close());
+          });
+          dialogue.addEventListener("keydown", event => {
+            if (event.key === "Escape") event.stopPropagation();
+          });
+          dialogue.dataset.initialise = "true";
         }
-
-        slot.innerHTML = "";
-
-        const overlay = document.createElement("div");
-        overlay.className = "lcdp-legal-lightbox";
-        overlay.setAttribute("role", "dialog");
-        overlay.setAttribute("aria-modal", "true");
-        overlay.setAttribute(
-          "aria-label",
-          "Demande juridique"
-        );
-
-        const carte = document.createElement("section");
-        carte.className = "lcdp-legal-lightbox__card";
-
-        const boutonFermer = document.createElement("button");
-        boutonFermer.type = "button";
-        boutonFermer.className = "lcdp-legal-lightbox__close";
-        boutonFermer.setAttribute(
-          "aria-label",
-          "Fermer la demande juridique"
-        );
-        boutonFermer.textContent = "×";
-
-        const contenu = document.createElement("div");
-        contenu.className = "lcdp-legal-lightbox__content";
-
-        carte.appendChild(boutonFermer);
-        carte.appendChild(contenu);
-        overlay.appendChild(carte);
-        slot.appendChild(overlay);
-        document.body.classList.add("lcdp-legal-lightbox-open");
-
-        let ferme = false;
-
-        const fermer = () => {
-          if (ferme) {
-            return;
-          }
-
-          ferme = true;
-          document.removeEventListener(
-            "keydown",
-            gererClavier
-          );
-          overlay.remove();
-          document.body.classList.remove(
-            "lcdp-legal-lightbox-open"
-          );
-        };
-
-        const gererClavier = (event) => {
-          if (event.key !== "Escape") {
-            return;
-          }
-
-          if (
-            overlay.querySelector(
-              "[data-lcdp-box-dialogue-bouton], " +
-              "[data-lcdp-box-alerte]"
-            )
-          ) {
-            return;
-          }
-
-          event.preventDefault();
-          fermer();
-        };
-
-        boutonFermer.addEventListener("click", fermer);
-        overlay.addEventListener("click", (event) => {
-          if (event.target === overlay) {
-            fermer();
-          }
-        });
-        document.addEventListener("keydown", gererClavier);
-
-        return {
-          overlay,
-          contenu,
-          fermer
-        };
-      }
-
-      async function ouvrirFormulaireDemandeJuridiquePage(
-        conteneur,
-        documentMentions
-      ) {
-        if (
-          typeof window.LCDP_creerFormulaire !==
-          "function"
-        ) {
-          throw new Error(
-            "Objet formulaire indisponible."
-          );
-        }
-
-        const boxDemande =
-          creerBoxDemandeJuridiquePage();
-
-        const slotFormulaire =
-          document.createElement("div");
-        boxDemande.contenu.appendChild(slotFormulaire);
-
-        const form =
-          await window.LCDP_creerFormulaire(
-            slotFormulaire,
-            configurationDemandeJuridiquePage()
-          );
-
-        if (!form) {
-          boxDemande.fermer();
-          throw new Error(
-            "Formulaire de demande juridique non créé."
-          );
-        }
-
-        form.querySelector(
-          "#bouton-retour-mentions-legales"
-        )?.addEventListener("click", () => {
-          boxDemande.fermer();
-        });
-
-        form.addEventListener(
-          "submit",
-          async (event) => {
-            event.preventDefault();
-
-            if (!form.reportValidity()) {
-              return;
-            }
-
-            const payload =
-              lireFormulaireDemandeJuridiquePage(
-                form
-              );
-            const erreur =
-              validerDemandeJuridiquePage(
-                payload
-              );
-
-            if (erreur) {
-              await afficherAlerteDemandeJuridiquePage(
-                erreur,
-                "erreur",
-                boxDemande
-              );
-              return;
-            }
-
-            const confirme =
-              await demanderConfirmationDemandeJuridiquePage(
-                boxDemande
-              );
-
-            if (!confirme) {
-              return;
-            }
-
-            const boutons = Array.from(
-              form.querySelectorAll("button")
-            );
-
-            boutons.forEach((bouton) => {
-              bouton.disabled = true;
-            });
-
-            try {
-              await envoyerDemandeJuridiquePage(
-                payload
-              );
-              form.reset();
-
-              await afficherAlerteDemandeJuridiquePage(
-                "Votre demande est envoyée.",
-                "validation",
-                boxDemande
-              );
-
-              boxDemande.fermer();
-            } catch (error) {
-              boutons.forEach((bouton) => {
-                bouton.disabled = false;
-              });
-
-              await afficherAlerteDemandeJuridiquePage(
-                String(
-                  error?.message ||
-                  error ||
-                  "La demande n’a pas pu être envoyée."
-                ),
-                "erreur",
-                boxDemande
-              );
-            }
-          }
-        );
-      }
-
-
-      function configurationDemandeJuridiquePage() {
-        return {
-          id: "formulaire-demande-juridique",
-          ariaLabel:
-            "Formulaire de demande juridique",
-          titre: "Demande juridique",
-          introHtml:
-            "<p>Renseignez vos coordonnées et la raison de votre demande.</p>",
-          validationNative: true,
-          champs: [
-            {
-              type: "text",
-              id: "demande-juridique-nom",
-              name: "nom",
-              label: "Votre nom",
-              required: true,
-              autocomplete: "family-name",
-              maxlength: 120
-            },
-            {
-              type: "text",
-              id: "demande-juridique-prenom",
-              name: "prenom",
-              label: "Votre prénom",
-              required: true,
-              autocomplete: "given-name",
-              maxlength: 120
-            },
-            {
-              type: "email",
-              id: "demande-juridique-email",
-              name: "email",
-              label: "Votre e-mail",
-              required: true,
-              autocomplete: "email",
-              autocapitalize: "none",
-              spellcheck: "false",
-              maxlength: 254
-            },
-            {
-              type: "textarea",
-              id: "demande-juridique-motif",
-              name: "motif",
-              label:
-                "Raison de votre demande juridique",
-              required: true,
-              maxlength: 4000
-            }
-          ],
-          boutons: [
-            {
-              id:
-                "bouton-envoyer-demande-juridique",
-              type: "submit",
-              label: "Envoyer",
-              style: "lcdp-button-orange"
-            },
-            {
-              id:
-                "bouton-retour-mentions-legales",
-              type: "button",
-              label: "Retour aux mentions légales",
-              style: "lcdp-button-secondary"
-            }
-          ]
-        };
-      }
-
-      function lireFormulaireDemandeJuridiquePage(
-        form
-      ) {
-        return {
-          nom: String(
-            form.elements.namedItem("nom")
-              ?.value || ""
-          ).trim(),
-          prenom: String(
-            form.elements.namedItem("prenom")
-              ?.value || ""
-          ).trim(),
-          email: String(
-            form.elements.namedItem("email")
-              ?.value || ""
-          ).trim().toLowerCase(),
-          motif: String(
-            form.elements.namedItem("motif")
-              ?.value || ""
-          ).trim(),
-          source: "mentions-legales"
-        };
-      }
-
-      function validerDemandeJuridiquePage(
-        payload
-      ) {
-        if (!payload.nom) {
-          return "Votre nom est obligatoire.";
-        }
-
-        if (!payload.prenom) {
-          return "Votre prénom est obligatoire.";
-        }
-
-        if (
-          !payload.email ||
-          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-            payload.email
-          )
-        ) {
-          return (
-            "Votre adresse e-mail n’est pas valide."
-          );
-        }
-
-        if (!payload.motif) {
-          return (
-            "La raison de votre demande est obligatoire."
-          );
-        }
-
-        return "";
-      }
-
-      async function envoyerDemandeJuridiquePage(
-        payload
-      ) {
-        const endpoint = endpointEditingAdmin();
-
-        if (!endpoint) {
-          throw new Error(
-            "Service de demande juridique non configuré."
-          );
-        }
-
-        const response = await fetch(
-          endpoint + "/public/demande-juridique",
-          {
-            method: "POST",
-            credentials: "omit",
-            cache: "no-store",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-          }
-        );
-
-        const data = await response
-          .json()
-          .catch(() => null);
-
-        if (
-          !response.ok ||
-          !data ||
-          data.success !== true
-        ) {
-          throw new Error(
-            data?.message ||
-            data?.detail ||
-            "La demande n’a pas pu être envoyée."
-          );
-        }
-
-        return data;
-      }
-
-      async function demanderConfirmationDemandeJuridiquePage(boxDemande = null) {
-        const slot = document.getElementById(
-          "lcdp-lightbox-slot"
-        );
-
-        if (!slot) {
-          throw new Error(
-            "Slot de dialogue introuvable."
-          );
-        }
-
-        const fragment = await chargerFragment(
-          "/OBJET/BOX/02-box-dialogue-bouton.html"
-        );
-        const dialogue = fragment.querySelector(
-          "[data-lcdp-box-dialogue-bouton]"
-        );
-
-        if (!dialogue) {
-          throw new Error(
-            "Objet dialogue incomplet."
-          );
-        }
-
-        dialogue.querySelector(
-          "[data-lcdp-dialogue-title]"
-        ).textContent = "Envoyer la demande ?";
-
-        dialogue.querySelector(
-          "[data-lcdp-dialogue-text]"
-        ).textContent =
-          "Confirmez-vous l’envoi de votre demande juridique ?";
-
-        const actions = dialogue.querySelector(
-          "[data-lcdp-dialogue-actions]"
-        );
-        const fermer = dialogue.querySelector(
-          "[data-lcdp-dialogue-close]"
-        );
-
-        const annuler =
-          document.createElement("button");
-        annuler.type = "button";
-        annuler.className =
-          "lcdp-button lcdp-button-secondary";
-        annuler.textContent = "Annuler";
-
-        const envoyer =
-          document.createElement("button");
-        envoyer.type = "button";
-        envoyer.className =
-          "lcdp-button lcdp-button-orange";
-        envoyer.textContent =
-          "Envoyer la demande";
-
-        actions.appendChild(annuler);
-        actions.appendChild(envoyer);
-        (boxDemande?.overlay || slot).appendChild(fragment);
-
-        return new Promise((resolve) => {
-          let termine = false;
-
-          function terminer(valeur) {
-            if (termine) {
-              return;
-            }
-
-            termine = true;
-            document.removeEventListener(
-              "keydown",
-              gererClavier
-            );
-            dialogue.remove();
-            resolve(valeur);
-          }
-
-          function gererClavier(event) {
-            if (event.key === "Escape") {
-              event.preventDefault();
-              terminer(false);
-            }
-          }
-
-          document.addEventListener(
-            "keydown",
-            gererClavier
-          );
-
-          fermer?.addEventListener(
-            "click",
-            () => terminer(false)
-          );
-          annuler.addEventListener(
-            "click",
-            () => terminer(false)
-          );
-          envoyer.addEventListener(
-            "click",
-            () => terminer(true)
-          );
-          dialogue.addEventListener(
-            "click",
-            (event) => {
-              if (event.target === dialogue) {
-                terminer(false);
-              }
-            }
-          );
-        });
-      }
-
-      async function afficherAlerteDemandeJuridiquePage(
-        message,
-        type,
-        boxDemande = null
-      ) {
-        const slot = document.getElementById(
-          "lcdp-lightbox-slot"
-        );
-
-        if (!slot) {
-          throw new Error(
-            "Slot d’alerte introuvable."
-          );
-        }
-
-        const fragment = await chargerFragment(
-          "/OBJET/BOX/02-box-alerte.html"
-        );
-        const alerte = fragment.querySelector(
-          "[data-lcdp-box-alerte]"
-        );
-
-        if (!alerte) {
-          throw new Error(
-            "Objet alerte incomplet."
-          );
-        }
-
-        alerte.dataset.type =
-          type || "information";
-
-        alerte.querySelector(
-          "[data-lcdp-alerte-message]"
-        ).textContent = String(message || "");
-
-        const fermer = alerte.querySelector(
-          "[data-lcdp-alerte-close]"
-        );
-        const ok = alerte.querySelector(
-          "[data-lcdp-alerte-ok]"
-        );
-
-        (boxDemande?.overlay || slot).appendChild(fragment);
-
-        return new Promise((resolve) => {
-          let termine = false;
-
-          function terminer() {
-            if (termine) {
-              return;
-            }
-
-            termine = true;
-            document.removeEventListener(
-              "keydown",
-              gererClavier
-            );
-            alerte.remove();
-            resolve();
-          }
-
-          function gererClavier(event) {
-            if (event.key === "Escape") {
-              event.preventDefault();
-              terminer();
-            }
-          }
-
-          document.addEventListener(
-            "keydown",
-            gererClavier
-          );
-
-          fermer?.addEventListener(
-            "click",
-            terminer
-          );
-          ok?.addEventListener(
-            "click",
-            terminer
-          );
-          alerte.addEventListener(
-            "click",
-            (event) => {
-              if (event.target === alerte) {
-                terminer();
-              }
-            }
-          );
-        });
+        dialogue.addEventListener("close", () => {
+          if (precedent?.isConnected) precedent.focus();
+        }, {once:true});
+        dialogue.showModal();
+        dialogue.querySelector("[data-juridique-fermer]").focus();
       }
 
       function nettoyerHtmlAffichage(htmlBrut) {
