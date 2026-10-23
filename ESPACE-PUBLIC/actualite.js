@@ -15,11 +15,11 @@
     const article=node('article',null,'lcdp-stack');
     const title=node('h2',a.titre,'lcdp-box-carousel__title');
     if(popup)article.append(image(a),title);else {
-      const more=link('voir les articles',listeUrl(),'lcdp-mention-connexion');
+      const more=link('derniers articles',listeUrl(),'lcdp-mention-connexion');
       // Les classes génériques fournissent la police et le corps secondaire.
       // Seuls l'alignement dans le titre et la couleur nécessitent ces valeurs.
-      more.style.cssText='display:inline;font-family:var(--lcdp-font-main,Arial,sans-serif);font-size:0.65em;font-weight:400;color:var(--lcdp-color-orange,#d97826);text-transform:none;letter-spacing:normal';
-      title.append(document.createTextNode(' | '),more);
+      more.style.cssText='display:block;margin-top:.6rem;margin-bottom:1rem;font-family:var(--lcdp-font-main,Arial,sans-serif);font-size:1rem;font-weight:400;line-height:1.5;color:var(--lcdp-color-orange,#d97826);text-transform:none;letter-spacing:normal;text-decoration:none !important;border-bottom:0;box-shadow:none';
+      title.append(more);
       article.append(title,image(a));
     }
     article.append(texte(a.texte));
@@ -56,17 +56,17 @@
     const letters=text=>typeof Intl.Segmenter==='function'?[...new Intl.Segmenter('fr',{granularity:'grapheme'}).segment(text)].map(x=>x.segment):Array.from(text);
     let characters=[];
     function start(){
-      const article=articles[index];characters=letters(article.titre);position=0;holding=false;
+      const article=articles[index];characters=letters(String(article.titre));position=0;holding=false;
       a.href=articleUrl(article.id);a.setAttribute('aria-label',article.titre);visible.textContent='';
     }
     function tick(){
       if(stopped)return;
-      if(document.hidden||bar.matches(':hover')||bar.contains(document.activeElement)||document.querySelector('dialog[open]')){timer=setTimeout(tick,100);return;}
+      if(document.hidden){timer=setTimeout(tick,100);return;}
       if(holding){index=(index+1)%articles.length;start();}
       if(reduced.matches){visible.textContent=characters.join('');position=characters.length;}
       else {position++;visible.textContent=characters.slice(0,position).join('');}
       holding=position>=characters.length;
-      timer=setTimeout(tick,holding?2000:25);
+      timer=setTimeout(tick,holding?1000:75);
     }
     start();tick();
     window.addEventListener('pagehide',()=>{stopped=true;clearTimeout(timer);},{once:true});
@@ -97,13 +97,13 @@ async function init(){
     const id=new URLSearchParams(location.search).get('id');slot.replaceChildren();slot.className='lcdp-stack-large';
     if(id){
       const a=articles.find(a=>a.id===id);
-      if(!a){slot.append(node('p','Cette actualité n’est plus disponible.'),link('voir les articles',listeUrl(),'lcdp-link-secondary'));return;}
+      if(!a){slot.append(node('p','Cette actualité n’est plus disponible.'),link('derniers articles',listeUrl(),'lcdp-link-secondary'));return;}
       const card=node('section',null,'lcdp-boxtext');card.append(contenu(a));slot.append(card);document.title='Actualité · '+a.titre+' - La Clé du Parc';
     }else{
       const list=node('div',null,'lcdp-stack');
       for(const a of articles.slice(0,10)){
         const row=node('div');row.append(link(a.titre,articleUrl(a.id),'lcdp-button lcdp-button-secondary'));
-        row.firstChild.style.cssText='display:block;width:100%;box-sizing:border-box;text-align:left;white-space:normal';list.append(row);
+        row.firstChild.style.cssText='display:block;width:100%;box-sizing:border-box;text-align:center;justify-content:center;white-space:normal';list.append(row);
       }
       slot.append(list);
       if(!articles.length)slot.append(node('p','Aucune actualité publiée.'));
