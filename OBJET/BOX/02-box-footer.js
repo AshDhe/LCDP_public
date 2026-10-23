@@ -155,15 +155,6 @@
     }
   };
 
-  function terminer(etat) {
-    if (etat.calque) {
-      window.LCDP_chargement.masquer(etat.calque);
-      etat.calque = null;
-    }
-    clearTimeout(etat.delai);
-    if (actif === etat) actif = null;
-  }
-
   function afficherConfirmation(message, retour) {
     const box = document.createElement('div');
     box.setAttribute('popover', 'manual');
@@ -218,87 +209,180 @@
     box.style.setProperty('display', 'flex', 'important');
     ok.focus();
   }
+  const CLE_PUBLIQUE = '0x4AAAAAAFiynf6HIp1GlPxM';
+  const API_VERIFICATION = 'https://lacleduparc.fr/api/verification';
+  let chargementTurnstile = null;
 
-  document.addEventListener('click', event => {
+  function chargerTurnstile() {
+    if (window.turnstile?.render) return Promise.resolve(window.turnstile);
+    if (chargementTurnstile) return chargementTurnstile;
+    chargementTurnstile = new Promise((resolve, reject) => {
+      let script = document.querySelector('script[data-lcdp-turnstile]');
+      if (!script) {
+        script = document.createElement('script');
+        script.dataset.lcdpTurnstile = '';
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+        script.async = true;
+        document.head.append(script);
+      }
+      let fini = false;
+      const debut = Date.now();
+      function verifier() {
+        if (fini) return;
+        if (window.turnstile?.render) { fini = true; resolve(window.turnstile); return; }
+        if (Date.now() - debut >= 15000) { echouer(); return; }
+        setTimeout(verifier, 100);
+      }
+      function echouer() {
+        if (fini) return;
+        fini = true;
+        script.remove();
+        chargementTurnstile = null;
+        reject(new Error('La vérification ne répond pas. Fermez puis réessayez.'));
+      }
+      script.addEventListener('error', echouer, {once:true});
+      verifier();
+    });
+    return chargementTurnstile;
+  }
+
+  function creerFormulaire(boutonRetour) {
+    const box = document.createElement('div');
+    box.setAttribute('popover','manual');
+    box.setAttribute('role','dialog');
+    box.setAttribute('aria-label','Vérification');
+    const proprietes = {all:'initial',position:'fixed',inset:'0',width:'100%',height:'100%',
+      'max-width':'none','max-height':'none','min-width':'0','min-height':'0',margin:'0',padding:'12px',
+      'box-sizing':'border-box',border:'0',background:'rgba(31,42,36,.46)',
+      'backdrop-filter':'blur(4px)',overflow:'auto',transform:'none'};
+    for (const [nom,valeur] of Object.entries(proprietes)) box.style.setProperty(nom,valeur,'important');
+    const racine = box.attachShadow({mode:'closed'});
+    const style = document.createElement('style');
+    style.textContent = `
+      .carte { position:relative; box-sizing:border-box; width:380px; max-width:100%;
+        height:auto; min-height:0; margin:auto; padding:52px 12px 18px;
+        border:1px solid #cbd1cc; border-radius:24px; background:#fff; color:#1f2a24;
+        font:16px/1.4 Arial,sans-serif; box-shadow:0 18px 50px rgba(31,42,36,.18); }
+      form { display:flex; align-items:center; gap:8px; margin:0; }
+      input { box-sizing:border-box; flex:1; width:0; min-width:0; height:46px;
+        padding:10px; border:1px solid #57754c; border-radius:8px;
+        background:#fff; color:#1f2a24; font:16px Arial,sans-serif; }
+      button { box-sizing:border-box; min-height:46px; padding:10px 12px;
+        border:1px solid #57754c; border-radius:8px;
+        background:#57754c; color:#fff; font:16px Arial,sans-serif; cursor:pointer; }
+      button:disabled { opacity:.55; cursor:default; }
+      .fermer { position:absolute; top:6px; right:6px; width:40px; min-height:40px;
+        padding:0; border:0; border-radius:50%; background:#f7f7f4; color:#1f2a24;
+        font-size:28px; line-height:1; }
+      .statut { margin:8px 0 0; text-align:center; font-size:14px; }
+      .statut:empty { display:none; }
+      button:focus-visible,input:focus-visible { outline:2px solid #1f2a24; outline-offset:3px; }
+    `;
+    const carte = document.createElement('div'); carte.className = 'carte';
+    const fermer = document.createElement('button'); fermer.type = 'button';
+    fermer.className = 'fermer'; fermer.textContent = '×'; fermer.setAttribute('aria-label','Fermer');
+    const form = document.createElement('form');
+    const email = document.createElement('input');
+    email.type = 'email'; email.required = true; email.maxLength = 254;
+    email.autocomplete = 'email'; email.placeholder = 'Votre adresse email';
+    email.setAttribute('aria-label','Adresse email');
+    const envoyer = document.createElement('button'); envoyer.type = 'submit';
+    envoyer.textContent = 'Envoyer'; envoyer.disabled = true;
+    form.append(email,envoyer);
+    const statut = document.createElement('p'); statut.className = 'statut';
+    statut.setAttribute('role','status'); statut.setAttribute('aria-live','polite');
+    statut.textContent = 'Vérification en cours…';
+    // Turnstile est rendu dans le DOM public, projeté dans la carte isolée.
+    const challenge = document.createElement('div'); challenge.slot = 'challenge';
+    challenge.style.cssText = 'all:initial!important;display:block!important;width:100%!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;box-sizing:border-box!important;';
+    const emplacement = document.createElement('slot'); emplacement.name = 'challenge';
+    carte.append(fermer,form,emplacement,statut);
+    racine.append(style,carte); box.append(challenge); document.body.append(box);
+    box.showPopover(); box.style.setProperty('display','flex','important');
+    const etat = {phase:'formulaire',box,form,email,envoyer,statut,fermer,challenge,
+      widget:null,token:'',retour:boutonRetour};
+    etat.fermerBoite = () => {
+      if (etat.phase === 'envoi') return;
+      if (etat.widget !== null && window.turnstile) window.turnstile.remove(etat.widget);
+      box.hidePopover(); box.remove();
+      if (actif === etat) actif = null;
+      boutonRetour.focus();
+    };
+    fermer.addEventListener('click',etat.fermerBoite);
+    box.addEventListener('click',event => {
+      if (event.composedPath()[0] === box) etat.fermerBoite();
+    });
+    box.addEventListener('keydown',event => {
+      if (event.key === 'Escape') {event.preventDefault();etat.fermerBoite();}
+    });
+    form.addEventListener('submit',async event => {
+      event.preventDefault();
+      if (etat.phase === 'envoi' || !form.reportValidity()) return;
+      if (!etat.token) {statut.textContent = 'Patientez pendant la vérification.';return;}
+      etat.phase = 'envoi'; envoyer.disabled = true; fermer.disabled = true;
+      const token = etat.token; etat.token = '';
+      box.hidePopover();
+      const attente = window.LCDP_chargement.afficher();
+      let succes = false;
+      try {
+        const r = await fetch(API_VERIFICATION,{
+          method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',
+          body:JSON.stringify({email:email.value.trim(),token}),signal:AbortSignal.timeout(40000)});
+        let data = null;
+        try {data = await r.json();} catch { /* Le pare-feu peut renvoyer une page HTML. */ }
+        if (r.ok && data?.ok === true) succes = true;
+        else statut.textContent = r.status === 429 ?
+          'Service occupé. Réessayez dans quelques instants.' :
+          (typeof data?.message === 'string' ? data.message : 'Envoi impossible. Réessayez plus tard.');
+      } catch {statut.textContent = 'Envoi non confirmé. Réessayez plus tard.';}
+      finally {window.LCDP_chargement.masquer(attente);}
+      etat.phase = 'formulaire'; fermer.disabled = false;
+      if (succes) {
+        etat.fermerBoite();
+        afficherConfirmation('',boutonRetour);
+      } else {
+        box.showPopover();
+        if (etat.widget !== null) window.turnstile.reset(etat.widget);
+        email.focus();
+      }
+    });
+    email.focus();
+    return etat;
+  }
+
+  document.addEventListener('click', async event => {
     const bouton = event.target.closest('[popovertarget="lcdp-footer-verification-info"]');
     if (!bouton || bouton.getAttribute('popovertargetaction') === 'hide') return;
-    const boite = bouton.closest('[data-lcdp-box-footer]')?.querySelector('#lcdp-footer-verification-info');
-    const slot = boite?.querySelector('[data-verification-slot]');
-    if (!slot) return;
     event.preventDefault();
     if (actif) return;
-    if (slot.dataset.pret === 'oui') { boite.showPopover(); return; }
-
-    const etat = {boite, bouton, calque:window.LCDP_chargement.afficher(), delai:null};
-    actif = etat;
-    const formulaire = document.createElement('iframe');
-    formulaire.title = 'Saisir votre adresse email';
-    formulaire.setAttribute('scrolling', 'no');
-    formulaire.referrerPolicy = 'no-referrer';
-    formulaire.style.cssText = 'display:block;width:100%;height:112px;min-height:0;border:0;margin:0;overflow:hidden;';
-    formulaire.addEventListener('load', () => {
-      if (!formulaire.isConnected) return;
-      slot.dataset.pret = 'oui';
-      if (actif !== etat) return;
-      terminer(etat);
-      boite.showPopover();
-    }, {once:true});
-    if (typeof slot.lcdpNettoyerMessages === 'function') slot.lcdpNettoyerMessages();
-    const canal = window.crypto.randomUUID();
-    const urlFormulaire = new URL(slot.dataset.verificationUrl);
-    urlFormulaire.searchParams.set('lcdpCanal', canal);
-    urlFormulaire.searchParams.set('lcdpOrigine', window.location.origin);
-    let envoiEnCours = false;
-    const recevoir = event => {
-      const data = event.data;
-      if (!data || data.type !== 'lcdp-verification' || data.canal !== canal) return;
-      if (!/^https:\/\/(?:script\.google\.com|(?:[a-z0-9-]+\.)?script\.googleusercontent\.com|[a-z0-9-]+-script\.googleusercontent\.com)$/.test(event.origin)) return;
-      if (!formulaire.isConnected) return;
-      if (data.etat === 'envoi') {
-        if (envoiEnCours || actif) return;
-        envoiEnCours = true;
-        boite.hidePopover();
-        etat.phase = 'envoi';
-        etat.calque = window.LCDP_chargement.afficher();
-        actif = etat;
-        etat.delai = setTimeout(() => {
-          if (!envoiEnCours) return;
-          envoiEnCours = false;
-          terminer(etat);
-          afficherConfirmation('La confirmation tarde. Vérifiez le tableau avant de réessayer.', bouton);
-        }, 30000);
-      } else if (data.etat === 'succes' && envoiEnCours) {
-        envoiEnCours = false;
-        terminer(etat);
-        afficherConfirmation('', bouton);
-      } else if (data.etat === 'erreur' && envoiEnCours) {
-        envoiEnCours = false;
-        terminer(etat);
-        boite.showPopover();
-      }
-    };
-    window.addEventListener('message', recevoir);
-    slot.lcdpNettoyerMessages = () => window.removeEventListener('message', recevoir);
-    formulaire.src = urlFormulaire.href;
-    slot.replaceChildren(formulaire);
-    // Une erreur reseau ne doit pas laisser le visiteur bloque derriere le calque.
-    etat.delai = setTimeout(() => {
-      if (actif !== etat) return;
-      terminer(etat);
-      slot.replaceChildren();
-      const message = document.createElement('p');
-      message.textContent = 'Le formulaire ne répond pas. Fermez puis réessayez.';
-      message.style.cssText = 'margin:12px 0;text-align:center;';
-      slot.append(message);
-      boite.showPopover();
-    }, 25000);
-  }, true);
-
-  document.addEventListener('keydown', event => {
-    if (event.key !== 'Escape' || !actif) return;
-    if (actif.phase === 'envoi') { event.preventDefault(); return; }
-    const etat = actif;
-    terminer(etat);
-    etat.bouton.focus();
-  });
+    actif = {phase:'ouverture'};
+    const attente = window.LCDP_chargement.afficher();
+    let api;
+    try {api = await chargerTurnstile();}
+    catch (erreur) {
+      actif = null; window.LCDP_chargement.masquer(attente);
+      afficherConfirmation(erreur.message,bouton); return;
+    }
+    window.LCDP_chargement.masquer(attente);
+    const etat = creerFormulaire(bouton); actif = etat;
+    try {
+      etat.widget = api.render(etat.challenge,{
+        sitekey:CLE_PUBLIQUE,action:'verification',theme:'light',appearance:'interaction-only',
+        size:window.innerWidth < 350 ? 'compact' : 'flexible',
+        callback:token => {
+          if (!etat.box.isConnected) return;
+          etat.token = token; etat.envoyer.disabled = false;
+          if (etat.statut.textContent === 'Vérification en cours…') etat.statut.textContent = '';
+        },
+        'expired-callback':() => {etat.token = '';etat.envoyer.disabled = true;api.reset(etat.widget);},
+        'error-callback':() => {
+          etat.token = '';etat.envoyer.disabled = true;
+          etat.statut.textContent = 'Vérification indisponible. Fermez puis réessayez.';
+          return true;
+        }
+      });
+    } catch {
+      etat.statut.textContent = 'Vérification indisponible. Fermez puis réessayez.';
+    }
+  },true);
 })();
