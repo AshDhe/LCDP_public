@@ -166,30 +166,56 @@
 
   function afficherConfirmation(message, retour) {
     const box = document.createElement('div');
-    box.className = 'lcdp-contact-info';
     box.setAttribute('popover', 'manual');
     box.setAttribute('role', 'dialog');
     box.setAttribute('aria-label', message || 'Adresse enregistrée');
-    box.style.cssText = 'position:fixed!important;inset:auto!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important;margin:0!important;box-sizing:border-box!important;height:fit-content!important;min-height:0!important;max-height:calc(100svh - 36px)!important;width:min(280px,calc(100% - 36px))!important;padding:24px!important;text-align:center;overflow:auto;';
+    // Le calque occupe l'écran ; la carte dans le Shadow DOM reste compacte.
+    // Aucun style de .lcdp-contact-info ou des div/boutons de la page ne s'y applique.
+    const styles = {
+      all: 'initial', position: 'fixed', inset: '0', margin: '0',
+      width: '100%', height: '100%', 'min-width': '0', 'min-height': '0',
+      'max-width': 'none', 'max-height': 'none', padding: '18px', border: '0',
+      'box-sizing': 'border-box', background: 'rgba(31,42,36,.46)',
+      'backdrop-filter': 'blur(4px)', transform: 'none', overflow: 'auto'
+    };
+    for (const [propriete, valeur] of Object.entries(styles)) {
+      box.style.setProperty(propriete, valeur, 'important');
+    }
+    const racine = box.attachShadow({mode: 'closed'});
+    const style = document.createElement('style');
+    style.textContent = `
+      .carte { box-sizing:border-box; width:280px; max-width:100%;
+        height:auto; min-height:0; margin:auto; padding:24px;
+        border:1px solid #cbd1cc; border-radius:24px; background:#fff;
+        color:#1f2a24; font:16px/1.5 Arial,sans-serif; text-align:center;
+        box-shadow:0 18px 50px rgba(31,42,36,.18); }
+      p { margin:0 0 20px; overflow-wrap:anywhere; }
+      button { box-sizing:border-box; display:block; width:110px; height:52px;
+        margin:0 auto; padding:0 20px; border:0; border-radius:16px;
+        background:var(--lcdp-color-primary,#57754c); color:#fff;
+        font:600 16px/1 Arial,sans-serif; cursor:pointer; }
+      button:focus-visible { outline:2px solid #1f2a24; outline-offset:4px; }
+    `;
+    const carte = document.createElement('div');
+    carte.className = 'carte';
     if (message) {
       const texte = document.createElement('p');
       texte.textContent = message;
-      texte.style.cssText = 'margin:0 0 20px;';
-      box.append(texte);
+      carte.append(texte);
     }
     const ok = document.createElement('button');
     ok.type = 'button';
-    ok.className = 'lcdp-button lcdp-button-primary';
     ok.textContent = 'OK';
-    ok.style.cssText = 'display:block;margin:0 auto;min-width:100px;';
     ok.addEventListener('click', () => {
       box.hidePopover();
       box.remove();
       retour.focus();
     });
-    box.append(ok);
+    carte.append(ok);
+    racine.append(style, carte);
     document.body.append(box);
     box.showPopover();
+    box.style.setProperty('display', 'flex', 'important');
     ok.focus();
   }
 
