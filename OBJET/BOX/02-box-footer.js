@@ -164,6 +164,35 @@
     if (actif === etat) actif = null;
   }
 
+  function afficherConfirmation(message, retour) {
+    const box = document.createElement('div');
+    box.className = 'lcdp-contact-info';
+    box.setAttribute('popover', 'manual');
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-label', message || 'Adresse enregistrée');
+    box.style.cssText = 'height:auto!important;min-height:0!important;width:min(360px,calc(100% - 36px));padding:32px!important;text-align:center;overflow:hidden;';
+    if (message) {
+      const texte = document.createElement('p');
+      texte.textContent = message;
+      texte.style.cssText = 'margin:0 0 20px;';
+      box.append(texte);
+    }
+    const ok = document.createElement('button');
+    ok.type = 'button';
+    ok.className = 'lcdp-button lcdp-button-primary';
+    ok.textContent = 'OK';
+    ok.style.cssText = 'display:block;margin:0 auto;min-width:100px;';
+    ok.addEventListener('click', () => {
+      box.hidePopover();
+      box.remove();
+      retour.focus();
+    });
+    box.append(ok);
+    document.body.append(box);
+    box.showPopover();
+    ok.focus();
+  }
+
   document.addEventListener('click', event => {
     const bouton = event.target.closest('[popovertarget="lcdp-footer-verification-info"]');
     if (!bouton || bouton.getAttribute('popovertargetaction') === 'hide') return;
@@ -188,7 +217,43 @@
       terminer(etat);
       boite.showPopover();
     }, {once:true});
-    formulaire.src = slot.dataset.verificationUrl;
+    if (typeof slot.lcdpNettoyerMessages === 'function') slot.lcdpNettoyerMessages();
+    const canal = window.crypto.randomUUID();
+    const urlFormulaire = new URL(slot.dataset.verificationUrl);
+    urlFormulaire.searchParams.set('lcdpCanal', canal);
+    urlFormulaire.searchParams.set('lcdpOrigine', window.location.origin);
+    let envoiEnCours = false;
+    const recevoir = event => {
+      const data = event.data;
+      if (!data || data.type !== 'lcdp-verification' || data.canal !== canal) return;
+      if (!/^https:\/\/(?:script\.google\.com|(?:[a-z0-9-]+\.)?script\.googleusercontent\.com|[a-z0-9-]+-script\.googleusercontent\.com)$/.test(event.origin)) return;
+      if (!formulaire.isConnected) return;
+      if (data.etat === 'envoi') {
+        if (envoiEnCours || actif) return;
+        envoiEnCours = true;
+        boite.hidePopover();
+        etat.phase = 'envoi';
+        etat.calque = window.LCDP_chargement.afficher();
+        actif = etat;
+        etat.delai = setTimeout(() => {
+          if (!envoiEnCours) return;
+          envoiEnCours = false;
+          terminer(etat);
+          afficherConfirmation('La confirmation tarde. Vérifiez le tableau avant de réessayer.', bouton);
+        }, 30000);
+      } else if (data.etat === 'succes' && envoiEnCours) {
+        envoiEnCours = false;
+        terminer(etat);
+        afficherConfirmation('', bouton);
+      } else if (data.etat === 'erreur' && envoiEnCours) {
+        envoiEnCours = false;
+        terminer(etat);
+        boite.showPopover();
+      }
+    };
+    window.addEventListener('message', recevoir);
+    slot.lcdpNettoyerMessages = () => window.removeEventListener('message', recevoir);
+    formulaire.src = urlFormulaire.href;
     slot.replaceChildren(formulaire);
     // Une erreur reseau ne doit pas laisser le visiteur bloque derriere le calque.
     etat.delai = setTimeout(() => {
@@ -205,6 +270,7 @@
 
   document.addEventListener('keydown', event => {
     if (event.key !== 'Escape' || !actif) return;
+    if (actif.phase === 'envoi') { event.preventDefault(); return; }
     const etat = actif;
     terminer(etat);
     etat.bouton.focus();
