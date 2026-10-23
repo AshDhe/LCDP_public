@@ -276,7 +276,8 @@
         font-size:28px; line-height:1; }
       .statut { margin:8px 0 0; text-align:center; font-size:14px; }
       .statut:empty { display:none; }
-      button:focus-visible,input:focus-visible { outline:2px solid #1f2a24; outline-offset:3px; }
+      button:focus-visible { outline:2px solid #1f2a24; outline-offset:3px; }
+      input:focus-visible { outline:none; }
     `;
     const carte = document.createElement('div'); carte.className = 'carte';
     const fermer = document.createElement('button'); fermer.type = 'button';
@@ -284,7 +285,7 @@
     const form = document.createElement('form');
     const email = document.createElement('input');
     email.type = 'email'; email.required = true; email.maxLength = 254;
-    email.autocomplete = 'email'; email.placeholder = 'Votre adresse email';
+    email.autocomplete = 'email';
     email.setAttribute('aria-label','Adresse email');
     const envoyer = document.createElement('button'); envoyer.type = 'submit';
     envoyer.textContent = 'Envoyer'; envoyer.disabled = true;
