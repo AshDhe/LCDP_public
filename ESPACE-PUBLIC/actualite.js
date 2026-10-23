@@ -19,8 +19,13 @@
       // Les classes génériques fournissent la police et le corps secondaire.
       // Seuls l'alignement dans le titre et la couleur nécessitent ces valeurs.
       more.style.cssText='display:block;text-align:left;margin-top:.6rem;margin-bottom:1rem;font-family:var(--lcdp-font-main,Arial,sans-serif);font-size:1rem;font-weight:400;line-height:1.5;color:var(--lcdp-color-orange,#d97826);text-transform:none;letter-spacing:normal;text-decoration:none !important;border-bottom:0;box-shadow:none';
-      title.append(more);
-      article.append(title,image(a));
+      const header=node('header');
+      header.style.cssText='display:flex;flex-direction:column;gap:.4rem;margin:0 0 .75rem';
+      title.style.margin='0';
+      more.style.margin='0';
+      header.append(title,more);
+      article.style.gap='0';
+      article.append(header,image(a));
     }
     article.append(texte(a.texte));
     if(!popup && a.contact)article.append(node('p',a.contact,'lcdp-text-strong-left'));
