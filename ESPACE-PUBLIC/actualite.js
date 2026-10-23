@@ -18,7 +18,7 @@
       const more=link('voir les articles',listeUrl(),'lcdp-mention-connexion');
       // Les classes génériques fournissent la police et le corps secondaire.
       // Seuls l'alignement dans le titre et la couleur nécessitent ces valeurs.
-      more.style.display='inline';more.style.fontFamily='var(--lcdp-font-main)';more.style.color='var(--lcdp-color-orange)';
+      more.style.cssText='display:inline;font-family:var(--lcdp-font-main,Arial,sans-serif);font-size:0.65em;font-weight:400;color:var(--lcdp-color-orange,#d97826);text-transform:none;letter-spacing:normal';
       title.append(document.createTextNode(' | '),more);
       article.append(title,image(a));
     }
@@ -46,8 +46,9 @@
     const slot=document.getElementById('lcdp-actualite-bandeau');if(!slot)return;
     const container=node('div',null,'lcdp-page-container'),width=node('div',null,'lcdp-page-content');
     const bar=node('nav',null,'lcdp-boxtext__text--center');bar.setAttribute('aria-label','Actualité');
+    bar.style.cssText='display:flex;justify-content:center;align-items:center;text-align:center;min-height:2.5em;border:0;background:transparent;box-shadow:none';
     const a=link('',articleUrl(articles[0].id),'lcdp-link-secondary');
-    a.style.textDecoration='none';
+    a.style.cssText='display:block;max-width:100%;text-align:center;color:var(--lcdp-color-green,#57754c);border:0;outline-offset:4px;box-shadow:none;background:transparent;text-decoration:none;transform:none;animation:none;transition:none';
     const visible=node('span');visible.setAttribute('aria-hidden','true');a.append(visible);
     bar.append(a);width.append(bar);container.append(width);slot.replaceChildren(container);
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -102,7 +103,7 @@ async function init(){
       const list=node('div',null,'lcdp-stack');
       for(const a of articles.slice(0,10)){
         const row=node('div');row.append(link(a.titre,articleUrl(a.id),'lcdp-button lcdp-button-secondary'));
-        row.firstChild.style.textAlign='left';list.append(row);
+        row.firstChild.style.cssText='display:block;width:100%;box-sizing:border-box;text-align:left;white-space:normal';list.append(row);
       }
       slot.append(list);
       if(!articles.length)slot.append(node('p','Aucune actualité publiée.'));
