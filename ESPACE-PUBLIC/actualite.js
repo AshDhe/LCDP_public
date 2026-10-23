@@ -15,10 +15,10 @@
     const article=node('article',null,'lcdp-stack');
     const title=node('h2',a.titre,'lcdp-box-carousel__title');
     if(popup)article.append(image(a),title);else {
-      const more=link('derniers articles',listeUrl(),'lcdp-mention-connexion');
+      const more=link('Derniers articles',listeUrl(),'lcdp-mention-connexion');
       // Les classes génériques fournissent la police et le corps secondaire.
       // Seuls l'alignement dans le titre et la couleur nécessitent ces valeurs.
-      more.style.cssText='display:block;margin-top:.6rem;margin-bottom:1rem;font-family:var(--lcdp-font-main,Arial,sans-serif);font-size:1rem;font-weight:400;line-height:1.5;color:var(--lcdp-color-orange,#d97826);text-transform:none;letter-spacing:normal;text-decoration:none !important;border-bottom:0;box-shadow:none';
+      more.style.cssText='display:block;text-align:left;margin-top:.6rem;margin-bottom:1rem;font-family:var(--lcdp-font-main,Arial,sans-serif);font-size:1rem;font-weight:400;line-height:1.5;color:var(--lcdp-color-orange,#d97826);text-transform:none;letter-spacing:normal;text-decoration:none !important;border-bottom:0;box-shadow:none';
       title.append(more);
       article.append(title,image(a));
     }
@@ -97,13 +97,13 @@ async function init(){
     const id=new URLSearchParams(location.search).get('id');slot.replaceChildren();slot.className='lcdp-stack-large';
     if(id){
       const a=articles.find(a=>a.id===id);
-      if(!a){slot.append(node('p','Cette actualité n’est plus disponible.'),link('derniers articles',listeUrl(),'lcdp-link-secondary'));return;}
+      if(!a){slot.append(node('p','Cette actualité n’est plus disponible.'),link('Derniers articles',listeUrl(),'lcdp-link-secondary'));return;}
       const card=node('section',null,'lcdp-boxtext');card.append(contenu(a));slot.append(card);document.title='Actualité · '+a.titre+' - La Clé du Parc';
     }else{
       const list=node('div',null,'lcdp-stack');
       for(const a of articles.slice(0,10)){
-        const row=node('div');row.append(link(a.titre,articleUrl(a.id),'lcdp-button lcdp-button-secondary'));
-        row.firstChild.style.cssText='display:block;width:100%;box-sizing:border-box;text-align:center;justify-content:center;white-space:normal';list.append(row);
+        const row=node('div');row.style.cssText='display:flex;justify-content:center;width:100%;min-width:0';row.append(link(a.titre,articleUrl(a.id),'lcdp-button lcdp-button-secondary'));
+        row.firstChild.style.cssText='display:inline-flex;flex:0 1 auto;width:max-content;min-width:min(18rem,100%);max-width:100%;box-sizing:border-box;text-align:center;justify-content:center;white-space:normal;overflow-wrap:anywhere';list.append(row);
       }
       slot.append(list);
       if(!articles.length)slot.append(node('p','Aucune actualité publiée.'));
