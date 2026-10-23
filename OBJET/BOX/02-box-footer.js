@@ -100,6 +100,7 @@
   if (window.LCDP_verificationFooterInstalle) return;
   window.LCDP_verificationFooterInstalle = true;
   let actif = null;
+  document.documentElement.setAttribute('data-lcdp-verification-version','20261023-r3');
 
   function urlObjet(chemin) {
     const config = window.SITE_CONFIG || {};
@@ -172,7 +173,7 @@
     for (const [propriete, valeur] of Object.entries(styles)) {
       box.style.setProperty(propriete, valeur, 'important');
     }
-    const racine = box.attachShadow({mode: 'closed'});
+    const racine = box.attachShadow({mode: 'open'});
     const style = document.createElement('style');
     style.textContent = `
       .carte { box-sizing:border-box; width:280px; max-width:100%;
@@ -256,7 +257,7 @@
       'box-sizing':'border-box',border:'0',background:'rgba(31,42,36,.46)',
       'backdrop-filter':'blur(4px)',overflow:'auto',transform:'none'};
     for (const [nom,valeur] of Object.entries(proprietes)) box.style.setProperty(nom,valeur,'important');
-    const racine = box.attachShadow({mode:'closed'});
+    const racine = box.attachShadow({mode:'open'});
     const style = document.createElement('style');
     style.textContent = `
       .carte { position:relative; box-sizing:border-box; width:380px; max-width:100%;
@@ -315,20 +316,17 @@
       if (etat.phase === 'envoi') return;
       clearTimeout(etat.delaiProtection);
       etat.finAttenteProtection();
-      if (etat.widget !== null && window.turnstile) window.turnstile.remove(etat.widget);
+      if (etat.widget !== null && window.turnstile) {
+        try {window.turnstile.remove(etat.widget);} catch { /* La fermeture reste possible. */ }
+      }
       box.hidePopover(); box.remove();
       if (actif === etat) actif = null;
       boutonRetour.focus();
     };
     fermer.addEventListener('click',etat.fermerBoite);
-    box.addEventListener('click',event => {
-      // Dans un Shadow DOM fermé, les clics internes sont reciblés sur box.
-      // La position du clic, et non event.target, distingue le fond de la carte.
-      if (!Number.isFinite(event.clientX) || !Number.isFinite(event.clientY) || !event.detail) return;
-      const r = carte.getBoundingClientRect();
-      if (event.clientX < r.left || event.clientX > r.right ||
-          event.clientY < r.top || event.clientY > r.bottom) etat.fermerBoite();
-    });
+    // Aucun clic dans le champ ou sur le fond ne ferme la boîte.
+    // Évite aussi sa fermeture par un gestionnaire de clic global de la page.
+    box.addEventListener('click',event => event.stopPropagation());
     box.addEventListener('keydown',event => {
       if (event.key === 'Escape') {event.preventDefault();etat.fermerBoite();}
     });
