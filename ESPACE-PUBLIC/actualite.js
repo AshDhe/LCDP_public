@@ -6,6 +6,7 @@
   const endpoint=String(cfg.workerEditingAdminUrl||cfg.WORKER_EDITING_ADMIN_URL||'').replace(/\/$/,'');
   function node(t,text,cls){const e=document.createElement(t);if(text)e.textContent=text;if(cls)e.className=cls;return e;}
   function link(text,href,cls='lcdp-button lcdp-button-secondary'){const a=node('a',text,cls);a.href=href;return a;}
+  const listeUrl=()=>url('/ESPACE-PUBLIC/actualites-liste.html');
   const articleUrl=id=>url('/ESPACE-PUBLIC/actualite.html?id='+encodeURIComponent(id));
   function imageUrl(p){return typeof cfg.objetUrl==='function'?cfg.objetUrl(p.replace(/^\/?OBJET\//,'')):url(p);}
   function image(a){const frame=node('div',null,'lcdp-box-carousel__viewport'),im=node('img',null,'lcdp-box-carousel__image');im.src=imageUrl(a.image);im.alt=a.alt||'';im.decoding='async';frame.append(im);return frame;}
@@ -13,7 +14,14 @@
   function contenu(a,popup=false){
     const article=node('article',null,'lcdp-stack');
     const title=node('h2',a.titre,'lcdp-box-carousel__title');
-    if(popup)article.append(image(a),title);else article.append(title,image(a));
+    if(popup)article.append(image(a),title);else {
+      const more=link('voir les articles',listeUrl(),'lcdp-mention-connexion');
+      // Les classes génériques fournissent la police et le corps secondaire.
+      // Seuls l'alignement dans le titre et la couleur nécessitent ces valeurs.
+      more.style.display='inline';more.style.fontFamily='var(--lcdp-font-main)';more.style.color='var(--lcdp-color-orange)';
+      title.append(document.createTextNode(' | '),more);
+      article.append(title,image(a));
+    }
     article.append(texte(a.texte));
     if(!popup && a.contact)article.append(node('p',a.contact,'lcdp-text-strong-left'));
     return article;
@@ -34,22 +42,34 @@
     const box=node('div',null,'lcdp-stack'),p=node('p','Ouvrez un compte dans l’application et ne réaffichez plus les pop-up','lcdp-box-dialogue-bouton__text'),actions=node('div',null,'lcdp-box-formulaire__actions'),ok=node('button','OK','lcdp-button');ok.type='button';actions.append(ok);box.append(p,actions);const close=await modal(box);ok.onclick=close;
   }
   function bandeau(articles){
-    if(!articles.length)return;const slot=document.getElementById('lcdp-actualite-bandeau');if(!slot)return;
-    const container=node('div',null,'lcdp-page-container'),width=node('div',null,'lcdp-page-content'),bar=node('nav',null,'lcdp-stack-small');bar.setAttribute('aria-label','Actualité');
-    const a=link(articles[0].titre+' ↗',articleUrl(articles[0].id));a.setAttribute('aria-label',articles[0].titre);bar.append(a);width.append(bar);container.append(width);slot.replaceChildren(container);
-    let i=0,transition=false;
+    if(!articles.length)return;
+    const slot=document.getElementById('lcdp-actualite-bandeau');if(!slot)return;
+    const container=node('div',null,'lcdp-page-container'),width=node('div',null,'lcdp-page-content');
+    const bar=node('nav',null,'lcdp-boxtext__text--center');bar.setAttribute('aria-label','Actualité');
+    const a=link('',articleUrl(articles[0].id),'lcdp-link-secondary');
+    a.style.textDecoration='none';
+    const visible=node('span');visible.setAttribute('aria-hidden','true');a.append(visible);
+    bar.append(a);width.append(bar);container.append(width);slot.replaceChildren(container);
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-    async function avancer(){
-      if(transition||document.hidden||bar.matches(':hover')||bar.contains(document.activeElement)||document.querySelector('dialog[open]'))return;
-      if(reduced.matches)return;
-      transition=true;
-      try{
-        await a.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(-65%)',opacity:0}],{duration:260,easing:'ease-in'}).finished;
-        i=(i+1)%articles.length;a.textContent=articles[i].titre+' ↗';a.href=articleUrl(articles[i].id);a.setAttribute('aria-label',articles[i].titre);
-        await a.animate([{transform:'translateY(65%)',opacity:0},{transform:'translateY(0)',opacity:1}],{duration:320,easing:'ease-out'}).finished;
-      }catch(_){}finally{transition=false;}
+    let index=0,position=0,holding=false,timer,stopped=false;
+    const letters=text=>typeof Intl.Segmenter==='function'?[...new Intl.Segmenter('fr',{granularity:'grapheme'}).segment(text)].map(x=>x.segment):Array.from(text);
+    let characters=[];
+    function start(){
+      const article=articles[index];characters=letters(article.titre);position=0;holding=false;
+      a.href=articleUrl(article.id);a.setAttribute('aria-label',article.titre);visible.textContent='';
     }
-    if(articles.length>1){const timer=setInterval(avancer,6000);window.addEventListener('pagehide',()=>clearInterval(timer),{once:true});}
+    function tick(){
+      if(stopped)return;
+      if(document.hidden||bar.matches(':hover')||bar.contains(document.activeElement)||document.querySelector('dialog[open]')){timer=setTimeout(tick,100);return;}
+      if(holding){index=(index+1)%articles.length;start();}
+      if(reduced.matches){visible.textContent=characters.join('');position=characters.length;}
+      else {position++;visible.textContent=characters.slice(0,position).join('');}
+      holding=position>=characters.length;
+      timer=setTimeout(tick,holding?2000:25);
+    }
+    start();tick();
+    window.addEventListener('pagehide',()=>{stopped=true;clearTimeout(timer);},{once:true});
+    window.addEventListener('pageshow',e=>{if(e.persisted){stopped=false;tick();}});
   }
 async function popup(data,articles){
  const a=articles.find(a=>a.id===data.popupId);if(!a)return;
@@ -76,11 +96,15 @@ async function init(){
     const id=new URLSearchParams(location.search).get('id');slot.replaceChildren();slot.className='lcdp-stack-large';
     if(id){
       const a=articles.find(a=>a.id===id);
-      const actions=node('nav',null,'lcdp-box-formulaire__actions');actions.setAttribute('aria-label','Navigation Actualité');actions.append(link('Sommaire',url('/ESPACE-PUBLIC/actualite.html')));
-      if(!a){slot.append(node('p','Cette actualité n’est plus disponible.'),actions);return;}
-      const card=node('section',null,'lcdp-boxtext');card.append(contenu(a),actions);slot.append(card);document.title='Actualité · '+a.titre+' - La Clé du Parc';
+      if(!a){slot.append(node('p','Cette actualité n’est plus disponible.'),link('voir les articles',listeUrl(),'lcdp-link-secondary'));return;}
+      const card=node('section',null,'lcdp-boxtext');card.append(contenu(a));slot.append(card);document.title='Actualité · '+a.titre+' - La Clé du Parc';
     }else{
-      for(const a of articles){const card=node('article',null,'lcdp-boxtext'),h=node('h2',a.titre,'lcdp-boxtext__title'),actions=node('div',null,'lcdp-box-formulaire__actions');actions.append(link('Lire l’article',articleUrl(a.id)));card.append(h,actions);slot.append(card);}
+      const list=node('div',null,'lcdp-stack');
+      for(const a of articles.slice(0,10)){
+        const row=node('div');row.append(link(a.titre,articleUrl(a.id),'lcdp-button lcdp-button-secondary'));
+        row.firstChild.style.textAlign='left';list.append(row);
+      }
+      slot.append(list);
       if(!articles.length)slot.append(node('p','Aucune actualité publiée.'));
     }
     return;
