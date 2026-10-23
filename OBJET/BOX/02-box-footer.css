@@ -145,11 +145,11 @@
 }
 
 /* Les deux entrées restent lisibles sur les petits écrans. */
-.lcdp-box-footer__inner { gap: 8px 18px; flex-wrap: wrap; }
+.lcdp-box-footer__inner { gap: 0 .5rem; flex-wrap: nowrap; box-sizing: border-box; }
 .lcdp-box-footer__inner a,
 .lcdp-box-footer__inner button { min-height: 44px; padding: 6px 0; }
 @media (max-width: 380px) {
-  .lcdp-box-footer__inner { column-gap: 12px; }
+  .lcdp-box-footer__inner { column-gap: .35rem; }
   .lcdp-box-footer__inner a,
   .lcdp-box-footer__inner button { font-size: 13px; }
 }
@@ -207,3 +207,33 @@
 .lcdp-contact-info[popover]::backdrop { background: rgba(31,42,36,.46); }
 
 .lcdp-contact-juridique-actions { display:flex; justify-content:center; margin-top:24px; }
+
+/* Même boîte et même ligne de texte pour les deux actions du footer. */
+.lcdp-box-footer__inner > a,
+.lcdp-box-footer__inner > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  min-width: 0;
+  flex: 0 1 auto;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.lcdp-box-footer__separator {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  color: var(--lcdp-color-text-muted);
+  flex: 0 0 auto;
+}
+#lcdp-footer-verification-info .lcdp-contact-info__email {
+  display: block;
+  margin: 0 0 16px;
+  padding: 0;
+}
