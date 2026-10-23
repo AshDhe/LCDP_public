@@ -94,36 +94,3 @@
     return true;
   };
 })();
-
-(() => {
-  "use strict";
-  // Delegation compatible avec les footers inseres apres le chargement de la page.
-  document.addEventListener("click", (event) => {
-    const bouton = event.target.closest('[popovertarget="lcdp-footer-verification-info"]');
-    if (!bouton || bouton.getAttribute("popovertargetaction") === "hide") return;
-    const boite = document.getElementById("lcdp-footer-verification-info");
-    const formulaire = boite?.querySelector("[data-verification-formulaire]");
-    if (!formulaire || formulaire.dataset.verificationDemarre === "oui") return;
-    formulaire.dataset.verificationDemarre = "oui";
-    const attente = boite.querySelector("[data-verification-attente]");
-    const image = boite.querySelector("[data-verification-gif]");
-    const conteneur = boite.querySelector("[data-verification-conteneur]");
-    if (image) image.src = construireUrlGif();
-    conteneur?.setAttribute("aria-busy", "true");
-    formulaire.addEventListener("load", () => {
-      if (attente) attente.style.display = "none";
-      formulaire.style.visibility = "visible";
-      conteneur?.setAttribute("aria-busy", "false");
-    }, { once: true });
-    formulaire.src = formulaire.dataset.verificationSrc;
-  }, true);
-
-  function construireUrlGif() {
-    const chemin = "/BOX/pictowait.gif";
-    const config = window.SITE_CONFIG || {};
-    if (typeof config.publicUrl === "function") return config.publicUrl(chemin);
-    if (typeof window.LCDP_urlPublic === "function") return window.LCDP_urlPublic(chemin);
-    const base = String(config.publicBaseUrl || config.PUBLIC_BASE || window.LCDP_PUBLIC_BASE || window.SITE_BASE || "").replace(/\/+$/, "");
-    return base + chemin;
-  }
-})();
