@@ -9,14 +9,19 @@
     <span class="lcdp-box-footer__separator" aria-hidden="true"> | </span>
     <button type="button" popovertarget="lcdp-footer-verification-info">Vérification</button>
   </div>
-  <div id="lcdp-footer-verification-info" class="lcdp-contact-info" popover="auto" role="dialog" aria-label="Vérification">
+  <div id="lcdp-footer-verification-info" class="lcdp-contact-info" popover="auto" role="dialog" aria-label="Vérification" style="height:auto;min-height:0;padding:40px 20px 12px;">
     <button class="lcdp-contact-info__close" type="button" popovertarget="lcdp-footer-verification-info" popovertargetaction="hide" aria-label="Fermer">×</button>
+    <div data-verification-conteneur style="position:relative;height:96px;">
+      <div data-verification-attente role="status" aria-label="Chargement" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+        <img data-verification-gif alt="" width="56" height="56" style="display:block;width:56px;height:56px;object-fit:contain;">
+      </div>
     <iframe
       title="Saisir votre adresse email"
-      src="https://script.google.com/macros/s/AKfycbz4PBr97qQBPrXcBc8jGE5560b3LBhmEwGXBw5H3YIqiGvExilaUK-ORCLK3NV2hZu3xA/exec"
-      loading="lazy"
+      data-verification-src="https://script.google.com/macros/s/AKfycbz4PBr97qQBPrXcBc8jGE5560b3LBhmEwGXBw5H3YIqiGvExilaUK-ORCLK3NV2hZu3xA/exec"
+      data-verification-formulaire
       referrerpolicy="no-referrer"
-      style="display:block;width:100%;height:180px;border:0;margin:16px 0 0;"
+      style="display:block;width:100%;height:96px;border:0;margin:0;visibility:hidden;"
     ></iframe>
+    </div>
   </div>
 </footer>
