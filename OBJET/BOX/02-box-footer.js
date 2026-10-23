@@ -304,10 +304,17 @@
     racine.append(style,carte); box.append(challenge); document.body.append(box);
     box.showPopover(); box.style.setProperty('display','flex','important');
     const etat = {phase:'formulaire',box,form,email,envoyer,statut,fermer,challenge,
-      widget:null,token:'',retour:boutonRetour,delaiProtection:null,relances:0};
+      widget:null,token:'',retour:boutonRetour,delaiProtection:null,relances:0,attenteProtection:null};
+    etat.finAttenteProtection = () => {
+      if (etat.attenteProtection) {
+        window.LCDP_chargement.masquer(etat.attenteProtection);
+        etat.attenteProtection = null;
+      }
+    };
     etat.fermerBoite = () => {
       if (etat.phase === 'envoi') return;
       clearTimeout(etat.delaiProtection);
+      etat.finAttenteProtection();
       if (etat.widget !== null && window.turnstile) window.turnstile.remove(etat.widget);
       box.hidePopover(); box.remove();
       if (actif === etat) actif = null;
@@ -378,6 +385,7 @@
     }
     window.LCDP_chargement.masquer(attente);
     const etat = creerFormulaire(bouton); actif = etat;
+    etat.attenteProtection = window.LCDP_chargement.afficher();
     etat.surveillerProtection = () => {
       clearTimeout(etat.delaiProtection);
       etat.delaiProtection = setTimeout(() => {
@@ -387,18 +395,24 @@
           api.reset(etat.widget);
           etat.surveillerProtection();
         } else {
+          etat.finAttenteProtection();
           etat.statut.textContent = 'La protection antirobot ne répond pas. Fermez puis réessayez.';
         }
-      },20000);
+      },15000);
     };
     try {
       etat.widget = api.render(etat.challenge,{
         sitekey:CLE_PUBLIQUE,action:'verification',theme:'light',appearance:'interaction-only',
         retry:'auto','retry-interval':8000,
         size:window.innerWidth < 350 ? 'compact' : 'flexible',
+        'before-interactive-callback':() => {
+          // Ne pas masquer une case que Cloudflare demande au visiteur de cocher.
+          etat.finAttenteProtection();
+        },
         callback:token => {
           if (!etat.box.isConnected) return;
           clearTimeout(etat.delaiProtection);
+          etat.finAttenteProtection();
           etat.token = token;
           etat.statut.textContent = '';
         },
@@ -409,10 +423,12 @@
           }
         },
         'timeout-callback':() => {
+          etat.finAttenteProtection();
           etat.token = '';
           etat.statut.textContent = 'La protection antirobot a expiré. Fermez puis réessayez.';
         },
         'error-callback':() => {
+          etat.finAttenteProtection();
           etat.token = '';
           etat.statut.textContent = 'Protection antirobot indisponible. Fermez puis réessayez.';
           return true;
@@ -420,6 +436,7 @@
       });
       if (!etat.token) etat.surveillerProtection();
     } catch {
+      etat.finAttenteProtection();
       etat.statut.textContent = 'Protection antirobot indisponible. Fermez puis réessayez.';
     }
   },true);
