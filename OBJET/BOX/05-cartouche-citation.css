@@ -1,0 +1,57 @@
+/* Objet partagé — cartouches de citation, styles repris de Hello. */
+.lcdp-cartouches-citation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: min(100%, 480px);
+  margin: 0 auto;
+}
+
+.lcdp-cartouche-citation {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0.85rem 1rem 0.7rem;
+  border: 1px solid currentColor;
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.lcdp-cartouche-citation p {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.lcdp-cartouche-citation footer {
+  margin-top: 0.4rem;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.lcdp-cartouche-citation--membre {
+  color: #57754c;
+  background: #f2f5ef;
+}
+
+.lcdp-cartouche-citation--coach {
+  color: #8660c8;
+  background: #f7f3fc;
+}
+
+.lcdp-cartouche-citation--parc {
+  color: #d64b68;
+  background: #fff1f4;
+}
+
+/* Espacement entre les citations et couleur des signatures. */
+.lcdp-cartouche-citation {
+  margin-bottom: 1rem;
+}
+.lcdp-cartouche-citation--membre footer { color: #57754c; }
+.lcdp-cartouche-citation--coach footer { color: #8660c8; }
+.lcdp-cartouche-citation--parc footer { color: #d64b68; }
+
