@@ -17,11 +17,13 @@
     },
     parc: {
       label: "Espace PARC",
-      cheminConnexion: "/ESPACE-PUBLIC/connexion-parc.html?source=menu-mon-compte"
+      espace: "parc",
+      cheminConnexion: "/ESPACE-PARC/connexion-parc.html?source=menu-mon-compte"
     },
     coach: {
       label: "Espace COACH",
-      cheminConnexion: "/ESPACE-PUBLIC/connexion-coach.html?source=menu-mon-compte"
+      espace: "coach",
+      cheminConnexion: "/ESPACE-COACH/connexion-coach.html?source=menu-mon-compte"
     }
   };
 
@@ -149,10 +151,26 @@
       return construireUrlSite("/ESPACE-PUBLIC/connexion-membre.html?source=menu-mon-compte");
     }
 
+    if (configuration.espace) {
+      const config = window.SITE_CONFIG || {};
+      const espace = configuration.espace;
+      const fonctionUrl = config[espace + "Url"];
+      if (typeof fonctionUrl === "function") return fonctionUrl(configuration.cheminConnexion);
+      const hote = window.location.hostname;
+      const baseDefaut = ["ashdhe.github.io", "huguespavret.github.io"].includes(hote)
+        ? "https://" + hote + "/LCDP_" + espace
+        : "https://" + espace + ".lacleduparc.fr";
+      const base = String(config[espace + "BaseUrl"] || config[espace.toUpperCase() + "_BASE"] || baseDefaut).replace(/\/+$/, "");
+      return base + configuration.cheminConnexion;
+    }
     return construireUrlSite(configuration.cheminConnexion);
   }
 
   async function redirigerCompte(compte) {
+    if (compte === "parc" || compte === "coach") {
+      window.location.href = construireUrlConnexion(compte);
+      return;
+    }
     const workerUrl = obtenirWorkerUserRouteurUrl();
 
     if (!workerUrl) {
@@ -331,6 +349,10 @@
         {
           label: "Le club",
           href: "/ESPACE-PUBLIC/le-club.html"
+        },
+        {
+          label: "FAQ",
+          href: "/ESPACE-PUBLIC/FAQ.html"
         }
       ];
 

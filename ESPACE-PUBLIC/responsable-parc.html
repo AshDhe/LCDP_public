@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Les parcs - La Clé du Parc</title>
+  <title>Responsable parc - La Clé du Parc</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Découvrir les parcs La Clé du Parc.">
+  <meta name="description" content="Demande d’inscription Responsable parc au réseau La Clé du Parc.">
 
   <script src="../config.js"></script>
 
@@ -23,6 +23,9 @@
   <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
 </head>
 
 <body>
@@ -31,16 +34,15 @@
     <div id="lcdp-bandeau-slot"></div>
 
     <main class="lcdp-site-main">
-      <section class="lcdp-page-section" aria-label="Les parcs">
+      <section class="lcdp-page-section" aria-label="Responsable parc">
         <div class="lcdp-page-container">
           <div class="lcdp-page-content lcdp-stack-large">
 
-            <h1 class="lcdp-title-page-center">Les parcs</h1>
+            
 
-            <p class="lcdp-mention-connexion">
-              [Espace public de l'application]
-            </p>
+            
 
+            <div id="formulaire-resparc-slot"></div>
             <div id="lcdp-boxtext-les-parcs-slot"></div>
 
           </div>
@@ -174,10 +176,22 @@
         appliquerRoutesSite(slot);
       }
 
+      async function initialiserDemande() {
+        await chargerScriptUneFois("/OBJET/BOX/03-box-formulaire.js");
+        await chargerScriptUneFois("/OBJET/BOX/03-formulaire-protege.js");
+        const base = String(window.SITE_CONFIG?.parcBaseUrl || window.SITE_BASE || "").replace(/\/$/, "");
+        const script = document.createElement("script");
+        script.src = (base || "..") + "/ESPACE-PARC/contact-resparc.js";
+        await new Promise((resolve,reject) => { script.onload=resolve;script.onerror=reject;document.body.appendChild(script); });
+        await window.LCDP_initialiserContactResparc();
+      }
+
       async function initialiserPage() {
         appliquerRoutesSite(document);
         await initialiserBandeau();
-        await ajouterBoxText("lcdp-boxtext-les-parcs-slot", "Contenu à intégrer", "<p>Le contenu réel de la page les parcs doit être réintégré ici.</p>");
+        await initialiserDemande();
+        await ajouterBoxText("lcdp-boxtext-les-parcs-slot", "Le réseau La Clé du Parc", "<p>Rejoignez une démarche collective autour des parcs et du plein air d’exception.</p><ul><li>Présentez votre parc au réseau et échangez avec notre équipe.</li><li>Définissez avec nous les conditions de participation adaptées à votre parc.</li><li>Participez à une dynamique territoriale autour de lieux préservés.</li></ul>");
+
         await initialiserFooter();
       }
 

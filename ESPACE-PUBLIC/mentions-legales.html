@@ -551,24 +551,18 @@
           if (typeof window.LCDP_creerFormulaire !== "function") throw new Error("Objet formulaire indisponible.");
           boxDemande = creerBoxDemandeJuridiquePage();
           boxDemande.overlay.setAttribute("data-juridique-interface", "");
-          // Interface seule : bloque aussi la touche Entrée et tout submit programmatique.
-          boxDemande.overlay.addEventListener("submit", event => {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-          }, true);
           const slotFormulaire = document.createElement("div");
           boxDemande.contenu.appendChild(slotFormulaire);
           const form = await window.LCDP_creerFormulaire(slotFormulaire, configurationDemandeJuridiquePage());
           if (!form) throw new Error("Formulaire de demande juridique non créé.");
           const envoyer = form.querySelector("#bouton-envoyer-demande-juridique");
           if (!envoyer) throw new Error("Bouton d’envoi introuvable.");
-          envoyer.disabled = true;
-          const statut = document.createElement("p");
-          statut.id = "juridique-envoi-indisponible";
-          statut.setAttribute("role", "status");
-          statut.textContent = "Envoi temporairement indisponible.";
-          form.appendChild(statut);
-          envoyer.setAttribute("aria-describedby", statut.id);
+          await chargerScriptUneFois("/OBJET/BOX/03-formulaire-protege.js");
+          await window.LCDP_brancherFormulaireProtege(form, {
+            type: "juridique",
+            endpoint: window.SITE_CONFIG?.workerDemandeJuridiqueUrl || "https://lacleduparc.fr/api/demande-juridique",
+            champs: configurationDemandeJuridiquePage().champs
+          });
           form.querySelector("#bouton-retour-mentions-legales")?.addEventListener("click", () => {
             boxDemande.fermer();
             if (precedent?.isConnected) precedent.focus();
@@ -598,6 +592,7 @@
               name: "nom",
               label: "Votre nom",
               required: true,
+              validationNative: true,
               autocomplete: "family-name",
               maxlength: 120
             },
@@ -607,6 +602,7 @@
               name: "prenom",
               label: "Votre prénom",
               required: true,
+              validationNative: true,
               autocomplete: "given-name",
               maxlength: 120
             },
@@ -616,6 +612,7 @@
               name: "email",
               label: "Votre e-mail",
               required: true,
+              validationNative: true,
               autocomplete: "email",
               autocapitalize: "none",
               spellcheck: "false",
@@ -628,6 +625,7 @@
               label:
                 "Raison de votre demande juridique",
               required: true,
+              validationNative: true,
               maxlength: 4000
             }
           ],

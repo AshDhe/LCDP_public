@@ -1,0 +1,65 @@
+/* Objet partagé : envoi des formulaires publics protégés, sans style propre. */
+(() => {
+ 'use strict';
+ let chargementTurnstile;
+ function chargerTurnstile(){
+  if(window.turnstile)return Promise.resolve();
+  if(!chargementTurnstile)chargementTurnstile=new Promise((resolve,reject)=>{
+   const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';s.async=true;
+   s.onload=()=>window.turnstile?resolve():reject(new Error('Vérification indisponible.'));
+   s.onerror=()=>{s.remove();chargementTurnstile=null;reject(new Error('Vérification indisponible. Réessayez.'));};document.head.appendChild(s);
+  });return chargementTurnstile;
+ }
+ async function message(texte){
+  const slot=document.getElementById('lcdp-lightbox-slot');
+  try{
+   const config=window.SITE_CONFIG||{};
+   const base=String(config.objetBaseUrl||config.OBJET_BASE||((window.SITE_BASE||'')+'/OBJET')).replace(/\/$/,'');
+   const url=base?base+'/BOX/02-box-alerte.html':'../OBJET/BOX/02-box-alerte.html';
+   const r=await fetch(url,{credentials:'same-origin'});if(!r.ok||!slot)throw new Error();
+   const template=document.createElement('template');template.innerHTML=(await r.text()).trim();
+   // L'alerte se superpose à un éventuel formulaire juridique, sans le détruire.
+   const zone=document.createElement('div');zone.append(template.content.cloneNode(true));slot.append(zone);
+   const cible=zone.querySelector('[data-lcdp-alerte-message]');if(!cible){zone.remove();throw new Error();}cible.textContent=texte;
+   await new Promise(resolve=>{const fermer=()=>{zone.remove();resolve();};zone.querySelectorAll('[data-lcdp-alerte-close], [data-lcdp-alerte-ok]').forEach(b=>b.addEventListener('click',fermer,{once:true}));});
+  }catch{window.alert(texte);}
+ }
+ window.LCDP_brancherFormulaireProtege=async function(form,config){
+  if(form.dataset.protege==='true')return;form.dataset.protege='true';
+  const bouton=form.querySelector('[type="submit"]');if(!bouton)throw new Error('Bouton absent.');
+  for(const champ of config.champs){
+   const field=form.elements.namedItem(champ.name);if(!field)continue;
+   field.required=true;
+   if(/^(?:nomresp|prenomresp|nomcoach|prenomcoach|nom|prenom)$/.test(champ.name))field.pattern="[\\p{L}\\p{M}][\\p{L}\\p{M} '\u2019.\\-]*";
+  }
+  const statut=document.createElement('p');statut.className='lcdp-box-formulaire__note';statut.setAttribute('role','status');form.append(statut);
+  const widget=document.createElement('div');form.querySelector('[data-lcdp-formulaire-actions]')?.before(widget);
+  if(!widget.isConnected)bouton.before(widget);
+  let token='',id=crypto.randomUUID(),empreinte='',enCours=false,widgetId=null;
+  bouton.disabled=true;statut.textContent='Préparation de la vérification…';
+  form.addEventListener('submit',async event=>{
+   event.preventDefault();if(enCours)return;
+   if(!form.reportValidity())return;
+   if(!token){statut.textContent='Validez la vérification avant l’envoi.';return;}
+   const donnees={};for(const champ of config.champs){const field=form.elements.namedItem(champ.name);donnees[champ.name]=String(field?.value||'').trim();}
+   const contenu=JSON.stringify(donnees);if(empreinte && empreinte!==contenu)id=crypto.randomUUID();empreinte=contenu;
+   enCours=true;bouton.disabled=true;form.setAttribute('aria-busy','true');statut.textContent='Envoi en cours…';
+   try{
+    const r=await fetch(config.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,donnees,token}),signal:AbortSignal.timeout(45000)});
+    const data=await r.json().catch(()=>null);if(!r.ok||data?.ok!==true)throw new Error(data?.message||'Envoi non confirmé. Réessayez.');
+    form.reset();id=crypto.randomUUID();empreinte='';statut.textContent='Votre demande est enregistrée. Merci.';
+    await message('Votre demande est enregistrée. Merci.');
+   }catch(e){statut.textContent=e.name==='TimeoutError'?'Envoi non confirmé. Réessayez avec les mêmes informations.':e.message;}
+   finally{enCours=false;form.removeAttribute('aria-busy');token='';bouton.disabled=true;if(widgetId!==null)window.turnstile.reset(widgetId);}
+  });
+  try{
+   const r=await fetch(config.endpoint,{headers:{Accept:'application/json'},cache:'no-store'});const data=await r.json();
+   if(!r.ok||data.type!==config.type||!data.sitekey)throw new Error('Formulaire momentanément indisponible.');
+   await chargerTurnstile();
+   widgetId=window.turnstile.render(widget,{sitekey:data.sitekey,action:config.type,size:'flexible',
+    callback:value=>{token=value;bouton.disabled=enCours;statut.textContent='';},
+    'expired-callback':()=>{token='';bouton.disabled=true;statut.textContent='Vérification expirée. Renouvelez-la.';},
+    'error-callback':()=>{token='';bouton.disabled=true;statut.textContent='Vérification indisponible. Réessayez.';}});
+  }catch(e){statut.textContent=e.message||'Formulaire momentanément indisponible. Rechargez la page.';}
+ };
+})();

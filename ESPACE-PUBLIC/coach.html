@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Les coachs - La Clé du Parc</title>
+  <title>Coach - La Clé du Parc</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Découvrir les coachs La Clé du Parc.">
+  <meta name="description" content="Demande d’inscription Coach au réseau La Clé du Parc.">
 
   <script src="../config.js"></script>
 
@@ -23,6 +23,9 @@
   <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
 </head>
 
 <body>
@@ -31,16 +34,15 @@
     <div id="lcdp-bandeau-slot"></div>
 
     <main class="lcdp-site-main">
-      <section class="lcdp-page-section" aria-label="Les coachs">
+      <section class="lcdp-page-section" aria-label="Coach">
         <div class="lcdp-page-container">
           <div class="lcdp-page-content lcdp-stack-large">
 
-            <h1 class="lcdp-title-page-center">Les coachs</h1>
+            
 
-            <p class="lcdp-mention-connexion">
-              [Espace public de l'application]
-            </p>
+            
 
+            <div id="formulaire-coach-slot"></div>
             <div id="lcdp-boxtext-les-coachs-slot"></div>
 
           </div>
@@ -216,15 +218,22 @@
         appliquerRoutesSite(slot);
       }
 
+      async function initialiserDemande() {
+        await chargerScriptUneFois("/OBJET/BOX/03-box-formulaire.js");
+        await chargerScriptUneFois("/OBJET/BOX/03-formulaire-protege.js");
+        const base = String(window.SITE_CONFIG?.coachBaseUrl || window.SITE_BASE || "").replace(/\/$/, "");
+        const script = document.createElement("script");
+        script.src = (base || "..") + "/ESPACE-COACH/contact-coach.js";
+        await new Promise((resolve,reject) => { script.onload=resolve;script.onerror=reject;document.body.appendChild(script); });
+        await window.LCDP_initialiserContactCoach();
+      }
+
       async function initialiserPage() {
         appliquerRoutesSite(document);
         await initialiserBandeau();
 
-        await ajouterBoxText(
-          "lcdp-boxtext-les-coachs-slot",
-          "Contenu à intégrer",
-          "<p>Le contenu réel de la page les coachs doit être réintégré ici.</p>"
-        );
+        await initialiserDemande();
+        await ajouterBoxText("lcdp-boxtext-les-coachs-slot", "Les coachs La Clé du Parc", "<p>Partagez votre activité et échangez avec notre équipe sur votre participation au réseau.</p><ul><li>Présentez vos activités et votre territoire de référence.</li><li>Étudiez avec notre équipe leur organisation dans les parcs du réseau.</li><li>Participez à des rencontres autour du sport, de l’art et de la culture en plein air.</li></ul>");
 
         await initialiserFooter();
       }
