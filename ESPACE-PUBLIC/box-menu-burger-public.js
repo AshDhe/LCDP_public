@@ -330,7 +330,7 @@
         },
         {
           label: "Le club",
-          href: "/ESPACE-PUBLIC/la-cle-du-parc.html"
+          href: "/ESPACE-PUBLIC/le-club.html"
         }
       ];
 
