@@ -132,15 +132,18 @@
 
         const data = await response.json().catch(() => null);
 
-        // Compte en récupération ou bloqué : redirection après authentification.
-        if (data?.reason === "account_recovery_in_progress" || data?.reason === "account_blocked") {
-          const chemin = data.reason === "account_recovery_in_progress"
-            ? "/ESPACE-MEMBRE/compte-en-recuperation.html"
-            : "/ESPACE-MEMBRE/compte-bloque.html";
-          window.location.replace(construireUrlMembre(chemin));
+        if (data?.reason === "inscription_incomplete" && data.repriseInscription) {
+          const config=window.SITE_CONFIG||{};
+          const endpoint=nettoyerBaseUrl(config.workerMdptokenzUrl||config.WORKER_MDPTOKENZ_URL||(typeof config.apiUrl==="function"?config.apiUrl("mdptokenz-api"):""));
+          if(!endpoint)throw new Error("Reprise indisponible.");
+          const r=await fetch(endpoint,{method:"POST",credentials:"omit",cache:"no-store",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"flow-resume",reprise:data.repriseInscription})});
+          data.repriseInscription="";
+          const d=await r.json().catch(()=>null);
+          if(!r.ok||!d?.success||!d.nextUrl)throw new Error(d?.message||"Reprise indisponible.");
+          champMdp.value="";
+          window.location.assign(d.nextUrl);
           return;
         }
-
         if (data?.reason === "security_setup_required") {
           await finaliserSecuriteAvantConnexion(data);
           return;

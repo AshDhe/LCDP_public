@@ -8,6 +8,8 @@
     initialiserBandeauRestreint().catch(() => {});
     initialiserFooter().catch(() => {});
     const type = document.body.dataset.codeType;
+    const flow = String(window.LCDP_SIGNUP_FLOW || "");
+    delete window.LCDP_SIGNUP_FLOW;
     let token = String(window.LCDP_CODE_TOKEN || "");
     delete window.LCDP_CODE_TOKEN;
     const form = document.getElementById("formulaire-code-securite");
@@ -21,6 +23,12 @@
     const normaliser = v => v;
     const afficher = texte => { message.textContent = texte; };
     const etat = actif => { [...saisie, ...confirmation].forEach(champ => { champ.disabled = !actif; }); bouton.disabled = !actif; };
+    if(flow) {
+      const titre=document.querySelector(".lcdp-box-formulaire__title");
+      if(titre) titre.textContent="Sécurité de votre compte — "+(type==="coda"?"1":"2")+" sur 3";
+      const sousTitre=document.querySelector(".lcdp-box-formulaire__subtitle");
+      if(sousTitre) sousTitre.textContent=type==="coda"?"Code A — Définir votre code d’accès (CODA)":"Code R — Définir votre code de récupération (CODR)";
+    }
     let operation = "creation";
     async function erreurSaisie(detail) {
       enCours=true;
@@ -42,7 +50,7 @@
     });
     async function appeler(action, valeurs = {}) {
       const reponse = await fetch(endpoint, { method: "POST", credentials: "omit", cache: "no-store",
-        headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, type, token, ...valeurs }) });
+        headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, type, token, ...(flow?{flow}:{}), ...valeurs }) });
       const resultat = await reponse.json().catch(() => null);
       if (!resultat) throw new Error("Le service est momentanément indisponible.");
       return { reponse, resultat };
@@ -51,6 +59,11 @@
       await afficherInformation("", "Ouvrez cette page depuis le lien reçu par e-mail.", "erreur"); return;
     }
     try {
+      if(flow) {
+        const state=await appeler("flow-state");
+        if(!state.reponse.ok||!state.resultat.success) throw new Error("Parcours expiré.");
+        if(state.resultat.stage!==type) { window.location.replace(state.resultat.nextUrl); return; }
+      }
       const { reponse, resultat } = await appeler("setup-status");
       if (!reponse.ok || !resultat.success) {
         await afficherInformation("", resultat.message || "Le lien est invalide ou expiré.", "erreur"); return;
@@ -86,6 +99,12 @@
           await afficherInformation("",resultat.message || "Le code n’a pas pu être enregistré.","erreur");
           if (![400,409,503].includes(reponse.status)) etat(true);
           else autorise = false;
+          return;
+        }
+        if(flow && resultat.nextUrl) {
+          token="";autorise=false;
+          [...saisie,...confirmation].forEach(champ=>{champ.value="";});
+          await afficherInformation("",type==="coda"?"Votre CODA est enregistré.":"Votre CODR est enregistré.","information",resultat.nextUrl);
           return;
         }
         token = ""; autorise = false;

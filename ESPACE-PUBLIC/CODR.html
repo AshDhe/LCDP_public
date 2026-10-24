@@ -12,6 +12,7 @@
   <meta name="robots" content="noindex,nofollow">
   <script>
     // Le jeton reste en mémoire, jamais dans un cookie ou le stockage local.
+    window.LCDP_SIGNUP_FLOW = new URLSearchParams(window.location.hash.slice(1)).get("flow") || "";
     window.LCDP_CODE_TOKEN = new URLSearchParams(window.location.hash.slice(1)).get("token") || "";
     if (window.location.hash) window.history.replaceState(null, "", window.location.pathname + window.location.search);
   </script>
