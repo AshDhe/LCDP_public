@@ -133,10 +133,10 @@
     );
 
     appliquerSousTitreOrangeListeAttente();
-    initialiserFormulaireListeAttente();
+    await initialiserFormulaireListeAttente();
   }
 
-  function initialiserFormulaireListeAttente() {
+  async function initialiserFormulaireListeAttente() {
     const formulaire = document.getElementById("formulaire-liste-attente");
     const boutonEnvoyer = document.getElementById("bouton-envoyer-liste-attente");
     const champAge = document.getElementById("age");
@@ -144,6 +144,10 @@
     const endpoint = obtenirEndpointListeAttente();
     const redirectUrl = construireUrlAccueilPublic();
 
+    let turnstileToken="";
+    let widgetId=null;
+    let requestId=crypto.randomUUID();
+    let dernierPayload="";
     let envoiEnCours = false;
     let texteBoutonInitial = "M'inscrire sur liste d'attente";
 
@@ -192,8 +196,30 @@
       await envoyerFormulaireListeAttente();
     });
 
+    boutonEnvoyer.disabled=true;
+    for(const [id,max] of [["nom",120],["prenom",120],["email",254],["texte_libre",2000]])document.getElementById(id)?.setAttribute("maxlength",String(max));
+    try{
+      const reponse=await fetch(endpoint,{credentials:"omit",cache:"no-store"});
+      const configuration=await reponse.json();
+      if(!reponse.ok||!configuration.sitekey)throw new Error("Protection indisponible.");
+      await chargerTurnstileListe();
+      const emplacement=document.createElement("div");
+      emplacement.setAttribute("aria-label","Protection du formulaire");
+      boutonEnvoyer.parentNode.insertBefore(emplacement,boutonEnvoyer);
+      widgetId=window.turnstile.render(emplacement,{sitekey:configuration.sitekey,action:"liste-attente",
+        callback(token){turnstileToken=token;if(!envoiEnCours)boutonEnvoyer.disabled=false;},
+        "expired-callback"(){turnstileToken="";boutonEnvoyer.disabled=true;},
+        "error-callback"(){turnstileToken="";boutonEnvoyer.disabled=true;}
+      });
+    }catch{
+      await afficherInformationListeAttente("","La protection du formulaire est indisponible. Rechargez la page pour réessayer.","erreur");
+    }
+    function renouvelerProtection(){
+      envoiEnCours=false;turnstileToken="";boutonEnvoyer.disabled=true;boutonEnvoyer.textContent=texteBoutonInitial;
+      if(widgetId!==null)window.turnstile.reset(widgetId);
+    }
     async function envoyerFormulaireListeAttente() {
-      if (envoiEnCours || boutonEnvoyer.disabled) return;
+      if (envoiEnCours || boutonEnvoyer.disabled || !turnstileToken) return;
 
       const payload = lireDonneesListeAttente();
       const erreur = validerPayloadListeAttente(payload);
@@ -203,6 +229,9 @@
         return;
       }
 
+      const contenu=JSON.stringify(payload);
+      if(dernierPayload&&dernierPayload!==contenu)requestId=crypto.randomUUID();
+      dernierPayload=contenu;
       envoiEnCours = true;
       boutonEnvoyer.disabled = true;
       boutonEnvoyer.textContent = "Envoi en cours...";
@@ -214,7 +243,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({...payload,requestId,turnstileToken})
         });
 
         const data = await response.json().catch(() => null);
@@ -226,22 +255,12 @@
             "erreur"
           );
 
-          envoiEnCours = false;
-          boutonEnvoyer.disabled = false;
-          boutonEnvoyer.textContent = texteBoutonInitial;
+          renouvelerProtection();
           return;
         }
 
-        const prenomConfirmation = String(payload.prenom || "").trim();
-
         formulaire.reset();
-
-        const messageConfirmation = [
-          `Bonjour ${prenomConfirmation},`,
-          "Votre pré-inscription est bien enregistrée. Merci !",
-          "Nous vous avons envoyé un e-mail de confirmation.",
-          "Un cadeau vous y attend à l'intérieur 😀🗝️ !"
-        ].join("\n");
+        const messageConfirmation=data.message || "Votre demande est traitée. Consultez votre messagerie.";
 
         await afficherInformationListeAttente(
           "",
@@ -252,9 +271,7 @@
           }
         );
 
-        envoiEnCours = false;
-        boutonEnvoyer.disabled = false;
-        boutonEnvoyer.textContent = texteBoutonInitial;
+        renouvelerProtection();
 
       } catch (error) {
         console.error("Erreur formulaire liste d'attente :", error);
@@ -265,9 +282,7 @@
           "erreur"
         );
 
-        envoiEnCours = false;
-        boutonEnvoyer.disabled = false;
-        boutonEnvoyer.textContent = texteBoutonInitial;
+        renouvelerProtection();
       }
     }
   }
@@ -294,9 +309,9 @@
 
     if (!valeur) return null;
 
-    const nombre = Number.parseInt(valeur, 10);
+    const nombre = /^\d{2,3}$/.test(valeur) ? Number(valeur) : NaN;
 
-    return Number.isInteger(nombre) ? nombre : null;
+    return Number.isInteger(nombre) ? nombre : NaN;
   }
 
   function normaliserDepartementListeAttente(valeur) {
@@ -310,19 +325,19 @@
   }
 
   function validerPayloadListeAttente(payload) {
-    if (!payload.nom) {
-      return "Votre nom n'est pas renseigné.";
+    if (!nomValideListe(payload.nom)) {
+      return "Vérifiez votre nom (120 caractères maximum).";
     }
 
-    if (!payload.prenom) {
-      return "Votre prénom n'est pas renseigné.";
+    if (!nomValideListe(payload.prenom)) {
+      return "Vérifiez votre prénom (120 caractères maximum).";
     }
 
     if (!payload.departement) {
       return "Vous n'avez pas indiqué de département.";
     }
 
-    if (!/^(?:\d{2,3}|2A|2B)$/i.test(payload.departement)) {
+    if (!/^(?:0[1-9]|1[0-9]|2[1-9]|[3-8][0-9]|9[0-5]|2A|2B|97[1-6])$/i.test(payload.departement)) {
       return "Le numéro de département n'est pas valide.";
     }
 
@@ -345,11 +360,22 @@
       return "Votre adresse mail n'est pas conforme.";
     }
 
+    if(payload.texte_libre.length>2000)return "Le texte libre est limité à 2 000 caractères.";
     return "";
   }
 
+  function nomValideListe(value){return value.length>0&&value.length<=120&&/^[\p{L}\p{M}][\p{L}\p{M} .’'\-]*$/u.test(value.normalize("NFC"));}
+  async function chargerTurnstileListe(){
+    if(window.turnstile)return;
+    const existant=document.querySelector('script[src^="https://challenges.cloudflare.com/turnstile/v0/api.js"]');
+    if(existant){
+      await new Promise((resolve,reject)=>{let essais=0;const timer=setInterval(()=>{if(window.turnstile){clearInterval(timer);resolve();}else if(++essais>=200){clearInterval(timer);reject(new Error("Protection indisponible."));}},100);});return;
+    }
+    await new Promise((resolve,reject)=>{const script=document.createElement("script");script.src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";script.onload=resolve;script.onerror=reject;document.head.appendChild(script);});
+    if(!window.turnstile)throw new Error("Protection indisponible.");
+  }
   function isValidEmailListeAttente(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    return email.length<=254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   function obtenirEndpointListeAttente() {
