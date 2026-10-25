@@ -158,7 +158,7 @@
     );
 
     appliquerVarianteSousTitreFormulaireInscription();
-    initialiserFormulaireInscriptionMembre();
+    await initialiserFormulaireInscriptionMembre();
   }
 
   function appliquerVarianteSousTitreFormulaireInscription() {
@@ -171,7 +171,7 @@
     }
   }
 
-  function initialiserFormulaireInscriptionMembre() {
+  async function initialiserFormulaireInscriptionMembre() {
     const racineFormulaire = document.getElementById("formulaire-inscription-membre");
     const form = obtenirElementFormulaireInscription(racineFormulaire);
     const submitButton = document.getElementById("bouton-envoyer-inscription");
@@ -180,6 +180,8 @@
       "/index.html?source=formulaire-inscription-membre"
     );
 
+    let turnstileToken="";
+    let widgetId=null;
     let envoiEnCours = false;
     let libelleBoutonInitial = "Devenir membre invité";
 
@@ -205,6 +207,29 @@
 
     form.addEventListener("submit", envoyerFormulaire);
     submitButton.addEventListener("click", envoyerFormulaire);
+    submitButton.disabled=true;
+    try {
+      const url=obtenirWorkerInscriptionMembreUrl();
+      if(!url)throw new Error("Service non configuré.");
+      const response=await fetch(url,{credentials:"omit",cache:"no-store"});
+      const configuration=await response.json();
+      if(!response.ok||!configuration.sitekey)throw new Error("Protection indisponible.");
+      await chargerTurnstile();
+      const emplacement=document.createElement("div");
+      emplacement.setAttribute("aria-label","Protection du formulaire");
+      submitButton.parentNode.insertBefore(emplacement,submitButton);
+      widgetId=window.turnstile.render(emplacement,{sitekey:configuration.sitekey,action:"inscription-membre",
+        callback(token){turnstileToken=token;if(!envoiEnCours)submitButton.disabled=false;},
+        "expired-callback"(){turnstileToken="";submitButton.disabled=true;},
+        "error-callback"(){turnstileToken="";submitButton.disabled=true;}
+      });
+    } catch {
+      await afficherAlerte("La protection du formulaire est indisponible. Rechargez la page pour réessayer.");
+    }
+    function renouvelerProtection(){
+      envoiEnCours=false;turnstileToken="";submitButton.disabled=true;submitButton.textContent=libelleBoutonInitial;
+      if(widgetId!==null)window.turnstile.reset(widgetId);
+    }
 
     async function envoyerFormulaire(event) {
       if (event) {
@@ -214,6 +239,7 @@
 
       if (envoiEnCours || submitButton.disabled) return;
 
+      if(!turnstileToken)return;
       const erreur = verifierFormulaire(form);
 
       if (erreur) {
@@ -234,7 +260,7 @@
       submitButton.disabled = true;
       submitButton.textContent = "Envoi en cours...";
 
-      const data = lireDonneesFormulaire(form);
+      const data = {...lireDonneesFormulaire(form),turnstileToken};
 
       try {
         const response = await fetch(workerUrl, {
@@ -255,16 +281,14 @@
 
           await afficherAlerte(messageErreur);
 
-          envoiEnCours = false;
-          submitButton.disabled = false;
-          submitButton.textContent = libelleBoutonInitial;
+          renouvelerProtection();
           return;
         }
 
         form.reset();
 
         await afficherAlerte(
-          "Votre demande d'inscription est enregistrée. Un e-mail vient de vous être envoyé. Cliquez sur le lien reçu pour confirmer votre adresse e-mail et finaliser votre inscription au club.",
+          result.message || "Consultez votre messagerie pour poursuivre votre inscription.",
           redirectUrl
         );
       } catch (error) {
@@ -274,9 +298,7 @@
           "Il n'est pas possible d'envoyer le formulaire pour le moment."
         );
 
-        envoiEnCours = false;
-        submitButton.disabled = false;
-        submitButton.textContent = libelleBoutonInitial;
+        renouvelerProtection();
       }
     }
   }
@@ -337,19 +359,19 @@
     const regleclub = form.querySelector("#regleclub_v1");
     const regleapp = form.querySelector("#regleapp_v1");
 
-    if (!nommembre) {
-      return "Votre nom est obligatoire.";
+    if (!nomValide(nommembre)) {
+      return "Vérifiez votre nom (120 caractères maximum).";
     }
 
-    if (!prenommembre) {
-      return "Votre prénom est obligatoire.";
+    if (!nomValide(prenommembre)) {
+      return "Vérifiez votre prénom (120 caractères maximum).";
     }
 
     if (!dptmtmembre) {
       return "Un département est nécessaire.";
     }
 
-    if (!/^(?:\d{2,3}|2A|2B)$/i.test(dptmtmembre)) {
+    if (!/^(?:0[1-9]|1[0-9]|2[1-9]|[3-8][0-9]|9[0-5]|2A|2B|97[1-6])$/i.test(dptmtmembre)) {
       return "Le numéro de département n'est pas valide.";
     }
 
@@ -388,8 +410,18 @@
     return String(email || "").trim().toLowerCase();
   }
 
+  function nomValide(value){return value.length>0&&value.length<=120&&/^[\p{L}\p{M}][\p{L}\p{M} .’'\-]*$/u.test(value.normalize("NFC"));}
+  async function chargerTurnstile(){
+    if(window.turnstile)return;
+    const existant=document.querySelector('script[src^="https://challenges.cloudflare.com/turnstile/v0/api.js"]');
+    if(existant){
+      await new Promise((resolve,reject)=>{let essais=0;const timer=setInterval(()=>{if(window.turnstile){clearInterval(timer);resolve();}else if(++essais>=200){clearInterval(timer);reject(new Error("Protection indisponible."));}},100);});return;
+    }
+    await new Promise((resolve,reject)=>{const script=document.createElement("script");script.src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";script.onload=resolve;script.onerror=reject;document.head.appendChild(script);});
+    if(!window.turnstile)throw new Error("Protection indisponible.");
+  }
   function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
+    return String(email||"").length<=254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
   }
 
   async function afficherAlerte(message, redirectUrl = "") {
