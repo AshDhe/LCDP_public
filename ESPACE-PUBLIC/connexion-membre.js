@@ -1,6 +1,16 @@
 (() => {
   "use strict";
 
+  if (window.LCDP_CONNEXION_MEMBRE_SCRIPT_CHARGE) return;
+  window.LCDP_CONNEXION_MEMBRE_SCRIPT_CHARGE = true;
+
+  // Le contrôle du champ ne dépend ni de config.js ni du service de connexion.
+  document.addEventListener("change", (event) => {
+    if (event.target.id !== "afficher-mdp-membre") return;
+    const champ = document.getElementById("mdpmembre");
+    if (champ) champ.type = event.target.checked ? "text" : "password";
+  });
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initialiserConnexionMembre);
   } else {
@@ -8,7 +18,13 @@
   }
 
   function initialiserConnexionMembre() {
-    appliquerRoutesSite(document);
+    const formulaireConnexion = document.getElementById("formulaire-connexion-membre");
+    if (formulaireConnexion?.dataset.connexionInitialisee === "true") return;
+    try {
+      appliquerRoutesSite(document);
+    } catch (error) {
+      console.error("Les liens de présentation n'ont pas pu être initialisés.", error);
+    }
 
     initialiserBandeauRestreint().catch((erreur) => {
       console.error("Erreur bandeau restreint connexion membre :", erreur);
@@ -25,11 +41,7 @@
     const afficherMotDePasse = document.getElementById("afficher-mdp-membre");
     const lienMotDePasseOublie = document.getElementById("lien-mot-de-passe-oublie");
 
-    const endpointConnexionMembre = nettoyerBaseUrl(
-      window.SITE_CONFIG?.workerConnexionMembreUrl ||
-      window.SITE_CONFIG?.WORKER_CONNEXION_MEMBRE_URL ||
-      ""
-    );
+    const endpointConnexionMembre = obtenirEndpointConnexionMembre();
 
     const urlMonCompteMembre = construireUrlMembre("/index.html");
 
@@ -63,32 +75,18 @@
 
     definirEtatBoutonConnexion(false);
 
-    if (!endpointConnexionMembre) {
-      champEmail.disabled = true;
-      champMdp.disabled = true;
-      definirEtatBoutonConnexion(true);
-
-      afficherInformation(
-        "Configuration manquante",
-        "L’adresse du service de connexion membre n’est pas configurée.",
-        "erreur"
-      );
-      return;
-    }
-
-    if (afficherMotDePasse) {
-      afficherMotDePasse.addEventListener("change", () => {
-        champMdp.type = afficherMotDePasse.checked ? "text" : "password";
-      });
-    }
-
     formulaire.addEventListener("submit", (event) => {
       event.preventDefault();
       connecterMembre();
     });
+    formulaire.dataset.connexionInitialisee = "true";
 
     async function connecterMembre() {
       if (envoiEnCours) return;
+      if (!endpointConnexionMembre) {
+        await afficherInformation("Connexion indisponible", "L’adresse du service de connexion n’est pas disponible. Rechargez la page.", "erreur");
+        return;
+      }
 
       const emailmembre = champEmail.value.trim().toLowerCase();
       const mdpmembre = champMdp.value;
@@ -131,6 +129,15 @@
         });
 
         const data = await response.json().catch(() => null);
+        if (!data) {
+          const message = response.status === 403
+            ? "La demande est bloquée avant la connexion. Rechargez la page ou réessayez dans un autre navigateur."
+            : "Le service de connexion ne renvoie pas de réponse exploitable. Réessayez dans un instant.";
+          await afficherInformation("Connexion indisponible", message, "erreur");
+          envoiEnCours = false;
+          definirEtatBoutonConnexion(false);
+          return;
+        }
 
         if (data?.reason === "inscription_incomplete" && data.repriseInscription) {
           const config=window.SITE_CONFIG||{};
@@ -386,6 +393,29 @@
     }
   }
 
+  function obtenirEndpointConnexionMembre() {
+    const config = window.SITE_CONFIG || {};
+    const explicite = config.workerConnexionMembreUrl || config.WORKER_CONNEXION_MEMBRE_URL;
+    if (typeof explicite === "string" && explicite.trim()) return nettoyerBaseUrl(explicite.trim());
+    if (typeof config.apiUrl === "function") return nettoyerBaseUrl(config.apiUrl("connexion-membre-api"));
+    // Adresse du service déjà présente dans la configuration publique du projet.
+    if (/^(?:[a-z0-9-]+\.)*lacleduparc\.fr$/i.test(window.location.hostname) ||
+        ["ashdhe.github.io", "huguespavret.github.io"].includes(window.location.hostname)) {
+      return "https://connexion-membre-api.lacleduparc.fr";
+    }
+    return "";
+  }
+
+  async function chargerFragmentSite(chemin) {
+    const reponse = await fetch(construireUrlPublique(chemin), {
+      method: "GET", credentials: "same-origin", cache: "no-cache"
+    });
+    if (!reponse.ok) throw new Error("Fragment site introuvable : " + chemin);
+    const template = document.createElement("template");
+    template.innerHTML = (await reponse.text()).trim();
+    return template.content.cloneNode(true);
+  }
+
   async function chargerFragmentObjet(chemin) {
     const reponse = await fetch(construireUrlObjet(chemin), {
       method: "GET",
@@ -480,6 +510,12 @@
       return joindreBaseEtChemin(membreBaseUrl, valeur);
     }
 
+    if (/^(?:[a-z0-9-]+\.)*lacleduparc\.fr$/i.test(window.location.hostname)) {
+      return joindreBaseEtChemin("https://membre.lacleduparc.fr", valeur);
+    }
+    if (["ashdhe.github.io", "huguespavret.github.io"].includes(window.location.hostname)) {
+      return joindreBaseEtChemin(window.location.origin + "/LCDP_membre", valeur);
+    }
     return valeur.startsWith("/") ? valeur : "/" + valeur;
   }
 

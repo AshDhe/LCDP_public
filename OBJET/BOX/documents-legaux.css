@@ -348,3 +348,18 @@ body.lcdp-legal-lightbox-open {
     padding: 12px;
   }
 }
+
+/* En savoir plus de Hello uniquement : ne modifie pas les mentions légales. */
+[data-lcdp-savoir-plus-dialog] .lcdp-legal-lightbox__content {
+  gap: clamp(1.2rem, 3vw, 1.6rem);
+}
+
+[data-lcdp-savoir-plus-dialog] .lcdp-legal-lightbox__section .lcdp-boxtext__title {
+  color: var(--lcdp-color-orange, #f2a23a);
+}
+
+/* Le paragraphe reprend après l'image et sa légende avec un espace visible. */
+[data-lcdp-savoir-plus-dialog] .lcdp-boxtext__content > figure + p,
+[data-lcdp-savoir-plus-dialog] .lcdp-boxtext__content > img + p {
+  margin-top: 1rem !important;
+}

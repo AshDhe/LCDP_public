@@ -46,6 +46,7 @@
 
               <form
                 id="formulaire-connexion-membre"
+                method="post"
                 class="lcdp-box-formulaire"
                 novalidate
               >
@@ -155,6 +156,21 @@
     (() => {
       "use strict";
 
+      const formulaire = document.getElementById("formulaire-connexion-membre");
+      const motDePasse = document.getElementById("mdpmembre");
+      const afficher = document.getElementById("afficher-mdp-membre");
+      if (afficher && motDePasse) {
+        afficher.addEventListener("change", () => {
+          motDePasse.type = afficher.checked ? "text" : "password";
+        });
+      }
+      // Un script absent ne doit jamais envoyer les identifiants dans l'URL.
+      formulaire?.addEventListener("submit", (event) => {
+        if (formulaire.dataset.connexionInitialisee === "true") return;
+        event.preventDefault();
+        window.alert("Le formulaire de connexion n’a pas pu être chargé. Rechargez cette page.");
+      });
+
       const siteBase = (
         window.SITE_BASE ||
         window.SITE_CONFIG?.publicBaseUrl ||
@@ -199,6 +215,6 @@
       appliquerRoutesSite(document);
     })();
   </script>
-  <script src="./connexion-membre.js"></script>
+  <script src="./connexion-membre.js?v=20261025-connexion-1"></script>
 </body>
 </html>
