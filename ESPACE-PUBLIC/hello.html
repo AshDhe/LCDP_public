@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../OBJET/BOX/04-box-liste-card.css" data-site-href="/OBJET/BOX/04-box-liste-card.css">
     <link rel="stylesheet" href="../OBJET/BOX/05-cartouche-citation.css" data-site-href="/OBJET/BOX/05-cartouche-citation.css">
 </head>
-  <body >
+  <body class="lcdp-page-hello">
     <div class="lcdp-site-page">
       <div id="lcdp-bandeau-slot"></div>
       <main class="lcdp-site-main lcdp-main-presentation">
@@ -49,12 +49,11 @@
                 <div id="lcdp-carrousel-hello-slot"></div>
               </section>
           
-              <section class="lcdp-component lcdp-box-carousel">
-                <h2 class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-boxtext-title>
+              <section class="lcdp-component lcdp-boxtext lcdp-texte-editorial" data-lcdp-boxtext="" aria-labelledby="hello-en-bref-title">
+                <h2 class="lcdp-boxtext__title lcdp-boxtext__title--center" data-lcdp-boxtext-title id="hello-en-bref-title">
                 En bref
                 </h2>
-                <section class="lcdp-component lcdp-boxtext lcdp-texte-editorial" data-lcdp-boxtext>
-                  <div class="lcdp-boxtext__content" data-lcdp-boxtext-content>
+                <div class="lcdp-boxtext__content" data-lcdp-boxtext-content>
                     <p>
                     <strong>La Clé du Parc</strong> est une association de <strong>loi 1901 à but non lucratif</strong> 
                     qui organise un accès nominatif et contrôlé à un réseau de <strong>parcs remarquables en France</strong> 
@@ -62,17 +61,19 @@
                     </p>
                     <p>
                     <strong>Soutien aux parcs : </strong>l’association agit aussi pour la préservation du patrimoine naturel et culturel des parcs à travers un <strong>soutien financier annuel direct</strong>. 
-                    Ce soutien provient des excédents d'eploitation de l'association et des dons des membres bienfaiteurs. Les critères d'attribution et de suvi de l'utilisation des fonds sont publics.
+                    rendu possible par les excédents d'eploitation de l'association et les dons des membres bienfaiteurs. Les critères d'attribution et de suvi des fonds sont publics.
                     </p>
                     <p>
-                    L'association organise par ailleurs les <strong>journées bénévoles</strong> pour les membres qui souhaitent donner de leur temps à un projet d'entretien et d'aménagement de parc. 
+                    L'association organise par ailleurs les <strong>journées bénévoles</strong> pour les membres qui souhaitent donner de leur temps à des projets d'entretien et d'aménagement des parcs. 
                     Ces journées complètent le soutien financier de l'association auprès des parcs et les critères des actions bénévoles et leur suivi sont également publics.
                     </p>
                   </div>
-                </section>
+                <div class="lcdp-actions-centrees">
+                  <button type="button" class="lcdp-button lcdp-button-secondary" data-lcdp-savoir-plus="" aria-haspopup="dialog" aria-controls="lcdp-savoir-plus-dialog">En savoir plus</button>
+                </div>
               </section>
 
-              <section class="lcdp-component lcdp-boxtext lcdp-texte-editorial" data-lcdp-boxtext>
+              <section class="lcdp-component lcdp-boxtext lcdp-texte-editorial" data-lcdp-boxtext aria-label="Pré-inscription 2027">
                 <div class="lcdp-boxtext__content" data-lcdp-boxtext-content>
                   <div class="lcdp-actions-centrees">
                     <a class="lcdp-button lcdp-button-orange" href="./formulaire-liste-attente.html?source=hello" data-site-href="/ESPACE-PUBLIC/formulaire-liste-attente.html?source=hello">
@@ -85,13 +86,12 @@
                 </div>
               </section>
               
-              <section class="lcdp-component lcdp-box-carousel">
-                <h2 class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-boxtext-title>
+              <section class="lcdp-component lcdp-boxtext lcdp-texte-editorial lcdp-formulaire-encadre" data-lcdp-boxtext="" aria-labelledby="hello-test-title">
+                <h2 class="lcdp-boxtext__title lcdp-boxtext__title--center" data-lcdp-boxtext-title id="hello-test-title">
                 Accédez à l'application "test"
                 </h2>
-                <section class="lcdp-component lcdp-boxtext lcdp-texte-editorial lcdp-formulaire-encadre" data-lcdp-boxtext>
-                  <div class="lcdp-boxtext__content" data-lcdp-boxtext-content>
-                    <section id="acces-24h" class="lcdp-ancre-formulaire lcdp-component lcdp-box-formulaire-page" aria-label="Formulaire d'accès temporaire">
+                <div class="lcdp-boxtext__content" data-lcdp-boxtext-content>
+                    <div id="acces-24h" class="lcdp-ancre-formulaire lcdp-component lcdp-box-formulaire-page" aria-label="Formulaire d'accès temporaire">
                       <div class="lcdp-box-formulaire-page__inner">
                         <form id="formulaire-acces-public" class="lcdp-box-formulaire" method="post" action="/__lcdp-public-login" novalidate>
                           <input type="hidden" id="hello-next" name="next" value="/">
@@ -128,10 +128,9 @@
                           </p>
                         </form>
                       </div>
-                    </section>
+                    </div>
                   </div>
                 </section>
-              </section>
               
             </div>
           </div>
@@ -144,5 +143,5 @@
     <script src="../OBJET/BOX/01-box-carrousel.js" data-site-src="/OBJET/BOX/01-box-carrousel.js"></script>
     <script src="../OBJET/BOX/documents-legaux.js" data-site-src="/OBJET/BOX/documents-legaux.js"></script>
     <script src="./hello.js" data-site-src="/ESPACE-PUBLIC/hello.js"></script>
-  </body>
+  <script src="./en-savoir-plus.js" data-site-src="/ESPACE-PUBLIC/en-savoir-plus.js"></script></body>
 </html>
