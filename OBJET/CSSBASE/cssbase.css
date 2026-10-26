@@ -1192,3 +1192,14 @@ html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) { display: none !impor
   margin-top: 12px;
 }
 
+
+/* Espacements de l’accueil membre sur mobile. */
+@media (max-width: 767px) {
+  .lcdp-page-accueil-membre #message-accueil-membre + #mention-statut-membre {
+    margin-top: calc(-1 * var(--lcdp-space-2) - (var(--lcdp-space-4) - var(--lcdp-space-2)) * 0.08);
+  }
+
+  .lcdp-page-accueil-membre .lcdp-accueil-actions {
+    gap: clamp(15.04px, 3.29vh, 22.56px);
+  }
+}
