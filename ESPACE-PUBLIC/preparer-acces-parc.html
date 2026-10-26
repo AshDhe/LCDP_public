@@ -61,6 +61,8 @@
     #identification-actualisation .lcdp-box-dialogue-champ__input { box-sizing: border-box; }
     #identification-actualisation label { line-height: 1.5; }
     #preparation-contenu #note-coda-actualisation { line-height: 1.5; }
+    .geo-coda-cases { display:grid;grid-template-columns:repeat(4,minmax(0,54px));gap:12px;justify-content:center; }
+    #identification-actualisation .geo-coda-cases input { width:100%;min-width:0;height:54px;padding:8px;text-align:center;font-size:1.4rem; }
   </style>
   <script>
     window.LCDP_PAGE_MEMBRE_SANS_SESSION = true;
@@ -70,7 +72,7 @@
     if (location.hash) history.replaceState(null,"",location.pathname+location.search);
   </script>
   <script src="../config.js"></script>
-  <script src="preparer-acces-parc.js?v=20261026-formulaire-soigne" defer></script>
+  <script src="preparer-acces-parc.js?v=20261026-afficher-coda" defer></script>
   <script>
     // Le HTML conserve le visuel choisi, même avec une ancienne version du JS.
     document.addEventListener("DOMContentLoaded", function () {
@@ -98,8 +100,18 @@
                     <div id="identification-actualisation" hidden style="margin:28px auto;max-width:360px;text-align:left">
                       <label for="email-actualisation" style="display:block;margin-bottom:8px">Saisissez votre email de compte depuis le téléphone.</label>
                       <input class="lcdp-box-dialogue-champ__input" id="email-actualisation" type="email" autocomplete="username" maxlength="254" required style="width:100%">
-                      <label for="coda-actualisation" style="display:block;margin:24px 0 8px">Saisissez votre CODA depuis le téléphone.</label>
-                      <input class="lcdp-box-dialogue-champ__input" id="coda-actualisation" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" autocomplete="off" required style="width:100%" aria-describedby="note-coda-actualisation">
+                      <fieldset id="coda-actualisation" style="border:0;padding:0;margin:24px 0 0;min-width:0" aria-describedby="note-coda-actualisation">
+                        <legend style="padding:0;margin-bottom:8px;line-height:1.5">Saisissez votre CODA depuis le téléphone.</legend>
+                        <div class="geo-coda-cases">
+                          <input class="lcdp-box-dialogue-champ__input" id="coda-actualisation-1" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" required aria-label="Chiffre 1 du CODA" data-geo-coda>
+                          <input class="lcdp-box-dialogue-champ__input" id="coda-actualisation-2" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" required aria-label="Chiffre 2 du CODA" data-geo-coda>
+                          <input class="lcdp-box-dialogue-champ__input" id="coda-actualisation-3" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" required aria-label="Chiffre 3 du CODA" data-geo-coda>
+                          <input class="lcdp-box-dialogue-champ__input" id="coda-actualisation-4" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" required aria-label="Chiffre 4 du CODA" data-geo-coda>
+                        </div>
+                      </fieldset>
+                      <label for="afficher-coda-actualisation" style="display:flex;align-items:center;gap:10px;margin-top:14px;cursor:pointer">
+                        <input type="checkbox" id="afficher-coda-actualisation"> Afficher le CODA
+                      </label>
                       <p id="note-coda-actualisation" style="margin-top:12px;text-align:left"><strong>Attention, vous avez un seul essai.</strong><br>Un seul essai toutes les trente minutes.</p>
                     </div>
                     <div class="lcdp-box-formulaire__actions">

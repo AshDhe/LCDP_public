@@ -66,6 +66,27 @@
     // Le lien email confirme le navigateur de la demande initiale, pas celui qui lit l’email.
     confirmationTelephone.hidden=true;
   }
+  const casesCoda=Array.from(document.querySelectorAll("[data-geo-coda]"));
+  const afficherCoda=document.getElementById("afficher-coda-actualisation");
+  afficherCoda.addEventListener("change",()=>{
+    casesCoda.forEach(champ=>{champ.type=afficherCoda.checked?"text":"password";});
+  });
+  casesCoda.forEach((champ,index)=>{
+    champ.addEventListener("input",()=>{
+      champ.value=champ.value.replace(/[^0-9]/g,"").slice(-1);
+      if(champ.value&&index<casesCoda.length-1)casesCoda[index+1].focus();
+    });
+    champ.addEventListener("keydown",event=>{
+      if(event.key==="Backspace"&&!champ.value&&index>0)casesCoda[index-1].focus();
+    });
+    champ.addEventListener("paste",event=>{
+      event.preventDefault();
+      const chiffres=(event.clipboardData?.getData("text")||"").replace(/[^0-9]/g,"").slice(0,4-index);
+      if(!chiffres)return;
+      [...chiffres].forEach((chiffre,decalage)=>{casesCoda[index+decalage].value=chiffre;});
+      casesCoda[Math.min(index+chiffres.length,3)].focus();
+    });
+  });
   autoriser.addEventListener("click",async()=>{
     if(enCours)return;
     if(tokenConfirmation){
@@ -85,11 +106,12 @@
     catch(e){statut.textContent=e.message;return;}
     if(modeActualisation){
       const email=document.getElementById("email-actualisation");
-      const code=document.getElementById("coda-actualisation");
-      if(!email.reportValidity()||!code.reportValidity())return;
+      if(!email.reportValidity()||casesCoda.some(champ=>!champ.reportValidity()))return;
+      const code=casesCoda.map(champ=>champ.value).join("");
       etat(true);statut.textContent="Enregistrement de votre autorisation…";
-      const enregistrement=appeler("geo-account-update",{email:email.value,coda:code.value,navigateur:navigateurDemande,telephoneConfirme:true,consent:true,version:"2026-10-24"});
-      code.value="";
+      const enregistrement=appeler("geo-account-update",{email:email.value,coda:code,navigateur:navigateurDemande,telephoneConfirme:true,consent:true,version:"2026-10-24"});
+      casesCoda.forEach(champ=>{champ.value="";champ.type="password";});
+      afficherCoda.checked=false;
       demanderPermissionNavigateur();
       try{const d=await enregistrement;appliquerDetection(d);termine();}
       catch(e){statut.textContent=e.message;}
