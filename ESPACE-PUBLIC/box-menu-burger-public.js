@@ -352,7 +352,7 @@
         },
         {
           label: "FAQ",
-          href: "/ESPACE-PUBLIC/FAQ.html"
+          href: "/ESPACE-PUBLIC/FAQ-public.html"
         }
       ];
 
