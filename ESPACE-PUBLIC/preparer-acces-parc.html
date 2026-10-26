@@ -46,7 +46,7 @@
     if (location.hash) history.replaceState(null,"",location.pathname+location.search);
   </script>
   <script src="../config.js"></script>
-  <script src="preparer-acces-parc.js?v=20261026-confirmation-sous-bouton" defer></script>
+  <script src="preparer-acces-parc.js?v=20261026-optin-sans-blocage-pc" defer></script>
   <script>
     // Le HTML conserve le visuel choisi, même avec une ancienne version du JS.
     document.addEventListener("DOMContentLoaded", function () {
@@ -91,7 +91,8 @@
                     </form>
                   </dialog>
                   <dialog id="confirmation-geolocalisation" style="border:1px solid #cdd2cd;border-radius:22px;padding:28px;max-width:calc(100% - 48px);color:#1f2a24">
-                    <p>Votre opt-in géolocalisation est enregistré.</p>
+                    <p>Votre autorisation est enregistrée.</p>
+                    <p id="avertissement-appareil" hidden style="margin-top:24px;line-height:1.6">Attention<br>Votre autorisation semble donnée d'un PC.<br>Effectuez la mise à jour avec votre téléphone connecté à votre espace Mon compte.</p>
                     <form method="dialog"><button class="lcdp-button">OK</button></form>
                   </dialog>
                 </div>

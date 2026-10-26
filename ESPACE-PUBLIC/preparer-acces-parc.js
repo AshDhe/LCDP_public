@@ -25,6 +25,10 @@
     if(!r.ok||!d?.success)throw new Error(d?.message||"L’enregistrement n’est pas confirmé. Réessayez.");
     return d;
   }
+  function appliquerDetection(d){
+    const avertissement=document.getElementById("avertissement-appareil");
+    avertissement.hidden=d.mobile_detecte!==false;
+  }
   function termine(){
     contenu.hidden=true;
     statut.textContent="Votre opt-in géolocalisation est enregistré. "+informationNavigateur+" Vous pouvez fermer cette page.";
@@ -51,7 +55,7 @@
       etat(true);
       const enregistrement=appeler("geo-email-confirm",{token:tokenConfirmation});
       demanderPermissionNavigateur();
-      try{await enregistrement;tokenConfirmation="";termine();}
+      try{const d=await enregistrement;appliquerDetection(d);tokenConfirmation="";termine();}
       catch(e){statut.textContent=e.message;}
       finally{etat(false);}
       return;
@@ -60,16 +64,15 @@
       window.alert("Confirmez que vous utilisez le téléphone");
       utiliseTelephone.focus();return;
     }
-    if(!mobile){statut.textContent="Scannez le QR code avec votre téléphone pour autoriser sa géolocalisation.";return;}
     try{navigateurDemande=obtenirIdentiteNavigateurMobile();}
     catch(e){statut.textContent=e.message;return;}
     optinAccepte=true;
     if(flow){
       etat(true);statut.textContent="Enregistrement de votre opt-in…";
       // Le consentement ne dépend pas de la réponse à la demande du navigateur.
-      const enregistrement=appeler("geo-save",{flow,navigateur:navigateurDemande,consent:true,version:"2026-10-24"});
+      const enregistrement=appeler("geo-save",{flow,navigateur:navigateurDemande,telephoneConfirme:true,consent:true,version:"2026-10-24"});
       demanderPermissionNavigateur();
-      try{await enregistrement;flow="";termine();}
+      try{const d=await enregistrement;appliquerDetection(d);flow="";termine();}
       catch(e){statut.textContent=e.message;}
       finally{etat(false);}
     } else {
@@ -80,7 +83,6 @@
   });
   function demanderPermissionNavigateur(){
     // Demande lancée depuis le clic, sans attendre le réseau ni conserver les coordonnées.
-    if(!mobile)return;
     const informer=texte=>{
       informationNavigateur=texte;
       if(contenu.hidden&&confirmation.open){
@@ -107,14 +109,13 @@
     const bouton=document.getElementById("envoyer-email-optin");const message=document.getElementById("message-email-optin");
     etat(true);bouton.disabled=true;
     try{
-      const d=await appeler("geo-email-request",{email:document.getElementById("email-compte-optin").value,navigateur:navigateurDemande,consent:true,version:"2026-10-24"});
+      const d=await appeler("geo-email-request",{email:document.getElementById("email-compte-optin").value,navigateur:navigateurDemande,telephoneConfirme:true,consent:true,version:"2026-10-24"});
       dialogueEmail.close();contenu.hidden=true;statut.textContent=d.message;
     }catch(e){message.textContent=e.message;}
     finally{etat(false);bouton.disabled=false;}
   });
   function obtenirIdentiteNavigateurMobile() {
     const ua = navigator.userAgent || "";
-    if (!/iPhone|iPod|Android.*Mobile|Windows Phone/i.test(ua)) return null;
     const nom = "lcdp_navigateur_proprietaire";
     const lire = () => {
       const prefixe = nom + "=";
