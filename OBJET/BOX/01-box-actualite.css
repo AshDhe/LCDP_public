@@ -37,45 +37,29 @@
 .lcdp-actualite-lien-groupe {display:block;border-color:var(--actu-groupe);background:var(--actu-fond);}
 .lcdp-actualite-picto svg {display:block;width:18px;height:18px;pointer-events:none;}
 
-/* Miniatures de l'inventaire admin. */
-.lcdp-page-admin-actualite .lcdp-actu-admin-table {width:100%;table-layout:auto;}
-.lcdp-page-admin-actualite .lcdp-actu-admin-table th:first-child,
-.lcdp-page-admin-actualite .lcdp-actu-admin-table td:first-child {width:100%;white-space:normal;overflow-wrap:anywhere;color:#111;}
-.lcdp-page-admin-actualite .lcdp-actu-admin-image-col {width:88px;min-width:88px;box-sizing:border-box;vertical-align:middle;}
-.lcdp-page-admin-actualite .lcdp-actu-admin-miniature {display:block;width:72px;height:48px;object-fit:cover;border-radius:4px;}
-.lcdp-page-admin-actualite .lcdp-actu-admin-miniature[hidden] {display:none;}
-
-/* Liste publique : miniature puis cartouche et titre sur la même ligne. */
+/* Liste publique : blocs identiques, centrés ; texte après le cartouche. */
 .lcdp-actu-liste {
   width:100%;max-width:36rem;min-width:0;margin:0 auto;
   display:grid;gap:16px;
 }
 .lcdp-actu-liste-ligne {width:100%;min-width:0;}
 .lcdp-actu-liste .lcdp-actualite-lien-groupe {
-  display:grid;grid-template-columns:96px minmax(0,1fr);
-  align-items:center;justify-content:initial;column-gap:14px;
+  display:grid;grid-template-columns:80px minmax(0,1fr);
+  align-items:center;justify-content:initial;column-gap:12px;
   box-sizing:border-box;width:100%;max-width:100%;min-width:0;
-  min-height:96px;height:auto;margin:0;padding:14px 16px;
+  height:88px;margin:0;padding:14px 16px;
   text-align:left;white-space:normal;overflow-wrap:anywhere;
-  color:#111;
 }
-.lcdp-actu-liste-miniature {display:block;width:96px;height:64px;overflow:hidden;border-radius:4px;background:var(--actu-fond,#f5f5f5);}
-.lcdp-actu-liste-miniature img {display:block;width:100%;height:100%;object-fit:cover;}
-.lcdp-actu-liste-miniature img[hidden] {display:none;}
-.lcdp-actu-liste .lcdp-actualite-groupe {display:inline-block;vertical-align:middle;}
+.lcdp-actu-liste .lcdp-actualite-groupe {justify-self:start;}
 .lcdp-actu-liste-titre {
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;
   min-width:0;max-height:2.8em;overflow:hidden;
   line-height:1.4;text-align:left;overflow-wrap:anywhere;
 }
-.lcdp-actu-liste .lcdp-actu-liste-titre,
-.lcdp-actu-liste .lcdp-actu-liste-texte {color:#111 !important;font-weight:400;}
 @media (max-width:600px) {
   .lcdp-actu-liste .lcdp-actualite-lien-groupe {
-    grid-template-columns:76px minmax(0,1fr);
-    min-height:112px;padding:14px 12px;column-gap:10px;
+    height:132px;padding:16px 12px;column-gap:10px;
   }
-  .lcdp-actu-liste-miniature {width:76px;height:60px;}
   .lcdp-actu-liste-titre {
     -webkit-line-clamp:4;line-clamp:4;max-height:5.6em;
   }
@@ -90,3 +74,29 @@
 
 /* Titres de la liste en graisse normale. */
 .lcdp-actu-liste .lcdp-actu-liste-titre {font-weight:400;}
+
+/* Miniature à gauche, groupe au début du titre, intérieur blanc. */
+.lcdp-actu-liste .lcdp-actualite-lien-groupe,
+.lcdp-actu-liste .lcdp-actualite-lien-groupe:hover,
+.lcdp-actu-liste .lcdp-actualite-lien-groupe:focus-visible {
+  background:#fff;border-color:var(--actu-groupe);
+  color:var(--lcdp-color-primary,#234438);font-weight:400;
+}
+.lcdp-actu-liste-miniature {
+  display:block;width:80px;height:54px;object-fit:contain;object-position:center;
+  border-radius:5px;background:#fff;
+}
+.lcdp-actu-liste .lcdp-actu-liste-titre {font-weight:400;color:inherit;}
+#lcdp-actualite-bandeau .lcdp-actu-bandeau-titre {font-weight:400;}
+@media (max-width:600px) {
+  .lcdp-actu-liste .lcdp-actualite-lien-groupe {grid-template-columns:64px minmax(0,1fr);}
+  .lcdp-actu-liste-miniature {width:64px;height:48px;}
+}
+
+/* Vue article : cartouche de groupe agrandi de 15 %, contact espacé. */
+.lcdp-actu-article-titre .lcdp-actualite-groupe {font-size:.782rem;}
+.lcdp-actu-contact {margin-top:1.5rem;}
+
+/* Légende éditoriale sous l’image, issue de la description saisie dans l’admin. */
+.lcdp-actu-illustration {width:100%;max-width:480px;min-width:0;align-self:center;margin:0 auto;}
+.lcdp-actu-legende {margin-top:.6rem;font-size:.85rem;font-weight:400;line-height:1.45;text-align:left;color:var(--lcdp-color-text-muted,#5f6861);overflow-wrap:anywhere;}

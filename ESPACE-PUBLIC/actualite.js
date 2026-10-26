@@ -19,7 +19,7 @@
     if(!window.LCDP_ACTUALITE_GROUPES)throw Error('Groupes Actualité indisponibles.');
   }
   function titreGroupe(element,a) {
-    element.replaceChildren(window.LCDP_ACTUALITE_GROUPES.cartouche(a.groupe),document.createTextNode(' - '+a.titre));
+    element.replaceChildren(window.LCDP_ACTUALITE_GROUPES.cartouche(a.groupe),document.createTextNode(' '+a.titre));
     return element;
   }
   function node(t,text,cls){const e=document.createElement(t);if(text)e.textContent=text;if(cls)e.className=cls;return e;}
@@ -33,6 +33,7 @@
     const article=node('article',null,'lcdp-stack');
     const title=titreGroupe(node('h2',null,'lcdp-box-carousel__title'),a);
     if(popup)article.append(image(a),title);else {
+      title.classList.add('lcdp-actu-article-titre');
       const more=link('Derniers articles',listeUrl(),'lcdp-mention-connexion');
       // Les classes génériques fournissent la police et le corps secondaire.
       // Seuls l'alignement dans le titre et la couleur nécessitent ces valeurs.
@@ -45,13 +46,30 @@
       article.style.gap='0';
       const illustration=image(a);
       illustration.style.cssText='width:100%;max-width:480px;min-width:0;align-self:center;margin:0 auto;flex-shrink:0';
-      article.append(header,illustration);
+      const figure=node('figure',null,'lcdp-actu-illustration');
+      figure.append(illustration);
+      if(String(a.alt||'').trim())figure.append(node('figcaption',a.alt,'lcdp-actu-legende'));
+      article.append(header,figure);
     }
     const corps=texte(a.texte);
     if(!popup)corps.style.paddingTop='1.25rem';
     article.append(corps);
-    if(!popup && a.contact)article.append(node('p',a.contact,'lcdp-text-strong-left'));
+    if(!popup && a.contact)article.append(node('p',a.contact,'lcdp-text-strong-left lcdp-actu-contact'));
     return article;
+  }
+  function creerLienListeActualite(a) {
+    const articleLink=link('',articleUrl(a.id),'lcdp-button lcdp-button-secondary lcdp-actualite-lien-groupe');
+    articleLink.dataset.groupe=window.LCDP_ACTUALITE_GROUPES.cle(a.groupe);
+    const miniature=node('img',null,'lcdp-actu-liste-miniature');
+    miniature.alt='';miniature.loading='lazy';miniature.decoding='async';
+    miniature.width=80;miniature.height=54;
+    if(a.image)miniature.src=imageUrl(a.image);
+    else miniature.hidden=true;
+    miniature.addEventListener('error',()=>{miniature.style.visibility='hidden';},{once:true});
+    const title=node('span',null,'lcdp-actu-liste-titre');
+    title.append(window.LCDP_ACTUALITE_GROUPES.cartouche(a.groupe),document.createTextNode(' '+a.titre));
+    articleLink.append(miniature,title);
+    return articleLink;
   }
   async function modal(content,onClose){
     const previous=document.activeElement,dialog=node('dialog',null,'lcdp-contact-info');
@@ -76,6 +94,7 @@
     bar.style.cssText='display:flex;justify-content:center;align-items:center;text-align:center;height:3em;min-height:3em;line-height:1.5;overflow:hidden;border:0;background:transparent;box-shadow:none';
     const a=link('',articleUrl(articles[0].id),'lcdp-link-secondary');
     a.style.cssText='display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;overflow-wrap:anywhere;white-space:normal;min-width:0;max-width:100%;max-height:3em;font-size:inherit;line-height:inherit;text-align:center;color:var(--lcdp-color-green,#57754c);border:0;outline-offset:4px;box-shadow:none;background:transparent;text-decoration:none;transform:none;animation:none;transition:none';
+    a.classList.add('lcdp-actu-bandeau-titre');
     const visible=node('span');visible.setAttribute('aria-hidden','true');const badge=node('span');a.append(badge,document.createTextNode(' - '),visible);
     bar.append(a);width.append(bar);container.append(width);slot.replaceChildren(container);
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -132,17 +151,7 @@ async function init(){
       const list=node('div',null,'lcdp-actu-liste');
       for(const a of articles.slice(0,10)){
         const row=node('div',null,'lcdp-actu-liste-ligne');
-        const articleLink=link('',articleUrl(a.id),'lcdp-button lcdp-button-secondary lcdp-actualite-lien-groupe');
-        articleLink.dataset.groupe=window.LCDP_ACTUALITE_GROUPES.cle(a.groupe);
-        const miniature=node('span',null,'lcdp-actu-liste-miniature');
-        if(a.image){
-          const im=node('img');im.alt='';im.loading='lazy';im.decoding='async';
-          im.width=96;im.height=64;im.src=imageUrl(a.image);
-          im.onerror=()=>{im.hidden=true;};miniature.append(im);
-        }
-        const title=node('span',null,'lcdp-actu-liste-titre');
-        title.append(window.LCDP_ACTUALITE_GROUPES.cartouche(a.groupe),document.createTextNode(' '),node('span',a.titre,'lcdp-actu-liste-texte'));
-        articleLink.append(miniature,title);
+        const articleLink=creerLienListeActualite(a);
         row.append(articleLink);list.append(row);
       }
       slot.append(list);
