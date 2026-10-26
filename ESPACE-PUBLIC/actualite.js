@@ -4,6 +4,21 @@
   const base=String(cfg.publicBaseUrl||window.SITE_BASE||'').replace(/\/$/,'');
   const url=p=>typeof cfg.publicUrl==='function'?cfg.publicUrl(p):base+p;
   const endpoint=String(cfg.workerEditingAdminUrl||cfg.WORKER_EDITING_ADMIN_URL||(typeof cfg.apiUrl==='function'?cfg.apiUrl('editing-admin-api'):'')||'https://editing-admin-api.lacleduparc.fr').replace(/\/$/,'');
+  async function chargerGroupes() {
+    const cssUrl=typeof cfg.objetUrl==='function'?cfg.objetUrl('/BOX/01-box-actualite.css'):url('/OBJET/BOX/01-box-actualite.css');
+    const cssExistant=Array.from(document.querySelectorAll('link[rel="stylesheet"]')).find(link=>link.href===new URL(cssUrl,location.href).href);
+    if(!cssExistant)await new Promise((resolve,reject)=>{
+      const link=document.createElement('link');link.rel='stylesheet';link.href=cssUrl;
+      link.onload=resolve;link.onerror=()=>reject(Error('Styles Actualité indisponibles.'));document.head.append(link);
+    });
+    if(window.LCDP_ACTUALITE_GROUPES)return;
+    await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url('/ESPACE-PUBLIC/actualite-groupes.js');script.onload=resolve;script.onerror=()=>reject(Error('Groupes Actualité indisponibles.'));document.head.append(script);});
+    if(!window.LCDP_ACTUALITE_GROUPES)throw Error('Groupes Actualité indisponibles.');
+  }
+  function titreGroupe(element,a) {
+    element.replaceChildren(window.LCDP_ACTUALITE_GROUPES.cartouche(a.groupe),document.createTextNode(' - '+a.titre));
+    return element;
+  }
   function node(t,text,cls){const e=document.createElement(t);if(text)e.textContent=text;if(cls)e.className=cls;return e;}
   function link(text,href,cls='lcdp-button lcdp-button-secondary'){const a=node('a',text,cls);a.href=href;return a;}
   const listeUrl=()=>url('/ESPACE-PUBLIC/actualites-liste.html');
@@ -13,7 +28,7 @@
   function texte(value){const box=node('div',null,'lcdp-boxtext__content');for(const paragraph of String(value||'').split(/\n\s*\n/)){const p=node('p');paragraph.split('\n').forEach((line,i)=>{if(i)p.append(node('br'));p.append(document.createTextNode(line));});box.append(p);}return box;}
   function contenu(a,popup=false){
     const article=node('article',null,'lcdp-stack');
-    const title=node('h2',a.titre,'lcdp-box-carousel__title');
+    const title=titreGroupe(node('h2',null,'lcdp-box-carousel__title'),a);
     if(popup)article.append(image(a),title);else {
       const more=link('Derniers articles',listeUrl(),'lcdp-mention-connexion');
       // Les classes génériques fournissent la police et le corps secondaire.
@@ -58,7 +73,7 @@
     bar.style.cssText='display:flex;justify-content:center;align-items:center;text-align:center;height:3em;min-height:3em;line-height:1.5;overflow:hidden;border:0;background:transparent;box-shadow:none';
     const a=link('',articleUrl(articles[0].id),'lcdp-link-secondary');
     a.style.cssText='display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;overflow-wrap:anywhere;white-space:normal;min-width:0;max-width:100%;max-height:3em;font-size:inherit;line-height:inherit;text-align:center;color:var(--lcdp-color-green,#57754c);border:0;outline-offset:4px;box-shadow:none;background:transparent;text-decoration:none;transform:none;animation:none;transition:none';
-    const visible=node('span');visible.setAttribute('aria-hidden','true');a.append(visible);
+    const visible=node('span');visible.setAttribute('aria-hidden','true');const badge=node('span');a.append(badge,document.createTextNode(' - '),visible);
     bar.append(a);width.append(bar);container.append(width);slot.replaceChildren(container);
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
     let index=0,position=0,holding=false,timer,stopped=false;
@@ -66,7 +81,8 @@
     let characters=[];
     function start(){
       const article=articles[index];characters=letters(String(article.titre));position=0;holding=false;
-      a.href=articleUrl(article.id);a.setAttribute('aria-label',article.titre);visible.textContent='';
+      badge.replaceChildren(window.LCDP_ACTUALITE_GROUPES.cartouche(article.groupe));
+      a.href=articleUrl(article.id);a.setAttribute('aria-label',window.LCDP_ACTUALITE_GROUPES.groupes[window.LCDP_ACTUALITE_GROUPES.cle(article.groupe)].label+' - '+article.titre);visible.textContent='';
     }
     function tick(){
       if(stopped)return;
@@ -98,9 +114,10 @@ async function popup(data,articles){
  if(ctx.userapp){try{localStorage.setItem(key,'1');}catch(_){}}
 }
 async function init(){
+  await chargerGroupes();
   if(!endpoint)throw Error('API Actualité non configurée.');
   const r=await fetch(endpoint+'/public/actualite',{cache:'no-store',credentials:'omit'});if(!r.ok)throw Error('Actualité indisponible.');const d=await r.json();
-  const articles=(d.slides||[]).filter(a=>a.active&&a.titre&&a.texte).sort((a,b)=>Date.parse(b.datepublication||0)-Date.parse(a.datepublication||0)||a.id.localeCompare(b.id));
+  const articles=(d.slides||[]).filter(a=>a.active&&a.titre&&a.texte);
   const slot=document.getElementById('lcdp-actualite-page');
   if(slot){
     const id=new URLSearchParams(location.search).get('id');slot.replaceChildren();slot.className='lcdp-stack-large';
@@ -112,7 +129,8 @@ async function init(){
       const list=node('div',null,'lcdp-stack');
       for(const a of articles.slice(0,10)){
         const row=node('div');row.style.cssText='display:flex;justify-content:center;width:100%;min-width:0';row.append(link(a.titre,articleUrl(a.id),'lcdp-button lcdp-button-secondary'));
-        row.firstChild.style.cssText='display:inline-flex;flex:0 1 auto;width:max-content;min-width:min(18rem,100%);max-width:100%;box-sizing:border-box;text-align:center;justify-content:center;white-space:normal;overflow-wrap:anywhere';list.append(row);
+        titreGroupe(row.firstChild,a);
+        row.firstChild.style.cssText='display:inline-flex;flex:0 1 auto;width:max-content;min-width:min(18rem,100%);max-width:100%;box-sizing:border-box;text-align:center;justify-content:center;white-space:normal;overflow-wrap:anywhere';row.firstChild.classList.add('lcdp-actualite-lien-groupe');row.firstChild.dataset.groupe=window.LCDP_ACTUALITE_GROUPES.cle(a.groupe);list.append(row);
       }
       slot.append(list);
       if(!articles.length)slot.append(node('p','Aucune actualité publiée.'));

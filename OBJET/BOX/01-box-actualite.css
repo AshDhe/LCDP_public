@@ -17,3 +17,22 @@
 .lcdp-actu-liste {display:grid;gap:16px;padding:0;list-style:none;}
 .lcdp-actu-liste a {display:block;padding:16px;border:1px solid var(--lcdp-color-border);border-radius:var(--lcdp-radius-button);}
 @media (prefers-reduced-motion:reduce){.lcdp-actu-bandeau.is-changing a{animation:none;}}
+
+/* Groupes Actualité — palette des témoignages En savoir plus. */
+.lcdp-actualite-groupe,.lcdp-actualite-lien-groupe {
+  --actu-groupe:#d64b68;
+  --actu-fond:#fff1f4;
+}
+.lcdp-actualite-groupe[data-groupe="CLUB"],.lcdp-actualite-lien-groupe[data-groupe="CLUB"] {--actu-groupe:#57754c;--actu-fond:#f2f5ef;}
+.lcdp-actualite-groupe[data-groupe="COACHS"],.lcdp-actualite-lien-groupe[data-groupe="COACHS"] {--actu-groupe:#8660c8;--actu-fond:#f7f3fc;}
+.lcdp-actualite-groupe[data-groupe="ASSO"],.lcdp-actualite-lien-groupe[data-groupe="ASSO"] {--actu-groupe:var(--lcdp-color-orange,#f2a23a);--actu-fond:#fff7e9;}
+.lcdp-actualite-groupe {
+  display:inline-block;vertical-align:middle;white-space:nowrap;
+  padding:.14em .5em;border:1px solid var(--actu-groupe);border-radius:5px;
+  color:var(--actu-groupe);background:var(--actu-fond);
+  font-family:var(--lcdp-font-main,Arial,sans-serif);
+  font-size:.68rem;font-weight:700;line-height:1.35;letter-spacing:.03em;text-transform:uppercase;
+}
+.lcdp-actualite-groupe[data-groupe="ASSO"] {color:var(--lcdp-color-text,#1f2a24);background:var(--actu-groupe);}
+.lcdp-actualite-lien-groupe {display:block;border-color:var(--actu-groupe);background:var(--actu-fond);}
+.lcdp-actualite-picto svg {display:block;width:18px;height:18px;pointer-events:none;}
