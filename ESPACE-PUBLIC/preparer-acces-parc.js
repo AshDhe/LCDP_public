@@ -56,11 +56,11 @@
       finally{etat(false);}
       return;
     }
-    if(!mobile){statut.textContent="Scannez le QR code avec votre téléphone pour autoriser sa géolocalisation.";return;}
     if(!utiliseTelephone.checked){
-      statut.textContent="Pour associer le bon navigateur à votre compte, utilisez votre téléphone puis cochez la confirmation. Sur ordinateur, scannez le QR code avec votre téléphone.";
+      window.alert("Confirmez que vous utilisez le téléphone");
       utiliseTelephone.focus();return;
     }
+    if(!mobile){statut.textContent="Scannez le QR code avec votre téléphone pour autoriser sa géolocalisation.";return;}
     try{navigateurDemande=obtenirIdentiteNavigateurMobile();}
     catch(e){statut.textContent=e.message;return;}
     optinAccepte=true;
