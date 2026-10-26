@@ -3,7 +3,7 @@
   const cfg=window.SITE_CONFIG||{};
   const base=String(cfg.publicBaseUrl||window.SITE_BASE||'').replace(/\/$/,'');
   const url=p=>typeof cfg.publicUrl==='function'?cfg.publicUrl(p):base+p;
-  const endpoint=String(cfg.workerEditingAdminUrl||cfg.WORKER_EDITING_ADMIN_URL||'').replace(/\/$/,'');
+  const endpoint=String(cfg.workerEditingAdminUrl||cfg.WORKER_EDITING_ADMIN_URL||(typeof cfg.apiUrl==='function'?cfg.apiUrl('editing-admin-api'):'')||'https://editing-admin-api.lacleduparc.fr').replace(/\/$/,'');
   function node(t,text,cls){const e=document.createElement(t);if(text)e.textContent=text;if(cls)e.className=cls;return e;}
   function link(text,href,cls='lcdp-button lcdp-button-secondary'){const a=node('a',text,cls);a.href=href;return a;}
   const listeUrl=()=>url('/ESPACE-PUBLIC/actualites-liste.html');
