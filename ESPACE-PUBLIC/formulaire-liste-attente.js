@@ -207,6 +207,7 @@
       emplacement.setAttribute("aria-label","Protection du formulaire");
       boutonEnvoyer.parentNode.insertBefore(emplacement,boutonEnvoyer);
       widgetId=window.turnstile.render(emplacement,{sitekey:configuration.sitekey,action:"liste-attente",
+        appearance:"interaction-only",
         callback(token){turnstileToken=token;if(!envoiEnCours)boutonEnvoyer.disabled=false;},
         "expired-callback"(){turnstileToken="";boutonEnvoyer.disabled=true;},
         "error-callback"(){turnstileToken="";boutonEnvoyer.disabled=true;}
