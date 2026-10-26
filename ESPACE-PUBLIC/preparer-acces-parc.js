@@ -1,7 +1,6 @@
 (() => {
   "use strict";
   const autoriser=document.getElementById("autoriser-geolocalisation");
-  const plusTard=document.getElementById("plus-tard-geolocalisation");
   const statut=document.getElementById("statut-geolocalisation");
   const contenu=document.getElementById("preparation-contenu");
   const confirmation=document.getElementById("confirmation-geolocalisation");
@@ -13,10 +12,10 @@
   const endpoint=String(config.workerMdptokenzUrl||config.WORKER_MDPTOKENZ_URL||(typeof config.apiUrl==="function"?config.apiUrl("mdptokenz-api"):"")).replace(/\/+$/,"");
   const mobile=/iPhone|iPod|Android.*Mobile|Windows Phone/i.test(navigator.userAgent);
   let enCours=false;
-  let localisationObtenue=false;
+  let optinAccepte=false;
+  let informationNavigateur="";
   let navigateurDemande="";
-  function accueil(){location.assign(new URL("/ESPACE-PUBLIC/accueil-public.html",location.href).href);}
-  function etat(occupe){enCours=occupe;autoriser.disabled=plusTard.disabled=occupe;}
+  function etat(occupe){enCours=occupe;autoriser.disabled=occupe;}
   async function appeler(action,body={}){
     if(!endpoint)throw new Error("Service indisponible. Réessayez plus tard.");
     const r=await fetch(endpoint,{method:"POST",credentials:"omit",cache:"no-store",headers:{"Content-Type":"application/json"},body:JSON.stringify({action,...body})});
@@ -26,7 +25,7 @@
   }
   function termine(){
     contenu.hidden=true;
-    statut.textContent="Votre opt-in géolocalisation est enregistré. Vous pouvez fermer cette page.";
+    statut.textContent="Votre opt-in géolocalisation est enregistré. "+informationNavigateur+" Vous pouvez fermer cette page.";
     if(typeof confirmation.showModal==="function")confirmation.showModal();
   }
   if(flow){
@@ -46,34 +45,57 @@
     if(enCours)return;
     if(tokenConfirmation){
       etat(true);
-      try{await appeler("geo-email-confirm",{token:tokenConfirmation});tokenConfirmation="";termine();}
+      const enregistrement=appeler("geo-email-confirm",{token:tokenConfirmation});
+      demanderPermissionNavigateur();
+      try{await enregistrement;tokenConfirmation="";termine();}
       catch(e){statut.textContent=e.message;}
       finally{etat(false);}
       return;
     }
     if(!mobile){statut.textContent="Scannez le QR code avec votre téléphone pour autoriser sa géolocalisation.";return;}
-    if(!window.isSecureContext||!navigator.geolocation){statut.textContent="Ouvrez cette page dans le navigateur de votre téléphone.";return;}
     try{navigateurDemande=obtenirIdentiteNavigateurMobile();}
     catch(e){statut.textContent=e.message;return;}
-    etat(true);statut.textContent="Autorisez la localisation dans la demande de votre téléphone.";
-    // Les coordonnées restent sur le téléphone, elles ne sont ni transmises ni conservées.
-    navigator.geolocation.getCurrentPosition(async()=>{
-      localisationObtenue=true;
-      try{
-        if(flow){
-          await appeler("geo-save",{flow,navigateur:navigateurDemande,consent:true,version:"2026-10-24"});flow="";termine();
-        } else {
-          statut.textContent="Confirmez votre email de compte pour enregistrer votre opt-in.";
-          dialogueEmail.showModal();document.getElementById("email-compte-optin").focus();
-        }
-      } catch(e){statut.textContent=e.message;}
+    optinAccepte=true;
+    if(flow){
+      etat(true);statut.textContent="Enregistrement de votre opt-in…";
+      // Le consentement ne dépend pas de la réponse à la demande du navigateur.
+      const enregistrement=appeler("geo-save",{flow,navigateur:navigateurDemande,consent:true,version:"2026-10-24"});
+      demanderPermissionNavigateur();
+      try{await enregistrement;flow="";termine();}
+      catch(e){statut.textContent=e.message;}
       finally{etat(false);}
-    },erreur=>{
-      etat(false);statut.textContent=erreur.code===1?"La localisation n’est pas autorisée. Vous pouvez modifier les réglages de votre navigateur ou choisir Plus tard.":"Position indisponible. Vérifiez la localisation de votre téléphone, puis réessayez.";
-    },{enableHighAccuracy:true,maximumAge:0,timeout:15000});
+    } else {
+      demanderPermissionNavigateur();
+      statut.textContent="Confirmez votre email de compte pour enregistrer votre opt-in.";
+      dialogueEmail.showModal();document.getElementById("email-compte-optin").focus();
+    }
   });
+  function demanderPermissionNavigateur(){
+    // Demande lancée depuis le clic, sans attendre le réseau ni conserver les coordonnées.
+    if(!mobile)return;
+    const informer=texte=>{
+      informationNavigateur=texte;
+      if(contenu.hidden&&confirmation.open){
+        statut.textContent="Votre opt-in géolocalisation est enregistré. "+texte+" Vous pouvez fermer cette page.";
+      }
+    };
+    if(!window.isSecureContext||!navigator.geolocation){
+      informer("La localisation est indisponible dans ce navigateur. Votre consentement reste valable.");return;
+    }
+    try{
+      navigator.geolocation.getCurrentPosition(
+        ()=>informer("La localisation est autorisée dans ce navigateur."),
+        erreur=>informer(erreur.code===1
+          ?"La localisation est refusée dans ce navigateur. Votre consentement reste valable ; vous devrez autoriser la localisation pour les contrôles au parc."
+          :"La position est indisponible. Votre consentement reste valable."),
+        {enableHighAccuracy:true,maximumAge:0,timeout:15000}
+      );
+    }catch{
+      informer("La demande de localisation n’a pas abouti. Votre consentement reste valable.");
+    }
+  }
   document.getElementById("form-email-optin").addEventListener("submit",async event=>{
-    event.preventDefault();if(enCours||!localisationObtenue)return;
+    event.preventDefault();if(enCours||!optinAccepte)return;
     const bouton=document.getElementById("envoyer-email-optin");const message=document.getElementById("message-email-optin");
     etat(true);bouton.disabled=true;
     try{
@@ -82,9 +104,6 @@
     }catch(e){message.textContent=e.message;}
     finally{etat(false);bouton.disabled=false;}
   });
-  document.getElementById("annuler-email-optin").addEventListener("click",()=>{if(!enCours)accueil();});
-  plusTard.addEventListener("click",()=>{if(!enCours)accueil();});
-  if(location.hash==="#plus-tard")accueil();
   function obtenirIdentiteNavigateurMobile() {
     const ua = navigator.userAgent || "";
     if (!/iPhone|iPod|Android.*Mobile|Windows Phone/i.test(ua)) return null;

@@ -29,10 +29,10 @@
     const paramsPreparation = new URLSearchParams(location.hash.slice(1));
     window.LCDP_GEO_FLOW = paramsPreparation.get("flow") || "";
     window.LCDP_GEO_CONFIRMATION = paramsPreparation.get("confirmation") || "";
-    if (location.hash && location.hash !== "#plus-tard") history.replaceState(null,"",location.pathname+location.search);
+    if (location.hash) history.replaceState(null,"",location.pathname+location.search);
   </script>
   <script src="../config.js"></script>
-  <script src="preparer-acces-parc.js?v=20261026-public" defer></script>
+  <script src="preparer-acces-parc.js?v=20261026-optin-navigateur" defer></script>
   <script>
     // Le HTML conserve le visuel choisi, même avec une ancienne version du JS.
     document.addEventListener("DOMContentLoaded", function () {
@@ -62,9 +62,6 @@
                     <div class="lcdp-box-formulaire__actions">
                       <button type="button" class="lcdp-button" id="autoriser-geolocalisation">Autoriser</button>
                     </div>
-                    <div class="lcdp-box-formulaire__actions" style="margin-top:36px">
-                      <button type="button" class="lcdp-button lcdp-button-secondary" id="plus-tard-geolocalisation">Plus tard</button>
-                    </div>
                   </div>
                   <p id="statut-geolocalisation" role="status" aria-live="polite"></p>
                   <dialog id="email-optin" style="border:1px solid #cdd2cd;border-radius:22px;padding:28px;max-width:calc(100% - 48px);color:#1f2a24">
@@ -74,7 +71,6 @@
                       <p id="message-email-optin" role="status" aria-live="polite"></p>
                       <div class="lcdp-box-formulaire__actions" style="margin-top:24px;display:flex;justify-content:center;gap:16px">
                         <button type="submit" class="lcdp-button" id="envoyer-email-optin">Confirmer</button>
-                        <button type="button" class="lcdp-button lcdp-button-secondary" id="annuler-email-optin">Plus tard</button>
                       </div>
                     </form>
                   </dialog>
