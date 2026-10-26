@@ -543,7 +543,7 @@
             action: (libelleBouton) => ouvrirPageMembrePublic(libelleBouton, "/ESPACE-MEMBRE/reserver-membre.html", "reserver")
           },
           {
-            label: "Mon agenda",
+            label: "Mes visites",
             style: "lcdp-button-accueil lcdp-button-accueil-green",
             variante: "planning",
             action: (libelleBouton) => ouvrirPageMembrePublic(libelleBouton, "/ESPACE-MEMBRE/planning-membre.html", "planning")
