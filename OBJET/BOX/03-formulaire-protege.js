@@ -56,7 +56,7 @@
    const r=await fetch(config.endpoint,{headers:{Accept:'application/json'},cache:'no-store'});const data=await r.json();
    if(!r.ok||data.type!==config.type||!data.sitekey)throw new Error('Formulaire momentanément indisponible.');
    await chargerTurnstile();
-   widgetId=window.turnstile.render(widget,{sitekey:data.sitekey,action:config.type,size:'flexible',
+   widgetId=window.turnstile.render(widget,{sitekey:data.sitekey,action:config.type,size:'flexible',appearance:['coach','resparc'].includes(config.type)?'interaction-only':'always',
     callback:value=>{token=value;bouton.disabled=enCours;statut.textContent='';},
     'expired-callback':()=>{token='';bouton.disabled=true;statut.textContent='Vérification expirée. Renouvelez-la.';},
     'error-callback':()=>{token='';bouton.disabled=true;statut.textContent='Vérification indisponible. Réessayez.';}});
