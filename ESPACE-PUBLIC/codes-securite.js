@@ -26,11 +26,9 @@
     if(flow) {
       const titre=document.querySelector(".lcdp-box-formulaire__title");
       if(titre) {
-        const progression=document.createElement("small");
-        progression.textContent=(type==="coda"?"1":"2")+" sur 3";
         const instruction=document.createElement("small");
-        instruction.textContent=type==="coda"?"Démarrer":"Continuer";
-        titre.replaceChildren(document.createTextNode("Sécurité de votre compte"),document.createElement("br"),instruction,document.createElement("br"),progression);
+        instruction.textContent=type==="coda"?"Démarrer - 1/3":"Continuer - 2/3";
+        titre.replaceChildren(document.createTextNode("Sécurité de votre compte"),document.createElement("br"),instruction);
       }
       const sousTitre=document.querySelector(".lcdp-box-formulaire__subtitle");
       if(sousTitre) sousTitre.textContent=type==="coda"?"Code A — Définir votre code d’accès (CODA)":"Code R — Définir votre code de récupération (CODR)";
