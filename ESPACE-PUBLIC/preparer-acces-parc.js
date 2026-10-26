@@ -29,9 +29,14 @@
     const avertissement=document.getElementById("avertissement-appareil");
     avertissement.hidden=d.mobile_detecte!==false;
   }
+  let optinEnregistre=false;
+  confirmation.addEventListener("close",()=>{
+    if(optinEnregistre)location.assign(new URL("/ESPACE-PUBLIC/connexion-membre.html",location.href).href);
+  });
   function termine(){
+    optinEnregistre=true;
     contenu.hidden=true;
-    statut.textContent="Votre opt-in géolocalisation est enregistré. "+informationNavigateur+" Vous pouvez fermer cette page.";
+    statut.textContent="Votre opt-in géolocalisation est enregistré. "+informationNavigateur+" Cliquez sur OK pour vous connecter.";
     if(typeof confirmation.showModal==="function")confirmation.showModal();
   }
   if(flow){
@@ -86,7 +91,7 @@
     const informer=texte=>{
       informationNavigateur=texte;
       if(contenu.hidden&&confirmation.open){
-        statut.textContent="Votre opt-in géolocalisation est enregistré. "+texte+" Vous pouvez fermer cette page.";
+        statut.textContent="Votre opt-in géolocalisation est enregistré. "+texte+" Cliquez sur OK pour vous connecter.";
       }
     };
     if(!window.isSecureContext||!navigator.geolocation){
