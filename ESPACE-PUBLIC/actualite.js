@@ -1,5 +1,8 @@
 (() => {
   'use strict';
+  // Effacer immédiatement tout ancien message, avant les appels réseau.
+  const zoneActualites=document.getElementById('lcdp-actualite-page');
+  if(zoneActualites)zoneActualites.replaceChildren();
   const cfg=window.SITE_CONFIG||{};
   const base=String(cfg.publicBaseUrl||window.SITE_BASE||'').replace(/\/$/,'');
   const url=p=>typeof cfg.publicUrl==='function'?cfg.publicUrl(p):base+p;
