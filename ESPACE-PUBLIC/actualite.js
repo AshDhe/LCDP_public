@@ -134,7 +134,7 @@ async function init(){
         const row=node('div',null,'lcdp-actu-liste-ligne');
         const articleLink=link('',articleUrl(a.id),'lcdp-button lcdp-button-secondary lcdp-actualite-lien-groupe');
         articleLink.dataset.groupe=window.LCDP_ACTUALITE_GROUPES.cle(a.groupe);
-        const title=node('span','- '+a.titre,'lcdp-actu-liste-titre');
+        const title=node('span',a.titre,'lcdp-actu-liste-titre');
         articleLink.append(window.LCDP_ACTUALITE_GROUPES.cartouche(a.groupe),title);
         row.append(articleLink);list.append(row);
       }

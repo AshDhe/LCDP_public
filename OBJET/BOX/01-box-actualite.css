@@ -71,3 +71,6 @@
 @media (prefers-reduced-motion:reduce) {
   .lcdp-actu-liste {animation:none;}
 }
+
+/* Titres de la liste en graisse normale. */
+.lcdp-actu-liste .lcdp-actu-liste-titre {font-weight:400;}
