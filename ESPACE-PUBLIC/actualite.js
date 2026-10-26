@@ -126,11 +126,14 @@ async function init(){
       if(!a){slot.append(node('p','Cette actualité n’est plus disponible.'),link('Derniers articles',listeUrl(),'lcdp-link-secondary'));return;}
       const card=node('section',null,'lcdp-boxtext');card.append(contenu(a));slot.append(card);document.title='Actualité · '+a.titre+' - La Clé du Parc';
     }else{
-      const list=node('div',null,'lcdp-stack');
+      const list=node('div',null,'lcdp-actu-liste');
       for(const a of articles.slice(0,10)){
-        const row=node('div');row.style.cssText='display:flex;justify-content:center;width:100%;min-width:0';row.append(link(a.titre,articleUrl(a.id),'lcdp-button lcdp-button-secondary'));
-        titreGroupe(row.firstChild,a);
-        row.firstChild.style.cssText='display:inline-flex;flex:0 1 auto;width:max-content;min-width:min(18rem,100%);max-width:100%;box-sizing:border-box;text-align:center;justify-content:center;white-space:normal;overflow-wrap:anywhere';row.firstChild.classList.add('lcdp-actualite-lien-groupe');row.firstChild.dataset.groupe=window.LCDP_ACTUALITE_GROUPES.cle(a.groupe);list.append(row);
+        const row=node('div',null,'lcdp-actu-liste-ligne');
+        const articleLink=link('',articleUrl(a.id),'lcdp-button lcdp-button-secondary lcdp-actualite-lien-groupe');
+        articleLink.dataset.groupe=window.LCDP_ACTUALITE_GROUPES.cle(a.groupe);
+        const title=node('span','- '+a.titre,'lcdp-actu-liste-titre');
+        articleLink.append(window.LCDP_ACTUALITE_GROUPES.cartouche(a.groupe),title);
+        row.append(articleLink);list.append(row);
       }
       slot.append(list);
       if(!articles.length)slot.append(node('p','Aucune actualité publiée.'));

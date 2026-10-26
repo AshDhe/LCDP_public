@@ -36,3 +36,38 @@
 .lcdp-actualite-groupe[data-groupe="ASSO"] {color:var(--lcdp-color-text,#1f2a24);background:var(--actu-groupe);}
 .lcdp-actualite-lien-groupe {display:block;border-color:var(--actu-groupe);background:var(--actu-fond);}
 .lcdp-actualite-picto svg {display:block;width:18px;height:18px;pointer-events:none;}
+
+/* Liste publique : blocs identiques, centrés ; texte après le cartouche. */
+.lcdp-actu-liste {
+  width:100%;max-width:36rem;min-width:0;margin:0 auto;
+  display:grid;gap:16px;
+}
+.lcdp-actu-liste-ligne {width:100%;min-width:0;}
+.lcdp-actu-liste .lcdp-actualite-lien-groupe {
+  display:grid;grid-template-columns:max-content minmax(0,1fr);
+  align-items:center;justify-content:initial;column-gap:12px;
+  box-sizing:border-box;width:100%;max-width:100%;min-width:0;
+  height:88px;margin:0;padding:14px 16px;
+  text-align:left;white-space:normal;overflow-wrap:anywhere;
+}
+.lcdp-actu-liste .lcdp-actualite-groupe {justify-self:start;}
+.lcdp-actu-liste-titre {
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;
+  min-width:0;max-height:2.8em;overflow:hidden;
+  line-height:1.4;text-align:left;overflow-wrap:anywhere;
+}
+@media (max-width:600px) {
+  .lcdp-actu-liste .lcdp-actualite-lien-groupe {
+    height:132px;padding:16px 12px;column-gap:10px;
+  }
+  .lcdp-actu-liste-titre {
+    -webkit-line-clamp:4;line-clamp:4;max-height:5.6em;
+  }
+}
+
+/* Apparition de la liste sans message intermédiaire ni déplacement. */
+.lcdp-actu-liste {animation:lcdp-actu-liste-apparition 220ms ease-out;}
+@keyframes lcdp-actu-liste-apparition {from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce) {
+  .lcdp-actu-liste {animation:none;}
+}
