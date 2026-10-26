@@ -32,7 +32,7 @@
     if (location.hash) history.replaceState(null,"",location.pathname+location.search);
   </script>
   <script src="../config.js"></script>
-  <script src="preparer-acces-parc.js?v=20261026-optin-navigateur" defer></script>
+  <script src="preparer-acces-parc.js?v=20261026-confirmation-telephone" defer></script>
   <script>
     // Le HTML conserve le visuel choisi, même avec une ancienne version du JS.
     document.addEventListener("DOMContentLoaded", function () {
@@ -49,7 +49,7 @@
           <div class="lcdp-component lcdp-box-formulaire-page">
             <div class="lcdp-box-formulaire-page__inner">
               <section class="lcdp-component lcdp-boxtext" data-lcdp-boxtext>
-                <p id="etape-securite" class="lcdp-boxtext__title" hidden>Sécurité de votre compte<br><small>3 sur 3</small></p>
+                <p id="etape-securite" class="lcdp-boxtext__title">Sécurité de votre compte<br><small>3 sur 3</small></p>
                 <h1 class="lcdp-boxtext__title" id="titre-preparation">Préparez votre accès au parc</h1>
                 <div class="lcdp-boxtext__content" data-lcdp-boxtext-content>
                   <div id="preparation-contenu">
@@ -59,6 +59,9 @@
                     </div>
                     <p id="consigne-autorisation">Ou bien autorisez maintenant depuis votre téléphone.</p>
                     <p id="texte-optin" style="margin-top:16px">J’autorise la géolocalisation de mon téléphone pour mes contrôles d’entrée et de sortie dans les parcs.</p>
+                    <p id="confirmation-telephone">
+                      <label><input type="checkbox" id="utilise-telephone"> Je confirme utiliser le navigateur de mon téléphone, qui servira à mes contrôles d’entrée et de sortie au parc.</label>
+                    </p>
                     <div class="lcdp-box-formulaire__actions">
                       <button type="button" class="lcdp-button" id="autoriser-geolocalisation">Autoriser</button>
                     </div>

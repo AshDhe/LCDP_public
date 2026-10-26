@@ -4,6 +4,8 @@
   const statut=document.getElementById("statut-geolocalisation");
   const contenu=document.getElementById("preparation-contenu");
   const confirmation=document.getElementById("confirmation-geolocalisation");
+  const utiliseTelephone=document.getElementById("utilise-telephone");
+  const confirmationTelephone=document.getElementById("confirmation-telephone");
   const dialogueEmail=document.getElementById("email-optin");
   let flow=String(window.LCDP_GEO_FLOW||"");
   let tokenConfirmation=String(window.LCDP_GEO_CONFIRMATION||"");
@@ -40,6 +42,8 @@
   if(tokenConfirmation){
     document.getElementById("consigne-autorisation").textContent="Confirmez votre opt-in géolocalisation.";
     autoriser.textContent="Confirmer mon opt-in";
+    // Le lien email confirme le navigateur de la demande initiale, pas celui qui lit l’email.
+    confirmationTelephone.hidden=true;
   }
   autoriser.addEventListener("click",async()=>{
     if(enCours)return;
@@ -53,6 +57,10 @@
       return;
     }
     if(!mobile){statut.textContent="Scannez le QR code avec votre téléphone pour autoriser sa géolocalisation.";return;}
+    if(!utiliseTelephone.checked){
+      statut.textContent="Pour associer le bon navigateur à votre compte, utilisez votre téléphone puis cochez la confirmation. Sur ordinateur, scannez le QR code avec votre téléphone.";
+      utiliseTelephone.focus();return;
+    }
     try{navigateurDemande=obtenirIdentiteNavigateurMobile();}
     catch(e){statut.textContent=e.message;return;}
     optinAccepte=true;
