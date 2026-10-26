@@ -25,7 +25,11 @@
     const etat = actif => { [...saisie, ...confirmation].forEach(champ => { champ.disabled = !actif; }); bouton.disabled = !actif; };
     if(flow) {
       const titre=document.querySelector(".lcdp-box-formulaire__title");
-      if(titre) titre.textContent="Sécurité de votre compte — "+(type==="coda"?"1":"2")+" sur 3";
+      if(titre) {
+        const progression=document.createElement("small");
+        progression.textContent=(type==="coda"?"1":"2")+" sur 3";
+        titre.replaceChildren(document.createTextNode("Sécurité de votre compte"),document.createElement("br"),progression);
+      }
       const sousTitre=document.querySelector(".lcdp-box-formulaire__subtitle");
       if(sousTitre) sousTitre.textContent=type==="coda"?"Code A — Définir votre code d’accès (CODA)":"Code R — Définir votre code de récupération (CODR)";
     }
