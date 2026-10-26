@@ -35,6 +35,7 @@
   });
   function termine(){
     optinEnregistre=true;
+    document.body.classList.add("optin-termine");
     contenu.hidden=true;
     statut.textContent="Votre opt-in géolocalisation est enregistré. "+informationNavigateur+" Cliquez sur OK pour vous connecter.";
     if(typeof confirmation.showModal==="function")confirmation.showModal();

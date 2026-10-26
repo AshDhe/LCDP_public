@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://lacleduparc.fr/OBJET/CSSBASE/cssbase.css">
   <link rel="stylesheet" href="https://lacleduparc.fr/OBJET/BOX/03-box-formulaire.css">
   <link rel="stylesheet" href="https://lacleduparc.fr/OBJET/BOX/01-box-text.css">
+  <link rel="stylesheet" href="https://lacleduparc.fr/OBJET/BOX/02-box-dialogue-bouton.css">
   <style>
     [data-lcdp-boxtext],
     #titre-preparation,
@@ -37,6 +38,24 @@
       justify-content: center;
       align-items: center;
     }
+    body.optin-termine { background: #fff; }
+    body.optin-termine > .lcdp-site-page { display: none !important; }
+    #confirmation-geolocalisation:not([open]) { display: none; }
+    #confirmation-geolocalisation[open] {
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      display: flex;
+      gap: 28px;
+      max-height: calc(100svh - 40px);
+      overflow-y: auto;
+      background: #fff;
+    }
+    #confirmation-geolocalisation::backdrop { background: #fff; }
+    #confirmation-geolocalisation .lcdp-box-dialogue-bouton__title { font-weight: 700; }
+    #avertissement-appareil { width: 100%; }
+    #avertissement-appareil[hidden] { display: none !important; }
+    #avertissement-appareil .lcdp-box-dialogue-bouton__text { margin-top: 0; }
   </style>
   <script>
     window.LCDP_PAGE_MEMBRE_SANS_SESSION = true;
@@ -46,7 +65,7 @@
     if (location.hash) history.replaceState(null,"",location.pathname+location.search);
   </script>
   <script src="../config.js"></script>
-  <script src="preparer-acces-parc.js?v=20261026-finalisation-optin" defer></script>
+  <script src="preparer-acces-parc.js?v=20261026-confirmation-sobre" defer></script>
   <script>
     // Le HTML conserve le visuel choisi, même avec une ancienne version du JS.
     document.addEventListener("DOMContentLoaded", function () {
@@ -90,11 +109,7 @@
                       </div>
                     </form>
                   </dialog>
-                  <dialog id="confirmation-geolocalisation" style="border:1px solid #cdd2cd;border-radius:22px;padding:28px;max-width:calc(100% - 48px);color:#1f2a24">
-                    <p>Votre autorisation est enregistrée.</p>
-                    <p id="avertissement-appareil" hidden style="margin-top:24px;line-height:1.6">Attention<br>Votre autorisation semble donnée d'un PC.<br>Effectuez la mise à jour avec votre téléphone connecté à votre espace Mon compte.</p>
-                    <form method="dialog"><button class="lcdp-button">OK</button></form>
-                  </dialog>
+
                 </div>
               </section>
             </div>
@@ -103,5 +118,15 @@
       </section>
     </main>
   </div>
+  <dialog id="confirmation-geolocalisation" class="lcdp-box-dialogue-bouton__card" aria-labelledby="titre-confirmation-optin">
+    <h2 id="titre-confirmation-optin" class="lcdp-box-dialogue-bouton__title">Autorisation enregistrée.</h2>
+    <div id="avertissement-appareil" hidden>
+      <h3 class="lcdp-box-dialogue-bouton__title">Attention</h3>
+      <p class="lcdp-box-dialogue-bouton__text">Votre autorisation semble donnée d'un PC.<br>Effectuez la mise à jour avec votre téléphone connecté à votre espace Mon compte.</p>
+    </div>
+    <form method="dialog" class="lcdp-box-dialogue-bouton__actions">
+      <button class="lcdp-button" autofocus>OK</button>
+    </form>
+  </dialog>
 </body>
 </html>
