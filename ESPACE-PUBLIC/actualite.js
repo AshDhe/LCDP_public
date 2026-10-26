@@ -134,8 +134,15 @@ async function init(){
         const row=node('div',null,'lcdp-actu-liste-ligne');
         const articleLink=link('',articleUrl(a.id),'lcdp-button lcdp-button-secondary lcdp-actualite-lien-groupe');
         articleLink.dataset.groupe=window.LCDP_ACTUALITE_GROUPES.cle(a.groupe);
-        const title=node('span',a.titre,'lcdp-actu-liste-titre');
-        articleLink.append(window.LCDP_ACTUALITE_GROUPES.cartouche(a.groupe),title);
+        const miniature=node('span',null,'lcdp-actu-liste-miniature');
+        if(a.image){
+          const im=node('img');im.alt='';im.loading='lazy';im.decoding='async';
+          im.width=96;im.height=64;im.src=imageUrl(a.image);
+          im.onerror=()=>{im.hidden=true;};miniature.append(im);
+        }
+        const title=node('span',null,'lcdp-actu-liste-titre');
+        title.append(window.LCDP_ACTUALITE_GROUPES.cartouche(a.groupe),document.createTextNode(' '),node('span',a.titre,'lcdp-actu-liste-texte'));
+        articleLink.append(miniature,title);
         row.append(articleLink);list.append(row);
       }
       slot.append(list);

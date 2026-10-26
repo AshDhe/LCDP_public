@@ -37,29 +37,45 @@
 .lcdp-actualite-lien-groupe {display:block;border-color:var(--actu-groupe);background:var(--actu-fond);}
 .lcdp-actualite-picto svg {display:block;width:18px;height:18px;pointer-events:none;}
 
-/* Liste publique : blocs identiques, centrés ; texte après le cartouche. */
+/* Miniatures de l'inventaire admin. */
+.lcdp-page-admin-actualite .lcdp-actu-admin-table {width:100%;table-layout:auto;}
+.lcdp-page-admin-actualite .lcdp-actu-admin-table th:first-child,
+.lcdp-page-admin-actualite .lcdp-actu-admin-table td:first-child {width:100%;white-space:normal;overflow-wrap:anywhere;color:#111;}
+.lcdp-page-admin-actualite .lcdp-actu-admin-image-col {width:88px;min-width:88px;box-sizing:border-box;vertical-align:middle;}
+.lcdp-page-admin-actualite .lcdp-actu-admin-miniature {display:block;width:72px;height:48px;object-fit:cover;border-radius:4px;}
+.lcdp-page-admin-actualite .lcdp-actu-admin-miniature[hidden] {display:none;}
+
+/* Liste publique : miniature puis cartouche et titre sur la même ligne. */
 .lcdp-actu-liste {
   width:100%;max-width:36rem;min-width:0;margin:0 auto;
   display:grid;gap:16px;
 }
 .lcdp-actu-liste-ligne {width:100%;min-width:0;}
 .lcdp-actu-liste .lcdp-actualite-lien-groupe {
-  display:grid;grid-template-columns:max-content minmax(0,1fr);
-  align-items:center;justify-content:initial;column-gap:12px;
+  display:grid;grid-template-columns:96px minmax(0,1fr);
+  align-items:center;justify-content:initial;column-gap:14px;
   box-sizing:border-box;width:100%;max-width:100%;min-width:0;
-  height:88px;margin:0;padding:14px 16px;
+  min-height:96px;height:auto;margin:0;padding:14px 16px;
   text-align:left;white-space:normal;overflow-wrap:anywhere;
+  color:#111;
 }
-.lcdp-actu-liste .lcdp-actualite-groupe {justify-self:start;}
+.lcdp-actu-liste-miniature {display:block;width:96px;height:64px;overflow:hidden;border-radius:4px;background:var(--actu-fond,#f5f5f5);}
+.lcdp-actu-liste-miniature img {display:block;width:100%;height:100%;object-fit:cover;}
+.lcdp-actu-liste-miniature img[hidden] {display:none;}
+.lcdp-actu-liste .lcdp-actualite-groupe {display:inline-block;vertical-align:middle;}
 .lcdp-actu-liste-titre {
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;
   min-width:0;max-height:2.8em;overflow:hidden;
   line-height:1.4;text-align:left;overflow-wrap:anywhere;
 }
+.lcdp-actu-liste .lcdp-actu-liste-titre,
+.lcdp-actu-liste .lcdp-actu-liste-texte {color:#111 !important;font-weight:400;}
 @media (max-width:600px) {
   .lcdp-actu-liste .lcdp-actualite-lien-groupe {
-    height:132px;padding:16px 12px;column-gap:10px;
+    grid-template-columns:76px minmax(0,1fr);
+    min-height:112px;padding:14px 12px;column-gap:10px;
   }
+  .lcdp-actu-liste-miniature {width:76px;height:60px;}
   .lcdp-actu-liste-titre {
     -webkit-line-clamp:4;line-clamp:4;max-height:5.6em;
   }
