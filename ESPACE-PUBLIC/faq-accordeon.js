@@ -100,7 +100,7 @@
       const panel = document.createElement("div"); panel.id = id + "-reponse"; panel.className = "lcdp-faq__panel";
       panel.hidden = true; panel.inert = true; panel.setAttribute("aria-hidden", "true");
       panel.setAttribute("role", "region"); panel.setAttribute("aria-labelledby", button.id);
-      const inner = document.createElement("div"); inner.className = "lcdp-faq__reponse"; inner.appendChild(nettoyer(bloc.html));
+      const inner = document.createElement("div"); inner.className = "lcdp-faq__reponse lcdp-boxtext__content"; inner.appendChild(nettoyer(bloc.html));
       panel.appendChild(inner); titre.appendChild(button); article.append(titre, panel); racine.appendChild(article);
       const item = { button, panel, inner, article, ancre: idAncre, animation: null, terminer: null }; elements.push(item);
       button.addEventListener("click", () => {
@@ -109,7 +109,7 @@
           if (liensDirects && window.location.hash === "#" + item.ancre) {
             const url = new URL(window.location.href); url.hash = ""; window.history.replaceState(null, "", url.href);
           }
-        } else { actualiserAdresse(item); void cibler(item); }
+        } else { ++navigation; actualiserAdresse(item); void ouvrir(item, true); }
       });
     }
     function suivreLien(event) {
