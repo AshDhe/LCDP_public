@@ -5,7 +5,7 @@
 .lcdp-faq__question::after { content:"+"; flex:none; font-size:1.55rem; font-weight:400; }
 .lcdp-faq__question[aria-expanded="true"]::after { content:"−"; }
 .lcdp-faq__question:hover { background:#55733f09; }
-.lcdp-faq__question:focus-visible { outline:2px solid #ee9f39; outline-offset:-5px; border-radius:9px; }
+.lcdp-faq__question:focus-visible { outline:none; background:#55733f15; }
 .lcdp-faq__panel { overflow:hidden; }
 .lcdp-faq__panel[hidden] { display:none; }
 .lcdp-faq__reponse { padding:0 24px 24px; color:var(--lcdp-color-text,#243129); line-height:1.75; overflow-wrap:anywhere; }
