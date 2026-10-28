@@ -868,3 +868,27 @@
   }
 }
 
+
+/* PLANIFIER : présentation réduite à l'action Partager, 25 % plus compacte. */
+.lcdp-box-fiche-parc--planifier-tunnel .lcdp-box-fiche-parc__departement {
+  margin: 5px 0 2px; font-size: .82rem; line-height: 1.3; font-weight: 400;
+  color: var(--lcdp-color-text-muted, #606b60);
+}
+.lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] {
+  width: fit-content !important; min-width: 0 !important;
+  min-height: 37.5px !important; padding: 7.5px 9.75px !important;
+  font-size: .87318rem !important; gap: 6px !important;
+  background: #f2a23a !important; border: 2px solid #f2a23a !important;
+  color: #fff !important;
+}
+.lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-icone {
+  width: 21px !important; height: 21px !important; flex: 0 0 21px !important;
+}
+@media(min-width:768px) {
+ .lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] {
+  min-height: 39px !important; padding: 7.5px 9.75px !important; font-size: .87318rem !important;
+ }
+ .lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-icone {
+  width: 21.78px !important; height: 21.78px !important; flex: 0 0 21.78px !important;
+ }
+}

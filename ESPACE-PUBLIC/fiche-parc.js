@@ -392,7 +392,21 @@
     );
 
     if (titre) {
-      titre.textContent = nom;
+      const nomSansPrefixe = nom.replace(/^parc\s+(?:de\s+|d['’]\s*)?/i, "").trim();
+      titre.textContent = "Parc de " + (nomSansPrefixe || nom);
+    }
+    const departementSousTitre = fiche.querySelector("[data-lcdp-fiche-parc-departement]");
+    if (departementSousTitre) {
+      const code = nettoyerDepartement(parc?.dptmt || parc?.departement);
+      const libelle = nettoyerTexte(options.nomDepartement || parc?.nomDepartement || parc?.nomdepartement);
+      departementSousTitre.textContent = [libelle, code || ""].filter(Boolean).join(" ");
+      departementSousTitre.hidden = !(libelle || code);
+    }
+    if (normaliserModeUsagePlanning(options) === MODE_USAGE_MEMBRE) {
+      fiche.classList.add("lcdp-box-fiche-parc--planifier-tunnel");
+      // La sélection du parc et l'ouverture du planning se font dans la liste des parcs.
+      boutonPlanning?.remove();
+      boutonPlanifier?.remove();
     }
 
     if (boutonLeParc) {
