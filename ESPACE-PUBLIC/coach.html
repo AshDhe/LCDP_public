@@ -27,14 +27,24 @@
   <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
   <style>
-    #formulaire-coach-slot .lcdp-box-formulaire__subtitle {
-      color: #000;
-      font-weight: 400;
+    /* Charte coach limitée à cette page publique. */
+    .lcdp-page-contact-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav {
+      background: var(--lcdp-color-coach, #8660c8);
+    }
+    .lcdp-page-contact-coach #formulaire-coach-slot .lcdp-box-formulaire__title {
+      color: var(--lcdp-color-coach, #8660c8);
+    }
+    .lcdp-page-contact-coach #formulaire-coach-slot button[type="submit"],
+    .lcdp-page-contact-coach #formulaire-coach-slot button[type="submit"]:hover,
+    .lcdp-page-contact-coach #formulaire-coach-slot button[type="submit"]:focus-visible {
+      background: var(--lcdp-color-coach, #8660c8);
+      border-color: var(--lcdp-color-coach, #8660c8);
+      color: #fff;
     }
   </style>
 </head>
 
-<body>
+<body class="lcdp-page-contact-coach">
   <div class="lcdp-site-page">
 
     <div id="lcdp-bandeau-slot"></div>
