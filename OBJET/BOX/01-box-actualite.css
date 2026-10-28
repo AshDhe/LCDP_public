@@ -20,11 +20,11 @@
 
 /* Groupes Actualité — palette des témoignages En savoir plus. */
 .lcdp-actualite-groupe,.lcdp-actualite-lien-groupe {
-  --actu-groupe:#d64b68;
-  --actu-fond:#fff1f4;
+  --actu-groupe:var(--lcdp-color-parc,#d64b68);
+  --actu-fond:var(--lcdp-color-parc-soft,#fff1f4);
 }
-.lcdp-actualite-groupe[data-groupe="CLUB"],.lcdp-actualite-lien-groupe[data-groupe="CLUB"] {--actu-groupe:#57754c;--actu-fond:#f2f5ef;}
-.lcdp-actualite-groupe[data-groupe="COACHS"],.lcdp-actualite-lien-groupe[data-groupe="COACHS"] {--actu-groupe:#8660c8;--actu-fond:#f7f3fc;}
+.lcdp-actualite-groupe[data-groupe="CLUB"],.lcdp-actualite-lien-groupe[data-groupe="CLUB"] {--actu-groupe:var(--lcdp-color-membre,#57754c);--actu-fond:var(--lcdp-color-membre-soft,#f2f5ef);}
+.lcdp-actualite-groupe[data-groupe="COACHS"],.lcdp-actualite-lien-groupe[data-groupe="COACHS"] {--actu-groupe:var(--lcdp-color-coach,#8660c8);--actu-fond:var(--lcdp-color-coach-soft,#f7f3fc);}
 .lcdp-actualite-groupe[data-groupe="ASSO"],.lcdp-actualite-lien-groupe[data-groupe="ASSO"] {--actu-groupe:var(--lcdp-color-orange,#f2a23a);--actu-fond:#fff7e9;}
 .lcdp-actualite-groupe {
   display:inline-block;vertical-align:middle;white-space:nowrap;

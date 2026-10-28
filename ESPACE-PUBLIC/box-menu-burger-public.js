@@ -234,7 +234,7 @@
     Object.entries(comptesPublics).forEach(([compte, configuration]) => {
       const bouton = document.createElement("button");
       bouton.type = "button";
-      bouton.className = "lcdp-button lcdp-button-primary";
+      bouton.className = "lcdp-button lcdp-button-compte lcdp-button-compte--" + compte;
       bouton.textContent = configuration.label;
 
       bouton.addEventListener("click", () => {

@@ -1203,3 +1203,30 @@ html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) { display: none !impor
     gap: clamp(15.04px, 3.29vh, 22.56px);
   }
 }
+
+/* Palette commune des comptes : public, membre, parc et coach. */
+:root {
+  --lcdp-color-membre: #57754c;
+  --lcdp-color-membre-soft: #f2f5ef;
+  --lcdp-color-parc: #d64b68;
+  --lcdp-color-parc-soft: #fff1f4;
+  --lcdp-color-coach: #8660c8;
+  --lcdp-color-coach-soft: #f7f3fc;
+}
+
+.lcdp-button-compte--membre { --lcdp-compte-color: var(--lcdp-color-membre); }
+.lcdp-button-compte--parc { --lcdp-compte-color: var(--lcdp-color-parc); }
+.lcdp-button-compte--coach { --lcdp-compte-color: var(--lcdp-color-coach); }
+
+.lcdp-button.lcdp-button-compte {
+  background: var(--lcdp-compte-color);
+  border-color: var(--lcdp-compte-color);
+  color: #fff;
+}
+.lcdp-button.lcdp-button-compte:hover,
+.lcdp-button.lcdp-button-compte:focus-visible {
+  background: var(--lcdp-compte-color);
+  border-color: var(--lcdp-compte-color);
+  color: #fff;
+  box-shadow: 0 0 0 3px var(--lcdp-color-focus);
+}
