@@ -55,15 +55,17 @@
         <div class="lcdp-page-container">
           <div class="lcdp-fiche-parc-page-content lcdp-stack-large">
 
-            <p
-              class="lcdp-mention-connexion"
-              id="lcdp-fiche-parc-status"
-              aria-live="polite"
-            >
-              [Chargement de la fiche parc]
-            </p>
+            <p class="lcdp-mention-connexion" id="lcdp-fiche-parc-status" aria-live="polite" hidden></p>
 
-            <div id="lcdp-fiche-parc-slot"></div>
+            <div id="lcdp-fiche-parc-slot">
+              <div class="lcdp-box-shift-detail-parc lcdp-box-shift-detail-parc--page lcdp-fiche-parc-public__en-chargement">
+                <article class="lcdp-box-shift-detail-parc__card">
+                  <div class="lcdp-fiche-parc-public__attente" role="status" aria-label="Chargement de la fiche du parc">
+                    <img src="../OBJET/BOX/pictowait.gif" data-site-src="/BOX/pictowait.gif" alt="" width="64" height="64">
+                  </div>
+                </article>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -76,6 +78,6 @@
   </div>
 
   <script src="../OBJET/BOX/03-box-galerie.js"></script>
-  <script src="./fiche-parc.js?v=20261028-fiche-v17"></script>
+  <script src="./fiche-parc.js?v=20261028-fiche-public-wait-v18"></script>
 </body>
 </html>

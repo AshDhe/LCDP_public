@@ -275,8 +275,7 @@
       throw new Error("Slot fiche parc introuvable.");
     }
 
-    slot.innerHTML = "";
-
+    // Conserver la fiche d'attente plein format pendant le chargement du fragment.
     const fragmentShift = await chargerFragmentObjetFiche(
       {},
       "/BOX/04-box-shift-detail-parc.html"
@@ -304,7 +303,19 @@
       boutonFermerShift.remove();
     }
 
-    slot.appendChild(shift);
+    const attente = document.createElement("div");
+    attente.className = "lcdp-fiche-parc-public__attente";
+    attente.setAttribute("role", "status");
+    attente.setAttribute("aria-label", "Chargement de la fiche du parc");
+    const gif = document.createElement("img");
+    gif.src = construireUrlObjetFiche({}, "/BOX/pictowait.gif");
+    gif.alt = "";
+    gif.width = 64;
+    gif.height = 64;
+    attente.appendChild(gif);
+    shift.querySelector(".lcdp-box-shift-detail-parc__card")?.appendChild(attente);
+    shift.classList.add("lcdp-fiche-parc-public__en-chargement");
+    slot.replaceChildren(shift);
 
     await rendreFicheParcDansConteneur(
       contenuShift,
@@ -322,6 +333,9 @@
         onReserverParc: afficherBlocageReservationPublique
       }
     );
+
+    shift.classList.remove("lcdp-fiche-parc-public__en-chargement");
+    attente.remove();
 
     const nom = parc.nom || "Parc";
     document.title = "Parc de " + nom + " - La Clé du Parc";

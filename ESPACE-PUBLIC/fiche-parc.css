@@ -35,3 +35,14 @@
 .lcdp-box-shift-detail-parc--page .lcdp-box-fiche-parc__close {
   display: none;
 }
+
+/* Fiche partagée : le cadre définitif est visible dès l'ouverture, GIF centré. */
+.lcdp-fiche-parc-public__attente {
+  min-height: min(70dvh, 660px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lcdp-fiche-parc-public__attente img { display: block; width: 64px; height: 64px; object-fit: contain; }
+.lcdp-fiche-parc-public__en-chargement .lcdp-box-shift-detail-parc__content { display: none; }
+.lcdp-fiche-parc-public__en-chargement .lcdp-fiche-parc-public__attente { display: flex; }
