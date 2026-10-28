@@ -12,16 +12,16 @@
 
   const comptesPublics = {
     membre: {
-      label: "Espace MEMBRE",
+      label: "Compte membre",
       cheminConnexion: "/ESPACE-PUBLIC/connexion-membre.html?source=menu-mon-compte"
     },
     parc: {
-      label: "Espace PARC",
+      label: "Compte parc",
       espace: "parc",
       cheminConnexion: "/ESPACE-PARC/connexion-parc.html?source=menu-mon-compte"
     },
     coach: {
-      label: "Espace COACH",
+      label: "Compte coach",
       espace: "coach",
       cheminConnexion: "/ESPACE-COACH/connexion-coach.html?source=menu-mon-compte"
     }
@@ -227,7 +227,7 @@
     }
 
     titre.textContent = "Connexion";
-    texte.textContent = "Choisissez votre espace";
+    texte.textContent = "Choisissez votre compte";
 
     actions.innerHTML = "";
 
