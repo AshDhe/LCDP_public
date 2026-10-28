@@ -35,6 +35,29 @@
   const statut=document.createElement('p');statut.className='lcdp-box-formulaire__note';statut.setAttribute('role','status');form.append(statut);
   const widget=document.createElement('div');form.querySelector('[data-lcdp-formulaire-actions]')?.before(widget);
   if(!widget.isConnected)bouton.before(widget);
+  // Indicateur limité aux contacts parc et coach, sans changement des autres formulaires.
+  let attenteVerification=null,delaiVerification=null;
+  if(['coach','resparc'].includes(config.type)){
+   attenteVerification=document.createElement('span');
+   attenteVerification.setAttribute('role','status');
+   attenteVerification.setAttribute('aria-label','Vérification du formulaire en cours');
+   const image=document.createElement('img');
+   image.width=24;image.height=24;image.alt='';image.setAttribute('aria-hidden','true');
+   const c=window.SITE_CONFIG||{};
+   const base=String(c.objetBaseUrl||c.OBJET_BASE||((window.SITE_BASE||'..')+'/OBJET')).replace(/\/$/,'');
+   image.src=typeof c.objetUrl==='function'?c.objetUrl('/BOX/pictowait.gif'):base+'/BOX/pictowait.gif';
+   attenteVerification.append(image);bouton.before(attenteVerification);
+  }
+  function afficherAttenteVerification(active){
+   if(!attenteVerification)return;
+   clearTimeout(delaiVerification);
+   attenteVerification.hidden=!active;
+   if(active)delaiVerification=setTimeout(()=>{
+    attenteVerification.hidden=true;
+    statut.textContent='La vérification prend plus de temps que prévu. Si une case de vérification est affichée, cochez-la. Sinon, rechargez la page pour réessayer.';
+   },30000);
+  }
+  afficherAttenteVerification(true);
   let token='',id=crypto.randomUUID(),empreinte='',enCours=false,widgetId=null;
   bouton.disabled=true;statut.textContent=['coach','resparc'].includes(config.type)?'':'Préparation de la vérification…';
   form.addEventListener('submit',async event=>{
@@ -50,16 +73,16 @@
     form.reset();id=crypto.randomUUID();empreinte='';statut.textContent='Votre demande est enregistrée. Merci.';
     await message('Votre demande est enregistrée. Merci.');
    }catch(e){statut.textContent=e.name==='TimeoutError'?'Envoi non confirmé. Réessayez avec les mêmes informations.':e.message;}
-   finally{enCours=false;form.removeAttribute('aria-busy');token='';bouton.disabled=true;if(widgetId!==null)window.turnstile.reset(widgetId);}
+   finally{enCours=false;form.removeAttribute('aria-busy');token='';bouton.disabled=true;if(widgetId!==null){afficherAttenteVerification(true);window.turnstile.reset(widgetId);}}
   });
   try{
    const r=await fetch(config.endpoint,{headers:{Accept:'application/json'},cache:'no-store'});const data=await r.json();
    if(!r.ok||data.type!==config.type||!data.sitekey)throw new Error('Formulaire momentanément indisponible.');
    await chargerTurnstile();
    widgetId=window.turnstile.render(widget,{sitekey:data.sitekey,action:config.type,size:'flexible',appearance:['coach','resparc'].includes(config.type)?'interaction-only':'always',
-    callback:value=>{token=value;bouton.disabled=enCours;statut.textContent='';},
-    'expired-callback':()=>{token='';bouton.disabled=true;statut.textContent='Vérification expirée. Renouvelez-la.';},
-    'error-callback':()=>{token='';bouton.disabled=true;statut.textContent='Vérification indisponible. Réessayez.';}});
-  }catch(e){statut.textContent=e.message||'Formulaire momentanément indisponible. Rechargez la page.';}
+    callback:value=>{afficherAttenteVerification(false);token=value;bouton.disabled=enCours;statut.textContent='';},
+    'expired-callback':()=>{afficherAttenteVerification(true);token='';bouton.disabled=true;statut.textContent='Vérification expirée. Renouvelez-la.';},
+    'error-callback':()=>{afficherAttenteVerification(false);token='';bouton.disabled=true;statut.textContent='Vérification indisponible. Réessayez.';}});
+  }catch(e){afficherAttenteVerification(false);statut.textContent=e.message||'Formulaire momentanément indisponible. Rechargez la page.';}
  };
 })();
