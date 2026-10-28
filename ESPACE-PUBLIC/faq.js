@@ -84,10 +84,14 @@
     await affichagePret;
     window.LCDP_FAQ.afficher(document.getElementById("lcdp-faq-liste"), data.blocs);
     status.textContent = ""; status.hidden = true;
+    document.getElementById("lcdp-faq-liste").setAttribute("aria-busy", "false");
   }
   initialiser().catch(async error => {
     await page.stylesPrets;
-    document.getElementById("lcdp-faq-status").textContent = error.message || "Les FAQ sont temporairement indisponibles.";
+    const status = document.getElementById("lcdp-faq-status");
+    status.textContent = error.message || "Les FAQ sont temporairement indisponibles.";
+    status.hidden = false;
+    document.getElementById("lcdp-faq-liste").setAttribute("aria-busy", "false");
     clearTimeout(window.LCDP_FAQ_SECOURS);
     document.documentElement.classList.remove("lcdp-faq-preparation");
   });
