@@ -892,3 +892,33 @@
   width: 21.78px !important; height: 21.78px !important; flex: 0 0 21.78px !important;
  }
 }
+
+/* V17 - Quatre photographies : une colonne mobile, deux colonnes tablette/PC. */
+.lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+@media (min-width:768px) {
+  .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+  }
+}
+/* Boutons fiche publique et tunnel : charte jaune/blanc. */
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-partager],
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] {
+  background:#f2a23a !important; border-color:#f2a23a !important; color:#fff !important;
+}
+.lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-icone,
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-icone,
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] .lcdp-box-card-parc__action-icone {
+  filter: brightness(0) invert(1) !important;
+}
+.lcdp-box-fiche-parc__departement {
+  margin:5px 0 2px; font-size:.82rem; line-height:1.3;
+  font-weight:400; color:var(--lcdp-color-text-muted,#606b60);
+}
+
+/* V17 : le bouton public de planning est jaune et sa police blanche. */
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-libelle,
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] .lcdp-box-card-parc__action-libelle,
+.lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-libelle { color:#fff !important; }

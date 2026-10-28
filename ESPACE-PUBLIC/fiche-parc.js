@@ -14,7 +14,7 @@
   const MODE_USAGE_MEMBRE =
     "reservation-membre";
   const MESSAGE_PLANIFICATION_PUBLIQUE =
-    "Vous devez vous connecter à l’espace membre pour réserver.";
+    "Connectez-vous à votre espace membre pour consulter le planning du parc.";
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
     "plage1",
@@ -70,6 +70,7 @@
   );
 
   let pageInitialisee = false;
+  let promesseAlertePublique = null;
   let parcActif = null;
   let accesPublic = null;
   const parametresPartage = new URLSearchParams(window.location.search);
@@ -118,6 +119,11 @@
 
     pageInitialisee = true;
     appliquerRoutesSite(document);
+    // Préchargement non bloquant : l’alerte Planning doit apparaître immédiatement.
+    promesseAlertePublique = Promise.all([
+      chargerStyleObjetFiche({}, "/BOX/02-box-alerte.css"),
+      chargerFragmentObjetFiche({}, "/BOX/02-box-alerte.html")
+    ]).then(([, fragment]) => fragment).catch(() => null);
 
     const promesseBandeau = initialiserBandeau().catch((erreur) => {
       console.warn("Bandeau public indisponible.", erreur);
@@ -142,7 +148,8 @@
         localitesCarte: Array.isArray(fiche.localites)
           ? fiche.localites
           : [],
-        acces: fiche.acces || null
+        acces: fiche.acces || null,
+        nomDepartement: fiche.nomDepartement || fiche.parc?.nomDepartement || ""
       };
 
       accesPublic = fiche.acces || null;
@@ -256,7 +263,8 @@
       resparc: data.resparc || null,
       parcsDepartement: Array.isArray(data.parcs) ? data.parcs : [],
       localites: Array.isArray(data.localites) ? data.localites : [],
-      acces: data.acces || null
+      acces: data.acces || null,
+      nomDepartement: data.nomDepartement || ""
     };
   }
 
@@ -399,13 +407,18 @@
     if (departementSousTitre) {
       const code = nettoyerDepartement(parc?.dptmt || parc?.departement);
       const libelle = nettoyerTexte(options.nomDepartement || parc?.nomDepartement || parc?.nomdepartement);
-      departementSousTitre.textContent = [libelle, code || ""].filter(Boolean).join(" ");
+      departementSousTitre.textContent = libelle ? `${libelle} (${code})` : code;
       departementSousTitre.hidden = !(libelle || code);
     }
     if (normaliserModeUsagePlanning(options) === MODE_USAGE_MEMBRE) {
       fiche.classList.add("lcdp-box-fiche-parc--planifier-tunnel");
       // La sélection du parc et l'ouverture du planning se font dans la liste des parcs.
       boutonPlanning?.remove();
+      boutonPlanifier?.remove();
+    }
+
+    if (normaliserModeUsagePlanning(options) !== MODE_USAGE_MEMBRE) {
+      fiche.classList.add("lcdp-box-fiche-parc--publique");
       boutonPlanifier?.remove();
     }
 
@@ -578,6 +591,7 @@
             ...parcCourant,
             ...(fiche?.parc || {}),
             resparc: fiche?.resparc || null,
+            nomDepartement: fiche?.nomDepartement || "",
             parcsDepartement: Array.isArray(
               fiche?.parcsDepartement
             )
@@ -1099,7 +1113,7 @@
     ) || "Parc";
     const cartes = [];
 
-    for (let index = 1; index <= 6; index += 1) {
+    for (let index = 1; index <= 4; index += 1) {
       const numero = String(index).padStart(2, "0");
 
       cartes.push({
@@ -4300,18 +4314,17 @@
     message,
     couleurAction = "orange"
   ) {
-    await chargerStyleObjetFiche(
-      {},
-      "/BOX/02-box-alerte.css"
-    );
+    if (!promesseAlertePublique) {
+      await chargerStyleObjetFiche({}, "/BOX/02-box-alerte.css");
+    }
 
     const conteneur = document.createElement("div");
     document.body.appendChild(conteneur);
 
-    const fragment = await chargerFragmentObjetFiche(
-      {},
-      "/BOX/02-box-alerte.html"
-    );
+    const fragmentPrecharge = promesseAlertePublique ? await promesseAlertePublique : null;
+    const fragment = fragmentPrecharge
+      ? fragmentPrecharge.cloneNode(true)
+      : await chargerFragmentObjetFiche({}, "/BOX/02-box-alerte.html");
     conteneur.appendChild(fragment);
 
     const alerte = conteneur.querySelector(
