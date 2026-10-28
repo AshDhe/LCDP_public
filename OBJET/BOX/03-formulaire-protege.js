@@ -36,7 +36,7 @@
   const widget=document.createElement('div');form.querySelector('[data-lcdp-formulaire-actions]')?.before(widget);
   if(!widget.isConnected)bouton.before(widget);
   let token='',id=crypto.randomUUID(),empreinte='',enCours=false,widgetId=null;
-  bouton.disabled=true;statut.textContent='Préparation de la vérification…';
+  bouton.disabled=true;statut.textContent=['coach','resparc'].includes(config.type)?'':'Préparation de la vérification…';
   form.addEventListener('submit',async event=>{
    event.preventDefault();if(enCours)return;
    if(!form.reportValidity())return;
