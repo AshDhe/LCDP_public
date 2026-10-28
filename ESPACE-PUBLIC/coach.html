@@ -56,7 +56,16 @@
 
             <h1 class="lcdp-title-page-center">COACH</h1>
 
-            <div id="formulaire-coach-slot"></div>
+            <div id="lcdp-contact-attente" class="lcdp-pictowait" role="status" aria-live="polite" aria-label="Chargement du formulaire">
+              <img class="lcdp-pictowait__image" src="../OBJET/BOX/pictowait.gif" data-site-src="/OBJET/BOX/pictowait.gif" alt="" width="56" height="56" aria-hidden="true">
+            </div>
+            <div id="lcdp-contact-erreur" role="alert" hidden>
+              <p>Le formulaire n’a pas pu être chargé.</p>
+              <button type="button" class="lcdp-button lcdp-button-secondary" onclick="window.location.reload()">Réessayer</button>
+            </div>
+            <div id="lcdp-contact-contenu" hidden>
+              <div id="formulaire-coach-slot"></div>
+            </div>
 
           </div>
         </div>
@@ -241,16 +250,33 @@
         await window.LCDP_initialiserContactCoach();
       }
 
+
+      let formulairePret = false;
+      function echecChargementContact() {
+        if (formulairePret) return;
+        document.getElementById("lcdp-contact-attente").hidden = true;
+        document.getElementById("lcdp-contact-erreur").hidden = false;
+      }
+      const delaiContact = window.setTimeout(echecChargementContact, 20000);
+      document.addEventListener("lcdp:contact-formulaire-pret", (event) => {
+        if (event.detail?.type !== "coach") return;
+        formulairePret = true;
+        window.clearTimeout(delaiContact);
+        document.getElementById("lcdp-contact-attente").hidden = true;
+        document.getElementById("lcdp-contact-erreur").hidden = true;
+        document.getElementById("lcdp-contact-contenu").hidden = false;
+      });
+
       async function initialiserPage() {
         appliquerRoutesSite(document);
-        await initialiserBandeau();
+        initialiserBandeau().catch(console.error);
 
         await initialiserDemande();
 
-        await initialiserFooter();
+        initialiserFooter().catch(console.error);
       }
 
-      initialiserPage().catch(console.error);
+      initialiserPage().catch((error) => { console.error(error); echecChargementContact(); });
     })();
   </script>
 </body>
