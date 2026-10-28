@@ -41,6 +41,19 @@
       border-color: var(--lcdp-color-parc, #d64b68);
       color: #fff;
     }
+
+    #lcdp-contact-attente:not([hidden]) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40vh;
+      min-height: 40svh;
+      width: 100%;
+    }
+    #lcdp-contact-attente[hidden], #lcdp-contact-contenu[hidden], #lcdp-contact-erreur[hidden] {
+      display: none !important;
+    }
+    #lcdp-contact-erreur { text-align: center; }
   </style>
 </head>
 
@@ -203,34 +216,41 @@
         await chargerScriptUneFois("/OBJET/BOX/03-formulaire-protege.js");
         const base = String(window.SITE_CONFIG?.parcBaseUrl || window.SITE_BASE || "").replace(/\/$/, "");
         const script = document.createElement("script");
-        script.src = (base || "..") + "/ESPACE-PARC/contact-resparc.js";
+        script.src = (base || "..") + "/ESPACE-PARC/contact-resparc.js?v=20261028-contact-gif-2";
         await new Promise((resolve,reject) => { script.onload=resolve;script.onerror=reject;document.body.appendChild(script); });
         await window.LCDP_initialiserContactResparc();
       }
 
 
       let formulairePret = false;
+      const contenuContact = document.getElementById("lcdp-contact-contenu");
+      function afficherFormulaireContact() {
+        const form = contenuContact.querySelector("form");
+        if (!form || form.querySelectorAll("input:not([type='hidden'])").length < 6 || !form.querySelector("button[type='submit']")) return false;
+        formulairePret = true;
+        window.clearTimeout(delaiContact);
+        observationContact.disconnect();
+        document.getElementById("lcdp-contact-attente").hidden = true;
+        document.getElementById("lcdp-contact-erreur").hidden = true;
+        contenuContact.hidden = false;
+        return true;
+      }
       function echecChargementContact() {
-        if (formulairePret) return;
+        if (formulairePret || afficherFormulaireContact()) return;
         document.getElementById("lcdp-contact-attente").hidden = true;
         document.getElementById("lcdp-contact-erreur").hidden = false;
       }
+      const observationContact = new MutationObserver(afficherFormulaireContact);
+      observationContact.observe(contenuContact, {childList: true, subtree: true});
       const delaiContact = window.setTimeout(echecChargementContact, 20000);
-      document.addEventListener("lcdp:contact-formulaire-pret", (event) => {
-        if (event.detail?.type !== "parc") return;
-        formulairePret = true;
-        window.clearTimeout(delaiContact);
-        document.getElementById("lcdp-contact-attente").hidden = true;
-        document.getElementById("lcdp-contact-erreur").hidden = true;
-        document.getElementById("lcdp-contact-contenu").hidden = false;
-      });
+      document.addEventListener("lcdp:contact-formulaire-pret", afficherFormulaireContact);
 
       async function initialiserPage() {
         appliquerRoutesSite(document);
         initialiserBandeau().catch(console.error);
-        await initialiserDemande();
-
         initialiserFooter().catch(console.error);
+        await initialiserDemande();
+        afficherFormulaireContact();
       }
 
       initialiserPage().catch((error) => { console.error(error); echecChargementContact(); });
