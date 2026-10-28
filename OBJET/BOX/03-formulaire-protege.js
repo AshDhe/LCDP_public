@@ -36,9 +36,20 @@
   const widget=document.createElement('div');form.querySelector('[data-lcdp-formulaire-actions]')?.before(widget);
   if(!widget.isConnected)bouton.before(widget);
   // Indicateur limité aux contacts parc et coach, sans changement des autres formulaires.
-  let attenteVerification=null,delaiVerification=null;
+  let attenteVerification=null,delaiVerification=null,libelleVerification=null;
+  const ariaLabelInitial=bouton.getAttribute('aria-label');
   if(['coach','resparc'].includes(config.type)){
+   libelleVerification=document.createElement('span');
+   while(bouton.firstChild)libelleVerification.append(bouton.firstChild);
+   bouton.append(libelleVerification);
+   bouton.style.position='relative';
    attenteVerification=document.createElement('span');
+   attenteVerification.style.position='absolute';
+   attenteVerification.style.left='50%';
+   attenteVerification.style.top='50%';
+   attenteVerification.style.transform='translate(-50%, -50%)';
+   attenteVerification.style.lineHeight='0';
+   attenteVerification.style.pointerEvents='none';
    attenteVerification.setAttribute('role','status');
    attenteVerification.setAttribute('aria-label','Vérification du formulaire en cours');
    const image=document.createElement('img');
@@ -46,14 +57,18 @@
    const c=window.SITE_CONFIG||{};
    const base=String(c.objetBaseUrl||c.OBJET_BASE||((window.SITE_BASE||'..')+'/OBJET')).replace(/\/$/,'');
    image.src=typeof c.objetUrl==='function'?c.objetUrl('/BOX/pictowait.gif'):base+'/BOX/pictowait.gif';
-   attenteVerification.append(image);bouton.before(attenteVerification);
+   attenteVerification.append(image);bouton.append(attenteVerification);
   }
   function afficherAttenteVerification(active){
    if(!attenteVerification)return;
    clearTimeout(delaiVerification);
    attenteVerification.hidden=!active;
+   libelleVerification.style.visibility=active?'hidden':'';
+   if(active)bouton.setAttribute('aria-label','Vérification du formulaire en cours');
+   else if(ariaLabelInitial===null)bouton.removeAttribute('aria-label');
+   else bouton.setAttribute('aria-label',ariaLabelInitial);
    if(active)delaiVerification=setTimeout(()=>{
-    attenteVerification.hidden=true;
+    afficherAttenteVerification(false);
     statut.textContent='La vérification prend plus de temps que prévu. Si une case de vérification est affichée, cochez-la. Sinon, rechargez la page pour réessayer.';
    },30000);
   }
