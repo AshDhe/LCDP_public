@@ -126,16 +126,16 @@
   border-color: #d98b24;
 }
 .lcdp-box-legende__carre--famille {
-  background: var(--lcdp-color-blue, #2f6fb3);
-  border-color: var(--lcdp-color-blue-hover, #255c96);
+  background: #626262;
+  border-color: #555555;
 }
 .lcdp-box-legende__carre--coach {
   background: var(--lcdp-color-coach, #8660c8);
   border-color: #704aa9;
 }
 .lcdp-box-legende__carre--famille-coach {
-  background: #80583d;
-  border-color: #69462e;
+  background: #287a53;
+  border-color: #216743;
 }
 
 /* PLANIFIER : légende devenue barre de filtres, quatre cases sur une seule ligne. */
