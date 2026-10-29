@@ -91,9 +91,7 @@
     const slot=document.getElementById('lcdp-actualite-bandeau');if(!slot)return;
     const container=node('div',null,'lcdp-page-container'),width=node('div',null,'lcdp-page-content');
     const bar=node('nav',null,'lcdp-boxtext__text--center');bar.setAttribute('aria-label','Actualité');
-    bar.style.cssText='display:flex;justify-content:center;align-items:center;text-align:center;height:3em;min-height:3em;line-height:1.5;overflow:hidden;border:0;background:transparent;box-shadow:none';
     const a=link('',articleUrl(articles[0].id),'lcdp-link-secondary');
-    a.style.cssText='display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;overflow-wrap:anywhere;white-space:normal;min-width:0;max-width:100%;max-height:3em;font-size:inherit;line-height:inherit;text-align:center;color:var(--lcdp-color-green,#57754c);border:0;outline-offset:4px;box-shadow:none;background:transparent;text-decoration:none;transform:none;animation:none;transition:none';
     a.classList.add('lcdp-actu-bandeau-titre');
     const visible=node('span',null,'lcdp-actu-bandeau-texte');visible.setAttribute('aria-hidden','true');const badge=node('span');const ligne=node('span',null,'lcdp-actu-bandeau-ligne');ligne.append(badge,visible);a.append(ligne);
     bar.append(a);width.append(bar);container.append(width);slot.replaceChildren(container);

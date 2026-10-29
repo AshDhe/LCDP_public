@@ -106,8 +106,39 @@
   font-size: clamp(22.1px, 5.1vw, 28.9px);
 }
 
-/* Bandeau des accueils : centrer verticalement le cartouche sur le texte du titre.
-   Ne modifie pas les cartouches des listes ni des pages article. */
-#lcdp-actualite-bandeau .lcdp-actu-bandeau-titre .lcdp-actualite-groupe {
-  vertical-align: middle;
+
+/* Bandeau Actualités : composant commun aux accueils public et membre. */
+#lcdp-actualite-bandeau { margin-top: 24px; }
+#lcdp-actualite-bandeau nav.lcdp-boxtext__text--center {
+  display: flex; align-items: center; justify-content: center;
+  box-sizing: border-box; height: 3em; min-height: 3em;
+  line-height: 1.5; text-align: center; overflow: hidden;
+  border: 0; background: transparent; box-shadow: none;
+}
+#lcdp-actualite-bandeau .lcdp-actu-bandeau-titre {
+  display: flex; align-items: center; justify-content: center;
+  box-sizing: border-box; min-width: 0; max-width: 100%; max-height: 3em;
+  overflow: hidden; font-size: inherit; line-height: 1.5;
+  text-align: center; color: var(--lcdp-color-green,#57754c);
+  border: 0; outline-offset: 4px; box-shadow: none;
+  background: transparent; text-decoration: none;
+  transform: none; animation: none; transition: none;
+}
+#lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: center; justify-content: center;
+  gap: .35em; min-width: 0; max-width: 100%;
+}
+#lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne > span:first-child {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 auto; min-width: 0; line-height: 1;
+}
+#lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne .lcdp-actualite-groupe {
+  display: inline-flex; align-items: center; justify-content: center;
+  margin: 0; vertical-align: middle;
+}
+#lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
+  display: block; flex: 0 1 auto; min-width: 0;
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  line-height: 1.5; overflow-wrap: normal;
 }
