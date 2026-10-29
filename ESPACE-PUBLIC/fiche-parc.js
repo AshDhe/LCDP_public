@@ -1132,7 +1132,7 @@
     ) || "Parc";
     const cartes = [];
 
-    for (let index = 1; index <= 6; index += 1) {
+    for (let index = 1; index <= 4; index += 1) {
       const numero = String(index).padStart(2, "0");
 
       cartes.push({
