@@ -95,7 +95,7 @@
     const a=link('',articleUrl(articles[0].id),'lcdp-link-secondary');
     a.style.cssText='display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;overflow-wrap:anywhere;white-space:normal;min-width:0;max-width:100%;max-height:3em;font-size:inherit;line-height:inherit;text-align:center;color:var(--lcdp-color-green,#57754c);border:0;outline-offset:4px;box-shadow:none;background:transparent;text-decoration:none;transform:none;animation:none;transition:none';
     a.classList.add('lcdp-actu-bandeau-titre');
-    const visible=node('span');visible.setAttribute('aria-hidden','true');const badge=node('span');a.append(badge,document.createTextNode(' - '),visible);
+    const visible=node('span');visible.setAttribute('aria-hidden','true');const badge=node('span');a.append(badge,document.createTextNode(' '),visible);
     bar.append(a);width.append(bar);container.append(width);slot.replaceChildren(container);
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
     let index=0,position=0,holding=false,timer,stopped=false;
@@ -104,7 +104,7 @@
     function start(){
       const article=articles[index];characters=letters(String(article.titre));position=0;holding=false;
       badge.replaceChildren(window.LCDP_ACTUALITE_GROUPES.cartouche(article.groupe));
-      a.href=articleUrl(article.id);a.setAttribute('aria-label',window.LCDP_ACTUALITE_GROUPES.groupes[window.LCDP_ACTUALITE_GROUPES.cle(article.groupe)].label+' - '+article.titre);visible.textContent='';
+      a.href=articleUrl(article.id);a.setAttribute('aria-label',window.LCDP_ACTUALITE_GROUPES.groupes[window.LCDP_ACTUALITE_GROUPES.cle(article.groupe)].label+' '+article.titre);visible.textContent='';
     }
     function tick(){
       if(stopped)return;
