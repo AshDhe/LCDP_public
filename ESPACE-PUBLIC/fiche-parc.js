@@ -14,7 +14,7 @@
   const MODE_USAGE_MEMBRE =
     "reservation-membre";
   const MESSAGE_PLANIFICATION_PUBLIQUE =
-    "Vous devez vous connecter à l’espace membre pour réserver.";
+    "Connectez-vous à votre espace membre pour consulter le planning du parc.";
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
     "plage1",
@@ -70,6 +70,7 @@
   );
 
   let pageInitialisee = false;
+  let promesseAlertePublique = null;
   let parcActif = null;
   let accesPublic = null;
   const parametresPartage = new URLSearchParams(window.location.search);
@@ -88,6 +89,7 @@
 
   window.LCDP_FicheParc = {
     chargerFicheParc,
+    rendreCarteDansConteneur: ajouterCarteParc,
     monterDansConteneur:
       monterParcoursFicheParcDansConteneur,
     rendreDansConteneur: rendreFicheParcDansConteneur,
@@ -118,6 +120,11 @@
 
     pageInitialisee = true;
     appliquerRoutesSite(document);
+    // Préchargement non bloquant : l’alerte Planning doit apparaître immédiatement.
+    promesseAlertePublique = Promise.all([
+      chargerStyleObjetFiche({}, "/BOX/02-box-alerte.css"),
+      chargerFragmentObjetFiche({}, "/BOX/02-box-alerte.html")
+    ]).then(([, fragment]) => fragment).catch(() => null);
 
     const promesseBandeau = initialiserBandeau().catch((erreur) => {
       console.warn("Bandeau public indisponible.", erreur);
@@ -142,7 +149,8 @@
         localitesCarte: Array.isArray(fiche.localites)
           ? fiche.localites
           : [],
-        acces: fiche.acces || null
+        acces: fiche.acces || null,
+        nomDepartement: fiche.nomDepartement || fiche.parc?.nomDepartement || ""
       };
 
       accesPublic = fiche.acces || null;
@@ -256,7 +264,8 @@
       resparc: data.resparc || null,
       parcsDepartement: Array.isArray(data.parcs) ? data.parcs : [],
       localites: Array.isArray(data.localites) ? data.localites : [],
-      acces: data.acces || null
+      acces: data.acces || null,
+      nomDepartement: data.nomDepartement || ""
     };
   }
 
@@ -267,8 +276,7 @@
       throw new Error("Slot fiche parc introuvable.");
     }
 
-    slot.innerHTML = "";
-
+    // Conserver la fiche d'attente plein format pendant le chargement du fragment.
     const fragmentShift = await chargerFragmentObjetFiche(
       {},
       "/BOX/04-box-shift-detail-parc.html"
@@ -296,7 +304,19 @@
       boutonFermerShift.remove();
     }
 
-    slot.appendChild(shift);
+    const attente = document.createElement("div");
+    attente.className = "lcdp-fiche-parc-public__attente";
+    attente.setAttribute("role", "status");
+    attente.setAttribute("aria-label", "Chargement de la fiche du parc");
+    const gif = document.createElement("img");
+    gif.src = construireUrlObjetFiche({}, "/BOX/pictowait.gif");
+    gif.alt = "";
+    gif.width = 64;
+    gif.height = 64;
+    attente.appendChild(gif);
+    shift.querySelector(".lcdp-box-shift-detail-parc__card")?.appendChild(attente);
+    shift.classList.add("lcdp-fiche-parc-public__en-chargement");
+    slot.replaceChildren(shift);
 
     await rendreFicheParcDansConteneur(
       contenuShift,
@@ -314,6 +334,9 @@
         onReserverParc: afficherBlocageReservationPublique
       }
     );
+
+    shift.classList.remove("lcdp-fiche-parc-public__en-chargement");
+    attente.remove();
 
     const nom = parc.nom || "Parc";
     document.title = "Parc de " + nom + " - La Clé du Parc";
@@ -392,7 +415,26 @@
     );
 
     if (titre) {
-      titre.textContent = nom;
+      const nomSansPrefixe = nom.replace(/^parc\s+(?:de\s+|d['’]\s*)?/i, "").trim();
+      titre.textContent = "Parc de " + (nomSansPrefixe || nom);
+    }
+    const departementSousTitre = fiche.querySelector("[data-lcdp-fiche-parc-departement]");
+    if (departementSousTitre) {
+      const code = nettoyerDepartement(parc?.dptmt || parc?.departement);
+      const libelle = nettoyerTexte(options.nomDepartement || parc?.nomDepartement || parc?.nomdepartement);
+      departementSousTitre.textContent = libelle ? `${libelle} (${code})` : code;
+      departementSousTitre.hidden = !(libelle || code);
+    }
+    if (normaliserModeUsagePlanning(options) === MODE_USAGE_MEMBRE) {
+      fiche.classList.add("lcdp-box-fiche-parc--planifier-tunnel");
+      // La sélection du parc et l'ouverture du planning se font dans la liste des parcs.
+      boutonPlanning?.remove();
+      boutonPlanifier?.remove();
+    }
+
+    if (normaliserModeUsagePlanning(options) !== MODE_USAGE_MEMBRE) {
+      fiche.classList.add("lcdp-box-fiche-parc--publique");
+      boutonPlanifier?.remove();
     }
 
     if (boutonLeParc) {
@@ -575,6 +617,7 @@
             ...parcCourant,
             ...(fiche?.parc || {}),
             resparc: fiche?.resparc || null,
+            nomDepartement: fiche?.nomDepartement || "",
             parcsDepartement: Array.isArray(
               fiche?.parcsDepartement
             )
@@ -652,12 +695,6 @@
     ) {
       const parcCible = actualiserParc(parc);
 
-      if (
-        !(await verifierPlanification(parcCible))
-      ) {
-        return;
-      }
-
       await afficherVue(
         "planning",
         parcCible
@@ -730,7 +767,6 @@
         .includes(vueDemandee)
         ? vueDemandee
         : "fiche";
-      if (vue === "planning" && !(await verifierPlanification(parc))) return;
       const operation = ++operationCourante;
 
       actualiserParc(parc);
@@ -1180,10 +1216,17 @@
     if (filtres) filtres.hidden = true;
     if (statut) statut.hidden = true;
     cardSlot.hidden = true;
+    if (options.carteNavigation) {
+      carte.classList.add("lcdp-carte-dynamique--navigation");
+      cardSlot.className = "lcdp-planifier-carte-cartouche";
+      carte.appendChild(cardSlot);
+    }
 
     svg.setAttribute("focusable", "false");
     svg.setAttribute("tabindex", "-1");
-    svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+    svg.setAttribute("preserveAspectRatio", options.carteNavigation ? "xMidYMid meet" : "xMidYMid slice");
+
+    if (options.carteNavigation) svg.setAttribute("role", "group");
 
     const codeDepartement = nettoyerDepartement(parc.dptmt || parc.departement);
     const features = Array.isArray(geojson?.features) ? geojson.features : [];
@@ -1559,7 +1602,11 @@
         coucheLocalites.appendChild(groupe);
       });
 
+    let numeroCard = 0;
+    let carteDetruite = false;
+
     function fermerCardParc() {
+      numeroCard += 1;
       cardSlot.innerHTML = "";
       cardSlot.hidden = true;
       cardSlot.classList.remove("is-open");
@@ -1567,7 +1614,17 @@
     }
 
     async function ouvrirCardParc(parcCarte) {
+      const numero = ++numeroCard;
+      if (typeof options.creerCardParcCarte === "function") {
+        const card = await options.creerCardParcCarte(parcCarte);
+        if (carteDetruite || numero !== numeroCard || !card) return;
+        cardSlot.replaceChildren(card);
+        cardSlot.hidden = false;
+        cardSlot.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
+        return;
+      }
       const card = (await obtenirTemplateCardParcFiche(options)).cloneNode(true);
+      if (carteDetruite || numero !== numeroCard) return;
       card.classList.add("lcdp-box-card-parc--carte-publique");
       card.removeAttribute("data-action");
       card.removeAttribute("tabindex");
@@ -1676,6 +1733,10 @@
     function ajouterMarqueurParc(parcCarte, estParcActif) {
       const longitude = parcCarte.lngparc ?? parcCarte.longitude ?? parcCarte.lngloc;
       const latitude = parcCarte.latparc ?? parcCarte.latitude ?? parcCarte.latloc;
+      if (options.carteNavigation && (
+        longitude == null || latitude == null ||
+        String(longitude).trim() === "" || String(latitude).trim() === ""
+      )) return;
       const point = projeterCoordonnee(longitude, latitude);
 
       if (!point) return;
@@ -1701,6 +1762,19 @@
       marker.setAttribute("focusable", "false");
       marker.setAttribute("tabindex", "-1");
       marker.setAttribute("aria-hidden", "true");
+      if (options.carteNavigation) {
+        marker.setAttribute("focusable", "true");
+        marker.setAttribute("tabindex", "0");
+        marker.removeAttribute("aria-hidden");
+        marker.setAttribute("role", "button");
+        marker.setAttribute("aria-label", "Afficher " + (parcCarte.nom || parcCarte.nomparc || "le parc"));
+        marker.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          event.stopPropagation();
+          ouvrirCardParc(parcCarte).catch(console.error);
+        });
+      }
 
       groupe.appendChild(marker);
       coucheParcs.appendChild(groupe);
@@ -1724,7 +1798,9 @@
       ajouterMarqueurParc(parcCarte, false);
     });
 
-    ajouterMarqueurParc(parcCourant || parc, true);
+    if (!options.carteNavigation || parcCourant) {
+      ajouterMarqueurParc(parcCourant || parc, !options.carteNavigation);
+    }
 
     svg.addEventListener("click", (event) => {
       const cible = event.target instanceof Element ? event.target : null;
@@ -1750,6 +1826,13 @@
     );
 
     appliquerViewBox();
+    return {
+      detruire() {
+        carteDetruite = true;
+        numeroCard += 1;
+        window.removeEventListener("resize", actualiserTailleElementsCarte);
+      }
+    };
   }
 
 
@@ -2115,6 +2198,10 @@
   ) {
     const droits =
       etatPlanning?.droitsPlanning || {};
+    if (etatPlanning?.modeUsage === MODE_USAGE_MEMBRE && typeof options.onLimiteHorizon === "function") {
+      await options.onLimiteHorizon(droits);
+      return;
+    }
     let message = "";
 
     if (
@@ -2126,7 +2213,9 @@
           ? "Les mois suivants sont consultables depuis la rubrique Réserver de votre espace membre."
           : "Vous devez être connecté à votre espace membre pour consulter les mois suivants.";
     } else {
-      message = "La planification est ouverte du mois en cours au mois M+12.";
+      message = droits.abonnementActif
+        ? "Votre abonnement ne permet pas de consulter le mois suivant."
+        : "Vous n'avez pas d'abonnement pour voir le mois suivant.";
     }
 
     if (
@@ -2318,10 +2407,11 @@
         "aria-disabled",
         precedentInterdit ? "true" : "false"
       );
-      boutonSuivant.disabled = auMaximum;
+      // Au dernier mois, le clic explique la limite sans demander le mois interdit.
+      boutonSuivant.disabled = false;
       boutonSuivant.setAttribute(
         "aria-disabled",
-        auMaximum ? "true" : "false"
+        "false"
       );
       boutonSuivant.dataset.lcdpHorizonLimite =
         auMaximum ? "true" : "false";
@@ -4297,18 +4387,17 @@
     message,
     couleurAction = "orange"
   ) {
-    await chargerStyleObjetFiche(
-      {},
-      "/BOX/02-box-alerte.css"
-    );
+    if (!promesseAlertePublique) {
+      await chargerStyleObjetFiche({}, "/BOX/02-box-alerte.css");
+    }
 
     const conteneur = document.createElement("div");
     document.body.appendChild(conteneur);
 
-    const fragment = await chargerFragmentObjetFiche(
-      {},
-      "/BOX/02-box-alerte.html"
-    );
+    const fragmentPrecharge = promesseAlertePublique ? await promesseAlertePublique : null;
+    const fragment = fragmentPrecharge
+      ? fragmentPrecharge.cloneNode(true)
+      : await chargerFragmentObjetFiche({}, "/BOX/02-box-alerte.html");
     conteneur.appendChild(fragment);
 
     const alerte = conteneur.querySelector(

@@ -100,3 +100,8 @@
 /* Légende éditoriale sous l’image, issue de la description saisie dans l’admin. */
 .lcdp-actu-illustration {width:100%;max-width:480px;min-width:0;align-self:center;margin:0 auto;}
 .lcdp-actu-legende {margin-top:.6rem;font-size:.85rem;font-weight:400;line-height:1.45;text-align:left;color:var(--lcdp-color-text-muted,#5f6861);overflow-wrap:anywhere;}
+
+/* Titre de l’article : réduction de 15 % sur mobile et ordinateur. */
+.lcdp-box-carousel__title.lcdp-actu-article-titre {
+  font-size: clamp(22.1px, 5.1vw, 28.9px);
+}
