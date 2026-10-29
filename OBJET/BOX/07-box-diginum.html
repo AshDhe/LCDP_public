@@ -2,7 +2,7 @@
 <div class="lcdp-box-diginum" data-lcdp-box-diginum role="presentation">
   <section class="lcdp-box-diginum__card" role="dialog" aria-modal="true" aria-labelledby="lcdp-diginum-title" aria-describedby="lcdp-diginum-hint" tabindex="-1">
     <h2 class="lcdp-box-diginum__title" id="lcdp-diginum-title" data-lcdp-diginum-title>Changer de département</h2>
-    <p class="lcdp-box-diginum__sr-only" id="lcdp-diginum-hint">Saisissez le code avec les touches du pavé numérique. Retour arrière efface un chiffre. Le logo confirme.</p>
+    <p class="lcdp-box-diginum__sr-only" id="lcdp-diginum-hint">Saisissez le code avec les touches du pavé numérique. Retour arrière efface un chiffre. Le code est validé automatiquement après saisie complète.</p>
     <input class="lcdp-box-diginum__display" data-lcdp-diginum-display type="text" value="" placeholder="exemple 08" readonly inputmode="none" autocomplete="off" aria-label="Code saisi" />
     <div class="lcdp-box-diginum__touches" role="group" aria-label="Pavé numérique">
       <button class="lcdp-box-diginum__touche" data-lcdp-diginum-digit="9" type="button">9</button>
@@ -18,9 +18,6 @@
         <img data-lcdp-diginum-picto-effacer alt="" width="28" height="28" aria-hidden="true" />
       </button>
       <button class="lcdp-box-diginum__touche" data-lcdp-diginum-digit="0" type="button">0</button>
-      <button class="lcdp-box-diginum__touche lcdp-box-diginum__touche--valider" data-lcdp-diginum-valider type="button" aria-label="Valider le code">
-        <img data-lcdp-diginum-logo alt="" width="49" height="49" aria-hidden="true" />
-      </button>
     </div>
     <p class="lcdp-box-diginum__message" data-lcdp-diginum-message role="status" aria-live="polite" hidden></p>
   </section>
