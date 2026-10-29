@@ -95,3 +95,45 @@
   font-size: 0.7rem; font-weight: 700; line-height: 1.1; overflow-wrap: normal;
 }
 
+
+/* PLANIFIER : autorisations des invités (ne pas modifier les autres légendes). */
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations {
+  margin: 8px 0 10px;
+  font-size: 0.8rem;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__contenu {
+  flex-direction: row;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+  gap: 5px 14px;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  min-height: 12px;
+  margin: 0;
+  border-radius: 2px;
+  flex: none;
+}
+.lcdp-box-legende__carre--duo {
+  background: var(--lcdp-color-logo-green, #55733f);
+  border-color: #486234;
+}
+.lcdp-box-legende__carre--famille {
+  background: var(--lcdp-color-blue, #2f6fb3);
+  border-color: var(--lcdp-color-blue-hover, #255c96);
+}
+.lcdp-box-legende__carre--coach {
+  background: var(--lcdp-color-coach, #8660c8);
+  border-color: #704aa9;
+}
+.lcdp-box-legende__carre--famille-coach {
+  background: #80583d;
+  border-color: #69462e;
+}
