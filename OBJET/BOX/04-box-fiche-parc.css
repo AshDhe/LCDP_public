@@ -194,9 +194,13 @@
     padding: var(--lcdp-space-4) 0;
   }
 
+  .lcdp-box-fiche-parc__section h3 {
+    font-size: 1.755rem;
+  }
+
   .lcdp-box-fiche-parc__box-text,
   .lcdp-box-fiche-parc__section p {
-    font-size: var(--lcdp-font-size-paragraph-desktop);
+    font-size: 1.125rem;
   }
 }
 
@@ -940,7 +944,7 @@
     width: 100%;
     max-width: 100%;
     min-width: 0;
-    margin: 0;
+    margin-inline: auto;
     padding: var(--lcdp-space-2);
     border: 1px solid var(--lcdp-color-border);
     border-radius: var(--lcdp-radius-large);
@@ -965,6 +969,7 @@
   .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card {
     width: 80%;
     max-width: 80%;
-    justify-self: start;
+    justify-self: center;
+    margin-inline: auto;
   }
 }

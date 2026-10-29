@@ -94,8 +94,8 @@
   height: min(72vh, 760px);
   min-height: 520px;
   overflow: hidden;
-  border: 1px solid #d3d3ce;
-  border-radius: 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
   background: #f1f1ee;
 }
 
@@ -323,8 +323,9 @@
   max-width: none;
   padding: 0;
   border: 0;
-  border-radius: var(--lcdp-radius-large);
+  border-radius: var(--lcdp-radius-medium);
   box-shadow: none;
+  overflow: hidden;
 }
 
 .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__header,
@@ -412,7 +413,7 @@
     box-sizing: border-box;
     padding-inline: 20px;
     overflow: hidden;
-    border-radius: 14px;
+    border-radius: var(--lcdp-radius-medium);
     background-clip: padding-box;
     isolation: isolate;
     touch-action: pan-y;
@@ -437,8 +438,7 @@
   .lcdp-carte-dynamique--fiche-parc {
     width: 75%;
     max-width: 75%;
-    margin-left: 0;
-    margin-right: auto;
+    margin-inline: auto;
   }
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
