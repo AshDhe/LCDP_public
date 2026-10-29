@@ -54,8 +54,8 @@
 
     titre.textContent = String(options.titre || "Saisir un code");
     affichage.placeholder = String(options.placeholder || "exemple 08");
-    racine.querySelector("[data-lcdp-diginum-picto-effacer]").src = urlObjet("/IMAG/PICTO/07-diginum-effacer.svg");
-    racine.querySelector("[data-lcdp-diginum-logo]").src = urlObjet("/IMAG/PICTO/07-diginum-valider.webp");
+    racine.querySelector("[data-lcdp-diginum-picto-effacer]").src = urlObjet("/BOX/07-diginum-effacer.svg");
+    racine.querySelector("[data-lcdp-diginum-logo]").src = urlObjet("/BOX/07-diginum-valider.webp");
 
     const longueurMax = Number.isInteger(options.longueurMax) && options.longueurMax > 0 ? options.longueurMax : 6;
     const precedentFocus = document.activeElement;
