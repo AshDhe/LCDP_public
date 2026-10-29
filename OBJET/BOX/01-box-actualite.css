@@ -105,3 +105,9 @@
 .lcdp-box-carousel__title.lcdp-actu-article-titre {
   font-size: clamp(22.1px, 5.1vw, 28.9px);
 }
+
+/* Bandeau des accueils : centrer verticalement le cartouche sur le texte du titre.
+   Ne modifie pas les cartouches des listes ni des pages article. */
+#lcdp-actualite-bandeau .lcdp-actu-bandeau-titre .lcdp-actualite-groupe {
+  vertical-align: middle;
+}
