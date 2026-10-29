@@ -14,7 +14,7 @@
   const MODE_USAGE_MEMBRE =
     "reservation-membre";
   const MESSAGE_PLANIFICATION_PUBLIQUE =
-    "Connectez-vous à votre espace membre pour consulter le planning du parc.";
+    "Vous devez vous connecter à l’espace membre pour réserver.";
   const dossierImagesParc = "/IMAG/PARC";
   const clesPlagesPlanning = [
     "plage1",
@@ -70,7 +70,6 @@
   );
 
   let pageInitialisee = false;
-  let promesseAlertePublique = null;
   let parcActif = null;
   let accesPublic = null;
   const parametresPartage = new URLSearchParams(window.location.search);
@@ -89,7 +88,6 @@
 
   window.LCDP_FicheParc = {
     chargerFicheParc,
-    rendreCarteDansConteneur: ajouterCarteParc,
     monterDansConteneur:
       monterParcoursFicheParcDansConteneur,
     rendreDansConteneur: rendreFicheParcDansConteneur,
@@ -120,11 +118,6 @@
 
     pageInitialisee = true;
     appliquerRoutesSite(document);
-    // Préchargement non bloquant : l’alerte Planning doit apparaître immédiatement.
-    promesseAlertePublique = Promise.all([
-      chargerStyleObjetFiche({}, "/BOX/02-box-alerte.css"),
-      chargerFragmentObjetFiche({}, "/BOX/02-box-alerte.html")
-    ]).then(([, fragment]) => fragment).catch(() => null);
 
     const promesseBandeau = initialiserBandeau().catch((erreur) => {
       console.warn("Bandeau public indisponible.", erreur);
@@ -149,8 +142,7 @@
         localitesCarte: Array.isArray(fiche.localites)
           ? fiche.localites
           : [],
-        acces: fiche.acces || null,
-        nomDepartement: fiche.nomDepartement || fiche.parc?.nomDepartement || ""
+        acces: fiche.acces || null
       };
 
       accesPublic = fiche.acces || null;
@@ -264,8 +256,7 @@
       resparc: data.resparc || null,
       parcsDepartement: Array.isArray(data.parcs) ? data.parcs : [],
       localites: Array.isArray(data.localites) ? data.localites : [],
-      acces: data.acces || null,
-      nomDepartement: data.nomDepartement || ""
+      acces: data.acces || null
     };
   }
 
@@ -276,7 +267,8 @@
       throw new Error("Slot fiche parc introuvable.");
     }
 
-    // Conserver la fiche d'attente plein format pendant le chargement du fragment.
+    slot.innerHTML = "";
+
     const fragmentShift = await chargerFragmentObjetFiche(
       {},
       "/BOX/04-box-shift-detail-parc.html"
@@ -304,19 +296,7 @@
       boutonFermerShift.remove();
     }
 
-    const attente = document.createElement("div");
-    attente.className = "lcdp-fiche-parc-public__attente";
-    attente.setAttribute("role", "status");
-    attente.setAttribute("aria-label", "Chargement de la fiche du parc");
-    const gif = document.createElement("img");
-    gif.src = construireUrlObjetFiche({}, "/BOX/pictowait.gif");
-    gif.alt = "";
-    gif.width = 64;
-    gif.height = 64;
-    attente.appendChild(gif);
-    shift.querySelector(".lcdp-box-shift-detail-parc__card")?.appendChild(attente);
-    shift.classList.add("lcdp-fiche-parc-public__en-chargement");
-    slot.replaceChildren(shift);
+    slot.appendChild(shift);
 
     await rendreFicheParcDansConteneur(
       contenuShift,
@@ -334,9 +314,6 @@
         onReserverParc: afficherBlocageReservationPublique
       }
     );
-
-    shift.classList.remove("lcdp-fiche-parc-public__en-chargement");
-    attente.remove();
 
     const nom = parc.nom || "Parc";
     document.title = "Parc de " + nom + " - La Clé du Parc";
@@ -415,26 +392,7 @@
     );
 
     if (titre) {
-      const nomSansPrefixe = nom.replace(/^parc\s+(?:de\s+|d['’]\s*)?/i, "").trim();
-      titre.textContent = "Parc de " + (nomSansPrefixe || nom);
-    }
-    const departementSousTitre = fiche.querySelector("[data-lcdp-fiche-parc-departement]");
-    if (departementSousTitre) {
-      const code = nettoyerDepartement(parc?.dptmt || parc?.departement);
-      const libelle = nettoyerTexte(options.nomDepartement || parc?.nomDepartement || parc?.nomdepartement);
-      departementSousTitre.textContent = libelle ? `${libelle} (${code})` : code;
-      departementSousTitre.hidden = !(libelle || code);
-    }
-    if (normaliserModeUsagePlanning(options) === MODE_USAGE_MEMBRE) {
-      fiche.classList.add("lcdp-box-fiche-parc--planifier-tunnel");
-      // La sélection du parc et l'ouverture du planning se font dans la liste des parcs.
-      boutonPlanning?.remove();
-      boutonPlanifier?.remove();
-    }
-
-    if (normaliserModeUsagePlanning(options) !== MODE_USAGE_MEMBRE) {
-      fiche.classList.add("lcdp-box-fiche-parc--publique");
-      boutonPlanifier?.remove();
+      titre.textContent = nom;
     }
 
     if (boutonLeParc) {
@@ -503,6 +461,17 @@
     );
 
     await ajouterGalerieParc(galerieSlot, parc, options);
+    // Les quatre premières photos sont réparties dans la fiche uniquement sur mobile.
+    // La galerie originale reste intacte et visible sur ordinateur.
+    const photosGalerie = galerieSlot?.querySelectorAll(".lcdp-box-galerie__card") || [];
+    fiche.querySelectorAll("[data-lcdp-fiche-photo-position]").forEach((emplacement) => {
+      const indexPhoto = Number(emplacement.dataset.lcdpFichePhotoPosition) - 1;
+      const photo = photosGalerie[indexPhoto];
+      if (photo) {
+        emplacement.appendChild(photo.cloneNode(true));
+        emplacement.removeAttribute("aria-hidden");
+      }
+    });
     await ajouterCarteParc(carteSlot, parc, options);
 
     remplirBlocTexteFiche(
@@ -606,7 +575,6 @@
             ...parcCourant,
             ...(fiche?.parc || {}),
             resparc: fiche?.resparc || null,
-            nomDepartement: fiche?.nomDepartement || "",
             parcsDepartement: Array.isArray(
               fiche?.parcsDepartement
             )
@@ -1128,7 +1096,7 @@
     ) || "Parc";
     const cartes = [];
 
-    for (let index = 1; index <= 4; index += 1) {
+    for (let index = 1; index <= 6; index += 1) {
       const numero = String(index).padStart(2, "0");
 
       cartes.push({
@@ -1212,17 +1180,10 @@
     if (filtres) filtres.hidden = true;
     if (statut) statut.hidden = true;
     cardSlot.hidden = true;
-    if (options.carteNavigation) {
-      carte.classList.add("lcdp-carte-dynamique--navigation");
-      cardSlot.className = "lcdp-planifier-carte-cartouche";
-      carte.appendChild(cardSlot);
-    }
 
     svg.setAttribute("focusable", "false");
     svg.setAttribute("tabindex", "-1");
-    svg.setAttribute("preserveAspectRatio", options.carteNavigation ? "xMidYMid meet" : "xMidYMid slice");
-
-    if (options.carteNavigation) svg.setAttribute("role", "group");
+    svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
 
     const codeDepartement = nettoyerDepartement(parc.dptmt || parc.departement);
     const features = Array.isArray(geojson?.features) ? geojson.features : [];
@@ -1598,11 +1559,7 @@
         coucheLocalites.appendChild(groupe);
       });
 
-    let numeroCard = 0;
-    let carteDetruite = false;
-
     function fermerCardParc() {
-      numeroCard += 1;
       cardSlot.innerHTML = "";
       cardSlot.hidden = true;
       cardSlot.classList.remove("is-open");
@@ -1610,17 +1567,7 @@
     }
 
     async function ouvrirCardParc(parcCarte) {
-      const numero = ++numeroCard;
-      if (typeof options.creerCardParcCarte === "function") {
-        const card = await options.creerCardParcCarte(parcCarte);
-        if (carteDetruite || numero !== numeroCard || !card) return;
-        cardSlot.replaceChildren(card);
-        cardSlot.hidden = false;
-        cardSlot.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
-        return;
-      }
       const card = (await obtenirTemplateCardParcFiche(options)).cloneNode(true);
-      if (carteDetruite || numero !== numeroCard) return;
       card.classList.add("lcdp-box-card-parc--carte-publique");
       card.removeAttribute("data-action");
       card.removeAttribute("tabindex");
@@ -1729,10 +1676,6 @@
     function ajouterMarqueurParc(parcCarte, estParcActif) {
       const longitude = parcCarte.lngparc ?? parcCarte.longitude ?? parcCarte.lngloc;
       const latitude = parcCarte.latparc ?? parcCarte.latitude ?? parcCarte.latloc;
-      if (options.carteNavigation && (
-        longitude == null || latitude == null ||
-        String(longitude).trim() === "" || String(latitude).trim() === ""
-      )) return;
       const point = projeterCoordonnee(longitude, latitude);
 
       if (!point) return;
@@ -1758,19 +1701,6 @@
       marker.setAttribute("focusable", "false");
       marker.setAttribute("tabindex", "-1");
       marker.setAttribute("aria-hidden", "true");
-      if (options.carteNavigation) {
-        marker.setAttribute("focusable", "true");
-        marker.setAttribute("tabindex", "0");
-        marker.removeAttribute("aria-hidden");
-        marker.setAttribute("role", "button");
-        marker.setAttribute("aria-label", "Afficher " + (parcCarte.nom || parcCarte.nomparc || "le parc"));
-        marker.addEventListener("keydown", (event) => {
-          if (event.key !== "Enter" && event.key !== " ") return;
-          event.preventDefault();
-          event.stopPropagation();
-          ouvrirCardParc(parcCarte).catch(console.error);
-        });
-      }
 
       groupe.appendChild(marker);
       coucheParcs.appendChild(groupe);
@@ -1794,9 +1724,7 @@
       ajouterMarqueurParc(parcCarte, false);
     });
 
-    if (!options.carteNavigation || parcCourant) {
-      ajouterMarqueurParc(parcCourant || parc, !options.carteNavigation);
-    }
+    ajouterMarqueurParc(parcCourant || parc, true);
 
     svg.addEventListener("click", (event) => {
       const cible = event.target instanceof Element ? event.target : null;
@@ -1822,13 +1750,6 @@
     );
 
     appliquerViewBox();
-    return {
-      detruire() {
-        carteDetruite = true;
-        numeroCard += 1;
-        window.removeEventListener("resize", actualiserTailleElementsCarte);
-      }
-    };
   }
 
 
@@ -1989,8 +1910,8 @@
 
     const boutonPlanning = creerBoutonActionFicheParc(
       {
-        libelle: "Planning",
-        ariaLabel: "Afficher le planning du parc",
+        libelle: "Planifier",
+        ariaLabel: "Planifier un accès",
         icone: "planning",
         variante: "orange-contour"
       },
@@ -2355,7 +2276,7 @@
       etatPlanning.parc?.nomparc ||
       "Parc"
     ) || "Parc";
-    titre.textContent = "Planning du parc : " + nomParc;
+    titre.textContent = "Planifier un accès";
     meta.hidden = true;
     meta.textContent = "";
     boutonFermer.hidden = true;
@@ -4376,17 +4297,18 @@
     message,
     couleurAction = "orange"
   ) {
-    if (!promesseAlertePublique) {
-      await chargerStyleObjetFiche({}, "/BOX/02-box-alerte.css");
-    }
+    await chargerStyleObjetFiche(
+      {},
+      "/BOX/02-box-alerte.css"
+    );
 
     const conteneur = document.createElement("div");
     document.body.appendChild(conteneur);
 
-    const fragmentPrecharge = promesseAlertePublique ? await promesseAlertePublique : null;
-    const fragment = fragmentPrecharge
-      ? fragmentPrecharge.cloneNode(true)
-      : await chargerFragmentObjetFiche({}, "/BOX/02-box-alerte.html");
+    const fragment = await chargerFragmentObjetFiche(
+      {},
+      "/BOX/02-box-alerte.html"
+    );
     conteneur.appendChild(fragment);
 
     const alerte = conteneur.querySelector(

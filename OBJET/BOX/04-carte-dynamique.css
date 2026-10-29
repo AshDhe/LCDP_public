@@ -403,3 +403,46 @@
     max-height: calc(100% - 20px);
   }
 }
+
+
+/* Fiche Parc mobile : couloirs de défilement autour de la carte tactile.
+   Le SVG conserve son zoom à deux doigts ; les bords restent scrollables. */
+@media (max-width: 767px) {
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell {
+    box-sizing: border-box;
+    padding-inline: 20px;
+    overflow: hidden;
+    border-radius: 14px;
+    background-clip: padding-box;
+    isolation: isolate;
+    touch-action: pan-y;
+  }
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    touch-action: none;
+  }
+  .lcdp-box-shift-detail-parc__card:has(.lcdp-carte-dynamique--fiche-parc),
+  .lcdp-box-fiche-parc__card:has(.lcdp-carte-dynamique--fiche-parc) {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+}
+
+/* Fiche parc uniquement, PC : carte réduite à 75 % sans redimensionner la fenêtre. */
+@media (min-width: 768px) {
+  .lcdp-carte-dynamique--fiche-parc {
+    width: 75%;
+    max-width: 75%;
+    margin-left: 0;
+    margin-right: auto;
+  }
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map-shell,
+  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
+    height: min(54vh, 540px);
+    min-height: 420px;
+  }
+}

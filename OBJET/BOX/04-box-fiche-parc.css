@@ -922,3 +922,49 @@
 .lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-libelle,
 .lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] .lcdp-box-card-parc__action-libelle,
 .lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-libelle { color:#fff !important; }
+
+/* Présentation mobile : photo / Le parc / photo / carte / photo / accès / photo.
+   Sur ordinateur, seule la galerie originale est affichée. */
+.lcdp-box-fiche-parc__photo-intercalee { display: none; }
+@media (max-width: 767px) {
+  .lcdp-box-fiche-parc__section--galerie { display: none !important; }
+  .lcdp-box-fiche-parc__photo-intercalee:not(:empty) {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: var(--lcdp-space-3) 0;
+    border-bottom: 1px solid var(--lcdp-color-border);
+  }
+  .lcdp-box-fiche-parc__photo-intercalee:last-child { border-bottom: 0; padding-bottom: 0; }
+  .lcdp-box-fiche-parc__photo-intercalee .lcdp-box-galerie__card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: var(--lcdp-space-2);
+    border: 1px solid var(--lcdp-color-border);
+    border-radius: var(--lcdp-radius-large);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .lcdp-box-fiche-parc__photo-intercalee .lcdp-box-galerie__image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--lcdp-radius-media);
+  }
+  .lcdp-box-fiche-parc__photo-intercalee .lcdp-box-galerie__card-title,
+  .lcdp-box-fiche-parc__photo-intercalee .lcdp-box-galerie__legend,
+  .lcdp-box-fiche-parc__photo-intercalee .lcdp-box-galerie__text { display: none; }
+}
+/* PC : conserver la taille de la fenêtre et l'ordre des blocs ; photos -20 %. */
+@media (min-width: 768px) {
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card {
+    width: 80%;
+    max-width: 80%;
+    justify-self: start;
+  }
+}
