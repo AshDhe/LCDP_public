@@ -558,7 +558,6 @@ select:focus-visible {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: clamp(18px, 3vh, 32px);
   padding-bottom: clamp(24px, 6vh, 56px);
 }
 
@@ -860,7 +859,6 @@ select:focus-visible {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: clamp(18px, 3vh, 32px);
   padding-bottom: clamp(24px, 6vh, 56px);
 }
 
@@ -1193,8 +1191,14 @@ html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) { display: none !impor
 }
 
 
-/* Espacements de l’accueil membre sur mobile. */
+/* Accueils : même respiration entre Actualités et contenu sur mobile. */
 @media (max-width: 767px) {
+  :is(.lcdp-page-accueil-public, .lcdp-page-accueil-membre)
+    .lcdp-site-main > .lcdp-page-section {
+    padding-top: calc(var(--lcdp-space-5) * 0.42);
+  }
+
+  /* Ajustements propres aux informations complémentaires du compte membre. */
   .lcdp-page-accueil-membre #message-accueil-membre + #mention-statut-membre {
     margin-top: calc(-1 * var(--lcdp-space-2) - (var(--lcdp-space-4) - var(--lcdp-space-2)) * 0.08);
   }
@@ -1229,4 +1233,43 @@ html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) { display: none !impor
   border-color: var(--lcdp-compte-color);
   color: #fff;
   box-shadow: 0 0 0 3px var(--lcdp-color-focus);
+}
+
+/* Interactions communes aux deux accueils : aucun carré bleu au toucher.
+   Le focus clavier conserve son contour via :focus-visible (règle générique). */
+:is(.lcdp-page-accueil-public, .lcdp-page-accueil-membre)
+  :is(button, a, [role="button"]) {
+  -webkit-tap-highlight-color: transparent;
+}
+:is(.lcdp-page-accueil-public, .lcdp-page-accueil-membre)
+  :is(button, a, [role="button"]):focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* Accueils : zone d'introduction commune de hauteur stable entre le bandeau
+   Actualités et les trois actions, quelle que soit la longueur du texte. */
+:is(.lcdp-page-accueil-public, .lcdp-page-accueil-membre) .lcdp-accueil-intro {
+  width: 100%;
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+}
+:is(.lcdp-page-accueil-public, .lcdp-page-accueil-membre) .lcdp-accueil-intro > .lcdp-accueil-mention,
+.lcdp-page-accueil-membre .lcdp-accueil-intro > #mention-statut-membre.lcdp-mention-connexion {
+  margin: 0 auto;
+}
+@media (max-width: 350px) {
+  :is(.lcdp-page-accueil-public, .lcdp-page-accueil-membre) .lcdp-accueil-intro {
+    min-height: 110px;
+  }
+}
+@media (min-width: 768px) {
+  :is(.lcdp-page-accueil-public, .lcdp-page-accueil-membre) .lcdp-accueil-intro {
+    min-height: 93px;
+    gap: 12px;
+  }
 }

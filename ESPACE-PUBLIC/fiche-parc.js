@@ -3764,10 +3764,14 @@
   }
 
   async function afficherBlocageReservationPublique() {
-    await afficherAlerteFicheParc(
+    const connexionDemandee = await afficherAlerteFicheParc(
       MESSAGE_PLANIFICATION_PUBLIQUE,
-      "orange"
+      "vert-plein",
+      "Connexion"
     );
+    if (connexionDemandee) {
+      window.location.href = pageConnexionMembre + "?source=fiche-parc";
+    }
   }
 
 
@@ -4398,7 +4402,8 @@
 
   async function afficherAlerteFicheParc(
     message,
-    couleurAction = "orange"
+    couleurAction = "orange",
+    libelleBouton = "OK"
   ) {
     if (!promesseAlertePublique) {
       await chargerStyleObjetFiche({}, "/BOX/02-box-alerte.css");
@@ -4432,6 +4437,7 @@
     }
 
     texte.textContent = message || "";
+    boutonOk.textContent = libelleBouton;
 
     boutonOk.classList.remove(
       "lcdp-button-primary",

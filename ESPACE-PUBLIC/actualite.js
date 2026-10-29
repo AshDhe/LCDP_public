@@ -90,10 +90,13 @@
     if(!articles.length)return;
     const slot=document.getElementById('lcdp-actualite-bandeau');if(!slot)return;
     const container=node('div',null,'lcdp-page-container'),width=node('div',null,'lcdp-page-content');
+    // Le bandeau et ses espacements sont définis exclusivement par l'objet CSS partagé.
     const bar=node('nav',null,'lcdp-boxtext__text--center');bar.setAttribute('aria-label','Actualité');
-    const a=link('',articleUrl(articles[0].id),'lcdp-link-secondary');
-    a.classList.add('lcdp-actu-bandeau-titre');
-    const visible=node('span',null,'lcdp-actu-bandeau-texte');visible.setAttribute('aria-hidden','true');const badge=node('span');const ligne=node('span',null,'lcdp-actu-bandeau-ligne');ligne.append(badge,visible);a.append(ligne);
+    const a=link('',articleUrl(articles[0].id),'lcdp-actu-bandeau-titre');
+    const ligne=node('span',null,'lcdp-actu-bandeau-ligne');
+    const badge=node('span',null,'lcdp-actu-bandeau-etiquette');
+    const visible=node('span',null,'lcdp-actu-bandeau-texte');visible.setAttribute('aria-hidden','true');
+    ligne.append(badge,visible);a.append(ligne);
     bar.append(a);width.append(bar);container.append(width);slot.replaceChildren(container);
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
     let index=0,position=0,holding=false,timer,stopped=false;

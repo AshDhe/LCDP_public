@@ -113,3 +113,26 @@
     max-width: 180px;
   }
 }
+
+/* Variantes génériques des lightbox d'accueil. Tous les styles sont ici. */
+.lcdp-box-alerte [data-lcdp-alerte-ok][hidden] { display: none !important; }
+.lcdp-alerte-droits--action-jaune [data-lcdp-alerte-ok],
+.lcdp-alerte-accueil-reserver [data-lcdp-alerte-ok] {
+  background: var(--lcdp-color-orange); border-color: var(--lcdp-color-orange); color: var(--lcdp-color-text);
+}
+.lcdp-alerte-droits--action-jaune [data-lcdp-alerte-ok]:hover,
+.lcdp-alerte-accueil-reserver [data-lcdp-alerte-ok]:hover {
+  background: var(--lcdp-color-orange-hover); border-color: var(--lcdp-color-orange-hover); color: var(--lcdp-color-text);
+}
+.lcdp-alerte-accueil-planning [data-lcdp-alerte-ok] {
+  background: var(--lcdp-color-logo-green); border-color: var(--lcdp-color-logo-green); color: #fff;
+}
+.lcdp-alerte-accueil-planning [data-lcdp-alerte-ok]:hover {
+  background: var(--lcdp-color-primary); border-color: var(--lcdp-color-primary); color: #fff;
+}
+.lcdp-alerte-accueil-ouvrir [data-lcdp-alerte-ok] {
+  background: var(--lcdp-color-blue); border-color: var(--lcdp-color-blue); color: #fff;
+}
+.lcdp-alerte-accueil-ouvrir [data-lcdp-alerte-ok]:hover {
+  background: var(--lcdp-color-blue-hover); border-color: var(--lcdp-color-blue-hover); color: #fff;
+}

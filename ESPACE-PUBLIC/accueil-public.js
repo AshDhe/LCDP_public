@@ -120,63 +120,10 @@
         });
       }
 
-      function assurerStyleAlerteAccueilPublic() {
-        if (document.getElementById("lcdp-style-alerte-accueil-public")) {
-          return;
-        }
-
-        const style = document.createElement("style");
-        style.id = "lcdp-style-alerte-accueil-public";
-        style.textContent = `
-          .lcdp-page-accueil-public .lcdp-alerte-accueil-reserver [data-lcdp-alerte-ok] {
-            background: var(--lcdp-color-orange, #f2a23a);
-            border-color: var(--lcdp-color-orange, #f2a23a);
-            color: var(--lcdp-color-text, #1f2a24);
-          }
-
-          .lcdp-page-accueil-public .lcdp-alerte-accueil-reserver [data-lcdp-alerte-ok]:hover {
-            background: var(--lcdp-color-orange-hover, #e89223);
-            border-color: var(--lcdp-color-orange-hover, #e89223);
-            color: var(--lcdp-color-text, #1f2a24);
-          }
-
-          .lcdp-page-accueil-public .lcdp-alerte-accueil-planning [data-lcdp-alerte-ok] {
-            background: var(--lcdp-color-logo-green, #55733f);
-            border-color: var(--lcdp-color-logo-green, #55733f);
-            color: #ffffff;
-          }
-
-          .lcdp-page-accueil-public .lcdp-alerte-accueil-planning [data-lcdp-alerte-ok]:hover {
-            background: var(--lcdp-color-primary, #234438);
-            border-color: var(--lcdp-color-primary, #234438);
-            color: #ffffff;
-          }
-
-          .lcdp-page-accueil-public .lcdp-alerte-accueil-ouvrir [data-lcdp-alerte-ok] {
-            background: var(--lcdp-color-blue, #2f6fb3);
-            border-color: var(--lcdp-color-blue, #2f6fb3);
-            color: #ffffff;
-          }
-
-          .lcdp-page-accueil-public .lcdp-alerte-accueil-ouvrir [data-lcdp-alerte-ok]:hover {
-            background: var(--lcdp-color-blue-hover, #255c96);
-            border-color: var(--lcdp-color-blue-hover, #255c96);
-            color: #ffffff;
-          }
-        `.trim();
-
-        document.head.appendChild(style);
-      }
-
       function appliquerVarianteAlerteAccueil(alerte, variante) {
-        const variantesAutorisees = ["reserver", "planning", "ouvrir"];
-
-        if (!variantesAutorisees.includes(variante)) {
-          return;
+        if (["reserver", "planning", "ouvrir"].includes(variante)) {
+          alerte.classList.add("lcdp-alerte-accueil-" + variante);
         }
-
-        assurerStyleAlerteAccueilPublic();
-        alerte.classList.add("lcdp-alerte-accueil-" + variante);
       }
 
       function construireUrlConnexionMembrePublic() {
@@ -377,95 +324,11 @@
         return "Vous devez être membre abonné pour utiliser la fonction " + normaliserNomFonction(libelleBouton) + ".";
       }
 
-      async function gererValidationPresencePublic(libelleBouton = "Ma Clé") {
-        const etat = await chargerEtatMembrePublic();
-
-        if (!etat) {
-          await afficherAlerte(messageConnexionRequise(libelleBouton), optionsAlerteConnexionRequise("ouvrir"));
-          return;
-        }
-
-        if (!ENDPOINT_LA_CLE_DU_PARC) {
-          await afficherAlerte("Le service Ma clé n'est pas configuré.", { variante: "ouvrir" });
-          return;
-        }
-
-        const reponse = await fetch(ENDPOINT_LA_CLE_DU_PARC + "/access", {
-          method: "GET",
-          credentials: "include",
-          cache: "no-store",
-          headers: {
-            "Accept": "application/json"
-          }
-        });
-
-        const resultat = await reponse.json().catch(() => null);
-
-        if (reponse.status === 401) {
-          await afficherAlerte(messageConnexionRequise(libelleBouton), optionsAlerteConnexionRequise("ouvrir"));
-          return;
-        }
-
-        if (!reponse.ok || !resultat) {
-          await afficherAlerte(messageErreurAccesCle(resultat), { variante: "ouvrir" });
-          return;
-        }
-
-        if (resultat.allowed !== true) {
-          await afficherAlerte(messageErreurAccesCle(resultat), { variante: "ouvrir" });
-          return;
-        }
-
-        window.location.href = construireUrlMembre("/ESPACE-MEMBRE/lacleduparc.html");
-      }
-
-      function messageErreurAccesCle(resultat) {
-        const raison = String(resultat?.reason || "").trim().toLowerCase();
-
-        if (raison === "no_reservation" || raison === "no_invitation") {
-          return "Vous n'avez pas de réservation en cours.";
-        }
-
-        if (raison === "key_inactive" || raison === "too_early" || raison === "too_late") {
-          return "Votre clé n'est pas active actuellement.";
-        }
-
-        if (raison === "subscription_unpaid") {
-          return "Votre abonnement n'est pas payé.";
-        }
-
-        if (raison === "sponsor_not_checked_in") {
-          return "Votre clé n'est pas encore disponible. Le membre qui vous a invité doit d'abord valider la sienne.";
-        }
-
-        return String(resultat?.message || resultat?.error || "Impossible d'ouvrir Ma clé.");
-      }
-
-      async function ouvrirPageMembrePublic(libelleBouton, chemin, variante = "") {
-        const etat = await chargerEtatMembrePublic();
-
-        if (!etat) {
+      async function gererBoutonAccueilConnecte(action, libelleBouton, variante) {
+        const issue = await window.LCDP_AccueilDroits.executer(action);
+        if (issue === "non_connecte") {
           await afficherAlerte(messageConnexionRequise(libelleBouton), optionsAlerteConnexionRequise(variante));
-          return;
         }
-
-        window.location.href = construireUrlMembre(chemin);
-      }
-
-      async function ouvrirPageAbonnePublic(libelleBouton, chemin, variante = "") {
-        const etat = await chargerEtatMembrePublic();
-
-        if (!etat) {
-          await afficherAlerte(messageConnexionRequise(libelleBouton), optionsAlerteConnexionRequise(variante));
-          return;
-        }
-
-        if (!etat.abonne || !lireCookie("abonne")) {
-          await afficherAlerte(messageAbonnementRequis(libelleBouton), { variante });
-          return;
-        }
-
-        window.location.href = construireUrlMembre(chemin);
       }
 
       async function gererEtreInvitePublic() {
@@ -540,19 +403,19 @@
             label: "Planifier",
             style: "lcdp-button-accueil lcdp-button-accueil-orange",
             variante: "reserver",
-            action: (libelleBouton) => ouvrirPageMembrePublic(libelleBouton, "/ESPACE-MEMBRE/reserver-membre.html", "reserver")
+            action: (libelleBouton) => gererBoutonAccueilConnecte("planifier", libelleBouton, "reserver")
           },
           {
             label: "Mes accès",
             style: "lcdp-button-accueil lcdp-button-accueil-green",
             variante: "planning",
-            action: (libelleBouton) => ouvrirPageMembrePublic(libelleBouton, "/ESPACE-MEMBRE/planning-membre.html", "planning")
+            action: (libelleBouton) => gererBoutonAccueilConnecte("mes_acces", libelleBouton, "planning")
           },
           {
             label: "Ma clé",
             style: "lcdp-button-accueil lcdp-button-accueil-blue",
             variante: "ouvrir",
-            action: gererValidationPresencePublic
+            action: (libelleBouton) => gererBoutonAccueilConnecte("ma_cle", libelleBouton, "ouvrir")
           }
         ];
 
