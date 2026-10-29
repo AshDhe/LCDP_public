@@ -145,7 +145,13 @@
   margin: 6px 0 9px;
   overflow-x: auto;
   overflow-y: hidden;
-  scrollbar-width: thin;
+  scrollbar-width: none; /* Pas de barre grise sous les filtres sur mobile. */
+  -ms-overflow-style: none;
+}
+.lcdp-page-reserver .lcdp-planifier-entete-filtres .lcdp-planifier-legende-autorisations::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
   display: flex;
