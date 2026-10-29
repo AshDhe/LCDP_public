@@ -1219,7 +1219,14 @@
 
     svg.setAttribute("focusable", "false");
     svg.setAttribute("tabindex", "-1");
-    svg.setAttribute("preserveAspectRatio", options.carteNavigation ? "xMidYMid meet" : "xMidYMid slice");
+    // La fiche mobile affiche le département entier, sans recadrage « slice ».
+    // Le mode navigation et le rendu ordinateur restent inchangés.
+    const cadrageFicheMobile = !options.carteNavigation &&
+      window.matchMedia("(max-width: 767px)").matches;
+    svg.setAttribute(
+      "preserveAspectRatio",
+      options.carteNavigation || cadrageFicheMobile ? "xMidYMid meet" : "xMidYMid slice"
+    );
 
     if (options.carteNavigation) svg.setAttribute("role", "group");
 
@@ -1266,10 +1273,22 @@
     const traceSelectionnee = traces.find((item) => item.code === codeDepartement);
     const bboxFrance = fusionnerBbox(traces.map((item) => item.trace.bbox));
     const bboxCible = traceSelectionnee?.trace?.bbox || bboxFrance;
-    const viewBoxInitiale = bboxVersViewBox(
-      bboxCible,
-      traceSelectionnee ? 0.04 : 0.045
-    );
+    // Sur mobile, le contour occupe au maximum 70 % de chaque dimension
+    // du viewBox : au moins 15 % de marge de chaque côté, puis centrage SVG.
+    const viewBoxInitiale = cadrageFicheMobile && bboxCible
+      ? (() => {
+          const largeur = Math.max(0.5, bboxCible[2] - bboxCible[0]);
+          const hauteur = Math.max(0.5, bboxCible[3] - bboxCible[1]);
+          const margeX = largeur * (0.15 / 0.70);
+          const margeY = hauteur * (0.15 / 0.70);
+          return [
+            bboxCible[0] - margeX,
+            bboxCible[1] - margeY,
+            largeur + 2 * margeX,
+            hauteur + 2 * margeY
+          ];
+        })()
+      : bboxVersViewBox(bboxCible, traceSelectionnee ? 0.04 : 0.045);
 
     if (!viewBoxInitiale) {
       throw new Error("Emprise cartographique inexploitable.");
