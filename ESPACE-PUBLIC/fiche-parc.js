@@ -1614,12 +1614,7 @@
       if (typeof options.creerCardParcCarte === "function") {
         const card = await options.creerCardParcCarte(parcCarte);
         if (carteDetruite || numero !== numeroCard || !card) return;
-        const fermer = document.createElement("button");
-        fermer.type = "button";
-        fermer.className = "lcdp-button lcdp-button-secondary";
-        fermer.textContent = "Fermer le cartouche";
-        fermer.addEventListener("click", fermerCardParc);
-        cardSlot.replaceChildren(card, fermer);
+        cardSlot.replaceChildren(card);
         cardSlot.hidden = false;
         cardSlot.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
         return;
