@@ -2,10 +2,10 @@
   "use strict";
   if (window.LCDP_ACTUALITE_GROUPES) return;
   const groupes = Object.freeze({
-    RESEAU: Object.freeze({label:"RÉSEAU"}),
-    CLUB: Object.freeze({label:"CLUB"}),
-    COACHS: Object.freeze({label:"COACHS"}),
-    ASSO: Object.freeze({label:"ASSO"})
+    RESEAU: Object.freeze({label:"Actualité réseau"}),
+    CLUB: Object.freeze({label:"Actualité club"}),
+    COACHS: Object.freeze({label:"Actualité coach"}),
+    ASSO: Object.freeze({label:"Actualité asso"})
   });
   const cle = value => Object.hasOwn(groupes, value) ? value : "RESEAU";
   function cartouche(value) {
