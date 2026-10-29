@@ -446,3 +446,28 @@
     min-height: 420px;
   }
 }
+
+/* Carte générale de la liste des parcs : largeur réduite sans modifier la fiche Parc.
+   Les marges externes permettent le défilement tactile de la page sur mobile. */
+.lcdp-carte-dynamique:not(.lcdp-carte-dynamique--fiche-parc) .lcdp-carte-dynamique__map-shell {
+  width: 75%;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  /* Deux couloirs internes de 20 px ne capturent pas le geste de la carte.
+     Le SVG central conserve les interactions de zoom et de déplacement. */
+  .lcdp-carte-dynamique:not(.lcdp-carte-dynamique--fiche-parc) .lcdp-carte-dynamique__map-shell {
+    padding-inline: 20px;
+    touch-action: pan-y;
+    background-clip: padding-box;
+    isolation: isolate;
+  }
+  .lcdp-carte-dynamique:not(.lcdp-carte-dynamique--fiche-parc) .lcdp-carte-dynamique__map {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    touch-action: none;
+  }
+}
