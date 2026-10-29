@@ -89,6 +89,7 @@
 
   window.LCDP_FicheParc = {
     chargerFicheParc,
+    rendreCarteDansConteneur: ajouterCarteParc,
     monterDansConteneur:
       monterParcoursFicheParcDansConteneur,
     rendreDansConteneur: rendreFicheParcDansConteneur,
@@ -1211,10 +1212,17 @@
     if (filtres) filtres.hidden = true;
     if (statut) statut.hidden = true;
     cardSlot.hidden = true;
+    if (options.carteNavigation) {
+      carte.classList.add("lcdp-carte-dynamique--navigation");
+      cardSlot.className = "lcdp-planifier-carte-cartouche";
+      carte.appendChild(cardSlot);
+    }
 
     svg.setAttribute("focusable", "false");
     svg.setAttribute("tabindex", "-1");
-    svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+    svg.setAttribute("preserveAspectRatio", options.carteNavigation ? "xMidYMid meet" : "xMidYMid slice");
+
+    if (options.carteNavigation) svg.setAttribute("role", "group");
 
     const codeDepartement = nettoyerDepartement(parc.dptmt || parc.departement);
     const features = Array.isArray(geojson?.features) ? geojson.features : [];
@@ -1590,7 +1598,11 @@
         coucheLocalites.appendChild(groupe);
       });
 
+    let numeroCard = 0;
+    let carteDetruite = false;
+
     function fermerCardParc() {
+      numeroCard += 1;
       cardSlot.innerHTML = "";
       cardSlot.hidden = true;
       cardSlot.classList.remove("is-open");
@@ -1598,7 +1610,22 @@
     }
 
     async function ouvrirCardParc(parcCarte) {
+      const numero = ++numeroCard;
+      if (typeof options.creerCardParcCarte === "function") {
+        const card = await options.creerCardParcCarte(parcCarte);
+        if (carteDetruite || numero !== numeroCard || !card) return;
+        const fermer = document.createElement("button");
+        fermer.type = "button";
+        fermer.className = "lcdp-button lcdp-button-secondary";
+        fermer.textContent = "Fermer le cartouche";
+        fermer.addEventListener("click", fermerCardParc);
+        cardSlot.replaceChildren(card, fermer);
+        cardSlot.hidden = false;
+        cardSlot.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
+        return;
+      }
       const card = (await obtenirTemplateCardParcFiche(options)).cloneNode(true);
+      if (carteDetruite || numero !== numeroCard) return;
       card.classList.add("lcdp-box-card-parc--carte-publique");
       card.removeAttribute("data-action");
       card.removeAttribute("tabindex");
@@ -1707,6 +1734,10 @@
     function ajouterMarqueurParc(parcCarte, estParcActif) {
       const longitude = parcCarte.lngparc ?? parcCarte.longitude ?? parcCarte.lngloc;
       const latitude = parcCarte.latparc ?? parcCarte.latitude ?? parcCarte.latloc;
+      if (options.carteNavigation && (
+        longitude == null || latitude == null ||
+        String(longitude).trim() === "" || String(latitude).trim() === ""
+      )) return;
       const point = projeterCoordonnee(longitude, latitude);
 
       if (!point) return;
@@ -1732,6 +1763,19 @@
       marker.setAttribute("focusable", "false");
       marker.setAttribute("tabindex", "-1");
       marker.setAttribute("aria-hidden", "true");
+      if (options.carteNavigation) {
+        marker.setAttribute("focusable", "true");
+        marker.setAttribute("tabindex", "0");
+        marker.removeAttribute("aria-hidden");
+        marker.setAttribute("role", "button");
+        marker.setAttribute("aria-label", "Afficher " + (parcCarte.nom || parcCarte.nomparc || "le parc"));
+        marker.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          event.stopPropagation();
+          ouvrirCardParc(parcCarte).catch(console.error);
+        });
+      }
 
       groupe.appendChild(marker);
       coucheParcs.appendChild(groupe);
@@ -1755,7 +1799,9 @@
       ajouterMarqueurParc(parcCarte, false);
     });
 
-    ajouterMarqueurParc(parcCourant || parc, true);
+    if (!options.carteNavigation || parcCourant) {
+      ajouterMarqueurParc(parcCourant || parc, !options.carteNavigation);
+    }
 
     svg.addEventListener("click", (event) => {
       const cible = event.target instanceof Element ? event.target : null;
@@ -1781,6 +1827,13 @@
     );
 
     appliquerViewBox();
+    return {
+      detruire() {
+        carteDetruite = true;
+        numeroCard += 1;
+        window.removeEventListener("resize", actualiserTailleElementsCarte);
+      }
+    };
   }
 
 
