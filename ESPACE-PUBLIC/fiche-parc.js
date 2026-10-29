@@ -507,34 +507,6 @@
     );
 
     await ajouterGalerieParc(galerieSlot, parc, options);
-    // Mobile : images autonomes, sans clonage des images (potentiellement lazy) de la galerie PC.
-    // La galerie PC reste intacte ; chaque image mobile possède sa propre URL explicite.
-    fiche.querySelectorAll("[data-lcdp-fiche-photo-position]").forEach((emplacement) => {
-      const numeroPhoto = Number(emplacement.dataset.lcdpFichePhotoPosition);
-      if (!Number.isInteger(numeroPhoto) || numeroPhoto < 1 || numeroPhoto > 4) return;
-      const numero = String(numeroPhoto).padStart(2, "0");
-      const card = document.createElement("div");
-      card.className = "lcdp-box-galerie__card";
-      const image = document.createElement("img");
-      image.className = "lcdp-box-galerie__image";
-      image.alt = "Photo " + numero + " du parc";
-      image.loading = "eager";
-      image.decoding = "async";
-      image.src = construireUrlImageGalerieFiche(options, parc, numero + ".jpg");
-      // En cas de fichier absent, tester l'extension WebP sans exposer un texte alternatif brut.
-      image.addEventListener("error", () => {
-        if (image.dataset.lcdpPhotoEssaiWebp !== "1") {
-          image.dataset.lcdpPhotoEssaiWebp = "1";
-          image.src = construireUrlImageGalerieFiche(options, parc, numero + ".webp");
-        } else {
-          image.hidden = true;
-          console.warn("Photo du parc indisponible :", numero, image.src);
-        }
-      });
-      card.appendChild(image);
-      emplacement.replaceChildren(card);
-      emplacement.removeAttribute("aria-hidden");
-    });
     await ajouterCarteParc(carteSlot, parc, options);
 
     remplirBlocTexteFiche(

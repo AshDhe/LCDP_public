@@ -927,42 +927,48 @@
 .lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] .lcdp-box-card-parc__action-libelle,
 .lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-libelle { color:#fff !important; }
 
-/* Présentation mobile : photo / Le parc / photo / carte / photo / accès / photo.
-   Sur ordinateur, seule la galerie originale est affichée. */
-.lcdp-box-fiche-parc__photo-intercalee { display: none; }
+/* Fiche Parc : galerie unique de quatre photos. Aucune duplication dans le DOM.
+   Mobile : les descendants de galerie deviennent éléments de grille de la fiche,
+   pour alterner photos et sections. La source des images demeure commune au PC. */
 @media (max-width: 767px) {
-  .lcdp-box-fiche-parc__section--galerie { display: none !important; }
-  .lcdp-box-fiche-parc__photo-intercalee:not(:empty) {
-    display: block;
-    width: 100%;
-    min-width: 0;
-    padding: var(--lcdp-space-3) 0;
-    border-bottom: 1px solid var(--lcdp-color-border);
+  .lcdp-box-fiche-parc__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
   }
-  .lcdp-box-fiche-parc__photo-intercalee:last-child { border-bottom: 0; padding-bottom: 0; }
-  .lcdp-box-fiche-parc__photo-intercalee .lcdp-box-galerie__card {
+  .lcdp-box-fiche-parc__header { order: 0; min-width: 0; }
+  .lcdp-box-fiche-parc__section--galerie,
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-fiche-parc__galerie,
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie,
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__list {
+    display: contents !important;
+  }
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__header { display: none !important; }
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card {
     width: 100%;
-    max-width: 100%;
     min-width: 0;
-    margin-inline: auto;
+    max-width: 100%;
+    margin: 0;
     padding: var(--lcdp-space-2);
     border: 1px solid var(--lcdp-color-border);
     border-radius: var(--lcdp-radius-large);
-    box-sizing: border-box;
+    align-self: start;
     overflow: hidden;
   }
-  .lcdp-box-fiche-parc__photo-intercalee .lcdp-box-galerie__image {
-    display: block;
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
     width: 100%;
-    max-width: 100%;
     height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
     border-radius: var(--lcdp-radius-media);
   }
-  .lcdp-box-fiche-parc__photo-intercalee .lcdp-box-galerie__card-title,
-  .lcdp-box-fiche-parc__photo-intercalee .lcdp-box-galerie__legend,
-  .lcdp-box-fiche-parc__photo-intercalee .lcdp-box-galerie__text { display: none; }
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(1) { order: 1; margin-top: var(--lcdp-space-3); }
+  .lcdp-box-fiche-parc__section[aria-label="Présentation du parc"] { order: 2; }
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(2) { order: 3; margin-top: var(--lcdp-space-3); }
+  .lcdp-box-fiche-parc__section--map { order: 4; }
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(3) { order: 5; margin-top: var(--lcdp-space-3); }
+  .lcdp-box-fiche-parc__section[aria-label="Accès La Clé du Parc"] { order: 6; }
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(4) { order: 7; margin-top: var(--lcdp-space-3); }
 }
 /* PC : conserver la taille de la fenêtre et l'ordre des blocs ; photos -20 %. */
 @media (min-width: 768px) {
