@@ -339,7 +339,7 @@
     attente.remove();
 
     const nom = parc.nom || "Parc";
-    document.title = "Parc de " + nom + " - La Clé du Parc";
+    document.title = nomParcAffiche(nom) + " - La Clé du Parc";
     appliquerRoutesSite(slot);
   }
 
@@ -415,8 +415,7 @@
     );
 
     if (titre) {
-      const nomSansPrefixe = nom.replace(/^parc\s+(?:de\s+|d['’]\s*)?/i, "").trim();
-      titre.textContent = "Parc de " + (nomSansPrefixe || nom);
+      titre.textContent = nomParcAffiche(nom);
     }
     const departementSousTitre = fiche.querySelector("[data-lcdp-fiche-parc-departement]");
     if (departementSousTitre) {
@@ -424,6 +423,11 @@
       const libelle = nettoyerTexte(options.nomDepartement || parc?.nomDepartement || parc?.nomdepartement);
       departementSousTitre.textContent = libelle ? `${libelle} (${code})` : code;
       departementSousTitre.hidden = !(libelle || code);
+      const sousTitreCarte = fiche.querySelector("[data-lcdp-fiche-parc-map-departement]");
+      if (sousTitreCarte) {
+        sousTitreCarte.textContent = libelle ? `${libelle} (${code})` : (code ? `Département ${code}` : "");
+        sousTitreCarte.hidden = !(libelle || code);
+      }
     }
     if (normaliserModeUsagePlanning(options) === MODE_USAGE_MEMBRE) {
       fiche.classList.add("lcdp-box-fiche-parc--planifier-tunnel");
@@ -1651,8 +1655,7 @@
 
       if (titre) {
         titre.textContent =
-          "Parc de " +
-          nomParc +
+          nomParcAffiche(nomParc) +
           (departement ? " (" + departement + ")" : "");
       }
 
@@ -3303,7 +3306,7 @@
       etatPlanning.parc?.nomparc ||
       "Parc"
     ) || "Parc";
-    titre.textContent = "Parc de " + nomParc;
+    titre.textContent = nomParcAffiche(nomParc);
     meta.textContent = "";
     meta.classList.add(
       "lcdp-box-calendrier-jour__meta--legende",
@@ -3907,7 +3910,7 @@
     const departement = nettoyerDepartement(parc.dptmt || parc.departement);
 
     titre.textContent =
-      "Parc de " + nomParc + (departement ? " - " + departement : "");
+      nomParcAffiche(nomParc) + (departement ? " - " + departement : "");
     meta.hidden = true;
     meta.textContent = "";
     boutonFermer.hidden = true;
@@ -4946,6 +4949,13 @@
     }
 
     return departement;
+  }
+
+  // Affichage uniquement : evite « Parc de Parc de ... » sans modifier les noms en base.
+  function nomParcAffiche(valeur) {
+    const brut = nettoyerTexte(valeur);
+    const sansPrefixe = brut.replace(/^(?:(?:parc\s+(?:de\s+|d[’\']\s*))|(?:parc\s+))+/i, "").trim();
+    return "Parc de " + (sansPrefixe || brut || "nom inconnu");
   }
 
   function nettoyerTexte(valeur) {
