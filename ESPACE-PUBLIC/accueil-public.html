@@ -40,6 +40,25 @@
   <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css">
   <link rel="stylesheet" href="../OBJET/BOX/01-box-carrousel.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-contact.css">
+  <!-- Ajustements propres à l’accueil public, uniquement sur mobile : -30 % sur les espacements verticaux. -->
+  <style id="lcdp-correction-espacements-public">
+    @media (max-width: 767px) {
+      .lcdp-page-accueil-public .lcdp-site-main > .lcdp-page-section.lcdp-accueil-section {
+        padding-top: calc(var(--lcdp-space-5, 36px) * 0.42 * 0.7);
+      }
+      .lcdp-page-accueil-public .lcdp-accueil-intro {
+        min-height: 58.8px; /* 84px × 70 % */
+      }
+      .lcdp-page-accueil-public .lcdp-accueil-content {
+        gap: calc(var(--lcdp-space-4, 24px) * 0.7);
+      }
+    }
+    @media (max-width: 350px) {
+      .lcdp-page-accueil-public .lcdp-accueil-intro {
+        min-height: 77px; /* 110px × 70 % */
+      }
+    }
+  </style>
 </head>
 
 <body class="lcdp-page-accueil-public">

@@ -125,9 +125,9 @@
   transform: none; animation: none; transition: none;
 }
 #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne {
-  display: flex; flex-direction: row; flex-wrap: nowrap;
+  display: flex; flex-direction: column; flex-wrap: nowrap;
   align-items: center; justify-content: center;
-  gap: 12px; min-width: 0; max-width: 100%;
+  gap: 2px; min-width: 0; max-width: 100%;
 }
 #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne > span:first-child {
   display: inline-flex; align-items: center; justify-content: center;
@@ -138,16 +138,13 @@
   margin: 0; vertical-align: middle;
 }
 #lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  display: block;
   flex: 0 1 auto;
   min-width: 0;
-  max-height: 3em;
+  max-width: 100%;
   overflow: hidden;
-  white-space: normal;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow-wrap: normal;
   line-height: 1.5;
   text-overflow: ellipsis;
 }
