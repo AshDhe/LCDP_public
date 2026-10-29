@@ -338,3 +338,32 @@
     transition: none;
   }
 }
+
+/* Tunnel Planifier : chargement exclusif de la fiche Parc.
+   Le masque occupe toute la fenêtre, au-dessus du contenu et des commandes. */
+.lcdp-planifier-fiche-attente {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--lcdp-color-surface, #fff);
+  border-radius: 0;
+  overflow: hidden;
+}
+.lcdp-planifier-fiche-attente .lcdp-pictowait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.lcdp-planifier-fiche-attente .lcdp-pictowait__image {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
