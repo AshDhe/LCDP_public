@@ -122,8 +122,8 @@
   flex: none;
 }
 .lcdp-box-legende__carre--duo {
-  background: var(--lcdp-color-logo-green, #55733f);
-  border-color: #486234;
+  background: var(--lcdp-color-orange, #f2a23a);
+  border-color: #d98b24;
 }
 .lcdp-box-legende__carre--famille {
   background: var(--lcdp-color-blue, #2f6fb3);
@@ -136,4 +136,79 @@
 .lcdp-box-legende__carre--famille-coach {
   background: #80583d;
   border-color: #69462e;
+}
+
+/* PLANIFIER : légende devenue barre de filtres, quatre cases sur une seule ligne. */
+.lcdp-page-reserver .lcdp-planifier-entete-filtres .lcdp-planifier-legende-autorisations {
+  width: 100%;
+  max-width: 100%;
+  margin: 6px 0 9px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  min-width: 0;
+  gap: 12px;
+  align-items: center;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie {
+  display: inline-flex;
+  position: relative;
+  gap: 5px;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  font-size: .79rem;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie__coche {
+  display: inline;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+}
+/* Contraste de la coche DUO sur le jaune. */
+.lcdp-page-reserver .lcdp-box-legende__carre--duo .lcdp-planifier-filtre-categorie__coche {
+  color: var(--lcdp-color-text, #1f2a24);
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie__input:not(:checked) + .lcdp-box-legende__carre {
+  background: transparent !important;
+  border: 2px solid currentColor !important;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie__input:not(:checked) + .lcdp-box-legende__carre .lcdp-planifier-filtre-categorie__coche {
+  display: none;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie__input:focus-visible + .lcdp-box-legende__carre {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+@media (max-width: 767px) {
+  .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne { gap: 7px; }
+  .lcdp-page-reserver .lcdp-planifier-filtre-categorie { gap: 3px; font-size: .64rem; }
+  .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
+    width: 14px; height: 14px; min-width: 14px; min-height: 14px;
+  }
+  .lcdp-page-reserver .lcdp-planifier-filtre-categorie__coche { font-size: 10px; }
 }
