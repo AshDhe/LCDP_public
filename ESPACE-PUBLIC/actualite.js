@@ -118,7 +118,7 @@
       const article=articles[index];caracteres=lettres(String(article.titre));position=0;holding=false;
       const apropos=article.type==='a-propos';
       visible.style.fontWeight=apropos?'700':'400';
-      const etiquette=apropos?node('span','A PROPOS','lcdp-actualite-groupe'):window.LCDP_ACTUALITE_GROUPES.cartouche(article.groupe);
+      const etiquette=apropos?node('span','EN SAVOIR PLUS','lcdp-actualite-groupe'):window.LCDP_ACTUALITE_GROUPES.cartouche(article.groupe);
       if(apropos)etiquette.dataset.groupe='APROPOS';
       badge.replaceChildren(etiquette);
       a.href=destination(article);a.setAttribute('aria-label',etiquette.textContent+' '+article.titre);
