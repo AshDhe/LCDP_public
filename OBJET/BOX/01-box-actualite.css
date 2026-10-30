@@ -156,3 +156,9 @@
   line-height: 1.5;
   overflow: hidden;
 }
+
+/* Titres A PROPOS : même cartouche, bleu ardoise et fond éclairci. */
+.lcdp-actualite-groupe[data-groupe="APROPOS"] {
+  --actu-groupe:#426b8a;
+  --actu-fond:#f0f5f8;
+}

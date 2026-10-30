@@ -92,7 +92,8 @@
     const container=node('div',null,'lcdp-page-container'),width=node('div',null,'lcdp-page-content');
     // Le bandeau et ses espacements sont définis exclusivement par l'objet CSS partagé.
     const bar=node('nav',null,'lcdp-boxtext__text--center');bar.setAttribute('aria-label','Actualité');
-    const a=link('',articleUrl(articles[0].id),'lcdp-actu-bandeau-titre');
+    const destination=article=>article.type==='a-propos'?url('/ESPACE-PUBLIC/le-club.html'):articleUrl(article.id);
+    const a=link('',destination(articles[0]),'lcdp-actu-bandeau-titre');
     const ligne=node('span',null,'lcdp-actu-bandeau-ligne');
     const badge=node('span',null,'lcdp-actu-bandeau-etiquette');
     const visible=node('span',null,'lcdp-actu-bandeau-texte');visible.setAttribute('aria-hidden','true');
@@ -104,8 +105,11 @@
     let characters=[];
     function start(){
       const article=articles[index];characters=letters(String(article.titre));position=0;holding=false;
-      badge.replaceChildren(window.LCDP_ACTUALITE_GROUPES.cartouche(article.groupe));
-      a.href=articleUrl(article.id);a.setAttribute('aria-label',window.LCDP_ACTUALITE_GROUPES.groupes[window.LCDP_ACTUALITE_GROUPES.cle(article.groupe)].label+' '+article.titre);visible.textContent='';
+      const apropos=article.type==='a-propos';
+      const etiquette=apropos?node('span','A PROPOS','lcdp-actualite-groupe'):window.LCDP_ACTUALITE_GROUPES.cartouche(article.groupe);
+      if(apropos)etiquette.dataset.groupe='APROPOS';
+      badge.replaceChildren(etiquette);
+      a.href=destination(article);a.setAttribute('aria-label',etiquette.textContent+' '+article.titre);visible.textContent='';
     }
     function tick(){
       if(stopped)return;
@@ -139,7 +143,16 @@ async function popup(data,articles){
 async function init(){
   await chargerGroupes();
   if(!endpoint)throw Error('API Actualité non configurée.');
-  const r=await fetch(endpoint+'/public/actualite',{cache:'no-store',credentials:'omit'});if(!r.ok)throw Error('Actualité indisponible.');const d=await r.json();
+  const charger=async chemin=>{const r=await fetch(endpoint+chemin,{cache:'no-store',credentials:'omit'});if(!r.ok)throw Error('Contenu du bandeau indisponible.');const d=await r.json();if(d.success===false)throw Error(d.message||'Contenu indisponible.');return d;};
+  const avecBandeau=Boolean(document.getElementById('lcdp-actualite-bandeau'));
+  const [actualiteResultat,aproposResultat]=await Promise.allSettled([
+    charger('/public/actualite'),avecBandeau?charger('/public/a-propos'):Promise.resolve({titres:[]})
+  ]);
+  if(actualiteResultat.status==='rejected'&&!avecBandeau)throw actualiteResultat.reason;
+  const d=actualiteResultat.status==='fulfilled'?actualiteResultat.value:{slides:[]};
+  const titresAPropos=aproposResultat.status==='fulfilled'?(aproposResultat.value.titres||[]).map(t=>({...t,type:'a-propos'})):[];
+  if(actualiteResultat.status==='rejected')console.error(actualiteResultat.reason);
+  if(aproposResultat.status==='rejected')console.error(aproposResultat.reason);
   const articles=(d.slides||[]).filter(a=>a.active&&a.titre&&a.texte);
   const slot=document.getElementById('lcdp-actualite-page');
   if(slot){
@@ -160,7 +173,12 @@ async function init(){
     }
     return;
   }
-  bandeau(articles.slice(0,4));await popup(d,articles);
+  const dernieresActualites=articles.slice(0,4),diffusion=[];
+  for(let i=0;i<Math.max(dernieresActualites.length,titresAPropos.length);i++){
+    if(dernieresActualites[i])diffusion.push(dernieresActualites[i]);
+    if(titresAPropos[i])diffusion.push(titresAPropos[i]);
+  }
+  bandeau(diffusion);await popup(d,articles);
 }
 init().catch(e=>{console.error(e);const p=document.getElementById('lcdp-actualite-page');if(p)p.textContent='Les actualités sont momentanément indisponibles.';});
 })();
