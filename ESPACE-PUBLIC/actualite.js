@@ -112,25 +112,35 @@
     bar.append(a);width.append(bar);container.append(width);slot.replaceChildren(container);
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
     let index=0,position=0,holding=false,timer,stopped=false;
-    const decouperMots=text=>text.match(/\s*\S+\s*/gu)||[];
-    let mots=[];
+    const lettres=text=>typeof Intl.Segmenter==='function'?[...new Intl.Segmenter('fr',{granularity:'grapheme'}).segment(text)].map(x=>x.segment):Array.from(text);
+    let caracteres=[],glyphes=[],texteAnime;
     function start(){
-      const article=articles[index];mots=decouperMots(String(article.titre));position=0;holding=false;
+      const article=articles[index];caracteres=lettres(String(article.titre));position=0;holding=false;
       const apropos=article.type==='a-propos';
       visible.style.fontWeight=apropos?'700':'400';
       const etiquette=apropos?node('span','A PROPOS','lcdp-actualite-groupe'):window.LCDP_ACTUALITE_GROUPES.cartouche(article.groupe);
       if(apropos)etiquette.dataset.groupe='APROPOS';
       badge.replaceChildren(etiquette);
-      a.href=destination(article);a.setAttribute('aria-label',etiquette.textContent+' '+article.titre);visible.textContent='';
+      a.href=destination(article);a.setAttribute('aria-label',etiquette.textContent+' '+article.titre);
+      texteAnime=node('span',null,'lcdp-actu-texte-anime');
+      glyphes=caracteres.map(lettre=>node('span',lettre,'lcdp-actu-lettre'));
+      texteAnime.append(...glyphes);visible.replaceChildren(texteAnime);
+      texteAnime.style.transition='none';texteAnime.style.transform=reduced.matches?'none':'translateX(12px)';
+      // Fixer la position initiale avant la transition, sans modifier la largeur du titre.
+      void texteAnime.offsetWidth;
+      texteAnime.style.transition='';
     }
     function tick(){
       if(stopped)return;
       if(document.hidden){timer=setTimeout(tick,100);return;}
       if(holding){index=(index+1)%articles.length;start();}
-      if(reduced.matches){visible.textContent=mots.join('');position=mots.length;}
-      else {position++;visible.textContent=mots.slice(0,position).join('');}
-      holding=position>=mots.length;
-      timer=setTimeout(tick,holding?1000:500);
+      if(reduced.matches){glyphes.forEach(g=>g.classList.add('is-visible'));position=caracteres.length;texteAnime.style.transform='none';}
+      else {
+        glyphes[position]?.classList.add('is-visible');position++;
+        texteAnime.style.transform='translateX('+(12*(1-Math.min(position/Math.max(caracteres.length,1),1)))+'px)';
+      }
+      holding=position>=caracteres.length;
+      timer=setTimeout(tick,holding?1000:120);
     }
     start();tick();
     window.addEventListener('pagehide',()=>{stopped=true;clearTimeout(timer);},{once:true});

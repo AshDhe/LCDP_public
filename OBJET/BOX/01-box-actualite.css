@@ -163,3 +163,19 @@
   --actu-groupe:#426b8a;
   --actu-fond:#f0f5f8;
 }
+
+/* Apparition douce : largeur réservée pour empêcher les à-coups du centrage. */
+#lcdp-actualite-bandeau .lcdp-actu-texte-anime {
+  display: inline-block;
+  white-space: pre;
+  transition: transform 120ms linear;
+}
+#lcdp-actualite-bandeau .lcdp-actu-lettre {
+  opacity: 0;
+  transition: opacity 180ms ease-out;
+}
+#lcdp-actualite-bandeau .lcdp-actu-lettre.is-visible { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  #lcdp-actualite-bandeau .lcdp-actu-texte-anime,
+  #lcdp-actualite-bandeau .lcdp-actu-lettre { transition: none; }
+}
