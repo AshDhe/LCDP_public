@@ -258,7 +258,7 @@
         await chargerScriptUneFois("/OBJET/BOX/03-formulaire-protege.js");
         const base = String(window.SITE_CONFIG?.coachBaseUrl || window.SITE_BASE || "").replace(/\/$/, "");
         const script = document.createElement("script");
-        script.src = (base || "..") + "/ESPACE-COACH/contact-coach.js?v=20261028-contact-gif-2";
+        script.src = (base || "..") + "/ESPACE-PUBLIC/contact-coach.js?v=20261028-contact-gif-2";
         await new Promise((resolve,reject) => { script.onload=resolve;script.onerror=reject;document.body.appendChild(script); });
         await window.LCDP_initialiserContactCoach();
       }
