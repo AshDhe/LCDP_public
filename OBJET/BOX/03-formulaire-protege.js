@@ -21,8 +21,8 @@
    // L'alerte se superpose à un éventuel formulaire juridique, sans le détruire.
    const zone=document.createElement('div');zone.append(template.content.cloneNode(true));slot.append(zone);
    const cible=zone.querySelector('[data-lcdp-alerte-message]');if(!cible){zone.remove();throw new Error();}cible.textContent=texte;
-   await new Promise(resolve=>{const fermer=()=>{zone.remove();resolve();};zone.querySelectorAll('[data-lcdp-alerte-close], [data-lcdp-alerte-ok]').forEach(b=>b.addEventListener('click',fermer,{once:true}));});
-  }catch{window.alert(texte);}
+   return await new Promise(resolve=>{const fermer=event=>{zone.remove();resolve(event.currentTarget.matches('[data-lcdp-alerte-ok]'));};zone.querySelectorAll('[data-lcdp-alerte-close], [data-lcdp-alerte-ok]').forEach(b=>b.addEventListener('click',fermer,{once:true}));});
+  }catch{window.alert(texte);return true;}
  }
  window.LCDP_brancherFormulaireProtege=async function(form,config){
   if(form.dataset.protege==='true')return;form.dataset.protege='true';
@@ -85,8 +85,16 @@
    try{
     const r=await fetch(config.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,donnees,token}),signal:AbortSignal.timeout(45000)});
     const data=await r.json().catch(()=>null);if(!r.ok||data?.ok!==true)throw new Error(data?.message||'Envoi non confirmé. Réessayez.');
-    form.reset();id=crypto.randomUUID();empreinte='';statut.textContent='Votre demande est enregistrée. Merci.';
-    await message('Votre demande est enregistrée. Merci.');
+    const contact=['coach','resparc'].includes(config.type);
+    const confirmation='Votre demande est enregistrée. Merci.'+(contact?' Nous revenons vers vous.':'');
+    form.reset();id=crypto.randomUUID();empreinte='';statut.textContent=confirmation;
+    const confirme=await message(confirmation);
+    if(contact && confirme){
+     const c=window.SITE_CONFIG||{};
+     const chemin='/ESPACE-PUBLIC/accueil-public.html';
+     const base=String(c.publicBaseUrl||c.PUBLIC_BASE||window.SITE_BASE||c.siteBase||'').replace(/\/+$/,'');
+     window.location.assign(typeof c.publicUrl==='function'?c.publicUrl(chemin):base+chemin);
+    }
    }catch(e){statut.textContent=e.name==='TimeoutError'?'Envoi non confirmé. Réessayez avec les mêmes informations.':e.message;}
    finally{enCours=false;form.removeAttribute('aria-busy');token='';bouton.disabled=true;if(widgetId!==null){afficherAttenteVerification(true);window.turnstile.reset(widgetId);}}
   });
