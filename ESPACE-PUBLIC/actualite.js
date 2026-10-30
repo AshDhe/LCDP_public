@@ -140,7 +140,7 @@
         texteAnime.style.transform='translateX('+(12*(1-Math.min(position/Math.max(caracteres.length,1),1)))+'px)';
       }
       holding=position>=caracteres.length;
-      timer=setTimeout(tick,holding?1000:120);
+      timer=setTimeout(tick,holding?1000:100);
     }
     start();tick();
     window.addEventListener('pagehide',()=>{stopped=true;clearTimeout(timer);},{once:true});
