@@ -117,7 +117,17 @@
     if (location.hash === "#le-club") ouvrirClub();
     else section.hidden = true;
   });
-  if (location.hash === "#le-club") {
+  const navigation = performance.getEntriesByType("navigation")[0];
+  if (navigation?.type === "reload") {
+    section.hidden = true;
+    if (location.hash === "#le-club") history.replaceState(history.state, "", location.pathname + location.search);
+    const revenirEnHaut = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: "instant" }));
+    };
+    if (document.readyState === "complete") revenirEnHaut();
+    else window.addEventListener("load", revenirEnHaut, { once: true });
+  } else if (location.hash === "#le-club") {
     if (document.readyState === "complete") ouvrirClub();
     else window.addEventListener("load", ouvrirClub, { once: true });
   }
