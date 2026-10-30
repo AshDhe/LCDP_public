@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Actualité - La Clé du Parc</title>
+  <title>Page en cours de mise à jour - La Clé du Parc</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Les derniers articles de La Clé du Parc.">
+  <meta name="description" content="Cette page est en cours de mise à jour.">
 
   <script src="../config.js"></script>
 
@@ -21,32 +21,66 @@
   <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
   <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
+  <link rel="stylesheet" href="../OBJET/BOX/documents-legaux.css" data-site-href="/OBJET/BOX/documents-legaux.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
+  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
-
-  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css">
-  <link rel="stylesheet" href="../OBJET/BOX/01-box-carrousel.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-contact.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
+  <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
+  <style>
+    .lcdp-mise-a-jour {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 45vh;
+      padding: 32px 0;
+      gap: 28px;
+      text-align: center;
+    }
+    .lcdp-mise-a-jour .lcdp-mise-a-jour-picto {
+      display: block;
+      width: clamp(160px, 42vw, 224px);
+      height: auto;
+      max-width: 100%;
+    }
+    .lcdp-mise-a-jour h1 {
+      margin: 0;
+      font-size: clamp(18px, 4.5vw, 24px);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+  </style>
 </head>
 
-<body>
+<body class="lcdp-page-document-legal">
   <div class="lcdp-site-page">
 
     <div id="lcdp-bandeau-slot"></div>
 
     <main class="lcdp-site-main">
-      <section class="lcdp-page-section" aria-label="Actualité">
+      <section class="lcdp-page-section" aria-label="Page en cours de mise à jour">
         <div class="lcdp-page-container">
-          <div class="lcdp-page-content lcdp-stack-large">
-
-            
-
-            <header class="lcdp-page-header">
-              <h1 class="lcdp-title-page-center" style="color:#111;">Actualité</h1>
-            </header>
-
-            <div id="lcdp-actualite-page" aria-live="polite"></div>
-
+          <div class="lcdp-mise-a-jour">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-labelledby="lcdp-attente-title" class="lcdp-mise-a-jour-picto">
+  <title id="lcdp-attente-title">Page en cours de mise à jour</title>
+  <style>@media (prefers-reduced-motion: reduce) { .rotation { animation: none; } } .rotation { transform-origin: 96px 96px; animation: tourner 3.36s steps(12, end) infinite; } @keyframes tourner { to { transform: rotate(360deg); } }</style>
+  <g class="rotation">
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#f5a000" transform="rotate(0 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#789953" transform="rotate(30 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#86a75f" transform="rotate(60 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#9dbb7e" transform="rotate(90 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#b4cda0" transform="rotate(120 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#c9dcb9" transform="rotate(150 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#d4e3c8" transform="rotate(180 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#c8dbb7" transform="rotate(210 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#b2cc9b" transform="rotate(240 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#98b77c" transform="rotate(270 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#83a35f" transform="rotate(300 96 96)"/>
+    <rect x="86" y="10" width="20" height="38" rx="10" fill="#759750" transform="rotate(330 96 96)"/>
+  </g>
+</svg>
+            <h1 class="lcdp-title-page-center">Page en cours de mise à jour</h1>
           </div>
         </div>
       </section>
@@ -57,7 +91,7 @@
 
   </div>
 
-  <script>
+<script>
     (() => {
       "use strict";
 
@@ -152,10 +186,20 @@
 
         const actions = dialogue.querySelector("[data-lcdp-dialogue-actions]");
 
-        [
-          { label: "Me connecter", href: "/ESPACE-PUBLIC/connexion-membre.html", style: "lcdp-button-primary" },
-          { label: "Être invité(e)", href: "/ESPACE-PUBLIC/inscription.html", style: "lcdp-button-secondary" }
-        ].forEach((bouton) => {
+        const boutons = [
+          {
+            label: "Me connecter",
+            href: "/ESPACE-PUBLIC/connexion-membre.html",
+            style: "lcdp-button-primary"
+          },
+          {
+            label: "Être invité(e)",
+            href: "/ESPACE-PUBLIC/inscription.html",
+            style: "lcdp-button-secondary"
+          }
+        ];
+
+        boutons.forEach((bouton) => {
           const lien = document.createElement("a");
           lien.className = "lcdp-button " + bouton.style;
           lien.textContent = bouton.label;
@@ -170,7 +214,9 @@
         dialogue.querySelector("[data-lcdp-dialogue-close]").addEventListener("click", fermer);
 
         dialogue.addEventListener("click", (event) => {
-          if (event.target === dialogue) fermer();
+          if (event.target === dialogue) {
+            fermer();
+          }
         });
       }
 
@@ -196,20 +242,6 @@
         }
       }
 
-      async function ajouterBoxText(slotId, titre, contenuHtml) {
-        const slot = document.getElementById(slotId);
-        slot.innerHTML = "";
-
-        const fragment = await chargerFragment("/OBJET/BOX/01-box-text.html");
-        slot.appendChild(fragment);
-
-        const box = slot.querySelector("[data-lcdp-boxtext]");
-        box.querySelector("[data-lcdp-boxtext-title]").textContent = titre;
-        box.querySelector("[data-lcdp-boxtext-content]").innerHTML = contenuHtml;
-
-        appliquerRoutesSite(slot);
-      }
-
       async function initialiserFooter() {
         const slot = document.getElementById("lcdp-footer-slot");
         slot.innerHTML = "";
@@ -222,14 +254,16 @@
 
       async function initialiserPage() {
         appliquerRoutesSite(document);
+
         await initialiserBandeau();
 
         await initialiserFooter();
       }
 
-      initialiserPage().catch(console.error);
+      initialiserPage().catch((erreur) => {
+        console.error(erreur);
+      });
     })();
   </script>
-  <script src="./actualite.js" defer></script>
 </body>
 </html>
