@@ -185,3 +185,19 @@
     font-size: 0.8704rem;
   }
 }
+
+/* Texte de la box : mobile d’abord, puis ordinateur. */
+#lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
+  font-size: 1.2em;
+}
+#lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne {
+  gap: 6px;
+}
+@media (min-width: 768px) {
+  #lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
+    font-size: 1.5em;
+  }
+  #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne {
+    gap: 10px;
+  }
+}
