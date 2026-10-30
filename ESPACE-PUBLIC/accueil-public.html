@@ -57,9 +57,18 @@
     }
   </style>
   <style id="lcdp-pictos-accueil-public">
+    .lcdp-page-accueil-public #lcdp-menu-central-slot,
+    .lcdp-page-accueil-public #lcdp-menu-central-slot > *,
+    .lcdp-page-accueil-public #lcdp-menu-central-slot .lcdp-accueil-actions {
+      width: 100%;
+      min-width: 0;
+    }
+
     .lcdp-page-accueil-public .lcdp-accueil-actions > button.lcdp-accueil-picto {
       box-sizing: border-box;
-      width: 42%;
+      width: 148.68px;
+      max-width: 100%;
+      flex-shrink: 0;
       height: 112px;
       min-height: 112px;
       margin-inline: auto;
@@ -71,6 +80,8 @@
     .lcdp-accueil-picto > svg,
     .lcdp-accueil-picto > img {
       display: block;
+      max-width: none;
+      min-width: 71.68px;
       width: 71.68px;
       height: 71.68px;
       flex: 0 0 71.68px;
@@ -88,11 +99,13 @@
     }
     @media (min-width: 768px) {
       .lcdp-page-accueil-public .lcdp-accueil-actions > button.lcdp-accueil-picto {
+        width: 194.88px;
         height: 120px;
         min-height: 120px;
       }
       .lcdp-accueil-picto > svg,
       .lcdp-accueil-picto > img {
+        min-width: 76.16px;
         width: 76.16px;
         height: 76.16px;
         flex-basis: 76.16px;
