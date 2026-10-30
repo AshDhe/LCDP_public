@@ -136,7 +136,7 @@
 #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne .lcdp-actualite-groupe {
   display: inline-flex; align-items: center; justify-content: center;
   margin: 0; vertical-align: middle;
-  font-size: 1.36rem;
+  font-size: 1.088rem;
 }
 #lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
   display: block;
