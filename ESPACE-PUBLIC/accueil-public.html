@@ -56,29 +56,49 @@
       }
     }
   </style>
-  <style id="lcdp-planifier-picto-public">
-    .lcdp-page-accueil-public .lcdp-accueil-actions > button.lcdp-accueil-planifier {
+  <style id="lcdp-pictos-accueil-public">
+    .lcdp-page-accueil-public .lcdp-accueil-actions > button.lcdp-accueil-picto {
       box-sizing: border-box;
+      width: 42%;
       height: 112px;
+      min-height: 112px;
+      margin-inline: auto;
       padding: 8px 16px;
       flex-direction: column;
       gap: 4px;
       color: #ffffff;
     }
-    .lcdp-accueil-planifier > svg {
+    .lcdp-accueil-picto > svg,
+    .lcdp-accueil-picto > img {
       display: block;
-      width: 32px;
-      height: 32px;
-      flex: 0 0 32px;
+      width: 71.68px;
+      height: 71.68px;
+      flex: 0 0 71.68px;
+      object-fit: contain;
+    }
+    .lcdp-accueil-picto > img {
+      filter: brightness(0) invert(1);
+      transform: scale(1.15);
+    }
+    .lcdp-accueil-picto > span {
+      font-size: clamp(11.95488px, 3.6064vw, 16.4864px);
+      transform: scaleX(0.95);
+      line-height: 1.05;
+      white-space: nowrap;
     }
     @media (min-width: 768px) {
-      .lcdp-page-accueil-public .lcdp-accueil-actions > button.lcdp-accueil-planifier {
+      .lcdp-page-accueil-public .lcdp-accueil-actions > button.lcdp-accueil-picto {
         height: 120px;
+        min-height: 120px;
       }
-      .lcdp-accueil-planifier > svg {
-        width: 36px;
-        height: 36px;
-        flex-basis: 36px;
+      .lcdp-accueil-picto > svg,
+      .lcdp-accueil-picto > img {
+        width: 76.16px;
+        height: 76.16px;
+        flex-basis: 76.16px;
+      }
+      .lcdp-accueil-picto > span {
+        font-size: 15.088px;
       }
     }
   </style>
