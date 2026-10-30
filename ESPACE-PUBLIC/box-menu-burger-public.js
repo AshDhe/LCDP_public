@@ -347,8 +347,8 @@
           href: "/ESPACE-PUBLIC/actualite.html"
         },
         {
-          label: "Le club",
-          href: "/ESPACE-PUBLIC/le-club.html"
+          label: "L’association",
+          href: "/ESPACE-PUBLIC/association.html"
         },
         {
           label: "FAQ",

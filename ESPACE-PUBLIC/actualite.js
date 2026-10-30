@@ -103,7 +103,7 @@
     const container=node('div',null,'lcdp-page-container'),width=node('div',null,'lcdp-page-content');
     // Le bandeau et ses espacements sont définis exclusivement par l'objet CSS partagé.
     const bar=node('nav',null,'lcdp-boxtext__text--center');bar.setAttribute('aria-label','Actualité');
-    const destination=article=>article.type==='a-propos'?url('/ESPACE-PUBLIC/le-club.html'):articleUrl(article.id);
+    const destination=article=>document.body.classList.contains('lcdp-page-accueil-public')?'#le-club':article.type==='a-propos'?url('/ESPACE-PUBLIC/le-club.html'):articleUrl(article.id);
     const a=link('',destination(articles[0]),'lcdp-actu-bandeau-titre');
     const ligne=node('span',null,'lcdp-actu-bandeau-ligne');
     const badge=node('span',null,'lcdp-actu-bandeau-etiquette');

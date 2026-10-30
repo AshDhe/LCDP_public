@@ -102,6 +102,11 @@
       }
     }
   </style>
+  <style>
+    .lcdp-page-accueil-public .lcdp-accueil-main { flex-direction: column; }
+    #le-club { width: 100%; flex: 0 0 auto; }
+    #le-club[hidden] { display: none !important; }
+  </style>
 </head>
 
 <body class="lcdp-page-accueil-public">
@@ -127,6 +132,7 @@
           </div>
         </div>
       </section>
+      <section id="le-club" hidden aria-label="Le club"></section>
     </main>
 
     <div id="lcdp-footer-slot"></div>
@@ -136,5 +142,6 @@
   <script src="./controle-acces-accueil.js"></script>
   <script src="./accueil-public.js"></script>
   <script src="./actualite.js" defer></script>
+  <script src="./club-accueil.js" defer></script>
 </body>
 </html>
