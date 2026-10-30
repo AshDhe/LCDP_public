@@ -179,3 +179,9 @@
   #lcdp-actualite-bandeau .lcdp-actu-texte-anime,
   #lcdp-actualite-bandeau .lcdp-actu-lettre { transition: none; }
 }
+
+@media (max-width: 767px) {
+  #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne .lcdp-actualite-groupe[data-groupe="APROPOS"] {
+    font-size: 0.8704rem;
+  }
+}
