@@ -139,6 +139,7 @@
   font-size: 1.088rem;
 }
 #lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
+  color: var(--lcdp-color-blue, #2f6fb3);
   display: block;
   flex: 0 1 auto;
   min-width: 0;
