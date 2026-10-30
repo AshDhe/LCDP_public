@@ -86,6 +86,17 @@
   async function rappel(){
     const box=node('div',null,'lcdp-stack'),p=node('p','Ouvrez un compte dans l’application et ne réaffichez plus les pop-up','lcdp-box-dialogue-bouton__text'),actions=node('div',null,'lcdp-box-formulaire__actions'),ok=node('button','OK','lcdp-button');ok.type='button';actions.append(ok);box.append(p,actions);const close=await modal(box);ok.onclick=close;
   }
+  function construireDiffusion(titresAPropos,articles){
+    const actualites=articles.filter(a=>a.bandeau===true).slice().sort((a,b)=>(Date.parse(b.datepublication)||0)-(Date.parse(a.datepublication)||0));
+    if(!titresAPropos.length)return actualites;
+    if(!actualites.length)return titresAPropos.slice();
+    // Boucle complète : chaque rubrique conserve son ordre, même si leurs tailles diffèrent.
+    const pgcd=(a,b)=>b?pgcd(b,a%b):a;
+    const tours=titresAPropos.length*actualites.length/pgcd(titresAPropos.length,actualites.length);
+    const diffusion=[];
+    for(let i=0;i<tours;i++)diffusion.push(titresAPropos[i%titresAPropos.length],actualites[i%actualites.length]);
+    return diffusion;
+  }
   function bandeau(articles){
     if(!articles.length)return;
     const slot=document.getElementById('lcdp-actualite-bandeau');if(!slot)return;
@@ -173,12 +184,7 @@ async function init(){
     }
     return;
   }
-  const dernieresActualites=articles.slice(0,4),diffusion=[];
-  for(let i=0;i<Math.max(dernieresActualites.length,titresAPropos.length);i++){
-    if(dernieresActualites[i])diffusion.push(dernieresActualites[i]);
-    if(titresAPropos[i])diffusion.push(titresAPropos[i]);
-  }
-  bandeau(diffusion);await popup(d,articles);
+  bandeau(construireDiffusion(titresAPropos,articles));await popup(d,articles);
 }
 init().catch(e=>{console.error(e);const p=document.getElementById('lcdp-actualite-page');if(p)p.textContent='Les actualités sont momentanément indisponibles.';});
 })();
