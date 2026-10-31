@@ -32,14 +32,35 @@
     avertissement.hidden=d.mobile_detecte!==false;
   }
   let optinEnregistre=false;
+  let connexionAFinaliser=null;
+  let connexionTerminee=false;
+  function suiteConfirmation(){
+    return connexionTerminee ? " Cliquez sur OK pour accéder à votre espace membre." : " Cliquez sur OK pour vous connecter.";
+  }
+  function accueilMembre(){
+    if(typeof config.membreUrl==="function")return config.membreUrl("/index.html");
+    const base=String(config.membreBaseUrl||config.MEMBRE_BASE||"").replace(/\/+$/,"");
+    if(base)return base+"/index.html";
+    if(["ashdhe.github.io","huguespavret.github.io"].includes(location.hostname))return location.origin+"/LCDP_membre/index.html";
+    return "https://membre.lacleduparc.fr/index.html";
+  }
+  async function finaliserConnexion(){
+    const explicite=config.workerConnexionMembreUrl||config.WORKER_CONNEXION_MEMBRE_URL;
+    const service=String(explicite||(typeof config.apiUrl==="function"?config.apiUrl("connexion-membre-api"):"https://connexion-membre-api.lacleduparc.fr")).replace(/\/+$/,"");
+    const r=await fetch(service,{method:"POST",credentials:"include",cache:"no-store",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({action:"finaliser-inscription",idsession:connexionAFinaliser.sessionConnexion,membre:connexionAFinaliser.membre,navigateur:navigateurDemande})});
+    const d=await r.json().catch(()=>null);
+    if(!r.ok||d?.success!==true)throw new Error(d?.message||"La connexion n’est pas confirmée. Cliquez de nouveau sur le bouton pour réessayer.");
+    connexionTerminee=true;connexionAFinaliser=null;
+  }
   confirmation.addEventListener("close",()=>{
-    if(optinEnregistre)location.assign(new URL("/ESPACE-PUBLIC/connexion-membre.html",location.href).href);
+    if(optinEnregistre)location.assign(connexionTerminee?accueilMembre():new URL("/ESPACE-PUBLIC/connexion-membre.html",location.href).href);
   });
   function termine(){
     optinEnregistre=true;
     document.body.classList.add("optin-termine");
     contenu.hidden=true;
-    statut.textContent="Votre opt-in géolocalisation est enregistré. "+informationNavigateur+" Cliquez sur OK pour vous connecter.";
+    statut.textContent="Votre opt-in géolocalisation est enregistré. "+informationNavigateur+suiteConfirmation();
     if(typeof confirmation.showModal==="function")confirmation.showModal();
   }
   if(modeActualisation){
@@ -89,6 +110,13 @@
   });
   autoriser.addEventListener("click",async()=>{
     if(enCours)return;
+    if(connexionAFinaliser){
+      etat(true);statut.textContent="Finalisation de votre connexion…";
+      try{await finaliserConnexion();termine();}
+      catch(e){statut.textContent=e.message;}
+      finally{etat(false);}
+      return;
+    }
     if(tokenConfirmation){
       etat(true);
       const enregistrement=appeler("geo-email-confirm",{token:tokenConfirmation});
@@ -124,7 +152,14 @@
       // Le consentement ne dépend pas de la réponse à la demande du navigateur.
       const enregistrement=appeler("geo-save",{flow,navigateur:navigateurDemande,telephoneConfirme:true,consent:true,version:"2026-10-24"});
       demanderPermissionNavigateur();
-      try{const d=await enregistrement;appliquerDetection(d);flow="";termine();}
+      try{
+        const d=await enregistrement;appliquerDetection(d);flow="";
+        if(d.sessionConnexion){
+          connexionAFinaliser={sessionConnexion:d.sessionConnexion,membre:d.membre};
+          await finaliserConnexion();
+        }
+        termine();
+      }
       catch(e){statut.textContent=e.message;}
       finally{etat(false);}
     } else {
@@ -138,7 +173,7 @@
     const informer=texte=>{
       informationNavigateur=texte;
       if(contenu.hidden&&confirmation.open){
-        statut.textContent="Votre opt-in géolocalisation est enregistré. "+texte+" Cliquez sur OK pour vous connecter.";
+        statut.textContent="Votre opt-in géolocalisation est enregistré. "+texte+suiteConfirmation();
       }
     };
     if(!window.isSecureContext||!navigator.geolocation){
