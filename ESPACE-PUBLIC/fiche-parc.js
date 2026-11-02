@@ -407,6 +407,9 @@
     const carteSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-map-slot]"
     );
+    const ouverture = fiche.querySelector(
+      "[data-lcdp-fiche-parc-ouverture]"
+    );
     const acces = fiche.querySelector(
       "[data-lcdp-fiche-parc-acces]"
     );
@@ -510,6 +513,10 @@
     await ajouterCarteParc(carteSlot, parc, options);
 
     remplirBlocTexteFiche(
+      ouverture,
+      String(parc?.horaire || "").trim() || "Horaires d’accès non renseignés."
+    );
+    remplirBlocTexteFiche(
       acces,
       construireTexteAccesParc(parc)
     );
@@ -522,13 +529,6 @@
         });
       }
     }
-
-    // Harmoniser le titre d'ouverture lorsqu'il est present dans le composant charge.
-    fiche.querySelectorAll("h2, h3, h4").forEach((titreBloc) => {
-      if (titreBloc.textContent.trim() === "Ouverture du parc") {
-        titreBloc.textContent = "Ouverture";
-      }
-    });
 
     slot.appendChild(fiche);
 
@@ -4923,14 +4923,9 @@
   }
 
   function construireTexteAccesParc(parc) {
-    const horaire = String(parc?.horaire || "").trim() ||
-      "Horaires d’accès non renseignés.";
-    const contact =
-      "Votre contact La Clé du Parc : " +
+    return "Votre contact La Clé du Parc : " +
       "camille@lacleduparc.fr - " +
       "Standard téléphonique : 02.34.46.51.14";
-
-    return horaire + "\n" + contact;
   }
 
   function normaliserNomParcPourChemin(valeur) {

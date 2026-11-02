@@ -971,8 +971,9 @@
   .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(2) { order: 3; margin-top: var(--lcdp-space-3); }
   .lcdp-box-fiche-parc__section--map { order: 4; }
   .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(3) { order: 5; margin-top: var(--lcdp-space-3); }
-  .lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"] { order: 6; }
-  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(4) { order: 7; margin-top: var(--lcdp-space-3); }
+  .lcdp-box-fiche-parc__section[aria-label="Ouverture"] { order: 6; }
+  .lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"] { order: 7; }
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(4) { order: 8; margin-top: var(--lcdp-space-3); }
 }
 /* PC : conserver la taille de la fenêtre et l'ordre des blocs ; photos -20 %. */
 @media (min-width: 768px) {
@@ -984,7 +985,3 @@
   }
 }
 
-/* Espacement du bloc Accès Ma Clé après le bloc qui le précède. */
-.lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"] {
-  margin-top: var(--lcdp-space-3);
-}
