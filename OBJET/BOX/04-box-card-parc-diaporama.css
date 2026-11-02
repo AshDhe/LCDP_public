@@ -72,3 +72,19 @@
   overflow: hidden;
   min-height: 0;
 }
+
+/* Les faces partagent une hauteur suffisante pour le titre, les deux boutons
+   et un court extrait. Sur grand écran, le ratio 16:10 reste prioritaire
+   dès qu'il fournit davantage de hauteur. Aucun scroll propre à la carte. */
+.lcdp-box-card-parc-diaporama__scene {
+  min-height: 272px;
+}
+.lcdp-box-card-parc-diaporama__face--verso,
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body,
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__text {
+  overflow: hidden;
+}
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body {
+  height: 100%;
+  justify-content: flex-start;
+}
