@@ -495,3 +495,22 @@
   display: block; font-size: 0.8em; font-weight: 700; margin-top: 0.3rem;
 }
 
+/* PLANIFIER uniquement : jours compacts sans étirement vertical des semaines. */
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid {
+  min-height: 0;
+  grid-auto-rows: 64px;
+  align-content: start;
+}
+
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid > [data-lcdp-card-jour-mois] {
+  min-height: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid {
+    min-height: 0;
+    grid-auto-rows: 78px;
+  }
+}
