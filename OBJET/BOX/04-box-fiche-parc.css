@@ -992,3 +992,9 @@
 .lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"] {
   margin-top: var(--lcdp-space-3);
 }
+
+/* Espacer les paragraphes des blocs Ouverture et Accès Ma Clé. */
+.lcdp-box-fiche-parc__section[aria-label="Ouverture du parc"] .lcdp-box-fiche-parc__box-text p + p,
+.lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"] .lcdp-box-fiche-parc__box-text p + p {
+  margin-top: var(--lcdp-space-3);
+}
