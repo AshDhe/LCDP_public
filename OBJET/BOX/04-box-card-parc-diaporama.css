@@ -9,11 +9,11 @@
 .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--recto { transform: rotateY(-180deg); visibility: hidden; }
 .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(0deg); visibility: visible; }
 .lcdp-box-card-parc-diaporama__face { position: absolute; inset: 0; overflow: hidden; border: 1px solid var(--lcdp-color-border); border-radius: var(--lcdp-radius-large); background: var(--lcdp-color-surface); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-.lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(180deg); visibility: hidden; transition: none; padding: var(--lcdp-space-2); overflow-y: auto; }
+.lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(180deg); visibility: hidden; transition: none; padding: var(--lcdp-space-2); overflow-y: hidden; }
 .lcdp-box-card-parc-diaporama__ouvrir { position: relative; display: block; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; text-align: left; }
 .lcdp-box-card-parc-diaporama__image { display: block; width: 100%; height: 100%; object-fit: cover; }
 .lcdp-box-card-parc-diaporama__nom { position: absolute; inset: auto 0 0; padding: var(--lcdp-space-3); color: #fff; font-weight: 700; font-size: clamp(1.1rem, 3vw, 1.55rem); background: linear-gradient(transparent, rgba(0,0,0,.65)); }
-/* La croix occupe la ligne du titre, qui lui réserve sa place. */
+/* La croix reste sur la ligne du titre, sans décaler tout le verso. */
 .lcdp-box-card-parc-diaporama__fermer { position: absolute; right: var(--lcdp-space-2); top: var(--lcdp-space-2); z-index: 2; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--lcdp-color-surface-soft); color: var(--lcdp-color-text); font-size: 1.5rem; cursor: pointer; }
 .lcdp-box-card-parc-diaporama__contenu { width: 100%; min-width: 0; }
 .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body { padding: 0; }
@@ -42,10 +42,10 @@
 /* Le verso reprend la Card Parc sans les règles horizontales de la liste PC.
    La hauteur garantit que les boutons restent dans le cartouche. */
 .lcdp-box-card-parc-diaporama__scene { aspect-ratio: 16 / 10; height: auto; }
-/* Ligne supérieure réservée à la croix : aucun bouton dessous. */
+/* Le titre réserve l’espace de la croix ; pas de bande vide au-dessus. */
 .lcdp-box-card-parc-diaporama__face--verso {
-  overflow-y: auto;
-  padding-top: calc(36px + 2 * var(--lcdp-space-2));
+  overflow-y: hidden;
+  padding: var(--lcdp-space-3);
 }
 .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body {
   display: flex; flex-direction: column; width: 100%; min-width: 0;
@@ -56,28 +56,19 @@
 }
 
 
-/* Verso : le début de la présentation issue de "prez" suit les boutons,
-   sans perdre son texte au profit du seul pictogramme. */
-.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__text {
-  display: contents;
+/* Conserver la structure et la typographie du composant Card Parc partagé.
+   L’ordre titre / actions / description est déjà construit par le JavaScript.
+   Ne jamais rendre visible une description masquée faute de texte administré. */
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description[hidden] {
+  display: none !important;
 }
-.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title {
-  order: 0;
-}
-.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__actions--reserver {
-  order: 1;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
+
+/* Diaporama compact : aucun défilement dans la petite carte. */
 .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description {
-  order: 2;
-  width: 100%;
-  min-width: 0;
-  height: auto;
-  overflow-wrap: break-word;
-  white-space: normal;
-  text-align: left;
-}
-.lcdp-box-card-parc-diaporama__face--verso [data-lcdp-card-parc-description-texte] {
-  display: inline;
-  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  min-height: 0;
 }
