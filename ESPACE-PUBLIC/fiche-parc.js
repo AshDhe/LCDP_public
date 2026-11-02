@@ -4986,11 +4986,12 @@
   }
 
   function construireTexteAccesParc(parc) {
-    return String(parc?.entreeparc || "").trim() ||
-      "L’accès est indiqué avec votre clé.\n" +
-      "Votre contact La Clé du Parc : " +
-      "camille@lacleduparc.fr - " +
-      "Standard téléphonique : 02.34.46.51.14";
+    // Source unique du bloc « Accès Ma Clé » : public.parcs.entreeparc.
+    // Le texte permanent est initialisé en base par le SQL précédent.
+    const texteEnregistre = parc?.entreeparc;
+    return typeof texteEnregistre === "string" && texteEnregistre.trim()
+      ? texteEnregistre.trim()
+      : "Accès au parc non renseigné.";
   }
 
   function normaliserNomParcPourChemin(valeur) {

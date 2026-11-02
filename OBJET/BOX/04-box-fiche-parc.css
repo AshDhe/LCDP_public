@@ -993,8 +993,10 @@
   margin-top: var(--lcdp-space-3);
 }
 
-/* Espacer les paragraphes des blocs Ouverture et Accès Ma Clé. */
-.lcdp-box-fiche-parc__section[aria-label="Ouverture du parc"] .lcdp-box-fiche-parc__box-text p + p,
-.lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"] .lcdp-box-fiche-parc__box-text p + p {
+/* Texte des champs Supabase : interligne et espace entre chaque ligne/paragraphe. */
+.lcdp-box-fiche-parc__box-text {
+  line-height: 1.55;
+}
+.lcdp-box-fiche-parc__box-text p + p {
   margin-top: var(--lcdp-space-3);
 }
