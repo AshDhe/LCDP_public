@@ -562,3 +562,25 @@
   margin-top: 0;
   margin-bottom: 4px;
 }
+
+/* PLANIFIER uniquement : liserés horaires plus fins, sans toucher aux couleurs ni aux jauges. */
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot]:not([hidden]) {
+  box-sizing: border-box;
+  height: 7px;
+  min-height: 7px;
+  max-height: 7px;
+  flex: 0 0 7px;
+}
+
+@media (max-width: 767px) {
+  /* Réduction légère de la hauteur des jours sur mobile (64 -> 60 px). */
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid {
+    grid-auto-rows: 60px;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot]:not([hidden]) {
+    height: 6px;
+    min-height: 6px;
+    max-height: 6px;
+    flex-basis: 6px;
+  }
+}

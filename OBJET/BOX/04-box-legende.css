@@ -211,6 +211,17 @@
   outline-offset: 3px;
 }
 @media (max-width: 767px) {
+  /* PLANIFIER : les quatre filtres restent visibles, sur deux lignes si nécessaire. */
+  .lcdp-page-reserver .lcdp-planifier-entete-filtres .lcdp-planifier-legende-autorisations {
+    overflow-x: visible;
+    overflow-y: visible;
+  }
+  .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
   .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne { gap: 7px; }
   .lcdp-page-reserver .lcdp-planifier-filtre-categorie { gap: 3px; font-size: .64rem; }
   .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
