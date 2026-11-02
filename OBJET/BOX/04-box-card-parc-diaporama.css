@@ -63,14 +63,40 @@
   display: none !important;
 }
 
-/* Diaporama compact : aucun défilement dans la petite carte. */
+/* Extrait compact : limiter uniquement le texte, pas le bouton qui contient
+   également le pictogramme de lecture. Celui-ci reste visible sur mobile. */
 .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  overflow: hidden;
+  min-height: 0;
+}
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description [data-lcdp-card-parc-description-texte] {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
-  min-height: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden]) {
+  display: block;
+  flex: 0 0 15px;
+  width: 15px;
+  height: 15px;
+  margin: 0 0 2px;
+}
+@media (min-width: 768px) {
+  /* Réduction ciblée : PC/tablette uniquement, sans toucher à la liste. */
+  .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title {
+    font-size: calc(clamp(1.25rem, 5.5vw, 1.65rem) * 0.85);
+  }
+  .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__actions--reserver {
+    width: 85%;
+    align-self: center;
+  }
 }
 
 /* Conserver strictement le format rectangulaire 16:10 du recto et du verso. */
