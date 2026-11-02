@@ -1315,7 +1315,11 @@
         .querySelectorAll(".lcdp-carte-dynamique__marker")
         .forEach((marker) => {
           const estParcActif = marker.classList.contains("lcdp-carte-dynamique__marker--parc-actif");
-          marker.setAttribute("r", String(rayonParc * (estParcActif ? 1.3 : 1)));
+          const rayon = rayonParc * (estParcActif ? 1.3 : 1);
+          marker.setAttribute("r", String(rayon));
+          // La propriété CSS r peut primer sur l'attribut SVG :
+          // imposer la même dimension uniquement sur les marqueurs des parcs.
+          marker.style.setProperty("r", rayon + "px", "important");
         });
 
       coucheLocalites
