@@ -143,10 +143,7 @@
   width: 100%;
   max-width: 100%;
   margin: 6px 0 9px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none; /* Pas de barre grise sous les filtres sur mobile. */
-  -ms-overflow-style: none;
+  overflow: visible;
 }
 .lcdp-page-reserver .lcdp-planifier-entete-filtres .lcdp-planifier-legende-autorisations::-webkit-scrollbar {
   display: none;
@@ -155,10 +152,11 @@
 }
 .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
   display: flex;
-  flex-wrap: nowrap;
-  width: max-content;
+  flex-wrap: wrap;
+  width: 100%;
   min-width: 0;
-  gap: 12px;
+  column-gap: 12px;
+  row-gap: 8px;
   align-items: center;
 }
 .lcdp-page-reserver .lcdp-planifier-filtre-categorie {
@@ -211,8 +209,10 @@
   outline-offset: 3px;
 }
 @media (max-width: 767px) {
-  .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne { gap: 7px; }
-  .lcdp-page-reserver .lcdp-planifier-filtre-categorie { gap: 3px; font-size: .64rem; }
+  .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+    gap: 10px 12px;
+  }
+  .lcdp-page-reserver .lcdp-planifier-filtre-categorie { gap: 4px; font-size: .79rem; }
   .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
     width: 14px; height: 14px; min-width: 14px; min-height: 14px;
   }

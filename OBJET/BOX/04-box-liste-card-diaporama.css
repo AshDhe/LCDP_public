@@ -1,0 +1,8 @@
+/* Variante dédiée au diaporama, indépendante des listes existantes. */
+.lcdp-box-liste-card-diaporama { width:100%; }
+.lcdp-box-liste-card-diaporama__list { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--lcdp-space-3); }
+@media (min-width:768px) { .lcdp-box-liste-card-diaporama__list { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+/* Les trois commandes sont disposées verticalement dans la seule box de sélection des parcs. */
+.lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] { display:flex; flex-direction:column; align-items:stretch; gap:var(--lcdp-space-2); }
+.lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button { width:100% !important; justify-content:center !important; }
+.lcdp-planifier-parcs-diaporama[hidden] { display:none !important; }
