@@ -39,6 +39,15 @@
       : "")
   ).replace(/\/$/, "");
 
+  // Service indépendant : seules les données de présentation transitent par ce Worker.
+  const endpointFicheParc = String(
+    config.workerFicheParcUrl ||
+    config.WORKER_FICHE_PARC_URL ||
+    (typeof config.apiUrl === "function"
+      ? config.apiUrl("fiche-parc-api")
+      : "")
+  ).replace(/\/$/, "");
+
   const endpointPlanningParc = String(
     config.workerPlanningParcUrl ||
     config.WORKER_PLANNING_PARC_URL ||
@@ -226,12 +235,12 @@
       throw new Error("Identifiant du parc manquant dans le lien partagé.");
     }
 
-    if (!endpointNouvelleDateMembre) {
+    if (!endpointFicheParc) {
       throw new Error("Le service de fiche parc n’est pas configuré.");
     }
 
     const reponse = await fetch(
-      endpointNouvelleDateMembre +
+      endpointFicheParc +
         "/fiche-parc?idparc=" +
         encodeURIComponent(identifiant) +
         "&token=" + encodeURIComponent(tokenPartage) +

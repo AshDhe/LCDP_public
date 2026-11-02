@@ -36,6 +36,7 @@
     la: "https://la-api.lacleduparc.fr",
     userRouteur: "https://user-routeur-api.lacleduparc.fr",
     laCleDuParc: "https://la-cle-du-parc-api.lacleduparc.fr",
+    ficheParc: "https://fiche-parc-api.lacleduparc.fr",
     editingAdmin: "https://editing-admin-api.lacleduparc.fr",
     editingAdminFallback: "https://w-editing-admin.hugues-pavret.workers.dev"
   };
@@ -60,12 +61,13 @@
     workerUserRouteurUrl: WORKERS.userRouteur,
     workerLaCleDuParcUrl: WORKERS.laCleDuParc,
     workerLaUrl: WORKERS.la,
+    workerFicheParcUrl: WORKERS.ficheParc,
     workerEditingAdminUrl: WORKERS.editingAdmin,
     workerEditingAdminFallbackUrl: WORKERS.editingAdminFallback,
     WORKER_LA_URL: WORKERS.la,
+    WORKER_FICHE_PARC_URL: WORKERS.ficheParc,
     WORKER_EDITING_ADMIN_URL: WORKERS.editingAdmin,
     WORKER_EDITING_ADMIN_FALLBACK_URL: WORKERS.editingAdminFallback,
-
 
     PUBLIC_BASE: active.publicBase,
     SITE_BASE: active.publicBase,
