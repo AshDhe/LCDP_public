@@ -12,10 +12,18 @@
 .lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(180deg); visibility: hidden; transition: transform 480ms ease, visibility 0s linear 240ms; padding: var(--lcdp-space-2); overflow-y: auto; }
 .lcdp-box-card-parc-diaporama__ouvrir { position: relative; display: block; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; text-align: left; }
 .lcdp-box-card-parc-diaporama__image { display: block; width: 100%; height: 100%; object-fit: cover; }
-.lcdp-box-card-parc-diaporama__nom { position: absolute; inset: auto 0 0; padding: var(--lcdp-space-3); color: #fff; font-weight: 700; font-size: clamp(1.1rem, 3vw, 1.55rem); background: linear-gradient(transparent, rgba(0,0,0,.65)); }
 /* La croix occupe la ligne du titre, qui lui réserve sa place. */
 .lcdp-box-card-parc-diaporama__fermer { position: absolute; right: var(--lcdp-space-2); top: var(--lcdp-space-2); z-index: 2; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--lcdp-color-surface-soft); color: var(--lcdp-color-text); font-size: 1.5rem; cursor: pointer; }
 .lcdp-box-card-parc-diaporama__contenu { width: 100%; min-width: 0; }
 .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body { padding: 0; }
-.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title { padding-right: 42px; }
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title { min-height: 36px; padding-right: 44px; box-sizing: border-box; }
 @media (prefers-reduced-motion: reduce) { .lcdp-box-card-parc-diaporama__face { transition: none; } }
+
+/* Le recto accueille le média ORIGINAL de la Card Parc : seule son emprise
+   est adaptée à la face diaporama ; le bandeau PREPA conserve le CSS partagé. */
+.lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media {
+  width: 100%; max-width: none; min-width: 0; height: 100%; display: block;
+}
+.lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
+  display: block; width: 100%; height: 100%; min-height: 0; aspect-ratio: auto;
+}
