@@ -446,7 +446,7 @@
     }
 
     if (titrePresentation) {
-      titrePresentation.textContent = "Le parc";
+      titrePresentation.textContent = "Présentation";
     }
 
     if (boutonPartager) {
@@ -506,10 +506,6 @@
       ) || "Présentation non renseignée."
     );
 
-    remplirBlocTexteFiche(
-      fiche.querySelector("[data-lcdp-fiche-parc-ouverture]"),
-      construireTexteOuvertureParc(parc)
-    );
     await ajouterGalerieParc(galerieSlot, parc, options);
     await ajouterCarteParc(carteSlot, parc, options);
 
@@ -526,6 +522,13 @@
         });
       }
     }
+
+    // Harmoniser le titre d'ouverture lorsqu'il est present dans le composant charge.
+    fiche.querySelectorAll("h2, h3, h4").forEach((titreBloc) => {
+      if (titreBloc.textContent.trim() === "Ouverture du parc") {
+        titreBloc.textContent = "Ouverture";
+      }
+    });
 
     slot.appendChild(fiche);
 
@@ -1129,24 +1132,24 @@
     const nom = nettoyerTexte(
       parc?.nom || parc?.nomparc || "Parc"
     ) || "Parc";
-    const fichiers = ["01.jpg", "02.jpg", "03.jpg"];
-    const cartes = [{
-      titre: "",
-      imageSrc: construireUrlImageCardParcFiche(options, parc),
-      imageAlt: "Photo 1 du parc de " + nom,
-      imageLegende: "",
-      texte: ""
-    }];
+    const cartes = [];
 
-    fichiers.forEach((fichier, index) => {
+    for (let index = 1; index <= 4; index += 1) {
+      const numero = String(index).padStart(2, "0");
+
       cartes.push({
         titre: "",
-        imageSrc: construireUrlImageGalerieFiche(options, parc, fichier),
-        imageAlt: "Photo " + (index + 2) + " du parc de " + nom,
+        imageSrc: construireUrlImageGalerieFiche(
+          options,
+          parc,
+          numero + ".jpg"
+        ),
+        imageAlt:
+          "Photo " + numero + " du parc de " + nom,
         imageLegende: "",
         texte: ""
       });
-    });
+    }
 
     await window.LCDP_ajouterGalerie(slot, {
       titre: "",
@@ -1223,14 +1226,8 @@
 
     svg.setAttribute("focusable", "false");
     svg.setAttribute("tabindex", "-1");
-    // La fiche mobile affiche le département entier, sans recadrage « slice ».
-    // Le mode navigation et le rendu ordinateur restent inchangés.
-    const cadrageFicheMobile = !options.carteNavigation &&
-      window.matchMedia("(max-width: 767px)").matches;
-    svg.setAttribute(
-      "preserveAspectRatio",
-      options.carteNavigation || cadrageFicheMobile ? "xMidYMid meet" : "xMidYMid slice"
-    );
+    // Même cadrage proportionnel dans la fiche et dans la vue CARTE de PLANIFIER.
+    svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
 
     if (options.carteNavigation) svg.setAttribute("role", "group");
 
@@ -1277,22 +1274,8 @@
     const traceSelectionnee = traces.find((item) => item.code === codeDepartement);
     const bboxFrance = fusionnerBbox(traces.map((item) => item.trace.bbox));
     const bboxCible = traceSelectionnee?.trace?.bbox || bboxFrance;
-    // Sur mobile, le contour occupe au maximum 70 % de chaque dimension
-    // du viewBox : au moins 15 % de marge de chaque côté, puis centrage SVG.
-    const viewBoxInitiale = cadrageFicheMobile && bboxCible
-      ? (() => {
-          const largeur = Math.max(0.5, bboxCible[2] - bboxCible[0]);
-          const hauteur = Math.max(0.5, bboxCible[3] - bboxCible[1]);
-          const margeX = largeur * (0.15 / 0.70);
-          const margeY = hauteur * (0.15 / 0.70);
-          return [
-            bboxCible[0] - margeX,
-            bboxCible[1] - margeY,
-            largeur + 2 * margeX,
-            hauteur + 2 * margeY
-          ];
-        })()
-      : bboxVersViewBox(bboxCible, traceSelectionnee ? 0.04 : 0.045);
+    // La fiche reprend exactement l'emprise initiale de la vue CARTE.
+    const viewBoxInitiale = bboxVersViewBox(bboxCible, traceSelectionnee ? 0.04 : 0.045);
 
     if (!viewBoxInitiale) {
       throw new Error("Emprise cartographique inexploitable.");
@@ -4939,23 +4922,15 @@
     );
   }
 
-  function construireTexteOuvertureParc(parc) {
-    const ouverture = parc?.ouverture_parc;
-    const parties = new Intl.DateTimeFormat("en-CA", {timeZone:"Europe/Paris",year:"numeric",month:"2-digit"}).formatToParts(new Date());
-    const mois = parties.find(p=>p.type==="year").value + "-" + parties.find(p=>p.type==="month").value;
-    const texte = ouverture && String(ouverture.mois || "").slice(0,7) === mois && Number.isInteger(ouverture.taux)
-      ? "Le taux d’ouverture du parc est de " + ouverture.taux + " % entre 10 h et 17 h ce mois-ci."
-      : "Le taux d’ouverture du mois en cours n’est pas encore renseigné.";
-    return texte + "\nConsultez le planning du parc pour connaître les horaires précis et les ouvertures sur les autres plages (6 h–10 h, 17 h–21 h et 21 h–2 h).";
-  }
-
   function construireTexteAccesParc(parc) {
+    const horaire = String(parc?.horaire || "").trim() ||
+      "Horaires d’accès non renseignés.";
     const contact =
       "Votre contact La Clé du Parc : " +
       "camille@lacleduparc.fr - " +
       "Standard téléphonique : 02.34.46.51.14";
 
-    return contact;
+    return horaire + "\n" + contact;
   }
 
   function normaliserNomParcPourChemin(valeur) {

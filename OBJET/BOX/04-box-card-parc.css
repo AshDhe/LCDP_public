@@ -305,3 +305,8 @@
   filter: saturate(0.35) brightness(1.18);
   cursor: help;
 }
+
+/* Pictogramme blanc du bouton Présentation, commun aux vues liste et diaporama, sur tous les écrans. */
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein .lcdp-box-card-parc__action-icone--presentation {
+  filter: brightness(0) invert(1);
+}
