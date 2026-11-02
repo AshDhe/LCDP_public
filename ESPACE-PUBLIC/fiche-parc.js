@@ -506,6 +506,10 @@
       ) || "Présentation non renseignée."
     );
 
+    remplirBlocTexteFiche(
+      fiche.querySelector("[data-lcdp-fiche-parc-ouverture]"),
+      construireTexteOuvertureParc(parc)
+    );
     await ajouterGalerieParc(galerieSlot, parc, options);
     await ajouterCarteParc(carteSlot, parc, options);
 
@@ -4935,15 +4939,23 @@
     );
   }
 
+  function construireTexteOuvertureParc(parc) {
+    const ouverture = parc?.ouverture_parc;
+    const parties = new Intl.DateTimeFormat("en-CA", {timeZone:"Europe/Paris",year:"numeric",month:"2-digit"}).formatToParts(new Date());
+    const mois = parties.find(p=>p.type==="year").value + "-" + parties.find(p=>p.type==="month").value;
+    const texte = ouverture && String(ouverture.mois || "").slice(0,7) === mois && Number.isInteger(ouverture.taux)
+      ? "Le taux d’ouverture du parc est de " + ouverture.taux + " % entre 10 h et 17 h ce mois-ci."
+      : "Le taux d’ouverture du mois en cours n’est pas encore renseigné.";
+    return texte + "\nConsultez le planning du parc pour connaître les horaires précis et les ouvertures sur les autres plages (6 h–10 h, 17 h–21 h et 21 h–2 h).";
+  }
+
   function construireTexteAccesParc(parc) {
-    const horaire = String(parc?.horaire || "").trim() ||
-      "Horaires d’accès non renseignés.";
     const contact =
       "Votre contact La Clé du Parc : " +
       "camille@lacleduparc.fr - " +
       "Standard téléphonique : 02.34.46.51.14";
 
-    return horaire + "\n" + contact;
+    return contact;
   }
 
   function normaliserNomParcPourChemin(valeur) {
