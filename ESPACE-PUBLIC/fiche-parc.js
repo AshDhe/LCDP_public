@@ -1125,24 +1125,24 @@
     const nom = nettoyerTexte(
       parc?.nom || parc?.nomparc || "Parc"
     ) || "Parc";
-    const cartes = [];
+    const fichiers = ["01.jpg", "02.jpg", "03.jpg"];
+    const cartes = [{
+      titre: "",
+      imageSrc: construireUrlImageCardParcFiche(options, parc),
+      imageAlt: "Photo 1 du parc de " + nom,
+      imageLegende: "",
+      texte: ""
+    }];
 
-    for (let index = 1; index <= 4; index += 1) {
-      const numero = String(index).padStart(2, "0");
-
+    fichiers.forEach((fichier, index) => {
       cartes.push({
         titre: "",
-        imageSrc: construireUrlImageGalerieFiche(
-          options,
-          parc,
-          numero + ".jpg"
-        ),
-        imageAlt:
-          "Photo " + numero + " du parc de " + nom,
+        imageSrc: construireUrlImageGalerieFiche(options, parc, fichier),
+        imageAlt: "Photo " + (index + 2) + " du parc de " + nom,
         imageLegende: "",
         texte: ""
       });
-    }
+    });
 
     await window.LCDP_ajouterGalerie(slot, {
       titre: "",
