@@ -407,9 +407,28 @@
     const carteSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-map-slot]"
     );
-    const ouverture = fiche.querySelector(
+    // Compatibilité avec un fragment de fiche plus ancien : celui-ci ne
+    // contenait pas la section Ouverture, donc rien ne pouvait s'afficher.
+    let ouverture = fiche.querySelector(
       "[data-lcdp-fiche-parc-ouverture]"
     );
+    if (!ouverture) {
+      const sectionAcces = fiche.querySelector(
+        '.lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"]'
+      );
+      if (sectionAcces) {
+        const sectionOuverture = document.createElement("section");
+        sectionOuverture.className = "lcdp-box-fiche-parc__section";
+        sectionOuverture.setAttribute("aria-label", "Ouverture du parc");
+        const titreOuverture = document.createElement("h3");
+        titreOuverture.textContent = "Ouverture";
+        ouverture = document.createElement("div");
+        ouverture.className = "lcdp-box-fiche-parc__box-text";
+        ouverture.setAttribute("data-lcdp-fiche-parc-ouverture", "");
+        sectionOuverture.append(titreOuverture, ouverture);
+        sectionAcces.before(sectionOuverture);
+      }
+    }
     const acces = fiche.querySelector(
       "[data-lcdp-fiche-parc-acces]"
     );
