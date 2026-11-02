@@ -6,3 +6,25 @@
 .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] { display:flex; flex-direction:column; align-items:stretch; gap:var(--lcdp-space-2); }
 .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button { width:100% !important; justify-content:center !important; }
 .lcdp-planifier-parcs-diaporama[hidden] { display:none !important; }
+
+/* Commandes de vues : empilement mobile, ligne compacte dès la tablette. */
+.lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button,
+.lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button .lcdp-box-commande-bar__libelle {
+  color: #fff !important;
+}
+.lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button .lcdp-box-commande-bar__icone {
+  filter: brightness(0) invert(1);
+}
+@media (min-width: 768px) {
+  .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    max-width: 100% !important;
+  }
+}

@@ -15,3 +15,36 @@
 .lcdp-box-card-parc-diaporama__description { margin:0; color:var(--lcdp-color-text); line-height:1.35; font-size:.9rem; overflow:auto; }
 .lcdp-box-card-parc-diaporama__description[hidden] { display:none; }
 @media (prefers-reduced-motion:reduce) { .lcdp-box-card-parc-diaporama__faces { transition:none; } }
+
+/* Verso : proportions de la fiche liste, contenu lisible et défilable si nécessaire. */
+.lcdp-box-card-parc-diaporama__face--verso { min-height:0; }
+.lcdp-box-card-parc-diaporama__nom-dos { flex:0 0 auto; line-height:1.15; }
+.lcdp-box-card-parc-diaporama__actions { flex:0 0 auto; }
+.lcdp-box-card-parc-diaporama__description {
+  flex:1 1 auto;
+  min-height:0;
+  font-size:0.98rem;
+  line-height:1.38;
+  overflow-y:auto;
+  overflow-wrap:break-word;
+}
+@media (max-width: 767px) {
+  .lcdp-box-card-parc-diaporama__face--verso { padding:9px 11px; gap:6px; }
+  .lcdp-box-card-parc-diaporama__nom-dos { font-size:1rem; padding-right:30px; }
+  .lcdp-box-card-parc-diaporama__fermer { width:28px; height:28px; font-size:1.2rem; }
+  .lcdp-box-card-parc-diaporama__actions { gap:6px; }
+  .lcdp-box-card-parc-diaporama__actions .lcdp-box-card-parc__action {
+    min-height:30px;
+    padding:4px 6px;
+    font-size:0.77rem;
+    gap:4px;
+    line-height:1.1;
+  }
+  .lcdp-box-card-parc-diaporama__actions .lcdp-box-card-parc__action-icone,
+  .lcdp-box-card-parc-diaporama__actions .lcdp-planifier-picto-planning {
+    width:15px;
+    height:15px;
+    flex:0 0 15px;
+  }
+  .lcdp-box-card-parc-diaporama__description { font-size:0.94rem; line-height:1.32; }
+}
