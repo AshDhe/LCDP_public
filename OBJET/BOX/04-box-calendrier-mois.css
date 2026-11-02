@@ -514,3 +514,20 @@
     grid-auto-rows: 78px;
   }
 }
+
+/* PLANIFIER uniquement : titre aligné avec la croix, sans ligne flottante réservée. */
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois__card {
+  position: relative;
+}
+
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  float: none;
+  margin: 0;
+}
+
+#lcdp-lightbox-slot .lcdp-planifier-entete-filtres > [data-lcdp-calendrier-mois-title] {
+  max-width: calc(100% - 52px);
+}
