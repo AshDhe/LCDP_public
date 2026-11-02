@@ -2,15 +2,20 @@
    classique est réutilisé directement, sans redéfinir les boutons. */
 .lcdp-box-card-parc-diaporama { min-width: 0; perspective: 1200px; }
 .lcdp-box-card-parc-diaporama__scene { width: 100%; aspect-ratio: 16 / 10; }
-.lcdp-box-card-parc-diaporama__faces { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 480ms ease; }
-.lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__faces { transform: rotateY(180deg); }
+.lcdp-box-card-parc-diaporama__faces { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+/* La rotation porte sur chaque face et non sur leur parent : la face arrière
+   conserve son rendu, notamment avec les contenus flex en desktop/tablette. */
+.lcdp-box-card-parc-diaporama__face--recto { transform: rotateY(0deg); visibility: visible; transition: transform 480ms ease, visibility 0s linear 240ms; }
+.lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--recto { transform: rotateY(-180deg); visibility: hidden; }
+.lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(0deg); visibility: visible; }
 .lcdp-box-card-parc-diaporama__face { position: absolute; inset: 0; overflow: hidden; border: 1px solid var(--lcdp-color-border); border-radius: var(--lcdp-radius-large); background: var(--lcdp-color-surface); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-.lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(180deg); padding: var(--lcdp-space-2); overflow-y: auto; }
+.lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(180deg); visibility: hidden; transition: transform 480ms ease, visibility 0s linear 240ms; padding: var(--lcdp-space-2); overflow-y: auto; }
 .lcdp-box-card-parc-diaporama__ouvrir { position: relative; display: block; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; text-align: left; }
 .lcdp-box-card-parc-diaporama__image { display: block; width: 100%; height: 100%; object-fit: cover; }
 .lcdp-box-card-parc-diaporama__nom { position: absolute; inset: auto 0 0; padding: var(--lcdp-space-3); color: #fff; font-weight: 700; font-size: clamp(1.1rem, 3vw, 1.55rem); background: linear-gradient(transparent, rgba(0,0,0,.65)); }
 /* La croix occupe la ligne du titre, qui lui réserve sa place. */
 .lcdp-box-card-parc-diaporama__fermer { position: absolute; right: var(--lcdp-space-2); top: var(--lcdp-space-2); z-index: 2; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--lcdp-color-surface-soft); color: var(--lcdp-color-text); font-size: 1.5rem; cursor: pointer; }
+.lcdp-box-card-parc-diaporama__contenu { width: 100%; min-width: 0; }
 .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body { padding: 0; }
 .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title { padding-right: 42px; }
-@media (prefers-reduced-motion: reduce) { .lcdp-box-card-parc-diaporama__faces { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .lcdp-box-card-parc-diaporama__face { transition: none; } }

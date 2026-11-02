@@ -1314,7 +1314,10 @@
 
       coucheParcs
         .querySelectorAll(".lcdp-carte-dynamique__marker")
-        .forEach((marker) => marker.setAttribute("r", String(rayonParc)));
+        .forEach((marker) => {
+          const estParcActif = marker.classList.contains("lcdp-carte-dynamique__marker--parc-actif");
+          marker.setAttribute("r", String(rayonParc * (estParcActif ? 1.3 : 1)));
+        });
 
       coucheLocalites
         .querySelectorAll(".lcdp-carte-dynamique__localite-marker")
