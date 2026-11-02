@@ -540,3 +540,25 @@
   width: 100%;
   margin: 0 0 var(--lcdp-space-2);
 }
+
+/* PLANIFIER uniquement : réduire les espaces au-dessus du calendrier, tous écrans. */
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__card {
+  padding-top: var(--lcdp-space-3);
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
+  padding-bottom: var(--lcdp-space-1);
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__body {
+  padding-top: var(--lcdp-space-1);
+}
+#lcdp-lightbox-slot .lcdp-planifier-entete-filtres {
+  gap: 4px;
+}
+#lcdp-lightbox-slot .lcdp-planifier-entete-filtres .lcdp-planifier-legende-autorisations {
+  margin-top: 2px;
+  margin-bottom: 3px;
+}
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois__body > .lcdp-planifier-actions-filtres {
+  margin-top: 0;
+  margin-bottom: 4px;
+}

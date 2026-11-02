@@ -143,7 +143,10 @@
   width: 100%;
   max-width: 100%;
   margin: 6px 0 9px;
-  overflow: visible;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; /* Pas de barre grise sous les filtres sur mobile. */
+  -ms-overflow-style: none;
 }
 .lcdp-page-reserver .lcdp-planifier-entete-filtres .lcdp-planifier-legende-autorisations::-webkit-scrollbar {
   display: none;
@@ -152,11 +155,10 @@
 }
 .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+  flex-wrap: nowrap;
+  width: max-content;
   min-width: 0;
-  column-gap: 12px;
-  row-gap: 8px;
+  gap: 12px;
   align-items: center;
 }
 .lcdp-page-reserver .lcdp-planifier-filtre-categorie {
@@ -193,9 +195,9 @@
   font-weight: 900;
   line-height: 1;
 }
-/* Contraste de la coche DUO sur le jaune. */
+/* Les quatre coches des filtres sont blanches, y compris DUO. */
 .lcdp-page-reserver .lcdp-box-legende__carre--duo .lcdp-planifier-filtre-categorie__coche {
-  color: var(--lcdp-color-text, #1f2a24);
+  color: #fff;
 }
 .lcdp-page-reserver .lcdp-planifier-filtre-categorie__input:not(:checked) + .lcdp-box-legende__carre {
   background: transparent !important;
@@ -209,10 +211,8 @@
   outline-offset: 3px;
 }
 @media (max-width: 767px) {
-  .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
-    gap: 10px 12px;
-  }
-  .lcdp-page-reserver .lcdp-planifier-filtre-categorie { gap: 4px; font-size: .79rem; }
+  .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne { gap: 7px; }
+  .lcdp-page-reserver .lcdp-planifier-filtre-categorie { gap: 3px; font-size: .64rem; }
   .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
     width: 14px; height: 14px; min-width: 14px; min-height: 14px;
   }
