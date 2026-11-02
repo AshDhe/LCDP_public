@@ -658,3 +658,14 @@
 .lcdp-page-reserver .lcdp-planifier-jauge--60 { --lcdp-jauge-largeur: 60%; }
 .lcdp-page-reserver .lcdp-planifier-jauge--80 { --lcdp-jauge-largeur: 80%; }
 .lcdp-page-reserver .lcdp-planifier-jauge--100 { --lcdp-jauge-largeur: 100%; }
+
+/* PLANIFIER : pas de marquage bleu/tactile persistant sur la croix de sortie.
+   Conserver l'indicateur de focus pour une activation au clavier. */
+.lcdp-page-reserver [data-lcdp-calendrier-mois-close] {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+.lcdp-page-reserver [data-lcdp-calendrier-mois-close]:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
