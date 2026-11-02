@@ -38,3 +38,16 @@
   .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--recto,
   .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--verso { transition: none; }
 }
+
+/* Le verso reprend la Card Parc sans les règles horizontales de la liste PC.
+   La hauteur garantit que les boutons restent dans le cartouche. */
+.lcdp-box-card-parc-diaporama__scene { aspect-ratio: auto; height: 390px; }
+.lcdp-box-card-parc-diaporama__face--verso { overflow-y: auto; }
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body {
+  display: flex; flex-direction: column; width: 100%; min-width: 0;
+  justify-content: flex-start; gap: var(--lcdp-space-3);
+}
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__actions--reserver {
+  width: 100%; max-width: none; flex-shrink: 0;
+}
+@media (max-width: 767px) { .lcdp-box-card-parc-diaporama__scene { height: 360px; } }
