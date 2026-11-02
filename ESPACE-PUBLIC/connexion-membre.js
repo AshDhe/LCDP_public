@@ -43,7 +43,7 @@
 
     const endpointConnexionMembre = obtenirEndpointConnexionMembre();
 
-    const urlMonCompteMembre = construireUrlMembre("/index.html");
+    const urlMonCompteMembre = construireUrlMembre("/ESPACE-MEMBRE/accueil-membre.html");
 
     const urlMotDePasseOublie = construireUrlPublique(
       "/ESPACE-PUBLIC/mdp-perdu-membre.html"
@@ -169,7 +169,15 @@
 
         programmerProchaineVerificationSessionMembre(data);
 
-        const urlDestination = obtenirUrlDestinationApresConnexion(urlMonCompteMembre);
+        // Reprise uniquement après expiration automatique depuis PLANIFIER.
+        // Une connexion ordinaire (y compris après déconnexion volontaire) ouvre l’accueil.
+        const parametresConnexion = new URLSearchParams(window.location.search);
+        const motifSession = String(parametresConnexion.get("session") || "").toLowerCase();
+        const depuisPlanifier = parametresConnexion.get("source") === "reserver-membre";
+        const repriseExpiration = depuisPlanifier && ["inactive", "expiree", "expirée"].includes(motifSession);
+        const urlDestination = repriseExpiration
+          ? construireUrlMembre("/ESPACE-MEMBRE/reserver-membre.html") + "?reprise=expiration"
+          : urlMonCompteMembre;
         effacerRetourMembreApresConnexion();
 
         window.location.href = urlDestination;
