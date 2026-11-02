@@ -531,3 +531,12 @@
 #lcdp-lightbox-slot .lcdp-planifier-entete-filtres > [data-lcdp-calendrier-mois-title] {
   max-width: calc(100% - 52px);
 }
+
+/* PLANIFIER : bouton PARC centré au-dessus de la navigation mensuelle. */
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois__body > .lcdp-planifier-actions-filtres {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 var(--lcdp-space-2);
+}

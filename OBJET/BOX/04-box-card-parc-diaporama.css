@@ -55,3 +55,29 @@
   width: 100%; max-width: none; flex-shrink: 0;
 }
 
+
+/* Verso : le début de la présentation issue de "prez" suit les boutons,
+   sans perdre son texte au profit du seul pictogramme. */
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__text {
+  display: contents;
+}
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title {
+  order: 0;
+}
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__actions--reserver {
+  order: 1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description {
+  order: 2;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: left;
+}
+.lcdp-box-card-parc-diaporama__face--verso [data-lcdp-card-parc-description-texte] {
+  display: inline;
+  white-space: normal;
+}

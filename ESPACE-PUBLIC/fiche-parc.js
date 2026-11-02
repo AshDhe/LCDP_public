@@ -11,6 +11,7 @@
   const config = window.SITE_CONFIG || {};
   const MODE_USAGE_PUBLIC =
     "consultation-publique";
+  const MODE_USAGE_ADMIN = "consultation-admin";
   const MODE_USAGE_MEMBRE =
     "reservation-membre";
   const MESSAGE_PLANIFICATION_PUBLIQUE =
@@ -506,6 +507,27 @@
       ) || "Présentation non renseignée."
     );
 
+    let ouverture = fiche.querySelector("[data-lcdp-fiche-parc-ouverture]");
+    if (!ouverture && acces) {
+      const sectionAcces = acces.closest(".lcdp-box-fiche-parc__section");
+      if (sectionAcces) {
+        const bloc = document.createElement("div");
+        bloc.setAttribute("role", "region");
+        bloc.setAttribute("aria-label", "Ouverture");
+        const titreOuverture = document.createElement("h3");
+        titreOuverture.textContent = "Ouverture";
+        ouverture = document.createElement("div");
+        ouverture.className = "lcdp-box-fiche-parc__box-text";
+        ouverture.setAttribute("data-lcdp-fiche-parc-ouverture", "");
+        bloc.append(titreOuverture, ouverture);
+        sectionAcces.prepend(bloc);
+      }
+    }
+    if (ouverture?.previousElementSibling?.tagName === "H3") {
+      ouverture.previousElementSibling.textContent = "Ouverture";
+      ouverture.parentElement?.setAttribute("aria-label", "Ouverture");
+    }
+    remplirBlocTexteFiche(ouverture, construireTexteOuvertureParc(parc));
     await ajouterGalerieParc(galerieSlot, parc, options);
     await ajouterCarteParc(carteSlot, parc, options);
 
@@ -2087,6 +2109,7 @@
 
 
   function normaliserModeUsagePlanning(options = {}) {
+    if (options.modeUsage === MODE_USAGE_ADMIN) return MODE_USAGE_ADMIN;
     return options.modeUsage === MODE_USAGE_MEMBRE
       ? MODE_USAGE_MEMBRE
       : MODE_USAGE_PUBLIC;
@@ -2200,7 +2223,9 @@
     }
     let message = "";
 
-    if (
+    if (etatPlanning?.modeUsage === MODE_USAGE_ADMIN) {
+      message = "La fin du planning disponible pour ce parc est atteinte.";
+    } else if (
       etatPlanning?.modeUsage ===
       MODE_USAGE_PUBLIC
     ) {
@@ -2237,7 +2262,13 @@
       throw new Error("Slot planning parc introuvable.");
     }
 
-    if (normaliserModeUsagePlanning(options) !== MODE_USAGE_MEMBRE) {
+    const modeUsage = normaliserModeUsagePlanning(options);
+    if (modeUsage === MODE_USAGE_ADMIN && ![
+      "chargerDroitsPlanning", "chargerPlanningMois", "chargerPlanningJour"
+    ].every(cle => typeof options[cle] === "function")) {
+      throw new Error("Les services de consultation admin du planning sont manquants.");
+    }
+    if (modeUsage === MODE_USAGE_PUBLIC) {
       await afficherBlocageReservationPublique();
       return;
     }
@@ -2361,7 +2392,9 @@
       etatPlanning.parc?.nomparc ||
       "Parc"
     ) || "Parc";
-    titre.textContent = "Planifier un accès";
+    titre.textContent = normaliserModeUsagePlanning(options) === MODE_USAGE_ADMIN
+      ? "Planning du parc — " + nomParc
+      : "Planifier un accès";
     meta.hidden = true;
     meta.textContent = "";
     boutonFermer.hidden = true;
@@ -2377,7 +2410,9 @@
         options
       )
     );
-    commande.appendChild(creerEtapePlanning("Etape 1 - Date à planifier"));
+    if (normaliserModeUsagePlanning(options) !== MODE_USAGE_ADMIN) {
+      commande.appendChild(creerEtapePlanning("Etape 1 - Date à planifier"));
+    }
     commande.appendChild(
       await chargerLegendePlanningParcCommun(options, true)
     );
@@ -2511,6 +2546,9 @@
   }
 
   function creerActionsPlanningParcCommun(parc, options) {
+    if (normaliserModeUsagePlanning(options) === MODE_USAGE_ADMIN) {
+      return document.createDocumentFragment();
+    }
     const barre = document.createElement("div");
     barre.className =
       "lcdp-box-fiche-parc__actions-barre " +
@@ -4913,6 +4951,19 @@
       "/" +
       encodeURIComponent(nomFichier)
     );
+  }
+
+  function construireTexteOuvertureParc(parc) {
+    const parties = new Intl.DateTimeFormat("en-CA", {timeZone:"Europe/Paris",year:"numeric",month:"2-digit"}).formatToParts(new Date());
+    const mois = parties.find(p=>p.type==="year").value + "-" + parties.find(p=>p.type==="month").value;
+    const ouverture = String(parc?.ouverture_parc?.mois || "").slice(0,7) === mois ? parc.ouverture_parc : null;
+    const taux = valeur => Number.isInteger(valeur) ? valeur + " %" : "Non renseigné";
+    return [
+      "Taux d’ouverture du parc de 10h à 17h ce mois-ci : " + taux(ouverture?.taux),
+      "Invités FAMILLE autorisés : " + taux(ouverture?.tauxFamille),
+      "Invités COACH autorisés : " + taux(ouverture?.tauxCoach),
+      "Connectez-vous à votre compte membre pour le planning détaillé du parc sur le mois et les mois suivants. Consultez les horaires d’accès en dehors de la plage 10h-17h."
+    ].join("\n");
   }
 
   function construireTexteAccesParc(parc) {
