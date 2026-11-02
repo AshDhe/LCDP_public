@@ -2273,6 +2273,13 @@
       return;
     }
 
+    if (modeUsage === MODE_USAGE_ADMIN) {
+      const hote = slot.closest("[data-lcdp-box-shift-detail-parc]") || slot;
+      hote.classList.add("lcdp-page-reserver", "lcdp-planifier-admin");
+      options = { ...options, filtresPlanifierAdmin: new Set(["duo", "famille", "coach", "famille-coach"]), hotePlanifierAdmin: hote };
+      await chargerStyleObjetFiche(options, "/BOX/04-box-card-jour-in-calendrier-mois.css?v=20261102-planifier-admin-v2");
+    }
+
     const droitsPlanning =
       await chargerDroitsPlanningCommun(
         parc,
@@ -2612,6 +2619,48 @@
       "Légende des couleurs du planning"
     );
 
+    if (normaliserModeUsagePlanning(options) === MODE_USAGE_ADMIN) {
+      legende.classList.add("lcdp-planifier-legende-autorisations");
+      legende.setAttribute("aria-label", "Filtrer les plages par catégories autorisées");
+      contenu.replaceChildren();
+      const ligne = document.createElement("div");
+      ligne.className = "lcdp-box-legende__ligne";
+      for (const [type, libelle] of [["duo", "DUO"], ["famille", "+ FAMILLE"], ["coach", "+ COACH"], ["famille-coach", "+ FAMILLE + COACH"]]) {
+        const item = document.createElement("label");
+        item.className = "lcdp-box-legende__item lcdp-planifier-filtre-categorie";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.className = "lcdp-planifier-filtre-categorie__input";
+        input.checked = options.filtresPlanifierAdmin.has(type);
+        input.setAttribute("aria-label", "Afficher " + libelle);
+        const carre = document.createElement("span");
+        carre.className = "lcdp-box-legende__carre lcdp-box-legende__carre--" + type;
+        carre.setAttribute("aria-hidden", "true");
+        const coche = document.createElement("span");
+        coche.className = "lcdp-planifier-filtre-categorie__coche";
+        coche.textContent = "✓";
+        carre.append(coche);
+        const texte = document.createElement("span");
+        texte.className = "lcdp-box-legende__libelle";
+        texte.textContent = libelle;
+        input.addEventListener("change", () => {
+          if (input.checked) options.filtresPlanifierAdmin.add(type);
+          else options.filtresPlanifierAdmin.delete(type);
+          options.hotePlanifierAdmin.querySelectorAll("[data-autorisation]").forEach(slot => {
+            slot.classList.toggle("lcdp-planifier-plage--masquee", !options.filtresPlanifierAdmin.has(slot.dataset.autorisation));
+          });
+          options.hotePlanifierAdmin.querySelectorAll(".lcdp-planifier-filtre-categorie__input").forEach(autre => {
+            autre.checked = options.filtresPlanifierAdmin.has(autre.value);
+          });
+        });
+        input.value = type;
+        item.append(input, carre, texte);
+        ligne.append(item);
+      }
+      contenu.append(ligne);
+      return legende;
+    }
+
     contenu.replaceChildren();
     const lignes = [
       [{libelle:"Accès des invités :"}],
@@ -2854,7 +2903,7 @@
 
     const plagesOuvertes = Object.values(planningJour?.plages || {}).filter(p => p.ouverte === true);
     const complet = plagesOuvertes.length > 0 && plagesOuvertes.every(p => Number(p.jauge) >= 100);
-    card.disabled = estPasse || !ouvert || complet;
+    card.disabled = estPasse || !ouvert || (complet && normaliserModeUsagePlanning(options) !== MODE_USAGE_ADMIN);
     if (complet) card.title = "Toutes les plages sont complètes.";
 
     if (estPasse) {
@@ -2893,14 +2942,41 @@
         "lcdp-box-card-jour-in-calendrier-mois__slot";
       slot.removeAttribute("style");
       slot.removeAttribute("title");
+      if (normaliserModeUsagePlanning(options) === MODE_USAGE_ADMIN) {
+        const plage = planningJour?.plages?.[nomPlage];
+        slot.hidden = !ouvert;
+        if (!plage?.ouverte) {
+          slot.classList.add("lcdp-planifier-plage--non-ouverte");
+        } else {
+          const autorisation = determinerAutorisationPlanifierAdmin(plage);
+          slot.dataset.autorisation = autorisation;
+          slot.classList.add("lcdp-planifier-plage--" + autorisation);
+          slot.classList.toggle("lcdp-planifier-plage--masquee", !options.filtresPlanifierAdmin.has(autorisation));
+          const jauge = normaliserLargeurJaugePlanning(plage.jauge);
+          if (jauge > 0) slot.classList.add("lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge", "lcdp-planifier-jauge--" + jauge);
+        }
+        slot.title = construireTitrePlagePlanningCommun(nomPlage, plage);
+      } else {
       appliquerRenduPlagePlanningCommun(
         slot,
         nomPlage,
         planningJour?.plages?.[nomPlage] || null
       );
+      }
     });
 
     return card;
+  }
+
+  function determinerAutorisationPlanifierAdmin(plage) {
+    const categories = Array.isArray(plage?.categories)
+      ? plage.categories.map(valeur => String(valeur || "").trim().toUpperCase()) : [];
+    const famille = categories.includes("FAMILLE");
+    const coach = categories.includes("COACH");
+    if (famille && coach) return "famille-coach";
+    if (famille) return "famille";
+    if (coach) return "coach";
+    return "duo";
   }
 
   function appliquerRenduPlagePlanningCommun(
@@ -3343,7 +3419,7 @@
       "lcdp-box-calendrier-jour__meta--legende",
       "lcdp-box-legende-host"
     );
-    meta.appendChild(creerEtapePlanning("Etape 2 - Horaire"));
+    if (normaliserModeUsagePlanning(options) !== MODE_USAGE_ADMIN) meta.appendChild(creerEtapePlanning("Etape 2 - Horaire"));
     meta.appendChild(
       await chargerLegendePlanningParcCommun(options)
     );
@@ -3355,6 +3431,25 @@
       formaterDatePlanningLongue(jour.date);
     corps.insertBefore(dateCourante, message);
 
+    if (normaliserModeUsagePlanning(options) === MODE_USAGE_ADMIN) {
+      // PLANIFIER affiche les cinq plages du jour à partir de la synthèse mensuelle.
+      const planningJour = (etatPlanning.planning || []).find(item => String(item.date) === String(jour.date));
+      for (const [nom, debut, fin] of [["plage1", "06:00", "10:00"], ["plage2", "10:00", "13:00"], ["plage3", "13:00", "17:00"], ["plage4", "17:00", "21:00"], ["plage5", "21:00", "02:00"]]) {
+        const plage = planningJour?.plages?.[nom];
+        const card = obtenirTemplateHeurePlanning(options).cloneNode(true);
+        card.removeAttribute("data-action");
+        card.disabled = true;
+        card.setAttribute("aria-disabled", "true");
+        card.classList.add("lcdp-planifier-choix-plage");
+        const autorisation = determinerAutorisationPlanifierAdmin(plage);
+        card.classList.add(plage?.ouverte ? "lcdp-planifier-heure--" + autorisation : "lcdp-planifier-heure--fermee");
+        const libelle = debut.replace(":", "h") + " – " + fin.replace(":", "h");
+        const label = card.querySelector("[data-lcdp-card-heure-jour-label]");
+        if (label) label.textContent = libelle;
+        card.setAttribute("aria-label", libelle + (plage?.ouverte ? " : " + autorisation : " : fermée"));
+        grille.append(card);
+      }
+    } else {
     const segments = Array.isArray(jour?.segments)
       ? jour.segments
       : [];
@@ -3384,6 +3479,7 @@
     note.className = "lcdp-box-legende lcdp-planning-checkin";
     note.textContent = "Votre check in est actif 15 minutes avant le démarrage de la plage horaire choisie et 30 minutes après";
     grille.insertAdjacentElement("afterend", note);
+    }
     message.hidden = grille.children.length > 0;
     message.textContent = grille.children.length
       ? ""

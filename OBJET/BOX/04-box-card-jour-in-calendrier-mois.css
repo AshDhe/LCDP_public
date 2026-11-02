@@ -296,3 +296,36 @@
   line-height: 1.15;
   transform: translateY(0.6px);
 }
+
+/* Consultation admin : règles reprises de 04-box-workflow-reservation.css. */
+.lcdp-planifier-admin .lcdp-planifier-plage--duo,
+.lcdp-planifier-admin .lcdp-planifier-heure--duo { background: #f2a23a !important; }
+.lcdp-planifier-admin .lcdp-planifier-plage--famille,
+.lcdp-planifier-admin .lcdp-planifier-heure--famille { background: #626262 !important; }
+.lcdp-planifier-admin .lcdp-planifier-plage--coach,
+.lcdp-planifier-admin .lcdp-planifier-heure--coach { background: #8660c8 !important; }
+.lcdp-planifier-admin .lcdp-planifier-plage--famille-coach,
+.lcdp-planifier-admin .lcdp-planifier-heure--famille-coach { background: #287a53 !important; }
+.lcdp-planifier-admin .lcdp-planifier-choix-plage:not(.lcdp-planifier-heure--fermee) { color: #ffffff !important; }
+.lcdp-planifier-admin .lcdp-planifier-jauge--60 { --lcdp-jauge-largeur: 60%; }
+.lcdp-planifier-admin .lcdp-planifier-jauge--80 { --lcdp-jauge-largeur: 80%; }
+.lcdp-planifier-admin .lcdp-planifier-jauge--100 { --lcdp-jauge-largeur: 100%; }
+    /* Cinq plages visibles même fermées : liseré neutre, sans remplissage. */
+    .lcdp-planifier-admin [data-lcdp-box-calendrier-mois] .lcdp-planifier-plage--non-ouverte {
+      visibility: visible !important;
+      box-sizing: border-box;
+      border: 1px solid #dce2e5 !important;
+      background: transparent !important;
+      border-radius: 3px; /* Même arrondi que les plages colorées sur mobile. */
+    }
+    @media (min-width: 768px) {
+      .lcdp-planifier-admin [data-lcdp-box-calendrier-mois] .lcdp-planifier-plage--non-ouverte {
+        border-radius: 5px; /* Même arrondi que les plages colorées sur ordinateur. */
+      }
+    }
+
+.lcdp-planifier-admin .lcdp-planifier-heure--fermee { background: transparent !important; border: 1px solid #dce2e5 !important; color: #616b70 !important; }
+
+
+.lcdp-planifier-admin [data-lcdp-card-jour-mois-slot][hidden] { display: none !important; }
+.lcdp-planifier-admin [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--masquee { visibility: hidden !important; }
