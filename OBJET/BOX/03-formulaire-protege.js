@@ -72,6 +72,31 @@
     statut.textContent='La vérification prend plus de temps que prévu. Si une case de vérification est affichée, cochez-la. Sinon, rechargez la page pour réessayer.';
    },30000);
   }
+  // Pictogramme SVG dédié à la soumission (distinct de la vérification Turnstile).
+  // Overlay retiré avant la boîte de confirmation ou le message d'erreur.
+  let attenteEnvoi = null;
+  if (['coach', 'resparc'].includes(config.type)) {
+   attenteEnvoi = document.createElement('div');
+   attenteEnvoi.hidden = true;
+   attenteEnvoi.setAttribute('role', 'status');
+   attenteEnvoi.setAttribute('aria-label', 'Envoi de votre demande en cours');
+   attenteEnvoi.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:var(--lcdp-color-surface,#fff);display:none;align-items:center;justify-content:center;';
+   const icone = document.createElement('img');
+   const site = window.SITE_CONFIG || {};
+   const objet = String(site.objetBaseUrl || site.OBJET_BASE || ((window.SITE_BASE || '..') + '/OBJET')).replace(/\/+$/, '');
+   icone.src = typeof site.objetUrl === 'function' ? site.objetUrl('/BOX/pictowait.svg') : objet + '/BOX/pictowait.svg';
+   icone.width = 64;
+   icone.height = 64;
+   icone.alt = '';
+   icone.setAttribute('aria-hidden', 'true');
+   attenteEnvoi.appendChild(icone);
+   document.body.appendChild(attenteEnvoi);
+  }
+  function afficherAttenteEnvoi(active) {
+   if (!attenteEnvoi) return;
+   attenteEnvoi.hidden = !active;
+   attenteEnvoi.style.display = active ? 'flex' : 'none';
+  }
   afficherAttenteVerification(true);
   let token='',id=crypto.randomUUID(),empreinte='',enCours=false,widgetId=null;
   bouton.disabled=true;statut.textContent=['coach','resparc'].includes(config.type)?'':'Préparation de la vérification…';
@@ -81,10 +106,11 @@
    if(!token){statut.textContent='Validez la vérification avant l’envoi.';return;}
    const donnees={};for(const champ of config.champs){const field=form.elements.namedItem(champ.name);donnees[champ.name]=String(field?.value||'').trim();}
    const contenu=JSON.stringify(donnees);if(empreinte && empreinte!==contenu)id=crypto.randomUUID();empreinte=contenu;
-   enCours=true;bouton.disabled=true;form.setAttribute('aria-busy','true');statut.textContent='Envoi en cours…';
+   enCours=true;bouton.disabled=true;form.setAttribute('aria-busy','true');statut.textContent='Envoi en cours…';afficherAttenteEnvoi(true);
    try{
     const r=await fetch(config.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,donnees,token}),signal:AbortSignal.timeout(45000)});
     const data=await r.json().catch(()=>null);if(!r.ok||data?.ok!==true)throw new Error(data?.message||'Envoi non confirmé. Réessayez.');
+    afficherAttenteEnvoi(false);
     const contact=['coach','resparc'].includes(config.type);
     const confirmation=typeof data.message==='string'&&data.message.trim()?data.message:'Votre demande est enregistrée. Merci.';
     form.reset();id=crypto.randomUUID();empreinte='';statut.textContent=confirmation;
@@ -95,8 +121,8 @@
      const base=String(c.publicBaseUrl||c.PUBLIC_BASE||window.SITE_BASE||c.siteBase||'').replace(/\/+$/,'');
      window.location.assign(typeof c.publicUrl==='function'?c.publicUrl(chemin):base+chemin);
     }
-   }catch(e){statut.textContent=e.name==='TimeoutError'?'Envoi non confirmé. Réessayez avec les mêmes informations.':e.message;}
-   finally{enCours=false;form.removeAttribute('aria-busy');token='';bouton.disabled=true;if(widgetId!==null){afficherAttenteVerification(true);window.turnstile.reset(widgetId);}}
+   }catch(e){afficherAttenteEnvoi(false);statut.textContent=e.name==='TimeoutError'?'Envoi non confirmé. Réessayez avec les mêmes informations.':e.message;}
+   finally{afficherAttenteEnvoi(false);enCours=false;form.removeAttribute('aria-busy');token='';bouton.disabled=true;if(widgetId!==null){afficherAttenteVerification(true);window.turnstile.reset(widgetId);}}
   });
   try{
    const r=await fetch(config.endpoint,{headers:{Accept:'application/json'},cache:'no-store'});const data=await r.json();
