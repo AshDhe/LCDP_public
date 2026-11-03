@@ -42,6 +42,10 @@
       if(note) note.textContent=type==="coda"
         ?"Conservez votre CODA. Il vous est demandé à l’étape de sécurité 3/3."
         :"Conservez votre CODR dans un endroit sûr et confidentiel, ainsi que votre CODA. Votre CODR sert à la récupération de votre compte. Ne partagez pas ces codes.";
+      if(note && type==="coda") {
+        const actions=bouton.closest(".lcdp-box-formulaire__actions");
+        if(actions) actions.before(note);
+      }
     }
     let operation = "creation";
     async function erreurSaisie(detail) {
