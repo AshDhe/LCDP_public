@@ -960,8 +960,8 @@
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
-    aspect-ratio: auto !important;
-    object-fit: contain !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
     object-position: center center !important;
     margin-inline: auto;
     border-radius: var(--lcdp-radius-media);
@@ -1031,5 +1031,15 @@
     width: 100%;
     min-width: 0;
     max-width: 100%;
+  }
+  .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: var(--lcdp-radius-media);
   }
 }
