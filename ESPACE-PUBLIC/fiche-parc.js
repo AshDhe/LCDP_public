@@ -1673,7 +1673,10 @@
           .trim()
           .toLocaleUpperCase("fr");
 
-        groupe.appendChild(marker);
+        // Dans la fiche publique, les petits points de localités ne sont pas
+        // utiles : ils peuvent apparaître isolés, sans libellé lisible.
+        // La vue CARTE de navigation conserve ses marqueurs de localité.
+        if (options.carteNavigation) groupe.appendChild(marker);
         groupe.appendChild(libelle);
         coucheLocalites.appendChild(groupe);
       });

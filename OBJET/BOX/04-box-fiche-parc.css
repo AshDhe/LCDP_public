@@ -973,9 +973,11 @@
   .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(3) { order: 5; margin-top: var(--lcdp-space-3); }
   .lcdp-box-fiche-parc__section[aria-label="Ouverture du parc"] { order: 6; }
   .lcdp-box-fiche-parc__section[aria-label="Extérieur"] { order: 7; }
-  .lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"] { order: 8; }
-  .lcdp-box-fiche-parc__section[aria-label="Espace réservé"] { order: 9; }
-  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(4) { order: 10; margin-top: var(--lcdp-space-3); }
+  /* La 4e photo appartient à la galerie principale, AVANT Accès Ma Clé.
+     Après Espace réservé : uniquement les 2 images de galerie-suite. */
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(4) { order: 8; margin-top: var(--lcdp-space-3); }
+  .lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"] { order: 9; }
+  .lcdp-box-fiche-parc__section[aria-label="Espace réservé"] { order: 10; }
 }
 /* PC : conserver la taille de la fenêtre et l'ordre des blocs ; photos -20 %. */
 @media (min-width: 768px) {

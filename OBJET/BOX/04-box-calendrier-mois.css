@@ -584,3 +584,19 @@
     flex-basis: 6px;
   }
 }
+
+/* PLANIFIER — PC uniquement : chiffres des dates -20 %, liserés remontés,
+   et hauteur journalière +10 % (78 px -> 86 px). Mobile inchangé. */
+@media (min-width: 768px) {
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid {
+    grid-auto-rows: 86px;
+  }
+
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-number] {
+    font-size: 0.8em;
+  }
+
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot]:not([hidden]) {
+    transform: translateY(-3px);
+  }
+}
