@@ -5,11 +5,17 @@
 
   async function initialiserCode() {
     appliquerRoutesSite(document);
-    initialiserBandeauRestreint().catch(() => {});
-    initialiserFooter().catch(() => {});
     const type = document.body.dataset.codeType;
     const flow = String(window.LCDP_SIGNUP_FLOW || "");
     delete window.LCDP_SIGNUP_FLOW;
+    if (flow) {
+      // Même cadre que la création du mot de passe pendant le tunnel.
+      document.getElementById("lcdp-bandeau-slot")?.remove();
+      document.getElementById("lcdp-footer-slot")?.remove();
+    } else {
+      initialiserBandeauRestreint().catch(() => {});
+      initialiserFooter().catch(() => {});
+    }
     let token = String(window.LCDP_CODE_TOKEN || "");
     delete window.LCDP_CODE_TOKEN;
     const form = document.getElementById("formulaire-code-securite");
@@ -108,7 +114,7 @@
         if(flow && resultat.nextUrl) {
           token="";autorise=false;
           [...saisie,...confirmation].forEach(champ=>{champ.value="";});
-          await afficherInformation("",type==="coda"?"Votre CODA est enregistré.":"Votre CODR est enregistré.","information",resultat.nextUrl);
+          window.location.replace(resultat.nextUrl);
           return;
         }
         token = ""; autorise = false;
