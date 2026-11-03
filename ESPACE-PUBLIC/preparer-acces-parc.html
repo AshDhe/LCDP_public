@@ -67,12 +67,13 @@
   <script>
     window.LCDP_PAGE_MEMBRE_SANS_SESSION = true;
     const paramsPreparation = new URLSearchParams(location.hash.slice(1));
+    window.LCDP_GEO_REFERENCE = paramsPreparation.get("r") || "";
     window.LCDP_GEO_FLOW = paramsPreparation.get("flow") || "";
     window.LCDP_GEO_CONFIRMATION = paramsPreparation.get("confirmation") || "";
     if (location.hash) history.replaceState(null,"",location.pathname+location.search);
   </script>
   <script src="../config.js"></script>
-  <script src="preparer-acces-parc.js?v=20261103-qr-jaune-logo" defer></script>
+  <script src="preparer-acces-parc.js?v=20261103-qr-court-final" defer></script>
 </head>
 <body>
   <div class="lcdp-site-page">
@@ -131,6 +132,13 @@
       <h3 class="lcdp-box-dialogue-bouton__title">Attention</h3>
       <p class="lcdp-box-dialogue-bouton__text">Votre autorisation semble donnée d'un PC.<br>Effectuez la mise à jour avec votre téléphone connecté à votre espace Mon compte.</p>
     </div>
+    <form method="dialog" class="lcdp-box-dialogue-bouton__actions">
+      <button class="lcdp-button" autofocus>OK</button>
+    </form>
+  </dialog>
+  <dialog id="information-erreur-optin" class="lcdp-box-dialogue-bouton__card" aria-labelledby="titre-erreur-optin" aria-describedby="texte-erreur-optin">
+    <h2 id="titre-erreur-optin" class="lcdp-box-dialogue-bouton__title">Information</h2>
+    <p id="texte-erreur-optin" class="lcdp-box-dialogue-bouton__text"></p>
     <form method="dialog" class="lcdp-box-dialogue-bouton__actions">
       <button class="lcdp-button" autofocus>OK</button>
     </form>
