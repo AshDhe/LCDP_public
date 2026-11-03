@@ -547,7 +547,8 @@
     );
 
     await ajouterGalerieParc(galerieSlot, parc, options);
-    // Deux photos supplémentaires placées après Espace réservé sur tous les écrans.
+    // Deux photos après Espace réservé (04.jpg et 05.jpg),
+    // pour un total de 6 images sur mobile comme sur PC.
     if (galerieSuiteSlot) {
       await ajouterGalerieParc(galerieSuiteSlot, parc, options, 5, 6);
     }
