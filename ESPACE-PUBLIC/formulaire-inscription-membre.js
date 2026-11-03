@@ -9,7 +9,7 @@
     sousTitreClasse: "lcdp-box-formulaire__subtitle--accent",
     introHtml: `
       <p>
-        Être membre invité La Clé du Parc est gratuit et vous permet d'être invité(e) par un membre abonné. Ouvrez votre compte pour recevoir des invitations et participer à la vie du club en tant que membre invité.
+        Être membre invité La Clé du Parc est gratuit. Ouvrez votre compte pour découvrir les parcs et pouvoir être invité(e) par nos membres abonnés.
       </p>
     `,
     champs: [
@@ -17,32 +17,32 @@
         type: "text",
         id: "nommembre",
         name: "nommembre",
-        label: "Votre NOM",
+        label: "NOM",
         required: true,
-        placeholder: "NOM",
+        placeholder: "Votre NOM en majuscule",
         autocomplete: "family-name",
-        description: "Conforme à votre état civil. En majuscules de préférence. Votre état civil est nécessaire si vous souhaitez devenir membre abonné."
+        description: ""
       },
       {
         type: "text",
         id: "prenommembre",
         name: "prenommembre",
-        label: "Votre Prénom",
+        label: "Prénom",
         required: true,
-        placeholder: "Prénom",
+        placeholder: "Votre Prénom",
         autocomplete: "given-name",
-        description: "Conforme à votre état civil. En minuscules de préférence, avec la première lettre en majuscule. Votre état civil est nécessaire si vous souhaitez devenir membre abonné."
+        description: ""
       },
       {
         type: "text",
         id: "dptmtmembre",
         name: "dptmtmembre",
-        label: "Quel est votre département ?",
+        label: "Dapartement de référence",
         required: true,
-        placeholder: "Numéro du département (exemple 08)",
+        placeholder: "Exemple : 08",
         inputmode: "text",
         autocomplete: "off",
-        description: "Un numéro du département permet de sélectionner les informations proches de vous en priorité. Il est modifiable directement par la suite depuis votre espace personnel dans l'application."
+        description: "Information non critique. Modifiable par la suite."
       },
       {
         type: "email",
@@ -54,7 +54,7 @@
         autocomplete: "email",
         autocapitalize: "none",
         spellcheck: "false",
-        description: "Une adresse e-mail que vous utilisez. C'est votre identifiant informatique de connexion à l'application. Elle est modifiable directement par la suite depuis votre espace personnel dans l'application."
+        description: "C'est votre identifiant de connexion pour l'application. Modifiable par la suite."
       },
       {
         type: "checkbox",
@@ -92,7 +92,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >règlement du club</a>
-          est nécessaire pour être membre du club (invité ou abonné).
+          est obligatoire pour devenir membre du club.
         `
       },
       {
@@ -110,7 +110,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >règlement de l’application</a>
-          est nécessaire pour être membre du club (invité ou abonné).
+          est obligatoire pour devenir membre du club.
         `
       }
     ],
@@ -218,7 +218,7 @@
       const emplacement=document.createElement("div");
       emplacement.setAttribute("aria-label","Protection du formulaire");
       submitButton.parentNode.insertBefore(emplacement,submitButton);
-      widgetId=window.turnstile.render(emplacement,{sitekey:configuration.sitekey,action:"inscription-membre",
+      widgetId=window.turnstile.render(emplacement,{sitekey:configuration.sitekey,action:"inscription-membre",appearance:"interaction-only",
         callback(token){turnstileToken=token;if(!envoiEnCours)submitButton.disabled=false;},
         "expired-callback"(){turnstileToken="";submitButton.disabled=true;},
         "error-callback"(){turnstileToken="";submitButton.disabled=true;}
