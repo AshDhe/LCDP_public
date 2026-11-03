@@ -86,7 +86,7 @@
     const r=await fetch(config.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,donnees,token}),signal:AbortSignal.timeout(45000)});
     const data=await r.json().catch(()=>null);if(!r.ok||data?.ok!==true)throw new Error(data?.message||'Envoi non confirmé. Réessayez.');
     const contact=['coach','resparc'].includes(config.type);
-    const confirmation='Votre demande est enregistrée. Merci.'+(contact?' Nous revenons vers vous.':'');
+    const confirmation=typeof data.message==='string'&&data.message.trim()?data.message:'Votre demande est enregistrée. Merci.';
     form.reset();id=crypto.randomUUID();empreinte='';statut.textContent=confirmation;
     const confirme=await message(confirmation);
     if(contact && confirme){

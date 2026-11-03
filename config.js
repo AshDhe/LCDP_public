@@ -57,6 +57,8 @@
 
     workerMdptokenzUrl: WORKERS.mdptokenz,
     workerConnexionMembreUrl: WORKERS.connexionMembre,
+    workerConnexionParcUrl: "https://connexion-parc-api.lacleduparc.fr",
+    workerConnexionCoachUrl: "https://connexion-coach-api.lacleduparc.fr",
     workerFormInscriptionMembreUrl: WORKERS.formInscriptionMembre,
     workerUserRouteurUrl: WORKERS.userRouteur,
     workerLaCleDuParcUrl: WORKERS.laCleDuParc,

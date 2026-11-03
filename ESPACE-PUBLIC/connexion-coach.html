@@ -25,9 +25,16 @@
   <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
+  <style>
+    .lcdp-connexion-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav { background: var(--lcdp-color-coach, #8660c8); }
+    .lcdp-connexion-coach .lcdp-box-formulaire__title { color: var(--lcdp-color-coach, #8660c8); }
+    .lcdp-connexion-coach #bouton-valider-formulaire,
+    .lcdp-connexion-coach #bouton-valider-formulaire:hover,
+    .lcdp-connexion-coach #bouton-valider-formulaire:focus-visible { background: #fff; border-color: #fff; }
+  </style>
 </head>
 
-<body>
+<body class="lcdp-connexion-coach">
   <div class="lcdp-site-page">
 
     <div id="lcdp-bandeau-slot"></div>
@@ -277,6 +284,11 @@
           console.error(erreur);
         });
     })();
+  </script>
+  <script>
+  document.getElementById('formulaire-connexion-coach')?.addEventListener('submit',function(event){
+    if(this.dataset.connexionInitialisee!=='true'){event.preventDefault();window.alert('Le service de connexion n’a pas été chargé. Rechargez cette page.');}
+  });
   </script>
   <script src="./connexion-coach.js"></script>
 </body>

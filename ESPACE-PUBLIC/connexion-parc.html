@@ -25,9 +25,16 @@
   <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
   <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
+  <style>
+    .lcdp-connexion-parc #lcdp-bandeau-slot .lcdp-box-bandeau-nav { background: var(--lcdp-color-parc, #d64b68); }
+    .lcdp-connexion-parc .lcdp-box-formulaire__title { color: var(--lcdp-color-parc, #d64b68); }
+    .lcdp-connexion-parc #bouton-valider-formulaire,
+    .lcdp-connexion-parc #bouton-valider-formulaire:hover,
+    .lcdp-connexion-parc #bouton-valider-formulaire:focus-visible { background: #fff; border-color: #fff; }
+  </style>
 </head>
 
-<body>
+<body class="lcdp-connexion-parc">
   <div class="lcdp-site-page">
 
     <div id="lcdp-bandeau-slot"></div>
@@ -277,6 +284,11 @@
           console.error(erreur);
         });
     })();
+  </script>
+  <script>
+  document.getElementById('formulaire-connexion-parc')?.addEventListener('submit',function(event){
+    if(this.dataset.connexionInitialisee!=='true'){event.preventDefault();window.alert('Le service de connexion n’a pas été chargé. Rechargez cette page.');}
+  });
   </script>
   <script src="./connexion-parc.js"></script>
 </body>
