@@ -256,10 +256,11 @@
       async function initialiserDemande() {
         await chargerScriptUneFois("/OBJET/BOX/03-box-formulaire.js");
         await chargerScriptUneFois("/OBJET/BOX/03-formulaire-protege.js");
-        const base = String(window.SITE_CONFIG?.coachBaseUrl || window.SITE_BASE || "").replace(/\/$/, "");
-        const script = document.createElement("script");
-        script.src = (base || "..") + "/ESPACE-PUBLIC/contact-coach.js?v=20261028-contact-gif-2";
-        await new Promise((resolve,reject) => { script.onload=resolve;script.onerror=reject;document.body.appendChild(script); });
+        // Le script appartient à l’espace public, pas à la base fonctionnelle COACH.
+        await chargerScriptUneFois("/ESPACE-PUBLIC/contact-coach.js?v=20261103-contact-chargement");
+        if (typeof window.LCDP_initialiserContactCoach !== "function") {
+          throw new Error("Initialisation du contact coach indisponible.");
+        }
         await window.LCDP_initialiserContactCoach();
       }
 
@@ -268,7 +269,9 @@
       const contenuContact = document.getElementById("lcdp-contact-contenu");
       function afficherFormulaireContact() {
         const form = contenuContact.querySelector("form");
-        if (!form || form.querySelectorAll("input:not([type='hidden'])").length < 6 || !form.querySelector("button[type='submit']")) return false;
+        if (!form || !form.querySelector("button[type='submit']")) return false;
+        const champsRequis = ["nomcoach", "prenomcoach", "emailcoach", "telcoach", "metiercoach", "dptmtcoach"];
+        if (!champsRequis.every(nom => form.elements.namedItem(nom))) return false;
         formulairePret = true;
         window.clearTimeout(delaiContact);
         observationContact.disconnect();
@@ -279,6 +282,7 @@
       }
       function echecChargementContact() {
         if (formulairePret || afficherFormulaireContact()) return;
+        console.error("LCDP : délai de chargement du formulaire dépassé ou initialisation échouée.");
         document.getElementById("lcdp-contact-attente").hidden = true;
         document.getElementById("lcdp-contact-erreur").hidden = false;
       }
