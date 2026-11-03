@@ -1322,36 +1322,16 @@ module.exports = QRCode;
     avertissement.hidden=d.mobile_detecte!==false;
   }
   let optinEnregistre=false;
-  let connexionAFinaliser=null;
-  let connexionTerminee=false;
-  function suiteConfirmation(){
-    return connexionTerminee ? " Cliquez sur OK pour accéder à votre espace membre." : " Cliquez sur OK pour vous connecter.";
-  }
-  function accueilMembre(){
-    if(typeof config.membreUrl==="function")return config.membreUrl("/index.html");
-    const base=String(config.membreBaseUrl||config.MEMBRE_BASE||"").replace(/\/+$/,"");
-    if(base)return base+"/index.html";
-    if(["ashdhe.github.io","huguespavret.github.io"].includes(location.hostname))return location.origin+"/LCDP_membre/index.html";
-    return "https://membre.lacleduparc.fr/index.html";
-  }
-  async function finaliserConnexion(){
-    const explicite=config.workerConnexionMembreUrl||config.WORKER_CONNEXION_MEMBRE_URL;
-    const service=String(explicite||(typeof config.apiUrl==="function"?config.apiUrl("connexion-membre-api"):"https://connexion-membre-api.lacleduparc.fr")).replace(/\/+$/,"");
-    const r=await fetch(service,{method:"POST",credentials:"include",cache:"no-store",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({action:"finaliser-inscription",idsession:connexionAFinaliser.sessionConnexion,membre:connexionAFinaliser.membre,navigateur:navigateurDemande})});
-    const d=await r.json().catch(()=>null);
-    if(!r.ok||d?.success!==true)throw new Error(d?.message||"La connexion n’est pas confirmée. Cliquez de nouveau sur le bouton pour réessayer.");
-    connexionTerminee=true;connexionAFinaliser=null;
-  }
   confirmation.addEventListener("close",()=>{
-    if(optinEnregistre)location.assign(connexionTerminee?accueilMembre():new URL("/ESPACE-PUBLIC/connexion-membre.html",location.href).href);
+    if(optinEnregistre)location.assign(new URL("/ESPACE-PUBLIC/connexion-membre.html",location.href).href);
   });
   function termine(){
     optinEnregistre=true;
     document.body.classList.add("optin-termine");
     contenu.hidden=true;
     statut.textContent="";
-    document.getElementById("texte-confirmation-optin").textContent=informationNavigateur+suiteConfirmation();
+    document.getElementById("titre-confirmation-optin").textContent=modeActualisation?"Autorisation enregistrée.":"Configuration terminée.";
+    document.getElementById("texte-confirmation-optin").textContent=modeActualisation?informationNavigateur:"Connectez-vous à votre compte.";
     if(typeof confirmation.showModal==="function")confirmation.showModal();
   }
   if(modeActualisation){
@@ -1373,8 +1353,6 @@ module.exports = QRCode;
     document.getElementById("note-coda-actualisation").textContent="Vous disposez de deux essais pour cette validation. Après deux erreurs, patientez 30 minutes.";
     if(!mobile){
       identification.hidden=true;
-      document.getElementById("confirmation-telephone").hidden=true;
-      autoriser.parentElement.hidden=true;
     }
     if(!mobile){
       document.getElementById("qr-geolocalisation").hidden=true;
@@ -1449,13 +1427,6 @@ module.exports = QRCode;
   });
   autoriser.addEventListener("click",async()=>{
     if(enCours)return;
-    if(connexionAFinaliser){
-      etat(true);statut.textContent="Finalisation de votre connexion…";
-      try{await finaliserConnexion();termine();}
-      catch(e){informerErreur(e.message||"L’enregistrement n’a pas pu être confirmé. Réessayez.");}
-      finally{etat(false);}
-      return;
-    }
     if(!utiliseTelephone.checked){
       informerErreur("Confirmez que vous utilisez ce téléphone.");
       utiliseTelephone.focus();return;
@@ -1489,10 +1460,6 @@ module.exports = QRCode;
         casesCoda.forEach(champ=>{champ.value="";});
         demanderPermissionNavigateur();
         appliquerDetection(d);flow="";
-        if(d.sessionConnexion){
-          connexionAFinaliser={sessionConnexion:d.sessionConnexion,membre:d.membre};
-          await finaliserConnexion();
-        }
         termine();
       }
       catch(e){informerErreur(e.message||"L’enregistrement n’a pas pu être confirmé. Réessayez.");}
@@ -1505,8 +1472,8 @@ module.exports = QRCode;
     // Demande lancée depuis le clic, sans attendre le réseau ni conserver les coordonnées.
     const informer=texte=>{
       informationNavigateur=texte;
-      if(contenu.hidden&&confirmation.open){
-        document.getElementById("texte-confirmation-optin").textContent=texte+suiteConfirmation();
+      if(modeActualisation&&contenu.hidden&&confirmation.open){
+        document.getElementById("texte-confirmation-optin").textContent=texte;
       }
     };
     if(!window.isSecureContext||!navigator.geolocation){
