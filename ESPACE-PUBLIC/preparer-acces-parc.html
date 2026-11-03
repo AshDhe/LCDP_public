@@ -73,7 +73,7 @@
     if (location.hash) history.replaceState(null,"",location.pathname+location.search);
   </script>
   <script src="../config.js"></script>
-  <script src="preparer-acces-parc.js?v=20261103-qr-court-final" defer></script>
+  <script src="preparer-acces-parc.js?v=20261103-affichage-qr" defer></script>
 </head>
 <body>
   <div class="lcdp-site-page">
@@ -136,6 +136,7 @@
       <button class="lcdp-button" autofocus>OK</button>
     </form>
   </dialog>
+  <template id="modele-information-erreur-optin">
   <dialog id="information-erreur-optin" class="lcdp-box-dialogue-bouton__card" aria-labelledby="titre-erreur-optin" aria-describedby="texte-erreur-optin">
     <h2 id="titre-erreur-optin" class="lcdp-box-dialogue-bouton__title">Information</h2>
     <p id="texte-erreur-optin" class="lcdp-box-dialogue-bouton__text"></p>
@@ -143,5 +144,6 @@
       <button class="lcdp-button" autofocus>OK</button>
     </form>
   </dialog>
+  </template>
 </body>
 </html>

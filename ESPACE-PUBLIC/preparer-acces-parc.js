@@ -1295,9 +1295,20 @@ module.exports = QRCode;
   let navigateurDemande="";
   function informerErreur(texte){
     statut.textContent=texte;
-    const boite=document.getElementById("information-erreur-optin");
+    let boite=document.getElementById("information-erreur-optin");
+    if(!boite){
+      const modele=document.getElementById("modele-information-erreur-optin");
+      document.body.appendChild(modele.content.cloneNode(true));
+      boite=document.getElementById("information-erreur-optin");
+      boite.addEventListener("close",()=>boite.remove(),{once:true});
+    }
     document.getElementById("texte-erreur-optin").textContent=texte;
-    if(typeof boite.showModal==="function"&&!boite.open)boite.showModal();
+    if(typeof boite.showModal==="function"){
+      if(!boite.open)boite.showModal();
+    }else{
+      boite.remove();
+      window.alert(texte);
+    }
   }
   function etat(occupe){enCours=occupe;autoriser.disabled=occupe;}
   async function appeler(action,body={}){
@@ -1359,7 +1370,11 @@ module.exports = QRCode;
     document.querySelector('label[for="email-actualisation"]').hidden=true;
     identification.querySelector("legend").textContent="Saisissez le CODA que vous venez de créer.";
     document.getElementById("note-coda-actualisation").textContent="Vous disposez de deux essais pour cette première validation. Après deux erreurs, patientez 30 minutes.";
-    if(!mobile) identification.hidden=true;
+    if(!mobile){
+      identification.hidden=true;
+      document.getElementById("confirmation-telephone").hidden=true;
+      autoriser.parentElement.hidden=true;
+    }
     if(!mobile){
       document.getElementById("qr-geolocalisation").hidden=true;
       try {
