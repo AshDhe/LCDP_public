@@ -73,7 +73,7 @@
     if (location.hash) history.replaceState(null,"",location.pathname+location.search);
   </script>
   <script src="../config.js"></script>
-  <script src="preparer-acces-parc.js?v=20261103-consigne-coda" defer></script>
+  <script src="preparer-acces-parc.js?v=20261104-ordre-coda" defer></script>
 </head>
 <body>
   <div class="lcdp-site-page">
@@ -96,6 +96,10 @@
                       <input class="lcdp-box-dialogue-champ__input" id="email-actualisation" type="email" autocomplete="username" maxlength="254" required style="width:100%">
                       <fieldset id="coda-actualisation" style="border:0;padding:0;margin:24px 0 0;min-width:0" aria-describedby="note-coda-actualisation">
                         <legend style="padding:0;margin-bottom:8px;line-height:1.5">Saisissez votre CODA depuis le téléphone.</legend>
+                      <p id="note-coda-actualisation" style="margin-top:12px;text-align:left"><strong>Attention, vous avez un seul essai.</strong><br>Un seul essai toutes les trente minutes.</p>
+                      <label for="afficher-coda-actualisation" style="display:flex;align-items:center;gap:10px;margin-top:14px;cursor:pointer">
+                        <input type="checkbox" id="afficher-coda-actualisation"> Afficher le CODA
+                      </label>
                         <div class="geo-coda-cases">
                           <input class="lcdp-box-dialogue-champ__input" id="coda-actualisation-1" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" required aria-label="Chiffre 1 du CODA" data-geo-coda>
                           <input class="lcdp-box-dialogue-champ__input" id="coda-actualisation-2" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" required aria-label="Chiffre 2 du CODA" data-geo-coda>
@@ -103,17 +107,13 @@
                           <input class="lcdp-box-dialogue-champ__input" id="coda-actualisation-4" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" required aria-label="Chiffre 4 du CODA" data-geo-coda>
                         </div>
                       </fieldset>
-                      <label for="afficher-coda-actualisation" style="display:flex;align-items:center;gap:10px;margin-top:14px;cursor:pointer">
-                        <input type="checkbox" id="afficher-coda-actualisation"> Afficher le CODA
-                      </label>
-                      <p id="note-coda-actualisation" style="margin-top:12px;text-align:left"><strong>Attention, vous avez un seul essai.</strong><br>Un seul essai toutes les trente minutes.</p>
-                    </div>
-                    <div class="lcdp-box-formulaire__actions">
-                      <button type="button" class="lcdp-button" id="autoriser-geolocalisation">Autoriser</button>
                     </div>
                     <p id="confirmation-telephone">
                       <label><input type="checkbox" id="utilise-telephone"> Je confirme utiliser ce téléphone</label>
                     </p>
+                    <div class="lcdp-box-formulaire__actions">
+                      <button type="button" class="lcdp-button" id="autoriser-geolocalisation">Autoriser</button>
+                    </div>
                   </div>
                   <p id="statut-geolocalisation" role="status" aria-live="polite"></p>
 
@@ -128,6 +128,7 @@
   </div>
   <dialog id="confirmation-geolocalisation" class="lcdp-box-dialogue-bouton__card" aria-labelledby="titre-confirmation-optin">
     <h2 id="titre-confirmation-optin" class="lcdp-box-dialogue-bouton__title">Autorisation enregistrée.</h2>
+    <p id="texte-confirmation-optin" class="lcdp-box-dialogue-bouton__text"></p>
     <div id="avertissement-appareil" hidden>
       <h3 class="lcdp-box-dialogue-bouton__title">Attention</h3>
       <p class="lcdp-box-dialogue-bouton__text">Votre autorisation semble donnée d'un PC.<br>Effectuez la mise à jour avec votre téléphone connecté à votre espace Mon compte.</p>
