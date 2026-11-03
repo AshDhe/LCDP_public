@@ -5,7 +5,7 @@
     id: "formulaire-inscription-membre",
     ariaLabel: "Formulaire d'inscription membre invité",
     titre: "Membre invité",
-    sousTitre: "Formulaire d'inscription",
+    sousTitre: "Inscription au club",
     sousTitreClasse: "lcdp-box-formulaire__subtitle--accent",
     introHtml: `
       <p>
