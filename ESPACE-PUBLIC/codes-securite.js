@@ -37,7 +37,11 @@
         titre.replaceChildren(document.createTextNode("Sécurité de votre compte"),document.createElement("br"),instruction);
       }
       const sousTitre=document.querySelector(".lcdp-box-formulaire__subtitle");
-      if(sousTitre) sousTitre.textContent=type==="coda"?"Code A — Définir votre code d’accès (CODA)":"Code R — Définir votre code de récupération (CODR)";
+      if(sousTitre) sousTitre.textContent=type==="coda"?"CODA — Définir votre code d’accès":"CODR — Définir votre code de récupération";
+      const note=document.getElementById("note-creation-code");
+      if(note) note.textContent=type==="coda"
+        ?"Conservez votre CODA. Il vous est demandé à l’étape de sécurité 3/3."
+        :"Conservez votre CODR dans un endroit sûr et confidentiel, ainsi que votre CODA. Votre CODR sert à la récupération de votre compte. Ne partagez pas ces codes.";
     }
     let operation = "creation";
     async function erreurSaisie(detail) {

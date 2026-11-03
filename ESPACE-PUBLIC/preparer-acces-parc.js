@@ -1366,8 +1366,9 @@ module.exports = QRCode;
     const identification=document.getElementById("identification-actualisation");
     identification.hidden=false;
     const email=document.getElementById("email-actualisation");
-    email.disabled=true;email.hidden=true;
-    document.querySelector('label[for="email-actualisation"]').hidden=true;
+    email.remove();
+    document.querySelector('label[for="email-actualisation"]')?.remove();
+    document.getElementById("coda-actualisation").style.removeProperty("margin");
     identification.querySelector("legend").textContent="Saisissez le CODA que vous venez de créer.";
     document.getElementById("note-coda-actualisation").textContent="Vous disposez de deux essais pour cette première validation. Après deux erreurs, patientez 30 minutes.";
     if(!mobile){
