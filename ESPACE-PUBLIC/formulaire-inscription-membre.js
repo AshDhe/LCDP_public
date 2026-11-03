@@ -9,7 +9,7 @@
     sousTitreClasse: "lcdp-box-formulaire__subtitle--accent",
     introHtml: `
       <p>
-        Être membre invité La Clé du Parc est gratuit. Inscrivez-vous pour voir les parcs et être invité(e) par les membres abonnés.
+        Être membre invité du club est gratuit. Inscrivez-vous pour voir les parcs et être invité(e) par les membres abonnés.
       </p>
     `,
     champs: [
@@ -39,7 +39,7 @@
         name: "dptmtmembre",
         label: "Département de référence",
         required: true,
-        placeholder: "Ex. : 08 - Mofifiable plus tard",
+        placeholder: "Ex. : 08 - Modifiable plus tard",
         inputmode: "text",
         autocomplete: "off",
         description: ""
@@ -139,8 +139,23 @@
       FORMULAIRE_INSCRIPTION_MEMBRE_CONFIG
     );
 
+    associerConfirmationEmail();
     appliquerVarianteSousTitreFormulaireInscription();
     await initialiserFormulaireInscriptionMembre();
+  }
+
+  // La confirmation appartient au champ e-mail : pas de bloc ni de titre séparé.
+  function associerConfirmationEmail() {
+    const email = document.getElementById("emailmembre");
+    const caseUnique = document.getElementById("unikuser");
+    const blocEmail = email?.closest(".lcdp-box-champ-formulaire");
+    const blocCase = caseUnique?.closest(".lcdp-box-champ-formulaire");
+    const ligneCase = caseUnique?.closest(".lcdp-box-champ-formulaire__checkbox-line");
+    const controleEmail = blocEmail?.querySelector("[data-lcdp-champ-control]");
+    if (!controleEmail || !blocCase || !ligneCase || blocCase === blocEmail) return;
+
+    controleEmail.appendChild(ligneCase);
+    blocCase.remove();
   }
 
   function appliquerVarianteSousTitreFormulaireInscription() {
