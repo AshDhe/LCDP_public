@@ -9,7 +9,7 @@
     sousTitreClasse: "lcdp-box-formulaire__subtitle--accent",
     introHtml: `
       <p>
-        Être membre invité La Clé du Parc est gratuit. Ouvrez votre compte pour découvrir les parcs et pouvoir être invité(e) par nos membres abonnés.
+        Être membre invité La Clé du Parc est gratuit. Inscrivez-vous pour voir les parcs et être invité(e) par les membres abonnés.
       </p>
     `,
     champs: [
@@ -42,7 +42,7 @@
         placeholder: "Exemple : 08",
         inputmode: "text",
         autocomplete: "off",
-        description: "Information non critique. Modifiable par la suite."
+        description: "Information modifiable par la suite."
       },
       {
         type: "email",
@@ -54,7 +54,7 @@
         autocomplete: "email",
         autocapitalize: "none",
         spellcheck: "false",
-        description: "C'est votre identifiant de connexion pour l'application. Modifiable par la suite."
+        description: "Votre identifiant de connexion pour l'application. Modifiable par la suite."
       },
       {
         type: "checkbox",
