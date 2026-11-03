@@ -1743,8 +1743,26 @@
       }
 
       if (badgePrepa) {
-        badgePrepa.hidden =
-          nettoyerTexte(parcCarte?.statut).toLowerCase() !== "prepa";
+        const statutCarte = nettoyerTexte(parcCarte?.statut).toLowerCase();
+        const projet = statutCarte === "prepa";
+        let nouveau = false;
+        if (statutCarte === "enligne" && parcCarte?.datestatut) {
+          const debut = new Date(parcCarte.datestatut);
+          if (Number.isFinite(debut.getTime())) {
+            const fin = new Date(debut.getTime());
+            const jour = debut.getUTCDate();
+            fin.setUTCDate(1);
+            fin.setUTCMonth(fin.getUTCMonth() + 2);
+            const dernierJour = new Date(Date.UTC(
+              fin.getUTCFullYear(), fin.getUTCMonth() + 1, 0
+            )).getUTCDate();
+            fin.setUTCDate(Math.min(jour, dernierJour));
+            nouveau = Date.now() >= debut.getTime() && Date.now() < fin.getTime();
+          }
+        }
+        badgePrepa.hidden = !projet && !nouveau;
+        badgePrepa.textContent = projet ? "PROJET" : "NOUVEAU";
+        badgePrepa.classList.toggle("lcdp-box-card-parc__badge--nouveau", nouveau);
       }
 
       if (image) {
