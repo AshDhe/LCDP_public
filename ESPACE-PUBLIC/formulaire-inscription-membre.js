@@ -37,12 +37,12 @@
         type: "text",
         id: "dptmtmembre",
         name: "dptmtmembre",
-        label: "Dapartement de référence",
+        label: "Département de référence",
         required: true,
-        placeholder: "Exemple : 08",
+        placeholder: "Ex. : 08 - Mofifiable plus tard",
         inputmode: "text",
         autocomplete: "off",
-        description: "Information modifiable par la suite."
+        description: ""
       },
       {
         type: "email",
@@ -54,13 +54,13 @@
         autocomplete: "email",
         autocapitalize: "none",
         spellcheck: "false",
-        description: "Votre identifiant de connexion pour l'application. Modifiable par la suite."
+        description: "C'est l'identifiant de connexion pour l'application. Modifiable par la suite."
       },
       {
         type: "checkbox",
         id: "unikuser",
         name: "unikuser",
-        label: "Utilisateur unique de l'adresse e-mail",
+        label: "",
         checkboxLabel: "Je confirme être l'unique utilisateur de l'adresse e-mail.",
         required: true,
         description: ""
@@ -82,47 +82,29 @@
         id: "regleclub_v1",
         name: "regleclub_v1",
         label: "Règlement du club",
-        checkboxLabel: "J'accepte le règlement du club",
+        checkboxLabel: "J'accepte le règlement du club. Cette acceptation est obligatoire.",
         required: true,
-        descriptionHtml: `
-          L'acceptation du 
-          <a
-            href="../ESPACE-PUBLIC/reglement-club.html"
-            data-site-href="/ESPACE-PUBLIC/reglement-club.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >règlement du club</a>
-          est obligatoire pour devenir membre du club.
-        `
+        descriptionHtml: ``
       },
       {
         type: "checkbox",
         id: "regleapp_v1",
         name: "regleapp_v1",
         label: "Règlement de l’application",
-        checkboxLabel: "J'accepte le règlement de l'application",
+        checkboxLabel: "J'accepte le règlement de l'application. Cette acceptation est obligatoire.",
         required: true,
-        descriptionHtml: `
-          L'acceptation du 
-          <a
-            href="../ESPACE-PUBLIC/reglement-app.html"
-            data-site-href="/ESPACE-PUBLIC/reglement-app.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >règlement de l’application</a>
-          est obligatoire pour devenir membre du club.
-        `
+        descriptionHtml: ``
       }
     ],
     bouton: {
       id: "bouton-envoyer-inscription",
       type: "submit",
-      label: "Devenir membre invité",
+      label: "M'inscrire",
       style: "lcdp-button-primary"
     },
     noteHtml: `
-      * Réponse nécessaire pour vous inscrire.<br>
-      Ce formulaire et ses informations sont soumis au
+      * Votre réponse nécessaire.<br>
+      Ce formulaire est soumis au
       <a
         href="../ESPACE-PUBLIC/reglement-club.html"
         data-site-href="/ESPACE-PUBLIC/reglement-club.html"
