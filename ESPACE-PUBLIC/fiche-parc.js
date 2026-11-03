@@ -1638,45 +1638,43 @@
       : null;
     observateurDimensionsCarte?.observe(svg);
 
+    // Source commune aux deux cartes : localités validées par le service.
+    // Une localité par département, avec coordonnées et libellé obligatoires.
+    const localitesDejaTracees = new Set();
     (Array.isArray(parc.localitesCarte) ? parc.localitesCarte : [])
       .forEach((localite) => {
-        const point = projeterCoordonnee(
-          localite.longitude,
-          localite.latitude
-        );
-
+        const nom = nettoyerTexte(localite?.nom);
+        const latitude = localite?.latitude;
+        const longitude = localite?.longitude;
+        if (!nom || latitude == null || longitude == null ||
+            String(latitude).trim() === "" || String(longitude).trim() === "") return;
+        const point = projeterCoordonnee(longitude, latitude);
         if (!point) return;
+        const cle = nettoyerDepartement(localite?.dptmt || parc.dptmt || parc.departement);
+        if (localitesDejaTracees.has(cle)) return;
+        localitesDejaTracees.add(cle);
 
         const groupe = creerElementSvg("g");
-        groupe.setAttribute("aria-hidden", "true");
-
+        groupe.setAttribute("aria-label", "Localité : " + nom);
         const marker = creerElementSvg("circle");
         marker.setAttribute("cx", String(point.x));
         marker.setAttribute("cy", String(point.y));
         marker.setAttribute("r", "0.1");
-        marker.setAttribute(
-          "class",
-          "lcdp-carte-dynamique__localite-marker"
-        );
+        marker.setAttribute("class", "lcdp-carte-dynamique__localite-marker");
+        const titre = creerElementSvg("title");
+        titre.textContent = "Localité : " + nom;
+        marker.appendChild(titre);
 
         const libelle = creerElementSvg("text");
         libelle.setAttribute("x", String(point.x));
         libelle.setAttribute("y", String(point.y));
         libelle.setAttribute("dominant-baseline", "middle");
-        libelle.setAttribute(
-          "class",
-          "lcdp-carte-dynamique__localite-label"
-        );
+        libelle.setAttribute("class", "lcdp-carte-dynamique__localite-label");
         libelle.dataset.pointX = String(point.x);
         libelle.dataset.pointY = String(point.y);
-        libelle.textContent = String(localite.nom || "")
-          .trim()
-          .toLocaleUpperCase("fr");
+        libelle.textContent = nom.toLocaleUpperCase("fr");
 
-        // Dans la fiche publique, les petits points de localités ne sont pas
-        // utiles : ils peuvent apparaître isolés, sans libellé lisible.
-        // La vue CARTE de navigation conserve ses marqueurs de localité.
-        if (options.carteNavigation) groupe.appendChild(marker);
+        groupe.appendChild(marker);
         groupe.appendChild(libelle);
         coucheLocalites.appendChild(groupe);
       });
