@@ -413,6 +413,9 @@
     const galerieSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-galerie-slot]"
     );
+    const galerieSuiteSlot = fiche.querySelector(
+      "[data-lcdp-fiche-parc-galerie-suite-slot]"
+    );
     const carteSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-map-slot]"
     );
@@ -544,6 +547,10 @@
     );
 
     await ajouterGalerieParc(galerieSlot, parc, options);
+    // Deux photos supplémentaires placées après Espace réservé sur tous les écrans.
+    if (galerieSuiteSlot) {
+      await ajouterGalerieParc(galerieSuiteSlot, parc, options, 5, 6);
+    }
     await ajouterCarteParc(carteSlot, parc, options);
 
     // Ne pas confondre les anciens horaires libres et la synthèse mensuelle
@@ -1160,7 +1167,9 @@
   async function ajouterGalerieParc(
     slot,
     parc,
-    options = {}
+    options = {},
+    premierIndex = 1,
+    dernierIndex = 4
   ) {
     if (!slot) {
       throw new Error("Slot galerie fiche parc introuvable.");
@@ -1180,7 +1189,7 @@
     ) || "Parc";
     const cartes = [];
 
-    for (let index = 1; index <= 4; index += 1) {
+    for (let index = premierIndex; index <= dernierIndex; index += 1) {
       const numero = String(index).padStart(2, "0");
       // La première photo de la fiche est celle de la Card Parc.
       const fichierImage = index === 1 ? "card1.webp" : String(index - 1).padStart(2, "0") + ".jpg";

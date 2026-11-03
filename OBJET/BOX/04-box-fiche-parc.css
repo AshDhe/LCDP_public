@@ -973,9 +973,9 @@
   .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(3) { order: 5; margin-top: var(--lcdp-space-3); }
   .lcdp-box-fiche-parc__section[aria-label="Ouverture du parc"] { order: 6; }
   .lcdp-box-fiche-parc__section[aria-label="Extérieur"] { order: 7; }
-  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(4) { order: 8; margin-top: var(--lcdp-space-3); }
-  .lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"] { order: 9; }
-  .lcdp-box-fiche-parc__section[aria-label="Espace réservé"] { order: 10; }
+  .lcdp-box-fiche-parc__section[aria-label="Accès Ma Clé"] { order: 8; }
+  .lcdp-box-fiche-parc__section[aria-label="Espace réservé"] { order: 9; }
+  .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(4) { order: 10; margin-top: var(--lcdp-space-3); }
 }
 /* PC : conserver la taille de la fenêtre et l'ordre des blocs ; photos -20 %. */
 @media (min-width: 768px) {
@@ -999,4 +999,37 @@
 }
 .lcdp-box-fiche-parc__box-text p + p {
   margin-top: var(--lcdp-space-3);
+}
+
+/* Photos supplémentaires après « Espace réservé » sur PC et mobile.
+   Les fichiers 04.jpg et 05.jpg suivent card1.webp, 01.jpg, 02.jpg et 03.jpg. */
+.lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__header {
+  display: none !important;
+}
+.lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__list {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: var(--lcdp-space-3);
+}
+@media (min-width: 768px) {
+  .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__card {
+    width: 80%;
+    max-width: 80%;
+    justify-self: center;
+    margin-inline: auto;
+  }
+}
+@media (max-width: 767px) {
+  .lcdp-box-fiche-parc__section--galerie-suite {
+    order: 11;
+    min-width: 0;
+  }
+  .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
 }
