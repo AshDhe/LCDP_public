@@ -157,18 +157,8 @@
       return construireUrlSite("/ESPACE-PUBLIC/connexion-membre.html?source=menu-mon-compte");
     }
 
-    if (configuration.espace) {
-      const config = window.SITE_CONFIG || {};
-      const espace = configuration.espace;
-      const fonctionUrl = config[espace + "Url"];
-      if (typeof fonctionUrl === "function") return fonctionUrl(configuration.cheminConnexion);
-      const hote = window.location.hostname;
-      const baseDefaut = ["ashdhe.github.io", "huguespavret.github.io"].includes(hote)
-        ? "https://" + hote + "/LCDP_" + espace
-        : "https://" + espace + ".lacleduparc.fr";
-      const base = String(config[espace + "BaseUrl"] || config[espace.toUpperCase() + "_BASE"] || baseDefaut).replace(/\/+$/, "");
-      return base + configuration.cheminConnexion;
-    }
+    // Les pages de connexion sont référencées sous ESPACE-PUBLIC :
+    // ne pas préfixer ces chemins avec les sous-domaines parc/coach.
     return construireUrlSite(configuration.cheminConnexion);
   }
 
