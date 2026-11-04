@@ -1,160 +1,82 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr" data-lcdp-css="c085">
 <head>
-  <meta charset="utf-8">
-
-  <title>Accueil public - La Clé du Parc</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Accueil public La Clé du Parc. Accès rapide aux fonctions membre.">
-
-  <script src="../config.js"></script>
-
-  <script>
-    window.SITE_BASE =
-      window.SITE_CONFIG?.publicBaseUrl ||
-      window.SITE_CONFIG?.siteBase ||
-      "";
-  </script>
-
-  <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
-
-  <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css">
-  <script>
-    // Charger le même objet CSS que l'accueil membre, via l'URL OBJET configurée.
-    (() => {
-      const config = window.SITE_CONFIG || {};
-      const publicBase = String(config.publicBaseUrl || config.PUBLIC_BASE || "").replace(/\/+$/, "");
-      const objetBase = String(config.objetBaseUrl || config.OBJET_BASE || publicBase + "/OBJET").replace(/\/+$/, "");
-      const href = typeof config.objetUrl === "function"
-        ? config.objetUrl("/BOX/01-box-actualite.css")
-        : objetBase + "/BOX/01-box-actualite.css";
-      document.write('<link rel="stylesheet" href="' + href + '">');
-    })();
-  </script>
-  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css">
-  <link rel="stylesheet" href="../OBJET/BOX/01-box-carrousel.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-contact.css">
-  <!-- Ajustements propres à l’accueil public, uniquement sur mobile : -30 % sur les espacements verticaux. -->
-  <style id="lcdp-correction-espacements-public">
-    @media (max-width: 767px) {
-      .lcdp-page-accueil-public .lcdp-site-main > .lcdp-page-section.lcdp-accueil-section {
-        padding-top: calc(var(--lcdp-space-5, 36px) * 0.42 * 0.7 * 3 * 0.85);
-      }
-      .lcdp-page-accueil-public .lcdp-accueil-content {
-        gap: calc(var(--lcdp-space-4, 24px) * 0.7);
-      }
-    }
-    @media (min-width: 768px) {
-      .lcdp-page-accueil-public .lcdp-site-main > .lcdp-page-section.lcdp-accueil-section {
-        padding-top: calc(var(--lcdp-space-4, 24px) * 2);
-      }
-    }
-  </style>
-  <style id="lcdp-pictos-accueil-public">
-    .lcdp-page-accueil-public #lcdp-menu-central-slot,
-    .lcdp-page-accueil-public #lcdp-menu-central-slot > *,
-    .lcdp-page-accueil-public #lcdp-menu-central-slot .lcdp-accueil-actions {
-      width: 100%;
-      min-width: 0;
-    }
-
-    .lcdp-page-accueil-public .lcdp-accueil-actions > button.lcdp-accueil-picto {
-      box-sizing: border-box;
-      width: 148.68px;
-      max-width: 100%;
-      flex-shrink: 0;
-      height: 112px;
-      min-height: 112px;
-      margin-inline: auto;
-      padding: 8px 16px;
-      flex-direction: column;
-      gap: 4px;
-      color: #ffffff;
-    }
-    .lcdp-accueil-picto > svg,
-    .lcdp-accueil-picto > img {
-      display: block;
-      max-width: none;
-      min-width: 71.68px;
-      width: 71.68px;
-      height: 71.68px;
-      flex: 0 0 71.68px;
-      object-fit: contain;
-    }
-    .lcdp-accueil-picto > img {
-      filter: brightness(0) invert(1);
-      transform: scale(1.15);
-    }
-    .lcdp-accueil-picto > span {
-      font-size: clamp(11.95488px, 3.6064vw, 16.4864px);
-      transform: scaleX(0.95);
-      line-height: 1.05;
-      white-space: nowrap;
-    }
-    @media (min-width: 768px) {
-      .lcdp-page-accueil-public .lcdp-accueil-actions > button.lcdp-accueil-picto {
-        width: 194.88px;
-        height: 120px;
-        min-height: 120px;
-      }
-      .lcdp-accueil-picto > svg,
-      .lcdp-accueil-picto > img {
-        min-width: 76.16px;
-        width: 76.16px;
-        height: 76.16px;
-        flex-basis: 76.16px;
-      }
-      .lcdp-accueil-picto > span {
-        font-size: 15.088px;
-      }
-    }
-  </style>
-  <style>
-    .lcdp-page-accueil-public .lcdp-accueil-main { flex-direction: column; }
-    #le-club { width: 100%; flex: 0 0 auto; }
-    #le-club[hidden] { display: none !important; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Clé du Parc - Accueil Vertical</title>
+  <link rel="stylesheet" href="lcdp-central-mobile-first.css">
 </head>
-
-<body class="lcdp-page-accueil-public">
-  <div class="lcdp-site-page">
-
-    <div id="lcdp-bandeau-slot"></div>
-    <div id="lcdp-actualite-bandeau">
-      <div class="lcdp-page-container">
-        <div class="lcdp-page-content">
-          <!-- Réserver deux lignes avant le chargement des actualités. -->
-          <div class="lcdp-boxtext__text--center lcdp-actu-bandeau-placeholder" aria-hidden="true"></div>
+<body class="public-home">
+  <div class="public-home__app">
+    <!-- HEADER -->
+    <header class="public-home__header">
+      <div class="public-home__brand">
+        <div class="public-home__brand-icon">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="public-home__brand-name">La Clé du Parc</h1>
+          <span class="public-home__brand-subtitle">Espace public</span>
         </div>
       </div>
-    </div>
+      <button class="public-home__menu-button" type="button" aria-label="Ouvrir le menu">
+        <span></span>
+        <span></span>
+      </button>
+    </header>
 
-    <main class="lcdp-site-main lcdp-accueil-main">
-      <section class="lcdp-page-section lcdp-accueil-section">
-        <div class="lcdp-page-container lcdp-accueil-container">
-          <div class="lcdp-page-content lcdp-accueil-content">
+    <!-- CONTENU -->
+    <main class="public-home__main">
+      <div class="public-home__intro">
+        <button class="public-home__more" type="button">
+          <span>En savoir plus</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+        <h2 class="public-home__heading">Des parcs</h2>
+      </div>
 
-            <div id="lcdp-menu-central-slot"></div>
+      <div class="public-home__actions">
+        <button class="public-home__action public-home__action--plan" type="button">
+          <span class="public-home__action-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+          </span>
+          <span class="public-home__action-label">Planifier</span>
+        </button>
 
-          </div>
-        </div>
-      </section>
-      <section id="le-club" hidden aria-label="Le club"></section>
+        <button class="public-home__action public-home__action--access" type="button">
+          <span class="public-home__action-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </span>
+          <span class="public-home__action-label">Mes accès</span>
+        </button>
+
+        <button class="public-home__action public-home__action--key" type="button">
+          <span class="public-home__action-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+            </svg>
+          </span>
+          <span class="public-home__action-label">Ma clé</span>
+        </button>
+      </div>
     </main>
 
-    <div id="lcdp-footer-slot"></div>
-    <div id="lcdp-lightbox-slot"></div>
-
+    <!-- FOOTER -->
+    <footer class="public-home__footer">
+      <a href="#">Mentions légales</a>
+      <span class="public-home__footer-separator" aria-hidden="true">•</span>
+      <a href="#">Données</a>
+      <span class="public-home__footer-separator" aria-hidden="true">•</span>
+      <a href="#">Vérification</a>
+    </footer>
   </div>
-  <script src="./controle-acces-accueil.js"></script>
-  <script src="./accueil-public.js"></script>
-  <script src="./actualite.js" defer></script>
-  <script src="./club-accueil.js" defer></script>
 </body>
 </html>
