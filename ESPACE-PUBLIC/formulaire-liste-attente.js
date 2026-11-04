@@ -250,9 +250,18 @@
         const data = await response.json().catch(() => null);
 
         if (!response.ok || !data || data.success !== true) {
+          // Une erreur serveur peut intervenir après l'enregistrement (envoi de l'email).
+          // Ne pas annoncer un échec d'inscription tant que son statut n'est pas connu.
+          console.error("Pré-inscription non confirmée : réponse du service", {
+            status: response.status
+          });
           await afficherInformationListeAttente(
-            "Inscription non enregistrée",
-            data?.message || "Votre inscription n'a pas pu être enregistrée.",
+            response.status >= 500 || !data
+              ? "Pré-inscription non confirmée"
+              : "Pré-inscription refusée",
+            data?.message || (response.status >= 500
+              ? "Le service ne peut pas confirmer votre pré-inscription. Réessayez dans une minute avec la même adresse e-mail."
+              : "Le service n'a pas accepté votre demande."),
             "erreur"
           );
 
@@ -278,8 +287,8 @@
         console.error("Erreur formulaire liste d'attente :", error);
 
         await afficherInformationListeAttente(
-          "Erreur",
-          "Il n'est pas possible d'envoyer le formulaire pour le moment.",
+          "Pré-inscription non confirmée",
+          "Impossible de confirmer l'envoi pour le moment. Réessayez avec la même adresse e-mail.",
           "erreur"
         );
 
