@@ -9612,6 +9612,7 @@ tr > td:nth-child(2) > button:focus-visible{
   gap: .75rem;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
 }
 /* Pilule En savoir plus : Tailwind px-4 py-2 rounded-full, 12px/600. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne > span:first-child {
@@ -9642,7 +9643,7 @@ tr > td:nth-child(2) > button:focus-visible{
 }
 /* Le cartouche de groupe est déjà produit par le script ; supprimer son
    ancien cadre interne pour ne conserver qu'une seule pilule. */
-:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne .lcdp-actualite-groupe {
+:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne .lcdp-actualite-groupe[data-groupe] {
   display: inline-flex;
   min-height: 0;
   margin: 0;
@@ -9651,12 +9652,12 @@ tr > td:nth-child(2) > button:focus-visible{
   border-radius: 0;
   background: transparent;
   box-shadow: none;
-  color: inherit;
+  color: var(--home-slate-500);
   font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  letter-spacing: inherit;
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: normal;
   text-transform: none;
 }
 /* Titre dynamique : Tailwind text-2xl font-black tracking-tight. */
@@ -9664,7 +9665,8 @@ tr > td:nth-child(2) > button:focus-visible{
   display: block;
   min-width: 0;
   max-width: 100%;
-  overflow: hidden;
+  overflow: visible;
+  overflow-wrap: anywhere;
   color: var(--home-slate-900);
   font-family: inherit;
   font-size: 1.5rem;
@@ -9672,12 +9674,19 @@ tr > td:nth-child(2) > button:focus-visible{
   line-height: 2rem;
   letter-spacing: -.025em;
   text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-placeholder {
   height: 6.5rem;
   min-height: 6.5rem;
+}
+/* Le titre est construit avec des lettres animées : autoriser son retour à la ligne. */
+:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-texte-anime {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 /* LCDP_public/OBJET/BOX/03-box-champ-formulaire.css */
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire{
