@@ -15921,3 +15921,232 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 @media (prefers-reduced-motion: reduce) {
   :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper figure.lcdp-editorial-hero > img.lcdp-editorial-hero__image {transition: none; transform: none;}
 }
+
+/* c031 — Carrousel générique modernisé (visuel Tailwind, navigation JS inchangée).
+   Seul [data-lcdp-box-carousel] reçoit la carte ; les wrappers éditoriaux ne changent pas. */
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] {
+  box-sizing:border-box; display:flex; flex-direction:column; gap:16px;
+  width:100%; min-width:0; max-width:100%; margin:0; padding:20px;
+  background:#fff; border:1px solid #f1f5f9; border-radius:24px;
+  box-shadow:0 20px 25px -5px rgb(15 23 42 / 9%),0 8px 10px -6px rgb(15 23 42 / 5%);
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__eyebrow {
+  display:block; margin:0 0 2px; color:#e59834; text-align:center;
+  font:700 10px/1.5 Arial,system-ui,sans-serif; text-transform:uppercase; letter-spacing:.1em;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__title {
+  color:#0f172a; text-align:center; margin:0;
+  font:900 18px/1.4 Arial,system-ui,sans-serif; letter-spacing:-.025em;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__frame {
+  position:relative; width:100%; min-width:0;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__viewport {
+  width:100%; height:240px; min-height:0; aspect-ratio:auto;
+  overflow:hidden; border-radius:16px; background:#f1f5f9;
+  box-shadow:0 4px 6px -1px rgb(15 23 42 / 10%),0 2px 4px -2px rgb(15 23 42 / 10%);
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__item {
+  overflow:hidden;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__image {
+  display:block; width:100%; height:100%; object-fit:cover; object-position:center;
+  transition:transform .7s ease;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__viewport:hover .lcdp-box-carousel__item.is-active .lcdp-box-carousel__image {transform:scale(1.05);}
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__item--with-title::after {
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
+  background:linear-gradient(to top,rgb(2 6 23 / 80%) 0%,rgb(2 6 23 / 20%) 53%,transparent 100%);
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__overlay-title {
+  position:absolute; z-index:2; left:20px; right:20px; bottom:20px;
+  width:auto; max-width:none; margin:0; padding:0;
+  color:#fff; font:900 24px/1.15 Arial,system-ui,sans-serif;
+  letter-spacing:-.025em; text-align:left; text-shadow:none;
+  overflow-wrap:normal; word-break:normal;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button {
+  box-sizing:border-box; position:absolute; top:50%; z-index:3;
+  display:flex; align-items:center; justify-content:center;
+  width:32px; height:32px; min-width:32px; min-height:32px;
+  margin:0; padding:0; border:0; border-radius:999px;
+  background:rgb(255 255 255 / 90%); color:#334155;
+  font:700 18px/1 Arial,system-ui,sans-serif; cursor:pointer;
+  box-shadow:0 1px 2px rgb(15 23 42 / 8%);
+  transform:translateY(-50%); transition:background-color .2s ease;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button:hover {background:#fff; border:0;}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button--prev {left:12px;}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button--next {right:12px;}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button:focus-visible,
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot:focus-visible {outline:2px solid #4e6838; outline-offset:2px;}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dots {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  min-height:16px; margin:0; padding-top:4px;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot {
+  width:8px; height:8px; padding:0; border:0; border-radius:99px;
+  background:#e2e8f0; box-shadow:none; cursor:pointer;
+  transition:width .2s ease,height .2s ease,background-color .2s ease;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot.is-active {
+  width:14px; height:6px; border:0; background:#4e6838; box-shadow:none;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-image-legend {
+  display:block; width:100%; margin:0; padding:0; text-align:center;
+  color:#94a3b8; font:italic 400 10px/1.5 Arial,system-ui,sans-serif;
+}
+@media (prefers-reduced-motion:reduce) {
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__image {transition:none; transform:none;}
+}
+
+/* c040 / c041 — Composants génériques de formulaire, présentation modernisée.
+   Variante de carte déjà déclarée dans le HTML : .lcdp-formulaire-encadre.
+   Le champ mot de passe et sa case restent visibles dans .__label-zone.
+   Aucun identifiant de page ou de champ n'est ciblé ; pas de contenu injecté. */
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre {
+  box-sizing:border-box; display:flex; flex-direction:column; gap:24px;
+  width:100%; min-width:0; max-width:100%; margin:0; padding:24px;
+  background:#fff; border:1px solid #f1f5f9; border-radius:24px;
+  box-shadow:0 20px 25px -5px rgb(15 23 42 / 9%),0 8px 10px -6px rgb(15 23 42 / 5%);
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre > .lcdp-boxtext__title {
+  display:block; width:100%; margin:0; padding:0;
+  color:#0f172a; text-align:center;
+  font:900 20px/1.4 Arial,system-ui,sans-serif; letter-spacing:-.025em;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre > .lcdp-boxtext__content {
+  box-sizing:border-box; display:block; width:100%; min-width:0; margin:0; padding:0;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire-page,
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire-page__inner {
+  box-sizing:border-box; width:100%; min-width:0; max-width:100%; margin:0; padding:0;
+  border:0; background:transparent; box-shadow:none;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire {
+  box-sizing:border-box; display:flex; flex-direction:column; gap:24px;
+  width:100%; min-width:0; max-width:100%; margin:0; padding:0;
+  border:0; border-radius:0; background:transparent; box-shadow:none;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__header {
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  width:100%; min-width:0; margin:0; padding:0;
+  border:0; background:transparent; text-align:center;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__subtitle:not(.lcdp-box-formulaire__subtitle--accent) {
+  box-sizing:border-box; max-width:280px; margin:0 auto; padding:0;
+  color:#94a3b8; text-align:center;
+  font:400 12px/1.625 Arial,system-ui,sans-serif;
+  letter-spacing:normal; text-transform:none;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__fields {
+  box-sizing:border-box; display:flex; flex-direction:column; gap:16px;
+  width:100%; min-width:0; margin:0; padding:0;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-champ-formulaire {
+  box-sizing:border-box; display:flex; flex-direction:column; gap:4px;
+  min-width:0; margin:0; padding:0;
+}
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__label-zone:has(> :is(input,select,textarea)) {
+  display:flex; flex-direction:column; gap:12px;
+  box-sizing:border-box; min-width:0; margin:0; padding:0;
+}
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__label-zone:has(> :is(input,select,textarea)) > .lcdp-box-champ-formulaire__checkbox-line {
+  margin-top:0;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-champ-formulaire__control {
+  box-sizing:border-box; width:100%; min-width:0; margin:0; padding:0;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-champ-formulaire :is(input[type="email"],input[type="password"],input[type="text"]) {
+  box-sizing:border-box; display:block; width:100%; min-width:0;
+  min-height:54px; margin:0; padding:12px 16px;
+  border:1px solid #e2e8f0; border-radius:12px; background:#f8fafc;
+  color:#1e293b; text-align:left;
+  font:400 14px/1.5 Arial,system-ui,sans-serif;
+  transition:background-color .2s ease,border-color .2s ease;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-champ-formulaire__checkbox-line {
+  display:flex; flex-direction:row; align-items:center; gap:10px;
+  margin:0; padding-inline:4px;
+  color:#64748b; text-align:left;
+  font:500 12px/1.5 Arial,system-ui,sans-serif; cursor:pointer;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-champ-formulaire__checkbox-line input[type="checkbox"] {
+  box-sizing:border-box; display:block; flex:0 0 16px;
+  width:16px; height:16px; margin:0;
+  accent-color:#4e6838; cursor:pointer;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__actions {
+  box-sizing:border-box; display:block; width:100%; min-width:0; margin:0; padding-top:8px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button) {
+  box-sizing:border-box; display:block; width:100%; min-width:0; min-height:52px;
+  margin:0; padding:14px 16px; border:0; border-radius:12px;
+  background:#4e6838; color:#fff; text-align:center;
+  font:700 12px/1.5 Arial,system-ui,sans-serif;
+  letter-spacing:.05em; text-transform:uppercase;
+  box-shadow:0 4px 6px -1px rgb(6 78 59 / 10%);
+  cursor:pointer; transition:background-color .2s ease,transform .2s ease;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button):hover {
+  background:#3d522c; color:#fff;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button):active {
+  transform:scale(.99);
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__note {
+  box-sizing:border-box; width:100%; margin:0; padding-top:16px;
+  border-top:1px solid #f8fafc;
+  color:#94a3b8; text-align:center;
+  font:400 10px/1.5 Arial,system-ui,sans-serif;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre :is(input,button):focus-visible {
+  outline:2px solid #4e6838; outline-offset:2px;
+}
+@media (max-width:380px) {
+  :where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre {padding:20px;}
+}
+
+/* c040 / c041 — Présentation générique des formulaires de codes à quatre cases.
+   Extension des variantes de composants déjà utilisées, indépendamment de CODA/CODR.
+   Aucune règle de page, d'identifiant métier ou de valeur de saisie. */
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--code > .lcdp-box-champ-formulaire__label {
+  display:block; margin:0 0 8px; color:#334155;
+  font:700 12px/1.45 Arial,system-ui,sans-serif; letter-spacing:.04em;
+}
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--code .lcdp-box-champ-formulaire__code-cases {
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px;
+  width:100%; min-width:0;
+}
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--code .lcdp-box-champ-formulaire__code-cases > input {
+  box-sizing:border-box; display:block; width:100%; min-width:0;
+  height:54px; min-height:54px; margin:0; padding:8px 4px;
+  border:1px solid #e2e8f0; border-radius:12px;
+  background:#f8fafc; color:#1e293b;
+  font:700 20px/1.3 Arial,system-ui,sans-serif;
+  text-align:center; letter-spacing:.025em;
+  transition:border-color .2s ease,background-color .2s ease;
+}
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--code .lcdp-box-champ-formulaire__code-cases > input[maxlength="4"] {
+  font-size:14px; letter-spacing:0;
+}
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--code .lcdp-box-champ-formulaire__code-cases > input:focus {
+  border-color:#4e6838; background:#fff; outline:2px solid #4e6838; outline-offset:1px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__title > small {
+  display:block; margin-top:8px; color:#64748b;
+  font:600 12px/1.5 Arial,system-ui,sans-serif;
+  letter-spacing:.04em;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note:is(ul,ol) {
+  list-style-image:none; list-style-position:outside; text-align:left;
+  padding:12px 14px 12px 32px; border:1px solid #f1f5f9;
+  border-radius:12px; background:#f8fafc; color:#64748b;
+  font:400 12px/1.55 Arial,system-ui,sans-serif;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note:is(ul,ol) > li + li {margin-top:4px;}
+@media (max-width:360px) {
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--code .lcdp-box-champ-formulaire__code-cases {gap:7px;}
+}
