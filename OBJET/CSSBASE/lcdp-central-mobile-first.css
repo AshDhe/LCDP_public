@@ -15239,3 +15239,276 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   :where(html[data-lcdp-css~="c085"]) .public-home__actions { gap: .5rem; margin-top: 1rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__action { padding: .5rem; }
 }
+
+
+/* c085 — Page « Membre invité », habillage Tailwind du 03/11/2026.
+   Variante de page : composants existants c034 (bandeau), c038 (burger),
+   c032 (texte), c042 (galerie), c037 (footer) ; aucune nouvelle box.
+   Portée STRICTEMENT limitée à body.lcdp-page-inscription. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription {
+  min-height:100dvh;
+  padding:12px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  background:#f8fafc;
+  color:#0f172a;
+  font-family:Arial,system-ui,sans-serif;
+  font-size:14px;
+  line-height:1.5;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-site-page {
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  max-width:448px;
+  height:calc(100dvh - 24px);
+  max-height:850px;
+  min-height:0;
+  margin:0;
+  border:1px solid #f1f5f9;
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 20px 25px -5px rgb(226 232 240 / 50%),0 8px 10px -6px rgb(226 232 240 / 50%);
+  overflow:hidden;
+}
+/* c034 — même gabarit de bandeau que l'accueil public Tailwind. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription #lcdp-bandeau-slot {
+  display:block;
+  flex:0 0 80px;
+  min-height:80px;
+  width:100%;
+  background:#4e6838;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav {
+  position:relative;
+  top:auto;right:auto;bottom:auto;left:auto;
+  min-height:80px;
+  width:100%;
+  border:0;
+  border-radius:23px 23px 0 0;
+  background:#4e6838;
+  z-index:4000;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__inner {
+  width:100%;max-width:none;min-height:80px;
+  padding:0 24px;
+  margin:0;
+  gap:12px;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__logo-link {
+  display:flex;align-items:center;gap:12px;
+  min-width:0;white-space:normal;
+  color:#fff;font-size:16px;line-height:1;
+  font-weight:700;text-decoration:none;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__logo {
+  width:36px;height:36px;flex:0 0 36px;
+  border-radius:12px;object-fit:contain;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__space-label {
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  min-width:0;color:#fff;font-size:16px;line-height:1.05;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-bandeau-restreint-title {
+  color:#fff;font-size:16px;font-weight:700;letter-spacing:-.025em;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-bandeau-restreint-subtitle {
+  color:#a7f3d0;font-size:11px;font-weight:500;
+  letter-spacing:.025em;text-transform:uppercase;line-height:1.35;
+}
+/* c038 — contraste des traits du burger sur le fond vert. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__burger-slot {color:#fff;}
+/* c038 — bouton Connexion et liens de menu de taille identique. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-menu-burger__link,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-menu-burger__button-link {
+  font-family:inherit;font-size:14px;line-height:1.3;
+  font-weight:600;letter-spacing:.025em;
+}
+/* c085 — une seule zone défilante, le corps (page éditoriale longue). */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-site-main {
+  flex:1 1 auto;min-height:0;min-width:0;
+  overflow-y:auto;overflow-x:hidden;
+  overscroll-behavior:contain;
+  background:rgb(248 250 252 / 50%);
+  scrollbar-width:thin;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-page-section {
+  width:100%;padding:20px;min-width:0;margin:0;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-page-container,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-page-content {
+  box-sizing:border-box;
+  width:100%;max-width:none;min-width:0;
+  padding:0;margin:0;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-page-content.lcdp-stack-large {
+  display:flex;flex-direction:column;
+  gap:24px;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-title-page-center {
+  margin:8px 0 -12px;
+  font-size:24px;line-height:32px;font-weight:900;
+  letter-spacing:-.025em;text-align:center;
+  color:#0f172a;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription section[aria-label="Accès des membres existants"] {
+  margin:0;padding:0;text-align:center;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-actions-centrees {
+  display:flex;flex-direction:column;align-items:center;
+  gap:12px;width:100%;margin:0;
+}
+/* c085 — boutons sur palette Tailwind et styles c085 déjà existants. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription a.lcdp-button {
+  box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;
+  min-width:0;min-height:0;
+  max-width:100%;width:auto;
+  padding:12px 16px;
+  border:0;border-radius:12px;
+  font:700 12px/1.35 Arial,system-ui,sans-serif;
+  letter-spacing:.05em;text-transform:uppercase;
+  text-align:center;text-decoration:none;
+  box-shadow:0 2px 4px rgb(15 23 42 / 10%);
+  transition:background-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription a.lcdp-button-orange {
+  background:#e59834;border-color:#e59834;color:#fff;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription a.lcdp-button-orange:hover {background:#cc8125;color:#fff;}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription a.lcdp-button-primary {
+  width:100%;padding:13px 16px;
+  background:#4e6838;border-color:#4e6838;color:#fff;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription a.lcdp-button-primary:hover {background:#3d522c;color:#fff;}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription a.lcdp-button-secondary {
+  width:100%;background:#fff;border:1px solid #e2e8f0;
+  color:#334155;font-weight:500;text-transform:none;
+  box-shadow:none;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription a.lcdp-button-secondary:hover {border-color:#334155;color:#0f172a;}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription a.lcdp-button:focus-visible {outline:2px solid #4e6838;outline-offset:3px;}
+/* c032 — cartes de texte existantes, teintes et espacements Tailwind. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-boxtext {
+  display:flex;flex-direction:column;gap:16px;
+  width:100%;min-width:0;
+  margin:0;padding:20px;
+  border:1px solid #f1f5f9;
+  border-radius:16px;background:#fff;
+  box-shadow:0 1px 3px rgb(15 23 42 / 8%);
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-boxtext__title,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-boxtext__title--center {
+  margin:0;width:100%;color:#0f172a;
+  font-size:14px;font-weight:700;line-height:1.4;
+  text-align:center;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-boxtext__content {
+  display:flex;flex-direction:column;gap:16px;
+  min-width:0;margin:0;padding:0;
+  color:#64748b;font-size:12px;line-height:1.625;
+  text-align:center;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-boxtext__content > p,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-boxtext__content > div > p {
+  max-width:100%;margin:0;color:#64748b;
+  font-size:12px;line-height:1.625;
+  overflow-wrap:anywhere;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-boxtext__content a:not(.lcdp-button) {
+  color:#334155;text-decoration:underline;text-underline-offset:2px;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-note-encadree {
+  width:100%;margin:0;padding:0;border:0;border-radius:0;
+  background:transparent;box-shadow:none;
+  color:#94a3b8;font-size:11px;line-height:1.55;text-align:center;
+}
+/* c042 — galerie existante à quatre cartes, grille Tailwind deux colonnes. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie {
+  width:100%;padding:8px 0 0;margin:0;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie__header {
+  margin:0 0 24px;padding:0;width:100%;max-width:100%;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie__title {
+  margin:0;color:#0f172a;
+  font-size:18px;line-height:1.4;font-weight:800;
+  letter-spacing:-.025em;text-align:center;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie__list {
+  width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie__card {
+  display:flex;flex-direction:column;justify-content:flex-start;
+  min-width:0;width:100%;gap:8px;padding:12px;
+  border:1px solid #f1f5f9;border-radius:16px;
+  background:#fff;box-shadow:0 1px 3px rgb(15 23 42 / 7%);
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie__image {
+  order:0;display:block;width:100%;height:112px;aspect-ratio:auto;
+  margin:0;border:0;border-radius:12px;
+  object-fit:cover;object-position:center;
+  background:#f1f5f9;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie__card-title {
+  order:1;margin:0;color:#0f172a;
+  font-size:12px;line-height:1.3;font-weight:700;text-align:left;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie__text {
+  order:2;margin:0;color:#94a3b8;
+  font-size:10px;line-height:1.5;font-weight:400;text-align:left;
+  overflow-wrap:anywhere;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie__legend {
+  order:3;margin:0;color:#94a3b8;
+  font-size:9px;line-height:1.3;text-align:left;
+}
+/* c032 — autres sections rédactionnelles, intégralement conservées. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-carousel {
+  display:flex;flex-direction:column;gap:16px;
+  padding:20px;margin:0;
+  border:1px solid #f1f5f9;border-radius:16px;
+  background:#fff;box-shadow:0 1px 3px rgb(15 23 42 / 7%);
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-carousel > .lcdp-box-carousel__title {
+  margin:0;color:#0f172a;font-size:18px;
+  font-weight:800;line-height:1.35;text-align:center;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-carousel > .lcdp-boxtext {
+  padding:0;border:0;box-shadow:none;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-boxtext__content p strong {color:#334155;}
+/* c037 — footer existant, à l'intérieur du gabarit. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription #lcdp-footer-slot {
+  position:relative;flex:0 0 50px;
+  width:100%;height:50px;
+  border-top:1px solid #f1f5f9;
+  background:#fff;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-footer {
+  position:relative;left:auto;right:auto;bottom:auto;
+  width:100%;height:50px;border:0;background:#fff;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-footer__inner {
+  display:flex;align-items:center;justify-content:center;
+  width:100%;max-width:none;height:50px;
+  padding:0 10px;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-footer__inner a,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-footer__inner button {
+  padding:0;margin:0;border:0;background:transparent;
+  color:#94a3b8;font:500 11px/1.2 Arial,system-ui,sans-serif;
+  text-decoration:none;cursor:pointer;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-footer__inner a:hover,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-footer__inner button:hover {color:#475569;}
+@media(min-width:768px) {
+  :where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription {align-items:center;padding:16px;}
+  :where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-site-page {height:calc(100dvh - 32px);max-height:850px;}
+}
+@media(max-width:360px) {
+  :where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-page-section {padding:14px;}
+  :where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie__list {gap:10px;}
+  :where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-galerie__card {padding:9px;}
+  :where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__inner {padding-inline:16px;}
+}
