@@ -9714,12 +9714,18 @@ tr > td:nth-child(2) > button:focus-visible{
 /* Le texte dynamique partage directement les règles .public-home__heading.
    Ces seules propriétés assurent la compatibilité avec l'animation et la largeur. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
-  display: block;
-  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 4rem;
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  overflow: visible;
+  height: 4rem;
+  min-height: 4rem;
+  max-height: 4rem;
+  overflow: hidden;
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: normal;
