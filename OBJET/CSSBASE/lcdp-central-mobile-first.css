@@ -9596,7 +9596,9 @@ tr > td:nth-child(2) > button:focus-visible{
   box-shadow: none;
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-titre {
-  display: inline-flex;
+  display: flex;
+  width: 100%;
+  min-width: 0;
   max-height: none;
   max-width: 100%;
   justify-content: center;
@@ -9653,11 +9655,14 @@ tr > td:nth-child(2) > button:focus-visible{
    Ces seules propriétés assurent la compatibilité avec l'animation et la largeur. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
   display: block;
+  flex: 1 1 100%;
+  width: 100%;
   min-width: 0;
   max-width: 100%;
   overflow: visible;
   white-space: normal;
   overflow-wrap: anywhere;
+  word-break: normal;
   text-align: center;
   text-overflow: clip;
   margin: 0;
@@ -9668,9 +9673,13 @@ tr > td:nth-child(2) > button:focus-visible{
 }
 /* Le titre est construit avec des lettres animées : autoriser son retour à la ligne. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-texte-anime {
+  display: block;
+  width: 100%;
   max-width: 100%;
   white-space: normal;
   overflow-wrap: anywhere;
+  word-break: normal;
+  text-align: center;
 }
 /* LCDP_public/OBJET/BOX/03-box-champ-formulaire.css */
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire{
@@ -14875,6 +14884,8 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 }
 
 :where(html[data-lcdp-css~="c085"]) .public-home__actions {
+  position: relative;
+  top: -15%;
   width: 100%;
   max-width: 280px;
   margin-right: auto;
@@ -15022,6 +15033,8 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 
 /* Accueil public — insertion du bandeau d'actualités existant (c029). */
 :where(html[data-lcdp-css~="c085"]) .public-home__actualite {
+  position: relative;
+  top: -15%;
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
