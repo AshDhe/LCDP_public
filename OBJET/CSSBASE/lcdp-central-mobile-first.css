@@ -10858,88 +10858,155 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c062"]) .lcdp-box-card-recaporder__actions .lcdp-button{
     max-width: none;
   }}
-/* LCDP_public/OBJET/BOX/02-box-menu-burger.css */
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger{
+/* LCDP_public/OBJET/BOX/02-box-menu-burger.css — composant c038 existant */
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger {
   position: relative;
   z-index: 4100;
+  --lcdp-burger-accent: var(--lcdp-color-membre, #4e6838);
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button{
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button {
   position: relative;
   z-index: 4101;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   padding: 0;
-  border: 2px solid #587242;
-  border-radius: 999px;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px #ffffff;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
   cursor: pointer;
+  transition: background-color 200ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button span{
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button:hover,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] {
+  background: rgba(255,255,255,.2);
+}
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button span {
   width: 18px;
   height: 2px;
-  background: #EBA042;
+  background: currentColor;
   border-radius: 999px;
-  transition: transform 180ms ease, opacity 180ms ease, background 180ms ease;
+  transition: transform 180ms ease, opacity 180ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1),:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(3){
-  background: #4a4a4a;
-}
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1){
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(2){
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(2) {
   opacity: 0;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(3){
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav{
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav {
+  box-sizing: border-box;
   position: absolute;
-  top: calc(100% + var(--lcdp-space-2));
+  top: calc(100% + 16px);
   right: 0;
   z-index: 4102;
-  width: min(320px, calc(100vw - 36px));
-  min-width: 220px;
-  max-height: calc(100vh - 120px);
-  padding: var(--lcdp-space-2);
-  border: 2px solid #587242;
-  border-radius: var(--lcdp-radius-large);
-  background: #ffffff;
-  box-shadow: var(--lcdp-shadow-soft);
+  width: min(256px, calc(100vw - 32px));
+  min-width: 0;
+  max-height: min(75dvh, 600px);
+  padding: 12px;
+  border: 1px solid rgba(241,245,249,.8);
+  border-radius: 16px;
+  background: #fff;
+  color: #334155;
+  box-shadow: 0 20px 25px -5px rgba(15,23,42,.10), 0 8px 10px -6px rgba(15,23,42,.10);
   overflow-y: auto;
+  animation: lcdp-burger-menu-enter 200ms ease-out both;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav[hidden]{
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav[hidden] {
   display: none !important;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__list{
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__list {
   display: flex;
   flex-direction: column;
-  gap: var(--lcdp-space-1);
+  gap: 4px;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link,:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link{
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
   width: 100%;
-  min-height: 44px;
-  padding: var(--lcdp-space-2);
+  min-height: 48px;
+  margin: 0;
+  padding: 12px;
   border: 0;
-  border-radius: var(--lcdp-radius-small);
+  border-radius: 12px;
   background: transparent;
-  color: var(--lcdp-color-text);
+  color: #475569;
   font: inherit;
+  font-size: 12px;
   font-weight: 600;
+  letter-spacing: .025em;
+  line-height: 1.25;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
+  transition: background-color 200ms ease, color 200ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:hover,:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:hover{
-  background: var(--lcdp-color-surface-soft);
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:hover,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:hover,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:focus-visible,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:focus-visible {
+  background: rgba(248,250,252,.8);
+  color: #0f172a;
+}
+/* Accueil : premier lien de la liste existante, accent issu de la couleur d'espace. */
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:first-child {
+  border-left: 4px solid var(--lcdp-burger-accent);
+  background: #f8fafc;
+  color: #0f172a;
+  font-weight: 800;
+}
+/* Connexion : bouton déjà créé par le JS existant ; cartouche non interactif via pseudo-élément. */
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link {
+  justify-content: space-between;
+  gap: 6px;
+  color: #334155;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link::after {
+  content: "Espace membre";
+  display: inline-block;
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #ecfdf5;
+  color: var(--lcdp-burger-accent);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: normal;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:hover::after,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:focus-visible::after {
+  background: var(--lcdp-burger-accent);
+  color: #fff;
+}
+/* Séparateur avant FAQ, dernier lien de la liste historique. */
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:last-child {
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  color: #64748b;
+  font-weight: 500;
+}
+@keyframes lcdp-burger-menu-enter {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav { animation: none; }
 }
 /* LCDP_public/OBJET/BOX/04-box-facture-a4.css */
 :where(html[data-lcdp-css~="c068"]) .lcdp-page-facture-a4{
@@ -14602,7 +14669,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   height: calc(100vh - 1.5rem);
   height: calc(100dvh - 1.5rem);
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
   background: #fff;
   border: 1px solid var(--home-slate-100);
   border-radius: 1.5rem;
@@ -14614,7 +14681,10 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 1;
   padding: 1rem 1.5rem;
+  border-radius: 1.5rem 1.5rem 0 0;
   color: #fff;
   background: #4e6838;
 }
@@ -14773,17 +14843,34 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   gap: 1rem;
   padding: 1rem 0;
   border-top: 1px solid var(--home-slate-100);
+  border-radius: 0 0 1.5rem 1.5rem;
   background: #fff;
   color: var(--home-slate-400);
   font-size: 11px;
   font-weight: 500;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__footer a {
+:where(html[data-lcdp-css~="c085"]) .public-home__footer > :is(a, button[popovertarget="lcdp-footer-verification-info"]) {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   color: inherit;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
   text-decoration: none;
+  cursor: pointer;
   transition: color 150ms ease;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__footer a:hover { color: var(--home-slate-600); }
+:where(html[data-lcdp-css~="c085"]) .public-home__footer > :is(a, button[popovertarget="lcdp-footer-verification-info"]):hover { color: var(--home-slate-600); }
 :where(html[data-lcdp-css~="c085"]) .public-home__footer-separator { color: var(--home-slate-200); }
 
 /* Accueil public : adaptation progressive à la fenêtre (mobile first).
@@ -14801,20 +14888,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 
 /* Accueil public : branchement fonctionnel du footer historique.
    Les règles sont limitées à c085 et ne modifient aucun autre footer. */
-:where(html[data-lcdp-css~="c085"]) .public-home__footer > button {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 150ms ease;
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__footer > button:hover {
-  color: var(--home-slate-600);
-}
 :where(html[data-lcdp-css~="c085"]) .public-home__footer > :is(a, button):focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-lcdp-css="c085 c029">
+<html lang="fr" data-lcdp-css="c085 c029 c038">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,7 @@
   <script src="../config.js"></script>
   <script src="/OBJET/BOX/02-box-footer.js" defer></script>
   <script src="./actualite.js" defer></script>
+  <script src="./box-menu-burger-public.js" defer></script>
 </head>
 <body class="public-home">
   <div class="public-home__app">
@@ -24,10 +25,7 @@
           <span class="public-home__brand-subtitle">Espace public</span>
         </div>
       </div>
-      <button class="public-home__menu-button" type="button" aria-label="Ouvrir le menu">
-        <span></span>
-        <span></span>
-      </button>
+      <div data-lcdp-burger-slot></div>
     </header>
 
     <!-- CONTENU -->
