@@ -44,9 +44,6 @@
                 class="lcdp-box-formulaire"
                 novalidate
               >
-                <a class="lcdp-box-dialogue-bouton__close" href="../ESPACE-PUBLIC/accueil-public.html"
-                   data-site-href="/ESPACE-PUBLIC/accueil-public.html"
-                   aria-label="Fermer et revenir à l’accueil public" title="Fermer">&times;</a>
                 <header class="lcdp-box-formulaire__header">
                   <h1 class="lcdp-box-formulaire__title">
                     Connexion coach
@@ -60,7 +57,6 @@
                 <div class="lcdp-box-formulaire__fields">
 
                   <div class="lcdp-box-champ-formulaire">
-                    
                     <div class="lcdp-box-champ-formulaire__control">
                       <input
                         type="email"
@@ -77,7 +73,6 @@
                   </div>
 
                   <div class="lcdp-box-champ-formulaire">
-                    
                     <div class="lcdp-box-champ-formulaire__control">
                       <input
                         type="password"
@@ -88,50 +83,44 @@
                         autocomplete="current-password"
                         required
                       >
-
-                      <label
-                        class="lcdp-box-champ-formulaire__checkbox-line"
-                        for="afficher-mdp-coach"
-                      >
-                        <input
-                          type="checkbox"
-                          id="afficher-mdp-coach"
-                        >
-                        <span>Afficher le mot de passe</span>
-                      </label>
-                      <p class="lcdp-box-formulaire__note lcdp-box-formulaire__note--after-control">
-                        <a
-                          id="lien-mot-de-passe-oublie"
-                          href="./mdp-perdu-coach.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Mot de passe perdu ?
-                        </a>
-                      </p>
                     </div>
                   </div>
 
                 </div>
 
-                  <div class="lcdp-box-formulaire__actions">
-                    <button
-                      type="submit"
-                      id="bouton-valider-formulaire"
-                      class="lcdp-button-logo"
-                      aria-label="Connexion"
-                      title="Connexion"
+                <div class="lcdp-box-formulaire__options">
+                  <label
+                    class="lcdp-box-champ-formulaire__checkbox-line"
+                    for="afficher-mdp-coach"
+                  >
+                    <input
+                      type="checkbox"
+                      id="afficher-mdp-coach"
                     >
-                    <img
-                      class="lcdp-button-logo__image"
-                      src="../OBJET/IMAG/LOGO/logo-bouton-navigation-192.webp"
-                      data-site-src="/OBJET/IMAG/LOGO/logo-bouton-navigation-192.webp"
-                      alt=""
-                      aria-hidden="true"
-                    >
-                      <span class="lcdp-sr-only">Connexion</span>
-                    </button>
-                  </div>
+                    <span>Afficher le mot de passe</span>
+                  </label>
+                  <a
+                    class="lcdp-box-formulaire__password-recovery"
+                    id="lien-mot-de-passe-oublie"
+                    href="./mdp-perdu-coach.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Mot de passe perdu ?
+                  </a>
+                </div>
+
+                <div class="lcdp-box-formulaire__actions">
+                  <button
+                    type="submit"
+                    id="bouton-valider-formulaire"
+                    class="lcdp-button"
+                    aria-label="Connexion"
+                    title="Connexion"
+                  >
+                    Connexion
+                  </button>
+                </div>
 
               </form>
 
@@ -160,7 +149,6 @@
 
       function construireUrlSite(chemin) {
         if (!chemin) return chemin;
-
         if (
           chemin.startsWith("#") ||
           chemin.startsWith("mailto:") ||
@@ -171,13 +159,11 @@
         ) {
           return chemin;
         }
-
         if (siteBase) {
           return chemin.startsWith("/")
             ? siteBase + chemin
             : siteBase + "/" + chemin.replace(/^\.\//, "");
         }
-
         return chemin.startsWith("/") ? ".." + chemin : chemin;
       }
 
@@ -187,7 +173,6 @@
         racine.querySelectorAll("[data-site-href]").forEach((element) => {
           element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
         });
-
         racine.querySelectorAll("[data-site-src]").forEach((element) => {
           element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
         });
@@ -199,25 +184,18 @@
           credentials: "same-origin",
           cache: "no-cache"
         });
-
-        if (!reponse.ok) {
-          throw new Error("Fragment introuvable : " + chemin);
-        }
-
+        if (!reponse.ok) throw new Error("Fragment introuvable : " + chemin);
         const html = await reponse.text();
         const template = document.createElement("template");
         template.innerHTML = html.trim();
-
         return template.content.cloneNode(true);
       }
 
       function chargerScriptUneFois(chemin) {
         const src = construireUrlSite(chemin);
-
         if (document.querySelector(`script[data-lcdp-script="${chemin}"]`)) {
           return Promise.resolve();
         }
-
         return new Promise((resolve, reject) => {
           const script = document.createElement("script");
           script.src = src;
@@ -231,20 +209,12 @@
 
       async function initialiserBandeauPublic() {
         const slot = document.getElementById("lcdp-bandeau-slot");
-
-        if (!slot) {
-          return;
-        }
-
+        if (!slot) return;
         slot.innerHTML = "";
-
         const bandeau = await chargerFragment("/ESPACE-PUBLIC/box-bandeau-nav-public.html");
         slot.appendChild(bandeau);
-
         appliquerRoutesSite(slot);
-
         await chargerScriptUneFois("/ESPACE-PUBLIC/box-menu-burger-public.js");
-
         if (typeof window.LCDP_initialiserMenuBurgerPublic === "function") {
           await window.LCDP_initialiserMenuBurgerPublic();
         }
@@ -252,32 +222,25 @@
 
       async function initialiserFooterPublic() {
         const slot = document.getElementById("lcdp-footer-slot");
-
-        if (!slot) {
-          return;
-        }
-
-        slot.innerHTML = "";
-
+        if (!slot) return;
         const footer = await chargerFragment("/OBJET/BOX/02-box-footer.html");
         slot.appendChild(footer);
-
         appliquerRoutesSite(slot);
       }
 
       appliquerRoutesSite(document);
-
       initialiserBandeauPublic()
         .then(initialiserFooterPublic)
-        .catch((erreur) => {
-          console.error(erreur);
-        });
+        .catch((erreur) => { console.error(erreur); });
     })();
   </script>
   <script>
-  document.getElementById('formulaire-connexion-coach')?.addEventListener('submit',function(event){
-    if(this.dataset.connexionInitialisee!=='true'){event.preventDefault();window.alert('Le service de connexion n’a pas été chargé. Rechargez cette page.');}
-  });
+    document.getElementById('formulaire-connexion-coach')?.addEventListener('submit',function(event){
+      if(this.dataset.connexionInitialisee!=='true'){
+        event.preventDefault();
+        window.alert('Le service de connexion n’a pas été chargé. Rechargez cette page.');
+      }
+    });
   </script>
   <script src="./connexion-coach.js"></script>
 </body>
