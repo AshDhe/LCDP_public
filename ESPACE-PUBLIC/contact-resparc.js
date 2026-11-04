@@ -75,11 +75,11 @@
   "bouton": {
     "type": "submit",
     "label": "Envoyer ma demande",
-    "style": "lcdp-button-secondary"
+    "style": "lcdp-button-primary"
   },
-  "introHtml": `<div class="lcdp-box-formulaire__note">Cette demande ne crée pas de compte PARC. Notre équipe vous recontacte pour étudier votre demande.</div>
+  "introHtml": `<div class="lcdp-box-formulaire__note" style="text-align: center !important;">Cette demande ne crée pas de compte PARC. Notre équipe vous recontacte pour étudier votre demande.</div>
     <section class="lcdp-boxtext__content" aria-labelledby="contact-parc-compte-title">
-      <h2 id="contact-parc-compte-title" class="lcdp-text-strong-left">Le compte PARC La Clé du Parc</h2>
+      <h2 id="contact-parc-compte-title" class="lcdp-text-strong-left" style="font-weight: 700 !important; text-align: center !important;">Le compte PARC La Clé du Parc</h2>
       <ul>
         <li>Inscrivez votre parc dans notre dynamique territoriale unique.</li>
         <li>Gardez le contrôle et la visibilité de l'accès à votre parc pour nos membres qualifiés La Clé du Parc.</li>
@@ -102,6 +102,30 @@
       zone.hidden = true;
     }
   });
+  // Reprendre le gabarit standard des boutons, sans modifier les autres formulaires.
+  const actions = form.querySelector(".lcdp-box-formulaire__actions");
+  const boutonEnvoyer = actions?.querySelector('button[type="submit"]');
+  if (actions) actions.style.setProperty("align-items", "center", "important");
+  if (boutonEnvoyer) {
+    const dimensions = {
+      "box-sizing": "border-box",
+      "width": "100%",
+      "max-width": "320px",
+      "min-height": "52px",
+      "padding": "12px 20px",
+      "border-width": "2px",
+      "border-style": "solid",
+      "border-radius": "var(--lcdp-radius-button)",
+      "font-size": "17px",
+      "font-weight": "600",
+      "line-height": "1.2",
+      "letter-spacing": "normal",
+      "text-transform": "none"
+    };
+    Object.entries(dimensions).forEach(([propriete, valeur]) => {
+      boutonEnvoyer.style.setProperty(propriete, valeur, "important");
+    });
+  }
   document.dispatchEvent(new CustomEvent("lcdp:contact-formulaire-pret", {detail: {type: "parc"}}));
   const endpoint=window.SITE_CONFIG?.workerContactResparcUrl || "https://lacleduparc.fr/api/contact-resparc";
   await window.LCDP_brancherFormulaireProtege(form,{type:"resparc",endpoint,champs:configuration.champs});
