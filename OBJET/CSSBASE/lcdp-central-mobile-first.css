@@ -15454,7 +15454,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   padding: 0;
 }
 
-/* c085 — état d’attente de l’accueil public (loader Tailwind, sans modifier c029/c038). */
+/* c085 — écran d’attente de l’accueil public ; spinner commun .lcdp-loading-spinner. */
 :where(html[data-lcdp-css~="c085"]) .public-home--loading .public-home__app {
   visibility: hidden;
 }
@@ -15477,30 +15477,62 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   gap: 1.5rem;
   text-align: center;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__loading-spinner {
+/* Composant générique : roue de chargement (accueil + pages d'attente).
+   Les deux cercles SVG et le point ne dépendent pas de Tailwind. */
+:where(html[data-lcdp-css~="c085"]) .lcdp-loading-spinner {
   position: relative;
-  width: 4rem;
-  height: 4rem;
   display: flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+  width: 4rem;
+  height: 4rem;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__loading-spinner svg {
+:where(html[data-lcdp-css~="c085"]) .lcdp-loading-spinner > svg {
   position: absolute;
   inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__loading-track { color: rgb(6 95 70 / 10%); }
-:where(html[data-lcdp-css~="c085"]) .public-home__loading-arc {
-  color: #e59834;
-  animation: lcdp-public-home-wait .8s linear infinite;
+:where(html[data-lcdp-css~="c085"]) .lcdp-loading-spinner__track {
+  color: rgb(6 95 70 / 10%);
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__loading-dot {
+:where(html[data-lcdp-css~="c085"]) .lcdp-loading-spinner__arc {
+  color: #e59834;
+  animation: lcdp-loading-spinner-tourne .8s linear infinite;
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-loading-spinner__dot {
   width: .5rem;
   height: .5rem;
   border-radius: 50%;
   background: #4e6838;
+}
+/* Variante pour la page d'attente : même roue agrandie, sans écran superposé. */
+:where(html[data-lcdp-css~="c085"]) .lcdp-mise-a-jour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 45vh;
+  padding: 32px 0;
+  gap: 28px;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-mise-a-jour .lcdp-loading-spinner {
+  width: clamp(160px, 42vw, 224px);
+  height: clamp(160px, 42vw, 224px);
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-mise-a-jour .lcdp-loading-spinner__dot {
+  width: clamp(20px, 5.25vw, 28px);
+  height: clamp(20px, 5.25vw, 28px);
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-mise-a-jour h1 {
+  margin: 0;
+  font-size: clamp(18px, 4.5vw, 24px);
+  line-height: 1.5;
+  font-weight: 500;
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__loading-copy { display: grid; gap: .25rem; }
 :where(html[data-lcdp-css~="c085"]) .public-home__loading-copy p { margin: 0; }
@@ -15516,9 +15548,9 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   line-height: 1rem;
   color: #94a3b8;
 }
-@keyframes lcdp-public-home-wait { to { transform: rotate(360deg); } }
+@keyframes lcdp-loading-spinner-tourne { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) {
-  :where(html[data-lcdp-css~="c085"]) .public-home__loading-arc { animation: none; }
+  :where(html[data-lcdp-css~="c085"]) .lcdp-loading-spinner__arc { animation: none; }
 }
 
 @media (max-height: 720px) {
@@ -16149,4 +16181,169 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note:is(ul,ol) > li + li {margin-top:4px;}
 @media (max-width:360px) {
   :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--code .lcdp-box-champ-formulaire__code-cases {gap:7px;}
+}
+
+/* c085 — Variantes de rôle réutilisables pour les formulaires d'accès. */
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role-parc {
+  --lcdp-role-accent: var(--lcdp-color-parc, #d64b68);
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role-coach {
+  --lcdp-role-accent: var(--lcdp-color-coach, #8660c8);
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-app-wrapper > #lcdp-bandeau-slot,
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-app-wrapper .lcdp-box-bandeau-nav {
+  background: var(--lcdp-role-accent);
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__title {
+  color: var(--lcdp-role-accent);
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__actions .lcdp-button-logo,
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__actions .lcdp-button-logo:is(:hover,:focus-visible) {
+  background: #fff;
+  border-color: #fff;
+}
+
+/* c032 / c041 — Parcours de préparation : présentation générique d'une étape de sécurité. */
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow {
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow > .lcdp-boxtext__title,
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow > .lcdp-boxtext__content {
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow > .lcdp-boxtext__title small {
+  display: block;
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__content p {
+  line-height: 1.6;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__qr {
+  display: block;
+  width: 260px;
+  max-width: 100%;
+  height: auto;
+  margin: 24px auto;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__identification {
+  width: 100%;
+  max-width: 360px;
+  min-width: 0;
+  margin: 28px auto;
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__identification label,
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__identification legend {
+  line-height: 1.5;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__label {
+  display: block;
+  margin-bottom: 8px;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__fieldset {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__legend {
+  padding: 0;
+  margin-bottom: 8px;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__note {
+  margin-top: 12px;
+  text-align: left;
+  line-height: 1.5;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  cursor: pointer;
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__phone-check {
+  margin: 28px 0;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__phone-check .lcdp-setup-flow__toggle {
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__phone-check input[type="checkbox"] {
+  flex: 0 0 auto;
+  margin: .35em 0 0;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__status:not(:empty) {
+  margin-top: 24px;
+  line-height: 1.6;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-setup-flow .lcdp-box-formulaire__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+}
+:where(html[data-lcdp-css~="c040"]) .lcdp-setup-flow__identification .lcdp-box-champ-formulaire__code-cases {
+  grid-template-columns: repeat(4, minmax(0,54px));
+  gap: 12px;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__qr-panel[hidden],
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__identification[hidden],
+:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__phone-check[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-app-page.optin-termine {
+  background: #fff;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-app-page.optin-termine > .lcdp-site-page {
+  display: none !important;
+}
+
+/* c036 — Variante réutilisable du dialogue natif de confirmation d'une étape. */
+:where(html[data-lcdp-css~="c036"]) dialog.lcdp-setup-dialog:not([open]) {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c036"]) dialog.lcdp-setup-dialog[open] {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: min(calc(100vw - 36px), 460px);
+  max-height: calc(100svh - 40px);
+  overflow-y: auto;
+  background: #fff;
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c036"]) dialog.lcdp-setup-dialog::backdrop {
+  background: #fff;
+}
+:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__title {
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__text {
+  line-height: 1.6;
+}
+:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning {
+  width: 100%;
+}
+:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning .lcdp-box-dialogue-bouton__text {
+  margin-top: 0;
 }

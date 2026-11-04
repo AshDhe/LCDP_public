@@ -18,30 +18,6 @@
   </script>
 
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
-  <style>
-    .lcdp-mise-a-jour {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 45vh;
-      padding: 32px 0;
-      gap: 28px;
-      text-align: center;
-    }
-    .lcdp-mise-a-jour .lcdp-mise-a-jour-picto {
-      display: block;
-      width: clamp(160px, 42vw, 224px);
-      height: auto;
-      max-width: 100%;
-    }
-    .lcdp-mise-a-jour h1 {
-      margin: 0;
-      font-size: clamp(18px, 4.5vw, 24px);
-      line-height: 1.5;
-      font-weight: 500;
-    }
-  </style>
 </head>
 
 <body class="lcdp-page-document-legal lcdp-app-page">
@@ -53,24 +29,11 @@
       <section class="lcdp-page-section" aria-label="Page en cours de mise à jour">
         <div class="lcdp-page-container">
           <div class="lcdp-mise-a-jour">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-labelledby="lcdp-attente-title" class="lcdp-mise-a-jour-picto">
-  <title id="lcdp-attente-title">Page en cours de mise à jour</title>
-  <style>@media (prefers-reduced-motion: reduce) { .rotation { animation: none; } } .rotation { transform-origin: 96px 96px; animation: tourner 3.36s steps(12, end) infinite; } @keyframes tourner { to { transform: rotate(360deg); } }</style>
-  <g class="rotation">
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#f5a000" transform="rotate(0 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#789953" transform="rotate(30 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#86a75f" transform="rotate(60 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#9dbb7e" transform="rotate(90 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#b4cda0" transform="rotate(120 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#c9dcb9" transform="rotate(150 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#d4e3c8" transform="rotate(180 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#c8dbb7" transform="rotate(210 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#b2cc9b" transform="rotate(240 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#98b77c" transform="rotate(270 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#83a35f" transform="rotate(300 96 96)"/>
-    <rect x="86" y="10" width="20" height="38" rx="10" fill="#759750" transform="rotate(330 96 96)"/>
-  </g>
-</svg>
+            <div class="lcdp-loading-spinner" aria-hidden="true">
+        <svg viewBox="0 0 36 36" class="lcdp-loading-spinner__track"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" /></svg>
+        <svg viewBox="0 0 36 36" class="lcdp-loading-spinner__arc"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75" /></svg>
+        <span class="lcdp-loading-spinner__dot"></span>
+      </div>
             <h1 class="lcdp-title-page-center">La page n'est pas rendue publique actuellement.</h1>
           </div>
         </div>
