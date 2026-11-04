@@ -2302,63 +2302,79 @@ tr > td:nth-child(2) > button:focus-visible{
   }}
 /* LCDP_public/OBJET/BOX/02-box-bandeau-nav.css */
 :where(html[data-lcdp-css~="c034"]) #lcdp-bandeau-slot{
-  min-height: 64px;
+  min-height: 80px;
 }
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav{
+  min-height: 80px;
+  background: #4e6838;
+  color: #fff;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 4000;
   width: 100%;
-  min-height: 64px;
-  background: var(--lcdp-color-logo-green);
+  
+  
   border-bottom: none;
   overflow: visible;
 }
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__inner{
+  min-height: 80px;
+  gap: 12px;
+  padding: 0 24px;
   position: relative;
   z-index: 4001;
   width: 100%;
   max-width: var(--lcdp-page-width);
-  min-height: 64px;
+  
   margin-inline: auto;
-  padding: 0 var(--lcdp-page-padding-mobile);
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--lcdp-space-3);
+  
   overflow: visible;
 }
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 1;
+  white-space: normal;
   min-width: 0;
   color: #ffffff;
   font-family: var(--lcdp-font-main);
-  font-size: 20px;
-  line-height: 1.2;
+  
+  
   font-weight: 700;
   text-decoration: none;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
 }
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:visited,:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:hover{
   color: #ffffff;
   text-decoration: none;
 }
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo{
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 12px;
   object-fit: contain;
-  flex: 0 0 44px;
+  
   display: block;
 }
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+  font-size: 16px;
+  line-height: 1.05;
   color: #ffffff;
-  font-size: 20px;
-  line-height: 1.2;
+  
+  
   font-weight: 700;
 }
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__burger-slot{
@@ -2371,66 +2387,23 @@ tr > td:nth-child(2) > button:focus-visible{
   overflow: visible;
 }
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c034"]) #lcdp-bandeau-slot{
-    min-height: 72px;
-  }
+  min-height: 80px;
+}
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav{
-    min-height: 72px;
-  }
+  min-height: 80px;
+}
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__inner{
-    min-height: 72px;
-    padding-inline: var(--lcdp-page-padding-desktop);
-  }
+  min-height: 80px;
+  padding-inline: 24px;
+}
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo{
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-  }}
+  width: 36px;
+  height: 36px;
+  flex-basis: 36px;
+}}
 
-/* c034 | Variante Membre invité : remplace uniquement le rendu de cette page. */
-:where(html[data-lcdp-css~="c034"]) body.lcdp-page-inscription #lcdp-bandeau-slot {
-  display:block;
-  flex:0 0 80px;
-  min-height:80px;
-  width:100%;
-  background:#4e6838;
-}
-:where(html[data-lcdp-css~="c034"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav {
-  position:relative;
-  top:auto;right:auto;bottom:auto;left:auto;
-  min-height:80px;
-  width:100%;
-  border:0;
-  border-radius:23px 23px 0 0;
-  background:#4e6838;
-  z-index:4000;
-}
-:where(html[data-lcdp-css~="c034"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__inner {
-  width:100%;max-width:none;min-height:80px;
-  padding:0 24px;
-  margin:0;
-  gap:12px;
-}
-:where(html[data-lcdp-css~="c034"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__logo-link {
-  display:flex;align-items:center;gap:12px;
-  min-width:0;white-space:normal;
-  color:#fff;font-size:16px;line-height:1;
-  font-weight:700;text-decoration:none;
-}
-:where(html[data-lcdp-css~="c034"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__logo {
-  width:36px;height:36px;flex:0 0 36px;
-  border-radius:12px;object-fit:contain;
-}
-:where(html[data-lcdp-css~="c034"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__space-label {
-  display:flex;flex-direction:column;align-items:flex-start;gap:4px;
-  min-width:0;color:#fff;font-size:16px;line-height:1.05;
-}
-:where(html[data-lcdp-css~="c034"]) body.lcdp-page-inscription .lcdp-bandeau-restreint-title {
-  color:#fff;font-size:16px;font-weight:700;letter-spacing:-.025em;
-}
-:where(html[data-lcdp-css~="c034"]) body.lcdp-page-inscription .lcdp-bandeau-restreint-subtitle {
-  color:#a7f3d0;font-size:11px;font-weight:500;
-  letter-spacing:.025em;text-transform:uppercase;line-height:1.35;
-}
+:where(html[data-lcdp-css~="c034"]) .lcdp-bandeau-restreint-title{color:#fff;font-size:16px;line-height:1.05;font-weight:700;letter-spacing:-.025em;}
+:where(html[data-lcdp-css~="c034"]) .lcdp-bandeau-restreint-subtitle{color:#a7f3d0;font-size:11px;line-height:1.35;font-weight:500;letter-spacing:.025em;text-transform:uppercase;}
 /* LCDP_public/OBJET/BOX/04-box-card-coordonnees-facture.css */
 :where(html[data-lcdp-css~="c049"]) .lcdp-box-card-coordonnees-facture{
   border: 1px solid rgba(31, 44, 36, 0.16);
@@ -9045,129 +9018,108 @@ tr > td:nth-child(2) > button:focus-visible{
 /* LCDP_public/OBJET/BOX/03-box-galerie.css */
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie{
   width: 100%;
+  padding: 8px 0 0;
+  margin: 0;
   padding-top: var(--lcdp-space-5);
   padding-bottom: var(--lcdp-space-5);
 }
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__header{
   width: 100%;
-  max-width: var(--lcdp-text-width);
+  max-width: 100%;
+  margin: 0 0 24px;
+  padding: 0;
   margin-inline: auto;
   margin-bottom: var(--lcdp-space-4);
   text-align: center;
 }
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__title{
   margin: 0;
-  font-size: clamp(1.5rem, 7vw, 2.1rem);
-  line-height: 1.12;
-  font-weight: 700;
-  color: var(--lcdp-color-text);
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 800;
+  letter-spacing: -.025em;
+  color: #0f172a;
   text-align: center;
 }
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__list{
   width: 100%;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 16px;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--lcdp-space-4);
 }
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__card{
   width: 100%;
-  padding: var(--lcdp-space-3);
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
-  background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-shadow-soft);
+  min-width: 0;
+  padding: 12px;
+  gap: 8px;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 7%);
+  justify-content: flex-start;
   display: flex;
   flex-direction: column;
-  gap: var(--lcdp-space-2);
 }
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__card-title{
+  order: 1;
   margin: 0;
-  font-size: clamp(1.15rem, 3.8vw, 1.35rem);
-  line-height: 1.16;
-  font-weight: 700;
-  color: var(--lcdp-color-primary);
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__image{
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: var(--lcdp-radius-media);
-  object-fit: cover;
-  object-position: center center;
-  background: var(--lcdp-color-surface-soft);
-}
-:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__legend{
-  margin: 0;
-  font-size: 0.78rem;
+  font-size: 12px;
   line-height: 1.3;
-  color: var(--lcdp-color-text-muted);
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__text{
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.45;
-  color: var(--lcdp-color-text-muted);
+  font-weight: 700;
+  color: #0f172a;
   text-align: left;
 }
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie{
-    padding-top: var(--lcdp-space-6);
-    padding-bottom: var(--lcdp-space-6);
-  }
-:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__header{
-    margin-bottom: var(--lcdp-space-5);
-  }
-:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__list{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--lcdp-space-5);
-  }
-:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__card{
-    padding: var(--lcdp-space-4);
-  }
+:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__image{
+  order: 0;
+  display: block;
+  height: 112px;
+  width: 100%;
+  aspect-ratio: auto;
+  margin: 0;
+  border: 0;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center;
+  background: #f1f5f9;
+}
+:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__legend{
+  order: 3;
+  margin: 0;
+  font-size: 9px;
+  line-height: 1.3;
+  text-align: left;
+  color: #94a3b8;
+}
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__text{
-    font-size: var(--lcdp-font-size-paragraph-desktop);
-  }}
+  order: 2;
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 400;
+  text-align: left;
+  color: #94a3b8;
+  overflow-wrap: anywhere;
+}
+@media  (min-width: 768px) {:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie{
+  padding: 8px 0 0;
+  padding-top: var(--lcdp-space-6);
+    padding-bottom: var(--lcdp-space-6);
+}
+:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__header{
+  margin: 0 0 24px;
+  margin-bottom: var(--lcdp-space-5);
+}
+:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__list{
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 16px;
+}
+:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__card{
+  padding: 12px;
+}
+:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__text{
+  font-size: 10px;
+}}
 
-/* c042 | Variante Membre invité : remplace uniquement le rendu de cette page. */
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription .lcdp-box-galerie {
-  width:100%;padding:8px 0 0;margin:0;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription .lcdp-box-galerie__header {
-  margin:0 0 24px;padding:0;width:100%;max-width:100%;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription .lcdp-box-galerie__title {
-  margin:0;color:#0f172a;
-  font-size:18px;line-height:1.4;font-weight:800;
-  letter-spacing:-.025em;text-align:center;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription .lcdp-box-galerie__list {
-  width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription .lcdp-box-galerie__card {
-  display:flex;flex-direction:column;justify-content:flex-start;
-  min-width:0;width:100%;gap:8px;padding:12px;
-  border:1px solid #f1f5f9;border-radius:16px;
-  background:#fff;box-shadow:0 1px 3px rgb(15 23 42 / 7%);
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription .lcdp-box-galerie__image {
-  order:0;display:block;width:100%;height:112px;aspect-ratio:auto;
-  margin:0;border:0;border-radius:12px;
-  object-fit:cover;object-position:center;
-  background:#f1f5f9;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription .lcdp-box-galerie__card-title {
-  order:1;margin:0;color:#0f172a;
-  font-size:12px;line-height:1.3;font-weight:700;text-align:left;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription .lcdp-box-galerie__text {
-  order:2;margin:0;color:#94a3b8;
-  font-size:10px;line-height:1.5;font-weight:400;text-align:left;
-  overflow-wrap:anywhere;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription .lcdp-box-galerie__legend {
-  order:3;margin:0;color:#94a3b8;
-  font-size:9px;line-height:1.3;text-align:left;
-}
 /* LCDP_public/OBJET/BOX/04-box-card-mentions-facture.css */
 :where(html[data-lcdp-css~="c056"]) .lcdp-box-card-mentions-facture{
   border: 1px solid rgba(31, 44, 36, 0.15);
@@ -10304,31 +10256,35 @@ tr > td:nth-child(2) > button:focus-visible{
 /* LCDP_public/OBJET/BOX/01-box-text.css */
 :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext{
   width: 100%;
-  padding: var(--lcdp-space-4);
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
-  background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-shadow-soft);
-  text-align: left;
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 8%);
   display: flex;
   flex-direction: column;
-  gap: var(--lcdp-space-2);
+  gap: 16px;
+  text-align: left;
 }
 :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__title{
   margin: 0;
-  font-size: clamp(1.25rem, 5vw, 1.75rem);
-  line-height: 1.18;
+  font-size: 14px;
+  line-height: 1.4;
   font-weight: 700;
-  color: var(--lcdp-color-text);
+  color: #0f172a;
   text-align: left;
 }
 :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content{
-  color: var(--lcdp-color-text);
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.625;
+  gap: 16px;
+  min-width: 0;
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  line-height: 1.55;
 }
 :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content > p,:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content > ul,:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content > ol{
   margin: 0;
@@ -10355,47 +10311,12 @@ tr > td:nth-child(2) > button:focus-visible{
   text-align: center;
 }
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext{
-    padding: var(--lcdp-space-5);
-  }
+  padding: 20px;
+}
 :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content{
-    font-size: var(--lcdp-font-size-paragraph-desktop);
-  }}
+  font-size: 12px;
+}}
 
-/* c032 | Variante Membre invité : remplace uniquement le rendu de cette page. */
-:where(html[data-lcdp-css~="c032"]) body.lcdp-page-inscription .lcdp-boxtext {
-  display:flex;flex-direction:column;gap:16px;
-  width:100%;min-width:0;
-  margin:0;padding:20px;
-  border:1px solid #f1f5f9;
-  border-radius:16px;background:#fff;
-  box-shadow:0 1px 3px rgb(15 23 42 / 8%);
-}
-:where(html[data-lcdp-css~="c032"]) body.lcdp-page-inscription .lcdp-boxtext__title,
-:where(html[data-lcdp-css~="c032"]) body.lcdp-page-inscription .lcdp-boxtext__title--center {
-  margin:0;width:100%;color:#0f172a;
-  font-size:14px;font-weight:700;line-height:1.4;
-  text-align:center;
-}
-:where(html[data-lcdp-css~="c032"]) body.lcdp-page-inscription .lcdp-boxtext__content {
-  display:flex;flex-direction:column;gap:16px;
-  min-width:0;margin:0;padding:0;
-  color:#64748b;font-size:12px;line-height:1.625;
-  text-align:center;
-}
-:where(html[data-lcdp-css~="c032"]) body.lcdp-page-inscription .lcdp-boxtext__content > p,
-:where(html[data-lcdp-css~="c032"]) body.lcdp-page-inscription .lcdp-boxtext__content > div > p {
-  max-width:100%;margin:0;color:#64748b;
-  font-size:12px;line-height:1.625;
-  overflow-wrap:anywhere;
-}
-:where(html[data-lcdp-css~="c032"]) body.lcdp-page-inscription .lcdp-boxtext__content a:not(.lcdp-button) {
-  color:#334155;text-decoration:underline;text-underline-offset:2px;
-}
-:where(html[data-lcdp-css~="c032"]) body.lcdp-page-inscription .lcdp-note-encadree {
-  width:100%;margin:0;padding:0;border:0;border-radius:0;
-  background:transparent;box-shadow:none;
-  color:#94a3b8;font-size:11px;line-height:1.55;text-align:center;
-}
 /* LCDP_public/OBJET/BOX/04-box-facture.css */
 :where(html[data-lcdp-css~="c069"]) .lcdp-box-facture{
   position: fixed;
@@ -11221,7 +11142,7 @@ tr > td:nth-child(2) > button:focus-visible{
   gap: 4px;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link,
-:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link {
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -11244,9 +11165,9 @@ tr > td:nth-child(2) > button:focus-visible{
   transition: background-color 200ms ease, color 200ms ease;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:hover,
-:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link:hover,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:hover,
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:focus-visible,
-:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link:focus-visible {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:focus-visible {
   background: rgba(248,250,252,.8);
   color: #0f172a;
 }
@@ -11301,13 +11222,6 @@ tr > td:nth-child(2) > button:focus-visible{
   :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav { animation: none; }
 }
 
-/* c038 | Variante Membre invité : remplace uniquement le rendu de cette page. */
-:where(html[data-lcdp-css~="c038"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__burger-slot {color:#fff;}
-:where(html[data-lcdp-css~="c038"]) body.lcdp-page-inscription .lcdp-box-menu-burger__link,
-:where(html[data-lcdp-css~="c038"]) body.lcdp-page-inscription .lcdp-box-menu-burger__button-link {
-  font-family:inherit;font-size:14px;line-height:1.3;
-  font-weight:600;letter-spacing:.025em;
-}
 /* LCDP_public/OBJET/BOX/04-box-facture-a4.css */
 :where(html[data-lcdp-css~="c068"]) .lcdp-page-facture-a4{
   margin: 0;
@@ -12375,39 +12289,45 @@ tr > td:nth-child(2) > button:focus-visible{
 }
 /* LCDP_public/OBJET/BOX/02-box-footer.css */
 :where(html[data-lcdp-css~="c037"]) .lcdp-box-footer{
+  height: 50px;
+  background: #fff;
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 2500;
   width: 100%;
-  height: 56px;
+  
   border-top: 1px solid var(--lcdp-color-border);
-  background: var(--lcdp-color-surface);
 }
 :where(html[data-lcdp-css~="c037"]) #lcdp-footer-slot{
-  height: 56px;
+  height: 50px;
   flex: 0 0 auto;
 }
 :where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner{
+  height: 50px;
+  padding: 0 10px;
   width: 100%;
   max-width: var(--lcdp-page-width);
-  height: 56px;
+  
   margin-inline: auto;
-  padding: 0 var(--lcdp-page-padding-mobile);
+  
   display: flex;
   align-items: center;
   justify-content: center;
 }
 :where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner a,:where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner button{
+  color: #94a3b8;
+  font: 500 11px/1.2 Arial,system-ui,sans-serif;
+  text-decoration: none;
   border: 0;
   background: transparent;
-  color: var(--lcdp-color-text-muted);
-  font: inherit;
+  
+  
   font-size: 0.95rem;
   line-height: 1.3;
   font-weight: 500;
-  text-decoration: none;
+  
   cursor: pointer;
 }
 :where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner a:hover,:where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner button:hover,:where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner a:focus-visible,:where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner button:focus-visible{
@@ -12499,7 +12419,9 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner{ gap: 0 .5rem; flex-wrap: nowrap; box-sizing: border-box; }
 :where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner a,:where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner button{ min-height: 44px; padding: 6px 0; }
 @media  (max-width: 380px) {:where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner{ column-gap: .35rem; }
-:where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner a,:where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner button{ font-size: 13px; }}
+:where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner a,:where(html[data-lcdp-css~="c037"]) .lcdp-box-footer__inner button{
+  font-size: 11px;
+}}
 :where(html[data-lcdp-css~="c037"]) .lcdp-contact-info{
   position: fixed;
   inset: 0;
@@ -12599,30 +12521,6 @@ tr > td:nth-child(2) > button:focus-visible{
     width: min(380px, calc(100% - 36px));
   }}
 
-/* c037 | Variante Membre invité : remplace uniquement le rendu de cette page. */
-:where(html[data-lcdp-css~="c037"]) body.lcdp-page-inscription #lcdp-footer-slot {
-  position:relative;flex:0 0 50px;
-  width:100%;height:50px;
-  border-top:1px solid #f1f5f9;
-  background:#fff;
-}
-:where(html[data-lcdp-css~="c037"]) body.lcdp-page-inscription .lcdp-box-footer {
-  position:relative;left:auto;right:auto;bottom:auto;
-  width:100%;height:50px;border:0;background:#fff;
-}
-:where(html[data-lcdp-css~="c037"]) body.lcdp-page-inscription .lcdp-box-footer__inner {
-  display:flex;align-items:center;justify-content:center;
-  width:100%;max-width:none;height:50px;
-  padding:0 10px;
-}
-:where(html[data-lcdp-css~="c037"]) body.lcdp-page-inscription .lcdp-box-footer__inner a,
-:where(html[data-lcdp-css~="c037"]) body.lcdp-page-inscription .lcdp-box-footer__inner button {
-  padding:0;margin:0;border:0;background:transparent;
-  color:#94a3b8;font:500 11px/1.2 Arial,system-ui,sans-serif;
-  text-decoration:none;cursor:pointer;
-}
-:where(html[data-lcdp-css~="c037"]) body.lcdp-page-inscription .lcdp-box-footer__inner a:hover,
-:where(html[data-lcdp-css~="c037"]) body.lcdp-page-inscription .lcdp-box-footer__inner button:hover {color:#475569;}
 /* LCDP_public/OBJET/BOX/04-box-card-facture.css */
 :where(html[data-lcdp-css~="c050"]) .lcdp-box-card-facture{
   display: grid;
@@ -13414,18 +13312,8 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
   gap: 2px;
   white-space: normal;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-bandeau-restreint-title{
-  color: #ffffff;
-  font-size: 20px;
-  line-height: 1.08;
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-bandeau-restreint-subtitle{
-  color: #ffffff;
-  font-size: 0.86rem;
-  line-height: 1.08;
-  font-weight: 400;
-}
+
+
 :where(html[data-lcdp-css~="c085"]) .lcdp-main-presentation{
   padding-top: 0;
   padding-bottom: 72px;
@@ -15398,6 +15286,35 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 
 
 
+/* Gabarit inscription : seulement le positionnement du header/footer dans la coque.
+   Les styles graphiques des objets sont dans c034/c037, communs aux pages. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription #lcdp-bandeau-slot {
+  display:block;flex:0 0 80px;min-height:80px;width:100%;background:#4e6838;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav {
+  position:relative;inset:auto;width:100%;border:0;border-radius:23px 23px 0 0;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav__inner {
+  width:100%;max-width:none;margin:0;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription #lcdp-footer-slot {
+  position:relative;flex:0 0 50px;width:100%;height:50px;
+  border-top:1px solid #f1f5f9;background:#fff;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-footer {
+  position:relative;inset:auto;width:100%;border:0;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-footer__inner {
+  width:100%;max-width:none;
+}
+/* Page d'inscription : ce contenu éditorial est centré ; c032 reste générique. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-texte-editorial .lcdp-boxtext__content {
+  text-align:center;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-texte-editorial .lcdp-note-encadree {
+  border:0;padding:0;margin:0;background:transparent;box-shadow:none;
+  font-size:11px;color:#94a3b8;line-height:1.55;text-align:center;
+}
 /* c085 | Membre invité : gabarit et ajustements éditoriaux. */
 /* c085 — variante Membre invité du gabarit accueil public.
    Portée limitée à body.lcdp-page-inscription. */
