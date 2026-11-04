@@ -210,6 +210,11 @@
   async function ouvrirDialogueMonComptePublic() {
     chargerCssUneFois("/OBJET/BOX/02-box-dialogue-bouton.css");
 
+    // Active le composant de dialogue c036 dans le CSS central s'il ne l'est pas déjà.
+    const modules = new Set((document.documentElement.dataset.lcdpCss || "").split(/\s+/).filter(Boolean));
+    modules.add("c036");
+    document.documentElement.dataset.lcdpCss = Array.from(modules).join(" ");
+
     const slot = assurerLightboxSlot();
     slot.innerHTML = "";
 
@@ -226,6 +231,8 @@
       throw new Error("Structure de dialogue Mon compte incomplète.");
     }
 
+    dialogue.dataset.lcdpConnexion = "true";
+
     titre.textContent = "Connexion";
     texte.textContent = "Choisissez votre compte";
 
@@ -235,7 +242,22 @@
       const bouton = document.createElement("button");
       bouton.type = "button";
       bouton.className = "lcdp-button lcdp-button-compte lcdp-button-compte--" + compte;
-      bouton.textContent = configuration.label;
+
+      const presentation = {
+        membre: { icone: "👤", description: "Accès particulier" },
+        parc: { icone: "🌳", description: "Espace propriétaire / gestion" },
+        coach: { icone: "👟", description: "Espace professionnel" }
+      }[compte];
+      const icone = document.createElement("span");
+      icone.textContent = presentation.icone;
+      icone.setAttribute("aria-hidden", "true");
+      const contenu = document.createElement("span");
+      const libelle = document.createElement("strong");
+      libelle.textContent = configuration.label;
+      const description = document.createElement("small");
+      description.textContent = presentation.description;
+      contenu.append(libelle, description);
+      bouton.append(icone, contenu);
 
       bouton.addEventListener("click", () => {
         redirigerCompte(compte);

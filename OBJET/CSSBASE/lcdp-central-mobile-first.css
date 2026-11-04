@@ -4340,6 +4340,54 @@ tr > td:nth-child(2) > button:focus-visible{
     width: 200px;
     max-width: 200px;
   }}
+
+/* c036 : variante Tailwind du dialogue Connexion sur l'accueil public (même composant). */
+:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion]{
+  box-sizing: border-box; padding: 16px;
+  background: rgba(15,23,42,.4);
+  backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(1px);
+}
+:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__card{
+  box-sizing: border-box;
+  width: min(320px, 100%); max-width: 320px; max-height: calc(100dvh - 32px);
+  margin: auto; padding: 24px; overflow-y: auto;
+  background: #fff; border: 1px solid #f1f5f9; border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(15,23,42,.3);
+  display: flex; flex-direction: column; align-items: stretch; gap: 0;
+  animation: lcdp-dialogue-connexion-entree .2s ease-out both;
+}
+:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__title{
+  box-sizing: border-box; width: 100%; max-width: none;
+  margin: 0; padding: 0 24px;
+  color: #0f172a; font-size: 18px; font-weight: 900; line-height: 28px;
+  letter-spacing: -.025em; text-align: center;
+}
+:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__text{
+  box-sizing: border-box; width: 100%; max-width: none;
+  margin: 4px 0 20px; padding: 0;
+  font-size: 11px; font-weight: 400; line-height: 16px;
+  color: #94a3b8; text-align: center;
+}
+:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close{
+  top: 20px; right: 20px; width: 24px; height: 24px;
+  border-radius: 999px; background: #f8fafc; color: #94a3b8;
+  font-size: 12px; font-weight: 700; line-height: 1;
+  transition: background-color .2s ease, color .2s ease;
+}
+:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close:hover{
+  background: #f1f5f9; color: #475569;
+}
+:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__actions{
+  width: 100%; display: grid; grid-template-columns: minmax(0,1fr);
+  gap: 12px; justify-items: stretch;
+}
+@keyframes lcdp-dialogue-connexion-entree{
+  from { opacity: 0; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce){
+  :where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__card{ animation: none; }
+}
 /* LCDP_public/OBJET/BOX/04-box-calendrier-mois-abonnement.css */
 :where(html[data-lcdp-css~="c045"]) .lcdp-box-calendrier-mois--abonnement .lcdp-box-calendrier-mois__header{
   padding-bottom: var(--lcdp-space-2);
@@ -13394,19 +13442,50 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
   --lcdp-color-coach: #8660c8;
   --lcdp-color-coach-soft: #f7f3fc;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-button-compte--membre{ --lcdp-compte-color: var(--lcdp-color-membre); }
-:where(html[data-lcdp-css~="c085"]) .lcdp-button-compte--parc{ --lcdp-compte-color: var(--lcdp-color-parc); }
-:where(html[data-lcdp-css~="c085"]) .lcdp-button-compte--coach{ --lcdp-compte-color: var(--lcdp-color-coach); }
-:where(html[data-lcdp-css~="c085"]) .lcdp-button.lcdp-button-compte{
-  background: var(--lcdp-compte-color);
-  border-color: var(--lcdp-compte-color);
-  color: #fff;
+/* c085 / c036 : choix de comptes du dialogue Connexion public, d'après Tailwind. */
+:where(html[data-lcdp-css~="c085"]) .lcdp-button-compte--membre{ --lcdp-compte-color: #4E6838; --lcdp-compte-hover: rgba(236,253,245,.3); --lcdp-compte-border-hover: rgba(167,243,208,.6); --lcdp-compte-icon-hover: #ecfdf5; }
+:where(html[data-lcdp-css~="c085"]) .lcdp-button-compte--parc{ --lcdp-compte-color: #E59834; --lcdp-compte-hover: rgba(255,251,235,.3); --lcdp-compte-border-hover: rgba(253,230,138,.6); --lcdp-compte-icon-hover: #fffbeb; }
+:where(html[data-lcdp-css~="c085"]) .lcdp-button-compte--coach{ --lcdp-compte-color: #346CB2; --lcdp-compte-hover: rgba(239,246,255,.3); --lcdp-compte-border-hover: rgba(191,219,254,.6); --lcdp-compte-icon-hover: #eff6ff; }
+:where(html[data-lcdp-css~="c085"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-button.lcdp-button-compte{
+  box-sizing: border-box;
+  width: 100%; max-width: none; min-width: 0; min-height: 0;
+  margin: 0; padding: 14px 12px;
+  display: flex; align-items: center; justify-content: flex-start; gap: 12px;
+  text-align: left;
+  background: #f8fafc; color: #1e293b;
+  border: 1px solid #f1f5f9; border-left: 4px solid var(--lcdp-compte-color);
+  border-radius: 12px;
+  box-shadow: none;
+  font: inherit; cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-button.lcdp-button-compte:hover,:where(html[data-lcdp-css~="c085"]) .lcdp-button.lcdp-button-compte:focus-visible{
-  background: var(--lcdp-compte-color);
-  border-color: var(--lcdp-compte-color);
-  color: #fff;
-  box-shadow: 0 0 0 3px var(--lcdp-color-focus);
+:where(html[data-lcdp-css~="c085"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-button.lcdp-button-compte:hover,
+:where(html[data-lcdp-css~="c085"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-button.lcdp-button-compte:focus-visible{
+  background: var(--lcdp-compte-hover);
+  border-color: var(--lcdp-compte-border-hover);
+  border-left-color: var(--lcdp-compte-color);
+  color: #1e293b;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c085"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-button-compte > span:first-child{
+  box-sizing: border-box; width: 32px; height: 32px; flex: 0 0 32px;
+  border-radius: 8px; background: white; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 1px 3px rgba(15,23,42,.12);
+}
+:where(html[data-lcdp-css~="c085"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-button-compte:hover > span:first-child{
+  background: var(--lcdp-compte-icon-hover);
+}
+:where(html[data-lcdp-css~="c085"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-button-compte > span:last-child{
+  display: flex; flex-direction: column; gap: 4px; min-width: 0;
+}
+:where(html[data-lcdp-css~="c085"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-button-compte strong{
+  display: block; font-size: 12px; line-height: 1.25; font-weight: 700;
+  color: #1e293b;
+}
+:where(html[data-lcdp-css~="c085"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-button-compte small{
+  display: block; font-size: 10px; line-height: 1.4; font-weight: 400;
+  color: #94a3b8;
 }
 :where(html[data-lcdp-css~="c085"]) :is(.lcdp-page-accueil-public, .lcdp-page-accueil-membre)
   :is(button, a, [role="button"]){
