@@ -10872,7 +10872,7 @@ tr > td:nth-child(2) > button:focus-visible{
   padding: 0;
   border: 0;
   border-radius: 12px;
-  background: transparent;
+  background: rgba(255,255,255,.2);
   color: inherit;
   display: flex;
   flex-direction: column;
@@ -10884,7 +10884,7 @@ tr > td:nth-child(2) > button:focus-visible{
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button:hover,
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] {
-  background: rgba(255,255,255,.2);
+  background: rgba(255,255,255,.3);
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button span {
   width: 18px;
