@@ -40,11 +40,48 @@
     const doc = new DOMParser().parseFromString(source, "text/html");
     const contenu = doc.querySelector("main");
     if (!contenu) throw new Error("Le contenu du Club est indisponible.");
-    const css = [...doc.querySelectorAll('link[rel="stylesheet"]')].map(el => {
+    // Le Club est injecté dans la page d'accueil : le CSS central de cette
+    // dernière ne peut appliquer ses règles que si leurs groupes sont activés.
+    const groupesCssObjets = {
+      "cssbase.css": "c085",
+      "02-box-bandeau-nav.css": "c034",
+      "02-box-menu-burger.css": "c038",
+      "01-box-text.css": "c032",
+      "01-box-carrousel.css": "c031",
+      "02-box-dialogue-bouton.css": "c036",
+      "02-box-footer.css": "c037",
+      "documents-legaux.css": "c083",
+      "02-box-alerte.css": "c033",
+      "03-box-formulaire.css": "c041",
+      "03-box-champ-formulaire.css": "c040",
+      "04-box-liste-card.css": "c073",
+      "05-cartouche-citation.css": "c079"
+    };
+    const liensCss = [...doc.querySelectorAll('link[rel="stylesheet"]')];
+    const cssCentralCharge = [...document.querySelectorAll('link[rel="stylesheet"]')]
+      .some(el => /\/OBJET\/CSSBASE\/lcdp-central-mobile-first\.css(?:[?#]|$)/.test(el.href));
+    const groupes = new Set((document.documentElement.getAttribute("data-lcdp-css") || "").split(/\s+/).filter(Boolean));
+    const groupesClub = (doc.documentElement.getAttribute("data-lcdp-css") || "").split(/\s+/).filter(Boolean);
+    const cssRestants = [];
+
+    groupesClub.forEach(groupe => groupes.add(groupe));
+    liensCss.forEach(el => {
       const path = el.getAttribute("data-site-href") || el.getAttribute("href");
-      return path.startsWith("/OBJET/") ? urlObjet(path.slice(6)) : new URL(path, urlSite("/ESPACE-PUBLIC/le-club.html")).href;
+      if (!path) return;
+      const nomFichier = path.split(/[?#]/, 1)[0].split("/").pop();
+      if (cssCentralCharge && nomFichier === "lcdp-central-mobile-first.css") return;
+      if (cssCentralCharge && groupesCssObjets[nomFichier]) {
+        groupes.add(groupesCssObjets[nomFichier]);
+        return;
+      }
+      cssRestants.push(path.startsWith("/OBJET/")
+        ? urlObjet(path.slice(6))
+        : new URL(path, urlSite("/ESPACE-PUBLIC/le-club.html")).href);
     });
-    await Promise.all(css.map(url => chargerRessource("link", url)));
+    if (cssCentralCharge) {
+      document.documentElement.setAttribute("data-lcdp-css", [...groupes].join(" "));
+    }
+    await Promise.all(cssRestants.map(url => chargerRessource("link", url)));
     await chargerRessource("script", urlObjet("/BOX/01-box-carrousel.js"));
     contenu.querySelectorAll("script").forEach(el => el.remove());
     contenu.querySelectorAll("[data-site-href], [data-site-src], a[href], img[src]").forEach(el => {
