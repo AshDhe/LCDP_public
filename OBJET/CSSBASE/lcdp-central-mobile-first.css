@@ -11078,14 +11078,13 @@ tr > td:nth-child(2) > button:focus-visible{
   z-index: 4102;
   width: min(256px, calc(100vw - 32px));
   min-width: 0;
-  max-height: min(75dvh, 600px);
   padding: 12px;
   border: 1px solid rgba(241,245,249,.8);
   border-radius: 16px;
   background: #fff;
   color: #334155;
   box-shadow: 0 20px 25px -5px rgba(15,23,42,.10), 0 8px 10px -6px rgba(15,23,42,.10);
-  overflow-y: auto;
+  overflow: visible;
   animation: lcdp-burger-menu-enter 200ms ease-out both;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav[hidden] {
@@ -11097,7 +11096,7 @@ tr > td:nth-child(2) > button:focus-visible{
   gap: 4px;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link {
+:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link {
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -11109,8 +11108,8 @@ tr > td:nth-child(2) > button:focus-visible{
   border-radius: 12px;
   background: transparent;
   color: #475569;
-  font: inherit;
-  font-size: 12px;
+  font-family: inherit;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: .025em;
   line-height: 1.25;
@@ -11120,9 +11119,9 @@ tr > td:nth-child(2) > button:focus-visible{
   transition: background-color 200ms ease, color 200ms ease;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:hover,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:hover,
+:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link:hover,
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:focus-visible,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:focus-visible {
+:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link:focus-visible {
   background: rgba(248,250,252,.8);
   color: #0f172a;
 }
@@ -11134,13 +11133,13 @@ tr > td:nth-child(2) > button:focus-visible{
   font-weight: 800;
 }
 /* Connexion : bouton déjà créé par le JS existant ; cartouche non interactif via pseudo-élément. */
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link {
+:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link {
   justify-content: space-between;
   gap: 6px;
   color: #334155;
   font-weight: 700;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link::after {
+:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link::after {
   content: "Espace membre";
   display: inline-block;
   flex: 0 0 auto;
@@ -11154,8 +11153,8 @@ tr > td:nth-child(2) > button:focus-visible{
   letter-spacing: normal;
   transition: background-color 200ms ease, color 200ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:hover::after,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:focus-visible::after {
+:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link:hover::after,
+:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link:focus-visible::after {
   background: var(--lcdp-burger-accent);
   color: #fff;
 }
@@ -14841,7 +14840,9 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   --home-slate-900: #0f172a;
   margin: 0;
   min-height: 100vh;
-  min-height: 100dvh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
   padding: .75rem;
   box-sizing: border-box;
   display: flex;
@@ -14937,13 +14938,14 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 :where(html[data-lcdp-css~="c085"]) .public-home__main {
   display: flex;
   flex: 1 1 0%;
+  min-width: 0;
   min-height: 0;
   flex-direction: column;
   justify-content: safe center;
-  gap: clamp(.75rem, 2.5dvh, 2rem);
-  overflow: visible;
+  gap: clamp(.5rem, 1.5dvh, 1rem);
+  overflow: clip;
   padding: clamp(.75rem, 2dvh, 1.5rem) 1.5rem;
-  padding-bottom: clamp(2.5rem, 12dvh, 6rem);
+  padding-bottom: clamp(.75rem, 3dvh, 1.5rem);
   background: rgb(248 250 252 / 50%);
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__intro { text-align: center; }
