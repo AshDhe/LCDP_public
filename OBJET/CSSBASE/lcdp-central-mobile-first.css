@@ -9576,44 +9576,104 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne{
     gap: 10px;
   }}
-/* c029 — rendu Tailwind de l’actualité sur l’accueil public c085.
-   Les données, liens et animations restent produits par actualite.js. */
+/* c029 — accueil public c085 : variante du bandeau selon le Tailwind validé.
+   Même composant dynamique, aucun changement de son animation. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau {
   margin-top: 0;
+  width: 100%;
   text-align: center;
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau nav.lcdp-boxtext__text--center {
+  display: flex;
+  width: 100%;
   height: auto;
   min-height: 6.5rem;
+  justify-content: center;
+  align-items: center;
   overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-titre {
+  display: inline-flex;
   max-height: none;
+  max-width: 100%;
+  justify-content: center;
   overflow: visible;
+  color: inherit;
   text-decoration: none;
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: .75rem;
+  width: 100%;
+  max-width: 100%;
 }
-:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne .lcdp-actualite-groupe {
+/* Pilule En savoir plus : Tailwind px-4 py-2 rounded-full, 12px/600. */
+:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  min-width: 0;
   min-height: 2.5rem;
   padding: .5rem 1rem;
   border: 1px solid var(--home-slate-200);
   border-radius: 9999px;
   background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
   color: var(--home-slate-500);
+  font-family: inherit;
   font-size: .75rem;
   font-weight: 600;
+  line-height: 1.5;
   letter-spacing: normal;
   text-transform: none;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+  text-decoration: none;
+  transition: color 150ms ease, border-color 150ms ease;
 }
+:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-titre:hover .lcdp-actu-bandeau-ligne > span:first-child {
+  border-color: var(--home-slate-300);
+  color: var(--home-slate-800);
+}
+/* Le cartouche de groupe est déjà produit par le script ; supprimer son
+   ancien cadre interne pour ne conserver qu'une seule pilule. */
+:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne .lcdp-actualite-groupe {
+  display: inline-flex;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+/* Titre dynamique : Tailwind text-2xl font-black tracking-tight. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   color: var(--home-slate-900);
+  font-family: inherit;
   font-size: 1.5rem;
   font-weight: 900;
   line-height: 2rem;
   letter-spacing: -.025em;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-placeholder {
   height: 6.5rem;
