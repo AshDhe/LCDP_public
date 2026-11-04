@@ -14842,7 +14842,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   min-height: 100vh;
   min-height: 100dvh;
   height: auto;
-  overflow-x: clip;
+  overflow-x: hidden;
   overflow-y: visible;
   padding: .75rem;
   box-sizing: border-box;
@@ -14869,7 +14869,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   max-width: 28rem;
   min-height: calc(100vh - 1.5rem);
   min-height: calc(100dvh - 1.5rem);
-  height: auto;
+  height: calc(100dvh - 1.5rem);
   overflow: visible;
   background: #fff;
   border: 1px solid var(--home-slate-100);
@@ -14938,15 +14938,14 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 
 :where(html[data-lcdp-css~="c085"]) .public-home__main {
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
   min-width: 0;
-  min-height: 0;
+  min-height: min-content;
   flex-direction: column;
-  justify-content: safe center;
-  gap: clamp(.5rem, 1.5dvh, 1rem);
+  justify-content: center;
+  gap: clamp(.75rem, 2dvh, 1rem);
   overflow: visible;
   padding: clamp(.75rem, 2dvh, 1.5rem) 1.5rem;
-  padding-bottom: clamp(.75rem, 3dvh, 1.5rem);
   background: rgb(248 250 252 / 50%);
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__intro { text-align: center; }
@@ -14983,7 +14982,9 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 
 :where(html[data-lcdp-css~="c085"]) .public-home__actions {
   width: 100%;
-  max-width: 280px;
+  max-width: min(280px, 100%);
+  min-width: 0;
+  flex: 0 0 auto;
   margin-right: auto;
   margin-left: auto;
   display: flex;
@@ -15085,9 +15086,8 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
     padding: 1rem;
   }
   :where(html[data-lcdp-css~="c085"]) .public-home__app {
-    min-height: min(850px, calc(100vh - 2rem));
     min-height: min(850px, calc(100dvh - 2rem));
-    height: auto;
+    height: min(850px, calc(100dvh - 2rem));
     max-height: none;
   }
 }
@@ -15135,6 +15135,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   min-width: 0;
   margin-top: 0;
   flex: 0 0 auto;
+  align-self: stretch;
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__actualite .lcdp-page-container,
 :where(html[data-lcdp-css~="c085"]) .public-home__actualite .lcdp-page-content {
@@ -15211,4 +15212,16 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 @keyframes lcdp-public-home-wait { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) {
   :where(html[data-lcdp-css~="c085"]) .public-home__loading-arc { animation: none; }
+}
+
+@media (max-height: 620px) {
+  :where(html[data-lcdp-css~="c085"]) .public-home__main {
+    gap: .5rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+  }
+  :where(html[data-lcdp-css~="c085"]) .public-home__actions { gap: .5rem; }
+  :where(html[data-lcdp-css~="c085"]) .public-home__action { padding: .75rem; gap: .25rem; }
+  :where(html[data-lcdp-css~="c085"]) .public-home__header { padding-top: .75rem; padding-bottom: .75rem; }
+  :where(html[data-lcdp-css~="c085"]) .public-home__footer { padding-top: .75rem; padding-bottom: .75rem; }
 }

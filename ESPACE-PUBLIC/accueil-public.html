@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Clé du Parc - Accueil Vertical</title>
+  <title>La Clé du Parc - Accueil public</title>
   <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
   <script src="../config.js"></script>
   <script src="/OBJET/BOX/02-box-footer.js" defer></script>
@@ -40,15 +40,15 @@
     </header>
 
     <!-- CONTENU -->
-    <main class="public-home__main">
+    <main class="public-home__main" id="contenu-principal">
       <!-- Bandeau d'actualité historique : alimenté par actualite.js -->
-      <div id="lcdp-actualite-bandeau" class="public-home__actualite">
+      <section id="lcdp-actualite-bandeau" class="public-home__actualite" aria-label="Actualités">
         <div class="lcdp-page-container">
           <div class="lcdp-page-content">
             <div class="lcdp-boxtext__text--center lcdp-actu-bandeau-placeholder" aria-hidden="true"></div>
           </div>
         </div>
-      </div>
+      </section>
 
       <div class="public-home__actions">
         <button class="public-home__action public-home__action--plan" type="button">
