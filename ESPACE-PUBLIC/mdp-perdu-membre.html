@@ -28,6 +28,7 @@
 
 <body class="lcdp-app-page">
   <div class="lcdp-site-page lcdp-app-wrapper">
+    <div id="lcdp-bandeau-slot"></div>
 
     <main class="lcdp-site-main">
       <section
@@ -93,6 +94,7 @@
       </section>
     </main>
 
+    <div id="lcdp-footer-slot"></div>
     <div id="lcdp-lightbox-slot"></div>
 
   </div>
@@ -145,6 +147,59 @@
       appliquerRoutesSite(document);
     })();
   </script>
-  <script src="./mdp-perdu-membre.js"></script>
+  
+<script>
+  (() => {
+    "use strict";
+    const siteBase = (window.SITE_BASE || window.SITE_CONFIG?.publicBaseUrl || window.SITE_CONFIG?.siteBase || "").replace(/\/$/, "");
+
+    function urlSite(chemin) {
+      if (/^(?:https?:|mailto:|tel:|data:|#)/.test(chemin)) return chemin;
+      if (siteBase) return siteBase + (chemin.startsWith("/") ? chemin : "/" + chemin.replace(/^\.\//, ""));
+      return chemin.startsWith("/") ? ".." + chemin : chemin;
+    }
+    function adapterLiens(racine) {
+      racine.querySelectorAll("[data-site-href]").forEach(el => el.setAttribute("href", urlSite(el.dataset.siteHref)));
+      racine.querySelectorAll("[data-site-src]").forEach(el => el.setAttribute("src", urlSite(el.dataset.siteSrc)));
+    }
+    async function chargerFragment(chemin, cible) {
+      const reponse = await fetch(urlSite(chemin), {method:"GET",credentials:"same-origin",cache:"no-cache"});
+      if (!reponse.ok) throw new Error("Fragment introuvable : " + chemin);
+      const template = document.createElement("template");
+      template.innerHTML = (await reponse.text()).trim();
+      cible.replaceChildren(template.content.cloneNode(true));
+      adapterLiens(cible);
+    }
+    function chargerScriptMenu() {
+      const chemin="/ESPACE-PUBLIC/box-menu-burger-public.js";
+      if (document.querySelector(`script[data-lcdp-script="${chemin}"]`)) return Promise.resolve();
+      return new Promise((resolve,reject) => {
+        const script=document.createElement("script");
+        script.src=urlSite(chemin);
+        script.defer=true;
+        script.dataset.lcdpScript=chemin;
+        script.onload=resolve;
+        script.onerror=() => reject(new Error("Script introuvable : " + chemin));
+        document.body.appendChild(script);
+      });
+    }
+    window.SITE_BASE = siteBase;
+    window.LCDP_construireUrlSite = urlSite;
+    adapterLiens(document);
+    const bandeau=document.getElementById("lcdp-bandeau-slot");
+    if (bandeau) {
+      chargerFragment("/ESPACE-PUBLIC/box-bandeau-nav-public.html", bandeau)
+        .then(chargerScriptMenu)
+        .then(() => window.LCDP_initialiserMenuBurgerPublic?.())
+        .catch(error => console.error("Bandeau public indisponible",error));
+    }
+    const footer=document.getElementById("lcdp-footer-slot");
+    if (footer) {
+      chargerFragment("/OBJET/BOX/02-box-footer.html", footer)
+        .catch(error => console.error("Pied de page indisponible",error));
+    }
+  })();
+</script>
+<script src="./mdp-perdu-membre.js"></script>
 </body>
 </html>
