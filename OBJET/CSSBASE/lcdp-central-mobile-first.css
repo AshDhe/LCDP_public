@@ -14849,6 +14849,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   gap: 2rem;
   overflow-y: auto;
   padding: 1.5rem;
+  padding-bottom: calc(1.5rem + 30dvh);
   background: rgb(248 250 252 / 50%);
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__intro { text-align: center; }
@@ -14884,8 +14885,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 }
 
 :where(html[data-lcdp-css~="c085"]) .public-home__actions {
-  position: relative;
-  top: -15%;
   width: 100%;
   max-width: 280px;
   margin-right: auto;
@@ -15033,8 +15032,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 
 /* Accueil public — insertion du bandeau d'actualités existant (c029). */
 :where(html[data-lcdp-css~="c085"]) .public-home__actualite {
-  position: relative;
-  top: -15%;
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
