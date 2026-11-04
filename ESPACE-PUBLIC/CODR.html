@@ -1,13 +1,10 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-lcdp-css="c085 c034 c038 c036 c037 c033 c040 c041">
 <head>
   <meta charset="utf-8">
-
   <title>Définir le code de récupération (CODR) - La Clé du Parc</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Définir votre code de récupération (CODR) La Clé du Parc.">
-
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noindex,nofollow">
   <script>
@@ -17,40 +14,22 @@
     if (window.location.hash) window.history.replaceState(null, "", window.location.pathname + window.location.search);
   </script>
   <script src="../config.js"></script>
-
   <script>
     window.SITE_BASE =
       window.SITE_CONFIG?.publicBaseUrl ||
       window.SITE_CONFIG?.siteBase ||
       "";
   </script>
-
-  <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
-  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
-  <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
 </head>
-
-<body data-code-type="codr">
-  <div class="lcdp-site-page">
-
+<body class="lcdp-app-page" data-code-type="codr">
+  <div class="lcdp-site-page lcdp-app-wrapper">
     <div id="lcdp-bandeau-slot"></div>
-
     <main class="lcdp-site-main">
-      <section
-        class="lcdp-page-section"
-        aria-label="Connexion au compte membre"
-      >
+      <section class="lcdp-page-section" aria-label="Connexion au compte membre">
         <div class="lcdp-page-container">
-
-          <section
-            class="lcdp-component lcdp-box-formulaire-page lcdp-box-formulaire-page--compact"
-            data-lcdp-box-formulaire-page
-          >
+          <section class="lcdp-component lcdp-box-formulaire-page lcdp-box-formulaire-page--compact" data-lcdp-box-formulaire-page>
             <div class="lcdp-box-formulaire-page__inner">
-
               <form id="formulaire-code-securite" class="lcdp-box-formulaire" novalidate>
                 <header class="lcdp-box-formulaire__header">
                   <h1 class="lcdp-box-formulaire__title">Définir le code de récupération (CODR)</h1>
@@ -58,17 +37,25 @@
                 </header>
                 <ul class="lcdp-box-formulaire__note"><li>4 mots ou groupes de lettres de votre choix.</li><li>4 lettres exactement par mot.</li><li>Répétition d'un même mot autorisée une fois.</li><li>Ordre des mots obligatoire.</li></ul>
                 <p class="lcdp-box-formulaire__note">Les mots doivent être écrits en majuscules et sans accent. Aucune vérification dans un dictionnaire.</p>
-                <div class="lcdp-box-formulaire__fields"><fieldset class="lcdp-box-champ-formulaire lcdp-box-champ-formulaire--code"><legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Votre code de récupération</legend><div class="lcdp-box-champ-formulaire__code-cases"><input type="password" id="code-1" name="code-1" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 1" data-code-value required>
-<input type="password" id="code-2" name="code-2" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 2" data-code-value required>
-<input type="password" id="code-3" name="code-3" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 3" data-code-value required>
-<input type="password" id="code-4" name="code-4" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 4" data-code-value required>
-</div></fieldset>
-<fieldset class="lcdp-box-champ-formulaire lcdp-box-champ-formulaire--code"><legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Confirmez votre code de récupération</legend><div class="lcdp-box-champ-formulaire__code-cases"><input type="password" id="confirmation-1" name="confirmation-1" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 1 de confirmation" data-code-confirmation required>
-<input type="password" id="confirmation-2" name="confirmation-2" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 2 de confirmation" data-code-confirmation required>
-<input type="password" id="confirmation-3" name="confirmation-3" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 3 de confirmation" data-code-confirmation required>
-<input type="password" id="confirmation-4" name="confirmation-4" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" aria-label="Mot 4 de confirmation" data-code-confirmation required>
-</div></fieldset>
-
+                <div class="lcdp-box-formulaire__fields">
+                  <fieldset class="lcdp-box-champ-formulaire lcdp-box-champ-formulaire--code">
+                    <legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Votre code de récupération</legend>
+                    <div class="lcdp-box-champ-formulaire__code-cases">
+                      <input type="password" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" id="code-1" name="code-1" aria-label="Mot 1" data-code-value required>
+<input type="password" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" id="code-2" name="code-2" aria-label="Mot 2" data-code-value required>
+<input type="password" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" id="code-3" name="code-3" aria-label="Mot 3" data-code-value required>
+<input type="password" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" id="code-4" name="code-4" aria-label="Mot 4" data-code-value required>
+                    </div>
+                  </fieldset>
+                  <fieldset class="lcdp-box-champ-formulaire lcdp-box-champ-formulaire--code">
+                    <legend class="lcdp-box-champ-formulaire__label lcdp-box-champ-formulaire__label-zone">Confirmez votre code de récupération</legend>
+                    <div class="lcdp-box-champ-formulaire__code-cases">
+                      <input type="password" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" id="confirmation-1" name="confirmation-1" aria-label="Mot 1 de confirmation" data-code-confirmation required>
+<input type="password" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" id="confirmation-2" name="confirmation-2" aria-label="Mot 2 de confirmation" data-code-confirmation required>
+<input type="password" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" id="confirmation-3" name="confirmation-3" aria-label="Mot 3 de confirmation" data-code-confirmation required>
+<input type="password" inputmode="text" maxlength="4" autocapitalize="characters" spellcheck="false" autocomplete="new-password" id="confirmation-4" name="confirmation-4" aria-label="Mot 4 de confirmation" data-code-confirmation required>
+                    </div>
+                  </fieldset>
                   <label class="lcdp-box-champ-formulaire__checkbox-line" for="afficher-code"><input type="checkbox" id="afficher-code"><span>Afficher la saisie</span></label>
                 </div>
                 <p id="message-code" class="lcdp-box-formulaire__note" role="status" aria-live="polite">Vérification du lien…</p>
@@ -80,23 +67,17 @@
                 </div>
                 <p id="note-creation-code" class="lcdp-box-formulaire__note">Gardez absolument secret ce code qui vous est strictement personnel. Le lien sert uniquement à sa première création.</p>
               </form>
-
             </div>
           </section>
-
         </div>
       </section>
     </main>
-
     <div id="lcdp-footer-slot"></div>
     <div id="lcdp-lightbox-slot"></div>
-
   </div>
-
   <script>
     (() => {
       "use strict";
-
       const siteBase = (
         window.SITE_BASE ||
         window.SITE_CONFIG?.publicBaseUrl ||
@@ -106,7 +87,6 @@
 
       function construireUrlSite(chemin) {
         if (!chemin) return chemin;
-
         if (
           chemin.startsWith("#") ||
           chemin.startsWith("mailto:") ||
@@ -117,13 +97,11 @@
         ) {
           return chemin;
         }
-
         if (siteBase) {
           return chemin.startsWith("/")
             ? siteBase + chemin
             : siteBase + "/" + chemin.replace(/^\.\//, "");
         }
-
         return chemin.startsWith("/") ? ".." + chemin : chemin;
       }
 
@@ -131,7 +109,6 @@
         racine.querySelectorAll("[data-site-href]").forEach((element) => {
           element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
         });
-
         racine.querySelectorAll("[data-site-src]").forEach((element) => {
           element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
         });
