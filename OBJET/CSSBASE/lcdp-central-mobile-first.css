@@ -765,6 +765,9 @@ tr > td:nth-child(2) > button:focus-visible{
   justify-content: center;
   transition: background-color 150ms ease, border-color 150ms ease;
 }
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close[hidden] {
+  display: none !important;
+}
 :where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close:hover{
   background: var(--lcdp-ui-close-hover, #e9eee6);
 }
@@ -834,6 +837,9 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
   justify-content: center;
   transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__close[hidden] {
+  display: none !important;
 }
 :where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__close:hover{
   background: var(--lcdp-ui-close-hover, #e9eee6);
@@ -4307,6 +4313,9 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
   justify-content: center;
 }
+:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton[hidden] {
+  display: none !important;
+}
 :where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__card{
   position: relative;
   width: min(calc(100vw - 36px), 460px);
@@ -4341,6 +4350,9 @@ tr > td:nth-child(2) > button:focus-visible{
   justify-content: center;
   transition: background-color 150ms ease, border-color 150ms ease;
 }
+:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close[hidden] {
+  display: none !important;
+}
 :where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close:hover{
   background: #ffffff;
 }
@@ -4367,6 +4379,8 @@ tr > td:nth-child(2) > button:focus-visible{
   color: var(--lcdp-color-text-muted);
   font-size: 1rem;
   line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
   font-weight: 400;
   text-align: center;
 }
@@ -4553,6 +4567,9 @@ tr > td:nth-child(2) > button:focus-visible{
   justify-content: center;
   overflow-y: auto;
 }
+:where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche[hidden] {
+  display: none !important;
+}
 :where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche__card{
   position: relative;
   width: 100%;
@@ -4562,6 +4579,10 @@ tr > td:nth-child(2) > button:focus-visible{
   border: 1px solid var(--lcdp-color-border);
   border-radius: var(--lcdp-radius-large);
   background: rgba(255, 255, 255, 0.97);
+  max-height: calc(100vh - 32px);
+  max-height: calc(100svh - 32px);
+  overflow-y: auto;
+  overflow-wrap: anywhere;
   box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
   display: flex;
   flex-direction: column;
@@ -4605,6 +4626,9 @@ tr > td:nth-child(2) > button:focus-visible{
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+:where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche__close[hidden] {
+  display: none !important;
 }
 :where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche__close:hover{
   background: #ffffff;
@@ -7409,6 +7433,9 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
   justify-content: center;
 }
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ[hidden] {
+  display: none !important;
+}
 :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card{
   position: relative;
   width: min(calc(100vw - 36px), 460px);
@@ -7419,6 +7446,7 @@ tr > td:nth-child(2) > button:focus-visible{
   box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
   text-align: center;
   max-height: calc(100svh - 36px);
+  overflow-wrap: anywhere;
   overflow-y: auto;
 }
 :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close{
@@ -7438,6 +7466,9 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
   justify-content: center;
   transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close[hidden] {
+  display: none !important;
 }
 :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close:hover{
   background: #ffffff;
@@ -8586,10 +8617,15 @@ tr > td:nth-child(2) > button:focus-visible{
   padding: 18px;
   background: rgba(31, 42, 36, 0.42);
 }
+:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non[hidden] {
+  display: none !important;
+}
 :where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__card{
   position: relative;
   width: min(100%, 540px);
   max-height: min(86vh, 720px);
+  max-height: min(86svh, 720px);
+  overflow-wrap: anywhere;
   overflow: auto;
   border-radius: 26px;
   background: #ffffff;
@@ -8600,8 +8636,10 @@ tr > td:nth-child(2) > button:focus-visible{
   position: absolute;
   top: 12px;
   right: 14px;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
   border: 0;
   border-radius: 999px;
   background: rgba(31, 42, 36, 0.08);
@@ -8609,9 +8647,15 @@ tr > td:nth-child(2) > button:focus-visible{
   font-size: 24px;
   line-height: 1;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__close[hidden] {
+  display: none !important;
 }
 :where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__header{
-  padding-right: 42px;
+  padding-right: 56px;
   margin-bottom: 16px;
 }
 :where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__eyebrow{
@@ -8832,6 +8876,9 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
   justify-content: center;
   transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__close[hidden] {
+  display: none !important;
 }
 :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__close:hover{
   background: #ffffff;
@@ -9252,10 +9299,15 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
   justify-content: center;
 }
+:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter[hidden] {
+  display: none !important;
+}
 :where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__card{
   position: relative;
   width: min(100%, 480px);
   max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  max-height: calc(100svh - (var(--lcdp-space-3) * 2));
+  overflow-wrap: anywhere;
   overflow: auto;
   padding: var(--lcdp-space-4);
   border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
@@ -9280,6 +9332,9 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
   justify-content: center;
   transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__close[hidden] {
+  display: none !important;
 }
 :where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__close:hover{
   background: var(--lcdp-ui-close-hover, #e9eee6);
@@ -9452,10 +9507,15 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
   justify-content: center;
 }
+:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img[hidden] {
+  display: none !important;
+}
 :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__card{
   position: relative;
   width: min(calc(100vw - 36px), 520px);
   max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  max-height: calc(100svh - (var(--lcdp-space-3) * 2));
+  overflow-wrap: anywhere;
   overflow: auto;
   padding: 30px 24px 24px;
   border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
@@ -9480,6 +9540,9 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
   justify-content: center;
   transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__close[hidden] {
+  display: none !important;
 }
 :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__close:hover{
   background: #ffffff;
@@ -10977,10 +11040,15 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
   justify-content: center;
 }
+:where(html[data-lcdp-css~="c062"]) .lcdp-box-card-recaporder[hidden] {
+  display: none !important;
+}
 :where(html[data-lcdp-css~="c062"]) .lcdp-box-card-recaporder__card{
   position: relative;
   width: min(100%, 680px);
   max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  max-height: calc(100svh - (var(--lcdp-space-3) * 2));
+  overflow-wrap: anywhere;
   overflow: auto;
   padding: var(--lcdp-space-4);
   border: 1px solid var(--lcdp-color-border);
@@ -12956,6 +13024,19 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
 }
 :where(html[data-lcdp-css~="c085"]) a:focus-visible,:where(html[data-lcdp-css~="c085"]) button:focus-visible,:where(html[data-lcdp-css~="c085"]) input:focus-visible,:where(html[data-lcdp-css~="c085"]) textarea:focus-visible,:where(html[data-lcdp-css~="c085"]) select:focus-visible{
   outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-lightbox :is(button, a):focus-visible,
+:where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche :is(button, a):focus-visible,
+:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte :is(button, a):focus-visible,
+:where(html[data-lcdp-css~="c035"]) dialog.lcdp-contact-info :is(button, a):focus-visible,
+:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton :is(button, a):focus-visible,
+:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non :is(button, a):focus-visible,
+:where(html[data-lcdp-css~="c062"]) .lcdp-box-card-recaporder :is(button, a):focus-visible,
+:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter :is(button, a):focus-visible,
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ :is(button, a):focus-visible,
+:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img :is(button, a):focus-visible {
+  outline: 3px solid #b98c31;
   outline-offset: 3px;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-site-page{
