@@ -270,3 +270,8 @@
     padding: 11px 14px;
   }
 }
+
+/* Création du mot de passe : centrage du bouton logo de validation. */
+#formulaire-mdp-membre #bouton-valider-formulaire {
+  margin-inline: auto;
+}
