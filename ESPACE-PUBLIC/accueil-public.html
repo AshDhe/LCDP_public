@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>La Clé du Parc - Accueil Vertical</title>
   <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
+  <script src="/OBJET/BOX/02-box-footer.js" defer></script>
 </head>
 <body class="public-home">
   <div class="public-home__app">
@@ -70,12 +71,20 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="public-home__footer">
-      <a href="#">Mentions légales</a>
+    <footer class="public-home__footer" data-lcdp-box-footer>
+      <a href="/ESPACE-PUBLIC/mentions-legales.html"
+         data-site-href="/ESPACE-PUBLIC/mentions-legales.html"
+         data-lcdp-footer-mentions-legales>Mentions légales - Données</a>
       <span class="public-home__footer-separator" aria-hidden="true">•</span>
-      <a href="#">Données</a>
-      <span class="public-home__footer-separator" aria-hidden="true">•</span>
-      <a href="#">Vérification</a>
+      <button type="button" popovertarget="lcdp-footer-verification-info">Vérification</button>
+      <div id="lcdp-footer-verification-info" class="public-home__verification-info"
+           popover="auto" role="dialog" aria-label="Vérification">
+        <button type="button" class="public-home__verification-close"
+                popovertarget="lcdp-footer-verification-info"
+                popovertargetaction="hide" aria-label="Fermer">×</button>
+        <div data-verification-slot
+             data-verification-url="https://script.google.com/macros/s/AKfycbz4PBr97qQBPrXcBc8jGE5560b3LBhmEwGXBw5H3YIqiGvExilaUK-ORCLK3NV2hZu3xA/exec"></div>
+      </div>
     </footer>
   </div>
 </body>
