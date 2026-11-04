@@ -271,7 +271,7 @@
   }
 }
 
-/* Création du mot de passe : centrage du bouton logo de validation. */
-#formulaire-mdp-membre #bouton-valider-formulaire {
+/* Centrage générique du bouton logo de validation dans les formulaires. */
+.lcdp-box-formulaire__actions > .lcdp-button-logo {
   margin-inline: auto;
 }
