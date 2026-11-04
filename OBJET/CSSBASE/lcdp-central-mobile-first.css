@@ -15145,3 +15145,70 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   margin: 0;
   padding: 0;
 }
+
+/* c085 — état d’attente de l’accueil public (loader Tailwind, sans modifier c029/c038). */
+:where(html[data-lcdp-css~="c085"]) .public-home--loading .public-home__app {
+  visibility: hidden;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__loading {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 1rem;
+  background: #f8fafc;
+  font-family: Arial, sans-serif;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__loading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__loading-spinner {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__loading-spinner svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__loading-track { color: rgb(6 95 70 / 10%); }
+:where(html[data-lcdp-css~="c085"]) .public-home__loading-arc {
+  color: #e59834;
+  animation: lcdp-public-home-wait .8s linear infinite;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__loading-dot {
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: #4e6838;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__loading-copy { display: grid; gap: .25rem; }
+:where(html[data-lcdp-css~="c085"]) .public-home__loading-copy p { margin: 0; }
+:where(html[data-lcdp-css~="c085"]) .public-home__loading-title {
+  font-size: .875rem;
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.25rem;
+  color: #1e293b;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__loading-subtitle {
+  font-size: .75rem;
+  line-height: 1rem;
+  color: #94a3b8;
+}
+@keyframes lcdp-public-home-wait { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  :where(html[data-lcdp-css~="c085"]) .public-home__loading-arc { animation: none; }
+}

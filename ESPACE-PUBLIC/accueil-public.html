@@ -10,7 +10,20 @@
   <script src="./actualite.js" defer></script>
   <script src="./box-menu-burger-public.js" defer></script>
 </head>
-<body class="public-home">
+<body class="public-home public-home--loading">
+  <div class="public-home__loading" role="status" aria-live="polite" aria-label="Chargement de l’accueil">
+    <div class="public-home__loading-inner">
+      <div class="public-home__loading-spinner" aria-hidden="true">
+        <svg viewBox="0 0 36 36" class="public-home__loading-track"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" /></svg>
+        <svg viewBox="0 0 36 36" class="public-home__loading-arc"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75" /></svg>
+        <span class="public-home__loading-dot"></span>
+      </div>
+      <div class="public-home__loading-copy">
+        <p class="public-home__loading-title">Vérification de vos accès</p>
+        <p class="public-home__loading-subtitle">Un instant, nous ouvrons la barrière...</p>
+      </div>
+    </div>
+  </div>
   <div class="public-home__app">
     <!-- HEADER -->
     <header class="public-home__header">
@@ -82,5 +95,62 @@
       </div>
     </footer>
   </div>
+
+  <script>
+  (() => {
+    "use strict";
+    const body = document.body;
+    const actualites = document.getElementById("lcdp-actualite-bandeau");
+    const burger = document.querySelector("[data-lcdp-burger-slot]");
+    const debut = performance.now();
+    let termine = false;
+    let verificationEnCours = false;
+    let delaiSecours;
+    let observateur;
+
+    function actualitesChargees() {
+      if (!actualites) return true;
+      const placeholder = actualites.querySelector(".lcdp-actu-bandeau-placeholder");
+      if (placeholder) return false;
+      return !!actualites.querySelector(".lcdp-actu-bandeau-titre, .lcdp-actu-bandeau-texte, nav a");
+    }
+
+    function menuCharge() {
+      return !burger || burger.dataset.lcdpBurgerInitialise === "true";
+    }
+
+    function terminer() {
+      if (termine) return;
+      termine = true;
+      if (observateur) observateur.disconnect();
+      clearTimeout(delaiSecours);
+      // Deux images rendues avec le nouveau contenu avant de retirer le voile.
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        body.classList.remove("public-home--loading");
+        const overlay = document.querySelector(".public-home__loading");
+        if (overlay) overlay.remove();
+      }));
+    }
+
+    function verifier() {
+      if (termine || verificationEnCours) return;
+      if (document.readyState === "loading") return;
+      if (!actualitesChargees() || !menuCharge()) return;
+      verificationEnCours = true;
+      const polices = document.fonts?.ready || Promise.resolve();
+      Promise.resolve(polices).catch(() => {}).then(() => terminer());
+    }
+
+    observateur = new MutationObserver(verifier);
+    observateur.observe(document.querySelector(".public-home__app"), {
+      subtree: true, childList: true, attributes: true,
+      attributeFilter: ["class", "data-lcdp-burger-initialise"]
+    });
+    document.addEventListener("DOMContentLoaded", verifier, { once: true });
+    window.addEventListener("load", verifier, { once: true });
+    delaiSecours = setTimeout(terminer, 7000);
+    verifier();
+  })();
+  </script>
 </body>
 </html>
