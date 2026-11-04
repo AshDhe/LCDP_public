@@ -478,3 +478,280 @@
     font-size: .88rem;
   }
 }
+
+
+/* V10 — Dimensionnement de PLANIFIER uniquement, mobile-first.
+   Les composants d'autres pages conservent leurs dimensions d'origine. */
+
+/* Sélection des parcs : fenêtre et vignettes réellement compactes. */
+.lcdp-planifier-parcs-card.lcdp-box-dialogue-champ__card {
+  box-sizing: border-box;
+  width: min(calc(100vw - 32px), 480px) !important;
+  min-width: 0;
+  max-width: 480px !important;
+  max-height: calc(100dvh - 24px);
+  min-height: 0 !important;
+  height: auto !important;
+  overflow-y: auto;
+  padding: 22px 14px 16px !important;
+}
+.lcdp-planifier-parcs-card .lcdp-box-dialogue-champ__title {
+  font-size: clamp(1.14rem, 4.8vw, 1.4rem);
+  margin-bottom: 4px;
+}
+.lcdp-planifier-parcs-card .lcdp-planifier-parcs-departement {
+  margin: 0 0 10px;
+  font-size: .83rem;
+  line-height: 1.3;
+}
+.lcdp-planifier-parcs-card .lcdp-box-dialogue-champ__content {
+  min-width: 0;
+  margin-bottom: 0;
+  gap: 10px;
+}
+.lcdp-planifier-parcs-card .lcdp-commande-parcs-modes {
+  padding: 6px 7px;
+  margin: 0;
+}
+.lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] {
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button {
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 36px;
+  flex: 1 1 135px !important;
+  padding: 7px 9px;
+  font-size: .74rem;
+}
+.lcdp-planifier-parcs-card .lcdp-commande-parcs-modes .lcdp-box-commande-bar__icone {
+  width: 16px;
+  height: 16px;
+}
+.lcdp-planifier-parcs-diaporama,
+.lcdp-planifier-parcs-diaporama .lcdp-box-liste-card-diaporama {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-liste-card-diaporama__list {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 9px !important;
+  width: 100%;
+  min-width: 0;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama {
+  min-width: 0;
+  width: 100%;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__scene {
+  width: 100%;
+  aspect-ratio: 4 / 3 !important;
+  min-height: 132px;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face {
+  border-radius: 12px;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso {
+  padding: 7px;
+  gap: 6px;
+  overflow-y: auto;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__nom-dos {
+  font-size: .8rem;
+  line-height: 1.18;
+  padding-right: 20px;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__fermer {
+  width: 25px;
+  height: 25px;
+  font-size: 1rem;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__description {
+  font-size: .72rem;
+  line-height: 1.3;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__actions--reserver,
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__actions {
+  gap: 5px;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__action {
+  min-width: 0;
+  min-height: 32px;
+  padding: 5px 4px;
+  font-size: .7rem;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__action-icone {
+  width: 16px;
+  height: 16px;
+}
+/* Les cartes réelles conservent leurs images et actions fonctionnelles. */
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__media {
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+/* Fiche parc : fenêtre nettement plus étroite, sans modifier la vue PLANNING PARC.
+   En cours d'ouverture, la fiche n'a pas encore son attribut data-lcdp-shift-vue. */
+#lcdp-planifier-fiche-overlay-slot
+.lcdp-box-shift-detail-parc:not([data-lcdp-shift-vue="planning"]):not([data-lcdp-shift-vue="planning-jour"])
+.lcdp-box-shift-detail-parc__card {
+  box-sizing: border-box;
+  width: min(100%, 460px) !important;
+  max-width: 460px !important;
+  min-width: 0;
+  max-height: calc(100dvh - 24px);
+  padding: 12px !important;
+  overflow: auto;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-shift-detail-parc {
+  padding: 10px;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-shift-detail-parc__close {
+  width: 30px;
+  height: 30px;
+  font-size: 1.3rem;
+  margin: 0 0 5px 5px;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__card {
+  display: block !important;
+  box-sizing: border-box;
+  min-width: 0;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__header {
+  padding: 1px 0 9px;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__title {
+  font-size: clamp(1.2rem, 4.5vw, 1.48rem) !important;
+  line-height: 1.14;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__departement {
+  font-size: .76rem;
+  line-height: 1.3;
+  margin: 3px 0 1px;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__section {
+  box-sizing: border-box;
+  padding: 10px 0 !important;
+  min-width: 0;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__section h3 {
+  font-size: .93rem !important;
+  line-height: 1.25;
+  margin: 0 0 7px;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__box-text {
+  padding: 10px;
+  font-size: .82rem !important;
+  line-height: 1.46;
+  border-radius: 11px;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__box-text p,
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__section p {
+  font-size: .82rem !important;
+  line-height: 1.46;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__actions {
+  margin-top: 8px;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__actions-barre {
+  gap: 6px;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action {
+  min-width: 0;
+  min-height: 34px;
+  padding: 5px 9px;
+  font-size: .72rem;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action-icone {
+  width: 18px;
+  height: 18px;
+}
+/* Dans la fiche du tunnel, restaurer la galerie 2x2 : la feuille de composant
+   affichait les quatre photos en colonne avec display:contents sur mobile. */
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__section--galerie,
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__section--galerie .lcdp-box-fiche-parc__galerie,
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie {
+  display: block !important;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  width: 100%;
+  min-width: 0;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  padding: 4px !important;
+  margin: 0 !important;
+  order: initial !important;
+  justify-self: stretch;
+  border-radius: 11px;
+}
+#lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+  object-fit: cover !important;
+  object-position: center;
+}
+
+/* PC uniquement : le calendrier mensuel rétrécit sans modifier la version mobile. */
+@media (min-width: 900px) {
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__card {
+    max-width: 650px;
+    padding: 12px 15px 16px;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
+    padding: 12px 46px 12px 14px;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-filtres {
+    gap: 9px;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-legende-autorisations {
+    padding: 8px 11px;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__month {
+    font-size: 1.4rem;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__navigation {
+    margin-bottom: 9px;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid,
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
+    max-width: 560px;
+    gap: 9px;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
+    min-height: 0;
+    grid-auto-rows: 66px;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__number {
+    font-size: .76rem;
+    margin-bottom: 2px;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
+    width: calc(100% - 12px);
+    grid-template-rows: repeat(5, 5px);
+    gap: 2px;
+  }
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
+    height: 5px;
+    min-height: 5px;
+    max-height: 5px;
+    flex: 0 0 5px;
+  }
+}
