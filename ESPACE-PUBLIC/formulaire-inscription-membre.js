@@ -83,6 +83,7 @@
         name: "regleclub_v1",
         label: "Règlement du club",
         checkboxLabel: "J'accepte le règlement du club. Cette acceptation est obligatoire.",
+        checkboxParts: ["J'accepte le ", { text: "règlement du club", href: "/ESPACE-PUBLIC/reglement-club.html" }, ". Cette acceptation est obligatoire."],
         required: true,
         descriptionHtml: ``
       },
@@ -92,6 +93,7 @@
         name: "regleapp_v1",
         label: "Règlement de l’application",
         checkboxLabel: "J'accepte le règlement de l'application. Cette acceptation est obligatoire.",
+        checkboxParts: ["J'accepte le ", { text: "règlement de l'application", href: "/ESPACE-PUBLIC/reglement-app.html" }, ". Cette acceptation est obligatoire."],
         required: true,
         descriptionHtml: ``
       }

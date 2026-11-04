@@ -2300,110 +2300,101 @@ tr > td:nth-child(2) > button:focus-visible{
     min-height: 240px;
     padding: var(--lcdp-space-4);
   }}
-/* LCDP_public/OBJET/BOX/02-box-bandeau-nav.css */
-:where(html[data-lcdp-css~="c034"]) #lcdp-bandeau-slot{
-  min-height: 80px;
+/* LCDP_public/OBJET/BOX/02-box-bandeau-nav.css — bandeau public commun, design home */
+:where(html[data-lcdp-css~="c034"]) #lcdp-bandeau-slot {
+  min-height: 68px;
 }
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav{
-  min-height: 80px;
-  background: #4e6838;
-  color: #fff;
+:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 4000;
+  box-sizing: border-box;
   width: 100%;
-  
-  
-  border-bottom: none;
+  min-height: 68px;
+  background: #4e6838;
+  border-bottom: 0;
+  color: #fff;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
   overflow: visible;
 }
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__inner{
-  min-height: 80px;
-  gap: 12px;
-  padding: 0 24px;
+:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__inner {
   position: relative;
   z-index: 4001;
+  box-sizing: border-box;
+  display: flex;
   width: 100%;
   max-width: var(--lcdp-page-width);
-  
+  min-height: 68px;
   margin-inline: auto;
-  
-  display: flex;
+  padding: 1rem 1.5rem;
   align-items: center;
   justify-content: space-between;
-  
+  gap: 1rem;
   overflow: visible;
 }
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link{
+:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link,
+:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:visited,
+:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:hover {
   display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 16px;
-  line-height: 1;
-  white-space: normal;
   min-width: 0;
-  color: #ffffff;
-  font-family: var(--lcdp-font-main);
-  
-  
+  align-items: center;
+  gap: .75rem;
+  color: #fff;
+  font-family: inherit;
+  font-size: inherit;
   font-weight: 700;
+  line-height: 1.5;
+  white-space: normal;
   text-decoration: none;
 }
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:visited,:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:hover{
-  color: #ffffff;
-  text-decoration: none;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo{
+:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo {
+  box-sizing: border-box;
+  display: block;
+  flex: 0 0 36px;
   width: 36px;
   height: 36px;
-  flex: 0 0 36px;
   border-radius: 12px;
+  background: rgb(255 255 255 / 10%);
   object-fit: contain;
-  
-  display: block;
 }
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label{
+:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label.lcdp-bandeau-restreint-label {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
-  min-width: 0;
-  font-size: 16px;
-  line-height: 1.05;
-  color: #ffffff;
-  
-  
-  font-weight: 700;
+  white-space: normal;
 }
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__burger-slot{
+:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label .lcdp-bandeau-restreint-title {
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.025em;
+  line-height: 1;
+}
+:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label .lcdp-bandeau-restreint-subtitle {
+  display: block;
+  margin: 0;
+  color: rgb(167 243 208 / 80%);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .025em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__burger-slot {
   position: relative;
   z-index: 4002;
-  flex: 0 0 auto;
   display: flex;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
   align-items: center;
   justify-content: flex-end;
   overflow: visible;
 }
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c034"]) #lcdp-bandeau-slot{
-  min-height: 80px;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav{
-  min-height: 80px;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__inner{
-  min-height: 80px;
-  padding-inline: 24px;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo{
-  width: 36px;
-  height: 36px;
-  flex-basis: 36px;
-}}
-
-:where(html[data-lcdp-css~="c034"]) .lcdp-bandeau-restreint-title{color:#fff;font-size:16px;line-height:1.05;font-weight:700;letter-spacing:-.025em;}
-:where(html[data-lcdp-css~="c034"]) .lcdp-bandeau-restreint-subtitle{color:#a7f3d0;font-size:11px;line-height:1.35;font-weight:500;letter-spacing:.025em;text-transform:uppercase;}
 /* LCDP_public/OBJET/BOX/04-box-card-coordonnees-facture.css */
 :where(html[data-lcdp-css~="c049"]) .lcdp-box-card-coordonnees-facture{
   border: 1px solid rgba(31, 44, 36, 0.16);
@@ -6649,105 +6640,89 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--masquee{ visibility: hidden !important; }
 /* LCDP_public/OBJET/BOX/03-box-formulaire.css */
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page{
-  width: 100%;
-  padding-top: var(--lcdp-space-4);
-  padding-bottom: var(--lcdp-space-4);
+  width:100%;
+  padding:0;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page__inner{
-  width: 100%;
-  max-width: 560px;
-  margin-inline: auto;
+  box-sizing:border-box;
+  width:100%;max-width:100%;margin:0 auto;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire{
-  width: 100%;
-  padding: var(--lcdp-space-3);
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
-  background: var(--lcdp-color-surface-soft);
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-3);
+  box-sizing:border-box;
+  width:100%;min-width:0;
+  padding:24px;
+  border:1px solid #f1f5f9;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 1px 3px rgba(15,23,42,.07);
+  text-align:left;
+  display:flex;flex-direction:column;gap:20px;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-2);
+  width:100%;
+  display:flex;flex-direction:column;gap:4px;
+  margin:8px 0 24px;text-align:center;
 }
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header[hidden],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header:not(:has(:not([hidden]))){
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header[hidden],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header:not(:has(:not([hidden]))),:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro[hidden],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__subtitle[hidden],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note[hidden]{
   display: none !important;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__title{
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--lcdp-color-text);
-  font-size: 1.4rem;
-  line-height: 1.25;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-align: center;
+  width:100%;margin:0;padding:0;border:0;
+  background:transparent;box-shadow:none;
+  font:900 24px/32px Arial,system-ui,sans-serif;
+  letter-spacing:-.025em;color:#0f172a;text-align:center;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__subtitle{
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.35;
-  font-weight: 700;
-  color: var(--lcdp-color-text);
-  text-align: center;
+  margin:0;
+  font:700 12px/1.5 Arial,system-ui,sans-serif;
+  letter-spacing:.05em;text-transform:uppercase;
+  color:#e59834;text-align:center;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__subtitle.lcdp-box-formulaire__subtitle--accent{
-  color: var(--lcdp-color-orange);
+  color:#e59834;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro{
-  color: var(--lcdp-color-text-muted);
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-2);
+  color:#94a3b8;
+  display:flex;flex-direction:column;gap:8px;
+  padding-bottom:8px;border-bottom:1px solid #f8fafc;
+  text-align:center;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro p{
-  margin: 0;
-  font-size: 15.5px;
-  line-height: 1.45;
-  font-weight: 400;
-  color: var(--lcdp-color-text);
+  margin:0;
+  font:400 12px/1.625 Arial,system-ui,sans-serif;
+  color:#94a3b8;text-align:center;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire .lcdp-box-formulaire__intro,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire .lcdp-box-formulaire__intro *{
   font-weight: 400 !important;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__fields{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-3);
+  width:100%;min-width:0;display:flex;flex-direction:column;gap:20px;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions{
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--lcdp-space-2);
+  width:100%;display:flex;flex-direction:column;gap:8px;
+  padding-top:12px;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button{
-  width: 100%;
-  max-width: 320px;
+  box-sizing:border-box;
+  width:100%;max-width:none;min-width:0;min-height:46px;
+  padding:14px 16px;border:0;border-radius:12px;
+  font:700 12px/1.3 Arial,system-ui,sans-serif;
+  letter-spacing:.05em;text-transform:uppercase;
+  color:#fff;background:#4e6838;
+  box-shadow:0 4px 6px -1px rgba(15,23,42,.12);
+  transition:background-color .2s ease,transform .2s ease;
 }
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button:hover {background:#3d522c;color:#fff;}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button:active {transform:scale(.99);}
+
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions button:disabled,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button[aria-disabled="true"]{
   opacity: 0.6;
   cursor: not-allowed;
   pointer-events: none;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note{
-  margin: 0;
-  font-size: 0.86rem;
-  line-height: 1.35;
-  color: var(--lcdp-color-text-muted);
-  text-align: left;
+  margin:0;text-align:center;
+  color:#94a3b8;font:400 10px/1.5 Arial,system-ui,sans-serif;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note a,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro a{
   color: var(--lcdp-color-primary);
@@ -6771,25 +6746,13 @@ tr > td:nth-child(2) > button:focus-visible{
   box-shadow: none !important;
   outline: none;
 }
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page{
-    padding-top: var(--lcdp-space-2);
-    padding-bottom: var(--lcdp-space-5);
-  }
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page__inner{
-    max-width: 540px;
-  }
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire{
-    padding: var(--lcdp-space-4);
-    padding-top: var(--lcdp-space-3);
-  }
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__title{
-    font-size: 1.6rem;
-  }
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button{
-    width: auto;
-    min-width: 190px;
-    max-width: 300px;
-  }}
+@media (min-width:768px) {
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page {padding:0;}
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page__inner {max-width:100%;}
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire {padding:24px;}
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__title {font-size:24px;}
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button {width:100%;max-width:none;min-width:0;}
+}
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page--compact .lcdp-box-formulaire-page__inner{
   max-width: 440px;
 }
@@ -9787,30 +9750,25 @@ tr > td:nth-child(2) > button:focus-visible{
 }
 /* LCDP_public/OBJET/BOX/03-box-champ-formulaire.css */
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire{
-  width: 100%;
-  text-align: left;
+  box-sizing:border-box;width:100%;min-width:0;text-align:left;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__label-zone{
-  width: 100%;
-  margin-bottom: var(--lcdp-space-2);
+  width:100%;margin-bottom:6px;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__label,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__heading{
-  margin: 0;
-  display: block;
-  font-size: 1rem;
-  line-height: 1.35;
-  font-weight: 600;
-  color: var(--lcdp-color-text);
-  text-align: left;
+  margin:0;display:block;
+  color:#334155;
+  font:700 12px/1.4 Arial,system-ui,sans-serif;
+  letter-spacing:.05em;text-transform:uppercase;text-align:left;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__required{
-  color: var(--lcdp-color-text-muted);
-  font-weight: 700;
+  color:#334155;font-weight:700;margin-left:3px;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__description{
-  margin: 0 0 var(--lcdp-space-2);
-  color: var(--lcdp-color-text-muted);
-  text-align: left;
+  margin:6px 0 0;
+  color:#94a3b8;
+  font:400 10px/1.5 Arial,system-ui,sans-serif;
+  text-align:left;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__description a{
   color: var(--lcdp-color-primary);
@@ -9823,22 +9781,16 @@ tr > td:nth-child(2) > button:focus-visible{
   color: var(--lcdp-color-primary-hover);
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__control{
-  width: 100%;
+  box-sizing:border-box;width:100%;min-width:0;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="text"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="email"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="password"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="tel"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="number"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="date"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire select,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire textarea{
-  width: 100%;
-  min-height: 50px;
-  padding: 12px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-medium);
-  font-family: var(--lcdp-font-main);
-  font-size: 1rem;
-  line-height: 1.35;
-  color: var(--lcdp-color-text);
-  background: var(--lcdp-color-surface);
-  text-align: left;
-  appearance: none;
-  -webkit-appearance: none;
+  box-sizing:border-box;width:100%;min-width:0;min-height:46px;
+  padding:12px 16px;
+  border:1px solid #e2e8f0;border-radius:12px;
+  font:400 14px/1.45 Arial,system-ui,sans-serif;
+  color:#1e293b;background:#f8fafc;text-align:left;
+  outline:none;transition:border-color .2s ease,background-color .2s ease;
+  appearance:none;-webkit-appearance:none;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire textarea{
   min-height: 120px;
@@ -9865,32 +9817,21 @@ tr > td:nth-child(2) > button:focus-visible{
   align-items: center;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input::placeholder,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire textarea::placeholder{
-  color: rgba(31, 42, 36, 0.45);
+  color:#94a3b8;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input:focus,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire select:focus,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire textarea:focus{
-  outline: none;
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 0 0 3px var(--lcdp-color-focus);
+  outline:none;border-color:#94a3b8;background:#fff;box-shadow:none;
 }
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire:has(input[type="checkbox"]) > .lcdp-box-champ-formulaire__label-zone {display:none;}
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line a {color:#334155;font-weight:500;text-decoration:underline;text-underline-offset:2px;}
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line{
-  display: flex;
-  align-items: flex-start;
-  gap: var(--lcdp-space-2);
-  margin-top: var(--lcdp-space-2);
-  font-size: 0.95rem;
-  line-height: 1.4;
-  font-weight: 400;
-  color: var(--lcdp-color-text-muted);
-  cursor: pointer;
-  text-align: left;
+  display:flex;align-items:flex-start;gap:12px;
+  margin-top:4px;cursor:pointer;text-align:left;
+  color:#64748b;font:400 12px/1.5 Arial,system-ui,sans-serif;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line input[type="checkbox"]{
-  width: 20px;
-  height: 20px;
-  margin: 2px 0 0;
-  flex-shrink: 0;
-  accent-color: var(--lcdp-color-primary);
-  cursor: pointer;
+  width:16px;height:16px;margin:2px 0 0;flex:0 0 16px;
+  accent-color:#4e6838;cursor:pointer;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line span{
   display: inline-block;
@@ -9899,31 +9840,20 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__aide{
   margin-top: var(--lcdp-space-1);
 }
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__label,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__heading{
-    font-size: 1rem;
-    line-height: 1.35;
-  }
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__description{
-    font-size: var(--lcdp-font-size-paragraph-desktop);
-  }
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="text"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="email"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="password"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="tel"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="number"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="date"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire select{
-    min-height: 48px;
-    padding: 11px 14px;
-    font-size: 1rem;
-  }
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire textarea{
-    min-height: 120px;
-    padding: 11px 14px;
-    font-size: 1rem;
-  }
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__lecture{
-    min-height: 48px;
-    padding: 11px 14px;
-    font-size: 1rem;
-  }
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line{
-    font-size: 1rem;
-  }}
+@media (min-width:768px) {
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__label,
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__heading {font-size:12px;line-height:1.4;}
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__description {font-size:10px;}
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="text"],
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="email"],
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="password"],
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="tel"],
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="number"],
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input[type="date"],
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire select {min-height:46px;padding:12px 16px;font-size:14px;}
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire textarea {padding:12px 16px;font-size:14px;}
+  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line {font-size:12px;}
+}
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable{
   --lcdp-champ-modifiable-action-size: 40px;
   --lcdp-champ-modifiable-action-offset: 7px;
@@ -11077,6 +11007,8 @@ tr > td:nth-child(2) > button:focus-visible{
   position: relative;
   z-index: 4100;
   --lcdp-burger-accent: var(--lcdp-color-membre, #4e6838);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button {
   position: relative;
@@ -11087,7 +11019,7 @@ tr > td:nth-child(2) > button:focus-visible{
   border: 0;
   border-radius: 12px;
   background: rgba(255,255,255,.2);
-  color: inherit;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11142,7 +11074,7 @@ tr > td:nth-child(2) > button:focus-visible{
   gap: 4px;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link {
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -11165,9 +11097,9 @@ tr > td:nth-child(2) > button:focus-visible{
   transition: background-color 200ms ease, color 200ms ease;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:hover,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:hover,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:hover,
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:focus-visible,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button-link:focus-visible {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:focus-visible {
   background: rgba(248,250,252,.8);
   color: #0f172a;
 }
@@ -11179,13 +11111,13 @@ tr > td:nth-child(2) > button:focus-visible{
   font-weight: 800;
 }
 /* Connexion : bouton déjà créé par le JS existant ; cartouche non interactif via pseudo-élément. */
-:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link {
   justify-content: space-between;
   gap: 6px;
   color: #334155;
   font-weight: 700;
 }
-:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link::after {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link::after {
   content: "Espace membre";
   display: inline-block;
   flex: 0 0 auto;
@@ -11199,8 +11131,8 @@ tr > td:nth-child(2) > button:focus-visible{
   letter-spacing: normal;
   transition: background-color 200ms ease, color 200ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link:hover::after,
-:where(html[data-lcdp-css~="c038"]) .public-home .lcdp-box-menu-burger__button-link:focus-visible::after {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:hover::after,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:focus-visible::after {
   background: var(--lcdp-burger-accent);
   color: #fff;
 }
@@ -11221,7 +11153,6 @@ tr > td:nth-child(2) > button:focus-visible{
 @media (prefers-reduced-motion: reduce) {
   :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav { animation: none; }
 }
-
 /* LCDP_public/OBJET/BOX/04-box-facture-a4.css */
 :where(html[data-lcdp-css~="c068"]) .lcdp-page-facture-a4{
   margin: 0;
@@ -14923,21 +14854,28 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   box-shadow: 0 20px 25px -5px rgb(226 232 240 / 50%), 0 8px 10px -6px rgb(226 232 240 / 50%);
 }
 
-:where(html[data-lcdp-css~="c085"]) .public-home__header {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: space-between;
+/* Shared public header is placed within the home card instead of being fixed to the viewport. */
+:where(html[data-lcdp-css~="c085"]) .public-home #lcdp-bandeau-slot {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 0;
+  flex: 0 0 auto;
   position: relative;
   z-index: 1;
-  padding: 1rem 1.5rem;
-  border-radius: 1.5rem 1.5rem 0 0;
-  color: #fff;
-  background: #4e6838;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__brand { display: flex; align-items: center; gap: .75rem; }
-.public-home__brand-icon,
-:where(html[data-lcdp-css~="c085"]) .public-home__menu-button {
+:where(html[data-lcdp-css~="c085"]) .public-home .lcdp-box-bandeau-nav {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  min-height: 68px;
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home .lcdp-box-bandeau-nav__inner {
+  max-width: 100%;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__brand-icon {
+  box-sizing: border-box;
+  overflow: hidden;
   width: 2.25rem;
   height: 2.25rem;
   border-radius: .75rem;
@@ -14946,40 +14884,11 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   align-items: center;
   justify-content: center;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__brand-icon {
-  box-sizing: border-box;
-  overflow: hidden;
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__brand-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
-:where(html[data-lcdp-css~="c085"]) .public-home__brand-name {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -.025em;
-  line-height: 1;
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__brand-subtitle {
+:where(html[data-lcdp-css~="c085"]) .public-home__brand-icon img {
   display: block;
-  margin-top: .25rem;
-  color: rgb(167 243 208 / 80%);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .025em;
-  text-transform: uppercase;
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__menu-button {
-  flex-direction: column;
-  gap: .25rem;
-  border: 0;
-  color: #fff;
-  transition: background-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__menu-button:hover { background: rgb(255 255 255 / 20%); }
-:where(html[data-lcdp-css~="c085"]) .public-home__menu-button span {
-  width: 1rem;
-  height: .125rem;
-  border-radius: 9999px;
-  background: #fff;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 :where(html[data-lcdp-css~="c085"]) .public-home__main {
@@ -15275,7 +15184,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   :where(html[data-lcdp-css~="c085"]) .public-home__main { padding: .75rem 1.5rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__actions { gap: .75rem; margin-top: 1.5rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__action { padding: .75rem; gap: .25rem; }
-  :where(html[data-lcdp-css~="c085"]) .public-home__header { padding-top: .75rem; padding-bottom: .75rem; }
+  :where(html[data-lcdp-css~="c085"]) .public-home .lcdp-box-bandeau-nav__inner { padding-top: .75rem; padding-bottom: .75rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__footer { padding-top: .75rem; padding-bottom: .75rem; }
 }
 @media (max-height: 560px) {
@@ -15289,7 +15198,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 /* Gabarit inscription : seulement le positionnement du header/footer dans la coque.
    Les styles graphiques des objets sont dans c034/c037, communs aux pages. */
 :where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription #lcdp-bandeau-slot {
-  display:block;flex:0 0 80px;min-height:80px;width:100%;background:#4e6838;
+  display:block;flex:0 0 68px;min-height:68px;width:100%;background:#4e6838;
 }
 :where(html[data-lcdp-css~="c085"]) body.lcdp-page-inscription .lcdp-box-bandeau-nav {
   position:relative;inset:auto;width:100%;border:0;border-radius:23px 23px 0 0;

@@ -279,7 +279,23 @@
     });
 
     const span = document.createElement("span");
-    span.textContent = champ.checkboxLabel || champ.label || "";
+    if (Array.isArray(champ.checkboxParts)) {
+      champ.checkboxParts.forEach((part) => {
+        if (typeof part === "string") {
+          span.appendChild(document.createTextNode(part));
+        } else if (part && part.href && part.text) {
+          const link = document.createElement("a");
+          link.href = construireUrlSite(part.href);
+          link.textContent = part.text;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.addEventListener("click", (event) => event.stopPropagation());
+          span.appendChild(link);
+        }
+      });
+    } else {
+      span.textContent = champ.checkboxLabel || champ.label || "";
+    }
 
     label.appendChild(input);
     label.appendChild(span);
