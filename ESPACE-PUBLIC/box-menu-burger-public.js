@@ -22,14 +22,14 @@
       icone: "🌳",
       description: "Espace propriétaire / gestion",
       espace: "parc",
-      cheminConnexion: "/ESPACE-PARC/connexion-parc.html?source=menu-mon-compte"
+      cheminConnexion: "/ESPACE-PUBLIC/connexion-parc.html?source=menu-mon-compte"
     },
     coach: {
       label: "Compte coach",
       icone: "👟",
       description: "Espace professionnel",
       espace: "coach",
-      cheminConnexion: "/ESPACE-COACH/connexion-coach.html?source=menu-mon-compte"
+      cheminConnexion: "/ESPACE-PUBLIC/connexion-coach.html?source=menu-mon-compte"
     }
   };
 

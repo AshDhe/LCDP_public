@@ -728,9 +728,9 @@ tr > td:nth-child(2) > button:focus-visible{
   inset: 0;
   z-index: 6000;
   padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -741,25 +741,32 @@ tr > td:nth-child(2) > button:focus-visible{
   max-height: calc(100vh - 36px);
   max-height: calc(100svh - 36px);
   padding: var(--lcdp-space-4);
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
   background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
   overflow-y: auto;
 }
 :where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close{
   position: absolute;
   top: var(--lcdp-space-2);
   right: var(--lcdp-space-2);
-  width: 38px;
-  height: 38px;
-  border: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
   border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
   color: var(--lcdp-color-text);
-  font-size: 1.8rem;
+  font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close:hover{
+  background: var(--lcdp-ui-close-hover, #e9eee6);
 }
 :where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card .lcdp-box-liste-card__header{
   padding-right: 44px;
@@ -801,27 +808,35 @@ tr > td:nth-child(2) > button:focus-visible{
   margin: auto;
   padding: 30px 22px 24px;
   overflow-y: auto;
-  border: 1px solid var(--lcdp-color-border, #cbd1cc);
-  border-radius: var(--lcdp-radius-large, 24px);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
   background: var(--lcdp-color-surface, #fff);
   color: var(--lcdp-color-text, #1f2a24);
   font-family: var(--lcdp-font-main, Arial, sans-serif);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
 }
 :where(html[data-lcdp-css~="c035"]) .lcdp-contact-info::backdrop{ background: rgba(31, 42, 36, 0.46); backdrop-filter: blur(4px); }
 :where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__close{
   position: absolute;
   top: 8px;
   right: 8px;
-  width: 44px;
-  height: 44px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--lcdp-color-surface-soft, #f7f7f4);
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: 999px;
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
   color: inherit;
   font: inherit;
-  font-size: 28px;
+  font-size: 1.35rem;
   cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__close:hover{
+  background: var(--lcdp-ui-close-hover, #e9eee6);
 }
 :where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__title{ margin: 0 30px 18px 0; font-size: clamp(23px, 5vw, 28px); line-height: 1.2; }
 :where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__text{ margin: 0 0 18px; font-size: 16px; line-height: 1.6; }
@@ -4285,9 +4300,9 @@ tr > td:nth-child(2) > button:focus-visible{
   inset: 0;
   z-index: 5000;
   padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4296,32 +4311,35 @@ tr > td:nth-child(2) > button:focus-visible{
   position: relative;
   width: min(calc(100vw - 36px), 460px);
   padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
   background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--lcdp-space-3);
   text-align: center;
+  max-height: calc(100svh - 36px);
+  overflow-y: auto;
 }
 :where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close{
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 34px;
-  height: 34px;
-  border: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
   border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
   color: var(--lcdp-color-text);
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
 }
 :where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close:hover{
   background: #ffffff;
@@ -4405,10 +4423,13 @@ tr > td:nth-child(2) > button:focus-visible{
   color: #94a3b8; text-align: center;
 }
 :where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close{
-  top: 20px; right: 20px; width: 24px; height: 24px;
+  top: 10px; right: 20px; width: 24px; height: 24px;
   border-radius: 999px; background: #f8fafc; color: #94a3b8;
-  font-size: 12px; font-weight: 700; line-height: 1;
+  font-size: 1.35rem; font-weight: 700; line-height: 1;
   transition: background-color .2s ease, color .2s ease;
+  right: 10px;
+  width: 40px;
+  height: 40px;
 }
 :where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close:hover{
   background: #f1f5f9; color: #475569;
@@ -7381,9 +7402,9 @@ tr > td:nth-child(2) > button:focus-visible{
   inset: 0;
   z-index: 5000;
   padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7392,28 +7413,31 @@ tr > td:nth-child(2) > button:focus-visible{
   position: relative;
   width: min(calc(100vw - 36px), 460px);
   padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
   background: var(--lcdp-color-surface);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
   text-align: center;
+  max-height: calc(100svh - 36px);
+  overflow-y: auto;
 }
 :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close{
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 34px;
-  height: 34px;
-  border: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
   border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
   color: var(--lcdp-color-text);
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
 }
 :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close:hover{
   background: #ffffff;
@@ -8448,10 +8472,10 @@ tr > td:nth-child(2) > button:focus-visible{
   position: relative;
   width: min(100%, 420px);
   padding: var(--lcdp-space-4);
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
   background: var(--lcdp-color-surface);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.22);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
   text-align: center;
   box-sizing: border-box;
 }
@@ -8459,16 +8483,23 @@ tr > td:nth-child(2) > button:focus-visible{
   position: absolute;
   top: var(--lcdp-space-2);
   right: var(--lcdp-space-2);
-  width: 34px;
-  height: 34px;
-  border: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
   border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
   color: var(--lcdp-color-text);
   font: inherit;
   font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__alerte-close:hover{
+  background: var(--lcdp-ui-close-hover, #e9eee6);
 }
 :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__alerte-message{
   margin: var(--lcdp-space-3) 0 var(--lcdp-space-4);
@@ -8753,9 +8784,9 @@ tr > td:nth-child(2) > button:focus-visible{
   min-height: 100vh;
   min-height: 100svh;
   padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8768,36 +8799,39 @@ tr > td:nth-child(2) > button:focus-visible{
   width: min(calc(100vw - 36px), 420px);
   max-width: 420px;
   padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
   background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--lcdp-space-3);
   text-align: center;
+  max-height: calc(100svh - 36px);
+  overflow-y: auto;
 }
 :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__close{
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 34px;
-  height: 34px;
-  min-width: 34px;
-  min-height: 34px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   padding: 0;
-  border: 0;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
   border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
   color: var(--lcdp-color-text);
   font-family: var(--lcdp-font-main);
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
 }
 :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__close:hover{
   background: #ffffff;
@@ -9211,9 +9245,9 @@ tr > td:nth-child(2) > button:focus-visible{
   inset: 0;
   z-index: 5200;
   padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9224,24 +9258,31 @@ tr > td:nth-child(2) > button:focus-visible{
   max-height: calc(100vh - (var(--lcdp-space-3) * 2));
   overflow: auto;
   padding: var(--lcdp-space-4);
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
   background: var(--lcdp-color-surface);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
 }
 :where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__close{
   position: absolute;
   top: var(--lcdp-space-2);
   right: var(--lcdp-space-2);
-  width: 38px;
-  height: 38px;
-  border: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
   border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
   color: var(--lcdp-color-text);
-  font-size: 1.8rem;
+  font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__close:hover{
+  background: var(--lcdp-ui-close-hover, #e9eee6);
 }
 :where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__title{
   margin: 0 44px var(--lcdp-space-4) 0;
@@ -9404,9 +9445,9 @@ tr > td:nth-child(2) > button:focus-visible{
   inset: 0;
   z-index: 5000;
   padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9417,27 +9458,28 @@ tr > td:nth-child(2) > button:focus-visible{
   max-height: calc(100vh - (var(--lcdp-space-3) * 2));
   overflow: auto;
   padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
   background: var(--lcdp-color-surface);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
 }
 :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__close{
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 34px;
-  height: 34px;
-  border: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
   border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
   color: var(--lcdp-color-text);
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
 }
 :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__close:hover{
   background: #ffffff;
@@ -12498,27 +12540,35 @@ tr > td:nth-child(2) > button:focus-visible{
   margin: auto;
   padding: 30px 22px 24px;
   overflow-y: auto;
-  border: 1px solid var(--lcdp-color-border, #cbd1cc);
-  border-radius: var(--lcdp-radius-large, 24px);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
   background: var(--lcdp-color-surface, #fff);
   color: var(--lcdp-color-text, #1f2a24);
   font-family: var(--lcdp-font-main, Arial, sans-serif);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
 }
 :where(html[data-lcdp-css~="c037"]) .lcdp-contact-info::backdrop{ background: rgba(31, 42, 36, 0.46); backdrop-filter: blur(4px); }
 :where(html[data-lcdp-css~="c037"]) .lcdp-contact-info__close{
   position: absolute;
   top: 8px;
   right: 8px;
-  width: 44px;
-  height: 44px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--lcdp-color-surface-soft, #f7f7f4);
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: 999px;
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
   color: inherit;
   font: inherit;
-  font-size: 28px;
+  font-size: 1.35rem;
   cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c037"]) .lcdp-contact-info__close:hover{
+  background: var(--lcdp-ui-close-hover, #e9eee6);
 }
 :where(html[data-lcdp-css~="c037"]) .lcdp-contact-info__title{ margin: 0 30px 18px 0; font-size: clamp(23px, 5vw, 28px); line-height: 1.2; }
 :where(html[data-lcdp-css~="c037"]) .lcdp-contact-info__text{ margin: 0 0 18px; font-size: 16px; line-height: 1.6; }
@@ -12775,6 +12825,17 @@ tr > td:nth-child(2) > button:focus-visible{
   --lcdp-radius-large: 24px;
   --lcdp-radius-media: 18px;
   --lcdp-radius-button: 14px;
+  /* Design system des commandes et dialogues : rendu utilitaire type Tailwind,
+     partagé entre boutons, alertes et boîtes informatives. Variantes couleur inchangées. */
+  --lcdp-ui-button-radius: 12px;
+  --lcdp-ui-button-shadow: 0 1px 2px rgba(31, 42, 36, 0.08);
+  --lcdp-ui-button-shadow-hover: 0 4px 6px -2px rgba(31, 42, 36, 0.10);
+  --lcdp-ui-dialog-radius: 16px;
+  --lcdp-ui-dialog-border: var(--lcdp-color-border);
+  --lcdp-ui-dialog-shadow: 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10);
+  --lcdp-ui-overlay: rgba(31, 42, 36, 0.46);
+  --lcdp-ui-close-bg: var(--lcdp-color-surface-soft);
+  --lcdp-ui-close-hover: var(--lcdp-color-surface-soft);
 
   --lcdp-shadow-soft: 0 12px 32px var(--lcdp-color-shadow);
 
@@ -12985,12 +13046,12 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
   max-width: 320px;
   min-height: 52px;
   padding: 12px 20px;
-  border: 2px solid var(--lcdp-color-logo-green);
-  border-radius: var(--lcdp-radius-button);
+  border: 1px solid var(--lcdp-color-logo-green);
+  border-radius: var(--lcdp-ui-button-radius, 12px);
   background: var(--lcdp-color-logo-green);
   color: #ffffff;
   font-family: var(--lcdp-font-main);
-  font-size: 17px;
+  font-size: 0.95rem;
   line-height: 1.2;
   font-weight: 600;
   text-align: center;
@@ -13001,11 +13062,26 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: var(--lcdp-ui-button-shadow, 0 1px 2px rgba(31, 42, 36, 0.08));
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button:hover{
   background: var(--lcdp-color-primary);
   border-color: var(--lcdp-color-primary);
   color: #ffffff;
+  box-shadow: var(--lcdp-ui-button-shadow-hover, 0 4px 6px -2px rgba(31, 42, 36, 0.10));
+}
+/* Commandes génériques : état indisponible et navigation clavier. */
+:where(html[data-lcdp-css~="c085"]) .lcdp-button:disabled,
+:where(html[data-lcdp-css~="c085"]) .lcdp-button[aria-disabled="true"]{
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-button:focus-visible{
+  outline: 2px solid var(--lcdp-color-logo-green);
+  outline-offset: 3px;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button-primary{
   background: var(--lcdp-color-logo-green);
