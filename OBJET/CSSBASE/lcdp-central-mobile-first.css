@@ -9587,7 +9587,8 @@ tr > td:nth-child(2) > button:focus-visible{
   display: flex;
   width: 100%;
   height: auto;
-  min-height: 6.5rem;
+  min-height: 0;
+  padding: 0;
   justify-content: center;
   align-items: center;
   overflow: visible;
@@ -9605,6 +9606,9 @@ tr > td:nth-child(2) > button:focus-visible{
   overflow: visible;
   color: inherit;
   text-decoration: none;
+  padding: 0;
+  line-height: inherit;
+  flex-wrap: wrap;
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne {
   display: flex;
@@ -9615,6 +9619,7 @@ tr > td:nth-child(2) > button:focus-visible{
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  padding: 0;
 }
 /* La pilule partage directement les règles .public-home__more du c085.
    Aucun second jeu de propriétés graphiques. */
@@ -9638,6 +9643,7 @@ tr > td:nth-child(2) > button:focus-visible{
   line-height: inherit;
   letter-spacing: normal;
   text-transform: lowercase;
+  white-space: nowrap;
 }
 /* Respect de la casse Tailwind, y compris si le groupe source est en capitales. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne .lcdp-actualite-groupe[data-groupe]::first-letter {
@@ -9648,8 +9654,10 @@ tr > td:nth-child(2) > button:focus-visible{
   content: "›";
   display: inline-block;
   color: currentColor;
-  font-size: .875rem;
+  font-size: 1rem;
+  font-weight: 400;
   line-height: 1;
+  margin-left: .125rem;
 }
 /* Le texte dynamique partage directement les règles .public-home__heading.
    Ces seules propriétés assurent la compatibilité avec l'animation et la largeur. */
@@ -9666,10 +9674,15 @@ tr > td:nth-child(2) > button:focus-visible{
   text-align: center;
   text-overflow: clip;
   margin: 0;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 2rem;
+  letter-spacing: -.025em;
+  color: var(--home-slate-900);
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-placeholder {
-  height: 6.5rem;
-  min-height: 6.5rem;
+  height: 6rem;
+  min-height: 6rem;
 }
 /* Le titre est construit avec des lettres animées : autoriser son retour à la ligne. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-texte-anime {
@@ -9677,9 +9690,10 @@ tr > td:nth-child(2) > button:focus-visible{
   width: 100%;
   max-width: 100%;
   white-space: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   word-break: normal;
   text-align: center;
+  line-height: inherit;
 }
 /* LCDP_public/OBJET/BOX/03-box-champ-formulaire.css */
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire{
@@ -14847,6 +14861,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   flex-direction: column;
   justify-content: safe center;
   gap: 2rem;
+  overflow-x: hidden;
   overflow-y: auto;
   padding: 1.5rem;
   padding-bottom: calc(1.5rem + 30dvh);
