@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-lcdp-css="c085 c034 c033 c037 c041 c040 c036 c038">
 <head>
   <meta charset="utf-8">
 
@@ -17,25 +17,42 @@
       "";
   </script>
 
-  <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
-  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
-  <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
   <style>
-    /* Centrage du bouton-logo, uniquement sur la page de connexion. */
+    /* Connexion : centrer les deux logos indépendants de la page. */
+    #lcdp-bandeau-slot .lcdp-box-bandeau-nav__inner {
+      position: relative;
+    }
+    #lcdp-bandeau-slot .lcdp-box-bandeau-nav__logo-link {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #formulaire-connexion-membre .lcdp-box-formulaire__actions {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
     #formulaire-connexion-membre .lcdp-box-formulaire__actions > .lcdp-button-logo {
-      margin-left: auto;
-      margin-right: auto;
+      display: inline-flex !important;
+      flex: 0 0 auto !important;
+      width: var(--lcdp-button-logo-size-mobile, 76px) !important;
+      height: var(--lcdp-button-logo-size-mobile, 76px) !important;
+      margin: 0 !important;
+    }
+    @media (min-width: 768px) {
+      #formulaire-connexion-membre .lcdp-box-formulaire__actions > .lcdp-button-logo {
+        width: var(--lcdp-button-logo-size-desktop, 84px) !important;
+        height: var(--lcdp-button-logo-size-desktop, 84px) !important;
+      }
     }
   </style>
 </head>
 
-<body>
-  <div class="lcdp-site-page">
+<body class="lcdp-connexion-membre lcdp-app-page">
+  <div class="lcdp-site-page lcdp-app-wrapper">
 
     <div id="lcdp-bandeau-slot"></div>
 
