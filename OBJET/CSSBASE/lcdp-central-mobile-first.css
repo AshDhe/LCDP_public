@@ -16347,3 +16347,10 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 :where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning .lcdp-box-dialogue-bouton__text {
   margin-top: 0;
 }
+
+/* Formulaires publics PARC et COACH : titres explicatifs de l'introduction.
+   Remplace les attributs style inline des scripts de contact, sans modifier les autres formulaires. */
+:where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-parc .lcdp-box-formulaire .lcdp-text-strong-left,
+:where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-coach .lcdp-box-formulaire .lcdp-text-strong-left {
+  font-weight: 700 !important;
+}
