@@ -13,15 +13,21 @@
   const comptesPublics = {
     membre: {
       label: "Compte membre",
+      icone: "👤",
+      description: "Accès particulier",
       cheminConnexion: "/ESPACE-PUBLIC/connexion-membre.html?source=menu-mon-compte"
     },
     parc: {
       label: "Compte parc",
+      icone: "🌳",
+      description: "Espace propriétaire / gestion",
       espace: "parc",
       cheminConnexion: "/ESPACE-PARC/connexion-parc.html?source=menu-mon-compte"
     },
     coach: {
       label: "Compte coach",
+      icone: "👟",
+      description: "Espace professionnel",
       espace: "coach",
       cheminConnexion: "/ESPACE-COACH/connexion-coach.html?source=menu-mon-compte"
     }
@@ -210,11 +216,6 @@
   async function ouvrirDialogueMonComptePublic() {
     chargerCssUneFois("/OBJET/BOX/02-box-dialogue-bouton.css");
 
-    // Active le composant de dialogue c036 dans le CSS central s'il ne l'est pas déjà.
-    const modules = new Set((document.documentElement.dataset.lcdpCss || "").split(/\s+/).filter(Boolean));
-    modules.add("c036");
-    document.documentElement.dataset.lcdpCss = Array.from(modules).join(" ");
-
     const slot = assurerLightboxSlot();
     slot.innerHTML = "";
 
@@ -231,8 +232,8 @@
       throw new Error("Structure de dialogue Mon compte incomplète.");
     }
 
-    dialogue.dataset.lcdpConnexion = "true";
-
+    // Ne cibler que le choix des comptes : les autres boîtes restent inchangées.
+    dialogue.setAttribute("data-lcdp-connexion", "");
     titre.textContent = "Connexion";
     texte.textContent = "Choisissez votre compte";
 
@@ -243,21 +244,24 @@
       bouton.type = "button";
       bouton.className = "lcdp-button lcdp-button-compte lcdp-button-compte--" + compte;
 
-      const presentation = {
-        membre: { icone: "👤", description: "Accès particulier" },
-        parc: { icone: "🌳", description: "Espace propriétaire / gestion" },
-        coach: { icone: "👟", description: "Espace professionnel" }
-      }[compte];
       const icone = document.createElement("span");
-      icone.textContent = presentation.icone;
+      icone.className = "lcdp-button-compte__icone";
       icone.setAttribute("aria-hidden", "true");
-      const contenu = document.createElement("span");
+      icone.textContent = configuration.icone;
+
+      const details = document.createElement("span");
+      details.className = "lcdp-button-compte__details";
+
       const libelle = document.createElement("strong");
+      libelle.className = "lcdp-button-compte__libelle";
       libelle.textContent = configuration.label;
+
       const description = document.createElement("small");
-      description.textContent = presentation.description;
-      contenu.append(libelle, description);
-      bouton.append(icone, contenu);
+      description.className = "lcdp-button-compte__description";
+      description.textContent = configuration.description;
+
+      details.append(libelle, description);
+      bouton.append(icone, details);
 
       bouton.addEventListener("click", () => {
         redirigerCompte(compte);
