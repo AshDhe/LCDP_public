@@ -270,19 +270,3 @@
     padding: 11px 14px;
   }
 }
-
-/* Centrage des actions contenant un bouton-logo (connexion, création MDP).
-   Conserve le comportement des autres groupes de boutons. */
-.lcdp-box-formulaire .lcdp-box-formulaire__actions:has(> .lcdp-button-logo) {
-  width: 100% !important;
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) !important;
-  justify-items: center !important;
-  align-items: center !important;
-}
-
-.lcdp-box-formulaire .lcdp-box-formulaire__actions > .lcdp-button-logo {
-  margin-inline: auto !important;
-  justify-self: center !important;
-  flex: 0 0 auto !important;
-}
