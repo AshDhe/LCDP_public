@@ -2396,7 +2396,8 @@ tr > td:nth-child(2) > button:focus-visible{
   overflow: visible;
 }
 /* c034 — bandeau dans le gabarit public réutilisable. */
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > #lcdp-bandeau-slot {
+:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > #lcdp-bandeau-slot,
+:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > .lcdp-box-bandeau-nav {
   display: block;
   flex: 0 0 68px;
   width: 100%;
@@ -14848,7 +14849,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 .lcdp-planning-parc-admin__scroll-haut-mesure{display:block;width:auto;max-width:none;height:1px}
 
 /* c085 — GABARIT PUBLIC COMMUN, MOBILE-FIRST.
-   Activer sur chaque page : body.lcdp-app-page + .lcdp-site-page.lcdp-app-wrapper.
+   Activer sur chaque page : body.lcdp-app-page + .lcdp-app-wrapper.
    Même coque, même header/footer, seul le contenu central défile.
    Aucune condition liée au nom d'une page. */
 :where(html[data-lcdp-css~="c085"]) body.lcdp-app-page {
@@ -14864,7 +14865,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   font-size: 14px;
   line-height: 1.5;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-site-page.lcdp-app-wrapper {
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -15033,7 +15034,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
     align-items: center;
     padding: 16px;
   }
-  :where(html[data-lcdp-css~="c085"]) .lcdp-site-page.lcdp-app-wrapper {
+  :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper {
     height: calc(100dvh - 32px);
   }
 }
@@ -15066,21 +15067,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   --home-slate-600: #475569;
   --home-slate-800: #1e293b;
   --home-slate-900: #0f172a;
-  margin: 0;
-  min-height: 100vh;
-  min-height: 100dvh;
-  height: auto;
   overflow-x: hidden;
-  overflow-y: visible;
-  padding: .75rem;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--home-slate-50);
-  color: var(--home-slate-800);
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.5;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -15090,40 +15077,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 :where(html[data-lcdp-css~="c085"]) .public-home button { font: inherit; cursor: pointer; }
 :where(html[data-lcdp-css~="c085"]) .public-home svg { display: block; }
 
-:where(html[data-lcdp-css~="c085"]) .public-home__app {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 28rem;
-  min-height: calc(100vh - 1.5rem);
-  min-height: calc(100dvh - 1.5rem);
-  height: calc(100dvh - 1.5rem);
-  overflow: visible;
-  background: #fff;
-  border: 1px solid var(--home-slate-100);
-  border-radius: 1.5rem;
-  box-shadow: 0 20px 25px -5px rgb(226 232 240 / 50%), 0 8px 10px -6px rgb(226 232 240 / 50%);
-}
-
-/* Shared public header is placed within the home card instead of being fixed to the viewport. */
-:where(html[data-lcdp-css~="c085"]) .public-home #lcdp-bandeau-slot {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 0;
-  flex: 0 0 auto;
-  position: relative;
-  z-index: 1;
-}
-:where(html[data-lcdp-css~="c085"]) .public-home .lcdp-box-bandeau-nav {
-  position: relative;
-  inset: auto;
-  width: 100%;
-  min-height: 68px;
-  border-radius: 1.5rem 1.5rem 0 0;
-}
-:where(html[data-lcdp-css~="c085"]) .public-home .lcdp-box-bandeau-nav__inner {
-  max-width: 100%;
-}
+/* Bandeau de l’accueil : géométrie assurée par le composant partagé c034. */
 :where(html[data-lcdp-css~="c085"]) .public-home__brand-icon {
   box-sizing: border-box;
   overflow: hidden;
@@ -15142,7 +15096,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   object-fit: contain;
 }
 
-:where(html[data-lcdp-css~="c085"]) .public-home__main {
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .public-home__main {
   display: flex;
   flex: 1 1 auto;
   min-width: 0;
@@ -15150,7 +15104,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   flex-direction: column;
   justify-content: flex-start;
   gap: 0;
-  overflow: visible;
   padding: 1.5rem;
   background: rgb(248 250 252 / 50%);
 }
@@ -15260,11 +15213,13 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 
 :where(html[data-lcdp-css~="c085"]) .public-home__footer {
   display: flex;
-  flex-shrink: 0;
+  flex: 0 0 50px;
+  box-sizing: border-box;
+  height: 50px;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 0;
   border-top: 1px solid var(--home-slate-100);
   border-radius: 0 0 1.5rem 1.5rem;
   background: #fff;
@@ -15295,19 +15250,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__footer > :is(a, button[popovertarget="lcdp-footer-verification-info"]):hover { color: var(--home-slate-600); }
 :where(html[data-lcdp-css~="c085"]) .public-home__footer-separator { color: var(--home-slate-200); }
-
-/* Accueil public : adaptation progressive à la fenêtre (mobile first).
-   Structure, couleurs, pictogrammes et dimensions des boutons inchangés. */
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c085"]) .public-home {
-    padding: 1rem;
-  }
-  :where(html[data-lcdp-css~="c085"]) .public-home__app {
-    min-height: min(850px, calc(100dvh - 2rem));
-    height: min(850px, calc(100dvh - 2rem));
-    max-height: none;
-  }
-}
 
 /* Accueil public : branchement fonctionnel du footer historique.
    Les règles sont limitées à c085 et ne modifient aucun autre footer. */
@@ -15432,14 +15374,14 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 }
 
 @media (max-height: 720px) {
-  :where(html[data-lcdp-css~="c085"]) .public-home__main { padding: .75rem 1.5rem; }
+  :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .public-home__main { padding: .75rem 1.5rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__actions { gap: .75rem; margin-top: 1.5rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__action { padding: .75rem; gap: .25rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home .lcdp-box-bandeau-nav__inner { padding-top: .75rem; padding-bottom: .75rem; }
-  :where(html[data-lcdp-css~="c085"]) .public-home__footer { padding-top: .75rem; padding-bottom: .75rem; }
+
 }
 @media (max-height: 560px) {
-  :where(html[data-lcdp-css~="c085"]) .public-home__main { padding-top: .5rem; padding-bottom: .5rem; }
+  :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .public-home__main { padding-top: .5rem; padding-bottom: .5rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__actions { gap: .5rem; margin-top: 1rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__action { padding: .5rem; }
 }
