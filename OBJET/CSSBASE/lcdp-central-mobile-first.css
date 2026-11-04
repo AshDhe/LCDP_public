@@ -14803,11 +14803,10 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   justify-content: center;
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__brand-icon {
-  border: 1px solid rgb(255 255 255 / 20%);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  box-sizing: border-box;
+  overflow: hidden;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__brand-icon svg { width: 1.25rem; height: 1.25rem; }
+:where(html[data-lcdp-css~="c085"]) .public-home__brand-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
 :where(html[data-lcdp-css~="c085"]) .public-home__brand-name {
   margin: 0;
   font-size: 1rem;
