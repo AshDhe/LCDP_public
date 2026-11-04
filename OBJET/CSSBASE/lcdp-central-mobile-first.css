@@ -9726,7 +9726,7 @@ tr > td:nth-child(2) > button:focus-visible{
   font-weight: 900;
   line-height: 2rem;
   letter-spacing: -.025em;
-  color: var(--home-slate-900);
+  color: #0f172a;
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-placeholder {
   height: 6rem;
@@ -9742,6 +9742,7 @@ tr > td:nth-child(2) > button:focus-visible{
   word-break: normal;
   text-align: center;
   line-height: inherit;
+  color: inherit;
 }
 /* LCDP_public/OBJET/BOX/03-box-champ-formulaire.css */
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire{
@@ -14939,11 +14940,10 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   min-height: 0;
   flex-direction: column;
   justify-content: safe center;
-  gap: 2rem;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 1.5rem;
-  padding-bottom: calc(1.5rem + 30dvh);
+  gap: clamp(.75rem, 2.5dvh, 2rem);
+  overflow: visible;
+  padding: clamp(.75rem, 2dvh, 1.5rem) 1.5rem;
+  padding-bottom: clamp(2.5rem, 12dvh, 6rem);
   background: rgb(248 250 252 / 50%);
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__intro { text-align: center; }
