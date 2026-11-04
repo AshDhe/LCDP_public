@@ -14576,7 +14576,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   margin: 0;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 1rem;
+  padding: .75rem;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -14599,7 +14599,9 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   flex-direction: column;
   width: 100%;
   max-width: 28rem;
-  height: 850px;
+  height: calc(100vh - 1.5rem);
+  height: calc(100dvh - 1.5rem);
+  min-height: 0;
   overflow: hidden;
   background: #fff;
   border: 1px solid var(--home-slate-100);
@@ -14783,3 +14785,16 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__footer a:hover { color: var(--home-slate-600); }
 :where(html[data-lcdp-css~="c085"]) .public-home__footer-separator { color: var(--home-slate-200); }
+
+/* Accueil public : adaptation progressive à la fenêtre (mobile first).
+   Structure, couleurs, pictogrammes et dimensions des boutons inchangés. */
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c085"]) .public-home {
+    padding: 1rem;
+  }
+  :where(html[data-lcdp-css~="c085"]) .public-home__app {
+    height: calc(100vh - 2rem);
+    height: calc(100dvh - 2rem);
+    max-height: 850px;
+  }
+}
