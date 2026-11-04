@@ -270,9 +270,16 @@
             throw new Error("Objet BoxText incomplet.");
           }
 
+          const titreBloc = String(bloc?.titre || "");
           box.querySelector(
             "[data-lcdp-boxtext-title]"
-          ).textContent = String(bloc?.titre || "");
+          ).textContent = titreBloc;
+
+          // Numéro visuel seulement : la donnée administrative reste intacte.
+          // Ne pas doubler un numéro déjà présent (1., Article 1, section 2...).
+          if (!/^\s*(?:(?:article|section|chapitre)\s*)?\d+(?=\s|[.):\-])/i.test(titreBloc)) {
+            enveloppe.classList.add("lcdp-legal-section--numerotation-auto");
+          }
 
           box.querySelector(
             "[data-lcdp-boxtext-content]"

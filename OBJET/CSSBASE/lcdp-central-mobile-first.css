@@ -12377,6 +12377,72 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c083"]) [data-lcdp-savoir-plus-dialog] .lcdp-boxtext__content > figure + p,:where(html[data-lcdp-css~="c083"]) [data-lcdp-savoir-plus-dialog] .lcdp-boxtext__content > img + p{
   margin-top: 1rem !important;
 }
+/* LCDP_public/OBJET/BOX/documents-legaux.css — correction des couleurs juridiques.
+   Scope c083 : n'affecte pas les autres pages et neutralise les tons slate de BoxText/c085. */
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__title,
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content {
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content a {
+  color: var(--lcdp-color-primary);
+}
+/* Déclarations directes nécessaires face aux règles du gabarit public c085. */
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-document-legal__title {
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__context {
+  color: var(--lcdp-color-text-muted);
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext__content strong {
+  color: var(--lcdp-color-text);
+}
+
+/* Règlement club : harmonisation du gabarit, sans modifier les autres espaces.
+   L'ancien fond et le pied de page utilisaient encore des couleurs slate. */
+:where(html[data-lcdp-css~="c083"]) body.lcdp-app-page.lcdp-page-document-legal {
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper {
+  border-color: var(--lcdp-color-border);
+  box-shadow: 0 12px 32px rgba(31, 42, 36, 0.12);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper > .lcdp-site-main {
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext {
+  border-color: var(--lcdp-color-border);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper > #lcdp-footer-slot {
+  border-top-color: var(--lcdp-color-border);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-box-footer__inner,
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-box-footer__inner > :is(a, button) {
+  color: var(--lcdp-color-text-muted);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-box-footer__inner > :is(a, button):is(:hover, :focus-visible) {
+  color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-box-footer__separator::before {
+  color: var(--lcdp-color-border-strong);
+}
+/* Règlement club : restauration des espacements éditoriaux de c083.
+   Le gabarit c085 possède des sélecteurs plus spécifiques qui les écrasaient. */
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
+  padding-top: clamp(1.25rem, 4vw, 2.5rem);
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-page-content.lcdp-document-legal {
+  gap: clamp(1rem, 2.4vw, 1.5rem);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-document-legal__title {
+  margin: 0;
+  font-size: 1.8rem; /* La coque mobile est fixe : les vw suivraient le grand écran. */
+  line-height: 1.12;
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-document-legal__context {
+  margin: -0.4rem 0 0;
+}
 /* LCDP_public/OBJET/BOX/02-box-footer.css */
 :where(html[data-lcdp-css~="c037"]) .lcdp-box-footer{
   height: 50px;
@@ -16498,4 +16564,352 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire:has(> .lcdp-box-dialogue-bouton__close) > .lcdp-box-formulaire__header,
 :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext:has(> .lcdp-box-dialogue-bouton__close) > .lcdp-boxtext__title {
   padding-inline: 26px;
+}
+
+/* LA CLÉ DU PARC — OBJET EMAIL / STYLE 01 « ÉDITORIAL »
+   Pour prévisualisation dans l'application uniquement.
+   Les e-mails effectivement envoyés sont générés avec styles inline
+   par lcdp-email-editorial.js : pas de dépendance à ce CSS distant.
+   Composants : objet, titre, sous-titre, paragraphes, image,
+   commentaire, signature, action et pied de page.
+   Préfixe dédié : aucune règle existante modifiée. */
+.lcdp-email-editorial {
+  box-sizing: border-box;
+  width: min(100%, 600px);
+  margin-inline: auto;
+  background: #ffffff;
+  color: #484b43;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.lcdp-email-editorial *,
+.lcdp-email-editorial *::before,
+.lcdp-email-editorial *::after { box-sizing: border-box; }
+.lcdp-email-editorial__objet {
+  margin: 0 0 12px;
+  color: #848b7e;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.lcdp-email-editorial__entete {
+  padding: 34px 44px 29px;
+  border-bottom: 1px solid #e5e7de;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.lcdp-email-editorial__marque {
+  margin: 0;
+  color: #35462e;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+.lcdp-email-editorial__contexte {
+  margin: 0;
+  color: #848b7e;
+  font-size: 11px;
+  text-align: right;
+  line-height: 1.3;
+}
+.lcdp-email-editorial__corps { padding: 58px 44px 25px; }
+.lcdp-email-editorial__sous-titre {
+  margin: 0 0 12px;
+  color: #9a6329;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.lcdp-email-editorial__titre {
+  margin: 0 0 42px;
+  color: #232a20;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+.lcdp-email-editorial__paragraphe {
+  margin: 0 0 20px;
+  color: #484b43;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.lcdp-email-editorial__image { margin: 25px 0 0; }
+.lcdp-email-editorial__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0;
+}
+.lcdp-email-editorial__legende {
+  margin: 9px 0 0;
+  color: #85877e;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.lcdp-email-editorial__citation {
+  margin: 25px 0 0;
+  color: #747970;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.65;
+}
+.lcdp-email-editorial__citation-auteur {
+  margin: 8px 0 0;
+  color: #85867c;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.lcdp-email-editorial__commentaire {
+  margin: 25px 0 0;
+  color: #747970;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.65;
+}
+.lcdp-email-editorial__signature {
+  margin: 12px 0 0;
+  color: #85867c;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+.lcdp-email-editorial__action { margin: 26px 0 0; }
+.lcdp-email-editorial__bouton {
+  display: inline-block;
+  padding: 15px 23px;
+  border-radius: 4px;
+  background: #4e6838;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+}
+.lcdp-email-editorial__bouton:link,
+.lcdp-email-editorial__bouton:visited,
+.lcdp-email-editorial__bouton:hover { color: #ffffff; text-decoration: none; }
+.lcdp-email-editorial__pied {
+  padding: 22px 44px 26px;
+  border-top: 1px solid #e8e9e3;
+  color: #85877e;
+  font-size: 10px;
+  line-height: 1.7;
+}
+.lcdp-email-editorial__pied p { margin: 0; }
+.lcdp-email-editorial__pied a { color: inherit; text-decoration: underline; }
+@media (max-width:620px) {
+  .lcdp-email-editorial__entete { padding: 28px 24px 24px; }
+  .lcdp-email-editorial__corps { padding: 36px 24px 25px; }
+  .lcdp-email-editorial__titre { font-size: 30px; line-height: 1.16; }
+  .lcdp-email-editorial__pied { padding: 22px 24px 26px; }
+}
+
+/* ============================================================================
+   c083 — DOCUMENTS OFFICIELS / ÉDITORIAUX (11-2026)
+   Présentation commune : règlement du club, règlement de l'application,
+   mentions légales et tout document futur portant .lcdp-document-legal.
+   Données inchangées : blocs { titre, html } de l'éditeur administratif.
+   Styles intégrés au CSS central, sans runtime Tailwind ni HTML figé.
+   ============================================================================ */
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  min-width: 0;
+  margin-inline: auto;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__title {
+  margin: 8px 0 0;
+  color: #232a25;
+  font-size: clamp(22px, 5vw, 26px);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -.025em;
+  text-align: center;
+  overflow-wrap: normal;
+}
+/* Cartouche de présentation existant, alimenté par la page et non par le CSS. */
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__context {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 18px 20px;
+  border: 1px solid #edf0ec;
+  border-radius: 16px;
+  background: #fff;
+  color: #616b64;
+  box-shadow: 0 1px 3px rgb(33 44 35 / 5%);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.65;
+  text-align: center;
+  white-space: normal;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
+  counter-reset: lcdp-legal-section;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content > div {
+  min-width: 0;
+  margin: 0;
+  counter-increment: lcdp-legal-section;
+}
+/* Chaque bloc administré reste une box-text : aucun clonage du contenu. */
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext,
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(16px, 4vw, 20px);
+  border: 1px solid #edf0ec;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(33 44 35 / 6%);
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext__title,
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__title {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+  color: #232a25;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.45;
+  letter-spacing: -.012em;
+  text-align: left;
+  overflow-wrap: break-word;
+}
+/* Numérotation visuelle facultative ; ne duplique pas les titres déjà numérotés. */
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content > .lcdp-legal-section--numerotation-auto .lcdp-boxtext__title::before {
+  box-sizing: border-box;
+  content: counter(lcdp-legal-section);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #eef5eb;
+  color: #4e6838;
+  font: 800 11px/1 Arial, system-ui, sans-serif;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext__content,
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content {
+  box-sizing: border-box;
+  display: block;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 0 16px;
+  border-left: 2px solid #edf0ec;
+  color: #5d6860;
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.75;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content :is(p, ul, ol),
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content :is(p, ul, ol) {
+  margin: 0 0 12px !important;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content > :last-child,
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content > :last-child {
+  margin-bottom: 0 !important;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content :is(ul, ol),
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content :is(ul, ol) {
+  padding-left: 22px;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content li,
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content li {
+  padding-left: 2px;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content li::marker,
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content li::marker {
+  color: #4e6838;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content strong,
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content strong {
+  color: #303a32;
+  font-weight: 750;
+}
+/* Sous-titre reconnaissable dans l'éditeur existant : un paragraphe en gras. */
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content p:has(> strong:only-child),
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content p:has(> strong:only-child) {
+  margin-top: 14px !important;
+  margin-bottom: 5px !important;
+  color: #303a32;
+  font-size: 13px;
+  line-height: 1.5;
+}
+/* Note en retrait : un paragraphe entièrement en italique. */
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content p:has(> em:only-child),
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content p:has(> em:only-child) {
+  padding: 9px 10px;
+  border: 1px solid #eef0ed;
+  border-radius: 8px;
+  background: #f8faf8;
+  color: #68736b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content a,
+:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content a {
+  color: #4e6838;
+  text-decoration: underline;
+  text-decoration-color: #a0ae96;
+  text-underline-offset: 3px;
+}
+@media (max-width: 420px) {
+  :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext {
+    padding: 16px;
+  }
+  :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext__title {
+    gap: 10px;
+    font-size: 13px;
+  }
+}
+@media print {
+  :where(html[data-lcdp-css~="c083"]) body.lcdp-app-page,
+  :where(html[data-lcdp-css~="c083"]) .lcdp-app-wrapper,
+  :where(html[data-lcdp-css~="c083"]) .lcdp-app-wrapper > .lcdp-site-main {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    background: #fff !important;
+  }
+  :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content > div {
+    break-inside: avoid;
+  }
 }

@@ -17,7 +17,7 @@
       "";
   </script>
 
-  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261104-135019-reglement" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261104-135019-reglement">
 </head>
 
 <body class="lcdp-page-document-legal lcdp-app-page">
@@ -270,9 +270,16 @@
             throw new Error("Objet BoxText incomplet.");
           }
 
+          const titreBloc = String(bloc?.titre || "");
           box.querySelector(
             "[data-lcdp-boxtext-title]"
-          ).textContent = String(bloc?.titre || "");
+          ).textContent = titreBloc;
+
+          // Numéro visuel seulement : la donnée administrative reste intacte.
+          // Ne pas doubler un numéro déjà présent (1., Article 1, section 2...).
+          if (!/^\s*(?:(?:article|section|chapitre)\s*)?\d+(?=\s|[.):\-])/i.test(titreBloc)) {
+            enveloppe.classList.add("lcdp-legal-section--numerotation-auto");
+          }
 
           box.querySelector(
             "[data-lcdp-boxtext-content]"
