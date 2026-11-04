@@ -6664,6 +6664,14 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-heure--fermee{ background: transparent !important; border: 1px solid #dce2e5 !important; color: #616b70 !important; }
 :where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin [data-lcdp-card-jour-mois-slot][hidden]{ display: none !important; }
 :where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--masquee{ visibility: hidden !important; }
+/* ==========================================================================
+   TAILWIND GÉNÉRIQUE — FORMULAIRES | module c041
+   Référence : maquette « Connexion membre » du 04/11/2026.
+   Transcription CSS native des utilitaires Tailwind, sans CDN ni dépendance.
+   Application générique aux classes .lcdp-box-formulaire sur les pages
+   activant c041 ; les variantes fonctionnelles existantes restent possibles.
+   c040 (plus bas) couvre l'ensemble des champs et cases à cocher.
+   ========================================================================== */
 /* LCDP_public/OBJET/BOX/03-box-formulaire.css */
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page{
   width:100%;
@@ -6687,7 +6695,8 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header{
   width:100%;
   display:flex;flex-direction:column;gap:4px;
-  margin:8px 0 24px;text-align:center;
+  margin:0;padding:0 0 8px;border-bottom:1px solid #f8fafc;
+  text-align:center;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header[hidden],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header:not(:has(:not([hidden]))),:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro[hidden],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__subtitle[hidden],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note[hidden]{
   display: none !important;
@@ -6695,17 +6704,21 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__title{
   width:100%;margin:0;padding:0;border:0;
   background:transparent;box-shadow:none;
-  font:900 24px/32px Arial,system-ui,sans-serif;
+  font:900 20px/28px Arial,system-ui,sans-serif;
   letter-spacing:-.025em;color:#0f172a;text-align:center;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__subtitle{
   margin:0;
-  font:700 12px/1.5 Arial,system-ui,sans-serif;
-  letter-spacing:.05em;text-transform:uppercase;
-  color:#e59834;text-align:center;
+  font:400 11px/1.5 Arial,system-ui,sans-serif;
+  letter-spacing:normal;text-transform:none;
+  color:#94a3b8;text-align:center;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__subtitle.lcdp-box-formulaire__subtitle--accent{
   color:#e59834;
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro{
   color:#94a3b8;
@@ -6724,6 +6737,27 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__fields{
   width:100%;min-width:0;display:flex;flex-direction:column;gap:20px;
 }
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;min-width:0;padding-top:4px;
+  color:#64748b;font:400 12px/1.5 Arial,system-ui,sans-serif;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options .lcdp-box-champ-formulaire__checkbox-line{
+  margin:0;display:inline-flex;align-items:center;gap:10px;
+  color:#64748b;font-size:12px;font-weight:500;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options .lcdp-box-champ-formulaire__checkbox-line input[type="checkbox"]{
+  margin:0;flex:0 0 16px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__password-recovery,
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options > a{
+  margin-left:auto;color:#94a3b8;font:500 12px/1.5 Arial,system-ui,sans-serif;
+  text-decoration:underline;text-underline-offset:2px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__password-recovery:hover,
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options > a:hover{
+  color:#1e293b;
+}
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions{
   width:100%;display:flex;flex-direction:column;gap:8px;
   padding-top:12px;
@@ -6737,6 +6771,10 @@ tr > td:nth-child(2) > button:focus-visible{
   color:#fff;background:#4e6838;
   box-shadow:0 4px 6px -1px rgba(15,23,42,.12);
   transition:background-color .2s ease,transform .2s ease;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button svg{
+  display:block;flex:0 0 16px;width:16px;height:16px;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button:hover {background:#3d522c;color:#fff;}
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button:active {transform:scale(.99);}
@@ -6776,7 +6814,7 @@ tr > td:nth-child(2) > button:focus-visible{
   :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page {padding:0;}
   :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page__inner {max-width:100%;}
   :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire {padding:24px;}
-  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__title {font-size:24px;}
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__title {font-size:20px;}
   :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button {width:100%;max-width:none;min-width:0;}
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page--compact .lcdp-box-formulaire-page__inner{
@@ -9780,6 +9818,12 @@ tr > td:nth-child(2) > button:focus-visible{
   line-height: inherit;
   color: inherit;
 }
+/* ==========================================================================
+   TAILWIND GÉNÉRIQUE — CHAMPS DE FORMULAIRE | module c040
+   Labels, saisies, placeholders, focus, cases à cocher, champs désactivés.
+   Le CSS natif reprend les classes Tailwind de la maquette, sans moteur JS.
+   Les composants spécifiques (lecture, modification, badges) sont conservés.
+   ========================================================================== */
 /* LCDP_public/OBJET/BOX/03-box-champ-formulaire.css */
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire{
   box-sizing:border-box;width:100%;min-width:0;text-align:left;
@@ -9853,6 +9897,11 @@ tr > td:nth-child(2) > button:focus-visible{
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input:focus,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire select:focus,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire textarea:focus{
   outline:none;border-color:#94a3b8;background:#fff;box-shadow:none;
+}
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire input:focus-visible,
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire select:focus-visible,
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire textarea:focus-visible{
+  outline:2px solid #4e6838;outline-offset:2px;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire:has(input[type="checkbox"]) > .lcdp-box-champ-formulaire__label-zone {display:none;}
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line a {color:#334155;font-weight:500;text-decoration:underline;text-underline-offset:2px;}
