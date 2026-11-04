@@ -18,6 +18,243 @@
   </script>
 
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
+
+  <!-- Habillage réservé aux formulaires publics COACH / PARC.
+       Les composants et les scripts fonctionnels restent inchangés. -->
+  <style>
+    /* Mise en page inspirée du modèle de contact fourni. */
+    body.lcdp-page-contact-coach .lcdp-site-main,
+    body.lcdp-page-contact-parc .lcdp-site-main {
+      background: #fafbfc;
+      min-width: 0;
+    }
+
+    body.lcdp-page-contact-coach .lcdp-site-main .lcdp-page-section,
+    body.lcdp-page-contact-parc .lcdp-site-main .lcdp-page-section {
+      padding: 24px 16px 40px;
+    }
+
+    body.lcdp-page-contact-coach .lcdp-site-main .lcdp-page-container,
+    body.lcdp-page-contact-parc .lcdp-site-main .lcdp-page-container {
+      width: 100%;
+      max-width: 540px;
+      margin-inline: auto;
+      box-sizing: border-box;
+    }
+
+    body.lcdp-page-contact-coach .lcdp-site-main .lcdp-page-content,
+    body.lcdp-page-contact-parc .lcdp-site-main .lcdp-page-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      min-width: 0;
+    }
+
+    body.lcdp-page-contact-coach .lcdp-site-main .lcdp-title-page-center,
+    body.lcdp-page-contact-parc .lcdp-site-main .lcdp-title-page-center {
+      margin: 0;
+      text-align: center;
+      color: #1f2a24;
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: .01em;
+    }
+
+    /* La zone qui accueille le formulaire est la carte blanche.
+       Aucun changement de DOM n'est requis à l'injection du formulaire. */
+    body.lcdp-page-contact-coach #lcdp-contact-contenu,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu {
+      width: 100%;
+      box-sizing: border-box;
+      background: #fff;
+      border: 1px solid #edf0f2;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 4px 16px rgb(31 42 36 / 3%);
+      color: #1f2a24;
+    }
+
+    /* Conserver l'état de chargement : l'attribut hidden reste prioritaire. */
+    body.lcdp-page-contact-coach #lcdp-contact-contenu[hidden],
+    body.lcdp-page-contact-parc #lcdp-contact-contenu[hidden] {
+      display: none !important;
+    }
+
+    /* Pas de seconde carte ni de double bordure dans le composant injecté. */
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-box-formulaire,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-box-formulaire {
+      width: 100%;
+      max-width: none;
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* En-tête du formulaire : titre rose, note centrée, séparateur léger. */
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-box-formulaire__header,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-box-formulaire__header {
+      text-align: center;
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #edf0f2;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-box-formulaire__title,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-box-formulaire__title {
+      margin: 0 0 8px;
+      color: #d64b68;
+      font-size: 1.4rem;
+      line-height: 1.25;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-box-formulaire__note,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-box-formulaire__note {
+      margin: 0;
+      color: #1f2a24;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* Avantages de l'offre : titre centré et trois encarts à liseré rose.
+       Les sélecteurs couvrent paragraphes, éléments de liste et div directs. */
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-boxtext,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-boxtext {
+      margin-bottom: 24px;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-boxtext__title,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-boxtext__title {
+      margin: 0 0 16px;
+      text-align: center;
+      color: #1f2a24;
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-boxtext__content,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-boxtext__content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      color: #1f2a24;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-boxtext__content ul,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-boxtext__content ul {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-boxtext__content > :is(p, div),
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-boxtext__content li,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-boxtext__content > :is(p, div),
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-boxtext__content li {
+      margin: 0;
+      padding: 12px 14px;
+      background: #fafbfc;
+      border-left: 4px solid #d64b68;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Champs de contact : fond clair et espacements uniformisés. */
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-box-formulaire__fields,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-box-formulaire__fields {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 12px;
+      padding-top: 18px;
+      border-top: 1px solid #edf0f2;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu :is(input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]), select, textarea),
+    body.lcdp-page-contact-parc #lcdp-contact-contenu :is(input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]), select, textarea) {
+      max-width: 100%;
+      box-sizing: border-box;
+      background: #fafbfc;
+      border: 1px solid #e6e9ec;
+      border-radius: 8px;
+      color: #1f2a24;
+      font-size: 14px;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu :is(input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]), select, textarea):focus-visible,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu :is(input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]), select, textarea):focus-visible {
+      outline: 2px solid #d64b68;
+      outline-offset: 2px;
+    }
+
+    /* Bouton d'envoi compact et centré (sans modifier son type ni l'envoi). */
+    body.lcdp-page-contact-coach #lcdp-contact-contenu .lcdp-box-formulaire__actions,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu .lcdp-box-formulaire__actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu button[type="submit"],
+    body.lcdp-page-contact-parc #lcdp-contact-contenu button[type="submit"] {
+      display: block;
+      width: auto;
+      min-width: 200px;
+      max-width: min(240px, 100%);
+      min-height: 44px;
+      box-sizing: border-box;
+      margin: 20px auto 0;
+      padding: 10px 18px;
+      border: 1px solid #d64b68;
+      border-radius: 6px;
+      background: #d64b68;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgb(214 75 104 / 15%);
+      cursor: pointer;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu button[type="submit"]:hover:not(:disabled),
+    body.lcdp-page-contact-parc #lcdp-contact-contenu button[type="submit"]:hover:not(:disabled) {
+      background: #c6425f;
+      border-color: #c6425f;
+    }
+
+    body.lcdp-page-contact-coach #lcdp-contact-contenu button[type="submit"]:focus-visible,
+    body.lcdp-page-contact-parc #lcdp-contact-contenu button[type="submit"]:focus-visible {
+      outline: 2px solid #1f2a24;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 480px) {
+      body.lcdp-page-contact-coach .lcdp-site-main .lcdp-page-section,
+      body.lcdp-page-contact-parc .lcdp-site-main .lcdp-page-section {
+        padding: 20px 12px 32px;
+      }
+
+      body.lcdp-page-contact-coach #lcdp-contact-contenu,
+      body.lcdp-page-contact-parc #lcdp-contact-contenu {
+        padding: 22px 18px;
+        border-radius: 20px;
+      }
+    }
+  </style>
 </head>
 
 <body class="lcdp-page-contact-parc lcdp-app-page">
