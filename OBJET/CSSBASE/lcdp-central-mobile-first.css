@@ -7634,6 +7634,40 @@ tr > td:nth-child(2) > button:focus-visible{
   min-height: 84px;
   padding: var(--lcdp-space-2) 0;
 }
+/* c084 — Affichage d'une page temporairement indisponible.
+   Style réutilisable pour Actualités, FAQ, Mentions légales et les autres pages publiques. */
+:where(html[data-lcdp-css~="c084"]) .lcdp-mise-a-jour {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 45vh;
+  padding: 32px 0;
+  gap: 28px;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-mise-a-jour .lcdp-mise-a-jour-picto {
+  display: block;
+  width: clamp(160px, 42vw, 224px);
+  height: auto;
+  max-width: 100%;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-mise-a-jour h1 {
+  margin: 0;
+  font-size: clamp(18px, 4.5vw, 24px);
+  line-height: 1.5;
+  font-weight: 500;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-mise-a-jour .rotation {
+  transform-origin: 96px 96px;
+  animation: tourner 3.36s steps(12, end) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(html[data-lcdp-css~="c084"]) .lcdp-mise-a-jour .rotation {
+    animation: none;
+  }
+}
 /* LCDP_public/OBJET/BOX/04-box-workflow-abonnement.css */
 :where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement{
   position: fixed;
@@ -16353,4 +16387,37 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 :where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-parc .lcdp-box-formulaire .lcdp-text-strong-left,
 :where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-coach .lcdp-box-formulaire .lcdp-text-strong-left {
   font-weight: 700 !important;
+}
+
+/* c036/c041/c032 — Fermeture commune : pages de formulaire, boxes de texte,
+   dialogues HTML natifs. Les boutons doivent exister dans le HTML. */
+:where(html[data-lcdp-css~="c036"]) dialog.lcdp-box-dialogue-bouton__card:not([open]) {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c036"]) dialog.lcdp-box-dialogue-bouton__card[open] {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  box-sizing: border-box;
+  max-height: calc(100svh - 40px);
+  margin: auto;
+  overflow-y: auto;
+  display: flex;
+}
+:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close {
+  z-index: 3;
+  font-family: inherit;
+  text-decoration: none;
+}
+:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close:focus-visible {
+  outline: 2px solid var(--lcdp-color-primary, #4e6838);
+  outline-offset: 2px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire:has(> .lcdp-box-dialogue-bouton__close),
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext:has(> .lcdp-box-dialogue-bouton__close) {
+  position: relative;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire:has(> .lcdp-box-dialogue-bouton__close) > .lcdp-box-formulaire__header,
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext:has(> .lcdp-box-dialogue-bouton__close) > .lcdp-boxtext__title {
+  padding-inline: 26px;
 }

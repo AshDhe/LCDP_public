@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-lcdp-css="c085 c034 c038 c032 c083 c036 c033 c037 c041 c040 c084">
 <head>
   <meta charset="utf-8">
 
@@ -16,45 +16,11 @@
       window.SITE_CONFIG?.siteBase ||
       "";
   </script>
-
-  <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
-  <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
-  <link rel="stylesheet" href="../OBJET/BOX/documents-legaux.css" data-site-href="/OBJET/BOX/documents-legaux.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-alerte.css" data-site-href="/OBJET/BOX/02-box-alerte.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
-  <link rel="stylesheet" href="../OBJET/BOX/03-box-formulaire.css" data-site-href="/OBJET/BOX/03-box-formulaire.css">
-  <link rel="stylesheet" href="../OBJET/BOX/03-box-champ-formulaire.css" data-site-href="/OBJET/BOX/03-box-champ-formulaire.css">
-  <style>
-    .lcdp-mise-a-jour {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 45vh;
-      padding: 32px 0;
-      gap: 28px;
-      text-align: center;
-    }
-    .lcdp-mise-a-jour .lcdp-mise-a-jour-picto {
-      display: block;
-      width: clamp(160px, 42vw, 224px);
-      height: auto;
-      max-width: 100%;
-    }
-    .lcdp-mise-a-jour h1 {
-      margin: 0;
-      font-size: clamp(18px, 4.5vw, 24px);
-      line-height: 1.5;
-      font-weight: 500;
-    }
-  </style>
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
 </head>
 
-<body class="lcdp-page-document-legal">
-  <div class="lcdp-site-page">
+<body class="lcdp-page-document-legal lcdp-app-page">
+  <div class="lcdp-site-page lcdp-app-wrapper">
 
     <div id="lcdp-bandeau-slot"></div>
 
@@ -64,7 +30,6 @@
           <div class="lcdp-mise-a-jour">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-labelledby="lcdp-attente-title" class="lcdp-mise-a-jour-picto">
   <title id="lcdp-attente-title">Page en cours de mise à jour</title>
-  <style>@media (prefers-reduced-motion: reduce) { .rotation { animation: none; } } .rotation { transform-origin: 96px 96px; animation: tourner 3.36s steps(12, end) infinite; } @keyframes tourner { to { transform: rotate(360deg); } }</style>
   <g class="rotation">
     <rect x="86" y="10" width="20" height="38" rx="10" fill="#f5a000" transform="rotate(0 96 96)"/>
     <rect x="86" y="10" width="20" height="38" rx="10" fill="#789953" transform="rotate(30 96 96)"/>
