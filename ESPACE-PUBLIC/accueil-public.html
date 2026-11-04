@@ -41,7 +41,7 @@
 
     <!-- CONTENU -->
     <main class="public-home__main" id="contenu-principal">
-      <!-- Bandeau d'actualité historique : alimenté par actualite.js -->
+      <!-- Bandeau dynamique existant c029 : alimenté par actualite.js. -->
       <section id="lcdp-actualite-bandeau" class="public-home__actualite" aria-label="Actualités">
         <div class="lcdp-page-container">
           <div class="lcdp-page-content">
@@ -110,8 +110,7 @@
 
     function actualitesChargees() {
       if (!actualites) return true;
-      const placeholder = actualites.querySelector(".lcdp-actu-bandeau-placeholder");
-      if (placeholder) return false;
+      if (actualites.querySelector(".lcdp-actu-bandeau-placeholder")) return false;
       return !!actualites.querySelector(".lcdp-actu-bandeau-titre, .lcdp-actu-bandeau-texte, nav a");
     }
 

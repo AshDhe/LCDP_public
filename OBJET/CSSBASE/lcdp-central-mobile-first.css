@@ -9656,6 +9656,7 @@ tr > td:nth-child(2) > button:focus-visible{
   text-decoration: none;
   padding: 0;
   line-height: inherit;
+  white-space: normal;
   flex-wrap: wrap;
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne {
@@ -9699,13 +9700,14 @@ tr > td:nth-child(2) > button:focus-visible{
 }
 /* Chevron du bouton Tailwind, sans modifier le lien dynamique. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne > span:first-child::after {
-  content: "›";
+  content: "";
   display: inline-block;
-  color: currentColor;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1;
-  margin-left: .125rem;
+  width: .45rem;
+  height: .45rem;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg);
+  margin-left: .25rem;
 }
 /* Le texte dynamique partage directement les règles .public-home__heading.
    Ces seules propriétés assurent la compatibilité avec l'animation et la largeur. */
@@ -14940,14 +14942,26 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   display: flex;
   flex: 1 1 auto;
   min-width: 0;
-  min-height: min-content;
+  min-height: 0;
   flex-direction: column;
-  justify-content: center;
-  gap: clamp(.75rem, 2dvh, 1rem);
+  justify-content: flex-start;
+  gap: 0;
   overflow: visible;
-  padding: clamp(.75rem, 2dvh, 1.5rem) 1.5rem;
+  padding: 1.5rem;
   background: rgb(248 250 252 / 50%);
 }
+/* c085 : répartit l'espace libre 35 % au-dessus / 65 % en dessous.
+   La remontée de 15 % est relative au centrage du seul espace disponible.
+   En cas de manque de hauteur, ces deux espaces rétrécissent avant le contenu. */
+:where(html[data-lcdp-css~="c085"]) .public-home__main::before,
+:where(html[data-lcdp-css~="c085"]) .public-home__main::after {
+  content: "";
+  display: block;
+  min-height: 0;
+  flex-basis: 0;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__main::before { flex-grow: 35; }
+:where(html[data-lcdp-css~="c085"]) .public-home__main::after { flex-grow: 65; }
 :where(html[data-lcdp-css~="c085"]) .public-home__intro { text-align: center; }
 :where(html[data-lcdp-css~="c085"]) .public-home__more,
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne > span:first-child {
@@ -14985,8 +14999,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   max-width: min(280px, 100%);
   min-width: 0;
   flex: 0 0 auto;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 2rem auto 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -15214,14 +15227,15 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   :where(html[data-lcdp-css~="c085"]) .public-home__loading-arc { animation: none; }
 }
 
-@media (max-height: 620px) {
-  :where(html[data-lcdp-css~="c085"]) .public-home__main {
-    gap: .5rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-  }
-  :where(html[data-lcdp-css~="c085"]) .public-home__actions { gap: .5rem; }
+@media (max-height: 720px) {
+  :where(html[data-lcdp-css~="c085"]) .public-home__main { padding: .75rem 1.5rem; }
+  :where(html[data-lcdp-css~="c085"]) .public-home__actions { gap: .75rem; margin-top: 1.5rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__action { padding: .75rem; gap: .25rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__header { padding-top: .75rem; padding-bottom: .75rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__footer { padding-top: .75rem; padding-bottom: .75rem; }
+}
+@media (max-height: 560px) {
+  :where(html[data-lcdp-css~="c085"]) .public-home__main { padding-top: .5rem; padding-bottom: .5rem; }
+  :where(html[data-lcdp-css~="c085"]) .public-home__actions { gap: .5rem; margin-top: 1rem; }
+  :where(html[data-lcdp-css~="c085"]) .public-home__action { padding: .5rem; }
 }
