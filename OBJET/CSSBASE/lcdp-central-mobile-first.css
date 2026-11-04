@@ -9614,32 +9614,11 @@ tr > td:nth-child(2) > button:focus-visible{
   max-width: 100%;
   min-width: 0;
 }
-/* Pilule En savoir plus : Tailwind px-4 py-2 rounded-full, 12px/600. */
+/* La pilule partage directement les règles .public-home__more du c085.
+   Aucun second jeu de propriétés graphiques. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne > span:first-child {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .25rem;
-  min-width: 0;
-  min-height: 2.5rem;
-  padding: .5rem 1rem;
-  border: 1px solid var(--home-slate-200);
-  border-radius: 9999px;
-  background: #fff;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
-  color: var(--home-slate-500);
-  font-family: inherit;
-  font-size: .75rem;
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: normal;
-  text-transform: none;
-  text-decoration: none;
-  transition: color 150ms ease, border-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-titre:hover .lcdp-actu-bandeau-ligne > span:first-child {
-  border-color: var(--home-slate-300);
-  color: var(--home-slate-800);
+  flex: 0 0 auto;
+  max-width: 100%;
 }
 /* Le cartouche de groupe est déjà produit par le script ; supprimer son
    ancien cadre interne pour ne conserver qu'une seule pilule. */
@@ -9660,23 +9639,18 @@ tr > td:nth-child(2) > button:focus-visible{
   letter-spacing: normal;
   text-transform: none;
 }
-/* Titre dynamique : Tailwind text-2xl font-black tracking-tight. */
+/* Le texte dynamique partage directement les règles .public-home__heading.
+   Ces seules propriétés assurent la compatibilité avec l'animation et la largeur. */
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
   display: block;
   min-width: 0;
   max-width: 100%;
   overflow: visible;
-  overflow-wrap: anywhere;
-  color: var(--home-slate-900);
-  font-family: inherit;
-  font-size: 1.5rem;
-  font-weight: 900;
-  line-height: 2rem;
-  letter-spacing: -.025em;
-  text-align: center;
-  text-overflow: clip;
   white-space: normal;
   overflow-wrap: anywhere;
+  text-align: center;
+  text-overflow: clip;
+  margin: 0;
 }
 :where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-placeholder {
   height: 6.5rem;
@@ -14859,7 +14833,8 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   background: rgb(248 250 252 / 50%);
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__intro { text-align: center; }
-:where(html[data-lcdp-css~="c085"]) .public-home__more {
+:where(html[data-lcdp-css~="c085"]) .public-home__more,
+:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne > span:first-child {
   display: inline-flex;
   align-items: center;
   gap: .25rem;
@@ -14873,12 +14848,14 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
   transition: color 150ms ease, border-color 150ms ease;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__more:hover {
+:where(html[data-lcdp-css~="c085"]) .public-home__more:hover,
+:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-titre:hover .lcdp-actu-bandeau-ligne > span:first-child {
   border-color: var(--home-slate-300);
   color: var(--home-slate-800);
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__more svg { width: .75rem; height: .75rem; }
-:where(html[data-lcdp-css~="c085"]) .public-home__heading {
+:where(html[data-lcdp-css~="c085"]) .public-home__heading,
+:where(html[data-lcdp-css~="c085"][data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-texte {
   margin: .75rem 0 0;
   color: var(--home-slate-900);
   font-size: 1.5rem;
