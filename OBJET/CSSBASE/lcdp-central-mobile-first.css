@@ -3539,8 +3539,8 @@ justify-content: center; align-items: center; background: #fff;
 :where(html[data-lcdp-css~="c077"]) .lcdp-panier-planning__offre{ text-align: left; padding: var(--lcdp-space-3, 1rem); margin-bottom: var(--lcdp-space-2, .5rem); border: 1px solid var(--lcdp-color-border); border-radius: var(--lcdp-radius-small); background: var(--lcdp-color-surface); }
 :where(html[data-lcdp-css~="c077"]) .lcdp-panier-planning__offre h3{ margin: 0 0 .5rem; font-size: 1rem; }
 :where(html[data-lcdp-css~="c077"]) .lcdp-panier-planning__offre p{ margin: .5rem 0; font-size: .9rem; }
-:where(html[data-lcdp-css~="c077"]) html:not(.lcdp-planifier-pret) .lcdp-site-page{ visibility: hidden !important; }
-:where(html[data-lcdp-css~="c077"]) html:not(.lcdp-planifier-pret) #lcdp-planifier-attente-initiale{ visibility: visible !important; }
+html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) .lcdp-site-page{ visibility: hidden !important; }
+html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-initiale{ visibility: visible !important; }
 :where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale{
       position: fixed;
       inset: 0;
@@ -6804,7 +6804,7 @@ background: var(--lcdp-color-surface);
   color:#1e293b;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions{
-  width:100%;display:flex;flex-direction:column;gap:8px;
+  width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;
   padding-top:12px;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button{
@@ -10880,108 +10880,354 @@ box-sizing:border-box;width:100%;min-width:0;
   }
 :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-filtre-categorie__coche{ font-size: 10px; }}
 /* LCDP_public/OBJET/BOX/04-box-card-parc-diaporama.css */
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama{ min-width: 0; perspective: 1200px; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__scene{ width: 100%; aspect-ratio: 16 / 10; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__faces{ position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--recto{ transform: rotateY(0deg); visibility: visible; transition: none; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--recto{ transform: rotateY(-180deg); visibility: hidden; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--verso{ transform: rotateY(0deg); visibility: visible; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face{ position: absolute; inset: 0; overflow: hidden; border: 1px solid var(--lcdp-color-border); border-radius: var(--lcdp-radius-large); background: var(--lcdp-color-surface); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso{ transform: rotateY(180deg); visibility: hidden; transition: none; padding: var(--lcdp-space-2); overflow-y: hidden; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir{ position: relative; display: block; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; text-align: left; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__image{ display: block; width: 100%; height: 100%; object-fit: cover; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__nom{ position: absolute; inset: auto 0 0; padding: var(--lcdp-space-3); color: #fff; font-weight: 700; font-size: clamp(1.1rem, 3vw, 1.55rem); background: linear-gradient(transparent, rgba(0,0,0,.65)); }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__fermer{ position: absolute; right: var(--lcdp-space-2); top: var(--lcdp-space-2); z-index: 2; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--lcdp-color-surface-soft); color: var(--lcdp-color-text); font-size: 1.5rem; cursor: pointer; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__contenu{ width: 100%; min-width: 0; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body{ padding: 0; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title{ padding-right: 42px; }
-@media  (prefers-reduced-motion: reduce) {:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face{ transition: none; }}
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media{
-  width: 100%; max-width: none; min-width: 0; height: 100%; display: block;
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama {
+  min-width: 0;
+  perspective: 1200px;
 }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image{
-  display: block; width: 100%; height: 100%; min-height: 0; aspect-ratio: auto;
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__scene {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
 }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--recto,:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--verso{
-  transition: transform 480ms ease;
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__scene {
+  aspect-ratio: auto;
+  height: 220px;
 }
-@media  (prefers-reduced-motion: reduce) {:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--recto,:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--verso{ transition: none; }}
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__scene{ aspect-ratio: 16 / 10; height: auto; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso{
-  overflow-y: hidden;
-  padding: var(--lcdp-space-3);
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__faces {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
 }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body{
-  display: flex; flex-direction: column; width: 100%; min-width: 0;
-  justify-content: flex-start; gap: var(--lcdp-space-3);
-}
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__actions--reserver{
-  width: 100%; max-width: none; flex-shrink: 0;
-}
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description[hidden]{
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description{
-  display: flex;
-  align-items: flex-end;
-  gap: 5px;
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
   overflow: hidden;
-  min-height: 0;
+  border: 1px solid #e6eae5;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(23 36 27 / 7%);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description [data-lcdp-card-parc-description-texte]{
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--recto {
+  padding: 8px;
+  transform: rotateY(0deg);
+  visibility: visible;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  height: 100%;
+  overflow: visible;
+  background: transparent;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
+  display: block;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+  border-radius: 11px;
+  background: #f3f5f3;
+  object-fit: cover;
+  transition: transform 260ms ease;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--recto .lcdp-box-card-parc__media--avec-nom .lcdp-box-card-parc__nom-image {
+  position: static;
+  display: block;
+  grid-row: 2;
+  min-height: 20px;
+  inset: auto;
+  padding: 7px 2px 2px;
+  background: none;
+  color: #202b23;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: clamp(0.68rem, 2.8vw, 0.85rem);
+  font-weight: 600;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--recto .lcdp-box-card-parc__badge-prepa:not([hidden]) {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  right: auto;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  max-width: calc(100% - 14px);
+  padding: 4px 8px;
+  transform: none;
+  border-radius: 999px;
+  background: #da8b2e;
+  color: #fff;
+  font-size: 0.60rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 12%);
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--recto .lcdp-box-card-parc__badge-prepa.lcdp-box-card-parc__badge--nouveau:not([hidden]) {
+  background: #526a40;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir:focus-visible {
+  outline: 2px solid #526a40;
+  outline-offset: -3px;
+  border-radius: 11px;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso {
+  padding: 12px 13px;
+  transform: rotateY(180deg);
+  visibility: hidden;
+  border-top: 3px solid #526a40;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--recto {
+  transform: rotateY(-180deg);
+  visibility: hidden;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--verso {
+  transform: rotateY(0deg);
+  visibility: visible;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__fermer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f4f6f4;
+  color: #67766a;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__fermer:hover { background: #e8ece7; color: #37493a; }
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__fermer:focus-visible { outline: 2px solid #526a40; outline-offset: 2px; }
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__contenu { width: 100%; height: 100%; min-width: 0; }
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  gap: 9px;
+  padding: 0;
+  overflow: hidden;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__text {
+  min-width: 0;
+  gap: 4px;
+  overflow: hidden;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title {
+  margin: 0;
+  padding: 0 32px 0 0;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 0.91rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.015em;
+  color: #1c2920;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__actions--reserver {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  max-width: none;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__action {
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  min-height: 39px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 999px;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: clamp(0.66rem, 2.9vw, 0.76rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__action-icone,
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-planifier-picto-planning {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-planifier-picto-planning svg { width: 17px; height: 17px; }
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description[hidden] { display: none; }
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  width: 100%;
+  min-height: 0;
+  margin: 1px 0 0;
+  padding: 8px 0 0;
+  border-top: 1px solid #edf0eb;
+  color: #617266;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  text-align: left;
+  overflow: hidden;
+}
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description [data-lcdp-card-parc-description-texte] {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
-  overflow: hidden;
-  min-width: 0;
   flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
 }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden]){
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden]) {
   display: block;
   flex: 0 0 15px;
   width: 15px;
   height: 15px;
   margin: 0 0 2px;
 }
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title{
-    font-size: calc(clamp(1.25rem, 5.5vw, 1.65rem) * 0.85);
-  }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__actions--reserver{
-    width: 85%;
-    align-self: center;
-  }}
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso,:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body,:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__text{
-  overflow: hidden;
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--recto,
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--verso {
+  transition: transform 420ms ease, visibility 420ms step-end;
 }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body{
-  height: 100%;
-  justify-content: flex-start;
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready.is-retourne .lcdp-box-card-parc-diaporama__face--verso { transition: transform 420ms ease, visibility 0s; }
+@media (min-width: 768px) {
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--recto { padding: 10px; }
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__scene { height: 232px; }
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso { padding: 15px 18px; }
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title { font-size: 1rem; }
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__action { min-height: 42px; font-size: 0.79rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face,
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--recto,
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso,
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--recto,
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--verso {
+    transition: none;
+  }
 }
 /* LCDP_public/OBJET/BOX/04-box-liste-card-diaporama.css */
-:where(html[data-lcdp-css~="c072"]) .lcdp-box-liste-card-diaporama{ width:100%; }
-:where(html[data-lcdp-css~="c072"]) .lcdp-box-liste-card-diaporama__list{ display:grid; grid-template-columns:minmax(0,1fr); gap:var(--lcdp-space-3); }
-@media  (min-width:768px) {:where(html[data-lcdp-css~="c072"]) .lcdp-box-liste-card-diaporama__list{ grid-template-columns:repeat(2,minmax(0,1fr)); }}
-:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions]{ display:flex; flex-direction:column; align-items:stretch; gap:var(--lcdp-space-2); }
-:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button{ width:100% !important; justify-content:center !important; }
-:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-diaporama[hidden]{ display:none !important; }
-:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button,:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button .lcdp-box-commande-bar__libelle{
-  color: #fff !important;
+:where(html[data-lcdp-css~="c072"]) .lcdp-box-liste-card-diaporama { width: 100%; min-width: 0; }
+:where(html[data-lcdp-css~="c072"]) .lcdp-box-liste-card-diaporama__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 12px;
+  width: 100%;
 }
-:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button .lcdp-box-commande-bar__icone{
-  filter: brightness(0) invert(1);
+:where(html[data-lcdp-css~="c072"]) .lcdp-box-liste-card-diaporama__list > .lcdp-box-card-parc-diaporama.is-retourne {
+  grid-column: 1 / -1;
 }
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions]{
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-diaporama[hidden] { display: none !important; }
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+}
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: auto !important;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 41px;
+  padding: 8px 9px;
+  border: 1px solid #e4e8e3;
+  border-radius: 12px;
+  background: #f6f7f5;
+  color: #485848;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button:first-child {
+  background: #fff8ea;
+  border-color: #f4e5c8;
+  color: #b77922;
+}
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button:hover { background: #eaeee9; }
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button:first-child:hover { background: #fff0d3; }
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button .lcdp-box-commande-bar__libelle {
+  color: inherit !important;
+  font-size: inherit;
+  font-weight: inherit;
+}
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button .lcdp-box-commande-bar__icone {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  filter: none;
+}
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button:focus-visible {
+  outline: 2px solid #526a40;
+  outline-offset: 2px;
+}
+@media (min-width: 768px) {
+:where(html[data-lcdp-css~="c072"]) .lcdp-box-liste-card-diaporama__list { gap: 16px; }
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] {
     justify-content: center;
+    gap: 12px;
   }
-:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button{
-    width: auto !important;
-    flex: 0 0 auto !important;
-    max-width: 100% !important;
-  }}
+:where(html[data-lcdp-css~="c072"]) .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button {
+    flex: 0 1 auto;
+    min-width: 130px;
+    padding: 9px 15px;
+    font-size: 0.72rem;
+  }
+}
 /* LCDP_public/OBJET/BOX/02-box-wraper-footer.css */
 :where(html[data-lcdp-css~="c039"]) body.lcdp-page-reserver{
   --lcdp-reserver-footer-height: 56px;
@@ -13308,8 +13554,7 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
   background: transparent;
   box-shadow: 0 10px 26px rgba(31, 42, 36, 0.12);
   overflow: hidden;
-  display: flex;
-  margin-inline: auto;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -17016,137 +17261,112 @@ font-size: 13px;
   }
 }
 
-/* PLANIFIER — hiérarchie d'en-tête et légende, sans modifier les filtres JS. */
-#lcdp-lightbox-slot .lcdp-planifier-entete-filtres {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas:
-    "intro localisation"
-    "parc localisation"
-    "legende legende"
-    "actions actions";
-  align-items: start;
-  gap: 4px 16px;
+@media (max-width: 767px) {
+/* c077 — PLANIFIER : en-tête du calendrier, priorité au mobile.
+   Structure réelle : entete-filtres > entete-identite > entete-parc > titre + nom,
+   tandis que departement est le frère de entete-parc. Pas de position PC imposée. */
+:where(html[data-lcdp-css~="c077"]) body.lcdp-page-reserver #lcdp-lightbox-slot .lcdp-planifier-entete-filtres {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  padding: 12px 56px 14px 16px;
-  border-bottom: 1px solid #eceeea;
-  border-radius: 18px 18px 0 0;
-  background: #ffffff;
+  padding: 10px 14px 12px;
+  border-bottom: 1px solid #e9ece7;
+  background: #fff;
 }
-
-#lcdp-lightbox-slot .lcdp-planifier-entete-filtres > [data-lcdp-calendrier-mois-title] {
-  grid-area: intro;
-  margin: 0 !important;
-  color: #e59834 !important;
-  font-size: 0.68rem !important;
-  font-weight: 800 !important;
-  line-height: 1.2;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-align: left;
-}
-
-#lcdp-lightbox-slot .lcdp-planifier-entete-filtres > .lcdp-planifier-nom-parc {
-  grid-area: parc;
+:where(html[data-lcdp-css~="c077"]) body.lcdp-page-reserver #lcdp-lightbox-slot .lcdp-planifier-entete-identite {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
   min-width: 0;
-  margin: 0 !important;
-  color: #111111 !important;
-  font-size: clamp(1.18rem, 2vw, 1.4rem) !important;
-  font-weight: 850 !important;
-  line-height: 1.2;
-  overflow-wrap: anywhere;
+}
+:where(html[data-lcdp-css~="c077"]) body.lcdp-page-reserver #lcdp-lightbox-slot .lcdp-planifier-entete-parc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c077"]) body.lcdp-page-reserver #lcdp-lightbox-slot .lcdp-planifier-entete-parc > [data-lcdp-calendrier-mois-title] {
+  margin: 0;
+  padding: 0;
+  color: #c67e24;
+  font-size: .7rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: .055em;
   text-align: left;
+  text-transform: uppercase;
 }
-
-#lcdp-lightbox-slot .lcdp-planifier-entete-filtres > .lcdp-planifier-departement-parc:not([hidden]) {
-  grid-area: localisation;
-  justify-self: end;
-  align-self: center;
-  margin: 0 !important;
-  padding: 5px 11px !important;
-  border-radius: 999px;
-  background: #eef0ed;
-  color: #465047 !important;
-  font-size: 0.7rem !important;
-  font-weight: 650 !important;
+:where(html[data-lcdp-css~="c077"]) body.lcdp-page-reserver #lcdp-lightbox-slot .lcdp-planifier-entete-parc > .lcdp-planifier-nom-parc:not([hidden]) {
+  display: block;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  color: #202a22;
+  font-size: clamp(1rem, 4.5vw, 1.28rem);
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+/* Localisation sous le nom du parc : simple texte, ni pastille ni épingle. */
+:where(html[data-lcdp-css~="c077"]) body.lcdp-page-reserver #lcdp-lightbox-slot .lcdp-planifier-entete-identite > .lcdp-planifier-departement-parc:not([hidden]) {
+  display: block;
+  align-self: flex-start;
+  margin: 2px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #778277;
+  font-size: .75rem;
+  font-weight: 500;
   line-height: 1.3;
+  text-align: left;
   white-space: normal;
-  text-align: center;
 }
-
-#lcdp-lightbox-slot .lcdp-planifier-entete-filtres > .lcdp-planifier-departement-parc:not([hidden])::before {
-  content: "📍 ";
+:where(html[data-lcdp-css~="c077"]) body.lcdp-page-reserver #lcdp-lightbox-slot .lcdp-planifier-entete-identite > .lcdp-planifier-departement-parc[hidden] {
+  display: none !important;
 }
-
-#lcdp-lightbox-slot .lcdp-planifier-entete-filtres > .lcdp-planifier-legende-autorisations {
-  grid-area: legende;
+:where(html[data-lcdp-css~="c077"]) body.lcdp-page-reserver #lcdp-lightbox-slot .lcdp-planifier-entete-filtres > .lcdp-planifier-legende-autorisations {
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  margin: 12px 0 4px !important;
-  padding: 12px 14px;
-  border: 1px solid #e8eae6;
-  border-radius: 14px;
-  background: #f7f8f6;
-  overflow: visible !important;
+  margin: 7px 0 0;
+  padding: 10px;
+  border: 1px solid #e8ebe5;
+  border-radius: 12px;
+  background: #f7f9f6;
 }
-
-#lcdp-lightbox-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__contenu {
-  width: 100%;
-  min-width: 0;
-}
-
-#lcdp-lightbox-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+:where(html[data-lcdp-css~="c077"]) body.lcdp-page-reserver #lcdp-lightbox-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  column-gap: 11px;
+  row-gap: 8px;
+}
+
+}
+
+/* c075 — Fiche parc PLANIFIER uniquement : largeur mobile et défilement maîtrisés.
+   Le calendrier et les autres fenêtres conservent leur taille. */
+:where(html[data-lcdp-css~="c075"]) body.lcdp-page-reserver .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]:not(.lcdp-box-shift-detail-parc--page) > .lcdp-box-shift-detail-parc__card {
   width: 100%;
-  max-width: 100%;
+  max-width: 520px;
+  max-height: calc(100dvh - 16px);
   min-width: 0;
-  column-gap: 20px;
-  row-gap: 12px;
+  padding: 14px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
-
-#lcdp-lightbox-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie {
-  margin: 0;
-  gap: 7px;
-  font-size: 0.76rem;
-  line-height: 1.3;
-}
-
-#lcdp-lightbox-slot .lcdp-planifier-entete-filtres > .lcdp-planifier-actions-filtres {
-  grid-area: actions;
-  margin-top: 6px;
-}
-
-@media (max-width: 767px) {
-  #lcdp-lightbox-slot .lcdp-planifier-entete-filtres {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "intro"
-      "parc"
-      "localisation"
-      "legende"
-      "actions";
-    padding: 10px 48px 12px 10px;
-    gap: 5px;
-  }
-  #lcdp-lightbox-slot .lcdp-planifier-entete-filtres > .lcdp-planifier-departement-parc:not([hidden]) {
-    justify-self: start;
-  }
-  #lcdp-lightbox-slot .lcdp-planifier-entete-filtres > .lcdp-planifier-legende-autorisations {
-    margin-top: 6px !important;
-    padding: 10px;
-  }
-  #lcdp-lightbox-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
-    column-gap: 12px;
-    row-gap: 9px;
-  }
-}
-
 /* PC uniquement : 70 % de la largeur actuelle par case,
    soit 15 % de respiration à gauche et à droite de chaque colonne. */
 @media (min-width: 1024px) {
@@ -17158,4 +17378,34 @@ font-size: 13px;
     min-width: 0;
     justify-self: center;
   }
+}
+
+/* c077 — Attente de mise à jour du calendrier PLANIFIER.
+   Le masque est créé et détruit par reserver-membre.js ; aucun changement métier. */
+:where(html[data-lcdp-css~="c077"]) .lcdp-page-reserver .lcdp-box-calendrier-mois__card {
+  position: relative;
+}
+:where(html[data-lcdp-css~="c077"]) .lcdp-page-reserver .lcdp-planifier-attente-mois {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, .94);
+  pointer-events: auto;
+  min-height: 160px;
+}
+:where(html[data-lcdp-css~="c077"]) .lcdp-page-reserver .lcdp-planifier-attente-mois .lcdp-pictowait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c077"]) .lcdp-page-reserver .lcdp-planifier-attente-mois .lcdp-pictowait__image {
+  display: block;
+  width: 56px;
+  height: 56px;
+  max-width: none;
+  object-fit: contain;
 }
