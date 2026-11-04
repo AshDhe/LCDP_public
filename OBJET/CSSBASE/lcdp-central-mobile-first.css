@@ -14778,12 +14778,28 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   font-size: 11px;
   font-weight: 500;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__footer a {
+:where(html[data-lcdp-css~="c085"]) .public-home__footer > :is(a, button[popovertarget="lcdp-footer-verification-info"]) {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   color: inherit;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
   text-decoration: none;
+  cursor: pointer;
   transition: color 150ms ease;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__footer a:hover { color: var(--home-slate-600); }
+:where(html[data-lcdp-css~="c085"]) .public-home__footer > :is(a, button[popovertarget="lcdp-footer-verification-info"]):hover { color: var(--home-slate-600); }
 :where(html[data-lcdp-css~="c085"]) .public-home__footer-separator { color: var(--home-slate-200); }
 
 /* Accueil public : adaptation progressive à la fenêtre (mobile first).
@@ -14801,20 +14817,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 
 /* Accueil public : branchement fonctionnel du footer historique.
    Les règles sont limitées à c085 et ne modifient aucun autre footer. */
-:where(html[data-lcdp-css~="c085"]) .public-home__footer > button {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 150ms ease;
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__footer > button:hover {
-  color: var(--home-slate-600);
-}
 :where(html[data-lcdp-css~="c085"]) .public-home__footer > :is(a, button):focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
@@ -14847,4 +14849,22 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   font: inherit;
   font-size: 28px;
   cursor: pointer;
+}
+
+/* Accueil public — insertion du bandeau d'actualités existant (c029). */
+:where(html[data-lcdp-css~="c085"]) .public-home__actualite {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin-top: 0;
+  flex: 0 0 auto;
+}
+:where(html[data-lcdp-css~="c085"]) .public-home__actualite .lcdp-page-container,
+:where(html[data-lcdp-css~="c085"]) .public-home__actualite .lcdp-page-content {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
