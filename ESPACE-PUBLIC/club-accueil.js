@@ -82,7 +82,7 @@
       document.documentElement.setAttribute("data-lcdp-css", [...groupes].join(" "));
     }
     await Promise.all(cssRestants.map(url => chargerRessource("link", url)));
-    await chargerRessource("script", urlObjet("/BOX/01-box-carrousel.js"));
+    await chargerRessource("script", urlObjet("/JSBASE/01-carrousel.js"));
     contenu.querySelectorAll("script").forEach(el => el.remove());
     contenu.querySelectorAll("[data-site-href], [data-site-src], a[href], img[src]").forEach(el => {
       const attr = el.tagName === "IMG" ? "src" : "href";

@@ -33,7 +33,7 @@
     if (!slot) { window.alert(t); return; }
     let zone;
     try {
-      const response = await fetch(objetUrl('/BOX/02-box-alerte.html'), { cache: 'no-cache' });
+      const response = await fetch(objetUrl('/HTMLBASE/02-alerte.html'), { cache: 'no-cache' });
       if (!response.ok) throw new Error('Boîte d’alerte indisponible.');
       const template = document.createElement('template');
       template.innerHTML = (await response.text()).trim();

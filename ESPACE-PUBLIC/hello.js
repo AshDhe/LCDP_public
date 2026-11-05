@@ -115,7 +115,7 @@
 
     slot.innerHTML = "";
 
-    const fragment = await chargerFragmentSite("/OBJET/BOX/02-box-footer.html");
+    const fragment = await chargerFragmentSite("/OBJET/HTMLBASE/02-footer.html");
     slot.appendChild(fragment);
     appliquerRoutesSite(slot);
   }
@@ -247,7 +247,7 @@
     slot.innerHTML = "";
 
     try {
-      const fragment = await chargerFragmentObjet("/BOX/02-box-alerte.html");
+      const fragment = await chargerFragmentObjet("/HTMLBASE/02-alerte.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector("[data-lcdp-box-alerte]");

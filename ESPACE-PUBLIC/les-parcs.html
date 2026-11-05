@@ -18,11 +18,7 @@
   </script>
 
   <link rel="stylesheet" href="../OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-bandeau-nav.css" data-site-href="/OBJET/BOX/02-box-bandeau-nav.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-menu-burger.css" data-site-href="/OBJET/BOX/02-box-menu-burger.css">
-  <link rel="stylesheet" href="../OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-dialogue-bouton.css" data-site-href="/OBJET/BOX/02-box-dialogue-bouton.css">
-  <link rel="stylesheet" href="../OBJET/BOX/02-box-footer.css" data-site-href="/OBJET/BOX/02-box-footer.css">
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261105-css-objets-complets-v1" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261105-css-objets-complets-v1">
 </head>
 
 <body>
@@ -111,7 +107,7 @@
         const slot = document.getElementById("lcdp-lightbox-slot");
         slot.innerHTML = "";
 
-        const fragment = await chargerFragment("/OBJET/BOX/02-box-dialogue-bouton.html");
+        const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-bouton.html");
         slot.appendChild(fragment);
 
         const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
@@ -160,7 +156,7 @@
       async function ajouterBoxText(slotId, titre, contenuHtml) {
         const slot = document.getElementById(slotId);
         slot.innerHTML = "";
-        slot.appendChild(await chargerFragment("/OBJET/BOX/01-box-text.html"));
+        slot.appendChild(await chargerFragment("/OBJET/HTMLBASE/01-text.html"));
         const box = slot.querySelector("[data-lcdp-boxtext]");
         box.querySelector("[data-lcdp-boxtext-title]").textContent = titre;
         box.querySelector("[data-lcdp-boxtext-content]").innerHTML = contenuHtml;
@@ -170,7 +166,7 @@
       async function initialiserFooter() {
         const slot = document.getElementById("lcdp-footer-slot");
         slot.innerHTML = "";
-        slot.appendChild(await chargerFragment("/OBJET/BOX/02-box-footer.html"));
+        slot.appendChild(await chargerFragment("/OBJET/HTMLBASE/02-footer.html"));
         appliquerRoutesSite(slot);
       }
 

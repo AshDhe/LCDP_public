@@ -8,17 +8,7 @@
   const url=p=>typeof cfg.publicUrl==='function'?cfg.publicUrl(p):base+p;
   const endpoint=String(cfg.workerEditingAdminUrl||cfg.WORKER_EDITING_ADMIN_URL||(typeof cfg.apiUrl==='function'?cfg.apiUrl('editing-admin-api'):'')||'https://editing-admin-api.lacleduparc.fr').replace(/\/$/,'');
   async function chargerGroupes() {
-    // c029 est déjà intégré au CSS central : ne pas recharger l'ancienne feuille,
-    // qui écraserait les adaptations c085 du bandeau de l'accueil public.
-    const cssCentralActif=(document.documentElement.getAttribute('data-lcdp-css')||'').split(/\s+/).includes('c029');
-    if(!cssCentralActif){
-      const cssUrl=typeof cfg.objetUrl==='function'?cfg.objetUrl('/BOX/01-box-actualite.css'):url('/OBJET/BOX/01-box-actualite.css');
-      const cssExistant=Array.from(document.querySelectorAll('link[rel="stylesheet"]')).find(link=>link.href===new URL(cssUrl,location.href).href);
-      if(!cssExistant)await new Promise((resolve,reject)=>{
-        const link=document.createElement('link');link.rel='stylesheet';link.href=cssUrl;
-        link.onload=resolve;link.onerror=()=>reject(Error('Styles Actualité indisponibles.'));document.head.append(link);
-      });
-    }
+    // Les styles Actualité sont fournis par le CSS central chargé par la page.
     if(window.LCDP_ACTUALITE_GROUPES)return;
     await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url('/ESPACE-PUBLIC/actualite-groupes.js');script.onload=resolve;script.onerror=()=>reject(Error('Groupes Actualité indisponibles.'));document.head.append(script);});
     if(!window.LCDP_ACTUALITE_GROUPES)throw Error('Groupes Actualité indisponibles.');

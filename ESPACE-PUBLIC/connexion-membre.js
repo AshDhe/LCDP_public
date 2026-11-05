@@ -201,7 +201,7 @@
     const slot=document.getElementById("lcdp-lightbox-slot");
     let renvoyer=false;
     try {
-      const fragment=await chargerFragmentObjet("/BOX/02-box-dialogue-bouton.html");
+      const fragment=await chargerFragmentObjet("/HTMLBASE/02-dialogue-bouton.html");
       slot.innerHTML="";slot.appendChild(fragment);
       slot.querySelector("[data-lcdp-dialogue-title]").textContent="Sécurité du compte";
       
@@ -284,7 +284,7 @@
 
     slot.innerHTML = "";
 
-    const footer = await chargerFragmentObjet("/BOX/02-box-footer.html");
+    const footer = await chargerFragmentObjet("/HTMLBASE/02-footer.html");
     slot.appendChild(footer);
 
     appliquerRoutesSite(slot);
@@ -333,7 +333,7 @@
     slot.innerHTML = "";
 
     try {
-      const fragment = await chargerFragmentObjet("/BOX/02-box-alerte.html");
+      const fragment = await chargerFragmentObjet("/HTMLBASE/02-alerte.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector("[data-lcdp-box-alerte]");
@@ -444,7 +444,7 @@
       return joindreBaseEtChemin(objetBaseUrl, valeur.replace(/^\/?OBJET\//, ""));
     }
 
-    return construireUrlPublique("/OBJET/" + valeur.replace(/^\/+/, "").replace(/^BOX\//, "BOX/"));
+    return construireUrlPublique("/OBJET/" + valeur.replace(/^\/+/, ""));
   }
 
   function construireUrlPublique(chemin) {

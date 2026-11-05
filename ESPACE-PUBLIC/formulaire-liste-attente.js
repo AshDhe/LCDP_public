@@ -484,7 +484,7 @@
   }
 
   async function initialiserFooterListeAttente() {
-    const fragment = await chargerFragmentSiteListeAttente("/OBJET/BOX/02-box-footer.html");
+    const fragment = await chargerFragmentSiteListeAttente("/OBJET/HTMLBASE/02-footer.html");
     const slot = document.getElementById("lcdp-footer-slot");
 
     if (slot) {
@@ -566,7 +566,7 @@
     slot.innerHTML = "";
 
     try {
-      const fragment = await chargerFragmentObjetListeAttente("/BOX/02-box-alerte.html");
+      const fragment = await chargerFragmentObjetListeAttente("/HTMLBASE/02-alerte.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector("[data-lcdp-box-alerte]");

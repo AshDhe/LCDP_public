@@ -441,7 +441,7 @@
     slot.innerHTML = "";
 
     try {
-      const fragment = await window.LCDP_chargerFragmentObjet("/BOX/02-box-alerte.html");
+      const fragment = await window.LCDP_chargerFragmentObjet("/HTMLBASE/02-alerte.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector("[data-lcdp-box-alerte]");

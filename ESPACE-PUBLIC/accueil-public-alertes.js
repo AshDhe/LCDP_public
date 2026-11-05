@@ -37,7 +37,7 @@
     if (chargementAlerteEnCours) return;
     chargementAlerteEnCours = true;
     try {
-      const reponse = await fetch(urlObjet('/BOX/02-box-alerte.html'), { cache: 'no-cache' });
+      const reponse = await fetch(urlObjet('/HTMLBASE/02-alerte.html'), { cache: 'no-cache' });
       if (!reponse.ok) throw new Error('Objet 02-box-alerte.html indisponible.');
       const modele = document.createElement('template');
       modele.innerHTML = (await reponse.text()).trim();

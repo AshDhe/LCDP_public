@@ -142,7 +142,7 @@
         const slot = document.getElementById("lcdp-lightbox-slot");
         slot.innerHTML = "";
 
-        const fragment = await chargerFragment("/OBJET/BOX/02-box-alerte.html");
+        const fragment = await chargerFragment("/OBJET/HTMLBASE/02-alerte.html");
         slot.appendChild(fragment);
 
         const alerte = slot.querySelector("[data-lcdp-box-alerte]");
@@ -256,7 +256,7 @@
         const slot = document.getElementById("lcdp-lightbox-slot");
         slot.innerHTML = "";
 
-        const fragment = await chargerFragment("/OBJET/BOX/02-box-dialogue-bouton.html");
+        const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-bouton.html");
         slot.appendChild(fragment);
 
         const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
@@ -387,7 +387,7 @@
         const slot = document.getElementById("lcdp-menu-central-slot");
         slot.innerHTML = "";
 
-        const fragment = await chargerFragment("/OBJET/BOX/02-box-menu-bouton.html");
+        const fragment = await chargerFragment("/OBJET/HTMLBASE/02-menu-bouton.html");
         slot.appendChild(fragment);
 
         const liste = slot.querySelector("[data-lcdp-menu-bouton-list]");
@@ -467,7 +467,7 @@
         const slot = document.getElementById("lcdp-footer-slot");
         slot.innerHTML = "";
 
-        const footer = await chargerFragment("/OBJET/BOX/02-box-footer.html");
+        const footer = await chargerFragment("/OBJET/HTMLBASE/02-footer.html");
         slot.appendChild(footer);
 
         appliquerRoutesSite(slot);

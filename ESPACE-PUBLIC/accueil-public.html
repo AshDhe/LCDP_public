@@ -6,7 +6,7 @@
   <title>La Clé du Parc - Accueil public</title>
   <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
   <script src="../config.js"></script>
-  <script src="/OBJET/BOX/02-box-footer.js" data-lcdp-footer-autonome defer></script>
+  <script src="/OBJET/JSBASE/02-footer.js" data-lcdp-footer-autonome defer></script>
   <script src="./actualite.js" defer></script>
   <script src="./box-menu-burger-public.js" defer></script>
   <script src="./controle-acces-accueil.js" defer></script>
@@ -120,7 +120,7 @@
     async function initialiserFooterCommun() {
       const slot = document.getElementById("lcdp-footer-slot");
       if (!slot) return;
-      const reponse = await fetch("/OBJET/BOX/02-box-footer.html", { cache: "no-cache" });
+      const reponse = await fetch("/OBJET/HTMLBASE/02-footer.html", { cache: "no-cache" });
       if (!reponse.ok) throw new Error("Footer public indisponible.");
       const modele = document.createElement("template");
       modele.innerHTML = (await reponse.text()).trim();

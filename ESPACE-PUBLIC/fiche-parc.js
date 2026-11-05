@@ -130,10 +130,7 @@
     pageInitialisee = true;
     appliquerRoutesSite(document);
     // Préchargement non bloquant : l’alerte Planning doit apparaître immédiatement.
-    promesseAlertePublique = Promise.all([
-      chargerStyleObjetFiche({}, "/BOX/02-box-alerte.css"),
-      chargerFragmentObjetFiche({}, "/BOX/02-box-alerte.html")
-    ]).then(([, fragment]) => fragment).catch(() => null);
+    promesseAlertePublique = chargerFragmentObjetFiche({}, "/HTMLBASE/02-alerte.html").catch(() => null);
 
     const promesseBandeau = initialiserBandeau().catch((erreur) => {
       console.warn("Bandeau public indisponible.", erreur);
@@ -288,7 +285,7 @@
     // Conserver la fiche d'attente plein format pendant le chargement du fragment.
     const fragmentShift = await chargerFragmentObjetFiche(
       {},
-      "/BOX/04-box-shift-detail-parc.html"
+      "/HTMLBASE/04-shift-detail-parc.html"
     );
     const shift = fragmentShift.querySelector(
       "[data-lcdp-box-shift-detail-parc]"
@@ -318,7 +315,7 @@
     attente.setAttribute("role", "status");
     attente.setAttribute("aria-label", "Chargement de la fiche du parc");
     const gif = document.createElement("img");
-    gif.src = construireUrlObjetFiche({}, "/BOX/pictowait.gif");
+    gif.src = construireUrlObjetFiche({}, "/IMAG/PICTO/pictowait.gif");
     gif.alt = "";
     gif.width = 64;
     gif.height = 64;
@@ -365,7 +362,7 @@
 
     const fragmentFiche = await chargerFragmentObjetFiche(
       options,
-      "/BOX/04-box-fiche-parc.html"
+      "/HTMLBASE/04-fiche-parc.html"
     );
     const fiche = fragmentFiche.querySelector(
       "[data-lcdp-box-fiche-parc]"
@@ -1113,7 +1110,7 @@
 
     const fragment = await chargerFragmentObjetFiche(
       options,
-      "/BOX/04-box-card-parc.html"
+      "/HTMLBASE/04-card-parc.html"
     );
     const template = fragment.querySelector(
       "[data-lcdp-box-card-parc]"
@@ -1222,8 +1219,8 @@
     slot.innerHTML = "";
 
     const [fragment, reponseGeojson] = await Promise.all([
-      chargerFragmentObjetFiche(options, "/BOX/04-carte-dynamique.html"),
-      fetch(construireUrlObjetFiche(options, "/BOX/04-carte-dynamique.geojson"), {
+      chargerFragmentObjetFiche(options, "/HTMLBASE/04-carte-dynamique.html"),
+      fetch(construireUrlObjetFiche(options, "/DATA/04-carte-dynamique.geojson"), {
         method: "GET",
         credentials: "omit",
         cache: "no-cache",
@@ -2402,7 +2399,7 @@
 
     const fragment = await chargerFragmentObjetFiche(
       options,
-      "/BOX/04-box-calendrier-mois.html"
+      "/HTMLBASE/04-calendrier-mois.html"
     );
     slot.appendChild(fragment);
 
@@ -2656,14 +2653,10 @@
   }
 
   async function chargerLegendePlanningParcCommun(options, expliquerSynthese = false) {
-    await chargerStyleObjetFiche(
-      options,
-      "/BOX/04-box-legende.css"
-    );
 
     const fragment = await chargerFragmentObjetFiche(
       options,
-      "/BOX/04-box-legende.html"
+      "/HTMLBASE/04-legende.html"
     );
     const legende = fragment.querySelector(
       "[data-lcdp-box-legende]"
@@ -3192,7 +3185,7 @@
 
     const fragment = await chargerFragmentObjetFiche(
       options,
-      "/BOX/04-box-calendrier-jour.html"
+      "/HTMLBASE/04-calendrier-jour.html"
     );
     conteneurJour.appendChild(fragment);
     overlay.appendChild(conteneurJour);
@@ -3808,10 +3801,10 @@
 
   async function initialiserObjetsInteraction() {
     const [fragmentShift, fragmentJour, fragmentHeure, fragmentCardParc] = await Promise.all([
-      chargerFragment("/OBJET/BOX/04-box-shift-detail-parc.html"),
-      chargerFragment("/OBJET/BOX/04-box-card-jour-in-calendrier-mois.html"),
-      chargerFragment("/OBJET/BOX/04-box-card-heure-in-calendrier-jour.html"),
-      chargerFragment("/OBJET/BOX/04-box-card-parc.html")
+      chargerFragment("/OBJET/HTMLBASE/04-shift-detail-parc.html"),
+      chargerFragment("/OBJET/HTMLBASE/04-card-jour-in-calendrier-mois.html"),
+      chargerFragment("/OBJET/HTMLBASE/04-card-heure-in-calendrier-jour.html"),
+      chargerFragment("/OBJET/HTMLBASE/04-card-parc.html")
     ]);
 
     etatInteraction.templateShiftDetail = fragmentShift.querySelector(
@@ -3989,7 +3982,7 @@
     contenu.style.minHeight = "";
   }
   async function afficherCalendrierMoisParcDansShift(contenu, parc, mode) {
-    const fragment = await chargerFragment("/OBJET/BOX/04-box-calendrier-mois.html");
+    const fragment = await chargerFragment("/OBJET/HTMLBASE/04-calendrier-mois.html");
     contenu.appendChild(fragment);
 
     const calendrier = contenu.querySelector("[data-lcdp-box-calendrier-mois]");
@@ -4284,7 +4277,7 @@
     const contenu = etat.contenu;
     contenu.innerHTML = "";
 
-    const fragment = await chargerFragment("/OBJET/BOX/04-box-calendrier-jour.html");
+    const fragment = await chargerFragment("/OBJET/HTMLBASE/04-calendrier-jour.html");
     contenu.appendChild(fragment);
 
     const calendrier = contenu.querySelector("[data-lcdp-box-calendrier-jour]");
@@ -4496,9 +4489,6 @@
     couleurAction = "orange",
     libelleBouton = "OK"
   ) {
-    if (!promesseAlertePublique) {
-      await chargerStyleObjetFiche({}, "/BOX/02-box-alerte.css");
-    }
 
     const conteneur = document.createElement("div");
     document.body.appendChild(conteneur);
@@ -4506,7 +4496,7 @@
     const fragmentPrecharge = promesseAlertePublique ? await promesseAlertePublique : null;
     const fragment = fragmentPrecharge
       ? fragmentPrecharge.cloneNode(true)
-      : await chargerFragmentObjetFiche({}, "/BOX/02-box-alerte.html");
+      : await chargerFragmentObjetFiche({}, "/HTMLBASE/02-alerte.html");
     conteneur.appendChild(fragment);
 
     const alerte = conteneur.querySelector(
@@ -4654,7 +4644,7 @@
     document.body.appendChild(conteneur);
 
     const fragment = await chargerFragment(
-      "/OBJET/BOX/04-box-listemails.html"
+      "/OBJET/HTMLBASE/04-listemails.html"
     );
     conteneur.appendChild(fragment);
 
@@ -5304,7 +5294,7 @@
     slot.innerHTML = "";
 
     const footer = await chargerFragment(
-      "/OBJET/BOX/02-box-footer.html"
+      "/OBJET/HTMLBASE/02-footer.html"
     );
 
     slot.appendChild(footer);

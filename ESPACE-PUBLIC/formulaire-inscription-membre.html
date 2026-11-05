@@ -41,7 +41,7 @@
 
   </div>
 
-  <script src="../OBJET/BOX/03-box-formulaire.js"></script>
+  <script src="../OBJET/JSBASE/03-formulaire.js"></script>
   <script>
     (() => {
       "use strict";
@@ -154,7 +154,7 @@
 
         slot.innerHTML = "";
 
-        const footer = await chargerFragment("/OBJET/BOX/02-box-footer.html");
+        const footer = await chargerFragment("/OBJET/HTMLBASE/02-footer.html");
         slot.appendChild(footer);
 
         appliquerRoutesSite(slot);

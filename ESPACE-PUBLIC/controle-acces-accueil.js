@@ -62,7 +62,7 @@
   async function alerte(message, action = null) {
     const slot = document.getElementById('lcdp-lightbox-slot');
     if (!slot) throw new Error('Emplacement de lightbox introuvable.');
-    const html = await fetch(urlObjet('/BOX/02-box-alerte.html'),{cache:'no-cache'});
+    const html = await fetch(urlObjet('/HTMLBASE/02-alerte.html'),{cache:'no-cache'});
     if (!html.ok) throw new Error('Objet lightbox indisponible.');
     const template = document.createElement('template');
     template.innerHTML = (await html.text()).trim();

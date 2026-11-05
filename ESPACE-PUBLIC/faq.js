@@ -48,11 +48,11 @@
     await script(urlLocale("/ESPACE-" + espace + "/box-menu-burger-" + suffixe + ".js"));
     const init = window[page.membre ? "LCDP_initialiserMenuBurgerMembre" : "LCDP_initialiserMenuBurgerPublic"];
     if (typeof init === "function") await init(page.membre ? { etatMembre: etat } : undefined);
-    await fragment("lcdp-footer-slot", page.objetUrl("/BOX/02-box-footer.html"));
+    await fragment("lcdp-footer-slot", page.objetUrl("/HTMLBASE/02-footer.html"));
   }
   // Le dialogue public existant permet de choisir son espace depuis le bandeau.
   window.LCDP_ouvrirDialogueMonCompte = async () => {
-    await fragment("lcdp-lightbox-slot", page.objetUrl("/BOX/02-box-dialogue-bouton.html"));
+    await fragment("lcdp-lightbox-slot", page.objetUrl("/HTMLBASE/02-dialogue-bouton.html"));
     const slot = document.getElementById("lcdp-lightbox-slot");
     const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
     if (!dialogue) return;

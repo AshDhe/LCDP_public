@@ -1,3 +1,6 @@
+/* PLANIFIER : masquage du contenu uniquement sur ce parcours, jamais dans le CSS global. */
+html:not(.lcdp-planifier-pret) .lcdp-site-page { visibility: hidden !important; }
+
 /* LA CLÉ DU PARC — PLANIFIER
    Styles dédiés au calendrier mensuel de l'espace membre.
    Mobile first : règles mobiles de base, puis améliorations progressives.

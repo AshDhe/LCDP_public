@@ -204,12 +204,11 @@
   }
 
   async function ouvrirDialogueMonComptePublic() {
-    chargerCssUneFois("/OBJET/BOX/02-box-dialogue-bouton.css");
 
     const slot = assurerLightboxSlot();
     slot.innerHTML = "";
 
-    const fragment = await chargerFragment("/OBJET/BOX/02-box-dialogue-bouton.html");
+    const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-bouton.html");
     slot.appendChild(fragment);
 
     const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
@@ -332,7 +331,7 @@
     initialisationEnCours = (async () => {
       slot.innerHTML = "";
 
-      const fragment = await chargerFragment("/OBJET/BOX/02-box-menu-burger.html");
+      const fragment = await chargerFragment("/OBJET/HTMLBASE/02-menu-burger.html");
       slot.appendChild(fragment);
 
       const boutonBurger = slot.querySelector("[data-lcdp-burger-button]");

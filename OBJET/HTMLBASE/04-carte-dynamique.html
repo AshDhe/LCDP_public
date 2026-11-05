@@ -1,0 +1,59 @@
+<section class="lcdp-carte-dynamique" data-lcdp-carte-dynamique>
+  <header class="lcdp-carte-dynamique__header">
+    <h1 class="lcdp-carte-dynamique__title">CarteParc</h1>
+  </header>
+
+  <form class="lcdp-carte-dynamique__filters" data-lcdp-carte-filters novalidate>
+    <label class="lcdp-carte-dynamique__field">
+      <span class="lcdp-carte-dynamique__label">Filtre géo</span>
+      <input
+        class="lcdp-carte-dynamique__input"
+        type="text"
+        inputmode="text"
+        autocomplete="off"
+        data-lcdp-carte-geo
+      >
+    </label>
+
+    <label class="lcdp-carte-dynamique__field">
+      <span class="lcdp-carte-dynamique__label">Filtre état</span>
+      <input
+        class="lcdp-carte-dynamique__input"
+        type="text"
+        autocomplete="off"
+        value="prepa"
+        data-lcdp-carte-etat
+      >
+    </label>
+
+  </form>
+
+  <p class="lcdp-carte-dynamique__status" data-lcdp-carte-status aria-live="polite"></p>
+
+  <div class="lcdp-carte-dynamique__map-shell">
+    <div class="lcdp-carte-dynamique__zoom" aria-label="Commandes de zoom">
+      <button class="lcdp-carte-dynamique__zoom-button" type="button" data-lcdp-carte-zoom-plus aria-label="Agrandir la carte">+</button>
+      <button class="lcdp-carte-dynamique__zoom-button" type="button" data-lcdp-carte-zoom-moins aria-label="Réduire la carte">−</button>
+    </div>
+
+    <svg
+      class="lcdp-carte-dynamique__map"
+      data-lcdp-carte-svg
+      viewBox="60 35 770 820"
+      role="img"
+      aria-label="Carte des départements de France métropolitaine et de Corse"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <g data-lcdp-carte-departements-layer></g>
+      <g data-lcdp-carte-selection-layer></g>
+      <g data-lcdp-carte-localites-layer></g>
+      <g data-lcdp-carte-parcs-layer></g>
+    </svg>
+
+    <div
+      class="lcdp-carte-dynamique__card-slot"
+      data-lcdp-carte-card-slot
+      hidden
+    ></div>
+  </div>
+</section>

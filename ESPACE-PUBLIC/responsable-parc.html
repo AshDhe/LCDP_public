@@ -270,7 +270,7 @@
             <h1 class="lcdp-title-page-center">PARC</h1>
 
             <div id="lcdp-contact-attente" class="lcdp-pictowait" role="status" aria-live="polite" aria-label="Chargement du formulaire">
-              <img class="lcdp-pictowait__image" src="../OBJET/BOX/pictowait.gif" data-site-src="/OBJET/BOX/pictowait.gif" alt="" width="56" height="56" aria-hidden="true">
+              <img class="lcdp-pictowait__image" src="../OBJET/IMAG/PICTO/pictowait.gif" data-site-src="/OBJET/IMAG/PICTO/pictowait.gif" alt="" width="56" height="56" aria-hidden="true">
             </div>
             <div id="lcdp-contact-erreur" role="alert" hidden>
               <p>Le formulaire n’a pas pu être chargé.</p>
@@ -348,7 +348,7 @@
         const slot = document.getElementById("lcdp-lightbox-slot");
         slot.innerHTML = "";
 
-        const fragment = await chargerFragment("/OBJET/BOX/02-box-dialogue-bouton.html");
+        const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-bouton.html");
         slot.appendChild(fragment);
 
         const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
@@ -397,7 +397,7 @@
       async function ajouterBoxText(slotId, titre, contenuHtml) {
         const slot = document.getElementById(slotId);
         slot.innerHTML = "";
-        slot.appendChild(await chargerFragment("/OBJET/BOX/01-box-text.html"));
+        slot.appendChild(await chargerFragment("/OBJET/HTMLBASE/01-text.html"));
         const box = slot.querySelector("[data-lcdp-boxtext]");
         box.querySelector("[data-lcdp-boxtext-title]").textContent = titre;
         box.querySelector("[data-lcdp-boxtext-content]").innerHTML = contenuHtml;
@@ -407,13 +407,13 @@
       async function initialiserFooter() {
         const slot = document.getElementById("lcdp-footer-slot");
         slot.innerHTML = "";
-        slot.appendChild(await chargerFragment("/OBJET/BOX/02-box-footer.html"));
+        slot.appendChild(await chargerFragment("/OBJET/HTMLBASE/02-footer.html"));
         appliquerRoutesSite(slot);
       }
 
       async function initialiserDemande() {
-        await chargerScriptUneFois("/OBJET/BOX/03-box-formulaire.js");
-        await chargerScriptUneFois("/OBJET/BOX/03-formulaire-protege.js");
+        await chargerScriptUneFois("/OBJET/JSBASE/03-formulaire.js");
+        await chargerScriptUneFois("/OBJET/JSBASE/03-formulaire-protege.js");
         // Le script appartient à l’espace public, pas à la base fonctionnelle PARC.
         await chargerScriptUneFois("/ESPACE-PUBLIC/contact-resparc.js?v=20261103-contact-chargement");
         if (typeof window.LCDP_initialiserContactResparc !== "function") {
