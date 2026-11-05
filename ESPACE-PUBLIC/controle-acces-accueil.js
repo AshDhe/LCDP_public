@@ -153,13 +153,9 @@
         return 'refuse';
       }
       if(action==='planifier') {window.location.href=urlMembre(chemin.planifier);return 'ouvert';}
-      if(action==='mes_acces') {
-        const resas=await planning();
-        if(resas.nonConnecte) return 'non_connecte';
-        if(resas.some(r=>dateDebut(r)>Date.now())) {window.location.href=urlMembre(chemin.mes_acces);return 'ouvert';}
-        await alerte("Vous n'avez aucun accès planifié",planifier());
-        return 'refuse';
-      }
+      // MES ACCÈS reste consultable même sans accès futur (onglet Passés).
+      // Le contrôle serveur de connexion, suspension et impayés reste inchangé.
+      if(action==='mes_acces') {window.location.href=urlMembre(chemin.mes_acces);return 'ouvert';}
       return await gererMaCle(options);
     } finally {traitementEnCours=false;}
   }
