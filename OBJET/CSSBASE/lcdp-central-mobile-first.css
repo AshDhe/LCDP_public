@@ -1033,23 +1033,18 @@
   overflow-x: auto;
   overflow-y: visible;
   border-radius: 8px;
-  scrollbar-width: thin;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table {
   width: 100%;
-  min-width: 1040px;
   table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 13px;
   line-height: 1.45;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td {
   box-sizing: border-box;
-  padding: 8px 6px;
   vertical-align: middle;
   white-space: nowrap;
-  font-size: 13px;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table thead tr:first-child th {
   background: #edf1e8;
@@ -1064,26 +1059,12 @@
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table tbody tr:hover {
   background: #eef4e8;
 }
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1) {
-  width: 6%;
-}
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2) {
-  width: 20%;
   text-align: left;
 }
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3) {
-  width: 11%;
-}
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(4),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(4) {
-  width: 10%;
-}
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(n+5):nth-child(-n+10),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(n+5):nth-child(-n+10) {
-  width: 6%;
   text-align: center;
   font-variant-numeric: tabular-nums;
-}
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:last-child,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:last-child {
-  width: 17%;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__sorts th {
   padding: 4px 5px;
@@ -1146,7 +1127,6 @@
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table {
   font-size: 14px;
-  min-width: 1180px;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td {
   font-size: 14px;
@@ -1160,15 +1140,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #526256;
-}
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1) {
-  width: 5%;
-}
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2) {
-  width: 22%;
-}
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3) {
-  width: 8%;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(4),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(4) {
   width: 18%;
@@ -3047,14 +3018,10 @@
   background: var(--lcdp-color-surface);
   color: var(--lcdp-color-text-muted);
   font-size: 1rem;
-  line-height: 1.45;
   box-sizing: border-box;
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__box-text p {
   margin: 0;
-}
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__box-text p + p {
-  margin-top: var(--lcdp-space-2);
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__map {
   width: 100%;
@@ -3222,12 +3189,6 @@
   border-color: var(--lcdp-color-orange-hover);
   color: #ffffff;
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage-libelle {
-  color: var(--lcdp-color-text);
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.25;
-}
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list {
     flex-direction: row !important;
@@ -3363,7 +3324,6 @@
   gap: var(--lcdp-space-2);
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-button,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage {
-  width: fit-content !important;
   box-sizing: border-box;
   white-space: nowrap;
 }
@@ -4104,11 +4064,9 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale {
   position: fixed;
-  z-index: 2147483646;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
 }
 :where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale img {
   display: block;
@@ -5299,9 +5257,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close {
   top: 10px;
-  right: 20px;
-  width: 24px;
-  height: 24px;
   border-radius: 999px;
   background: #f8fafc;
   color: #94a3b8;
@@ -6614,14 +6569,11 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   --lcdp-reservation-invitation-color: #7b5aa6;
   width: 100%;
   margin: 0 auto;
-  padding: var(--lcdp-space-3);
   border: 1px solid var(--lcdp-color-border);
   border-radius: var(--lcdp-radius-large);
   background: var(--lcdp-color-surface);
   text-align: left;
-  display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--lcdp-space-3);
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--avec-image {
   grid-template-columns: 92px minmax(0, 1fr);
@@ -6637,7 +6589,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__media {
   width: 100%;
   overflow: hidden;
-  border-radius: var(--lcdp-radius-medium);
   background: var(--lcdp-color-surface-soft);
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__media[hidden] {
@@ -6646,8 +6597,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
   display: block;
   width: 100%;
-  height: 100%;
-  min-height: 108px;
   object-fit: cover;
   background: var(--lcdp-color-surface-soft);
 }
@@ -6655,8 +6604,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: var(--lcdp-space-3);
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation {
   margin: 0;
@@ -6666,7 +6613,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__content {
   display: flex;
   flex-direction: column;
-  gap: var(--lcdp-space-1);
   width: 100%;
   min-width: 0;
 }
@@ -6691,9 +6637,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   white-space: nowrap;
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__park {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   font-weight: 700;
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__department {
@@ -6705,7 +6648,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: var(--lcdp-space-2);
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
   min-height: 38px;
@@ -6782,11 +6724,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__hour,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__park,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__department {
     font-size: 0.92rem;
   }
-  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
-    min-height: 34px;
-    padding: 7px 11px;
-    font-size: 0.88rem;
-  }
 }
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre {
@@ -6796,9 +6733,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--avec-image {
     grid-template-columns: 150px minmax(0, 1fr);
     gap: var(--lcdp-space-4);
-  }
-  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
-    min-height: 150px;
   }
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
     justify-content: center;
@@ -7074,17 +7008,8 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__title {
   font-size: clamp(1.15rem, 4vw, 1.45rem);
 }
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list {
-  gap: var(--lcdp-space-2);
-}
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
-  gap: var(--lcdp-space-1);
-}
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card-title {
   font-size: 0.95rem;
-}
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  aspect-ratio: 16 / 10;
 }
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__text,:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__legend {
   font-size: 0.78rem;
@@ -7188,7 +7113,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   }
 }
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list {
-  grid-template-columns: 1fr !important;
   gap: var(--lcdp-space-3);
 }
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
@@ -8343,7 +8267,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid {
     min-height: 0;
-    grid-auto-rows: 78px;
   }
 }
 :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__card {
@@ -9179,7 +9102,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__date-planning {
   margin: 0 0 var(--lcdp-space-3);
   color: var(--lcdp-color-text);
-  font-size: clamp(1.35rem, 5vw, 2rem);
   line-height: 1.15;
   font-weight: 700;
   text-align: center;
@@ -10998,7 +10920,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 2px;
   min-width: 0;
   max-width: 100%;
 }
@@ -12065,19 +11986,12 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__contenu {
   flex-direction: row;
 }
-:where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
-  gap: 5px 14px;
-}
 :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__item {
   display: inline-flex;
   align-items: center;
   gap: 5px;
 }
 :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
-  width: 12px;
-  height: 12px;
-  min-width: 12px;
-  min-height: 12px;
   margin: 0;
   border-radius: 2px;
   flex: none;
@@ -12460,10 +12374,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden]) {
   display: block;
-  flex: 0 0 15px;
-  width: 15px;
-  height: 15px;
-  margin: 0 0 2px;
 }
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--recto, :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--verso {
   transition: transform 420ms ease, visibility 420ms step-end;
@@ -14521,9 +14431,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-document-legal__title {
   color: var(--lcdp-color-text);
-}
-:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__context {
-  color: var(--lcdp-color-text-muted);
 }
 :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext__content strong {
   color: var(--lcdp-color-text);

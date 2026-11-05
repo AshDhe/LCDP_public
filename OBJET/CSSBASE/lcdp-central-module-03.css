@@ -351,11 +351,9 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale {
   position: fixed;
-  z-index: 2147483646;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
 }
 :where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale img {
   display: block;
@@ -1546,9 +1544,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close {
   top: 10px;
-  right: 20px;
-  width: 24px;
-  height: 24px;
   border-radius: 999px;
   background: #f8fafc;
   color: #94a3b8;

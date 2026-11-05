@@ -1014,14 +1014,10 @@
   background: var(--lcdp-color-surface);
   color: var(--lcdp-color-text-muted);
   font-size: 1rem;
-  line-height: 1.45;
   box-sizing: border-box;
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__box-text p {
   margin: 0;
-}
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__box-text p + p {
-  margin-top: var(--lcdp-space-2);
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__map {
   width: 100%;
@@ -1189,12 +1185,6 @@
   border-color: var(--lcdp-color-orange-hover);
   color: #ffffff;
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage-libelle {
-  color: var(--lcdp-color-text);
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.25;
-}
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list {
     flex-direction: row !important;
@@ -1330,7 +1320,6 @@
   gap: var(--lcdp-space-2);
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-button,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage {
-  width: fit-content !important;
   box-sizing: border-box;
   white-space: nowrap;
 }

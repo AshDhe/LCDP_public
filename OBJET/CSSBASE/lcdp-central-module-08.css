@@ -1526,9 +1526,6 @@
 :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-document-legal__title {
   color: var(--lcdp-color-text);
 }
-:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__context {
-  color: var(--lcdp-color-text-muted);
-}
 :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext__content strong {
   color: var(--lcdp-color-text);
 }

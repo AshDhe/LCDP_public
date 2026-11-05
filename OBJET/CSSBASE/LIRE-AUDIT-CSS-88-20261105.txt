@@ -1,0 +1,261 @@
+LA CLÉ DU PARC — AUDIT DES 88 CONFLITS CSS
+Version du 5 novembre 2026 — base : CSS central phase 2
+
+RÉSULTAT
+88 transitions de valeurs examinées sur sélecteurs, propriétés et contextes CSS identiques.
+61 surcharges historiques résolues par suppression des anciennes déclarations écrasées.
+27 replis de compatibilité conservés (unités de hauteur CSS vh / svh / dvh).
+61 déclarations supprimées et 16 règles devenues vides retirées.
+CSS central : 13 578 → 13 517 déclarations ; 3 509 → 3 493 règles ; 982 → 980 !important.
+Vérification visuelle locale : 20/20 scénarios pixel-identiques à 320, 360, 390, 768 et 1 180 px.
+DA et Mon compte : inchangés.
+
+PÉRIMÈTRE ET LIMITE
+Audit ciblé : même sélecteur, même propriété, même contexte (@media, @supports), même importance.
+Il ne prouve pas l’absence de tous conflits entre sélecteurs de spécificités différentes ni entre CSS /BOX et CSS des pages.
+Une comparaison locale de captures n’est pas une validation intégrale des parcours de production.
+
+DÉTAIL DES 88 CAS
+S = ancienne surcharge supprimée ; R = repli de compatibilité conservé.
+
+01 | S | c063 | font-size | 0.88rem  →  0.86rem
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge
+     Valeur finale conservée : 0.86rem
+02 | S | c063 | min-height | 34px  →  32px
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge
+     Valeur finale conservée : 32px
+03 | S | c063 | padding | 7px 11px  →  6px 10px
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge
+     Valeur finale conservée : 6px 10px
+04 | R | c083 | max-height | 100vh  →  100svh
+     :where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__card
+05 | R | c030 | max-height | calc(100vh - 72px)  →  calc(100svh - 72px)
+     :where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche__card
+06 | S | c046 | grid-auto-rows | 78px  →  86px
+     :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid
+     Valeur finale conservée : 86px
+07 | S | c063 | min-height | 150px  →  210px
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image
+     Valeur finale conservée : 210px
+08 | R | c075 | max-height | calc(100vh - (var(--lcdp-space-2) * 2))  →  calc(100dvh - (var(--lcdp-space-2) * 2))
+     :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__card
+09 | S | c015 | scrollbar-width | thin  →  none
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__scroll
+     Valeur finale conservée : none
+10 | S | c015 | font-size | 13px  →  14px
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td
+     Valeur finale conservée : 14px
+11 | S | c015 | padding | 8px 6px  →  10px 8px
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td
+     Valeur finale conservée : 10px 8px
+12 | S | c015 | width | 17%  →  14%
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:last-child,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:last-child
+     Valeur finale conservée : 14%
+13 | S | c015 | width | 5%  →  7%
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1)
+     Valeur finale conservée : 7%
+14 | S | c015 | width | 6%  →  5%
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1)
+     Valeur finale conservée : 7%
+15 | S | c015 | width | 20%  →  22%
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2)
+     Valeur finale conservée : 25%
+16 | S | c015 | width | 22%  →  25%
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2)
+     Valeur finale conservée : 25%
+17 | S | c015 | width | 11%  →  8%
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3)
+     Valeur finale conservée : 10%
+18 | S | c015 | width | 8%  →  10%
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3)
+     Valeur finale conservée : 10%
+19 | S | c015 | width | 10%  →  18%
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(4),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(4)
+     Valeur finale conservée : 18%
+20 | S | c015 | width | 6%  →  5.5%
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(n+5):nth-child(-n+10),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(n+5):nth-child(-n+10)
+     Valeur finale conservée : 5.5%
+21 | S | c015 | font-size | 13px  →  14px
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table
+     Valeur finale conservée : 14px
+22 | S | c015 | min-width | 1040px  →  1180px
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table
+     Valeur finale conservée : 850px
+23 | S | c015 | min-width | 1180px  →  850px
+     :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table
+     Valeur finale conservée : 850px
+24 | R | c021 | max-height | 360px  →  min(45svh,360px)
+     :where(html[data-lcdp-css~="c021"]) .lcdp-acces-invites-liste
+25 | R | c027 | max-height | calc(100vh - 36px)  →  calc(100svh - 36px)
+     :where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card
+26 | S | c029 | gap | 2px  →  6px
+     :where(html[data-lcdp-css~="c029"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne
+     Valeur finale conservée : 6px
+27 | R | c030 | min-height | 100vh  →  100svh
+     :where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche
+28 | R | c030 | max-height | calc(100vh - 32px)  →  calc(100svh - 32px)
+     :where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche__card
+29 | R | c030 | min-height | 100vh  →  100svh
+     :where(html[data-lcdp-css~="c030"]) .lcdp-index-stage
+30 | R | c030 | height | 100vh  →  100svh
+     :where(html[data-lcdp-css~="c030"]) .lcdp-index-stage__background
+31 | R | c030 | min-height | 100vh  →  100svh
+     :where(html[data-lcdp-css~="c030"]) .lcdp-index-stage__overlay
+32 | R | c033 | min-height | 100vh  →  100svh
+     :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte
+33 | S | c036 | height | 24px  →  40px
+     :where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close
+     Valeur finale conservée : 40px
+34 | S | c036 | right | 20px  →  10px
+     :where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close
+     Valeur finale conservée : 10px
+35 | S | c036 | width | 24px  →  40px
+     :where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close
+     Valeur finale conservée : 40px
+36 | R | c037 | max-height | calc(100vh - 36px)  →  calc(100svh - 36px)
+     :where(html[data-lcdp-css~="c037"]) .lcdp-footer-legal-card
+37 | S | c044 | font-size | clamp(1.35rem, 5vw, 2rem)  →  clamp(1.215rem, 4.5vw, 1.8rem)
+     :where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__date-planning
+     Valeur finale conservée : clamp(1.215rem, 4.5vw, 1.8rem)
+38 | S | c048 | gap | var(--lcdp-space-1)  →  0
+     :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card
+     Valeur finale conservée : 0
+39 | S | c048 | aspect-ratio | 16 / 10  →  16 / 9
+     :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image
+     Valeur finale conservée : 16 / 9
+40 | S | c048 | gap | var(--lcdp-space-2)  →  var(--lcdp-space-3)
+     :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list
+     Valeur finale conservée : var(--lcdp-space-3)
+41 | S | c048 | grid-template-columns | 1fr  →  minmax(0, 1fr)
+     :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list
+     Valeur finale conservée : minmax(0, 1fr)
+42 | R | c054 | max-height | min(86vh, 720px)  →  min(86svh, 720px)
+     :where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__card
+43 | S | c058 | flex | 0 0 15px  →  0 0 13px
+     :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])
+     Valeur finale conservée : 0 0 13px
+44 | S | c058 | height | 15px  →  13px
+     :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])
+     Valeur finale conservée : 13px
+45 | S | c058 | margin | 0 0 2px  →  1px 0 0
+     :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])
+     Valeur finale conservée : 1px 0 0
+46 | S | c058 | width | 15px  →  13px
+     :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])
+     Valeur finale conservée : 13px
+47 | R | c062 | max-height | calc(100vh - (var(--lcdp-space-3) * 2))  →  calc(100svh - (var(--lcdp-space-3) * 2))
+     :where(html[data-lcdp-css~="c062"]) .lcdp-box-card-recaporder__card
+48 | S | c063 | display | grid  →  flex
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre
+     Valeur finale conservée : flex
+49 | S | c063 | gap | var(--lcdp-space-3)  →  0
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre
+     Valeur finale conservée : 0
+50 | S | c063 | padding | var(--lcdp-space-3)  →  0
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre
+     Valeur finale conservée : 0
+51 | S | c063 | gap | var(--lcdp-space-2)  →  8px
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__actions
+     Valeur finale conservée : 8px
+52 | S | c063 | gap | var(--lcdp-space-3)  →  var(--lcdp-space-2)
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body
+     Valeur finale conservée : var(--lcdp-space-2)
+53 | S | c063 | justify-content | center  →  space-between
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body
+     Valeur finale conservée : space-between
+54 | S | c063 | gap | var(--lcdp-space-1)  →  var(--lcdp-space-2)
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__content
+     Valeur finale conservée : var(--lcdp-space-2)
+55 | S | c063 | height | 100%  →  auto
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image
+     Valeur finale conservée : auto
+56 | S | c063 | min-height | 108px  →  0
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image
+     Valeur finale conservée : 0
+57 | S | c063 | border-radius | var(--lcdp-radius-medium)  →  0
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__media
+     Valeur finale conservée : 0
+58 | S | c063 | overflow | hidden  →  visible
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__park
+     Valeur finale conservée : visible
+59 | S | c063 | text-overflow | ellipsis  →  clip
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__park
+     Valeur finale conservée : clip
+60 | S | c063 | white-space | nowrap  →  normal
+     :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__park
+     Valeur finale conservée : normal
+61 | R | c065 | max-height | calc(100vh - (var(--lcdp-space-3) * 2))  →  calc(100svh - (var(--lcdp-space-3) * 2))
+     :where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__card
+62 | R | c067 | max-height | calc(100vh - (var(--lcdp-space-3) * 2))  →  calc(100svh - (var(--lcdp-space-3) * 2))
+     :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__card
+63 | S | c070 | width | fit-content  →  auto
+     :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-button,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage
+     Valeur finale conservée : auto
+64 | S | c070 | margin-top | var(--lcdp-space-2)  →  var(--lcdp-space-3)
+     :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__box-text p + p
+     Valeur finale conservée : var(--lcdp-space-3)
+65 | S | c070 | line-height | 1.45  →  1.55
+     :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__box-text
+     Valeur finale conservée : 1.55
+66 | S | c070 | color | var(--lcdp-color-text)  →  #EBA042
+     :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage-libelle
+     Valeur finale conservée : #EBA042
+67 | S | c070 | font-size | 1rem  →  0.95rem
+     :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage-libelle
+     Valeur finale conservée : 0.95rem
+68 | S | c070 | font-weight | 600  →  700
+     :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage-libelle
+     Valeur finale conservée : 700
+69 | S | c070 | line-height | 1.25  →  1.1
+     :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage-libelle
+     Valeur finale conservée : 1.1
+70 | S | c071 | height | 12px  →  16px
+     :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre
+     Valeur finale conservée : 16px
+71 | S | c071 | min-height | 12px  →  16px
+     :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre
+     Valeur finale conservée : 16px
+72 | S | c071 | min-width | 12px  →  16px
+     :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre
+     Valeur finale conservée : 16px
+73 | S | c071 | width | 12px  →  16px
+     :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre
+     Valeur finale conservée : 16px
+74 | S | c071 | gap | 5px 14px  →  12px
+     :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne
+     Valeur finale conservée : 12px
+75 | R | c075 | max-height | calc(100vh - (var(--lcdp-space-2) * 2))  →  calc(100dvh - (var(--lcdp-space-2) * 2))
+     :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__card
+76 | S | c077 | background | #ffffff  →  var(--lcdp-color-bg, #fff)
+     :where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale
+     Valeur finale conservée : var(--lcdp-color-bg, #fff)
+77 | S | c077 | z-index | 2147483646  →  7000
+     :where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale
+     Valeur finale conservée : 7000
+78 | R | c083 | max-height | calc(100vh - 1.5rem)  →  calc(100svh - 1.5rem)
+     :where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__card
+79 | S | c083 | color | var(--lcdp-color-text-muted)  →  #616b64
+     :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__context
+     Valeur finale conservée : #616b64
+80 | R | c085 | max-height | calc(100vh - 36px)  →  calc(100svh - 36px)
+     :where(html[data-lcdp-css~="c085"]) .lcdp-restricted-legal-card
+81 | R | p06912beca6de | height | 100vh  →  100dvh
+     :where(html[data-lcdp-css~="p06912beca6de"]) #lcdp-accueil-attente
+82 | R | p06912beca6de | min-height | 100vh  →  100dvh
+     :where(html[data-lcdp-css~="p06912beca6de"]) #lcdp-navigation-attente:not([hidden])
+83 | R | p155c9e29c5ec | min-height | 40vh  →  40svh
+     :where(html[data-lcdp-css~="p155c9e29c5ec"]) #lcdp-contact-attente:not([hidden])
+84 | R | p590d24011e87 | height | 100vh  →  100dvh
+     :where(html[data-lcdp-css~="p590d24011e87"]) #lcdp-accueil-attente
+85 | R | p590d24011e87 | min-height | 100vh  →  100dvh
+     :where(html[data-lcdp-css~="p590d24011e87"]) #lcdp-navigation-attente:not([hidden])
+86 | R | p8ffe07172f8c | min-height | 40vh  →  40svh
+     :where(html[data-lcdp-css~="p8ffe07172f8c"]) #lcdp-contact-attente:not([hidden])
+87 | R | pd802b67dbe10 | height | 100vh  →  100dvh
+     :where(html[data-lcdp-css~="pd802b67dbe10"]) #lcdp-accueil-attente
+88 | R | pd802b67dbe10 | min-height | 100vh  →  100dvh
+     :where(html[data-lcdp-css~="pd802b67dbe10"]) #lcdp-navigation-attente:not([hidden])
+
+DÉPLOIEMENT : remplacer uniquement lcdp-central-mobile-first.css dans OBJET/CSSBASE.
+Les autres modules de maintenance sont facultatifs pour l’exécution du site.
+Les 27 replis viewport sont conservés volontairement ; ne pas supprimer mécaniquement les lignes en vh.

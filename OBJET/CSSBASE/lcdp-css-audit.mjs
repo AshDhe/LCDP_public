@@ -71,6 +71,16 @@ const current={
   conflict_keys:Object.fromEntries(files.map(f=>[f,[...(records[f]?.conflicts||[])].sort()])),
   overlaps:overlapping
 };
+// Les 27 valeurs historiques vh -> svh/dvh et 360px -> min(45svh,360px)
+// sont des replis volontaires pour les navigateurs sans unités modernes.
+const isViewportFallback = (serialized) => {
+ const [, oldValue, newValue] = JSON.parse(serialized);
+ return /(?:svh|dvh|lvh)\b/.test(newValue) && !/(?:svh|dvh|lvh)\b/.test(oldValue);
+};
+for (const f of files) {
+ const unexplained = current.conflict_keys[f].filter(item=>!isViewportFallback(item));
+ if (unexplained.length) errors.push(f+': '+unexplained.length+' contradiction(s) encore non résolue(s)');
+}
 const baselineName='lcdp-css-baseline.json';
 if(process.argv.includes('--snapshot')){
  fs.writeFileSync(path.join(folder,baselineName),JSON.stringify(current,null,2)+'\n');
@@ -94,7 +104,8 @@ if(process.argv.includes('--snapshot')){
 }
 for(const name of files){
  const r=records[name];if(!r)continue;
- console.log(`${name}.css : ${r.rules} règles, ${r.declarations} déclarations, ${r.important} !important, ${r.conflicts.size} conflits existants, ${r.repeatedValues.size} répétitions identiques`);
+ const fallbackCount = [...r.conflicts].filter(isViewportFallback).length;
+ console.log(`${name}.css : ${r.rules} règles, ${r.declarations} déclarations, ${r.important} !important, ${r.conflicts.size-fallbackCount} conflits non expliqués, ${fallbackCount} replis viewport, ${r.repeatedValues.size} répétitions identiques`);
 }
 console.log(`Central : ${actualImports.length} sources CSS classiques dont la DA partagée ; CSS classique sans compilation Tailwind`);
 if(errors.length){for(const e of errors) console.error('ÉCHEC : '+e);process.exit(1);}

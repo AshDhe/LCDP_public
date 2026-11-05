@@ -697,7 +697,6 @@
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid {
     min-height: 0;
-    grid-auto-rows: 78px;
   }
 }
 :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__card {
@@ -1533,7 +1532,6 @@
 :where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__date-planning {
   margin: 0 0 var(--lcdp-space-3);
   color: var(--lcdp-color-text);
-  font-size: clamp(1.35rem, 5vw, 2rem);
   line-height: 1.15;
   font-weight: 700;
   text-align: center;

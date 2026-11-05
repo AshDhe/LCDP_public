@@ -1,0 +1,1804 @@
+{
+  "phase": "2026-11-05-88-conflits",
+  "base": "Central CSS phase2, c873133b...",
+  "cas_signales": 88,
+  "conflits_elimines": 61,
+  "replis_conserves": 27,
+  "declarations_retires": 61,
+  "regles_vides_retires": 16,
+  "modules_touches": {
+    "lcdp-central-module-04.css": 21,
+    "lcdp-central-module-05.css": 2,
+    "lcdp-central-module-01.css": 15,
+    "lcdp-central-module-06.css": 1,
+    "lcdp-central-module-03.css": 5,
+    "lcdp-central-module-07.css": 9,
+    "lcdp-central-module-02.css": 7,
+    "lcdp-central-module-08.css": 1
+  },
+  "detail": [
+    {
+      "id": 1,
+      "key": "[[\"@media (max-width: 420px)\"],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__invitation-badge\",\"font-size\",false]",
+      "ctx": [
+        "@media (max-width: 420px)"
+      ],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__invitation-badge",
+      "property": "font-size",
+      "important": false,
+      "first": "0.88rem",
+      "last": "0.86rem",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 938,
+          "value": "0.88rem"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1059,
+        "value": "0.86rem"
+      }
+    },
+    {
+      "id": 2,
+      "key": "[[\"@media (max-width: 420px)\"],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__invitation-badge\",\"min-height\",false]",
+      "ctx": [
+        "@media (max-width: 420px)"
+      ],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__invitation-badge",
+      "property": "min-height",
+      "important": false,
+      "first": "34px",
+      "last": "32px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 936,
+          "value": "34px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1057,
+        "value": "32px"
+      }
+    },
+    {
+      "id": 3,
+      "key": "[[\"@media (max-width: 420px)\"],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__invitation-badge\",\"padding\",false]",
+      "ctx": [
+        "@media (max-width: 420px)"
+      ],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__invitation-badge",
+      "property": "padding",
+      "important": false,
+      "first": "7px 11px",
+      "last": "6px 10px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 937,
+          "value": "7px 11px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1058,
+        "value": "6px 10px"
+      }
+    },
+    {
+      "id": 4,
+      "key": "[[\"@media (max-width: 620px)\"],\":where(html[data-lcdp-css~=\\\"c083\\\"]) .lcdp-legal-lightbox__card\",\"max-height\",false]",
+      "ctx": [
+        "@media (max-width: 620px)"
+      ],
+      "selector": ":where(html[data-lcdp-css~=\"c083\"]) .lcdp-legal-lightbox__card",
+      "property": "max-height",
+      "important": false,
+      "first": "100vh",
+      "last": "100svh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 5,
+      "key": "[[\"@media (min-width: 768px)\"],\":where(html[data-lcdp-css~=\\\"c030\\\"]) .lcdp-box-affiche__card\",\"max-height\",false]",
+      "ctx": [
+        "@media (min-width: 768px)"
+      ],
+      "selector": ":where(html[data-lcdp-css~=\"c030\"]) .lcdp-box-affiche__card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - 72px)",
+      "last": "calc(100svh - 72px)",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 6,
+      "key": "[[\"@media (min-width: 768px)\"],\":where(html[data-lcdp-css~=\\\"c046\\\"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid\",\"grid-auto-rows\",false]",
+      "ctx": [
+        "@media (min-width: 768px)"
+      ],
+      "selector": ":where(html[data-lcdp-css~=\"c046\"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid",
+      "property": "grid-auto-rows",
+      "important": false,
+      "first": "78px",
+      "last": "86px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-05.css",
+          "line": 700,
+          "value": "78px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-05.css",
+        "line": 763,
+        "value": "86px"
+      }
+    },
+    {
+      "id": 7,
+      "key": "[[\"@media (min-width: 768px)\"],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__image\",\"min-height\",false]",
+      "ctx": [
+        "@media (min-width: 768px)"
+      ],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__image",
+      "property": "min-height",
+      "important": false,
+      "first": "150px",
+      "last": "210px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 951,
+          "value": "150px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1129,
+        "value": "210px"
+      }
+    },
+    {
+      "id": 8,
+      "key": "[[\"@media (min-width: 768px)\"],\":where(html[data-lcdp-css~=\\\"c075\\\"]) .lcdp-box-shift-detail-parc__card\",\"max-height\",false]",
+      "ctx": [
+        "@media (min-width: 768px)"
+      ],
+      "selector": ":where(html[data-lcdp-css~=\"c075\"]) .lcdp-box-shift-detail-parc__card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - (var(--lcdp-space-2) * 2))",
+      "last": "calc(100dvh - (var(--lcdp-space-2) * 2))",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 9,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__scroll\",\"scrollbar-width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__scroll",
+      "property": "scrollbar-width",
+      "important": false,
+      "first": "thin",
+      "last": "none",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1035,
+          "value": "thin"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1242,
+        "value": "none"
+      }
+    },
+    {
+      "id": 10,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td\",\"font-size\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td",
+      "property": "font-size",
+      "important": false,
+      "first": "13px",
+      "last": "14px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1051,
+          "value": "13px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1151,
+        "value": "14px"
+      }
+    },
+    {
+      "id": 11,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td\",\"padding\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td",
+      "property": "padding",
+      "important": false,
+      "first": "8px 6px",
+      "last": "10px 8px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1048,
+          "value": "8px 6px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1152,
+        "value": "10px 8px"
+      }
+    },
+    {
+      "id": 12,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:last-child,:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:last-child\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:last-child,:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:last-child",
+      "property": "width",
+      "important": false,
+      "first": "17%",
+      "last": "14%",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1085,
+          "value": "17%"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1179,
+        "value": "14%"
+      }
+    },
+    {
+      "id": 13,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1)\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1)",
+      "property": "width",
+      "important": false,
+      "first": "5%",
+      "last": "7%",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1067,
+          "value": "6%"
+        },
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1164,
+          "value": "5%"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1211,
+        "value": "7%"
+      }
+    },
+    {
+      "id": 14,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1)\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1)",
+      "property": "width",
+      "important": false,
+      "first": "6%",
+      "last": "5%",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1067,
+          "value": "6%"
+        },
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1164,
+          "value": "5%"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1211,
+        "value": "7%"
+      }
+    },
+    {
+      "id": 15,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2)\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2)",
+      "property": "width",
+      "important": false,
+      "first": "20%",
+      "last": "22%",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1070,
+          "value": "20%"
+        },
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1167,
+          "value": "22%"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1214,
+        "value": "25%"
+      }
+    },
+    {
+      "id": 16,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2)\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2)",
+      "property": "width",
+      "important": false,
+      "first": "22%",
+      "last": "25%",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1070,
+          "value": "20%"
+        },
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1167,
+          "value": "22%"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1214,
+        "value": "25%"
+      }
+    },
+    {
+      "id": 17,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3)\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3)",
+      "property": "width",
+      "important": false,
+      "first": "11%",
+      "last": "8%",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1074,
+          "value": "11%"
+        },
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1170,
+          "value": "8%"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1217,
+        "value": "10%"
+      }
+    },
+    {
+      "id": 18,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3)\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3)",
+      "property": "width",
+      "important": false,
+      "first": "8%",
+      "last": "10%",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1074,
+          "value": "11%"
+        },
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1170,
+          "value": "8%"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1217,
+        "value": "10%"
+      }
+    },
+    {
+      "id": 19,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(4),:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(4)\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(4),:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(4)",
+      "property": "width",
+      "important": false,
+      "first": "10%",
+      "last": "18%",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1077,
+          "value": "10%"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1173,
+        "value": "18%"
+      }
+    },
+    {
+      "id": 20,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(n+5):nth-child(-n+10),:where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(n+5):nth-child(-n+10)\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(n+5):nth-child(-n+10),:where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(n+5):nth-child(-n+10)",
+      "property": "width",
+      "important": false,
+      "first": "6%",
+      "last": "5.5%",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1080,
+          "value": "6%"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1176,
+        "value": "5.5%"
+      }
+    },
+    {
+      "id": 21,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table\",\"font-size\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table",
+      "property": "font-size",
+      "important": false,
+      "first": "13px",
+      "last": "14px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1043,
+          "value": "13px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1147,
+        "value": "14px"
+      }
+    },
+    {
+      "id": 22,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table\",\"min-width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table",
+      "property": "min-width",
+      "important": false,
+      "first": "1040px",
+      "last": "1180px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1039,
+          "value": "1040px"
+        },
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1148,
+          "value": "1180px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1208,
+        "value": "850px"
+      }
+    },
+    {
+      "id": 23,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c015\\\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table\",\"min-width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c015\"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table",
+      "property": "min-width",
+      "important": false,
+      "first": "1180px",
+      "last": "850px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1039,
+          "value": "1040px"
+        },
+        {
+          "module": "lcdp-central-module-01.css",
+          "line": 1148,
+          "value": "1180px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-01.css",
+        "line": 1208,
+        "value": "850px"
+      }
+    },
+    {
+      "id": 24,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c021\\\"]) .lcdp-acces-invites-liste\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c021\"]) .lcdp-acces-invites-liste",
+      "property": "max-height",
+      "important": false,
+      "first": "360px",
+      "last": "min(45svh,360px)",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 25,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c027\\\"]) .lcdp-restricted-legal-card\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c027\"]) .lcdp-restricted-legal-card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - 36px)",
+      "last": "calc(100svh - 36px)",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 26,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c029\\\"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne\",\"gap\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c029\"]) #lcdp-actualite-bandeau .lcdp-actu-bandeau-ligne",
+      "property": "gap",
+      "important": false,
+      "first": "2px",
+      "last": "6px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-06.css",
+          "line": 1418,
+          "value": "2px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-06.css",
+        "line": 1486,
+        "value": "6px"
+      }
+    },
+    {
+      "id": 27,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c030\\\"]) .lcdp-box-affiche\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c030\"]) .lcdp-box-affiche",
+      "property": "min-height",
+      "important": false,
+      "first": "100vh",
+      "last": "100svh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 28,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c030\\\"]) .lcdp-box-affiche__card\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c030\"]) .lcdp-box-affiche__card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - 32px)",
+      "last": "calc(100svh - 32px)",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 29,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c030\\\"]) .lcdp-index-stage\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c030\"]) .lcdp-index-stage",
+      "property": "min-height",
+      "important": false,
+      "first": "100vh",
+      "last": "100svh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 30,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c030\\\"]) .lcdp-index-stage__background\",\"height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c030\"]) .lcdp-index-stage__background",
+      "property": "height",
+      "important": false,
+      "first": "100vh",
+      "last": "100svh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 31,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c030\\\"]) .lcdp-index-stage__overlay\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c030\"]) .lcdp-index-stage__overlay",
+      "property": "min-height",
+      "important": false,
+      "first": "100vh",
+      "last": "100svh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 32,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c033\\\"]) .lcdp-box-alerte\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c033\"]) .lcdp-box-alerte",
+      "property": "min-height",
+      "important": false,
+      "first": "100vh",
+      "last": "100svh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 33,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c036\\\"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close\",\"height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c036\"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close",
+      "property": "height",
+      "important": false,
+      "first": "24px",
+      "last": "40px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-03.css",
+          "line": 1551,
+          "value": "24px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-03.css",
+        "line": 1561,
+        "value": "40px"
+      }
+    },
+    {
+      "id": 34,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c036\\\"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close\",\"right\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c036\"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close",
+      "property": "right",
+      "important": false,
+      "first": "20px",
+      "last": "10px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-03.css",
+          "line": 1549,
+          "value": "20px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-03.css",
+        "line": 1559,
+        "value": "10px"
+      }
+    },
+    {
+      "id": 35,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c036\\\"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c036\"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close",
+      "property": "width",
+      "important": false,
+      "first": "24px",
+      "last": "40px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-03.css",
+          "line": 1550,
+          "value": "24px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-03.css",
+        "line": 1560,
+        "value": "40px"
+      }
+    },
+    {
+      "id": 36,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c037\\\"]) .lcdp-footer-legal-card\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c037\"]) .lcdp-footer-legal-card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - 36px)",
+      "last": "calc(100svh - 36px)",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 37,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c044\\\"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__date-planning\",\"font-size\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c044\"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__date-planning",
+      "property": "font-size",
+      "important": false,
+      "first": "clamp(1.35rem, 5vw, 2rem)",
+      "last": "clamp(1.215rem, 4.5vw, 1.8rem)",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-05.css",
+          "line": 1536,
+          "value": "clamp(1.35rem, 5vw, 2rem)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-05.css",
+        "line": 1588,
+        "value": "clamp(1.215rem, 4.5vw, 1.8rem)"
+      }
+    },
+    {
+      "id": 38,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c048\\\"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card\",\"gap\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c048\"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card",
+      "property": "gap",
+      "important": false,
+      "first": "var(--lcdp-space-1)",
+      "last": "0",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 1231,
+          "value": "var(--lcdp-space-1)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1246,
+        "value": "0"
+      }
+    },
+    {
+      "id": 39,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c048\\\"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image\",\"aspect-ratio\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c048\"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image",
+      "property": "aspect-ratio",
+      "important": false,
+      "first": "16 / 10",
+      "last": "16 / 9",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 1237,
+          "value": "16 / 10"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1352,
+        "value": "16 / 9"
+      }
+    },
+    {
+      "id": 40,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c048\\\"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list\",\"gap\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c048\"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list",
+      "property": "gap",
+      "important": false,
+      "first": "var(--lcdp-space-2)",
+      "last": "var(--lcdp-space-3)",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 1228,
+          "value": "var(--lcdp-space-2)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1342,
+        "value": "var(--lcdp-space-3)"
+      }
+    },
+    {
+      "id": 41,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c048\\\"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list\",\"grid-template-columns\",true]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c048\"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list",
+      "property": "grid-template-columns",
+      "important": true,
+      "first": "1fr",
+      "last": "minmax(0, 1fr)",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 1341,
+          "value": "1fr"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1385,
+        "value": "minmax(0, 1fr)"
+      }
+    },
+    {
+      "id": 42,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c054\\\"]) .lcdp-box-card-listinvites-oui-non__card\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c054\"]) .lcdp-box-card-listinvites-oui-non__card",
+      "property": "max-height",
+      "important": false,
+      "first": "min(86vh, 720px)",
+      "last": "min(86svh, 720px)",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 43,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c058\\\"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])\",\"flex\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c058\"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])",
+      "property": "flex",
+      "important": false,
+      "first": "0 0 15px",
+      "last": "0 0 13px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-07.css",
+          "line": 955,
+          "value": "0 0 15px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-07.css",
+        "line": 974,
+        "value": "0 0 13px"
+      }
+    },
+    {
+      "id": 44,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c058\\\"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])\",\"height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c058\"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])",
+      "property": "height",
+      "important": false,
+      "first": "15px",
+      "last": "13px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-07.css",
+          "line": 957,
+          "value": "15px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-07.css",
+        "line": 976,
+        "value": "13px"
+      }
+    },
+    {
+      "id": 45,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c058\\\"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])\",\"margin\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c058\"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])",
+      "property": "margin",
+      "important": false,
+      "first": "0 0 2px",
+      "last": "1px 0 0",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-07.css",
+          "line": 958,
+          "value": "0 0 2px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-07.css",
+        "line": 977,
+        "value": "1px 0 0"
+      }
+    },
+    {
+      "id": 46,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c058\\\"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c058\"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden])",
+      "property": "width",
+      "important": false,
+      "first": "15px",
+      "last": "13px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-07.css",
+          "line": 956,
+          "value": "15px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-07.css",
+        "line": 975,
+        "value": "13px"
+      }
+    },
+    {
+      "id": 47,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c062\\\"]) .lcdp-box-card-recaporder__card\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c062\"]) .lcdp-box-card-recaporder__card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - (var(--lcdp-space-3) * 2))",
+      "last": "calc(100svh - (var(--lcdp-space-3) * 2))",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 48,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre\",\"display\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre",
+      "property": "display",
+      "important": false,
+      "first": "grid",
+      "last": "flex",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 772,
+          "value": "grid"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1079,
+        "value": "flex"
+      }
+    },
+    {
+      "id": 49,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre\",\"gap\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre",
+      "property": "gap",
+      "important": false,
+      "first": "var(--lcdp-space-3)",
+      "last": "0",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 774,
+          "value": "var(--lcdp-space-3)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1081,
+        "value": "0"
+      }
+    },
+    {
+      "id": 50,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre\",\"padding\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre",
+      "property": "padding",
+      "important": false,
+      "first": "var(--lcdp-space-3)",
+      "last": "0",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 767,
+          "value": "var(--lcdp-space-3)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1077,
+        "value": "0"
+      }
+    },
+    {
+      "id": 51,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__actions\",\"gap\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__actions",
+      "property": "gap",
+      "important": false,
+      "first": "var(--lcdp-space-2)",
+      "last": "8px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 858,
+          "value": "var(--lcdp-space-2)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1037,
+        "value": "8px"
+      }
+    },
+    {
+      "id": 52,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__body\",\"gap\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__body",
+      "property": "gap",
+      "important": false,
+      "first": "var(--lcdp-space-3)",
+      "last": "var(--lcdp-space-2)",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 809,
+          "value": "var(--lcdp-space-3)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 994,
+        "value": "var(--lcdp-space-2)"
+      }
+    },
+    {
+      "id": 53,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__body\",\"justify-content\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__body",
+      "property": "justify-content",
+      "important": false,
+      "first": "center",
+      "last": "space-between",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 808,
+          "value": "center"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1106,
+        "value": "space-between"
+      }
+    },
+    {
+      "id": 54,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__content\",\"gap\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__content",
+      "property": "gap",
+      "important": false,
+      "first": "var(--lcdp-space-1)",
+      "last": "var(--lcdp-space-2)",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 819,
+          "value": "var(--lcdp-space-1)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 997,
+        "value": "var(--lcdp-space-2)"
+      }
+    },
+    {
+      "id": 55,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__image\",\"height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__image",
+      "property": "height",
+      "important": false,
+      "first": "100%",
+      "last": "auto",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 799,
+          "value": "100%"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1097,
+        "value": "auto"
+      }
+    },
+    {
+      "id": 56,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__image\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__image",
+      "property": "min-height",
+      "important": false,
+      "first": "108px",
+      "last": "0",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 800,
+          "value": "108px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1098,
+        "value": "0"
+      }
+    },
+    {
+      "id": 57,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__media\",\"border-radius\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__media",
+      "property": "border-radius",
+      "important": false,
+      "first": "var(--lcdp-radius-medium)",
+      "last": "0",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 790,
+          "value": "var(--lcdp-radius-medium)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1092,
+        "value": "0"
+      }
+    },
+    {
+      "id": 58,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__park\",\"overflow\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__park",
+      "property": "overflow",
+      "important": false,
+      "first": "hidden",
+      "last": "visible",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 844,
+          "value": "hidden"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1020,
+        "value": "visible"
+      }
+    },
+    {
+      "id": 59,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__park\",\"text-overflow\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__park",
+      "property": "text-overflow",
+      "important": false,
+      "first": "ellipsis",
+      "last": "clip",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 846,
+          "value": "ellipsis"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1022,
+        "value": "clip"
+      }
+    },
+    {
+      "id": 60,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c063\\\"]) .lcdp-box-card-reservation-membre__park\",\"white-space\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__park",
+      "property": "white-space",
+      "important": false,
+      "first": "nowrap",
+      "last": "normal",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-04.css",
+          "line": 845,
+          "value": "nowrap"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-04.css",
+        "line": 1021,
+        "value": "normal"
+      }
+    },
+    {
+      "id": 61,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c065\\\"]) .lcdp-box-dialogue-champ-inviter__card\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c065\"]) .lcdp-box-dialogue-champ-inviter__card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - (var(--lcdp-space-3) * 2))",
+      "last": "calc(100svh - (var(--lcdp-space-3) * 2))",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 62,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c067\\\"]) .lcdp-box-dialogue-upload-img__card\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c067\"]) .lcdp-box-dialogue-upload-img__card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - (var(--lcdp-space-3) * 2))",
+      "last": "calc(100svh - (var(--lcdp-space-3) * 2))",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 63,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c070\\\"]) .lcdp-box-fiche-parc__actions-list .lcdp-button,:where(html[data-lcdp-css~=\\\"c070\\\"]) .lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,:where(html[data-lcdp-css~=\\\"c070\\\"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,:where(html[data-lcdp-css~=\\\"c070\\\"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage\",\"width\",true]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list .lcdp-button,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage",
+      "property": "width",
+      "important": true,
+      "first": "fit-content",
+      "last": "auto",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-02.css",
+          "line": 1333,
+          "value": "fit-content"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-02.css",
+        "line": 1346,
+        "value": "auto"
+      }
+    },
+    {
+      "id": 64,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c070\\\"]) .lcdp-box-fiche-parc__box-text p + p\",\"margin-top\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__box-text p + p",
+      "property": "margin-top",
+      "important": false,
+      "first": "var(--lcdp-space-2)",
+      "last": "var(--lcdp-space-3)",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-02.css",
+          "line": 1024,
+          "value": "var(--lcdp-space-2)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-02.css",
+        "line": 1679,
+        "value": "var(--lcdp-space-3)"
+      }
+    },
+    {
+      "id": 65,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c070\\\"]) .lcdp-box-fiche-parc__box-text\",\"line-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__box-text",
+      "property": "line-height",
+      "important": false,
+      "first": "1.45",
+      "last": "1.55",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-02.css",
+          "line": 1017,
+          "value": "1.45"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-02.css",
+        "line": 1676,
+        "value": "1.55"
+      }
+    },
+    {
+      "id": 66,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c070\\\"]) .lcdp-box-fiche-parc__partage-libelle\",\"color\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage-libelle",
+      "property": "color",
+      "important": false,
+      "first": "var(--lcdp-color-text)",
+      "last": "#EBA042",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-02.css",
+          "line": 1193,
+          "value": "var(--lcdp-color-text)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-02.css",
+        "line": 1288,
+        "value": "#EBA042"
+      }
+    },
+    {
+      "id": 67,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c070\\\"]) .lcdp-box-fiche-parc__partage-libelle\",\"font-size\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage-libelle",
+      "property": "font-size",
+      "important": false,
+      "first": "1rem",
+      "last": "0.95rem",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-02.css",
+          "line": 1195,
+          "value": "1rem"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-02.css",
+        "line": 1289,
+        "value": "0.95rem"
+      }
+    },
+    {
+      "id": 68,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c070\\\"]) .lcdp-box-fiche-parc__partage-libelle\",\"font-weight\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage-libelle",
+      "property": "font-weight",
+      "important": false,
+      "first": "600",
+      "last": "700",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-02.css",
+          "line": 1194,
+          "value": "600"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-02.css",
+        "line": 1291,
+        "value": "700"
+      }
+    },
+    {
+      "id": 69,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c070\\\"]) .lcdp-box-fiche-parc__partage-libelle\",\"line-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage-libelle",
+      "property": "line-height",
+      "important": false,
+      "first": "1.25",
+      "last": "1.1",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-02.css",
+          "line": 1196,
+          "value": "1.25"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-02.css",
+        "line": 1290,
+        "value": "1.1"
+      }
+    },
+    {
+      "id": 70,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c071\\\"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre\",\"height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c071\"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre",
+      "property": "height",
+      "important": false,
+      "first": "12px",
+      "last": "16px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-07.css",
+          "line": 570,
+          "value": "12px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-07.css",
+        "line": 634,
+        "value": "16px"
+      }
+    },
+    {
+      "id": 71,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c071\\\"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c071\"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre",
+      "property": "min-height",
+      "important": false,
+      "first": "12px",
+      "last": "16px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-07.css",
+          "line": 572,
+          "value": "12px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-07.css",
+        "line": 636,
+        "value": "16px"
+      }
+    },
+    {
+      "id": 72,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c071\\\"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre\",\"min-width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c071\"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre",
+      "property": "min-width",
+      "important": false,
+      "first": "12px",
+      "last": "16px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-07.css",
+          "line": 571,
+          "value": "12px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-07.css",
+        "line": 635,
+        "value": "16px"
+      }
+    },
+    {
+      "id": 73,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c071\\\"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre\",\"width\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c071\"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre",
+      "property": "width",
+      "important": false,
+      "first": "12px",
+      "last": "16px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-07.css",
+          "line": 569,
+          "value": "12px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-07.css",
+        "line": 633,
+        "value": "16px"
+      }
+    },
+    {
+      "id": 74,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c071\\\"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne\",\"gap\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c071\"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne",
+      "property": "gap",
+      "important": false,
+      "first": "5px 14px",
+      "last": "12px",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-07.css",
+          "line": 561,
+          "value": "5px 14px"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-07.css",
+        "line": 612,
+        "value": "12px"
+      }
+    },
+    {
+      "id": 75,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c075\\\"]) .lcdp-box-shift-detail-parc__card\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c075\"]) .lcdp-box-shift-detail-parc__card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - (var(--lcdp-space-2) * 2))",
+      "last": "calc(100dvh - (var(--lcdp-space-2) * 2))",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 76,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c077\\\"]) #lcdp-planifier-attente-initiale\",\"background\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) #lcdp-planifier-attente-initiale",
+      "property": "background",
+      "important": false,
+      "first": "#ffffff",
+      "last": "var(--lcdp-color-bg, #fff)",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-03.css",
+          "line": 358,
+          "value": "#ffffff"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-03.css",
+        "line": 665,
+        "value": "var(--lcdp-color-bg, #fff)"
+      }
+    },
+    {
+      "id": 77,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c077\\\"]) #lcdp-planifier-attente-initiale\",\"z-index\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) #lcdp-planifier-attente-initiale",
+      "property": "z-index",
+      "important": false,
+      "first": "2147483646",
+      "last": "7000",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-03.css",
+          "line": 354,
+          "value": "2147483646"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-03.css",
+        "line": 661,
+        "value": "7000"
+      }
+    },
+    {
+      "id": 78,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c083\\\"]) .lcdp-legal-lightbox__card\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c083\"]) .lcdp-legal-lightbox__card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - 1.5rem)",
+      "last": "calc(100svh - 1.5rem)",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 79,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c083\\\"]) .lcdp-page-document-legal .lcdp-document-legal__context\",\"color\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c083\"]) .lcdp-page-document-legal .lcdp-document-legal__context",
+      "property": "color",
+      "important": false,
+      "first": "var(--lcdp-color-text-muted)",
+      "last": "#616b64",
+      "disposition": "SUPPRESSION_SURCHARGE",
+      "removed": [
+        {
+          "module": "lcdp-central-module-08.css",
+          "line": 1530,
+          "value": "var(--lcdp-color-text-muted)"
+        }
+      ],
+      "kept": {
+        "module": "lcdp-central-module-14-document-planifier.css",
+        "line": 29,
+        "value": "#616b64"
+      }
+    },
+    {
+      "id": 80,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"c085\\\"]) .lcdp-restricted-legal-card\",\"max-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) .lcdp-restricted-legal-card",
+      "property": "max-height",
+      "important": false,
+      "first": "calc(100vh - 36px)",
+      "last": "calc(100svh - 36px)",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 81,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"p06912beca6de\\\"]) #lcdp-accueil-attente\",\"height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"p06912beca6de\"]) #lcdp-accueil-attente",
+      "property": "height",
+      "important": false,
+      "first": "100vh",
+      "last": "100dvh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 82,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"p06912beca6de\\\"]) #lcdp-navigation-attente:not([hidden])\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"p06912beca6de\"]) #lcdp-navigation-attente:not([hidden])",
+      "property": "min-height",
+      "important": false,
+      "first": "100vh",
+      "last": "100dvh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 83,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"p155c9e29c5ec\\\"]) #lcdp-contact-attente:not([hidden])\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"p155c9e29c5ec\"]) #lcdp-contact-attente:not([hidden])",
+      "property": "min-height",
+      "important": false,
+      "first": "40vh",
+      "last": "40svh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 84,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"p590d24011e87\\\"]) #lcdp-accueil-attente\",\"height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"p590d24011e87\"]) #lcdp-accueil-attente",
+      "property": "height",
+      "important": false,
+      "first": "100vh",
+      "last": "100dvh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 85,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"p590d24011e87\\\"]) #lcdp-navigation-attente:not([hidden])\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"p590d24011e87\"]) #lcdp-navigation-attente:not([hidden])",
+      "property": "min-height",
+      "important": false,
+      "first": "100vh",
+      "last": "100dvh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 86,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"p8ffe07172f8c\\\"]) #lcdp-contact-attente:not([hidden])\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"p8ffe07172f8c\"]) #lcdp-contact-attente:not([hidden])",
+      "property": "min-height",
+      "important": false,
+      "first": "40vh",
+      "last": "40svh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 87,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"pd802b67dbe10\\\"]) #lcdp-accueil-attente\",\"height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"pd802b67dbe10\"]) #lcdp-accueil-attente",
+      "property": "height",
+      "important": false,
+      "first": "100vh",
+      "last": "100dvh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    },
+    {
+      "id": 88,
+      "key": "[[],\":where(html[data-lcdp-css~=\\\"pd802b67dbe10\\\"]) #lcdp-navigation-attente:not([hidden])\",\"min-height\",false]",
+      "ctx": [],
+      "selector": ":where(html[data-lcdp-css~=\"pd802b67dbe10\"]) #lcdp-navigation-attente:not([hidden])",
+      "property": "min-height",
+      "important": false,
+      "first": "100vh",
+      "last": "100dvh",
+      "disposition": "REPLI_COMPATIBILITE",
+      "removed": []
+    }
+  ]
+}

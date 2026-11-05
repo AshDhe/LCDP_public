@@ -557,19 +557,12 @@
 :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__contenu {
   flex-direction: row;
 }
-:where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
-  gap: 5px 14px;
-}
 :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__item {
   display: inline-flex;
   align-items: center;
   gap: 5px;
 }
 :where(html[data-lcdp-css~="c071"]) .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
-  width: 12px;
-  height: 12px;
-  min-width: 12px;
-  min-height: 12px;
   margin: 0;
   border-radius: 2px;
   flex: none;
@@ -952,10 +945,6 @@
 }
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description-icone:not([hidden]) {
   display: block;
-  flex: 0 0 15px;
-  width: 15px;
-  height: 15px;
-  margin: 0 0 2px;
 }
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--recto, :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama.is-ready .lcdp-box-card-parc-diaporama__face--verso {
   transition: transform 420ms ease, visibility 420ms step-end;

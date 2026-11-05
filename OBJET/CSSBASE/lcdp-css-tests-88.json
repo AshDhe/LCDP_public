@@ -1,0 +1,227 @@
+[
+  {
+    "fixture": "compte-da",
+    "width": 320,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 320,
+      "viewport": 320
+    },
+    "measure_after": {
+      "docWidth": 320,
+      "viewport": 320
+    }
+  },
+  {
+    "fixture": "compte-da",
+    "width": 360,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 360,
+      "viewport": 360
+    },
+    "measure_after": {
+      "docWidth": 360,
+      "viewport": 360
+    }
+  },
+  {
+    "fixture": "compte-da",
+    "width": 390,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 390,
+      "viewport": 390
+    },
+    "measure_after": {
+      "docWidth": 390,
+      "viewport": 390
+    }
+  },
+  {
+    "fixture": "compte-da",
+    "width": 768,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 768,
+      "viewport": 768
+    },
+    "measure_after": {
+      "docWidth": 768,
+      "viewport": 768
+    }
+  },
+  {
+    "fixture": "compte-da",
+    "width": 1180,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 1180,
+      "viewport": 1180
+    },
+    "measure_after": {
+      "docWidth": 1180,
+      "viewport": 1180
+    }
+  },
+  {
+    "fixture": "diaporama-first",
+    "width": 320,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 320,
+      "viewport": 320
+    },
+    "measure_after": {
+      "docWidth": 320,
+      "viewport": 320
+    }
+  },
+  {
+    "fixture": "diaporama-first",
+    "width": 360,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 360,
+      "viewport": 360
+    },
+    "measure_after": {
+      "docWidth": 360,
+      "viewport": 360
+    }
+  },
+  {
+    "fixture": "diaporama-first",
+    "width": 390,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 390,
+      "viewport": 390
+    },
+    "measure_after": {
+      "docWidth": 390,
+      "viewport": 390
+    }
+  },
+  {
+    "fixture": "diaporama-first",
+    "width": 768,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 768,
+      "viewport": 768
+    },
+    "measure_after": {
+      "docWidth": 768,
+      "viewport": 768
+    }
+  },
+  {
+    "fixture": "diaporama-first",
+    "width": 1180,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 1180,
+      "viewport": 1180
+    },
+    "measure_after": {
+      "docWidth": 1180,
+      "viewport": 1180
+    }
+  },
+  {
+    "fixture": "diaporama-last",
+    "width": 320,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 320,
+      "viewport": 320
+    },
+    "measure_after": {
+      "docWidth": 320,
+      "viewport": 320
+    }
+  },
+  {
+    "fixture": "diaporama-last",
+    "width": 360,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 360,
+      "viewport": 360
+    },
+    "measure_after": {
+      "docWidth": 360,
+      "viewport": 360
+    }
+  },
+  {
+    "fixture": "diaporama-last",
+    "width": 390,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 390,
+      "viewport": 390
+    },
+    "measure_after": {
+      "docWidth": 390,
+      "viewport": 390
+    }
+  },
+  {
+    "fixture": "diaporama-last",
+    "width": 768,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 768,
+      "viewport": 768
+    },
+    "measure_after": {
+      "docWidth": 768,
+      "viewport": 768
+    }
+  },
+  {
+    "fixture": "diaporama-last",
+    "width": 1180,
+    "pixel_equal": true,
+    "measure_before": {
+      "docWidth": 1180,
+      "viewport": 1180
+    },
+    "measure_after": {
+      "docWidth": 1180,
+      "viewport": 1180
+    }
+  },
+  {
+    "fixture": "admin-reservation-fiche",
+    "width": 320,
+    "pixel_equal": true,
+    "computed_equal": true
+  },
+  {
+    "fixture": "admin-reservation-fiche",
+    "width": 360,
+    "pixel_equal": true,
+    "computed_equal": true
+  },
+  {
+    "fixture": "admin-reservation-fiche",
+    "width": 390,
+    "pixel_equal": true,
+    "computed_equal": true
+  },
+  {
+    "fixture": "admin-reservation-fiche",
+    "width": 768,
+    "pixel_equal": true,
+    "computed_equal": true
+  },
+  {
+    "fixture": "admin-reservation-fiche",
+    "width": 1180,
+    "pixel_equal": true,
+    "computed_equal": true
+  }
+]

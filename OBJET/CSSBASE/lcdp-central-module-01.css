@@ -1032,23 +1032,18 @@
   overflow-x: auto;
   overflow-y: visible;
   border-radius: 8px;
-  scrollbar-width: thin;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table {
   width: 100%;
-  min-width: 1040px;
   table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 13px;
   line-height: 1.45;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td {
   box-sizing: border-box;
-  padding: 8px 6px;
   vertical-align: middle;
   white-space: nowrap;
-  font-size: 13px;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table thead tr:first-child th {
   background: #edf1e8;
@@ -1063,26 +1058,12 @@
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table tbody tr:hover {
   background: #eef4e8;
 }
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1) {
-  width: 6%;
-}
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2) {
-  width: 20%;
   text-align: left;
 }
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3) {
-  width: 11%;
-}
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(4),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(4) {
-  width: 10%;
-}
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(n+5):nth-child(-n+10),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(n+5):nth-child(-n+10) {
-  width: 6%;
   text-align: center;
   font-variant-numeric: tabular-nums;
-}
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:last-child,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:last-child {
-  width: 17%;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__sorts th {
   padding: 4px 5px;
@@ -1145,7 +1126,6 @@
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table {
   font-size: 14px;
-  min-width: 1180px;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td {
   font-size: 14px;
@@ -1159,15 +1139,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #526256;
-}
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1) {
-  width: 5%;
-}
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2) {
-  width: 22%;
-}
-:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3) {
-  width: 8%;
 }
 :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(4),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(4) {
   width: 18%;
