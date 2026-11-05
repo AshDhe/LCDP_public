@@ -17390,18 +17390,133 @@ font-size: 13px;
   overflow-x: hidden;
   overflow-y: auto;
 }
-/* PC uniquement : 70 % de la largeur actuelle par case,
-   soit 15 % de respiration à gauche et à droite de chaque colonne. */
-@media (min-width: 1024px) {
-  #lcdp-lightbox-slot
-    .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+/* PLANIFIER — réduction réelle du calendrier mensuel, mobile first.
+   N'agit que sur le calendrier avec filtres de PLANIFIER dans la lightbox.
+   Laisse intact le calendrier d'abonnement et le planning parc admin.
+   Supprime localement le min-height du composant générique (jusqu'à 620px)
+   et le ratio carré/les hauteurs minimales des plages. */
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-calendrier-mois__card {
+  box-sizing: border-box;
+  width: min(100%, 600px);
+  max-width: 600px;
+  padding: 9px 9px 10px;
+}
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-calendrier-mois__body {
+  padding-top: 6px;
+}
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-calendrier-mois__navigation {
+  gap: 7px;
+  margin-bottom: 8px;
+}
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-calendrier-mois__weekdays,
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-calendrier-mois__grid {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 540px;
+  margin-inline: auto;
+  gap: 5px;
+}
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-calendrier-mois__weekdays {
+  margin-bottom: 6px;
+  font-size: .76rem;
+  line-height: 1.2;
+}
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-calendrier-mois__grid {
+  min-height: 0 !important;
+  grid-auto-rows: 54px !important;
+  align-content: start;
+}
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-calendrier-mois__grid > [data-lcdp-card-jour-mois] {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 0 !important;
+  height: 100% !important;
+  max-height: 100%;
+  aspect-ratio: auto !important;
+  padding: 3px 3px !important;
+  gap: 2px;
+  justify-content: flex-start;
+  border-radius: 8px;
+}
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-card-jour-in-calendrier-mois__number {
+  flex: 0 0 auto;
+  margin-bottom: 1px;
+  font-size: .74rem;
+  line-height: 1.1;
+}
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-card-jour-in-calendrier-mois__slots {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  gap: 2px;
+  margin-inline: auto;
+}
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  .lcdp-box-card-jour-in-calendrier-mois__slot,
+#lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+  [data-lcdp-card-jour-mois-slot]:not([hidden]) {
+  box-sizing: border-box;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  flex: initial;
+  padding: 0 1px;
+  transform: none;
+  border-radius: 3px;
+}
+@media (min-width: 600px) {
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+    .lcdp-box-calendrier-mois__grid {
+    grid-auto-rows: 62px !important;
+  }
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+    .lcdp-box-calendrier-mois__weekdays,
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+    .lcdp-box-calendrier-mois__grid {
+    gap: 7px;
+  }
+}
+@media (min-width: 900px) {
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+    .lcdp-box-calendrier-mois__card {
+    width: min(100%, 600px);
+    max-width: 600px;
+    padding: 12px 15px 15px;
+  }
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+    .lcdp-box-calendrier-mois__weekdays,
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+    .lcdp-box-calendrier-mois__grid {
+    max-width: 540px;
+    gap: 8px;
+  }
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
+    .lcdp-box-calendrier-mois__grid {
+    grid-auto-rows: 60px !important;
+  }
+  /* Conserver la réduction de largeur à 70 % demandée précédemment. */
+  #lcdp-lightbox-slot .lcdp-box-calendrier-mois:has(.lcdp-planifier-entete-filtres)
     .lcdp-box-calendrier-mois__grid > [data-lcdp-card-jour-mois] {
-    box-sizing: border-box;
     width: 70%;
-    min-width: 0;
     justify-self: center;
   }
 }
+
 
 /* c077 — Attente de mise à jour du calendrier PLANIFIER.
    Le masque est créé et détruit par reserver-membre.js ; aucun changement métier. */
