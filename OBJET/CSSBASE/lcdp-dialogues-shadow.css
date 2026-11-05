@@ -1,31 +1,161 @@
-:host(.lcdp-shadow-dialogue-confirmation) .carte { box-sizing:border-box; width:280px; max-width:100%;
-        height:auto; min-height:0; margin:auto; padding:24px;
-        border:1px solid #cbd1cc; border-radius:24px; background:#fff;
-        color:#1f2a24; font:16px/1.5 Arial,sans-serif; text-align:center;
-        box-shadow:0 18px 50px rgba(31,42,36,.18); }
-:host(.lcdp-shadow-dialogue-confirmation) p { margin:0 0 20px; overflow-wrap:anywhere; }
-:host(.lcdp-shadow-dialogue-confirmation) button { box-sizing:border-box; display:block; width:110px; height:52px;
-        margin:0 auto; padding:0 20px; border:0; border-radius:16px;
-        background:var(--lcdp-color-primary,#57754c); color:#fff;
-        font:600 16px/1 Arial,sans-serif; cursor:pointer; }
-:host(.lcdp-shadow-dialogue-confirmation) button:focus-visible { outline:2px solid #1f2a24; outline-offset:4px; }
-:host(.lcdp-shadow-dialogue-formulaire) .carte { position:relative; box-sizing:border-box; width:380px; max-width:100%;
-        height:auto; min-height:0; margin:auto; padding:52px 12px 18px;
-        border:1px solid #cbd1cc; border-radius:24px; background:#fff; color:#1f2a24;
-        font:16px/1.4 Arial,sans-serif; box-shadow:0 18px 50px rgba(31,42,36,.18); }
-:host(.lcdp-shadow-dialogue-formulaire) form { position:relative; z-index:1; display:flex; align-items:center; gap:8px; margin:0; border:0; outline:0; box-shadow:none; }
-:host(.lcdp-shadow-dialogue-formulaire) input { box-sizing:border-box; flex:1; width:0; min-width:0; height:46px;
-        padding:10px; border:0; outline:0; box-shadow:none; border-radius:8px;
-        background:#edf1ea; color:#1f2a24; font:16px Arial,sans-serif; }
-:host(.lcdp-shadow-dialogue-formulaire) button { box-sizing:border-box; min-height:46px; padding:10px 12px;
-        border:1px solid #57754c; border-radius:8px;
-        background:#57754c; color:#fff; font:16px Arial,sans-serif; cursor:pointer; }
-:host(.lcdp-shadow-dialogue-formulaire) button:disabled { opacity:.55; cursor:default; }
-:host(.lcdp-shadow-dialogue-formulaire) .fermer { position:absolute; top:6px; right:6px; width:40px; min-height:40px;
-        padding:0; border:0; border-radius:50%; background:#f7f7f4; color:#1f2a24;
-        font-size:28px; line-height:1; }
-:host(.lcdp-shadow-dialogue-formulaire) .statut { margin:8px 0 0; text-align:center; font-size:14px; }
-:host(.lcdp-shadow-dialogue-formulaire) .statut:empty { display:none; }
-:host(.lcdp-shadow-dialogue-formulaire) button:focus-visible { outline:2px solid #1f2a24; outline-offset:3px; }
-:host(.lcdp-shadow-dialogue-formulaire) input:focus, :host(.lcdp-shadow-dialogue-formulaire) input:focus-visible { outline:none; box-shadow:none; }
-:host(.lcdp-shadow-dialogue-formulaire) .protection { position:relative; z-index:0; overflow:hidden; isolation:isolate; }
+/* ============================================================================
+   LA CLE DU PARC — DIALOGUES SHADOW DOM
+   Jetons communs a ces deux dialogues ; aucun style injecte dans JS/HTML.
+   Couleurs et dimensions initiales strictement conservees.
+   ============================================================================ */
+:host(.lcdp-shadow-dialogue-confirmation),
+:host(.lcdp-shadow-dialogue-formulaire) {
+  --lcdp-shadow-blanc: #fff;
+  --lcdp-shadow-texte: #1f2a24;
+  --lcdp-shadow-bordure: #cbd1cc;
+  --lcdp-shadow-action: #57754c;
+  --lcdp-shadow-fermeture: #f7f7f4;
+  --lcdp-shadow-champ: #edf1ea;
+  --lcdp-shadow-ombre: 0 18px 50px rgba(31,42,36,.18);
+}
+
+:host(.lcdp-shadow-dialogue-confirmation) .carte {
+  box-sizing: border-box;
+  width: 280px;
+  max-width: 100%;
+  height: auto;
+  min-height: 0;
+  margin: auto;
+  padding: 24px;
+  border: 1px solid var(--lcdp-shadow-bordure);
+  border-radius: 24px;
+  background: var(--lcdp-shadow-blanc);
+  color: var(--lcdp-shadow-texte);
+  font: 16px/1.5 Arial,sans-serif;
+  text-align: center;
+  box-shadow: var(--lcdp-shadow-ombre);
+}
+
+:host(.lcdp-shadow-dialogue-confirmation) p {
+  margin: 0 0 20px;
+  overflow-wrap: anywhere;
+}
+
+:host(.lcdp-shadow-dialogue-confirmation) button {
+  box-sizing: border-box;
+  display: block;
+  width: 110px;
+  height: 52px;
+  margin: 0 auto;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--lcdp-color-primary,var(--lcdp-shadow-action));
+  color: var(--lcdp-shadow-blanc);
+  font: 600 16px/1 Arial,sans-serif;
+  cursor: pointer;
+}
+
+:host(.lcdp-shadow-dialogue-confirmation) button:focus-visible {
+  outline: 2px solid var(--lcdp-shadow-texte);
+  outline-offset: 4px;
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) .carte {
+  position: relative;
+  box-sizing: border-box;
+  width: 380px;
+  max-width: 100%;
+  height: auto;
+  min-height: 0;
+  margin: auto;
+  padding: 52px 12px 18px;
+  border: 1px solid var(--lcdp-shadow-bordure);
+  border-radius: 24px;
+  background: var(--lcdp-shadow-blanc);
+  color: var(--lcdp-shadow-texte);
+  font: 16px/1.4 Arial,sans-serif;
+  box-shadow: var(--lcdp-shadow-ombre);
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) form {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) input {
+  box-sizing: border-box;
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  height: 46px;
+  padding: 10px;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  border-radius: 8px;
+  background: var(--lcdp-shadow-champ);
+  color: var(--lcdp-shadow-texte);
+  font: 16px Arial,sans-serif;
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) button {
+  box-sizing: border-box;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--lcdp-shadow-action);
+  border-radius: 8px;
+  background: var(--lcdp-shadow-action);
+  color: var(--lcdp-shadow-blanc);
+  font: 16px Arial,sans-serif;
+  cursor: pointer;
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) button:disabled {
+  opacity: .55;
+  cursor: default;
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) .fermer {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--lcdp-shadow-fermeture);
+  color: var(--lcdp-shadow-texte);
+  font-size: 28px;
+  line-height: 1;
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) .statut {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) .statut:empty {
+  display: none;
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) button:focus-visible {
+  outline: 2px solid var(--lcdp-shadow-texte);
+  outline-offset: 3px;
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) input:focus, :host(.lcdp-shadow-dialogue-formulaire) input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+:host(.lcdp-shadow-dialogue-formulaire) .protection {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
