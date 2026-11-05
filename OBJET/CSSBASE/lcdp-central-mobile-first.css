@@ -24927,7 +24927,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3.68px;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link {
   box-sizing: border-box;
@@ -24986,6 +24986,29 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   color: #fff;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:last-child {
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  color: #64748b;
+  font-weight: 500;
+}
+/* Burger membre : mêmes rôles visuels que le burger public, indépendamment de la position de FAQ. */
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte] {
+  color: #334155;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link:last-child:not([data-lcdp-menu-faq]) {
+  margin-top: 0;
+  padding-top: 12px;
+  border-top: 0;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  color: #475569;
+  font-weight: 600;
+}
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-faq] {
   margin-top: 8px;
   padding-top: 16px;
   border-top: 1px solid #f1f5f9;
