@@ -1,0 +1,27 @@
+/* SOURCE DE DESIGN SYSTEM — Tailwind CSS v4.
+ * Les variables CSS LCDP existantes restent la source de vérité au runtime.
+ * Ces alias permettent aux nouveaux composants de partager les mêmes jetons.
+ * N'inclut pas Preflight : aucun reset global des pages existantes.
+ */
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+@theme inline {
+  --color-lcdp-primary: var(--lcdp-color-primary, #234438);
+  --color-lcdp-primary-hover: var(--lcdp-color-primary-hover, #183229);
+  --color-lcdp-vert: var(--lcdp-color-logo-green, #55733f);
+  --color-lcdp-orange: var(--lcdp-color-orange, #f2a23a);
+  --color-lcdp-surface: var(--lcdp-color-surface, #fff);
+  --color-lcdp-surface-soft: var(--lcdp-color-surface-soft, #f7f7f4);
+  --color-lcdp-text: var(--lcdp-color-text, #1f2a24);
+  --color-lcdp-muted: var(--lcdp-color-text-muted, #5f6861);
+  --color-lcdp-border: var(--lcdp-color-border, rgba(31,42,36,.22));
+  --radius-lcdp-small: var(--lcdp-radius-small, 10px);
+  --radius-lcdp-medium: var(--lcdp-radius-medium, 16px);
+  --radius-lcdp-large: var(--lcdp-radius-large, 24px);
+  --spacing-lcdp-1: var(--lcdp-space-1, 8px);
+  --spacing-lcdp-2: var(--lcdp-space-2, 12px);
+  --spacing-lcdp-3: var(--lcdp-space-3, 18px);
+  --spacing-lcdp-4: var(--lcdp-space-4, 24px);
+  --spacing-lcdp-5: var(--lcdp-space-5, 36px);
+  --font-lcdp: var(--lcdp-font-main, Arial, sans-serif);
+}

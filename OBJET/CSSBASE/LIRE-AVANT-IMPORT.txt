@@ -1,0 +1,51 @@
+LA CLÉ DU PARC — MIGRATION TAILWIND 4 : LOT 1, COMPATIBILITÉ
+5 novembre 2026
+
+1. FICHIERS À DÉPLOYER DANS OBJET/CSSBASE
+   lcdp-central-mobile-first.css
+   lcdp-da-membre.css
+   lcdp-mon-compte.css
+
+   Ce sont des CSS standards déjà COMPILÉS avec Tailwind CSS 4.1.10.
+   Les URL et les noms de fichiers restent inchangés.
+   Aucun HTML ni JavaScript n'est à remplacer pour cette livraison.
+
+2. SOURCES POUR LES FUTURES MODIFICATIONS (même dossier CSSBASE)
+   lcdp-central-mobile-first.tailwind.css
+   lcdp-da-membre.tailwind.css
+   lcdp-mon-compte.tailwind.css
+   lcdp-tailwind-theme.css
+   lcdp-build-tailwind.mjs
+
+   Les sources Tailwind ne doivent PAS être référencées dans les pages web.
+   Le fichier lcdp-tailwind-theme.css mappe les jetons Tailwind aux jetons LCDP.
+   Tailwind intervient à la compilation; aucun CDN, reset ou script Tailwind
+   n'est chargé dans le navigateur. Les sélecteurs actuels sont conservés.
+
+3. COMPILATION À PARTIR DE CES SOURCES
+   Installer Node.js et tailwindcss@4.1.10 dans le dépôt ou répertoire parent.
+   Depuis le dossier contenant les huit fichiers :
+       node lcdp-build-tailwind.mjs --check
+       node lcdp-build-tailwind.mjs --write
+
+   --check vérifie sans écrire, --write reconstruit les trois CSS de production.
+   La génération automatique en CI GitHub n'est PAS encore configurée.
+
+4. CONTRÔLES
+   Central : 3 541 règles CSS, 3 516 déclarations converties en @apply.
+   DA : 34 règles CSS, 45 déclarations converties.
+   Mon compte : 58 règles CSS, 75 déclarations converties.
+   Comparaison structurelle : mêmes sélecteurs, propriétés, valeurs et priorités.
+   Comparaison visuelle locale : captures pixel-identiques à 320, 360, 390,
+   768 et 1 180 px sur une page de référence Mon compte + formulaire DA.
+
+5. LIMITES — NE PAS CONFONDRE AVEC UNE REFONTE FINIE
+   Ce premier lot utilise réellement Tailwind via @apply, mais ne convertit
+   PAS encore les classes HTML/JS en classes utilitaires.
+   Le CSS central conserve ses règles historiques et ses doublons.
+   L'architecture sera simplifiée composant par composant, après inventaire
+   des propriétaires et tests de non-régression.
+   Aucune garantie de compatibilité avec chaque page non testée en production.
+
+   Les fichiers CSS sources fournis ne sont pas des fichiers CSS navigateur :
+   ils nécessitent la compilation Tailwind avant déploiement.

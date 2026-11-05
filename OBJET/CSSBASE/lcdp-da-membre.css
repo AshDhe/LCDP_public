@@ -1,8 +1,7 @@
-/* La Clé du Parc — DA membre : styles dans CSSBASE.
-   Dédié au workflow DA ; réutilise les variables et classes du système central.
-   Aucun style global de formulaire ou de bouton n'est modifié. */
-
-#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement { padding: 12px; }
+/*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement {
+  padding: 12px;
+}
 #lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__card {
   box-sizing: border-box;
   width: min(100%, 540px);
@@ -11,8 +10,12 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
-#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content { min-width: 0; }
-#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack { gap: 13px; }
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content {
+  min-width: 0;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack {
+  gap: 13px;
+}
 #lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack > h2 {
   margin: 0 28px 6px;
   font-size: clamp(1.25rem, 4.6vw, 1.45rem);
@@ -96,8 +99,7 @@
   width: 100%;
   gap: 10px;
 }
-#lcdp-da-membre-overlay-slot .lcdp-box-formulaire__actions .lcdp-button,
-#lcdp-da-membre-overlay-slot #bouton-transmettre-da {
+#lcdp-da-membre-overlay-slot .lcdp-box-formulaire__actions .lcdp-button, #lcdp-da-membre-overlay-slot #bouton-transmettre-da {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
@@ -133,10 +135,9 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-
-/* Boutons de confirmation : variante mutualisable du composant de base,
-   sans modifier les boutons de l'ensemble de l'application. */
-.lcdp-da-membre-alerte .lcdp-box-alerte__card { padding: 25px 20px 21px; }
+.lcdp-da-membre-alerte .lcdp-box-alerte__card {
+  padding: 25px 20px 21px;
+}
 .lcdp-da-membre-alerte .lcdp-box-alerte__message {
   font-size: clamp(1rem, 4vw, 1.09rem);
   line-height: 1.45;
@@ -158,11 +159,12 @@
   line-height: 1.25;
   text-align: center;
 }
-.lcdp-da-membre-alerte--confirmation [data-lcdp-alerte-close],
-.lcdp-da-membre-alerte [data-lcdp-alerte-close][hidden] { display: none !important; }
-.lcdp-da-membre-alerte--confirmation .lcdp-box-alerte__card { padding-top: 23px; }
-
-/* Spinner de transmission DA : dessiné/animé en CSS, aucune image ni fragment. */
+.lcdp-da-membre-alerte--confirmation [data-lcdp-alerte-close], .lcdp-da-membre-alerte [data-lcdp-alerte-close][hidden] {
+  display: none !important;
+}
+.lcdp-da-membre-alerte--confirmation .lcdp-box-alerte__card {
+  padding-top: 23px;
+}
 .lcdp-da-transmission-attente {
   position: fixed;
   inset: 0;
@@ -194,21 +196,27 @@
   animation: lcdp-da-spinner-pulse 1.08s linear infinite;
   animation-delay: calc(var(--lcdp-rayon) * -90ms);
 }
-.lcdp-da-transmission-spinner > span:nth-child(3n + 1) { background: #a4ba87; }
-.lcdp-da-transmission-spinner > span:nth-child(11),
-.lcdp-da-transmission-spinner > span:nth-child(12) { background: #e59834; }
+.lcdp-da-transmission-spinner > span:nth-child(3n + 1) {
+  background: #a4ba87;
+}
+.lcdp-da-transmission-spinner > span:nth-child(11), .lcdp-da-transmission-spinner > span:nth-child(12) {
+  background: #e59834;
+}
 @keyframes lcdp-da-spinner-pulse {
-  0% { opacity: 1; }
-  100% { opacity: .22; }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .22;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .lcdp-da-transmission-spinner > span { animation: none; opacity: .86; }
+  .lcdp-da-transmission-spinner > span {
+    animation: none;
+    opacity: .86;
+  }
 }
-
-/* Conserver une teinte neutre/verte lors de l'autoremplissage du navigateur. */
-#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:-webkit-autofill,
-#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:-webkit-autofill:hover,
-#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:-webkit-autofill:focus {
+#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:-webkit-autofill, #lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:-webkit-autofill:hover, #lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 100px #f7faf5 inset !important;
   -webkit-text-fill-color: #23362b !important;
   caret-color: #23362b;

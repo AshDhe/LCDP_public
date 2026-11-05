@@ -1329,3 +1329,146 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
     gap: 15px !important;
   }
 }
+
+
+/* ABO-RÉZA — 05-11-2026 : étapes 1/2 compactes et bouton Planifier permanent.
+   Réservé au workflow d'abonnement ; ne modifie aucun autre dialogue. */
+.lcdp-box-workflow-abonnement:has(select):not(.lcdp-aboreza-etape2) > .lcdp-box-workflow-abonnement__card {
+  box-sizing: border-box;
+  width: min(100%, 440px) !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: calc(100dvh - 28px) !important;
+  padding: 22px 20px 20px !important;
+  overflow-y: auto;
+}
+.lcdp-box-workflow-abonnement:has(select):not(.lcdp-aboreza-etape2) .lcdp-box-dialogue-bouton__title {
+  max-width: 360px;
+  margin: 0 auto 14px;
+  font-size: clamp(1.23rem, 4.4vw, 1.47rem) !important;
+  line-height: 1.2;
+}
+.lcdp-box-workflow-abonnement:has(select):not(.lcdp-aboreza-etape2) .lcdp-box-dialogue-bouton__actions {
+  gap: 10px;
+  justify-content: flex-start;
+}
+.lcdp-box-workflow-abonnement:has(select):not(.lcdp-aboreza-etape2) select,
+.lcdp-box-workflow-abonnement:has(select):not(.lcdp-aboreza-etape2) input:not([type="checkbox"]):not([type="radio"]) {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: 42px;
+  padding-block: 7px;
+  font-size: .91rem;
+}
+.lcdp-box-workflow-abonnement:has(select):not(.lcdp-aboreza-etape2) .lcdp-box-dialogue-bouton__actions > .lcdp-button {
+  min-height: 42px;
+  margin-top: 3px;
+}
+
+/* Étape 2 : la coque et la box intérieure se répartissent la hauteur.
+   Les informations et les CGV défilent ; l'action conserve sa vraie place
+   hors de cette zone, avec son gestionnaire de clic d'origine. */
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 {
+  box-sizing: border-box;
+  padding: 12px !important;
+}
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 > .lcdp-box-workflow-abonnement__card {
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box;
+  width: min(100%, 590px) !important;
+  max-width: 590px !important;
+  min-height: 0 !important;
+  max-height: min(90dvh, 680px) !important;
+  padding: 19px 19px 14px !important;
+  overflow: hidden !important;
+}
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-box-workflow-abonnement__content,
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-box-workflow-abonnement__content > .lcdp-box-dialogue-bouton,
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__card {
+  box-sizing: border-box;
+  display: flex !important;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  max-height: none;
+  overflow: hidden !important;
+}
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-box-dialogue-bouton__title {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  margin: 0 auto 8px;
+  padding-inline: 30px;
+  font-size: clamp(1.15rem, 4vw, 1.42rem) !important;
+  line-height: 1.18;
+}
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-box-dialogue-bouton__text {
+  flex: 0 0 auto;
+  margin: 0 0 10px;
+  font-size: .87rem !important;
+  line-height: 1.35;
+}
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-box-dialogue-bouton__actions.lcdp-aboreza-etape2-actions {
+  display: flex !important;
+  flex: 1 1 auto;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  min-height: 0;
+  width: 100%;
+  margin: 0;
+  gap: 0;
+  overflow: hidden !important;
+}
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-aboreza-etape2-informations {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  padding: 3px 8px 8px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #abb5a6 transparent;
+}
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-aboreza-etape2-informations > p,
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-aboreza-etape2-informations .lcdp-box-champ-formulaire__description {
+  margin: 6px 0 10px;
+  font-size: .84rem !important;
+  line-height: 1.4 !important;
+  text-align: left;
+}
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-aboreza-etape2-informations .lcdp-box-card-abonnement {
+  margin: 0 auto 10px;
+  max-width: 440px;
+}
+.lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-aboreza-etape2-actions > .lcdp-button:last-child {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 220px) !important;
+  max-width: 220px !important;
+  min-height: 44px;
+  margin: 11px auto 0 !important;
+  padding: 10px 17px;
+  font-size: .95rem;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
+}
+@media (max-width: 480px) {
+  .lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 > .lcdp-box-workflow-abonnement__card {
+    max-height: calc(100dvh - 24px) !important;
+    padding: 15px 12px 12px !important;
+  }
+  .lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-box-dialogue-bouton__title {
+    font-size: 1.2rem !important;
+    margin-bottom: 6px;
+  }
+  .lcdp-box-workflow-abonnement.lcdp-aboreza-etape2 .lcdp-aboreza-etape2-informations > p {
+    margin-bottom: 8px;
+  }
+}

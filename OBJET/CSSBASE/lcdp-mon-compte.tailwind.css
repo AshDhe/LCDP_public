@@ -1,0 +1,424 @@
+/* SOURCE TAILWIND 4 — NE PAS servir directement au navigateur.
+ * Compiler en CSS classique avec lcdp-build-tailwind.mjs.
+ * Contrat: HTML et JS existants inchangés; aucun Preflight Tailwind; mêmes sélecteurs.
+ * Référence Tailwind utilisée uniquement à la compilation, sans style global ajouté.
+ */
+@reference "./lcdp-tailwind-theme.css";
+
+/* ==========================================================================
+   LA CLÉ DU PARC — MON COMPTE / CSS SPÉCIFIQUE, VERSION 2
+   OBJET/CSSBASE/lcdp-mon-compte.css
+
+   CONTRAT DE CASCADE
+   1. lcdp-central-mobile-first.css chargé AVANT cette feuille.
+   2. Le central reste propriétaire du wrapper, bandeau, footer, gabarit,
+      formulaires, contrôles et palette. Activation c085/c041/c040.
+   3. Cette feuille ne gère que les cartes de lecture, leur espacement et
+      les variantes propres à Mon compte (selfie, édition, codes).
+   4. Aucun style dans les fichiers JavaScript ou HTML.
+   5. Les anciens styles de mes-informations.js encore intégrés au CSS
+      central sont neutralisés explicitement ici, sans effet sur d'autres pages.
+   ========================================================================== */
+
+/* 01 — VARIABLES ET PÉRIMÈTRE ----------------------------------------------- */
+.lcdp-page-mon-compte {
+  /* Alias de présentation, dérivés des jetons du système central. */
+  --compte-fond-carte: var(--lcdp-color-surface, #fff);
+  --compte-fond-ligne: var(--lcdp-color-surface-soft, #f7f7f4);
+  --compte-texte: var(--lcdp-color-text, #1f2a24);
+  --compte-texte-secondaire: var(--lcdp-color-text-muted, #5f6861);
+  --compte-bordure: var(--lcdp-color-border, rgba(31,42,36,.22));
+  --compte-accent: var(--lcdp-color-logo-green, #55733f);
+  --compte-rayon-carte: var(--lcdp-radius-medium, 16px);
+  --compte-rayon-ligne: var(--lcdp-radius-small, 10px);
+  --compte-espacement: var(--lcdp-space-2, 12px);
+  --compte-ombre: var(--lcdp-ui-button-shadow, 0 1px 2px rgba(31,42,36,.08));
+  color: var(--compte-texte);
+}
+
+/* 02 — ADAPTATION DU CONTENU DANS LE WRAPPER COMMUN ----------------------- */
+/* Ne pas redéfinir les dimensions/positionnements : le module c085 les porte. */
+.lcdp-page-mon-compte .lcdp-app-wrapper .lcdp-page-content.lcdp-stack-large {
+  gap: var(--compte-espacement);
+}
+.lcdp-page-mon-compte .lcdp-app-wrapper .lcdp-title-page-center {
+  color: var(--compte-texte);
+}
+/* Mêmes badges de statut sur cette page, priorité explicite sur c085. */
+.lcdp-page-mon-compte .lcdp-page-header .lcdp-mention-connexion,
+.lcdp-page-mon-compte .lcdp-page-header #mention-statut-membre.lcdp-mention-connexion {
+  @apply block;
+  width: fit-content;
+  @apply max-w-full;
+  margin: 4px auto;
+  padding: 4px 10px;
+  border-radius: var(--compte-rayon-ligne);
+  background: var(--compte-fond-ligne);
+  color: var(--compte-texte-secondaire);
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1.35;
+  @apply text-center;
+  overflow-wrap: anywhere;
+}
+.lcdp-page-mon-compte #lcdp-mes-informations-slot {
+  min-width: 0;
+  @apply w-full;
+  margin: 0;
+}
+
+/* 03 — FORMULAIRE HÔTE : les six cartes remplacent le grand bloc générique ---- */
+.lcdp-page-mon-compte #form-mes-informations-membre {
+  @apply w-full;
+  min-width: 0;
+  @apply box-border;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  gap: 0;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-box-formulaire__header,
+.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-formulaire-actions][hidden] {
+  display: none !important;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-box-formulaire__fields.lcdp-mon-compte-sections {
+  @apply flex;
+  @apply flex-col;
+  gap: var(--compte-espacement);
+  @apply w-full;
+  min-width: 0;
+}
+
+/* 04 — CARTES / SECTIONS : état civil, sécurité, club, règlements, IBAN, adresse */
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section {
+  @apply flex;
+  @apply flex-col;
+  gap: 8px;
+  @apply box-border;
+  min-width: 0;
+  padding: 15px 14px 16px;
+  border: 1px solid var(--compte-bordure);
+  border-radius: var(--compte-rayon-carte);
+  background: var(--compte-fond-carte);
+  box-shadow: var(--compte-ombre);
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-title-section {
+  @apply block;
+  margin: 0 0 4px;
+  padding: 0 0 9px;
+  border-bottom: 1px solid var(--compte-bordure);
+  color: var(--compte-texte-secondaire);
+  font-size: .88rem;
+  font-weight: 650;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* 05 — LIGNES DE DONNÉES (lecture seule et actions d'édition) ---------------- */
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] {
+  @apply grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3px;
+  @apply items-center;
+  @apply box-border;
+  min-width: 0;
+  margin: 0;
+  padding: 9px 11px;
+  border: 1px solid var(--compte-bordure);
+  border-radius: var(--compte-rayon-ligne);
+  background: var(--compte-fond-ligne);
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__label-zone {
+  @apply w-full;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__label {
+  @apply block;
+  margin: 0;
+  font-size: .76rem;
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--compte-texte-secondaire);
+  overflow-wrap: anywhere;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__control {
+  @apply relative;
+  min-width: 0;
+  @apply w-full;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__lecture {
+  @apply flex;
+  @apply items-center;
+  @apply w-full;
+  min-width: 0;
+  min-height: 24px;
+  padding: 0 !important;
+  margin: 0;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--compte-texte) !important;
+  font-size: .88rem;
+  line-height: 1.35;
+  font-weight: 550;
+  @apply text-left;
+  @apply whitespace-normal;
+  overflow-wrap: anywhere;
+  -webkit-text-fill-color: var(--compte-texte);
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__control--modifiable .lcdp-box-champ-formulaire__lecture {
+  padding-right: 38px !important;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
+  padding-left: 38px !important;
+}
+/* Le bouton et la réserve de texte partagent les mêmes variables c040. */
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire--modifiable {
+  --lcdp-champ-modifiable-action-size: 32px;
+  --lcdp-champ-modifiable-action-offset: 0px;
+  --lcdp-champ-modifiable-icon-size: 17px;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit {
+  @apply box-border;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  right: 0;
+  border: 1px solid var(--compte-bordure);
+  border-radius: var(--compte-rayon-ligne);
+  background: var(--compte-fond-carte);
+  color: var(--lcdp-color-orange, #f2a23a);
+  box-shadow: none;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit:hover {
+  background: var(--compte-fond-ligne);
+  border-color: var(--lcdp-color-orange, #f2a23a);
+  color: var(--lcdp-color-orange-hover, #e89223);
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge,
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge:hover,
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge:focus-visible {
+  color: #b3261e;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit-icon,
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit-icon path {
+  fill: currentColor;
+  stroke: currentColor;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit[hidden] {
+  display: none !important;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide {
+  margin: 6px 0 0;
+  padding: 0;
+  font-size: .78rem;
+  line-height: 1.45;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide a {
+  color: var(--compte-accent);
+  text-underline-offset: 3px;
+}
+
+/* 06 — FOCUS MÉTIER / POINTS / ÉTAT DES DROITS ------------------------------ */
+.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="participation"] #champ-points-club-membre,
+.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="participation"] #champ-da-membre {
+  font-variant-numeric: tabular-nums;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="participation"] .lcdp-box-champ-formulaire--badge {
+  background: var(--compte-fond-ligne);
+  border-color: var(--compte-bordure);
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse {
+  @apply flex;
+  @apply justify-center;
+  @apply items-center;
+  @apply flex-wrap;
+  gap: 8px;
+  @apply w-full;
+  margin: 5px 0 0;
+  padding: 0;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button {
+  @apply box-border;
+  @apply w-auto;
+  min-width: 155px;
+  @apply max-w-full;
+  min-height: 37px;
+  margin: 0;
+  padding: 7px 15px;
+  border-radius: 11px;
+  font-size: .86rem;
+  font-weight: 600;
+  line-height: 1.25;
+  @apply whitespace-normal;
+  @apply text-center;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange {
+  background: var(--lcdp-color-orange);
+  border-color: var(--lcdp-color-orange);
+  color: var(--compte-texte);
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange:hover {
+  background: var(--lcdp-color-orange-hover);
+  border-color: var(--lcdp-color-orange-hover);
+}
+
+/* Ancien CSS central de mes-informations.js : neutraliser ses marges de groupes. */
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-formulaire__actions,
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-title-section {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* 07 — SELFIE : styles migrés depuis mes-informations.js --------------------- */
+.lcdp-page-mon-compte #zone-selfie .lcdp-selfie-control {
+  @apply relative;
+  @apply box-border;
+  min-height: 42px;
+  @apply w-full;
+  padding: 5px 38px 5px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.lcdp-page-mon-compte #zone-selfie .lcdp-selfie-contenu {
+  @apply flex;
+  @apply items-center;
+  gap: 9px;
+  min-width: 0;
+}
+.lcdp-page-mon-compte #zone-selfie .lcdp-selfie-texte {
+  @apply flex;
+  @apply flex-col;
+  gap: 2px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: .76rem;
+  color: var(--compte-texte-secondaire);
+}
+.lcdp-page-mon-compte #zone-selfie #selfie-etat { font-size: .86rem; color: var(--compte-texte); }
+.lcdp-page-mon-compte #zone-selfie #selfie-etat:empty { @apply hidden; }
+.lcdp-page-mon-compte #zone-selfie #selfie-badge {
+  @apply block;
+  @apply box-border;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  @apply overflow-hidden;
+  @apply shrink-0;
+  cursor: zoom-in;
+}
+.lcdp-page-mon-compte #zone-selfie #selfie-badge:focus-visible { outline: 3px solid var(--compte-accent); outline-offset: 3px; }
+.lcdp-page-mon-compte #zone-selfie #selfie-photo { @apply block; @apply w-full; @apply h-full; @apply object-cover; }
+.lcdp-page-mon-compte #zone-selfie #selfie-badge[hidden],
+.lcdp-page-mon-compte #zone-selfie #selfie-photo[hidden] { display: none !important; }
+
+/* 08 — DIALOGUES SELFIE : modal navigateur, sans CSS injecté en JS ----------- */
+.lcdp-page-mon-compte #dialogue-selfie {
+  @apply box-border;
+  width: min(92vw, 440px);
+  max-height: 90dvh;
+  @apply overflow-auto;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31,42,36,.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
+  padding: 22px 17px;
+  background: var(--compte-fond-carte, #fff);
+  color: var(--compte-texte, #1f2a24);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31,42,36,.12));
+}
+.lcdp-page-mon-compte #dialogue-selfie::backdrop { background: var(--lcdp-ui-overlay, rgba(31,42,36,.46)); }
+.lcdp-page-mon-compte #dialogue-selfie video { @apply block; @apply w-full; max-height: 50dvh; @apply object-contain; transform: scaleX(-1); }
+.lcdp-page-mon-compte #dialogue-selfie .lcdp-selfie-actions { @apply flex; gap: 10px; @apply justify-center; @apply flex-wrap; margin-top: 12px; }
+.lcdp-page-mon-compte #dialogue-selfie-agrandi {
+  @apply box-border;
+  @apply relative;
+  width: min(92vw, 720px);
+  max-width: 92vw;
+  max-height: 92dvh;
+  @apply overflow-auto;
+  padding: 45px 12px 12px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31,42,36,.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
+  background: var(--lcdp-color-surface, #fff);
+}
+.lcdp-page-mon-compte #dialogue-selfie-agrandi::backdrop { background: rgba(31,42,36,.78); }
+.lcdp-page-mon-compte #dialogue-selfie-agrandi img { @apply block; @apply max-w-full; max-height: calc(92dvh - 70px); @apply w-auto; @apply h-auto; @apply object-contain; margin: auto; border-radius: 8px; }
+.lcdp-page-mon-compte #dialogue-selfie-agrandi button {
+  @apply absolute;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
+  color: var(--lcdp-color-text, #1f2a24);
+  font-size: 24px;
+  line-height: 1;
+  @apply cursor-pointer;
+}
+
+/* 09 — SAISIE DE CODES : styles extraits de .style.cssText ------------------ */
+.lcdp-page-mon-compte .lcdp-box-champ-formulaire__code-cases {
+  @apply grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--lcdp-space-2, 8px);
+  @apply w-full;
+  max-width: 340px;
+  min-width: 0;
+}
+.lcdp-page-mon-compte .lcdp-box-champ-formulaire__code-cases > input {
+  @apply box-border;
+  @apply w-full;
+  min-width: 0;
+  @apply text-center;
+  font-size: 1.15rem;
+  padding-inline: 3px;
+}
+
+/* 10 — TABLETTE / PC --------------------------------------------------------- */
+@media (min-width: 540px) {
+  .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section { padding: 19px 20px 20px; gap: 9px; }
+  .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] {
+    grid-template-columns: minmax(110px, .43fr) minmax(0, 1fr);
+    gap: 12px;
+    padding: 10px 12px;
+  }
+  .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__lecture {
+    font-size: .9rem;
+  }
+}
+
+/* 11 — TRÈS PETITS ÉCRANS --------------------------------------------------- */
+@media (max-width: 359px) {
+  .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section { padding: 12px 10px; }
+  .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] { padding: 8px; }
+}
+
+/* 12 — ACCESSIBILITÉ ET ÉTATS ----------------------------------------------- */
+.lcdp-page-mon-compte #form-mes-informations-membre button:focus-visible,
+.lcdp-page-mon-compte #form-mes-informations-membre a:focus-visible,
+#dialogue-selfie button:focus-visible,
+.lcdp-page-mon-compte #dialogue-selfie-agrandi button:focus-visible {
+  outline: 2px solid var(--lcdp-color-primary, #55733f);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lcdp-page-mon-compte #form-mes-informations-membre *,
+  #dialogue-selfie *,
+  .lcdp-page-mon-compte #dialogue-selfie-agrandi * { transition: none !important; animation: none !important; }
+}

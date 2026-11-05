@@ -1,0 +1,225 @@
+/* SOURCE TAILWIND 4 — NE PAS servir directement au navigateur.
+ * Compiler en CSS classique avec lcdp-build-tailwind.mjs.
+ * Contrat: HTML et JS existants inchangés; aucun Preflight Tailwind; mêmes sélecteurs.
+ * Référence Tailwind utilisée uniquement à la compilation, sans style global ajouté.
+ */
+@reference "./lcdp-tailwind-theme.css";
+
+/* La Clé du Parc — DA membre : styles dans CSSBASE.
+   Dédié au workflow DA ; réutilise les variables et classes du système central.
+   Aucun style global de formulaire ou de bouton n'est modifié. */
+
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement { padding: 12px; }
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__card {
+  @apply box-border;
+  width: min(100%, 540px);
+  max-height: calc(100dvh - 24px);
+  padding: clamp(14px, 3vw, 23px);
+  @apply overflow-x-hidden;
+  @apply overflow-y-auto;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content { min-width: 0; }
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack { gap: 13px; }
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack > h2 {
+  margin: 0 28px 6px;
+  font-size: clamp(1.25rem, 4.6vw, 1.45rem);
+  line-height: 1.25;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack section {
+  padding: 11px 12px;
+  border: 1px solid var(--lcdp-color-border, #d9dfd5);
+  border-radius: 12px;
+  background: var(--lcdp-color-surface, #fff);
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack section h3 {
+  margin: 0 0 7px;
+  color: var(--lcdp-color-text, #23362b);
+  font-size: .96rem;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack section p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: .89rem;
+}
+#lcdp-da-membre-overlay-slot #lcdp-formulaire-da-slot .lcdp-box-formulaire-page {
+  @apply box-border;
+  padding-block: 0;
+  @apply w-full;
+}
+#lcdp-da-membre-overlay-slot #lcdp-formulaire-da-slot .lcdp-box-formulaire-page__inner {
+  @apply w-full;
+  @apply max-w-full;
+}
+#lcdp-da-membre-overlay-slot #lcdp-formulaire-da-slot .lcdp-box-formulaire {
+  @apply box-border;
+  @apply w-full;
+  margin: 0;
+  padding: 8px 2px 12px;
+  gap: 15px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#lcdp-da-membre-overlay-slot #lcdp-formulaire-da-slot .lcdp-box-formulaire__fields {
+  @apply flex;
+  @apply flex-col;
+  gap: 13px;
+  min-width: 0;
+}
+#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section {
+  @apply flex;
+  @apply flex-col;
+  gap: 10px;
+  @apply box-border;
+  min-width: 0;
+  padding: 13px 12px;
+  border: 1px solid var(--lcdp-color-border, #d7ded2);
+  border-radius: 14px;
+  background: var(--lcdp-color-surface, #fff);
+}
+#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section__titre {
+  margin: 0 0 3px;
+  color: var(--lcdp-color-text, #243d30);
+  font-size: .98rem;
+  line-height: 1.35;
+  font-weight: 650;
+  @apply text-left;
+}
+#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:not([type="checkbox"]) {
+  @apply box-border;
+  @apply w-full;
+  @apply max-w-full;
+  min-width: 0;
+  min-height: 46px;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-formulaire__actions {
+  @apply flex;
+  @apply justify-center;
+  @apply items-center;
+  margin: 3px auto 0;
+  padding-top: 11px;
+  @apply w-full;
+  gap: 10px;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-formulaire__actions .lcdp-button,
+#lcdp-da-membre-overlay-slot #bouton-transmettre-da {
+  @apply box-border;
+  @apply inline-flex;
+  @apply items-center;
+  @apply justify-center;
+  width: min(100%, 216px);
+  max-width: 216px;
+  min-width: 0;
+  min-height: 48px;
+  margin-inline: auto;
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-transform: none;
+  @apply text-center;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-formulaire__note {
+  @apply box-border;
+  max-width: 450px;
+  @apply w-full;
+  margin: 0 auto;
+  padding: 3px 3px 0;
+  font-size: .81rem;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--lcdp-color-text-muted, #57645a);
+  @apply text-left;
+  overflow-wrap: anywhere;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-formulaire__note a {
+  color: var(--lcdp-color-primary, #4e6838);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Boutons de confirmation : variante mutualisable du composant de base,
+   sans modifier les boutons de l'ensemble de l'application. */
+.lcdp-da-membre-alerte .lcdp-box-alerte__card { padding: 25px 20px 21px; }
+.lcdp-da-membre-alerte .lcdp-box-alerte__message {
+  font-size: clamp(1rem, 4vw, 1.09rem);
+  line-height: 1.45;
+  max-width: 360px;
+  @apply text-center;
+}
+.lcdp-da-membre-alerte [data-lcdp-alerte-ok].lcdp-confirmation-action {
+  @apply inline-flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply box-border;
+  width: min(100%, 216px);
+  max-width: 216px;
+  min-width: 0;
+  min-height: 46px;
+  padding: 10px 15px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.25;
+  @apply text-center;
+}
+.lcdp-da-membre-alerte--confirmation [data-lcdp-alerte-close],
+.lcdp-da-membre-alerte [data-lcdp-alerte-close][hidden] { display: none !important; }
+.lcdp-da-membre-alerte--confirmation .lcdp-box-alerte__card { padding-top: 23px; }
+
+/* Spinner de transmission DA : dessiné/animé en CSS, aucune image ni fragment. */
+.lcdp-da-transmission-attente {
+  @apply fixed;
+  inset: 0;
+  z-index: 7000;
+  @apply flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply w-full;
+  min-height: 100svh;
+  background: rgba(255, 255, 255, .94);
+  @apply pointer-events-auto;
+}
+.lcdp-da-transmission-spinner {
+  @apply relative;
+  @apply block;
+  width: 64px;
+  height: 64px;
+}
+.lcdp-da-transmission-spinner > span {
+  @apply absolute;
+  left: calc(50% - 3px);
+  top: 3px;
+  width: 6px;
+  height: 13px;
+  border-radius: 4px;
+  background: #719a54;
+  transform-origin: 3px 29px;
+  transform: rotate(calc(var(--lcdp-rayon) * 30deg));
+  animation: lcdp-da-spinner-pulse 1.08s linear infinite;
+  animation-delay: calc(var(--lcdp-rayon) * -90ms);
+}
+.lcdp-da-transmission-spinner > span:nth-child(3n + 1) { background: #a4ba87; }
+.lcdp-da-transmission-spinner > span:nth-child(11),
+.lcdp-da-transmission-spinner > span:nth-child(12) { background: #e59834; }
+@keyframes lcdp-da-spinner-pulse {
+  0% { opacity: 1; }
+  100% { opacity: .22; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lcdp-da-transmission-spinner > span { animation: none; opacity: .86; }
+}
+
+/* Conserver une teinte neutre/verte lors de l'autoremplissage du navigateur. */
+#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:-webkit-autofill,
+#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:-webkit-autofill:hover,
+#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 100px #f7faf5 inset !important;
+  -webkit-text-fill-color: #23362b !important;
+  caret-color: #23362b;
+}
+#lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:focus-visible {
+  outline-color: var(--lcdp-color-primary, #4e6838);
+}
