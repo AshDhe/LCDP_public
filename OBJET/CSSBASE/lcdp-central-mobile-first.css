@@ -24967,8 +24967,9 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   color: #334155;
   font-weight: 700;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link::after {
-  content: "Espace membre";
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link::after,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]::after {
+  content: "Espace personnel";
   display: inline-block;
   flex: 0 0 auto;
   padding: 4px 8px;
@@ -24981,7 +24982,9 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   letter-spacing: normal;
   transition: background-color 200ms ease, color 200ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:hover::after, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:focus-visible::after {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:hover::after, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:focus-visible::after,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]:hover::after,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]:focus-visible::after {
   background: var(--lcdp-burger-accent);
   color: #fff;
 }
@@ -24998,6 +25001,8 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte] {
   color: #334155;
   font-weight: 700;
+  justify-content: space-between;
+  gap: 6px;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link:last-child:not([data-lcdp-menu-faq]) {
   margin-top: 0;
@@ -33214,23 +33219,3 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   }
 }
 /* ======================================================================== */
-
-/* Gabarit sans navigation : tunnels de connexion, de sécurité et de formulaires.
-   La classe est ajoutée à .lcdp-app-wrapper ; aucune navigation n'est chargée.
-   Cette règle protège également le rendu si un ancien script réinsère un bandeau. */
-.lcdp-app-wrapper.lcdp-app-wriper--sans {
-  display: flex;
-  flex-direction: column;
-}
-.lcdp-app-wrapper.lcdp-app-wriper--sans > :is(
-  #lcdp-bandeau-slot,
-  #lcdp-footer-slot,
-  .lcdp-box-bandeau-nav,
-  .lcdp-box-footer
-) {
-  display: none !important;
-}
-.lcdp-app-wrapper.lcdp-app-wriper--sans > .lcdp-site-main {
-  flex: 1 1 auto;
-  min-height: 0;
-}
