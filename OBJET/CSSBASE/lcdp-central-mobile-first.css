@@ -20853,3 +20853,236 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
     padding: 25px;
   }
 }
+
+
+/* ========================================================================
+   OBJET GENERIQUE : BOUTONS ET DIALOGUES — NORMALISATION 2026-11-05
+   Une seule grammaire visuelle. Les classes historiques BOX ci-dessous sont
+   des points de raccordement temporaire, pas de nouveaux composants.
+   Pas de couleur conditionnée par les variantes « ouvrir », « droits », etc.
+   Les choix fonctionnels (fermer/annuler/confirmer) restent dans le JS.
+   ======================================================================== */
+:root {
+  --lcdp-ui-action: var(--lcdp-color-logo-green, #55733f);
+  --lcdp-ui-action-hover: var(--lcdp-color-primary, #234438);
+  --lcdp-ui-surface: var(--lcdp-color-surface, #fff);
+  --lcdp-ui-texte: var(--lcdp-color-text, #1f2a24);
+  --lcdp-ui-voile: rgba(31, 42, 36, .46);
+  --lcdp-ui-rayon-dialogue: var(--lcdp-radius-large, 24px);
+  --lcdp-ui-rayon-bouton: var(--lcdp-radius-button, 14px);
+}
+
+/* Famille DIALOGUE : même fond et même coque, sans modifier les choix de
+   compte « data-lcdp-connexion » ni les fenêtres de calendrier spécialisées. */
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img) {
+  position: fixed;
+  inset: 0;
+  z-index: 6000;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--lcdp-ui-voile);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton, .lcdp-box-dialogue-champ,
+    .lcdp-box-dialogue-champ-inviter, .lcdp-box-dialogue-upload-img)[hidden] {
+  display: none !important;
+}
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img)
+  :is(.lcdp-box-alerte__card, .lcdp-box-dialogue-bouton__card,
+      .lcdp-box-dialogue-champ__card, .lcdp-box-dialogue-champ-inviter__card,
+      .lcdp-box-dialogue-upload-img__card) {
+  box-sizing: border-box;
+  position: relative;
+  width: min(100%, 480px);
+  max-width: 480px;
+  max-height: calc(100vh - 32px);  /* repli navigateur */
+  max-height: calc(100dvh - 32px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: clamp(20px, 4vw, 28px);
+  border: 1px solid var(--lcdp-color-border, #d7ded2);
+  border-radius: var(--lcdp-ui-rayon-dialogue);
+  background: var(--lcdp-ui-surface);
+  color: var(--lcdp-ui-texte);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, .18);
+}
+/* Le niveau d'erreur est un état métier, pas une nouvelle palette de fenêtre. */
+.lcdp-box-alerte:is([data-type="erreur"], [data-type="error"]) .lcdp-box-alerte__card {
+  border-color: var(--lcdp-color-border, #d7ded2);
+}
+/* Un formulaire d'envoi d'images a besoin de plus d'espace utile. */
+.lcdp-box-dialogue-upload-img .lcdp-box-dialogue-upload-img__card {
+  width: min(100%, 540px);
+  max-width: 540px;
+}
+
+/* Même bouton de fermeture pour toutes les fenêtres fermables. */
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img)
+  :is(.lcdp-box-alerte__close, .lcdp-box-dialogue-bouton__close,
+      .lcdp-box-dialogue-champ__close, .lcdp-box-dialogue-champ-inviter__close,
+      .lcdp-box-dialogue-upload-img__close) {
+  box-sizing: border-box;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft, #f7f7f4);
+  color: var(--lcdp-ui-texte);
+  font: inherit;
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+}
+:is(.lcdp-box-alerte__close, .lcdp-box-dialogue-bouton__close,
+    .lcdp-box-dialogue-champ__close, .lcdp-box-dialogue-champ-inviter__close,
+    .lcdp-box-dialogue-upload-img__close)[hidden] {
+  display: none !important;
+}
+
+/* Titres et messages des trois familles : alerte, choix, saisie. */
+:is(.lcdp-box-dialogue-bouton:not([data-lcdp-connexion]), .lcdp-box-dialogue-champ,
+    .lcdp-box-dialogue-champ-inviter, .lcdp-box-dialogue-upload-img)
+  :is(.lcdp-box-dialogue-bouton__title, .lcdp-box-dialogue-champ__title,
+      .lcdp-box-dialogue-champ-inviter__title, .lcdp-box-dialogue-upload-img__title) {
+  color: var(--lcdp-ui-texte);
+  font-size: clamp(1.18rem, 4vw, 1.55rem);
+  line-height: 1.24;
+  font-weight: 700;
+  text-align: center;
+}
+.lcdp-box-alerte .lcdp-box-alerte__message,
+.lcdp-box-dialogue-bouton:not([data-lcdp-connexion]) .lcdp-box-dialogue-bouton__text {
+  color: var(--lcdp-ui-texte);
+  font-size: 1rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+/* OBJET BOUTON : 2 présentations seulement, primaire vert / secondaire blanc.
+   Les actions spéciales du tunnel PLANIFIER conservent leur CSS de parcours. */
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img) .lcdp-button:not(.lcdp-button-logo) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 9px 16px;
+  border: 1px solid var(--lcdp-ui-action);
+  border-radius: var(--lcdp-ui-rayon-bouton);
+  font: inherit;
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  white-space: normal;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img) .lcdp-button:not(.lcdp-button-secondary):not(.lcdp-button-logo),
+.lcdp-box-alerte [data-lcdp-alerte-ok].lcdp-button {
+  background: var(--lcdp-ui-action);
+  border-color: var(--lcdp-ui-action);
+  color: #fff;
+}
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img) .lcdp-button:not(.lcdp-button-secondary):not(.lcdp-button-logo):hover,
+.lcdp-box-alerte [data-lcdp-alerte-ok].lcdp-button:hover {
+  background: var(--lcdp-ui-action-hover);
+  border-color: var(--lcdp-ui-action-hover);
+  color: #fff;
+}
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img) .lcdp-button.lcdp-button-secondary {
+  background: #fff;
+  border-color: var(--lcdp-ui-action);
+  color: var(--lcdp-ui-action);
+}
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img) .lcdp-button.lcdp-button-secondary:hover {
+  background: var(--lcdp-color-surface-soft, #f7f7f4);
+  border-color: var(--lcdp-ui-action-hover);
+  color: var(--lcdp-ui-action-hover);
+}
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img) .lcdp-button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+/* Le HTML « hidden » prime toujours sur les dispositions des composants. */
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton, .lcdp-box-dialogue-champ,
+    .lcdp-box-dialogue-champ-inviter, .lcdp-box-dialogue-upload-img)
+  :is(.lcdp-button, button)[hidden] {
+  display: none !important;
+}
+
+/* Actions : même alignement et même grille, quel que soit le composant hérité. */
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img)
+  :is(.lcdp-dialogue-actions, .lcdp-box-dialogue-bouton__actions,
+      .lcdp-box-dialogue-champ__actions, .lcdp-box-dialogue-champ-inviter__actions,
+      .lcdp-box-dialogue-upload-img__actions) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+}
+:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img)
+  :is(.lcdp-dialogue-actions, .lcdp-box-dialogue-bouton__actions,
+      .lcdp-box-dialogue-champ__actions, .lcdp-box-dialogue-champ-inviter__actions,
+      .lcdp-box-dialogue-upload-img__actions) > .lcdp-button {
+  flex: 0 1 auto;
+  width: min(100%, 190px);
+  max-width: 190px;
+  min-width: 108px;
+  margin: 0;
+}
+@media (max-width: 350px) {
+  :is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+      .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
+      .lcdp-box-dialogue-upload-img) :is(.lcdp-dialogue-actions,
+      .lcdp-box-dialogue-bouton__actions, .lcdp-box-dialogue-champ__actions,
+      .lcdp-box-dialogue-champ-inviter__actions, .lcdp-box-dialogue-upload-img__actions) > .lcdp-button {
+    flex: 1 1 100%;
+  }
+}
+/* ======================================================================== */
