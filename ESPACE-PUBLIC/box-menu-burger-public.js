@@ -409,11 +409,11 @@
         },
         {
           label: "Galerie",
-          href: "/ESPACE-PUBLIC/gallery.html"
+          href: "/ESPACE-PUBLIC/galerie.html"
         },
         {
           label: "Témoignages",
-          href: "/ESPACE-PUBLIC/Témoignages.html"
+          href: "/ESPACE-PUBLIC/temoignages.html"
         },
         {
           label: "FAQ",
@@ -421,7 +421,7 @@
         },
         {
           label: "Bénévolat",
-          href: "/ESPACE-PUBLIC/Bénévolat.html"
+          href: "/ESPACE-PUBLIC/benevolat.html"
         },
         {
           label: "Membre bienfaiteur",
