@@ -1,0 +1,1796 @@
+:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails {
+  box-sizing: border-box;
+  position: fixed;
+  inset: 0;
+  z-index: 7000;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.46);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__card {
+  position: relative;
+  width: min(100%, 620px);
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow: auto;
+  padding: 24px 20px 22px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+}
+:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__title {
+  margin: 0 0 var(--lcdp-space-3) 0;
+  text-align: center;
+  font-size: 1.45rem;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__message {
+  margin: 0 0 var(--lcdp-space-3);
+  padding: var(--lcdp-space-2);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text-muted);
+  text-align: center;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__item {
+  padding: var(--lcdp-space-2);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font-weight: 700;
+  word-break: break-word;
+}
+:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__actions {
+  margin-top: var(--lcdp-space-4);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+  justify-items: center;
+}
+:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__actions .lcdp-button {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 0;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails {
+    padding: var(--lcdp-space-4);
+  }
+  :where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__card {
+    padding: var(--lcdp-space-5);
+  }
+}
+:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__input {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  padding: 10px 12px;
+  font: inherit;
+  font-weight: 400;
+  color: var(--lcdp-color-text);
+  background: var(--lcdp-color-surface);
+}
+:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__input:focus {
+  outline: 2px solid rgba(35, 68, 56, 0.22);
+  outline-offset: 2px;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__title {
+  margin: 0;
+  font-size: clamp(26px, 6vw, 34px);
+  line-height: 1.18;
+  font-weight: 600;
+  text-align: left;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__frame {
+  position: relative;
+  width: 100%;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 180px;
+  overflow: hidden;
+  border-radius: var(--lcdp-radius-button);
+  background: var(--lcdp-color-surface-soft);
+  box-shadow: 0 10px 24px rgba(31, 42, 36, 0.08);
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__list {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--lcdp-color-surface-soft);
+  transition: opacity 1.2s ease;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__item.is-active {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  background: var(--lcdp-color-surface-soft);
+  display: block;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(31, 42, 36, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--lcdp-color-text);
+  font-family: var(--lcdp-font-main);
+  font-size: 28px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(31, 42, 36, 0.14);
+  appearance: none;
+  -webkit-appearance: none;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--prev {
+  left: 10px;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--next {
+  right: 10px;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button:hover {
+  background: #ffffff;
+  border-color: var(--lcdp-color-border-strong);
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button:active {
+  opacity: 0.75;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dots {
+  min-height: 16px;
+  margin-top: var(--lcdp-space-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid rgba(31, 42, 36, 0.18);
+  border-radius: 999px;
+  background: rgba(31, 42, 36, 0.35);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(31, 42, 36, 0.12);
+  appearance: none;
+  -webkit-appearance: none;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot.is-active {
+  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-logo-green);
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__viewport {
+    border-radius: calc(var(--lcdp-radius-button) + 8px);
+  }
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button {
+    width: 44px;
+    height: 44px;
+    font-size: 34px;
+  }
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--prev {
+    left: 16px;
+  }
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--next {
+    right: 16px;
+  }
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dots {
+    min-height: 18px;
+    gap: 9px;
+  }
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__item--with-title::after {
+  content: "";
+  position: absolute;
+  inset: 42% 0 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient( to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.12) 34%, rgba(0, 0, 0, 0.56) 100% );
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__overlay-title {
+  position: absolute;
+  z-index: 2;
+  left: clamp(16px, 5%, 76px);
+  bottom: clamp(18px, 6%, 64px);
+  width: calc(100% - 2 * clamp(16px, 5%, 76px));
+  max-width: none;
+  margin: 0;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(17.28px, 3.712vw, 48.64px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-align: left;
+  text-wrap: wrap;
+  overflow-wrap: normal;
+  word-break: normal;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.24);
+  pointer-events: none;
+}
+@media (max-width: 767px) {
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__overlay-title {
+    left: 5%;
+    bottom: 7%;
+    width: 90%;
+    max-width: none;
+    font-size: clamp(21.85px, 6.27vw, 43.7px);
+    line-height: 1.1;
+  }
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__item--with-title::after {
+    inset: 35% 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__item {
+    transition-duration: 0.01ms;
+  }
+}
+:where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item__input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+}
+:where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item__input[readonly] {
+  background: transparent;
+  border-color: transparent;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lcdp-space-2);
+  justify-content: flex-end;
+}
+:where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item__actions .lcdp-button {
+  margin-top: 0;
+  min-width: 120px;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__media {
+  position: relative;
+  width: 100%;
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__body {
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__meta {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__title {
+  margin: 0;
+  font-size: clamp(1.25rem, 5.5vw, 1.65rem);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__description {
+  display: block;
+  width: 100%;
+  margin: var(--lcdp-space-1) 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  text-align: left;
+  text-transform: none;
+  appearance: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__description:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__description-icone {
+  width: 1em;
+  height: 1em;
+  margin-left: 5px;
+  display: inline-block;
+  vertical-align: -2px;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.65;
+  object-fit: contain;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__actions .lcdp-button {
+  width: 100%;
+  max-width: none;
+  margin-top: 0;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__media {
+    width: 34%;
+    min-width: 220px;
+    max-width: 280px;
+    display: flex;
+  }
+  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__image {
+    height: 100%;
+    min-height: 210px;
+    aspect-ratio: auto;
+  }
+  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__body {
+    flex: 1;
+    padding: var(--lcdp-space-4);
+    justify-content: space-between;
+  }
+  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 420px;
+  }
+  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__actions .lcdp-button {
+    min-width: 0;
+  }
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__description {
+    font-size: var(--lcdp-font-size-paragraph-desktop);
+  }
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__badge-prepa {
+  position: absolute;
+  top: 14px;
+  left: -34px;
+  z-index: 1;
+  width: 120px;
+  padding: 5px 0;
+  transform: rotate(-45deg);
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+  font-size: 0.72rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__actions--reserver {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--lcdp-space-2);
+  max-width: none;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  margin-top: 0;
+  padding: 10px 9px;
+  border: 2px solid currentColor;
+  border-radius: var(--lcdp-radius-button);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: clamp(0.9072rem, 4.32vw, 1.0584rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-transform: none;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+  width: 27.72px;
+  height: 27.72px;
+  flex: 0 0 27.72px;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-libelle {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein {
+  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-logo-green);
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein:hover {
+  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-primary);
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-contour {
+  border-color: var(--lcdp-color-logo-green);
+  background: #ffffff;
+  color: var(--lcdp-color-logo-green);
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-contour:hover {
+  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-plein {
+  border-color: var(--lcdp-color-orange);
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-plein:hover {
+  border-color: var(--lcdp-color-orange-hover);
+  background: var(--lcdp-color-orange-hover);
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-contour {
+  border-color: var(--lcdp-color-orange);
+  background: #ffffff;
+  color: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-contour:hover {
+  border-color: var(--lcdp-color-orange-hover);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-orange-hover);
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__actions--reserver {
+    max-width: 460px;
+  }
+  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+    min-height: 52px;
+    padding-inline: 13px;
+    font-size: 1.16424rem;
+  }
+  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+    width: 29.04px;
+    height: 29.04px;
+    flex-basis: 29.04px;
+  }
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__media--avec-nom {
+  position: relative;
+  overflow: hidden;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__media--avec-nom .lcdp-box-card-parc__nom-image {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  display: block;
+  padding: var(--lcdp-space-3);
+  background: linear-gradient(transparent, rgba(0, 0, 0, .68));
+  color: #ffffff;
+  font-weight: 700;
+  font-size: clamp(1.1rem, 3vw, 1.55rem);
+  line-height: 1.2;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__badge--nouveau {
+  background: #3C71B1;
+  letter-spacing: 0.035em;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet,:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet:hover {
+  filter: saturate(0.35) brightness(1.18);
+  cursor: help;
+}
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein .lcdp-box-card-parc__action-icone--presentation {
+  filter: brightness(0) invert(1);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour {
+  min-height: 50px;
+  padding: 8px 10px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour:hover {
+  border-color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour:disabled {
+  cursor: default;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--gris-clair {
+  background: #e6e6e6;
+  border-color: #d6d6d6;
+  color: var(--lcdp-color-text-muted);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--vert {
+  background: #cfeecf;
+  border-color: #a9d9a9;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--orange {
+  background: #ffd8a8;
+  border-color: #f0b96f;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--rouge-clair {
+  background: #f7c9c9;
+  border-color: #eca8a8;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--rouge {
+  background: #e98282;
+  border-color: #d15f5f;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--gris-fonce {
+  background: #5c5c5c;
+  border-color: #4a4a4a;
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--plage-bloquee {
+  opacity: 0.42;
+  filter: grayscale(0.8);
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--passee {
+  background: var(--lcdp-color-surface-soft);
+  border-color: var(--lcdp-color-border);
+  color: var(--lcdp-color-text-muted);
+  opacity: 0.52;
+  filter: grayscale(1);
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--deja-reserve {
+  opacity: 1;
+  filter: none;
+  background: #ffd8a8;
+  border-color: #f0b96f;
+  color: var(--lcdp-color-text);
+  box-shadow: inset 0 0 0 2px rgba(242, 162, 58, 0.42);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour:disabled:hover {
+  border-color: var(--lcdp-color-border);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--deja-reserve:disabled:hover {
+  border-color: #f0b96f;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--passee:disabled:hover {
+  border-color: var(--lcdp-color-border);
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour {
+    min-height: 58px;
+    font-size: 1.1rem;
+  }
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--planning-lecture {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: default;
+  font-size: 0.95rem;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.2;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  opacity: 1;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--planning-lecture:disabled {
+  cursor: default;
+  opacity: 1;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--planning-action {
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--planning-action:hover {
+  border-color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--planning-action:focus-visible {
+  outline: 3px solid var(--lcdp-color-primary);
+  outline-offset: 2px;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--bleu-clair {
+  background: #cfe3f7;
+  border-color: #9fc6ea;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--bleu-fonce {
+  background: #2f6fb3;
+  border-color: #255a91;
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--violet {
+  background: #7b5aa6;
+  border-color: #654889;
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--orange-clair {
+  background: #ffd8a8;
+  border-color: #f0b96f;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--orange-fonce {
+  background: #f2a23a;
+  border-color: #d98c27;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--multicolore {
+  background: var(--lcdp-heure-fond);
+  border-color: var(--lcdp-color-border-strong);
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--avec-jauge {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--avec-jauge::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0 auto 0 0;
+  width: var(--lcdp-jauge-largeur, 0%);
+  height: 100%;
+  background: #343836;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--avec-jauge [data-lcdp-card-heure-jour-label] {
+  position: relative;
+  z-index: 2;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour--avec-jauge [data-lcdp-card-heure-jour-label] {
+  color: #fff;
+  text-shadow: 0 1px 2px #111, 0 0 2px #111;
+}
+:where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour.lcdp-planning-avec-membre {
+  padding-inline: 22% 4%;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre {
+  --lcdp-reservation-invitation-color: #7b5aa6;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  text-align: left;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--avec-image {
+  grid-template-columns: 92px minmax(0, 1fr);
+  align-items: stretch;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--invitation {
+  border-color: rgba(123, 90, 166, 0.42);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre.lcdp-box-card-reservation-membre--prochaine,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre[data-lcdp-prochaine-reservation="true"] {
+  border: 2px solid var(--lcdp-color-orange, #f2a23a) !important;
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08), 0 0 0 1px rgba(242, 162, 58, 0.18);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__media {
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__media[hidden] {
+  display: none;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 108px;
+  object-fit: cover;
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation {
+  margin: 0;
+  color: var(--lcdp-reservation-invitation-color);
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+  width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__date,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__place {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--lcdp-space-2);
+  width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__date {
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__date-label {
+  min-width: 0;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__hour {
+  color: var(--lcdp-color-text-muted);
+  white-space: nowrap;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__park {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__department {
+  color: var(--lcdp-color-text-muted);
+  white-space: nowrap;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: 999px;
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action {
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action {
+  min-width: 54px;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action:hover,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action:hover {
+  border-color: var(--lcdp-color-border-strong);
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action[data-action="adresse"] {
+  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-logo-green);
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action[data-action="adresse"]:hover {
+  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-primary);
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action--inviter {
+  border-color: var(--lcdp-reservation-invitation-color);
+  color: var(--lcdp-reservation-invitation-color);
+  background: var(--lcdp-color-surface);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action--inviter:hover {
+  border-color: var(--lcdp-reservation-invitation-color);
+  background: rgba(123, 90, 166, 0.08);
+  color: var(--lcdp-reservation-invitation-color);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-color: var(--lcdp-reservation-invitation-color);
+  background: var(--lcdp-reservation-invitation-color);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: default;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge[hidden] {
+  display: none;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--passe {
+  opacity: 0.72;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--passe [data-lcdp-card-reservation-annuler] {
+  display: none;
+}
+@media (max-width: 420px) {
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--avec-image {
+    grid-template-columns: 78px minmax(0, 1fr);
+    gap: var(--lcdp-space-2);
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
+    min-height: 104px;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__date-label {
+    font-size: 0.98rem;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__hour,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__park,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__department {
+    font-size: 0.92rem;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
+    min-height: 34px;
+    padding: 7px 11px;
+    font-size: 0.88rem;
+  }
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre {
+    width: min(100%, 760px);
+    padding: var(--lcdp-space-4);
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--avec-image {
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: var(--lcdp-space-4);
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
+    min-height: 150px;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
+    justify-content: center;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__content {
+    gap: var(--lcdp-space-2);
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__date,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__place {
+    justify-content: flex-start;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__date-label {
+    font-size: 1.2rem;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__hour,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__park {
+    font-size: 1.05rem;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__actions {
+    justify-content: flex-start;
+  }
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action[data-action="adresse"] {
+  border-color: var(--lcdp-color-logo-green) !important;
+  background: var(--lcdp-color-logo-green) !important;
+  color: #ffffff !important;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action[data-action="adresse"]:hover {
+  border-color: var(--lcdp-color-primary) !important;
+  background: var(--lcdp-color-primary) !important;
+  color: #ffffff !important;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre [data-action="adresse"],:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces {
+  border-color: var(--lcdp-color-logo-green) !important;
+  background: var(--lcdp-color-logo-green) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre [data-action="adresse"]:hover,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces:hover {
+  border-color: var(--lcdp-color-primary) !important;
+  background: var(--lcdp-color-primary) !important;
+  color: #ffffff !important;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__content {
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__place {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__place-line {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  max-width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__park {
+  min-width: 0;
+  max-width: 100%;
+  overflow: visible;
+  white-space: normal;
+  text-overflow: clip;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__department {
+  flex: 0 0 auto;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action--annuler {
+  align-self: flex-start;
+  margin: 0 !important;
+  min-height: 34px;
+  padding: 7px 13px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__actions {
+  margin-top: 2px;
+  gap: 8px;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__actions .lcdp-box-card-reservation-membre__micro-action--fermer {
+  border-color: var(--lcdp-color-border);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__actions .lcdp-box-card-reservation-membre__micro-action--fermer:hover {
+  border-color: var(--lcdp-color-border-strong);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+}
+@media (max-width: 420px) {
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
+    gap: var(--lcdp-space-2);
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__place {
+    gap: 8px;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: 0.86rem;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action--annuler {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__place {
+    gap: 10px;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
+    min-height: 36px;
+    padding: 7px 13px;
+  }
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--avec-image {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__media {
+  width: 100%;
+  min-width: 0;
+  border-radius: 0;
+  display: flex;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
+  flex: 1;
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  justify-content: space-between;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--annulee {
+  opacity: 0.68;
+  border-style: dashed;
+}
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--annulee .lcdp-box-card-reservation-membre__invitation {
+  color: var(--lcdp-color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--avec-image {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__media {
+    width: 34%;
+    min-width: 220px;
+    max-width: 280px;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
+    height: 100%;
+    min-height: 210px;
+    aspect-ratio: auto;
+  }
+  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
+    padding: var(--lcdp-space-4);
+  }
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc {
+  position: fixed;
+  inset: 0;
+  z-index: 5400;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.36);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__card {
+  position: relative;
+  width: min(100%, 760px);
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow: auto;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__close {
+  position: sticky;
+  top: var(--lcdp-space-2);
+  right: var(--lcdp-space-2);
+  margin-left: auto;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 1.65rem;
+  line-height: 1;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__header {
+  padding-right: 44px;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__title {
+  margin: 0;
+  font-size: clamp(1.35rem, 5.5vw, 2rem);
+  line-height: 1.12;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__bloc {
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface);
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__bloc-title {
+  margin: 0 0 var(--lcdp-space-1);
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--lcdp-color-logo-green, #587242);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__text {
+  margin: 0;
+  color: var(--lcdp-color-text);
+  font-size: 0.98rem;
+  line-height: 1.38;
+  font-weight: 500;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__text p {
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__header {
+  margin-bottom: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__title {
+  font-size: clamp(1.15rem, 4vw, 1.45rem);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list {
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card-title {
+  font-size: 0.95rem;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  aspect-ratio: 16 / 10;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__text,:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__legend {
+  font-size: 0.78rem;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__header,:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card-title {
+  display: none;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+  gap: 0;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc {
+    padding: var(--lcdp-space-4);
+  }
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__card {
+    max-height: calc(100vh - (var(--lcdp-space-4) * 2));
+    padding: var(--lcdp-space-5);
+    gap: var(--lcdp-space-4);
+  }
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__bloc {
+    padding: var(--lcdp-space-4);
+  }
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-planning-reservation-vues {
+  width: 100%;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-planning-reservation-vue {
+  width: 100%;
+  animation: lcdp-planning-reservation-vue-entree 180ms ease-out both;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-planning-reservation-vue[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline {
+  position: relative;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  display: block;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__card {
+  width: 100%;
+  max-height: none;
+  overflow: visible;
+  padding: var(--lcdp-space-4);
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__header {
+  width: 100%;
+  padding-right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__retour-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 0 var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__close--retour {
+  position: static;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 36px;
+  padding: 7px 13px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--lcdp-color-text);
+  font-size: 0.92rem;
+  line-height: 1;
+  font-weight: 600;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__close--retour:hover {
+  border-color: var(--lcdp-color-logo-green);
+  color: var(--lcdp-color-logo-green);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__title {
+  width: 100%;
+  min-width: 0;
+  flex: 0 0 auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-planning-reservation-vue {
+    animation: none;
+  }
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__card {
+    padding: var(--lcdp-space-5);
+  }
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list {
+  grid-template-columns: 1fr !important;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+  width: 100%;
+  max-width: none;
+  padding: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  width: 100%;
+  min-height: 220px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center center;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list {
+    grid-template-columns: 1fr !important;
+    gap: var(--lcdp-space-4);
+  }
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+    min-height: 300px;
+  }
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc,:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc *,:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline,:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline * {
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__card,:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__card {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie,:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie,:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list,:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie {
+  padding: 0 !important;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: stretch !important;
+  align-items: start !important;
+  gap: var(--lcdp-space-3) !important;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+  display: block !important;
+  padding: var(--lcdp-space-2) !important;
+  border-radius: var(--lcdp-radius-large);
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: clamp(150px, 48vw, 220px) !important;
+  min-height: 0 !important;
+  max-height: 220px !important;
+  aspect-ratio: auto !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: var(--lcdp-radius-media);
+}
+@media (max-width: 767px) {
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc {
+    align-items: center;
+    padding: var(--lcdp-space-2);
+  }
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__card {
+    max-height: calc(100dvh - (var(--lcdp-space-2) * 2));
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-workflow-reservation__card {
+    max-height: calc(100dvh - (var(--lcdp-space-3) * 2));
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline,:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__card {
+    max-height: none !important;
+    overflow-x: hidden !important;
+  }
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
+    padding: var(--lcdp-space-1) !important;
+  }
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+    height: clamp(132px, 46vw, 184px) !important;
+    max-height: 184px !important;
+  }
+}
+@supports not (height: 100dvh) {
+  @media (max-width: 767px) {
+    :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__card {
+      max-height: calc(100vh - (var(--lcdp-space-2) * 2));
+    }
+    :where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-workflow-reservation__card {
+      max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+    }
+  }
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+    height: clamp(220px, 30vw, 340px) !important;
+    max-height: 340px !important;
+  }
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photos {
+  width: 100%;
+  min-width: 0;
+  margin-top: var(--lcdp-space-3);
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photos-list {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--lcdp-space-3);
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photo {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: var(--lcdp-space-2);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: #ffffff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photo-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: clamp(132px, 46vw, 184px);
+  border-radius: var(--lcdp-radius-media);
+  background: #ffffff;
+  object-fit: cover;
+  object-position: center center;
+  box-sizing: border-box;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photo-image {
+    height: clamp(220px, 30vw, 340px);
+  }
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__retour-row {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__close--retour {
+  margin: 0 !important;
+  align-self: flex-start !important;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__header {
+  margin-top: calc(-1 * var(--lcdp-space-2)) !important;
+}
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline [data-lcdp-card-acces-parc-close],:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__close:not(.lcdp-box-card-acces-parc__close--retour) {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois {
+  width: 100%;
+  min-height: 56px;
+  padding: 4px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: 7px;
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 3px;
+  overflow: hidden;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois:disabled {
+  cursor: default;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--past,:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--closed {
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text-muted);
+  opacity: 0.45;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--hors-abonnement {
+  background: #f3ede4;
+  color: #7b6958;
+  border-color: #d8c8b8;
+  opacity: 1;
+  cursor: not-allowed;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--hors-abonnement .lcdp-box-card-jour-in-calendrier-mois__number {
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--hors-abonnement .lcdp-box-card-jour-in-calendrier-mois__slot {
+  background: #ded3c8;
+  border-color: #c7b6a6;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--abonnement-avenir {
+  background: #edf5ff;
+  border-color: rgba(47, 111, 179, 0.34);
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--abonnement-avenir .lcdp-box-card-jour-in-calendrier-mois__number {
+  color: var(--lcdp-color-blue);
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--today {
+  outline: 2px solid var(--lcdp-color-primary);
+  outline-offset: 2px;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__number {
+  display: block;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 0.78rem;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slots {
+  display: grid;
+  grid-template-rows: repeat(5, minmax(5px, 1fr));
+  gap: 2px;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 22px;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 5px;
+  padding: 0 2px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: #f3f3f3;
+  overflow: hidden;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.34rem;
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--gris-clair {
+  background: #f3f3f3;
+  border-color: #e4e4e4;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--bleu-clair {
+  background: #cfe3f7;
+  border-color: #a9cbea;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--bleu-fonce {
+  background: #2f6fb3;
+  border-color: #255c96;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--violet {
+  background: #7b5aa6;
+  border-color: #684993;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--orange-clair {
+  background: #ffd8a8;
+  border-color: #f0b96f;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--orange-fonce {
+  background: #f2a23a;
+  border-color: #d98b24;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--multicolore {
+  background: var(--lcdp-plage-fond);
+  border-color: transparent;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge {
+  position: relative;
+  isolation: isolate;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0 auto 0 0;
+  width: var(--lcdp-jauge-largeur, 0%);
+  height: 100%;
+  background: #343836;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+  position: relative;
+  z-index: 2;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--vert {
+  background: #587242;
+  border-color: #4e663b;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--vert .lcdp-box-card-jour-in-calendrier-mois__slot-label,:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--vert-passe .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+  color: #ffffff;
+  font-weight: 400;
+  line-height: 1.15;
+  transform: translateY(0.6px);
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--orange {
+  background: #ffd8a8;
+  border-color: #f0b96f;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--rouge-clair {
+  background: #f7c9c9;
+  border-color: #eca8a8;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--rouge {
+  background: #e98282;
+  border-color: #d15f5f;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--gris-fonce {
+  background: #d4d7d4;
+  border-color: #c2c6c2;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--past {
+  background: #f4f2ec;
+  color: var(--lcdp-color-text-muted);
+  opacity: 1;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--past .lcdp-box-card-jour-in-calendrier-mois__slots {
+  visibility: hidden;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--closed:not(.lcdp-box-card-jour-in-calendrier-mois--past) {
+  background: #ffffff;
+  color: var(--lcdp-color-text);
+  opacity: 1;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--closed:not(.lcdp-box-card-jour-in-calendrier-mois--past) .lcdp-box-card-jour-in-calendrier-mois__slots {
+  visibility: hidden;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois {
+    min-height: auto;
+    aspect-ratio: 1 / 1;
+    padding: 10px;
+    border-radius: var(--lcdp-radius-small);
+    font-size: 1rem;
+    gap: 0;
+    justify-content: space-between;
+  }
+  :where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__number {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+  }
+  :where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slots {
+    gap: 4px;
+    min-height: 0;
+  }
+  :where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot {
+    min-height: 12px;
+    padding: 0 3px;
+    border-radius: 5px;
+  }
+  :where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+    font-size: 0.42rem;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--reservation-membre-passee {
+  opacity: 1;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--vert-passe {
+  background: #7b9168;
+  border-color: #70855f;
+  opacity: 0.72;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois--reservation-membre {
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-invitation,:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-hors-abonnement {
+  background: #7b5aa6;
+  border-color: #6d4d96 !important;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-invitation .lcdp-box-card-jour-in-calendrier-mois__slot-label,:where(html[data-lcdp-css~="c052"]) .lcdp-box-card-jour-in-calendrier-mois__slot--reservation-hors-abonnement .lcdp-box-card-jour-in-calendrier-mois__slot-label {
+  color: #ffffff;
+  font-weight: 400;
+  line-height: 1.15;
+  transform: translateY(0.6px);
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-plage--duo,:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-heure--duo {
+  background: #f2a23a !important;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-plage--famille,:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-heure--famille {
+  background: #626262 !important;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-plage--coach,:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-heure--coach {
+  background: #8660c8 !important;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-plage--famille-coach,:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-heure--famille-coach {
+  background: #287a53 !important;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-choix-plage:not(.lcdp-planifier-heure--fermee) {
+  color: #ffffff !important;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-jauge--60 {
+  --lcdp-jauge-largeur: 60%;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-jauge--80 {
+  --lcdp-jauge-largeur: 80%;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-jauge--100 {
+  --lcdp-jauge-largeur: 100%;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin [data-lcdp-box-calendrier-mois] .lcdp-planifier-plage--non-ouverte {
+  visibility: visible !important;
+  box-sizing: border-box;
+  border: 1px solid #dce2e5 !important;
+  background: transparent !important;
+  border-radius: 3px;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin [data-lcdp-box-calendrier-mois] .lcdp-planifier-plage--non-ouverte {
+    border-radius: 5px;
+  }
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin .lcdp-planifier-heure--fermee {
+  background: transparent !important;
+  border: 1px solid #dce2e5 !important;
+  color: #616b70 !important;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin [data-lcdp-card-jour-mois-slot][hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--masquee {
+  visibility: hidden !important;
+}

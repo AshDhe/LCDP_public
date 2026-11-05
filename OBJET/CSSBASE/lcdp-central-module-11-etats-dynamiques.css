@@ -1,0 +1,816 @@
+[data-lcdp-external-style="s0ba527f17571"] {
+  height: 176px !important;
+  min-height: 0 !important;
+  max-height: calc(100svh - 36px);
+  padding: 56px 20px 6px;
+  overflow: hidden !important;
+  box-sizing: border-box;
+}
+[data-lcdp-external-style="s0ebcb42449ab"] {
+  margin: 28px auto;
+  max-width: 360px;
+  text-align: left;
+}
+[data-lcdp-external-style="s3c3ee00be577"] {
+  font-weight: 700 !important;
+}
+[data-lcdp-external-style="s5313e2ec7b02"] {
+  margin-top: 12px;
+  text-align: left;
+}
+[data-lcdp-external-style="s5fe678120b00"] {
+  padding: 0;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+[data-lcdp-external-style="s60a7c04587b9"] {
+  border: 0;
+  padding: 0;
+  margin: 24px 0 0;
+  min-width: 0;
+}
+[data-lcdp-external-style="s6aa34d7432e7"] {
+  display: none;
+}
+[data-lcdp-external-style="s84c17a6c70d6"] {
+  display: flex;
+}
+[data-lcdp-external-style="sa3d4b1c97186"] {
+  margin-inline-start: auto;
+}
+[data-lcdp-external-style="sb651c4de043a"] {
+  display: block;
+  margin-bottom: 8px;
+}
+[data-lcdp-external-style="sb7aa1ec0049d"] {
+  width: 100%;
+}
+[data-lcdp-external-style="sc984854a60c4"] {
+  padding: 18px 0 4px;
+}
+[data-lcdp-external-style="scb075b8dd609"] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  cursor: pointer;
+}
+[data-lcdp-external-style="sf4d4810d2422"] {
+  color: var(--lcdp-color-orange);
+}
+[data-lcdp-external-style="sf7c3b9c70b16"] {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 24px auto;
+}
+[data-lcdp-external-style="sfb5ec070f2bf"] {
+  text-align: center;
+}
+html.lcdp-controle-cle-en-cours body {
+  visibility: hidden !important;
+}
+html.lcdp-compte-bloque {
+  background: #000 !important;
+}
+html.lcdp-compte-bloque body {
+  background: #000 !important;
+  color: #fff !important;
+}
+html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
+  display: none !important;
+}
+#lcdp-compte-bloque {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  overflow: auto;
+  background: #000;
+  color: #fff;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+#lcdp-compte-bloque p {
+  color: #fff !important;
+}
+#lcdp-compte-bloque .lcdp-compte-bloque-actions {
+  margin-top: auto;
+  padding-top: 24px;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+#lcdp-compte-bloque button {
+  display: block;
+  margin-top: 16px;
+}
+.lcdp-box-card-reservation-membre [data-action="adresse"], .lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces {
+  border-color: var(--lcdp-color-logo-green) !important;
+  background: var(--lcdp-color-logo-green) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+.lcdp-box-card-reservation-membre [data-action="adresse"]:hover, .lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces:hover {
+  border-color: var(--lcdp-color-primary) !important;
+  background: var(--lcdp-color-primary) !important;
+  color: #ffffff !important;
+}
+.lcdp-box-card-reservation-membre [data-action="invitation"].lcdp-box-card-reservation-membre__micro-action--invit-recu {
+  border-color: #7b4ab8 !important;
+  background: #7b4ab8 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+.lcdp-box-card-reservation-membre [data-action="invitation"].lcdp-box-card-reservation-membre__micro-action--invit-recu:hover, .lcdp-box-card-reservation-membre [data-action="invitation"].lcdp-box-card-reservation-membre__micro-action--invit-recu:focus-visible {
+  border-color: #6d3fa7 !important;
+  background: #6d3fa7 !important;
+  color: #ffffff !important;
+}
+.lcdp-box-workflow-reservation--planning-reservation .lcdp-box-calendrier-mois__close, .lcdp-box-workflow-reservation--planning-reservation [data-lcdp-calendrier-mois-close], .lcdp-box-workflow-reservation--planning-reservation > .lcdp-box-workflow-reservation__card > button[aria-label="Fermer"], .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-reservation-membre [data-lcdp-card-reservation-close] {
+  display: none !important;
+}
+.lcdp-box-card-reservation-membre__place {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+}
+.lcdp-box-card-reservation-membre__place-line {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  justify-content: flex-start !important;
+  flex-wrap: wrap !important;
+  gap: 6px 10px !important;
+  max-width: 100% !important;
+}
+.lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
+  align-self: flex-start !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+}
+.lcdp-box-card-reservation-membre__actions .lcdp-box-card-reservation-membre__micro-action--fermer {
+  border-color: var(--lcdp-color-border) !important;
+  background: var(--lcdp-color-surface) !important;
+  color: var(--lcdp-color-text) !important;
+}
+@media (max-width: 767px) {
+  .lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
+    align-self: flex-start !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    white-space: normal !important;
+  }
+}
+.lcdp-box-card-reservation-membre__micro-action--delai-depasse {
+  border-color: var(--lcdp-color-border) !important;
+  background: var(--lcdp-color-surface-soft) !important;
+  color: var(--lcdp-color-text-muted) !important;
+  opacity: 0.58 !important;
+  cursor: not-allowed !important;
+}
+.lcdp-box-card-reservation-membre__micro-action--delai-depasse:hover {
+  border-color: var(--lcdp-color-border) !important;
+  background: var(--lcdp-color-surface-soft) !important;
+  color: var(--lcdp-color-text-muted) !important;
+}
+[data-lcdp-invitation-invites-overlay] {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 11000 !important;
+  pointer-events: auto !important;
+}
+[data-lcdp-invitation-invites-overlay] .lcdp-box-card-listinvites-oui-non {
+  z-index: 11001 !important;
+}
+[data-lcdp-invitation-invites-overlay] .lcdp-box-card-listinvites-oui-non__close {
+  display: none !important;
+}
+[data-lcdp-invitation-invites-overlay] .lcdp-box-card-listinvites-oui-non__header {
+  padding-right: 0 !important;
+}
+[data-lcdp-invitation-invites-overlay] .lcdp-box-card-listinvites-oui-non__ajout-title {
+  display: none !important;
+}
+[data-lcdp-invitation-invites-overlay] .lcdp-box-card-listinvites-oui-non__actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 10px 12px !important;
+  align-items: stretch !important;
+  justify-items: stretch !important;
+  margin-top: 18px !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+[data-lcdp-invitation-invites-overlay] .lcdp-box-card-listinvites-oui-non__actions .lcdp-button {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: 54px !important;
+  margin: 0 !important;
+  padding: 10px 14px !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  white-space: normal !important;
+}
+[data-lcdp-invitation-invites-overlay] [data-lcdp-listinvites-add-email] {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+}
+[data-lcdp-invitation-invites-overlay] [data-lcdp-listinvites-update] {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+}
+[data-lcdp-invitation-invites-overlay] [data-lcdp-listinvites-cancel] {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+}
+#zone-selfie .lcdp-selfie-control {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 46px;
+  width: 100%;
+  padding: 10px 58px 10px 14px;
+  border: 1px solid #bdc5d0;
+  border-radius: 16px;
+  background: #f0f2f4;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
+}
+#zone-selfie .lcdp-selfie-contenu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+#zone-selfie .lcdp-selfie-texte {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+#zone-selfie #selfie-badge {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: zoom-in;
+}
+#zone-selfie #selfie-badge:focus-visible {
+  outline: 3px solid #557347;
+  outline-offset: 3px;
+}
+#zone-selfie #selfie-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#zone-selfie #selfie-badge[hidden],#zone-selfie #selfie-photo[hidden] {
+  display: none !important;
+}
+#zone-selfie #selfie-etat {
+  font-size: .9rem;
+}
+#zone-selfie #selfie-etat:empty {
+  display: none;
+}
+#dialogue-selfie {
+  width: min(92vw,440px);
+  max-height: 90vh;
+  overflow: auto;
+  border: 0;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+#dialogue-selfie::backdrop {
+  background: rgba(0,0,0,.65);
+}
+#dialogue-selfie video {
+  width: 100%;
+  max-height: 50vh;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
+#dialogue-selfie .lcdp-selfie-actions {
+  display: flex;
+  gap: .75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#dialogue-selfie-agrandi {
+  box-sizing: border-box;
+  position: relative;
+  width: min(92vw,720px);
+  max-width: 92vw;
+  max-height: 92vh;
+  overflow: auto;
+  padding: 45px 12px 12px;
+  border: 0;
+  border-radius: 14px;
+  background: #fff;
+}
+#dialogue-selfie-agrandi::backdrop {
+  background: rgba(0,0,0,.82);
+}
+#dialogue-selfie-agrandi img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(92vh - 70px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: auto;
+  border-radius: 8px;
+}
+#dialogue-selfie-agrandi button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: #f0f2f4;
+  color: #202820;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+#form-mes-informations-membre .lcdp-title-section {
+  margin: 1.15rem 0 0.55rem;
+}
+#form-mes-informations-membre [data-lcdp-box-champ-formulaire] + .lcdp-box-formulaire__actions, #form-mes-informations-membre .lcdp-box-formulaire__actions {
+  margin-top: 0.55rem;
+  margin-bottom: 0.55rem;
+  padding-top: 0;
+}
+#form-mes-informations-membre .lcdp-box-formulaire__actions + [data-lcdp-box-champ-formulaire], #form-mes-informations-membre .lcdp-box-formulaire__actions + .lcdp-title-section {
+  margin-top: 0.55rem;
+}
+#form-mes-informations-membre .lcdp-compte-actions-adresse {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lcdp-space-2);
+}
+#form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button {
+  margin-top: 0;
+}
+#form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange {
+  background: var(--lcdp-color-orange);
+  border-color: var(--lcdp-color-orange);
+  color: var(--lcdp-color-text);
+}
+#form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange:hover {
+  background: var(--lcdp-color-orange-hover);
+  border-color: var(--lcdp-color-orange-hover);
+  color: var(--lcdp-color-text);
+}
+#form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit--rouge, #form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit--rouge:hover, #form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit--rouge:focus-visible {
+  color: #b3261e;
+}
+#form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit--rouge .lcdp-box-champ-formulaire__action-edit-icon, #form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit--rouge .lcdp-box-champ-formulaire__action-edit-icon path {
+  fill: currentColor;
+  stroke: currentColor;
+}
+@media (max-width: 767px) {
+  #mention-statut-membre {
+    margin-top: 0.35rem;
+    margin-bottom: 0.45rem;
+  }
+  #lcdp-mes-informations-slot {
+    margin-top: 0.25rem;
+  }
+  #form-mes-informations-membre {
+    margin-top: 0;
+  }
+  #form-mes-informations-membre .lcdp-title-section {
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin: 1rem 0 0.55rem;
+  }
+  #form-mes-informations-membre [data-lcdp-box-champ-formulaire] + .lcdp-box-formulaire__actions, #form-mes-informations-membre .lcdp-box-formulaire__actions {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+}
+.lcdp-shadow-dialogue-confirmation {
+  all: initial !important;
+  position: fixed !important;
+  inset: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  padding: 18px !important;
+  border: 0 !important;
+  box-sizing: border-box !important;
+  background: rgba(31,42,36,.46) !important;
+  backdrop-filter: blur(4px) !important;
+  transform: none !important;
+  overflow: auto !important;
+}
+.lcdp-shadow-dialogue-formulaire {
+  all: initial !important;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 12px !important;
+  box-sizing: border-box !important;
+  border: 0 !important;
+  background: rgba(31,42,36,.46) !important;
+  backdrop-filter: blur(4px) !important;
+  overflow: auto !important;
+  transform: none !important;
+}
+.lcdp-shadow-dialogue-challenge {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.lcdp-admin-config-textarea {
+  width: 100%;
+}
+.lcdp-admin-actu-table-spacing {
+  margin-top: 1rem;
+}
+.lcdp-admin-actu-actions-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: .4rem;
+  margin: 0;
+}
+.lcdp-admin-actu-actions-nowrap {
+  white-space: nowrap;
+}
+.lcdp-admin-actu-control {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 0;
+  min-height: 2rem;
+  margin: 0;
+  padding: .4rem .65rem;
+  font-size: .8rem;
+  line-height: 1.2;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.lcdp-coach-header {
+  background-color: var(--lcdp-color-coach);
+}
+.lcdp-regular-weight {
+  font-weight: 400;
+}
+.lcdp-parc-color-context {
+  --lcdp-color-logo-green: var(--lcdp-color-parc);
+}
+.lcdp-parc-small-card {
+  width: 176px;
+  max-width: 100%;
+}
+.lcdp-actu-more-texte {
+  display: block;
+  text-align: left;
+  margin-top: .6rem;
+  margin-bottom: 1rem;
+  font-family: var(--lcdp-font-main,Arial,sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--lcdp-color-orange,#d97826);
+  text-transform: none;
+  letter-spacing: normal;
+}
+.lcdp-actu-detail-header {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  margin: 0 0 .75rem;
+}
+.lcdp-actu-no-margin {
+  margin: 0;
+}
+.lcdp-actu-no-gap {
+  gap: 0;
+}
+.lcdp-actu-image-layout {
+  width: 100%;
+  max-width: 480px;
+  min-width: 0;
+  align-self: center;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+.lcdp-actu-corps-avec-padding {
+  padding-top: 1.25rem;
+}
+.lcdp-actu-miniature-cassee {
+  visibility: hidden;
+}
+.lcdp-actu-texte-emphase {
+  font-weight: 700;
+}
+.lcdp-actu-transition-sans-animation {
+  transition: none;
+}
+.lcdp-actu-anime-offset {
+  transform: translateX(12px);
+}
+.lcdp-coda-no-margin {
+  margin: 0;
+}
+.lcdp-verification-bouton-attente {
+  position: relative;
+}
+.lcdp-verification-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  line-height: 0;
+  pointer-events: none;
+}
+.lcdp-verification-texte-masque {
+  visibility: hidden;
+}
+.lcdp-verification-envoi-attente {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  background: var(--lcdp-color-surface,#fff);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.lcdp-verification-envoi-actif {
+  display: flex;
+}
+.lcdp-footer-attente-calque {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(255,255,255,.96);
+  overflow: hidden;
+}
+.lcdp-footer-attente-centre {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lcdp-footer-attente-image {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+.lcdp-footer-attente-secours {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #dce3d7;
+  border-top-color: #57754c;
+  border-radius: 50%;
+}
+.lcdp-diginum-svg-action {
+  width: 24px;
+  height: 24px;
+}
+.lcdp-invitation-active {
+  pointer-events: auto;
+}
+.lcdp-planning-conteneur-haut {
+  position: relative;
+  z-index: 9000;
+}
+.lcdp-planning-couche-urgence {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  pointer-events: auto;
+}
+.lcdp-planning-alerte-urgence {
+  position: fixed;
+  inset: 0;
+  z-index: 12001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lcdp-dialogue-retrait {
+  display: none;
+  opacity: 0;
+}
+.lcdp-mes-infos-bouton-masque {
+  display: none;
+}
+.lcdp-mes-infos-code-groupe {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: var(--lcdp-space-2,8px);
+  max-width: 340px;
+}
+.lcdp-mes-infos-code-champ {
+  min-width: 0;
+  text-align: center;
+  font-size: 1.15rem;
+  padding-inline: 3px;
+}
+.lcdp-fiche-card-visible {
+  display: block;
+}
+.lcdp-map-marker-interactif {
+  pointer-events: all;
+  cursor: pointer;
+}
+.lcdp-fiche-slot-invisible {
+  visibility: hidden;
+}
+.lcdp-actu-more-texte {
+  text-decoration: none !important;
+  border-bottom: 0;
+  box-shadow: none;
+}
+.lcdp-dialogue-retrait {
+  display: none !important;
+  opacity: 0 !important;
+}
+.lcdp-mes-infos-bouton-masque {
+  display: none !important;
+}
+.lcdp-verification-envoi-actif {
+  display: flex !important;
+}
+.lcdp-diginum-scroll-verrouille {
+  overflow: hidden !important;
+}
+.lcdp-accueil-navigation-en-attente {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100vh !important;
+  z-index: 2147483647 !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--lcdp-color-surface,#fff) !important;
+  padding: 16px !important;
+}
+.lcdp-camera-selfie-miroir {
+  transform: scaleX(-1);
+}
+.lcdp-shadow-dialogue-confirmation, .lcdp-shadow-dialogue-formulaire {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.lcdp-planifier-parcs-chargement {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  z-index: 10000;
+  background: rgba(255,255,255,.92);
+}
+.lcdp-retour-accueil-masque {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  background: rgba(255,255,255,.94);
+}
+.lcdp-retour-accueil-gif {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin: 0;
+  flex: none;
+}
+.lcdp-acces-presence-sans-image {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.lcdp-acces-presence-fond {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.lcdp-acces-presence-sans-image>p {
+  position: relative;
+  z-index: 1;
+}
+.lcdp-planning-parc-admin__scroll-haut-interieur {
+  width: max-content;
+  min-width: 100%;
+  height: 1px;
+}
+.lcdp-fiche-transition {
+  overflow-anchor: none;
+}
+.lcdp-box-card-heure-in-calendrier-jour--multicolore,.lcdp-box-card-jour-in-calendrier-mois__slot--multicolore {
+  position: relative;
+  isolation: isolate;
+  background: transparent !important;
+  overflow: hidden;
+}
+.lcdp-planning-fond-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.lcdp-box-card-jour-in-calendrier-mois__slot--multicolore>.lcdp-box-card-jour-in-calendrier-mois__slot-label,.lcdp-box-card-heure-in-calendrier-jour--multicolore>[data-lcdp-card-heure-jour-label] {
+  position: relative;
+  z-index: 2;
+}
+.lcdp-planning-remplissage--gris-moyen {
+  fill: #9ca09e;
+}
+.lcdp-planning-remplissage--bleu-clair {
+  fill: #cfe3f7;
+}
+.lcdp-planning-remplissage--bleu-fonce {
+  fill: #2f6fb3;
+}
+.lcdp-planning-remplissage--violet {
+  fill: #7b5aa6;
+}
+.lcdp-planning-remplissage--orange-clair {
+  fill: #ffd8a8;
+}
+.lcdp-planning-remplissage--orange-fonce {
+  fill: #f2a23a;
+}
+.lcdp-planning-remplissage--blanc {
+  fill: #fff;
+}
+.lcdp-planning-jauge-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.lcdp-planning-jauge-remplissage {
+  fill: #343836;
+}
+.lcdp-box-card-heure-in-calendrier-jour--avec-jauge::after,.lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge::after {
+  content: none !important;
+}
+.lcdp-planning-parc-admin__scroll-haut-mesure {
+  display: block;
+  width: auto;
+  max-width: none;
+  height: 1px;
+}

@@ -1,50 +1,16 @@
 /**
- * LA CLÉ DU PARC — compilation Tailwind CSS v4.1.10.
- * Usage depuis OBJET/CSSBASE :
- *   npm install --no-save tailwindcss@4.1.10
- *   node lcdp-build-tailwind.mjs --check   (vérifie sans modifier)
- *   node lcdp-build-tailwind.mjs --write   (compile et remplace les 3 CSS livrés)
- * Le site continue de charger exclusivement les CSS classiques compilés.
- * Aucun reset Tailwind ni utilisation de CDN côté navigateur.
+ * Compatibilité avec la commande historique de compilation.
+ * Depuis la phase 2, la source officielle est constituée des modules CSS
+ * classiques et l'assemblage n'utilise plus Tailwind ni de paquet npm.
+ * Ce relais empêche l'ancien workflow de réécraser les correctifs modulaires.
  */
-import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-const { compile } = require('tailwindcss');
-const directory = path.dirname(fileURLToPath(import.meta.url));
-const names = ['lcdp-central-mobile-first', 'lcdp-da-membre', 'lcdp-mon-compte'];
-const action = process.argv[2] || '--check';
-if (!['--check','--write'].includes(action)) {
-  console.error('Utilisation : node lcdp-build-tailwind.mjs --check|--write');
-  process.exit(2);
-}
-async function loadStylesheet(id, base) {
-  const filename = id === 'tailwindcss'
-    ? require.resolve('tailwindcss/index.css')
-    : id.startsWith('tailwindcss/')
-      ? require.resolve(id)
-      : path.resolve(base, id);
-  return { content: fs.readFileSync(filename, 'utf8'), base: path.dirname(filename) };
-}
-let errors = 0;
-for (const name of names) {
-  const sourcePath = path.join(directory, `${name}.tailwind.css`);
-  const outputPath = path.join(directory, `${name}.css`);
-  const source = fs.readFileSync(sourcePath, 'utf8');
-  const compiled = await compile(source, { base: directory, loadStylesheet });
-  const css = compiled.build([]);
-  if (action === '--check') {
-    const existing = fs.existsSync(outputPath) ? fs.readFileSync(outputPath, 'utf8') : '';
-    const equal = existing === css;
-    console.log(`${equal ? 'OK' : 'DIFF'}  ${name}.css`);
-    if (!equal) errors++;
-  } else {
-    const tmp = `${outputPath}.tmp`;
-    fs.writeFileSync(tmp, css, 'utf8');
-    fs.renameSync(tmp, outputPath);
-    console.log(`GÉNÉRÉ  ${name}.css`);
-  }
-}
-if (errors) process.exit(1);
+import {fileURLToPath} from 'node:url';
+import {spawnSync} from 'node:child_process';
+const filename=fileURLToPath(import.meta.url);
+const assembler=path.join(path.dirname(filename),'lcdp-assembler-css.mjs');
+const argument=process.argv[2]||'--check';
+console.warn('LCDP : commande historique redirigée vers l’assemblage CSS standard (sans Tailwind).');
+const result=spawnSync(process.execPath,[assembler,argument],{stdio:'inherit'});
+if(result.error){console.error(result.error);process.exit(1);}
+process.exit(result.status===null?1:result.status);

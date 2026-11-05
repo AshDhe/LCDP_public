@@ -1,0 +1,2032 @@
+@keyframes lcdp-workflow-reservation-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes lcdp-planning-reservation-vue-entree {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes lcdp-workflow-abonnement-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes lcdp-workflow-abonnement-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes lcdp-actu-remonte {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes lcdp-actu-liste-apparition {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes lcdp-acces-tourne {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes lcdp-button-logo-loading {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes tourner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-editeur {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  margin: 24px 0;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-editeur label {
+  display: grid;
+  gap: 8px;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-editeur input:not([type=checkbox]):not([type=radio]),:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-editeur textarea {
+  width: 100%;
+  padding: 10px;
+  font: inherit;
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-editeur textarea {
+  min-height: 180px;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+  object-position: center;
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin {
+  position: relative;
+  width: 100%;
+  min-height: 72px;
+  padding: var(--lcdp-space-2);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  color: var(--lcdp-color-text);
+  font-size: 0.84rem;
+  line-height: 1.25;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--lcdp-color-border);
+  text-align: left;
+  vertical-align: middle;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table th {
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: var(--lcdp-color-surface-soft);
+  white-space: nowrap;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__status {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.86rem;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__status--error {
+  color: var(--lcdp-color-text);
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sorts th {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background: var(--lcdp-color-surface);
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sort-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sort-button {
+  width: 30px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sort-button:hover {
+  border-color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sort-button[aria-pressed="true"] {
+  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-primary);
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__filter-input {
+  width: 100%;
+  min-width: 120px;
+  min-height: 34px;
+  padding: 7px 9px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+}
+:where(html[data-lcdp-css~="c009"]) select.lcdp-table-lecture-admin__filter-input {
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__filter-input:focus {
+  outline: none;
+  border-color: var(--lcdp-color-primary);
+  box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__status[data-lcdp-table-lecture-admin-loading] {
+  display: none !important;
+  position: static !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action {
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-weight: 700;
+  line-height: inherit;
+  text-align: left !important;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:hover,:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible {
+  outline: 2px solid var(--lcdp-color-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot .lcdp-box-formulaire-page {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+:where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot .lcdp-box-formulaire-page__inner {
+  max-width: 1120px;
+}
+:where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot .lcdp-box-formulaire__fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot .lcdp-box-champ-formulaire--wide {
+  grid-column: 1 / -1;
+}
+:where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot .lcdp-box-formulaire__note {
+  padding: 10px 12px;
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot .lcdp-box-formulaire__note[data-state="success"] {
+  border: 1px solid var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot .lcdp-box-formulaire__note[data-state="error"] {
+  border: 1px solid var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-parc-edition-loading {
+  margin: 0;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  text-align: center;
+}
+@media (min-width: 900px) {
+  :where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot .lcdp-box-formulaire__fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination {
+  width: 100%;
+  margin-top: var(--lcdp-space-3);
+  padding-top: var(--lcdp-space-2);
+  border-top: 1px solid var(--lcdp-color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-info,:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-page {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.86rem;
+  line-height: 1.3;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-2);
+  flex-wrap: wrap;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button {
+  min-height: 34px;
+  padding: 7px 13px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:hover:not(:disabled),:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:focus-visible:not(:disabled) {
+  border-color: var(--lcdp-color-primary);
+  color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:focus-visible {
+  outline: 2px solid var(--lcdp-color-primary);
+  outline-offset: 2px;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+@media (min-width: 700px) {
+  :where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  :where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-info {
+    text-align: left;
+  }
+}
+:where(html[data-lcdp-css~="c009"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button {
+  all: unset !important;
+  display: inline-block !important;
+  max-width: 100% !important;
+  color: var(--lcdp-color-text) !important;
+  font: inherit !important;
+  font-weight: 700 !important;
+  line-height: inherit !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 3px !important;
+  cursor: pointer !important;
+}
+:where(html[data-lcdp-css~="c009"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button:hover {
+  color: var(--lcdp-color-primary) !important;
+}
+:where(html[data-lcdp-css~="c009"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button:focus-visible {
+  color: var(--lcdp-color-primary) !important;
+  outline: 2px solid var(--lcdp-color-primary) !important;
+  outline-offset: 3px !important;
+  border-radius: 2px !important;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-checkbox {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin {
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-actions .lcdp-button {
+  white-space: normal;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin {
+  position: relative;
+  width: 100%;
+  min-height: 72px;
+  padding: var(--lcdp-space-2);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  color: var(--lcdp-color-text);
+  font-size: 0.84rem;
+  line-height: 1.25;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--lcdp-color-border);
+  text-align: left;
+  vertical-align: middle;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table th {
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: var(--lcdp-color-surface-soft);
+  white-space: nowrap;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__status {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.86rem;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__status--error {
+  color: var(--lcdp-color-text);
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sorts th {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background: var(--lcdp-color-surface);
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sort-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sort-button {
+  width: 30px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sort-button:hover {
+  border-color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sort-button[aria-pressed="true"] {
+  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-primary);
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__filter-input {
+  width: 100%;
+  min-width: 120px;
+  min-height: 34px;
+  padding: 7px 9px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+}
+:where(html[data-lcdp-css~="c005"]) select.lcdp-table-lecture-admin__filter-input {
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__filter-input:focus {
+  outline: none;
+  border-color: var(--lcdp-color-primary);
+  box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__status[data-lcdp-table-lecture-admin-loading] {
+  display: none !important;
+  position: static !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action {
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-weight: 700;
+  line-height: inherit;
+  text-align: left !important;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:hover,:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible {
+  outline: 2px solid var(--lcdp-color-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot .lcdp-box-formulaire-page {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+:where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot .lcdp-box-formulaire-page__inner {
+  max-width: 1120px;
+}
+:where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot .lcdp-box-formulaire__fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot .lcdp-box-champ-formulaire--wide {
+  grid-column: 1 / -1;
+}
+:where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot .lcdp-box-formulaire__note {
+  padding: 10px 12px;
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot .lcdp-box-formulaire__note[data-state="success"] {
+  border: 1px solid var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot .lcdp-box-formulaire__note[data-state="error"] {
+  border: 1px solid var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-parc-edition-loading {
+  margin: 0;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  text-align: center;
+}
+@media (min-width: 900px) {
+  :where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot .lcdp-box-formulaire__fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination {
+  width: 100%;
+  margin-top: var(--lcdp-space-3);
+  padding-top: var(--lcdp-space-2);
+  border-top: 1px solid var(--lcdp-color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-info,:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-page {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.86rem;
+  line-height: 1.3;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-2);
+  flex-wrap: wrap;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button {
+  min-height: 34px;
+  padding: 7px 13px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:hover:not(:disabled),:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:focus-visible:not(:disabled) {
+  border-color: var(--lcdp-color-primary);
+  color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:focus-visible {
+  outline: 2px solid var(--lcdp-color-primary);
+  outline-offset: 2px;
+}
+:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+@media (min-width: 700px) {
+  :where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  :where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-info {
+    text-align: left;
+  }
+}
+:where(html[data-lcdp-css~="c005"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button {
+  all: unset !important;
+  display: inline-block !important;
+  max-width: 100% !important;
+  color: var(--lcdp-color-text) !important;
+  font: inherit !important;
+  font-weight: 700 !important;
+  line-height: inherit !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 3px !important;
+  cursor: pointer !important;
+}
+:where(html[data-lcdp-css~="c005"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button:hover {
+  color: var(--lcdp-color-primary) !important;
+}
+:where(html[data-lcdp-css~="c005"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button:focus-visible {
+  color: var(--lcdp-color-primary) !important;
+  outline: 2px solid var(--lcdp-color-primary) !important;
+  outline-offset: 3px !important;
+  border-radius: 2px !important;
+}
+:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture {
+  border: 1px solid rgba(31, 44, 36, 0.13);
+  border-radius: 0.72rem;
+  padding: 0.75rem;
+  background: rgba(250, 251, 249, 0.72);
+}
+:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__title,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-facture__section-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.98rem;
+  font-weight: 650;
+  line-height: 1.2;
+  color: #567a41;
+}
+:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__list,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__echeances {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__row,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__rib {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 0.44fr) minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: baseline;
+  padding: 0.38rem 0;
+  border-bottom: 1px solid rgba(31, 44, 36, 0.09);
+}
+:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row dt,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__row span,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__rib span {
+  color: rgba(31, 44, 36, 0.72);
+  font-weight: 400;
+}
+:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row dd,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__row strong,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__rib strong {
+  margin: 0;
+  color: #1f2c24;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__rib {
+  margin-top: 0.38rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(31, 44, 36, 0.16);
+  border-bottom: 0;
+}
+@media (max-width: 560px) {
+  :where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__row,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__rib {
+    grid-template-columns: 1fr;
+    gap: 0.12rem;
+  }
+}
+@media print {
+  :where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture {
+    padding: 2.4mm !important;
+    border-radius: 2.5mm !important;
+    border-width: 0.35pt !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  :where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__title,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-facture__section-title {
+    margin-bottom: 1.3mm !important;
+    font-size: 9pt !important;
+    font-weight: 650 !important;
+    line-height: 1.15 !important;
+  }
+  :where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__row,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__rib {
+    grid-template-columns: 32mm minmax(0, 1fr) !important;
+    gap: 3mm !important;
+    padding: 1.05mm 0 !important;
+    border-bottom: 0.25pt solid rgba(31, 44, 36, 0.12) !important;
+  }
+  :where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__rib {
+    margin-top: 1.2mm !important;
+    padding-top: 1.2mm !important;
+    border-top: 0.35pt solid rgba(31, 44, 36, 0.2) !important;
+    border-bottom: 0 !important;
+  }
+  :where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row dt,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture .lcdp-box-card-facture__row dd,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__row span,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__row strong,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__rib span,:where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture__rib strong {
+    font-size: 8.6pt !important;
+    line-height: 1.2 !important;
+    font-weight: 400 !important;
+  }
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-box-bandeau-nav__inner {
+  justify-content: flex-start;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  white-space: normal;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-title {
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1.08;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-subtitle {
+  color: #ffffff;
+  font-size: 0.86rem;
+  line-height: 1.08;
+  font-weight: 400;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-formulaire-liste-attente-main {
+  padding-top: 0;
+  padding-bottom: 72px;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-formulaire-liste-attente-main .lcdp-page-section {
+  padding-top: var(--lcdp-space-3);
+  padding-bottom: var(--lcdp-space-5);
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente [data-lcdp-formulaire-subtitle].lcdp-formulaire-liste-attente__subtitle--orange {
+  color: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-footer-button {
+  border: 0;
+  background: transparent;
+  color: var(--lcdp-color-text-muted);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-footer-button:hover {
+  color: var(--lcdp-color-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-lightbox[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 6000;
+  padding: var(--lcdp-space-3);
+  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card {
+  position: relative;
+  width: min(100%, 820px);
+  max-height: calc(100vh - 36px);
+  max-height: calc(100svh - 36px);
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
+  overflow-y: auto;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close {
+  position: absolute;
+  top: var(--lcdp-space-2);
+  right: var(--lcdp-space-2);
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: 999px;
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
+  color: var(--lcdp-color-text);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close:hover {
+  background: var(--lcdp-ui-close-hover, #e9eee6);
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card .lcdp-box-liste-card__header {
+  padding-right: 44px;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-formulaire-liste-attente-main .lcdp-page-section {
+    padding-top: var(--lcdp-space-4);
+  }
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card [data-mentions-legales-list] {
+  display: block;
+  gap: 0;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card [data-mentions-legales-list] > .lcdp-boxtext {
+  margin: 0;
+  padding: 0;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card [data-mentions-legales-list] > .lcdp-boxtext + .lcdp-boxtext {
+  margin-top: 1.5rem;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card .lcdp-boxtext__title {
+  margin: 0 0 0.65rem;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card .lcdp-boxtext__content {
+  margin: 0;
+  padding: 0;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card .lcdp-boxtext__content > p {
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card .lcdp-boxtext__content > p + p {
+  margin-top: 0.9rem;
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: min(560px, calc(100% - 36px));
+  max-height: calc(100svh - 36px);
+  margin: auto;
+  padding: 30px 22px 24px;
+  overflow-y: auto;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
+  background: var(--lcdp-color-surface, #fff);
+  color: var(--lcdp-color-text, #1f2a24);
+  font-family: var(--lcdp-font-main, Arial, sans-serif);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info::backdrop {
+  background: rgba(31, 42, 36, 0.46);
+  backdrop-filter: blur(4px);
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: 999px;
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
+  color: inherit;
+  font: inherit;
+  font-size: 1.35rem;
+  cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__close[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__close:hover {
+  background: var(--lcdp-ui-close-hover, #e9eee6);
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__title {
+  margin: 0 30px 18px 0;
+  font-size: clamp(23px, 5vw, 28px);
+  line-height: 1.2;
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__text {
+  margin: 0 0 18px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__email {
+  display: inline-block;
+  max-width: 100%;
+  padding-block: 8px;
+  color: var(--lcdp-color-primary, #234438);
+  font-size: 16px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  user-select: text;
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__actions .lcdp-button {
+  max-width: 180px;
+  min-height: 48px;
+}
+@media (min-width: 640px) {
+  :where(html[data-lcdp-css~="c035"]) .lcdp-contact-info {
+    padding: 36px;
+  }
+}
+:where(html[data-lcdp-css~="c035"]) .lcdp-contact-juridique-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-page-section {
+  width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-page-container {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: clamp(12px,1.6vw,30px);
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-admin-page-layout {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(12px,1.3vw,22px);
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin #lcdp-menu-gauche-admin-slot {
+  flex: 0 0 178px;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-admin-page-content {
+  flex: 1 1 0;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: clamp(16px,1.6vw,26px);
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__entete {
+  margin-bottom: .9rem;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__titre {
+  margin: 0;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__mois-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.15rem;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__mois-nav strong {
+  min-width: 175px;
+  text-align: center;
+  font-size: 1.13rem;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__mois-nav button {
+  border: 1px solid #55733f;
+  background: #fff;
+  color: #55733f;
+  border-radius: 9px;
+  min-height: 38px;
+  min-width: 44px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__mois-nav button:disabled {
+  opacity: .4;
+  cursor: wait;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__shift [data-lcdp-shift-detail-parc-content] {
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__shift .lcdp-box-fiche-parc__actions-barre {
+  display: none;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__message {
+  margin: 0 0 1rem;
+  padding: .8rem 1rem;
+  border: 1px solid currentColor;
+  border-radius: .8rem;
+  font-weight: 600;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__message--erreur {
+  color: #8b1f1f;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin #lcdp-planning-parc-table-slot {
+  width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  border-radius: 8px;
+  scrollbar-width: thin;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table {
+  width: 100%;
+  min-width: 1040px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td {
+  box-sizing: border-box;
+  padding: 8px 6px;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-size: 13px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table thead tr:first-child th {
+  background: #edf1e8;
+  color: #273b2f;
+  font-weight: 700;
+  padding-block: 12px;
+  border-bottom: 1px solid #c9d6c4;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table tbody tr:nth-child(even) {
+  background: #f8faf6;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table tbody tr:hover {
+  background: #eef4e8;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1) {
+  width: 6%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2) {
+  width: 20%;
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3) {
+  width: 11%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(4),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(4) {
+  width: 10%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(n+5):nth-child(-n+10),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(n+5):nth-child(-n+10) {
+  width: 6%;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:last-child,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:last-child {
+  width: 17%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__sorts th {
+  padding: 4px 5px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__sort-actions {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__sort-button {
+  min-width: 23px;
+  min-height: 24px;
+  padding: 1px 5px;
+  font-size: 14px;
+  line-height: 1;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__filters th {
+  padding: 5px 4px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__filter-input,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__filters input,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__filters select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px 5px;
+  font-size: 12px;
+  height: 32px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__cell-action {
+  color: #255b3c;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: underline;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__pagination {
+  font-size: 13px;
+}
+@media (max-width:900px) {
+  :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-page-container {
+    padding-inline: 10px;
+  }
+  :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin #lcdp-menu-gauche-admin-slot {
+    flex-basis: 145px;
+  }
+  :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-admin-page-content {
+    padding: 14px;
+  }
+}
+@media (max-width:650px) {
+  :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-admin-page-layout {
+    display: block;
+  }
+  :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-admin-page-content {
+    width: 100%;
+  }
+  :where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table {
+    min-width: 1040px;
+  }
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table {
+  font-size: 14px;
+  min-width: 1180px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td {
+  font-size: 14px;
+  padding: 10px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(4) {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #526256;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1) {
+  width: 5%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2) {
+  width: 22%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3) {
+  width: 8%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(4),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(4) {
+  width: 18%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(n+5):nth-child(-n+10),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(n+5):nth-child(-n+10) {
+  width: 5.5%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:last-child,:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:last-child {
+  width: 14%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__outils {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 0 14px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__ouvertures {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  color: #263f2e;
+  font-size: 14px;
+  font-weight: 650;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__ouvertures input {
+  width: 19px;
+  height: 19px;
+  accent-color: #55733f;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-planning-parc-admin__indice {
+  color: #526256;
+  font-size: 13px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table {
+  min-width: 850px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(1),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(1) {
+  width: 7%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(2),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(2) {
+  width: 25%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(3),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(3) {
+  width: 10%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(n+4):nth-child(-n+9),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(n+4):nth-child(-n+9) {
+  width: 7%;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table th:nth-child(10),:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__table td:nth-child(10) {
+  width: 16%;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-planning-parc-admin__scroll-haut {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 17px;
+  margin-bottom: 7px;
+  scrollbar-width: auto;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-planning-parc-admin__scroll-haut[hidden] {
+  display: none;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-planning-parc-admin__scroll-haut-interieur {
+  height: 1px;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__scroll {
+  scrollbar-width: none;
+}
+:where(html[data-lcdp-css~="c015"]) .lcdp-page-planning-parc-admin .lcdp-table-lecture-admin__scroll::-webkit-scrollbar {
+  display: none;
+}
+:where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__introduction {
+  margin: 0 0 var(--lcdp-space-2);
+  color: var(--lcdp-color-text-muted);
+  line-height: 1.4;
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__field {
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__input[type="file"] {
+  min-height: 52px;
+  padding: 9px 10px;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__input[type="file"]::file-selector-button {
+  min-height: 36px;
+  margin-right: var(--lcdp-space-2);
+  padding: 7px 12px;
+  border: 1px solid var(--lcdp-color-logo-green);
+  border-radius: 10px;
+  background: var(--lcdp-color-logo-green);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__aide {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.35;
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__liste {
+  max-height: 145px;
+  margin: var(--lcdp-space-1) 0 0;
+  padding: var(--lcdp-space-2) var(--lcdp-space-2) var(--lcdp-space-2) calc(var(--lcdp-space-3) + 10px);
+  overflow: auto;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+:where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__liste[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c002"]) .lcdp-page-accueil-admin .lcdp-page-section,:where(html[data-lcdp-css~="c002"]) .lcdp-page-admin-interieure .lcdp-page-section {
+  padding-top: var(--lcdp-space-3);
+  padding-bottom: var(--lcdp-space-4);
+}
+:where(html[data-lcdp-css~="c002"]) .lcdp-page-accueil-admin .lcdp-page-container,:where(html[data-lcdp-css~="c002"]) .lcdp-page-admin-interieure .lcdp-page-container {
+  max-width: 1500px;
+}
+:where(html[data-lcdp-css~="c002"]) .lcdp-admin-accueil-layout,:where(html[data-lcdp-css~="c002"]) .lcdp-admin-page-layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(190px, 220px) minmax(0, 1fr);
+  gap: var(--lcdp-space-3);
+  align-items: start;
+}
+:where(html[data-lcdp-css~="c002"]) .lcdp-menu-centre-admin,:where(html[data-lcdp-css~="c002"]) .lcdp-admin-page-content {
+  width: 100%;
+  min-width: 0;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface);
+  box-shadow: var(--lcdp-shadow-soft);
+}
+:where(html[data-lcdp-css~="c002"]) .lcdp-menu-centre-admin__contenu,:where(html[data-lcdp-css~="c002"]) .lcdp-admin-page-content {
+  min-width: 0;
+}
+@media (max-width: 899px) {
+  :where(html[data-lcdp-css~="c002"]) .lcdp-admin-accueil-layout,:where(html[data-lcdp-css~="c002"]) .lcdp-admin-page-layout {
+    grid-template-columns: 1fr;
+  }
+}
+:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin {
+  position: sticky;
+  top: var(--lcdp-space-2);
+  width: 100%;
+  min-width: 0;
+  padding-right: var(--lcdp-space-3);
+  border-right: 1px solid var(--lcdp-color-border);
+}
+:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin__slot,:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-box-menu-bouton,:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-box-menu-bouton__list {
+  width: 100%;
+}
+:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-box-menu-bouton__list {
+  max-width: none;
+  margin: 0;
+  gap: var(--lcdp-space-1);
+  justify-items: stretch;
+}
+:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-box-menu-bouton__list > .lcdp-button {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 40px;
+  margin: 0;
+  padding: 8px 12px;
+  justify-content: flex-start;
+  font-size: 0.9rem;
+  line-height: 1.15;
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-button[aria-pressed="true"],:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-button[aria-current="page"] {
+  background: var(--lcdp-color-primary);
+  border-color: var(--lcdp-color-primary);
+  box-shadow: 0 6px 16px var(--lcdp-color-shadow);
+}
+@media (max-width: 899px) {
+  :where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin {
+    position: static;
+    padding-right: 0;
+    padding-bottom: var(--lcdp-space-3);
+    border-right: 0;
+    border-bottom: 1px solid var(--lcdp-color-border);
+  }
+}
+:where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin {
+  width: 100%;
+}
+:where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__button {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  padding: 8px;
+  font-size: 0.8rem;
+  line-height: 1.1;
+}
+:where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__button[aria-disabled="true"] {
+  opacity: 0.62;
+  cursor: default;
+}
+@media (max-width: 1100px) {
+  :where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+@media (max-width: 899px) {
+  :where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 620px) {
+  :where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__entete {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__aide {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  line-height: 1.4;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__blocs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__bloc {
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__bloc-entete {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__titre-zone {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__label,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien label > span {
+  color: var(--lcdp-color-text);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__titre,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien input {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__titre:focus,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien input:focus,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone:focus {
+  outline: 2px solid var(--lcdp-color-primary);
+  outline-offset: 2px;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__ordre {
+  display: flex;
+  align-items: center;
+  gap: var(--lcdp-space-1);
+  flex-wrap: wrap;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__petit-bouton {
+  min-height: 34px;
+  margin: 0;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre button {
+  min-height: 32px;
+  margin: 0;
+  padding: 5px 9px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: 7px;
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre button:hover,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre button:focus-visible {
+  border-color: var(--lcdp-color-primary);
+  color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien {
+  width: 100%;
+  padding: var(--lcdp-space-2);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien label {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--lcdp-space-1);
+  flex-wrap: wrap;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien-actions .lcdp-button {
+  min-height: 36px;
+  margin: 0;
+  padding: 7px 11px;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone {
+  width: 100%;
+  min-height: 170px;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font-size: 1rem;
+  line-height: 1.58;
+  overflow-wrap: anywhere;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone:empty::before {
+  content: "Saisir un ou plusieurs paragraphes…";
+  color: var(--lcdp-color-text-muted);
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > p,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > ul,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > ol {
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > p + p,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > p + ul,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > p + ol,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > ul + p,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > ol + p,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > ul + ul,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > ol + ol,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > ul + ol,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > ol + ul {
+  margin-top: 0.9rem;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > ul,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > ol {
+  padding-left: 1.55rem;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone li {
+  margin: 0;
+  padding-left: 0.12rem;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone li + li {
+  margin-top: 0.18rem;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone > br {
+  display: none;
+}
+:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__erreur {
+  margin: 0;
+  color: var(--lcdp-color-orange);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+@media (min-width: 800px) {
+  :where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__entete {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  :where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__bloc-entete {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+  :where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__ordre {
+    justify-content: flex-end;
+  }
+  :where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-page-cle-admin .lcdp-admin-page-content,:where(html[data-lcdp-css~="c007"]) #lcdp-cle-onglets-slot,:where(html[data-lcdp-css~="c007"]) .lcdp-cle-admin__table,:where(html[data-lcdp-css~="c007"]) .lcdp-cle-admin__edition {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-cle-admin__entete {
+  margin: 0 0 var(--lcdp-space-4);
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-cle-admin__titre {
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-cle-admin__barre-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 var(--lcdp-space-4);
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-cle-admin__edition[hidden],:where(html[data-lcdp-css~="c007"]) .lcdp-cle-admin__table[hidden],:where(html[data-lcdp-css~="c007"]) .lcdp-cle-admin__barre-actions[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-cle-admin__chargement {
+  margin: 0;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-page-cle-admin #lcdp-cle-onglets-slot [data-lcdp-wraper-onglets-navigation] {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-page-cle-admin #lcdp-cle-onglets-slot [data-lcdp-onglet] {
+  width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-cle-suivi__carte {
+  padding: var(--lcdp-space-4);
+  margin: var(--lcdp-space-4) 0;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-cle-suivi__form {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-cle-suivi__form label {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+:where(html[data-lcdp-css~="c007"]) .lcdp-cle-suivi__form input {
+  max-width: 12rem;
+}
+@media (max-width:700px) {
+  :where(html[data-lcdp-css~="c007"]) .lcdp-page-cle-admin #lcdp-cle-onglets-slot [data-lcdp-wraper-onglets-navigation] {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+}
+:where(html[data-lcdp-css~="c008"]) .lcdp-page-prixabo .lcdp-admin-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c008"]) .lcdp-prixabo__entete {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c008"]) .lcdp-prixabo__titre,:where(html[data-lcdp-css~="c008"]) .lcdp-prixabo__explication {
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c008"]) .lcdp-prixabo__titre {
+  color: var(--lcdp-color-text);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  line-height: 1.2;
+}
+:where(html[data-lcdp-css~="c008"]) .lcdp-prixabo__explication {
+  margin-top: var(--lcdp-space-1);
+  color: var(--lcdp-color-text-muted);
+  line-height: 1.4;
+}
+:where(html[data-lcdp-css~="c008"]) #lcdp-prixabo-table-slot,:where(html[data-lcdp-css~="c008"]) #lcdp-prixabo-edition-slot {
+  width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c008"]) #lcdp-prixabo-edition-slot .lcdp-box-formulaire__note[data-state="error"] {
+  color: var(--lcdp-color-orange);
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c008"]) #lcdp-prixabo-edition-slot .lcdp-box-formulaire__note[data-state="success"] {
+  color: var(--lcdp-color-primary);
+  font-weight: 700;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c008"]) .lcdp-prixabo__entete {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  :where(html[data-lcdp-css~="c008"]) .lcdp-prixabo__entete .lcdp-button {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-page-calculpoints .lcdp-admin-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-4);
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__entete {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__titre,:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__intro,:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__resultat-titre,:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__statut {
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__titre {
+  color: var(--lcdp-color-text);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  line-height: 1.2;
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__intro {
+  max-width: 760px;
+  color: var(--lcdp-color-text-muted);
+  line-height: 1.5;
+}
+:where(html[data-lcdp-css~="c006"]) #lcdp-calculpoints-form-slot .lcdp-box-formulaire-page {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+:where(html[data-lcdp-css~="c006"]) #lcdp-calculpoints-form-slot .lcdp-box-formulaire-page__inner {
+  max-width: 760px;
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__resultat {
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-orange);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__resultat[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__resultat-titre {
+  color: var(--lcdp-color-text);
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__statut {
+  margin-top: var(--lcdp-space-2);
+  color: var(--lcdp-color-text-muted);
+  line-height: 1.4;
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--lcdp-space-2);
+  margin: var(--lcdp-space-3) 0 0;
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__donnee {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--lcdp-space-3);
+  padding: 10px 12px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__donnee dt {
+  color: var(--lcdp-color-text-muted);
+}
+:where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__donnee dd {
+  margin: 0;
+  color: var(--lcdp-color-text);
+  font-weight: 700;
+  text-align: right;
+}
+@media (min-width: 760px) {
+  :where(html[data-lcdp-css~="c006"]) .lcdp-calculpoints__grille {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-page-reglement-app-admin .lcdp-admin-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__entete {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__titre {
+  margin: 0;
+  color: var(--lcdp-color-text);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  line-height: 1.2;
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__explication,:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__meta,:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__status {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  line-height: 1.4;
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__status {
+  min-height: 1.4em;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__status[data-state="dirty"] {
+  color: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__status[data-state="error"] {
+  color: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--lcdp-space-2);
+  flex-wrap: wrap;
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__actions .lcdp-button {
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__preview {
+  width: 100%;
+  padding-top: var(--lcdp-space-3);
+  border-top: 1px solid var(--lcdp-color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__preview[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__preview-title {
+  margin: 0;
+  color: var(--lcdp-color-text);
+  font-size: 1.35rem;
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__preview-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__loading {
+  margin: 0;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+  text-align: center;
+}
+@media (max-width: 620px) {
+  :where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  :where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__actions .lcdp-button {
+    width: 100%;
+  }
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-page-faq-admin .lcdp-admin-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__entete {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__titre {
+  margin: 0;
+  color: var(--lcdp-color-text);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  line-height: 1.2;
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__explication,:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__meta,:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__status {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  line-height: 1.4;
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__status {
+  min-height: 1.4em;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__status[data-state="dirty"] {
+  color: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__status[data-state="error"] {
+  color: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--lcdp-space-2);
+  flex-wrap: wrap;
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__actions .lcdp-button {
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__preview {
+  width: 100%;
+  padding-top: var(--lcdp-space-3);
+  border-top: 1px solid var(--lcdp-color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__preview[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__preview-title {
+  margin: 0;
+  color: var(--lcdp-color-text);
+  font-size: 1.35rem;
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__preview-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__loading {
+  margin: 0;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+  text-align: center;
+}
+@media (max-width: 620px) {
+  :where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  :where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__actions .lcdp-button {
+    width: 100%;
+  }
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-faq-admin__liens {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+:where(html[data-lcdp-css~="c010"]) .lcdp-faq-admin__liens [role="status"] {
+  font-size: .9rem;
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-page-mentions-legales-admin .lcdp-admin-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__entete {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__titre {
+  margin: 0;
+  color: var(--lcdp-color-text);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  line-height: 1.2;
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__explication,:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__meta,:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__status {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  line-height: 1.4;
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__status {
+  min-height: 1.4em;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__status[data-state="dirty"] {
+  color: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__status[data-state="error"] {
+  color: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--lcdp-space-2);
+  flex-wrap: wrap;
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__actions .lcdp-button {
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__preview {
+  width: 100%;
+  padding-top: var(--lcdp-space-3);
+  border-top: 1px solid var(--lcdp-color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__preview[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__preview-title {
+  margin: 0;
+  color: var(--lcdp-color-text);
+  font-size: 1.35rem;
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__preview-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__loading {
+  margin: 0;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+  text-align: center;
+}
+@media (max-width: 620px) {
+  :where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  :where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__actions .lcdp-button {
+    width: 100%;
+  }
+}

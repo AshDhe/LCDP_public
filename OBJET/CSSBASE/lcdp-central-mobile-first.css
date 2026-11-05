@@ -198,9 +198,6 @@
 }
 :where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__status[data-lcdp-table-lecture-admin-loading] {
   display: none !important;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__status[data-lcdp-table-lecture-admin-loading] {
-  display: none !important;
   position: static !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -474,9 +471,6 @@
   outline: none;
   border-color: var(--lcdp-color-primary);
   box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__status[data-lcdp-table-lecture-admin-loading] {
-  display: none !important;
 }
 :where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__status[data-lcdp-table-lecture-admin-loading] {
   display: none !important;
@@ -3088,7 +3082,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--lcdp-space-2);
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__action-reserver,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__action-planning {
   width: 100%;
@@ -3101,34 +3094,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  gap: var(--lcdp-space-2);
-  color: var(--lcdp-color-text);
   cursor: pointer;
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage-icone {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  min-height: 40px;
-  padding: 0;
-  border: 2px solid var(--lcdp-color-orange);
-  border-radius: 999px;
-  background: var(--lcdp-color-orange);
-  color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage:hover .lcdp-box-fiche-parc__partage-icone {
-  background: var(--lcdp-color-orange-hover);
-  border-color: var(--lcdp-color-orange-hover);
-  color: #ffffff;
-}
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage-libelle {
-  color: var(--lcdp-color-text);
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.25;
 }
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc {
@@ -3150,25 +3121,9 @@
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__action-reserver {
   min-width: 112px;
-  padding: 8px 16px;
-  border: 2px solid var(--lcdp-color-orange);
-  border-radius: 999px;
-  background: #ffffff;
-  color: var(--lcdp-color-orange);
-  font-family: var(--lcdp-font-main);
-  font-size: 0.86rem;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: 0.045em;
   text-align: center;
-  text-decoration: none !important;
-  text-transform: uppercase;
-  box-shadow: none;
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__action-reserver:hover {
-  background: rgba(242, 162, 58, 0.10);
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-orange);
   text-decoration: none !important;
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__action-reserver:focus-visible {
@@ -3190,11 +3145,6 @@
     margin: 0;
     white-space: nowrap;
     flex: 0 0 auto;
-  }
-  :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__action-planning {
-    min-width: 142px;
-    padding-left: 18px;
-    padding-right: 18px;
   }
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage {
     width: auto;
@@ -3414,11 +3364,6 @@
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-button,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage {
   width: fit-content !important;
-  max-width: 100% !important;
-  min-height: 44px !important;
-  margin: 0 !important;
-  padding: 10px 18px !important;
-  flex: 0 0 auto !important;
   box-sizing: border-box;
   white-space: nowrap;
 }
@@ -4159,7 +4104,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale {
   position: fixed;
-  inset: 0;
   z-index: 2147483646;
   display: flex;
   align-items: center;
@@ -4168,8 +4112,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale img {
   display: block;
-  width: 64px;
-  height: 64px;
   max-width: none;
   object-fit: contain;
 }
@@ -4960,9 +4902,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     min-height: 250px;
     height: clamp(250px, 78vw, 330px);
     max-height: 330px;
-  }
-  :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
-    touch-action: none;
   }
   :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__localite-label {
     paint-order: stroke fill;
@@ -6683,7 +6622,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--lcdp-space-3);
-  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--avec-image {
   grid-template-columns: 92px minmax(0, 1fr);
@@ -6698,7 +6636,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__media {
   width: 100%;
-  min-width: 0;
   overflow: hidden;
   border-radius: var(--lcdp-radius-medium);
   background: var(--lcdp-color-surface-soft);
@@ -6754,7 +6691,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   white-space: nowrap;
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__park {
-  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -7142,7 +7078,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   gap: var(--lcdp-space-2);
 }
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
-  padding: var(--lcdp-space-2);
   gap: var(--lcdp-space-1);
 }
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card-title {
@@ -8348,9 +8283,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     column-gap: var(--lcdp-space-3);
     row-gap: var(--lcdp-space-1);
   }
-}
-:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"] .lcdp-box-calendrier-mois__title {
-  color: var(--lcdp-color-text) !important;
 }
 :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"] .lcdp-box-calendrier-mois__header {
   position: relative;
@@ -10839,7 +10771,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste {
   display: grid;
-  gap: 16px;
   padding: 0;
   list-style: none;
 }
@@ -10965,9 +10896,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   :where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste {
     animation: none;
   }
-}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste .lcdp-actu-liste-titre {
-  font-weight: 400;
 }
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste .lcdp-actualite-lien-groupe,:where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste .lcdp-actualite-lien-groupe:hover,:where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste .lcdp-actualite-lien-groupe:focus-visible {
   background: #fff;
@@ -11491,9 +11419,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__control {
   position: relative;
 }
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="text"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="email"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="password"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="tel"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="number"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="date"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge select,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge textarea,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
-  padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-3)) !important;
-}
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__badge {
   width: var(--lcdp-champ-badge-size);
   height: var(--lcdp-champ-badge-size);
@@ -11529,9 +11454,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge {
     --lcdp-champ-badge-size: 38px;
     --lcdp-champ-badge-offset: 6px;
-  }
-  :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="text"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="email"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="password"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="tel"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="number"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge input[type="date"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge select,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge textarea,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
-    padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-2)) !important;
   }
 }
 @media (min-width: 768px) {

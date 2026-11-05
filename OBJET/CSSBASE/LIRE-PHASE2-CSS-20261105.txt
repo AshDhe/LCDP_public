@@ -1,0 +1,98 @@
+LA CLÉ DU PARC — CSS PHASE 2 : ARCHITECTURE ET DÉDOUBLONNAGE SÉCURISÉ
+5 novembre 2026 — livrable de migration
+
+OBJECTIF
+  Attribuer un propriétaire à chaque bloc de styles et prévenir l'ajout de
+  surcharges contradictoires, sans modifier la disposition visuelle validée.
+  La méthode reprend les principes d'un design system (jetons, composants,
+  portées, règles réutilisables), mais NE DÉPEND PAS DE TAILWIND pour assembler
+  les CSS ni pour servir le site.
+
+A. DÉPLOIEMENT IMMÉDIAT — ARCHIVE DE PRODUCTION
+  Remplacer dans OBJET/CSSBASE uniquement :
+    lcdp-central-mobile-first.css
+
+  Les CSS suivants restent ceux du lot 1, sans modification :
+    lcdp-da-membre.css
+    lcdp-mon-compte.css
+
+  Les pages HTML, les JavaScript, le CSS PLANIFIER et le CSS dialogues Shadow
+  ne sont pas modifiés par cette livraison.
+
+B. SOURCES DU CSS CENTRAL — ARCHIVE DES SOURCES
+  Tous les fichiers du ZIP sont placés À PLAT dans OBJET/CSSBASE.
+  - lcdp-central-module-01.css à lcdp-central-module-08.css :
+      groupes historiques de composants, avec leurs commentaires de provenance
+  - lcdp-central-module-09-fondations.css : base et variables communes
+  - lcdp-central-module-10-pages-extraites.css : CSS historiquement dans HTML
+  - lcdp-central-module-11-etats-dynamiques.css : CSS issu des états JS
+  - lcdp-central-module-12-gabarit-composants.css : gabarit, formulaires et
+      variantes visuelles partagées
+  - lcdp-central-module-13-editorial-email.css : typographie éditoriale
+  - lcdp-central-module-14-document-planifier.css : documents et calendrier
+  - lcdp-central-module-16-compte-rdv.css : rendez-vous DA, compte membre
+  - lcdp-da-membre.css : source UNIQUE du flux DA, déjà livrée au lot 1.
+    Elle est incluse dans le central pour compatibilité ET reste un CSS autonome.
+    Attention : cela représente encore une duplication dans les CSS SERVIS,
+    mais plus aucune double maintenance de cette source.
+  - lcdp-css-ownership.json : registre de chaque module, origine, portée c###
+  - lcdp-css-baseline.json : état initial des conflits existants
+  - lcdp-assembler-css.mjs : outil autonome de construction
+  - lcdp-css-audit.mjs : audit complémentaire de la cascade
+  - lcdp-build-tailwind.mjs : relais neutralisant l'ancien compilateur Tailwind
+
+C. MÉTHODE DE MAINTENANCE (NATIVE NODE, AUCUN NPM)
+  1. Modifier UNIQUEMENT le module propriétaire correspondant, ou la feuille
+     DA / Mon compte si le style ne concerne que cette page.
+  2. Recompiler le central sans aucun paquet externe :
+       node lcdp-assembler-css.mjs --write
+  3. Vérifier sans écrire :
+       node lcdp-assembler-css.mjs --check
+  4. Vérification complémentaire des conflits (facultatif, requiert postcss) :
+       npm install --no-save postcss
+       node lcdp-css-audit.mjs
+  5. Livrer uniquement les CSS finaux réellement modifiés.
+
+  IMPORTANT : ne plus utiliser les *.tailwind.css du lot 1 comme sources
+  officielles. La commande héritée lcdp-build-tailwind.mjs est redirigée vers
+  l'assembleur classique, pour éviter d'écraser la migration.
+
+D. PRINCIPES DE GOUVERNANCE
+  - Le CSS central est une SORTIE GÉNÉRÉE : ne jamais y écrire des correctifs.
+  - Le registre de propriété donne l'origine et les codes data-lcdp-css.
+  - Ne jamais réordonner les modules : l'ordre de la cascade est conservé.
+  - Une règle globale va dans le module des fondations / composants, pas dans
+    les pages, et seulement après contrôle de compatibilité.
+  - Une variante propre à Mon compte ou à la DA reste dans son CSS spécialisé.
+  - Éviter les nouvelles valeurs codées en dur : réutiliser les variables
+    --lcdp-* centrales lorsque la valeur et la sémantique sont identiques.
+  - Ne pas ajouter de nouveau CSS inline dans HTML ou JavaScript.
+  - Un nouveau !important / conflit entre propriétaires bloque l'audit tant
+    que la baseline n'est pas réexaminée et documentée.
+
+E. RÉSULTAT CHIFFRÉ
+  Central lot 1 : 3 519 règles de styles (hors keyframes),
+  13 636 déclarations, 993 !important.
+  Central phase 2 : 3 509 règles, 13 578 déclarations, 982 !important.
+  - 58 déclarations identiques redondantes retirées (même portée, sélecteur,
+    propriété, valeur et importance) et 10 règles devenues vides omises.
+  - 16 sources assemblées, dont une seule source DA réutilisée.
+  - 88 conflits de cascade historiques encore suivis par la baseline.
+    Certains sont des fallbacks vh/svh/dvh ou des réglages métier : suppression
+    automatique INTERDITE sans tests du composant concerné.
+
+F. CONTRÔLES
+  - Construction sans Tailwind : octets du central identiques à la compilation
+    Tailwind de la source nettoyée.
+  - DA et Mon compte : fichiers compilés identiques au lot 1.
+  - Capture comparée avant/après : 15 / 15 pixel-identiques à 320, 360, 390,
+    768 et 1180 px, sur les scénarios locaux Mon compte+DA, diaporama central
+    en premier et diaporama central en dernier.
+  - Contrôle automatique du registre, de l'assemblage et des nouveaux conflits.
+  - Aucune garantie de fonctionnement sur tous les tunnels non testés ou sur
+    le serveur déployé ; les scénarios locaux ne sont pas des tests métier.
+
+REMARQUE SUR LES STYLES RESTANTS
+  La phase d'architecture et de garde-fous est implémentée. La disparition de
+  tous les anciens !important ou des 88 conflits n'est PAS revendiquée : il
+  serait dangereux de les enlever sans vérifier leurs consommateurs exacts.

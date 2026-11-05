@@ -1,0 +1,1937 @@
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page {
+  width: 100%;
+  padding: 0;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page__inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(15,23,42,.07);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #f8fafc;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header[hidden],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__header:not(:has(:not([hidden]))),:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro[hidden],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__subtitle[hidden],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__title {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font: 900 20px/28px Arial,system-ui,sans-serif;
+  letter-spacing: -.025em;
+  color: #0f172a;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__subtitle {
+  margin: 0;
+  font: 400 11px/1.5 Arial,system-ui,sans-serif;
+  letter-spacing: normal;
+  text-transform: none;
+  color: #94a3b8;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__subtitle.lcdp-box-formulaire__subtitle--accent {
+  color: #e59834;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro {
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f8fafc;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro p {
+  margin: 0;
+  font: 400 12px/1.625 Arial,system-ui,sans-serif;
+  color: #94a3b8;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire .lcdp-box-formulaire__intro,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire .lcdp-box-formulaire__intro * {
+  font-weight: 400 !important;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__fields {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
+  padding-top: 4px;
+  color: #64748b;
+  font: 400 12px/1.5 Arial,system-ui,sans-serif;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options .lcdp-box-champ-formulaire__checkbox-line {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options .lcdp-box-champ-formulaire__checkbox-line input[type="checkbox"] {
+  margin: 0;
+  flex: 0 0 16px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__password-recovery, :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options > a {
+  margin-left: auto;
+  color: #94a3b8;
+  font: 500 12px/1.5 Arial,system-ui,sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__password-recovery:hover, :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options > a:hover {
+  color: #1e293b;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-top: 12px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 46px;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: 12px;
+  font: 700 12px/1.3 Arial,system-ui,sans-serif;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #4e6838;
+  box-shadow: 0 4px 6px -1px rgba(15,23,42,.12);
+  transition: background-color .2s ease,transform .2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button svg {
+  display: block;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button:hover {
+  background: #3d522c;
+  color: #fff;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button:active {
+  transform: scale(.99);
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions button:disabled,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note {
+  margin: 0;
+  text-align: center;
+  color: #94a3b8;
+  font: 400 10px/1.5 Arial,system-ui,sans-serif;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note a,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro a {
+  color: var(--lcdp-color-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note a:hover,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro a:hover {
+  color: var(--lcdp-color-primary-hover);
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire input[readonly],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire textarea[readonly],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire select[readonly],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire input:disabled,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire textarea:disabled,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire select:disabled,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire [aria-readonly="true"] {
+  background: #f1f3f5 !important;
+  border-color: rgba(100, 116, 139, 0.34) !important;
+  color: var(--lcdp-color-text) !important;
+  -webkit-text-fill-color: var(--lcdp-color-text);
+  opacity: 1;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire input[readonly]:focus,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire textarea[readonly]:focus,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire select[readonly]:focus,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire input:disabled:focus,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire textarea:disabled:focus,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire select:disabled:focus,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire [aria-readonly="true"]:focus {
+  border-color: rgba(100, 116, 139, 0.42) !important;
+  box-shadow: none !important;
+  outline: none;
+}
+@media (min-width:768px) {
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page {
+    padding: 0;
+  }
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page__inner {
+    max-width: 100%;
+  }
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire {
+    padding: 24px;
+  }
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__title {
+    font-size: 20px;
+  }
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions .lcdp-button {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page--compact .lcdp-box-formulaire-page__inner {
+  max-width: 440px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note--after-control {
+  margin-top: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note--intro-center {
+  margin: -4px auto 0;
+  max-width: 360px;
+  font-size: 0.98rem;
+  line-height: 1.35;
+  font-weight: 400;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page--compact .lcdp-box-formulaire-page__inner {
+    max-width: 440px;
+  }
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire-page--compact .lcdp-box-formulaire__actions .lcdp-button {
+    width: 100%;
+    max-width: 260px;
+  }
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire--lecture .lcdp-box-champ-formulaire__lecture {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid #d8c8b8;
+  border-radius: var(--lcdp-radius-medium);
+  background: #f3ede4;
+  box-shadow: inset 0 0 0 1px rgba(123, 105, 88, 0.10);
+  color: var(--lcdp-color-text);
+  font-family: var(--lcdp-font-main);
+  font-size: 1rem;
+  line-height: 1.35;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire--lecture .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__lecture {
+  padding-right: calc(var(--lcdp-champ-modifiable-action-size) + var(--lcdp-space-3)) !important;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire--lecture .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
+  padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-3)) !important;
+}
+@media (max-width: 380px) {
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire--lecture .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__lecture {
+    padding-right: calc(var(--lcdp-champ-modifiable-action-size) + var(--lcdp-space-2)) !important;
+  }
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire--lecture .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
+    padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-2)) !important;
+  }
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire--lecture .lcdp-box-champ-formulaire__lecture {
+    min-height: 48px;
+    padding: 11px 14px;
+  }
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.46);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__card {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow: auto;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__close {
+  position: sticky;
+  top: var(--lcdp-space-2);
+  float: right;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__header {
+  padding-right: 44px;
+  padding-bottom: var(--lcdp-space-3);
+  border-bottom: 1px solid var(--lcdp-color-border);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__title {
+  margin: 0;
+  font-size: clamp(1.7rem, 7vw, 2.6rem);
+  line-height: 1.08;
+  font-weight: 700;
+  color: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__meta {
+  margin: var(--lcdp-space-1) 0 0;
+  color: var(--lcdp-color-text-muted);
+  font-weight: 600;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__body {
+  padding-top: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-2);
+  margin-bottom: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__month {
+  min-width: 150px;
+  margin: 0;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 1.45rem;
+  line-height: 1.1;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__nav-button {
+  width: 38px;
+  height: 38px;
+  min-height: 38px;
+  padding: 0;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: 999px;
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__nav-button:hover,:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__close:hover {
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__nav-button:disabled,:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__nav-button[aria-disabled="true"] {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text-muted);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--lcdp-color-text-muted);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  min-height: calc((68px * 6) + (5px * 5));
+  align-content: start;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__message {
+  margin: 0 0 var(--lcdp-space-3);
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text-muted);
+  font-weight: 700;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois {
+    padding: var(--lcdp-space-4);
+  }
+  :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__card {
+    max-height: calc(100vh - (var(--lcdp-space-4) * 2));
+    padding: var(--lcdp-space-5);
+  }
+  :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__navigation {
+    gap: var(--lcdp-space-3);
+    margin-bottom: var(--lcdp-space-4);
+  }
+  :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__month {
+    min-width: 210px;
+    font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+  }
+  :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__nav-button {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    font-size: 1.35rem;
+  }
+  :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__weekdays,:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__grid {
+    gap: 7px;
+  }
+  :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__grid {
+    min-height: clamp(380px, 52vw, 620px);
+  }
+  :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__weekdays {
+    font-size: 0.95rem;
+  }
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__partage {
+  width: 100%;
+  margin-top: var(--lcdp-space-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--lcdp-space-2);
+  color: var(--lcdp-color-text);
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__partage-icone {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border: 2px solid var(--lcdp-color-orange);
+  border-radius: 999px;
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__partage:hover .lcdp-box-calendrier-mois__partage-icone {
+  background: var(--lcdp-color-orange-hover);
+  border-color: var(--lcdp-color-orange-hover);
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__partage-libelle {
+  color: var(--lcdp-color-text);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__grid--loading {
+  opacity: 0.72;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__actions-parc {
+  width: 100%;
+  margin-top: var(--lcdp-space-2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__actions-parc .lcdp-button {
+  width: auto;
+  max-width: none;
+  min-height: 40px;
+  margin: 0;
+  white-space: nowrap;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__action-reserver {
+  min-width: 112px;
+  padding: 8px 16px;
+  border: 2px solid var(--lcdp-color-orange);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--lcdp-color-orange);
+  font-family: var(--lcdp-font-main);
+  font-size: 0.86rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-align: center;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__action-reserver:visited,:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__action-reserver:hover {
+  color: var(--lcdp-color-orange);
+  text-decoration: none !important;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__action-reserver:hover {
+  background: rgba(242, 162, 58, 0.10);
+  border-color: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__action-reserver:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__actions-parc .lcdp-box-calendrier-mois__partage {
+  width: auto;
+  margin-top: 0;
+  flex: 0 0 auto;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__actions-parc .lcdp-box-calendrier-mois__partage-libelle {
+  white-space: nowrap;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois.lcdp-box-calendrier-mois--planning-membre {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  display: block;
+  align-items: initial;
+  justify-content: initial;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois.lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__card {
+  width: 100%;
+  max-width: 960px;
+  max-height: none;
+  margin-inline: auto;
+  overflow: visible;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois.lcdp-box-calendrier-mois--embedded .lcdp-box-calendrier-mois__card {
+  max-width: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__commande {
+  width: 100%;
+  margin-bottom: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__header {
+  padding-right: 0;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__title[hidden],:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois--planning-membre .lcdp-box-calendrier-mois__meta[hidden] {
+  display: none;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__commande--avec-legende {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-planning {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--lcdp-space-2);
+  color: var(--lcdp-color-text);
+  font-family: var(--lcdp-font-main);
+  font-size: 0.78rem;
+  line-height: 1.25;
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-ligne {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-weight: 400;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-carre {
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  min-height: 12px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-carre--bleu-fonce {
+  background: #2f6fb3;
+  border-color: #255c96;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-carre--violet {
+  background: #7b5aa6;
+  border-color: #684993;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-carre--orange-fonce {
+  background: #f2a23a;
+  border-color: #d98b24;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-carre--orange-clair {
+  background: #ffd8a8;
+  border-color: #f0b96f;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-carre--bleu-clair {
+  background: #cfe3f7;
+  border-color: #a9cbea;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-planning {
+    font-size: 0.9rem;
+  }
+  :where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-ligne {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: var(--lcdp-space-3);
+    row-gap: var(--lcdp-space-1);
+  }
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"] .lcdp-box-calendrier-mois__header {
+  position: relative;
+  width: 100%;
+  margin-inline: auto;
+  padding-right: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"] .lcdp-box-calendrier-mois__header::after {
+  content: "";
+  order: 5;
+  width: 100%;
+  height: 1px;
+  margin: var(--lcdp-space-2) auto 0;
+  background: var(--lcdp-color-border);
+  flex: 0 0 auto;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"] .lcdp-box-calendrier-mois__title {
+  order: 1;
+  color: var(--lcdp-color-text) !important;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"] .lcdp-box-calendrier-mois__commande {
+  order: 2;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"] .lcdp-box-calendrier-mois__legende-planning {
+  order: 3;
+  position: static !important;
+  float: none !important;
+  clear: both;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"] .lcdp-box-calendrier-mois__meta {
+  order: 4;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-planning,:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__legende-planning * {
+  font-weight: 400 !important;
+}
+:where(html[data-lcdp-css~="c046"]) .lcdp-box-calendrier-mois__date-reelle {
+  display: block;
+  font-size: 0.8em;
+  font-weight: 700;
+  margin-top: 0.3rem;
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid {
+  min-height: 0;
+  grid-auto-rows: 64px;
+  align-content: start;
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid > [data-lcdp-card-jour-mois] {
+  min-height: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid {
+    min-height: 0;
+    grid-auto-rows: 78px;
+  }
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__card {
+  position: relative;
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  float: none;
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-planifier-entete-filtres > [data-lcdp-calendrier-mois-title] {
+  max-width: calc(100% - 52px);
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__body > .lcdp-planifier-actions-filtres {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__card {
+  padding-top: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
+  padding-bottom: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__body {
+  padding-top: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-planifier-entete-filtres {
+  gap: 4px;
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-planifier-entete-filtres .lcdp-planifier-legende-autorisations {
+  margin-top: 2px;
+  margin-bottom: 3px;
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__body > .lcdp-planifier-actions-filtres {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+:where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot]:not([hidden]) {
+  box-sizing: border-box;
+  height: 7px;
+  min-height: 7px;
+  max-height: 7px;
+  flex: 0 0 7px;
+}
+@media (max-width: 767px) {
+  :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid {
+    grid-auto-rows: 60px;
+  }
+  :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot]:not([hidden]) {
+    height: 6px;
+    min-height: 6px;
+    max-height: 6px;
+    flex-basis: 6px;
+  }
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot .lcdp-box-calendrier-mois__grid {
+    grid-auto-rows: 86px;
+  }
+  :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-number] {
+    font-size: 0.8em;
+  }
+  :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot]:not([hidden]) {
+    transform: translateY(-3px);
+  }
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  padding: var(--lcdp-space-3);
+  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card {
+  position: relative;
+  width: min(calc(100vw - 36px), 460px);
+  padding: 30px 24px 24px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
+  background: var(--lcdp-color-surface);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
+  text-align: center;
+  max-height: calc(100svh - 36px);
+  overflow-wrap: anywhere;
+  overflow-y: auto;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: 999px;
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
+  color: var(--lcdp-color-text);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close:hover {
+  background: #ffffff;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__title {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto var(--lcdp-space-3);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--lcdp-color-text);
+  font-size: clamp(1.25rem, 5vw, 1.7rem);
+  line-height: 1.22;
+  font-weight: 650;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__form,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content {
+  margin-bottom: var(--lcdp-space-3);
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__label {
+  font-weight: 600;
+  color: var(--lcdp-color-text);
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__input,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field select,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__input:focus,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field select:focus,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea:focus {
+  outline: none;
+  border-color: var(--lcdp-color-primary);
+  box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__error {
+  margin: 0 auto var(--lcdp-space-3);
+  color: #8a2d2d;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions .lcdp-button {
+  width: min(100%, 210px);
+  min-width: 0;
+  max-width: 210px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card {
+    width: min(100%, 500px);
+    padding: 32px 28px 26px;
+  }
+  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content {
+    font-size: var(--lcdp-font-size-paragraph-desktop);
+  }
+  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions {
+    flex-direction: row;
+    gap: var(--lcdp-space-2);
+  }
+  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions .lcdp-button {
+    width: auto;
+    min-width: 160px;
+    max-width: 210px;
+  }
+}
+:where(html[data-lcdp-css~="c081"]) [data-lcdp-wraper-onglets-slot],:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets,:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__contenu,:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__panneau,:where(html[data-lcdp-css~="c081"]) [data-lcdp-contenu-onglet] {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets {
+  margin-inline: auto;
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__navigation {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: 2px;
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets--1 .lcdp-wraper-onglets__navigation {
+  grid-template-columns: minmax(0, 1fr);
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets--2 .lcdp-wraper-onglets__navigation {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets--3 .lcdp-wraper-onglets__navigation {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets--4 .lcdp-wraper-onglets__navigation {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__tab {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  margin: 0;
+  padding: 8px 6px;
+  border: 1px solid var(--lcdp-color-border-strong);
+  border-bottom: 0;
+  border-radius: var(--lcdp-radius-small) var(--lcdp-radius-small) 0 0;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text-muted);
+  font: inherit;
+  font-size: 0.88rem;
+  line-height: 1.15;
+  font-weight: 700;
+  text-align: center;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__tab:hover {
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-primary);
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__tab[aria-selected="true"] {
+  position: relative;
+  z-index: 1;
+  background: var(--lcdp-color-logo-green);
+  border-color: var(--lcdp-color-logo-green);
+  color: #ffffff;
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__tab:focus-visible {
+  position: relative;
+  z-index: 2;
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__contenu {
+  padding: var(--lcdp-space-1);
+  border: 1px solid var(--lcdp-color-border-strong);
+  border-radius: 0 0 var(--lcdp-radius-medium) var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface);
+  overflow: hidden;
+}
+:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__panneau[hidden] {
+  display: none !important;
+}
+@media (min-width: 600px) {
+  :where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__navigation {
+    width: min(100%, 460px);
+    gap: 4px;
+  }
+  :where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__tab {
+    min-height: 46px;
+    padding: 9px 18px;
+    font-size: 1rem;
+  }
+  :where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__contenu {
+    padding: var(--lcdp-space-3);
+  }
+}
+@media (min-width: 900px) {
+  :where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__navigation {
+    width: 520px;
+  }
+  :where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__contenu {
+    padding: var(--lcdp-space-4);
+  }
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-pictowait {
+  width: 100%;
+  min-height: 104px;
+  padding: var(--lcdp-space-3) 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-2);
+  color: var(--lcdp-color-text-muted);
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-pictowait[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-pictowait__image {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-pictowait__message {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-pictowait--avec-liste {
+  min-height: 84px;
+  padding: var(--lcdp-space-2) 0;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-mise-a-jour {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 45vh;
+  padding: 32px 0;
+  gap: 28px;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-mise-a-jour .lcdp-mise-a-jour-picto {
+  display: block;
+  width: clamp(160px, 42vw, 224px);
+  height: auto;
+  max-width: 100%;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-mise-a-jour h1 {
+  margin: 0;
+  font-size: clamp(18px, 4.5vw, 24px);
+  line-height: 1.5;
+  font-weight: 500;
+}
+:where(html[data-lcdp-css~="c084"]) .lcdp-mise-a-jour .rotation {
+  transform-origin: 96px 96px;
+  animation: tourner 3.36s steps(12, end) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(html[data-lcdp-css~="c084"]) .lcdp-mise-a-jour .rotation {
+    animation: none;
+  }
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.46);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__card {
+  position: relative;
+  width: min(100%, 560px);
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow: auto;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  transition: none;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement--emails-famille .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 860px);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement--calendrier-mois .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 760px);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement--calendrier-an .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 820px);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement--recapitulatif .lcdp-box-workflow-abonnement__card,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement--paiement .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 760px);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content {
+  width: 100%;
+  opacity: 1;
+  transition: opacity 70ms ease-out;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content--transition {
+  opacity: 0;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content > .lcdp-box-dialogue-bouton,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content > .lcdp-box-dialogue-champ-inviter,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content > .lcdp-box-card-listemails,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content > .lcdp-box-calendrier-an,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content > .lcdp-box-calendrier-mois,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content > .lcdp-box-card-recaporder {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  display: block;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__card,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-champ-inviter__card,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-card-listemails__card,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-an__card,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-mois__card,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-card-recaporder__card {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  position: static;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__close,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-champ-inviter__close,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-an__close,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-mois__close {
+  position: absolute;
+  inset: auto var(--lcdp-space-2) auto auto;
+  top: var(--lcdp-space-4);
+  z-index: 6;
+  float: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  margin: 0;
+  padding: 0;
+  border-radius: 999px;
+  line-height: 1;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement--paiement .lcdp-box-dialogue-bouton__close {
+  position: absolute;
+  top: var(--lcdp-space-4);
+  right: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__text,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-dialogue-champ-inviter__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__meta,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__meta {
+  padding-inline: 42px;
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box {
+  animation: lcdp-workflow-abonnement-enter 90ms ease-out both;
+  will-change: opacity;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--sortie {
+  animation: lcdp-workflow-abonnement-exit 70ms ease-in both;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-button:disabled,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-button[aria-disabled="true"],:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-alerte .lcdp-button:disabled,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-alerte .lcdp-button[aria-disabled="true"] {
+  opacity: 0.48;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__text {
+  color: var(--lcdp-color-text-muted);
+  font-size: clamp(1.12rem, 3vw, 1.32rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-dialogue-champ-inviter__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-card-listemails__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-card-recaporder__title {
+  font-size: clamp(1.28rem, 4vw, 1.68rem);
+  line-height: 1.14;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--recapitulatif .lcdp-box-card-recaporder__title {
+  text-transform: uppercase;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__dialogue-actions {
+  width: 100%;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__choice-zone {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+  justify-items: center;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__choice-zone .lcdp-button {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 0;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__choice-zone .lcdp-button[aria-pressed="true"],:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month[aria-pressed="true"],:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day[aria-pressed="true"] {
+  border-color: var(--lcdp-color-orange);
+  background: var(--lcdp-color-orange);
+  color: var(--lcdp-color-text);
+  box-shadow: inset 0 0 0 2px var(--lcdp-color-orange-hover);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__actions-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--lcdp-space-2);
+  align-items: stretch;
+  justify-items: stretch;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__actions-row .lcdp-button {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin-top: 0;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__actions-full {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__actions-full .lcdp-button {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 0;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--email-duo .lcdp-box-dialogue-champ-inviter__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--email-duo .lcdp-box-dialogue-champ-inviter__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--lcdp-space-2);
+  align-items: stretch;
+  justify-items: stretch;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--email-duo .lcdp-box-dialogue-champ-inviter__actions .lcdp-button {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin-top: 0;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--email-duo [data-lcdp-dialogue-inviter-back] {
+  order: 1;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--email-duo [data-lcdp-dialogue-inviter-next] {
+  order: 2;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--email-duo [data-lcdp-dialogue-inviter-skip] {
+  order: 3;
+  grid-column: 1 / -1;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__actions,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__actions {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  max-width: 520px;
+  margin-inline: auto;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__actions .lcdp-button,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__actions .lcdp-button {
+  width: 100%;
+  max-width: none;
+  margin-top: 0;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--emails-famille .lcdp-box-card-listemails__title {
+  font-size: clamp(1.28rem, 4vw, 1.68rem);
+  line-height: 1.14;
+  font-weight: 700;
+  margin-bottom: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__emails-actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+  justify-items: center;
+  margin-top: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__emails-actions .lcdp-workflow-abonnement__actions-full {
+  width: min(100%, 320px);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__emails-actions .lcdp-workflow-abonnement__actions-row {
+  width: min(100%, 520px);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement__emails-actions .lcdp-button {
+  margin-top: 0;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--emails-famille .lcdp-box-card-listemails__message {
+  display: none;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-alerte [data-lcdp-box-alerte] {
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-alerte [data-lcdp-alerte-actions],:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-alerte .lcdp-box-alerte__actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-alerte [data-lcdp-alerte-ok] {
+  width: min(100%, 220px);
+  min-width: 0;
+  max-width: 220px;
+  min-height: 46px;
+  margin-inline: auto;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement {
+    padding: var(--lcdp-space-4);
+  }
+  :where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__card {
+    max-height: calc(100vh - (var(--lcdp-space-4) * 2));
+    padding: var(--lcdp-space-5);
+  }
+  :where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__close,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-champ-inviter__close,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-an__close,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-mois__close {
+    top: var(--lcdp-space-5);
+    right: var(--lcdp-space-3);
+  }
+}
+@media (max-width: 420px) {
+  :where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-bouton__close,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-dialogue-champ-inviter__close,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-an__close,:where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__content .lcdp-box-calendrier-mois__close {
+    top: var(--lcdp-space-3);
+    right: var(--lcdp-space-2);
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    font-size: 1.45rem;
+  }
+  :where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-dialogue-bouton__text,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-dialogue-champ-inviter__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__meta,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__title,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois__meta {
+    padding-inline: 36px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(html[data-lcdp-css~="c076"]) .lcdp-box-workflow-abonnement__card,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--sortie {
+    transition: none;
+    animation: none;
+  }
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-workflow-micro-action {
+  width: auto;
+  max-width: 320px;
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: 999px;
+  background: var(--lcdp-color-surface);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-workflow-micro-action:hover {
+  border-color: var(--lcdp-color-border-strong);
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--confirmation .lcdp-box-dialogue-bouton__title {
+  font-size: clamp(1.28rem, 4vw, 1.68rem);
+  line-height: 1.14;
+  font-weight: 700;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box--confirmation .lcdp-box-dialogue-bouton__text {
+  white-space: pre-line;
+  text-align: center;
+  font-weight: 500;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--passe,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day--passe {
+  border-color: #edf1eb;
+  background: #fbfcfa;
+  color: #a9b0a7;
+  opacity: 1;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--occupe,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day--occupe {
+  border-color: #536f43;
+  background: #9fb28e;
+  color: #1f2a1c;
+  opacity: 1;
+  box-shadow: inset 0 0 0 2px rgba(49, 64, 43, 0.24);
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--incompatible {
+  border-color: #c99f5b;
+  background: #f3e7d4;
+  color: #5e4729;
+  opacity: 1;
+  box-shadow: inset 0 0 0 1px rgba(94, 71, 41, 0.12);
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month[aria-disabled="true"]:not(:disabled),:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day[aria-disabled="true"]:not(:disabled) {
+  pointer-events: auto;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--occupe:hover,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day--occupe:hover,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--occupe:focus-visible,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-mois-abonnement__day--occupe:focus-visible {
+  border-color: #3f5732;
+  background: #8fa27e;
+}
+:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--incompatible:hover,:where(html[data-lcdp-css~="c076"]) .lcdp-workflow-abonnement-box .lcdp-box-calendrier-an__month--incompatible:focus-visible {
+  border-color: #b58335;
+  background: #ead6b7;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.46);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__card {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow: auto;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__close {
+  position: sticky;
+  top: var(--lcdp-space-2);
+  float: right;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__close:hover {
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__header {
+  padding-right: 44px;
+  padding-bottom: var(--lcdp-space-3);
+  border-bottom: 1px solid var(--lcdp-color-border);
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__title {
+  margin: 0;
+  font-size: clamp(1.55rem, 6vw, 2.35rem);
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__meta {
+  margin: var(--lcdp-space-1) 0 0;
+  color: var(--lcdp-color-text-muted);
+  font-weight: 600;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__body {
+  padding-top: var(--lcdp-space-4);
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  max-width: 760px;
+  margin-inline: auto;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__message {
+  margin: 0 0 var(--lcdp-space-3);
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text-muted);
+  font-weight: 700;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour {
+    padding: var(--lcdp-space-4);
+  }
+  :where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__card {
+    max-height: calc(100vh - (var(--lcdp-space-4) * 2));
+    padding: var(--lcdp-space-5);
+  }
+  :where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour__grid {
+    grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+    gap: 10px;
+  }
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__title {
+  font-size: clamp(1.7rem, 7vw, 2.6rem);
+  line-height: 1.08;
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__meta--legende {
+  margin-top: 0;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__body {
+  padding-top: var(--lcdp-space-3);
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__grid {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__date-planning {
+  margin: 0 0 var(--lcdp-space-3);
+  color: var(--lcdp-color-text);
+  font-size: clamp(1.35rem, 5vw, 2rem);
+  line-height: 1.15;
+  font-weight: 700;
+  text-align: center;
+  text-transform: capitalize;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__message {
+  font-weight: 600;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour {
+  position: static;
+  inset: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  display: block;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__card {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  min-height: 0;
+  overflow: visible;
+  padding: clamp(0.95rem, 2.4vw, 1.25rem);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__close {
+  display: inline-flex !important;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__header {
+  gap: 0.45rem;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__meta--legende {
+  font-size: 0.72rem;
+  line-height: 1.15;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__date-planning {
+  margin-block: 0.65rem 0.55rem;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__grid {
+  width: min(100%, 320px);
+  margin-inline: auto;
+  gap: 0.42rem;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-fiche-parc__planning-jour-box .lcdp-box-card-heure-in-calendrier-jour {
+  min-height: 32px;
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__date-planning {
+  font-size: clamp(1.215rem, 4.5vw, 1.8rem);
+}
+:where(html[data-lcdp-css~="c044"]) .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__grid {
+  margin-top: 1.25rem;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c044"]) .lcdp-box-calendrier-jour--planning-lecture .lcdp-box-calendrier-jour__date-planning {
+    font-size: clamp(1.08rem, 4vw, 1.6rem);
+  }
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouches-citation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: min(100%, 480px);
+  margin: 0 auto;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0.85rem 1rem 0.7rem;
+  border: 1px solid currentColor;
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation p {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation footer {
+  margin-top: 0.4rem;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--membre {
+  color: #57754c;
+  background: #f2f5ef;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--coach {
+  color: #8660c8;
+  background: #f7f3fc;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--parc {
+  color: #d64b68;
+  background: #fff1f4;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation {
+  margin-bottom: 1rem;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--membre footer {
+  color: #57754c;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--coach footer {
+  color: #8660c8;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--parc footer {
+  color: #d64b68;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  padding: var(--lcdp-space-2);
+  background: rgba(31, 42, 36, 0.46);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc[hidden] {
+  display: none !important;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__card {
+  position: relative;
+  width: 100%;
+  max-width: 1060px;
+  max-height: calc(100vh - (var(--lcdp-space-2) * 2));
+  max-height: calc(100dvh - (var(--lcdp-space-2) * 2));
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  overflow: auto;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__close {
+  position: sticky;
+  top: var(--lcdp-space-2);
+  float: right;
+  z-index: 4;
+  width: 40px;
+  height: 40px;
+  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__close:hover {
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__content {
+  width: 100%;
+  transition: opacity 150ms ease-out, transform 150ms ease-out;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__content--transition {
+  opacity: 0;
+  transform: translateY(8px);
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-fiche-parc,:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois,:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  display: block;
+  align-items: initial;
+  justify-content: initial;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-fiche-parc__card,:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__card,:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour__card {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-fiche-parc__close,:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__close,:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour__close {
+  display: none;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-fiche-parc__header,:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois__header,:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-calendrier-jour__header {
+  padding-right: 44px;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-box-shift-detail-parc__card {
+  overflow: hidden;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-box-shift-detail-parc__content {
+  min-height: 0 !important;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.65rem, 2vw, 1.25rem);
+  border-radius: inherit;
+  background: rgba(31, 42, 36, 0.28);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-box {
+  width: min(100%, 560px);
+  max-height: calc(100% - 0.5rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface, #ffffff);
+  box-shadow: 0 18px 46px rgba(31, 42, 36, 0.24);
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour {
+  position: static;
+  inset: auto;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  display: block;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__card {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  min-height: 0;
+  overflow: visible;
+  padding: clamp(0.95rem, 2.4vw, 1.25rem);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__close {
+  display: inline-flex !important;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__header {
+  gap: 0.45rem;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__meta--legende {
+  font-size: 0.72rem;
+  line-height: 1.15;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__date-planning {
+  margin-block: 0.65rem 0.55rem;
+  text-align: center;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-box .lcdp-box-calendrier-jour__grid {
+  width: min(100%, 340px);
+  margin-inline: auto;
+  gap: 0.42rem;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-box .lcdp-box-card-heure-in-calendrier-jour {
+  min-height: 32px;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-box-calendrier-jour__body {
+  min-height: 0 !important;
+  height: auto !important;
+  padding-bottom: var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__alerte-slot {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--lcdp-space-3);
+  border-radius: var(--lcdp-radius-large);
+  background: rgba(31, 42, 36, 0.28);
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__alerte-slot:not(:empty) {
+  display: flex;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__alerte-box {
+  position: relative;
+  width: min(100%, 420px);
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
+  background: var(--lcdp-color-surface);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
+  text-align: center;
+  box-sizing: border-box;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__alerte-close {
+  position: absolute;
+  top: var(--lcdp-space-2);
+  right: var(--lcdp-space-2);
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
+  border-radius: 999px;
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__alerte-close:hover {
+  background: var(--lcdp-ui-close-hover, #e9eee6);
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__alerte-message {
+  margin: var(--lcdp-space-3) 0 var(--lcdp-space-4);
+  color: var(--lcdp-color-text);
+  font-size: 1rem;
+  line-height: 1.45;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__alerte-ok {
+  min-width: 130px;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-shift-detail-parc__close {
+  position: absolute;
+  top: var(--lcdp-space-4);
+  right: var(--lcdp-space-4);
+  float: none;
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc .lcdp-box-calendrier-mois--shift-detail .lcdp-fiche-parc__commande-detail {
+  margin-top: 12px !important;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc {
+    padding: var(--lcdp-space-2);
+  }
+  :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__card {
+    max-height: calc(100vh - (var(--lcdp-space-2) * 2));
+    max-height: calc(100dvh - (var(--lcdp-space-2) * 2));
+    padding: var(--lcdp-space-5);
+  }
+  :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-shift-detail-parc__close {
+    top: var(--lcdp-space-5);
+    right: var(--lcdp-space-5);
+  }
+}
+@media (max-width: 520px) {
+  :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-overlay {
+    align-items: flex-start;
+    padding: 0.5rem;
+  }
+  :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc--planning-jour .lcdp-fiche-parc__planning-jour-box {
+    max-height: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__content {
+    transition: none;
+  }
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-planifier-fiche-attente {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--lcdp-color-surface, #fff);
+  border-radius: 0;
+  overflow: hidden;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-planifier-fiche-attente .lcdp-pictowait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+:where(html[data-lcdp-css~="c075"]) .lcdp-planifier-fiche-attente .lcdp-pictowait__image {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
