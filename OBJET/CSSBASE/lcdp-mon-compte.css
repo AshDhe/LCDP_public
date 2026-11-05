@@ -1,85 +1,63 @@
-/* ============================================================================
-   LA CLÉ DU PARC — MON COMPTE
-   SOURCE MODIFIABLE — v1 du 05/11/2026
-   Répertoire : OBJET/CSSBASE/lcdp-mon-compte.css
-   Portée      : page ESPACE-MEMBRE/mes-informations.html uniquement
-   Dépendances : cssbase.css, 03-box-formulaire.css,
-                 03-box-champ-formulaire.css, composants déjà chargés.
+/* ==========================================================================
+   LA CLÉ DU PARC — MON COMPTE / CSS SPÉCIFIQUE, VERSION 2
+   OBJET/CSSBASE/lcdp-mon-compte.css
 
-   Conventions :
-   - MOBILE FIRST. Aucun style CSS écrit dans HTML ou JavaScript.
-   - Ne pas remplacer le bandeau / le burger / le footer communs.
-   - Aucune donnée de la maquette n'est codée ici.
-   - Modifier en priorité les variables de section ci-dessous.
-   ============================================================================ */
+   CONTRAT DE CASCADE
+   1. lcdp-central-mobile-first.css chargé AVANT cette feuille.
+   2. Le central reste propriétaire du wrapper, bandeau, footer, gabarit,
+      formulaires, contrôles et palette. Activation c085/c041/c040.
+   3. Cette feuille ne gère que les cartes de lecture, leur espacement et
+      les variantes propres à Mon compte (selfie, édition, codes).
+   4. Aucun style dans les fichiers JavaScript ou HTML.
+   5. Les anciens styles de mes-informations.js encore intégrés au CSS
+      central sont neutralisés explicitement ici, sans effet sur d'autres pages.
+   ========================================================================== */
 
 /* 01 — VARIABLES ET PÉRIMÈTRE ----------------------------------------------- */
 .lcdp-page-mon-compte {
-  --compte-largeur: 520px;
-  --compte-fond-page: #f7f8f5;
-  --compte-fond-carte: #ffffff;
-  --compte-fond-ligne: #fafbf9;
-  --compte-texte: #1f2a24;
-  --compte-texte-secondaire: #52645a;
-  --compte-texte-discret: #67766b;
-  --compte-bordure: #e2e8df;
-  --compte-accent: #55733f;
-  --compte-accent-action: #e59834;
-  --compte-rayon-carte: 17px;
-  --compte-rayon-ligne: 11px;
-  --compte-espacement: 12px;
-  --compte-ombre: 0 3px 15px rgba(31, 42, 36, .045);
+  /* Alias de présentation, dérivés des jetons du système central. */
+  --compte-fond-carte: var(--lcdp-color-surface, #fff);
+  --compte-fond-ligne: var(--lcdp-color-surface-soft, #f7f7f4);
+  --compte-texte: var(--lcdp-color-text, #1f2a24);
+  --compte-texte-secondaire: var(--lcdp-color-text-muted, #5f6861);
+  --compte-bordure: var(--lcdp-color-border, rgba(31,42,36,.22));
+  --compte-accent: var(--lcdp-color-logo-green, #55733f);
+  --compte-rayon-carte: var(--lcdp-radius-medium, 16px);
+  --compte-rayon-ligne: var(--lcdp-radius-small, 10px);
+  --compte-espacement: var(--lcdp-space-2, 12px);
+  --compte-ombre: var(--lcdp-ui-button-shadow, 0 1px 2px rgba(31,42,36,.08));
   color: var(--compte-texte);
 }
 
-/* 02 — CONTENEUR ET TITRE ---------------------------------------------------- */
-.lcdp-page-mon-compte .lcdp-page-section {
-  padding-block: 12px 30px;
+/* 02 — ADAPTATION DU CONTENU DANS LE WRAPPER COMMUN ----------------------- */
+/* Ne pas redéfinir les dimensions/positionnements : le module c085 les porte. */
+.lcdp-page-mon-compte .lcdp-app-wrapper .lcdp-page-content.lcdp-stack-large {
+  gap: var(--compte-espacement);
 }
-.lcdp-page-mon-compte .lcdp-page-container {
-  box-sizing: border-box;
-  max-width: calc(var(--compte-largeur) + 40px);
-  padding-inline: 12px;
-}
-.lcdp-page-mon-compte .lcdp-page-content--avec-entete {
-  min-width: 0;
-  max-width: var(--compte-largeur);
-  margin-inline: auto;
-  padding: 0;
-  gap: 12px;
-}
-.lcdp-page-mon-compte .lcdp-page-header {
-  margin: 0;
-  padding: 7px 0 4px;
-  text-align: center;
-}
-.lcdp-page-mon-compte .lcdp-title-page-center {
-  margin: 0 0 7px;
-  font-size: clamp(1.42rem, 5.5vw, 1.7rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -.025em;
+.lcdp-page-mon-compte .lcdp-app-wrapper .lcdp-title-page-center {
   color: var(--compte-texte);
 }
-.lcdp-page-mon-compte .lcdp-page-header .lcdp-mention-connexion {
+/* Mêmes badges de statut sur cette page, priorité explicite sur c085. */
+.lcdp-page-mon-compte .lcdp-page-header .lcdp-mention-connexion,
+.lcdp-page-mon-compte .lcdp-page-header #mention-statut-membre.lcdp-mention-connexion {
   display: block;
   width: fit-content;
   max-width: 100%;
-  box-sizing: border-box;
   margin: 4px auto;
   padding: 4px 10px;
-  border-radius: 8px;
-  background: #edf0ea;
+  border-radius: var(--compte-rayon-ligne);
+  background: var(--compte-fond-ligne);
   color: var(--compte-texte-secondaire);
   font-size: .75rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.35;
+  text-align: center;
   overflow-wrap: anywhere;
 }
 .lcdp-page-mon-compte #lcdp-mes-informations-slot {
+  min-width: 0;
   width: 100%;
   margin: 0;
-  min-width: 0;
 }
 
 /* 03 — FORMULAIRE HÔTE : les six cartes remplacent le grand bloc générique ---- */
@@ -143,7 +121,7 @@
   min-width: 0;
   margin: 0;
   padding: 9px 11px;
-  border: 1px solid #ecf0ea;
+  border: 1px solid var(--compte-bordure);
   border-radius: var(--compte-rayon-ligne);
   background: var(--compte-fond-ligne);
 }
@@ -159,7 +137,7 @@
   font-size: .76rem;
   line-height: 1.3;
   font-weight: 500;
-  color: var(--compte-texte-discret);
+  color: var(--compte-texte-secondaire);
   overflow-wrap: anywhere;
 }
 .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__control {
@@ -194,26 +172,29 @@
 .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
   padding-left: 38px !important;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit {
+/* Le bouton et la réserve de texte partagent les mêmes variables c040. */
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire--modifiable {
   --lcdp-champ-modifiable-action-size: 32px;
   --lcdp-champ-modifiable-action-offset: 0px;
   --lcdp-champ-modifiable-icon-size: 17px;
+}
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit {
   box-sizing: border-box;
   width: 32px;
   height: 32px;
   min-width: 32px;
   min-height: 32px;
   right: 0;
-  border: 1px solid #f4e6d1;
-  border-radius: 9px;
-  background: #fff5e7;
-  color: #ad691e;
+  border: 1px solid var(--compte-bordure);
+  border-radius: var(--compte-rayon-ligne);
+  background: var(--compte-fond-carte);
+  color: var(--lcdp-color-orange, #f2a23a);
   box-shadow: none;
 }
 .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit:hover {
-  background: #fce8cb;
-  border-color: #eed4b3;
-  color: #8c5217;
+  background: var(--compte-fond-ligne);
+  border-color: var(--lcdp-color-orange, #f2a23a);
+  color: var(--lcdp-color-orange-hover, #e89223);
 }
 .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge,
 .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge:hover,
@@ -245,8 +226,8 @@
   font-variant-numeric: tabular-nums;
 }
 .lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="participation"] .lcdp-box-champ-formulaire--badge {
-  background: #f6f8f4;
-  border-color: #e4ebdf;
+  background: var(--compte-fond-ligne);
+  border-color: var(--compte-bordure);
 }
 .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse {
   display: flex;
@@ -283,6 +264,13 @@
   border-color: var(--lcdp-color-orange-hover);
 }
 
+/* Ancien CSS central de mes-informations.js : neutraliser ses marges de groupes. */
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-formulaire__actions,
+.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-title-section {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /* 07 — SELFIE : styles migrés depuis mes-informations.js --------------------- */
 .lcdp-page-mon-compte #zone-selfie .lcdp-selfie-control {
   position: relative;
@@ -290,6 +278,10 @@
   min-height: 42px;
   width: 100%;
   padding: 5px 38px 5px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 .lcdp-page-mon-compte #zone-selfie .lcdp-selfie-contenu {
   display: flex;
@@ -304,7 +296,7 @@
   min-width: 0;
   overflow-wrap: anywhere;
   font-size: .76rem;
-  color: var(--compte-texte-discret);
+  color: var(--compte-texte-secondaire);
 }
 .lcdp-page-mon-compte #zone-selfie #selfie-etat { font-size: .86rem; color: var(--compte-texte); }
 .lcdp-page-mon-compte #zone-selfie #selfie-etat:empty { display: none; }
@@ -328,21 +320,22 @@
 .lcdp-page-mon-compte #zone-selfie #selfie-photo[hidden] { display: none !important; }
 
 /* 08 — DIALOGUES SELFIE : modal navigateur, sans CSS injecté en JS ----------- */
-#dialogue-selfie {
+.lcdp-page-mon-compte #dialogue-selfie {
   box-sizing: border-box;
   width: min(92vw, 440px);
   max-height: 90dvh;
   overflow: auto;
-  border: 0;
-  border-radius: 14px;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31,42,36,.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
   padding: 22px 17px;
-  background: #fff;
-  color: #1f2a24;
+  background: var(--compte-fond-carte, #fff);
+  color: var(--compte-texte, #1f2a24);
+  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31,42,36,.12));
 }
-#dialogue-selfie::backdrop { background: rgba(0,0,0,.65); }
-#dialogue-selfie video { display: block; width: 100%; max-height: 50dvh; object-fit: contain; transform: scaleX(-1); }
-#dialogue-selfie .lcdp-selfie-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
-#dialogue-selfie-agrandi {
+.lcdp-page-mon-compte #dialogue-selfie::backdrop { background: var(--lcdp-ui-overlay, rgba(31,42,36,.46)); }
+.lcdp-page-mon-compte #dialogue-selfie video { display: block; width: 100%; max-height: 50dvh; object-fit: contain; transform: scaleX(-1); }
+.lcdp-page-mon-compte #dialogue-selfie .lcdp-selfie-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.lcdp-page-mon-compte #dialogue-selfie-agrandi {
   box-sizing: border-box;
   position: relative;
   width: min(92vw, 720px);
@@ -350,13 +343,13 @@
   max-height: 92dvh;
   overflow: auto;
   padding: 45px 12px 12px;
-  border: 0;
-  border-radius: 14px;
-  background: #fff;
+  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31,42,36,.14));
+  border-radius: var(--lcdp-ui-dialog-radius, 16px);
+  background: var(--lcdp-color-surface, #fff);
 }
-#dialogue-selfie-agrandi::backdrop { background: rgba(0,0,0,.82); }
-#dialogue-selfie-agrandi img { display: block; max-width: 100%; max-height: calc(92dvh - 70px); width: auto; height: auto; object-fit: contain; margin: auto; border-radius: 8px; }
-#dialogue-selfie-agrandi button {
+.lcdp-page-mon-compte #dialogue-selfie-agrandi::backdrop { background: rgba(31,42,36,.78); }
+.lcdp-page-mon-compte #dialogue-selfie-agrandi img { display: block; max-width: 100%; max-height: calc(92dvh - 70px); width: auto; height: auto; object-fit: contain; margin: auto; border-radius: 8px; }
+.lcdp-page-mon-compte #dialogue-selfie-agrandi button {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -365,8 +358,8 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: #f0f2f4;
-  color: #202820;
+  background: var(--lcdp-ui-close-bg, #f7f7f4);
+  color: var(--lcdp-color-text, #1f2a24);
   font-size: 24px;
   line-height: 1;
   cursor: pointer;
@@ -392,7 +385,6 @@
 
 /* 10 — TABLETTE / PC --------------------------------------------------------- */
 @media (min-width: 540px) {
-  .lcdp-page-mon-compte .lcdp-page-container { padding-inline: 20px; }
   .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section { padding: 19px 20px 20px; gap: 9px; }
   .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] {
     grid-template-columns: minmax(110px, .43fr) minmax(0, 1fr);
@@ -406,7 +398,6 @@
 
 /* 11 — TRÈS PETITS ÉCRANS --------------------------------------------------- */
 @media (max-width: 359px) {
-  .lcdp-page-mon-compte .lcdp-page-container { padding-inline: 8px; }
   .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section { padding: 12px 10px; }
   .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] { padding: 8px; }
 }
@@ -415,12 +406,12 @@
 .lcdp-page-mon-compte #form-mes-informations-membre button:focus-visible,
 .lcdp-page-mon-compte #form-mes-informations-membre a:focus-visible,
 #dialogue-selfie button:focus-visible,
-#dialogue-selfie-agrandi button:focus-visible {
+.lcdp-page-mon-compte #dialogue-selfie-agrandi button:focus-visible {
   outline: 2px solid var(--lcdp-color-primary, #55733f);
   outline-offset: 3px;
 }
 @media (prefers-reduced-motion: reduce) {
   .lcdp-page-mon-compte #form-mes-informations-membre *,
   #dialogue-selfie *,
-  #dialogue-selfie-agrandi * { transition: none !important; animation: none !important; }
+  .lcdp-page-mon-compte #dialogue-selfie-agrandi * { transition: none !important; animation: none !important; }
 }
