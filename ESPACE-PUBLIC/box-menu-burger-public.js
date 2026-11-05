@@ -157,8 +157,18 @@
       return construireUrlSite("/ESPACE-PUBLIC/connexion-membre.html?source=menu-mon-compte");
     }
 
-    // Les pages de connexion sont référencées sous ESPACE-PUBLIC :
-    // ne pas préfixer ces chemins avec les sous-domaines parc/coach.
+    if (configuration.espace) {
+      const config = window.SITE_CONFIG || {};
+      const espace = configuration.espace;
+      const fonctionUrl = config[espace + "Url"];
+      if (typeof fonctionUrl === "function") return fonctionUrl(configuration.cheminConnexion);
+      const hote = window.location.hostname;
+      const baseDefaut = ["ashdhe.github.io", "huguespavret.github.io"].includes(hote)
+        ? "https://" + hote + "/LCDP_" + espace
+        : "https://" + espace + ".lacleduparc.fr";
+      const base = String(config[espace + "BaseUrl"] || config[espace.toUpperCase() + "_BASE"] || baseDefaut).replace(/\/+$/, "");
+      return base + configuration.cheminConnexion;
+    }
     return construireUrlSite(configuration.cheminConnexion);
   }
 
@@ -204,11 +214,12 @@
   }
 
   async function ouvrirDialogueMonComptePublic() {
+    chargerCssUneFois("/OBJET/BOX/02-box-dialogue-bouton.css");
 
     const slot = assurerLightboxSlot();
     slot.innerHTML = "";
 
-    const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-bouton.html");
+    const fragment = await chargerFragment("/OBJET/BOX/02-box-dialogue-bouton.html");
     slot.appendChild(fragment);
 
     const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
@@ -313,6 +324,37 @@
     return lien;
   }
 
+  // L'ancien thème plaçait le séparateur sur :last-child (auparavant FAQ).
+  // Ces règles le maintiennent sur FAQ malgré les deux liens suivants.
+  function assurerStyleSeparateurFaq() {
+    const identifiant = "lcdp-public-menu-separateur-faq";
+    if (document.getElementById(identifiant)) return;
+
+    const style = document.createElement("style");
+    style.id = identifiant;
+    style.textContent = `
+      .lcdp-box-menu-burger__list > .lcdp-box-menu-burger__link:last-child {
+        margin-top: 0;
+        padding-top: var(--lcdp-space-2);
+        border-top: 0;
+        border-top-left-radius: var(--lcdp-radius-small);
+        border-top-right-radius: var(--lcdp-radius-small);
+        color: var(--lcdp-color-text);
+        font-weight: 600;
+      }
+      .lcdp-box-menu-burger__list > .lcdp-box-menu-burger__link[data-lcdp-menu-faq] {
+        margin-top: 8px;
+        padding-top: 16px;
+        border-top: 1px solid #f1f5f9;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        color: #64748b;
+        font-weight: 500;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   async function initialiserMenuBurgerPublic() {
     const slot = document.querySelector("[data-lcdp-burger-slot]");
 
@@ -331,7 +373,7 @@
     initialisationEnCours = (async () => {
       slot.innerHTML = "";
 
-      const fragment = await chargerFragment("/OBJET/HTMLBASE/02-menu-burger.html");
+      const fragment = await chargerFragment("/OBJET/BOX/02-box-menu-burger.html");
       slot.appendChild(fragment);
 
       const boutonBurger = slot.querySelector("[data-lcdp-burger-button]");
@@ -366,18 +408,38 @@
           href: "/ESPACE-PUBLIC/association.html"
         },
         {
+          label: "Galerie",
+          href: "/ESPACE-PUBLIC/gallery.html"
+        },
+        {
+          label: "Témoignages",
+          href: "/ESPACE-PUBLIC/Témoignages.html"
+        },
+        {
           label: "FAQ",
           href: "/ESPACE-PUBLIC/FAQ-public.html"
+        },
+        {
+          label: "Bénévolat",
+          href: "/ESPACE-PUBLIC/Bénévolat.html"
+        },
+        {
+          label: "Membre bienfaiteur",
+          href: "/ESPACE-PUBLIC/membre-bienfaiteur.html"
         }
       ];
 
       listeBurger.innerHTML = "";
 
       liensPublics.forEach((item) => {
-        listeBurger.appendChild(
-          creerLienMenu(item, boutonBurger, navBurger)
-        );
+        const element = creerLienMenu(item, boutonBurger, navBurger);
+        if (item.label === "FAQ") {
+          element.setAttribute("data-lcdp-menu-faq", "");
+        }
+        listeBurger.appendChild(element);
       });
+
+      assurerStyleSeparateurFaq();
 
       boutonBurger.addEventListener("click", (event) => {
         event.preventDefault();
