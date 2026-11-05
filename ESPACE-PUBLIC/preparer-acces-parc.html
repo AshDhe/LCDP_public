@@ -19,15 +19,13 @@
   <script src="preparer-acces-parc.js?v=20261104-case-telephone" defer></script>
 </head>
 <body class="lcdp-app-page">
-  <div class="lcdp-site-page lcdp-app-wrapper">
+  <div class="lcdp-site-page lcdp-app-wrapper lcdp-app-wriper--sans">
     <main class="lcdp-site-main">
       <section class="lcdp-page-section" aria-labelledby="titre-preparation">
         <div class="lcdp-page-container">
           <div class="lcdp-component lcdp-box-formulaire-page">
             <div class="lcdp-box-formulaire-page__inner">
               <section class="lcdp-component lcdp-boxtext lcdp-setup-flow" data-lcdp-boxtext>
-                <a class="lcdp-box-dialogue-bouton__close" href="../ESPACE-PUBLIC/accueil-public.html"
-                   aria-label="Fermer et revenir à l’accueil public" title="Fermer">&times;</a>
                 <p id="etape-securite" class="lcdp-boxtext__title">Sécurité de votre compte<br><small>Terminer - 3/3</small></p>
                 <h1 class="lcdp-boxtext__title" id="titre-preparation">Préparez votre accès au parc</h1>
                 <div class="lcdp-boxtext__content lcdp-setup-flow__content" data-lcdp-boxtext-content>
@@ -72,7 +70,6 @@
     </main>
   </div>
   <dialog id="confirmation-geolocalisation" class="lcdp-box-dialogue-bouton__card lcdp-setup-dialog" aria-labelledby="titre-confirmation-optin">
-    <form method="dialog"><button class="lcdp-box-dialogue-bouton__close" type="submit" value="cancel" aria-label="Fermer" title="Fermer">&times;</button></form>
     <h2 id="titre-confirmation-optin" class="lcdp-box-dialogue-bouton__title">Autorisation enregistrée.</h2>
     <p id="texte-confirmation-optin" class="lcdp-box-dialogue-bouton__text"></p>
     <div id="avertissement-appareil" class="lcdp-setup-dialog__warning" hidden>
@@ -85,7 +82,6 @@
   </dialog>
   <template id="modele-information-erreur-optin">
   <dialog id="information-erreur-optin" class="lcdp-box-dialogue-bouton__card lcdp-setup-dialog" aria-labelledby="titre-erreur-optin" aria-describedby="texte-erreur-optin">
-    <form method="dialog"><button class="lcdp-box-dialogue-bouton__close" type="submit" value="cancel" aria-label="Fermer" title="Fermer">&times;</button></form>
     <h2 id="titre-erreur-optin" class="lcdp-box-dialogue-bouton__title">Information</h2>
     <p id="texte-erreur-optin" class="lcdp-box-dialogue-bouton__text"></p>
     <form method="dialog" class="lcdp-box-dialogue-bouton__actions">

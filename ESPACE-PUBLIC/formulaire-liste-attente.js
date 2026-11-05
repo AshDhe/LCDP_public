@@ -109,13 +109,7 @@
   async function initialiserPageListeAttente() {
     appliquerRoutesSiteListeAttente(document);
 
-    initialiserBandeauListeAttente().catch((erreur) => {
-      console.error("Erreur bandeau liste d'attente :", erreur);
-    });
-
-    initialiserFooterListeAttente().catch((erreur) => {
-      console.error("Erreur footer liste d'attente :", erreur);
-    });
+    // Parcours isolé : ne pas charger de bandeau ni de footer.
 
     if (typeof window.LCDP_creerFormulaire !== "function") {
       console.error("Objet formulaire V3 introuvable.");
@@ -250,18 +244,9 @@
         const data = await response.json().catch(() => null);
 
         if (!response.ok || !data || data.success !== true) {
-          // Une erreur serveur peut intervenir après l'enregistrement (envoi de l'email).
-          // Ne pas annoncer un échec d'inscription tant que son statut n'est pas connu.
-          console.error("Pré-inscription non confirmée : réponse du service", {
-            status: response.status
-          });
           await afficherInformationListeAttente(
-            response.status >= 500 || !data
-              ? "Pré-inscription non confirmée"
-              : "Pré-inscription refusée",
-            data?.message || (response.status >= 500
-              ? "Le service ne peut pas confirmer votre pré-inscription. Réessayez dans une minute avec la même adresse e-mail."
-              : "Le service n'a pas accepté votre demande."),
+            "Inscription non enregistrée",
+            data?.message || "Votre inscription n'a pas pu être enregistrée.",
             "erreur"
           );
 
@@ -287,8 +272,8 @@
         console.error("Erreur formulaire liste d'attente :", error);
 
         await afficherInformationListeAttente(
-          "Pré-inscription non confirmée",
-          "Impossible de confirmer l'envoi pour le moment. Réessayez avec la même adresse e-mail.",
+          "Erreur",
+          "Il n'est pas possible d'envoyer le formulaire pour le moment.",
           "erreur"
         );
 
@@ -484,7 +469,7 @@
   }
 
   async function initialiserFooterListeAttente() {
-    const fragment = await chargerFragmentSiteListeAttente("/OBJET/HTMLBASE/02-footer.html");
+    const fragment = await chargerFragmentSiteListeAttente("/OBJET/BOX/02-box-footer.html");
     const slot = document.getElementById("lcdp-footer-slot");
 
     if (slot) {
@@ -566,7 +551,7 @@
     slot.innerHTML = "";
 
     try {
-      const fragment = await chargerFragmentObjetListeAttente("/HTMLBASE/02-alerte.html");
+      const fragment = await chargerFragmentObjetListeAttente("/BOX/02-box-alerte.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector("[data-lcdp-box-alerte]");

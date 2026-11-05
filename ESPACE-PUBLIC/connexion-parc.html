@@ -28,9 +28,7 @@
 </head>
 
 <body class="lcdp-connexion-parc lcdp-app-page lcdp-app-page--role lcdp-app-page--role-parc">
-  <div class="lcdp-site-page lcdp-app-wrapper">
-
-    <div id="lcdp-bandeau-slot"></div>
+  <div class="lcdp-site-page lcdp-app-wrapper lcdp-app-wriper--sans">
 
     <main class="lcdp-site-main">
       <section
@@ -145,8 +143,6 @@
         </div>
       </section>
     </main>
-
-    <div id="lcdp-footer-slot"></div>
     <div id="lcdp-lightbox-slot"></div>
 
   </div>
@@ -263,19 +259,13 @@
 
         slot.innerHTML = "";
 
-        const footer = await chargerFragment("/OBJET/HTMLBASE/02-footer.html");
+        const footer = await chargerFragment("/OBJET/BOX/02-box-footer.html");
         slot.appendChild(footer);
 
         appliquerRoutesSite(slot);
       }
 
       appliquerRoutesSite(document);
-
-      initialiserBandeauPublic()
-        .then(initialiserFooterPublic)
-        .catch((erreur) => {
-          console.error(erreur);
-        });
     })();
   </script>
   <script>

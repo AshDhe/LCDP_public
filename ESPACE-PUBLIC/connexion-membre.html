@@ -17,13 +17,42 @@
       "";
   </script>
 
-  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261104-wrapper-membre" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261104-wrapper-membre">
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
+  <style>
+    /* Connexion : centrer les deux logos indépendants de la page. */
+    #lcdp-bandeau-slot .lcdp-box-bandeau-nav__inner {
+      position: relative;
+    }
+    #lcdp-bandeau-slot .lcdp-box-bandeau-nav__logo-link {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #formulaire-connexion-membre .lcdp-box-formulaire__actions {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+    #formulaire-connexion-membre .lcdp-box-formulaire__actions > .lcdp-button-logo {
+      display: inline-flex !important;
+      flex: 0 0 auto !important;
+      width: var(--lcdp-button-logo-size-mobile, 76px) !important;
+      height: var(--lcdp-button-logo-size-mobile, 76px) !important;
+      margin: 0 !important;
+    }
+    @media (min-width: 768px) {
+      #formulaire-connexion-membre .lcdp-box-formulaire__actions > .lcdp-button-logo {
+        width: var(--lcdp-button-logo-size-desktop, 84px) !important;
+        height: var(--lcdp-button-logo-size-desktop, 84px) !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="lcdp-connexion-membre lcdp-app-page">
-  <div class="lcdp-site-page lcdp-app-wrapper">
-
-    <div id="lcdp-bandeau-slot"></div>
+  <div class="lcdp-site-page lcdp-app-wrapper lcdp-app-wriper--sans">
 
     <main class="lcdp-site-main">
       <section
@@ -138,8 +167,6 @@
         </div>
       </section>
     </main>
-
-    <div id="lcdp-footer-slot"></div>
     <div id="lcdp-lightbox-slot"></div>
 
   </div>

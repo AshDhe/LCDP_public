@@ -8,14 +8,7 @@
     const type = document.body.dataset.codeType;
     const flow = String(window.LCDP_SIGNUP_FLOW || "");
     delete window.LCDP_SIGNUP_FLOW;
-    if (flow) {
-      // Même cadre que la création du mot de passe pendant le tunnel.
-      document.getElementById("lcdp-bandeau-slot")?.remove();
-      document.getElementById("lcdp-footer-slot")?.remove();
-    } else {
-      initialiserBandeauRestreint().catch(() => {});
-      initialiserFooter().catch(() => {});
-    }
+    // Écran isolé : aucun bandeau ni footer, y compris hors inscription.
     let token = String(window.LCDP_CODE_TOKEN || "");
     delete window.LCDP_CODE_TOKEN;
     const form = document.getElementById("formulaire-code-securite");
@@ -201,7 +194,7 @@
 
   slot.innerHTML = "";
 
-  const footer = await chargerFragmentObjet("/HTMLBASE/02-footer.html");
+  const footer = await chargerFragmentObjet("/BOX/02-box-footer.html");
   slot.appendChild(footer);
 
   appliquerRoutesSite(slot);
@@ -239,7 +232,7 @@
     slot.innerHTML = "";
 
     try {
-      const fragment = await chargerFragmentObjet("/HTMLBASE/02-alerte.html");
+      const fragment = await chargerFragmentObjet("/BOX/02-box-alerte.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector("[data-lcdp-box-alerte]");
@@ -322,7 +315,7 @@
       return joindreBaseEtChemin(objetBaseUrl, valeur.replace(/^\/?OBJET\//, ""));
     }
 
-    return construireUrlPublique("/OBJET/" + valeur.replace(/^\/+/, ""));
+    return construireUrlPublique("/OBJET/" + valeur.replace(/^\/+/, "").replace(/^BOX\//, "BOX/"));
   }
 
   function construireUrlPublique(chemin) {
