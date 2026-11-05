@@ -96,6 +96,50 @@
   margin: 0;
   z-index: 3;
 }
+/* Croix PLANIFIER : pictogramme géométrique net et centré, pas un caractère de police. */
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0;
+  border: 1px solid #e5e9e3;
+  border-radius: 50%;
+  background: #f6f7f5;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  cursor: pointer;
+  z-index: 5;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::before,
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  margin-left: -7px;
+  margin-top: -1px;
+  border-radius: 2px;
+  background: #455244;
+  pointer-events: none;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::before { transform: rotate(45deg); }
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::after { transform: rotate(-45deg); }
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close:focus-visible {
+  outline: 2px solid #4e6838;
+  outline-offset: 2px;
+}
 #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-filtres {
   display: flex;
   flex-direction: column;
@@ -246,6 +290,40 @@
   transform: none !important;
   cursor: pointer;
 }
+/* Case native personnalisée : même coche blanche pour les quatre catégories,
+   y compris DUO. L'input demeure cliquable, focusable et utilisable au clavier. */
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative !important;
+  display: inline-grid !important;
+  place-items: center;
+  background: #fff;
+  border: 1px solid #899189;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked {
+  border-color: transparent;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-1px) rotate(45deg);
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:focus-visible {
+  outline: 2px solid #344f2e;
+  outline-offset: 2px;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="duo"] { background: #e59834; }
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="famille"] { background: #626262; }
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="coach"] { background: #8660c8; }
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="famille-coach"] { background: #4e6838; }
+
 /* Couleurs métier des coches : aucun bleu natif du navigateur. */
 #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input[value="duo"] { accent-color: #e59834; }
 #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input[value="famille"] { accent-color: #626262; }
@@ -515,23 +593,50 @@
 }
 .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] {
   display: flex;
-  flex-direction: row !important;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column !important;
+  flex-wrap: nowrap;
+  align-items: stretch;
   justify-content: center;
-  gap: 7px;
+  gap: 9px;
+  width: 100%;
 }
 .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button {
-  width: auto !important;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center !important;
+  gap: 9px;
+  width: 100% !important;
+  max-width: 100% !important;
   min-width: 0 !important;
-  min-height: 36px;
-  flex: 1 1 135px !important;
-  padding: 7px 9px;
-  font-size: .74rem;
+  min-height: 44px;
+  flex: 0 0 auto !important;
+  margin: 0;
+  padding: 10px 14px;
+  font-size: .91rem !important;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: normal;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes .lcdp-box-commande-bar__icone {
-  width: 16px;
-  height: 16px;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+}
+.lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button .lcdp-box-commande-bar__libelle {
+  display: inline-block;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  font-size: inherit !important;
+  font-weight: inherit;
+  line-height: inherit;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 .lcdp-planifier-parcs-diaporama,
 .lcdp-planifier-parcs-diaporama .lcdp-box-liste-card-diaporama {
@@ -541,8 +646,8 @@
 }
 .lcdp-planifier-parcs-diaporama .lcdp-box-liste-card-diaporama__list {
   display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 9px !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 14px !important;
   width: 100%;
   min-width: 0;
 }
@@ -564,9 +669,9 @@
   overflow-y: auto;
 }
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__nom-dos {
-  font-size: .8rem;
-  line-height: 1.18;
-  padding-right: 20px;
+  font-size: .96rem;
+  line-height: 1.25;
+  padding-right: 28px;
 }
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__fermer {
   width: 25px;
@@ -574,8 +679,8 @@
   font-size: 1rem;
 }
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__description {
-  font-size: .72rem;
-  line-height: 1.3;
+  font-size: .88rem;
+  line-height: 1.4;
 }
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__actions--reserver,
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__actions {
@@ -583,9 +688,12 @@
 }
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__action {
   min-width: 0;
-  min-height: 32px;
-  padding: 5px 4px;
-  font-size: .7rem;
+  min-height: 42px;
+  padding: 9px 12px;
+  font-size: .89rem !important;
+  line-height: 1.2;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__action-icone {
   width: 16px;
@@ -753,5 +861,62 @@
     min-height: 5px;
     max-height: 5px;
     flex: 0 0 5px;
+  }
+}
+
+/* Tablette et PC : seules ces largeurs disposent de deux colonnes et de boutons en ligne. */
+@media (min-width: 768px) {
+  .lcdp-planifier-parcs-diaporama .lcdp-box-liste-card-diaporama__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+  .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .lcdp-planifier-parcs-card .lcdp-commande-parcs-modes [data-lcdp-commande-bar-actions] > button {
+    flex: 1 1 160px !important;
+    width: auto !important;
+    min-height: 40px;
+    padding: 9px 12px;
+    font-size: .84rem !important;
+  }
+  .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__action {
+    font-size: .83rem !important;
+    min-height: 36px;
+    padding: 7px 8px;
+  }
+}
+/* Sur mobile, les deux actions du verso se suivent verticalement pour garder
+   un libellé lisible, notamment sur les écrans de 320 px. */
+@media (max-width: 767px) {
+  .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__actions--reserver,
+  .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__actions {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch;
+    gap: 7px;
+    width: 100%;
+    min-width: 0;
+  }
+  .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__actions--reserver > .lcdp-button,
+  .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    font-size: .89rem !important;
+    white-space: normal !important;
+    text-align: center;
+  }
+  .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__action-libelle {
+    font-size: inherit;
+    line-height: 1.2;
+    white-space: normal;
   }
 }
