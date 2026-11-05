@@ -339,7 +339,7 @@
         border-top: 0;
         border-top-left-radius: var(--lcdp-radius-small);
         border-top-right-radius: var(--lcdp-radius-small);
-        color: var(--lcdp-color-text);
+        color: #475569;
         font-weight: 600;
       }
       .lcdp-box-menu-burger__list > .lcdp-box-menu-burger__link[data-lcdp-menu-faq] {
