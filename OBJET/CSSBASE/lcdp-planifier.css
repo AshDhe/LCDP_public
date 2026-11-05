@@ -1472,3 +1472,241 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
     margin-bottom: 8px;
   }
 }
+
+/* ABO-RÉZA — Étape 3, choix de plage : validation explicite et visible.
+   Le JS n'intercepte que les plages libres lorsque ABO-RÉZA est actif. */
+#lcdp-planifier-jour-overlay-slot.lcdp-aboreza-choix-jour .lcdp-box-calendrier-jour__card {
+  box-sizing: border-box;
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+}
+#lcdp-planifier-jour-overlay-slot.lcdp-aboreza-choix-jour .lcdp-box-calendrier-jour__grid {
+  margin-bottom: 0;
+}
+#lcdp-planifier-jour-overlay-slot .lcdp-aboreza-choix-validation {
+  position: sticky;
+  bottom: -1px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 14px -3px -3px;
+  padding: 12px 8px 5px;
+  border-top: 1px solid #e2e8df;
+  border-radius: 0 0 9px 9px;
+  background: #fff;
+  text-align: center;
+}
+#lcdp-planifier-jour-overlay-slot .lcdp-aboreza-choix-validation__aide {
+  margin: 0;
+  color: #4e6050;
+  font-size: .8rem;
+  line-height: 1.35;
+}
+#lcdp-planifier-jour-overlay-slot .lcdp-aboreza-choix-validation__bouton {
+  box-sizing: border-box;
+  width: min(100%, 240px);
+  min-height: 44px;
+  margin: 0;
+  padding: 9px 14px;
+  font-size: .95rem;
+  line-height: 1.2;
+}
+#lcdp-planifier-jour-overlay-slot .lcdp-aboreza-choix-validation__bouton:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+#lcdp-planifier-jour-overlay-slot .lcdp-aboreza-choix-validation__message {
+  max-width: 480px;
+  margin: 0;
+  color: #9a3a23;
+  font-size: .83rem;
+  line-height: 1.4;
+}
+#lcdp-planifier-jour-overlay-slot .lcdp-aboreza-choix-validation__message[hidden] {
+  display: none !important;
+}
+#lcdp-planifier-jour-overlay-slot .lcdp-planifier-choix-plage.lcdp-aboreza-choix-validation--retenue {
+  outline: 3px solid #4e6838 !important;
+  outline-offset: 2px;
+  box-shadow: inset 0 0 0 2px #fff !important;
+}
+@media (max-width: 600px) {
+  #lcdp-planifier-jour-overlay-slot.lcdp-aboreza-choix-jour .lcdp-box-calendrier-jour__card {
+    padding: 16px 12px;
+  }
+  #lcdp-planifier-jour-overlay-slot .lcdp-aboreza-choix-validation {
+    margin-top: 12px;
+  }
+}
+
+/* ABO-RÉZA — récapitulatif de préparation (étape 3) : réduire les blancs,
+   sans modifier les cartes d'abonnement des autres pages. */
+#lcdp-lightbox-slot .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  box-shadow: none;
+  gap: 9px;
+}
+#lcdp-lightbox-slot .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) .lcdp-box-card-abonnement__row {
+  gap: 7px 12px;
+}
+#lcdp-lightbox-slot .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) .lcdp-box-card-abonnement__mention {
+  margin: 0;
+  font-size: .82rem;
+  line-height: 1.35;
+}
+#lcdp-lightbox-slot .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) .lcdp-box-card-abonnement__micro-action {
+  min-height: 36px;
+  margin: 0;
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-size: .78rem;
+  line-height: 1.25;
+  white-space: normal;
+}
+
+/* LCDP — COMPACT intégré. Source unique : ne plus charger lcdp-planifier-compact.css. */
+/* PLANIFIER — ajustements de proportion, exclusifs à ce tunnel.
+   À charger après lcdp-planifier.css, sans toucher aux composants génériques /BOX.
+   Les dimensions du recto et du verso restent identiques pour le retournement. */
+
+/* Liste de parcs : fenêtre et photos moins imposantes. */
+.lcdp-planifier-parcs-card.lcdp-box-dialogue-champ__card {
+  width: min(calc(100vw - 24px), 440px) !important;
+  max-width: 440px !important;
+  padding: 18px 13px 15px !important;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-liste-card-diaporama__list {
+  gap: 10px !important;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama {
+  width: min(100%, 370px) !important;
+  max-width: 370px;
+  margin-inline: auto;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__scene,
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__scene {
+  width: 100% !important;
+  aspect-ratio: auto !important;
+  height: clamp(190px, 27vh, 214px) !important;
+  min-height: 190px !important;
+  max-height: 214px !important;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__nom {
+  padding: 10px 12px;
+  font-size: clamp(1rem, 3vw, 1.22rem);
+}
+/* Verso : composition centrée sur la hauteur disponible, fond doux.
+   En cas de description plus longue, le défilement reste dans la face. */
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso {
+  box-sizing: border-box;
+  background: #f5f7f3 !important;
+  padding: 10px 12px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc-diaporama__contenu {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 9px !important;
+  flex: 1 1 auto;
+  min-height: 100%;
+  height: auto !important;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__title {
+  color: #293c2e;
+  font-size: 1rem !important;
+  line-height: 1.2 !important;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__action {
+  min-height: 36px !important;
+  padding: 6px 8px !important;
+  font-size: .82rem !important;
+}
+.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description:not([hidden]) {
+  padding-top: 4px;
+  font-size: .75rem;
+  line-height: 1.3;
+}
+@media (max-width: 767px) {
+  .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__actions--reserver {
+    gap: 5px !important;
+  }
+}
+
+/* Fiche parc : même échelle que la navigation, sans toucher à PLANNING PARC. */
+#lcdp-planifier-fiche-overlay-slot
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] > .lcdp-box-shift-detail-parc__card {
+  width: min(100%, 450px) !important;
+  max-width: 450px !important;
+  padding: 10px !important;
+}
+#lcdp-planifier-fiche-overlay-slot
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card {
+  gap: 9px !important;
+}
+#lcdp-planifier-fiche-overlay-slot
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__header,
+#lcdp-planifier-fiche-overlay-slot
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__section {
+  padding: 11px !important;
+  border-radius: 11px !important;
+}
+#lcdp-planifier-fiche-overlay-slot
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+  gap: 7px !important;
+}
+
+/* Planning mensuel : barres 30 % moins longues, 40 % moins épaisses.
+   Les cinq plages, leurs couleurs et leurs jauges d'occupation sont conservées. */
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
+  border-color: rgba(61, 82, 68, .19) !important;
+  border-radius: 8px;
+  box-shadow: none !important;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
+  box-sizing: border-box;
+  width: 70% !important;
+  max-width: 42px !important;
+  margin-inline: auto !important;
+  flex: 0 0 auto !important;
+  grid-template-rows: repeat(5, 3px) !important;
+  gap: 2px !important;
+  min-height: 0 !important;
+  align-content: center;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
+  box-sizing: border-box;
+  width: 100%;
+  height: 3px !important;
+  min-height: 3px !important;
+  max-height: 3px !important;
+  flex: 0 0 3px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot--gris-clair {
+  background: #eef0ed;
+}
+/* Conserver le signal rouge d'un accès personnel, à l'échelle des nouvelles barres. */
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-plage--acces-personnel {
+  box-shadow: inset 3px 0 0 #c74c45 !important;
+}
+@media (min-width: 900px) {
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
+    grid-auto-rows: 63px;
+  }
+}
