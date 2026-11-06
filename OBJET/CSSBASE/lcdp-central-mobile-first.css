@@ -25017,6 +25017,39 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   color: #64748b;
   font-weight: 500;
 }
+/* Burger membre : typographie et repère « Mon compte » identiques à la logique du burger public. */
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.25;
+  letter-spacing: .025em;
+  text-transform: none;
+}
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte] {
+  justify-content: space-between;
+  gap: 6px;
+  color: #334155;
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]::after {
+  content: "Espace personnel";
+  display: inline-block;
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #ecfdf5;
+  color: var(--lcdp-burger-accent);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: normal;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]:hover::after,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]:focus-visible::after {
+  background: var(--lcdp-burger-accent);
+  color: #fff;
+}
 @keyframes lcdp-burger-menu-enter {
   from {
     opacity: 0;
