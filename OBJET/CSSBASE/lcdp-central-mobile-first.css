@@ -33348,3 +33348,76 @@ body:is(.lcdp-connexion-membre, .lcdp-connexion-parc, .lcdp-connexion-coach)
   text-align: center;
   text-transform: none;
 }
+
+
+/* Présentation commune des deux formulaires publics.
+   Exclusivement activée par la classe portée par leurs pages HTML.
+   Les configurations métier, sous-titres et contrôles restent indépendants. */
+body.lcdp-formulaire-public-unifie .lcdp-site-main .lcdp-page-section {
+  padding-top: var(--lcdp-space-3);
+  padding-bottom: var(--lcdp-space-5);
+}
+body.lcdp-formulaire-public-unifie .lcdp-site-main .lcdp-page-container {
+  width: 100%;
+  max-width: 680px;
+  margin-inline: auto;
+}
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire {
+  gap: 20px;
+  padding: 24px;
+}
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__title {
+  font-size: 20px;
+  line-height: 1.4;
+}
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__intro p {
+  font-size: 13px;
+  line-height: 1.6;
+}
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__fields {
+  gap: 20px;
+}
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire .lcdp-box-champ-formulaire__label,
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire .lcdp-box-champ-formulaire__heading {
+  font-size: 13px;
+  line-height: 1.45;
+}
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire .lcdp-box-champ-formulaire input:not([type="checkbox"]),
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire .lcdp-box-champ-formulaire select,
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire .lcdp-box-champ-formulaire textarea {
+  font-size: 14px;
+  line-height: 1.4;
+}
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire .lcdp-box-champ-formulaire__checkbox-line {
+  font-size: 13px;
+  line-height: 1.45;
+}
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__actions .lcdp-button {
+  min-height: 46px;
+  padding: 14px 16px;
+  font-size: 12px;
+  line-height: 1.3;
+  border-radius: 12px;
+  background: #4e6838;
+  border-color: #4e6838;
+  color: #fff;
+}
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__actions .lcdp-button:hover {
+  background: #3d522c;
+  border-color: #3d522c;
+  color: #fff;
+}
+body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__note {
+  font-size: 11px;
+  line-height: 1.5;
+}
+@media (min-width: 768px) {
+  body.lcdp-formulaire-public-unifie .lcdp-site-main .lcdp-page-section {
+    padding-top: var(--lcdp-space-4);
+  }
+}
+@media (max-width: 480px) {
+  body.lcdp-formulaire-public-unifie .lcdp-box-formulaire {
+    padding: 18px;
+  }
+}
