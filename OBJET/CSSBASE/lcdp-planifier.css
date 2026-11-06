@@ -143,13 +143,13 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
 }
 
 /* Cadre du calendrier et véritable en-tête, compact par défaut. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__card {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__card {
   position: relative;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
   display: block;
   width: 100%;
   min-width: 0;
@@ -162,7 +162,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   border-radius: 18px 18px 0 0;
   box-sizing: border-box;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close {
   position: absolute;
   top: 0;
   right: 0;
@@ -171,7 +171,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   z-index: 3;
 }
 /* Croix PLANIFIER : pictogramme géométrique net et centré, pas un caractère de police. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
@@ -193,8 +193,8 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   cursor: pointer;
   z-index: 5;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::before,
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::after {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::before,
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::after {
   content: "";
   display: block;
   position: absolute;
@@ -208,13 +208,13 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   background: #455244;
   pointer-events: none;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::before { transform: rotate(45deg); }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::after { transform: rotate(-45deg); }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close:focus-visible {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::before { transform: rotate(45deg); }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close::after { transform: rotate(-45deg); }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__close:focus-visible {
   outline: 2px solid #4e6838;
   outline-offset: 2px;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-filtres {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-filtres {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -222,7 +222,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   width: 100%;
   min-width: 0;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-identite {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-identite {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -230,14 +230,14 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   width: 100%;
   min-width: 0;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-parc {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-parc {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   min-width: 0;
   width: 100%;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title] {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title] {
   display: block;
   margin: 0 0 3px;
   padding: 0;
@@ -250,13 +250,13 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   color: #ba7424 !important;
 }
 /* À la première ouverture, aucun parc : PLANIFIER reste un titre complet. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois]
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois]
 .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc) [data-lcdp-calendrier-mois-title] {
   font-size: 1.5rem !important;
   letter-spacing: normal;
   color: #1f2a24 !important;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-nom-parc:not([hidden]) {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-nom-parc:not([hidden]) {
   display: block !important;
   visibility: visible !important;
   margin: 0;
@@ -270,7 +270,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   opacity: 1 !important;
   min-height: 1.2em;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-departement-parc:not([hidden]) {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-departement-parc:not([hidden]) {
   display: inline-flex !important;
   visibility: visible !important;
   align-items: center;
@@ -290,13 +290,13 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   text-align: left;
   opacity: 1 !important;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-departement-parc:not([hidden])::before {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-departement-parc:not([hidden])::before {
   content: "📍";
   margin-right: 4px;
 }
 
 /* Filtrage : les quatre cases restent les vraies cases interactives du JS. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-legende-autorisations {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-legende-autorisations {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -307,14 +307,14 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   background: #f7f8f5;
   box-sizing: border-box;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois]
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois]
 .lcdp-planifier-legende-autorisations .lcdp-box-legende__contenu {
   display: block;
   width: 100%;
   margin: 0;
   padding: 0;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois]
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois]
 .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -327,7 +327,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   margin: 0;
   padding: 0;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie {
   display: inline-flex;
   position: relative;
   align-items: center;
@@ -343,7 +343,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   line-height: 1.3;
   white-space: normal;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input {
   /* Le CSS du composant masquait encore l'input : rétablir la vraie case. */
   display: inline-block !important;
   position: static !important;
@@ -366,7 +366,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
 }
 /* Case native personnalisée : même coche blanche pour les quatre catégories,
    y compris DUO. L'input demeure cliquable, focusable et utilisable au clavier. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input {
   -webkit-appearance: none;
   appearance: none;
   position: relative !important;
@@ -377,10 +377,10 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   border-radius: 4px;
   box-sizing: border-box;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked {
   border-color: transparent;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked::after {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked::after {
   content: "";
   display: block;
   width: 5px;
@@ -389,30 +389,30 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   border-width: 0 2px 2px 0;
   transform: translateY(-1px) rotate(45deg);
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:focus-visible {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:focus-visible {
   outline: 2px solid #344f2e;
   outline-offset: 2px;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="duo"] { background: #e59834; }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="famille"] { background: #626262; }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="coach"] { background: #8660c8; }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="famille-coach"] { background: #4e6838; }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="duo"] { background: #e59834; }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="famille"] { background: #626262; }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="coach"] { background: #8660c8; }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="famille-coach"] { background: #4e6838; }
 
 /* Couleurs métier des coches : aucun bleu natif du navigateur. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input[value="duo"] { accent-color: #e59834; }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input[value="famille"] { accent-color: #626262; }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input[value="coach"] { accent-color: #8660c8; }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input[value="famille-coach"] { accent-color: #4e6838; }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input[value="duo"] { accent-color: #e59834; }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input[value="famille"] { accent-color: #626262; }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input[value="coach"] { accent-color: #8660c8; }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input[value="famille-coach"] { accent-color: #4e6838; }
 
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois]
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois]
 .lcdp-planifier-filtre-categorie .lcdp-box-legende__carre {
   /* La couleur est portée par la vraie checkbox, pas par une imitation. */
   display: none !important;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__coche {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__coche {
   display: none;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois]
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois]
 .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle {
   font-size: 0.7rem;
   line-height: 1.35;
@@ -424,8 +424,8 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
 }
 
 /* Navigation du mois plus discrète sur téléphone. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__body { padding-top: 10px; }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois]
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__body { padding-top: 10px; }
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois]
 .lcdp-box-calendrier-mois__body > .lcdp-planifier-actions-filtres {
   display: flex;
   justify-content: center;
@@ -433,16 +433,16 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   width: 100%;
   margin: 0 auto 7px;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__navigation {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__navigation {
   gap: 7px;
   margin-bottom: 11px;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__month {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__month {
   min-width: 0;
   font-size: clamp(1.1rem, 4.6vw, 1.35rem);
   line-height: 1.2;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__nav-button {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__nav-button {
   width: 34px;
   height: 34px;
   min-height: 34px;
@@ -450,17 +450,17 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
 }
 
 /* Grille mobile : conserver sept colonnes sans rétrécir les plages à l'excès. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid,
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid,
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
   gap: 5px;
   min-width: 0;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
   min-height: 0;
   grid-auto-rows: 64px;
   align-content: start;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
   width: 100%;
   min-width: 0;
   min-height: 0;
@@ -471,24 +471,24 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   border-radius: 8px;
   justify-content: flex-start;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__number {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__number {
   font-size: 0.72rem;
   margin-bottom: 2px;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
   width: 100%;
   min-height: 0;
   flex: 1 1 auto;
   gap: 2px;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
   min-height: 5px;
   padding: 0 1px;
   border-radius: 3px;
 }
 
 /* Spinner pendant les appels asynchrones, entièrement dans la card mensuelle. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-attente-mois {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-attente-mois {
   position: absolute;
   inset: 0;
   z-index: 10;
@@ -499,7 +499,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   background: rgba(255,255,255,.93);
   pointer-events: auto;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-attente-mois .lcdp-planifier-spinner {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-attente-mois .lcdp-planifier-spinner {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -507,49 +507,49 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
 
 /* Améliorations progressives sur tablette (et non l'inverse). */
 @media (min-width: 600px) {
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
     padding: 16px 54px 16px 18px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-identite {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-identite {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: 12px 18px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-parc {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-parc {
     flex: 1 1 180px;
     width: auto;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-nom-parc:not([hidden]) {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-nom-parc:not([hidden]) {
     font-size: 1.32rem !important;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-legende-autorisations {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-legende-autorisations {
     padding: 11px 13px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois]
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois]
   .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     column-gap: 10px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie {
     font-size: 0.73rem;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid,
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid,
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
     width: 100%;
     max-width: 680px;
     margin-inline: auto;
     gap: 9px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
     grid-auto-rows: 72px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
     padding: 7px 5px;
     gap: 4px;
     aspect-ratio: auto;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
     width: calc(100% - 8px);
     margin-inline: auto;
     gap: 3px;
@@ -558,59 +558,59 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
 
 /* Ordinateur : jours volontairement plus étroits, moins denses et espacés. */
 @media (min-width: 900px) {
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__card {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__card {
     max-width: 760px;
     padding: 17px 20px 22px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
     padding: 20px 55px 18px 20px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-filtres {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-filtres {
     gap: 14px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois]
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois]
   .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
     grid-template-columns: repeat(4, max-content);
     justify-content: space-between;
     gap: 12px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-legende-autorisations {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-legende-autorisations {
     padding: 12px 14px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__body {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__body {
     padding-top: 13px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__month {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__month {
     min-width: 185px;
     font-size: 1.72rem;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__nav-button {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__nav-button {
     width: 40px;
     height: 40px;
     min-height: 40px;
     flex-basis: 40px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid,
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid,
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
     width: 100%;
     max-width: 660px;
     margin-inline: auto;
     gap: 12px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
     grid-auto-rows: 80px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
     padding: 6px 5px;
     gap: 4px;
     border-radius: 10px;
     aspect-ratio: auto;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__number {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__number {
     margin-bottom: 4px;
     font-size: .9rem;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
     flex: 0 0 auto;
     width: calc(100% - 16px);
     min-height: 0;
@@ -618,14 +618,14 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
     grid-template-rows: repeat(5, 6px);
     gap: 2px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
     height: 6px;
     min-height: 6px;
     max-height: 6px;
     flex: 0 0 6px;
     border-radius: 3px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
     margin-bottom: 12px;
     font-size: .88rem;
   }
@@ -997,44 +997,44 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
 
 /* PC uniquement : le calendrier mensuel rétrécit sans modifier la version mobile. */
 @media (min-width: 900px) {
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__card {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__card {
     max-width: 650px;
     padding: 12px 15px 16px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
     padding: 12px 46px 12px 14px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-filtres {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-entete-filtres {
     gap: 9px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-legende-autorisations {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-legende-autorisations {
     padding: 8px 11px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__month {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__month {
     font-size: 1.4rem;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__navigation {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__navigation {
     margin-bottom: 9px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid,
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid,
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
     max-width: 560px;
     gap: 9px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
     min-height: 0;
     grid-auto-rows: 66px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__number {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__number {
     font-size: .76rem;
     margin-bottom: 2px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
     width: calc(100% - 12px);
     grid-template-rows: repeat(5, 5px);
     gap: 2px;
   }
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
     height: 5px;
     min-height: 5px;
     max-height: 5px;
@@ -1546,7 +1546,7 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
 
 /* ABO-RÉZA — récapitulatif de préparation (étape 3) : réduire les blancs,
    sans modifier les cartes d'abonnement des autres pages. */
-#lcdp-lightbox-slot .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) {
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
@@ -1556,15 +1556,15 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
   box-shadow: none;
   gap: 9px;
 }
-#lcdp-lightbox-slot .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) .lcdp-box-card-abonnement__row {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) .lcdp-box-card-abonnement__row {
   gap: 7px 12px;
 }
-#lcdp-lightbox-slot .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) .lcdp-box-card-abonnement__mention {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) .lcdp-box-card-abonnement__mention {
   margin: 0;
   font-size: .82rem;
   line-height: 1.35;
 }
-#lcdp-lightbox-slot .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) .lcdp-box-card-abonnement__micro-action {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) .lcdp-box-card-abonnement:has(.lcdp-box-card-abonnement__micro-action) .lcdp-box-card-abonnement__micro-action {
   min-height: 36px;
   margin: 0;
   padding: 7px 12px;
@@ -1674,12 +1674,12 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
 
 /* Planning mensuel : barres 30 % moins longues, 40 % moins épaisses.
    Les cinq plages, leurs couleurs et leurs jauges d'occupation sont conservées. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
   border-color: rgba(61, 82, 68, .19) !important;
   border-radius: 8px;
   box-shadow: none !important;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
   box-sizing: border-box;
   width: 70% !important;
   max-width: 42px !important;
@@ -1690,7 +1690,7 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
   min-height: 0 !important;
   align-content: center;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
   box-sizing: border-box;
   width: 100%;
   height: 3px !important;
@@ -1701,15 +1701,168 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
   border: 0 !important;
   border-radius: 2px !important;
 }
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot--gris-clair {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot--gris-clair {
   background: #eef0ed;
 }
 /* Conserver le signal rouge d'un accès personnel, à l'échelle des nouvelles barres. */
-#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-plage--acces-personnel {
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-plage--acces-personnel {
   box-shadow: inset 3px 0 0 #c74c45 !important;
 }
 @media (min-width: 900px) {
-  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
+  :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
     grid-auto-rows: 63px;
   }
+}
+
+
+/* ======================================================================
+   PLANIFIER — GABARIT APP MOBILE (2026-11-06)
+   Le calendrier est un élément permanent de la page ; les dialogues et les
+   workflows ponctuels continuent d'utiliser #lcdp-lightbox-slot.
+   La largeur est celle de .lcdp-app-wrapper (448 px maximum sur ordinateur).
+   Ne pas déplacer les superpositions : elles conservent leur gestion de focus.
+   ====================================================================== */
+body.lcdp-page-reserver .lcdp-planifier-wrapper {
+  min-width: 0;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper > .lcdp-site-main {
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-width: 0;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper > .lcdp-site-main > .lcdp-page-section {
+  padding: 14px 12px 24px;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-content.lcdp-stack-large {
+  gap: 10px;
+  max-width: none;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header {
+  margin: 0;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header > .lcdp-title-page-center {
+  margin: 5px 0 0;
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+/* Remplacer uniquement le comportement plein écran du calendrier principal. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot > [data-lcdp-box-calendrier-mois] {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto !important;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0 !important;
+  border: 0;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot > [data-lcdp-box-calendrier-mois] > .lcdp-box-calendrier-mois__card {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  height: auto;
+  max-height: none !important;
+  min-height: 0;
+  margin: 0;
+  padding: 9px 8px 13px !important;
+  overflow: visible;
+  border: 1px solid #e4eae4;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(31,42,36,.08);
+}
+/* Le H1 du wrapper suffit jusqu'à la première sélection d'un parc. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc) [data-lcdp-calendrier-mois-title] {
+  display: none;
+}
+/* Le contenu conserve sa largeur mobile même quand le viewport dépasse 900 px.
+   Cela neutralise les agrandissements de la grille et du bandeau de filtres. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__header {
+  padding: 12px 42px 10px 8px !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres {
+  gap: 9px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-parc {
+  width: 100%;
+  flex: none;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations {
+  padding: 7px 5px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: stretch;
+  gap: 6px 8px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__body {
+  padding-top: 8px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__navigation {
+  gap: 6px;
+  margin-bottom: 10px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__month {
+  min-width: 0;
+  font-size: clamp(1.06rem, 4.3vw, 1.3rem);
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__nav-button {
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  flex-basis: 34px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__grid,
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__weekdays {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  gap: 5px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__grid {
+  min-height: 0;
+  grid-auto-rows: 60px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__number {
+  font-size: .72rem;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__slots {
+  width: 70% !important;
+  max-width: 42px !important;
+  grid-template-rows: repeat(5, 3px) !important;
+  gap: 2px !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__slot {
+  height: 3px !important;
+  min-height: 3px !important;
+  max-height: 3px !important;
+}
+/* Un ancien composant ne doit pas ouvrir une nappe grise sur la page wrapper. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-box-calendrier-mois]::backdrop {
+  background: transparent;
 }
