@@ -126,10 +126,10 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   border-bottom: 1px solid #f8fafc;
   color: var(--compte-texte-libelle);
   font-family: Arial, system-ui, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: .055em;
+  line-height: 1.4;
+  letter-spacing: .045em;
   text-transform: uppercase;
   text-align: left;
 }
@@ -691,7 +691,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] > .lcdp-title-section {
   color: #d97706;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: .09em;
   line-height: 1.5;
@@ -827,4 +827,17 @@ body.lcdp-page-mon-compte #form-mes-informations-membre #zone-selfie .lcdp-selfi
   body.lcdp-page-mon-compte #form-mes-informations-membre
   .lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
   .lcdp-compte-action-prioritaire { transition: none; }
+}
+
+/* Mention DA identique pour remboursement et facturation (fond, graisse, italique). */
+body.lcdp-page-mon-compte #form-mes-informations-membre
+:is([data-lcdp-compte-section="remboursement"], [data-lcdp-compte-section="facturation"])
+.lcdp-box-champ-formulaire__lecture.lcdp-compte-placeholder-da {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.45;
+  text-align: left;
 }

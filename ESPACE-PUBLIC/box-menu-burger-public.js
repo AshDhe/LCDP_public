@@ -2,6 +2,7 @@
   "use strict";
 
   let initialisationEnCours = null;
+  let membreConnecteConfirme = false;
 
   const siteBase = (
     window.SITE_BASE ||
@@ -213,6 +214,37 @@
     }
   }
 
+  // Ne jamais déduire la connexion d'un simple cookie ou du libellé du menu.
+  // Le Worker d'index confirme la session membre lorsque la page publique est affichée.
+  async function verifierSessionMembreMenuPublic() {
+    const config = window.SITE_CONFIG || {};
+    const endpoint = config.workerIndexMembreUrl || config.WORKER_INDEX_MEMBRE_URL ||
+      config.W_INDEX_MEMBRE_URL ||
+      (typeof config.apiUrl === "function" ? config.apiUrl("index-membre-api") : "");
+    if (!endpoint) return false;
+
+    try {
+      const reponse = await fetch(String(endpoint).replace(/\/+$/, "") + "/index", {
+        method: "GET", credentials: "include", cache: "no-store",
+        headers: { Accept: "application/json" }
+      });
+      if (!reponse.ok) return false;
+      const data = await reponse.json().catch(() => null);
+      return data?.success === true && data?.connected === true;
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function urlMonCompteMembreDepuisPublic() {
+    const config = window.SITE_CONFIG || {};
+    const chemin = "/ESPACE-MEMBRE/mes-informations.html";
+    if (typeof window.LCDP_urlMembre === "function") return window.LCDP_urlMembre(chemin);
+    if (typeof config.membreUrl === "function") return config.membreUrl(chemin);
+    const base = String(config.membreBaseUrl || config.MEMBRE_BASE || "").replace(/\/+$/, "");
+    return base ? base + chemin : construireUrlSite(chemin);
+  }
+
   async function ouvrirDialogueMonComptePublic() {
     chargerCssUneFois("/OBJET/BOX/02-box-dialogue-bouton.css");
 
@@ -302,6 +334,10 @@
 
       bouton.addEventListener("click", () => {
         fermerMenu(boutonBurger, navBurger);
+        if (membreConnecteConfirme) {
+          window.location.href = urlMonCompteMembreDepuisPublic();
+          return;
+        }
 
         ouvrirDialogueMonComptePublic().catch((erreur) => {
           console.error("Erreur dialogue Mon compte :", erreur);
@@ -407,6 +443,15 @@
         const element = creerLienMenu(item, boutonBurger, navBurger);
         element.dataset.lcdpMenuRole = item.roleGraphique || "standard";
         listeBurger.appendChild(element);
+      });
+
+      // Aucune affirmation de connexion avant la confirmation du Worker.
+      // Si la vérification échoue, le menu public reste en mode « Connexion ».
+      const entreeCompte = listeBurger.querySelector('[data-lcdp-menu-role="compte"]');
+      void verifierSessionMembreMenuPublic().then((connecte) => {
+        if (!connecte || !entreeCompte?.isConnected) return;
+        membreConnecteConfirme = true;
+        entreeCompte.textContent = "Mon compte";
       });
 
       boutonBurger.addEventListener("click", (event) => {
