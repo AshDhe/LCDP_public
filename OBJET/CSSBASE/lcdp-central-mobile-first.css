@@ -24967,9 +24967,8 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   color: #334155;
   font-weight: 700;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link::after,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]::after {
-  content: "Espace personnel";
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link::after {
+  content: "Espace membre";
   display: inline-block;
   flex: 0 0 auto;
   padding: 4px 8px;
@@ -24982,9 +24981,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   letter-spacing: normal;
   transition: background-color 200ms ease, color 200ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:hover::after, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:focus-visible::after,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]:hover::after,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]:focus-visible::after {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:hover::after, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:focus-visible::after {
   background: var(--lcdp-burger-accent);
   color: #fff;
 }
@@ -25001,8 +24998,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte] {
   color: #334155;
   font-weight: 700;
-  justify-content: space-between;
-  gap: 6px;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link:last-child:not([data-lcdp-menu-faq]) {
   margin-top: 0;
@@ -33219,3 +33214,116 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   }
 }
 /* ======================================================================== */
+
+/* Gabarit sans navigation : tunnels de connexion, de sécurité et de formulaires.
+   La classe est ajoutée à .lcdp-app-wrapper ; aucune navigation n'est chargée.
+   Cette règle protège également le rendu si un ancien script réinsère un bandeau. */
+.lcdp-app-wrapper.lcdp-app-wriper--sans {
+  display: flex;
+  flex-direction: column;
+}
+.lcdp-app-wrapper.lcdp-app-wriper--sans > :is(
+  #lcdp-bandeau-slot,
+  #lcdp-footer-slot,
+  .lcdp-box-bandeau-nav,
+  .lcdp-box-footer
+) {
+  display: none !important;
+}
+.lcdp-app-wrapper.lcdp-app-wriper--sans > .lcdp-site-main {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+
+/* Ajustements generiques de connexion et de changement de compte.
+   Portee limitee aux trois formulaires de connexion et aux boutons
+   de choix de compte dans le dialogue commun. */
+body:is(.lcdp-connexion-membre, .lcdp-connexion-parc, .lcdp-connexion-coach)
+  .lcdp-box-champ-formulaire__control > .lcdp-box-champ-formulaire__checkbox-line {
+  margin-top: 12px;
+}
+
+/* Reutilise les couleurs de compte existantes et les regles communes
+   de bouton (y compris hover) via les variables generiques. */
+.lcdp-box-dialogue-bouton .lcdp-button.lcdp-button-compte--membre {
+  --lcdp-ui-action: #4E6838;
+  --lcdp-ui-action-hover: #4E6838;
+}
+.lcdp-box-dialogue-bouton .lcdp-button.lcdp-button-compte--parc {
+  --lcdp-ui-action: var(--lcdp-color-parc, #d64b68);
+  --lcdp-ui-action-hover: var(--lcdp-color-parc, #d64b68);
+}
+.lcdp-box-dialogue-bouton .lcdp-button.lcdp-button-compte--coach {
+  --lcdp-ui-action: var(--lcdp-color-coach, #8660c8);
+  --lcdp-ui-action-hover: var(--lcdp-color-coach, #8660c8);
+}
+
+/* ===================================================================
+   COMPOSANT PUBLIC : SECTION EN SOMMEIL
+   Remplace uniquement l'ancien visuel d'attente des pages non publiées.
+   HTML autonome : aucune dépendance à Tailwind CSS.
+   =================================================================== */
+.lcdp-page-document-legal .lcdp-section-sommeil {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 384px;
+  margin: 0 auto;
+  padding: 32px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .06), 0 1px 3px rgba(15, 23, 42, .04);
+}
+.lcdp-page-document-legal .lcdp-section-sommeil__icone {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  margin: 0 0 16px;
+  color: #e59834;
+  background: rgba(255, 251, 235, .6);
+  border: 1px solid rgba(254, 243, 199, .5);
+  border-radius: 16px;
+  animation: lcdp-section-sommeil-flotte 3s infinite;
+}
+.lcdp-page-document-legal .lcdp-section-sommeil__icone svg {
+  display: block;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+.lcdp-page-document-legal .lcdp-section-sommeil__titre {
+  margin: 0;
+  padding: 0;
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: .025em;
+  text-transform: uppercase;
+}
+.lcdp-page-document-legal .lcdp-section-sommeil__texte {
+  max-width: 220px;
+  margin: 4px 0 0;
+  padding: 0;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+@keyframes lcdp-section-sommeil-flotte {
+  0%, 100% { transform: translateY(-6px); animation-timing-function: cubic-bezier(.8, 0, 1, 1); }
+  50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, .2, 1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lcdp-page-document-legal .lcdp-section-sommeil__icone { animation: none; }
+}
