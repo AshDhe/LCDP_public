@@ -9,6 +9,55 @@
     const flow = String(window.LCDP_SIGNUP_FLOW || "");
     delete window.LCDP_SIGNUP_FLOW;
     // Écran isolé : aucun bandeau ni footer, y compris hors inscription.
+    // Présentation du tunnel uniquement ; aucune modification des règles de sécurité.
+    if (flow && (type === "coda" || type === "codr")) {
+      document.body.classList.add("lcdp-security-tunnel");
+      document.body.dataset.securityStep = type === "coda" ? "1" : "2";
+      const feuille = document.createElement("link");
+      feuille.rel = "stylesheet";
+      feuille.href = new URL("../OBJET/CSSBASE/securite-compte.css", location.href).href;
+      document.head.appendChild(feuille);
+      const entete = document.querySelector("#formulaire-code-securite .lcdp-box-formulaire__header");
+      if (entete) {
+        const titre = entete.querySelector(".lcdp-box-formulaire__title");
+        const sousTitre = entete.querySelector(".lcdp-box-formulaire__subtitle");
+        const progression = document.createElement("div");
+        progression.className = "lcdp-step-progress";
+        progression.style.setProperty("--lcdp-step-progress-value", type === "coda" ? "33.3333%" : "66.6667%");
+        progression.setAttribute("role", "progressbar");
+        progression.setAttribute("aria-valuemin", "0");
+        progression.setAttribute("aria-valuemax", "3");
+        progression.setAttribute("aria-valuenow", type === "coda" ? "1" : "2");
+        progression.setAttribute("aria-label", "Progression de la sécurisation du compte");
+        progression.innerHTML = '<span class="lcdp-step-progress__fill"></span>';
+        if (titre) {
+          const badge = document.createElement("span");
+          badge.className = "lcdp-step-progress__badge";
+          badge.textContent = type === "coda" ? "Étape 1 / 3" : "Étape 2 / 3";
+          titre.after(badge);
+        }
+        if (sousTitre) sousTitre.before(progression);
+      }
+      const consignes = document.querySelector("#formulaire-code-securite > ul.lcdp-box-formulaire__note");
+      if (consignes) {
+        consignes.classList.add("lcdp-security-rules");
+        const enteteRegles = document.createElement("li");
+        enteteRegles.className = "lcdp-security-rules__heading";
+        enteteRegles.textContent = type === "coda" ? "Consignes de sécurité" : "Règles du code de récupération";
+        consignes.prepend(enteteRegles);
+      }
+      const valider = document.getElementById("bouton-valider-code");
+      if (valider) {
+        valider.classList.remove("lcdp-button-logo");
+        valider.classList.add("lcdp-security-submit");
+        valider.replaceChildren(document.createTextNode("Valider et continuer"));
+        valider.setAttribute("aria-label", "Valider et continuer");
+        valider.title = "Valider et continuer";
+      }
+      document.querySelectorAll("#formulaire-code-securite .lcdp-box-champ-formulaire--code input").forEach(champ => {
+        champ.setAttribute("aria-autocomplete", "none");
+      });
+    }
     let token = String(window.LCDP_CODE_TOKEN || "");
     delete window.LCDP_CODE_TOKEN;
     const form = document.getElementById("formulaire-code-securite");

@@ -1,0 +1,353 @@
+/* Tunnel d'inscription : CODA / CODR / préparation de l'accès.
+   Habillage autonome inspiré des trois maquettes fournies.
+   Portée strictement limitée à body.lcdp-security-tunnel. */
+body.lcdp-security-tunnel {
+  background: #f8fafc;
+  color: #334155;
+  font-family: Arial, system-ui, sans-serif;
+}
+body.lcdp-security-tunnel .lcdp-site-page,
+body.lcdp-security-tunnel .lcdp-app-wrapper {
+  min-height: 100dvh;
+  background: #f8fafc;
+}
+body.lcdp-security-tunnel .lcdp-site-main {
+  padding: 16px !important;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  box-sizing: border-box;
+}
+body.lcdp-security-tunnel .lcdp-page-section,
+body.lcdp-security-tunnel .lcdp-page-container {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 0;
+}
+body.lcdp-security-tunnel .lcdp-page-container { max-width: 448px; }
+body.lcdp-security-tunnel .lcdp-box-formulaire-page,
+body.lcdp-security-tunnel .lcdp-box-formulaire-page__inner {
+  width: 100%; max-width: none; margin: 0; padding: 0;
+  border: 0; border-radius: 0; background: transparent; box-shadow: none;
+}
+body.lcdp-security-tunnel #formulaire-code-securite,
+body.lcdp-security-tunnel .lcdp-setup-flow {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  padding: 22px 24px 24px;
+  border: 1px solid #f1f5f9;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, .10);
+  color: #475569;
+}
+/* Entête des étapes 1/2 : la structure existante reste en place. */
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-formulaire__header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 20px;
+  padding: 0 0 6px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-formulaire__title,
+body.lcdp-security-tunnel .lcdp-setup-flow > #etape-securite {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #020617;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  text-align: left;
+}
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-formulaire__title small,
+body.lcdp-security-tunnel #etape-securite small { display: none !important; }
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-formulaire__subtitle,
+body.lcdp-security-tunnel #titre-preparation {
+  display: block;
+  margin: 4px 0 0;
+  color: #94a3b8;
+  font: 700 12px/1.45 Arial,system-ui,sans-serif;
+  text-align: left;
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+/* Panneau des consignes : aucune règle métier supprimée. */
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-security-rules {
+  display: grid;
+  gap: 9px;
+  padding: 16px;
+  margin: 0 0 20px;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  background: #f8fafc;
+  list-style: none;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.55;
+  text-align: left;
+}
+body.lcdp-security-tunnel .lcdp-security-rules > li {
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 14px;
+}
+body.lcdp-security-tunnel .lcdp-security-rules > li:not(.lcdp-security-rules__heading)::before {
+  content: "";
+  position: absolute;
+  top: .65em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e59834;
+}
+body.lcdp-security-tunnel .lcdp-security-rules > .lcdp-security-rules__heading {
+  margin: 0 0 4px;
+  padding: 0;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+body.lcdp-security-tunnel .lcdp-security-rules__heading::before { content: "🛡️ "; }
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-formulaire__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-champ-formulaire--code {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-champ-formulaire__label {
+  margin: 0 0 10px;
+  padding: 0;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .065em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+body.lcdp-security-tunnel .lcdp-box-champ-formulaire__code-cases {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 9px;
+}
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-champ-formulaire__code-cases input {
+  width: 100%;
+  min-width: 0;
+  height: 54px;
+  min-height: 54px;
+  padding: 4px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  box-sizing: border-box;
+  background: #f8fafc !important;
+  color: #0f172a;
+  font: 700 20px/1.25 Arial,system-ui,sans-serif;
+  text-align: center;
+  transition: border-color .2s ease,background-color .2s ease;
+}
+body.lcdp-security-tunnel[data-security-step="2"] #formulaire-code-securite .lcdp-box-champ-formulaire__code-cases input {
+  height: 48px;
+  min-height: 48px;
+  font: 700 14px/1.25 ui-monospace,Consolas,monospace;
+  text-transform: uppercase;
+}
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-champ-formulaire__code-cases input:focus {
+  outline: none;
+  border-color: #e59834;
+  background: #fff !important;
+  box-shadow: 0 0 0 2px rgba(229,152,52,.14);
+}
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-champ-formulaire__checkbox-line {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 2px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+}
+body.lcdp-security-tunnel #formulaire-code-securite input[type="checkbox"] { accent-color: #4e6838; }
+body.lcdp-security-tunnel #formulaire-code-securite > .lcdp-box-formulaire__note:not(.lcdp-security-rules) {
+  margin: 14px 0;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.55;
+  text-align: center;
+}
+body.lcdp-security-tunnel #formulaire-code-securite #note-creation-code {
+  margin: 12px 0 0;
+  color: #64748b;
+  font-weight: 600;
+}
+body.lcdp-security-tunnel #formulaire-code-securite .lcdp-box-formulaire__actions {
+  width: 100%;
+  padding: 16px 0 0;
+  margin: 12px 0 0;
+  border-top: 1px solid #f1f5f9;
+}
+body.lcdp-security-tunnel #bouton-valider-code.lcdp-security-submit {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  min-height: 54px;
+  margin: 0;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 16px;
+  background: #4e6838;
+  color: #fff;
+  font: 800 14px/1.2 Arial,system-ui,sans-serif;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(39,81,56,.14);
+}
+body.lcdp-security-tunnel #bouton-valider-code.lcdp-security-submit:hover:not(:disabled) { background: #3d522c; }
+body.lcdp-security-tunnel #bouton-valider-code.lcdp-security-submit:disabled { opacity: .55; cursor: wait; }
+/* Étape 3 : modèle commun ; QR uniquement selon le JS et les états hidden existants. */
+body.lcdp-security-tunnel .lcdp-setup-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+body.lcdp-security-tunnel .lcdp-setup-flow > #etape-securite { order: 0; }
+body.lcdp-security-tunnel .lcdp-setup-flow > .lcdp-step-progress__badge { order: 1; }
+body.lcdp-security-tunnel .lcdp-setup-flow > .lcdp-step-progress { order: 2; }
+body.lcdp-security-tunnel .lcdp-setup-flow > #titre-preparation { order: 3; }
+body.lcdp-security-tunnel .lcdp-setup-flow > .lcdp-setup-flow__content { order: 4; }
+body.lcdp-security-tunnel #etape-securite { margin: 0 !important; }
+body.lcdp-security-tunnel #titre-preparation { font-size: 12px; }
+body.lcdp-security-tunnel #preparation-contenu { text-align: left; }
+body.lcdp-security-tunnel #preparation-qr {
+  padding: 14px;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  background: #f8fafc;
+  text-align: center;
+}
+body.lcdp-security-tunnel #preparation-qr[hidden] { display: none !important; }
+body.lcdp-security-tunnel #identification-actualisation {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin: 12px 0 0;
+}
+body.lcdp-security-tunnel #identification-actualisation > label,
+body.lcdp-security-tunnel .lcdp-setup-flow__legend {
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+body.lcdp-security-tunnel .lcdp-setup-flow__note {
+  padding: 13px 14px;
+  border: 1px solid #fde7be;
+  border-radius: 12px;
+  background: #fffbeb;
+  color: #92400e;
+  font-size: 12px;
+  line-height: 1.5;
+}
+body.lcdp-security-tunnel .lcdp-setup-flow__fieldset .lcdp-box-champ-formulaire__code-cases {
+  max-width: 280px;
+  margin: 12px auto 0;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 10px;
+}
+body.lcdp-security-tunnel .lcdp-setup-flow__fieldset .lcdp-box-champ-formulaire__code-cases input {
+  height: 54px; min-height: 54px; width: 100%; min-width: 0;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc !important;
+  text-align: center;
+  color: #0f172a;
+  font: 700 20px/1.2 Arial,system-ui,sans-serif;
+  box-sizing: border-box;
+}
+body.lcdp-security-tunnel .lcdp-setup-flow__fieldset .lcdp-box-champ-formulaire__code-cases input:focus {
+  outline: none;
+  border-color: #4e6838;
+  background: #fff !important;
+  box-shadow: 0 0 0 2px rgba(78,104,56,.12);
+}
+body.lcdp-security-tunnel .lcdp-setup-flow__phone-check {
+  width: min(100%,280px);
+  margin: 18px auto 14px;
+  padding: 12px;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  background: #f8fafc;
+  box-sizing: border-box;
+}
+body.lcdp-security-tunnel .lcdp-setup-flow__phone-check .lcdp-setup-flow__toggle {
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: #475569;
+}
+body.lcdp-security-tunnel .lcdp-setup-flow .lcdp-box-formulaire__actions {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+body.lcdp-security-tunnel .lcdp-setup-flow .lcdp-box-formulaire__actions #autoriser-geolocalisation {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 54px !important;
+  height: auto !important;
+  max-height: none !important;
+  padding: 14px 16px !important;
+  border: 0;
+  border-radius: 16px;
+  background: #4e6838;
+  color: #fff;
+  font: 800 14px/1.2 Arial,system-ui,sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .045em;
+  box-sizing: border-box;
+}
+body.lcdp-security-tunnel .lcdp-setup-flow .lcdp-box-formulaire__actions #autoriser-geolocalisation:hover:not(:disabled) { background:#3d522c; }
+body.lcdp-security-tunnel .lcdp-setup-flow .lcdp-box-formulaire__actions #autoriser-geolocalisation:disabled { opacity: .58; }
+/* Conserver sans bandeau/footer. Les mots « header/footer » du modèle Tailwind
+   désignent ici seulement les zones internes de la carte. */
+body.lcdp-security-tunnel #lcdp-bandeau-slot,
+body.lcdp-security-tunnel #lcdp-footer-slot { display: none !important; }
+@media (max-width: 480px) {
+  body.lcdp-security-tunnel .lcdp-site-main { padding: 10px !important; align-items:flex-start; }
+  body.lcdp-security-tunnel #formulaire-code-securite,
+  body.lcdp-security-tunnel .lcdp-setup-flow { padding: 20px 18px; border-radius: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.lcdp-security-tunnel #bouton-valider-code,
+  body.lcdp-security-tunnel .lcdp-step-progress__fill { transition: none; }
+}
