@@ -22211,7 +22211,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__list {
   width: 100%;
-  grid-template-columns: repeat(2,minmax(0,1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
   display: grid;
 }
@@ -22231,7 +22231,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__card-title {
   order: 1;
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.3;
   font-weight: 700;
   color: #0f172a;
@@ -22253,7 +22253,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__legend {
   order: 3;
   margin: 0;
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.3;
   text-align: left;
   color: #94a3b8;
@@ -22261,7 +22261,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__text {
   order: 2;
   margin: 0;
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.5;
   font-weight: 400;
   text-align: left;
@@ -22286,7 +22286,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     padding: 12px;
   }
   :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__text {
-    font-size: 10px;
+    font-size: 13px;
   }
 }
 :where(html[data-lcdp-css~="c056"]) .lcdp-box-card-mentions-facture {
@@ -31232,7 +31232,7 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
     padding: .5rem;
   }
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-page-heading {
+:where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-page-heading {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31241,7 +31241,7 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   padding-top: 8px;
   text-align: center;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-back-link {
+:where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-back-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -31253,10 +31253,10 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   text-decoration: none;
   transition: color .2s ease;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-back-link:hover, :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-back-link:focus-visible {
+:where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-back-link:hover, :where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-back-link:focus-visible {
   color: #475569;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-back-link svg {
+:where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-back-link svg {
   display: block;
   width: 12px;
   height: 12px;
@@ -31266,7 +31266,7 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   stroke-linejoin: round;
   stroke-linecap: round;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-page-heading > .lcdp-title-page-center {
+:where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-page-heading > .lcdp-title-page-center {
   margin: 0;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card {
@@ -33420,4 +33420,52 @@ body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__note {
   body.lcdp-formulaire-public-unifie .lcdp-box-formulaire {
     padding: 18px;
   }
+}
+
+/* Illustrations éditoriales — présentation uniforme sur Hello, Association et Le Club.
+   Même largeur quelle que soit l'imbrication dans un composant boxtext.
+   Les cartes géographiques conservent leur object-fit et hauteur spécifiques. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-contenu-editorial figure.lcdp-editorial-inline-figure,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-contenu-editorial figure.lcdp-editorial-map {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-contenu-editorial figure.lcdp-editorial-inline-figure > img.lcdp-illustration {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Harmonisation vérifiée des illustrations des pages Hello, Association et Le Club.
+   La largeur d'une illustration dans une section sans carte est alignée sur celle
+   d'une carte éditoriale (retrait intérieur de 20px de chaque côté).
+   Les cartes géographiques gardent leur format propre, identique entre pages. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-contenu-editorial .lcdp-editorial-feature figure.lcdp-editorial-inline-figure {
+  box-sizing: border-box;
+  width: calc(100% - 40px);
+  max-width: none;
+  margin-inline: auto;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-contenu-editorial .lcdp-editorial-card figure.lcdp-editorial-inline-figure,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-contenu-editorial .lcdp-editorial-card figure.lcdp-editorial-map {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-contenu-editorial figure.lcdp-editorial-inline-figure > img.lcdp-illustration {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Harmonisation des pages de règlement : navigation non imprimable. */
+@media print {
+  :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-editorial-back-link { display: none; }
 }
