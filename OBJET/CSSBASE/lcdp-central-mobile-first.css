@@ -33469,3 +33469,61 @@ body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__note {
 @media print {
   :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-editorial-back-link { display: none; }
 }
+
+/* Page Inscription membre invité : mise au niveau typographique des pages
+   éditoriales (Hello, Association et Le Club), sans changer le composant
+   galerie générique ni les autres pages qui emploient c042. */
+:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-contenu-editorial .lcdp-box-galerie__card-title {
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #0f172a;
+}
+:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-contenu-editorial .lcdp-box-galerie__text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #475569;
+}
+:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-contenu-editorial .lcdp-box-galerie__legend {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #64748b;
+}
+:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-contenu-editorial .lcdp-box-galerie__image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+/* Maintien de la taille commune aussi sur PC malgré l'ancienne règle c042
+   qui imposait 10px à tous les paragraphes de la galerie. */
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-contenu-editorial .lcdp-box-galerie__text {
+    font-size: 13px;
+  }
+}
+
+/* Inscription membre invité — étapes numérotées automatiquement.
+   Style isolé : ne modifie pas les listes du règlement ni les autres pages. */
+:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-inscription-etapes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: lcdp-inscription-etape;
+}
+:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-inscription-etapes > li {
+  counter-increment: lcdp-inscription-etape;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #475569;
+}
+:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-inscription-etapes > li::before {
+  content: "Étape " counter(lcdp-inscription-etape) " : ";
+  font-weight: 700;
+  color: #0f172a;
+}

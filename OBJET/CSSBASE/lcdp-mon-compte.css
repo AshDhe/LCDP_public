@@ -1,237 +1,392 @@
-/*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
-.lcdp-page-mon-compte {
-  --compte-fond-carte: var(--lcdp-color-surface, #fff);
-  --compte-fond-ligne: var(--lcdp-color-surface-soft, #f7f7f4);
-  --compte-texte: var(--lcdp-color-text, #1f2a24);
-  --compte-texte-secondaire: var(--lcdp-color-text-muted, #5f6861);
-  --compte-bordure: var(--lcdp-color-border, rgba(31,42,36,.22));
-  --compte-accent: var(--lcdp-color-logo-green, #55733f);
-  --compte-rayon-carte: var(--lcdp-radius-medium, 16px);
-  --compte-rayon-ligne: var(--lcdp-radius-small, 10px);
-  --compte-espacement: var(--lcdp-space-2, 12px);
-  --compte-ombre: var(--lcdp-ui-button-shadow, 0 1px 2px rgba(31,42,36,.08));
+/* ======================================================================
+   MON COMPTE — adaptation fidèle du corps de la maquette Tailwind fournie.
+   Règles exclusivement spécifiques à la page membre : aucun reset Tailwind,
+   aucune modification des bandeaux, du menu burger ou du footer.
+   Dépend du socle lcdp-central-mobile-first.css, chargé avant ce fichier.
+   ====================================================================== */
+
+body.lcdp-page-mon-compte {
+  --compte-fond-page: #f8fafc;
+  --compte-fond-carte: #ffffff;
+  --compte-fond-ligne: #f8fafc;
+  --compte-texte: #0f172a;
+  --compte-texte-secondaire: #64748b;
+  --compte-texte-libelle: #94a3b8;
+  --compte-bordure: #f1f5f9;
+  --compte-accent: #4e6838;
+  --compte-orange: #e59834;
+  --compte-rayon-carte: 16px;
+  --compte-rayon-ligne: 12px;
+  --compte-espacement: 20px;
+  --compte-ombre: 0 1px 3px rgba(15,23,42,.07), 0 1px 2px rgba(15,23,42,.04);
   color: var(--compte-texte);
 }
-.lcdp-page-mon-compte .lcdp-app-wrapper .lcdp-page-content.lcdp-stack-large {
-  gap: var(--compte-espacement);
+
+/* Le fond et la largeur ne concernent que la surface de la page. */
+body.lcdp-page-mon-compte .lcdp-site-main {
+  background: var(--compte-fond-page);
 }
-.lcdp-page-mon-compte .lcdp-app-wrapper .lcdp-title-page-center {
-  color: var(--compte-texte);
+body.lcdp-page-mon-compte .lcdp-site-main > .lcdp-page-section {
+  padding: 20px 0 38px;
 }
-.lcdp-page-mon-compte .lcdp-page-header .lcdp-mention-connexion, .lcdp-page-mon-compte .lcdp-page-header #mention-statut-membre.lcdp-mention-connexion {
-  display: block;
+body.lcdp-page-mon-compte .lcdp-site-main .lcdp-page-container {
+  padding-inline: 20px;
+}
+body.lcdp-page-mon-compte .lcdp-site-main .lcdp-page-content.lcdp-stack-large {
+  width: 100%;
+  max-width: 448px; /* max-w-md de la maquette */
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+body.lcdp-page-mon-compte .lcdp-page-header {
+  max-width: 100%;
+  padding-top: 8px;
+  gap: 6px;
+  text-align: center;
+}
+body.lcdp-page-mon-compte .lcdp-page-header > .lcdp-title-page-center {
+  margin: 0;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 900;
+  letter-spacing: -.025em;
+  color: #0f172a;
+}
+body.lcdp-page-mon-compte .lcdp-page-header #mention-statut-membre.lcdp-mention-connexion {
+  display: inline-block;
   width: fit-content;
   max-width: 100%;
-  margin: 4px auto;
+  margin: 0 auto;
   padding: 4px 10px;
-  border-radius: var(--compte-rayon-ligne);
-  background: var(--compte-fond-ligne);
-  color: var(--compte-texte-secondaire);
-  font-size: .75rem;
-  font-weight: 600;
-  line-height: 1.35;
-  text-align: center;
-  overflow-wrap: anywhere;
+  border-radius: 6px;
+  background: #e2e8f0;
+  color: #475569;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
-.lcdp-page-mon-compte #lcdp-mes-informations-slot {
-  min-width: 0;
+body.lcdp-page-mon-compte #mention-suspension-abonnement-membre {
   width: 100%;
+  margin-top: 5px;
+  color: #92400e;
+  font-size: 12px;
+  line-height: 1.45;
+}
+body.lcdp-page-mon-compte #lcdp-mes-informations-slot {
+  width: 100%;
+  min-width: 0;
   margin: 0;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre {
-  width: 100%;
-  min-width: 0;
+body.lcdp-page-mon-compte #form-mes-informations-membre {
   box-sizing: border-box;
-  padding: 0;
+  display: block;
+  width: 100%;
+  min-width: 0;
   margin: 0;
+  padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
-  gap: 0;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-box-formulaire__header, .lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-formulaire-actions][hidden] {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-box-formulaire__header,
+body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-formulaire-actions][hidden] {
   display: none !important;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-box-formulaire__fields.lcdp-mon-compte-sections {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-box-formulaire__fields.lcdp-mon-compte-sections {
   display: flex;
   flex-direction: column;
-  gap: var(--compte-espacement);
+  gap: 20px;
   width: 100%;
   min-width: 0;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section {
+/* Six cartes blanches distinctes, comme les sections de la maquette. */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  box-sizing: border-box;
-  min-width: 0;
-  padding: 15px 14px 16px;
-  border: 1px solid var(--compte-bordure);
-  border-radius: var(--compte-rayon-carte);
-  background: var(--compte-fond-carte);
-  box-shadow: var(--compte-ombre);
-}
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-title-section {
-  display: block;
-  margin: 0 0 4px;
-  padding: 0 0 9px;
-  border-bottom: 1px solid var(--compte-bordure);
-  color: var(--compte-texte-secondaire);
-  font-size: .88rem;
-  font-weight: 650;
-  line-height: 1.3;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-}
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 3px;
-  align-items: center;
-  box-sizing: border-box;
+  gap: 12px;
   min-width: 0;
   margin: 0;
-  padding: 9px 11px;
+  padding: 20px;
   border: 1px solid var(--compte-bordure);
-  border-radius: var(--compte-rayon-ligne);
-  background: var(--compte-fond-ligne);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: var(--compte-ombre);
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__label-zone {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-title-section {
+  margin: 0 0 3px;
+  padding: 0 0 9px;
+  border-bottom: 1px solid #f8fafc;
+  color: var(--compte-texte-libelle);
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+  text-align: left;
+}
+/* Lignes de valeurs : fond ardoise très clair et bords discrets. */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, .40fr) minmax(0, .60fr);
+  align-items: center;
+  gap: 8px;
   width: 100%;
   min-width: 0;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  background: rgba(248,250,252,.8);
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__label-zone {
+  min-width: 0;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__label {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section :is(.lcdp-box-champ-formulaire__label,.lcdp-box-champ-formulaire__heading) {
   display: block;
   margin: 0;
-  font-size: .76rem;
-  line-height: 1.3;
+  color: var(--compte-texte-libelle);
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.35;
   font-weight: 500;
-  color: var(--compte-texte-secondaire);
+  text-align: left;
   overflow-wrap: anywhere;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__control {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__control {
   position: relative;
-  min-width: 0;
   width: 100%;
+  min-width: 0;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__lecture {
-  display: flex;
-  align-items: center;
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__lecture {
+  box-sizing: border-box;
+  display: block;
   width: 100%;
   min-width: 0;
-  min-height: 24px;
-  padding: 0 !important;
+  min-height: 0;
   margin: 0;
+  padding: 0 !important;
   border: 0 !important;
   border-radius: 0;
   background: transparent !important;
   box-shadow: none !important;
-  color: var(--compte-texte) !important;
-  font-size: .88rem;
-  line-height: 1.35;
-  font-weight: 550;
-  text-align: left;
+  color: #1e293b !important;
+  -webkit-text-fill-color: #1e293b;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 700;
+  text-align: right;
   white-space: normal;
   overflow-wrap: anywhere;
-  -webkit-text-fill-color: var(--compte-texte);
+  word-break: normal;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__control--modifiable .lcdp-box-champ-formulaire__lecture {
-  padding-right: 38px !important;
+/* Les lignes modifiables empilent leur libellé et leur valeur, bouton à droite. */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-champ-formulaire--modifiable:not(.lcdp-mon-compte-action-courte) {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3px;
+  transition: border-color .18s ease;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
-  padding-left: 38px !important;
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-champ-formulaire--modifiable:hover {
+  border-color: #fcd9a6;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire--modifiable {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire--modifiable:not(.lcdp-mon-compte-action-courte) .lcdp-box-champ-formulaire__lecture {
+  padding-right: 42px !important;
+  text-align: left;
+}
+/* Actions CODA, CODR et géolocalisation : pas de valeur répétée sous l'intitulé. */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-mon-compte-action-courte {
+  grid-template-columns: minmax(0, 1fr) 32px;
+  gap: 6px;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-action-courte .lcdp-box-champ-formulaire__control {
+  width: 32px;
+  min-height: 32px;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-action-courte .lcdp-box-champ-formulaire__lecture {
+  display: none;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire--modifiable {
   --lcdp-champ-modifiable-action-size: 32px;
   --lcdp-champ-modifiable-action-offset: 0px;
-  --lcdp-champ-modifiable-icon-size: 17px;
+  --lcdp-champ-modifiable-icon-size: 16px;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit,
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge {
   box-sizing: border-box;
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
+  position: absolute;
+  top: 50%;
   right: 0;
-  border: 1px solid var(--compte-bordure);
-  border-radius: var(--compte-rayon-ligne);
-  background: var(--compte-fond-carte);
-  color: var(--lcdp-color-orange, #f2a23a);
-  box-shadow: none;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ffedd5;
+  border-radius: 8px;
+  background: #fffbeb;
+  color: var(--compte-orange);
+  box-shadow: 0 1px 2px rgba(15,23,42,.07);
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit:hover {
-  background: var(--compte-fond-ligne);
-  border-color: var(--lcdp-color-orange, #f2a23a);
-  color: var(--lcdp-color-orange-hover, #e89223);
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit:hover,
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge:hover {
+  border-color: #fcd9a6;
+  background: #fef3c7;
+  color: #c77a16;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge, .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge:hover, .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge:focus-visible {
-  color: #b3261e;
-}
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit-icon, .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit-icon path {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit-icon {
+  width: 16px;
+  height: 16px;
   fill: currentColor;
   stroke: currentColor;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit[hidden] {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit[hidden] {
   display: none !important;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide {
-  margin: 6px 0 0;
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide {
+  grid-column: 1 / -1;
+  margin: 3px 0 0;
   padding: 0;
-  font-size: .78rem;
-  line-height: 1.45;
+  font: 700 12px/1.5 Arial,system-ui,sans-serif;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide a {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide a {
   color: var(--compte-accent);
+  text-decoration: underline;
   text-underline-offset: 3px;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="participation"] #champ-points-club-membre, .lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="participation"] #champ-da-membre {
-  font-variant-numeric: tabular-nums;
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide a:hover {
+  color: #3d522c;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="participation"] .lcdp-box-champ-formulaire--badge {
-  background: var(--compte-fond-ligne);
-  border-color: var(--compte-bordure);
+/* Espace Points passion : synthèse réelle alimentée par le JS et l'API. */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-points-source-masque {
+  display: none !important;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-points {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  width: 100%;
-  margin: 5px 0 0;
-  padding: 0;
-}
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button {
-  box-sizing: border-box;
-  width: auto;
-  min-width: 155px;
-  max-width: 100%;
-  min-height: 37px;
-  margin: 0;
-  padding: 7px 15px;
-  border-radius: 11px;
-  font-size: .86rem;
-  font-weight: 600;
-  line-height: 1.25;
-  white-space: normal;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+  margin-top: 4px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#f8fafc,#f1f5f9);
   text-align: center;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: var(--compte-texte);
+body.lcdp-page-mon-compte .lcdp-mon-compte-points__resume {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange:hover {
-  background: var(--lcdp-color-orange-hover);
-  border-color: var(--lcdp-color-orange-hover);
+body.lcdp-page-mon-compte .lcdp-mon-compte-points__valeur {
+  font: 900 30px/1.2 Arial,system-ui,sans-serif;
+  letter-spacing: -.025em;
+  color: #0f172a;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-formulaire__actions, .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-title-section {
-  margin-top: 0;
-  margin-bottom: 0;
+body.lcdp-page-mon-compte .lcdp-mon-compte-points__badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border: 1px solid #ffedd5;
+  border-radius: 6px;
+  background: #fffbeb;
+  color: #b45309;
+  font: 800 11px/1.35 Arial,system-ui,sans-serif;
+  letter-spacing: .05em;
+  text-transform: uppercase;
 }
+body.lcdp-page-mon-compte .lcdp-mon-compte-points__detail {
+  max-width: 240px;
+  margin: 0;
+  color: #94a3b8;
+  font: 400 11px/1.5 Arial,system-ui,sans-serif;
+}
+/* Accès Factures / Points : boutons secondaires minimalistes. */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 3px 0 0;
+  padding: 0;
+  width: 100%;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse > .lcdp-button {
+  width: auto;
+  min-width: 0;
+  min-height: 36px;
+  max-width: 100%;
+  margin: 0;
+  padding: 8px 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  color: #334155;
+  font: 700 12px/1.35 Arial,system-ui,sans-serif;
+  letter-spacing: normal;
+  text-transform: none;
+  box-shadow: 0 1px 2px rgba(15,23,42,.05);
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse > .lcdp-button:hover {
+  border-color: #334155;
+  background: #f8fafc;
+  color: #0f172a;
+}
+/* Règlements : lecture et acceptation restent distinctes, sans toucher aux URL. */
+body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="reglements"] > [data-lcdp-box-champ-formulaire] {
+  row-gap: 4px;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="reglements"] .lcdp-box-champ-formulaire__lecture {
+  font-size: 12px;
+}
+/* Identifiants et coordonnées longues toujours lisibles sur écran étroit. */
+body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="remboursement"] .lcdp-box-champ-formulaire__lecture,
+body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="facturation"] .lcdp-box-champ-formulaire__lecture {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre :is(button,a):focus-visible {
+  outline: 2px solid var(--compte-accent);
+  outline-offset: 3px;
+}
+@media (max-width: 359px) {
+  body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section {
+    padding: 15px 13px;
+  }
+  body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] {
+    grid-template-columns: minmax(0, .43fr) minmax(0,.57fr);
+    padding: 9px 10px;
+  }
+  body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-champ-formulaire--modifiable:not(.lcdp-mon-compte-action-courte) {
+    grid-template-columns: 1fr;
+  }
+  body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-mon-compte-action-courte {
+    grid-template-columns: minmax(0,1fr) 32px;
+  }
+}
+
+/* Styles de dialogues selfie et codes conservés de la feuille précédente. */
+
 .lcdp-page-mon-compte #zone-selfie .lcdp-selfie-control {
   position: relative;
   box-sizing: border-box;
