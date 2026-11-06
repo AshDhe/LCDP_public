@@ -14,6 +14,17 @@
     const form = document.getElementById("formulaire-code-securite");
     const bouton = document.getElementById("bouton-valider-code");
     const message = document.getElementById("message-code");
+    const attente = document.createElement("div");
+    attente.className = "lcdp-setup-loading";
+    attente.hidden = true;
+    attente.setAttribute("role", "status");
+    attente.setAttribute("aria-live", "polite");
+    attente.innerHTML = '<span class="lcdp-setup-loading__spinner" aria-hidden="true"></span><span class="lcdp-setup-loading__text">Validation en cours…</span>';
+    document.body.appendChild(attente);
+    const afficherAttente = (actif, texte = "Validation en cours…") => {
+      attente.querySelector(".lcdp-setup-loading__text").textContent = texte;
+      attente.hidden = !actif;
+    };
     const saisie = [...document.querySelectorAll("[data-code-value]")];
     const confirmation = [...document.querySelectorAll("[data-code-confirmation]")];
     const endpoint = nettoyerBaseUrl(window.SITE_CONFIG?.workerMdptokenzUrl || window.SITE_CONFIG?.WORKER_MDPTOKENZ_URL ||
@@ -69,6 +80,7 @@
     if (!endpoint || !/^[a-f0-9]{64}$/.test(token) || !["coda","codr"].includes(type)) {
       await afficherInformation("", "Ouvrez cette page depuis le lien reçu par e-mail.", "erreur"); return;
     }
+    afficherAttente(true, "Vérification de votre parcours…");
     try {
       if(flow) {
         const state=await appeler("flow-state");
@@ -88,6 +100,7 @@
       }
       autorise = true; etat(true); afficher("Choisissez votre code, puis confirmez-le avec le bouton La Clé.");
     } catch { await afficherInformation("", "La vérification est indisponible. Rouvrez le lien reçu par e-mail pour réessayer.", "erreur"); }
+    finally { afficherAttente(false); }
     form.addEventListener("submit", async event => {
       event.preventDefault();
       if (enCours || !autorise) return;
@@ -103,7 +116,7 @@
       if (type === "coda" && valeurs.some((v,i) => i < 3 && Math.abs(Number(v) - Number(valeurs[i+1])) === 1)) {
         await erreurSaisie("Deux chiffres côte à côte ne doivent pas se suivre, dans un sens ou dans l’autre."); return;
       }
-      enCours = true; etat(false);
+      enCours = true; etat(false); afficherAttente(true);
       try {
         const { reponse, resultat } = await appeler("setup-save", type === "coda" ? { coda: valeurs.join("") } : { mots: valeurs });
         if (!reponse.ok || !resultat.success) {
@@ -124,7 +137,7 @@
         const texte=operation==="modification" ? "Votre CODA est mis à jour. Vous pouvez vous reconnecter à votre compte." : "Votre " + nom + " est enregistré. Retrouvez les informations relatives à vos codes de sécurité depuis votre page Mon Compte dans l’application.";
         await afficherInformation("",texte,"information",construireUrlPublique("/ESPACE-PUBLIC/hello.html"));
       } catch { autorise = false; await afficherInformation("","La réponse n’a pas pu être confirmée. Rouvrez le lien reçu par e-mail pour vérifier si le code a été enregistré.","erreur"); }
-      finally { enCours = false; }
+      finally { enCours = false; afficherAttente(false); }
     });
   }
   function appliquerRoutesSite(racine = document) {
@@ -255,7 +268,10 @@
         };
 
         boutonFermer.hidden = true;
-        boutonOk.addEventListener("click", fermer, { once: true });
+         boutonOk.addEventListener("click", () => {
+           if (redirectUrl) { const a = document.querySelector(".lcdp-setup-loading"); if (a) { a.querySelector(".lcdp-setup-loading__text").textContent = "Ouverture de la page…"; a.hidden = false; } }
+           fermer();
+         }, { once: true });
 
       });
 
