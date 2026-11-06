@@ -33327,3 +33327,24 @@ body:is(.lcdp-connexion-membre, .lcdp-connexion-parc, .lcdp-connexion-coach)
 @media (prefers-reduced-motion: reduce) {
   .lcdp-page-document-legal .lcdp-section-sommeil__icone { animation: none; }
 }
+
+/* Harmonisation Hello / Association / Le Club : titres historiques de Hello,
+   textes à 13px (entre ancien rendu compact et rendu éditorial à 14px).
+   Limité aux trois pages, sans effet sur les autres espaces. */
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-editorial-copy,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-editorial-feature .lcdp-editorial-copy {
+  font-size: 13px;
+}
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-editorial-card > .lcdp-boxtext__title,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-editorial-card > .lcdp-box-carousel__title,
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-editorial-feature > .lcdp-box-carousel__title {
+  margin: 0;
+  padding: 0;
+  color: #0f172a;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: normal;
+  text-align: center;
+  text-transform: none;
+}
