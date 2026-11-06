@@ -24912,13 +24912,16 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   z-index: 4102;
   width: min(256px, calc(100vw - 32px));
   min-width: 0;
-  padding: 12px;
+  padding: 8px;
   border: 1px solid rgba(241,245,249,.8);
   border-radius: 16px;
   background: #fff;
   color: #334155;
   box-shadow: 0 20px 25px -5px rgba(15,23,42,.10), 0 8px 10px -6px rgba(15,23,42,.10);
-  overflow: visible;
+  max-height: calc(100vh - 110px);
+  max-height: calc(100dvh - 110px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   animation: lcdp-burger-menu-enter 200ms ease-out both;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav[hidden] {
@@ -24927,16 +24930,16 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__list {
   display: flex;
   flex-direction: column;
-  gap: 3.68px;
+  gap: 2px;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link {
   box-sizing: border-box;
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 48px;
+  min-height: 44px;
   margin: 0;
-  padding: 12px;
+  padding: 8px 10px;
   border: 0;
   border-radius: 12px;
   background: transparent;
@@ -24988,8 +24991,8 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   color: #fff;
 }
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="faq"] {
-  margin-top: 8px;
-  padding-top: 16px;
+  margin-top: 5px;
+  padding-top: 9px;
   border-top: 1px solid #f1f5f9;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
