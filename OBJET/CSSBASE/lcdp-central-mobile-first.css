@@ -24955,83 +24955,20 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   background: rgba(248,250,252,.8);
   color: #0f172a;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:first-child {
+/* Quatre rôles communs, indépendants de la position et du type a/button. */
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="accueil"] {
   border-left: 4px solid var(--lcdp-burger-accent);
   background: #f8fafc;
   color: #0f172a;
   font-weight: 800;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="compte"] {
   justify-content: space-between;
   gap: 6px;
   color: #334155;
   font-weight: 700;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link::after {
-  content: "Espace membre";
-  display: inline-block;
-  flex: 0 0 auto;
-  padding: 4px 8px;
-  border-radius: 6px;
-  background: #ecfdf5;
-  color: var(--lcdp-burger-accent);
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: normal;
-  transition: background-color 200ms ease, color 200ms ease;
-}
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:hover::after, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:focus-visible::after {
-  background: var(--lcdp-burger-accent);
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:last-child {
-  margin-top: 8px;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  color: #64748b;
-  font-weight: 500;
-}
-/* Burger membre : mêmes rôles visuels que le burger public, indépendamment de la position de FAQ. */
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte] {
-  color: #334155;
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link:last-child:not([data-lcdp-menu-faq]) {
-  margin-top: 0;
-  padding-top: 12px;
-  border-top: 0;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  color: #475569;
-  font-weight: 600;
-}
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-faq] {
-  margin-top: 8px;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  color: #64748b;
-  font-weight: 500;
-}
-/* Burger membre : typographie et repère « Mon compte » identiques à la logique du burger public. */
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 14px;
-  line-height: 1.25;
-  letter-spacing: .025em;
-  text-transform: none;
-}
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte] {
-  justify-content: space-between;
-  gap: 6px;
-  color: #334155;
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]::after {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="compte"]::after {
   content: "Espace personnel";
   display: inline-block;
   flex: 0 0 auto;
@@ -25045,11 +24982,21 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   letter-spacing: normal;
   transition: background-color 200ms ease, color 200ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]:hover::after,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger--membre .lcdp-box-menu-burger__link[data-lcdp-menu-compte]:focus-visible::after {
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="compte"]:hover::after,
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="compte"]:focus-visible::after {
   background: var(--lcdp-burger-accent);
   color: #fff;
 }
+:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="faq"] {
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  color: #64748b;
+  font-weight: 500;
+}
+/* Les autres entrées conservent le style commun défini plus haut. */
 @keyframes lcdp-burger-menu-enter {
   from {
     opacity: 0;

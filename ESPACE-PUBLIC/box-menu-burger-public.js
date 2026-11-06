@@ -324,37 +324,6 @@
     return lien;
   }
 
-  // L'ancien thème plaçait le séparateur sur :last-child (auparavant FAQ).
-  // Ces règles le maintiennent sur FAQ malgré les deux liens suivants.
-  function assurerStyleSeparateurFaq() {
-    const identifiant = "lcdp-public-menu-separateur-faq";
-    if (document.getElementById(identifiant)) return;
-
-    const style = document.createElement("style");
-    style.id = identifiant;
-    style.textContent = `
-      .lcdp-box-menu-burger__list > .lcdp-box-menu-burger__link:last-child {
-        margin-top: 0;
-        padding-top: var(--lcdp-space-2);
-        border-top: 0;
-        border-top-left-radius: var(--lcdp-radius-small);
-        border-top-right-radius: var(--lcdp-radius-small);
-        color: #475569;
-        font-weight: 600;
-      }
-      .lcdp-box-menu-burger__list > .lcdp-box-menu-burger__link[data-lcdp-menu-faq] {
-        margin-top: 8px;
-        padding-top: 16px;
-        border-top: 1px solid #f1f5f9;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        color: #64748b;
-        font-weight: 500;
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
   async function initialiserMenuBurgerPublic() {
     const slot = document.querySelector("[data-lcdp-burger-slot]");
 
@@ -389,10 +358,12 @@
       const liensPublics = [
         {
           label: "Accueil La Clé du Parc",
+          roleGraphique: "accueil",
           href: "/ESPACE-PUBLIC/accueil-public.html"
         },
         {
           label: "Connexion",
+          roleGraphique: "compte",
           action: "mon-compte"
         },
         {
@@ -417,6 +388,7 @@
         },
         {
           label: "FAQ",
+          roleGraphique: "faq",
           href: "/ESPACE-PUBLIC/FAQ-public.html"
         },
         {
@@ -433,13 +405,9 @@
 
       liensPublics.forEach((item) => {
         const element = creerLienMenu(item, boutonBurger, navBurger);
-        if (item.label === "FAQ") {
-          element.setAttribute("data-lcdp-menu-faq", "");
-        }
+        element.dataset.lcdpMenuRole = item.roleGraphique || "standard";
         listeBurger.appendChild(element);
       });
-
-      assurerStyleSeparateurFaq();
 
       boutonBurger.addEventListener("click", (event) => {
         event.preventDefault();
