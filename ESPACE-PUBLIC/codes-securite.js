@@ -64,11 +64,12 @@
     const bouton = document.getElementById("bouton-valider-code");
     const message = document.getElementById("message-code");
     const attente = document.createElement("div");
-    attente.className = "lcdp-setup-loading";
+    attente.className = "lcdp-setup-loading lcdp-attente-plein-ecran";
     attente.hidden = true;
     attente.setAttribute("role", "status");
     attente.setAttribute("aria-live", "polite");
-    attente.innerHTML = '<span class="lcdp-setup-loading__spinner" aria-hidden="true"></span><span class="lcdp-setup-loading__text">Validation en cours…</span>';
+    attente.setAttribute("aria-label", "Traitement en cours");
+    attente.innerHTML = '<div class="lcdp-loading-spinner" aria-hidden="true"><svg class="lcdp-loading-spinner__track" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></circle></svg><svg class="lcdp-loading-spinner__arc" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75"></circle></svg><span class="lcdp-loading-spinner__dot"></span></div><span class="lcdp-setup-loading__text" hidden aria-hidden="true"></span>';
     document.body.appendChild(attente);
     const afficherAttente = (actif, texte = "Validation en cours…") => {
       attente.querySelector(".lcdp-setup-loading__text").textContent = texte;
@@ -256,7 +257,7 @@
 
   slot.innerHTML = "";
 
-  const footer = await chargerFragmentObjet("/BOX/02-box-footer.html");
+  const footer = await chargerFragmentObjet("/HTMLBASE/02-footer.html");
   slot.appendChild(footer);
 
   appliquerRoutesSite(slot);
@@ -294,7 +295,7 @@
     slot.innerHTML = "";
 
     try {
-      const fragment = await chargerFragmentObjet("/BOX/02-box-alerte.html");
+      const fragment = await chargerFragmentObjet("/HTMLBASE/02-alerte.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector("[data-lcdp-box-alerte]");
