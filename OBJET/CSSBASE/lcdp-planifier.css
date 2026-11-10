@@ -2171,3 +2171,46 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
     font-size: 1.32rem !important;
   }
 }
+
+/* Consolidation de lcdp-planifier-compact.css : réglages spécifiques non encore présents. */
+/* Planning mensuel : barres 30 % moins longues, 40 % moins épaisses.
+   Les cinq plages, leurs couleurs et leurs jauges d'occupation sont conservées. */
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
+  border-color: rgba(61, 82, 68, .19) !important;
+  border-radius: 8px;
+  box-shadow: none !important;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
+  box-sizing: border-box;
+  width: 70% !important;
+  max-width: 42px !important;
+  margin-inline: auto !important;
+  flex: 0 0 auto !important;
+  grid-template-rows: repeat(5, 3px) !important;
+  gap: 2px !important;
+  min-height: 0 !important;
+  align-content: center;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot {
+  box-sizing: border-box;
+  width: 100%;
+  height: 3px !important;
+  min-height: 3px !important;
+  max-height: 3px !important;
+  flex: 0 0 3px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+}
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slot--gris-clair {
+  background: #eef0ed;
+}
+/* Conserver le signal rouge d'un accès personnel, à l'échelle des nouvelles barres. */
+#lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-planifier-plage--acces-personnel {
+  box-shadow: inset 3px 0 0 #c74c45 !important;
+}
+@media (min-width: 900px) {
+  #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
+    grid-auto-rows: 63px;
+  }
+}

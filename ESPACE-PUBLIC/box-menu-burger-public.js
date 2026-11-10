@@ -311,7 +311,6 @@
   }
 
   async function ouvrirDialogueMonComptePublic() {
-    chargerCssUneFois("/OBJET/CSSBASE/02-box-dialogue-bouton.css");
 
     const slot = assurerLightboxSlot();
     slot.innerHTML = "";
