@@ -2912,3 +2912,31 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   color: var(--lcdp-color-text) !important;
   opacity: 1 !important;
 }
+
+
+/* PLANIFIER : trois états visuels pour le même calendrier, avec ou sans parc.
+   Les barres horaires et les droits de réservation restent inchangés. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois:not(.lcdp-box-card-jour-in-calendrier-mois--empty) {
+  background: #ffffff !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--past {
+  background: #f4f2ec !important;
+  color: var(--lcdp-color-text-muted) !important;
+  opacity: 1 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--closed:not(.lcdp-box-card-jour-in-calendrier-mois--past) {
+  background: #ffffff !important;
+  opacity: 1 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-planifier-jour--abonnement-couvert:not(.lcdp-box-card-jour-in-calendrier-mois--past):not(.lcdp-box-card-jour-in-calendrier-mois--closed) {
+  background: #e5f4e9 !important;
+  border-color: #b7dac1 !important;
+}
