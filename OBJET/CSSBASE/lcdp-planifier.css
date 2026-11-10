@@ -2947,7 +2947,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois.lcdp-box-card-jour-in-calendrier-mois--past:not(.lcdp-box-card-jour-in-calendrier-mois--empty) {
-  background: #e7e9e9 !important;
+  background: #f0f1f1 !important;
   border-color: #d6dad9 !important;
   color: #7b8380 !important;
   opacity: 1 !important;
