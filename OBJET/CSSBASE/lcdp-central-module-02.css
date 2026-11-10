@@ -1707,3 +1707,25 @@
     border-radius: var(--lcdp-radius-media);
   }
 }
+
+/* LCDP 2026-11-10 : photos Parc 16:9, galeries de fiche sur une colonne. */
+.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__list,
+.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__list {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  width: 100%; min-width: 0; gap: 12px !important;
+}
+.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card,
+.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__card {
+  display: block !important; box-sizing: border-box;
+  width: 100% !important; max-width: 100% !important; min-width: 0 !important;
+  margin: 0 !important; padding: 0 !important;
+  order: initial !important; justify-self: stretch !important;
+}
+.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image,
+.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
+  display: block !important; width: 100% !important; max-width: 100% !important;
+  height: auto !important; min-height: 0 !important;
+  aspect-ratio: 16 / 9 !important; object-fit: cover !important;
+  object-position: center center;
+}
