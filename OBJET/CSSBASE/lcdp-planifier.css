@@ -2541,9 +2541,10 @@ body.lcdp-page-reserver .lcdp-planifier-carte-hote .lcdp-planifier-carte-sans-pa
    Les contrôles natifs et leurs catégories restent inchangés. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations {
   box-sizing: border-box;
-  width: 100%;
-  margin: 0 0 12px;
-  padding: 15px !important;
+  width: calc(100% + 30px);
+  max-width: none;
+  margin: 0 -30px 8px 0;
+  padding: 10px 11px !important;
   background: #fff;
   border: 1px solid #edf0f4;
   border-radius: 20px;
@@ -2556,7 +2557,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__titre {
   display: block;
-  margin: 0 0 11px 2px;
+  margin: 0 0 7px 2px;
   color: #94a3b8;
   font-size: .69rem;
   font-weight: 800;
@@ -2566,7 +2567,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 9px !important;
+  gap: 6px 8px !important;
   width: 100% !important;
   justify-content: stretch !important;
 }
@@ -2577,10 +2578,10 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   justify-content: space-between;
   width: 100%;
   min-width: 0;
-  min-height: 46px;
-  gap: 8px !important;
+  min-height: 36px;
+  gap: 5px !important;
   margin: 0;
-  padding: 10px 11px !important;
+  padding: 6px 9px !important;
   border: 1px solid #edf0f5 !important;
   border-radius: 12px;
   background: #f8fafc !important;
@@ -2595,7 +2596,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle {
   flex: 1 1 auto;
   min-width: 0;
-  font-size: .77rem !important;
+  font-size: .74rem !important;
   font-weight: 800;
   line-height: 1.25;
   color: #475569;
@@ -2604,13 +2605,22 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre-categorie:has(.lcdp-planifier-filtre-categorie__input:checked) .lcdp-box-legende__libelle {
   color: #92400e;
 }
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__picto {
+  display: inline-flex;
+  flex: 0 0 18px;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  line-height: 1;
+  font-size: .9rem;
+}
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__input {
   order: 2;
-  flex: 0 0 19px;
-  width: 19px !important;
-  min-width: 19px;
-  height: 19px !important;
-  min-height: 19px;
+  flex: 0 0 17px;
+  width: 17px !important;
+  min-width: 17px;
+  height: 17px !important;
+  min-height: 17px;
   margin: 0 0 0 auto;
   padding: 0;
   border-radius: 50% !important;
@@ -2666,7 +2676,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-moi
   color: #475569 !important;
 }
 @media (max-width: 380px) {
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations { padding: 11px !important; }
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations { padding: 8px !important; width: calc(100% + 27px); margin-right: -27px; }
   body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie { padding: 8px !important; }
   body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle { font-size: .68rem !important; }
 }
