@@ -2496,3 +2496,31 @@ body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-card-parc--
   height: auto !important; min-height: 0 !important;
   aspect-ratio: 16 / 9 !important; object-fit: cover !important;
 }
+
+
+/* 2026-11-10 — Message d'information sur la carte d'un département sans parc.
+   L'emprise du département et ses commandes de zoom restent visibles. */
+body.lcdp-page-reserver .lcdp-planifier-carte-hote .lcdp-carte-dynamique__map-shell {
+  position: relative;
+}
+body.lcdp-page-reserver .lcdp-planifier-carte-hote .lcdp-planifier-carte-sans-parc {
+  position: absolute;
+  z-index: 3;
+  left: 12px;
+  right: 12px;
+  bottom: 15px;
+  box-sizing: border-box;
+  max-width: 330px;
+  margin: 0 auto;
+  padding: 11px 12px;
+  border: 1px solid #dae3d9;
+  border-radius: 12px;
+  background: rgba(255,255,255,.96);
+  color: #354b36;
+  font-size: .88rem;
+  font-weight: 600;
+  line-height: 1.42;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(20,35,24,.10);
+  pointer-events: none;
+}
