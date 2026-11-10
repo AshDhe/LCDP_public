@@ -8278,7 +8278,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
       background: #b93737;
     }
     .lcdp-page-reserver [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--invitation-recue::before {
-      width: 15%;
+      width: 100%;
       background: #f5b1a6;
     }
     /* Ajustements propres à PLANIFIER : sans changer les styles génériques. */
@@ -16378,7 +16378,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   background: #b93737;
 }
 :where(html[data-lcdp-css~="c077"]) .lcdp-page-reserver [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--invitation-recue::before {
-  width: 15%;
+  width: 100%;
   background: #f5b1a6;
 }
 @media (max-width: 767px) {
