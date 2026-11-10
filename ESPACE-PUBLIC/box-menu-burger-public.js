@@ -2,7 +2,6 @@
   "use strict";
 
   let initialisationEnCours = null;
-  let membreConnecteConfirme = false;
 
   const siteBase = (
     window.SITE_BASE ||
@@ -73,6 +72,103 @@
     }
 
     return "https://user-routeur-api.lacleduparc.fr";
+  }
+
+  // Le Worker vérifie la session côté serveur : un cookie de présence seul
+  // ne donne jamais droit à l'affichage du menu membre.
+  function obtenirWorkerIndexMembreUrl() {
+    const config = window.SITE_CONFIG || {};
+    return String(
+      config.workerIndexMembreUrl ||
+      config.WORKER_INDEX_MEMBRE_URL ||
+      config.W_INDEX_MEMBRE_URL ||
+      (typeof config.apiUrl === "function" ? config.apiUrl("index-membre-api") : "") ||
+      "https://index-membre-api.lacleduparc.fr"
+    ).replace(/\/+$/, "");
+  }
+
+  async function obtenirSessionMembreActive() {
+    try {
+      const reponse = await fetch(obtenirWorkerIndexMembreUrl() + "/index", {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+        headers: { "Accept": "application/json" }
+      });
+      if (!reponse.ok) return null;
+      const donnees = await reponse.json().catch(() => null);
+      return donnees?.success === true && donnees?.connected === true
+        ? donnees : null;
+    } catch (erreur) {
+      console.warn("Menu public : vérification de session membre indisponible.", erreur);
+      return null;
+    }
+  }
+
+  function construireUrlScriptMenuMembre() {
+    const config = window.SITE_CONFIG || {};
+    const chemin = "/ESPACE-MEMBRE/box-menu-burger-membre.js";
+    if (typeof window.LCDP_urlMembre === "function") {
+      return window.LCDP_urlMembre(chemin);
+    }
+    if (typeof config.membreUrl === "function") {
+      return config.membreUrl(chemin);
+    }
+    const base = String(
+      config.membreBaseUrl || config.MEMBRE_BASE ||
+      (["ashdhe.github.io", "huguespavret.github.io"].includes(window.location.hostname)
+        ? "https://" + window.location.hostname + "/LCDP_membre"
+        : "https://membre.lacleduparc.fr")
+    ).replace(/\/+$/, "");
+    return base + chemin;
+  }
+
+  let chargementScriptMenuMembre = null;
+  function assurerScriptMenuMembre() {
+    if (typeof window.LCDP_initialiserMenuBurgerMembre === "function") {
+      return Promise.resolve();
+    }
+    if (chargementScriptMenuMembre) return chargementScriptMenuMembre;
+    chargementScriptMenuMembre = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = construireUrlScriptMenuMembre();
+      script.onload = () => typeof window.LCDP_initialiserMenuBurgerMembre === "function"
+        ? resolve()
+        : reject(new Error("Initialisation du menu membre introuvable."));
+      script.onerror = () => reject(new Error("Script du menu membre introuvable."));
+      document.body.appendChild(script);
+    }).catch((erreur) => {
+      chargementScriptMenuMembre = null;
+      throw erreur;
+    });
+    return chargementScriptMenuMembre;
+  }
+
+  async function essayerInitialiserMenuMembre(slot) {
+    const etat = await obtenirSessionMembreActive();
+    if (!etat) return false;
+    try {
+      await assurerScriptMenuMembre();
+      await window.LCDP_initialiserMenuBurgerMembre({
+        etatMembre: {
+          abonne: etat.abonne === true,
+          abonnementSuspendu: etat.abonnementSuspendu === true || etat.suspendu === true,
+          paiementSuspension: etat.paiementSuspension || null,
+          statutabo: etat.statutabo || "",
+          fin: etat.abonnementEnCours?.fin || "",
+          statuda: etat.statuda,
+          dateda: etat.dateda || null,
+          datenext: etat.datenext || null
+        }
+      });
+      slot.dataset.lcdpBurgerInitialise = "true";
+      slot.dataset.lcdpBurgerType = "membre";
+      return true;
+    } catch (erreur) {
+      console.error("Menu membre indisponible sur la page publique :", erreur);
+      slot.replaceChildren();
+      return false;
+    }
   }
 
   async function chargerFragment(chemin) {
@@ -214,37 +310,6 @@
     }
   }
 
-  // Ne jamais déduire la connexion d'un simple cookie ou du libellé du menu.
-  // Le Worker d'index confirme la session membre lorsque la page publique est affichée.
-  async function verifierSessionMembreMenuPublic() {
-    const config = window.SITE_CONFIG || {};
-    const endpoint = config.workerIndexMembreUrl || config.WORKER_INDEX_MEMBRE_URL ||
-      config.W_INDEX_MEMBRE_URL ||
-      (typeof config.apiUrl === "function" ? config.apiUrl("index-membre-api") : "");
-    if (!endpoint) return false;
-
-    try {
-      const reponse = await fetch(String(endpoint).replace(/\/+$/, "") + "/index", {
-        method: "GET", credentials: "include", cache: "no-store",
-        headers: { Accept: "application/json" }
-      });
-      if (!reponse.ok) return false;
-      const data = await reponse.json().catch(() => null);
-      return data?.success === true && data?.connected === true;
-    } catch (_error) {
-      return false;
-    }
-  }
-
-  function urlMonCompteMembreDepuisPublic() {
-    const config = window.SITE_CONFIG || {};
-    const chemin = "/ESPACE-MEMBRE/mes-informations.html";
-    if (typeof window.LCDP_urlMembre === "function") return window.LCDP_urlMembre(chemin);
-    if (typeof config.membreUrl === "function") return config.membreUrl(chemin);
-    const base = String(config.membreBaseUrl || config.MEMBRE_BASE || "").replace(/\/+$/, "");
-    return base ? base + chemin : construireUrlSite(chemin);
-  }
-
   async function ouvrirDialogueMonComptePublic() {
     chargerCssUneFois("/OBJET/BOX/02-box-dialogue-bouton.css");
 
@@ -334,11 +399,6 @@
 
       bouton.addEventListener("click", () => {
         fermerMenu(boutonBurger, navBurger);
-        if (membreConnecteConfirme) {
-          window.location.href = urlMonCompteMembreDepuisPublic();
-          return;
-        }
-
         ouvrirDialogueMonComptePublic().catch((erreur) => {
           console.error("Erreur dialogue Mon compte :", erreur);
           window.location.href = construireUrlConnexion("membre");
@@ -376,7 +436,9 @@
     }
 
     initialisationEnCours = (async () => {
-      slot.innerHTML = "";
+      // La session est validée avant tout rendu pour éviter le flash du menu public.
+      slot.replaceChildren();
+      if (await essayerInitialiserMenuMembre(slot)) return;
 
       const fragment = await chargerFragment("/OBJET/BOX/02-box-menu-burger.html");
       slot.appendChild(fragment);
@@ -445,15 +507,6 @@
         listeBurger.appendChild(element);
       });
 
-      // Aucune affirmation de connexion avant la confirmation du Worker.
-      // Si la vérification échoue, le menu public reste en mode « Connexion ».
-      const entreeCompte = listeBurger.querySelector('[data-lcdp-menu-role="compte"]');
-      void verifierSessionMembreMenuPublic().then((connecte) => {
-        if (!connecte || !entreeCompte?.isConnected) return;
-        membreConnecteConfirme = true;
-        entreeCompte.textContent = "Mon compte";
-      });
-
       boutonBurger.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -477,6 +530,7 @@
       });
 
       slot.dataset.lcdpBurgerInitialise = "true";
+      slot.dataset.lcdpBurgerType = "public";
     })();
 
     try {
@@ -491,6 +545,16 @@
 
   document.addEventListener("lcdp:ouvrir-dialogue-mon-compte", () => {
     ouvrirDialogueMonComptePublic().catch(console.error);
+  });
+
+  // Une page restaurée depuis le cache de navigation doit revérifier la session.
+  window.addEventListener("pageshow", (event) => {
+    if (!event.persisted) return;
+    const slot = document.querySelector("[data-lcdp-burger-slot]");
+    if (!slot) return;
+    delete slot.dataset.lcdpBurgerInitialise;
+    delete slot.dataset.lcdpBurgerType;
+    initialiserMenuBurgerPublic().catch(console.error);
   });
 
   if (document.readyState === "loading") {
