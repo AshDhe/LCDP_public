@@ -2535,3 +2535,138 @@ body.lcdp-page-reserver .lcdp-planifier-carte-hote .lcdp-planifier-carte-sans-pa
   box-shadow: 0 3px 10px rgba(20,35,24,.10);
   pointer-events: none;
 }
+
+
+/* PLANIFIER — présentation des filtres et du mois inspirée du gabarit fourni.
+   Les contrôles natifs et leurs catégories restent inchangés. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 15px !important;
+  background: #fff;
+  border: 1px solid #edf0f4;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(15,23,42,.07);
+  overflow: visible;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__contenu {
+  display: block;
+  width: 100%;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__titre {
+  display: block;
+  margin: 0 0 11px 2px;
+  color: #94a3b8;
+  font-size: .69rem;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: .075em;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 9px !important;
+  width: 100% !important;
+  justify-content: stretch !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie {
+  box-sizing: border-box;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  gap: 8px !important;
+  margin: 0;
+  padding: 10px 11px !important;
+  border: 1px solid #edf0f5 !important;
+  border-radius: 12px;
+  background: #f8fafc !important;
+  color: #475569;
+  cursor: pointer;
+  transition: border-color .15s, background-color .15s;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie:has(.lcdp-planifier-filtre-categorie__input:checked) {
+  background: #fff9ec !important;
+  border-color: #f5d58e !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: .77rem !important;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #475569;
+  overflow-wrap: anywhere;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre-categorie:has(.lcdp-planifier-filtre-categorie__input:checked) .lcdp-box-legende__libelle {
+  color: #92400e;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__input {
+  order: 2;
+  flex: 0 0 19px;
+  width: 19px !important;
+  min-width: 19px;
+  height: 19px !important;
+  min-height: 19px;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border-radius: 50% !important;
+  border: 1px solid #cbd5e1;
+  background: transparent;
+  cursor: pointer;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre-categorie__input:checked {
+  background: #e59834 !important;
+  border-color: #e59834 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre-categorie__input:focus-visible {
+  outline: 2px solid #4e6838;
+  outline-offset: 3px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__navigation {
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  padding: 7px 2px 13px;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 13px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__month {
+  flex: 1 1 auto;
+  min-width: 0 !important;
+  text-align: center;
+  font-size: clamp(.96rem, 3.9vw, 1.1rem) !important;
+  font-weight: 850;
+  line-height: 1.3;
+  letter-spacing: -.025em;
+  color: #1e293b;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__nav-button {
+  flex: 0 0 35px;
+  width: 35px !important;
+  height: 35px !important;
+  min-height: 35px !important;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 9px;
+  background: transparent !important;
+  color: #94a3b8 !important;
+  box-shadow: none !important;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__nav-button:hover:not(:disabled) {
+  background: #f8fafc !important;
+  color: #475569 !important;
+}
+@media (max-width: 380px) {
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations { padding: 11px !important; }
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie { padding: 8px !important; }
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle { font-size: .68rem !important; }
+}
