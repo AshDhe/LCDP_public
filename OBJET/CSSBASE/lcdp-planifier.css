@@ -2473,3 +2473,26 @@ body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot
   text-align: left;
   overflow-wrap: anywhere;
 }
+
+/* LCDP 2026-11-10 : PLANIFIER — format photo Parc unique 16:9.
+   Neutralise les anciens carrés, la galerie deux colonnes et les hauteurs fixes. */
+body.lcdp-page-reserver .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__scene,
+body.lcdp-page-reserver .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__scene {
+  aspect-ratio: 16 / 9 !important; height: auto !important;
+  min-height: 0 !important; max-height: none !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+  display: grid !important; grid-template-columns: minmax(0, 1fr) !important;
+  width: 100% !important; gap: 12px !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__card {
+  display: block !important; width: 100% !important; max-width: 100% !important;
+  min-width: 0 !important; margin: 0 !important; padding: 0 !important;
+  order: initial !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__image,
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-card-parc--carte-publique .lcdp-box-card-parc__image {
+  display: block !important; width: 100% !important; max-width: 100% !important;
+  height: auto !important; min-height: 0 !important;
+  aspect-ratio: 16 / 9 !important; object-fit: cover !important;
+}
