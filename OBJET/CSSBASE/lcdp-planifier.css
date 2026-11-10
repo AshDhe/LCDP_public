@@ -2214,3 +2214,119 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
     grid-auto-rows: 63px;
   }
 }
+
+
+/* 2026-11-10 — Fiche et planning du parc : quatrième vue du wrapper PLANIFIER.
+   Styles exclusivement locaux, sans modifier les composants OBJET communs. */
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot[hidden] {
+  display: none !important;
+}
+body.lcdp-page-reserver.lcdp-planifier-vue-fiche-active .lcdp-planifier-wrapper .lcdp-page-header,
+body.lcdp-page-reserver.lcdp-planifier-vue-fiche-active #lcdp-planifier-calendrier-slot,
+body.lcdp-page-reserver.lcdp-planifier-vue-fiche-active #lcdp-planifier-parcs-vue,
+body.lcdp-page-reserver.lcdp-planifier-vue-fiche-active #lcdp-planifier-jour-overlay-slot {
+  display: none !important;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper #lcdp-planifier-fiche-overlay-slot {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper #lcdp-planifier-fiche-overlay-slot > [data-lcdp-box-shift-detail-parc] {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto !important;
+  transform: none !important;
+  opacity: 1 !important;
+  display: block !important;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: auto !important;
+  min-height: 0;
+  max-height: none !important;
+  margin: 0;
+  padding: 0 !important;
+  overflow: visible !important;
+  border: 0;
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper #lcdp-planifier-fiche-overlay-slot > [data-lcdp-box-shift-detail-parc] > .lcdp-box-shift-detail-parc__card {
+  position: relative !important;
+  transform: none !important;
+  box-sizing: border-box;
+  display: block;
+  width: 100% !important;
+  min-width: 0;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 12px !important;
+  overflow: visible !important;
+  border: 1px solid #e4eae4;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(31,42,36,.08);
+}
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-shift-detail-parc__content,
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-fiche-parc__shift-view {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc--shift-detail,
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot [data-lcdp-box-calendrier-mois],
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot [data-lcdp-box-calendrier-jour] {
+  position: static !important;
+  inset: auto !important;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: auto !important;
+  min-height: 0;
+  max-height: none !important;
+  padding: 0 !important;
+  margin: 0;
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__card,
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-calendrier-mois__card,
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-calendrier-jour__card {
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0;
+  max-width: 100% !important;
+  height: auto;
+  max-height: none !important;
+  overflow: visible;
+}
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-shift-detail-parc__close {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  z-index: 5;
+}
+/* Première ouverture : PLANIFIER centré sur la ligne du bouton de fermeture. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc) .lcdp-planifier-entete-parc {
+  min-height: 34px;
+  justify-content: center;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc) [data-lcdp-calendrier-mois-title] {
+  display: flex !important;
+  align-items: center;
+  min-height: 34px;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
