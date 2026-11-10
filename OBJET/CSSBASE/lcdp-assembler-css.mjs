@@ -36,6 +36,14 @@ if(mode==='--check'){
   if(existing!==compiled){console.error('ÉCHEC : le central ne correspond pas à ses modules CSS.');process.exit(1)}
   console.log(`OK : ${modules.length} modules / central conforme, ${Buffer.byteLength(compiled)} octets.`);
 }else{
+  // Sécurité : la version centrale publiée contient des règles historiques qui
+  // ne figurent pas toutes dans les modules extraits. Ne JAMAIS les écraser.
+  // Avant un nouvel assemblage complet, réconcilier les sources et le central.
+  const existing=fs.existsSync(target)?read('lcdp-central-mobile-first.css'):null;
+  if(existing!==null && existing!==compiled){
+    console.error('ÉCRITURE BLOQUÉE : le central contient des règles absentes de l’assemblage. Aucune modification du fichier.');
+    process.exit(1);
+  }
   const tmp=target+'.tmp';
   fs.writeFileSync(tmp,compiled,'utf8');
   fs.renameSync(tmp,target);
