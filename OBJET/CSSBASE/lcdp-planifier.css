@@ -738,10 +738,10 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
      du composant central, insuffisante pour les boutons et la description. */
   box-sizing: border-box;
   width: 100%;
-  aspect-ratio: auto !important;
-  height: clamp(250px, 35vh, 280px) !important;
-  min-height: 250px;
-  max-height: none;
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
 }
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face {
   box-sizing: border-box;
@@ -969,7 +969,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
 }
 #lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
   display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-columns: minmax(0, 1fr) !important;
   gap: 8px !important;
   width: 100%;
   min-width: 0;
@@ -989,7 +989,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   display: block;
   width: 100% !important;
   max-width: 100% !important;
-  aspect-ratio: 1 / 1 !important;
+  aspect-ratio: 16 / 9 !important;
   height: auto !important;
   object-fit: cover !important;
   object-position: center;
@@ -1232,7 +1232,7 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
 #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
   display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-columns: minmax(0, 1fr) !important;
   gap: 11px !important;
 }
 #lcdp-planifier-fiche-overlay-slot
@@ -1246,7 +1246,7 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
 }
 #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
-  aspect-ratio: 1 / 1 !important;
+  aspect-ratio: 16 / 9 !important;
   height: auto !important;
   object-fit: cover !important;
 }
@@ -1580,10 +1580,10 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__scene,
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__scene {
   width: 100% !important;
-  aspect-ratio: auto !important;
-  height: clamp(190px, 27vh, 214px) !important;
-  min-height: 190px !important;
-  max-height: 214px !important;
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
 }
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__nom {
   padding: 10px 12px;
@@ -2451,7 +2451,7 @@ body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot
   grid-row: 1;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 11px 11px 0 0;
 }
