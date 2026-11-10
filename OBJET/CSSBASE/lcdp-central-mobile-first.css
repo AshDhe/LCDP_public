@@ -33615,3 +33615,18 @@ body.lcdp-app-page .lcdp-setup-flow .lcdp-box-formulaire__actions {
 @media (prefers-reduced-motion: reduce) {
   .lcdp-step-progress__fill { transition: none; }
 }
+
+/* Statut membre : mise en page commune, sans changer l'étiquette de référence.
+   Accueil : l'étiquette précède désormais le salut, celui-ci reste discret.
+   PLANIFIER : respirations au-dessus et au-dessous comme sur Mon compte. */
+:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-membre .lcdp-accueil-intro > #mention-statut-membre.lcdp-etiquette-statut-membre {
+  margin: var(--lcdp-space-3) auto var(--lcdp-space-2);
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-membre #message-accueil-membre {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-page-reserver .lcdp-page-header > #mention-statut-membre.lcdp-etiquette-statut-membre {
+  margin: var(--lcdp-space-3) auto var(--lcdp-space-4);
+}
