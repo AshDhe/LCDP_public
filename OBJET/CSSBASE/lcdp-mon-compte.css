@@ -111,7 +111,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   min-width: 0;
   margin: 0;
   padding: 20px;
@@ -121,8 +121,8 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   box-shadow: var(--compte-ombre);
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-title-section {
-  margin: 0 0 3px;
-  padding: 0 0 9px;
+  margin: 0;
+  padding: 0 0 5px;
   border-bottom: 1px solid #f8fafc;
   color: var(--compte-texte-libelle);
   font-family: Arial, system-ui, sans-serif;
@@ -137,9 +137,9 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: minmax(0, .40fr) minmax(0, .60fr);
-  align-items: center;
-  gap: 8px;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 3px;
   width: 100%;
   min-width: 0;
   margin: 0;
@@ -188,7 +188,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   font-size: 13px;
   line-height: 1.5;
   font-weight: 700;
-  text-align: right;
+  text-align: left;
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: normal;
@@ -206,6 +206,26 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   padding-right: 42px !important;
   text-align: left;
 }
+
+/* Édition : position en haut du bloc, à droite du libellé (1re ligne). */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-champ-formulaire--modifiable {
+  position: relative;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-champ-formulaire--modifiable > [data-lcdp-champ-control] {
+  position: static;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__action-edit {
+  top: 10px;
+  right: 12px;
+  transform: none;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__label-zone {
+  padding-right: 40px;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] .lcdp-compte-action-prioritaire:active {
+  transform: scale(.95);
+}
+
 /* Actions CODA, CODR et géolocalisation : pas de valeur répétée sous l'intitulé. */
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-mon-compte-action-courte {
   grid-template-columns: minmax(0, 1fr) 32px;
@@ -374,7 +394,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre :is(button,a):focus-visi
     padding: 15px 13px;
   }
   body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] {
-    grid-template-columns: minmax(0, .43fr) minmax(0,.57fr);
+    grid-template-columns: minmax(0, 1fr);
     padding: 9px 10px;
   }
   body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-champ-formulaire--modifiable:not(.lcdp-mon-compte-action-courte) {
@@ -653,8 +673,8 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
     gap: 9px;
   }
   .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] {
-    grid-template-columns: minmax(110px, .43fr) minmax(0, 1fr);
-    gap: 12px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3px;
     padding: 10px 12px;
   }
   .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__lecture {
@@ -805,6 +825,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 body.lcdp-page-mon-compte #form-mes-informations-membre
 .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] #zone-selfie {
   grid-template-columns: minmax(0,1fr);
+  gap: 3px;
   padding: 10px 12px;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre #zone-selfie .lcdp-selfie-texte {
@@ -841,3 +862,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   line-height: 1.45;
   text-align: left;
 }
+
+/* La valeur bracelet et les masques CODA/CODR restent lisibles sous leur libellé. */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] > .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__lecture { display: block; }
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] .lcdp-compte-action-prioritaire:active { transform: scale(.95); }
