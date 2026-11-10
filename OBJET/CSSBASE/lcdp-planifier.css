@@ -818,6 +818,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
 }
 
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__action-libelle {
+  text-transform: uppercase;
   white-space: normal !important;
   overflow-wrap: normal;
   word-break: normal;
