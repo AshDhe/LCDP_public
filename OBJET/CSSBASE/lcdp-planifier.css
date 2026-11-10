@@ -2840,3 +2840,53 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   margin: 0 !important;
   justify-content: flex-end;
 }
+
+
+/* PLANIFIER : alignement géométrique de l'en-tête du calendrier.
+   Croix : top 11px, diamètre 34px ; contenu : top 11px, hauteur 34px.
+   La carte conserve son padding supérieur de 9px. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
+  padding-top: 2px !important;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header
+.lcdp-planifier-parc-en-tete {
+  text-align: center;
+  text-transform: uppercase;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-identite {
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 12px !important;
+  min-height: 34px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-identite .lcdp-planifier-entete-parc {
+  display: flex !important;
+  flex: 0 1 auto !important;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 34px;
+  width: auto !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-filtres [data-lcdp-calendrier-mois-title] {
+  flex: 0 1 auto !important;
+  min-height: 34px;
+  white-space: nowrap;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres {
+  align-self: center;
+  justify-content: flex-start !important;
+  margin: 0 !important;
+}
+@media (max-width: 360px) {
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+  .lcdp-planifier-entete-identite { gap: 7px !important; }
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+  .lcdp-planifier-entete-filtres [data-lcdp-calendrier-mois-title] {
+    font-size: 1.04rem !important;
+  }
+}
