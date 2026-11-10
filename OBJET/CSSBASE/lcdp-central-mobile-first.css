@@ -27558,6 +27558,34 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   letter-spacing: 0.035em;
   text-transform: uppercase;
 }
+
+/* Étiquette statut membre commune (Mon compte, PLANIFIER et pages futures).
+   16 px = +60 % par rapport à la présentation à 10 px de Mon compte.
+   La classe est réutilisable ; le sélecteur avec ID neutralise seulement
+   les anciens styles historiques appliqués à #mention-statut-membre. */
+.lcdp-etiquette-statut-membre,
+#mention-statut-membre.lcdp-etiquette-statut-membre {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 6px;
+  background: #e2e8f0;
+  color: #475569;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: .08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 :where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement {
   width: 100%;
   max-width: var(--lcdp-text-width);

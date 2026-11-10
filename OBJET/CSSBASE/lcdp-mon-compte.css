@@ -55,22 +55,6 @@ body.lcdp-page-mon-compte .lcdp-page-header > .lcdp-title-page-center {
   letter-spacing: -.025em;
   color: #0f172a;
 }
-body.lcdp-page-mon-compte .lcdp-page-header #mention-statut-membre.lcdp-mention-connexion {
-  display: inline-block;
-  width: fit-content;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 4px 10px;
-  border-radius: 6px;
-  background: #e2e8f0;
-  color: #475569;
-  font-family: Arial, system-ui, sans-serif;
-  font-size: 10px;
-  line-height: 1.5;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
 body.lcdp-page-mon-compte #mention-suspension-abonnement-membre {
   width: 100%;
   margin-top: 5px;
