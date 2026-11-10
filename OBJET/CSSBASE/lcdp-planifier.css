@@ -2758,7 +2758,9 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-filtres.lcdp-planifier-entete-avec-parc
 [data-lcdp-calendrier-mois-title] {
-  display: block !important;
+  display: flex !important;
+  align-items: center;
+  min-height: 34px;
   margin: 0 !important;
   padding: 0;
   font-size: 1.15rem !important;
