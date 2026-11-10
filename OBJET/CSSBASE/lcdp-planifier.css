@@ -2397,10 +2397,9 @@ body.lcdp-page-reserver .lcdp-planifier-parcs-diaporama
   cursor: not-allowed;
 }
 
-/* Tout créneau déjà occupé par le membre est rouge sur la totalité du bouton,
-   y compris s'il consulte un autre parc ou une autre région. */
+/* Accès personnel planifié : rouge sur toute la plage, quel que soit le parc consulté. */
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
-.lcdp-planifier-choix-plage:is(.lcdp-planifier-heure--reservation, .lcdp-planifier-heure--invitation),
+.lcdp-planifier-choix-plage.lcdp-planifier-heure--reservation,
 body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-card-heure-in-calendrier-jour--planning-action.lcdp-planifier-heure--reservation {
   --lcdp-heure-fond: #b93737 !important;
@@ -2411,12 +2410,27 @@ body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot
   color: #fff !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
-.lcdp-planifier-choix-plage:is(.lcdp-planifier-heure--reservation, .lcdp-planifier-heure--invitation)
+.lcdp-planifier-choix-plage.lcdp-planifier-heure--reservation
 [data-lcdp-card-heure-jour-label],
 body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-card-heure-in-calendrier-jour--planning-action.lcdp-planifier-heure--reservation
 [data-lcdp-card-heure-jour-label] {
   color: #fff !important;
+}
+/* Invitation reçue : corail existant sur toute la plage. */
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
+.lcdp-planifier-choix-plage.lcdp-planifier-heure--invitation {
+  --lcdp-heure-fond: #f5b1a6 !important;
+  background: #f5b1a6 !important;
+  background-image: none !important;
+  border-color: #f5b1a6 !important;
+  box-shadow: none !important;
+  color: #343836 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
+.lcdp-planifier-choix-plage.lcdp-planifier-heure--invitation
+[data-lcdp-card-heure-jour-label] {
+  color: #343836 !important;
 }
 
 
