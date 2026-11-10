@@ -2544,7 +2544,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   width: calc(100% + 30px);
   max-width: none;
   margin: 0 -30px 8px 0;
-  padding: 10px 11px !important;
+  padding: 7px 11px 8px !important;
   background: #fff;
   border: 1px solid #edf0f4;
   border-radius: 20px;
@@ -2557,7 +2557,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__titre {
   display: block;
-  margin: 0 0 7px 2px;
+  margin: 0 0 4px 2px;
   color: #94a3b8;
   font-size: .69rem;
   font-weight: 800;
@@ -2676,7 +2676,14 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-moi
   color: #475569 !important;
 }
 @media (max-width: 380px) {
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations { padding: 8px !important; width: calc(100% + 27px); margin-right: -27px; }
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations { padding: 6px 8px 7px !important; width: calc(100% + 27px); margin-right: -27px; }
   body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie { padding: 8px !important; }
   body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle { font-size: .68rem !important; }
+}
+/* Sur la première vue, aligner optiquement PLANIFIER sur le centre
+   de la croix absolue sans déplacer le contrôle de fermeture. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc)
+[data-lcdp-calendrier-mois-title] {
+  transform: translateY(-9px);
 }
