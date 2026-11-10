@@ -979,11 +979,9 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0;
-  padding: 4px !important;
   margin: 0 !important;
   order: initial !important;
   justify-self: stretch;
-  border-radius: 11px;
 }
 #lcdp-planifier-fiche-overlay-slot .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
   display: block;
@@ -1238,11 +1236,9 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
 #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card {
   margin: 0 !important;
-  padding: 3px !important;
   width: 100% !important;
   max-width: 100% !important;
   order: initial !important;
-  border-radius: 11px !important;
 }
 #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
@@ -2361,7 +2357,7 @@ body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-dia
   min-width: 0;
   max-width: 100%;
   margin: 14px 0 0;
-  padding: 12px 12px 18px;
+  padding: 0;
 }
 body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-diaporama
 .lcdp-box-card-parc-diaporama__scene,
