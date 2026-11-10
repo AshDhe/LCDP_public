@@ -2687,3 +2687,52 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-calendrier-mois-title] {
   transform: translateY(-9px);
 }
+
+
+/* PLANIFIER : identité et bouton CHANGER sur une seule ligne.
+   Conserver la marge à droite réservée à la croix de fermeture. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between;
+  align-items: center !important;
+  gap: 6px !important;
+  width: 100%;
+  min-width: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite .lcdp-planifier-entete-parc {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+  width: auto;
+  margin: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-aucun-parc:not([hidden]) {
+  display: block;
+  margin-top: 1px;
+  color: #8b948c;
+  font-size: clamp(.68rem, 2.7vw, .77rem);
+  font-weight: 550;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc)
+[data-lcdp-calendrier-mois-title] {
+  min-height: 0;
+  transform: none;
+  line-height: 1.2 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc)
+.lcdp-planifier-entete-parc {
+  min-height: 34px;
+  justify-content: center;
+}
