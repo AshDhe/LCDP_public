@@ -2122,3 +2122,52 @@ body.lcdp-page-reserver .lcdp-planifier-wrapper #lcdp-planifier-jour-overlay-slo
     font-size: .86rem;
   }
 }
+
+
+/* 2026-11-10 — Titres des deux vues du calendrier PLANIFIER.
+   Une seule ligne dans l'entête de page : statut membre (pas de grand PLANIFIER).
+   La carte affiche un titre de même corps dans ses deux états. */
+body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header {
+  gap: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title] {
+  order: 1;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-parc .lcdp-planifier-nom-parc:not([hidden]) {
+  order: 0;
+}
+/* Planning général : PLANIFIER occupe la première ligne à gauche de la croix. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc)
+[data-lcdp-calendrier-mois-title] {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0;
+  font-size: 1.15rem !important;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: normal;
+  color: #1f2a24 !important;
+}
+/* Planning d'un parc : son nom sur la ligne de la croix,
+   PLANIFIER, petit et ambre, sur la ligne immédiatement suivante. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-filtres.lcdp-planifier-entete-avec-parc
+[data-lcdp-calendrier-mois-title] {
+  display: block;
+  margin: 3px 0 0;
+  font-size: .7rem !important;
+  line-height: 1.35;
+  font-weight: 750;
+  letter-spacing: .075em;
+  color: #ba7424 !important;
+}
+@media (min-width: 600px) {
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+  .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc)
+  [data-lcdp-calendrier-mois-title] {
+    font-size: 1.32rem !important;
+  }
+}
