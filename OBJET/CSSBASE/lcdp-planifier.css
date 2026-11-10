@@ -2891,3 +2891,22 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
     font-size: 1.04rem !important;
   }
 }
+
+
+/* PLANIFIER : priorité des états calendaires sur la couverture d'abonnement.
+   L'abonnement payé reste vert sur les journées futures ouvertes seulement.
+   Reprendre les couleurs historiques de la vue Planning Parc (c052). */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--past {
+  background: #f4f2ec !important;
+  color: var(--lcdp-color-text-muted) !important;
+  opacity: 1 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--closed:not(.lcdp-box-card-jour-in-calendrier-mois--past) {
+  background: #ffffff !important;
+  color: var(--lcdp-color-text) !important;
+  opacity: 1 !important;
+}
