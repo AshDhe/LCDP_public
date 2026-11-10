@@ -884,18 +884,18 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   aspect-ratio: auto;
 }
 
-/* Fiche parc : fenêtre nettement plus étroite, sans modifier la vue PLANNING PARC.
+/* Fiche parc dans le wrapper PLANIFIER : largeur identique au calendrier.
    En cours d'ouverture, la fiche n'a pas encore son attribut data-lcdp-shift-vue. */
 #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-shift-detail-parc:not([data-lcdp-shift-vue="planning"]):not([data-lcdp-shift-vue="planning-jour"])
 .lcdp-box-shift-detail-parc__card {
   box-sizing: border-box;
-  width: min(100%, 460px) !important;
-  max-width: 460px !important;
+  width: 100% !important;
+  max-width: 100% !important;
   min-width: 0;
-  max-height: calc(100dvh - 24px);
+  max-height: none !important;
   padding: 12px !important;
-  overflow: auto;
+  overflow: visible !important;
 }
 #lcdp-planifier-fiche-overlay-slot .lcdp-box-shift-detail-parc {
   padding: 10px;
@@ -1147,20 +1147,17 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
   white-space: normal;
 }
 
-/* PLANIFIER — fiche parc, restauration des cartes aerées et de la largeur PC.
-   Correctif du 05/11/2026 : cette feuille est réellement chargée en dernier
-   par reserver-membre.html. Aucune incidence sur la vue planning/abonnement.
-   Le DOM peut être ancien (sans --organisee) : on ne dépend pas de ce modificateur. */
+/* PLANIFIER — fiche parc, cartes aérées dans le wrapper étroit sur tous écrans.
+   Ne modifie ni la vue planning/abonnement ni les composants génériques. */
 #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] > .lcdp-box-shift-detail-parc__card {
   box-sizing: border-box;
-  width: min(100%, 520px) !important;
-  max-width: 520px !important;
+  width: 100% !important;
+  max-width: 100% !important;
   min-width: 0;
-  padding: 13px !important;
-  max-height: calc(100dvh - 20px) !important;
-  overflow-x: hidden;
-  overflow-y: auto;
+  padding: 12px !important;
+  max-height: none !important;
+  overflow: visible !important;
 }
 #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card {
@@ -1285,22 +1282,24 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
   background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E");
 }
 @media (min-width: 768px) {
-  /* Ne pas appliquer les 460/520px de la feuille mobile à la fiche PC. */
+  /* Le viewport PC ne doit pas agrandir la fiche au-delà du wrapper compact. */
   #lcdp-planifier-fiche-overlay-slot
   .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]:not([data-lcdp-shift-vue="planning"]):not([data-lcdp-shift-vue="planning-jour"]) > .lcdp-box-shift-detail-parc__card {
-    width: min(880px, calc(100vw - 52px)) !important;
-    max-width: 880px !important;
-    padding: 22px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 12px !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
   #lcdp-planifier-fiche-overlay-slot
   .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card {
-    gap: 18px !important;
+    gap: 12px !important;
   }
   #lcdp-planifier-fiche-overlay-slot
   .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__header,
   #lcdp-planifier-fiche-overlay-slot
   .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__section {
-    padding: 22px !important;
+    padding: 12px !important;
   }
   #lcdp-planifier-fiche-overlay-slot
   .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__title {
@@ -1634,12 +1633,14 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
   }
 }
 
-/* Fiche parc : même échelle que la navigation, sans toucher à PLANNING PARC. */
+/* Fiche parc : largeur du wrapper (mobile et PC), sans toucher à PLANNING PARC. */
 #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] > .lcdp-box-shift-detail-parc__card {
-  width: min(100%, 450px) !important;
-  max-width: 450px !important;
-  padding: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 12px !important;
+  max-height: none !important;
+  overflow: visible !important;
 }
 #lcdp-planifier-fiche-overlay-slot
 .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card {
