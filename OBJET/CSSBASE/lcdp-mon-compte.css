@@ -111,7 +111,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
   min-width: 0;
   margin: 0;
   padding: 20px;
@@ -121,8 +121,8 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   box-shadow: var(--compte-ombre);
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-title-section {
-  margin: 0;
-  padding: 0 0 5px;
+  margin: 0 0 -2px;
+  padding: 0 0 3px;
   border-bottom: 1px solid #f8fafc;
   color: var(--compte-texte-libelle);
   font-family: Arial, system-ui, sans-serif;
@@ -203,7 +203,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   border-color: #fcd9a6;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire--modifiable:not(.lcdp-mon-compte-action-courte) .lcdp-box-champ-formulaire__lecture {
-  padding-right: 42px !important;
+  padding-right: 0 !important;
   text-align: left;
 }
 
@@ -670,7 +670,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 @media (min-width: 540px) {
   .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section {
     padding: 19px 20px 20px;
-    gap: 9px;
+    gap: 5px;
   }
   .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > [data-lcdp-box-champ-formulaire] {
     grid-template-columns: minmax(0, 1fr);
@@ -729,8 +729,8 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 body.lcdp-page-mon-compte #form-mes-informations-membre
 .lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
 :is(.lcdp-box-champ-formulaire__label,.lcdp-box-champ-formulaire__heading) {
-  color: #1e293b;
-  font-weight: 700;
+  color: var(--compte-texte-libelle);
+  font-weight: 500;
 }
 
 /* CODA et CODR n'affichent pas une valeur redondante sous leur intitulé. */
@@ -792,35 +792,6 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   border-color: #e2e8f0;
 }
 
-/* Le bracelet inactif reste visible mais plus discret ; actif, style standard. */
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="securite"] > .lcdp-compte-bracelet--inactif {
-  background: rgba(248,250,252,.5);
-  border-color: #f1f5f9;
-  box-shadow: none;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
-.lcdp-compte-bracelet--inactif .lcdp-box-champ-formulaire__label {
-  color: #94a3b8;
-  font-weight: 500;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
-.lcdp-compte-bracelet--inactif .lcdp-box-champ-formulaire__action-edit {
-  border-color: #e2e8f0;
-  background: #fff;
-  color: #94a3b8;
-  box-shadow: 0 1px 2px rgba(15,23,42,.05);
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
-.lcdp-compte-bracelet--inactif .lcdp-box-champ-formulaire__action-edit:hover {
-  border-color: #cbd5e1;
-  background: #fff;
-  color: #475569;
-}
-
 /* Le selfie sans photo ne présente qu'un seul texte ; avec photo, sa vignette. */
 body.lcdp-page-mon-compte #form-mes-informations-membre
 .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] #zone-selfie {
@@ -829,8 +800,8 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   padding: 10px 12px;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre #zone-selfie .lcdp-selfie-texte {
-  color: #1e293b;
-  font-size: 12px;
+  color: var(--compte-texte);
+  font-size: 13px;
   font-weight: 700;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre #zone-selfie #selfie-libelle[hidden] {
@@ -856,9 +827,11 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 .lcdp-box-champ-formulaire__lecture.lcdp-compte-placeholder-da {
   color: #94a3b8 !important;
   -webkit-text-fill-color: #94a3b8;
+  font-family: Arial, system-ui, sans-serif;
   font-size: 12px;
   font-weight: 500;
   font-style: italic;
+  letter-spacing: normal;
   line-height: 1.45;
   text-align: left;
 }
