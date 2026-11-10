@@ -18,9 +18,9 @@
   </script>
 
   <link rel="stylesheet" href="./OBJET/CSSBASE/cssbase.css" data-site-href="/OBJET/CSSBASE/cssbase.css">
-  <link rel="stylesheet" href="./OBJET/BOX/01-box-affiche.css" data-site-href="/OBJET/BOX/01-box-affiche.css">
-  <link rel="stylesheet" href="./OBJET/BOX/01-box-carrousel.css" data-site-href="/OBJET/BOX/01-box-carrousel.css">
-  <link rel="stylesheet" href="./OBJET/BOX/01-box-text.css" data-site-href="/OBJET/BOX/01-box-text.css">
+  <link rel="stylesheet" href="./OBJET/CSSBASE/01-box-affiche.css" data-site-href="/OBJET/CSSBASE/01-box-affiche.css">
+  <link rel="stylesheet" href="./OBJET/CSSBASE/01-box-carrousel.css" data-site-href="/OBJET/CSSBASE/01-box-carrousel.css">
+  <link rel="stylesheet" href="./OBJET/CSSBASE/01-box-text.css" data-site-href="/OBJET/CSSBASE/01-box-text.css">
 </head>
 
 <body>
@@ -177,7 +177,7 @@
         const root = document.getElementById("lcdp-index-root");
         root.innerHTML = "";
 
-        const affiche = await chargerFragment("/OBJET/BOX/01-box-affiche.html");
+        const affiche = await chargerFragment("/OBJET/HTMLBASE/01-box-affiche.html");
         root.appendChild(affiche);
 
         const box = root.querySelector("[data-lcdp-box-affiche]");
@@ -192,7 +192,7 @@
           "Des parcs plein air d’exception proches de vous<br>pour venir vous ressourcer";
 
         const carrouselSlot = box.querySelector("[data-lcdp-affiche-carrousel-slot]");
-        const carrousel = await chargerFragment("/OBJET/BOX/01-box-carrousel.html");
+        const carrousel = await chargerFragment("/OBJET/HTMLBASE/01-box-carrousel.html");
         carrouselSlot.appendChild(carrousel);
 
         const carrouselElement = carrouselSlot.querySelector("[data-lcdp-box-carousel]");
@@ -254,14 +254,14 @@
           liste.appendChild(figure);
         });
 
-        await chargerScriptUneFois("/OBJET/BOX/01-box-carrousel.js");
+        await chargerScriptUneFois("/OBJET/JSBASE/01-carrousel.js");
 
         if (typeof window.LCDP_initialiserCarrousels === "function") {
           window.LCDP_initialiserCarrousels(carrouselSlot);
         }
 
         const textSlot = box.querySelector("[data-lcdp-affiche-text-slot]");
-        const boxText = await chargerFragment("/OBJET/BOX/01-box-text.html");
+        const boxText = await chargerFragment("/OBJET/HTMLBASE/01-text.html");
         textSlot.appendChild(boxText);
 
         const boxTextElement = textSlot.querySelector("[data-lcdp-boxtext]");

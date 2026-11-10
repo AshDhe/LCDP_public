@@ -1,0 +1,231 @@
+.lcdp-box-legende-host {
+  margin-bottom: 0;
+}
+
+.lcdp-box-legende {
+  width: 100%;
+  margin: 12px 0 8px;
+  color: var(--lcdp-color-text);
+  font-family: var(--lcdp-font-main);
+  font-size: 0.85rem;
+  line-height: 1.25;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+.lcdp-box-legende__contenu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.lcdp-box-legende__ligne {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 4px;
+}
+
+.lcdp-box-legende__item {
+  min-width: 0;
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.lcdp-box-legende__libelle {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.25;
+  vertical-align: baseline;
+}
+
+.lcdp-box-legende__carre {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  min-height: 15px;
+  margin: 0 0 0 4px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+.lcdp-box-legende__carre--bleu-fonce {
+  background: #2f6fb3;
+  border-color: #255c96;
+}
+
+.lcdp-box-legende__carre--violet {
+  background: #7b5aa6;
+  border-color: #684993;
+}
+
+.lcdp-box-legende__carre--orange-fonce {
+  background: #f2a23a;
+  border-color: #d98b24;
+}
+
+.lcdp-box-legende__carre--orange-clair {
+  background: #ffd8a8;
+  border-color: #f0b96f;
+}
+
+.lcdp-box-legende__carre--bleu-clair {
+  background: #cfe3f7;
+  border-color: #a9cbea;
+}
+
+/* Indicateurs personnels et occupation, communs aux deux calendriers. */
+.lcdp-box-legende__carre--vert { background: #587242; border-color: #4e663b; }
+.lcdp-box-legende__carre--gris-fonce { background: #343836; border-color: #343836; }
+.lcdp-planning-etape { margin: 1.25rem 0 0.75rem; font-weight: 700; }
+.lcdp-planning-checkin { margin-top: 1.25rem; }
+.lcdp-planning-avec-membre { position: relative; isolation: isolate; overflow: hidden; }
+.lcdp-planning-jauge-membre {
+  position: absolute; z-index: 3; inset: 0 auto 0 0; width: 20%; height: 100%;
+  box-sizing: border-box; background: #587242; color: #fff; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 700; line-height: 1.1; overflow-wrap: normal;
+}
+
+
+/* PLANIFIER : autorisations des invités (ne pas modifier les autres légendes). */
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations {
+  margin: 8px 0 10px;
+  font-size: 0.8rem;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__contenu {
+  flex-direction: row;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+  gap: 5px 14px;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  min-height: 12px;
+  margin: 0;
+  border-radius: 2px;
+  flex: none;
+}
+.lcdp-box-legende__carre--duo {
+  background: var(--lcdp-color-orange, #f2a23a);
+  border-color: #d98b24;
+}
+.lcdp-box-legende__carre--famille {
+  background: #626262;
+  border-color: #555555;
+}
+.lcdp-box-legende__carre--coach {
+  background: var(--lcdp-color-coach, #8660c8);
+  border-color: #704aa9;
+}
+.lcdp-box-legende__carre--famille-coach {
+  background: #287a53;
+  border-color: #216743;
+}
+
+/* PLANIFIER : légende devenue barre de filtres, quatre cases sur une seule ligne. */
+.lcdp-page-reserver .lcdp-planifier-entete-filtres .lcdp-planifier-legende-autorisations {
+  width: 100%;
+  max-width: 100%;
+  margin: 6px 0 9px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; /* Pas de barre grise sous les filtres sur mobile. */
+  -ms-overflow-style: none;
+}
+.lcdp-page-reserver .lcdp-planifier-entete-filtres .lcdp-planifier-legende-autorisations::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  min-width: 0;
+  gap: 12px;
+  align-items: center;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie {
+  display: inline-flex;
+  position: relative;
+  gap: 5px;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  font-size: .79rem;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie__coche {
+  display: inline;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+}
+/* Les quatre coches des filtres sont blanches, y compris DUO. */
+.lcdp-page-reserver .lcdp-box-legende__carre--duo .lcdp-planifier-filtre-categorie__coche {
+  color: #fff;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie__input:not(:checked) + .lcdp-box-legende__carre {
+  background: transparent !important;
+  border: 2px solid currentColor !important;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie__input:not(:checked) + .lcdp-box-legende__carre .lcdp-planifier-filtre-categorie__coche {
+  display: none;
+}
+.lcdp-page-reserver .lcdp-planifier-filtre-categorie__input:focus-visible + .lcdp-box-legende__carre {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+@media (max-width: 767px) {
+  /* PLANIFIER : les quatre filtres restent visibles, sur deux lignes si nécessaire. */
+  .lcdp-page-reserver .lcdp-planifier-entete-filtres .lcdp-planifier-legende-autorisations {
+    overflow-x: visible;
+    overflow-y: visible;
+  }
+  .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+  .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne { gap: 7px; }
+  .lcdp-page-reserver .lcdp-planifier-filtre-categorie { gap: 3px; font-size: .64rem; }
+  .lcdp-page-reserver .lcdp-planifier-legende-autorisations .lcdp-box-legende__carre {
+    width: 14px; height: 14px; min-width: 14px; min-height: 14px;
+  }
+  .lcdp-page-reserver .lcdp-planifier-filtre-categorie__coche { font-size: 10px; }
+}

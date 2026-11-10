@@ -1,0 +1,99 @@
+#lcdp-bandeau-slot {
+  min-height: 64px;
+}
+
+.lcdp-box-bandeau-nav {
+  --lcdp-header-icon-size: 44px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 4000;
+  width: 100%;
+  min-height: 64px;
+  background: var(--lcdp-color-logo-green);
+  border-bottom: none;
+  overflow: visible;
+}
+
+.lcdp-box-bandeau-nav__inner {
+  position: relative;
+  z-index: 4001;
+  width: 100%;
+  max-width: var(--lcdp-page-width);
+  min-height: 64px;
+  margin-inline: auto;
+  padding: 0 var(--lcdp-page-padding-mobile);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lcdp-space-3);
+  overflow: visible;
+}
+
+.lcdp-box-bandeau-nav__logo-link {
+  min-width: 0;
+  color: #ffffff;
+  font-family: var(--lcdp-font-main);
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lcdp-box-bandeau-nav__logo-link:visited,
+.lcdp-box-bandeau-nav__logo-link:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.lcdp-box-bandeau-nav__logo {
+  width: var(--lcdp-header-icon-size, 44px);
+  height: var(--lcdp-header-icon-size, 44px);
+  border-radius: 999px;
+  object-fit: contain;
+  flex: 0 0 var(--lcdp-header-icon-size, 44px);
+  display: block;
+}
+
+.lcdp-box-bandeau-nav__space-label {
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.lcdp-box-bandeau-nav__burger-slot {
+  position: relative;
+  z-index: 4002;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  #lcdp-bandeau-slot {
+    min-height: 72px;
+  }
+
+  .lcdp-box-bandeau-nav {
+    min-height: 72px;
+  }
+
+  .lcdp-box-bandeau-nav__inner {
+    min-height: 72px;
+    padding-inline: var(--lcdp-page-padding-desktop);
+  }
+
+  .lcdp-box-bandeau-nav__logo {
+    width: var(--lcdp-header-icon-size, 44px);
+    height: var(--lcdp-header-icon-size, 44px);
+    flex-basis: var(--lcdp-header-icon-size, 44px);
+  }
+}

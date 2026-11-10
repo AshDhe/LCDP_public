@@ -1,0 +1,312 @@
+.lcdp-box-card-parc {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.lcdp-box-card-parc__media {
+  position: relative;
+  width: 100%;
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-card-parc__image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-card-parc__body {
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-box-card-parc__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+}
+
+.lcdp-box-card-parc__meta {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.lcdp-box-card-parc__title {
+  margin: 0;
+  font-size: clamp(1.25rem, 5.5vw, 1.65rem);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-card-parc__description {
+  display: block;
+  width: 100%;
+  margin: var(--lcdp-space-1) 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  text-align: left;
+  text-transform: none;
+  appearance: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.lcdp-box-card-parc__description:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+
+.lcdp-box-card-parc__description-icone {
+  width: 1em;
+  height: 1em;
+  margin-left: 5px;
+  display: inline-block;
+  vertical-align: -2px;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.65;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.lcdp-box-card-parc__actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-card-parc__actions .lcdp-button {
+  width: 100%;
+  max-width: none;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-parc {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .lcdp-box-card-parc__media {
+    width: 34%;
+    min-width: 220px;
+    max-width: 280px;
+    display: flex;
+  }
+
+  .lcdp-box-card-parc__image {
+    height: 100%;
+    min-height: 210px;
+    aspect-ratio: auto;
+  }
+
+  .lcdp-box-card-parc__body {
+    flex: 1;
+    padding: var(--lcdp-space-4);
+    justify-content: space-between;
+  }
+
+  .lcdp-box-card-parc__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 420px;
+  }
+
+  .lcdp-box-card-parc__actions .lcdp-button {
+    min-width: 0;
+  }
+}
+
+/* Ajustement typographie desktop — texte de lecture uniquement. */
+@media (min-width: 768px) {
+  .lcdp-box-card-parc__description {
+    font-size: var(--lcdp-font-size-paragraph-desktop);
+  }
+}
+
+
+.lcdp-box-card-parc__badge-prepa {
+  position: absolute;
+  top: 14px;
+  left: -34px;
+  z-index: 1;
+  width: 120px;
+  padding: 5px 0;
+  transform: rotate(-45deg);
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+  font-size: 0.72rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Card Parc — actions spécifiques à la page Réserver, mobile first. */
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__actions--reserver {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--lcdp-space-2);
+  max-width: none;
+}
+
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  margin-top: 0;
+  padding: 10px 9px;
+  border: 2px solid currentColor;
+  border-radius: var(--lcdp-radius-button);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: clamp(0.9072rem, 4.32vw, 1.0584rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-transform: none;
+  box-shadow: none;
+}
+
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+  width: 27.72px;
+  height: 27.72px;
+  flex: 0 0 27.72px;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-libelle {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-plein {
+  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-logo-green);
+  color: #ffffff;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-plein:hover {
+  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-primary);
+  color: #ffffff;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-contour {
+  border-color: var(--lcdp-color-logo-green);
+  background: #ffffff;
+  color: var(--lcdp-color-logo-green);
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-contour:hover {
+  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-primary);
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-plein {
+  border-color: var(--lcdp-color-orange);
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-plein:hover {
+  border-color: var(--lcdp-color-orange-hover);
+  background: var(--lcdp-color-orange-hover);
+  color: #ffffff;
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-contour {
+  border-color: var(--lcdp-color-orange);
+  background: #ffffff;
+  color: var(--lcdp-color-orange);
+}
+
+.lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-contour:hover {
+  border-color: var(--lcdp-color-orange-hover);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-orange-hover);
+}
+
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-parc--reserver .lcdp-box-card-parc__actions--reserver {
+    max-width: 460px;
+  }
+
+  .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+    min-height: 52px;
+    padding-inline: 13px;
+    font-size: 1.16424rem;
+  }
+
+  .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+    width: 29.04px;
+    height: 29.04px;
+    flex-basis: 29.04px;
+  }
+}
+
+
+/* Nom du parc sur la photographie : même objet pour liste et diaporama. */
+.lcdp-box-card-parc__media--avec-nom { position: relative; overflow: hidden; }
+.lcdp-box-card-parc__media--avec-nom .lcdp-box-card-parc__nom-image {
+  position: absolute; inset: auto 0 0; z-index: 2; display: block;
+  padding: var(--lcdp-space-3);
+  background: linear-gradient(transparent, rgba(0, 0, 0, .68));
+  color: #ffffff; font-weight: 700; font-size: clamp(1.1rem, 3vw, 1.55rem);
+  line-height: 1.2; pointer-events: none;
+}
+
+/* Statuts communs aux cartes Parc en liste, sur carte et en diaporama. */
+.lcdp-box-card-parc__badge--nouveau {
+  background: #3C71B1;
+  letter-spacing: 0.035em;
+}
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet,
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet:hover {
+  filter: saturate(0.35) brightness(1.18);
+  cursor: help;
+}
+
+/* Pictogramme blanc du bouton Présentation, commun aux vues liste et diaporama, sur tous les écrans. */
+.lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein .lcdp-box-card-parc__action-icone--presentation {
+  filter: brightness(0) invert(1);
+}

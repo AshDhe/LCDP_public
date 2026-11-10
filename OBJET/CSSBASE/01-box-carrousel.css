@@ -1,0 +1,220 @@
+.lcdp-box-carousel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-carousel__title {
+  margin: 0;
+  font-size: clamp(26px, 6vw, 34px);
+  line-height: 1.18;
+  font-weight: 600;
+  text-align: left;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-carousel__frame {
+  position: relative;
+  width: 100%;
+}
+
+.lcdp-box-carousel__viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 180px;
+  overflow: hidden;
+  border-radius: var(--lcdp-radius-button);
+  background: var(--lcdp-color-surface-soft);
+  box-shadow: 0 10px 24px rgba(31, 42, 36, 0.08);
+}
+
+.lcdp-box-carousel__list {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.lcdp-box-carousel__item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--lcdp-color-surface-soft);
+  transition: opacity 1.2s ease;
+}
+
+.lcdp-box-carousel__item.is-active {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.lcdp-box-carousel__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  background: var(--lcdp-color-surface-soft);
+  display: block;
+}
+
+.lcdp-box-carousel__button {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(31, 42, 36, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--lcdp-color-text);
+  font-family: var(--lcdp-font-main);
+  font-size: 28px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(31, 42, 36, 0.14);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lcdp-box-carousel__button--prev {
+  left: 10px;
+}
+
+.lcdp-box-carousel__button--next {
+  right: 10px;
+}
+
+.lcdp-box-carousel__button:hover {
+  background: #ffffff;
+  border-color: var(--lcdp-color-border-strong);
+}
+
+.lcdp-box-carousel__button:active {
+  opacity: 0.75;
+}
+
+.lcdp-box-carousel__dots {
+  min-height: 16px;
+  margin-top: var(--lcdp-space-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lcdp-space-1);
+}
+
+.lcdp-box-carousel__dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid rgba(31, 42, 36, 0.18);
+  border-radius: 999px;
+  background: rgba(31, 42, 36, 0.35);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(31, 42, 36, 0.12);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lcdp-box-carousel__dot.is-active {
+  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-logo-green);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-carousel__viewport {
+    border-radius: calc(var(--lcdp-radius-button) + 8px);
+  }
+
+  .lcdp-box-carousel__button {
+    width: 44px;
+    height: 44px;
+    font-size: 34px;
+  }
+
+  .lcdp-box-carousel__button--prev {
+    left: 16px;
+  }
+
+  .lcdp-box-carousel__button--next {
+    right: 16px;
+  }
+
+  .lcdp-box-carousel__dots {
+    min-height: 18px;
+    gap: 9px;
+  }
+
+  .lcdp-box-carousel__dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+/* TITRE SUR IMAGE — composant générique, utilisable sur toutes les pages.
+   Le texte est un figcaption dans la figure ; aucun texte n'est intégré à l'image.
+   Position de référence : bas gauche, avec marges adaptatives PC/mobile. */
+.lcdp-box-carousel__item--with-title::after {
+  content: "";
+  position: absolute;
+  inset: 42% 0 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.12) 34%,
+    rgba(0, 0, 0, 0.56) 100%
+  );
+}
+
+.lcdp-box-carousel__overlay-title {
+  position: absolute;
+  z-index: 2;
+  left: clamp(16px, 5%, 76px);
+  bottom: clamp(18px, 6%, 64px);
+  width: calc(100% - 2 * clamp(16px, 5%, 76px));
+  max-width: none;
+  margin: 0;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(17.28px, 3.712vw, 48.64px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-align: left;
+  /* Evite qu’une ponctuation finale soit isolée sur une ligne. */
+  text-wrap: wrap;
+  overflow-wrap: normal;
+  word-break: normal;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.24);
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .lcdp-box-carousel__overlay-title {
+    left: 5%;
+    bottom: 7%;
+    width: 90%;
+    max-width: none;
+    font-size: clamp(21.85px, 6.27vw, 43.7px);
+    line-height: 1.1;
+  }
+  .lcdp-box-carousel__item--with-title::after {
+    inset: 35% 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lcdp-box-carousel__item { transition-duration: 0.01ms; }
+}
