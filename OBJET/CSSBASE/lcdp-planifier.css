@@ -2940,3 +2940,16 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   background: #e5f4e9 !important;
   border-color: #b7dac1 !important;
 }
+
+
+/* Calendrier général : jour passé explicitement désactivé.
+   Spécificité supérieure au fond blanc générique avec :not(.empty). */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois.lcdp-box-card-jour-in-calendrier-mois--past:not(.lcdp-box-card-jour-in-calendrier-mois--empty) {
+  background: #e7e9e9 !important;
+  border-color: #d6dad9 !important;
+  color: #7b8380 !important;
+  opacity: 1 !important;
+  cursor: default;
+}
