@@ -2367,9 +2367,10 @@ body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-dia
 .lcdp-box-card-parc-diaporama__scene,
 body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-diaporama
 .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__scene {
-  height: clamp(235px, 30vh, 265px) !important;
-  min-height: 235px !important;
-  max-height: 265px !important;
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
 }
 body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-diaporama
 .lcdp-box-card-parc-diaporama__face--verso {
