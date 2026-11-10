@@ -16,6 +16,7 @@
 }
 
 .lcdp-box-bandeau-nav {
+  --lcdp-header-icon-size: 44px;
   position: fixed;
   top: 0;
   left: 0;
@@ -64,11 +65,11 @@
 }
 
 .lcdp-box-bandeau-nav__logo {
-  width: 44px;
-  height: 44px;
+  width: var(--lcdp-header-icon-size, 44px);
+  height: var(--lcdp-header-icon-size, 44px);
   border-radius: 999px;
   object-fit: contain;
-  flex: 0 0 44px;
+  flex: 0 0 var(--lcdp-header-icon-size, 44px);
   display: block;
 }
 
@@ -104,9 +105,9 @@
   }
 
   .lcdp-box-bandeau-nav__logo {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
+    width: var(--lcdp-header-icon-size, 44px);
+    height: var(--lcdp-header-icon-size, 44px);
+    flex-basis: var(--lcdp-header-icon-size, 44px);
   }
 }
 
@@ -123,13 +124,14 @@
 .lcdp-box-menu-burger__button {
   position: relative;
   z-index: 4101;
-  width: 38px;
-  height: 38px;
+  box-sizing: border-box;
+  width: var(--lcdp-header-icon-size, 44px);
+  height: var(--lcdp-header-icon-size, 44px);
   padding: 0;
   border: 2px solid #587242;
   border-radius: 999px;
   background: #ffffff;
-  box-shadow: 0 0 0 3px #ffffff;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14881,6 +14883,9 @@ body.lcdp-legal-lightbox-open {
 :where(html[data-lcdp-css~="c034"]) #lcdp-bandeau-slot {
   min-height: 68px;
 }
+html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
+  --lcdp-header-icon-size: 36px;
+}
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav {
   position: fixed;
   top: 0;
@@ -14928,9 +14933,9 @@ body.lcdp-legal-lightbox-open {
 :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo {
   box-sizing: border-box;
   display: block;
-  flex: 0 0 36px;
-  width: 36px;
-  height: 36px;
+  flex: 0 0 var(--lcdp-header-icon-size, 44px);
+  width: var(--lcdp-header-icon-size, 44px);
+  height: var(--lcdp-header-icon-size, 44px);
   border-radius: 12px;
   background: rgb(255 255 255 / 10%);
   object-fit: contain;
@@ -24870,12 +24875,14 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button {
   position: relative;
   z-index: 4101;
-  width: 36px;
-  height: 36px;
+  box-sizing: border-box;
+  width: var(--lcdp-header-icon-size, 44px);
+  height: var(--lcdp-header-icon-size, 44px);
   padding: 0;
   border: 0;
   border-radius: 12px;
   background: rgba(255,255,255,.2);
+  box-shadow: none;
   color: #fff;
   display: flex;
   flex-direction: column;

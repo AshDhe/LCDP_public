@@ -3,6 +3,7 @@
 }
 
 .lcdp-box-bandeau-nav {
+  --lcdp-header-icon-size: 44px;
   position: fixed;
   top: 0;
   left: 0;
@@ -51,11 +52,11 @@
 }
 
 .lcdp-box-bandeau-nav__logo {
-  width: 44px;
-  height: 44px;
+  width: var(--lcdp-header-icon-size, 44px);
+  height: var(--lcdp-header-icon-size, 44px);
   border-radius: 999px;
   object-fit: contain;
-  flex: 0 0 44px;
+  flex: 0 0 var(--lcdp-header-icon-size, 44px);
   display: block;
 }
 
@@ -91,8 +92,8 @@
   }
 
   .lcdp-box-bandeau-nav__logo {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
+    width: var(--lcdp-header-icon-size, 44px);
+    height: var(--lcdp-header-icon-size, 44px);
+    flex-basis: var(--lcdp-header-icon-size, 44px);
   }
 }
