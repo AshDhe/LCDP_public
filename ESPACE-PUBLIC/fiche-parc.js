@@ -1724,18 +1724,34 @@
       const badgePrepa = card.querySelector(
         "[data-lcdp-card-parc-badge-prepa]"
       );
-      const nomParc =
-        nettoyerTexte(parcCarte?.nom || parcCarte?.nomparc)
-          .replace(/^(?:parc\s+de\s+)+/i, "") ||
-        "Parc";
-      const departement = nettoyerDepartement(
-        parcCarte?.dptmt || parcCarte?.departement
-      );
+      const nomParc = nettoyerTexte(parcCarte?.nom || parcCarte?.nomparc) || "Parc";
+      const departement = nettoyerDepartement(parcCarte?.dptmt || parcCarte?.departement);
+      // Les noms en base peuvent déjà finir par « - 45 » ou « (45) ».
+      // Le titre ne doit jamais redoubler « Parc de » (préfixe du template).
+      const suffixe = departement
+        ? new RegExp("(?:\\s*[-–—]\\s*|\\s*\\()" + departement + "\\)?\\s*$", "i")
+        : null;
+      const nomSansNumero = suffixe ? nomParc.replace(suffixe, "").trim() : nomParc;
+      const titreClassique = (nomSansNumero + (departement ? " (" + departement + ")" : ""))
+        .toLocaleUpperCase("fr-FR");
 
       if (titre) {
-        titre.textContent =
-          nomParcAffiche(nomParc) +
-          (departement ? " (" + departement + ")" : "");
+        const titreComplet = titre.closest(".lcdp-box-card-parc__title");
+        if (titreComplet) titreComplet.textContent = titreClassique;
+        else titre.textContent = titreClassique;
+      }
+      // Dans le parcours membre, ce cartouche reprend le recto photo du diaporama,
+      // avec nom court superposé à l'image plutôt qu'un second titre sous la photo.
+      if (normaliserModeUsagePlanning(options) === MODE_USAGE_MEMBRE && media) {
+        media.classList.add("lcdp-box-card-parc__media--avec-nom");
+        const nomImage = card.querySelector("[data-lcdp-card-parc-nom-image]");
+        if (nomImage) {
+          const court = titreClassique
+            .replace(/^(?:parc\s+(?:(?:de|du|des)\s+|d[’']\s*)?)+/i, "")
+            .trim();
+          nomImage.textContent = court || titreClassique;
+        }
+        card.querySelector(".lcdp-box-card-parc__body")?.remove();
       }
 
       if (meta) {
@@ -3599,7 +3615,19 @@
     }
 
     ajouterJaugePersonnelle(card, segment.planningMembre, true);
-    const occupes = (segment.planningMembre || []).length > 0;
+    // Une réservation sur cette plage appartient au membre même si elle a été
+    // faite dans un autre parc ou département : affichage intégral en rouge.
+    const reserveAilleurs = modeReservationMembre &&
+      typeof options.verifierPlageReserveeMembre === "function" &&
+      options.verifierPlageReserveeMembre(contexte.jour.date, segment.plage);
+    const occupes = Array.isArray(segment.planningMembre) &&
+      segment.planningMembre.some(r => r && r.statut !== "cancd");
+    if (modeReservationMembre && (reserveAilleurs || occupes)) {
+      card.classList.add("lcdp-planifier-heure--reservation");
+      card.dataset.indisponible = "deja-reserve";
+      card.title = "Vous avez déjà un accès planifié sur cette plage.";
+      card.setAttribute("aria-label", card.title);
+    }
     const dateDebut = construireDateBookdFicheParc(contexte.jour.date, segment.debut);
     if (modeReservationMembre && !occupes && (Number(segment.jauge) >= 100 || !dateDebut || Date.parse(dateDebut) <= Date.now())) {
       card.disabled = true; card.setAttribute("aria-disabled", "true");

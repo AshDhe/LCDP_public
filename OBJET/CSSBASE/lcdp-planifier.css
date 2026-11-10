@@ -2331,3 +2331,93 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-f
   margin: 0 !important;
   line-height: 1.2 !important;
 }
+
+
+/* 2026-11-10 — PLANIFIER : dernières harmonisations fiche, cartes et créneaux.
+   Correctifs locaux au parcours membre, sans altérer les composants publics. */
+
+/* Fiche intégrée : croix alignée avec le titre, sans chevaucher l'en-tête. */
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="fiche"] > .lcdp-box-shift-detail-parc__card
+> .lcdp-box-shift-detail-parc__close {
+  position: absolute !important;
+  top: 28px !important;
+  right: 21px !important;
+  width: 32px;
+  height: 32px;
+  margin: 0 !important;
+  float: none !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="fiche"]
+.lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__header {
+  padding-right: 59px !important;
+}
+
+/* La carte départementale reprend le verso du diaporama avec des respirations. */
+body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-diaporama {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 14px 0 0;
+  padding: 12px 12px 18px;
+}
+body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-diaporama
+.lcdp-box-card-parc-diaporama__scene,
+body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-diaporama
+.lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__scene {
+  height: clamp(235px, 30vh, 265px) !important;
+  min-height: 235px !important;
+  max-height: 265px !important;
+}
+body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-diaporama
+.lcdp-box-card-parc-diaporama__face--verso {
+  padding: 16px 14px !important;
+}
+body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-diaporama
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body {
+  justify-content: flex-start !important;
+  min-height: 0 !important;
+  gap: 13px !important;
+}
+body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-diaporama
+.lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description:not([hidden]) {
+  padding-top: 10px !important;
+}
+
+/* Identité visuelle des deux actions, sans annuler le refus des parcs PROJET. */
+body.lcdp-page-reserver .lcdp-planifier-parcs-diaporama
+.lcdp-box-card-parc__actions--reserver .lcdp-box-card-parc__action {
+  background: #55733f !important;
+  border-color: #55733f !important;
+  color: #fff !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+body.lcdp-page-reserver .lcdp-planifier-parcs-diaporama
+.lcdp-box-card-parc__actions--reserver .lcdp-box-card-parc__action[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+/* Tout créneau déjà occupé par le membre est rouge sur la totalité du bouton,
+   y compris s'il consulte un autre parc ou une autre région. */
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
+.lcdp-planifier-choix-plage:is(.lcdp-planifier-heure--reservation, .lcdp-planifier-heure--invitation),
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot
+.lcdp-box-card-heure-in-calendrier-jour--planning-action.lcdp-planifier-heure--reservation {
+  --lcdp-heure-fond: #b93737 !important;
+  background: #b93737 !important;
+  background-image: none !important;
+  border-color: #a82c2c !important;
+  box-shadow: none !important;
+  color: #fff !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
+.lcdp-planifier-choix-plage:is(.lcdp-planifier-heure--reservation, .lcdp-planifier-heure--invitation)
+[data-lcdp-card-heure-jour-label],
+body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot
+.lcdp-box-card-heure-in-calendrier-jour--planning-action.lcdp-planifier-heure--reservation
+[data-lcdp-card-heure-jour-label] {
+  color: #fff !important;
+}
