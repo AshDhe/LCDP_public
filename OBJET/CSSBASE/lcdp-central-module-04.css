@@ -1763,3 +1763,11 @@
 :where(html[data-lcdp-css~="c052"]) .lcdp-planifier-admin [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--masquee {
   visibility: hidden !important;
 }
+
+/* LCDP 2026-11-10 : format 16:9 des vignettes photographiques Parc. */
+.lcdp-box-card-parc__media .lcdp-box-card-parc__image,
+.lcdp-box-card-reservation-membre__media .lcdp-box-card-reservation-membre__image,
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  display: block; width: 100% !important; height: auto !important;
+  min-height: 0 !important; aspect-ratio: 16 / 9 !important; object-fit: cover !important;
+}
