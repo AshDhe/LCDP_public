@@ -2736,3 +2736,41 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   min-height: 34px;
   justify-content: center;
 }
+
+
+/* PLANIFIER : même hiérarchie avec et sans parc sélectionné.
+   Titre d'abord, identification du parc en dessous, CHANGER à droite. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title] {
+  order: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-parc .lcdp-planifier-nom-parc:not([hidden]) {
+  order: 1;
+  min-height: 0;
+  margin: 1px 0 0;
+  font-size: clamp(.7rem, 2.8vw, .8rem) !important;
+  line-height: 1.25;
+  font-weight: 650 !important;
+  color: #637063 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-filtres.lcdp-planifier-entete-avec-parc
+[data-lcdp-calendrier-mois-title] {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0;
+  font-size: 1.15rem !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  letter-spacing: normal !important;
+  color: #1f2a24 !important;
+  text-transform: uppercase;
+}
+@media (min-width: 600px) {
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+  .lcdp-planifier-entete-filtres.lcdp-planifier-entete-avec-parc
+  [data-lcdp-calendrier-mois-title] {
+    font-size: 1.32rem !important;
+  }
+}
