@@ -2774,3 +2774,69 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
     font-size: 1.32rem !important;
   }
 }
+
+
+/* PLANIFIER — en-tête de page : parc sous l'étiquette de membre.
+   La commande CHANGER reste dans la carte, en face de PLANIFIER. */
+body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header .lcdp-planifier-parc-en-tete {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 9px 0 2px;
+  padding: 0;
+  color: #172118;
+  font-size: clamp(1rem, 3.7vw, 1.16rem);
+  font-weight: 750;
+  line-height: 1.3;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-identite {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between;
+  gap: 8px !important;
+  width: 100%;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-identite .lcdp-planifier-entete-parc {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 34px;
+  width: auto;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-filtres
+[data-lcdp-calendrier-mois-title] {
+  display: flex !important;
+  align-items: center;
+  flex: 1 1 auto;
+  min-height: 34px;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  font-size: clamp(1.15rem, 4vw, 1.32rem) !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  letter-spacing: normal !important;
+  color: #1f2a24 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+.lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres {
+  display: flex;
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 0;
+  margin: 0 !important;
+  justify-content: flex-end;
+}
