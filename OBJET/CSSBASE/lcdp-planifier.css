@@ -3212,7 +3212,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   padding: 7px 0 0;
   border-top: 1px solid #f1f5f9;
   font-family: var(--lcdp-font-main);
-  font-size: .425rem;
+  font-size: .75rem;
   line-height: 1.25;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__contenu,
