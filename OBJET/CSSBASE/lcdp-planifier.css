@@ -4836,59 +4836,112 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__r
   margin-top: 25px !important;
 }
 
-/* ABO-RÉZA — suivi de préplanification en tête du calendrier, sans modifier les autres cartes. */
+/* ABO-RÉZA — carte de suivi : chaque segment représente un accès du mois. */
 body.lcdp-page-reserver .lcdp-box-calendrier-mois__card > .lcdp-aboreza-suivi {
   box-sizing: border-box;
   width: 100%;
   margin: 12px 0 14px;
-  padding: 14px;
-  border: 1px solid #dce3d7;
-  border-radius: 15px;
-  background: #f7f9f5;
-  color: #28372a;
+  padding: 20px 21px 18px;
+  border: 1px solid #e7e5e4;
+  border-radius: 22px;
+  background: #fafaf9;
+  color: #292524;
   font-family: var(--lcdp-font-main);
 }
 body.lcdp-page-reserver .lcdp-aboreza-suivi__details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 0;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #e7e5e4;
 }
 body.lcdp-page-reserver .lcdp-aboreza-suivi__champ {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  gap: 7px;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__champ + .lcdp-aboreza-suivi__champ {
+  align-items: flex-end;
+  padding-left: 10px;
+  text-align: right;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__libelle {
+  color: #a8a29e;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__valeur {
+  color: #292524;
+  font-size: .98rem;
+  font-weight: 800;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__champ + .lcdp-aboreza-suivi__champ .lcdp-aboreza-suivi__valeur {
+  color: #4b6333;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__progression {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin: 17px 0 12px;
+  font-size: .85rem;
+  line-height: 1.35;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__progression-libelle {
+  color: #57534e;
+  font-weight: 600;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__progression-valeur {
+  color: #292524;
+  font-weight: 800;
+  white-space: nowrap;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__mois {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__mois-groupe {
+  flex: 1 1 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 5px;
+  gap: 6px;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__cases {
+  display: flex;
+  gap: 3px;
+  min-height: 10px;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__case {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 10px;
+  border-radius: 5px;
+  background: #e7e5e4;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__case--faite {
+  background: #4b6333;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__mois-libelle {
+  color: #78716c;
+  font-size: .65rem;
+  font-weight: 650;
+  line-height: 1.2;
   text-align: center;
 }
-body.lcdp-page-reserver .lcdp-aboreza-suivi__libelle {
-  color: #788477;
-  font-size: .68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .03em;
-}
-body.lcdp-page-reserver .lcdp-aboreza-suivi__valeur {
-  font-size: .92rem;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-}
-body.lcdp-page-reserver .lcdp-aboreza-suivi__progression {
-  margin: 0 0 12px;
-  font-size: .86rem;
-  line-height: 1.4;
-  text-align: center;
-}
-body.lcdp-page-reserver .lcdp-aboreza-suivi__reprendre.lcdp-button {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: none;
-  min-height: 40px;
-  padding: 9px 12px;
-  border-radius: 12px;
-  white-space: normal;
-  font-size: .8rem;
-  line-height: 1.35;
+@media (max-width: 420px) {
+  body.lcdp-page-reserver .lcdp-box-calendrier-mois__card > .lcdp-aboreza-suivi {
+    padding: 15px 13px 14px;
+  }
+  body.lcdp-page-reserver .lcdp-aboreza-suivi__valeur {
+    font-size: .88rem;
+  }
 }
