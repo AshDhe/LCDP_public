@@ -3160,3 +3160,38 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__body {
   padding-top: 0 !important;
 }
+
+/* PLANIFIER — code couleur unique desktop/mobile (2026-11-11).
+   Sur une journée ouverte : jaune pour une plage ouverte, gris ardoise
+   #707780 pour une plage fermée. La largeur éventuelle de jauge est
+   conservée, sans introduire une troisième couleur. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
+[data-lcdp-card-jour-mois-slot]:not([hidden]) {
+  --lcdp-slot-remplissage: 100%;
+  --lcdp-slot-couleur: #e59834;
+  background: linear-gradient(to right, var(--lcdp-slot-couleur) var(--lcdp-slot-remplissage), transparent var(--lcdp-slot-remplissage)) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]) {
+  --lcdp-slot-couleur: #707780;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--60 {
+  --lcdp-slot-remplissage: 60%;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--80 {
+  --lcdp-slot-remplissage: 80%;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--100 {
+  --lcdp-slot-remplissage: 100%;
+}
