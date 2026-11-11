@@ -1832,7 +1832,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-moi
   grid-auto-rows: 60px;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__number {
-  font-size: .72rem;
+  font-size: .612rem;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__slots {
   width: 70% !important;
