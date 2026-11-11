@@ -2612,6 +2612,16 @@ body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-sl
   width: 100% !important;
   justify-content: stretch !important;
 }
+/* Filtres INVITÉS et COACH mutuellement exclusifs : le display:grid!important
+   des catégories ne doit jamais annuler l'attribut HTML hidden. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne[hidden],
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne[hidden],
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-information-coach][hidden],
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot [data-lcdp-information-coach][hidden],
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-calendrier-mois-grid][hidden] {
+  display: none !important;
+}
+
 body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie {
   box-sizing: border-box;
   display: flex !important;
