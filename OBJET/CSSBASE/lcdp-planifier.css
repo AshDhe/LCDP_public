@@ -3180,6 +3180,9 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]) {
   --lcdp-slot-couleur: #707780;
+  /* La règle historique spécifique imposait background: #fff !important.
+     Définir aussi background ici pour la supplanter sur tous les écrans. */
+  background: linear-gradient(to right, #707780 var(--lcdp-slot-remplissage), transparent var(--lcdp-slot-remplissage)) !important;
   border: 0 !important;
   box-shadow: none !important;
 }
