@@ -5564,12 +5564,6 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
   filter: none !important;
   cursor: default !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach:disabled,
-body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach:disabled {
-  background: var(--lcdp-color-coach, #8660c8) !important;
-  color: #fff !important;
-  opacity: 1 !important;
-}
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc img,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc img {
   display: block;
