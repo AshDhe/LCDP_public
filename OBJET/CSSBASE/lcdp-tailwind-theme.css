@@ -23,5 +23,5 @@
   --spacing-lcdp-3: var(--lcdp-space-3, 18px);
   --spacing-lcdp-4: var(--lcdp-space-4, 24px);
   --spacing-lcdp-5: var(--lcdp-space-5, 36px);
-  --font-lcdp: var(--lcdp-font-main, Arial, sans-serif);
+  --font-lcdp: var(--lcdp-font-main, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
 }
