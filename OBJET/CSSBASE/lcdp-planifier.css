@@ -3082,3 +3082,49 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   line-height: 1.15 !important;
   padding: 0 !important;
 }
+
+
+/* PLANIFIER — synthèse mensuelle : traits fins et distinction nette des plages.
+   Un jour passé ou fermé n'affiche aucun trait, y compris face aux anciennes
+   règles qui imposaient visibility:visible sur les plages non ouvertes. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+[data-lcdp-card-jour-mois-slot][hidden],
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--past [data-lcdp-card-jour-mois-slot],
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--closed [data-lcdp-card-jour-mois-slot] {
+  display: none !important;
+  visibility: hidden !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture
+.lcdp-box-card-jour-in-calendrier-mois__slots {
+  grid-template-rows: repeat(5, 2px) !important;
+  gap: 2px !important;
+  align-content: start !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture
+[data-lcdp-card-jour-mois-slot]:not([hidden]) {
+  box-sizing: border-box !important;
+  height: 2px !important;
+  min-height: 2px !important;
+  max-height: 2px !important;
+  flex: 0 0 2px !important;
+  padding: 0 !important;
+  border-radius: 1px !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]) {
+  background: #ffffff !important;
+  border: 1px solid #a3adb0 !important;
+  box-shadow: 0 0 0 0.3px #a3adb0 !important;
+  visibility: visible !important;
+}
