@@ -3842,30 +3842,37 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
 .lcdp-box-calendrier-jour__title {
   text-align: center !important;
-  margin: 7px 0 4px !important;
-  color: #6b756e !important;
-  font-size: .75rem !important;
+  margin: 8px 0 8px !important;
+  color: #68756a !important;
+  font-size: .73rem !important;
   line-height: 1.3 !important;
   font-weight: 450 !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
 .lcdp-box-calendrier-jour__meta {
-  display: block !important;
+  display: flex !important;
+  justify-content: center !important;
   text-align: center !important;
-  margin: 0 0 10px !important;
+  margin: 0 0 14px !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
 .lcdp-planifier-heure-entete-date {
-  display: block;
+  display: inline-block !important;
+  box-sizing: border-box;
+  width: fit-content;
   max-width: 100%;
-  margin-inline: auto;
+  margin: 0 auto;
+  padding: 8px 14px;
+  border: 1px solid #dce7d8;
+  border-radius: 10px;
+  background: #f4f7f1;
   text-align: center !important;
-  font-size: 0.98rem !important;
-  font-weight: 700 !important;
+  font-size: .89rem !important;
+  font-weight: 650 !important;
   line-height: 1.35 !important;
   letter-spacing: 0 !important;
   text-transform: none !important;
-  color: #263a2b !important;
+  color: #2c4733 !important;
   text-wrap: balance;
 }
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
