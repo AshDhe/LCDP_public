@@ -4947,7 +4947,7 @@ body.lcdp-page-reserver .lcdp-aboreza-suivi__case {
   background: #e7e5e4;
 }
 body.lcdp-page-reserver .lcdp-aboreza-suivi__case--faite {
-  background: #4b6333;
+  background: #fef3c7;
 }
 body.lcdp-page-reserver .lcdp-aboreza-suivi__mois-libelle {
   color: #78716c;
@@ -4965,7 +4965,7 @@ body.lcdp-page-reserver .lcdp-aboreza-suivi__mois-libelle {
   }
 }
 
-/* Barre unique segmentée : gris = accès restant, vert LCDP = accès planifié. */
+/* Barre unique segmentée : gris = accès restant, jaune clair LCDP = accès planifié. */
 body.lcdp-page-reserver .lcdp-aboreza-suivi__champ,
 body.lcdp-page-reserver .lcdp-aboreza-suivi__champ + .lcdp-aboreza-suivi__champ {
   align-items: center;
@@ -4988,5 +4988,5 @@ body.lcdp-page-reserver .lcdp-aboreza-suivi__case {
   background: #e7e5e4;
 }
 body.lcdp-page-reserver .lcdp-aboreza-suivi__case--faite {
-  background: #4b6333;
+  background: #fef3c7;
 }
