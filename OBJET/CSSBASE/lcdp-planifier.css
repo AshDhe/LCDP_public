@@ -3013,7 +3013,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
-  margin-top: 0 !important;
+  margin-top: 2px !important;
   margin-bottom: 0 !important;
   gap: 1px !important;
   grid-template-rows: repeat(5, 3px) !important;
