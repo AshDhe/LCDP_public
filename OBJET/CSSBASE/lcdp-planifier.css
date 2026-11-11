@@ -3857,7 +3857,7 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
 .lcdp-planifier-heure-entete-date {
   display: block;
   text-align: center !important;
-  font-size: 1.3rem !important;
+  font-size: 0.91rem !important;
   font-weight: 650 !important;
   line-height: 1.4 !important;
   letter-spacing: 0 !important;
