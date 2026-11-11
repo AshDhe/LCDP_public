@@ -3167,7 +3167,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 }
 
 /* PLANIFIER — couleurs communes desktop/mobile.
-   Jaune pour une plage ouverte ; vert du thème (#55733f) pour une plage
+   Jaune pour une plage ouverte ; gris anthracite (#707780) pour une plage
    fermée et pour la jauge d'occupation d'une plage ouverte. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
@@ -3183,10 +3183,10 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]):not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
-  --lcdp-slot-couleur: #55733f;
+  --lcdp-slot-couleur: #707780;
   /* La règle historique spécifique imposait background: #fff !important.
      Définir aussi background ici pour la supplanter sur tous les écrans. */
-  background: linear-gradient(to right, #55733f var(--lcdp-slot-remplissage), transparent var(--lcdp-slot-remplissage)) !important;
+  background: linear-gradient(to right, #707780 var(--lcdp-slot-remplissage), transparent var(--lcdp-slot-remplissage)) !important;
   border: 0 !important;
   box-shadow: none !important;
 }
@@ -3208,13 +3208,13 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--100 {
   --lcdp-slot-remplissage: 100%;
 }
-/* La jauge verte occupe la fraction indiquée, sur la plage jaune ouverte.
-   Les plages fermées restent intégralement vertes. */
+/* La jauge anthracite occupe la fraction indiquée, sur la plage jaune ouverte.
+   Les plages fermées restent intégralement anthracite. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
 [data-lcdp-card-jour-mois-slot].lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge:not(.lcdp-planifier-plage--non-ouverte):not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
-  background: linear-gradient(to right, #55733f var(--lcdp-slot-remplissage), #e59834 var(--lcdp-slot-remplissage)) !important;
+  background: linear-gradient(to right, #707780 var(--lcdp-slot-remplissage), #e59834 var(--lcdp-slot-remplissage)) !important;
 }
 
 /* PLANIFIER — légende compacte sous la grille (styles et couleurs du thème existants). */
@@ -3248,7 +3248,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
 }
 
 /* PLANIFIER — légende discrète, typographie commune et repères d'accès.
-   Codes bleus déjà utilisés : Ma clé (#2f6fb3), bleu clair du thème (#cfe3f7). */
+   Accès personnel : couleur du bandeau Parc ; invitation : rose clair. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning {
   font-size: .66rem;
   color: var(--lcdp-color-text-muted);
@@ -3264,16 +3264,16 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   color: var(--lcdp-color-text-muted);
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--acces-clos {
-  background: #55733f;
-  border-color: #55733f;
+  background: #707780;
+  border-color: #707780;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--bleu-fonce {
-  background: var(--lcdp-color-blue);
-  border-color: var(--lcdp-color-blue);
+  background: var(--lcdp-color-parc, #d64b68);
+  border-color: var(--lcdp-color-parc, #d64b68);
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--bleu-clair {
-  background: #cfe3f7;
-  border-color: #a9cbea;
+  background: #f6b7c5;
+  border-color: #eaa0b2;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois] {
   position: relative;
@@ -3308,17 +3308,17 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--acces-personnel {
-  background: var(--lcdp-color-blue) !important;
+  background: var(--lcdp-color-parc, #d64b68) !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--invitation-recue {
-  background: #cfe3f7 !important;
+  background: #f6b7c5 !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--acces-et-invitation {
-  background: linear-gradient(to right, var(--lcdp-color-blue) 50%, #cfe3f7 50%) !important;
+  background: linear-gradient(to right, var(--lcdp-color-parc, #d64b68) 50%, #f6b7c5 50%) !important;
 }
 /* Les plages invisibles du calendrier sans parc ne décalent pas les plages réservées. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage1"] { grid-row: 1; }
