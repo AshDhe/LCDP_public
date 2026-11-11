@@ -3314,3 +3314,12 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-moi
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage3"] { grid-row: 3; }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage4"] { grid-row: 4; }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage5"] { grid-row: 5; }
+
+/* Calendrier sans parc : aucun état de disponibilité (jaune ou gris).
+   Seules les plages avec une réservation/invitation du membre s'affichent. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-planifier-jour--sans-parc
+[data-lcdp-card-jour-mois-slot]:not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
+  display: none !important;
+  visibility: hidden !important;
+}
