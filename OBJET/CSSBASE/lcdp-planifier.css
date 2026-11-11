@@ -4964,3 +4964,29 @@ body.lcdp-page-reserver .lcdp-aboreza-suivi__mois-libelle {
     font-size: .88rem;
   }
 }
+
+/* Barre unique segmentée : gris = accès restant, vert LCDP = accès planifié. */
+body.lcdp-page-reserver .lcdp-aboreza-suivi__champ,
+body.lcdp-page-reserver .lcdp-aboreza-suivi__champ + .lcdp-aboreza-suivi__champ {
+  align-items: center;
+  padding-left: 0;
+  text-align: center;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__champ .lcdp-aboreza-suivi__libelle,
+body.lcdp-page-reserver .lcdp-aboreza-suivi__champ .lcdp-aboreza-suivi__valeur {
+  width: 100%;
+  text-align: center;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__mois {
+  gap: 5px;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__cases {
+  min-height: 13px;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__case {
+  height: 13px;
+  background: #e7e5e4;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__case--faite {
+  background: #4b6333;
+}
