@@ -4801,15 +4801,33 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__f
 }
 
 
-/* ABO-RÉZA — préparation : récapitulatif rapproché du texte, action immédiatement dessous. */
+/* ABO-RÉZA — préparation : espacement compact et alignements centrés. */
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .lcdp-box-dialogue-bouton__title {
+  width: 100% !important;
+  margin: 0 0 8px !important;
+  padding: 0 45px !important;
+  text-align: center !important;
+}
 body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .lcdp-box-dialogue-bouton__text {
-  margin-bottom: 10px !important;
+  margin: 0 0 2px !important;
 }
 body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .lcdp-box-dialogue-bouton__actions.lcdp-aboreza-preparation__contenu {
   gap: 0 !important;
+  margin-top: 0 !important;
 }
 body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__resume.lcdp-box-card-abonnement {
-  margin-bottom: 14px !important;
+  margin: 0 0 10px !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__resume .lcdp-box-card-abonnement__item {
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__resume .lcdp-box-card-abonnement__label,
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__resume .lcdp-box-card-abonnement__value {
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
 }
 body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .lcdp-aboreza-preparation__continuer.lcdp-button {
   margin: 0 !important;
