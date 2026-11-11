@@ -3128,3 +3128,15 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   box-shadow: 0 0 0 0.3px #a3adb0 !important;
   visibility: visible !important;
 }
+
+
+/* PLANIFIER : aucune mise en évidence visuelle du jour courant.
+   Conserver la classe métier --today, mais retirer uniquement son contour.
+   Les styles de focus clavier (:focus-visible) restent indépendants. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--today:not(:focus-visible) {
+  outline: none !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+}
