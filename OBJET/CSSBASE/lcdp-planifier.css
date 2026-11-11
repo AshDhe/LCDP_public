@@ -1734,14 +1734,14 @@ body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header > .lcdp-title-
   line-height: 1.25;
   letter-spacing: -.025em;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot {
   width: 100%;
   min-width: 0;
   margin: 0;
   padding: 0;
 }
 /* Remplacer uniquement le comportement plein écran du calendrier principal. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot > [data-lcdp-box-calendrier-mois] {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot > [data-lcdp-box-calendrier-mois] {
   position: static !important;
   inset: auto !important;
   z-index: auto !important;
@@ -1758,7 +1758,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot > [data-lcdp-box-calendr
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot > [data-lcdp-box-calendrier-mois] > .lcdp-box-calendrier-mois__card {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot > [data-lcdp-box-calendrier-mois] > .lcdp-box-calendrier-mois__card {
   position: relative;
   box-sizing: border-box;
   display: block;
@@ -1777,81 +1777,81 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot > [data-lcdp-box-calendr
   box-shadow: 0 1px 4px rgba(31,42,36,.08);
 }
 /* Le H1 du wrapper suffit jusqu'à la première sélection d'un parc. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc) [data-lcdp-calendrier-mois-title] {
   display: none;
 }
 /* Le contenu conserve sa largeur mobile même quand le viewport dépasse 900 px.
    Cela neutralise les agrandissements de la grille et du bandeau de filtres. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__header {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__header {
   padding: 12px 42px 10px 8px !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres {
   gap: 9px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite {
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-parc {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-parc {
   width: 100%;
   flex: none;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations {
   padding: 7px 5px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   justify-content: stretch;
   gap: 6px 8px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__body {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__body {
   padding-top: 8px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__navigation {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__navigation {
   gap: 6px;
   margin-bottom: 10px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__month {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__month {
   min-width: 0;
   font-size: clamp(1.06rem, 4.3vw, 1.3rem);
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__nav-button {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__nav-button {
   width: 34px;
   height: 34px;
   min-height: 34px;
   flex-basis: 34px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__grid,
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__weekdays {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__grid,
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__weekdays {
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
   min-width: 0;
   gap: 5px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__grid {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__grid {
   min-height: 0;
   grid-auto-rows: 60px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__number {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__number {
   font-size: .612rem;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__slots {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__slots {
   width: 70% !important;
   max-width: 42px !important;
   grid-template-rows: repeat(5, 3px) !important;
   gap: 2px !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__slot {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-card-jour-in-calendrier-mois__slot {
   height: 3px !important;
   min-height: 3px !important;
   max-height: 3px !important;
 }
 /* Un ancien composant ne doit pas ouvrir une nappe grise sur la page wrapper. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-box-calendrier-mois]::backdrop {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot [data-lcdp-box-calendrier-mois]::backdrop {
   background: transparent;
 }
 
@@ -2132,16 +2132,16 @@ body.lcdp-page-reserver .lcdp-planifier-wrapper #lcdp-planifier-jour-overlay-slo
 body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header {
   gap: 0;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title] {
   order: 1;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-parc .lcdp-planifier-nom-parc:not([hidden]) {
   order: 0;
 }
 /* Planning général : PLANIFIER occupe la première ligne à gauche de la croix. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc)
 [data-lcdp-calendrier-mois-title] {
   display: block !important;
@@ -2155,7 +2155,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 }
 /* Planning d'un parc : son nom sur la ligne de la croix,
    PLANIFIER, petit et ambre, sur la ligne immédiatement suivante. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-filtres.lcdp-planifier-entete-avec-parc
 [data-lcdp-calendrier-mois-title] {
   display: block;
@@ -2167,7 +2167,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   color: #ba7424 !important;
 }
 @media (min-width: 600px) {
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+  body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
   .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc)
   [data-lcdp-calendrier-mois-title] {
     font-size: 1.32rem !important;
@@ -2321,11 +2321,11 @@ body.lcdp-page-reserver #lcdp-planifier-fiche-overlay-slot .lcdp-box-shift-detai
   z-index: 5;
 }
 /* Première ouverture : PLANIFIER centré sur la ligne du bouton de fermeture. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc) .lcdp-planifier-entete-parc {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc) .lcdp-planifier-entete-parc {
   min-height: 34px;
   justify-content: center;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc) [data-lcdp-calendrier-mois-title] {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc) [data-lcdp-calendrier-mois-title] {
   display: flex !important;
   align-items: center;
   min-height: 34px;
@@ -2544,7 +2544,7 @@ body.lcdp-page-reserver .lcdp-planifier-carte-hote .lcdp-planifier-carte-sans-pa
 
 /* PLANIFIER — présentation des filtres et du mois inspirée du gabarit fourni.
    Les contrôles natifs et leurs catégories restent inchangés. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations {
   box-sizing: border-box;
   width: calc(100% + 30px);
   max-width: none;
@@ -2556,11 +2556,11 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   box-shadow: 0 2px 5px rgba(15,23,42,.07);
   overflow: visible;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__contenu {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__contenu {
   display: block;
   width: 100%;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__titre {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__titre {
   display: block;
   margin: 0 0 4px 2px;
   color: #94a3b8;
@@ -2569,14 +2569,14 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   line-height: 1.3;
   letter-spacing: .075em;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 6px 8px !important;
   width: 100% !important;
   justify-content: stretch !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie {
   box-sizing: border-box;
   display: flex !important;
   align-items: center;
@@ -2594,11 +2594,11 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   cursor: pointer;
   transition: border-color .15s, background-color .15s;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie:has(.lcdp-planifier-filtre-categorie__input:checked) {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie:has(.lcdp-planifier-filtre-categorie__input:checked) {
   background: #fff9ec !important;
   border-color: #f5d58e !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle {
   flex: 1 1 auto;
   min-width: 0;
   font-size: .74rem !important;
@@ -2607,10 +2607,10 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   color: #475569;
   overflow-wrap: anywhere;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre-categorie:has(.lcdp-planifier-filtre-categorie__input:checked) .lcdp-box-legende__libelle {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre-categorie:has(.lcdp-planifier-filtre-categorie__input:checked) .lcdp-box-legende__libelle {
   color: #92400e;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__picto {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__picto {
   display: inline-flex;
   flex: 0 0 18px;
   align-items: center;
@@ -2619,7 +2619,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   line-height: 1;
   font-size: .9rem;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__input {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__input {
   order: 2;
   flex: 0 0 17px;
   width: 17px !important;
@@ -2633,15 +2633,15 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   background: transparent;
   cursor: pointer;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre-categorie__input:checked {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre-categorie__input:checked {
   background: #e59834 !important;
   border-color: #e59834 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre-categorie__input:focus-visible {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre-categorie__input:focus-visible {
   outline: 2px solid #4e6838;
   outline-offset: 3px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__navigation {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__navigation {
   display: flex;
   justify-content: space-between !important;
   align-items: center;
@@ -2651,7 +2651,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-moi
   border-bottom: 1px solid #f1f5f9;
   margin-bottom: 13px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__month {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__month {
   flex: 1 1 auto;
   min-width: 0 !important;
   text-align: center;
@@ -2661,7 +2661,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-moi
   letter-spacing: -.025em;
   color: #1e293b;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__nav-button {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__nav-button {
   flex: 0 0 35px;
   width: 35px !important;
   height: 35px !important;
@@ -2676,18 +2676,18 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-moi
   font-weight: 600;
   line-height: 1;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__nav-button:hover:not(:disabled) {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-box-calendrier-mois__nav-button:hover:not(:disabled) {
   background: #f8fafc !important;
   color: #475569 !important;
 }
 @media (max-width: 380px) {
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations { padding: 6px 8px 7px !important; width: calc(100% + 27px); margin-right: -27px; }
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie { padding: 8px !important; }
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle { font-size: .68rem !important; }
+  body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations { padding: 6px 8px 7px !important; width: calc(100% + 27px); margin-right: -27px; }
+  body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie { padding: 8px !important; }
+  body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle { font-size: .68rem !important; }
 }
 /* Sur la première vue, aligner optiquement PLANIFIER sur le centre
    de la croix absolue sans déplacer le contrôle de fermeture. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc)
 [data-lcdp-calendrier-mois-title] {
   transform: translateY(-9px);
@@ -2696,7 +2696,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 
 /* PLANIFIER : identité et bouton CHANGER sur une seule ligne.
    Conserver la marge à droite réservée à la croix de fermeture. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite {
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between;
@@ -2705,12 +2705,12 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-i
   width: 100%;
   min-width: 0;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite .lcdp-planifier-entete-parc {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite .lcdp-planifier-entete-parc {
   flex: 1 1 auto;
   min-width: 0;
   width: auto;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
@@ -2719,7 +2719,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-i
   width: auto;
   margin: 0;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-aucun-parc:not([hidden]) {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-aucun-parc:not([hidden]) {
   display: block;
   margin-top: 1px;
   color: #8b948c;
@@ -2728,14 +2728,14 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-aucun-pa
   line-height: 1.25;
   letter-spacing: 0;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc)
 [data-lcdp-calendrier-mois-title] {
   min-height: 0;
   transform: none;
   line-height: 1.2 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-filtres:not(.lcdp-planifier-entete-avec-parc)
 .lcdp-planifier-entete-parc {
   min-height: 34px;
@@ -2745,11 +2745,11 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 
 /* PLANIFIER : même hiérarchie avec et sans parc sélectionné.
    Titre d'abord, identification du parc en dessous, CHANGER à droite. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title] {
   order: 0;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-parc .lcdp-planifier-nom-parc:not([hidden]) {
   order: 1;
   min-height: 0;
@@ -2759,7 +2759,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   font-weight: 650 !important;
   color: #637063 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-filtres.lcdp-planifier-entete-avec-parc
 [data-lcdp-calendrier-mois-title] {
   display: flex !important;
@@ -2775,7 +2775,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   text-transform: uppercase;
 }
 @media (min-width: 600px) {
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+  body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
   .lcdp-planifier-entete-filtres.lcdp-planifier-entete-avec-parc
   [data-lcdp-calendrier-mois-title] {
     font-size: 1.32rem !important;
@@ -2804,7 +2804,7 @@ body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header .lcdp-planifie
   text-align: left;
   overflow-wrap: anywhere;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-identite {
   display: flex !important;
   flex-direction: row !important;
@@ -2813,7 +2813,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   gap: 8px !important;
   width: 100%;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-identite .lcdp-planifier-entete-parc {
   display: flex;
   justify-content: center;
@@ -2822,7 +2822,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   min-height: 34px;
   width: auto;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-filtres
 [data-lcdp-calendrier-mois-title] {
   display: flex !important;
@@ -2838,7 +2838,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   letter-spacing: normal !important;
   color: #1f2a24 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres {
   display: flex;
   flex: 0 0 auto;
@@ -2852,7 +2852,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 /* PLANIFIER : alignement géométrique de l'en-tête du calendrier.
    Croix : top 11px, diamètre 34px ; contenu : top 11px, hauteur 34px.
    La carte conserve son padding supérieur de 9px. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
   padding-top: 2px !important;
 }
@@ -2861,14 +2861,14 @@ body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header
   text-align: center;
   text-transform: uppercase;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-identite {
   justify-content: flex-start !important;
   align-items: center !important;
   gap: 12px !important;
   min-height: 34px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-identite .lcdp-planifier-entete-parc {
   display: flex !important;
   flex: 0 1 auto !important;
@@ -2877,22 +2877,22 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   min-height: 34px;
   width: auto !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-filtres [data-lcdp-calendrier-mois-title] {
   flex: 0 1 auto !important;
   min-height: 34px;
   white-space: nowrap;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres {
   align-self: center;
   justify-content: flex-start !important;
   margin: 0 !important;
 }
 @media (max-width: 360px) {
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+  body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
   .lcdp-planifier-entete-identite { gap: 7px !important; }
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+  body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
   .lcdp-planifier-entete-filtres [data-lcdp-calendrier-mois-title] {
     font-size: 1.04rem !important;
   }
@@ -2902,14 +2902,14 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 /* PLANIFIER : priorité des états calendaires sur la couverture d'abonnement.
    L'abonnement payé reste vert sur les journées futures ouvertes seulement.
    Reprendre les couleurs historiques de la vue Planning Parc (c052). */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--past {
   background: #f4f2ec !important;
   color: var(--lcdp-color-text-muted) !important;
   opacity: 1 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture.lcdp-box-card-jour-in-calendrier-mois--closed:not(.lcdp-box-card-jour-in-calendrier-mois--past) {
   background: #ffffff !important;
@@ -2920,25 +2920,25 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 
 /* PLANIFIER : trois états visuels pour le même calendrier, avec ou sans parc.
    Les barres horaires et les droits de réservation restent inchangés. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois:not(.lcdp-box-card-jour-in-calendrier-mois--empty) {
   background: #ffffff !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--past {
   background: #f4f2ec !important;
   color: var(--lcdp-color-text-muted) !important;
   opacity: 1 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--closed:not(.lcdp-box-card-jour-in-calendrier-mois--past) {
   background: #ffffff !important;
   opacity: 1 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-planifier-jour--abonnement-couvert:not(.lcdp-box-card-jour-in-calendrier-mois--past):not(.lcdp-box-card-jour-in-calendrier-mois--closed) {
   background: #e5f4e9 !important;
@@ -2948,7 +2948,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 
 /* Calendrier général : jour passé explicitement désactivé.
    Spécificité supérieure au fond blanc générique avec :not(.empty). */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois.lcdp-box-card-jour-in-calendrier-mois--past:not(.lcdp-box-card-jour-in-calendrier-mois--empty) {
   background: #f0f1f1 !important;
@@ -2961,23 +2961,23 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 
 /* PLANIFIER : cases mensuelles 30 % moins hautes (60px -> 42px).
    Règle locale identique sur mobile et desktop, avec ou sans parc sélectionné. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
   grid-auto-rows: 42px !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
   min-height: 0 !important;
   height: 100% !important;
   padding: 2px 3px !important;
   gap: 1px !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__number {
   margin-bottom: 0 !important;
   line-height: 1 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
   flex: 0 0 auto !important;
   align-content: center;
@@ -2986,7 +2986,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 
 /* PLANIFIER : chaque case est réduite de 15 % sur les côtés, sans
    toucher aux sept colonnes ni à la hauteur de 42 px. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
   box-sizing: border-box;
   width: 70% !important;
@@ -2999,23 +2999,23 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 /* PLANIFIER : rapprocher immédiatement les plages du numéro de jour,
    et réduire encore la hauteur de 15 % (42 px -> 36 px).
    S'applique aux deux états du calendrier, mobile et desktop. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__grid {
   grid-auto-rows: 36px !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
   padding: 1px 2px !important;
   gap: 0 !important;
   justify-content: flex-start !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__number {
   margin: 0 !important;
   padding: 0 !important;
   flex: 0 0 auto !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois__slots {
   margin-top: 2px !important;
   margin-bottom: 0 !important;
@@ -3030,7 +3030,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
    Une plage fermée dans une journée ouverte = barre blanche bordée.
    Les jours entièrement fermés ne présentent aucune plage (gestion JS existante).
    La jauge d'occupation ne doit plus assombrir ces barres de synthèse. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed)
 [data-lcdp-card-jour-mois-slot]:not([hidden]):not(.lcdp-planifier-plage--non-ouverte):not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
@@ -3039,7 +3039,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   border-color: #e59834 !important;
   box-shadow: none !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed)
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]):not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
@@ -3048,11 +3048,11 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   border: 1px solid #dce2e5 !important;
   visibility: visible !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot]::before,
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot]::after {
@@ -3063,14 +3063,14 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 
 /* PLANIFIER : navigation mensuelle compacte et jours de semaine plus discrets.
    Identique sans parc et avec parc, sur mobile et desktop. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__navigation {
   min-height: 0 !important;
   gap: 6px !important;
   padding: 2px 2px 5px !important;
   margin: 0 0 5px !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__nav-button {
   flex: 0 0 28px !important;
   width: 28px !important;
@@ -3079,7 +3079,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   min-height: 28px !important;
   font-size: 1.05rem !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
   min-height: 0 !important;
   margin: 0 0 4px !important;
@@ -3087,7 +3087,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   font-size: .62rem !important;
   line-height: 1.15 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays > span {
   line-height: 1.15 !important;
   padding: 0 !important;
@@ -3097,19 +3097,19 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 /* PLANIFIER — synthèse mensuelle : traits fins et distinction nette des plages.
    Un jour passé ou fermé n'affiche aucun trait, y compris face aux anciennes
    règles qui imposaient visibility:visible sur les plages non ouvertes. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 [data-lcdp-card-jour-mois-slot][hidden],
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--past [data-lcdp-card-jour-mois-slot],
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--closed [data-lcdp-card-jour-mois-slot] {
   display: none !important;
   visibility: hidden !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 .lcdp-box-card-jour-in-calendrier-mois__slots {
@@ -3117,7 +3117,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   gap: 2px !important;
   align-content: start !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot]:not([hidden]) {
@@ -3129,7 +3129,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   padding: 0 !important;
   border-radius: 1px !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]):not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
@@ -3143,7 +3143,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 /* PLANIFIER : aucune mise en évidence visuelle du jour courant.
    Conserver la classe métier --today, mais retirer uniquement son contour.
    Les styles de focus clavier (:focus-visible) restent indépendants. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--today:not(:focus-visible) {
   outline: none !important;
@@ -3155,12 +3155,12 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 /* PLANIFIER : rapprocher mois et jours de semaine du bloc des filtres.
    Supprimer le séparateur au-dessus de la navigation, sans modifier
    l'alignement des commandes de l'en-tête. Identique mobile / desktop. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
   border-bottom: 0 !important;
   padding-bottom: 2px !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__body {
   padding-top: 0 !important;
 }
@@ -3168,7 +3168,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 /* PLANIFIER — couleurs communes desktop/mobile.
    Jaune pour une plage ouverte ; gris anthracite (#707780) pour une plage
    fermée et pour la jauge d'occupation d'une plage ouverte. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
 [data-lcdp-card-jour-mois-slot]:not([hidden]):not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
@@ -3178,7 +3178,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   border: 0 !important;
   box-shadow: none !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]):not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
@@ -3189,19 +3189,19 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   border: 0 !important;
   box-shadow: none !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--60 {
   --lcdp-slot-remplissage: 60%;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--80 {
   --lcdp-slot-remplissage: 80%;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--100 {
@@ -3209,7 +3209,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 }
 /* La jauge anthracite occupe la fraction indiquée, sur la plage jaune ouverte.
    Les plages fermées restent intégralement anthracite. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
 [data-lcdp-card-jour-mois-slot].lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge:not(.lcdp-planifier-plage--non-ouverte):not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
@@ -3217,7 +3217,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 }
 
 /* PLANIFIER — légende compacte sous la grille (styles et couleurs du thème existants). */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning {
   box-sizing: border-box;
   margin: 7px 0 0;
   padding: 7px 0 0;
@@ -3226,19 +3226,19 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   font-size: .75rem;
   line-height: 1.25;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__contenu,
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__ligne {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__contenu,
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__ligne {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__item {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__item {
   display: inline-flex;
   align-items: center;
   gap: 4px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre {
   width: 8px;
   height: 8px;
   min-width: 8px;
@@ -3248,45 +3248,45 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
 
 /* PLANIFIER — légende discrète, typographie commune et repères d'accès.
    Accès personnel : couleur du bandeau Parc ; invitation : rose clair. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning {
   font-size: .66rem;
   color: var(--lcdp-color-text-muted);
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__ligne {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__ligne {
   flex-wrap: wrap;
   column-gap: 12px;
   row-gap: 5px;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__libelle {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__libelle {
   font-size: inherit;
   font-weight: 400;
   color: var(--lcdp-color-text-muted);
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--acces-clos {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--acces-clos {
   background: #707780;
   border-color: #707780;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--bleu-fonce {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--bleu-fonce {
   background: var(--lcdp-color-parc, #d64b68);
   border-color: var(--lcdp-color-parc, #d64b68);
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--bleu-clair {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--bleu-clair {
   background: #f6b7c5;
   border-color: #eaa0b2;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois] {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois] {
   position: relative;
 }
 /* PLANIFIER : les réservations du membre occupent les VRAIS traits plage1..5,
    dans les deux vues, tous parcs confondus. Priorité sur états de parc,
    sur les jauges et sur les règles masquant les jours fermés. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--acces-personnel,
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--invitation-recue,
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--acces-et-invitation {
   display: block !important;
@@ -3304,31 +3304,31 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   box-shadow: none !important;
   background-image: none !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--acces-personnel {
   background: var(--lcdp-color-parc, #d64b68) !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--invitation-recue {
   background: #f6b7c5 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--acces-et-invitation {
   background: linear-gradient(to right, var(--lcdp-color-parc, #d64b68) 50%, #f6b7c5 50%) !important;
 }
 /* Les plages invisibles du calendrier sans parc ne décalent pas les plages réservées. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage1"] { grid-row: 1; }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage2"] { grid-row: 2; }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage3"] { grid-row: 3; }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage4"] { grid-row: 4; }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage5"] { grid-row: 5; }
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage1"] { grid-row: 1; }
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage2"] { grid-row: 2; }
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage3"] { grid-row: 3; }
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage4"] { grid-row: 4; }
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage5"] { grid-row: 5; }
 
 /* Calendrier sans parc : aucun état de disponibilité (jaune ou gris).
    Seules les plages avec une réservation/invitation du membre s'affichent. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois] .lcdp-planifier-jour--sans-parc
 [data-lcdp-card-jour-mois-slot]:not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
   display: none !important;
@@ -3337,14 +3337,14 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 
 /* Aucun trait d'accès historique, même si une règle antérieure impose display:block.
    Épaisseur de 2 px commune aux plages colorées (desktop et mobile). */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--past
 [data-lcdp-card-jour-mois-slot] {
   display: none !important;
   visibility: hidden !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
 [data-lcdp-card-jour-mois-slot]:not([hidden]) {
