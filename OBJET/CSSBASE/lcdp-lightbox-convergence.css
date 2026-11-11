@@ -194,3 +194,82 @@
 )[hidden] {
   display: none !important;
 }
+
+
+/* Phase 5 — PLANIFIER : toutes les réponses sont contenues dans le wrapper.
+   Un portail dédié accueille les dialogues JavaScript ; le slot historique
+   reste disponible pour le calendrier et les dialogues qui l'utilisent.
+   Le cadrage est local au wrapper, jamais au viewport du navigateur. */
+body.lcdp-page-reserver .lcdp-planifier-wrapper {
+  position: relative;
+}
+body.lcdp-page-reserver .lcdp-planifier-wrapper > #lcdp-planifier-dialogues-slot {
+  position: absolute;
+  inset: 0;
+  z-index: 9500;
+  pointer-events: none;
+}
+body.lcdp-page-reserver #lcdp-planifier-dialogues-slot > :is(div,section) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+body.lcdp-page-reserver #lcdp-planifier-dialogues-slot > :is(div,section) > :is(
+  .lcdp-box-alerte,
+  .lcdp-box-dialogue-bouton,
+  .lcdp-box-dialogue-champ,
+  .lcdp-box-dialogue-champ-inviter,
+  .lcdp-box-dialogue-upload-img,
+  .lcdp-box-card-listemails
+),
+body.lcdp-page-reserver #lcdp-planifier-dialogues-slot > :is(
+  .lcdp-box-alerte,
+  .lcdp-box-dialogue-bouton,
+  .lcdp-box-dialogue-champ,
+  .lcdp-box-dialogue-champ-inviter,
+  .lcdp-box-dialogue-upload-img,
+  .lcdp-box-card-listemails
+),
+body.lcdp-page-reserver #lcdp-lightbox-slot > :is(
+  .lcdp-box-alerte,
+  .lcdp-box-dialogue-bouton,
+  .lcdp-box-dialogue-champ,
+  .lcdp-box-dialogue-champ-inviter,
+  .lcdp-box-dialogue-upload-img
+) {
+  position: absolute !important;
+  inset: 0 !important;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  pointer-events: auto;
+}
+body.lcdp-page-reserver #lcdp-planifier-dialogues-slot > :is(
+  .lcdp-planifier-partage-attente,
+  .lcdp-planifier-attente-svg,
+  .lcdp-attente-plein-ecran,
+  #lcdp-retour-accueil-attente
+) {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
+  .lcdp-box-alerte__card,
+  .lcdp-box-dialogue-bouton__card,
+  .lcdp-box-dialogue-champ__card,
+  .lcdp-box-dialogue-champ-inviter__card,
+  .lcdp-box-dialogue-upload-img__card,
+  .lcdp-box-card-listemails__card
+) {
+  max-width: calc(100% - 24px);
+  max-height: calc(100% - 24px);
+}
