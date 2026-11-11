@@ -3454,6 +3454,10 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre
 }
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre-categorie__input {
   display: inline-grid;
+  position: static;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
   place-items: center;
   flex: 0 0 17px;
   width: 17px;
