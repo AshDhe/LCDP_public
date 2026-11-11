@@ -1,0 +1,47 @@
+/* LCDP — convergence progressive des dialogues / phase 1.
+   Socle opt-in réservé à l'accueil membre et aux dialogues qu'il instancie.
+   Inspiration Tailwind (tokens / surfaces / états), CSS navigateur sans Preflight.
+   Aucun style global ni modification des autres tunnels. */
+.lcdp-page-accueil-membre {
+  --lcdp-modal-backdrop: var(--lcdp-ui-overlay, rgba(31,42,36,.46));
+  --lcdp-modal-surface: var(--lcdp-color-surface,#fff);
+  --lcdp-modal-soft: var(--lcdp-color-surface-soft,#f7f7f4);
+  --lcdp-modal-ink: var(--lcdp-color-text,#1f2a24);
+  --lcdp-modal-muted: var(--lcdp-color-text-muted,#5f6861);
+  --lcdp-modal-stroke: var(--lcdp-ui-dialog-border,rgba(31,42,36,.14));
+  --lcdp-modal-shadow: var(--lcdp-ui-dialog-shadow,0 20px 25px -5px rgba(31,42,36,.12));
+  --lcdp-modal-radius: var(--lcdp-radius-large,24px);
+  --lcdp-modal-action-radius: var(--lcdp-radius-medium,16px);
+  --lcdp-modal-focus: var(--lcdp-color-focus,rgba(35,68,56,.24));
+  --lcdp-modal-accent:#4b6333;
+  --lcdp-modal-close-bg:var(--lcdp-ui-close-bg,#f7f7f4);
+}
+/* Les trois familles utilisent les mêmes fondations, leurs contenus restent propres. */
+.lcdp-page-accueil-membre :is(.lcdp-planifier-choix,.lcdp-box-dialogue-bouton,.lcdp-box-alerte){
+  box-sizing:border-box;background:var(--lcdp-modal-backdrop);
+  backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+}
+.lcdp-page-accueil-membre :is(.lcdp-planifier-choix__card,.lcdp-box-dialogue-bouton__card,.lcdp-box-alerte__card){
+  box-sizing:border-box;background:var(--lcdp-modal-surface);
+  border-color:var(--lcdp-modal-stroke);border-radius:var(--lcdp-modal-radius);
+  box-shadow:var(--lcdp-modal-shadow);
+}
+.lcdp-page-accueil-membre :is(.lcdp-planifier-choix__close,.lcdp-box-dialogue-bouton__close,.lcdp-box-alerte__close){
+  border-radius:999px;background:var(--lcdp-modal-close-bg);
+  color:var(--lcdp-modal-muted);cursor:pointer;
+}
+.lcdp-page-accueil-membre :is(.lcdp-planifier-choix__close,.lcdp-box-dialogue-bouton__close,.lcdp-box-alerte__close):hover{
+  background:#e7e5e4;color:var(--lcdp-modal-ink);
+}
+.lcdp-page-accueil-membre :is(.lcdp-planifier-choix__title,.lcdp-box-dialogue-bouton__title){
+  color:var(--lcdp-modal-ink);letter-spacing:-.025em;
+}
+.lcdp-page-accueil-membre :is(.lcdp-planifier-choix__subtitle,.lcdp-box-dialogue-bouton__text){
+  color:var(--lcdp-modal-muted);
+}
+.lcdp-page-accueil-membre :is(.lcdp-planifier-choix,.lcdp-box-dialogue-bouton,.lcdp-box-alerte) :is(button,a):focus-visible{
+  outline:3px solid var(--lcdp-modal-focus);outline-offset:3px;
+}
+@media(prefers-reduced-motion:reduce){
+  .lcdp-page-accueil-membre :is(.lcdp-planifier-choix,.lcdp-box-dialogue-bouton,.lcdp-box-alerte) *{transition:none!important}
+}
