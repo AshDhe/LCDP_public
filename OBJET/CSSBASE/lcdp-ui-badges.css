@@ -71,15 +71,24 @@ body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header
   width: fit-content;
   max-width: 100%;
   margin: 9px auto 2px;
-  padding: 6px 14px;
+  padding: 7px 16px;
   border: 1px solid var(--lcdp-badge-bordure);
   border-radius: 999px;
   background: var(--lcdp-badge-fond);
   color: var(--lcdp-badge-texte);
-  font-size: clamp(.76rem,2.8vw,.89rem);
+  font-size: .98rem;
   font-weight: 800;
   line-height: 1.3;
   letter-spacing: .025em;
   text-align: center;
   white-space: normal;
+}
+
+/* Identification du parc dans PLANIFIER : +15 % sur les écrans mobiles. */
+@media (max-width: 600px) {
+  body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header
+  .lcdp-planifier-parc-en-tete.lcdp-ui-badge {
+    font-size: .874rem;
+    padding: 7px 16px;
+  }
 }
