@@ -3204,3 +3204,33 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--100 {
   --lcdp-slot-remplissage: 100%;
 }
+
+/* PLANIFIER — légende compacte sous la grille (styles et couleurs du thème existants). */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning {
+  box-sizing: border-box;
+  margin: 7px 0 0;
+  padding: 7px 0 0;
+  border-top: 1px solid #f1f5f9;
+  font-family: var(--lcdp-font-main);
+  font-size: .425rem;
+  line-height: 1.25;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__contenu,
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__ligne {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  min-height: 8px;
+  margin: 0;
+}
