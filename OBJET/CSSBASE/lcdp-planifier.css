@@ -3262,29 +3262,50 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois] {
   position: relative;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-indicateurs-acces {
-  position: absolute;
-  bottom: 3px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  pointer-events: none;
+/* PLANIFIER : les réservations du membre occupent les VRAIS traits plage1..5,
+   dans les deux vues, tous parcs confondus. Priorité sur états de parc,
+   sur les jauges et sur les règles masquant les jours fermés. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--acces-personnel,
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--invitation-recue,
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--acces-et-invitation {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 2px !important;
+  min-height: 2px !important;
+  max-height: 2px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 1px !important;
+  box-shadow: none !important;
+  background-image: none !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-indicateur-acces {
-  display: block;
-  width: 7px;
-  height: 7px;
-  flex: 0 0 7px;
-  border-radius: 2px;
-  box-sizing: border-box;
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--acces-personnel {
+  background: var(--lcdp-color-blue) !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-indicateur-acces--planifie {
-  background: var(--lcdp-color-blue);
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--invitation-recue {
+  background: #cfe3f7 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-indicateur-acces--invitation {
-  background: #cfe3f7;
-  border: 1px solid #a9cbea;
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois--planning-lecture
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--acces-et-invitation {
+  background: linear-gradient(to right, var(--lcdp-color-blue) 50%, #cfe3f7 50%) !important;
 }
+/* Les plages invisibles du calendrier sans parc ne décalent pas les plages réservées. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage1"] { grid-row: 1; }
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage2"] { grid-row: 2; }
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage3"] { grid-row: 3; }
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage4"] { grid-row: 4; }
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois-slot="plage5"] { grid-row: 5; }
