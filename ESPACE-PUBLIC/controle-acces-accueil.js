@@ -152,7 +152,7 @@
         await alerte('Votre abonnement est impayé. Vous devez le régulariser pour utiliser la fonction '+libelles[action]+'.',regulariser());
         return 'refuse';
       }
-      if(action==='planifier') {window.location.href=urlMembre(chemin.planifier);return 'ouvert';}
+      if(action==='planifier') {const destination=urlMembre(chemin.planifier);window.location.href=options.planifierMode==='ia' ? destination+'?mode=ia' : destination;return 'ouvert';}
       // MES ACCÈS reste consultable même sans accès futur (onglet Passés).
       // Le contrôle serveur de connexion, suspension et impayés reste inchangé.
       if(action==='mes_acces') {window.location.href=urlMembre(chemin.mes_acces);return 'ouvert';}
