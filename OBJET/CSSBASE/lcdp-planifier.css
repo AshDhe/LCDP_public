@@ -4903,6 +4903,25 @@ body.lcdp-page-reserver .lcdp-aboreza-suivi__progression-valeur {
   font-weight: 800;
   white-space: nowrap;
 }
+body.lcdp-page-reserver .lcdp-aboreza-suivi__barre {
+  box-sizing: border-box;
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e7e5e4;
+  margin: 0 0 14px;
+}
+body.lcdp-page-reserver .lcdp-aboreza-suivi__barre-remplissage {
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: #4e6838;
+  transition: width .2s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.lcdp-page-reserver .lcdp-aboreza-suivi__barre-remplissage { transition: none; }
+}
 body.lcdp-page-reserver .lcdp-aboreza-suivi__mois {
   display: flex;
   gap: 6px;
