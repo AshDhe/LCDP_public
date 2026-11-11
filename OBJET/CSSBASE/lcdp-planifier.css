@@ -4799,3 +4799,21 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__f
     gap: 16px !important;
   }
 }
+
+
+/* ABO-RÉZA — préparation : récapitulatif rapproché du texte, action immédiatement dessous. */
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .lcdp-box-dialogue-bouton__text {
+  margin-bottom: 10px !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .lcdp-box-dialogue-bouton__actions.lcdp-aboreza-preparation__contenu {
+  gap: 0 !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__resume.lcdp-box-card-abonnement {
+  margin-bottom: 14px !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .lcdp-aboreza-preparation__continuer.lcdp-button {
+  margin: 0 !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__regles {
+  margin-top: 25px !important;
+}
