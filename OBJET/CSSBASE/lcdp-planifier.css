@@ -4599,7 +4599,7 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .l
   display: block !important;
   width: 100% !important;
   max-width: 450px !important;
-  margin: 0 0 28px !important;
+  margin: 0 0 12px !important;
   padding: 0 !important;
   color: #78716c !important;
   font-size: .87rem !important;
@@ -4618,7 +4618,7 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .l
   min-width: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
-  gap: 26px !important;
+  gap: 16px !important;
 }
 body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__resume.lcdp-box-card-abonnement {
   box-sizing: border-box !important;
@@ -4768,7 +4768,7 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .l
   max-width: none !important;
   min-width: 0 !important;
   min-height: 56px !important;
-  margin: 5px 0 0 !important;
+  margin: -6px 0 0 !important;
   padding: 14px 18px !important;
   border-radius: 17px !important;
   border: 0 !important;
@@ -4796,6 +4796,6 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__f
     padding-left: 12px !important;
   }
   body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .lcdp-box-dialogue-bouton__actions.lcdp-aboreza-preparation__contenu {
-    gap: 22px !important;
+    gap: 16px !important;
   }
 }
