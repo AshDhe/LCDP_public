@@ -3234,3 +3234,57 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-
   min-height: 8px;
   margin: 0;
 }
+
+/* PLANIFIER — légende discrète, typographie commune et repères d'accès.
+   Codes bleus déjà utilisés : Ma clé (#2f6fb3), bleu clair du thème (#cfe3f7). */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning {
+  font-size: .66rem;
+  color: var(--lcdp-color-text-muted);
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__ligne {
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 5px;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__libelle {
+  font-size: inherit;
+  font-weight: 400;
+  color: var(--lcdp-color-text-muted);
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--bleu-fonce {
+  background: var(--lcdp-color-blue);
+  border-color: var(--lcdp-color-blue);
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-planning .lcdp-box-legende__carre--bleu-clair {
+  background: #cfe3f7;
+  border-color: #a9cbea;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-card-jour-mois] {
+  position: relative;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-indicateurs-acces {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  pointer-events: none;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-indicateur-acces {
+  display: block;
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-indicateur-acces--planifie {
+  background: var(--lcdp-color-blue);
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-indicateur-acces--invitation {
+  background: #cfe3f7;
+  border: 1px solid #a9cbea;
+}
