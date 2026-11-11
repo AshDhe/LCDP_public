@@ -72,3 +72,102 @@
   outline: 3px solid var(--lcdp-modal-focus);
   outline-offset: 3px;
 }
+
+
+/* ==========================================================================
+   Phase 3 — fondations communes multi-familles (CSS natif, compatible TW v4).
+   Les composants HTMLBASE restent la source du markup. Les règles ci-dessous
+   unifient les TOKENS ET ETATS, sans changer les dimensions, dispositions,
+   interactions, ni les boîtes internes des workflows d'abonnement/réservation.
+   Le fichier est chargé après le CSS central par les pages opt-in.
+   ========================================================================== */
+:where(body.lcdp-app-page) {
+  --lcdp-dialogue-fond: var(--lcdp-color-surface, #fff);
+  --lcdp-dialogue-texte: var(--lcdp-color-text, #1f2a24);
+  --lcdp-dialogue-muted: var(--lcdp-color-text-muted, #5f6861);
+  --lcdp-dialogue-bordure: var(--lcdp-ui-dialog-border, rgba(31,42,36,.14));
+  --lcdp-dialogue-ombre: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31,42,36,.12));
+  --lcdp-dialogue-rayon: var(--lcdp-radius-large,24px);
+  --lcdp-dialogue-focus: var(--lcdp-color-focus,#b98c31);
+  --lcdp-dialogue-fermeture: var(--lcdp-ui-close-bg,#f7f7f4);
+}
+/* Alertes, boutons, champs, invitation et ajout d'images partagent les
+   mêmes fondamentaux visuels ; leurs largeurs restent propres à chaque objet. */
+:where(body.lcdp-app-page) :is(
+  .lcdp-box-alerte,
+  .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
+  .lcdp-box-dialogue-champ,
+  .lcdp-box-dialogue-champ-inviter,
+  .lcdp-box-dialogue-upload-img
+) {
+  --lcdp-modal-surface: var(--lcdp-dialogue-fond);
+  --lcdp-modal-ink: var(--lcdp-dialogue-texte);
+  --lcdp-modal-muted: var(--lcdp-dialogue-muted);
+  --lcdp-modal-stroke: var(--lcdp-dialogue-bordure);
+  --lcdp-modal-shadow: var(--lcdp-dialogue-ombre);
+  --lcdp-modal-radius: var(--lcdp-dialogue-rayon);
+  --lcdp-modal-focus: var(--lcdp-dialogue-focus);
+  --lcdp-modal-close-bg: var(--lcdp-dialogue-fermeture);
+}
+/* Cartes autonomes seulement : exclure les contenus internes des workflows. */
+:where(body.lcdp-app-page) :is(
+  .lcdp-box-alerte,
+  .lcdp-box-dialogue-bouton,
+  .lcdp-box-dialogue-champ,
+  .lcdp-box-dialogue-champ-inviter,
+  .lcdp-box-dialogue-upload-img
+):not(.lcdp-box-workflow-abonnement__content *):not(.lcdp-box-workflow-reservation__content *) > :is(
+  .lcdp-box-alerte__card,
+  .lcdp-box-dialogue-bouton__card,
+  .lcdp-box-dialogue-champ__card,
+  .lcdp-box-dialogue-champ-inviter__card,
+  .lcdp-box-dialogue-upload-img__card
+) {
+  box-sizing: border-box;
+  border-color: var(--lcdp-modal-stroke,var(--lcdp-dialogue-bordure));
+  border-radius: var(--lcdp-modal-radius,var(--lcdp-dialogue-rayon));
+  background: var(--lcdp-modal-surface,var(--lcdp-dialogue-fond));
+  box-shadow: var(--lcdp-modal-shadow,var(--lcdp-dialogue-ombre));
+}
+/* Un seul style pour les commandes de fermeture, sans retirer une commande
+   fonctionnelle : la décision croix/CTA relève du type de dialogue en JS. */
+:where(body.lcdp-app-page) :is(
+  .lcdp-box-alerte__close,
+  .lcdp-box-dialogue-bouton__close,
+  .lcdp-box-dialogue-champ__close,
+  .lcdp-box-dialogue-champ-inviter__close,
+  .lcdp-box-dialogue-upload-img__close
+) {
+  border-radius: 999px;
+  background: var(--lcdp-modal-close-bg,var(--lcdp-dialogue-fermeture));
+  color: var(--lcdp-modal-muted,var(--lcdp-dialogue-muted));
+  cursor: pointer;
+}
+:where(body.lcdp-app-page) :is(
+  .lcdp-box-alerte__close,
+  .lcdp-box-dialogue-bouton__close,
+  .lcdp-box-dialogue-champ__close,
+  .lcdp-box-dialogue-champ-inviter__close,
+  .lcdp-box-dialogue-upload-img__close
+):hover {
+  color: var(--lcdp-modal-ink,var(--lcdp-dialogue-texte));
+}
+:where(body.lcdp-app-page) :is(
+  .lcdp-box-alerte,
+  .lcdp-box-dialogue-bouton,
+  .lcdp-box-dialogue-champ,
+  .lcdp-box-dialogue-champ-inviter,
+  .lcdp-box-dialogue-upload-img
+) :is(button,a,input,select,textarea):focus-visible {
+  outline: 3px solid var(--lcdp-modal-focus,var(--lcdp-dialogue-focus));
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(body.lcdp-app-page) :is(
+    .lcdp-box-alerte,
+    .lcdp-box-dialogue-bouton,
+    .lcdp-box-dialogue-champ,
+    .lcdp-box-dialogue-champ-inviter,
+    .lcdp-box-dialogue-upload-img
+  ) * { transition-duration: 0s !important; }
+}
