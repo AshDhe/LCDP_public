@@ -3140,3 +3140,17 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   outline-offset: 0 !important;
   box-shadow: none !important;
 }
+
+
+/* PLANIFIER : rapprocher mois et jours de semaine du bloc des filtres.
+   Supprimer le séparateur au-dessus de la navigation, sans modifier
+   l'alignement des commandes de l'en-tête. Identique mobile / desktop. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__header {
+  border-bottom: 0 !important;
+  padding-bottom: 2px !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__body {
+  padding-top: 0 !important;
+}
