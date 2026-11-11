@@ -4327,3 +4327,193 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-workflow-inter
   background: #fff !important;
   box-shadow: none !important;
 }
+
+/* ABO-RÉZA — calendrier du début d'abonnement, limité au wrapper PLANIFIER. */
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  padding: 0 0 18px !important;
+  border: 1px solid #e7e9e5 !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__header {
+  position: relative;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 6px;
+  padding: 23px 20px 19px !important;
+  border-bottom: 1px solid #eceeeb;
+  text-align: left !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage__badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: calc(100% - 40px);
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #fff3d7;
+  color: #8a430c;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .025em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__close {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  z-index: 3;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__title {
+  margin: 7px 30px 0 0 !important;
+  padding: 0 !important;
+  font-size: clamp(1.14rem, 4.6vw, 1.35rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.23 !important;
+  color: #1f2822 !important;
+  text-align: left !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__meta {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100%;
+  color: #69736b !important;
+  font-size: .78rem !important;
+  font-weight: 450;
+  line-height: 1.45;
+  text-align: left !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__years {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px;
+  width: 100%;
+  padding: 20px 17px 0 !important;
+  box-sizing: border-box;
+  overflow: visible !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage__annee {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__year-title {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  margin: 0 !important;
+  color: #929a92 !important;
+  font-size: .78rem !important;
+  font-weight: 800 !important;
+  line-height: 1.3;
+  letter-spacing: .04em;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__year-title::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: #eceeeb;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__months {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 9px !important;
+  width: 100%;
+  margin: 0 !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__month {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 70px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 10px 5px !important;
+  gap: 4px;
+  border: 1px solid #dfe4df !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  color: #303a32 !important;
+  box-shadow: none !important;
+  font-family: inherit !important;
+  text-align: center !important;
+  white-space: normal !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__month[aria-pressed="true"] {
+  background: #4b6333 !important;
+  border: 2px solid #4b6333 !important;
+  color: #fff !important;
+  box-shadow: 0 3px 8px rgba(35, 55, 35, .13) !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage__mois-nom {
+  font-size: .81rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage__mois-annee {
+  color: #929a92;
+  font-size: .69rem;
+  font-weight: 550;
+  line-height: 1.2;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__month[aria-pressed="true"] .lcdp-aboreza-demarrage__mois-annee { color: #e8f1e0; }
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage__recap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  margin: 23px 17px 0;
+  padding: 14px;
+  border: 1px solid #bfe6d2;
+  border-radius: 15px;
+  background: #f1fbf5;
+  color: #344536;
+  text-align: left;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage__recap[hidden] { display: none !important; }
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage__recap-titre {
+  color: #25362a;
+  font-size: .8rem;
+  font-weight: 800;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage__recap-texte {
+  margin: 0 !important;
+  font-size: .78rem;
+  line-height: 1.45;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) !important;
+  gap: 12px !important;
+  width: auto !important;
+  margin: 20px 17px 0 !important;
+  padding: 0 !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__actions .lcdp-button {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  min-height: 48px !important;
+  margin: 0 !important;
+  padding: 10px !important;
+  border-radius: 15px !important;
+  font-size: .83rem !important;
+  font-weight: 750 !important;
+}
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-demarrage .lcdp-box-calendrier-an__actions [data-lcdp-calendrier-an-next] {
+  border-color: #4b6333 !important;
+  background: #4b6333 !important;
+  color: #fff !important;
+}
