@@ -2978,3 +2978,15 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   flex: 0 0 auto !important;
   align-content: center;
 }
+
+
+/* PLANIFIER : chaque case est réduite de 15 % sur les côtés, sans
+   toucher aux sept colonnes ni à la hauteur de 42 px. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-card-jour-in-calendrier-mois {
+  box-sizing: border-box;
+  width: 70% !important;
+  max-width: 70% !important;
+  margin-inline: auto !important;
+  justify-self: center;
+}
