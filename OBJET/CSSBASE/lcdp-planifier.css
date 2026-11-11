@@ -5420,3 +5420,45 @@ body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__action
   body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions [data-lcdp-recaporder-cancel] { grid-column: 1; grid-row: 2; }
   body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions [data-lcdp-recaporder-pay] { grid-column: 1; grid-row: 1; }
 }
+
+
+/* Paiement Stripe Elements LCDP — page membre. Habillage dans le CSS partagé PLANIFIER. */
+html:has(body.lcdp-stripe-page) { font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif); }
+body.lcdp-stripe-page { box-sizing:border-box; margin:0; min-height:100dvh; background:#f5f5f4; color:#292524; padding:24px 12px; font-family:inherit; }
+body.lcdp-stripe-page *,body.lcdp-stripe-page *::before,body.lcdp-stripe-page *::after {box-sizing:border-box}
+body.lcdp-stripe-page .lcdp-stripe {width:min(100%,540px);margin:auto;background:#fff;border:1px solid #e7e5e4;border-radius:28px;overflow:hidden;box-shadow:0 18px 50px #1c19171a}
+body.lcdp-stripe-page .lcdp-stripe__entete {display:flex;align-items:center;gap:12px;padding:21px 26px;border-bottom:1px solid #f5f5f4}
+body.lcdp-stripe-page .lcdp-stripe__logo {width:46px;height:46px;flex:none;display:grid;place-items:center;border-radius:13px;background:#f1f7ed;color:#4b6333}
+body.lcdp-stripe-page .lcdp-stripe__logo img {display:block;width:38px;height:38px;object-fit:contain}
+body.lcdp-stripe-page .lcdp-stripe__logo #logo-attente {font-size:10px;font-weight:900}
+body.lcdp-stripe-page .lcdp-stripe__marque {flex:1}
+body.lcdp-stripe-page .lcdp-stripe__marque p {margin:0;font-weight:850;font-size:16px}
+body.lcdp-stripe-page .lcdp-stripe__marque span {display:block;margin-top:2px;color:#78716c;font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.08em}
+body.lcdp-stripe-page .lcdp-stripe__test {padding:5px 9px;background:#fef3c7;color:#92400e;border-radius:999px;font-size:11px;font-weight:900}
+body.lcdp-stripe-page .lcdp-stripe__corps {padding:25px 26px 29px}
+body.lcdp-stripe-page .lcdp-stripe__etape {color:#a8a29e;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.08em}
+body.lcdp-stripe-page h1 {margin:6px 0 8px;font-size:clamp(21px,5vw,26px);line-height:1.23;letter-spacing:-.02em}
+body.lcdp-stripe-page .lcdp-stripe__commande {margin:0 0 20px;font-size:13px;color:#78716c;line-height:1.45}
+body.lcdp-stripe-page .lcdp-stripe__resume {padding:16px;background:#fafaf9;border:1px solid #e7e5e4;border-radius:17px;display:grid;gap:12px}
+body.lcdp-stripe-page .lcdp-stripe__resume>div {display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+body.lcdp-stripe-page .lcdp-stripe__resume span {font-size:12px;color:#78716c}
+body.lcdp-stripe-page .lcdp-stripe__resume strong {font-size:16px;overflow-wrap:anywhere;text-align:right}
+body.lcdp-stripe-page h2 {margin:25px 0 15px;font-size:16px;font-weight:800}
+body.lcdp-stripe-page .lcdp-stripe__label {display:block;margin:0 0 8px;color:#57534e;font-size:13px;font-weight:700}
+body.lcdp-stripe-page .lcdp-stripe__email {width:100%;min-height:46px;border:1px solid #d6d3d1;border-radius:12px;background:#fff;color:#292524;font:inherit;padding:10px 13px;margin-bottom:19px}
+body.lcdp-stripe-page #stripe-payment-element {min-height:110px}
+body.lcdp-stripe-page .lcdp-stripe__payer {display:block;width:100%;margin:22px 0 0;padding:15px 18px;background:#4b6333;color:#fff;border:1px solid #4b6333;border-radius:16px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:800;box-shadow:0 3px 7px #1c19171a}
+body.lcdp-stripe-page .lcdp-stripe__payer:hover:not(:disabled) {background:#3d5129}
+body.lcdp-stripe-page .lcdp-stripe__payer:disabled {opacity:.55;cursor:not-allowed}
+body.lcdp-stripe-page .lcdp-stripe__erreur {padding:12px;background:#fff1f2;border:1px solid #fecdd3;color:#9f1239;border-radius:10px;font-size:13px}
+body.lcdp-stripe-page .lcdp-stripe__aide {margin:16px 0 0;font-size:11px;color:#78716c;text-align:center;line-height:1.45}
+body.lcdp-stripe-page .lcdp-stripe__retour {display:block;margin-top:19px;color:#4b6333;text-align:center;font-size:13px;font-weight:750;text-decoration:underline;text-underline-offset:3px}
+body.lcdp-stripe-page .lcdp-stripe__pied {padding:13px;border-top:1px solid #f5f5f4;color:#a8a29e;font-size:11px;text-align:center}
+body.lcdp-stripe-page :focus-visible {outline:2px solid #4b6333;outline-offset:3px}
+body.lcdp-stripe-page [hidden] {display:none!important}
+@media(max-width:480px) {
+  body.lcdp-stripe-page {padding:0;background:#fff}
+  body.lcdp-stripe-page .lcdp-stripe {border:0;box-shadow:none;border-radius:0;min-height:100dvh}
+  body.lcdp-stripe-page .lcdp-stripe__entete {padding:18px}
+  body.lcdp-stripe-page .lcdp-stripe__corps {padding:22px 18px}
+}
