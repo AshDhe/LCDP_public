@@ -3034,7 +3034,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed)
-[data-lcdp-card-jour-mois-slot]:not([hidden]):not(.lcdp-planifier-plage--non-ouverte) {
+[data-lcdp-card-jour-mois-slot]:not([hidden]):not(.lcdp-planifier-plage--non-ouverte) :not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
   background: #e59834 !important;
   background-image: none !important;
   border-color: #e59834 !important;
@@ -3043,7 +3043,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed)
-[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]) {
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]) :not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
   background: #ffffff !important;
   background-image: none !important;
   border: 1px solid #dce2e5 !important;
@@ -3133,7 +3133,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
-[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]) {
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]) :not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
   background: #ffffff !important;
   border: 1px solid #a3adb0 !important;
   box-shadow: 0 0 0 0.3px #a3adb0 !important;
@@ -3173,7 +3173,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
-[data-lcdp-card-jour-mois-slot]:not([hidden]) {
+[data-lcdp-card-jour-mois-slot]:not([hidden]) :not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
   --lcdp-slot-remplissage: 100%;
   --lcdp-slot-couleur: #e59834;
   background: linear-gradient(to right, var(--lcdp-slot-couleur) var(--lcdp-slot-remplissage), transparent var(--lcdp-slot-remplissage)) !important;
@@ -3183,7 +3183,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-box-calendrier-mois]
 .lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
-[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]) {
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]) :not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
   --lcdp-slot-couleur: #707780;
   /* La règle historique spécifique imposait background: #fff !important.
      Définir aussi background ici pour la supplanter sur tous les écrans. */
