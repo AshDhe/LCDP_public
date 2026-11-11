@@ -3497,3 +3497,239 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-box-calendrier-j
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot [data-lcdp-planifier-autorisation-jour][hidden] {
   display: none !important;
 }
+
+/* PLANIFIER — troisième vue : mise en page stable de l'en-tête et filtres.
+   Le titre de section est au-dessus des quatre options, jamais dans leur grille. */
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-box-calendrier-jour__header {
+  box-sizing: border-box;
+  padding: 2px 0 12px !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 10px;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 8px;
+  width: 100%;
+  padding-right: 37px;
+  box-sizing: border-box;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-parc {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 3px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-nom-parc:not([hidden]) {
+  order: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  color: #1f2a24 !important;
+  font-size: .86rem !important;
+  font-weight: 750 !important;
+  line-height: 1.25;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour [data-lcdp-calendrier-mois-title] {
+  order: 1 !important;
+  transform: none !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #1f2a24 !important;
+  font-size: 1.17rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase;
+  line-height: 1.2 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres {
+  flex: 0 0 auto;
+  align-self: flex-end;
+  margin: 0 !important;
+  width: auto !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-filtre--parc {
+  white-space: nowrap;
+  min-width: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-legende-autorisations {
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0;
+  max-width: 100%;
+  margin: 10px 0 0 !important;
+  padding: 8px 10px !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-legende-autorisations .lcdp-box-legende__contenu {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-legende-autorisations .lcdp-box-legende__titre {
+  display: block !important;
+  width: 100%;
+  margin: 0 0 6px !important;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+  gap: 6px 8px !important;
+  width: 100% !important;
+  min-width: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-filtre-categorie {
+  box-sizing: border-box;
+  display: flex !important;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100% !important;
+  min-width: 0;
+  min-height: 34px;
+  gap: 5px;
+  margin: 0;
+  padding: 5px 7px !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-filtre-categorie__picto {
+  display: inline-flex;
+  flex: 0 0 17px;
+  width: 17px;
+  align-items: center;
+  justify-content: center;
+  font-size: .82rem;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle {
+  display: block;
+  min-width: 0;
+  flex: 1 1 auto;
+  white-space: normal;
+  overflow-wrap: normal;
+  font-size: .7rem !important;
+  line-height: 1.15;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-filtre-categorie__input {
+  flex: 0 0 17px !important;
+  box-sizing: border-box;
+  width: 17px !important;
+  min-width: 17px !important;
+  max-width: 17px !important;
+  height: 17px !important;
+  min-height: 17px !important;
+  max-height: 17px !important;
+  padding: 0 !important;
+  margin-left: auto !important;
+  pointer-events: auto !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-box-calendrier-jour__meta {
+  margin: 9px 0 2px !important;
+  color: #637063 !important;
+  font-family: var(--lcdp-font-main);
+  font-size: .75rem !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-box-calendrier-jour__title {
+  margin: 0 0 4px !important;
+  color: #1f2a24 !important;
+  font-family: var(--lcdp-font-main);
+  font-size: clamp(1.06rem, 4vw, 1.22rem) !important;
+  font-weight: 750 !important;
+  line-height: 1.3;
+}
+
+/* Les cinq horaires utilisent exclusivement les couleurs des états du
+   calendrier mensuel : jaune, rose Parc, rose invitation, gris anthracite.
+   La nature des invités n'est plus une couleur de créneau. */
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-choix-plage:not(.lcdp-planifier-heure--reservation):not(.lcdp-planifier-heure--invitation):not(.lcdp-planifier-heure--fermee) {
+  --lcdp-heure-fond: #e59834 !important;
+  background: #e59834 !important;
+  border-color: #e59834 !important;
+  color: #1f2a24 !important;
+  box-shadow: none !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-choix-plage.lcdp-planifier-heure--fermee {
+  --lcdp-heure-fond: #707780 !important;
+  background: #707780 !important;
+  border-color: #707780 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-choix-plage.lcdp-planifier-heure--reservation {
+  --lcdp-heure-fond: #d64b68 !important;
+  background: #d64b68 !important;
+  border-color: #d64b68 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-choix-plage.lcdp-planifier-heure--invitation {
+  --lcdp-heure-fond: #f6b7c5 !important;
+  background: #f6b7c5 !important;
+  border-color: #f6b7c5 !important;
+  color: #1f2a24 !important;
+  box-shadow: none !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-choix-plage [data-lcdp-card-heure-jour-label] {
+  color: inherit !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-horaires {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 10px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px solid #f1f5f9;
+  color: var(--lcdp-color-text-muted);
+  font-family: var(--lcdp-font-main);
+  font-size: .66rem;
+  line-height: 1.25;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-horaires .lcdp-box-legende__contenu,
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-horaires .lcdp-box-legende__ligne {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+  width: 100%;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-horaires .lcdp-box-legende__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 400;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-horaires .lcdp-box-legende__libelle {
+  font-size: inherit;
+  font-weight: 400;
+  color: var(--lcdp-color-text-muted);
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-horaires .lcdp-box-legende__carre {
+  display: inline-block;
+  width: 8px;
+  min-width: 8px;
+  height: 8px;
+  min-height: 8px;
+  margin: 0;
+  border-radius: 2px;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-horaires .lcdp-planifier-jour--abonnement-couvert {
+  background: #e5f4e9;
+  border: 1px solid #b7dac1;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-horaires .lcdp-box-legende__carre--bleu-fonce {
+  background: #d64b68;
+  border-color: #d64b68;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-horaires .lcdp-box-legende__carre--bleu-clair {
+  background: #f6b7c5;
+  border-color: #eaa0b2;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-horaires .lcdp-box-legende__carre--acces-clos {
+  background: #707780;
+  border-color: #707780;
+}
