@@ -1473,9 +1473,7 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
   margin-bottom: 0;
 }
 #lcdp-planifier-jour-overlay-slot .lcdp-aboreza-choix-validation {
-  position: sticky;
-  bottom: -1px;
-  z-index: 3;
+  position: static;
   display: flex;
   flex-direction: column;
   align-items: center;
