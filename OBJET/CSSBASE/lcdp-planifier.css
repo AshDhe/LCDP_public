@@ -3184,14 +3184,20 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   box-shadow: none !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
-[data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--60 {
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--60 {
   --lcdp-slot-remplissage: 60%;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
-[data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--80 {
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--80 {
   --lcdp-slot-remplissage: 80%;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
-[data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--100 {
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed):not(.lcdp-box-card-jour-in-calendrier-mois--past)
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-jauge--100 {
   --lcdp-slot-remplissage: 100%;
 }
