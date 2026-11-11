@@ -3355,3 +3355,141 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   flex: 0 0 2px !important;
   border-width: 0 !important;
 }
+
+/* PLANIFIER — troisième vue : reprendre le bloc de filtres mensuel sans
+   modifier le calendrier conservé ni les données du parc. */
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour {
+  margin: 0 0 10px;
+  padding: 0;
+  font-family: var(--lcdp-font-main);
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-identite {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-right: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-parc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-parc .lcdp-planifier-nom-parc {
+  display: block;
+  margin: 0 0 3px;
+  color: #637063;
+  font-size: .78rem;
+  font-weight: 650;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title] {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-actions-filtres {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre--parc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: #55733f;
+  color: white;
+  font-size: .76rem;
+  font-weight: 750;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-autorisations {
+  width: 100%;
+  margin: 9px 0 0;
+  padding: 7px 10px 8px;
+  border: 1px solid #edf0f4;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(15,23,42,.07);
+  box-sizing: border-box;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__titre {
+  display: block;
+  margin: 0 0 5px;
+  color: #94a3b8;
+  font-size: .69rem;
+  font-weight: 800;
+  letter-spacing: .075em;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 6px 8px;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre-categorie {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid #edf0f5;
+  border-radius: 12px;
+  background: #f8fafc;
+  box-sizing: border-box;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre-categorie:has(.lcdp-planifier-filtre-categorie__input:checked) {
+  background: #fff9ec;
+  border-color: #f5d58e;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: #92400e;
+  font-size: .7rem;
+  font-weight: 800;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre-categorie__input {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
+  margin: 0 0 0 auto;
+  border: 1px solid #cbd5e1;
+  border-radius: 50%;
+  appearance: none;
+  background: transparent;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre-categorie__input:checked {
+  background: #e59834;
+  border-color: #e59834;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre-categorie__input:checked:not([value="duo"])::after {
+  content: "";
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-1px) rotate(45deg);
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre-categorie .lcdp-box-legende__carre {
+  display: none;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-box-calendrier-jour__header {
+  padding-right: 38px;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-box-calendrier-jour__meta {
+  margin: 10px 0 4px;
+  color: #637063;
+  font-size: .79rem;
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-box-calendrier-jour__title {
+  font-size: clamp(1.08rem, 4.4vw, 1.24rem);
+}
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot [data-lcdp-planifier-autorisation-jour][hidden] {
+  display: none !important;
+}
