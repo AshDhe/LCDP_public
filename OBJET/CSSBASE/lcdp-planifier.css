@@ -3856,12 +3856,16 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
 .lcdp-planifier-heure-entete-date {
   display: block;
+  max-width: 100%;
+  margin-inline: auto;
   text-align: center !important;
   font-size: 0.91rem !important;
-  font-weight: 650 !important;
-  line-height: 1.4 !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
   letter-spacing: 0 !important;
-  text-transform: uppercase !important;
+  text-transform: none !important;
+  color: #344536 !important;
+  text-wrap: balance;
 }
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot
 .lcdp-planifier-choix-plage {
