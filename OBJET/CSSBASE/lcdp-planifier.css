@@ -5534,35 +5534,53 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
   width: auto !important;
   min-width: 0 !important;
   max-width: none !important;
-  height: 31px !important;
-  min-height: 31px !important;
+  height: 33px !important;
+  min-height: 33px !important;
   margin: 0 !important;
-  padding: 0 10px !important;
-  border: 1px solid transparent !important;
-  border-radius: var(--lcdp-radius-small, 10px) !important;
+  padding: 0 11px !important;
+  border: 1px solid var(--lcdp-filtre-bordure, transparent) !important;
+  border-radius: var(--lcdp-radius-medium, 12px) !important;
+  background: var(--lcdp-filtre-fond, #f7f8f5) !important;
+  color: var(--lcdp-filtre-texte, #36512b) !important;
+  -webkit-text-fill-color: currentColor !important;
   font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
-  font-size: .7rem !important;
-  font-weight: 550 !important;
+  font-size: .71rem !important;
+  font-weight: 700 !important;
   line-height: 1 !important;
-  letter-spacing: .012em;
+  letter-spacing: .015em;
   white-space: nowrap;
-  box-shadow: none !important;
+  box-shadow: 0 1px 2px rgba(31,42,36,.06) !important;
   text-shadow: none !important;
+  transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc {
-  background: var(--lcdp-color-logo-green, #55733f) !important;
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
+  --lcdp-filtre-fond: #edf3e9;
+  --lcdp-filtre-texte: #405f31;
+  --lcdp-filtre-bordure: #d5e1ce;
+  cursor: pointer !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach {
-  background: var(--lcdp-color-coach, #8660c8) !important;
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-  opacity: 1 !important;
+  --lcdp-filtre-fond: #f4effb;
+  --lcdp-filtre-texte: #7655a5;
+  --lcdp-filtre-bordure: #e5d9f4;
+  opacity: .78 !important;
   filter: none !important;
-  cursor: default !important;
+  cursor: not-allowed !important;
+}
+/* Boutons de filtre : états interactifs façon Tailwind (tonal + ring discret).
+   COACH reste non cliquable jusqu'à l'activation de sa fonction. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc:not(:disabled):hover,
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc:not(:disabled):hover {
+  --lcdp-filtre-fond: #e4efdc;
+  --lcdp-filtre-bordure: #b9d0a9;
+  box-shadow: 0 2px 5px rgba(64,95,49,.1) !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre:focus-visible,
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre:focus-visible {
+  outline: 2px solid var(--lcdp-color-focus, #52793d) !important;
+  outline-offset: 2px !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc img,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc img {
@@ -5581,7 +5599,7 @@ body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-c
   flex: 0 0 14px;
   font-size: 12px;
   line-height: 1;
-  filter: grayscale(1) brightness(0) invert(1);
+  filter: none;
 }
 @media (max-width: 400px) {
   body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite,
@@ -5594,10 +5612,10 @@ body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-c
   }
   body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre,
   body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre {
-    height: 30px !important;
-    min-height: 30px !important;
+    height: 31px !important;
+    min-height: 31px !important;
     gap: 4px !important;
-    padding: 0 7px !important;
-    font-size: .66rem !important;
+    padding: 0 8px !important;
+    font-size: .67rem !important;
   }
 }
