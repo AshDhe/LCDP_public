@@ -45,3 +45,30 @@
 @media(prefers-reduced-motion:reduce){
   .lcdp-page-accueil-membre :is(.lcdp-planifier-choix,.lcdp-box-dialogue-bouton,.lcdp-box-alerte) *{transition:none!important}
 }
+
+/* Phase 2 : opt-in pour l'alerte informative PLANIFIER.
+   Réutilise les tokens du socle commun sans modifier les autres dialogues.
+   Styles CSS natifs compatibles avec la convention de tokens Tailwind du projet. */
+.lcdp-page-reserver .lcdp-planifier-alerte-information {
+  --lcdp-modal-backdrop: var(--lcdp-ui-overlay,rgba(31,42,36,.46));
+  --lcdp-modal-surface: var(--lcdp-color-surface,#fff);
+  --lcdp-modal-ink: var(--lcdp-color-text,#1f2a24);
+  --lcdp-modal-stroke: var(--lcdp-ui-dialog-border,rgba(31,42,36,.14));
+  --lcdp-modal-shadow: var(--lcdp-ui-dialog-shadow,0 20px 25px -5px rgba(31,42,36,.12));
+  --lcdp-modal-radius: var(--lcdp-radius-large,24px);
+  --lcdp-modal-focus: var(--lcdp-color-focus,rgba(35,68,56,.24));
+}
+.lcdp-page-reserver .lcdp-planifier-alerte-information .lcdp-box-alerte__card {
+  box-sizing: border-box;
+  background: var(--lcdp-modal-surface);
+  border-color: var(--lcdp-modal-stroke);
+  border-radius: var(--lcdp-modal-radius);
+  box-shadow: var(--lcdp-modal-shadow);
+}
+.lcdp-page-reserver .lcdp-planifier-alerte-information .lcdp-box-alerte__message {
+  color: var(--lcdp-modal-ink);
+}
+.lcdp-page-reserver .lcdp-planifier-alerte-information :is(button,a):focus-visible {
+  outline: 3px solid var(--lcdp-modal-focus);
+  outline-offset: 3px;
+}
