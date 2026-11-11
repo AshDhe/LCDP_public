@@ -389,6 +389,11 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   border-width: 0 2px 2px 0;
   transform: translateY(-1px) rotate(45deg);
 }
+/* DUO SEUL reste coché et jaune, sans coche dessinée dans la pastille. */
+:is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:checked[value="duo"]::after {
+  content: none !important;
+  display: none !important;
+}
 :is(#lcdp-lightbox-slot, #lcdp-planifier-calendrier-slot) [data-lcdp-box-calendrier-mois] .lcdp-planifier-filtre-categorie__input:focus-visible {
   outline: 2px solid #344f2e;
   outline-offset: 2px;
