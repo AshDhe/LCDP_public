@@ -3019,3 +3019,33 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   grid-template-rows: repeat(5, 3px) !important;
   align-content: start !important;
 }
+
+
+/* PLANIFIER : lecture d'un parc sélectionné uniquement.
+   Une plage ouverte = doré du thème (#e59834), toutes catégories confondues.
+   Une plage fermée dans une journée ouverte = barre blanche bordée.
+   Les jours entièrement fermés ne présentent aucune plage (gestion JS existante).
+   La jauge d'occupation ne doit plus assombrir ces barres de synthèse. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed)
+[data-lcdp-card-jour-mois-slot]:not([hidden]):not(.lcdp-planifier-plage--non-ouverte) {
+  background: #e59834 !important;
+  background-image: none !important;
+  border-color: #e59834 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture:not(.lcdp-box-card-jour-in-calendrier-mois--closed)
+[data-lcdp-card-jour-mois-slot].lcdp-planifier-plage--non-ouverte:not([hidden]) {
+  background: #ffffff !important;
+  background-image: none !important;
+  border: 1px solid #dce2e5 !important;
+  visibility: visible !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture
+[data-lcdp-card-jour-mois-slot].lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge::after {
+  display: none !important;
+}
