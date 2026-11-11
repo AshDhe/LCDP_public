@@ -5568,10 +5568,13 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
   --lcdp-filtre-bordure: #edf0f5;
   opacity: 1 !important;
   filter: none !important;
-  cursor: not-allowed !important;
+  cursor: pointer !important;
 }
-/* Boutons de filtre : même surface slate que les catégories invitées, icônes colorées.
-   COACH reste non cliquable jusqu'à l'activation de sa fonction. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre--coach[aria-disabled="true"],
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre--coach[aria-disabled="true"] {
+  opacity: .7 !important;
+}
+/* Boutons de filtre : même surface slate que les catégories invitées, icônes colorées. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc:not(:disabled):hover,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc:not(:disabled):hover {
   --lcdp-filtre-fond: #f1f5f9;
