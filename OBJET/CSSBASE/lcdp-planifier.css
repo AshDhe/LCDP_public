@@ -5497,21 +5497,22 @@ body.lcdp-stripe-page [hidden] {display:none!important}
 }
 
 
-/* PLANIFIER — convergence avec les jetons LCDP / Tailwind.
-   En-tête sobre, commandes compactes et typographie de poids modéré. */
+/* PLANIFIER — typographie et boutons alignés sur les jetons LCDP/Tailwind.
+   Titre gris du design system, boutons compacts à arrondis modérés. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite {
   align-items: center !important;
   gap: 9px !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres [data-lcdp-calendrier-mois-title],
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres .lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title],
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres.lcdp-planifier-entete-avec-parc .lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title],
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite [data-lcdp-calendrier-mois-title] {
   font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
   font-size: clamp(1.1rem, 3.7vw, 1.32rem) !important;
   font-weight: 850 !important;
   line-height: 1.15 !important;
   letter-spacing: -.025em !important;
-  color: var(--lcdp-planifier-titre-gris, #56616b) !important;
+  color: var(--lcdp-color-text-muted, #5f6861) !important;
   white-space: nowrap;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres,
@@ -5539,15 +5540,15 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
   margin: 0 !important;
   padding: 0 11px !important;
   border: 1px solid var(--lcdp-filtre-bordure, transparent) !important;
-  border-radius: var(--lcdp-radius-medium, 12px) !important;
+  border-radius: 10px !important;
   background: var(--lcdp-filtre-fond, #f7f8f5) !important;
   color: var(--lcdp-filtre-texte, #36512b) !important;
   -webkit-text-fill-color: currentColor !important;
   font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
   font-size: .73rem !important;
-  font-weight: 750 !important;
+  font-weight: 650 !important;
   line-height: 1 !important;
-  letter-spacing: .015em;
+  letter-spacing: 0 !important;
   white-space: nowrap;
   box-shadow: 0 1px 2px rgba(31,42,36,.06) !important;
   text-shadow: none !important;
