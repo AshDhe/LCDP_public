@@ -5497,24 +5497,28 @@ body.lcdp-stripe-page [hidden] {display:none!important}
 }
 
 
-/* PLANIFIER : en-tête compact commun aux calendriers mensuel et journalier.
-   Les deux commandes conservent leur couleur métier, indépendamment de l'état disabled. */
+/* PLANIFIER — convergence avec les jetons LCDP / Tailwind.
+   En-tête sobre, commandes compactes et typographie de poids modéré. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite {
-  gap: 8px !important;
   align-items: center !important;
+  gap: 9px !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres [data-lcdp-calendrier-mois-title],
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite [data-lcdp-calendrier-mois-title] {
-  font-size: clamp(1.05rem, 3.3vw, 1.19rem) !important;
-  letter-spacing: -.018em !important;
+  font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
+  font-size: clamp(.99rem, 3vw, 1.13rem) !important;
+  font-weight: 650 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -.012em !important;
+  color: var(--lcdp-color-text-muted, #5f6861) !important;
   white-space: nowrap;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres {
   display: inline-flex !important;
-  align-items: center !important;
   flex: 0 0 auto !important;
+  align-items: center !important;
   flex-wrap: nowrap !important;
   gap: 6px !important;
   min-width: 0;
@@ -5530,30 +5534,30 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
   width: auto !important;
   min-width: 0 !important;
   max-width: none !important;
-  height: 32px !important;
-  min-height: 32px !important;
+  height: 31px !important;
+  min-height: 31px !important;
   margin: 0 !important;
-  padding: 0 9px !important;
-  border: 0 !important;
-  border-radius: 9px !important;
-  font-family: inherit;
+  padding: 0 10px !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--lcdp-radius-small, 10px) !important;
+  font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
   font-size: .7rem !important;
-  font-weight: 800 !important;
+  font-weight: 550 !important;
   line-height: 1 !important;
-  letter-spacing: .005em;
+  letter-spacing: .012em;
   white-space: nowrap;
   box-shadow: none !important;
   text-shadow: none !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc {
-  background: var(--lcdp-color-logo-green, #4e6838) !important;
+  background: var(--lcdp-color-logo-green, #55733f) !important;
   color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach {
   background: var(--lcdp-color-coach, #8660c8) !important;
-  border-color: var(--lcdp-color-coach, #8660c8) !important;
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
   opacity: 1 !important;
@@ -5569,30 +5573,30 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc img,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc img {
   display: block;
-  flex: 0 0 14px !important;
-  width: 14px !important;
-  height: 14px !important;
+  width: 13px !important;
+  height: 13px !important;
+  flex: 0 0 13px !important;
   object-fit: contain;
 }
 body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-coach__picto {
   display: inline-flex;
-  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  width: 15px;
-  height: 16px;
-  font-size: 13px;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  font-size: 12px;
   line-height: 1;
   filter: grayscale(1) brightness(0) invert(1);
 }
 @media (max-width: 400px) {
   body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite,
   body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite {
-    gap: 5px !important;
+    gap: 6px !important;
   }
   body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres [data-lcdp-calendrier-mois-title],
   body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite [data-lcdp-calendrier-mois-title] {
-    font-size: 1rem !important;
+    font-size: .96rem !important;
   }
   body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre,
   body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre {
@@ -5601,9 +5605,5 @@ body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-c
     gap: 4px !important;
     padding: 0 7px !important;
     font-size: .66rem !important;
-  }
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres,
-  body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres {
-    gap: 5px !important;
   }
 }
