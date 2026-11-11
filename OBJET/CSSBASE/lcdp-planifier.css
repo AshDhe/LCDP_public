@@ -5209,6 +5209,9 @@ body.lcdp-page-reserver .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__
   font-size: .84rem;
   line-height: 1.5;
 }
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row[hidden] {
+  display: none !important;
+}
 body.lcdp-page-reserver .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row dt {
   color: #57534e !important;
   font-weight: 500 !important;
