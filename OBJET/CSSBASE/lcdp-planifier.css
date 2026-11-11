@@ -4603,21 +4603,11 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .l
   line-height: 1 !important;
   cursor: pointer;
 }
+/* Les propriétés visuelles sont désormais définies par .lcdp-ui-badge.
+   Ne conserver ici que les contraintes de position du workflow ABO-RÉZA. */
 body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation__badge {
-  display: inline-flex;
-  width: fit-content;
   max-width: calc(100% - 55px);
   margin: 0 0 12px !important;
-  padding: 5px 12px !important;
-  border: 1px solid #cfe4d1;
-  border-radius: 999px;
-  background: #eef9f0;
-  color: #4b6333;
-  font-size: .72rem;
-  font-weight: 800;
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: .035em;
 }
 body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-preparation .lcdp-box-dialogue-bouton__title {
   box-sizing: border-box !important;
