@@ -3287,6 +3287,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
   height: 2px !important;
   min-height: 2px !important;
   max-height: 2px !important;
+  flex: 0 0 2px !important;
   padding: 0 !important;
   border: 0 !important;
   border-radius: 1px !important;
@@ -3322,4 +3323,24 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-card-jour-mois-slot]:not(.lcdp-planifier-plage--acces-personnel):not(.lcdp-planifier-plage--invitation-recue):not(.lcdp-planifier-plage--acces-et-invitation) {
   display: none !important;
   visibility: hidden !important;
+}
+
+/* Aucun trait d'accès historique, même si une règle antérieure impose display:block.
+   Épaisseur de 2 px commune aux plages colorées (desktop et mobile). */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--past
+[data-lcdp-card-jour-mois-slot] {
+  display: none !important;
+  visibility: hidden !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois]
+.lcdp-box-card-jour-in-calendrier-mois--planning-lecture
+[data-lcdp-card-jour-mois-slot]:not([hidden]) {
+  height: 2px !important;
+  min-height: 2px !important;
+  max-height: 2px !important;
+  flex: 0 0 2px !important;
+  border-width: 0 !important;
 }
