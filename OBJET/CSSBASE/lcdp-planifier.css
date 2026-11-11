@@ -3977,6 +3977,12 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
 }
 
 
+/* Quand ABO-RÉZA occupe la vue PLANIFIER, masquer les informations
+   propres au parc (notamment « Aucun parc sélectionné »), pas le bandeau du site. */
+body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-content:has(> #lcdp-aboreza-workflow-slot:not([hidden])) > .lcdp-page-header {
+  display: none !important;
+}
+
 /* ABO-RÉZA — étapes intégrées au wrapper permanent de PLANIFIER.
    Aucun fond de modale, aucun positionnement hors du site : bandeau et footer visibles. */
 body.lcdp-page-reserver #lcdp-aboreza-workflow-slot[hidden] { display: none !important; }
@@ -4100,12 +4106,10 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-catalogue__lis
   gap: 18px;
   min-width: 0;
   width: 100%;
-  max-height: min(52dvh, 460px);
+  max-height: none;
   padding: 0 2px 14px;
   box-sizing: border-box;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scrollbar-width: thin;
+  overflow: visible;
 }
 body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-catalogue__section {
   display: flex;
