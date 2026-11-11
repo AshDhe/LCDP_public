@@ -171,3 +171,26 @@
     .lcdp-box-dialogue-upload-img
   ) * { transition-duration: 0s !important; }
 }
+
+
+/* Phase 4 — robustesse des dialogues sur petits écrans et libellés longs.
+   Les gabarits fonctionnels conservent leurs dimensions et leur mise en page. */
+:where(body.lcdp-app-page) :is(
+  .lcdp-box-alerte__message,
+  .lcdp-box-dialogue-bouton__text,
+  .lcdp-box-dialogue-champ__title,
+  .lcdp-box-dialogue-champ-inviter__title,
+  .lcdp-box-dialogue-upload-img__title
+) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+:where(body.lcdp-app-page) :is(
+  .lcdp-box-alerte__close,
+  .lcdp-box-dialogue-bouton__close,
+  .lcdp-box-dialogue-champ__close,
+  .lcdp-box-dialogue-champ-inviter__close,
+  .lcdp-box-dialogue-upload-img__close
+)[hidden] {
+  display: none !important;
+}
