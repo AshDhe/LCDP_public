@@ -3049,3 +3049,36 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
 [data-lcdp-card-jour-mois-slot].lcdp-box-card-jour-in-calendrier-mois__slot--avec-jauge::after {
   display: none !important;
 }
+
+
+/* PLANIFIER : navigation mensuelle compacte et jours de semaine plus discrets.
+   Identique sans parc et avec parc, sur mobile et desktop. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__navigation {
+  min-height: 0 !important;
+  gap: 6px !important;
+  padding: 2px 2px 5px !important;
+  margin: 0 0 5px !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__nav-button {
+  flex: 0 0 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  font-size: 1.05rem !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays {
+  min-height: 0 !important;
+  margin: 0 0 4px !important;
+  padding: 0 !important;
+  font-size: .72rem !important;
+  line-height: 1.15 !important;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot
+[data-lcdp-box-calendrier-mois] .lcdp-box-calendrier-mois__weekdays > span {
+  line-height: 1.15 !important;
+  padding: 0 !important;
+}
