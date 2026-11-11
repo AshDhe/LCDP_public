@@ -4988,3 +4988,432 @@ body.lcdp-page-reserver .lcdp-aboreza-suivi__case {
 body.lcdp-page-reserver .lcdp-aboreza-suivi__case--faite {
   background: #fef3c7;
 }
+
+
+/* PAIEMENT — récapitulatif client ABO-RÉZA 2026-11-11.
+   Habillage local de la carte : aucune modification des données ni du tunnel Stripe. */
+body.lcdp-page-reserver .lcdp-box-workflow-abonnement--recapitulatif .lcdp-box-workflow-abonnement__card {
+  box-sizing: border-box;
+  width: min(100%, 720px);
+  max-height: calc(100dvh - 24px);
+  padding: 0 !important;
+  border-radius: 26px;
+  overflow-y: auto;
+  background: #fff;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte,
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__card {
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0;
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  color: #292524;
+  font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__entete {
+  padding: 25px 30px 22px;
+  border-bottom: 1px solid #f0efed;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__surtitre {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__pastille {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: .69rem;
+  font-weight: 850;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__quantite {
+  color: #a8a29e;
+  font-size: .79rem;
+  font-weight: 650;
+  text-align: right;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__title {
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #1c1917 !important;
+  font-size: clamp(1.28rem, 4.2vw, 1.55rem) !important;
+  font-weight: 850 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -.025em;
+  text-align: left !important;
+  text-transform: none !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__message.lcdp-box-card-recaporder__message {
+  display: block !important;
+  margin: 14px 30px 0 !important;
+  padding: 10px 14px !important;
+  border: 1px solid #e9e6dc !important;
+  border-radius: 13px !important;
+  background: #fafaf9 !important;
+  color: #57534e !important;
+  font-size: .77rem !important;
+  line-height: 1.5 !important;
+  font-weight: 650 !important;
+  text-align: center !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__message[hidden] { display: none !important; }
+body.lcdp-page-reserver .lcdp-paiement-refonte__contenu {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  padding: 24px 30px 16px;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__resume {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid #e7e5e4;
+  border-radius: 16px;
+  background: #fafaf9;
+  overflow: hidden;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__resume-champ {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  padding: 12px 13px;
+  border-right: 1px solid #e7e5e4;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__resume-champ:last-child { border-right: 0; }
+body.lcdp-page-reserver .lcdp-paiement-refonte__resume-champ span {
+  color: #a8a29e;
+  font-size: .68rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__resume-champ strong {
+  color: #292524;
+  font-size: .81rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__rubrique {
+  margin: 0 !important;
+  color: #a8a29e !important;
+  text-transform: uppercase;
+  font-size: .73rem !important;
+  font-weight: 850 !important;
+  line-height: 1.35 !important;
+  letter-spacing: .06em;
+  text-align: left;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces {
+  overflow: hidden;
+  border: 1px solid #e7e5e4;
+  border-radius: 17px;
+  background: #fff;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f5f5f4;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-ligne:last-child { border-bottom: 0; }
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-detail { flex: 1; min-width: 0; }
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-haut {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 7px;
+  line-height: 1.4;
+  font-size: .82rem;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__numero { color: #4b6333; font-weight: 850; }
+body.lcdp-page-reserver .lcdp-paiement-refonte__point { color: #d6d3d1; }
+body.lcdp-page-reserver .lcdp-paiement-refonte__date { color: #292524; font-weight: 750; }
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-sousligne {
+  margin: 3px 0 0 !important;
+  color: #78716c !important;
+  font-size: .76rem !important;
+  line-height: 1.4 !important;
+  overflow-wrap: anywhere;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__statut {
+  flex: none;
+  padding: 4px 7px;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  background: #fffbeb;
+  color: #92400e;
+  font-size: .64rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__statut--existant {
+  border-color: #d6e5d0;
+  background: #f1f7ef;
+  color: #4b6333;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__inclusions {
+  padding: 10px 14px;
+  border: 1px solid #e7e5e4;
+  border-radius: 14px;
+  background: #fafaf9;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__inclusions p {
+  margin: 4px 0 !important;
+  font-size: .8rem;
+  color: #57534e;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix {
+  padding: 16px 18px;
+  border: 1px solid #e7e5e4;
+  border-radius: 18px;
+  background: #fafaf9;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  width: 100%;
+  margin: 0 !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  text-align: left !important;
+  font-size: .84rem;
+  line-height: 1.5;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row dt {
+  color: #57534e !important;
+  font-weight: 500 !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row dd {
+  margin: 0 !important;
+  flex: none;
+  text-align: right;
+  color: #292524 !important;
+  font-weight: 800 !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix [data-lcdp-recaporder-tva-label],
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix [data-lcdp-recaporder-tva-net-label] {
+  color: #a8a29e;
+  font-size: .75rem;
+  font-weight: 500;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row--total {
+  padding-top: 13px !important;
+  margin-top: 6px !important;
+  border-top: 1px solid #e7e5e4 !important;
+  align-items: center;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row--total dt {
+  color: #1c1917 !important;
+  font-size: .96rem !important;
+  font-weight: 850 !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row--total dd {
+  color: #1c1917 !important;
+  font-size: clamp(1.2rem, 4vw, 1.6rem) !important;
+  font-weight: 900 !important;
+  white-space: nowrap;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__paiement {
+  gap: 12px;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 11px !important;
+  width: 100%;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option {
+  display: grid !important;
+  grid-template-columns: 23px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 13px !important;
+  width: 100% !important;
+  min-height: 81px;
+  margin: 0 !important;
+  padding: 16px 18px !important;
+  border: 1px solid #e7e5e4 !important;
+  border-radius: 18px !important;
+  background: #fff !important;
+  color: #292524 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  text-align: left !important;
+  cursor: pointer;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option:has(input:checked) {
+  border: 2px solid #4b6333 !important;
+  padding: 15px 17px !important;
+  background: #f7f9f5 !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option input {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-paiement-refonte__radio {
+  display: grid;
+  place-items: center;
+  width: 19px;
+  height: 19px;
+  border: 2px solid #d6d3d1;
+  border-radius: 50%;
+  background: #fff;
+  box-sizing: border-box;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option:has(input:checked) .lcdp-paiement-refonte__radio {
+  border-color: #4b6333;
+  background: #4b6333;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option:has(input:checked) .lcdp-paiement-refonte__radio::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__option-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__option-details .lcdp-workflow-paiement__option-text {
+  color: #292524 !important;
+  font-size: .91rem !important;
+  font-weight: 850 !important;
+  line-height: 1.4 !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__option-details small {
+  color: #78716c;
+  font-size: .77rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__option-prix {
+  color: #4b6333;
+  font-size: .89rem;
+  font-weight: 850;
+  white-space: nowrap;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__links {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 9px 20px !important;
+  margin: 0 !important;
+  padding: 2px 0 2px !important;
+  border: 0 !important;
+  font-size: .72rem !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__links a {
+  color: #78716c !important;
+  text-underline-offset: 3px;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte__pied {
+  padding: 15px 30px 24px;
+  border-top: 1px solid #f0efed;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) !important;
+  justify-items: stretch !important;
+  gap: 13px !important;
+  margin: 0 !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions .lcdp-button {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0;
+  min-height: 52px;
+  margin: 0 !important;
+  padding: 12px 14px !important;
+  border-radius: 17px !important;
+  font-family: inherit;
+  font-size: .85rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions [data-lcdp-recaporder-cancel] {
+  grid-column: 1;
+  grid-row: 1;
+  background: #fff !important;
+  color: #57534e !important;
+  border: 1px solid #e7e5e4 !important;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions [data-lcdp-recaporder-pay] {
+  grid-column: 2;
+  grid-row: 1;
+  background: #4b6333 !important;
+  color: #fff !important;
+  border: 1px solid #4b6333 !important;
+  box-shadow: 0 3px 7px rgba(42, 60, 29, .17);
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions [data-lcdp-recaporder-pay]:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option:focus-within,
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions .lcdp-button:focus-visible {
+  outline: 2px solid #4b6333;
+  outline-offset: 2px;
+}
+@media (max-width: 560px) {
+  body.lcdp-page-reserver .lcdp-box-workflow-abonnement--recapitulatif .lcdp-box-workflow-abonnement__card {
+    max-height: calc(100dvh - 12px);
+    border-radius: 22px;
+  }
+  body.lcdp-page-reserver .lcdp-paiement-refonte__entete { padding: 20px 19px 18px; }
+  body.lcdp-page-reserver .lcdp-paiement-refonte__message.lcdp-box-card-recaporder__message {
+    margin: 12px 19px 0 !important;
+    padding: 10px !important;
+  }
+  body.lcdp-page-reserver .lcdp-paiement-refonte__contenu { padding: 19px 19px 15px; gap: 20px; }
+  body.lcdp-page-reserver .lcdp-paiement-refonte__resume { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body.lcdp-page-reserver .lcdp-paiement-refonte__resume-champ:nth-child(2) { border-right: 0; }
+  body.lcdp-page-reserver .lcdp-paiement-refonte__resume-champ:nth-child(-n + 2) { border-bottom: 1px solid #e7e5e4; }
+  body.lcdp-page-reserver .lcdp-paiement-refonte__acces-ligne { padding: 11px 12px; gap: 8px; }
+  body.lcdp-page-reserver .lcdp-paiement-refonte__pied { padding: 12px 19px 20px; }
+  body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option { padding: 13px 12px !important; gap: 9px !important; }
+  body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option:has(input:checked) { padding: 12px 11px !important; }
+  body.lcdp-page-reserver .lcdp-paiement-refonte__option-prix { font-size: .81rem; }
+}
+@media (max-width: 370px) {
+  body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions { grid-template-columns: 1fr !important; }
+  body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions [data-lcdp-recaporder-cancel] { grid-column: 1; grid-row: 2; }
+  body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__actions [data-lcdp-recaporder-pay] { grid-column: 1; grid-row: 1; }
+}
