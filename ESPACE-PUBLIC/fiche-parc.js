@@ -13,6 +13,8 @@
     "consultation-publique";
   const MODE_USAGE_MEMBRE =
     "reservation-membre";
+  const MODE_USAGE_ADMIN =
+    "consultation-admin";
   const MESSAGE_PLANIFICATION_PUBLIQUE =
     "Connectez-vous à votre espace membre pour consulter le planning du parc.";
   const dossierImagesParc = "/IMAG/PARC";
@@ -2210,6 +2212,7 @@
 
 
   function normaliserModeUsagePlanning(options = {}) {
+    if (options.modeUsage === MODE_USAGE_ADMIN) return MODE_USAGE_ADMIN;
     return options.modeUsage === MODE_USAGE_MEMBRE
       ? MODE_USAGE_MEMBRE
       : MODE_USAGE_PUBLIC;
@@ -2323,7 +2326,9 @@
     }
     let message = "";
 
-    if (
+    if (etatPlanning?.modeUsage === MODE_USAGE_ADMIN) {
+      message = "Vous avez atteint la limite de consultation du planning."; 
+    } else if (
       etatPlanning?.modeUsage ===
       MODE_USAGE_PUBLIC
     ) {
@@ -2362,7 +2367,7 @@
       throw new Error("Slot planning parc introuvable.");
     }
 
-    if (normaliserModeUsagePlanning(options) !== MODE_USAGE_MEMBRE) {
+    if (normaliserModeUsagePlanning(options) === MODE_USAGE_PUBLIC) {
       await afficherBlocageReservationPublique();
       return;
     }
@@ -2486,7 +2491,9 @@
       etatPlanning.parc?.nomparc ||
       "Parc"
     ) || "Parc";
-    titre.textContent = "Planifier un accès";
+    titre.textContent = etatPlanning.modeUsage === MODE_USAGE_ADMIN
+      ? "Planning du parc"
+      : "Planifier un accès";
     meta.hidden = true;
     meta.textContent = "";
     boutonFermer.hidden = true;
