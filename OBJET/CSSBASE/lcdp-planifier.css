@@ -5591,6 +5591,12 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre
   --lcdp-filtre-premier-plan: var(--lcdp-filtre-texte);
   opacity: .7 !important;
 }
+/* En vue jour, COACH reste indicateur du mode choisi au mois,
+   mais n'est pas modifiable : même atténuation que CHANGER. */
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-filtre--coach:disabled {
+  opacity: .5 !important;
+  cursor: not-allowed !important;
+}
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre--coach[aria-disabled="false"][aria-pressed="true"],
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre--coach[aria-disabled="false"][aria-pressed="true"] {
   --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 80%, white);
