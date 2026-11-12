@@ -5725,3 +5725,8 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-ligne-
   --lcdp-badge-bordure: #b7d4ba;
   font-size: clamp(.85rem, 3.15vw, 1rem);
 }
+
+/* Alerte d'accès déjà réservé : conserver le parc sur une ligne distincte. */
+body.lcdp-page-reserver .lcdp-planifier-alerte-acces-existant [data-lcdp-alerte-message] {
+  white-space: pre-line;
+}
