@@ -51,6 +51,8 @@ Migration progressive : `721116fa`, `770faaf9`, `f46e40dc`, `abbb0c6f`, `e26077e
 
 Aucun test utilisateur/navigateur n'a été réalisé à ce stade. Les anciens CSS ne sont pas supprimés lorsque d'autres profils continuent à les utiliser. Ne pas déclarer les espaces entièrement migrés sans contrôle ciblé des autres points d'appel.
 
+- **PUBLIC, fiche parc, nouvelle migration** — `ESPACE-PUBLIC/fiche-parc.js` : le message empêchant la planification publique et invitant à se connecter passe au profil graphique INFORMATION. Il conserve ses deux issues métier « Connexion » (retour `true`, redirection) et « Fermer » ou clic sur l'arrière-plan (retour `false`, aucune redirection), grâce aux boutons graphiques standards. Commit `0734fc9e`. Aucun CSS supplémentaire créé.
+
 ## Reprise du prochain lot
 Continuer INFORMATION en prenant les consommateurs restants depuis l'inventaire existant, avec priorité aux points d'appel partagés. Ne pas remplacer mécaniquement un dialogue d'erreur, une action qui retourne `true/false` (par exemple « M'abonner »), ni un choix par un message INFORMATION. Vérifier et retirer les CSS historiques seulement lorsqu'ils ne servent plus. Ne pas annoncer la migration terminée avant suppression et tests des styles historiques.
 
