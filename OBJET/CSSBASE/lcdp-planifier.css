@@ -5633,12 +5633,6 @@ body.lcdp-page-reserver .lcdp-planifier-actions-filtres :is(.lcdp-planifier-filt
   color: var(--lcdp-filtre-premier-plan, var(--lcdp-filtre-icone, #64748b));
 }
 body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-coach__picto {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 15px;
-  height: 15px;
-  flex: 0 0 15px;
   line-height: 1;
   filter: none;
 }
@@ -5650,14 +5644,6 @@ body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-c
   body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres [data-lcdp-calendrier-mois-title],
   body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite [data-lcdp-calendrier-mois-title] {
     font-size: 1.08rem !important;
-  }
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre,
-  body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre {
-    height: 31px !important;
-    min-height: 31px !important;
-    gap: 4px !important;
-    padding: 0 8px !important;
-    font-size: .75rem !important;
   }
 }
 
