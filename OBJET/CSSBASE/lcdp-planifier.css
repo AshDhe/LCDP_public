@@ -5552,8 +5552,8 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
   border: 1px solid var(--lcdp-filtre-bordure) !important;
   border-radius: 12px !important;
   background: var(--lcdp-filtre-fond) !important;
-  color: var(--lcdp-filtre-texte) !important;
-  -webkit-text-fill-color: var(--lcdp-filtre-texte) !important;
+  color: var(--lcdp-filtre-premier-plan, var(--lcdp-filtre-texte)) !important;
+  -webkit-text-fill-color: var(--lcdp-filtre-premier-plan, var(--lcdp-filtre-texte)) !important;
   font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
   font-size: .75rem !important;
   font-weight: 800 !important;
@@ -5570,14 +5570,16 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
   --lcdp-filtre-icone: var(--lcdp-filtre-texte);
   --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 60%, white);
   --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 60%, white);
+  --lcdp-filtre-premier-plan: #fff;
   cursor: pointer !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach {
   --lcdp-filtre-texte: var(--lcdp-color-coach, #8660c8);
   --lcdp-filtre-icone: var(--lcdp-filtre-texte);
-  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 19%, white);
-  --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 48%, white);
+  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 60%, white);
+  --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 60%, white);
+  --lcdp-filtre-premier-plan: #fff;
   opacity: 1 !important;
   filter: none !important;
   cursor: pointer !important;
@@ -5586,17 +5588,18 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre--
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre--coach[aria-disabled="true"] {
   --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 9%, white);
   --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 25%, white);
+  --lcdp-filtre-premier-plan: var(--lcdp-filtre-texte);
   opacity: .7 !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre--coach[aria-pressed="true"],
-body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre--coach[aria-pressed="true"] {
-  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 35%, white);
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre--coach[aria-disabled="false"][aria-pressed="true"],
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre--coach[aria-disabled="false"][aria-pressed="true"] {
+  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 80%, white);
   --lcdp-filtre-bordure: var(--lcdp-filtre-texte);
 }
 /* Survol léger selon la couleur métier de chaque commande. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc:not(:disabled):hover,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc:not(:disabled):hover {
-  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 33%, white);
+  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 68%, white);
   --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 70%, white);
   box-shadow: 0 2px 5px rgba(15,23,42,.07) !important;
 }
@@ -5622,13 +5625,13 @@ body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-c
   width: 15px;
   height: 15px;
   flex: 0 0 15px;
-  color: var(--lcdp-filtre-icone, #64748b);
+  color: var(--lcdp-filtre-premier-plan, var(--lcdp-filtre-icone, #64748b));
 }
 body.lcdp-page-reserver .lcdp-planifier-actions-filtres :is(.lcdp-planifier-filtre__picto, .lcdp-planifier-filtre-coach__picto) svg {
   display: block;
   width: 15px;
   height: 15px;
-  color: var(--lcdp-filtre-icone, #64748b);
+  color: var(--lcdp-filtre-premier-plan, var(--lcdp-filtre-icone, #64748b));
 }
 body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-coach__picto {
   display: inline-flex;
