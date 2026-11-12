@@ -75,6 +75,12 @@ Aucun test utilisateur/navigateur n'a été réalisé à ce stade. Les anciens C
 - **Vérification structurelle ciblée** : les autres points d'appel inspectés dans `reserver-membre.js` restent liés à des erreurs techniques, des données absentes, des formulaires ou des boutons qui entraînent une décision (« M'abonner », page de paiement) ; ils ne peuvent pas être supprimés mécaniquement. Dans `abonnement-membre.js`, les confirmations de commande et de sortie et les erreurs de validation doivent conserver leur comportement en attendant les autres familles.
 - **Nettoyage CSS** : aucun ancien CSS retiré dans ce lot, faute de preuve qu'il ne possède plus de consommateurs. Ne pas annoncer la clôture INFORMATION ni l'absence de régressions sans tests navigateurs. Aucun Worker modifié.
 
+## Lot INFORMATION — poursuite du 12 novembre 2026
+
+- **MEMBRE / INVITER** : `ESPACE-MEMBRE/inviter-membre.js` — cinq points d'appel (quatre formulations) migrés explicitement vers `profil: "information"` : accès réservé aux membres abonnés (deux parcours), abonnement suspendu/non payé, absence d'échéance impayée, droit d'invitation non configuré. Le composant partagé et son CSS étaient déjà branchés sur cette page. Commit `62e05733`.
+- **MEMBRE / PLANIFIER** : `ESPACE-MEMBRE/reserver-membre.js` — indication « Sélectionnez d'abord un parc » raccordée à `afficherDialogueInformationPlanifier` (profil unique). Commit `f7e178b3`.
+- **Délimitation du nettoyage** : les anciens `afficherAlerte` de ces deux modules conservent des appels relatifs à des erreurs de service, des validations de formulaire ou des décisions de paiement (retour booléen). Aucun retrait CSS ni suppression d'un composant partagé ne peut être attesté sans contrôle de ces dépendances. Changements GitHub réalisés, tests visuels et fonctionnels à effectuer.
+
 ## Reprise du prochain lot
 Continuer INFORMATION en prenant les consommateurs restants depuis l'inventaire existant, avec priorité aux points d'appel partagés. Ne pas remplacer mécaniquement un dialogue d'erreur, une action qui retourne `true/false` (par exemple « M'abonner »), ni un choix par un message INFORMATION. Vérifier et retirer les CSS historiques seulement lorsqu'ils ne servent plus. Ne pas annoncer la migration terminée avant suppression et tests des styles historiques.
 
