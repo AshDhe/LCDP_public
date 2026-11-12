@@ -5770,3 +5770,83 @@ body.lcdp-page-reserver .lcdp-planifier-dialogue-etat .lcdp-box-dialogue-bouton_
     gap: 14px;
   }
 }
+
+
+/* OBJET GÉNÉRIQUE — navigation par onglets avec compteur.
+   Réutilisable par tout espace : une seule définition, aucun sélecteur de page.
+   Référence visuelle : onglet souligné, compteur en pastille. */
+.lcdp-navigation-onglets {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid #e7e5e4;
+  background: transparent;
+  text-align: center;
+}
+.lcdp-navigation-onglets__onglet {
+  appearance: none;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin: 0 0 -1px;
+  padding: 12px 3px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #78716c;
+  font: 600 12px/1.25 var(--lcdp-font-main, Arial, sans-serif);
+  text-align: center;
+  box-shadow: none;
+  cursor: pointer;
+  transition: border-color .15s ease, color .15s ease;
+}
+.lcdp-navigation-onglets__onglet:hover:not([aria-pressed="true"]) {
+  border-bottom-color: #d6d3d1;
+  color: #292524;
+}
+.lcdp-navigation-onglets__onglet[aria-pressed="true"] {
+  border-bottom-color: #4b6333;
+  color: #4b6333;
+  font-weight: 800;
+}
+.lcdp-navigation-onglets__compteur {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: 25px;
+  padding: 3px 8px;
+  border: 0;
+  border-radius: 999px;
+  background: #f5f5f4;
+  color: #78716c;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+.lcdp-navigation-onglets__onglet[aria-pressed="true"] .lcdp-navigation-onglets__compteur {
+  background: #ecfdf5;
+  color: #4b6333;
+  box-shadow: inset 0 0 0 1px rgb(75 99 51 / 20%);
+  font-weight: 800;
+}
+.lcdp-navigation-onglets__onglet:focus-visible {
+  outline: 2px solid #4b6333;
+  outline-offset: -4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lcdp-navigation-onglets__onglet { transition: none; }
+}
