@@ -89,6 +89,11 @@ Aucun test utilisateur/navigateur n'a été réalisé à ce stade. Les anciens C
 - **Points d'appel restant à classer** : `LCDP_membre/ESPACE-MEMBRE/fiche-parc.js` conserve une information de restriction d'accès avec boutons métier « Abonnement » et autres actions, non migrée ici pour ne pas perdre ces actions. `LCDP_public/ESPACE-PUBLIC/connexion-coach.js` et `connexion-parc.js` utilisent des alertes pour les échecs d'identification, à laisser pour ERREUR. Les composants de facturation et d'avoir affichent des erreurs de chargement dans des zones internes, non des boîtes INFORMATION.
 - **État des validations** : modification de code et traçabilité GitHub uniquement ; aucun test navigateur réel ni preuve exhaustive d'absence de CSS ancien inutilisé à ce stade.
 
+## Lot INFORMATION — contrôle ciblé du 12 novembre 2026 (suite)
+- **MEMBRE / PLANNING** : `ESPACE-MEMBRE/planning-membre.js` — message du parrain sur une invitation hors abonnement redirigé vers `afficherAlerteInvitationReservation(..., { profil: "information" })` ; message « délai d'annulation dépassé » redirigé vers `afficherInformationPlanning`, en superposition si le workflow est ouvert. Commit `b082644d`.
+- **MEMBRE / PLANNING, restrictions d'invitation** : les messages retournés par `determinerBlocageInvitationReservation` et `determinerBlocageReservationPlanning` utilisent le profil INFORMATION commun. Les états métiers (abonnement impayé, annulé, suspendu, membre non abonné) et l'interdiction d'inviter restent évalués comme avant. Commit `8d319d6a`.
+- Les alertes de réservation manquante/introuvable et les échecs techniques n'ont pas été migrés vers INFORMATION. Ces changements n'ont pas été testés en navigateur ; ne pas supprimer l'ancienne feuille de style encore utilisée par ces erreurs.
+
 ## Reprise du prochain lot
 Continuer INFORMATION en prenant les consommateurs restants depuis l'inventaire existant, avec priorité aux points d'appel partagés. Ne pas remplacer mécaniquement un dialogue d'erreur, une action qui retourne `true/false` (par exemple « M'abonner »), ni un choix par un message INFORMATION. Vérifier et retirer les CSS historiques seulement lorsqu'ils ne servent plus. Ne pas annoncer la migration terminée avant suppression et tests des styles historiques.
 
