@@ -2525,10 +2525,12 @@
         );
       const precedentInterdit =
         auMinimum || moisPrecedentEntierementPasse;
-      const auMaximum = moisPlanningCommunIdentique(
-        etatPlanning,
-        etatPlanning.moisMaximum
-      );
+      const auMaximum =
+        etatPlanning.modeUsage !== MODE_USAGE_ADMIN &&
+        moisPlanningCommunIdentique(
+          etatPlanning,
+          etatPlanning.moisMaximum
+        );
 
       boutonPrecedent.disabled = precedentInterdit;
       boutonPrecedent.setAttribute(
@@ -2620,6 +2622,7 @@
       "click",
       () => {
         if (
+          etatPlanning.modeUsage !== MODE_USAGE_ADMIN &&
           moisPlanningCommunIdentique(
             etatPlanning,
             etatPlanning.moisMaximum
