@@ -5568,8 +5568,8 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc {
   --lcdp-filtre-texte: var(--lcdp-color-logo-green, #55733f);
   --lcdp-filtre-icone: var(--lcdp-filtre-texte);
-  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 9%, white);
-  --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 25%, white);
+  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 19%, white);
+  --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 48%, white);
   cursor: pointer !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach,
@@ -5589,8 +5589,8 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre
 /* Survol léger selon la couleur métier de chaque commande. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc:not(:disabled):hover,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc:not(:disabled):hover {
-  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 15%, white);
-  --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 40%, white);
+  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 25%, white);
+  --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 55%, white);
   box-shadow: 0 2px 5px rgba(15,23,42,.07) !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre:focus-visible,
