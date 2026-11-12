@@ -1023,7 +1023,7 @@
       return options.chargerFragmentObjet(chemin);
     }
 
-    return chargerFragment("/OBJET" + chemin);
+    return chargerFragment(construireUrlObjetFiche(options, chemin));
   }
 
   function construireUrlObjetFiche(options, chemin) {
