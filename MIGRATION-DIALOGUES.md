@@ -178,3 +178,34 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **L'inventaire initial exhaustif a déjà été réalisé** lors des travaux antérieurs, conformément à la méthodologie de ce registre (« reprendre les audits et inventaires déjà réalisés ; ne pas recommencer un audit général »). Le chantier actuel consiste à exécuter la migration et à mettre à jour sa traçabilité.
 - Ne plus présenter un « nouvel audit exhaustif » comme préalable à la clôture d'un profil. Distinguer : **inventaire initial**, **état de migration consigné**, **contrôle ciblé des dépendances et consommateurs**, **tests navigateur non effectués**. Le registre est un suivi des migrations et commits ; il ne reproduit pas nécessairement toutes les lignes de l'inventaire initial.
 - **CHOIX** : traiter comme exceptions distinctes les trois cas complexes déjà listés : arbitrage tarifaire multi-options, vue « Votre planning » à quatre actions et conteneur de workflow ABO-RÉZA. Les choix simples identifiés ont été migrés. Poursuivre avec **SUPPRESSION**, puis **ERREUR**, sans perdre les exceptions ni inventer une certification navigateur.
+
+## Rapprochement CHOIX avec l'inventaire initial — statuts (12 novembre 2026)
+**Sources :** `OBJET/CSSBASE/INVENTAIRE-DIALOGUES-APPLICATION-20261112.md` (261 fichiers HTML/JS, inventaire des sources, pas de tous les messages), `OBJET/CSSBASE/RAPPROCHEMENT-DIALOGUES-REFERENCES-20261112.md` (candidats par profil) et commits consignés ici. Les lignes suivantes correspondent aux **cas ou familles CHOIX repérables dans ces documents**, complétés par les cas découverts pendant la migration. « Reporté » signifie non migré, et non validé. Aucun test navigateur effectué.
+
+| Cas inventorié / identifié | Source | Statut | Précision |
+|---|---|---|---|
+| Prolonger un abonnement | MEMBRE `abonnement-membre.js` | **TRAITÉ** | Gabarit CHOIX, `9b1b73c9` |
+| Quitter la demande d'abonnement | MEMBRE `abonnement-membre.js` | **TRAITÉ** | Choix superposé, `9b1b73c9` |
+| Confirmer commande avant paiement et régularisation | MEMBRE `abonnement-membre.js` | **TRAITÉ** | `9cad9dd0` |
+| Confirmer redirection abonnement/paiement | MEMBRE `accueil-membre.js` | **TRAITÉ** | `08c80640` |
+| Confirmer régularisation | MEMBRE `inviter-membre.js` | **TRAITÉ** | `0a4d48a1` |
+| Confirmer régularisation | MEMBRE `mes-informations.js` | **TRAITÉ** | `8e5124d3` |
+| Confirmer régularisation | MEMBRE `reserver-membre.js` | **TRAITÉ** | `caef48ab` |
+| Autoriser microphone IA / déclaration Duo Actif | MEMBRE `reserver-membre.js` | **TRAITÉ** | `52e44023` |
+| Choisir un parc / planning partiellement couvert | MEMBRE `reserver-membre.js` | **TRAITÉ** | `32d17481`, fermeture neutre `4abc5c22` |
+| Confirmation d'heure d'arrivée | PUBLIC `fiche-parc.js` | **TRAITÉ** | `870e909f` |
+| Choix de proposition d'abonnement / alternative tarifaire | MEMBRE `reserver-membre.js` | **REPORTÉ, COMPLEXE** | Contenu tarifaire dynamique, 2–3 actions |
+| Vue « Votre planning » | MEMBRE `reserver-membre.js` | **REPORTÉ, COMPLEXE** | Quatre actions et contenu dynamique |
+| Conteneur du tunnel ABO-RÉZA | MEMBRE `aboreza-membre.js` | **REPORTÉ, COMPLEXE** | Conteneur métier, pas confirmation simple |
+| Confirmation « Planifier votre accès ? » avec récapitulatif | MEMBRE `reserver-membre.js` | **REPORTÉ, COMPLEXE** | Récapitulatif structuré déjà distingué par l'audit initial ; étudier avec la vue métier, ne pas détruire son contenu |
+| Confirmation/changement de compte par burger | MEMBRE `box-menu-burger-membre.js` | **REPORTÉ, CHOIX** | `02-dialogue-bouton.html` toujours chargé (contrôle GitHub) |
+| Choix du compte / connexion par burger | PUBLIC `box-menu-burger-public.js` | **REPORTÉ, CHOIX** | `02-dialogue-bouton.html` toujours chargé |
+| Choix du compte / connexion par burger | PARC et COACH `box-menu-burger-{parc,coach}.js` | **REPORTÉ, CHOIX** | Gabarit historique toujours chargé |
+| Confirmation « Votre DA est terminée ? » | MEMBRE `da-membre.js` | **REPORTÉ, CHOIX** | `mode:"confirmation"` sur l'ancienne alerte |
+| Confirmation de publication / sélection d'actualité | ADMIN `B_ADMIN/admin-actualite.js` | **REPORTÉ, CHOIX** | Le helper métier utilise toujours `02-dialogue-bouton.html` ; suppression d'article à exclure pour SUPPRESSION |
+| Confirmations de planning / sortie / nouvelle base | ADMIN `B_PARCS/planning-parc.js` | **REPORTÉ, CHOIX** | Dialogues natifs et `window.confirm`, conséquences à distinguer |
+| Annulation d'abonnement / de réservations / d'invitations / d'invités, abandon des dates et suppressions administratives | MEMBRE et ADMIN (sources dans inventaire initial) | **REPORTÉ, SUPPRESSION** | Ne pas compter comme CHOIX simple : décisions destructrices |
+| Autres dialogues à boutons, champs, calendriers, listes et tunnels répertoriés sans classification de chacune de leurs actions | Les cinq dépôts, inventaire section C | **REPORTÉ, À QUALIFIER** | L'inventaire est par **fichier/source**, pas par instance de message : ne pas inventer une correspondance exhaustive |
+
+**Conclusion de rapprochement :** les choix simples **migrés et vérifiables par commit** sont traités. Mais il est **inexact de dire que seuls trois cas complexes subsistent** : l'inventaire initial et la vérification ciblée révèlent également des choix anciens dans les burgers, la DA, l'administration et les confirmations natives. Ces cas portent désormais le statut REPORTÉ. Le profil CHOIX est donc **partiellement migré**, non clôturé exhaustivement. Les cas à supprimer sont réservés au lot SUPPRESSION. Aucune ligne non rapprochée n'est marquée « traité ».
+
