@@ -457,7 +457,7 @@
         await chargerScriptUneFois("/OBJET/JSBASE/03-formulaire.js");
         await chargerScriptUneFois("/OBJET/JSBASE/03-formulaire-protege.js");
         // Le script appartient à l’espace public, pas à la base fonctionnelle COACH.
-        await chargerScriptUneFois("/ESPACE-PUBLIC/contact-coach.js?v=20261103-contact-chargement");
+        await chargerScriptUneFois("/ESPACE-PUBLIC/contact-coach.js");
         if (typeof window.LCDP_initialiserContactCoach !== "function") {
           throw new Error("Initialisation du contact coach indisponible.");
         }
