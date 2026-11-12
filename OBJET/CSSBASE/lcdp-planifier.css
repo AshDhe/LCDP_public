@@ -5660,3 +5660,39 @@ body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-c
     font-size: .75rem !important;
   }
 }
+
+/* PLANIFIER — densité des commandes uniquement sur mobile.
+   Conserver les couleurs et les états existants. */
+@media (max-width: 600px) {
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre,
+  body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre {
+    height: 29px !important;
+    min-height: 29px !important;
+    padding: 0 7px !important;
+    gap: 4px !important;
+    font-size: .69rem !important;
+  }
+  body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre__picto,
+  body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-coach__picto,
+  body.lcdp-page-reserver .lcdp-planifier-actions-filtres :is(.lcdp-planifier-filtre__picto, .lcdp-planifier-filtre-coach__picto) svg {
+    width: 13px;
+    height: 13px;
+  }
+  body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre__picto,
+  body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-coach__picto {
+    flex-basis: 13px;
+  }
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie {
+    min-height: 29px;
+    padding: 3px 7px !important;
+    gap: 4px !important;
+  }
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle {
+    font-size: .69rem !important;
+  }
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__picto {
+    flex-basis: 15px;
+    width: 15px;
+    font-size: .8rem;
+  }
+}
