@@ -5568,7 +5568,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc {
   --lcdp-filtre-texte: var(--lcdp-color-logo-green, #55733f);
   --lcdp-filtre-icone: var(--lcdp-filtre-texte);
-  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 70%, white);
+  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 80%, white);
   --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 60%, white);
   --lcdp-filtre-premier-plan: #fff;
   cursor: pointer !important;
@@ -5577,7 +5577,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach {
   --lcdp-filtre-texte: var(--lcdp-color-coach, #8660c8);
   --lcdp-filtre-icone: var(--lcdp-filtre-texte);
-  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 70%, white);
+  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 80%, white);
   --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 60%, white);
   --lcdp-filtre-premier-plan: #fff;
   opacity: 1 !important;
