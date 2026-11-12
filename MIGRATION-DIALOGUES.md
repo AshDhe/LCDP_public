@@ -30,13 +30,15 @@ Supprimer les doublons CSS historiques, sans en ajouter. Quatre profils graphiqu
 - `LCDP_membre/ESPACE-MEMBRE/planning-membre.js` + `.html` : notifications invitation envoyée (deux chemins métier), liste des invités mise à jour, information sur le parrain de l'invitation reçue, confirmation d'annulation d'invitation/réservation. Un helper INFORMATION gère le slot normal ou la superposition au workflow. CSS commun ajouté à la page. Les autres alertes restent inchangées.
 - `LCDP_membre/ESPACE-MEMBRE/abonnement-membre.js` + `.html` : INFORMATION pour demande d'annulation d'abonnement enregistrée (avoir) et pour commande enregistrée avec virement. La confirmation commande conserve sa redirection vers la page abonnement au clic OK ou au clic sur l'arrière-plan. Les dialogues de décision « Prolonger ? », « Annuler ? », frais d'annulation et erreurs restent inchangés. CSS commun chargé.
 - `LCDP_membre/ESPACE-MEMBRE/mdp-membre.js` + `.html` : confirmation de modification réussie du mot de passe migrée vers INFORMATION, en conservant la redirection vers la connexion après fermeture. Les échecs restent sur l'ancien objet.
+- `LCDP_membre/ESPACE-MEMBRE/lacleduparc.js` + `.html` : INFORMATION pour checkout enregistré, checkout enregistré avec impossibilité d'éteindre automatiquement le bracelet, clé validée et bracelet allumé ; bouton OK et poursuite des actions métier inchangés.
+- `LCDP_membre/ESPACE-MEMBRE/da-membre.js` : INFORMATION pour les deux cas de DA en cours et les deux cas d'éligibilité future des membres invités. CSS commun chargé via la fonction CSS existante. Erreurs et confirmations DA demeurent sur le système existant.
 - Les dialogues d'erreur et les dialogues nécessitant une décision ou des formulaires ne doivent pas être requalifiés automatiquement en INFORMATION.
 - Nettoyage déjà réalisé dans `LCDP_public/OBJET/CSSBASE/lcdp-lightbox-convergence.css` : retrait du bloc spécifique ancienne alerte INFORMATION PLANIFIER.
 - Migré en code ne signifie pas que l'ancienne famille graphique n'est plus utilisée ailleurs. Les CSS historiques subsistent et le chantier global est inachevé.
 
 ## Commits repères
 Historique annoncé au début du chantier : `0f1e5fbb`, `abd31e5b`, `62bb71e9`, `ccbab407`.
-Migration progressive : `721116fa`, `770faaf9`, `f46e40dc`, `abbb0c6f`, `e26077e6`, `e31738ac`, `7a5b356a`, `ffb0108e`, `de3d5072`, `9a56726c`, `480b0147`, `3af23778`, `e780006a`, `3d4b4770`, `9a1b4304`, `191d646e`, `9aa007f8`, `da4dd13f`, `5407e3b8`, `6136c1d4`.
+Migration progressive : `721116fa`, `770faaf9`, `f46e40dc`, `abbb0c6f`, `e26077e6`, `e31738ac`, `7a5b356a`, `ffb0108e`, `de3d5072`, `9a56726c`, `480b0147`, `3af23778`, `e780006a`, `3d4b4770`, `9a1b4304`, `191d646e`, `9aa007f8`, `da4dd13f`, `5407e3b8`, `6136c1d4`, `7c37a446`, `883be4d7`, `a406f065`.
 
 ## Reprise du prochain lot
 Continuer INFORMATION en prenant les consommateurs restants depuis l'inventaire existant, avec priorité aux points d'appel partagés. Ne pas remplacer mécaniquement un dialogue d'erreur, une action qui retourne `true/false` (par exemple « M'abonner »), ni un choix par un message INFORMATION. Vérifier et retirer les CSS historiques seulement lorsqu'ils ne servent plus. Ne pas annoncer la migration terminée avant suppression et tests des styles historiques.
