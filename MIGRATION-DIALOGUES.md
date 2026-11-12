@@ -149,3 +149,8 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **Validation** : code modifié dans GitHub, pas de test navigateur ; poursuivre CHOIX dans les autres consommateurs MEMBRE. Garder les CSS anciens nécessaires aux alertes non migrées.
 
 - **MEMBRE / INVITER**, `ESPACE-MEMBRE/inviter-membre.js` : confirmation avant paiement CB depuis l'invitation basculée vers le profil CHOIX ; nouveau branchement `profil: "choix"` dans le helper existant, boutons « Annuler » et « Continuer vers le paiement », réponse booléenne et redirection inchangées. Commit `0a4d48a1`. Code non testé en navigateur.
+
+### CHOIX — régularisation depuis MES INFORMATIONS et PLANIFIER (12 novembre 2026)
+- `LCDP_membre/ESPACE-MEMBRE/mes-informations.js` : confirmation de redirection vers paiement CB migrée vers `/HTMLBASE/02-dialogue-reference-choix.html` ; « Annuler » renvoie `false`, « Continuer vers le paiement » renvoie `true`, destination `PAGE_PAIEMENT_CB` et paramètres `orderid/echeance/source=suspension` préservés. Commit `8e5124d3`.
+- `LCDP_membre/ESPACE-MEMBRE/reserver-membre.js` : confirmation de redirection CB migrée vers CHOIX, affichée au sein de `hoteDialoguesPlanifier()` sans remplacer le calendrier permanent ; attribut de dialogue `data-lcdp-dialogue-context="conteneur"`. Destination et paramètres de paiement inchangés. Commit `caef48ab`.
+- Les composants d'alerte dédiés aux erreurs et les flux nécessitant des décisions spécifiques restent non migrés. Aucune validation navigateur n'a été réalisée sur ce lot.
