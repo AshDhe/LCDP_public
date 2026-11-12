@@ -61,6 +61,8 @@ Aucun test utilisateur/navigateur n'a été réalisé à ce stade. Les anciens C
 - Ces migrations sont **enregistrées dans le code, non testées en navigateur**. Les anciennes règles CSS des autres familles ne doivent pas être supprimées.
 - **À contrôler avant clôture** : les retours de Workers susceptibles de contenir des messages métiers négatifs malgré une réponse technique réussie ; ne pas qualifier mécaniquement tout message dynamique de succès. Contrôler aussi les entrées INFORMATION des composants partagés, les appels restants dans les pages publiques, puis les dépendances CSS ciblées.
 
+- **MEMBRE / PLANIFIER** : `reserver-membre.js` — restriction de la recherche IA aux abonnements permanents et absence d'échéance de paiement en souffrance migrées vers le profil INFORMATION existant (pas de CSS nouveau). Commit `8ea8e75b`.
+
 ## Reprise du prochain lot
 Continuer INFORMATION en prenant les consommateurs restants depuis l'inventaire existant, avec priorité aux points d'appel partagés. Ne pas remplacer mécaniquement un dialogue d'erreur, une action qui retourne `true/false` (par exemple « M'abonner »), ni un choix par un message INFORMATION. Vérifier et retirer les CSS historiques seulement lorsqu'ils ne servent plus. Ne pas annoncer la migration terminée avant suppression et tests des styles historiques.
 
