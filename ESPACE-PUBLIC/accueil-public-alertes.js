@@ -37,24 +37,41 @@
     if (chargementAlerteEnCours) return;
     chargementAlerteEnCours = true;
     try {
-      const reponse = await fetch(urlObjet('/HTMLBASE/02-alerte.html'), { cache: 'no-cache' });
-      if (!reponse.ok) throw new Error('Objet 02-box-alerte.html indisponible.');
+      // Les invitations à se connecter relèvent d'INFORMATION.
+      // Les erreurs conservent leur comportement actuel en attendant le lot ERREUR.
+      const information = Boolean(configuration.actionLibelle && configuration.destination);
+      const chemin = information
+        ? '/HTMLBASE/02-dialogue-reference-information.html'
+        : '/HTMLBASE/02-alerte.html';
+      const reponse = await fetch(urlObjet(chemin), { cache: 'no-cache' });
+      if (!reponse.ok) throw new Error('Objet de dialogue indisponible.');
       const modele = document.createElement('template');
       modele.innerHTML = (await reponse.text()).trim();
 
       const slot = emplacementAlerte();
       slot.replaceChildren(modele.content.cloneNode(true));
-      const boite = slot.querySelector('[data-lcdp-box-alerte]');
-      const texte = slot.querySelector('[data-lcdp-alerte-message]');
-      const fermerBouton = slot.querySelector('[data-lcdp-alerte-close]');
-      const validerBouton = slot.querySelector('[data-lcdp-alerte-ok]');
-      if (!boite || !texte || !fermerBouton || !validerBouton) {
+      const boite = slot.querySelector(information
+        ? '[data-lcdp-dialogue-reference="information"]'
+        : '[data-lcdp-box-alerte]');
+      const texte = slot.querySelector(information
+        ? '[data-lcdp-dialogue-message]'
+        : '[data-lcdp-alerte-message]');
+      const fermerBouton = information ? null : slot.querySelector('[data-lcdp-alerte-close]');
+      const validerBouton = slot.querySelector(information
+        ? '[data-lcdp-dialogue-action="compris"]'
+        : '[data-lcdp-alerte-ok]');
+      if (!boite || !texte || !validerBouton || (!information && !fermerBouton)) {
         slot.replaceChildren();
-        throw new Error('Objet 02-box-alerte.html incomplet.');
+        throw new Error('Objet de dialogue incomplet.');
       }
 
       texte.textContent = String(message);
-      if (configuration.variante) boite.classList.add('lcdp-alerte-accueil-' + configuration.variante);
+      if (information) {
+        const titre = slot.querySelector('[data-lcdp-dialogue-titre]');
+        if (titre) titre.textContent = 'Connexion nécessaire';
+      } else if (configuration.variante) {
+        boite.classList.add('lcdp-alerte-accueil-' + configuration.variante);
+      }
       if (configuration.actionLibelle) validerBouton.textContent = configuration.actionLibelle;
       else validerBouton.hidden = true;
 
@@ -65,12 +82,13 @@
         slot.replaceChildren();
         if (precedentFocus && typeof precedentFocus.focus === 'function') precedentFocus.focus();
       }
-      fermerBouton.addEventListener('click', fermer, { signal: ecouteurs.signal });
+      fermerBouton?.addEventListener('click', fermer, { signal: ecouteurs.signal });
       boite.addEventListener('click', e => { if (e.target === boite) fermer(); }, { signal: ecouteurs.signal });
       document.addEventListener('keydown', e => {
         if (e.key === 'Escape') fermer();
         if (e.key === 'Tab') {
-          const elements = [fermerBouton, ...(validerBouton.hidden ? [] : [validerBouton])];
+          const elements = [fermerBouton, ...(validerBouton.hidden ? [] : [validerBouton])].filter(Boolean);
+          if (!elements.length) return;
           const index = elements.indexOf(document.activeElement);
           if (e.shiftKey && index <= 0) { e.preventDefault(); elements[elements.length - 1].focus(); }
           else if (!e.shiftKey && index === elements.length - 1) { e.preventDefault(); elements[0].focus(); }
@@ -80,7 +98,7 @@
         fermer();
         if (configuration.destination) window.location.assign(configuration.destination);
       }, { signal: ecouteurs.signal });
-      fermerBouton.focus();
+      (fermerBouton || validerBouton).focus();
     } finally {
       chargementAlerteEnCours = false;
     }
