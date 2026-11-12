@@ -41,6 +41,16 @@ Supprimer les doublons CSS historiques, sans en ajouter. Quatre profils graphiqu
 Historique annoncé au début du chantier : `0f1e5fbb`, `abd31e5b`, `62bb71e9`, `ccbab407`.
 Migration progressive : `721116fa`, `770faaf9`, `f46e40dc`, `abbb0c6f`, `e26077e6`, `e31738ac`, `7a5b356a`, `ffb0108e`, `de3d5072`, `9a56726c`, `480b0147`, `3af23778`, `e780006a`, `3d4b4770`, `9a1b4304`, `191d646e`, `9aa007f8`, `da4dd13f`, `5407e3b8`, `6136c1d4`, `7c37a446`, `883be4d7`, `a406f065`, `61df21d0`.
 
+## Avancement supplémentaire — 12 novembre 2026 (lot suivant)
+- **MEMBRE** — `ESPACE-MEMBRE/paiement-membre.js` : migration INFORMATION des messages de retour Stripe « paiement en cours de vérification » et « paiement non effectué / reprise ». Conservation du bouton « Reprendre le paiement », de l'appel à `/valider` et des redirections existantes. Commit `5a67537c`. Pas de Worker modifié.
+- **PUBLIC** — `ESPACE-PUBLIC/formulaire-inscription-membre.js` + `.html` : notification de succès de l'inscription migrée vers INFORMATION ; redirection après fermeture maintenue. Les messages d'échec restent sur l'ancien objet. Commits `f42ed200`, `6a36e254`.
+- **PUBLIC** — `ESPACE-PUBLIC/mdp-perdu-membre.js` + `.html` : message « Demande envoyée » (type `validation`) migré vers INFORMATION ; erreurs inchangées ; redirection maintenue. Commits `26173f84`, `32c49b6d`.
+- **PUBLIC** — `ESPACE-PUBLIC/fiche-parc.js` + `.html` : succès de partage de fiche parc migré vers INFORMATION. La boîte de connexion avec réponse booléenne et les messages d'échec restent sur l'objet historique. Commits `4df3694b`, `258ad356`.
+- **COACH** — `ESPACE-COACH/accueil-coach.js` + `.html` : trois notifications d'actions non encore raccordées migrées vers INFORMATION ; callback générique destiné aux erreurs reste sur l'ancien objet. Commits `30179eab`, `06b7c38e`.
+- **PARC** — `ESPACE-PARC/accueil-parc.js` utilise l'ancienne alerte pour le callback de menu ; l'appel identifié dans le burger PARC concerne « Dialogue indisponible », qui relève d'ERREUR : **non migré**.
+
+Aucun test utilisateur/navigateur n'a été réalisé à ce stade. Les anciens CSS ne sont pas supprimés lorsque d'autres profils continuent à les utiliser. Ne pas déclarer les espaces entièrement migrés sans contrôle ciblé des autres points d'appel.
+
 ## Reprise du prochain lot
 Continuer INFORMATION en prenant les consommateurs restants depuis l'inventaire existant, avec priorité aux points d'appel partagés. Ne pas remplacer mécaniquement un dialogue d'erreur, une action qui retourne `true/false` (par exemple « M'abonner »), ni un choix par un message INFORMATION. Vérifier et retirer les CSS historiques seulement lorsqu'ils ne servent plus. Ne pas annoncer la migration terminée avant suppression et tests des styles historiques.
 
