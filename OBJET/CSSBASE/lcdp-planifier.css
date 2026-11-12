@@ -5705,3 +5705,10 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-pa
   text-transform: uppercase;
   overflow-wrap: anywhere;
 }
+/* Variante du badge partagé : seule l'identité d'un parc sélectionné
+   gagne en lisibilité, sur ordinateur comme sur mobile. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-parc .lcdp-planifier-parc-en-tete.lcdp-ui-badge--green {
+  --lcdp-badge-fond: #deefdf;
+  --lcdp-badge-bordure: #b7d4ba;
+  font-size: clamp(.85rem, 3.15vw, 1rem);
+}
