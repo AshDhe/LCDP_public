@@ -134,7 +134,8 @@
         return {
           variante,
           boutonOkLabel: "Me connecter",
-          redirectionOk: construireUrlConnexionMembrePublic()
+          redirectionOk: construireUrlConnexionMembrePublic(),
+          profil: "information"
         };
       }
 
@@ -142,6 +143,31 @@
         const slot = document.getElementById("lcdp-lightbox-slot");
         slot.innerHTML = "";
 
+        if (options.profil === "information") {
+          const fragmentInformation = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-information.html");
+          slot.appendChild(fragmentInformation);
+          const dialogue = slot.querySelector('[data-lcdp-dialogue-reference="information"]');
+          const titre = slot.querySelector("[data-lcdp-dialogue-titre]");
+          const texte = slot.querySelector("[data-lcdp-dialogue-message]");
+          const fermer = slot.querySelector('[data-lcdp-dialogue-action="compris"]');
+          if (!dialogue || !titre || !texte || !fermer) {
+            slot.replaceChildren();
+            throw new Error("Structure INFORMATION incomplète.");
+          }
+          titre.textContent = options.titre || "Information";
+          texte.textContent = message;
+          fermer.textContent = options.boutonOkLabel || "Fermer";
+          const clore = (rediriger = false) => {
+            slot.replaceChildren();
+            if (rediriger && options.redirectionOk) window.location.href = options.redirectionOk;
+          };
+          fermer.addEventListener("click", () => clore(true), { once: true });
+          dialogue.addEventListener("click", event => {
+            if (event.target === dialogue) clore(false);
+          });
+          fermer.focus();
+          return;
+        }
         const fragment = await chargerFragment("/OBJET/HTMLBASE/02-alerte.html");
         slot.appendChild(fragment);
 
@@ -340,11 +366,11 @@
         }
 
         if (!etat.parrainRenseigne) {
-          await afficherAlerte('Renseignez votre parrain dans la rubrique "Mes informations"');
+          await afficherAlerte('Renseignez votre parrain dans la rubrique "Mes informations"', { profil: "information" });
           return;
         }
 
-        await afficherAlerte("Votre parrain peut vous inviter depuis son espace.");
+        await afficherAlerte("Votre parrain peut vous inviter depuis son espace.", { profil: "information" });
       }
 
       function construireEndpointApi(cleModerne, cleLegacy, cleCourte, sousDomaineWorker) {
