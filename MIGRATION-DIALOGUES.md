@@ -55,6 +55,12 @@ Aucun test utilisateur/navigateur n'a été réalisé à ce stade. Les anciens C
 
 - **PUBLIC, fiche parc, informations planning** — deux autres consommateurs de `afficherAlerteFicheParc` migrés : « Choisissez votre journée » et explication des droits de consultation du mois suivant. Les autres erreurs de la même fonction ne sont pas migrées. Commit `2a7b4faf`.
 
+## Lot complémentaire INFORMATION — 12 novembre 2026
+- **MEMBRE / Mes informations** : `mes-informations.js` — confirmation de changement d'alias et message positif du Worker concernant la demande de changement d'e-mail migrés vers `afficherInformationMembre`. Les échecs de formulaire d'alerte et les erreurs de suppression ont été renvoyés vers `afficherAlerte` (et non INFORMATION). Commit `61e4af70`. Le `posterJson` existant vérifie `resultat.ok === true` avant l'affichage des deux succès.
+- **MEMBRE / Abonnement** : `abonnement-membre.js` — information « délai d'annulation dépassé » et information sur l'abonnement annulé non payé migrées vers `afficherInformationAbonnement` avec titres adaptés. Commit `01979c87`.
+- Ces migrations sont **enregistrées dans le code, non testées en navigateur**. Les anciennes règles CSS des autres familles ne doivent pas être supprimées.
+- **À contrôler avant clôture** : les retours de Workers susceptibles de contenir des messages métiers négatifs malgré une réponse technique réussie ; ne pas qualifier mécaniquement tout message dynamique de succès. Contrôler aussi les entrées INFORMATION des composants partagés, les appels restants dans les pages publiques, puis les dépendances CSS ciblées.
+
 ## Reprise du prochain lot
 Continuer INFORMATION en prenant les consommateurs restants depuis l'inventaire existant, avec priorité aux points d'appel partagés. Ne pas remplacer mécaniquement un dialogue d'erreur, une action qui retourne `true/false` (par exemple « M'abonner »), ni un choix par un message INFORMATION. Vérifier et retirer les CSS historiques seulement lorsqu'ils ne servent plus. Ne pas annoncer la migration terminée avant suppression et tests des styles historiques.
 
