@@ -3879,7 +3879,8 @@
     const connexionDemandee = await afficherAlerteFicheParc(
       MESSAGE_PLANIFICATION_PUBLIQUE,
       "vert-plein",
-      "Connexion"
+      "Connexion",
+      { profil: "information", titre: "Connexion nécessaire", annulationPossible: true }
     );
     if (connexionDemandee) {
       window.location.href = pageConnexionMembre + "?source=fiche-parc";
@@ -4531,11 +4532,30 @@
         titre.textContent = options.titre || "Information";
         texte.textContent = String(message || "");
         bouton.textContent = libelleBouton;
+        const annulationPossible = options.annulationPossible === true;
+        let boutonAnnuler = null;
+        if (annulationPossible) {
+          boutonAnnuler = document.createElement("button");
+          boutonAnnuler.type = "button";
+          boutonAnnuler.className = "lcdp-dialogue-ref__bouton lcdp-dialogue-ref__bouton--secondaire";
+          boutonAnnuler.textContent = "Fermer";
+          bouton.parentElement.prepend(boutonAnnuler);
+        }
         return await new Promise(resolve => {
-          bouton.addEventListener("click", () => {
+          let resolu = false;
+          const fermer = valeur => {
+            if (resolu) return;
+            resolu = true;
             conteneur.remove();
-            resolve(true);
-          }, { once: true });
+            resolve(valeur);
+          };
+          bouton.addEventListener("click", () => fermer(true), { once: true });
+          boutonAnnuler?.addEventListener("click", () => fermer(false), { once: true });
+          if (annulationPossible) {
+            dialogue.addEventListener("click", event => {
+              if (event.target === dialogue) fermer(false);
+            });
+          }
           bouton.focus();
         });
       } catch (error) {
