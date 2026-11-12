@@ -5682,3 +5682,25 @@ body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-c
     font-size: .8rem;
   }
 }
+
+/* PLANIFIER — badge du parc en première ligne, au niveau de la fermeture ;
+   commandes PLANIFIER/CHANGER/COACH sur la ligne suivante. */
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-parc {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 34px;
+  width: 100%;
+  min-width: 0;
+}
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-parc .lcdp-planifier-parc-en-tete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
