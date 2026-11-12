@@ -26,14 +26,14 @@ Supprimer les doublons CSS historiques, sans en ajouter. Quatre profils graphiqu
 - `LCDP_public/ESPACE-PUBLIC/connexion-membre.js` : les appels `afficherInformation` de type `information` utilisent désormais le profil INFORMATION ; les autres types restent temporairement sur le gabarit historique.
 - `LCDP_membre/ESPACE-MEMBRE/inviter-membre.js` + `.html` : trois notifications INFORMATION (« Invitation envoyée », « L’annulation se fait depuis votre planning », « L’adresse sera raccordée ensuite »). La feuille de style commune est chargée explicitement. Les appels d'erreur et de confirmation non migrés conservent leur ancien objet.
 - `LCDP_membre/ESPACE-MEMBRE/mes-informations.js` + `.html` : quatre confirmations du compte migrées vers INFORMATION (adresse de facturation, coordonnées de remboursement, parrain, département), CSS commun chargé.
-- `LCDP_membre/ESPACE-MEMBRE/accueil-membre.js` : fonction `afficherAlerte` migrée pour tous les appels non `mode: "confirmation"`, en conservant les retours booléens et en laissant les confirmations sur l'ancien objet. Le CSS commun était déjà chargé.
+- `LCDP_membre/ESPACE-MEMBRE/accueil-membre.js` : fonction `afficherAlerte` équipée d’un branchement explicite `options.profil: "information"` pour trois notifications ciblées (accès abonné requis, parrain à renseigner, invitation par le parrain). Les autres appels, notamment les erreurs et confirmations, conservent l’ancien objet. Le CSS commun était déjà chargé.
 - Les dialogues d'erreur et les dialogues nécessitant une décision ou des formulaires ne doivent pas être requalifiés automatiquement en INFORMATION.
 - Nettoyage déjà réalisé dans `LCDP_public/OBJET/CSSBASE/lcdp-lightbox-convergence.css` : retrait du bloc spécifique ancienne alerte INFORMATION PLANIFIER.
 - Migré en code ne signifie pas que l'ancienne famille graphique n'est plus utilisée ailleurs. Les CSS historiques subsistent et le chantier global est inachevé.
 
 ## Commits repères
 Historique annoncé au début du chantier : `0f1e5fbb`, `abd31e5b`, `62bb71e9`, `ccbab407`.
-Migration progressive : `721116fa`, `770faaf9`, `f46e40dc`, `abbb0c6f`, `e26077e6`, `e31738ac`, `7a5b356a`, `ffb0108e`, `de3d5072`, `9a56726c`, `480b0147`, `3af23778`, `e780006a`.
+Migration progressive : `721116fa`, `770faaf9`, `f46e40dc`, `abbb0c6f`, `e26077e6`, `e31738ac`, `7a5b356a`, `ffb0108e`, `de3d5072`, `9a56726c`, `480b0147`, `3af23778`, `e780006a`, `3d4b4770`.
 
 ## Reprise du prochain lot
 Continuer INFORMATION en prenant les consommateurs restants depuis l'inventaire existant, avec priorité aux points d'appel partagés. Ne pas remplacer mécaniquement un dialogue d'erreur, une action qui retourne `true/false` (par exemple « M'abonner »), ni un choix par un message INFORMATION. Vérifier et retirer les CSS historiques seulement lorsqu'ils ne servent plus. Ne pas annoncer la migration terminée avant suppression et tests des styles historiques.
