@@ -2616,6 +2616,7 @@ body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) #lcdp-planifier-calendrier-sl
    des catégories ne doit jamais annuler l'attribut HTML hidden. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne[hidden],
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne[hidden],
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-legende-autorisations .lcdp-box-legende__ligne[hidden],
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-information-coach][hidden],
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot [data-lcdp-information-coach][hidden],
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot [data-lcdp-calendrier-mois-grid][hidden] {
@@ -5668,15 +5669,18 @@ body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-c
   body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-coach__picto {
     flex-basis: 13px;
   }
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie {
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie,
+  body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie {
     min-height: 29px;
     padding: 3px 7px !important;
     gap: 4px !important;
   }
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle {
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle,
+  body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie .lcdp-box-legende__libelle {
     font-size: .69rem !important;
   }
-  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__picto {
+  body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__picto,
+  body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-legende-autorisations .lcdp-planifier-filtre-categorie__picto {
     flex-basis: 15px;
     width: 15px;
     font-size: .8rem;
@@ -5685,7 +5689,8 @@ body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-c
 
 /* PLANIFIER — badge du parc en première ligne, au niveau de la fermeture ;
    commandes PLANIFIER/CHANGER/COACH sur la ligne suivante. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-parc {
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-parc,
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-ligne-parc {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -5693,7 +5698,8 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-pa
   width: 100%;
   min-width: 0;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-parc .lcdp-planifier-parc-en-tete {
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-parc .lcdp-planifier-parc-en-tete,
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-ligne-parc .lcdp-planifier-parc-en-tete {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -5707,7 +5713,8 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-pa
 }
 /* Variante du badge partagé : seule l'identité d'un parc sélectionné
    gagne en lisibilité, sur ordinateur comme sur mobile. */
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-parc .lcdp-planifier-parc-en-tete.lcdp-ui-badge--green {
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-parc .lcdp-planifier-parc-en-tete.lcdp-ui-badge--green,
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-ligne-parc .lcdp-planifier-parc-en-tete.lcdp-ui-badge--green {
   --lcdp-badge-fond: #deefdf;
   --lcdp-badge-bordure: #b7d4ba;
   font-size: clamp(.85rem, 3.15vw, 1rem);
