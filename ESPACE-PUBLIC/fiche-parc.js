@@ -4444,7 +4444,7 @@
         plagebookd
       });
 
-      await afficherMessageShift("Votre nouvelle date a bien été enregistrée.");
+      await afficherMessageShift("Votre nouvelle date a bien été enregistrée.", "information");
       const slot = document.getElementById("lcdp-lightbox-slot");
       if (slot) slot.innerHTML = "";
     } catch (error) {
@@ -4517,10 +4517,12 @@
     return promesse;
   }
 
-  async function afficherMessageShift(message) {
+  async function afficherMessageShift(message, profil = null) {
     await afficherAlerteFicheParc(
       message,
-      "orange"
+      "orange",
+      "Fermer",
+      profil === "information" ? { profil: "information", titre: "Réservation enregistrée" } : {}
     );
   }
 
