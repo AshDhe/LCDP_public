@@ -29,7 +29,7 @@ CONSTATS VÉRIFIÉS
 4. La confirmation « Planifier votre accès ? » passe par
    ouvrirDialogueBoutonsSuperpose(), avec un titre et un contenu construit
    ligne à ligne (date, parc, horaire), classe dédiée
-   lcdp-aboreza-confirmation-acces. C'est la référence visuelle retenue.
+   lcdp-aboreza-confirmation-acces. Cet exemple est jugé propre visuellement, mais ne constitue PAS une référence obligatoire.
 5. Une règle locale dans lcdp-planifier.css cible uniquement
    lcdp-planifier-alerte-acces-existant pour préserver les retours à la ligne.
    Elle ne crée pas le gabarit commun.
@@ -38,7 +38,7 @@ CONSTATS VÉRIFIÉS
    d'assembler et de vérifier le résultat. Elle indique aussi des conflits
    historiques : l'absence de régression ne peut pas être postulée.
 
-PROPOSITION DE NORME À VALIDER PAR UN PILOTE
+POINT DE DÉPART : PROFILS VISUELS EXISTANTS, SANS RÉFÉRENCE IMPOSÉE
 - Fond commun : overlay, largeur maximale, carte, marges et rayon normalisés.
 - Titre sémantique distinct du message et, si nécessaire, récapitulatif lisible.
 - Boutons uniformes tout en conservant les variantes et couleurs métier.
@@ -47,9 +47,10 @@ PROPOSITION DE NORME À VALIDER PAR UN PILOTE
 - Pas de remplacement de toutes les boîtes en une opération.
 
 ORDRE DE TRAVAIL PROPOSÉ
-Étape 2 : examiner le CSS de la confirmation de réservation, sa composition
-  JS et ses dépendances exactes ; établir une comparaison avant/après.
-Étape 3 : pilote limité à l'alerte « déjà planifié » de la vue jour,
+Étape 2 : identifier les profils déjà normalisés dans l'ancienne démarche
+  Tailwind et documenter leurs caractéristiques (titres, textes, boutons,
+  espacements), avant de choisir un profil commun.
+Étape 3 : pilote à définir après étude des profils, éventuellement l'alerte « déjà planifié » de la vue jour,
   sans changer le texte métier, le mécanisme de réservation ou les autres alertes.
 Étape 4 : contrôler affichage et fermeture sur mobile et desktop, puis
   étendre aux autres familles et espaces après inventaire de leurs usages.
@@ -60,3 +61,23 @@ NON VÉRIFIÉ / HORS PÉRIMÈTRE À CE STADE
 - Inventaire de tous les dialogues Shadow DOM et de leurs styles.
 - Test visuel réel sur navigateur et comparaison pixel avant/après.
 - Compatibilité d'un éventuel changement global avec tous les tunnels.
+
+COMPLÉMENT — 12 NOVEMBRE, RECTIFICATION DE PÉRIMÈTRE
+L'utilisateur n'a pas désigné la confirmation « Planifier votre accès ? »
+comme modèle obligatoire. Cette première analyse est PARTIELLE : elle ne
+constitue pas un audit de toutes les boîtes de l'application.
+Les sources CSS actuelles utilisent des modules classiques et un assembleur
+Node ; les fichiers *.tailwind.css historiques ne sont plus les sources
+officielles. On peut retrouver un style apparenté aux utilitaires Tailwind
+sans attribuer avec certitude chaque profil à une migration Tailwind passée.
+Exemples de styles existants dans lcdp-central-module-03.css (code c036) :
+- Dialogue générique : carte jusqu'à 460px mobile / 500px desktop,
+  titre clamp(1.25rem, 5vw, 1.7rem), texte 1rem, boutons jusqu'à 220px.
+- Variante Connexion public : carte 320px, angle 24px, ombre diffuse,
+  titre 18px / 900, texte 11px, boutons en grille pleine largeur,
+  fermeture arrondie en haut à droite. Ce sont des caractéristiques du
+  CSS vérifié, PAS une preuve de filiation Tailwind par composant.
+Les codes c033 (alerte) et c066 (dialogue-champ) partagent déjà les jetons
+--lcdp-ui-dialog-* (bordure, rayon, ombre) ; les polices et boutons divergent.
+Aucun remplacement global ne doit être lancé sans matrice des variantes et
+contrôle des conflits historiques.
