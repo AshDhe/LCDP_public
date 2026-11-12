@@ -1,0 +1,62 @@
+LA CLÉ DU PARC — CHANTIER D'HOMOGÉNÉISATION DES BOÎTES
+ÉTAPE 1 — ÉTAT DES LIEUX CIBLÉ (12 novembre 2026)
+Statut : documentation d'audit, AUCUNE modification de style ou de comportement en production.
+
+PÉRIMÈTRE EFFECTIVEMENT EXAMINÉ
+- LCDP_public/OBJET/HTMLBASE/02-alerte.html
+- LCDP_public/OBJET/HTMLBASE/02-dialogue-bouton.html
+- LCDP_public/OBJET/CSSBASE/lcdp-central-module-06.css (profil c033, alertes)
+- LCDP_public/OBJET/CSSBASE/lcdp-central-module-03.css (composants de dialogue et workflow)
+- LCDP_public/OBJET/CSSBASE/lcdp-planifier.css
+- LCDP_membre/ESPACE-MEMBRE/reserver-membre.js
+- LCDP_public/OBJET/CSSBASE/LIRE-PHASE2-CSS-20261105.txt
+- LCDP_public/OBJET/CSSBASE/lcdp-css-ownership.json
+
+CONSTATS VÉRIFIÉS
+1. Deux structures HTML différentes sont utilisées :
+   a. 02-alerte.html : overlay, carte, croix facultative, message <p>, bouton.
+      Pas de titre ou de zone de récapitulatif structurée.
+   b. 02-dialogue-bouton.html : overlay, carte, croix, titre <h2>, texte <p>,
+      emplacement d'actions. Ce fragment contient en outre du CSS embarqué
+      spécifiquement limité à [data-lcdp-connexion].
+2. Profil central d'alerte : lcdp-central-module-06.css, code c033.
+   La règle .lcdp-box-alerte__message emploie une taille de police
+   clamp(1rem, 4vw, 1.16rem), texte centré et largeur maximale 330px,
+   modifiés en vue >= 768px. Ce profil n'est pas équivalent au dialogue structuré.
+3. Dans reserver-membre.js, afficherAlerteSuperposee charge 02-alerte.html
+   et affecte directement texte.textContent = message. Le message long du
+   « déjà planifié » est donc un seul paragraphe, même s'il contient un saut de ligne.
+4. La confirmation « Planifier votre accès ? » passe par
+   ouvrirDialogueBoutonsSuperpose(), avec un titre et un contenu construit
+   ligne à ligne (date, parc, horaire), classe dédiée
+   lcdp-aboreza-confirmation-acces. C'est la référence visuelle retenue.
+5. Une règle locale dans lcdp-planifier.css cible uniquement
+   lcdp-planifier-alerte-acces-existant pour préserver les retours à la ligne.
+   Elle ne crée pas le gabarit commun.
+6. L'architecture CSS du 5 novembre 2026 interdit la modification directe
+   du CSS central assemblé et demande de changer le module propriétaire,
+   d'assembler et de vérifier le résultat. Elle indique aussi des conflits
+   historiques : l'absence de régression ne peut pas être postulée.
+
+PROPOSITION DE NORME À VALIDER PAR UN PILOTE
+- Fond commun : overlay, largeur maximale, carte, marges et rayon normalisés.
+- Titre sémantique distinct du message et, si nécessaire, récapitulatif lisible.
+- Boutons uniformes tout en conservant les variantes et couleurs métier.
+- Distinction conservée entre information (action « Fermer »),
+  confirmation (choix explicite) et erreur/avertissement.
+- Pas de remplacement de toutes les boîtes en une opération.
+
+ORDRE DE TRAVAIL PROPOSÉ
+Étape 2 : examiner le CSS de la confirmation de réservation, sa composition
+  JS et ses dépendances exactes ; établir une comparaison avant/après.
+Étape 3 : pilote limité à l'alerte « déjà planifié » de la vue jour,
+  sans changer le texte métier, le mécanisme de réservation ou les autres alertes.
+Étape 4 : contrôler affichage et fermeture sur mobile et desktop, puis
+  étendre aux autres familles et espaces après inventaire de leurs usages.
+Un composant ne doit être généralisé qu'après vérification des consommateurs.
+
+NON VÉRIFIÉ / HORS PÉRIMÈTRE À CE STADE
+- Exhaustivité des boîtes dans les espaces administrateur, parc, coach et public.
+- Inventaire de tous les dialogues Shadow DOM et de leurs styles.
+- Test visuel réel sur navigateur et comparaison pixel avant/après.
+- Compatibilité d'un éventuel changement global avec tous les tunnels.
