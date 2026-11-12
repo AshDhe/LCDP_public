@@ -273,3 +273,155 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
   max-width: calc(100% - 24px);
   max-height: calc(100% - 24px);
 }
+
+/* ==========================================================================
+   Références de dialogues — trois variantes Tailwind, activation EXPLICITE.
+   Ces classes ne modifient aucun dialogue existant : attribution progressive
+   après contrôle du contexte et du mécanisme de fermeture.
+   Coexistence avec les jetons du socle LCDP et sans Preflight.
+   ========================================================================== */
+.lcdp-dialogue-ref {
+  --lcdp-ref-vert: #4b6333;
+  --lcdp-ref-vert-hover: #3d5129;
+  --lcdp-ref-rose: #e90046;
+  --lcdp-ref-rose-hover: #be123c;
+  box-sizing: border-box;
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(28, 25, 23, .5);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+.lcdp-dialogue-ref[hidden] { display: none !important; }
+.lcdp-dialogue-ref, .lcdp-dialogue-ref * { box-sizing: border-box; }
+.lcdp-dialogue-ref__card {
+  width: 100%;
+  max-width: 384px;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, .05);
+  background: #fff;
+  color: #1c1917;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .25);
+}
+.lcdp-dialogue-ref__icone {
+  width: 48px;
+  height: 48px;
+  margin-inline: auto;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lcdp-dialogue-ref__icone svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.lcdp-dialogue-ref--information .lcdp-dialogue-ref__icone {
+  background: #ecfdf5;
+  color: var(--lcdp-ref-vert);
+  border: 1px solid rgba(75, 99, 51, .2);
+}
+.lcdp-dialogue-ref--confirmation .lcdp-dialogue-ref__icone {
+  background: #fffbeb;
+  color: #d97706;
+  border: 1px solid rgba(251, 191, 36, .5);
+}
+.lcdp-dialogue-ref--danger .lcdp-dialogue-ref__icone {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid rgba(251, 113, 133, .3);
+}
+.lcdp-dialogue-ref__titre {
+  margin: 16px 0 0;
+  color: #1c1917;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+}
+.lcdp-dialogue-ref__message {
+  margin: 6px 0 0;
+  color: #78716c;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.625;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+.lcdp-dialogue-ref__actions {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.lcdp-dialogue-ref__actions--choix {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.lcdp-dialogue-ref__bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 10px;
+  border-radius: 16px;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, transform .15s ease;
+}
+.lcdp-dialogue-ref__bouton--secondaire {
+  background: #fff;
+  color: #57534e;
+  border: 1px solid #e7e5e4;
+  font-weight: 700;
+}
+.lcdp-dialogue-ref__bouton--secondaire:hover { background: #fafaf9; color: #1c1917; }
+.lcdp-dialogue-ref__bouton--principal {
+  background: var(--lcdp-ref-vert);
+  border: 1px solid var(--lcdp-ref-vert);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.lcdp-dialogue-ref__bouton--principal:hover { background: var(--lcdp-ref-vert-hover); border-color: var(--lcdp-ref-vert-hover); }
+.lcdp-dialogue-ref__bouton--danger {
+  background: var(--lcdp-ref-rose);
+  border: 1px solid var(--lcdp-ref-rose);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.lcdp-dialogue-ref__bouton--danger:hover { background: var(--lcdp-ref-rose-hover); border-color: var(--lcdp-ref-rose-hover); }
+.lcdp-dialogue-ref__bouton:active { transform: scale(.98); }
+.lcdp-dialogue-ref__bouton:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus, #b98c31);
+  outline-offset: 3px;
+}
+.lcdp-dialogue-ref__bouton:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lcdp-dialogue-ref__bouton { transition: none; }
+  .lcdp-dialogue-ref__bouton:active { transform: none; }
+}
