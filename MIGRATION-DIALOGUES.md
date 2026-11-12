@@ -63,6 +63,12 @@ Aucun test utilisateur/navigateur n'a été réalisé à ce stade. Les anciens C
 
 - **MEMBRE / PLANIFIER** : `reserver-membre.js` — restriction de la recherche IA aux abonnements permanents et absence d'échéance de paiement en souffrance migrées vers le profil INFORMATION existant (pas de CSS nouveau). Commit `8ea8e75b`.
 
+## Lot INFORMATION supplémentaire — 12 novembre 2026
+- **MEMBRE / ABONNEMENT** : dans `ESPACE-MEMBRE/abonnement-membre.js`, deux notifications du calendrier (« Vous êtes déjà abonné(e) à cette date », appelées depuis deux points, et « Date incompatible avec votre prochain abonnement ») et « Aucune échéance non payée » utilisent le profil INFORMATION partagé. Commits `04ed3f9c`, `8a59cf7c`. La superposition des informations de calendrier a été explicitement conservée afin de ne pas effacer le DOM du workflow sous-jacent.
+- **MEMBRE / MES INFORMATIONS** : `ESPACE-MEMBRE/mes-informations.js`, « Aucune échéance non payée » utilise INFORMATION. Commit `7838fac9`.
+- **MEMBRE / PLANIFIER** : `ESPACE-MEMBRE/reserver-membre.js`, notification des résultats d'alerte expirés et informations « Accès au parc clos » / « Cette plage a déjà commencé » migrées vers INFORMATION. Commits `21da84ea`, `a61d15ca`. Les plages passées conservent la fermeture par clic sur le fond, contrairement aux plages closes.
+- **Contrôle** : modifications du code réalisées, pas de test navigateur mobile/desktop. Ne pas déclarer la famille achevée. Certaines fonctions historiques restent appelées par des erreurs, des confirmations ou des validations. Le nettoyage CSS demeure conditionné à la preuve d'absence de consommateurs résiduels.
+
 ## Reprise du prochain lot
 Continuer INFORMATION en prenant les consommateurs restants depuis l'inventaire existant, avec priorité aux points d'appel partagés. Ne pas remplacer mécaniquement un dialogue d'erreur, une action qui retourne `true/false` (par exemple « M'abonner »), ni un choix par un message INFORMATION. Vérifier et retirer les CSS historiques seulement lorsqu'ils ne servent plus. Ne pas annoncer la migration terminée avant suppression et tests des styles historiques.
 
