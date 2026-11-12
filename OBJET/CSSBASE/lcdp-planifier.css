@@ -5700,6 +5700,7 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-ligne-pa
   width: auto;
   max-width: 100%;
   margin: 0;
+  border-radius: 12px;
   text-align: left;
   text-transform: uppercase;
   overflow-wrap: anywhere;
