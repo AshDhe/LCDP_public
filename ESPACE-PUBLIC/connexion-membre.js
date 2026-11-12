@@ -333,50 +333,60 @@
     slot.innerHTML = "";
 
     try {
-      const fragment = await chargerFragmentObjet("/HTMLBASE/02-alerte.html");
+      const information = type === "information";
+      const fragment = await chargerFragmentObjet(information
+        ? "/HTMLBASE/02-dialogue-reference-information.html"
+        : "/HTMLBASE/02-alerte.html");
       slot.appendChild(fragment);
+      const alerte = slot.querySelector(information
+        ? '[data-lcdp-dialogue-reference="information"]'
+        : "[data-lcdp-box-alerte]");
+      const messageElement = slot.querySelector(information
+        ? "[data-lcdp-dialogue-message]"
+        : "[data-lcdp-alerte-message]");
+      const boutonFermer = information ? null : slot.querySelector("[data-lcdp-alerte-close]");
+      const boutonOk = slot.querySelector(information
+        ? '[data-lcdp-dialogue-action="compris"]'
+        : "[data-lcdp-alerte-ok]");
 
-      const alerte = slot.querySelector("[data-lcdp-box-alerte]");
-      const messageElement = slot.querySelector("[data-lcdp-alerte-message]");
-      const boutonFermer = slot.querySelector("[data-lcdp-alerte-close]");
-      const boutonOk = slot.querySelector("[data-lcdp-alerte-ok]");
-
-      if (!alerte || !messageElement || !boutonFermer || !boutonOk) {
-        throw new Error("Structure de l'alerte V3 incomplète.");
+      if (!alerte || !messageElement || !boutonOk || (!information && !boutonFermer)) {
+        throw new Error("Structure du dialogue incomplète.");
       }
 
-      messageElement.textContent = titre && message
-        ? titre + " — " + message
-        : titre || message || "";
+      if (information) {
+        const titreElement = slot.querySelector("[data-lcdp-dialogue-titre]");
+        if (titreElement) titreElement.textContent = titre || "Information";
+        messageElement.textContent = message || "";
+        boutonOk.textContent = "Fermer";
+      } else {
+        messageElement.textContent = titre && message
+          ? titre + " — " + message
+          : titre || message || "";
+      }
 
       await new Promise((resolve) => {
+        let resolu = false;
         const fermer = () => {
+          if (resolu) return;
+          resolu = true;
           slot.innerHTML = "";
           resolve();
         };
 
-        boutonFermer.addEventListener("click", fermer, { once: true });
+        boutonFermer?.addEventListener("click", fermer, { once: true });
         boutonOk.addEventListener("click", fermer, { once: true });
-
         alerte.addEventListener("click", (event) => {
-          if (event.target === alerte) {
-            fermer();
-          }
-        }, { once: true });
+          if (event.target === alerte) fermer();
+        });
+        boutonOk.focus();
       });
 
-      if (redirectUrl) {
-        window.location.href = redirectUrl;
-      }
+      if (redirectUrl) window.location.href = redirectUrl;
 
     } catch (error) {
-      console.error("Erreur alerte V3 :", error);
-
+      console.error("Erreur affichage dialogue :", error);
       alert(message || titre);
-
-      if (redirectUrl) {
-        window.location.href = redirectUrl;
-      }
+      if (redirectUrl) window.location.href = redirectUrl;
     }
   }
 
