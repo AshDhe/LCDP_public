@@ -275,7 +275,7 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
 }
 
 /* ==========================================================================
-   Références de dialogues — trois variantes Tailwind, activation EXPLICITE.
+   Références de dialogues — quatre objets génériques Tailwind, activation EXPLICITE.
    Ces classes ne modifient aucun dialogue existant : attribution progressive
    après contrôle du contexte et du mécanisme de fermeture.
    Coexistence avec les jetons du socle LCDP et sans Preflight.
@@ -336,6 +336,12 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
   background: #ecfdf5;
   color: var(--lcdp-ref-vert);
   border: 1px solid rgba(75, 99, 51, .2);
+}
+/* ERREUR : même gabarit, une action, signal visuel rouge. Aucune règle par page. */
+.lcdp-dialogue-ref--erreur .lcdp-dialogue-ref__icone {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid rgba(251, 113, 133, .3);
 }
 .lcdp-dialogue-ref--choix .lcdp-dialogue-ref__icone {
   background: #fffbeb;
