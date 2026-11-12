@@ -12,7 +12,7 @@
   }
 
   async function chargerModele() {
-    const response = await fetch(urlObjet("/HTMLBASE/07-diginum.html?v=20261029-compact-sans-logo-v3"), {
+    const response = await fetch(urlObjet("/HTMLBASE/07-diginum.html"), {
       method: "GET", credentials: "omit", cache: "no-store"
     });
     if (!response.ok) throw new Error("Objet Diginum indisponible.");

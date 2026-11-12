@@ -415,7 +415,7 @@
         await chargerScriptUneFois("/OBJET/JSBASE/03-formulaire.js");
         await chargerScriptUneFois("/OBJET/JSBASE/03-formulaire-protege.js");
         // Le script appartient à l’espace public, pas à la base fonctionnelle PARC.
-        await chargerScriptUneFois("/ESPACE-PUBLIC/contact-resparc.js?v=20261103-contact-chargement");
+        await chargerScriptUneFois("/ESPACE-PUBLIC/contact-resparc.js");
         if (typeof window.LCDP_initialiserContactResparc !== "function") {
           throw new Error("Initialisation du contact parc indisponible.");
         }
