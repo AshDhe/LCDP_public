@@ -767,7 +767,9 @@
           : (message) =>
               afficherAlerteFicheParc(
                 message,
-                "orange"
+                "orange",
+                "OK",
+                { profil: "information", titre: "Information planning" }
               );
 
       await action(
@@ -2345,7 +2347,9 @@
 
     await afficherAlerteFicheParc(
       message,
-      "orange"
+      "orange",
+      "OK",
+      { profil: "information", titre: "Consultation du planning" }
     );
   }
 
