@@ -288,7 +288,8 @@
 
         await afficherAlerte(
           result.message || "Consultez votre messagerie pour poursuivre votre inscription.",
-          redirectUrl
+          redirectUrl,
+          "information"
         );
       } catch (error) {
         console.error("Erreur formulaire inscription membre :", error);
@@ -423,7 +424,7 @@
     return String(email||"").length<=254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
   }
 
-  async function afficherAlerte(message, redirectUrl = "") {
+  async function afficherAlerte(message, redirectUrl = "", profil = null) {
     const slot = document.getElementById("lcdp-lightbox-slot");
     const alerteObligatoire = Boolean(redirectUrl);
     const texteMessage = message || "";
@@ -441,24 +442,38 @@
     slot.innerHTML = "";
 
     try {
-      const fragment = await window.LCDP_chargerFragmentObjet("/HTMLBASE/02-alerte.html");
+      const information = profil === "information";
+      const fragment = await window.LCDP_chargerFragmentObjet(information
+        ? "/HTMLBASE/02-dialogue-reference-information.html"
+        : "/HTMLBASE/02-alerte.html");
       slot.appendChild(fragment);
 
-      const alerte = slot.querySelector("[data-lcdp-box-alerte]");
-      const messageElement = slot.querySelector("[data-lcdp-alerte-message]");
-      const boutonFermer = slot.querySelector("[data-lcdp-alerte-close]");
-      const boutonOk = slot.querySelector("[data-lcdp-alerte-ok]");
+      const alerte = slot.querySelector(information
+        ? '[data-lcdp-dialogue-reference="information"]'
+        : "[data-lcdp-box-alerte]");
+      const messageElement = slot.querySelector(information
+        ? "[data-lcdp-dialogue-message]"
+        : "[data-lcdp-alerte-message]");
+      const boutonFermer = information ? null : slot.querySelector("[data-lcdp-alerte-close]");
+      const boutonOk = slot.querySelector(information
+        ? '[data-lcdp-dialogue-action="compris"]'
+        : "[data-lcdp-alerte-ok]");
 
-      if (!alerte || !messageElement || !boutonFermer || !boutonOk) {
-        throw new Error("Structure de l'alerte V3 incomplète.");
+      if (!alerte || !messageElement || !boutonOk || (!information && !boutonFermer)) {
+        throw new Error("Structure du dialogue incomplète.");
       }
 
+      if (information) {
+        const titre = slot.querySelector("[data-lcdp-dialogue-titre]");
+        if (titre) titre.textContent = "Inscription enregistrée";
+        boutonOk.textContent = "Continuer";
+      }
       messageElement.textContent = texteMessage;
 
       if (alerteObligatoire) {
-        boutonFermer.hidden = true;
-        boutonFermer.setAttribute("aria-hidden", "true");
-        boutonFermer.tabIndex = -1;
+        if (boutonFermer) boutonFermer.hidden = true;
+        boutonFermer?.setAttribute("aria-hidden", "true");
+        if (boutonFermer) boutonFermer.tabIndex = -1;
       }
 
       await new Promise((resolve) => {
