@@ -5549,14 +5549,14 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
   min-height: 33px !important;
   margin: 0 !important;
   padding: 0 11px !important;
-  border: 1px solid var(--lcdp-filtre-bordure, #edf0f5) !important;
+  border: 1px solid var(--lcdp-filtre-bordure) !important;
   border-radius: 12px !important;
-  background: var(--lcdp-filtre-fond, #f8fafc) !important;
-  color: #475569 !important;
-  -webkit-text-fill-color: #475569 !important;
+  background: var(--lcdp-filtre-fond) !important;
+  color: var(--lcdp-filtre-texte) !important;
+  -webkit-text-fill-color: var(--lcdp-filtre-texte) !important;
   font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
   font-size: .73rem !important;
-  font-weight: 800 !important;
+  font-weight: 550 !important;
   line-height: 1 !important;
   letter-spacing: 0 !important;
   white-space: nowrap;
@@ -5566,16 +5566,18 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc {
-  --lcdp-filtre-fond: #f8fafc;
-  --lcdp-filtre-icone: #55733f;
-  --lcdp-filtre-bordure: #edf0f5;
+  --lcdp-filtre-texte: var(--lcdp-color-logo-green, #55733f);
+  --lcdp-filtre-icone: var(--lcdp-filtre-texte);
+  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 9%, white);
+  --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 25%, white);
   cursor: pointer !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--coach {
-  --lcdp-filtre-fond: #f8fafc;
-  --lcdp-filtre-icone: #8660c8;
-  --lcdp-filtre-bordure: #edf0f5;
+  --lcdp-filtre-texte: var(--lcdp-color-coach, #8660c8);
+  --lcdp-filtre-icone: var(--lcdp-filtre-texte);
+  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 9%, white);
+  --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 25%, white);
   opacity: 1 !important;
   filter: none !important;
   cursor: pointer !important;
@@ -5584,11 +5586,11 @@ body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-filtre--
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-filtre--coach[aria-disabled="true"] {
   opacity: .7 !important;
 }
-/* Boutons de filtre : même surface slate que les catégories invitées, icônes colorées. */
+/* Survol léger selon la couleur métier de chaque commande. */
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc:not(:disabled):hover,
 body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre--parc:not(:disabled):hover {
-  --lcdp-filtre-fond: #f1f5f9;
-  --lcdp-filtre-bordure: #cbd5e1;
+  --lcdp-filtre-fond: color-mix(in srgb, var(--lcdp-filtre-texte) 15%, white);
+  --lcdp-filtre-bordure: color-mix(in srgb, var(--lcdp-filtre-texte) 40%, white);
   box-shadow: 0 2px 5px rgba(15,23,42,.07) !important;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-actions-filtres > .lcdp-planifier-filtre:focus-visible,
@@ -5604,7 +5606,7 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
   flex: 0 0 13px !important;
   object-fit: contain;
 }
-/* Les pictogrammes gardent leur couleur métier, indépendamment du texte slate. */
+/* Texte et pictogramme reprennent tous deux la couleur de l'espace. */
 body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre__picto,
 body.lcdp-page-reserver .lcdp-planifier-actions-filtres .lcdp-planifier-filtre-coach__picto {
   display: inline-flex;
