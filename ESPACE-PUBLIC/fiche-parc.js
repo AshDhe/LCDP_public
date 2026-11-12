@@ -4515,8 +4515,34 @@
   async function afficherAlerteFicheParc(
     message,
     couleurAction = "orange",
-    libelleBouton = "OK"
+    libelleBouton = "OK",
+    options = {}
   ) {
+    if (options.profil === "information") {
+      const conteneur = document.createElement("div");
+      document.body.appendChild(conteneur);
+      try {
+        conteneur.appendChild(await chargerFragmentObjetFiche({}, "/HTMLBASE/02-dialogue-reference-information.html"));
+        const dialogue = conteneur.querySelector('[data-lcdp-dialogue-reference="information"]');
+        const titre = conteneur.querySelector("[data-lcdp-dialogue-titre]");
+        const texte = conteneur.querySelector("[data-lcdp-dialogue-message]");
+        const bouton = conteneur.querySelector('[data-lcdp-dialogue-action="compris"]');
+        if (!dialogue || !titre || !texte || !bouton) throw new Error("Structure INFORMATION incomplète.");
+        titre.textContent = options.titre || "Information";
+        texte.textContent = String(message || "");
+        bouton.textContent = libelleBouton;
+        return await new Promise(resolve => {
+          bouton.addEventListener("click", () => {
+            conteneur.remove();
+            resolve(true);
+          }, { once: true });
+          bouton.focus();
+        });
+      } catch (error) {
+        conteneur.remove();
+        throw error;
+      }
+    }
 
     const conteneur = document.createElement("div");
     document.body.appendChild(conteneur);
@@ -4657,7 +4683,9 @@
       await afficherAlerteFicheParc(
         nettoyerTexte(resultat?.message) ||
         "Le partage a bien été envoyé.",
-        "vert"
+        "vert",
+        "OK",
+        { profil: "information", titre: "Partage envoyé" }
       );
     } catch (error) {
       await afficherAlerteFicheParc(
