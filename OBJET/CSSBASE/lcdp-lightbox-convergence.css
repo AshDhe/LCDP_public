@@ -337,12 +337,12 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
   color: var(--lcdp-ref-vert);
   border: 1px solid rgba(75, 99, 51, .2);
 }
-.lcdp-dialogue-ref--confirmation .lcdp-dialogue-ref__icone {
+.lcdp-dialogue-ref--choix .lcdp-dialogue-ref__icone {
   background: #fffbeb;
   color: #d97706;
   border: 1px solid rgba(251, 191, 36, .5);
 }
-.lcdp-dialogue-ref--danger .lcdp-dialogue-ref__icone {
+.lcdp-dialogue-ref--suppression .lcdp-dialogue-ref__icone {
   background: #fff1f2;
   color: #e11d48;
   border: 1px solid rgba(251, 113, 133, .3);
@@ -404,13 +404,13 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
   box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
 .lcdp-dialogue-ref__bouton--principal:hover { background: var(--lcdp-ref-vert-hover); border-color: var(--lcdp-ref-vert-hover); }
-.lcdp-dialogue-ref__bouton--danger {
+.lcdp-dialogue-ref__bouton--suppression {
   background: var(--lcdp-ref-rose);
   border: 1px solid var(--lcdp-ref-rose);
   color: #fff;
   box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
-.lcdp-dialogue-ref__bouton--danger:hover { background: var(--lcdp-ref-rose-hover); border-color: var(--lcdp-ref-rose-hover); }
+.lcdp-dialogue-ref__bouton--suppression:hover { background: var(--lcdp-ref-rose-hover); border-color: var(--lcdp-ref-rose-hover); }
 .lcdp-dialogue-ref__bouton:active { transform: scale(.98); }
 .lcdp-dialogue-ref__bouton:focus-visible {
   outline: 3px solid var(--lcdp-color-focus, #b98c31);
