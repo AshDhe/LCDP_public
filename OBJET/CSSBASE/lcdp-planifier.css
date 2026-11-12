@@ -5514,15 +5514,14 @@ body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete
   align-items: center !important;
   gap: 9px !important;
 }
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres .lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title],
-body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres.lcdp-planifier-entete-avec-parc .lcdp-planifier-entete-parc [data-lcdp-calendrier-mois-title],
-body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour .lcdp-planifier-entete-identite [data-lcdp-calendrier-mois-title] {
+body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres [data-lcdp-calendrier-mois-title],
+body.lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-planifier-entete-jour [data-lcdp-calendrier-mois-title] {
   font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
   font-size: clamp(1.1rem, 3.7vw, 1.32rem) !important;
   font-weight: 850 !important;
   line-height: 1.15 !important;
   letter-spacing: -.025em !important;
-  color: var(--lcdp-color-text-muted, #5f6861) !important;
+  color: #37443b !important;
   white-space: nowrap;
 }
 body.lcdp-page-reserver #lcdp-planifier-calendrier-slot .lcdp-planifier-entete-identite .lcdp-planifier-actions-filtres,
