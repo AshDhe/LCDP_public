@@ -90,22 +90,22 @@ body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces
   @apply w-full! max-w-full!;
 }
 /* En vue FICHE : Partager orange, Carte verte, même gabarit et rayon. */
-#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__actions-barre {
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__actions-barre {
   @apply grid! grid-cols-2! w-full! gap-2!;
 }
-#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"]
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]
 :is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte]) {
   @apply w-full! min-w-0! max-w-full! justify-center!;
   height: 40px !important;
   min-height: 40px !important;
   border-radius: 8px !important;
 }
-#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-carte] {
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-carte] {
   background: var(--lcdp-color-logo-green, #536c3d) !important;
   border-color: var(--lcdp-color-logo-green, #536c3d) !important;
   color: #fff !important;
 }
-#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-partager] {
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-partager] {
   background: #e59834 !important;
   border-color: #e59834 !important;
   color: #fff !important;
