@@ -296,7 +296,7 @@
 
     try {
       const information = type === "information";
-      if (information) {
+      {
         const href = construireUrlObjet("/CSSBASE/lcdp-lightbox-convergence.css");
         if (!Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(link => link.href === new URL(href, document.baseURI).href)) {
           await new Promise((resolve, reject) => {
@@ -311,35 +311,25 @@
       }
       const fragment = await chargerFragmentObjet(information
         ? "/HTMLBASE/02-dialogue-reference-information.html"
-        : "/HTMLBASE/02-alerte.html");
+        : "/HTMLBASE/02-dialogue-reference-erreur.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector(information
         ? '[data-lcdp-dialogue-reference="information"]'
-        : "[data-lcdp-box-alerte]");
-      const messageElement = slot.querySelector(information
-        ? "[data-lcdp-dialogue-message]"
-        : "[data-lcdp-alerte-message]");
-      const boutonFermer = information ? null : slot.querySelector("[data-lcdp-alerte-close]");
+        : '[data-lcdp-dialogue-reference="erreur"]');
+      const messageElement = slot.querySelector("[data-lcdp-dialogue-message]");
+      const titreElement = slot.querySelector("[data-lcdp-dialogue-titre]");
       const boutonOk = slot.querySelector(information
         ? '[data-lcdp-dialogue-action="compris"]'
-        : "[data-lcdp-alerte-ok]");
+        : '[data-lcdp-dialogue-action="fermer"]');
 
-      if (!alerte || !messageElement || !boutonOk || (!information && !boutonFermer)) {
+      if (!alerte || !messageElement || !titreElement || !boutonOk) {
         throw new Error("Structure du dialogue incomplète.");
       }
 
-      if (information) {
-        const titreElement = slot.querySelector("[data-lcdp-dialogue-titre]");
-        if (!titreElement) throw new Error("Titre INFORMATION introuvable.");
-        titreElement.textContent = titre || "Information";
-        messageElement.textContent = message || "";
-        boutonOk.textContent = "Fermer";
-      } else {
-        messageElement.textContent = titre && message
-          ? titre + " — " + message
-          : titre || message || "";
-      }
+      titreElement.textContent = titre || (information ? "Information" : "Erreur");
+      messageElement.textContent = message || "";
+      boutonOk.textContent = "Fermer";
 
       await new Promise((resolve) => {
         const fermer = () => {
@@ -347,7 +337,6 @@
           resolve();
         };
 
-        if (boutonFermer) boutonFermer.hidden = true;
          boutonOk.addEventListener("click", () => {
            if (redirectUrl) { const a = document.querySelector(".lcdp-setup-loading"); if (a) { a.querySelector(".lcdp-setup-loading__text").textContent = "Ouverture de la page…"; a.hidden = false; } }
            fermer();
