@@ -849,16 +849,6 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__
   color: #1e293b;
   font: 700 13px/1.35 Arial,system-ui,sans-serif;
   text-align: left;
-  cursor: pointer;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__ligne:hover,
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__ligne[aria-expanded="true"] {
-  border-color: #cbd5e1;
-  background: #f1f5f9;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__ligne:focus-visible {
-  outline: 2px solid #4e6838;
-  outline-offset: 2px;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__libelle {
   flex: 1 1 auto;
@@ -868,23 +858,32 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__
   color: #64748b;
   font-weight: 500;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__action {
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__nombre {
+  box-sizing: border-box;
   display: inline-flex;
+  justify-content: center;
   align-items: center;
   flex: none;
-  gap: 6px;
-  color: #4e6838;
-  font-size: 12px;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__action [data-lcdp-relations-nombre] {
-  box-sizing: border-box;
-  min-width: 24px;
-  padding: 2px 5px;
-  border-radius: 10px;
+  min-width: 28px;
+  min-height: 28px;
+  margin: 0;
+  padding: 4px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
   background: #e2e8f0;
   color: #334155;
-  font-size: 12px;
+  font: 700 12px/1.2 Arial,system-ui,sans-serif;
   text-align: center;
+  cursor: pointer;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__nombre:hover,
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__nombre[aria-expanded="true"] {
+  background: #cbd5e1;
+  border-color: #94a3b8;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__nombre:focus-visible {
+  outline: 2px solid #4e6838;
+  outline-offset: 2px;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__liste {
   margin: -4px 0 2px;
