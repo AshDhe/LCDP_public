@@ -205,3 +205,11 @@ Aucun test navigateur réalisé pour ce lot. L'inventaire CHOIX (section H) rest
 | MEMBRE `mes-acces-membre.js` | `window.confirm` avant annulation réservation/invitation, notification via Worker | **NON TRAITÉ** : droits/effets métier et annulations à préserver | — |
 
 **Limites :** comparaison ciblée de sources, non audit exhaustif supplémentaire ; migrations enregistrées en commits, sans test navigateur ni validation sur le site déployé.
+
+
+### I.2 Actualisation — clés ADMIN, 13 novembre 2026
+| Cas | Comparaison de l'ancien et du nouveau | Statut | Commit |
+|---|---|---|---|
+| `LCDP_admin/B_ADMIN/Cle.js` : supprimer clé, Brac ou clé Bluetooth | Ancien dialogue à boutons avec repli `window.confirm`. Nouveau gabarit SUPPRESSION avec titre dynamique, confirmation booléenne et absence d'écriture en cas d'échec du dialogue ; appel DELETE inchangé. | **TRAITÉ — migration statique** (remplace le statut NON TRAITÉ du tableau I.1) | `af3a4e67` |
+
+Les autres cas du tableau I.1 demeurent non traités. Aucun test navigateur réalisé.
