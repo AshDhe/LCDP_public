@@ -37,11 +37,13 @@
 }
 :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
 .lcdp-carte-dynamique--vue-fiche .lcdp-planifier-carte-cartouche {
-  @apply static! grid w-full min-w-0 mt-4! p-0 border-0 bg-transparent shadow-none gap-3 overflow-visible;
+  @apply static! grid w-full min-w-0 mt-4! p-0 bg-transparent gap-3 overflow-visible;
   inset: auto !important;
   transform: none !important;
   max-width: 100%;
   margin-inline: auto;
+  border: 0;
+  box-shadow: none;
 }
 :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
 .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul {
