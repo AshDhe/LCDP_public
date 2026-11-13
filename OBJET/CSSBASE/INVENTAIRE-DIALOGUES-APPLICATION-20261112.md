@@ -193,3 +193,15 @@ L'inventaire ci-dessus est une photographie statique du 12 novembre ; il reste i
 | MEMBRE : annulations de réservation, invitation, abonnement et dates | **REPORTÉ — SUPPRESSION** | Ne pas modifier les règles métier ni les Workers |
 
 Aucun test navigateur réalisé pour ce lot. L'inventaire CHOIX (section H) reste une photographie de son propre avancement ; la migration SUPPRESSION n'implique pas sa clôture.
+
+
+### I.1 Comparaison et statut SUPPRESSION — contrôle ciblé du 13 novembre 2026
+| Dépôt / cas | Ancien comportement vérifié | Statut / motif | Commit |
+|---|---|---|---|
+| ADMIN `B_ADMIN/list-points.js` | Ancien dialogue à boutons, confirmation « Supprimer l’entrée », booléen avant `supprimerPoint` | **TRAITÉ — migration statique** : gabarit SUPPRESSION, libellés/retour/traitement conservés | `b1bb145e` |
+| ADMIN `B_ADMIN/Cle.js` | Ancien dialogue avec recours possible à `window.confirm` | **NON TRAITÉ** : secours natif et fermeture à harmoniser sans réduire la sécurité | — |
+| ADMIN `B_ADMIN/faq-admin.js` | Confirmation de suppression d'un bloc du brouillon, puis clic relancé | **NON TRAITÉ** : mécanisme de propagation/clic à préserver | — |
+| ADMIN `B_ADMIN/admin-actualite.js` | Supprime article du brouillon, site public et éventuelle pop-up ; image conservée | **NON TRAITÉ** : effets multiples documentés | — |
+| MEMBRE `mes-acces-membre.js` | `window.confirm` avant annulation réservation/invitation, notification via Worker | **NON TRAITÉ** : droits/effets métier et annulations à préserver | — |
+
+**Limites :** comparaison ciblée de sources, non audit exhaustif supplémentaire ; migrations enregistrées en commits, sans test navigateur ni validation sur le site déployé.
