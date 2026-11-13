@@ -461,3 +461,10 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **Métier inchangé** : `POST /login`, `GET /session`, contrôle de compte, champs envoyés au Worker, redirections vers les espaces correspondants, état du bouton lors de la connexion. Aucun changement au Worker.
 
 **Contrôles** : les quatre fichiers JS sont syntaxiquement valides à la relecture des sources GitHub. Aucun ancien CSS n'est supprimé. Le CSS de convergence central existe et est chargé à la demande uniquement par ces profils. Aucun essai navigateur/réseau ni validation sur les cinq dépôts complets. Ne pas interpréter la disparition des références locales comme une autorisation de retirer `02-alerte.html` ou `lcdp-central-module-06.css`.
+
+
+### Convergence complémentaire ERREUR des codes de sécurité PUBLIC (13 novembre 2026)
+- **Source** : `ESPACE-PUBLIC/codes-securite.js`, fonction `afficherInformation(titre,message,type,redirectUrl)`. Après la migration INFORMATION `6c39ec59`, la branche `type !== "information"` (les appels métier observés utilisent `"erreur"`) affichait encore `02-alerte.html`.
+- **TRAITÉ — ERREUR**, commit `8b7fe8d3` : branche erreur raccordée à `02-dialogue-reference-erreur.html`, titre « Erreur » par défaut et texte d'origine, bouton « Fermer ». Comme avant, le dialogue attend le clic explicite avant de résoudre. Le profil INFORMATION conserve son gabarit. Le chargement du CSS de convergence couvre désormais les deux profils.
+- **Harmonisation et sécurité de rendu**, commit `9b1456b0` : simplification du chargement CSS, masquage de navigation affiché sans exception si `.lcdp-setup-loading__text` est absent. Le masque, l'absence de renvoi métier en cas d'erreur, la redirection `redirectUrl` après clic ainsi que les secours `alert` restent préservés.
+- **Nettoyage local** : zéro référence littérale à `02-alerte.html` dans `codes-securite.js`. Ce constat ne permet pas de supprimer globalement le gabarit ou ses CSS : d'autres écrans des cinq dépôts en dépendent. Syntaxe JavaScript contrôlée ; pas de test navigateur.
