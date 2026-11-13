@@ -65,3 +65,37 @@ Code fourni le 13/11/2026, 1 619 lignes, syntaxe JS contrôlée.
 Le Worker Cloudflare n'est pas accessible via les connecteurs de déploiement actifs. Le fichier reçu est la source de travail pour une **nouvelle version à générer et fournir**, pas une preuve d'un déploiement sur le site.
 
 La vue préparée `04-card-invites-abonnement.html` et le contrôleur `invites-abonnement.js` ne sont pas reliés à `planning-membre.html` ni à `planning-membre.js`. Il est donc attendu que l'ancienne box Inviter reste visible tant que le raccordement et le nouveau Worker ne sont pas prêts.
+
+
+## Passerelle des privilèges supplémentaires : schéma existant vérifié
+
+La base possède **déjà** la table `aboreza_inclusions` avec `(idpanier, idabo)` comme clé primaire et deux clés étrangères vers `aboreza_paniers` et `abo`. Il ne faut **pas** créer de doublon fonctionnel de cette table.
+
+Le chemin canonique est :
+
+```
+abo.idabo -- aboreza_inclusions.idabo
+           aboreza_inclusions.idpanier -- aboreza_paniers.idpanier
+                                        -- aboreza_options.idpanier
+aboreza_options.idprixabo -- prixabo.idprixabo
+abo.idprixabo -- prixabo.idprixabo
+```
+
+**Situation vérifiée :** la table `aboreza_inclusions` a **0 ligne**. Les trois lignes d'options enregistrées appartiennent à trois paniers différents : **un panier finalisé** et **deux paniers annulés**. Une seule ligne `aboreza_paniers.numero_commande` est renseignée parmi 31 paniers ; le contrôle `abo.orderid = aboreza_paniers.numero_commande` retourne zéro correspondance.
+
+Le panier finalisé avec option a **un abonnement payé candidat** présentant le même membre, la même formule et les mêmes dates exactes. En revanche, son numéro de commande ne coïncide pas avec `abo.orderid`. Ce rapprochement de dates et de membre ne constitue pas une preuve suffisante pour établir automatiquement la liaison `idabo` ↔ `idpanier` en production. Un point de contrôle dans le Worker de finalisation de la commande est nécessaire pour créer la ligne au moment de la validation du paiement.
+
+La lecture des privilèges supplémentaires doit exiger cumulativement :
+- une inclusion existante (`aboreza_inclusions`) vers l'abonnement ciblé ;
+- un panier réellement finalisé et `options_confirmees=true` ;
+- une identité membre identique entre le panier et l'abonnement ;
+- une ligne d'option dont l'`idprixabo` référence effectivement la formule d'option tarifaire ;
+- aucune attribution de privilège sur les paniers annulés.
+
+Les privilèges cumulés proviennent de la formule `prixabo` de l'abonnement plus les composantes `prixabo` des options **réellement rattachées à cette commande**. Aucun quota ne doit être calculé uniquement à partir du texte `code_option`.
+
+**Attention au champ `multiplicateur` :** sur l'option « +5 DUO+ » du panier finalisé, `prix_unitaire_ttc=20`, `multiplicateur=5` et `montant_ttc=100`. Le produit `20 × 5 = 100` confirme son rôle dans la tarification de cette ligne ; cela n'autorise pas à déduire que le quota `duoplus` est multiplié par cinq. Il faut vérifier le Worker d'ABO-RÉZA ou de facturation pour établir précisément sa sémantique sur les privilèges.
+
+Pour l'adaptation de `w-inviter-membre.js`, les écritures d'invitations doivent s'effectuer côté serveur avec une vérification atomique des quotas (MAXDUO, DUO+ simultanés et fréquence mensuelle, MAXFAMILL), en distinguant carnet `inviteabo` et accès `inviteacces`. Aucune valeur d'option non rattachée ne doit être appliquée par simple ressemblance de dates.
+
+**Règle de non-régression :** ne pas activer le formulaire V2 ni remplacer les routes existantes tant que la passerelle n'est pas renseignée lors des nouvelles commandes, que les droits supplémentaires ne sont pas calculés de façon déterministe et que l'enregistrement atomique n'est pas vérifié.
