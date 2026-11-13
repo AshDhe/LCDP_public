@@ -209,3 +209,13 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 
 **Conclusion de rapprochement :** les choix simples **migrés et vérifiables par commit** sont traités. Mais il est **inexact de dire que seuls trois cas complexes subsistent** : l'inventaire initial et la vérification ciblée révèlent également des choix anciens dans les burgers, la DA, l'administration et les confirmations natives. Ces cas portent désormais le statut REPORTÉ. Le profil CHOIX est donc **partiellement migré**, non clôturé exhaustivement. Les cas à supprimer sont réservés au lot SUPPRESSION. Aucune ligne non rapprochée n'est marquée « traité ».
 
+## PENSE-BÊTE PRIORITAIRE — ARBITRAGES À REVOIR AVEC L'UTILISATEUR (13 novembre 2026)
+**NE PAS PERDRE AU CHANGEMENT DE FIL.** Le profil CHOIX n'est pas clos tant que les points reportés du tableau de rapprochement ne sont pas traités ou arbitrés. Revenir explicitement vers l'utilisateur avec les questions ci-dessous, une à une, au moment du traitement des cas complexes. Ne pas annoncer « choix terminé » en confondant simple migration et cas encore reportés.
+
+1. `reserver-membre.js` : choix d'abonnement recommandé / alternative, avec tarifs dynamiques et jusqu'à trois actions. **À trancher :** conserver un écran métier autonome ou adapter le gabarit CHOIX à un contenu et à trois actions ?
+2. `reserver-membre.js` : « Votre planning » (quatre actions et contenu construit dynamiquement). **À trancher :** conserver ce panneau métier et ne migrer que ses confirmations secondaires, ou créer un composant métier spécifique ?
+3. `aboreza-membre.js` : `02-dialogue-bouton.html` sert de conteneur de tunnel. **À trancher :** le conserver comme écran de workflow distinct des quatre profils, ou refactoriser son conteneur après analyse des actions et états ?
+4. `reserver-membre.js` : « Planifier votre accès ? » et récapitulatif structuré. **À trancher :** intégrer au point 2 (écran de planification) ou adapter la référence CHOIX en conservant le récapitulatif ?
+5. Dans les autres dépôts, toutes les lignes REPORTÉ / À QUALIFIER du tableau précédent doivent être suivies et avoir un statut explicite. Les confirmations simples se migrent sans arbitrage ; les ambiguïtés métier se soumettent à l'utilisateur. Ne pas gonfler la liste des arbitrages pour des choix évidents.
+**Ordre utilisateur :** terminer les CHOIX simples, garder les complexes à part et revenir vers l'utilisateur pour les trancher ; **ensuite SUPPRESSION, puis ERREUR**. Conserver les CSS hérités aussi longtemps que leurs consommateurs existent. Tests réels à prévoir, jamais présumés faits.
+
