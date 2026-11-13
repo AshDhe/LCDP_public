@@ -238,3 +238,21 @@ Les annulations MEMBRE restent ouvertes. Aucun test navigateur réalisé.
 | `LCDP_membre/planning-membre.js`, `abonnement-membre.js` : autres annulations | Flux de réservation et abonnement à analyser individuellement, ne pas confondre avec l'annulation MES ACCÈS. | **NON TRAITÉ — à qualifier** | — |
 
 Aucun test navigateur effectué.
+
+
+## J. Bilan des anciens mécanismes retirés — contrôle des six commits SUPPRESSION du 13 novembre 2026
+
+**Périmètre :** examen des diffs GitHub des six commits de migration `49224c72`, `b1bb145e`, `af3a4e67`, `abf8b51d`, `245b3b42` et `845cf9aa`. Le mot « supprimé » désigne ici le retrait d'un ancien mécanisme de confirmation du code source, **pas** la suppression de fichiers complets ni une exécution réelle de suppression de données métier.
+
+| Dépôt / source | Ancien mécanisme retiré dans le commit | Remplacement / conservation | Statut |
+|---|---|---|---|
+| ADMIN `B_ADMIN/PrixAbo.js` | Appel `window.confirm` de suppression d'une version d'abonnement | Référence SUPPRESSION ; requête métier conservée ; commit `49224c72` | **RETIRÉ — vérifié par diff** |
+| ADMIN `B_ADMIN/list-points.js` | Ancien bloc `02-dialogue-bouton.html` de confirmation de suppression de point | Référence SUPPRESSION ; `supprimerPoint` conservé ; commit `b1bb145e` | **RETIRÉ — vérifié par diff** |
+| ADMIN `B_ADMIN/Cle.js` | Ancien bloc `02-dialogue-bouton.html` et secours `window.confirm` de suppression de clé/Brac/Bluetooth | Référence SUPPRESSION ; méthode DELETE conservée ; commit `af3a4e67` | **RETIRÉ — vérifié par diff** |
+| ADMIN `B_ADMIN/faq-admin.js` | Ancienne branche `02-dialogue-bouton.html` de suppression de bloc FAQ | Référence SUPPRESSION ; branche CHOIX de publication et gestionnaire de clic maintenus ; commit `abf8b51d` | **RETIRÉ — vérifié par diff** |
+| ADMIN `B_ADMIN/admin-actualite.js` | Ancien gestionnaire `02-dialogue-bouton.html`, secours `window.confirm` | Référence SUPPRESSION pour supprimer ; branche CHOIX de publication préservée ; commit `245b3b42` | **RETIRÉ — vérifié par diff** |
+| MEMBRE `mes-acces-membre.js` | Appel `window.confirm` pour annuler accès ou invitation reçue | Référence SUPPRESSION ; appels de réservation et notifications maintenus ; commit `845cf9aa` | **RETIRÉ — vérifié par diff** |
+
+**Bilan vérifiable :** six fichiers JavaScript modifiés, zéro fichier entier supprimé par ces six commits. Le gabarit partagé `OBJET/HTMLBASE/02-dialogue-bouton.html` reste nécessaire pour d'autres consommateurs documentés (CHOIX complexes, tunnels et écrans métiers) ; **NE PAS SUPPRIMER**. Les styles hérités doivent également être conservés tant que leurs consommateurs résiduels existent.
+
+**Non traité / non prouvé :** retrait exhaustif de tous les appels anciens dans les cinq dépôts ; inutilisation à l'exécution des anciens gabarits ; tests navigateur ; absence de régression fonctionnelle. Les annulations `planning-membre.js`, `abonnement-membre.js` et autres cas ouverts restent à rapprocher. Aucune suppression de données de production n'a été effectuée par ces commits de migration.
