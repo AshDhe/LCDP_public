@@ -605,6 +605,10 @@
     );
 
     await ajouterGalerieParc(galerieSlot, parc, options);
+    const editorialPublic = await obtenirEditorialPublicParc(parc);
+    const parcAvecAccesFiche = editorialPublic.accesfiche
+      ? { ...parc, accesfiche: editorialPublic.accesfiche }
+      : parc;
     if (!carteDansVueDediee) {
       await ajouterCarteParc(carteSlot, parc, options);
     }
@@ -623,11 +627,11 @@
     );
     remplirBlocTexteFiche(
       espaceReserve,
-      construireTexteZonesReserveesParc(parc)
+      construireTexteZonesReserveesParc(parcAvecAccesFiche)
     );
     remplirBlocAccesMaCle(
       acces,
-      construireTexteEntreeParc(parc)
+      construireTexteEntreeParc(parcAvecAccesFiche)
     );
     afficherImageEntreeParc(
       fiche.querySelector("[data-lcdp-fiche-parc-entree-image]"),
@@ -1438,12 +1442,17 @@
     Promise.resolve(action(parc)).catch(console.error);
   }
 
-  async function obtenirPhotoEditorialParc(parc) {
-    if (parc?.photoseditorial && typeof parc.photoseditorial === "object") {
-      return parc.photoseditorial;
+  async function obtenirEditorialPublicParc(parc) {
+    const idparc = String(parc?.idparc || parc?.id || "").trim();
+    const local = {
+      photoseditorial: parc?.photoseditorial &&
+        typeof parc.photoseditorial === "object" ? parc.photoseditorial : null,
+      accesfiche: parc?.accesfiche &&
+        typeof parc.accesfiche === "object" ? parc.accesfiche : null
+    };
+    if (!idparc || !endpointPhotoEditorialParc) {
+      return { photoseditorial: local.photoseditorial || {}, accesfiche: local.accesfiche };
     }
-    const idparc = String(parc?.idparc || "").trim();
-    if (!idparc || !endpointPhotoEditorialParc) return {};
     if (!cachePhotoEditorialParc.has(idparc)) {
       const lecture = fetch(
         endpointPhotoEditorialParc + "/photoeditorial-public?idparc=" +
@@ -1457,14 +1466,25 @@
       ).then(async response => {
         if (!response.ok) return {};
         const data = await response.json().catch(() => null);
-        if (data?.success !== true ||
-            !data.photoseditorial ||
-            typeof data.photoseditorial !== "object") return {};
-        return data.photoseditorial;
+        if (data?.success !== true) return {};
+        return {
+          photoseditorial: data.photoseditorial &&
+            typeof data.photoseditorial === "object" ? data.photoseditorial : {},
+          accesfiche: data.accesfiche &&
+            typeof data.accesfiche === "object" ? data.accesfiche : null
+        };
       }).catch(() => ({}));
       cachePhotoEditorialParc.set(idparc, lecture);
     }
-    return cachePhotoEditorialParc.get(idparc);
+    const publicData = await cachePhotoEditorialParc.get(idparc);
+    return {
+      photoseditorial: local.photoseditorial || publicData.photoseditorial || {},
+      accesfiche: local.accesfiche || publicData.accesfiche || null
+    };
+  }
+
+  async function obtenirPhotoEditorialParc(parc) {
+    return (await obtenirEditorialPublicParc(parc)).photoseditorial;
   }
 
   async function ajouterGalerieParc(
