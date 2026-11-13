@@ -275,3 +275,12 @@ Aucun test navigateur effectué.
 | `abonnement-membre.js`, deuxième confirmation des frais d'annulation | Alerte OK/fermeture avant demande d'avoir ; validation explicitement distincte. | **NON TRAITÉ — à qualifier**, statut I.6 maintenu | — |
 
 **CSS / gabarits** : aucun fichier CSS ni gabarit historique supprimé ; recherche des consommateurs résiduels nécessaire avant tout retrait. Vérification statique uniquement, pas de test navigateur.
+
+
+### J.1 Nettoyage de code documenté — PLANNING MEMBRE, 13 novembre 2026
+| Élément examiné | Constat avant | Action / constat après | Statut / commit |
+|---|---|---|---|
+| `LCDP_membre/ESPACE-MEMBRE/planning-membre.js` : `ouvrirDialogueBoutons` et `ouvrirDialogueBoutonsParDessusLightbox` | Deux déclarations sans appel interne dans le fichier après migration `fb5871a3` ; deux chargements de l'ancien `02-dialogue-bouton.html` | Deux fonctions locales supprimées (129 lignes) ; zéro référence littérale résiduelle à `02-dialogue-bouton.html` dans ce fichier ; nouveau helper SUPPRESSION et traitement métier présents | **RETIRÉ — vérifié statiquement**, `2e068a28` |
+| `OBJET/HTMLBASE/02-dialogue-bouton.html` et CSS historiques | Composants partagés avec d'autres consommateurs documentés | **CONSERVÉS**, contrôle inter-dépôts préalable au nettoyage | **NON SUPPRIMÉS** |
+
+La ligne de J.1 concernant les helpers remplace le statut « à qualifier » de I.7 pour **ces deux fonctions locales seulement**. Aucun test navigateur ; n'en déduire aucune inutilisation globale du gabarit historique ou de ses styles.
