@@ -506,6 +506,8 @@
 
     if (normaliserModeUsagePlanning(options) !== MODE_USAGE_MEMBRE) {
       fiche.classList.add("lcdp-box-fiche-parc--publique");
+      // Même barre d'actions que dans PLANIFIER : uniquement Partager.
+      boutonPlanning?.remove();
       boutonPlanifier?.remove();
     }
 
