@@ -15,28 +15,14 @@
         <div class="lcdp-page-container">
           <div class="lcdp-page-content lcdp-stack-large lcdp-contenu-editorial">
             <div class="lcdp-editorial-page-heading">
-              <h1 id="lcdp-invitation-titre" class="lcdp-title-page-center">Mon invitation</h1>
+              <h1 id="lcdp-invitation-titre" class="lcdp-title-page-center">{{TITRE}}</h1>
             </div>
 
-            <section class="lcdp-component lcdp-boxtext lcdp-texte-editorial lcdp-editorial-card" aria-labelledby="lcdp-invitation-detail-titre">
-              <h2 id="lcdp-invitation-detail-titre" class="lcdp-boxtext__title">Votre accès au parc</h2>
+            <section class="lcdp-component lcdp-boxtext lcdp-texte-editorial lcdp-editorial-card" aria-label="Informations d'invitation">
               <div class="lcdp-boxtext__content lcdp-editorial-copy">
-                <p>Retrouvez ci-dessous les informations concernant votre invitation.</p>
-
-                <div class="lcdp-note-encadree">
-                  <p><strong>Parc :</strong> {{NOM_PARC}}</p>
-                  <p><strong>Date :</strong> {{DATE_ACCES}}</p>
-                </div>
-
-                <p class="lcdp-editorial-meta">{{MESSAGE_INVITATION}}</p>
-
-                <!-- Remplacer les URL uniquement après vérification du routage existant.
-                     Le gabarit n'effectue aucune annulation : le lien mène à l'étape
-                     de confirmation existante du Worker. -->
-                <div class="lcdp-actions-centrees lcdp-editorial-cta">
-                  <a class="lcdp-button lcdp-button-primary" href="{{LIEN_INSCRIPTION_OU_COMPTE}}">{{LIBELLE_ACTION_PRINCIPALE}}</a>
-                  <a class="lcdp-button lcdp-button-secondary" href="{{LIEN_CONFIRMATION_ANNULATION}}">Annuler mon invitation</a>
-                </div>
+                <p>{{MESSAGE}}</p>
+                {{DETAILS_HTML}}
+                {{CONTENU_HTML}}
               </div>
             </section>
           </div>
