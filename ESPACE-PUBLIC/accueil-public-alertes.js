@@ -1,5 +1,4 @@
-/* Accueil public : connexion des trois boutons au contrôle d'accès partagé
-   et à l'objet central 02-box-alerte.html (styles c033 du CSS central). */
+/* Accueil public : contrôle d'accès et dialogues de référence INFORMATION / ERREUR. */
 (() => {
   'use strict';
 
@@ -37,12 +36,11 @@
     if (chargementAlerteEnCours) return;
     chargementAlerteEnCours = true;
     try {
-      // Les invitations à se connecter relèvent d'INFORMATION.
-      // Les erreurs conservent leur comportement actuel en attendant le lot ERREUR.
+      // Les invitations à se connecter relèvent d'INFORMATION ; les échecs relèvent d'ERREUR.
       const information = Boolean(configuration.actionLibelle && configuration.destination);
       const chemin = information
         ? '/HTMLBASE/02-dialogue-reference-information.html'
-        : '/HTMLBASE/02-alerte.html';
+        : '/HTMLBASE/02-dialogue-reference-erreur.html';
       const reponse = await fetch(urlObjet(chemin), { cache: 'no-cache' });
       if (!reponse.ok) throw new Error('Objet de dialogue indisponible.');
       const modele = document.createElement('template');
@@ -52,28 +50,20 @@
       slot.replaceChildren(modele.content.cloneNode(true));
       const boite = slot.querySelector(information
         ? '[data-lcdp-dialogue-reference="information"]'
-        : '[data-lcdp-box-alerte]');
-      const texte = slot.querySelector(information
-        ? '[data-lcdp-dialogue-message]'
-        : '[data-lcdp-alerte-message]');
-      const fermerBouton = information ? null : slot.querySelector('[data-lcdp-alerte-close]');
+        : '[data-lcdp-dialogue-reference="erreur"]');
+      const texte = slot.querySelector('[data-lcdp-dialogue-message]');
       const validerBouton = slot.querySelector(information
         ? '[data-lcdp-dialogue-action="compris"]'
-        : '[data-lcdp-alerte-ok]');
-      if (!boite || !texte || !validerBouton || (!information && !fermerBouton)) {
+        : '[data-lcdp-dialogue-action="fermer"]');
+      const titre = slot.querySelector('[data-lcdp-dialogue-titre]');
+      if (!boite || !texte || !validerBouton || !titre) {
         slot.replaceChildren();
         throw new Error('Objet de dialogue incomplet.');
       }
 
       texte.textContent = String(message);
-      if (information) {
-        const titre = slot.querySelector('[data-lcdp-dialogue-titre]');
-        if (titre) titre.textContent = 'Connexion nécessaire';
-      } else if (configuration.variante) {
-        boite.classList.add('lcdp-alerte-accueil-' + configuration.variante);
-      }
-      if (configuration.actionLibelle) validerBouton.textContent = configuration.actionLibelle;
-      else validerBouton.hidden = true;
+      titre.textContent = information ? 'Connexion nécessaire' : 'Erreur';
+      validerBouton.textContent = information ? configuration.actionLibelle : 'Fermer';
 
       const precedentFocus = document.activeElement;
       const ecouteurs = new AbortController();
@@ -82,12 +72,11 @@
         slot.replaceChildren();
         if (precedentFocus && typeof precedentFocus.focus === 'function') precedentFocus.focus();
       }
-      fermerBouton?.addEventListener('click', fermer, { signal: ecouteurs.signal });
       boite.addEventListener('click', e => { if (e.target === boite) fermer(); }, { signal: ecouteurs.signal });
       document.addEventListener('keydown', e => {
         if (e.key === 'Escape') fermer();
         if (e.key === 'Tab') {
-          const elements = [fermerBouton, ...(validerBouton.hidden ? [] : [validerBouton])].filter(Boolean);
+          const elements = [validerBouton];
           if (!elements.length) return;
           const index = elements.indexOf(document.activeElement);
           if (e.shiftKey && index <= 0) { e.preventDefault(); elements[elements.length - 1].focus(); }
@@ -98,7 +87,7 @@
         fermer();
         if (configuration.destination) window.location.assign(configuration.destination);
       }, { signal: ecouteurs.signal });
-      (fermerBouton || validerBouton).focus();
+      validerBouton.focus();
     } finally {
       chargementAlerteEnCours = false;
     }
