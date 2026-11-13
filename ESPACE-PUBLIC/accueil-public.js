@@ -120,12 +120,6 @@
         });
       }
 
-      function appliquerVarianteAlerteAccueil(alerte, variante) {
-        if (["reserver", "planning", "ouvrir"].includes(variante)) {
-          alerte.classList.add("lcdp-alerte-accueil-" + variante);
-        }
-      }
-
       function construireUrlConnexionMembrePublic() {
         return construireUrlSite("/ESPACE-PUBLIC/connexion-membre.html");
       }
@@ -168,56 +162,40 @@
           fermer.focus();
           return;
         }
-        const fragment = await chargerFragment("/OBJET/HTMLBASE/02-alerte.html");
+        const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-erreur.html");
         slot.appendChild(fragment);
 
-        const alerte = slot.querySelector("[data-lcdp-box-alerte]");
-        const texte = slot.querySelector("[data-lcdp-alerte-message]");
-        const boutonFermer = slot.querySelector("[data-lcdp-alerte-close]");
-        const boutonOk = slot.querySelector("[data-lcdp-alerte-ok]");
+        const dialogue = slot.querySelector('[data-lcdp-dialogue-reference="erreur"]');
+        const titre = slot.querySelector("[data-lcdp-dialogue-titre]");
+        const texte = slot.querySelector("[data-lcdp-dialogue-message]");
+        const bouton = slot.querySelector('[data-lcdp-dialogue-action="fermer"]');
 
-        if (!alerte || !texte || !boutonFermer || !boutonOk) {
-          throw new Error("Structure de l’alerte incomplète.");
+        if (!dialogue || !titre || !texte || !bouton) {
+          slot.replaceChildren();
+          throw new Error("Structure ERREUR incomplète.");
         }
 
+        titre.textContent = options.titre || "Erreur";
         texte.textContent = message;
+        bouton.textContent = options.boutonOkLabel || "Fermer";
 
-        if (options.boutonOkLabel) {
-          boutonOk.textContent = options.boutonOkLabel;
-        }
-
-        appliquerVarianteAlerteAccueil(alerte, options.variante);
-
-        const fermer = () => {
-          slot.innerHTML = "";
+        let termine = false;
+        const fermer = (rediriger = false) => {
+          if (termine) return;
+          termine = true;
+          document.removeEventListener("keydown", gererClavier);
+          slot.replaceChildren();
+          if (rediriger && options.redirectionOk) window.location.href = options.redirectionOk;
         };
-
-        const fermerEtRediriger = () => {
-          fermer();
-
-          if (options.redirectionOk) {
-            window.location.href = options.redirectionOk;
-          }
+        const gererClavier = event => {
+          if (event.key === "Escape") { event.preventDefault(); fermer(false); }
         };
-
-        boutonFermer.addEventListener("click", fermer);
-        boutonOk.addEventListener("click", options.redirectionOk ? fermerEtRediriger : fermer);
-
-        alerte.addEventListener("click", (event) => {
-          if (event.target === alerte) {
-            fermer();
-          }
+        bouton.addEventListener("click", () => fermer(true), { once: true });
+        dialogue.addEventListener("click", event => {
+          if (event.target === dialogue) fermer(false);
         });
-
-        document.addEventListener(
-          "keydown",
-          (event) => {
-            if (event.key === "Escape") {
-              fermer();
-            }
-          },
-          { once: true }
-        );
+        document.addEventListener("keydown", gererClavier);
+        bouton.focus();
       }
 
       function ouvrirDialogueConnexion() {
