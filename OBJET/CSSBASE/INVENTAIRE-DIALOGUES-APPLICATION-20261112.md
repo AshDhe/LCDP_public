@@ -456,3 +456,13 @@ Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Au
 | Même source, CSS et masque de sortie | CSS historique chargé pour l'alerte, masque affiché après confirmation de réussite | **TRAITÉ — mise en cohérence** : CSS de convergence commun INFORMATION/ERREUR ; accès à l'élément de texte du masque contrôlé avant modification | `9b1456b0` |
 
 **Conséquence CSS** : après ces changements, aucune référence littérale à `02-alerte.html` dans `codes-securite.js`, `hello.js`, `connexion-parc.js` ou `connexion-coach.js`. Ce sont quatre contrôles **locaux**. `02-alerte.html` et les styles communs restent utilisés dans les autres pages ; **NE PAS SUPPRIMER** sans contrôle inter-dépôts complet. Contrôle syntaxique réussi, tests navigateur non réalisés.
+
+
+### K.9 PUBLIC — convergence des erreurs de formulaires (13 novembre 2026)
+| Source / cas | Avant | Après / statut | Commit |
+|---|---|---|---|
+| `ESPACE-PUBLIC/mdp-perdu-membre.js`, erreurs de demande de lien | `02-alerte.html`, titre + message, simple acquittement ; succès déjà en INFORMATION | **TRAITÉ — ERREUR** : référence ERREUR, texte conservé ; succès et redirection inchangés | `930865a2` |
+| `ESPACE-PUBLIC/formulaire-liste-attente.js`, erreurs de validation et soumission | `02-alerte.html`, fermeture par boutons/fond, Échap écouté une seule fois | **TRAITÉ — ERREUR** : référence ERREUR, Échap disponible jusqu'à fermeture, validation INFORMATION et redirection inchangées | `91060d5d` |
+| `ESPACE-PUBLIC/formulaire-inscription-membre.js`, échecs de formulaire | `02-alerte.html`, fermeture libre ; confirmation du succès INFORMATION avec acquittement avant redirection | **TRAITÉ — ERREUR** : référence ERREUR pour les échecs, confirmation INFORMATION et redirection obligatoires conservées | `c82ddc48` |
+
+**Périmètre vérifié** : sept fichiers JS publics comprenant `codes-securite.js`, `hello.js`, les deux connexions coach/parc et les trois formulaires ci-dessus ; syntaxe valide et zéro référence littérale résiduelle à `02-alerte.html` dans **ces sept fichiers**. Les pages de formulaire suivantes chargent déjà `lcdp-lightbox-convergence.css` : `mdp-perdu-membre.html`, `formulaire-liste-attente.html`, `formulaire-inscription-membre.html`. Le CSS central et `02-alerte.html` restent consommés ailleurs, donc **NE PAS SUPPRIMER**. Aucun test navigateur.
