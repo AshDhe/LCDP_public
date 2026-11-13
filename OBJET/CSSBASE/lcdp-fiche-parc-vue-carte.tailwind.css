@@ -1,0 +1,61 @@
+/* Vue CARTE de Fiche Parc : source Tailwind CSS v4, sans Preflight.
+ * Source d'apparence unique, commune aux espaces PUBLIC et PLANIFIER.
+ * La feuille CSS compilée associée est servie par les deux espaces.
+ */
+@reference "tailwindcss/theme.css";
+
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] > .lcdp-box-shift-detail-parc__card
+> .lcdp-box-shift-detail-parc__close {
+  @apply absolute;
+  top: 28px !important;
+  right: 21px !important;
+  width: 32px;
+  height: 32px;
+  margin: 0 !important;
+  float: none !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"]
+.lcdp-box-fiche-parc__card--organisee {
+  @apply flex! flex-col! items-stretch! gap-4! min-w-0;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"]
+.lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__header {
+  @apply flex-none;
+  padding: 14px 62px 16px 16px !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"]
+.lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__section--map {
+  @apply flex-none min-w-0 p-4!;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche {
+  @apply w-full min-w-0;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche .lcdp-planifier-carte-cartouche {
+  @apply static! grid w-full min-w-0 mt-4! p-0 border-0 bg-transparent shadow-none gap-3 overflow-visible;
+  inset: auto !important;
+  transform: none !important;
+  max-width: 100%;
+  margin-inline: auto;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul {
+  @apply box-border block w-full min-w-0 mx-auto;
+  max-width: 370px;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc-diaporama__scene {
+  @apply w-full! aspect-video! h-auto! min-h-0!;
+  max-height: none !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__media,
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__image {
+  @apply w-full h-full! object-cover;
+}
