@@ -810,24 +810,7 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   gap: 8px;
 }
 
-.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__action {
-  box-sizing: border-box;
-  width: 100% !important;
-  min-width: 0 !important;
-  min-height: 40px;
-  padding: 7px 9px;
-  font-size: .86rem !important;
-  line-height: 1.2;
-  white-space: normal;
-  text-align: center;
-}
 
-.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__action-libelle {
-  text-transform: uppercase;
-  white-space: normal !important;
-  overflow-wrap: normal;
-  word-break: normal;
-}
 
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description:not([hidden]) {
   display: flex;
@@ -869,19 +852,6 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__actions--reserver,
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__actions {
   gap: 5px;
-}
-.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__action {
-  min-width: 0;
-  min-height: 42px;
-  padding: 9px 12px;
-  font-size: .89rem !important;
-  line-height: 1.2;
-  white-space: normal;
-  overflow-wrap: anywhere;
-}
-.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__action-icone {
-  width: 16px;
-  height: 16px;
 }
 /* Les cartes réelles conservent leurs images et actions fonctionnelles. */
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__media {
@@ -1061,11 +1031,6 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
     padding: 9px 12px;
     font-size: .84rem !important;
   }
-  .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc__action {
-    font-size: .86rem !important;
-    min-height: 40px;
-    padding: 7px 9px;
-  }
 }
 /* Les deux actions du verso restent côte à côte sur mobile comme sur PC. */
 @media (max-width: 767px) {
@@ -1076,18 +1041,6 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
     gap: 6px !important;
     width: 100%;
     min-width: 0;
-  }
-  .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action {
-    box-sizing: border-box;
-    flex: initial !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    padding: 7px 5px !important;
-    font-size: .78rem !important;
-    line-height: 1.2;
-    white-space: normal !important;
-    text-align: center;
   }
 }
 
@@ -1616,11 +1569,6 @@ body.lcdp-page-reserver [data-lcdp-box-dialogue-bouton] .lcdp-box-dialogue-bouto
   color: #293c2e;
   font-size: 1rem !important;
   line-height: 1.2 !important;
-}
-.lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__action {
-  min-height: 36px !important;
-  padding: 6px 8px !important;
-  font-size: .82rem !important;
 }
 .lcdp-planifier-parcs-diaporama .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__description:not([hidden]) {
   padding-top: 4px;
