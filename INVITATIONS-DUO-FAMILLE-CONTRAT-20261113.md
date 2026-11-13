@@ -48,3 +48,20 @@ La requête d'enregistrement doit contenir `idflux` et, pour chaque catégorie, 
 Le nouveau contrôleur **n'est pas connecté à `planning-membre.js`**. Cette activation est volontairement différée jusqu'à l'adaptation du Worker ; sinon l'interface présenterait des droits erronés ou des invitations non enregistrées.
 
 Le chantier « Mes invités / Mes invitants » dans Mon compte reste exclu de cette passe.
+
+## Audit du Worker fourni par l'utilisateur (w-inviter-membre(6).js)
+
+Code fourni le 13/11/2026, 1 619 lignes, syntaxe JS contrôlée.
+
+- Routes existantes : POST `/inviter-reservation`, GET `/invites`, POST `/invites`, GET `/reservations-invitables` ; les anciennes routes doivent être conservées.
+- Limite actuelle : `lireNbinvitAbonnement` prend `abo.nbinvit` et plafonne la valeur à 10. Elle ne lit ni `prixabo.maxduo`, ni `duoplus`, ni `freqduoplus`, ni `famille`.
+- L'abonnement actuel est recherché à la date du jour. Pour une réservation future, les droits doivent être obtenus pour la commande couvrant la date de l'accès.
+- Les adresses sans compte sont **déjà prises en charge** : `chercherOuCreerMembreInvitation` crée au besoin une fiche `membres` provisoire avec `emailvalid=false` et `emailvalidmode=invitation`. Il faut réutiliser le mécanisme existant plutôt qu'affirmer que l'envoi sans compte est impossible.
+- Le message `Aucune modification de la liste des invités.` provient de `handleMajInvites` lorsque ni mise à jour ni ajout n'ont été enregistrés.
+- Un envoi Resend est lancé en arrière-plan via `ctx.waitUntil` ; la réponse métier actuelle n'atteste pas la livraison effective de chaque e-mail.
+
+**Liaison des options à vérifier :** un contrôle en lecture seule sur la base du projet ne trouve aucun `aboreza_paniers.numero_commande = abo.orderid` pour les 13 lignes `abo`. La table `aboreza_inclusions` ne contient aucune ligne alors que `aboreza_options` en contient. Ne pas inventer de liaison d'options effectivement commandées à un abonnement sans contrat de référence supplémentaire. Ne pas extrapoler la signification de `multiplicateur` (notamment l'option « +5 DUO+ » avec multiplicateur 5).
+
+Le Worker Cloudflare n'est pas accessible via les connecteurs de déploiement actifs. Le fichier reçu est la source de travail pour une **nouvelle version à générer et fournir**, pas une preuve d'un déploiement sur le site.
+
+La vue préparée `04-card-invites-abonnement.html` et le contrôleur `invites-abonnement-v2.js` ne sont pas reliés à `planning-membre.html` ni à `planning-membre.js`. Il est donc attendu que l'ancienne box Inviter reste visible tant que le raccordement et le nouveau Worker ne sont pas prêts.
