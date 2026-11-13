@@ -384,3 +384,46 @@ END;
 $function$;
 REVOKE ALL ON FUNCTION public.lcdp_reclamer_envoi_invite(uuid,uuid) FROM PUBLIC,anon,authenticated;
 GRANT EXECUTE ON FUNCTION public.lcdp_reclamer_envoi_invite(uuid,uuid) TO service_role;
+
+-- Annulation depuis un lien signé : synchroniser les trois tables dans la même transaction.
+CREATE OR REPLACE FUNCTION public.lcdp_annuler_invitation_par_jeton(
+  p_idflux_source uuid,
+  p_idflux_invite uuid,
+  p_idmembre_invite uuid
+) RETURNS boolean
+LANGUAGE plpgsql SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $function$
+DECLARE
+  v_source public.fluxm%ROWTYPE;
+  v_invite public.fluxm%ROWTYPE;
+  v_limite timestamptz;
+BEGIN
+  SELECT * INTO v_source FROM public.fluxm
+  WHERE idflux=p_idflux_source AND invitation=false FOR UPDATE;
+  IF NOT FOUND THEN RAISE EXCEPTION 'Réservation de l’invitant introuvable.' USING ERRCODE='22023'; END IF;
+  SELECT * INTO v_invite FROM public.fluxm
+  WHERE idflux=p_idflux_invite AND idmembre=p_idmembre_invite
+    AND idfluxparrain=p_idflux_source AND invitation=true FOR UPDATE;
+  IF NOT FOUND THEN RAISE EXCEPTION 'Invitation introuvable.' USING ERRCODE='22023'; END IF;
+  IF v_invite.statut='cancd' THEN RETURN false; END IF;
+  v_limite := (((v_source.datebookd AT TIME ZONE 'Europe/Paris')::date - 1) + time '14:00') AT TIME ZONE 'Europe/Paris';
+  IF now()>=v_limite THEN
+    RAISE EXCEPTION 'Annulation impossible après 14h.' USING ERRCODE='22023';
+  END IF;
+  UPDATE public.invitation
+    SET invit='cancd',datecancd=now(),source=NULL
+    WHERE idflux=p_idflux_source AND idmembre=p_idmembre_invite AND invit='true';
+  UPDATE public.fluxm SET statut='cancd',datecancd=now()
+    WHERE idflux=p_idflux_invite AND statut<>'cancd';
+  UPDATE public.inviteacces ia SET statut='cancd',dateannulation=now()
+    WHERE ia.idflux=p_idflux_source AND ia.statut<>'cancd'
+      AND ia.idinvite IN (
+        SELECT i.idinvite FROM public.invitation i
+        WHERE i.idflux=p_idflux_source AND i.idmembre=p_idmembre_invite
+      );
+  RETURN true;
+END;
+$function$;
+REVOKE ALL ON FUNCTION public.lcdp_annuler_invitation_par_jeton(uuid,uuid,uuid) FROM PUBLIC,anon,authenticated;
+GRANT EXECUTE ON FUNCTION public.lcdp_annuler_invitation_par_jeton(uuid,uuid,uuid) TO service_role;
