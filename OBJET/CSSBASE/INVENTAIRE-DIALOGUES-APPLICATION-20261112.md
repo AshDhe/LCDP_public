@@ -497,3 +497,11 @@ Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Au
 | `inviter-membre.js`, échéances de paiement | `02-dialogue-bouton.html` avec actions Payer et détail des échéances | **CONSERVER — paiement multi-actions**, gabarit et CSS toujours nécessaires | — |
 
 **Vérification statique** : cinq JS valides syntaxiquement, aucun `window.confirm` dans `alerte-planifier.js` ou `fiche-parc.js`, aucune référence `02-alerte.html` dans `mes-points.js`, `mes-factures-membre.js`, `inviter-membre.js`. Ce résultat n'est pas une preuve d'inutilisation dans les autres fichiers ou dépôts. Aucun CSS historique supprimé, aucun parcours navigateur testé.
+
+
+### K.13 Contrôle PUBLIC / MEMBRE — sélecteur FAQ, 13 novembre 2026
+| Consommateur | Usage vérifié | Décision |
+|---|---|---|
+| `LCDP_public/ESPACE-PUBLIC/faq.js`, `LCDP_ouvrirDialogueMonCompte` | `02-dialogue-bouton.html`, deux liens distincts « Me connecter » et « Être invité(e) », partagé avec variante FAQ membre | **CONSERVER — MULTI-ACTIONS** ; ne pas remplacer par un CHOIX binaire et ne pas supprimer le gabarit/CSS |
+
+Aucune modification fonctionnelle ni CSS dans ce fichier ; contrôle statique uniquement.
