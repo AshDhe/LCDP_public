@@ -295,21 +295,51 @@
     slot.innerHTML = "";
 
     try {
-      const fragment = await chargerFragmentObjet("/HTMLBASE/02-alerte.html");
+      const information = type === "information";
+      if (information) {
+        const href = construireUrlObjet("/CSSBASE/lcdp-lightbox-convergence.css");
+        if (!Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(link => link.href === new URL(href, document.baseURI).href)) {
+          await new Promise((resolve, reject) => {
+            const feuille = document.createElement("link");
+            feuille.rel = "stylesheet";
+            feuille.href = href;
+            feuille.onload = resolve;
+            feuille.onerror = () => { feuille.remove(); reject(new Error("CSS INFORMATION indisponible.")); };
+            document.head.appendChild(feuille);
+          });
+        }
+      }
+      const fragment = await chargerFragmentObjet(information
+        ? "/HTMLBASE/02-dialogue-reference-information.html"
+        : "/HTMLBASE/02-alerte.html");
       slot.appendChild(fragment);
 
-      const alerte = slot.querySelector("[data-lcdp-box-alerte]");
-      const messageElement = slot.querySelector("[data-lcdp-alerte-message]");
-      const boutonFermer = slot.querySelector("[data-lcdp-alerte-close]");
-      const boutonOk = slot.querySelector("[data-lcdp-alerte-ok]");
+      const alerte = slot.querySelector(information
+        ? '[data-lcdp-dialogue-reference="information"]'
+        : "[data-lcdp-box-alerte]");
+      const messageElement = slot.querySelector(information
+        ? "[data-lcdp-dialogue-message]"
+        : "[data-lcdp-alerte-message]");
+      const boutonFermer = information ? null : slot.querySelector("[data-lcdp-alerte-close]");
+      const boutonOk = slot.querySelector(information
+        ? '[data-lcdp-dialogue-action="compris"]'
+        : "[data-lcdp-alerte-ok]");
 
-      if (!alerte || !messageElement || !boutonFermer || !boutonOk) {
-        throw new Error("Structure de l'alerte V3 incomplète.");
+      if (!alerte || !messageElement || !boutonOk || (!information && !boutonFermer)) {
+        throw new Error("Structure du dialogue incomplète.");
       }
 
-      messageElement.textContent = titre && message
-        ? titre + " — " + message
-        : titre || message || "";
+      if (information) {
+        const titreElement = slot.querySelector("[data-lcdp-dialogue-titre]");
+        if (!titreElement) throw new Error("Titre INFORMATION introuvable.");
+        titreElement.textContent = titre || "Information";
+        messageElement.textContent = message || "";
+        boutonOk.textContent = "Fermer";
+      } else {
+        messageElement.textContent = titre && message
+          ? titre + " — " + message
+          : titre || message || "";
+      }
 
       await new Promise((resolve) => {
         const fermer = () => {
@@ -317,7 +347,7 @@
           resolve();
         };
 
-        boutonFermer.hidden = true;
+        if (boutonFermer) boutonFermer.hidden = true;
          boutonOk.addEventListener("click", () => {
            if (redirectUrl) { const a = document.querySelector(".lcdp-setup-loading"); if (a) { a.querySelector(".lcdp-setup-loading__text").textContent = "Ouverture de la page…"; a.hidden = false; } }
            fermer();
