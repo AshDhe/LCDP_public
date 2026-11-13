@@ -10,7 +10,6 @@
     regulariser: '/ESPACE-MEMBRE/abonnement-membre.html'
   };
   const libelles = {planifier:'PLANIFIER',mes_acces:'MES ACCÈS',ma_cle:'MA CLÉ'};
-  const dureesPlage = {plage1:4,plage2:3,plage3:4,plage4:4,plage5:5};
   const MINUTE = 60000;
   let traitementEnCours = false;
 
@@ -57,7 +56,11 @@
       String(r?.statut || '').toLowerCase() === 'bookd' && Number.isFinite(dateDebut(r)));
   }
   function hh(t) {return new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',hour:'2-digit',minute:'2-digit'}).format(new Date(t)).replace(':',' h ');}
-  function fin(r) {return dateDebut(r) + (dureesPlage[String(r.plagebookd || '')] || 0) * 60 * MINUTE;}
+  function fin(r) {
+    const valeur = r?.datebookf || r?.endsAt || r?.dateFin || r?.datefin;
+    const date = Date.parse(String(valeur || ''));
+    return Number.isFinite(date) && date > dateDebut(r) ? date : NaN;
+  }
 
   async function alerte(message, action = null, profil = 'erreur') {
     const slot = document.getElementById('lcdp-lightbox-slot');
@@ -173,16 +176,16 @@
     const proche=resas.filter(r=>dateDebut(r)-30*MINUTE<=now && now<dateDebut(r)-15*MINUTE).sort((a,b)=>dateDebut(a)-dateDebut(b))[0];
     if(proche) {
       const debut=dateDebut(proche),invitation=vraie(proche.invitation);
-      let message='Votre clé sera active à partir de '+hh(debut-15*MINUTE)+' jusqu’à '+hh(debut+30*MINUTE)+' pour l’accès planifié.';
+      let message='Votre clé sera active à partir de '+hh(debut-15*MINUTE)+(Number.isFinite(fin(proche))?' jusqu’à '+hh(fin(proche)+30*MINUTE):'')+' pour l’accès planifié.';
       if(invitation) message+=' Votre invitant doit d’abord valider son checkin sans valider le vôtre.';
       await alerte(message, null, 'information');return 'refuse';
     }
-    const pendant=resas.filter(r=>dateDebut(r)-15*MINUTE<=now && now<=dateDebut(r)+30*MINUTE).sort((a,b)=>dateDebut(a)-dateDebut(b))[0];
+    const pendant=resas.filter(r=>Number.isFinite(fin(r)) && dateDebut(r)-15*MINUTE<=now && now<=fin(r)+30*MINUTE).sort((a,b)=>dateDebut(a)-dateDebut(b))[0];
     if(motif==='sponsor_not_checked_in' && pendant && vraie(pendant.invitation)) {
-      await alerte('Votre clé sera active jusqu’à '+hh(dateDebut(pendant)+30*MINUTE)+' quand votre invitant aura validé son checkin sans valider le vôtre.', null, 'information');
+      await alerte('Votre clé sera active jusqu’à '+hh(fin(pendant)+30*MINUTE)+' quand votre invitant aura validé son checkin sans valider le vôtre.', null, 'information');
       return 'refuse';
     }
-    const depassee=resas.filter(r=>dateDebut(r)+30*MINUTE<now && Number.isFinite(fin(r)) && now<fin(r)).sort((a,b)=>dateDebut(b)-dateDebut(a))[0];
+    const depassee=resas.filter(r=>Number.isFinite(fin(r)) && fin(r)+30*MINUTE<now).sort((a,b)=>fin(b)-fin(a))[0];
     if(depassee) {await alerte('Votre clé n’est plus active pour l’accès planifié.', null, 'information');return 'refuse';}
     if(pendant && motif !== 'no_current_access' && motif !== 'no_reservation' && motif !== 'no_invitation') {
       await alerte(String(rep.message || 'Votre clé n’est pas active actuellement.'));return 'refuse';
