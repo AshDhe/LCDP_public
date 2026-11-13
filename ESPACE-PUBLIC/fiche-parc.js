@@ -191,6 +191,7 @@
       promesseBandeau,
       promesseFooter
     ]);
+    window.LCDP_terminerAttenteArrivee?.();
   }
 
   function lireParcDepuisUrl() {
