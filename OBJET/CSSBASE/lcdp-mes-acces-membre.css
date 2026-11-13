@@ -560,3 +560,136 @@
       #lcdp-planning-calendrier-slot .lcdp-planning-jour-liste > * {
         grid-column:1 / -1 !important;max-width:100%;min-width:0;
       }
+
+
+/* MES ACCÈS — vues secondaires intégrées au wrapper (2026-11-13). */
+#lcdp-planning-calendrier-slot [data-lcdp-liste-card-list] > [hidden] {
+  display: none !important;
+}
+#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+}
+#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire[data-lcdp-invitation-invites-overlay],
+#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire[data-lcdp-invitation-emails-overlay] {
+  position: relative !important;
+  inset: auto !important;
+  z-index: auto !important;
+  pointer-events: auto !important;
+}
+#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire :is(
+  .lcdp-box-card-listinvites-oui-non,
+  .lcdp-box-card-listemails,
+  .lcdp-dialogue-ref,
+  .lcdp-box-alerte,
+  .lcdp-box-workflow-reservation
+) {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  overflow: visible !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire :is(
+  .lcdp-box-card-listinvites-oui-non__card,
+  .lcdp-box-card-listemails__card,
+  .lcdp-dialogue-ref__card,
+  .lcdp-box-alerte__card
+) {
+  position: static !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 18px 14px !important;
+  overflow: visible !important;
+  background: var(--lcdp-color-surface, #fff) !important;
+  border: 1px solid var(--lcdp-color-border, #e7e5e4) !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+}
+#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire .lcdp-box-workflow-reservation__card,
+#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire .lcdp-box-workflow-reservation__content {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire :is(
+  .lcdp-box-card-listinvites-oui-non,
+  .lcdp-box-card-listemails,
+  .lcdp-dialogue-ref,
+  .lcdp-box-alerte,
+  .lcdp-box-workflow-reservation
+)::backdrop {
+  display: none !important;
+}
+#lcdp-planning-calendrier-slot .lcdp-planning-vue-retour {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: 38px;
+  padding: 9px 12px;
+  margin: 0 0 14px;
+  border: 1px solid var(--lcdp-color-border, #d6d3d1);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--lcdp-color-text, #1f2a24);
+  cursor: pointer;
+}
+#lcdp-planning-calendrier-slot .lcdp-box-liste-card[data-lcdp-vue-secondaire-active="true"] [data-lcdp-commande-bar-actions] {
+  pointer-events: none;
+  opacity: .55;
+}
+#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire .lcdp-box-card-listinvites-oui-non__actions .lcdp-button {
+  min-height: 44px !important;
+}
+@media (max-width: 520px) {
+  #lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire :is(
+    .lcdp-box-card-listinvites-oui-non__card,
+    .lcdp-box-card-listemails__card,
+    .lcdp-dialogue-ref__card,
+    .lcdp-box-alerte__card
+  ) { padding: 14px 10px !important; }
+}
