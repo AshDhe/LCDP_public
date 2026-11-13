@@ -571,3 +571,14 @@ Recherche après les commits K.17. Unité de comptage : occurrence littérale da
 **Sources ciblées à qualifier** : `LCDP_membre/ESPACE-MEMBRE/box-menu-burger-membre.js` (une alerte à deuxième bouton optionnel « Payer »), `LCDP_membre/ESPACE-MEMBRE/da-membre.js` (branche alerte), `LCDP_membre/config.js` (référence de préchargement) ; `LCDP_public/ESPACE-PUBLIC/controle-acces-accueil.js`, `fiche-parc.js`, `OBJET/JSBASE/02-footer.js`, `OBJET/JSBASE/03-formulaire-protege.js`. Les derniers sélecteurs `02-dialogue-bouton.html` des burgers coach/parc ne sont pas binaires.
 
 **Portée stricte** : recherche statique des formes littérales `02-alerte.html`, `02-dialogue-bouton.html` et `confirm()` dans les seuls JS listés par les arbres GitHub des quatre dépôts. Aucune confirmation native `window.confirm()` trouvée dans ce périmètre. Les fichiers HTML, feuilles CSS, chargements dynamiques, autres extensions et le dépôt ADMIN ne sont pas couverts par ce comptage ; pas de conclusion de non-utilisation globale. Aucun CSS supprimé et aucun test navigateur.
+
+
+### K.19 PUBLIC — quatre composants partagés convergés (13 novembre 2026)
+| Fichier / contexte | Ancien mécanisme | Nouveau mécanisme / statut | Commit |
+|---|---|---|---|
+| `ESPACE-PUBLIC/fiche-parc.js`, erreurs et préchargement | Deux références à `02-alerte.html`, INFORMATION séparé pour connexion et succès | **TRAITÉ — ERREUR**, préchargement inclus, retour booléen et accès membre conservés | `59b2ed84` |
+| `OBJET/JSBASE/02-footer.js`, vérification e-mail | `02-alerte.html` pour validation et échec | **TRAITÉ — INFORMATION/ERREUR**, CSS de convergence chargé à la demande, formulaire Turnstile et API inchangés | `69ac1dc0` |
+| `OBJET/JSBASE/03-formulaire-protege.js`, confirmation après POST | `02-alerte.html`, OK=true / croix=false, redirection des contacts selon le retour | **TRAITÉ — CHOIX** pour retour accueil, **INFORMATION** sinon. Échec d'affichage => false au lieu de true, sans redirection non confirmée | `48daae8f` |
+| `ESPACE-PUBLIC/controle-acces-accueil.js`, contrôle des droits | `02-alerte.html` avec bouton éventuel de navigation / fermeture par croix | **TRAITÉ — CHOIX** pour Planifier/Régulariser, INFORMATION pour trois indications temporelles, ERREUR pour les autres blocages, logique Worker inchangée | `f1bc2400` |
+
+**Vérification statique après commits** : les quatre fichiers passent l'analyse de syntaxe JavaScript ; zéro référence littérale résiduelle à `02-alerte.html` dans ces quatre sources. Les quatre gabarits centraux ne doivent pas être retirés sur cette seule base. Le CSS de convergence est chargé depuis `fiche-parc.html` ou à la demande par les trois autres scripts. **Aucun ancien CSS ou fragment supprimé.** Aucun test navigateur, réseau ou Turnstile n'a été réalisé.
