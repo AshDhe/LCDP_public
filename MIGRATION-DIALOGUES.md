@@ -322,3 +322,10 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **NON TRAITÉ — deuxième étape distincte** : `afficherAlerte("Des frais de traitement d’annulation s’appliquent conformément aux Conditions Générales de Vente.")`, dont le `true` conditionne encore la demande d'avoir. La traiter comme validation explicite des frais, sans la confondre avec une simple information.
 - **Métier inchangé** : `POST /demander-annulation`, `idabo`, informations d'avoir et rechargement des abonnements, ordre des deux validations. Aucun test navigateur.
 - **CSS** : les fragments `02-alerte.html` et leurs CSS ne sont pas retirés : autres usages et seconde validation toujours présents. Aucun retrait CSS autorisé sur le seul constat de la migration.
+
+
+### SUPPRESSION — annulations depuis PLANNING membre (13 novembre 2026)
+- **Avant** : `LCDP_membre/ESPACE-MEMBRE/planning-membre.js`, `traiterAnnulationReservation` demandait « Confirmer l’annulation » avec Non/Oui et deux messages distincts selon invite/réservation, via `ouvrirDialogueBoutons` ou `ouvrirDialogueBoutonsParDessusLightbox` en présence d'un workflow.
+- **Après / TRAITÉ (migration statique)** : appel à `confirmerSuppressionPlanning(message, superposition)`, gabarit `02-dialogue-reference-suppression.html`, boutons Non/Oui, décision booléenne. Variante superposée portée à z-index 12000. Refus, Escape, clic extérieur et échec CSS/HTML renvoient `false` ; l'action d'annulation n'est pas lancée. Commit `fb5871a3`.
+- **Métier conservé** : recherche de la réservation, limite de délai, contrôle de l'idflux, requête `POST /annuler-reservation`, rechargement et affichage des suites. Les deux helpers historiques ne sont pas supprimés faute de vérification de tous leurs consommateurs.
+- **Nettoyage CSS** : aucun CSS supprimé. Ancien `02-dialogue-bouton.html` et CSS historiques encore nécessaires potentiellement ; dépendances à vérifier avant retrait. Aucun test navigateur.
