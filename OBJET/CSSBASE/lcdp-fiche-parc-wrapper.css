@@ -1,0 +1,501 @@
+/* FICHE PARC / WRAPPER — présentation commune aux espaces PLANIFIER et PUBLIC.
+ * Origine : lcdp-planifier.css (règles de fiche exclusivement).
+ * Les comportements liés aux droits restent gérés par le contrôleur JS commun.
+ */
+
+/* Fiche parc dans le wrapper PLANIFIER : largeur identique au calendrier.
+   En cours d'ouverture, la fiche n'a pas encore son attribut data-lcdp-shift-vue. */
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc:not([data-lcdp-shift-vue="planning"]):not([data-lcdp-shift-vue="planning-jour"])
+.lcdp-box-shift-detail-parc__card {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  max-height: none !important;
+  padding: 12px !important;
+  overflow: visible !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-shift-detail-parc {
+  padding: 10px;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-shift-detail-parc__close {
+  width: 30px;
+  height: 30px;
+  font-size: 1.3rem;
+  margin: 0 0 5px 5px;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__card {
+  display: block !important;
+  box-sizing: border-box;
+  min-width: 0;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__header {
+  padding: 1px 0 9px;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__title {
+  font-size: clamp(1.2rem, 4.5vw, 1.48rem) !important;
+  line-height: 1.14;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__departement {
+  font-size: .76rem;
+  line-height: 1.3;
+  margin: 3px 0 1px;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__section {
+  box-sizing: border-box;
+  padding: 10px 0 !important;
+  min-width: 0;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__section h3 {
+  font-size: .93rem !important;
+  line-height: 1.25;
+  margin: 0 0 7px;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__box-text {
+  padding: 10px;
+  font-size: .82rem !important;
+  line-height: 1.46;
+  border-radius: 11px;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__box-text p,
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__section p {
+  font-size: .82rem !important;
+  line-height: 1.46;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__actions {
+  margin-top: 8px;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__actions-barre {
+  gap: 6px;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action {
+  min-width: 0;
+  min-height: 34px;
+  padding: 5px 9px;
+  font-size: .72rem;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action-icone {
+  width: 18px;
+  height: 18px;
+}
+/* Dans la fiche du tunnel, restaurer la galerie 2x2 : la feuille de composant
+   affichait les quatre photos en colonne avec display:contents sur mobile. */
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__section--galerie,
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__section--galerie .lcdp-box-fiche-parc__galerie,
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie {
+  display: block !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 8px !important;
+  width: 100%;
+  min-width: 0;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  margin: 0 !important;
+  order: initial !important;
+  justify-self: stretch;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+  object-fit: cover !important;
+  object-position: center;
+}
+
+
+/* PLANIFIER — fiche parc, cartes aérées dans le wrapper étroit sur tous écrans.
+   Ne modifie ni la vue planning/abonnement ni les composants génériques. */
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] > .lcdp-box-shift-detail-parc__card {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  padding: 12px !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 13px !important;
+  min-width: 0;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #f5f7f3 !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__header,
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__section {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 15px !important;
+  order: initial !important;
+  border: 1px solid #e2e8df !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  box-shadow: 0 3px 12px rgba(30, 54, 35, .035) !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__header {
+  padding-right: 45px !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__title {
+  font-size: clamp(1.18rem, 4vw, 1.55rem) !important;
+  line-height: 1.16 !important;
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__section > h3 {
+  margin: 0 0 12px !important;
+  padding: 0 0 9px !important;
+  border-bottom: 1px solid #edf0eb !important;
+  color: #263c2d !important;
+  font-size: .86rem !important;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: .045em;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__box-text {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: .88rem !important;
+  line-height: 1.58 !important;
+  color: #4a584d;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__section p {
+  line-height: 1.55 !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__section--galerie {
+  padding: 13px !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 11px !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card {
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  order: initial !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+  object-fit: cover !important;
+}
+/* Le bouton Partager reprend le pictogramme de lien du modèle Tailwind.
+   L'élément img reste dans le DOM pour ne pas perturber le JS ou l'accessibilité. */
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-partager] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  min-height: 38px !important;
+  padding: 7px 13px !important;
+  border: 1px solid #e59834 !important;
+  border-radius: 999px !important;
+  background: #e59834 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  font-size: .82rem !important;
+  font-weight: 700 !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-icone {
+  display: none !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-partager]::before {
+  content: "";
+  display: inline-block;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E");
+}
+@media (min-width: 768px) {
+  /* Le viewport PC ne doit pas agrandir la fiche au-delà du wrapper compact. */
+  :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]:not([data-lcdp-shift-vue="planning"]):not([data-lcdp-shift-vue="planning-jour"]) > .lcdp-box-shift-detail-parc__card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 12px !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card {
+    gap: 12px !important;
+  }
+  :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__header,
+  :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__section {
+    padding: 12px !important;
+  }
+  :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__title {
+    font-size: 1.6rem !important;
+  }
+  :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__box-text {
+    font-size: .95rem !important;
+  }
+  :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+  .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+    max-width: 680px;
+    margin-inline: auto !important;
+    gap: 15px !important;
+  }
+}
+
+
+
+/* Fiche parc : largeur du wrapper (mobile et PC), sans toucher à PLANNING PARC. */
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] > .lcdp-box-shift-detail-parc__card {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 12px !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card {
+  gap: 9px !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__header,
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__section {
+  padding: 11px !important;
+  border-radius: 11px !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+  gap: 7px !important;
+}
+
+
+/* 2026-11-10 — Fiche et planning du parc : quatrième vue du wrapper PLANIFIER.
+   Styles exclusivement locaux, sans modifier les composants OBJET communs. */
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)[hidden] {
+  display: none !important;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique).lcdp-planifier-vue-fiche-active .lcdp-planifier-wrapper .lcdp-page-header,
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique).lcdp-planifier-vue-fiche-active #lcdp-planifier-calendrier-slot,
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique).lcdp-planifier-vue-fiche-active #lcdp-planifier-parcs-vue,
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique).lcdp-planifier-vue-fiche-active #lcdp-planifier-jour-overlay-slot {
+  display: none !important;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) .lcdp-planifier-wrapper :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) .lcdp-planifier-wrapper :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) > [data-lcdp-box-shift-detail-parc] {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto !important;
+  transform: none !important;
+  opacity: 1 !important;
+  display: block !important;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: auto !important;
+  min-height: 0;
+  max-height: none !important;
+  margin: 0;
+  padding: 0 !important;
+  overflow: visible !important;
+  border: 0;
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) .lcdp-planifier-wrapper :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) > [data-lcdp-box-shift-detail-parc] > .lcdp-box-shift-detail-parc__card {
+  position: relative !important;
+  transform: none !important;
+  box-sizing: border-box;
+  display: block;
+  width: 100% !important;
+  min-width: 0;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 12px !important;
+  overflow: visible !important;
+  border: 1px solid #e4eae4;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(31,42,36,.08);
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-shift-detail-parc__content,
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-fiche-parc__shift-view {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc--shift-detail,
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) [data-lcdp-box-calendrier-mois],
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) [data-lcdp-box-calendrier-jour] {
+  position: static !important;
+  inset: auto !important;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: auto !important;
+  min-height: 0;
+  max-height: none !important;
+  padding: 0 !important;
+  margin: 0;
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__card,
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-calendrier-mois__card,
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-calendrier-jour__card {
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0;
+  max-width: 100% !important;
+  height: auto;
+  max-height: none !important;
+  overflow: visible;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-shift-detail-parc__close {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  z-index: 5;
+}
+
+/* Fiche intégrée : croix alignée avec le titre, sans chevaucher l'en-tête. */
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="fiche"] > .lcdp-box-shift-detail-parc__card
+> .lcdp-box-shift-detail-parc__close {
+  position: absolute !important;
+  top: 28px !important;
+  right: 21px !important;
+  width: 32px;
+  height: 32px;
+  margin: 0 !important;
+  float: none !important;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="fiche"]
+.lcdp-box-fiche-parc__card > .lcdp-box-fiche-parc__header {
+  padding-right: 59px !important;
+}
+
+
+/* Recto carte d'un parc voisin depuis la fiche : même présentation photo +
+   légende courte sous l'image que la Card Parc du diaporama. */
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-card-parc--carte-publique {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 13px;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-card-parc--carte-publique .lcdp-box-card-parc__media--avec-nom {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  overflow: hidden;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-card-parc--carte-publique .lcdp-box-card-parc__media--avec-nom
+.lcdp-box-card-parc__image {
+  display: block;
+  grid-row: 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 11px 11px 0 0;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-box-card-parc--carte-publique .lcdp-box-card-parc__media--avec-nom
+.lcdp-box-card-parc__nom-image {
+  position: static;
+  display: block;
+  grid-row: 2;
+  min-height: 22px;
+  margin: 0;
+  padding: 9px 10px 11px;
+  background: #fff;
+  color: #202b23;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: clamp(.74rem, 3vw, .9rem);
+  line-height: 1.3;
+  font-weight: 700;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
+  display: grid !important; grid-template-columns: minmax(0, 1fr) !important;
+  width: 100% !important; gap: 12px !important;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__card {
+  display: block !important; width: 100% !important; max-width: 100% !important;
+  min-width: 0 !important; margin: 0 !important; padding: 0 !important;
+  order: initial !important;
+}
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__image,
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-card-parc--carte-publique .lcdp-box-card-parc__image {
+  display: block !important; width: 100% !important; max-width: 100% !important;
+  height: auto !important; min-height: 0 !important;
+  aspect-ratio: 16 / 9 !important; object-fit: cover !important;
+}
+
+
