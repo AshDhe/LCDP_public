@@ -350,3 +350,10 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **Conséquence métier vérifiée au niveau du code** : abandon d'un brouillon local, aucune suppression serveur dans ces deux chemins ; la méthode `annulerBase()` et l'enregistrement de base ne sont pas modifiés.
 - **NON TRAITÉ** : confirmation native d'enregistrement d'opération IA pouvant annuler des réservations, dialogue de sortie à plusieurs issues, autres cas recensés dans les cinq dépôts.
 - **Nettoyage** : deux appels natifs `confirm()` en moins dans ce fichier (de trois à un). Aucun CSS ni gabarit historique supprimé. Pas de test navigateur.
+
+
+### SUPPRESSION — deuxième validation des frais d'annulation, abonnement MEMBRE (13 novembre 2026)
+- **Avant** : `LCDP_membre/ESPACE-MEMBRE/abonnement-membre.js`, deuxième condition préalable à `POST /demander-annulation`, `afficherAlerte("Des frais de traitement d’annulation s’appliquent conformément aux Conditions Générales de Vente.")` renvoyant `true` après OK et `false` si fermeture.
+- **TRAITÉ — migration statique**, commit `a2cbea71` : même avertissement sur les frais, deuxième appel au gabarit SUPPRESSION avec titre « Confirmer l’annulation avec frais ? », actions « Conserver » et « Poursuivre l’annulation ». Aucun enregistrement sans première ET deuxième validation ; refus/fermeture/ressource indisponible bloquent l'appel. Le helper existant est paramétré sans modifier le contrat booléen.
+- **Métier inchangé** : `POST /demander-annulation`, `idabo`, contrôle d'absence d'abonnement, informations sur l'avoir et rechargement ; aucun Worker modifié.
+- **CSS et composants** : retrait de ce dernier usage d'`afficherAlerte` pour valider les frais, mais `afficherAlerte` reste appelée ailleurs ; `02-alerte.html` et ses CSS ne sont donc pas supprimés. Tests navigateur non réalisés.
