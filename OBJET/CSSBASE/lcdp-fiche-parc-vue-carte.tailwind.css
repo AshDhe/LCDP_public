@@ -61,3 +61,57 @@
 .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__image {
   @apply w-full h-full! object-cover;
 }
+
+/* MES ACCÈS : calque Fiche/Carte occupant toute la surface du wrapper.
+ * La vue MES ACCÈS reste en dessous, inchangée, puis revient à la fermeture.
+ * Les boutons du verso restent ses seuls points d'entrée. */
+body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main {
+  @apply relative;
+}
+body.lcdp-mes-acces-page.lcdp-mes-acces-calque-fiche-actif > .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
+  @apply invisible pointer-events-none;
+}
+body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces-fiche-slot {
+  @apply absolute inset-0 z-30 block w-full h-full overflow-y-auto overflow-x-hidden box-border;
+  padding: 14px 12px 24px;
+  background: var(--lcdp-color-background, #f7f9fb);
+  -webkit-overflow-scrolling: touch;
+}
+body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces-fiche-slot[hidden] {
+  @apply hidden!;
+}
+/* Carte : même largeur utile que le wrapper, et non la règle PC 75 %.
+ * Les dimensions internes du SVG et son zoom restent inchangés. */
+#lcdp-mes-acces-fiche-slot .lcdp-carte-dynamique--fiche-parc.lcdp-carte-dynamique--vue-fiche {
+  @apply w-full! max-w-full!;
+  margin-inline: 0 !important;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-carte-dynamique--vue-fiche .lcdp-carte-dynamique__map-shell {
+  @apply w-full! max-w-full!;
+}
+/* En vue FICHE : Partager orange, Carte verte, même gabarit et rayon. */
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__actions-barre {
+  @apply grid! grid-cols-2! w-full! gap-2!;
+}
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"]
+:is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte]) {
+  @apply w-full! min-w-0! max-w-full! justify-center!;
+  height: 40px !important;
+  min-height: 40px !important;
+  border-radius: 8px !important;
+}
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-carte] {
+  background: var(--lcdp-color-logo-green, #536c3d) !important;
+  border-color: var(--lcdp-color-logo-green, #536c3d) !important;
+  color: #fff !important;
+}
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-partager] {
+  background: #e59834 !important;
+  border-color: #e59834 !important;
+  color: #fff !important;
+}
+/* En vue CARTE, aucune action de partage ou de retour intermédiaire :
+ * la croix referme le calque et revient à MES ACCÈS. */
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="carte"] [data-lcdp-fiche-parc-actions] {
+  @apply hidden!;
+}
