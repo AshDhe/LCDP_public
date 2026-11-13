@@ -874,7 +874,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
 /* MES ACCÈS : quatre catégories Coach reprises de la vue Coach de PLANIFIER.
    Les cases sont désactivées tant que le service d'accès n'expose aucune
    catégorie Coach. Ne pas modifier les filtres de réservation existants. */
-#lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach {
+body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach {
   box-sizing:border-box;
   display:block;
   min-width:0;
@@ -886,7 +886,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
   border-radius:12px;
   background:#f7f8f5;
 }
-#lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach .lcdp-box-legende__titre {
+body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach .lcdp-box-legende__titre {
   display:block;
   margin:0 0 8px;
   padding:0;
@@ -896,7 +896,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
   font-weight:800;
   letter-spacing:.075em;
 }
-#lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach .lcdp-box-legende__ligne {
+body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach .lcdp-box-legende__ligne {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:6px 8px;
@@ -904,7 +904,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
   min-width:0;
   margin:0;
 }
-#lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach .lcdp-planifier-filtre-categorie {
+body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach .lcdp-planifier-filtre-categorie {
   box-sizing:border-box;
   display:flex;
   align-items:center;
@@ -920,7 +920,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
   color:#92400e;
   cursor:default;
 }
-#lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach .lcdp-planifier-filtre-categorie__picto {
+body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach .lcdp-planifier-filtre-categorie__picto {
   display:inline-flex;
   flex:0 0 18px;
   align-items:center;
@@ -929,7 +929,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
   line-height:1;
   font-size:.9rem;
 }
-#lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach .lcdp-box-legende__libelle {
+body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach .lcdp-box-legende__libelle {
   flex:1 1 auto;
   min-width:0;
   font-size:.74rem;
@@ -937,7 +937,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
   line-height:1.25;
   color:#92400e;
 }
-#lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach .lcdp-planifier-filtre-categorie__input {
+body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach .lcdp-planifier-filtre-categorie__input {
   display:inline-grid!important;
   appearance:none!important;
   -webkit-appearance:none!important;
@@ -958,7 +958,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
   visibility:visible!important;
   pointer-events:none!important;
 }
-#lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach .lcdp-planifier-filtre-categorie__input:checked::after {
+body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach .lcdp-planifier-filtre-categorie__input:checked::after {
   content:"";
   width:5px;
   height:9px;
@@ -966,18 +966,18 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
   border-width:0 2px 2px 0;
   transform:translateY(-1px) rotate(45deg);
 }
-#lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach
+body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach
   :is(.lcdp-box-legende__carre,.lcdp-planifier-filtre-categorie__coche) {
   display:none!important;
 }
-#lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach__note {
+body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach__note {
   margin:9px 2px 0;
   color:#64748b;
   font-size:.7rem;
   line-height:1.4;
 }
 @media(min-width:700px) {
-  #lcdp-planning-calendrier-slot .lcdp-mes-acces-filtres-coach .lcdp-box-legende__ligne {
+  body.lcdp-mes-acces-page .lcdp-box-liste-card--planning-membre .lcdp-mes-acces-filtres-coach .lcdp-box-legende__ligne {
     grid-template-columns:repeat(4,minmax(0,1fr));
   }
 }
