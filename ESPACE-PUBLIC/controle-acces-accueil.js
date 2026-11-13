@@ -35,7 +35,22 @@
   async function requete(nom,path) {
     const base = urlApi(nom);
     if (!base) throw new Error('Le service de vérification des droits n’est pas configuré.');
-    const reponse = await fetch(base + path, {method:'GET',credentials:'include',cache:'no-store',headers:{Accept:'application/json'}});
+    const controleur = new AbortController();
+    const delai = window.setTimeout(() => controleur.abort(), 12000);
+    let reponse;
+    try {
+      reponse = await fetch(base + path, {
+        method:'GET',credentials:'include',cache:'no-store',
+        signal:controleur.signal,headers:{Accept:'application/json'}
+      });
+    } catch (erreur) {
+      if (erreur?.name === 'AbortError') {
+        throw new Error('Le contrôle d’accès ne répond pas. Réessayez.');
+      }
+      throw erreur;
+    } finally {
+      window.clearTimeout(delai);
+    }
     const data = await reponse.json().catch(() => null);
     if (reponse.status === 401) return {nonConnecte:true};
     if (!reponse.ok || !data || (nom === 'index' && (data.success !== true || data.connected !== true)) ||
