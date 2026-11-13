@@ -393,3 +393,15 @@ Cette section actualise les statuts précédents ; la photographie initiale A–
 | COACH `ESPACE-COACH/accueil-coach.js`, profil INFORMATION | Fermeture uniquement par bouton ; risque d'attente si Échap/clic sur fond | Fermeture par bouton, Échap ou clic sur fond, écouteur clavier retiré et résolution unique ; messages et erreurs inchangés | **TRAITÉ — INFORMATION**, `17ebb351` |
 
 Huit fichiers JavaScript sont concernés par la passe MEMBRE/PUBLIC/COACH/PARC (contre sept au premier contrôle). Aucun CSS supprimé.
+
+
+### K.3 MEMBRE — résultat sécurité, déconnexion burger et alerte supprimable (13 novembre 2026)
+| Source et cas | Ancien comportement / comparaison | Nouveau comportement / statut | Commit |
+|---|---|---|---|
+| `mes-informations.js` : `afficherResultatSecurite` | Ancien `02-dialogue-bouton.html`, titre « Sécurité du compte », boutons OK et Annuler exécutant le même `fermer()` | **TRAITÉ — INFORMATION** : référence INFORMATION, un bouton OK, message et absence d'effet métier conservés | `90ea6640` |
+| `box-menu-burger-membre.js` : confirmer la déconnexion | Profil CHOIX existant, écouteur Échap déclaré une seule fois : un Tab le supprimait | **TRAITÉ — cohérence CHOIX** : écouteur actif jusqu'à fermeture, Tab/Shift+Tab, action `/deconnexion` inchangée | `ad23d98a` |
+| `mes-informations.js` : suppression d'alerte | Référence SUPPRESSION existante, retour booléen, fermeture par boutons ou Échap | **TRAITÉ — cohérence SUPPRESSION** : clic extérieur neutre, fermeture et focus harmonisés, API inchangée | `2b49ded3` |
+| `mes-informations.js` : échéances de paiement | Un consommateur `02-dialogue-bouton.html` restant, avec lignes et actions Payer | **NON TRAITÉ — paiement**, gabarit et CSS à conserver | — |
+| `box-menu-burger-membre.js` : changement d'espace | Ancien gabarit à plusieurs actions de navigation de comptes | **NON TRAITÉ — MULTI-ACTIONS**, gabarit et CSS à conserver | — |
+
+**Comparaison et dépendances :** une référence à l'ancien `02-dialogue-bouton.html` a été supprimée dans `mes-informations.js`, sans supprimer le composant partagé. Le CSS de convergence était déjà inclus sur la page. Aucun CSS supprimé ; vérification statique, sans parcours navigateur.
