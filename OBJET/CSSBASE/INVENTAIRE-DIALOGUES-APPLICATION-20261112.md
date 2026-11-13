@@ -582,3 +582,13 @@ Recherche après les commits K.17. Unité de comptage : occurrence littérale da
 | `ESPACE-PUBLIC/controle-acces-accueil.js`, contrôle des droits | `02-alerte.html` avec bouton éventuel de navigation / fermeture par croix | **TRAITÉ — CHOIX** pour Planifier/Régulariser, INFORMATION pour trois indications temporelles, ERREUR pour les autres blocages, logique Worker inchangée | `f1bc2400` |
 
 **Vérification statique après commits** : les quatre fichiers passent l'analyse de syntaxe JavaScript ; zéro référence littérale résiduelle à `02-alerte.html` dans ces quatre sources. Les quatre gabarits centraux ne doivent pas être retirés sur cette seule base. Le CSS de convergence est chargé depuis `fiche-parc.html` ou à la demande par les trois autres scripts. **Aucun ancien CSS ou fragment supprimé.** Aucun test navigateur, réseau ou Turnstile n'a été réalisé.
+
+
+### K.20 Vérification complète des fichiers JavaScript du dépôt PUBLIC (13 novembre 2026)
+| Périmètre | Résultat après convergence | Interprétation |
+|---|---|---|
+| `LCDP_public`, **34 fichiers `.js` de `main`** relus | **0** occurrence littérale de `02-alerte.html` | Plus de chargement littéral de cette alerte dans les fichiers JS actuels du dépôt PUBLIC |
+| Même périmètre | **2** occurrences littérales de `02-dialogue-bouton.html` | `ESPACE-PUBLIC/box-menu-burger-public.js` et `ESPACE-PUBLIC/faq.js` ; choix de destinations à conserver |
+| CSS/HTML/autres dépôts/chemins non littéraux | **NON AUDITÉS exhaustivement dans ce contrôle** | Interdit de retirer le gabarit `02-alerte.html`, `02-dialogue-bouton.html` ou des CSS partagés sur la seule base du compteur JS |
+
+Contrôle effectué après les commits K.19, sans erreur de lecture des 34 fichiers. Aucune suppression CSS ni vérification fonctionnelle navigateur.
