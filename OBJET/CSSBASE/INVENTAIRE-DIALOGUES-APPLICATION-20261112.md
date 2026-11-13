@@ -170,6 +170,7 @@ L'inventaire ci-dessus est une photographie statique du 12 novembre ; il reste i
 | ADMIN `C_MEMBRES/suspension-membres.js` : suspendre/lever la suspension | **TRAITÉ** | `02aa7aa4` |
 | ADMIN `B_PARCS/AjustCoach.js`, `AjustDuo.js`, `AjustFamille.js`, `InsertFamille.js` : validation des ajustements | **TRAITÉ** | `8e38e0a6`, `ab661ec3`, `52bb5c54`, `0b572c4a` |
 | ADMIN `B_PARCS/planning-parc.js` : ancienne journée, enregistrement d'une nouvelle base | **TRAITÉ** | `5e62eb13`, `e5997331`, CSS `cb28ac04` |
+| ADMIN `C_MEMBRES/SuiviDA.html` : confirmation de date de décision DA | **TRAITÉ** | `904d5a3a` ; formulaire de date et API inchangés |
 | MEMBRE/PUBLIC/PARC/COACH : menus de changement d'espace connecté avec trois comptes | **REPORTÉ — MULTI-CHOIX** | Contenu spécifique, trois destinations. Arbitrage utilisateur, pas de conversion binaire |
 | MEMBRE `reserver-membre.js` : choix d'abonnement, panneau « Votre planning », récapitulatif de réservation | **REPORTÉ — WORKFLOW COMPLEXE** | Plusieurs actions, données dynamiques ; arbitrage utilisateur |
 | MEMBRE `aboreza-membre.js`, `abonnement-membre.js` : conteneurs de tunnels | **REPORTÉ — WORKFLOW COMPLEXE** | Ne pas substituer un gabarit binaire au flux |
