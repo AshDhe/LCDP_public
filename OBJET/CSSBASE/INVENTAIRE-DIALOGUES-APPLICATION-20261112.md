@@ -424,3 +424,14 @@ Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Au
 | Même source, messages génériques d'alerte | `02-alerte.html` et `window.alert` de secours | **CONSERVÉ — profil ERREUR/ALERTE à qualifier**, ne pas retirer les ressources sans vérification | — |
 
 **Contrôles statiques** : `mes-informations.js`, `box-menu-burger-membre.js`, `accueil-membre.js`, `da-membre.js` syntaxiquement valides. `da-membre.js` compte 0 confirmation native contre 3 avant. Aucun fichier CSS supprimé ; aucun test navigateur.
+
+
+### K.6 PUBLIC — CHOIX du renvoi d’email de sécurité (13 novembre 2026)
+| Source / cas | Avant et décision métier | Après / statut | Commit |
+|---|---|---|---|
+| `LCDP_public/ESPACE-PUBLIC/connexion-membre.js`, `finaliserSecuriteAvantConnexion` | Ancien dialogue à boutons « Renvoyer l'email » ou « Annuler ». Seul le premier appelle `mdptokenz-api` (`action:"setup-resend"`) puis redirection `hello.html`. | **TRAITÉ — CHOIX** : dialogue de référence, textes et décision conservés, fermeture neutre = aucun renvoi ; Worker et redirection inchangés. | `dbefdff7` |
+| Même fichier, dépendance à l'ancien dialogue | Une référence `02-dialogue-bouton.html` | **RETIRÉE** : 0 référence littérale après migration ; CSS de convergence déjà présent dans la page | `dbefdff7` |
+| PUBLIC `hello.js`, `codes-securite.js` | Anciennes alertes dont la fonction peut affecter l'état d'un formulaire ou une redirection | **NON TRAITÉ — à qualifier**, ne pas effacer `02-alerte.html` | — |
+| PUBLIC `connexion-parc.js`, `connexion-coach.js` | Alertes d'erreur et `window.alert` de secours | **NON TRAITÉ — ERREUR ultérieur** | — |
+
+**Validation** : syntaxe JavaScript vérifiée pour `connexion-membre.js`. Aucun CSS supprimé, aucun test navigateur. Les autres consommateurs des gabarits historiques restent ouverts.
