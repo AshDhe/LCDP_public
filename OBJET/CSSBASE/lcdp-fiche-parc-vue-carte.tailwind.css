@@ -69,13 +69,14 @@ body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main {
   @apply relative;
 }
 body.lcdp-mes-acces-page.lcdp-mes-acces-calque-fiche-actif > .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
-  @apply invisible pointer-events-none;
+  @apply hidden!;
 }
 body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces-fiche-slot {
-  @apply absolute inset-0 z-30 block w-full h-full overflow-y-auto overflow-x-hidden box-border;
+  /* Le main du wrapper défile déjà. Ce calque n'a AUCUN scroll propre. */
+  @apply relative z-30 block w-full min-h-full box-border overflow-visible;
+  height: auto;
   padding: 14px 12px 24px;
   background: var(--lcdp-color-background, #f7f9fb);
-  -webkit-overflow-scrolling: touch;
 }
 body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces-fiche-slot[hidden] {
   @apply hidden!;
@@ -114,4 +115,36 @@ body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[
  * la croix referme le calque et revient à MES ACCÈS. */
 #lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="carte"] [data-lcdp-fiche-parc-actions] {
   @apply hidden!;
+}
+
+/* Pendant la préparation : couche opaque et spinner identique à MES ACCÈS.
+   Le contenu de la fiche reste monté pour conserver les mesures du SVG. */
+#lcdp-mes-acces-fiche-slot > .lcdp-mes-acces-calque-attente {
+  @apply absolute inset-0 z-40 flex items-center justify-center;
+  background: var(--lcdp-color-background, #f7f9fb);
+}
+#lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner {
+  @apply relative flex w-16 h-16 items-center justify-center;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner > svg {
+  @apply absolute inset-0 w-full h-full;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__track {
+  color: rgba(6, 95, 70, .1);
+}
+#lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__arc {
+  color: #e59834;
+  animation: lcdp-mes-acces-calque-rotation .8s linear infinite;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__dot {
+  @apply w-2 h-2 rounded-full;
+  background: #4e6838;
+}
+@keyframes lcdp-mes-acces-calque-rotation {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__arc {
+    animation: none;
+  }
 }
