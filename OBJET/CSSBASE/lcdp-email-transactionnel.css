@@ -49,9 +49,11 @@
 
 /* Appels à l'action : lien primaire et secondaire, sans style côté Worker. */
 .lcdp-email-transactionnel__actions {
-  display: grid;
-  gap: 10px;
+  display: block;
   margin-top: 18px;
+}
+.lcdp-email-transactionnel__actions .lcdp-email-transactionnel__bouton + .lcdp-email-transactionnel__bouton {
+  margin-top: 10px;
 }
 .lcdp-email-transactionnel__bouton,
 .lcdp-email-transactionnel__bouton:link,
