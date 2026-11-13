@@ -352,3 +352,36 @@ Les deux fichiers sont syntaxiquement valides lors de la vérification statique.
 | `B_ADMIN/reglement-club-admin.js` | Même branche héritée après retour/exception CHOIX | **RETIRÉ — code mort**, pas une migration SUPPRESSION | `3e9970ec` |
 
 Aucun des quatre fichiers ne conserve de référence littérale à `02-dialogue-bouton.html` après nettoyage ; chacun conserve le dialogue de publication CHOIX. Aucun CSS ni gabarit commun supprimé. Les consommateurs des autres dépôts n'ont pas été déclarés épuisés et aucun test navigateur n'est réalisé.
+
+
+## K. Priorité MEMBRE, PUBLIC, puis COACH/PARC — rapprochement du 13 novembre 2026
+
+Cette section actualise les statuts précédents ; la photographie initiale A–G reste historique. `TRAITÉ` signifie code modifié et commit confirmé, non test fonctionnel navigateur.
+
+| Priorité / source | Comparaison ancien → nouveau | Statut et conséquence | Commits |
+|---|---|---|---|
+| MEMBRE `reserver-membre.js`, abandon des dates en attente | Dialogue ancien NON/ANNULER → SUPPRESSION avec rappel des dates non enregistrées ; chemin d'effacement local conservé | **TRAITÉ — SUPPRESSION**, validation booléenne | `3d6826db`, `85bdb74e` |
+| MEMBRE `reserver-membre.js`, annulation de réservation/invitation enregistrée | Dialogue ancien NON/ANNULER → SUPPRESSION, type/parc/date conservés, même `POST /annuler-reservation` | **TRAITÉ — SUPPRESSION**, même requête ; fermeture du fond neutre | `3d6826db`, `85bdb74e` |
+| MEMBRE `accueil-membre.js`, déconnexion | Ancien dialogue à boutons → référence CHOIX avec Annuler/Confirmer ; requête `/deconnexion` conservée | **TRAITÉ — CHOIX**, contrôle de sécurité CODA non modifié | `009bedee` |
+| PUBLIC `accueil-public.js`, helper dialogue sans appel | `ouvrirDialogueBoutons` déclaré une fois, zéro invocation locale ; 60 lignes de code devenu orphelin | **RETIRÉ — nettoyage**, plus de référence littérale à ancien fragment dans ce fichier | `ac70287d` |
+| PUBLIC `fiche-parc.js`, confirmation d'heure | Gabarit CHOIX déjà actif mais secours `window.confirm` si slot manquant → toujours CHOIX sans dépendance au slot | **TRAITÉ — CHOIX**, pas de secours natif | `686e2282` |
+| PARC `accueil-parc.js` + `accueil-parc.html` | Alerte ancienne pour tous messages → profil INFORMATION pour messages explicitement marqués, alertes d'erreur conservées | **TRAITÉ — INFORMATION**, CSS convergence chargé sur l'accueil | `d3b0835b`, `ebe2cd1a` |
+| PARC `box-menu-burger-parc.js`, information « Mon compte » | Ancien appel d'alerte sans profil → appel INFORMATION explicite | **TRAITÉ — INFORMATION**, déconnexion inchangée | `0baa3731` |
+| COACH `box-menu-burger-coach.js`, information « Mon compte » | Ancien appel d'alerte sans profil → branche INFORMATION déjà existante dans `accueil-coach.js` | **TRAITÉ — INFORMATION**, déconnexion inchangée | `2c24dbf4` |
+| MEMBRE `reserver-membre.js`, deux derniers appels de l'ancien dialogue | Échéances de paiement et dialogues multi-étapes / multi-actions PLANIFIER | **NON TRAITÉ — à qualifier**, pas de suppression CSS | — |
+| MEMBRE `accueil-membre.js`, trois appels de l'ancien dialogue | Paiement, transfert sécurisé du navigateur et choix associé | **NON TRAITÉ — à qualifier**, conserver les gabarits | — |
+| PUBLIC `box-menu-burger-public.js`, sélecteur de compte | Choix de plusieurs comptes, pas un CHOIX binaire | **REPORTÉ — multi-actions**, conserver le gabarit | — |
+| COACH / PARC, `box-menu-burger-{coach,parc}.js` | « Changer d’espace connecté » propose trois comptes, non assimilable à SUPPRESSION/CHOIX binaire | **REPORTÉ — multi-actions**, conserver l'ancien dialogue et CSS | — |
+| COACH / PARC, alertes de déconnexion échouée | Alerte d'erreur existante ; profil ERREUR non engagé dans cette passe | **NON TRAITÉ — profil ERREUR ultérieur** | — |
+
+### K.1 Compteurs de dépendances vérifiés après cette passe
+| Fichier | Références littérales `02-dialogue-bouton.html` encore présentes | Décision |
+|---|---:|---|
+| MEMBRE `reserver-membre.js` | 2 | Conserver gabarit/CSS |
+| MEMBRE `accueil-membre.js` | 3 | Conserver gabarit/CSS |
+| PUBLIC `accueil-public.js` | 0 | Retrait local seulement |
+| PUBLIC `fiche-parc.js` | 0 | Retrait local seulement |
+| PARC `box-menu-burger-parc.js` | 1 | Conserver gabarit/CSS |
+| COACH `box-menu-burger-coach.js` | 1 | Conserver gabarit/CSS |
+
+**Bilan CSS : zéro fichier supprimé.** CSS de convergence ajouté seulement sur l'accueil PARC. Les ressources historiques restent indispensables pour les parcours non binaires, de paiement et de sécurité ; une recherche inter-dépôts et une validation fonctionnelle restent nécessaires avant tout retrait. Sept fichiers JS contrôlés syntaxiquement ; pas de test navigateur.
