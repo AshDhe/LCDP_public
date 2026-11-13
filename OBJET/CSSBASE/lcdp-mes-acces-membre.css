@@ -722,3 +722,122 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
 }
 
 
+
+/*
+ * MES ACCÈS / INVITER : le gabarit 04-card-listinvites-oui-non.html
+ * occupe la surface du wrapper sans être un deuxième wrapper ou un
+ * dialogue flottant. Cadrage limité à [data-lcdp-invitation-vue-page].
+ */
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  margin: 0;
+  padding: 16px 12px 24px;
+  background: var(--lcdp-color-background, #f7f9fb);
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] > .lcdp-page-container,
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] .lcdp-page-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] [data-lcdp-invitation-wrapper] {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 16px 14px 18px;
+  border: 1px solid var(--lcdp-color-border, #d7ddd5);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgb(31 42 36 / 5%);
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] .lcdp-box-liste-card__header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--lcdp-color-border, #e7e5e4);
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] .lcdp-box-liste-card__list,
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] [data-lcdp-invitation-form] {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] [data-lcdp-invitation-form] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] .lcdp-box-card-listinvites-oui-non__emails {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] [data-lcdp-invite-email-row] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 8px;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] [data-lcdp-invite-email] {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin: 0;
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] [data-lcdp-invite-effacer] {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  height: 44px;
+  min-height: 44px !important;
+  padding: 0 !important;
+  margin: 0;
+  border-radius: 8px;
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] :is(
+  [data-lcdp-listinvites-add-email],
+  [data-lcdp-listinvites-update],
+  [data-lcdp-listinvites-sans-email],
+  [data-lcdp-listinvites-cancel]
+) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 44px;
+  margin: 0;
+  border-radius: 8px;
+}
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] .lcdp-box-dialogue-champ-inviter__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  justify-items: stretch;
+  width: 100%;
+}
