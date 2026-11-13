@@ -214,63 +214,10 @@
   height: auto !important;
   object-fit: cover !important;
 }
-/* Actions du parc communes aux fiches publique et membre.
-   Les boutons Partager et Carte ont la même géométrie, sans forme pilule. */
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
-.lcdp-box-shift-detail-parc:is([data-lcdp-shift-vue="fiche"], [data-lcdp-shift-vue="carte"])
-:is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte]) {
-  box-sizing: border-box;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 7px !important;
-  min-height: 38px !important;
-  width: auto !important;
-  padding: 7px 13px !important;
-  border: 1px solid #e59834 !important;
-  border-radius: var(--lcdp-radius-button, 14px) !important;
-  background: #e59834 !important;
-  color: #fff !important;
-  box-shadow: none !important;
-  font-size: .82rem !important;
-  font-weight: 700 !important;
-}
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
-.lcdp-box-shift-detail-parc:is([data-lcdp-shift-vue="fiche"], [data-lcdp-shift-vue="carte"])
-[data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-icone {
-  display: none !important;
-}
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
-.lcdp-box-shift-detail-parc:is([data-lcdp-shift-vue="fiche"], [data-lcdp-shift-vue="carte"])
-[data-lcdp-fiche-parc-action-partager]::before {
-  content: "";
-  display: inline-block;
-  flex: 0 0 16px;
-  width: 16px;
-  height: 16px;
-  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E");
-}
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
-.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]
-[data-lcdp-fiche-parc-action-carte] .lcdp-box-card-parc__action-icone {
-  display: block !important;
-  width: 16px !important;
-  height: 16px !important;
-  flex: 0 0 16px;
-  filter: brightness(0) invert(1);
-}
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
-.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="carte"]
-[data-lcdp-fiche-parc-action-le-parc] {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 7px !important;
-  width: auto !important;
-  min-height: 38px !important;
-  padding: 7px 13px !important;
-  border-radius: var(--lcdp-radius-button, 14px) !important;
-}
+/* Actions Fiche Parc : les boutons reprennent directement les classes
+ * lcdp-box-commande-bar__actions / lcdp-button-orange du bouton CARTE
+ * départemental (rayon 8 px), sans surcharge concurrente.
+ */
 @media (min-width: 768px) {
   /* Le viewport PC ne doit pas agrandir la fiche au-delà du wrapper compact. */
   :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
