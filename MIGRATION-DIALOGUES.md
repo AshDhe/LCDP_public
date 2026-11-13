@@ -329,3 +329,9 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **Après / TRAITÉ (migration statique)** : appel à `confirmerSuppressionPlanning(message, superposition)`, gabarit `02-dialogue-reference-suppression.html`, boutons Non/Oui, décision booléenne. Variante superposée portée à z-index 12000. Refus, Escape, clic extérieur et échec CSS/HTML renvoient `false` ; l'action d'annulation n'est pas lancée. Commit `fb5871a3`.
 - **Métier conservé** : recherche de la réservation, limite de délai, contrôle de l'idflux, requête `POST /annuler-reservation`, rechargement et affichage des suites. Les deux helpers historiques ne sont pas supprimés faute de vérification de tous leurs consommateurs.
 - **Nettoyage CSS** : aucun CSS supprimé. Ancien `02-dialogue-bouton.html` et CSS historiques encore nécessaires potentiellement ; dépendances à vérifier avant retrait. Aucun test navigateur.
+
+
+### SUPPRESSION — nettoyage ciblé après migration PLANNING membre (13 novembre 2026)
+- **Vérification du code après migration `fb5871a3`** : dans `LCDP_membre/ESPACE-MEMBRE/planning-membre.js`, `ouvrirDialogueBoutons` et `ouvrirDialogueBoutonsParDessusLightbox` n'avaient plus d'appels internes (une déclaration chacune ; le nouveau `confirmerSuppressionPlanning` est bien appelé). Deux fonctions locales anciennes retirées, soit 129 lignes de source. Commit `2e068a28`.
+- **Comparaison avant/après** : avant ce nettoyage, les deux helpers contenaient deux références au fragment `02-dialogue-bouton.html` ; après, aucune référence littérale à ce fragment ne demeure dans `planning-membre.js`. Le nouveau dialogue SUPPRESSION et l'appel métier de réservation restent présents.
+- **Périmètre / prudence CSS** : aucun gabarit partagé ni CSS supprimé ; l'absence de référence dans ce fichier ne démontre pas l'absence de consommateurs dans les cinq dépôts. Aucun test navigateur.
