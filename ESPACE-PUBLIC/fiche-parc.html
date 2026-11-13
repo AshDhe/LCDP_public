@@ -40,7 +40,7 @@
   <noscript><style>#lcdp-attente-arrivee { display:none !important; }</style></noscript>
 </head>
 
-<body class="lcdp-app-page">
+<body class="lcdp-app-page lcdp-fiche-parc-publique">
   <div id="lcdp-attente-arrivee" role="status" aria-label="Chargement de la page">
     <div class="lcdp-loading-spinner" aria-hidden="true">
       <svg class="lcdp-loading-spinner__track" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></circle></svg>
@@ -57,19 +57,19 @@
     })();
   </script>
 
-  <div class="lcdp-site-page lcdp-app-wrapper">
+  <div class="lcdp-site-page lcdp-app-wrapper lcdp-planifier-wrapper">
 
     <div id="lcdp-bandeau-slot"></div>
 
     <main class="lcdp-site-main">
       <section class="lcdp-page-section" aria-label="Fiche parc">
         <div class="lcdp-page-container">
-          <div class="lcdp-fiche-parc-page-content lcdp-stack-large">
+          <div class="lcdp-page-content lcdp-fiche-parc-page-content lcdp-stack-large">
 
             <p class="lcdp-mention-connexion" id="lcdp-fiche-parc-status" aria-live="polite" hidden></p>
 
             <div id="lcdp-fiche-parc-slot">
-              <div class="lcdp-box-shift-detail-parc lcdp-box-shift-detail-parc--page lcdp-fiche-parc-public__en-chargement">
+              <div class="lcdp-box-shift-detail-parc lcdp-box-shift-detail-parc--page lcdp-fiche-parc-public__en-chargement" data-lcdp-shift-vue="fiche">
                 <article class="lcdp-box-shift-detail-parc__card">
                   <div class="lcdp-fiche-parc-public__attente" role="status" aria-label="Chargement de la fiche du parc">
                     <div class="lcdp-loading-spinner" aria-hidden="true">
