@@ -240,42 +240,63 @@
     const texte = titre ? titre + "\n\n" + message : message;
 
     if (!slot) {
-      alert(texte);
+      window.alert(texte);
       return;
     }
 
-    slot.innerHTML = "";
-
+    const focusInitial = document.activeElement;
     try {
-      const fragment = await chargerFragmentObjet("/HTMLBASE/02-alerte.html");
-      slot.appendChild(fragment);
-
-      const alerte = slot.querySelector("[data-lcdp-box-alerte]");
-      const messageElement = slot.querySelector("[data-lcdp-alerte-message]");
-      const boutons = slot.querySelectorAll("[data-lcdp-alerte-close], [data-lcdp-alerte-ok]");
-
-      if (!alerte || !messageElement || boutons.length === 0) {
-        throw new Error("Structure de l'alerte V3 incomplète.");
+      const css = construireUrlObjet("/CSSBASE/lcdp-lightbox-convergence.css");
+      if (!Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(link => link.href === new URL(css, document.baseURI).href)) {
+        await new Promise((resolve, reject) => {
+          const feuille = document.createElement("link");
+          feuille.rel = "stylesheet";
+          feuille.href = css;
+          feuille.onload = resolve;
+          feuille.onerror = () => { feuille.remove(); reject(new Error("CSS ERREUR indisponible.")); };
+          document.head.appendChild(feuille);
+        });
       }
 
-      messageElement.textContent = texte;
+      slot.replaceChildren(await chargerFragmentObjet("/HTMLBASE/02-dialogue-reference-erreur.html"));
+      const dialogue = slot.querySelector('[data-lcdp-dialogue-reference="erreur"]');
+      const titreElement = slot.querySelector("[data-lcdp-dialogue-titre]");
+      const messageElement = slot.querySelector("[data-lcdp-dialogue-message]");
+      const fermerBouton = slot.querySelector('[data-lcdp-dialogue-action="fermer"]');
+      if (!dialogue || !titreElement || !messageElement || !fermerBouton) {
+        throw new Error("Structure ERREUR incomplète.");
+      }
+      titreElement.textContent = titre || "Erreur";
+      messageElement.textContent = message || "";
+      fermerBouton.textContent = "Fermer";
 
-      const fermer = () => {
-        slot.innerHTML = "";
-      };
-
-      boutons.forEach((bouton) => {
-        bouton.addEventListener("click", fermer, { once: true });
+      await new Promise(resolve => {
+        let termine = false;
+        const fermer = () => {
+          if (termine) return;
+          termine = true;
+          document.removeEventListener("keydown", gererClavier);
+          slot.replaceChildren();
+          if (focusInitial?.isConnected && typeof focusInitial.focus === "function") focusInitial.focus();
+          resolve();
+        };
+        const gererClavier = event => {
+          if (event.key === "Escape") {
+            event.preventDefault();
+            fermer();
+          }
+        };
+        fermerBouton.addEventListener("click", fermer, { once: true });
+        dialogue.addEventListener("click", event => {
+          if (event.target === dialogue) fermer();
+        });
+        document.addEventListener("keydown", gererClavier);
+        fermerBouton.focus();
       });
-
-      alerte.addEventListener("click", (event) => {
-        if (event.target === alerte) {
-          fermer();
-        }
-      });
-    } catch (error) {
-      console.error("Erreur alerte hello :", error);
-      alert(texte);
+    } catch (erreur) {
+      slot.replaceChildren();
+      console.error("Erreur alerte hello :", erreur);
+      window.alert(texte);
     }
   }
 
