@@ -183,34 +183,25 @@
       const information = options.type === "validation";
       const fragment = await chargerFragmentObjet(information
         ? "/HTMLBASE/02-dialogue-reference-information.html"
-        : "/HTMLBASE/02-alerte.html");
+        : "/HTMLBASE/02-dialogue-reference-erreur.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector(information
         ? '[data-lcdp-dialogue-reference="information"]'
-        : "[data-lcdp-box-alerte]");
-      const messageElement = slot.querySelector(information
-        ? "[data-lcdp-dialogue-message]"
-        : "[data-lcdp-alerte-message]");
-      const boutonFermer = information ? null : slot.querySelector("[data-lcdp-alerte-close]");
+        : '[data-lcdp-dialogue-reference="erreur"]');
+      const messageElement = slot.querySelector("[data-lcdp-dialogue-message]");
+      const elementTitre = slot.querySelector("[data-lcdp-dialogue-titre]");
       const boutonOk = slot.querySelector(information
         ? '[data-lcdp-dialogue-action="compris"]'
-        : "[data-lcdp-alerte-ok]");
+        : '[data-lcdp-dialogue-action="fermer"]');
 
-      if (!alerte || !messageElement || !boutonOk || (!information && !boutonFermer)) {
+      if (!alerte || !messageElement || !elementTitre || !boutonOk) {
         throw new Error("Structure du dialogue incomplète.");
       }
 
-      if (information) {
-        const elementTitre = slot.querySelector("[data-lcdp-dialogue-titre]");
-        if (elementTitre) elementTitre.textContent = titre || "Information";
-        boutonOk.textContent = "Fermer";
-        messageElement.textContent = message || "";
-      } else {
-        messageElement.textContent = titre && message
-          ? titre + " — " + message
-          : titre || message || "";
-      }
+      elementTitre.textContent = titre || (information ? "Information" : "Erreur");
+      messageElement.textContent = message || "";
+      boutonOk.textContent = "Fermer";
 
       await new Promise((resolve) => {
         let ferme = false;
@@ -222,7 +213,6 @@
           resolve();
         };
 
-        boutonFermer?.addEventListener("click", fermer, { once: true });
         boutonOk.addEventListener("click", fermer, { once: true });
 
         alerte.addEventListener("click", (event) => {
