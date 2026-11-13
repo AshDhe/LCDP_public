@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- HTML d'expédition compilé depuis module-13, lcdp-email-transactionnel.css, lcdp-email-invitation.css. Ne pas éditer directement. Aucun CSS dans le Worker. -->
+
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invitation à un accès - La Clé du Parc</title>
+  <!-- Gabarit source hors Worker. Les styles réutilisent les CSSBASE existants. -->
+  </head>
+<body class="lcdp-email-transactionnel-preview" style="margin:0;padding:18px 12px 36px;background:#f7f8f5">
+  <main class="lcdp-email-editorial lcdp-email-transactionnel lcdp-email-invitation" style="box-sizing:border-box;width:min(100%, 600px);margin-inline:auto;background:#ffffff;color:#484b43;font-family:Arial, Helvetica, sans-serif;font-size:15px;line-height:1.7;border:1px solid #e5e7de">
+    <header class="lcdp-email-editorial__entete" style="box-sizing:border-box;padding:34px 44px 29px;border-bottom:1px solid #e5e7de;display:block;align-items:center;justify-content:space-between;gap:16px">
+      <p class="lcdp-email-editorial__marque" style="box-sizing:border-box;margin:0;color:#35462e;font-size:17px;font-weight:500;letter-spacing:-0.02em;line-height:1.3">La Clé du Parc</p>
+    </header>
+    <section class="lcdp-email-editorial__corps" aria-label="Votre invitation" style="box-sizing:border-box;padding:58px 44px 25px;padding-top:48px;padding-bottom:30px">
+      <p class="lcdp-email-editorial__sous-titre" style="box-sizing:border-box;margin:0 0 12px;color:#9a6329;font-family:Arial, Helvetica, sans-serif;font-size:10px;font-weight:400;letter-spacing:1.5px;line-height:1.5;text-transform:uppercase">Invitation à un accès</p>
+      <h1 class="lcdp-email-editorial__titre" style="box-sizing:border-box;margin:0 0 42px;color:#232a20;font-family:Georgia, 'Times New Roman', serif;font-size:34px;font-weight:400;letter-spacing:-0.5px;line-height:1.15;margin-bottom:30px">Vous êtes invité(e)</h1>
+      <p class="lcdp-email-editorial__paragraphe" style="box-sizing:border-box;margin:0 0 20px;color:#484b43;font-size:15px;font-weight:400;line-height:1.7;overflow-wrap:anywhere">{{SALUTATION}}</p>
+      <p class="lcdp-email-editorial__paragraphe" style="box-sizing:border-box;margin:0 0 20px;color:#484b43;font-size:15px;font-weight:400;line-height:1.7;overflow-wrap:anywhere">{{NOM_INVITANT}} vous invite à profiter d’un accès à La Clé du Parc.</p>
+      <div class="lcdp-email-transactionnel__details" style="box-sizing:border-box;margin:22px 0 24px;padding:17px 18px 18px;border:1px solid #e5e7de;border-radius:6px;background:#f7f8f5">
+        <p class="lcdp-email-transactionnel__detail-label" style="box-sizing:border-box;margin:0 0 5px;color:#85877e;font:11px/1.5 Arial, Helvetica, sans-serif;text-transform:uppercase">Parc</p>
+        <p class="lcdp-email-transactionnel__detail-valeur lcdp-email-invitation__detail-valeur--parc" style="box-sizing:border-box;margin:0 0 13px;color:#35462e;font:15px/1.5 Arial, Helvetica, sans-serif;font-size:17px;font-weight:600">{{NOM_PARC}}</p>
+        <p class="lcdp-email-transactionnel__detail-label" style="box-sizing:border-box;margin:0 0 5px;color:#85877e;font:11px/1.5 Arial, Helvetica, sans-serif;text-transform:uppercase">Date de l’accès</p>
+        <p class="lcdp-email-transactionnel__detail-valeur" style="box-sizing:border-box;margin:0 0 13px;color:#484b43;font:15px/1.5 Arial, Helvetica, sans-serif">{{DATE_ACCES}}</p>
+      </div>
+      <p class="lcdp-email-editorial__paragraphe" data-lcdp-email-conflit style="box-sizing:border-box;margin:0 0 20px;color:#484b43;font-size:15px;font-weight:400;line-height:1.7;overflow-wrap:anywhere">{{TEXTE_CONFLIT}}</p>
+      <p class="lcdp-email-editorial__paragraphe" style="box-sizing:border-box;margin:0 0 20px;color:#484b43;font-size:15px;font-weight:400;line-height:1.7;overflow-wrap:anywhere">Votre invitation est enregistrée. Vous pouvez la consulter ou demander son annulation.</p>
+      <div class="lcdp-email-transactionnel__actions" style="box-sizing:border-box;display:block;margin-top:18px">
+        <a class="lcdp-email-editorial__bouton lcdp-email-transactionnel__bouton" href="{{LIEN_VOIR}}" style="box-sizing:border-box;display:block;padding:15px 14px;border-radius:4px;background:#4e6838;color:#ffffff;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:600;line-height:20px;text-decoration:none;border:1px solid #4e6838;text-align:center">Voir mon invitation</a>
+        <a class="lcdp-email-editorial__bouton lcdp-email-transactionnel__bouton lcdp-email-transactionnel__bouton--secondaire" href="{{LIEN_ANNULER}}" style="box-sizing:border-box;display:block;padding:15px 14px;border-radius:4px;background:#ffffff;color:#4e6838;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:600;line-height:20px;text-decoration:none;border:1px solid #4e6838;text-align:center">Annuler mon invitation</a>
+      </div>
+      <p class="lcdp-email-transactionnel__information-compte" style="box-sizing:border-box;margin-top:24px;color:#747970;font-size:13px;line-height:1.65">{{TEXTE_COMPTE}}</p>
+      <p class="lcdp-email-editorial__paragraphe" data-lcdp-email-inscription style="box-sizing:border-box;margin:0 0 20px;color:#484b43;font-size:15px;font-weight:400;line-height:1.7;overflow-wrap:anywhere"><a class="lcdp-email-transactionnel__lien" href="https://lacleduparc.fr/ESPACE-PUBLIC/inscription.html" style="box-sizing:border-box">Finaliser mon inscription (facultatif)</a></p>
+    </section>
+    <footer class="lcdp-email-editorial__pied" style="box-sizing:border-box;padding:22px 44px 26px;border-top:1px solid #e8e9e3;color:#85877e;font-size:10px;line-height:1.7">
+      <p style="box-sizing:border-box;margin:0">À bientôt dans les parcs,</p>
+      <p style="box-sizing:border-box;margin:0">L’équipe La Clé du Parc.</p>
+    </footer>
+  </main>
+</body>
+</html>
