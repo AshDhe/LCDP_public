@@ -748,6 +748,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
   padding: 0;
 }
 .lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] [data-lcdp-invitation-wrapper] {
+  position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -763,6 +764,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
   box-shadow: 0 2px 6px rgb(31 42 36 / 5%);
 }
 .lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] .lcdp-box-liste-card__header {
+  padding-right: 48px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--lcdp-color-border, #e7e5e4);
 }
@@ -820,8 +822,7 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
 .lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] :is(
   [data-lcdp-listinvites-add-email],
   [data-lcdp-listinvites-update],
-  [data-lcdp-listinvites-sans-email],
-  [data-lcdp-listinvites-cancel]
+  [data-lcdp-listinvites-sans-email]
 ) {
   box-sizing: border-box;
   display: inline-flex;
