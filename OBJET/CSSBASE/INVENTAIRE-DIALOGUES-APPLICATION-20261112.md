@@ -385,3 +385,11 @@ Cette section actualise les statuts précédents ; la photographie initiale A–
 | COACH `box-menu-burger-coach.js` | 1 | Conserver gabarit/CSS |
 
 **Bilan CSS : zéro fichier supprimé.** CSS de convergence ajouté seulement sur l'accueil PARC. Les ressources historiques restent indispensables pour les parcours non binaires, de paiement et de sécurité ; une recherche inter-dépôts et une validation fonctionnelle restent nécessaires avant tout retrait. Sept fichiers JS contrôlés syntaxiquement ; pas de test navigateur.
+
+
+### K.2 Complément — fermeture INFORMATION espace COACH (13 novembre 2026)
+| Source | Avant | Après | Statut / commit |
+|---|---|---|---|
+| COACH `ESPACE-COACH/accueil-coach.js`, profil INFORMATION | Fermeture uniquement par bouton ; risque d'attente si Échap/clic sur fond | Fermeture par bouton, Échap ou clic sur fond, écouteur clavier retiré et résolution unique ; messages et erreurs inchangés | **TRAITÉ — INFORMATION**, `17ebb351` |
+
+Huit fichiers JavaScript sont concernés par la passe MEMBRE/PUBLIC/COACH/PARC (contre sept au premier contrôle). Aucun CSS supprimé.
