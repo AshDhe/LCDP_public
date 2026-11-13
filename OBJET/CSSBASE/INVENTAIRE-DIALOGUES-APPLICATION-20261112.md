@@ -265,3 +265,13 @@ Aucun test navigateur effectué.
 | Même source : deuxième confirmation « Des frais de traitement d’annulation s’appliquent… » | `afficherAlerte` sur `02-alerte.html`, OK nécessaire avant enregistrement | **NON TRAITÉ — À QUALIFIER** : validation explicite des frais, ne pas supprimer le second verrou ni le classer simple INFORMATION | — |
 
 **Nettoyage CSS** : aucun fichier CSS supprimé dans ce lot. `02-alerte.html` reste consommé par d'autres alertes et par la seconde validation. Conserver ses styles. Tests navigateur non réalisés.
+
+
+### I.7 Rapprochement — annulations PLANNING membre, 13 novembre 2026
+| Source/cas | Comparaison ancien / nouveau | Statut | Commit |
+|---|---|---|---|
+| `LCDP_membre/ESPACE-MEMBRE/planning-membre.js`, annulation réservation/invite par `traiterAnnulationReservation` | Ancien dialogue à boutons Non/Oui, variant selon la présence du workflow et le type d'accès ; nouveau gabarit SUPPRESSION en surcouche lorsque nécessaire, deux textes métier préservés et décision booléenne. | **TRAITÉ — migration statique** | `fb5871a3` |
+| `planning-membre.js`, autres consommateurs éventuels des helpers `ouvrirDialogueBoutons`, `ouvrirDialogueBoutonsParDessusLightbox` | Helpers historiques toujours présents après migration ; leur absence de consommateurs n'est pas démontrée. | **À QUALIFIER — ne pas supprimer les helpers ni leurs CSS** | — |
+| `abonnement-membre.js`, deuxième confirmation des frais d'annulation | Alerte OK/fermeture avant demande d'avoir ; validation explicitement distincte. | **NON TRAITÉ — à qualifier**, statut I.6 maintenu | — |
+
+**CSS / gabarits** : aucun fichier CSS ni gabarit historique supprimé ; recherche des consommateurs résiduels nécessaire avant tout retrait. Vérification statique uniquement, pas de test navigateur.
