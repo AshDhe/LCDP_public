@@ -341,3 +341,14 @@ Les deux fichiers sont syntaxiquement valides lors de la vérification statique.
 | Même fichier : dépendance à l'ancien dialogue | Une référence littérale à `02-dialogue-bouton.html` | **RETIRÉE** ; aucune référence littérale résiduelle dans le fichier après mise à jour. Ne prouve pas l'inutilisation de l'ancien gabarit dans les autres sources. | `f867df3f` |
 
 **Limites** : suppression fonctionnelle sur brouillon local uniquement tant qu'aucun enregistrement n'a lieu. Aucun CSS partagé supprimé. Aucun test navigateur.
+
+
+### J.3 Nettoyage du code mort des dialogues ADMIN légaux (13 novembre 2026)
+| Fichier | Ancien mécanisme constaté | Opération / statut | Commit |
+|---|---|---|---|
+| `B_ADMIN/cgv-admin.js` | Branche inatteignable `02-dialogue-bouton.html` après confirmation active CHOIX | **RETIRÉ — code mort**, pas une migration SUPPRESSION | `9bd3e3d4` |
+| `B_ADMIN/mentions-legales-admin.js` | Même branche héritée après retour/exception CHOIX | **RETIRÉ — code mort**, pas une migration SUPPRESSION | `8d000213` |
+| `B_ADMIN/reglement-app-admin.js` | Même branche héritée après retour/exception CHOIX | **RETIRÉ — code mort**, pas une migration SUPPRESSION | `38511e0d` |
+| `B_ADMIN/reglement-club-admin.js` | Même branche héritée après retour/exception CHOIX | **RETIRÉ — code mort**, pas une migration SUPPRESSION | `3e9970ec` |
+
+Aucun des quatre fichiers ne conserve de référence littérale à `02-dialogue-bouton.html` après nettoyage ; chacun conserve le dialogue de publication CHOIX. Aucun CSS ni gabarit commun supprimé. Les consommateurs des autres dépôts n'ont pas été déclarés épuisés et aucun test navigateur n'est réalisé.
