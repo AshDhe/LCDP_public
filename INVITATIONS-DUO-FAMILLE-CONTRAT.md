@@ -60,42 +60,33 @@ Code fourni le 13/11/2026, 1 619 lignes, syntaxe JS contrôlée.
 - Le message `Aucune modification de la liste des invités.` provient de `handleMajInvites` lorsque ni mise à jour ni ajout n'ont été enregistrés.
 - Un envoi Resend est lancé en arrière-plan via `ctx.waitUntil` ; la réponse métier actuelle n'atteste pas la livraison effective de chaque e-mail.
 
-**Liaison des options à vérifier :** un contrôle en lecture seule sur la base du projet ne trouve aucun `aboreza_paniers.numero_commande = abo.orderid` pour les 13 lignes `abo`. La table `aboreza_inclusions` ne contient aucune ligne alors que `aboreza_options` en contient. Ne pas inventer de liaison d'options effectivement commandées à un abonnement sans contrat de référence supplémentaire. Ne pas extrapoler la signification de `multiplicateur` (notamment l'option « +5 DUO+ » avec multiplicateur 5).
+**Liaison des options clarifiée le 13/11/2026 après réception des trois Workers de paiement :** une commande payée est rattachée explicitement à son abonnement par `paiement_commandes.idabo`. La clé `paiement_commandes.idpanier` permet de rejoindre `aboreza_options`. L'ancienne comparaison `abo.orderid = aboreza_paniers.numero_commande` était incorrecte : ce sont deux références distinctes. Le rôle d'`aboreza_inclusions` est l'intégration d'abonnements antérieurs dans un nouveau panier, et **non** le rattachement des options achetées. Les privilèges supplémentaires sont à lire exclusivement sur les commandes payées et paniers finalisés. La fonction `paiement_confirmer_commande` écrit l'`idabo` de la commande dans la même transaction que la finalisation.
 
 Le Worker Cloudflare n'est pas accessible via les connecteurs de déploiement actifs. Le fichier reçu est la source de travail pour une **nouvelle version à générer et fournir**, pas une preuve d'un déploiement sur le site.
 
 La vue préparée `04-card-invites-abonnement.html` et le contrôleur `invites-abonnement.js` ne sont pas reliés à `planning-membre.html` ni à `planning-membre.js`. Il est donc attendu que l'ancienne box Inviter reste visible tant que le raccordement et le nouveau Worker ne sont pas prêts.
 
 
-## Passerelle des privilèges supplémentaires : schéma existant vérifié
+## Passerelle des privilèges : correspondance canonique vérifiée dans Supabase
 
-La base possède **déjà** la table `aboreza_inclusions` avec `(idpanier, idabo)` comme clé primaire et deux clés étrangères vers `aboreza_paniers` et `abo`. Il ne faut **pas** créer de doublon fonctionnel de cette table.
+Les trois Workers source fournis sont `w-factupaiement(6).js`, `w-paiement(20261113-164759).js` et `w-rezabo(7).js`. Ils ont été comparés aux fonctions SQL réelles `paiement_confirmer_commande` et `paiement_creer_abo_commande`, sans modifier leur code ni déployer de Worker.
 
-Le chemin canonique est :
+**Chemin exact :**
 
+```text
+abo.idabo <- paiement_commandes.idabo
+              paiement_commandes.idpanier -> aboreza_paniers.idpanier
+                                          -> aboreza_options.idpanier
+aboreza_options.idprixabo -> prixabo.idprixabo (privilèges optionnels)
+abo.idprixabo              -> prixabo.idprixabo (privilèges de base)
 ```
-abo.idabo -- aboreza_inclusions.idabo
-           aboreza_inclusions.idpanier -- aboreza_paniers.idpanier
-                                        -- aboreza_options.idpanier
-aboreza_options.idprixabo -- prixabo.idprixabo
-abo.idprixabo -- prixabo.idprixabo
-```
 
-**Situation vérifiée :** la table `aboreza_inclusions` a **0 ligne**. Les trois lignes d'options enregistrées appartiennent à trois paniers différents : **un panier finalisé** et **deux paniers annulés**. Une seule ligne `aboreza_paniers.numero_commande` est renseignée parmi 31 paniers ; le contrôle `abo.orderid = aboreza_paniers.numero_commande` retourne zéro correspondance.
+Au 13/11/2026, les deux commandes `paiement_commandes.statut='paye'` ont un `idabo` non nul et une relation valide avec `abo`, en accord avec `abo.orderid = paiement_commandes.orderid`. L'une de ces commandes contient l'option `+5 DUO+` sur un panier `finalise`, avec `options_confirmees=true`. Les deux autres lignes d'options appartiennent à des paniers `annule` et doivent être exclues.
 
-Le panier finalisé avec option a **un abonnement payé candidat** présentant le même membre, la même formule et les mêmes dates exactes. En revanche, son numéro de commande ne coïncide pas avec `abo.orderid`. Ce rapprochement de dates et de membre ne constitue pas une preuve suffisante pour établir automatiquement la liaison `idabo` ↔ `idpanier` en production. Un point de contrôle dans le Worker de finalisation de la commande est nécessaire pour créer la ligne au moment de la validation du paiement.
+**Conditions obligatoires de lecture** : `paiement_commandes.statut='paye'` ; `paiement_commandes.idabo = abo.idabo` ; `aboreza_paniers.idpanier = paiement_commandes.idpanier` et `aboreza_paniers.statut='finalise'` ; `aboreza_paniers.options_confirmees=true` pour les lignes d'options ; `aboreza_paniers.idmembre = abo.idmembre = paiement_commandes.idmembre` ; `aboreza_options.idprixabo = prixabo.idprixabo`. Ne jamais calculer des privilèges depuis une option annulée, un panier non payé ou un simple libellé.
 
-La lecture des privilèges supplémentaires doit exiger cumulativement :
-- une inclusion existante (`aboreza_inclusions`) vers l'abonnement ciblé ;
-- un panier réellement finalisé et `options_confirmees=true` ;
-- une identité membre identique entre le panier et l'abonnement ;
-- une ligne d'option dont l'`idprixabo` référence effectivement la formule d'option tarifaire ;
-- aucune attribution de privilège sur les paniers annulés.
+**Multiplicateur confirmé dans le Worker `w-paiement` :** `prix_unitaire_ttc × multiplicateur = montant_ttc`. Le Worker vérifie `multiplicateur=1` pour `+5 DUOMAX` et la durée du panier (en mois) pour les autres options, avec `1` pour `1J`. Ainsi, `multiplicateur=5` sur une option `+5 DUO+` d'un abonnement `5M` concerne **la facturation** et ne signifie pas cinq fois le privilège `duoplus`. Les valeurs de droits sont les colonnes `maxduo`, `duoplus`, `freqduoplus` et `famille` de la ligne `prixabo` référencée par chaque option.
 
-Les privilèges cumulés proviennent de la formule `prixabo` de l'abonnement plus les composantes `prixabo` des options **réellement rattachées à cette commande**. Aucun quota ne doit être calculé uniquement à partir du texte `code_option`.
+**Aucun changement nécessaire aux Workers de paiement pour créer la clé** : `paiement_creer_abo_commande` retrouve/crée l'abonnement et renseigne `paiement_commandes.idabo` ; `paiement_confirmer_commande` confirme paiement, abonnement et accès atomiquement. L'usage des droits doit être implémenté **dans le Worker d'invitation**, sans réinterpréter `aboreza_inclusions` ni toucher aux paiements.
 
-**Attention au champ `multiplicateur` :** sur l'option « +5 DUO+ » du panier finalisé, `prix_unitaire_ttc=20`, `multiplicateur=5` et `montant_ttc=100`. Le produit `20 × 5 = 100` confirme son rôle dans la tarification de cette ligne ; cela n'autorise pas à déduire que le quota `duoplus` est multiplié par cinq. Il faut vérifier le Worker d'ABO-RÉZA ou de facturation pour établir précisément sa sémantique sur les privilèges.
-
-Pour l'adaptation de `w-inviter-membre.js`, les écritures d'invitations doivent s'effectuer côté serveur avec une vérification atomique des quotas (MAXDUO, DUO+ simultanés et fréquence mensuelle, MAXFAMILL), en distinguant carnet `inviteabo` et accès `inviteacces`. Aucune valeur d'option non rattachée ne doit être appliquée par simple ressemblance de dates.
-
-**Règle de non-régression :** ne pas activer le formulaire V2 ni remplacer les routes existantes tant que la passerelle n'est pas renseignée lors des nouvelles commandes, que les droits supplémentaires ne sont pas calculés de façon déterministe et que l'enregistrement atomique n'est pas vérifié.
+**À finaliser :** règles de cumul exact des privilèges d'option avec les droits de base, calcul temporel et atomique de `freqduoplus`, enregistrement `inviteabo`/`inviteacces`, compatibilité des anciennes routes et des envois e-mail, puis activation du nouveau formulaire. Ce document n'est pas une preuve que le Worker d'invitation a été déployé.
