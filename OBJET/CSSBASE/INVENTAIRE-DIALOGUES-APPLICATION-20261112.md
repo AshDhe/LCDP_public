@@ -315,3 +315,11 @@ La ligne de J.1 concernant les helpers remplace le statut « à qualifier » de 
 | `02-alerte.html` et CSS associés | `afficherAlerte` reste appelée à d'autres endroits du même fichier ; consommateurs non épuisés | **CONSERVER — nettoyage non autorisé** | — |
 
 Aucun test navigateur ; ne pas déduire qu'une confirmation des frais vaut une acceptation contractuelle distincte des CGV, le code ne conserve que le même oui/non qu'avant.
+
+
+### I.11 Rapprochement adjacent CHOIX — opération IA, planning ADMIN (13 novembre 2026)
+| Cas | Comparaison | Statut / profil | Commit |
+|---|---|---|---|
+| `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js`, `appliquerIA()` | Ancien `confirm` natif avant **enregistrement** d'une opération, avertissant des possibles annulations de réservations. Nouveau gabarit CHOIX déjà disponible dans ce fichier ; texte et requête `/operation` conservés. | **TRAITÉ — CHOIX**, reclasse le « NON TRAITÉ — IMPACTS À QUALIFIER » de I.8 et I.9 ; ne pas compter comme SUPPRESSION | `636b04f8` |
+
+**Contrôle local de source** : zéro appel `confirm()` natif restant dans `planning-parc.js`. Cela ne prouve pas leur disparition dans les autres fichiers ou dépôts. Aucun CSS supprimé. Test navigateur non réalisé.
