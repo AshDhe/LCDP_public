@@ -505,3 +505,15 @@ Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Au
 | `LCDP_public/ESPACE-PUBLIC/faq.js`, `LCDP_ouvrirDialogueMonCompte` | `02-dialogue-bouton.html`, deux liens distincts « Me connecter » et « Être invité(e) », partagé avec variante FAQ membre | **CONSERVER — MULTI-ACTIONS** ; ne pas remplacer par un CHOIX binaire et ne pas supprimer le gabarit/CSS |
 
 Aucune modification fonctionnelle ni CSS dans ce fichier ; contrôle statique uniquement.
+
+
+### K.14 MEMBRE — Ma clé, mot de passe et erreurs Mes accès (13 novembre 2026)
+| Source / cas | Ancien mécanisme | Après / statut | Commit |
+|---|---|---|---|
+| `LCDP_membre/ESPACE-MEMBRE/lacleduparc.js` : erreurs/situations bloquantes de Ma clé | `02-alerte.html`, acquittement OK, fermeture croix/fond/Échap pour cas ordinaires | **TRAITÉ — ERREUR** : référence ERREUR, même libellé d'action personnalisable, valeurs de décision et confirmations INFORMATION conservées ; CSS déjà chargé | `0199be5d` |
+| `LCDP_membre/ESPACE-MEMBRE/mdp-membre.js` : erreurs de saisie et d'envoi | `02-alerte.html`, INFORMATION séparé pour réussite et redirection après fermeture | **TRAITÉ — ERREUR**, INFORMATION et redirection conservés ; rectification du clic sur fond avec redirection dans un second commit | `a13faf17`, `8ca657c7` |
+| `LCDP_membre/ESPACE-MEMBRE/mes-acces-membre.js` : erreurs d'annulation | Deux `window.alert` natifs | **TRAITÉ — ERREUR**, gabarit de référence avec fallback natif uniquement en cas d'indisponibilité ; confirmation SUPPRESSION et requête inchangées | `f311d762` |
+| `LCDP_membre/ESPACE-MEMBRE/aboreza-membre.js` : workflow | `02-dialogue-bouton.html` monté dans workflow ABO-RÉZA | **CONSERVER — workflow personnalisé**, pas une confirmation binaire | — |
+| `LCDP_membre/ESPACE-MEMBRE/alerte-planifier-formulaire.js` : formulaire de critères | `02-dialogue-bouton.html` hébergeant un formulaire complet | **CONSERVER — saisie complexe**, pas une SUPPRESSION/CHOIX | — |
+
+**Contrôle statique** : trois JS compilables ; les deux premiers ne contiennent plus de référence `02-alerte.html`. Le troisième conserve `window.alert` de secours à l'intérieur du nouveau helper ERREUR. Aucune suppression CSS ni test navigateur. Cette vérification ne couvre pas tous les consommateurs des cinq dépôts.
