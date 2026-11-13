@@ -100,13 +100,13 @@ body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces
   width: 100% !important;
   max-width: 100% !important;
 }
-#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__actions-barre {
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__actions-barre {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   width: 100% !important;
   gap: 8px !important;
 }
-#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] :is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte]) {
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] :is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte]) {
   width: 100% !important;
   min-width: 0 !important;
   max-width: 100% !important;
@@ -115,12 +115,12 @@ body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces
   min-height: 40px !important;
   border-radius: 8px !important;
 }
-#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-carte] {
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-carte] {
   background: var(--lcdp-color-logo-green, #536c3d) !important;
   border-color: var(--lcdp-color-logo-green, #536c3d) !important;
   color: #fff !important;
 }
-#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-partager] {
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-partager] {
   background: #e59834 !important;
   border-color: #e59834 !important;
   color: #fff !important;
