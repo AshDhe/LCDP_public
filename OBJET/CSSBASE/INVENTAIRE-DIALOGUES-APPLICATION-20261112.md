@@ -229,3 +229,12 @@ Les autres cas du tableau I.1 demeurent non traités. Aucun test navigateur réa
 | `LCDP_admin/B_ADMIN/admin-actualite.js`, supprimer actualité | Ancien dialogue à boutons pour suppression brouillon/site/pop-up, image conservée ; nouveau gabarit SUPPRESSION avec message, Annuler/Supprimer et retour booléen ; publication/dépublication CHOIX et `sauver('supprimer',a.id)` inchangés. | **TRAITÉ — migration statique** (remplace NON TRAITÉ de I.1) | `245b3b42` |
 
 Les annulations MEMBRE restent ouvertes. Aucun test navigateur réalisé.
+
+
+### I.5 Actualisation — annulations MES ACCÈS membre, 13 novembre 2026
+| Cas | Comparaison | Statut | Commit |
+|---|---|---|---|
+| `LCDP_membre/ESPACE-MEMBRE/mes-acces-membre.js` : annulation accès ou invitation reçue | Ancien `window.confirm` avec deux messages métier ; nouveau dialogue SUPPRESSION conservant le texte, distinction des cas, décision booléenne et mêmes requêtes d'annulation ; fermeture neutre en cas d'échec. | **TRAITÉ — migration statique** (remplace le statut NON TRAITÉ de I.1 pour cette source) | `845cf9aa` |
+| `LCDP_membre/planning-membre.js`, `abonnement-membre.js` : autres annulations | Flux de réservation et abonnement à analyser individuellement, ne pas confondre avec l'annulation MES ACCÈS. | **NON TRAITÉ — à qualifier** | — |
+
+Aucun test navigateur effectué.
