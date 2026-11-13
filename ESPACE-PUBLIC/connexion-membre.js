@@ -200,29 +200,48 @@
   async function finaliserSecuriteAvantConnexion(data) {
     const slot=document.getElementById("lcdp-lightbox-slot");
     let renvoyer=false;
+    const messageSecurite="Vos codes de sécurité de compte ne sont pas définis. Consultez l'email reçu pour plus d'informations.";
+    const avant=document.activeElement;
     try {
-      const fragment=await chargerFragmentObjet("/HTMLBASE/02-dialogue-bouton.html");
-      slot.innerHTML="";slot.appendChild(fragment);
-      slot.querySelector("[data-lcdp-dialogue-title]").textContent="Sécurité du compte";
-      
-      // OPTIMISATION : Mise à jour du texte selon vos indications (au singulier)
-      slot.querySelector("[data-lcdp-dialogue-text]").textContent="Vos codes de sécurité de compte ne sont pas définis. Consultez l'email reçu pour plus d'informations.";
-      
-      const actions=slot.querySelector("[data-lcdp-dialogue-actions]");
+      if(!slot)throw new Error("Conteneur CHOIX indisponible.");
+      const fragment=await chargerFragmentObjet("/HTMLBASE/02-dialogue-reference-choix.html");
+      slot.replaceChildren(fragment);
+      const dialogue=slot.querySelector('[data-lcdp-dialogue-reference="choix"]');
+      const titre=slot.querySelector("[data-lcdp-dialogue-titre]");
+      const texte=slot.querySelector("[data-lcdp-dialogue-message]");
+      const annuler=slot.querySelector('[data-lcdp-dialogue-action="annuler"]');
+      const confirmer=slot.querySelector('[data-lcdp-dialogue-action="confirmer"]');
+      if(!dialogue||!titre||!texte||!annuler||!confirmer)throw new Error("Structure CHOIX incomplète.");
+      titre.textContent="Sécurité du compte";
+      texte.textContent=messageSecurite;
+      annuler.textContent="Annuler";
+      confirmer.textContent="Renvoyer l'email";
       renvoyer=await new Promise(resolve=>{
-        const fermer=valeur=>{slot.innerHTML="";resolve(valeur);};
-        
-        // OPTIMISATION : Suppression du bouton "OK". Modification du texte "Renvoyer les liens" par "Renvoyer l'email"
-        for (const [texte,valeur] of [["Renvoyer l'email",true], ["Annuler",false]]) {
-          const bouton=document.createElement("button");bouton.type="button";
-          bouton.className="lcdp-button "+(valeur?"lcdp-button-primary":"lcdp-button-secondary");
-          bouton.textContent=texte;bouton.addEventListener("click",()=>fermer(valeur),{once:true});actions.appendChild(bouton);
-        }
-        slot.querySelector("[data-lcdp-dialogue-close]").addEventListener("click",()=>fermer(false),{once:true});
+        let termine=false;
+        const fermer=valeur=>{
+          if(termine)return;
+          termine=true;
+          document.removeEventListener("keydown",clavier);
+          slot.replaceChildren();
+          if(avant?.isConnected&&typeof avant.focus==="function")avant.focus();
+          resolve(valeur);
+        };
+        const clavier=e=>{
+          if(e.key==="Escape"){e.preventDefault();fermer(false);}
+          if(e.key==="Tab"){
+            if(e.shiftKey&&document.activeElement===annuler){e.preventDefault();confirmer.focus();}
+            else if(!e.shiftKey&&document.activeElement===confirmer){e.preventDefault();annuler.focus();}
+          }
+        };
+        annuler.addEventListener("click",()=>fermer(false),{once:true});
+        confirmer.addEventListener("click",()=>fermer(true),{once:true});
+        dialogue.addEventListener("click",e=>{if(e.target===dialogue)fermer(false);});
+        document.addEventListener("keydown",clavier);
+        annuler.focus();
       });
-    } catch {
-      // Version de secours (fallback) également mise à jour au singulier
-      await afficherInformation("Sécurité du compte","Vos codes de sécurité de compte ne sont pas définis. Consultez l'email reçu pour plus d'informations.","information");
+    } catch(error) {
+      slot?.replaceChildren();
+      await afficherInformation("Sécurité du compte",messageSecurite,"information");
     }
     if (renvoyer) {
       try {
