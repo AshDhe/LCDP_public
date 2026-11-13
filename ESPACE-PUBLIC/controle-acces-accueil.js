@@ -59,31 +59,84 @@
   function hh(t) {return new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',hour:'2-digit',minute:'2-digit'}).format(new Date(t)).replace(':',' h ');}
   function fin(r) {return dateDebut(r) + (dureesPlage[String(r.plagebookd || '')] || 0) * 60 * MINUTE;}
 
-  async function alerte(message, action = null) {
+  async function alerte(message, action = null, profil = 'erreur') {
     const slot = document.getElementById('lcdp-lightbox-slot');
     if (!slot) throw new Error('Emplacement de lightbox introuvable.');
-    const html = await fetch(urlObjet('/HTMLBASE/02-alerte.html'),{cache:'no-cache'});
-    if (!html.ok) throw new Error('Objet lightbox indisponible.');
+    const mode = action ? 'choix' : profil === 'information' ? 'information' : 'erreur';
+    const href = urlObjet('/CSSBASE/lcdp-lightbox-convergence.css');
+    if (![...document.querySelectorAll('link[rel="stylesheet"]')]
+      .some(lien => lien.href === new URL(href, document.baseURI).href)) {
+      await new Promise((resolve,reject) => {
+        const lien = document.createElement('link');
+        lien.rel = 'stylesheet';
+        lien.href = href;
+        lien.onload = resolve;
+        lien.onerror = () => {
+          lien.remove();
+          reject(new Error('CSS de convergence indisponible.'));
+        };
+        document.head.appendChild(lien);
+      });
+    }
+    const source = {
+      choix: '/HTMLBASE/02-dialogue-reference-choix.html',
+      information: '/HTMLBASE/02-dialogue-reference-information.html',
+      erreur: '/HTMLBASE/02-dialogue-reference-erreur.html'
+    }[mode];
+    const response = await fetch(urlObjet(source), {cache:'no-cache'});
+    if (!response.ok) throw new Error('Objet lightbox indisponible.');
     const template = document.createElement('template');
-    template.innerHTML = (await html.text()).trim();
+    template.innerHTML = (await response.text()).trim();
     slot.replaceChildren(template.content.cloneNode(true));
-    const boite = slot.querySelector('[data-lcdp-box-alerte]');
-    const texte = slot.querySelector('[data-lcdp-alerte-message]');
-    const fermerBouton = slot.querySelector('[data-lcdp-alerte-close]');
-    const bouton = slot.querySelector('[data-lcdp-alerte-ok]');
-    if (!boite || !texte || !fermerBouton || !bouton) throw new Error('Structure de lightbox incomplète.');
+    const boite = slot.querySelector('[data-lcdp-dialogue-reference="' + mode + '"]');
+    const titre = boite?.querySelector('[data-lcdp-dialogue-titre]');
+    const texte = boite?.querySelector('[data-lcdp-dialogue-message]');
+    const confirmer = boite?.querySelector(mode === 'choix'
+      ? '[data-lcdp-dialogue-action="confirmer"]'
+      : mode === 'information'
+        ? '[data-lcdp-dialogue-action="compris"]'
+        : '[data-lcdp-dialogue-action="fermer"]');
+    const annuler = mode === 'choix'
+      ? boite?.querySelector('[data-lcdp-dialogue-action="annuler"]')
+      : null;
+    if (!boite || !titre || !texte || !confirmer || (mode === 'choix' && !annuler)) {
+      slot.replaceChildren();
+      throw new Error('Structure de lightbox incomplète.');
+    }
+    titre.textContent = mode === 'choix' ? 'Accès à votre espace' :
+      mode === 'information' ? 'Information' : 'Accès indisponible';
     texte.textContent = message;
-    boite.classList.add('lcdp-alerte-droits');
-    if (action) {
-      bouton.textContent = action.libelle;
-      boite.classList.add('lcdp-alerte-droits--action-jaune');
-    } else bouton.hidden = true;
+    confirmer.textContent = action ? action.libelle : 'Fermer';
+    if (annuler) annuler.textContent = 'Fermer';
+
+    const focusInitial = document.activeElement;
     const controller = new AbortController();
-    function fermer() {controller.abort();slot.replaceChildren();}
-    fermerBouton.addEventListener('click',fermer,{signal:controller.signal});
-    boite.addEventListener('click',e=>{if(e.target===boite)fermer();},{signal:controller.signal});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')fermer();},{signal:controller.signal});
-    if (action) bouton.addEventListener('click',()=>{fermer();window.location.href=urlMembre(chemin[action.destination]);},{signal:controller.signal});
+    const fermer = () => {
+      controller.abort();
+      slot.replaceChildren();
+      if (focusInitial?.isConnected && typeof focusInitial.focus === 'function') {
+        focusInitial.focus({preventScroll:true});
+      }
+    };
+    confirmer.addEventListener('click', () => {
+      fermer();
+      if (action) window.location.href = urlMembre(chemin[action.destination]);
+    }, {signal:controller.signal});
+    annuler?.addEventListener('click',fermer,{signal:controller.signal});
+    boite.addEventListener('click',event=>{
+      if (event.target === boite) fermer();
+    },{signal:controller.signal});
+    document.addEventListener('keydown',event=>{
+      if (event.key === 'Escape') {event.preventDefault();fermer();}
+      if (mode === 'choix' && event.key === 'Tab') {
+        if (event.shiftKey && document.activeElement === annuler) {
+          event.preventDefault();confirmer.focus();
+        } else if (!event.shiftKey && document.activeElement === confirmer) {
+          event.preventDefault();annuler.focus();
+        }
+      }
+    },{signal:controller.signal});
+    if (annuler) annuler.focus(); else confirmer.focus();
   }
   function planifier() {return {libelle:'PLANIFIER',destination:'planifier'};}
   function regulariser() {return {libelle:'Régulariser',destination:'regulariser'};}
@@ -122,15 +175,15 @@
       const debut=dateDebut(proche),invitation=vraie(proche.invitation);
       let message='Votre clé sera active à partir de '+hh(debut-15*MINUTE)+' jusqu’à '+hh(debut+30*MINUTE)+' pour l’accès planifié.';
       if(invitation) message+=' Votre invitant doit d’abord valider son checkin sans valider le vôtre.';
-      await alerte(message);return 'refuse';
+      await alerte(message, null, 'information');return 'refuse';
     }
     const pendant=resas.filter(r=>dateDebut(r)-15*MINUTE<=now && now<=dateDebut(r)+30*MINUTE).sort((a,b)=>dateDebut(a)-dateDebut(b))[0];
     if(motif==='sponsor_not_checked_in' && pendant && vraie(pendant.invitation)) {
-      await alerte('Votre clé sera active jusqu’à '+hh(dateDebut(pendant)+30*MINUTE)+' quand votre invitant aura validé son checkin sans valider le vôtre.');
+      await alerte('Votre clé sera active jusqu’à '+hh(dateDebut(pendant)+30*MINUTE)+' quand votre invitant aura validé son checkin sans valider le vôtre.', null, 'information');
       return 'refuse';
     }
     const depassee=resas.filter(r=>dateDebut(r)+30*MINUTE<now && Number.isFinite(fin(r)) && now<fin(r)).sort((a,b)=>dateDebut(b)-dateDebut(a))[0];
-    if(depassee) {await alerte('Votre clé n’est plus active pour l’accès planifié.');return 'refuse';}
+    if(depassee) {await alerte('Votre clé n’est plus active pour l’accès planifié.', null, 'information');return 'refuse';}
     if(pendant && motif !== 'no_current_access' && motif !== 'no_reservation' && motif !== 'no_invitation') {
       await alerte(String(rep.message || 'Votre clé n’est pas active actuellement.'));return 'refuse';
     }
