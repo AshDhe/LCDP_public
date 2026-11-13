@@ -1,29 +1,60 @@
 <section class="lcdp-page-section" data-lcdp-invitation-abonnement role="region" aria-labelledby="lcdp-invitation-abonnement-titre">
+  <style>
+    [data-lcdp-invitation-abonnement] .lcdp-invites-titre {
+      font-size:27px!important;line-height:1.2!important;font-weight:800!important;letter-spacing:.02em;
+    }
+    [data-lcdp-invitation-abonnement] .lcdp-invites-categorie {
+      display:inline-flex;align-items:center;gap:7px;width:max-content;max-width:100%;
+      padding:5px 9px;margin:0 0 10px;border-radius:11px;
+      font-size:15px!important;line-height:1.3!important;font-weight:800!important;
+    }
+    [data-lcdp-invitation-categorie="duo"] .lcdp-invites-categorie {
+      border:1px solid #f6cb70;background:#fff8e9;color:#644021;
+    }
+    [data-lcdp-invitation-categorie="famille"] .lcdp-invites-categorie {
+      border:1px solid #b7c7ac;background:#f2f6ed;color:#425a33;
+    }
+    [data-lcdp-invitation-abonnement] .lcdp-invites-ajouter {
+      display:inline-flex!important;align-items:center;justify-content:center;gap:6px;
+      width:auto!important;max-width:100%!important;min-width:116px!important;
+      min-height:39px!important;margin-top:12px!important;padding:7px 14px!important;
+      border-radius:13px!important;font-size:14px!important;font-weight:700!important;
+    }
+    [data-lcdp-invitation-categorie="duo"] .lcdp-invites-ajouter {
+      border:1px solid #f6c84f!important;background:#fff3c7!important;color:#553319!important;
+    }
+    [data-lcdp-invitation-categorie="famille"] .lcdp-invites-ajouter {
+      border:1px solid #acbda1!important;background:#edf3e9!important;color:#465f35!important;
+    }
+    [data-lcdp-invitation-abonnement] .lcdp-invites-ajouter:focus-visible {
+      outline:2px solid currentColor;outline-offset:2px;
+    }
+  </style>
   <div class="lcdp-page-container">
     <div class="lcdp-page-content">
       <section class="lcdp-box-liste-card" data-lcdp-invitation-wrapper>
         <div class="lcdp-box-liste-card__header">
           <div class="lcdp-box-liste-card__heading">
-            <h2 class="lcdp-box-liste-card__title" id="lcdp-invitation-abonnement-titre">Inviter / Invités</h2>
+            <h2 class="lcdp-box-liste-card__title lcdp-invites-titre" id="lcdp-invitation-abonnement-titre">INVITÉS</h2>
           </div>
-          <button type="button" class="lcdp-box-dialogue-champ-inviter__close" data-lcdp-listinvites-close aria-label="Fermer le formulaire Inviter" title="Fermer">×</button>
+          <button type="button" class="lcdp-box-dialogue-champ-inviter__close" data-lcdp-listinvites-close aria-label="Fermer le formulaire Invités" title="Fermer">×</button>
         </div>
         <div class="lcdp-box-liste-card__list">
           <form class="lcdp-box-dialogue-champ-inviter__form" data-lcdp-invitation-form data-lcdp-invitation-abonnement-form novalidate style="display:flex; flex-direction:column; gap:18px;">
             <p class="lcdp-text-muted" data-lcdp-invitation-abonnement-message role="status" aria-live="polite" hidden></p>
             <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-duo" data-lcdp-invitation-categorie="duo" style="display:flex;flex-direction:column;gap:0;min-width:0;padding:14px 12px 16px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
-              <h3 class="lcdp-box-champ-formulaire__label" id="lcdp-invitation-titre-duo" style="font-size:23px;line-height:1.2;font-weight:800;letter-spacing:.01em;color:var(--lcdp-color-text,#1f2a24);margin:0 0 8px;">INVITÉ DUO / DUO+</h3>
+              <h3 class="lcdp-box-champ-formulaire__label lcdp-invites-categorie" id="lcdp-invitation-titre-duo"><span aria-hidden="true">👫</span> DUO / DUO+</h3>
               <p class="lcdp-box-champ-formulaire__description" data-lcdp-invitation-quota="duo" role="status" hidden></p>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="duo" style="display:none;margin:0 0 8px;padding:0;list-style:none;"></ul>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="duo" style="margin:0;padding:0;list-style:none;"></ul>
-              <button type="button" class="lcdp-button lcdp-button-secondary" data-lcdp-invitation-ajouter="duo" style="width:100%;max-width:none;min-height:44px;margin-top:12px;">Ajouter un invité DUO / DUO+</button>
+              <button type="button" class="lcdp-button lcdp-button-secondary lcdp-invites-ajouter" data-lcdp-invitation-ajouter="duo"><span aria-hidden="true">＋</span> Ajouter</button>
             </section>
             <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-famille" data-lcdp-invitation-categorie="famille" style="display:flex;flex-direction:column;gap:0;min-width:0;padding:14px 12px 16px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
-              <h3 class="lcdp-box-champ-formulaire__label" id="lcdp-invitation-titre-famille" style="font-size:23px;line-height:1.2;font-weight:800;letter-spacing:.01em;color:var(--lcdp-color-text,#1f2a24);margin:0 0 8px;">INVITÉ FAMILLE</h3>
+              <h3 class="lcdp-box-champ-formulaire__label lcdp-invites-categorie" id="lcdp-invitation-titre-famille"><span aria-hidden="true">🏠</span> FAMILLE</h3>
               <p class="lcdp-box-champ-formulaire__description" data-lcdp-invitation-quota="famille" role="status" hidden></p>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="famille" style="display:none;margin:0 0 8px;padding:0;list-style:none;"></ul>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="famille" style="margin:0;padding:0;list-style:none;"></ul>
-              <button type="button" class="lcdp-button lcdp-button-secondary" data-lcdp-invitation-ajouter="famille" style="width:100%;max-width:none;min-height:44px;margin-top:12px;">Ajouter un invité FAMILLE</button>
+              <button type="button" class="lcdp-button lcdp-button-secondary lcdp-invites-ajouter" data-lcdp-invitation-ajouter="famille"><span aria-hidden="true">＋</span> Ajouter</button>
             </section>
             <div class="lcdp-box-dialogue-champ-inviter__actions" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;justify-items:stretch;margin-top:0;padding:12px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
               <button type="button" class="lcdp-button lcdp-button-secondary" aria-disabled="true" data-lcdp-invitation-groupe title="Fonction Groupe à venir" style="width:100%;max-width:none;min-width:0;min-height:44px;margin:0;">Groupe</button>
