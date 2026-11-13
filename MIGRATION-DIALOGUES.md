@@ -357,3 +357,9 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **TRAITÉ — migration statique**, commit `a2cbea71` : même avertissement sur les frais, deuxième appel au gabarit SUPPRESSION avec titre « Confirmer l’annulation avec frais ? », actions « Conserver » et « Poursuivre l’annulation ». Aucun enregistrement sans première ET deuxième validation ; refus/fermeture/ressource indisponible bloquent l'appel. Le helper existant est paramétré sans modifier le contrat booléen.
 - **Métier inchangé** : `POST /demander-annulation`, `idabo`, contrôle d'absence d'abonnement, informations sur l'avoir et rechargement ; aucun Worker modifié.
 - **CSS et composants** : retrait de ce dernier usage d'`afficherAlerte` pour valider les frais, mais `afficherAlerte` reste appelée ailleurs ; `02-alerte.html` et ses CSS ne sont donc pas supprimés. Tests navigateur non réalisés.
+
+
+### CHOIX adjacent — dernière confirmation native du planning ADMIN (13 novembre 2026)
+- `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js`, `appliquerIA()` : ancienne confirmation native « Enregistrer cette opération ... ? Une réduction d’accès annule les réservations concernées. » n'est **pas une suppression** ; elle autorise un enregistrement pouvant provoquer des annulations.
+- **TRAITÉ — classification CHOIX et migration statique**, commit `636b04f8` : réutilisation du helper CHOIX `demanderChoixPlanningAdmin` déjà en place, titre « Enregistrer cette opération ? », message d'avertissement conservé, bouton « Enregistrer ». Le Worker `POST /operation` et les conséquences métier sont inchangés.
+- **Résultat ciblé** : plus aucun appel natif `confirm(...)` dans ce fichier après les migrations SUPPRESSION (opération et deux abandons de base) et la migration CHOIX (opération IA). Aucune suppression de CSS ou de fragment partagé, aucun test navigateur.
