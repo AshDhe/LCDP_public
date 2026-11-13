@@ -76,6 +76,14 @@
   font-size: 13px;
   line-height: 1.65;
 }
+/* Lien complémentaire d'inscription, moins dominant que les deux actions. */
+.lcdp-email-transactionnel__lien,
+.lcdp-email-transactionnel__lien:link,
+.lcdp-email-transactionnel__lien:visited {
+  color: #4e6838;
+  font-weight: 600;
+  text-decoration: underline;
+}
 @media (max-width: 620px) {
   .lcdp-email-transactionnel .lcdp-email-editorial__corps {
     padding-top: 36px;
@@ -85,11 +93,3 @@
   }
 }
 
-/* Lien complémentaire d'inscription, moins dominant que les deux actions. */
-.lcdp-email-transactionnel__lien,
-.lcdp-email-transactionnel__lien:link,
-.lcdp-email-transactionnel__lien:visited {
-  color: #4e6838;
-  font-weight: 600;
-  text-decoration: underline;
-}
