@@ -4523,10 +4523,6 @@
   }
 
   async function ouvrirConfirmationShift(titre, texte) {
-    const detail = document.querySelector("[data-lcdp-box-shift-detail-parc]");
-    const slot = detail?.querySelector("[data-lcdp-shift-detail-parc-alerte-slot]");
-    if (!slot) return window.confirm(texte);
-
     const hote = document.createElement("div");
     document.body.appendChild(hote);
     try {
