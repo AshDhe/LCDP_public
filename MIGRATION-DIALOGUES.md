@@ -238,3 +238,11 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - `LCDP_admin/ESPACE-ADMIN/B_ADMIN/cgv-admin.js` : confirmation de **publication des CGV** migrée vers CHOIX. Commit `f0c10770`.
 - Le changement concerne les composants et leurs retours de décision, sans modification des appels métier / Worker. Les confirmations administratives de sortie/abandon de brouillon, d'opérations réduisant les accès et de suppression restent **REPORTÉES** au lot SUPPRESSION ou à la qualification des conséquences ; ne pas les migrer mécaniquement.
 - **Contrôle** : commits GitHub réalisés. Aucun essai réel sur navigateur, aucune preuve d'absence de consommateur résiduel des anciens styles.
+
+### CHOIX — publications ADMIN, lot complémentaire du 13 novembre 2026
+- `LCDP_admin/ESPACE-ADMIN/B_ADMIN/mentions-legales-admin.js` : confirmation « Publier les mentions légales » migrée vers `02-dialogue-reference-choix.html`. Texte, retour booléen, sortie Escape / clic extérieur et flux de publication préservés. Commit `bd9d8226`.
+- `LCDP_admin/ESPACE-ADMIN/B_ADMIN/reglement-app-admin.js` : confirmation « Publier les règlement application » (libellé historique conservé) migrée vers CHOIX. Commit `d847509f`.
+- `LCDP_admin/ESPACE-ADMIN/B_ADMIN/reglement-club-admin.js` : confirmation « Publier les règlement club » (libellé historique conservé) migrée vers CHOIX. Commit `cef68291`.
+- CSS de convergence chargé à la demande sans nouvelle feuille métier. Aucun Worker modifié. Les fonctions historiques restantes ne sont pas supprimées dans ce lot.
+- **À suivre** : confirmation de sortie du planning admin à trois conséquences (rester, sauvegarder, ignorer), changements d'accès pouvant annuler des réservations, annulations et suppressions : classification métier / SUPPRESSION. Sélecteurs multi-comptes et workflows complexes : pense-bête d'arbitrage.
+- Tests navigateur non réalisés. Ne pas déclarer CHOIX clos sans statut de tous les cas inventoriés.
