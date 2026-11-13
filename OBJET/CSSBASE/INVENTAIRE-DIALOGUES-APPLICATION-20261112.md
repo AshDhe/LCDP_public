@@ -295,3 +295,14 @@ La ligne de J.1 concernant les helpers remplace le statut « à qualifier » de 
 | Même fichier : dialogue de sortie | Plusieurs issues, sauvegarder/rester/ignorer | **REPORTÉ — MULTI-ACTIONS** | — |
 
 **Nettoyage CSS** : `lcdp-lightbox-convergence.css` déjà chargé par `planning-parc.html`. Aucun CSS ancien supprimé dans ce lot. Aucun test navigateur.
+
+
+### I.9 Comparaison — abandon de nouvelle base, planning ADMIN (13 novembre 2026)
+| Source / cas | Avant | Après / statut | Commit |
+|---|---|---|---|
+| `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js`, `nouvelleBase()` lorsque `baseDirty` | `confirm('Abandonner la nouvelle base en cours ?')` | **TRAITÉ — migration statique** : gabarit SUPPRESSION, Conserver/Abandonner, même décision de renoncer au brouillon local | `23fab949` |
+| Même fichier, bouton `annuler-base` | `confirm('Abandonner la nouvelle base ?')` avant `annulerBase()` | **TRAITÉ — migration statique** : gabarit SUPPRESSION, annulation de la confirmation sans abandon du brouillon | `23fab949` |
+| Même fichier, `appliquerIA()` | `confirm` d'enregistrement pouvant annuler des réservations | **NON TRAITÉ — IMPACTS À QUALIFIER** (seul appel natif `confirm` restant dans ce fichier) | — |
+| Même fichier, dialogue de sortie | Plusieurs décisions (rester/enregistrer/ignorer) | **REPORTÉ — MULTI-ACTIONS** | — |
+
+**Réconciliation** : les deux lignes « NON TRAITÉ — À QUALIFIER » de I.8 concernant `nouvelleBase` et `annuler-base` prennent désormais le statut TRAITÉ ci-dessus. Anciennes feuilles CSS : aucune suppression, `lcdp-lightbox-convergence.css` déjà raccordée à la page ; autres consommateurs à auditer avant retrait. Aucun test navigateur.
