@@ -517,3 +517,12 @@ Aucune modification fonctionnelle ni CSS dans ce fichier ; contrôle statique un
 | `LCDP_membre/ESPACE-MEMBRE/alerte-planifier-formulaire.js` : formulaire de critères | `02-dialogue-bouton.html` hébergeant un formulaire complet | **CONSERVER — saisie complexe**, pas une SUPPRESSION/CHOIX | — |
 
 **Contrôle statique** : trois JS compilables ; les deux premiers ne contiennent plus de référence `02-alerte.html`. Le troisième conserve `window.alert` de secours à l'intérieur du nouveau helper ERREUR. Aucune suppression CSS ni test navigateur. Cette vérification ne couvre pas tous les consommateurs des cinq dépôts.
+
+
+### K.15 Qualification supplémentaire — `mes-informations.js`, 13 novembre 2026
+| Consommateur | Constat dans la source | Statut |
+|---|---|---|
+| `LCDP_membre/ESPACE-MEMBRE/mes-informations.js`, `afficherAlerte(message)` | Ancien `02-alerte.html`, appels pour erreurs et pour `messageValidation` après certaines modifications | **NON TRAITÉ — reclasser les appels un à un**, ne pas convertir globalement en ERREUR |
+| Même fichier, `afficherAlerteSuperposee(message)` | Ancien `02-alerte.html`, affichage de secours de certains résultats de sécurité | **NON TRAITÉ — secours à préserver**, ne pas supprimer le gabarit ou CSS |
+
+Ces deux consommateurs empêchent de déclarer `02-alerte.html` inutilisé. Aucun code applicatif modifié au titre de ce constat.
