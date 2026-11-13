@@ -391,8 +391,9 @@
         "responsabilite": "Variantes visuelles propres aux invitations"
       }
     ],
-    "statut_integration": "Gabarit non raccordé au Worker : les e-mails existants restent inchangés",
-    "compatibilite_messageries": "Prévoir une transformation des feuilles CSS en styles du HTML final hors Worker avant l'envoi. La référence externe aux feuilles suffit pour les aperçus web, pas pour garantir le rendu dans les messageries."
+    "statut_integration": "HTML d'expédition précompilé et gabarit de page prêts ; déploiement du Worker non vérifié",
+    "compatibilite_messageries": "Prévoir une transformation des feuilles CSS en styles du HTML final hors Worker avant l'envoi. La référence externe aux feuilles suffit pour les aperçus web, pas pour garantir le rendu dans les messageries.",
+    "sortie_html_expedition": "OBJET/HTMLBASE/04-email-invitation-expedition.html"
   },
   "regles_de_propriete": {
     "central": "tokens, composants partagés, variantes activées par data-lcdp-css",
