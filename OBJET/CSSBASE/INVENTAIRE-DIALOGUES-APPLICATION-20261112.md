@@ -415,3 +415,12 @@ Huit fichiers JavaScript sont concernés par la passe MEMBRE/PUBLIC/COACH/PARC (
 | Même fichier, dépendances restantes à `02-dialogue-bouton.html` | Trois références littérales initiales | **2 références restantes** après migration : paiement et saisie CODA ; **NON TRAITÉ — CONSERVER** l'ancien gabarit/CSS | — |
 
 Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Aucune suppression CSS globale ; test navigateur non effectué.
+
+
+### K.5 CHOIX — secours natifs DA membre (13 novembre 2026)
+| Source / cas | Avant / comparaison | Après / statut | Commit |
+|---|---|---|---|
+| `LCDP_membre/ESPACE-MEMBRE/da-membre.js`, confirmations DA | Gabarit CHOIX avec `window.confirm` de secours en cas de panne, plus deux `confirm` inatteignables dans les branches d'alerte générique | **TRAITÉ — cohérence CHOIX** : échec du gabarit = `false`, aucun `window.confirm` résiduel dans le fichier ; actions métier et profil INFORMATION conservés | `b16b2b91` |
+| Même source, messages génériques d'alerte | `02-alerte.html` et `window.alert` de secours | **CONSERVÉ — profil ERREUR/ALERTE à qualifier**, ne pas retirer les ressources sans vérification | — |
+
+**Contrôles statiques** : `mes-informations.js`, `box-menu-burger-membre.js`, `accueil-membre.js`, `da-membre.js` syntaxiquement valides. `da-membre.js` compte 0 confirmation native contre 3 avant. Aucun fichier CSS supprimé ; aucun test navigateur.
