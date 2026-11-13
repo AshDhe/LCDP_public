@@ -9,16 +9,16 @@
           <button type="button" class="lcdp-box-dialogue-champ-inviter__close" data-lcdp-listinvites-close aria-label="Fermer le formulaire Inviter" title="Fermer">×</button>
         </div>
         <div class="lcdp-box-liste-card__list">
-          <form class="lcdp-box-dialogue-champ-inviter__form" data-lcdp-invitation-abonnement-form novalidate>
+          <form class="lcdp-box-dialogue-champ-inviter__form" data-lcdp-invitation-form data-lcdp-invitation-abonnement-form novalidate>
             <p class="lcdp-text-muted" data-lcdp-invitation-abonnement-message role="status" aria-live="polite" hidden></p>
-            <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-duo" data-lcdp-invitation-categorie="duo">
+            <section class="lcdp-box-champ-formulaire lcdp-box-dialogue-champ-inviter__form" aria-labelledby="lcdp-invitation-titre-duo" data-lcdp-invitation-categorie="duo">
               <h3 class="lcdp-box-champ-formulaire__label" id="lcdp-invitation-titre-duo">INVITÉ DUO</h3>
               <p class="lcdp-box-champ-formulaire__description" data-lcdp-invitation-quota="duo" role="status"></p>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="duo"></ul>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="duo"></ul>
               <button type="button" class="lcdp-button lcdp-button-secondary" data-lcdp-invitation-ajouter="duo">Ajouter un invité DUO</button>
             </section>
-            <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-famille" data-lcdp-invitation-categorie="famille">
+            <section class="lcdp-box-champ-formulaire lcdp-box-dialogue-champ-inviter__form" aria-labelledby="lcdp-invitation-titre-famille" data-lcdp-invitation-categorie="famille">
               <h3 class="lcdp-box-champ-formulaire__label" id="lcdp-invitation-titre-famille">INVITÉS FAMILLE</h3>
               <p class="lcdp-box-champ-formulaire__description" data-lcdp-invitation-quota="famille" role="status"></p>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="famille"></ul>
@@ -26,7 +26,7 @@
               <button type="button" class="lcdp-button lcdp-button-secondary" data-lcdp-invitation-ajouter="famille">Ajouter un invité FAMILLE</button>
             </section>
             <div class="lcdp-box-dialogue-champ-inviter__actions">
-              <button type="button" class="lcdp-button lcdp-button-secondary" aria-disabled="true" data-lcdp-invitation-groupe>Groupe</button>
+              <button type="button" class="lcdp-button lcdp-button-secondary" aria-disabled="true" data-lcdp-invitation-groupe title="Fonction Groupe à venir">Groupe</button>
               <button type="submit" class="lcdp-button lcdp-button-primary" data-lcdp-invitation-envoyer>Enregistrer les invités</button>
             </div>
           </form>
