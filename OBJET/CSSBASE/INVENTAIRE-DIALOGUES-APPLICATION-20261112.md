@@ -221,3 +221,11 @@ Les autres cas du tableau I.1 demeurent non traités. Aucun test navigateur réa
 | `LCDP_admin/B_ADMIN/faq-admin.js`, suppression d'un bloc FAQ du brouillon | Ancien dialogue à boutons, Non/Oui, avec autorisation de relancer le clic de suppression. Nouveau gabarit SUPPRESSION, même décision booléenne et même mécanisme de relance ; branche publication CHOIX inchangée. | **TRAITÉ — migration statique**, remplace le statut NON TRAITÉ du tableau I.1 | `abf8b51d` |
 
 `admin-actualite.js` et les annulations MEMBRE restent non traités. Aucun test navigateur.
+
+
+### I.4 Actualisation — suppression actualités ADMIN, 13 novembre 2026
+| Cas | Ancien comportement / comparaison | Statut | Commit |
+|---|---|---|---|
+| `LCDP_admin/B_ADMIN/admin-actualite.js`, supprimer actualité | Ancien dialogue à boutons pour suppression brouillon/site/pop-up, image conservée ; nouveau gabarit SUPPRESSION avec message, Annuler/Supprimer et retour booléen ; publication/dépublication CHOIX et `sauver('supprimer',a.id)` inchangés. | **TRAITÉ — migration statique** (remplace NON TRAITÉ de I.1) | `245b3b42` |
+
+Les annulations MEMBRE restent ouvertes. Aucun test navigateur réalisé.
