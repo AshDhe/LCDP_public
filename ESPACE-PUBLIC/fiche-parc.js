@@ -453,9 +453,6 @@
     const galerieSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-galerie-slot]"
     );
-    const galerieSuiteSlot = fiche.querySelector(
-      "[data-lcdp-fiche-parc-galerie-suite-slot]"
-    );
     const carteSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-map-slot]"
     );
@@ -608,34 +605,34 @@
     );
 
     await ajouterGalerieParc(galerieSlot, parc, options);
-    // Deux photos après Espace réservé (04.jpg et 05.jpg),
-    // pour un total de 6 images sur mobile comme sur PC.
-    if (galerieSuiteSlot) {
-      await ajouterGalerieParc(galerieSuiteSlot, parc, options, 5, 6);
-    }
     if (!carteDansVueDediee) {
       await ajouterCarteParc(carteSlot, parc, options);
     }
 
     // Ne pas confondre les anciens horaires libres et la synthèse mensuelle
     // de Planning Park. Celle-ci doit être fournie par le service fiche-parc.
-    remplirBlocTexteFiche(
+    remplirBlocOuvertureEnCours(
       ouverture,
       typeof parc?.texteOuvertureMois === "string" && parc.texteOuvertureMois.trim()
         ? parc.texteOuvertureMois
-        : "Synthèse d’ouverture du mois courant indisponible."
+        : "Information non renseignée."
     );
     remplirBlocTexteFiche(
       exterieur,
       nettoyerTexte(parc?.exterieur || "")
     );
     remplirBlocTexteFiche(
-      acces,
-      construireTexteAccesParc(parc)
-    );
-    remplirBlocTexteFiche(
       espaceReserve,
-      nettoyerTexte(parc?.espacereserve || "")
+      construireTexteZonesReserveesParc(parc)
+    );
+    remplirBlocAccesMaCle(
+      acces,
+      construireTexteEntreeParc(parc)
+    );
+    afficherImageEntreeParc(
+      fiche.querySelector("[data-lcdp-fiche-parc-entree-image]"),
+      parc,
+      options
     );
     if (boutonFermer) {
       if (options.masquerBoutonFermer === true) {
@@ -1152,6 +1149,99 @@
     return api;
   }
 
+
+  function accesFicheDuParc(parc) {
+    // Le worker ne livre ici que les textes destinés à la fiche publique.
+    // Les instructions détaillées (check-in, chemins, présence et règlement)
+    // demeurent accessibles exclusivement à leur circuit autorisé.
+    if (parc?.accesfiche && typeof parc.accesfiche === "object") {
+      return parc.accesfiche;
+    }
+    return null;
+  }
+
+  function construireTexteEntreeParc(parc) {
+    const accesFiche = accesFicheDuParc(parc);
+    const valeur = accesFiche === null
+      ? parc?.entreeparc // Compatibilité avec le worker non encore mis à niveau.
+      : accesFiche.entree;
+    return typeof valeur === "string" ? valeur.trim() : "";
+  }
+
+  function construireTexteZonesReserveesParc(parc) {
+    const accesFiche = accesFicheDuParc(parc);
+    if (accesFiche === null) {
+      // Compatibilité temporaire avec l'ancien service fiche-parc.
+      return typeof parc?.espacereserve === "string" ? parc.espacereserve.trim() : "";
+    }
+    return [accesFiche.zonereservee1, accesFiche.zonereservee2]
+      .filter(texte => typeof texte === "string" && texte.trim())
+      .map(texte => texte.trim())
+      .join("\n");
+  }
+
+  function remplirBlocOuvertureEnCours(conteneur, texte) {
+    if (!conteneur) return;
+    conteneur.replaceChildren();
+    const lignes = String(texte || "")
+      .split(/\r?\n/)
+      .map(ligne => ligne.trim().replace(/\s+/g, " "))
+      .filter(Boolean);
+    const indexConnexion = lignes.findIndex(ligne => /^connectez[- ]vous\b/i.test(ligne));
+    const avant = (indexConnexion >= 0 ? lignes.slice(0, indexConnexion) : lignes).join(" ");
+    const connexion = indexConnexion >= 0 ? lignes.slice(indexConnexion).join(" ") : "";
+    const paragraphe = document.createElement("p");
+    paragraphe.textContent = avant || "Information non renseignée.";
+    conteneur.appendChild(paragraphe);
+    if (connexion) {
+      const paragrapheConnexion = document.createElement("p");
+      paragrapheConnexion.textContent = connexion;
+      conteneur.appendChild(paragrapheConnexion);
+    }
+  }
+
+  function remplirBlocAccesMaCle(conteneur, texteEntree) {
+    if (!conteneur) return;
+    conteneur.replaceChildren();
+    const lignes = [
+      String(texteEntree || "").trim() || "Information non renseignée.",
+      "L’accès détaillé au parc est communiqué avec votre CLÉ.",
+      "Votre contact La Clé du Parc dans l'application : @camille."
+    ];
+    const paragraphe = document.createElement("p");
+    lignes.forEach((ligne, index) => {
+      if (index) paragraphe.appendChild(document.createElement("br"));
+      paragraphe.appendChild(document.createTextNode(ligne));
+    });
+    conteneur.appendChild(paragraphe);
+  }
+
+  function afficherImageEntreeParc(image, parc, options) {
+    if (!image) return;
+    const departement = nettoyerDepartement(parc?.dptmt || parc?.departement);
+    // Identique à la nomenclature du module ADMIN Accès détail :
+    // les espaces du nom de parc sont remplacés par des underscores.
+    const dossierParc = String(parc?.nom || "").trim().replace(/\s+/g, "_");
+    const imageDefaut = construireUrlObjetFiche(options, "/IMAG/PARC/galeriedefaut.jpg");
+    const imageParc = departement && dossierParc
+      ? construireUrlObjetFiche(
+          options,
+          "/IMAG/ACCESPARC/" +
+            encodeURIComponent(departement) + "/" +
+            encodeURIComponent(dossierParc) + "/entree1.webp"
+        )
+      : imageDefaut;
+    image.alt = "Entrée du parc " + nettoyerTexte(parc?.nom || "");
+    image.hidden = false;
+    image.addEventListener("error", () => {
+      if (image.src === imageDefaut) {
+        image.hidden = true;
+        return;
+      }
+      image.src = imageDefaut;
+    });
+    image.src = imageParc;
+  }
 
   function remplirBlocTexteFiche(conteneur, texte) {
     if (!conteneur) {
