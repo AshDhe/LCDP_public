@@ -484,3 +484,16 @@ Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Au
 | Même source, demandes de connexion et messages de parrain | `02-dialogue-reference-information.html` déjà en place | **CONSERVÉ — INFORMATION**, navigation vers connexion inchangée | — |
 
 **Contrôle limité aux dix sources publiques traitées** : dix fichiers JS syntaxiquement valides, chacun sans référence littérale restante à `02-alerte.html`. Cet inventaire **ne démontre pas** que les autres fichiers PUBLIC, MEMBRE, ADMIN, COACH ou PARC ont cessé de l'utiliser. `02-alerte.html` et les styles du central restent à conserver. Aucun CSS supprimé ni test navigateur.
+
+
+### K.12 MEMBRE — SUPPRESSION / CHOIX / ERREUR, 13 novembre 2026
+| Fichier / cas | Avant | Après / statut | Commit |
+|---|---|---|---|
+| `alerte-planifier.js`, suppression d'une alerte | `window.confirm` avant `DELETE /alertes/{idalerte}` | **TRAITÉ — SUPPRESSION** : gabarit de référence, titre d'alerte, refus sans DELETE ; API et rechargement inchangés | JS `65c4ff13` ; CSS HTML `ead549bd` |
+| `fiche-parc.js`, confirmation d'heure d'arrivée | Secours natif `window.confirm` si slot absent, sinon CHOIX | **TRAITÉ — CHOIX** : gabarit de référence systématique, CSS chargé, refus si ressource absente ; réservation inchangée | `ec60e103` |
+| `mes-points.js`, erreur de chargement | `02-alerte.html` / fermeture libre | **TRAITÉ — ERREUR** : titre/message, fermeture cohérente ; CSS de convergence ajouté à la page | JS `0f3fa4a8` ; HTML `593216c9` |
+| `mes-factures-membre.js`, erreur de chargement / ouverture | `02-alerte.html` / fermeture libre | **TRAITÉ — ERREUR** : gabarit central, messages et affichage métier conservés ; CSS de convergence ajouté | JS `3b800b42` ; HTML `198766c4` |
+| `inviter-membre.js`, messages d'échec | `02-alerte.html` pour cas sans profil, INFORMATION / CHOIX déjà présents | **TRAITÉ — ERREUR** pour cas sans profil, INFORMATION et CHOIX préservés | `f8a532dd` |
+| `inviter-membre.js`, échéances de paiement | `02-dialogue-bouton.html` avec actions Payer et détail des échéances | **CONSERVER — paiement multi-actions**, gabarit et CSS toujours nécessaires | — |
+
+**Vérification statique** : cinq JS valides syntaxiquement, aucun `window.confirm` dans `alerte-planifier.js` ou `fiche-parc.js`, aucune référence `02-alerte.html` dans `mes-points.js`, `mes-factures-membre.js`, `inviter-membre.js`. Ce résultat n'est pas une preuve d'inutilisation dans les autres fichiers ou dépôts. Aucun CSS historique supprimé, aucun parcours navigateur testé.
