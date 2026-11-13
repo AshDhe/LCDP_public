@@ -17,6 +17,7 @@
       "";
   </script>
   <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
+  <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-lightbox-convergence.css">
 </head>
 
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune">
@@ -457,45 +458,48 @@
 
   async function afficherAlerte(titre, message) {
     const slot = document.getElementById("lcdp-lightbox-slot");
-    const texte = titre ? titre + "\n\n" + message : message;
-
+    const texteSecours = titre ? titre + "\n\n" + message : message;
     if (!slot) {
-      alert(texte);
+      window.alert(texteSecours);
       return;
     }
-
-    slot.innerHTML = "";
-
+    slot.replaceChildren();
+    const focusInitial = document.activeElement;
     try {
-      const fragment = await chargerFragmentObjet("/HTMLBASE/02-alerte.html");
-      slot.appendChild(fragment);
-
-      const alerte = slot.querySelector("[data-lcdp-box-alerte]");
-      const messageElement = slot.querySelector("[data-lcdp-alerte-message]");
-      const boutons = slot.querySelectorAll("[data-lcdp-alerte-close], [data-lcdp-alerte-ok]");
-
-      if (!alerte || !messageElement || boutons.length === 0) {
-        throw new Error("Structure de l'alerte V3 incomplète.");
+      slot.appendChild(await chargerFragmentObjet("/HTMLBASE/02-dialogue-reference-erreur.html"));
+      const dialogue = slot.querySelector('[data-lcdp-dialogue-reference="erreur"]');
+      const titreElement = slot.querySelector("[data-lcdp-dialogue-titre]");
+      const messageElement = slot.querySelector("[data-lcdp-dialogue-message]");
+      const bouton = slot.querySelector('[data-lcdp-dialogue-action="fermer"]');
+      if (!dialogue || !titreElement || !messageElement || !bouton) {
+        throw new Error("Structure ERREUR incomplète.");
       }
-
-      messageElement.textContent = texte;
-
+      titreElement.textContent = titre || "Erreur";
+      messageElement.textContent = message || "";
+      bouton.textContent = "Fermer";
+      let termine = false;
       const fermer = () => {
-        slot.innerHTML = "";
-      };
-
-      boutons.forEach((bouton) => {
-        bouton.addEventListener("click", fermer, { once: true });
-      });
-
-      alerte.addEventListener("click", (event) => {
-        if (event.target === alerte) {
-          fermer();
+        if (termine) return;
+        termine = true;
+        document.removeEventListener("keydown", clavier);
+        slot.replaceChildren();
+        if (focusInitial?.isConnected && typeof focusInitial.focus === "function") {
+          focusInitial.focus({preventScroll:true});
         }
+      };
+      const clavier = event => {
+        if (event.key === "Escape") {event.preventDefault();fermer();}
+      };
+      bouton.addEventListener("click", fermer, {once:true});
+      dialogue.addEventListener("click", event => {
+        if (event.target === dialogue) fermer();
       });
+      document.addEventListener("keydown", clavier);
+      bouton.focus();
     } catch (error) {
-      console.error("Erreur alerte hello :", error);
-      alert(texte);
+      slot.replaceChildren();
+      console.error("Erreur alerte accès public :", error);
+      window.alert(texteSecours);
     }
   }
 
