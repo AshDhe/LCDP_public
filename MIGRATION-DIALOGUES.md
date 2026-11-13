@@ -226,3 +226,8 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **MEMBRE / BURGER** : `box-menu-burger-membre.js`, confirmation de déconnexion migrée vers CHOIX ; Worker de déconnexion non modifié. Commits `4185b8fa`, `604ee044` (CSS explicite). Choix multi-comptes non migré.
 - **ADMIN / ACTUALITÉS** : `B_ADMIN/admin-actualite.js`, confirmations publier/dépublier et pop-up migrées vers CHOIX. Le dialogue « Supprimer » conserve son rendu historique jusqu'au lot SUPPRESSION. Commit `e80219de`.
 - **Reportés** : menus de sélection multi-comptes dans les quatre espaces, confirmations administratives de planning, écrans métier à plusieurs actions ou données dynamiques (voir tableau et pense-bête). Tests navigateur non réalisés.
+
+### CHOIX — planning parc ADMIN, lot du 13 novembre 2026
+- `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js` : confirmation de modification d'une ancienne journée basculée depuis le dialogue natif historique vers `02-dialogue-reference-choix.html`, avec retour booléen, annulation par Escape/clic extérieur, et aucun changement à la sauvegarde du planning. En cas d'échec de chargement, retour `false` pour éviter une modification sans confirmation. Commit `5e62eb13`.
+- `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.html` : chargement de la feuille CSS commune `lcdp-lightbox-convergence.css`, commit `cb28ac04`.
+- Le dialogue historique reste présent dans le HTML et n'est pas supprimé dans ce lot ; les autres confirmations ADMIN (nouvelle base, opérations, sorties, annulations) restent à traiter selon leur nature. Aucun test navigateur effectué.
