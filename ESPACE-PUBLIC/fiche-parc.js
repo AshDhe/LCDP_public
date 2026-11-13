@@ -676,6 +676,10 @@
     fiche.classList.add("lcdp-box-fiche-parc--shift-detail", "lcdp-box-fiche-parc--vue-carte");
     card.replaceChildren(entete, carteSection);
     actions.replaceChildren(retourFiche, partager);
+    // La vue CARTE conserve le titre du parc dans l'en-tête, sans le
+    // répéter au-dessus de la carte elle-même.
+    carteSection.querySelector("h3")?.remove();
+    carteSection.querySelector("[data-lcdp-fiche-parc-map-departement]")?.remove();
 
     const nom = nettoyerTexte(parc?.nom || parc?.nomparc || "Parc") || "Parc";
     const titre = fiche.querySelector("[data-lcdp-fiche-parc-title]");
@@ -715,7 +719,10 @@
     appliquerRoutes(fiche);
     // Le même moteur cartographique reste seul responsable des données,
     // des marqueurs, des zooms et de la carte des parcs voisins.
-    return ajouterCarteParc(carteSlot, parc, options);
+    return ajouterCarteParc(carteSlot, parc, {
+      ...options,
+      carteFicheVueDediee: true
+    });
   }
 
   async function monterParcoursFicheParcDansConteneur(
@@ -1381,7 +1388,7 @@
 
     slot.innerHTML = "";
 
-    const [fragment, reponseGeojson] = await Promise.all([
+    const [fragment, reponseGeojson, fragmentRecto] = await Promise.all([
       chargerFragmentObjetFiche(options, "/HTMLBASE/04-carte-dynamique.html"),
       fetch(construireUrlObjetFiche(options, "/DATA/04-carte-dynamique.geojson"), {
         method: "GET",
@@ -1390,7 +1397,10 @@
         headers: {
           "Accept": "application/geo+json, application/json"
         }
-      })
+      }),
+      options.carteFicheVueDediee
+        ? chargerFragmentObjetFiche(options, "/HTMLBASE/04-card-parc-diaporama.html")
+        : Promise.resolve(null)
     ]);
 
     if (!reponseGeojson.ok) {
@@ -1439,6 +1449,13 @@
     if (options.carteNavigation) {
       carte.classList.add("lcdp-carte-dynamique--navigation");
       cardSlot.className = "lcdp-planifier-carte-cartouche";
+      carte.appendChild(cardSlot);
+    }
+    if (options.carteFicheVueDediee) {
+      // Même emplacement sous la carte que le cartouche du parcours
+      // départemental ; aucun calque ou panneau dans le SVG.
+      carte.classList.add("lcdp-carte-dynamique--vue-fiche");
+      cardSlot.className = "lcdp-planifier-carte-cartouche lcdp-planifier-parcs-diaporama";
       carte.appendChild(cardSlot);
     }
 
@@ -1971,6 +1988,29 @@
         );
       }
 
+      if (options.carteFicheVueDediee) {
+        // Recto officiel du diaporama : on réutilise son gabarit et
+        // le média de la Card Parc (photo, légende et badge).
+        const recto = fragmentRecto?.querySelector("[data-lcdp-card-parc-diaporama]")?.cloneNode(true);
+        const ouvrirRecto = recto?.querySelector("[data-lcdp-diaporama-retourner]");
+        if (!recto || !ouvrirRecto || !media) {
+          throw new Error("Recto officiel de la Card Parc introuvable.");
+        }
+        recto.classList.add("lcdp-box-card-parc-diaporama--recto-seul");
+        ouvrirRecto.appendChild(media);
+        ouvrirRecto.setAttribute("aria-label", "Voir la fiche du parc " + nomParc);
+        ouvrirRecto.addEventListener("click", () => {
+          const ouvrir = options.onOuvrirFicheParc;
+          if (typeof ouvrir === "function") {
+            executerActionFiche(ouvrir, parcCarte);
+          }
+        });
+        cardSlot.replaceChildren(recto);
+        cardSlot.hidden = false;
+        cardSlot.removeAttribute("hidden");
+        return;
+      }
+
       const boutonFermerCard = document.createElement("button");
       boutonFermerCard.type = "button";
       boutonFermerCard.className =
@@ -2105,6 +2145,10 @@
     );
 
     appliquerViewBox();
+    if (options.carteFicheVueDediee) {
+      // Premier affichage : le recto du parc actif est déjà visible.
+      await ouvrirCardParc(parcCourant || parc);
+    }
     return {
       detruire() {
         carteDetruite = true;
