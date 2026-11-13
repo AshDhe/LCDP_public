@@ -296,18 +296,16 @@
 
     try {
       const information = type === "information";
-      {
-        const href = construireUrlObjet("/CSSBASE/lcdp-lightbox-convergence.css");
-        if (!Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(link => link.href === new URL(href, document.baseURI).href)) {
-          await new Promise((resolve, reject) => {
-            const feuille = document.createElement("link");
-            feuille.rel = "stylesheet";
-            feuille.href = href;
-            feuille.onload = resolve;
-            feuille.onerror = () => { feuille.remove(); reject(new Error("CSS INFORMATION indisponible.")); };
-            document.head.appendChild(feuille);
-          });
-        }
+      const href = construireUrlObjet("/CSSBASE/lcdp-lightbox-convergence.css");
+      if (!Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(link => link.href === new URL(href, document.baseURI).href)) {
+        await new Promise((resolve, reject) => {
+          const feuille = document.createElement("link");
+          feuille.rel = "stylesheet";
+          feuille.href = href;
+          feuille.onload = resolve;
+          feuille.onerror = () => { feuille.remove(); reject(new Error("CSS de convergence indisponible.")); };
+          document.head.appendChild(feuille);
+        });
       }
       const fragment = await chargerFragmentObjet(information
         ? "/HTMLBASE/02-dialogue-reference-information.html"
@@ -337,10 +335,17 @@
           resolve();
         };
 
-         boutonOk.addEventListener("click", () => {
-           if (redirectUrl) { const a = document.querySelector(".lcdp-setup-loading"); if (a) { a.querySelector(".lcdp-setup-loading__text").textContent = "Ouverture de la page…"; a.hidden = false; } }
-           fermer();
-         }, { once: true });
+        boutonOk.addEventListener("click", () => {
+          if (redirectUrl) {
+            const masque = document.querySelector(".lcdp-setup-loading");
+            if (masque) {
+              const texte = masque.querySelector(".lcdp-setup-loading__text");
+              if (texte) texte.textContent = "Ouverture de la page…";
+              masque.hidden = false;
+            }
+          }
+          fermer();
+        }, { once: true });
 
       });
 
