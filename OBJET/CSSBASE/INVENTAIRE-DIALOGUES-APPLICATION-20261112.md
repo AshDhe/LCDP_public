@@ -542,3 +542,16 @@ Ces deux consommateurs empêchent de déclarer `02-alerte.html` inutilisé. Aucu
 | `abonnement-membre.js`, paiement et workflow | Trois références `02-dialogue-bouton.html` | **CONSERVER — écrans métier** ; pas de suppression CSS | — |
 
 **Contrôle après commits** : cinq fichiers JS syntaxiquement valides ; `02-alerte.html` : 0 occurrence dans les quatre premiers fichiers traités, 2 occurrences dans `reserver-membre.js`. Aucun CSS historique supprimé. Les modules de paiement/sécurité et panneaux du calendrier restent à vérifier fonctionnellement.
+
+
+### K.17 MEMBRE / COACH / PARC — ERREUR (13 novembre 2026)
+| Source / cas | Comparaison ancien / nouveau | Statut | Commit |
+|---|---|---|---|
+| MEMBRE `reserver-membre.js`, erreur superposée | `02-alerte.html` avec bouton/couleur/classe/`onAffiche` et fermeture conditionnelle → référence ERREUR dans le même hôte, mêmes options et retour booléen | **TRAITÉ — ERREUR**, 0 ancienne alerte dans le fichier | `e4fe6bcc` |
+| MEMBRE `reserver-membre.js`, erreur ordinaire | `02-alerte.html` pouvant remplacer le slot → référence ERREUR ; si le calendrier y figure, conserver la superposition | **TRAITÉ — ERREUR**, calendrier conservé | `e4fe6bcc` |
+| COACH `accueil-coach.js`, erreurs de menu/déconnexion | `02-alerte.html` et INFORMATION déjà migrée → référence ERREUR et INFORMATION conservée, secours natif en cas de panne | **TRAITÉ — ERREUR**, 0 ancienne alerte dans le fichier | `4e94b9c9` |
+| PARC `accueil-parc.js`, erreurs de menu/déconnexion | Identique, avec gestionnaire d'alerte propre à l'espace PARC | **TRAITÉ — ERREUR**, 0 ancienne alerte dans le fichier | `6cfc5023` |
+| MEMBRE `reserver-membre.js`, paiement/panneaux métier | Deux références littérales `02-dialogue-bouton.html`, indépendantes de l'alerte ERREUR | **CONSERVER — non binaire**, ne pas supprimer gabarit/CSS | — |
+| COACH/PARC `box-menu-burger-*.js`, sélection de comptes | Choix de plusieurs espaces : `02-dialogue-bouton.html` | **CONSERVER — multi-actions**, hors migration binaire | — |
+
+**Vérifications** : contrôle syntaxique de trois fichiers JavaScript après commits, zéro référence littérale `02-alerte.html` dans ces trois fichiers et CSS de convergence présent dans les trois pages d'accueil correspondantes. Aucun CSS historique supprimé. Aucun test navigateur ; aucune conclusion globale sur les autres consommateurs des cinq dépôts.
