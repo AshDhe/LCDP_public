@@ -2,6 +2,7 @@
   <div class="lcdp-page-container">
     <div class="lcdp-page-content">
       <section class="lcdp-box-liste-card" data-lcdp-invitation-wrapper>
+        <button type="button" class="lcdp-box-dialogue-champ-inviter__close" data-lcdp-listinvites-cancel aria-label="Fermer le formulaire Inviter" title="Fermer">×</button>
         <div class="lcdp-box-liste-card__header">
           <div class="lcdp-box-liste-card__heading">
             <h2 class="lcdp-box-liste-card__title" id="lcdp-listinvites-title" data-lcdp-listinvites-title>Inviter</h2>
@@ -15,7 +16,7 @@
 
             <label class="lcdp-box-dialogue-champ-inviter__label" for="lcdp-listinvites-email">Adresse e-mail de l'invité</label>
             <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-listinvites-emails>
-              <li class="lcdp-box-card-listinvites-oui-non__item" data-lcdp-invite-email-row>
+              <li data-lcdp-invite-email-row>
                 <input id="lcdp-listinvites-email" type="email" class="lcdp-box-dialogue-champ-inviter__input" data-lcdp-invite-email autocomplete="email" inputmode="email" placeholder="nom@exemple.fr" aria-label="Adresse e-mail de l'invité">
                 <button type="button" class="lcdp-button lcdp-button-secondary" data-lcdp-invite-effacer aria-label="Effacer l'adresse e-mail" title="Effacer">
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -31,7 +32,6 @@
             <div class="lcdp-box-dialogue-champ-inviter__actions">
               <button class="lcdp-button lcdp-button-primary" type="submit" data-lcdp-listinvites-update>Inviter et mettre à jour</button>
               <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-sans-email>Inviter sans e-mail</button>
-              <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-cancel>Annuler</button>
             </div>
           </form>
         </div>
