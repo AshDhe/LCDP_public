@@ -766,15 +766,22 @@ body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vu
 .lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] .lcdp-box-liste-card__header {
   box-sizing: border-box;
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   min-height: 40px;
-  padding-right: 48px;
+  padding-right: 0;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--lcdp-color-border, #e7e5e4);
 }
+.lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] .lcdp-box-liste-card__heading {
+  flex: 1 1 auto;
+  min-width: 0;
+}
 .lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] [data-lcdp-listinvites-close] {
-  top: 16px;
-  right: 14px;
+  position: static;
+  flex: 0 0 40px;
+  margin: 0;
 }
 .lcdp-app-wrapper > .lcdp-site-main > [data-lcdp-invitation-vue-page] [data-lcdp-listinvites-add-email][hidden] {
   display: none !important;
