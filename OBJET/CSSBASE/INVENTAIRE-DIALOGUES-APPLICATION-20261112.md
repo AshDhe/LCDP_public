@@ -332,3 +332,12 @@ Aucun test navigateur ; ne pas déduire qu'une confirmation des frais vaut une a
 | `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js` | **0 référence littérale** à l'ancien dialogue ; **0 appel natif** `confirm()` | Contrôle limité au fichier ; aucune autorisation globale de suppression CSS |
 
 Les deux fichiers sont syntaxiquement valides lors de la vérification statique. Les parcours d'abonnement, leur mise en page, les dépendances indirectes et les cinq dépôts dans leur ensemble ne sont pas testés au navigateur ; aucune suppression CSS dans ce contrôle.
+
+
+### I.12 SUPPRESSION — titres À propos ADMIN (13 novembre 2026)
+| Source et cas | Ancien comportement | Statut / comparaison | Commit |
+|---|---|---|---|
+| `LCDP_admin/ESPACE-ADMIN/B_ADMIN/a-propos-admin.js` : suppression d'un titre À propos | `02-dialogue-bouton.html`, Non/Oui et avertissement de diffusion après enregistrement ; suppression locale du brouillon, puis enregistrement explicite | **TRAITÉ — migration statique** : `02-dialogue-reference-suppression.html` avec les mêmes textes, validation booléenne et enregistrement séparé. CSS de convergence chargé. | `f867df3f` |
+| Même fichier : dépendance à l'ancien dialogue | Une référence littérale à `02-dialogue-bouton.html` | **RETIRÉE** ; aucune référence littérale résiduelle dans le fichier après mise à jour. Ne prouve pas l'inutilisation de l'ancien gabarit dans les autres sources. | `f867df3f` |
+
+**Limites** : suppression fonctionnelle sur brouillon local uniquement tant qu'aucun enregistrement n'a lieu. Aucun CSS partagé supprimé. Aucun test navigateur.
