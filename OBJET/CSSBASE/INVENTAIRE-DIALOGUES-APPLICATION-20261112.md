@@ -447,3 +447,12 @@ Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Au
 | `connexion-coach.js`, erreurs de connexion | Identique, identifiants coach propres au Worker | **TRAITÉ — ERREUR** : référence ERREUR, champs métier et redirections inchangés | `09fc3bc1` |
 
 **Rapprochement CSS** : `hello.js`, `connexion-parc.js`, `connexion-coach.js` n'ont plus de référence littérale `02-alerte.html` ; `codes-securite.js` en possède encore une pour les erreurs. Les quatre sources chargent `lcdp-lightbox-convergence.css` à la demande, sans modification des anciennes feuilles. **NE PAS SUPPRIMER** `02-alerte.html` ni les styles hérités tant que des consommateurs restent présents. Contrôle syntaxique quatre fichiers, aucun test navigateur.
+
+
+### K.8 Rectification des statuts — `codes-securite.js`, 13 novembre 2026
+| Source / cas | Ancien statut K.7 | Statut courant et vérification | Commit |
+|---|---|---|---|
+| PUBLIC `ESPACE-PUBLIC/codes-securite.js`, messages d'erreur de validation des codes | **NON TRAITÉ** : `02-alerte.html` | **TRAITÉ — ERREUR** : `02-dialogue-reference-erreur.html`, message d'origine, même attente du clic avant suite du traitement | `8b7fe8d3` |
+| Même source, CSS et masque de sortie | CSS historique chargé pour l'alerte, masque affiché après confirmation de réussite | **TRAITÉ — mise en cohérence** : CSS de convergence commun INFORMATION/ERREUR ; accès à l'élément de texte du masque contrôlé avant modification | `9b1456b0` |
+
+**Conséquence CSS** : après ces changements, aucune référence littérale à `02-alerte.html` dans `codes-securite.js`, `hello.js`, `connexion-parc.js` ou `connexion-coach.js`. Ce sont quatre contrôles **locaux**. `02-alerte.html` et les styles communs restent utilisés dans les autres pages ; **NE PAS SUPPRIMER** sans contrôle inter-dépôts complet. Contrôle syntaxique réussi, tests navigateur non réalisés.
