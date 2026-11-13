@@ -923,3 +923,16 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__
   color: #64748b;
   overflow-wrap: anywhere;
 }
+
+/* Mon compte : touches spécifiques 2A et 2B du pavé Diginum. */
+body.lcdp-page-mon-compte .lcdp-box-diginum__speciaux {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 6px;
+}
+body.lcdp-page-mon-compte .lcdp-box-diginum__speciaux .lcdp-box-diginum__touche {
+  aspect-ratio: auto;
+  min-height: 38px;
+  font-size: 18px;
+}
