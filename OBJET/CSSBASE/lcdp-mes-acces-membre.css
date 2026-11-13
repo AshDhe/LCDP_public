@@ -562,11 +562,11 @@
       }
 
 
-/* MES ACCÈS — vues secondaires intégrées au wrapper (2026-11-13). */
+/* MES ACCÈS — les boxes secondaires sont des calques frères du contenu, à défilement unique. */
 #lcdp-planning-calendrier-slot [data-lcdp-liste-card-list] > [hidden] {
   display: none !important;
 }
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire {
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire {
   position: relative !important;
   inset: auto !important;
   display: block !important;
@@ -575,20 +575,23 @@
   max-width: 100% !important;
   min-width: 0 !important;
   height: auto !important;
-  min-height: 0 !important;
+  min-height: 100% !important;
   margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
+  padding: 14px 12px 24px !important;
+  background: var(--lcdp-color-background, #f7f9fb) !important;
   overflow: visible !important;
 }
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire[data-lcdp-invitation-invites-overlay],
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire[data-lcdp-invitation-emails-overlay] {
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire[hidden] {
+  display: none !important;
+}
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire[data-lcdp-invitation-invites-overlay],
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire[data-lcdp-invitation-emails-overlay] {
   position: relative !important;
   inset: auto !important;
   z-index: auto !important;
   pointer-events: auto !important;
 }
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire :is(
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire :is(
   .lcdp-box-card-listinvites-oui-non,
   .lcdp-box-card-listemails,
   .lcdp-dialogue-ref,
@@ -616,7 +619,7 @@
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire :is(
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire :is(
   .lcdp-box-card-listinvites-oui-non__card,
   .lcdp-box-card-listemails__card,
   .lcdp-dialogue-ref__card,
@@ -637,8 +640,8 @@
   border-radius: 16px !important;
   box-shadow: none !important;
 }
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire .lcdp-box-workflow-reservation__card,
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire .lcdp-box-workflow-reservation__content {
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-box-workflow-reservation__card,
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-box-workflow-reservation__content {
   position: static !important;
   inset: auto !important;
   display: block !important;
@@ -654,7 +657,7 @@
   box-shadow: none !important;
   overflow: visible !important;
 }
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire :is(
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire :is(
   .lcdp-box-card-listinvites-oui-non,
   .lcdp-box-card-listemails,
   .lcdp-dialogue-ref,
@@ -663,7 +666,7 @@
 )::backdrop {
   display: none !important;
 }
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-retour {
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-planning-vue-retour {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -682,11 +685,11 @@
   pointer-events: none;
   opacity: .55;
 }
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire .lcdp-box-card-listinvites-oui-non__actions .lcdp-button {
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-box-card-listinvites-oui-non__actions .lcdp-button {
   min-height: 44px !important;
 }
 @media (max-width: 520px) {
-  #lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire :is(
+  body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire :is(
     .lcdp-box-card-listinvites-oui-non__card,
     .lcdp-box-card-listemails__card,
     .lcdp-dialogue-ref__card,
@@ -695,7 +698,7 @@
 }
 
 /* Règles dédiées à la lecture des invités : la racine sert elle-même de vue. */
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire.lcdp-box-card-listinvites-oui-non {
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire.lcdp-box-card-listinvites-oui-non {
   position: relative !important;
   inset: auto !important;
   display: block !important;
@@ -718,31 +721,4 @@
   -webkit-backdrop-filter: none !important;
 }
 
-/* Fiche et Carte du parc : même vue secondaire et même largeur que Mes accès. */
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire #lcdp-mes-acces-fiche-slot {
-  position: relative !important;
-  box-sizing: border-box !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc--page,
-#lcdp-planning-calendrier-slot .lcdp-planning-vue-secondaire #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc__card {
-  position: static !important;
-  inset: auto !important;
-  box-sizing: border-box !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  max-height: none !important;
-  height: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  transform: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  overflow: visible !important;
-  backdrop-filter: none !important;
-}
+
