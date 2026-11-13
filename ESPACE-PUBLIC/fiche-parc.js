@@ -2043,14 +2043,14 @@
           throw new Error("Recto officiel de la Card Parc introuvable.");
         }
         recto.classList.add("lcdp-box-card-parc-diaporama--recto-seul");
-        ouvrirRecto.appendChild(media);
-        ouvrirRecto.setAttribute("aria-label", "Voir la fiche du parc " + nomParc);
-        ouvrirRecto.addEventListener("click", () => {
-          const ouvrir = options.onOuvrirFicheParc;
-          if (typeof ouvrir === "function") {
-            executerActionFiche(ouvrir, parcCarte);
-          }
-        });
+        // Dans la vue Carte, la photo reste purement informative.
+        // Remplacer le bouton du recto par un élément non interactif :
+        // aucun clic, retour Fiche ou focus clavier sur l'image.
+        const photoStatique = document.createElement("div");
+        photoStatique.className = ouvrirRecto.className;
+        photoStatique.style.cursor = "default";
+        photoStatique.appendChild(media);
+        ouvrirRecto.replaceWith(photoStatique);
         cardSlot.replaceChildren(recto);
         cardSlot.hidden = false;
         cardSlot.removeAttribute("hidden");
