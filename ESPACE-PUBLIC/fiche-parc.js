@@ -1331,7 +1331,13 @@
       return options.construireUrlImageCardParc(parc);
     }
 
-    return construireUrlImageCardParc(parc);
+    // Le recto et la galerie partagent la même source OBJET. La base du
+    // site courant (MEMBRE) ne doit jamais être utilisée pour l'image Parc.
+    const chemin = construireCheminImageParc(parc, "card1.webp");
+    if (!chemin || chemin.endsWith("/parc-defaut.webp")) {
+      return "";
+    }
+    return construireUrlObjetFiche(options, chemin);
   }
 
   function executerActionFiche(action, parc) {
