@@ -166,6 +166,14 @@
       parcActif = parc;
       await afficherFicheParc(parc);
 
+      // Ouverture ciblée de la carte depuis le verso MES ACCÈS.
+      if (new URLSearchParams(window.location.search).get("vue") === "carte") {
+        window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+          const carte = document.querySelector('[data-lcdp-fiche-parc-map-slot]');
+          carte?.closest('section')?.scrollIntoView({ block: "start", behavior: "auto" });
+        }));
+      }
+
       if (vuePartage === "planning") {
         await ouvrirShiftDetailParc(parc, "planning");
       }
