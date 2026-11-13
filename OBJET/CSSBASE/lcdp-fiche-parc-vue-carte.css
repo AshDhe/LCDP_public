@@ -65,3 +65,66 @@
   width: 100%;
   object-fit: cover;
 }
+
+/* MES ACCÈS — règles Tailwind de vue en calque ; cible uniquement cette page. */
+body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main {
+  position: relative;
+}
+body.lcdp-mes-acces-page.lcdp-mes-acces-calque-fiche-actif > .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
+  visibility: hidden;
+  pointer-events: none;
+}
+body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces-fiche-slot {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 14px 12px 24px;
+  background: var(--lcdp-color-background, #f7f9fb);
+  -webkit-overflow-scrolling: touch;
+}
+body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces-fiche-slot[hidden] {
+  display: none !important;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-carte-dynamique--fiche-parc.lcdp-carte-dynamique--vue-fiche {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-inline: 0 !important;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-carte-dynamique--vue-fiche .lcdp-carte-dynamique__map-shell {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__actions-barre {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  width: 100% !important;
+  gap: 8px !important;
+}
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] :is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte]) {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  justify-content: center !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  border-radius: 8px !important;
+}
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-carte] {
+  background: var(--lcdp-color-logo-green, #536c3d) !important;
+  border-color: var(--lcdp-color-logo-green, #536c3d) !important;
+  color: #fff !important;
+}
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-partager] {
+  background: #e59834 !important;
+  border-color: #e59834 !important;
+  color: #fff !important;
+}
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="carte"] [data-lcdp-fiche-parc-actions] {
+  display: none !important;
+}
