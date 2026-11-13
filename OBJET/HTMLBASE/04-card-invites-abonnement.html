@@ -4,7 +4,7 @@
       <section class="lcdp-box-liste-card" data-lcdp-invitation-wrapper>
         <div class="lcdp-box-liste-card__header">
           <div class="lcdp-box-liste-card__heading">
-            <h2 class="lcdp-box-liste-card__title" id="lcdp-invitation-abonnement-titre">Inviter</h2>
+            <h2 class="lcdp-box-liste-card__title" id="lcdp-invitation-abonnement-titre">Inviter / Invités</h2>
           </div>
           <button type="button" class="lcdp-box-dialogue-champ-inviter__close" data-lcdp-listinvites-close aria-label="Fermer le formulaire Inviter" title="Fermer">×</button>
         </div>
@@ -12,14 +12,14 @@
           <form class="lcdp-box-dialogue-champ-inviter__form" data-lcdp-invitation-form data-lcdp-invitation-abonnement-form novalidate style="display:flex; flex-direction:column; gap:18px;">
             <p class="lcdp-text-muted" data-lcdp-invitation-abonnement-message role="status" aria-live="polite" hidden></p>
             <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-duo" data-lcdp-invitation-categorie="duo" style="display:flex;flex-direction:column;gap:0;min-width:0;padding:14px 12px 16px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
-              <h3 class="lcdp-box-champ-formulaire__label" id="lcdp-invitation-titre-duo" style="font-size:23px;line-height:1.2;font-weight:800;letter-spacing:.01em;color:var(--lcdp-color-text,#1f2a24);margin:0 0 8px;">INVITÉ DUO</h3>
+              <h3 class="lcdp-box-champ-formulaire__label" id="lcdp-invitation-titre-duo" style="font-size:23px;line-height:1.2;font-weight:800;letter-spacing:.01em;color:var(--lcdp-color-text,#1f2a24);margin:0 0 8px;">INVITÉ DUO / DUO+</h3>
               <p class="lcdp-box-champ-formulaire__description" data-lcdp-invitation-quota="duo" role="status" hidden></p>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="duo" style="display:none;margin:0 0 8px;padding:0;list-style:none;"></ul>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="duo" style="margin:0;padding:0;list-style:none;"></ul>
-              <button type="button" class="lcdp-button lcdp-button-secondary" data-lcdp-invitation-ajouter="duo" style="width:100%;max-width:none;min-height:44px;margin-top:12px;">Ajouter un invité DUO</button>
+              <button type="button" class="lcdp-button lcdp-button-secondary" data-lcdp-invitation-ajouter="duo" style="width:100%;max-width:none;min-height:44px;margin-top:12px;">Ajouter un invité DUO / DUO+</button>
             </section>
             <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-famille" data-lcdp-invitation-categorie="famille" style="display:flex;flex-direction:column;gap:0;min-width:0;padding:14px 12px 16px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
-              <h3 class="lcdp-box-champ-formulaire__label" id="lcdp-invitation-titre-famille" style="font-size:23px;line-height:1.2;font-weight:800;letter-spacing:.01em;color:var(--lcdp-color-text,#1f2a24);margin:0 0 8px;">INVITÉS FAMILLE</h3>
+              <h3 class="lcdp-box-champ-formulaire__label" id="lcdp-invitation-titre-famille" style="font-size:23px;line-height:1.2;font-weight:800;letter-spacing:.01em;color:var(--lcdp-color-text,#1f2a24);margin:0 0 8px;">INVITÉ FAMILLE</h3>
               <p class="lcdp-box-champ-formulaire__description" data-lcdp-invitation-quota="famille" role="status" hidden></p>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="famille" style="display:none;margin:0 0 8px;padding:0;list-style:none;"></ul>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="famille" style="margin:0;padding:0;list-style:none;"></ul>
@@ -27,7 +27,7 @@
             </section>
             <div class="lcdp-box-dialogue-champ-inviter__actions" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;justify-items:stretch;margin-top:0;padding:12px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
               <button type="button" class="lcdp-button lcdp-button-secondary" aria-disabled="true" data-lcdp-invitation-groupe title="Fonction Groupe à venir" style="width:100%;max-width:none;min-width:0;min-height:44px;margin:0;">Groupe</button>
-              <button type="submit" class="lcdp-button lcdp-button-primary" data-lcdp-invitation-envoyer style="width:100%;max-width:none;min-width:0;min-height:44px;margin:0;">Inviter</button>
+              <button type="submit" class="lcdp-button lcdp-button-primary" data-lcdp-invitation-envoyer style="width:100%;max-width:none;min-width:0;min-height:44px;margin:0;">Mettre à jour</button>
             </div>
           </form>
         </div>
