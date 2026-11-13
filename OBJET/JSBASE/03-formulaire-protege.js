@@ -10,19 +10,88 @@
    s.onerror=()=>{s.remove();chargementTurnstile=null;reject(new Error('Vérification indisponible. Réessayez.'));};document.head.appendChild(s);
   });return chargementTurnstile;
  }
- async function message(texte){
-  const slot=document.getElementById('lcdp-lightbox-slot');
-  try{
-   const config=window.SITE_CONFIG||{};
-   const base=String(config.objetBaseUrl||config.OBJET_BASE||((window.SITE_BASE||'')+'/OBJET')).replace(/\/$/,'');
-   const url=base?base+'/HTMLBASE/02-alerte.html':'../OBJET/HTMLBASE/02-alerte.html';
-   const r=await fetch(url,{credentials:'same-origin'});if(!r.ok||!slot)throw new Error();
-   const template=document.createElement('template');template.innerHTML=(await r.text()).trim();
-   // L'alerte se superpose à un éventuel formulaire juridique, sans le détruire.
-   const zone=document.createElement('div');zone.append(template.content.cloneNode(true));slot.append(zone);
-   const cible=zone.querySelector('[data-lcdp-alerte-message]');if(!cible){zone.remove();throw new Error();}cible.textContent=texte;
-   return await new Promise(resolve=>{const fermer=event=>{zone.remove();resolve(event.currentTarget.matches('[data-lcdp-alerte-ok]'));};zone.querySelectorAll('[data-lcdp-alerte-close], [data-lcdp-alerte-ok]').forEach(b=>b.addEventListener('click',fermer,{once:true}));});
-  }catch{window.alert(texte);return true;}
+ async function message(texte, options = {}) {
+  const slot = document.getElementById('lcdp-lightbox-slot');
+  const retourAccueil = options.retourAccueil === true;
+  let zone;
+  let dialog;
+  const focusInitial = document.activeElement;
+  try {
+   if (!slot) throw new Error('Emplacement du dialogue indisponible.');
+   const config = window.SITE_CONFIG || {};
+   const base = String(config.objetBaseUrl || config.OBJET_BASE || ((window.SITE_BASE || '') + '/OBJET')).replace(/\/$/,'');
+   const objet = chemin => base ? base + chemin : '../OBJET' + chemin;
+   const css = objet('/CSSBASE/lcdp-lightbox-convergence.css');
+   if (![...document.querySelectorAll('link[rel="stylesheet"]')]
+    .some(lien => lien.href === new URL(css, document.baseURI).href)) {
+    await new Promise((resolve,reject) => {
+     const lien = document.createElement('link');
+     lien.rel = 'stylesheet';
+     lien.href = css;
+     lien.onload = resolve;
+     lien.onerror = () => {lien.remove();reject(new Error('CSS de convergence indisponible.'));};
+     document.head.appendChild(lien);
+    });
+   }
+   const chemin = retourAccueil ? '/HTMLBASE/02-dialogue-reference-choix.html'
+                               : '/HTMLBASE/02-dialogue-reference-information.html';
+   const r = await fetch(objet(chemin), { credentials:'same-origin' });
+   if (!r.ok) throw new Error('Dialogue de confirmation indisponible.');
+   const template = document.createElement('template');
+   template.innerHTML = (await r.text()).trim();
+   // Le dialogue reste superposé au formulaire sans détruire son contenu.
+   zone = document.createElement('div');
+   zone.append(template.content.cloneNode(true));
+   dialog = zone.querySelector(retourAccueil
+    ? '[data-lcdp-dialogue-reference="choix"]'
+    : '[data-lcdp-dialogue-reference="information"]');
+   const titre = dialog?.querySelector('[data-lcdp-dialogue-titre]');
+   const cible = dialog?.querySelector('[data-lcdp-dialogue-message]');
+   const boutonOk = dialog?.querySelector(retourAccueil
+    ? '[data-lcdp-dialogue-action="confirmer"]'
+    : '[data-lcdp-dialogue-action="compris"]');
+   const boutonFermer = retourAccueil ? dialog?.querySelector('[data-lcdp-dialogue-action="annuler"]') : null;
+   if (!dialog || !titre || !cible || !boutonOk || (retourAccueil && !boutonFermer)) {
+    throw new Error('Structure du dialogue de référence incomplète.');
+   }
+   titre.textContent = 'Demande enregistrée';
+   cible.textContent = texte || '';
+   boutonOk.textContent = 'OK';
+   if (boutonFermer) boutonFermer.textContent = 'Fermer';
+   slot.append(zone);
+   return await new Promise(resolve => {
+    let termine = false;
+    const fermer = valeur => {
+     if (termine) return;
+     termine = true;
+     document.removeEventListener('keydown',clavier);
+     zone.remove();
+     if (focusInitial?.isConnected && typeof focusInitial.focus === 'function') focusInitial.focus();
+     resolve(valeur);
+    };
+    const clavier = event => {
+     if (event.key === 'Escape') {event.preventDefault();fermer(false);}
+     if (retourAccueil && event.key === 'Tab') {
+      if (event.shiftKey && document.activeElement === boutonFermer) {
+       event.preventDefault();boutonOk.focus();
+      } else if (!event.shiftKey && document.activeElement === boutonOk) {
+       event.preventDefault();boutonFermer.focus();
+      }
+     }
+    };
+    boutonOk.addEventListener('click',()=>fermer(true),{once:true});
+    boutonFermer?.addEventListener('click',()=>fermer(false),{once:true});
+    dialog.addEventListener('click',event=>{if(event.target===dialog)fermer(false);});
+    document.addEventListener('keydown',clavier);
+    boutonOk.focus();
+   });
+  } catch (erreur) {
+   zone?.remove();
+   console.error('Dialogue de confirmation formulaire indisponible :',erreur);
+   window.alert(texte);
+   // Une ressource indisponible ne déclenche jamais de redirection sans validation.
+   return false;
+  }
  }
  window.LCDP_brancherFormulaireProtege=async function(form,config){
   if(form.dataset.protege==='true')return;form.dataset.protege='true';
@@ -114,7 +183,7 @@
     const contact=['coach','resparc'].includes(config.type);
     const confirmation=typeof data.message==='string'&&data.message.trim()?data.message:'Votre demande est enregistrée. Merci.';
     form.reset();id=crypto.randomUUID();empreinte='';statut.textContent=confirmation;
-    const confirme=await message(confirmation);
+    const confirme=await message(confirmation,{retourAccueil:contact});
     if(contact && confirme){
      const c=window.SITE_CONFIG||{};
      const chemin='/ESPACE-PUBLIC/accueil-public.html';
