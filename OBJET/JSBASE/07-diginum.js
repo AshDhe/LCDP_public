@@ -170,7 +170,12 @@
     }
     function clavier(event) {
       if (ferme) return;
-      if (event.key === "Escape") { event.preventDefault(); event.stopPropagation(); fermer(null); return; }
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!verificationEnCours || options.bloquerFermeturePendantVerification !== true) fermer(null);
+        return;
+      }
       // Ne jamais afficher le clavier natif : la saisie utilise les touches de la box.
       if (/^\d$/.test(event.key) || event.key === "Backspace") {
         event.preventDefault(); event.stopPropagation(); return;
@@ -186,7 +191,10 @@
 
     chiffres.forEach(bouton => bouton.addEventListener("click", () => ajouter(bouton.dataset.lcdpDiginumDigit)));
     boutonEffacer.addEventListener("click", effacer);
-    racine.addEventListener("click", event => { if (event.target === racine) fermer(null); });
+    racine.addEventListener("click", event => {
+      if (event.target === racine &&
+          (!verificationEnCours || options.bloquerFermeturePendantVerification !== true)) fermer(null);
+    });
     document.addEventListener("keydown", clavier, true);
     document.body.appendChild(racine);
     html.style.overflow = "hidden";
