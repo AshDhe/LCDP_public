@@ -302,3 +302,9 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **Comparaison** : `LCDP_admin/ESPACE-ADMIN/B_ADMIN/admin-actualite.js` utilisait `02-dialogue-bouton.html` pour « Supprimer l’actualité », message précisant la suppression du brouillon, du site public et de la pop-up éventuelle, fichier image conservé. La publication/dépublication et le réglage pop-up utilisent déjà le profil CHOIX.
 - **TRAITÉ — migration statique** : branche `options.confirmer === "Supprimer"` passée à `02-dialogue-reference-suppression.html`, boutons Annuler/Supprimer, même texte, retour booléen. Escape, clic extérieur, annulation, absence du slot ou échec de fragment/CSS => `false`. Ancien fragment retiré de ce gestionnaire ; les autres actions restent sur CHOIX. Le `sauver('supprimer',a.id)` et le Worker restent inchangés. Commit `245b3b42`.
 - **Limites** : aucun test navigateur ; suppression effective et conservation de l'image à vérifier sur parcours réel, pas présumées validées.
+
+
+### SUPPRESSION — annulation d'accès / invitation MEMBRE (13 novembre 2026)
+- **Comparaison** : `LCDP_membre/ESPACE-MEMBRE/mes-acces-membre.js`, `demanderAnnulation(r)`. Avant : `window.confirm(question)`, avec deux messages distincts selon `estRecue(r)` (invitation reçue / accès et invitations associées). Après : `02-dialogue-reference-suppression.html`, titre distinguant les deux cas et message métier existant conservé ; boutons Conserver / Oui, annuler.
+- **TRAITÉ — migration statique** : retour booléen, Escape, clic extérieur, refus et absence de ressources => pas d'appel d'annulation. Le contrôle `annulationEnCours`, le contrôle de période, le délai d'annulation sur bouton, la requête `POST /annuler-reservation`, le rechargement et les notifications ne changent pas. Commit `845cf9aa`.
+- **Non traité** : les autres annulations de réservation/invitation dans `planning-membre.js`, `abonnement-membre.js` et composants connexes. Aucun test navigateur.
