@@ -536,7 +536,6 @@
 
   async function afficherInformationListeAttente(titre, message, type = "information", options = {}) {
     const slot = document.getElementById("lcdp-lightbox-slot");
-    const texte = titre ? `${titre}\n\n${message}` : message;
 
     if (!slot) {
       alert(message);
@@ -554,33 +553,25 @@
       const information = type === "validation" || type === "information";
       const fragment = await chargerFragmentObjetListeAttente(information
         ? "/HTMLBASE/02-dialogue-reference-information.html"
-        : "/HTMLBASE/02-alerte.html");
+        : "/HTMLBASE/02-dialogue-reference-erreur.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector(information
         ? '[data-lcdp-dialogue-reference="information"]'
-        : "[data-lcdp-box-alerte]");
-      const messageElement = slot.querySelector(information
-        ? "[data-lcdp-dialogue-message]"
-        : "[data-lcdp-alerte-message]");
-      const boutonFermer = information ? null : slot.querySelector("[data-lcdp-alerte-close]");
+        : '[data-lcdp-dialogue-reference="erreur"]');
+      const messageElement = slot.querySelector("[data-lcdp-dialogue-message]");
+      const elementTitre = slot.querySelector("[data-lcdp-dialogue-titre]");
       const boutonOk = slot.querySelector(information
         ? '[data-lcdp-dialogue-action="compris"]'
-        : "[data-lcdp-alerte-ok]");
+        : '[data-lcdp-dialogue-action="fermer"]');
 
-      if (!alerte || !messageElement || !boutonOk || (!information && !boutonFermer)) {
+      if (!alerte || !messageElement || !elementTitre || !boutonOk) {
         throw new Error("Structure du dialogue incomplète.");
       }
 
-      if (information) {
-        const elementTitre = slot.querySelector("[data-lcdp-dialogue-titre]");
-        if (elementTitre) elementTitre.textContent = titre || "Demande enregistrée";
-        boutonOk.textContent = "Fermer";
-        messageElement.textContent = message || "";
-      } else {
-        alerte.dataset.type = type;
-        messageElement.textContent = texte;
-      }
+      elementTitre.textContent = titre || (information ? "Demande enregistrée" : "Erreur");
+      messageElement.textContent = message || "";
+      boutonOk.textContent = "Fermer";
 
       await new Promise((resolve) => {
         let ferme = false;
@@ -588,11 +579,14 @@
         const fermer = () => {
           if (ferme) return;
           ferme = true;
+          document.removeEventListener("keydown", gererClavier);
           slot.innerHTML = "";
           resolve();
         };
 
-        boutonFermer?.addEventListener("click", fermer, { once: true });
+        const gererClavier = event => {
+          if (event.key === "Escape") { event.preventDefault(); fermer(); }
+        };
         boutonOk.addEventListener("click", fermer, { once: true });
 
         alerte.addEventListener("click", (event) => {
@@ -601,15 +595,8 @@
           }
         });
 
-        document.addEventListener(
-          "keydown",
-          (event) => {
-            if (event.key === "Escape") {
-              fermer();
-            }
-          },
-          { once: true }
-        );
+        document.addEventListener("keydown", gererClavier);
+        boutonOk.focus();
       });
 
       if (options.redirectUrl) {
