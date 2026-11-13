@@ -183,3 +183,13 @@ L'inventaire ci-dessus est une photographie statique du 12 novembre ; il reste i
 | Les autres sources inventoriées en section C sans classification unitaire de leurs messages | **REPORTÉ — À QUALIFIER** | Inventaire par source, pas preuve d'une instance CHOIX simple résiduelle |
 
 **Pense-bête à conserver :** retourner vers l'utilisateur pour les décisions sur les menus multi-comptes et workflows multi-actions, sans perdre le tableau. **Règle d'avancement :** ne marquer TRAITÉ que les cas avec code migré/commit vérifié ; les statuts REPORTÉ sont des exceptions documentées. La migration de code ne vaut pas validation navigateur. Aucun test desktop/mobile attesté pour ces lots.
+
+
+## I. Suivi SUPPRESSION — 13 novembre 2026
+| Source/cas | Statut | Référence |
+|---|---|---|
+| ADMIN `B_ADMIN/PrixAbo.js` : supprimer définitivement une version d'abonnement | **TRAITÉ (migration statique)** | `49224c72` ; ancien `window.confirm` remplacé par le gabarit SUPPRESSION, retour booléen sécurisé, endpoint inchangé |
+| ADMIN `B_ADMIN/Cle.js`, `list-points.js`, `faq-admin.js`, `admin-actualite.js` | **REPORTÉ — SUPPRESSION** | À migrer après vérification des conséquences et des appels |
+| MEMBRE : annulations de réservation, invitation, abonnement et dates | **REPORTÉ — SUPPRESSION** | Ne pas modifier les règles métier ni les Workers |
+
+Aucun test navigateur réalisé pour ce lot. L'inventaire CHOIX (section H) reste une photographie de son propre avancement ; la migration SUPPRESSION n'implique pas sa clôture.
