@@ -2,7 +2,7 @@
   <div class="lcdp-page-container">
     <div class="lcdp-page-content">
       <section class="lcdp-box-liste-card" data-lcdp-invitation-wrapper>
-        <button type="button" class="lcdp-box-dialogue-champ-inviter__close" data-lcdp-listinvites-cancel aria-label="Fermer le formulaire Inviter" title="Fermer">×</button>
+        <button type="button" class="lcdp-box-dialogue-champ-inviter__close" data-lcdp-listinvites-close aria-label="Fermer le formulaire Inviter" title="Fermer">×</button>
         <div class="lcdp-box-liste-card__header">
           <div class="lcdp-box-liste-card__heading">
             <h2 class="lcdp-box-liste-card__title" id="lcdp-listinvites-title" data-lcdp-listinvites-title>Inviter</h2>
@@ -32,11 +32,14 @@
               </div>
               <p class="lcdp-box-champ-formulaire__description" id="lcdp-listinvites-note">Une invitation maximum par accès actuellement.</p>
             </div>
-            <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-add-email>Ajouter</button>
+            <!-- Une invitation maximum : l'action Ajouter est non disponible.
+                 On conserve son point d'accroche pour la compatibilité JS. -->
+            <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-add-email hidden>Ajouter</button>
 
             <div class="lcdp-box-dialogue-champ-inviter__actions">
               <button class="lcdp-button lcdp-button-primary" type="submit" data-lcdp-listinvites-update>Inviter et mettre à jour</button>
-              <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-sans-email>Inviter sans e-mail</button>
+              <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-cancel>Annuler</button>
+              <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-sans-email aria-label="Inviter sans e-mail" aria-disabled="true" title="Fonctionnalité indisponible actuellement">Inviter sans</button>
             </div>
           </form>
         </div>
