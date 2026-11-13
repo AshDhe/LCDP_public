@@ -310,6 +310,7 @@
     }
 
     shift.classList.add("lcdp-box-shift-detail-parc--page");
+    shift.dataset.lcdpShiftVue = "fiche";
     shift.removeAttribute("role");
     shift.removeAttribute("aria-modal");
 
@@ -318,7 +319,14 @@
     );
 
     if (boutonFermerShift) {
-      boutonFermerShift.remove();
+      boutonFermerShift.addEventListener("click", () => {
+        const retour = document.referrer;
+        if (retour && new URL(retour, window.location.href).origin === window.location.origin && window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.assign(construireUrlSite("/ESPACE-PUBLIC/accueil-public.html"));
+        }
+      });
     }
 
     const attente = document.createElement("div");
