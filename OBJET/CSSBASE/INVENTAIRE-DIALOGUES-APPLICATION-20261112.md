@@ -475,3 +475,12 @@ Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Au
 | `ESPACE-PUBLIC/connexion-membre.js`, validation et erreurs de connexion | `02-alerte.html`, titre et message concaténés ; INFORMATION pour les autres messages, CHOIX pour le renvoi d'email | **TRAITÉ — ERREUR** : titre et message distincts, gabarit de référence ; autres profils, requêtes et navigations conservés | `f1bd0922` |
 
 **Rapprochement technique** : neuf fichiers publics nommés dans le registre ne possèdent plus de référence littérale `02-alerte.html`, avec validation de syntaxe. Le reste du dépôt PUBLIC et les quatre autres dépôts ne sont **pas** couverts par cette conclusion ; le composant `02-alerte.html` et ses CSS doivent rester jusqu'à épuisement de leurs consommateurs. Aucun CSS supprimé ni test navigateur.
+
+
+### K.11 PUBLIC — `accueil-public.js`, 13 novembre 2026
+| Source et cas | Avant | Après / statut | Commit |
+|---|---|---|---|
+| `ESPACE-PUBLIC/accueil-public.js`, branche d'erreur de `afficherAlerte` | `02-alerte.html`, variantes d'alerte selon le bouton de l'accueil, fermeture / redirection optionnelle | **TRAITÉ — ERREUR** : gabarit `02-dialogue-reference-erreur.html`, message et fermeture cohérents ; helper ancien de variante supprimé | `e0bd12fa` |
+| Même source, demandes de connexion et messages de parrain | `02-dialogue-reference-information.html` déjà en place | **CONSERVÉ — INFORMATION**, navigation vers connexion inchangée | — |
+
+**Contrôle limité aux dix sources publiques traitées** : dix fichiers JS syntaxiquement valides, chacun sans référence littérale restante à `02-alerte.html`. Cet inventaire **ne démontre pas** que les autres fichiers PUBLIC, MEMBRE, ADMIN, COACH ou PARC ont cessé de l'utiliser. `02-alerte.html` et les styles du central restent à conserver. Aucun CSS supprimé ni test navigateur.
