@@ -50,6 +50,16 @@
       : "")
   ).replace(/\/$/, "");
 
+  // Lecture publique des textes associes aux photographies des parcs publies.
+  const endpointPhotoEditorialParc = String(
+    config.workerParcAdminUrl ||
+    config.WORKER_PARC_ADMIN_URL ||
+    (typeof config.apiUrl === "function"
+      ? config.apiUrl("parc-admin-api")
+      : "")
+  ).replace(/\/$/, "");
+  const cachePhotoEditorialParc = new Map();
+
   const endpointPlanningParc = String(
     config.workerPlanningParcUrl ||
     config.WORKER_PLANNING_PARC_URL ||
@@ -1332,6 +1342,35 @@
     Promise.resolve(action(parc)).catch(console.error);
   }
 
+  async function obtenirPhotoEditorialParc(parc) {
+    if (parc?.photoseditorial && typeof parc.photoseditorial === "object") {
+      return parc.photoseditorial;
+    }
+    const idparc = String(parc?.idparc || "").trim();
+    if (!idparc || !endpointPhotoEditorialParc) return {};
+    if (!cachePhotoEditorialParc.has(idparc)) {
+      const lecture = fetch(
+        endpointPhotoEditorialParc + "/photoeditorial-public?idparc=" +
+          encodeURIComponent(idparc),
+        {
+          method: "GET",
+          credentials: "omit",
+          cache: "no-store",
+          headers: { Accept: "application/json" }
+        }
+      ).then(async response => {
+        if (!response.ok) return {};
+        const data = await response.json().catch(() => null);
+        if (data?.success !== true ||
+            !data.photoseditorial ||
+            typeof data.photoseditorial !== "object") return {};
+        return data.photoseditorial;
+      }).catch(() => ({}));
+      cachePhotoEditorialParc.set(idparc, lecture);
+    }
+    return cachePhotoEditorialParc.get(idparc);
+  }
+
   async function ajouterGalerieParc(
     slot,
     parc,
@@ -1356,23 +1395,24 @@
       parc?.nom || parc?.nomparc || "Parc"
     ) || "Parc";
     const cartes = [];
+    const editorialPhoto = await obtenirPhotoEditorialParc(parc);
 
     for (let index = premierIndex; index <= dernierIndex; index += 1) {
       const numero = String(index).padStart(2, "0");
       // La première photo de la fiche est celle de la Card Parc.
       const fichierImage = index === 1 ? "card1.webp" : String(index - 1).padStart(2, "0") + ".jpg";
 
+      const metadonnees = editorialPhoto[fichierImage] || {};
       cartes.push({
-        titre: "",
+        titre: String(metadonnees.titre || ""),
         imageSrc: construireUrlImageGalerieFiche(
           options,
           parc,
           fichierImage
         ),
-        imageAlt:
-          "Photo " + numero + " du parc de " + nom,
-        imageLegende: "",
-        texte: ""
+        imageAlt: String(metadonnees.alt || "Photo " + numero + " du parc de " + nom),
+        imageLegende: String(metadonnees.legende || ""),
+        texte: String(metadonnees.texte || "")
       });
     }
 
