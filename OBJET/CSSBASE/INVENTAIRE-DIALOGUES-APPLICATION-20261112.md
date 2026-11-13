@@ -306,3 +306,12 @@ La ligne de J.1 concernant les helpers remplace le statut « à qualifier » de 
 | Même fichier, dialogue de sortie | Plusieurs décisions (rester/enregistrer/ignorer) | **REPORTÉ — MULTI-ACTIONS** | — |
 
 **Réconciliation** : les deux lignes « NON TRAITÉ — À QUALIFIER » de I.8 concernant `nouvelleBase` et `annuler-base` prennent désormais le statut TRAITÉ ci-dessus. Anciennes feuilles CSS : aucune suppression, `lcdp-lightbox-convergence.css` déjà raccordée à la page ; autres consommateurs à auditer avant retrait. Aucun test navigateur.
+
+
+### I.10 Actualisation — deuxième confirmation des frais, abonnement MEMBRE (13 novembre 2026)
+| Cas | Comparaison | Statut | Commit |
+|---|---|---|---|
+| `LCDP_membre/ESPACE-MEMBRE/abonnement-membre.js`, avertissement des frais d'annulation | Ancienne `afficherAlerte` confirmable OK/fermeture, deuxième verrou après la demande d'annulation. Nouvelle confirmation SUPPRESSION avec message inchangé, boutons « Conserver » / « Poursuivre l’annulation », deuxième verrou booléen maintenu avant `POST /demander-annulation`. | **TRAITÉ — migration statique** ; remplace le NON TRAITÉ de I.6 et I.7 pour ce seul cas | `a2cbea71` |
+| `02-alerte.html` et CSS associés | `afficherAlerte` reste appelée à d'autres endroits du même fichier ; consommateurs non épuisés | **CONSERVER — nettoyage non autorisé** | — |
+
+Aucun test navigateur ; ne pas déduire qu'une confirmation des frais vaut une acceptation contractuelle distincte des CGV, le code ne conserve que le même oui/non qu'avant.
