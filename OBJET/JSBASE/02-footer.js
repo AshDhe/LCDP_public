@@ -138,17 +138,46 @@
     });
     return chargementTurnstile;
   }
+  let cssDialogueReference = null;
+  async function assurerCssDialogueReference() {
+    if (cssDialogueReference) return cssDialogueReference;
+    const href = urlObjet('/CSSBASE/lcdp-lightbox-convergence.css');
+    if ([...document.querySelectorAll('link[rel="stylesheet"]')]
+      .some(lien => lien.href === new URL(href, document.baseURI).href)) return;
+    cssDialogueReference = new Promise((resolve,reject) => {
+      const lien = document.createElement('link');
+      lien.rel = 'stylesheet';
+      lien.href = href;
+      lien.onload = resolve;
+      lien.onerror = () => {
+        lien.remove();
+        cssDialogueReference = null;
+        reject(new Error('CSS des dialogues de référence indisponible.'));
+      };
+      document.head.appendChild(lien);
+    });
+    return cssDialogueReference;
+  }
   async function afficherAlerte(message,type = 'information',retour = null) {
     let racine;
+    const information = type !== 'erreur';
     try {
-      const fragment = await chargerFragment('/HTMLBASE/02-alerte.html');
-      racine = fragment.querySelector('[data-lcdp-box-alerte]');
-      const texte = racine?.querySelector('[data-lcdp-alerte-message]');
-      const ok = racine?.querySelector('[data-lcdp-alerte-ok]');
-      const fermer = racine?.querySelector('[data-lcdp-alerte-close]');
-      if (!racine || !texte || !ok || !fermer) throw new Error('Structure alerte incomplète');
-      racine.dataset.type = type;
+      await assurerCssDialogueReference();
+      const fragment = await chargerFragment(information
+        ? '/HTMLBASE/02-dialogue-reference-information.html'
+        : '/HTMLBASE/02-dialogue-reference-erreur.html');
+      racine = fragment.querySelector(information
+        ? '[data-lcdp-dialogue-reference="information"]'
+        : '[data-lcdp-dialogue-reference="erreur"]');
+      const titre = racine?.querySelector('[data-lcdp-dialogue-titre]');
+      const texte = racine?.querySelector('[data-lcdp-dialogue-message]');
+      const ok = racine?.querySelector(information
+        ? '[data-lcdp-dialogue-action="compris"]'
+        : '[data-lcdp-dialogue-action="fermer"]');
+      if (!racine || !titre || !texte || !ok) throw new Error('Structure du dialogue de référence incomplète.');
+      titre.textContent = information ? 'Vérification envoyée' : 'Erreur de vérification';
       texte.textContent = message;
+      ok.textContent = 'OK';
       document.body.append(fragment);
       await new Promise(resolve => {
         let termine = false;
@@ -159,15 +188,19 @@
           racine.remove();
           resolve();
         }
-        function echap(event) {if (event.key === 'Escape') terminer();}
+        function echap(event) {
+          if (event.key === 'Escape') { event.preventDefault(); terminer(); }
+        }
         ok.addEventListener('click',terminer,{once:true});
-        fermer.addEventListener('click',terminer,{once:true});
+        racine.addEventListener('click',event => {
+          if (event.target === racine) terminer();
+        });
         document.addEventListener('keydown',echap);
         ok.focus();
       });
     } catch (erreur) {
       racine?.remove();
-      console.error('Alerte centralisée indisponible :',erreur);
+      console.error('Dialogue de vérification indisponible :',erreur);
       window.alert(message);
     }
     if (retour?.isConnected) retour.focus();
