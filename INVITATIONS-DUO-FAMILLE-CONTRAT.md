@@ -43,9 +43,9 @@ La requête d'enregistrement doit contenir `idflux` et, pour chaque catégorie, 
 
 - `LCDP_public/OBJET/HTMLBASE/04-card-invites-abonnement.html` : présentation séparée DUO/FAMILLE, croix, cases, champs et boutons.
 - `LCDP_membre/ESPACE-MEMBRE/invites-abonnement.js` : validation du contexte, sélection locale, plafonds, formulaire, soumission par callbacks.
-- `LCDP_public/OBJET/CSSBASE/lcdp-mes-acces-membre.css` : règles ciblées, sans toucher aux champs de l'ancien formulaire.
+- Aucun nouveau CSS spécifique au formulaire : réutilisation des composants CSS/Tailwind communs c040, c054 et c065.
 
-Le nouveau contrôleur **n'est pas connecté à `planning-membre.js`**. Cette activation est volontairement différée jusqu'à l'adaptation du Worker ; sinon l'interface présenterait des droits erronés ou des invitations non enregistrées.
+Le contrôleur est raccordé à `planning-membre.js` et à `inviter-membre.js`. Chaque page tente la route `GET /invites-abonnement/contexte` ; si le Worker actuel répond 404, l'ancien formulaire demeure opérationnel. Le nouveau formulaire n'apparaîtra qu'après déploiement du Worker compatible.
 
 Le chantier « Mes invités / Mes invitants » dans Mon compte reste exclu de cette passe.
 
@@ -53,7 +53,7 @@ Le chantier « Mes invités / Mes invitants » dans Mon compte reste exclu de ce
 
 Code fourni le 13/11/2026, 1 619 lignes, syntaxe JS contrôlée.
 
-- Routes existantes : POST `/inviter-reservation`, GET `/invites`, POST `/invites`, GET `/reservations-invitables` ; les anciennes routes doivent être conservées.
+- Routes historiques en production d'origine : POST `/inviter-reservation`, GET `/invites`, POST `/invites`, GET `/reservations-invitables`. Le Worker préparé conserve les lectures et liens signés, mais refuse les deux anciens POST non catégorisés (HTTP 409) pour empêcher un contournement des nouveaux quotas ; les deux formulaires membres actifs ont été raccordés à la nouvelle route.
 - Limite actuelle : `lireNbinvitAbonnement` prend `abo.nbinvit` et plafonne la valeur à 10. Elle ne lit ni `prixabo.maxduo`, ni `duoplus`, ni `freqduoplus`, ni `famille`.
 - L'abonnement actuel est recherché à la date du jour. Pour une réservation future, les droits doivent être obtenus pour la commande couvrant la date de l'accès.
 - Les adresses sans compte sont **déjà prises en charge** : `chercherOuCreerMembreInvitation` crée au besoin une fiche `membres` provisoire avec `emailvalid=false` et `emailvalidmode=invitation`. Il faut réutiliser le mécanisme existant plutôt qu'affirmer que l'envoi sans compte est impossible.
@@ -62,9 +62,9 @@ Code fourni le 13/11/2026, 1 619 lignes, syntaxe JS contrôlée.
 
 **Liaison des options clarifiée le 13/11/2026 après réception des trois Workers de paiement :** une commande payée est rattachée explicitement à son abonnement par `paiement_commandes.idabo`. La clé `paiement_commandes.idpanier` permet de rejoindre `aboreza_options`. L'ancienne comparaison `abo.orderid = aboreza_paniers.numero_commande` était incorrecte : ce sont deux références distinctes. Le rôle d'`aboreza_inclusions` est l'intégration d'abonnements antérieurs dans un nouveau panier, et **non** le rattachement des options achetées. Les privilèges supplémentaires sont à lire exclusivement sur les commandes payées et paniers finalisés. La fonction `paiement_confirmer_commande` écrit l'`idabo` de la commande dans la même transaction que la finalisation.
 
-Le Worker Cloudflare n'est pas accessible via les connecteurs de déploiement actifs. Le fichier reçu est la source de travail pour une **nouvelle version à générer et fournir**, pas une preuve d'un déploiement sur le site.
+Le Worker préparé est livré sous le nom `w-inviter-membre.js`. Son code est vérifié localement, mais n'a pas été déployé sur Cloudflare.
 
-La vue préparée `04-card-invites-abonnement.html` et le contrôleur `invites-abonnement.js` ne sont pas reliés à `planning-membre.html` ni à `planning-membre.js`. Il est donc attendu que l'ancienne box Inviter reste visible tant que le raccordement et le nouveau Worker ne sont pas prêts.
+Les pages `planning-membre.html`/`planning-membre.js` et `inviter-membre.html`/`inviter-membre.js` chargent le nouveau formulaire uniquement lorsque le Worker expose la route de contexte ; l'ancien formulaire demeure en repli sur HTTP 404.
 
 
 ## Passerelle des privilèges : correspondance canonique vérifiée dans Supabase
@@ -89,4 +89,13 @@ Au 13/11/2026, les deux commandes `paiement_commandes.statut='paye'` ont un `ida
 
 **Aucun changement nécessaire aux Workers de paiement pour créer la clé** : `paiement_creer_abo_commande` retrouve/crée l'abonnement et renseigne `paiement_commandes.idabo` ; `paiement_confirmer_commande` confirme paiement, abonnement et accès atomiquement. L'usage des droits doit être implémenté **dans le Worker d'invitation**, sans réinterpréter `aboreza_inclusions` ni toucher aux paiements.
 
-**À finaliser :** règles de cumul exact des privilèges d'option avec les droits de base, calcul temporel et atomique de `freqduoplus`, enregistrement `inviteabo`/`inviteacces`, compatibilité des anciennes routes et des envois e-mail, puis activation du nouveau formulaire. Ce document n'est pas une preuve que le Worker d'invitation a été déployé.
+**État de préparation :** calcul des privilèges, contrôles temporels, quotas simultanés/cumulés et transaction `inviteabo`/`inviteacces`/`invitation`/`fluxm` mis en place dans Supabase. Les routes nouvelles du Worker sont préparées et les deux pages membres raccordées. Tests unitaires Node et tests SQL avec annulation transactionnelle réalisés. **Restent non confirmés sans déploiement Cloudflare** : le rendu mobile réel, l'appel réseau authentifié, la réception Resend et le comportement après activation sur les comptes en production.
+
+
+## Parcours d'annulation et protection contre les contournements
+
+- La fonction `lcdp_annuler_invitation_par_jeton` sécurise l'annulation par lien signé : elle annule dans une seule transaction la ligne `invitation`, la réservation invitée `fluxm` et la sélection `inviteacces` lorsqu'elle existe, tout en gardant le délai de la veille à 14 h.
+- Les anciens POST `/inviter-reservation` et `/invites` ne transmettent pas la catégorie DUO/FAMILLE. Sur le Worker **à déployer**, ils sont refusés avec un message explicite (409) au lieu de permettre le contournement des quotas. Les autres lectures et consultations signées restent disponibles.
+- Test positif : le Worker utilise la même routine existante d'envoi Resend et de génération des liens signés, y compris pour un compte provisoire ; son fonctionnement réel avec la clé Resend de production devra être validé après déploiement.
+- Tests réalisés : fonction SQL de création appelée dans un `BEGIN ... ROLLBACK`, présence de toutes les écritures vérifiée dans la transaction ; refus du dépassement MAXDUO et DUO+ ; annulation d'invitation avec synchronisation vérifiée dans une transaction annulée. Après ces tests, carnet/invitations/compte fictif : 0 ligne créée durablement.
+- Les trois Workers de paiement et le Worker de réservation `w-rezabo` restent inchangés.
