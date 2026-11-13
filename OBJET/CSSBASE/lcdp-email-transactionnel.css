@@ -1,0 +1,84 @@
+/* LA CLÉ DU PARC — socle partagé pour les e-mails transactionnels.
+   Source CSS externe au Worker. À intégrer au HTML lors de la préparation
+   des e-mails expédiés : un lien CSS externe seul n'est pas fiable en messagerie.
+   Dépendance : lcdp-central-module-13-editorial-email.css. */
+
+/* Fond et conteneur : classes réutilisables hors parcours d'invitation. */
+.lcdp-email-transactionnel-preview {
+  margin: 0;
+  padding: 18px 12px 36px;
+  background: #f7f8f5;
+}
+.lcdp-email-transactionnel {
+  border: 1px solid #e5e7de;
+}
+.lcdp-email-transactionnel .lcdp-email-editorial__entete {
+  display: block;
+}
+.lcdp-email-transactionnel .lcdp-email-editorial__corps {
+  padding-top: 48px;
+  padding-bottom: 30px;
+}
+.lcdp-email-transactionnel .lcdp-email-editorial__titre {
+  margin-bottom: 30px;
+  font-size: 34px;
+}
+
+/* Métadonnées de l'e-mail (parc, date, référence, etc.). */
+.lcdp-email-transactionnel__details {
+  margin: 22px 0 24px;
+  padding: 17px 18px 18px;
+  border: 1px solid #e5e7de;
+  border-radius: 6px;
+  background: #f7f8f5;
+}
+.lcdp-email-transactionnel__detail-label {
+  margin: 0 0 5px;
+  color: #85877e;
+  font: 11px/1.5 Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+}
+.lcdp-email-transactionnel__detail-valeur {
+  margin: 0 0 13px;
+  color: #484b43;
+  font: 15px/1.5 Arial, Helvetica, sans-serif;
+}
+.lcdp-email-transactionnel__detail-valeur:last-child {
+  margin-bottom: 0;
+}
+
+/* Appels à l'action : lien primaire et secondaire, sans style côté Worker. */
+.lcdp-email-transactionnel__actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+.lcdp-email-transactionnel__bouton,
+.lcdp-email-transactionnel__bouton:link,
+.lcdp-email-transactionnel__bouton:visited {
+  display: block;
+  padding: 15px 14px;
+  border: 1px solid #4e6838;
+  text-align: center;
+  font-weight: 600;
+}
+.lcdp-email-transactionnel__bouton--secondaire,
+.lcdp-email-transactionnel__bouton--secondaire:link,
+.lcdp-email-transactionnel__bouton--secondaire:visited {
+  background: #ffffff;
+  color: #4e6838;
+}
+.lcdp-email-transactionnel__information-compte {
+  margin-top: 24px;
+  color: #747970;
+  font-size: 13px;
+  line-height: 1.65;
+}
+@media (max-width: 620px) {
+  .lcdp-email-transactionnel .lcdp-email-editorial__corps {
+    padding-top: 36px;
+  }
+  .lcdp-email-transactionnel .lcdp-email-editorial__titre {
+    font-size: 30px;
+  }
+}
