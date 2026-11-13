@@ -84,3 +84,12 @@
     font-size: 30px;
   }
 }
+
+/* Lien complémentaire d'inscription, moins dominant que les deux actions. */
+.lcdp-email-transactionnel__lien,
+.lcdp-email-transactionnel__lien:link,
+.lcdp-email-transactionnel__lien:visited {
+  color: #4e6838;
+  font-weight: 600;
+  text-decoration: underline;
+}
