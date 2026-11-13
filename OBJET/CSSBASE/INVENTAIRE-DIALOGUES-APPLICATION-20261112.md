@@ -435,3 +435,15 @@ Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Au
 | PUBLIC `connexion-parc.js`, `connexion-coach.js` | Alertes d'erreur et `window.alert` de secours | **NON TRAITÉ — ERREUR ultérieur** | — |
 
 **Validation** : syntaxe JavaScript vérifiée pour `connexion-membre.js`. Aucun CSS supprimé, aucun test navigateur. Les autres consommateurs des gabarits historiques restent ouverts.
+
+
+### K.7 PUBLIC — INFORMATION et ERREUR, 13 novembre 2026
+| Page / cas | Ancien composant et effet métier | Nouveau profil / statut | Commit |
+|---|---|---|---|
+| `codes-securite.js`, réussite des codes | `02-alerte.html` / OK, puis `hello.html` après affichage éventuel du masque | **TRAITÉ — INFORMATION** : gabarit de référence, bouton Fermer et même déclenchement de la redirection après fermeture | `6c39ec59` |
+| `codes-securite.js`, erreurs de validation | `02-alerte.html` avec message d'erreur, sans redirection systématique | **NON TRAITÉ — ERREUR**, conserver `02-alerte.html` et CSS associés | — |
+| `hello.js`, erreurs email / mot de passe / accès public | `02-alerte.html` : titre + message ; fermeture / secours alert natif | **TRAITÉ — ERREUR** : `02-dialogue-reference-erreur.html`, mêmes textes, fermeture et secours | `3412581e` |
+| `connexion-parc.js`, erreurs de connexion | `02-alerte.html` : saisie invalide, échec login/session | **TRAITÉ — ERREUR** : référence ERREUR, contrôles /login et /session inchangés | `b7c388e1` |
+| `connexion-coach.js`, erreurs de connexion | Identique, identifiants coach propres au Worker | **TRAITÉ — ERREUR** : référence ERREUR, champs métier et redirections inchangés | `09fc3bc1` |
+
+**Rapprochement CSS** : `hello.js`, `connexion-parc.js`, `connexion-coach.js` n'ont plus de référence littérale `02-alerte.html` ; `codes-securite.js` en possède encore une pour les erreurs. Les quatre sources chargent `lcdp-lightbox-convergence.css` à la demande, sans modification des anciennes feuilles. **NE PAS SUPPRIMER** `02-alerte.html` ni les styles hérités tant que des consommateurs restent présents. Contrôle syntaxique quatre fichiers, aucun test navigateur.
