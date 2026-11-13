@@ -166,13 +166,7 @@
       parcActif = parc;
       await afficherFicheParc(parc, fiche);
 
-      // Ouverture ciblée de la carte depuis le verso MES ACCÈS.
-      if (new URLSearchParams(window.location.search).get("vue") === "carte") {
-        window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
-          const carte = document.querySelector('[data-lcdp-fiche-parc-map-slot]');
-          carte?.closest('section')?.scrollIntoView({ block: "start", behavior: "auto" });
-        }));
-      }
+      // ?vue=carte ouvre directement la vue Carte du contrôleur commun.
 
       if (vuePartage === "planning") {
         await ouvrirShiftDetailParc(parc, "planning");
@@ -348,7 +342,9 @@
       contenuShift,
       parc,
       {
-        vueInitiale: "fiche",
+        vueInitiale: new URLSearchParams(window.location.search).get("vue") === "carte"
+          ? "carte"
+          : "fiche",
         modeUsage: MODE_USAGE_PUBLIC,
         templateCardParc: etatInteraction.templateCardParc,
         chargerFicheParc: (idparc) =>
@@ -417,6 +413,9 @@
     const boutonPartager = fiche.querySelector(
       "[data-lcdp-fiche-parc-action-partager]"
     );
+    const boutonCarte = fiche.querySelector(
+      "[data-lcdp-fiche-parc-action-carte]"
+    );
     const boutonPlanning = fiche.querySelector(
       "[data-lcdp-fiche-parc-action-planning]"
     );
@@ -425,6 +424,9 @@
     );
     const iconePartager = fiche.querySelector(
       "[data-lcdp-fiche-parc-action-partager-icone]"
+    );
+    const iconeCarte = fiche.querySelector(
+      "[data-lcdp-fiche-parc-action-carte-icone]"
     );
     const iconePlanning = fiche.querySelector(
       "[data-lcdp-fiche-parc-action-planning-icone]"
@@ -447,6 +449,12 @@
     const carteSlot = fiche.querySelector(
       "[data-lcdp-fiche-parc-map-slot]"
     );
+    // Le contenu reste identique ; seule la carte est déplacée dans une vue
+    // distincte lorsque le parcours commun fournit son action Carte.
+    const carteDansVueDediee = typeof options.onCarte === "function";
+    if (carteDansVueDediee) {
+      carteSlot?.closest(".lcdp-box-fiche-parc__section--map")?.remove();
+    }
     // Compatibilité avec un fragment de fiche plus ancien : celui-ci ne
     // contenait pas la section Ouverture, donc rien ne pouvait s'afficher.
     let ouverture = fiche.querySelector(
@@ -529,6 +537,18 @@
       });
     }
 
+    if (boutonCarte) {
+      if (carteDansVueDediee) {
+        boutonCarte.addEventListener("click", (event) => {
+          event.preventDefault();
+          executerActionFiche(options.onCarte, parc);
+        });
+      } else {
+        // Les anciens contextes de rendu direct conservent la carte intégrée.
+        boutonCarte.remove();
+      }
+    }
+
     if (boutonPlanning && normaliserModeUsagePlanning(options) === MODE_USAGE_MEMBRE) {
       boutonPlanning.remove();
     } else if (boutonPlanning) {
@@ -553,6 +573,7 @@
 
     [
       [iconePartager, "partager"],
+      [iconeCarte, "localiser"],
       [iconePlanning, "planning"],
       [iconePlanifier, "reserver"]
     ].forEach(([icone, nomIcone]) => {
@@ -582,7 +603,9 @@
     if (galerieSuiteSlot) {
       await ajouterGalerieParc(galerieSuiteSlot, parc, options, 5, 6);
     }
-    await ajouterCarteParc(carteSlot, parc, options);
+    if (!carteDansVueDediee) {
+      await ajouterCarteParc(carteSlot, parc, options);
+    }
 
     // Ne pas confondre les anciens horaires libres et la synthèse mensuelle
     // de Planning Park. Celle-ci doit être fournie par le service fiche-parc.
@@ -625,6 +648,75 @@
     return fiche;
   }
 
+
+  // Vue Carte du parcours partagé : utilise la section et le moteur carto
+  // existants, et conserve le même header dans les deux espaces.
+  async function rendreVueCarteParcDansConteneur(slot, parc, options = {}) {
+    if (!slot) {
+      throw new Error("Conteneur de carte du parc introuvable.");
+    }
+
+    const fragment = await chargerFragmentObjetFiche(
+      options,
+      "/HTMLBASE/04-fiche-parc.html"
+    );
+    const fiche = fragment.querySelector("[data-lcdp-box-fiche-parc]");
+    const carteSection = fiche?.querySelector(".lcdp-box-fiche-parc__section--map");
+    const card = fiche?.querySelector(".lcdp-box-fiche-parc__card");
+    const entete = fiche?.querySelector(".lcdp-box-fiche-parc__header");
+    const actions = fiche?.querySelector("[data-lcdp-fiche-parc-actions]");
+    const retourFiche = fiche?.querySelector("[data-lcdp-fiche-parc-action-le-parc]");
+    const partager = fiche?.querySelector("[data-lcdp-fiche-parc-action-partager]");
+    const carteSlot = carteSection?.querySelector("[data-lcdp-fiche-parc-map-slot]");
+
+    if (![fiche, carteSection, card, entete, actions, retourFiche, partager, carteSlot].every(Boolean)) {
+      throw new Error("Structure de la vue Carte du parc incomplète.");
+    }
+
+    fiche.classList.add("lcdp-box-fiche-parc--shift-detail", "lcdp-box-fiche-parc--vue-carte");
+    card.replaceChildren(entete, carteSection);
+    actions.replaceChildren(retourFiche, partager);
+
+    const nom = nettoyerTexte(parc?.nom || parc?.nomparc || "Parc") || "Parc";
+    const titre = fiche.querySelector("[data-lcdp-fiche-parc-title]");
+    if (titre) titre.textContent = nomParcAffiche(nom);
+
+    const code = nettoyerDepartement(parc?.dptmt || parc?.departement);
+    const libelle = nettoyerTexte(options.nomDepartement || parc?.nomDepartement || parc?.nomdepartement);
+    const texteDepartement = libelle ? `${libelle} (${code})` : code;
+    const sousTitre = fiche.querySelector("[data-lcdp-fiche-parc-departement]");
+    if (sousTitre) {
+      sousTitre.textContent = texteDepartement;
+      sousTitre.hidden = !(libelle || code);
+    }
+    const sousTitreCarte = fiche.querySelector("[data-lcdp-fiche-parc-map-departement]");
+    if (sousTitreCarte) {
+      sousTitreCarte.textContent = libelle ? `${libelle} (${code})` : (code ? `Département ${code}` : "");
+      sousTitreCarte.hidden = !(libelle || code);
+    }
+
+    retourFiche.removeAttribute("aria-current");
+    retourFiche.setAttribute("aria-label", "Retour à la fiche du parc");
+    retourFiche.title = "Retour à la fiche du parc";
+    retourFiche.addEventListener("click", (event) => {
+      event.preventDefault();
+      executerActionFiche(options.onRetourFiche, parc);
+    });
+    partager.addEventListener("click", (event) => {
+      event.preventDefault();
+      executerActionFiche(options.onPartager || partagerFicheParc, parc);
+    });
+
+    const appliquerRoutes = typeof options.appliquerRoutes === "function"
+      ? options.appliquerRoutes
+      : appliquerRoutesSite;
+
+    slot.replaceChildren(fiche);
+    appliquerRoutes(fiche);
+    // Le même moteur cartographique reste seul responsable des données,
+    // des marqueurs, des zooms et de la carte des parcs voisins.
+    return ajouterCarteParc(carteSlot, parc, options);
+  }
 
   async function monterParcoursFicheParcDansConteneur(
     slot,
@@ -863,7 +955,7 @@
     }
 
     async function afficherVue(vueDemandee, parc) {
-      const vue = ["fiche", "planning"]
+      const vue = ["fiche", "carte", "planning"]
         .includes(vueDemandee)
         ? vueDemandee
         : "fiche";
@@ -872,7 +964,7 @@
       actualiserParc(parc);
 
       const parcAffiche =
-        vue === "fiche"
+        vue === "fiche" || vue === "carte"
           ? await obtenirFicheComplete(parcCourant)
           : parcCourant;
 
@@ -899,6 +991,8 @@
             onPlanning: ouvrirPlanningSelonDroits,
             onPartager: (parcCible) =>
               partager(parcCible, "fiche"),
+            onCarte: (parcCible) =>
+              afficherVueSecurisee("carte", parcCible),
             onOuvrirFicheParc: (parcCible) =>
               normaliserModeUsagePlanning(options) === MODE_USAGE_PUBLIC &&
               typeof options.onOuvrirFicheParc === "function"
@@ -910,6 +1004,24 @@
               typeof options.onReserverParc === "function"
                 ? options.onReserverParc
                 : ouvrirPlanningPourPlanification
+          }
+        );
+      } else if (vue === "carte") {
+        nouvelleVue._lcdpControleurCarte = await rendreVueCarteParcDansConteneur(
+          nouvelleVue,
+          parcAffiche,
+          {
+            ...options,
+            onRetourFiche: (parcCible) =>
+              afficherVueSecurisee("fiche", parcCible),
+            onPartager: (parcCible) =>
+              partager(parcCible, "fiche"),
+            onOuvrirFicheParc: (parcCible) =>
+              normaliserModeUsagePlanning(options) === MODE_USAGE_PUBLIC &&
+              typeof options.onOuvrirFicheParc === "function"
+                ? options.onOuvrirFicheParc(parcCible)
+                : afficherVueSecurisee("fiche", parcCible),
+            onOuvrirPlanningParc: ouvrirPlanningSelonDroits
           }
         );
       } else if (vue === "planning") {
@@ -933,6 +1045,7 @@
       }
 
       if (!actif || operation !== operationCourante) {
+        nouvelleVue._lcdpControleurCarte?.detruire?.();
         return;
       }
 
@@ -976,6 +1089,7 @@
       }
 
       if (ancienneVue) {
+        ancienneVue._lcdpControleurCarte?.detruire?.();
         ancienneVue.remove();
       }
 
@@ -994,6 +1108,8 @@
     const api = {
       afficherFiche: (parc) =>
         afficherVue("fiche", parc || parcCourant),
+      afficherCarte: (parc) =>
+        afficherVue("carte", parc || parcCourant),
       afficherPlanning: (parc) =>
         afficherVue("planning", parc || parcCourant),
       afficherReservation: (parc) =>
@@ -1005,6 +1121,8 @@
       detruire: () => {
         actif = false;
         operationCourante += 1;
+        slot.querySelector(".lcdp-fiche-parc__shift-view")
+          ?._lcdpControleurCarte?.detruire?.();
         slot.style.removeProperty("min-height");
       }
     };
