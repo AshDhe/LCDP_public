@@ -198,11 +198,11 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 | Vue « Votre planning » | MEMBRE `reserver-membre.js` | **REPORTÉ, COMPLEXE** | Quatre actions et contenu dynamique |
 | Conteneur du tunnel ABO-RÉZA | MEMBRE `aboreza-membre.js` | **REPORTÉ, COMPLEXE** | Conteneur métier, pas confirmation simple |
 | Confirmation « Planifier votre accès ? » avec récapitulatif | MEMBRE `reserver-membre.js` | **REPORTÉ, COMPLEXE** | Récapitulatif structuré déjà distingué par l'audit initial ; étudier avec la vue métier, ne pas détruire son contenu |
-| Confirmation/changement de compte par burger | MEMBRE `box-menu-burger-membre.js` | **REPORTÉ, CHOIX** | `02-dialogue-bouton.html` toujours chargé (contrôle GitHub) |
+| Confirmation/changement de compte par burger | MEMBRE `box-menu-burger-membre.js` | **PARTIEL : déconnexion TRAITÉE, sélection de compte REPORTÉE** | Déconnexion CHOIX `4185b8fa`, CSS `604ee044` ; sélection multi-comptes conserve l'ancien objet |
 | Choix du compte / connexion par burger | PUBLIC `box-menu-burger-public.js` | **REPORTÉ, CHOIX** | `02-dialogue-bouton.html` toujours chargé |
 | Choix du compte / connexion par burger | PARC et COACH `box-menu-burger-{parc,coach}.js` | **REPORTÉ, CHOIX** | Gabarit historique toujours chargé |
-| Confirmation « Votre DA est terminée ? » | MEMBRE `da-membre.js` | **REPORTÉ, CHOIX** | `mode:"confirmation"` sur l'ancienne alerte |
-| Confirmation de publication / sélection d'actualité | ADMIN `B_ADMIN/admin-actualite.js` | **REPORTÉ, CHOIX** | Le helper métier utilise toujours `02-dialogue-bouton.html` ; suppression d'article à exclure pour SUPPRESSION |
+| Confirmation « Votre DA est terminée ? » | MEMBRE `da-membre.js` | **TRAITÉ** | Toutes les confirmations DA migrées, y compris « Quitter ma DA ? » ; `d287e085` |
+| Confirmation de publication / sélection d'actualité | ADMIN `B_ADMIN/admin-actualite.js` | **TRAITÉ hors suppression** | Publication/dépublication/pop-up migrées `e80219de` ; suppression d'article reportée à SUPPRESSION |
 | Confirmations de planning / sortie / nouvelle base | ADMIN `B_PARCS/planning-parc.js` | **REPORTÉ, CHOIX** | Dialogues natifs et `window.confirm`, conséquences à distinguer |
 | Annulation d'abonnement / de réservations / d'invitations / d'invités, abandon des dates et suppressions administratives | MEMBRE et ADMIN (sources dans inventaire initial) | **REPORTÉ, SUPPRESSION** | Ne pas compter comme CHOIX simple : décisions destructrices |
 | Autres dialogues à boutons, champs, calendriers, listes et tunnels répertoriés sans classification de chacune de leurs actions | Les cinq dépôts, inventaire section C | **REPORTÉ, À QUALIFIER** | L'inventaire est par **fichier/source**, pas par instance de message : ne pas inventer une correspondance exhaustive |
@@ -219,3 +219,10 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 5. Dans les autres dépôts, toutes les lignes REPORTÉ / À QUALIFIER du tableau précédent doivent être suivies et avoir un statut explicite. Les confirmations simples se migrent sans arbitrage ; les ambiguïtés métier se soumettent à l'utilisateur. Ne pas gonfler la liste des arbitrages pour des choix évidents.
 **Ordre utilisateur :** terminer les CHOIX simples, garder les complexes à part et revenir vers l'utilisateur pour les trancher ; **ensuite SUPPRESSION, puis ERREUR**. Conserver les CSS hérités aussi longtemps que leurs consommateurs existent. Tests réels à prévoir, jamais présumés faits.
 
+
+### CHOIX — poursuite du 13 novembre 2026
+- **Pense-bête permanent** : décisions utilisateur à solliciter décrites dans « PENSE-BÊTE PRIORITAIRE — ARBITRAGES À REVOIR AVEC L'UTILISATEUR », commit `eaaa96e8`. Ne pas les perdre lors du prochain fil.
+- **MEMBRE / DA** : `da-membre.js`, confirmations DA terminée / quitter DA migrées sur `02-dialogue-reference-choix.html`, retours booléens préservés, `sansCroix` maintenu, secours natif si chargement impossible. Commit `d287e085`.
+- **MEMBRE / BURGER** : `box-menu-burger-membre.js`, confirmation de déconnexion migrée vers CHOIX ; Worker de déconnexion non modifié. Commits `4185b8fa`, `604ee044` (CSS explicite). Choix multi-comptes non migré.
+- **ADMIN / ACTUALITÉS** : `B_ADMIN/admin-actualite.js`, confirmations publier/dépublier et pop-up migrées vers CHOIX. Le dialogue « Supprimer » conserve son rendu historique jusqu'au lot SUPPRESSION. Commit `e80219de`.
+- **Reportés** : menus de sélection multi-comptes dans les quatre espaces, confirmations administratives de planning, écrans métier à plusieurs actions ou données dynamiques (voir tableau et pense-bête). Tests navigateur non réalisés.
