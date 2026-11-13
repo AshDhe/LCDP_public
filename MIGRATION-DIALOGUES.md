@@ -315,3 +315,10 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **Bilan** : six fichiers JavaScript changés ; aucun fichier entier supprimé par ces commits. Les actions métier de suppression/annulation sont conservées ; elles ne sont pas exécutées par les commits. L'ancien gabarit partagé `02-dialogue-bouton.html` n'est pas supprimé, car d'autres consommateurs sont encore documentés.
 - **Document de référence** : inventaire `OBJET/CSSBASE/INVENTAIRE-DIALOGUES-APPLICATION-20261112.md`, section J, commit `cc9b5be7`.
 - **Toujours ouverts** : annulations des autres écrans MEMBRE, consommateurs anciens à qualifier, validation navigateur et revue d'inutilisation avant tout nettoyage de fichiers partagés. Ne pas assimiler « référence retirée dans une fonction » à « composant désormais inutilisé dans le dépôt ».
+
+
+### SUPPRESSION — abonnement MEMBRE, première confirmation (13 novembre 2026)
+- **Comparaison vérifiée** : `LCDP_membre/ESPACE-MEMBRE/abonnement-membre.js`, `demanderAnnulationAvoir(card)`. Première étape antérieure : `afficherAlerte("Voulez-vous annuler l'abonnement ?")` (alerte `02-alerte.html`, bouton OK = `true`, fermeture = `false`). Elle est remplacée par le gabarit `02-dialogue-reference-suppression.html` (Conserver / Oui, annuler), même décision booléenne. Commit `623e9bd0`. Échap, clic extérieur, absence de CSS/fragment => refus sans appel Worker.
+- **NON TRAITÉ — deuxième étape distincte** : `afficherAlerte("Des frais de traitement d’annulation s’appliquent conformément aux Conditions Générales de Vente.")`, dont le `true` conditionne encore la demande d'avoir. La traiter comme validation explicite des frais, sans la confondre avec une simple information.
+- **Métier inchangé** : `POST /demander-annulation`, `idabo`, informations d'avoir et rechargement des abonnements, ordre des deux validations. Aucun test navigateur.
+- **CSS** : les fragments `02-alerte.html` et leurs CSS ne sont pas retirés : autres usages et seconde validation toujours présents. Aucun retrait CSS autorisé sur le seul constat de la migration.
