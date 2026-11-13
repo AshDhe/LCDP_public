@@ -324,12 +324,11 @@
     attente.className = "lcdp-fiche-parc-public__attente";
     attente.setAttribute("role", "status");
     attente.setAttribute("aria-label", "Chargement de la fiche du parc");
-    const gif = document.createElement("img");
-    gif.src = construireUrlObjetFiche({}, "/IMAG/PICTO/pictowait.gif");
-    gif.alt = "";
-    gif.width = 64;
-    gif.height = 64;
-    attente.appendChild(gif);
+    attente.innerHTML = `<div class="lcdp-loading-spinner" aria-hidden="true">
+        <svg class="lcdp-loading-spinner__track" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></circle></svg>
+        <svg class="lcdp-loading-spinner__arc" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75"></circle></svg>
+        <span class="lcdp-loading-spinner__dot"></span>
+      </div>`;
     shift.querySelector(".lcdp-box-shift-detail-parc__card")?.appendChild(attente);
     shift.classList.add("lcdp-fiche-parc-public__en-chargement");
     slot.replaceChildren(shift);
