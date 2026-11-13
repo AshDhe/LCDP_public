@@ -40,11 +40,141 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.inviteabo, public.inviteacc
 -- LCDP - Sélection transactionnelle d'invités DUO/FAMILLE pour un accès.
 -- Uniquement le Worker, via service_role, transmet l'identité issue du cookie signé.
 -- Dépend de inviteabo, inviteacces, paiement_commandes, prixabo, fluxm, invitation.
-CREATE OR REPLACE FUNCTION public.lcdp_enregistrer_invites_abonnement(
-  p_idflux uuid, p_idmembre uuid, p_selection jsonb
-) RETURNS jsonb
-LANGUAGE plpgsql SECURITY DEFINER
-SET search_path = public, pg_temp
+-- Ajustements propres à un abonnement, sans modifier les lignes tarifaires partagées.
+-- Les trois options commerciales n'augmentent jamais la fréquence DUO+.
+CREATE TABLE IF NOT EXISTS public.abo_privileges_override (
+ idabo uuid PRIMARY KEY REFERENCES public.abo(idabo) ON DELETE CASCADE,
+ maxduo integer CHECK (maxduo IS NULL OR maxduo>=0),
+ duoplus integer CHECK (duoplus IS NULL OR duoplus>=0),
+ freqduoplus integer CHECK (freqduoplus IS NULL OR freqduoplus>=0),
+ famille integer CHECK (famille IS NULL OR famille>=0),
+ motif text NOT NULL,
+ datecreation timestamptz NOT NULL DEFAULT now(),
+ datemaj timestamptz NOT NULL DEFAULT now(),
+ CONSTRAINT abo_privileges_override_non_vide CHECK
+ (maxduo IS NOT NULL OR duoplus IS NOT NULL OR freqduoplus IS NOT NULL OR famille IS NOT NULL)
+);
+ALTER TABLE public.abo_privileges_override ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON TABLE public.abo_privileges_override FROM PUBLIC,anon,authenticated;
+GRANT SELECT,INSERT,UPDATE,DELETE ON TABLE public.abo_privileges_override TO service_role;
+
+-- Lecture unique des droits et utilisations de l'accès, réutilisée par l'écriture.
+CREATE OR REPLACE FUNCTION public.lcdp_quotas_invites_abonnement(p_idflux uuid, p_idmembre uuid)
+ RETURNS jsonb
+ LANGUAGE plpgsql
+ SECURITY DEFINER
+ SET search_path TO 'public', 'pg_temp'
+AS $function$
+DECLARE
+ v_source public.fluxm%ROWTYPE;
+ v_abo public.abo%ROWTYPE;
+ v_prix public.prixabo%ROWTYPE;
+ v_override public.abo_privileges_override%ROWTYPE;
+ v_nombre_abos integer;
+ v_option_maxduo integer := 0;
+ v_option_duoplus integer := 0;
+ v_option_famille integer := 0;
+ v_maxduo integer;
+ v_duoplus integer;
+ v_freqduoplus integer;
+ v_famille integer;
+ v_duo_carnet integer;
+ v_famille_carnet integer;
+ v_plus_mois_autres integer;
+ v_duo_acces integer;
+ v_famille_acces integer;
+BEGIN
+ SELECT * INTO v_source FROM public.fluxm
+ WHERE idflux=p_idflux AND idmembre=p_idmembre AND invitation=false
+   AND statut IN ('bookd','chekd','full');
+ IF NOT FOUND THEN RAISE EXCEPTION 'Accès personnel indisponible.' USING ERRCODE='22023'; END IF;
+
+ SELECT count(*) INTO v_nombre_abos FROM public.abo a
+ WHERE a.idmembre=p_idmembre AND a.statutabo='paye'
+ AND (a.debut AT TIME ZONE 'Europe/Paris')::date <= (v_source.datebookd AT TIME ZONE 'Europe/Paris')::date
+ AND (a.fin AT TIME ZONE 'Europe/Paris')::date >= (v_source.datebookd AT TIME ZONE 'Europe/Paris')::date;
+ IF v_nombre_abos<>1 THEN RAISE EXCEPTION 'Abonnement payé absent ou ambigu.' USING ERRCODE='22023'; END IF;
+
+ SELECT * INTO STRICT v_abo FROM public.abo a
+ WHERE a.idmembre=p_idmembre AND a.statutabo='paye'
+ AND (a.debut AT TIME ZONE 'Europe/Paris')::date <= (v_source.datebookd AT TIME ZONE 'Europe/Paris')::date
+ AND (a.fin AT TIME ZONE 'Europe/Paris')::date >= (v_source.datebookd AT TIME ZONE 'Europe/Paris')::date;
+ SELECT * INTO v_prix FROM public.prixabo WHERE idprixabo=v_abo.idprixabo;
+ IF NOT FOUND OR v_prix.maxduo IS NULL OR v_prix.duoplus IS NULL
+  OR v_prix.freqduoplus IS NULL OR v_prix.famille IS NULL
+  OR LEAST(v_prix.maxduo,v_prix.duoplus,v_prix.freqduoplus,v_prix.famille)<0
+ THEN RAISE EXCEPTION 'Privilèges de l’abonnement non configurés.' USING ERRCODE='22023'; END IF;
+
+ SELECT COALESCE(SUM(CASE WHEN o.code_option='+5 DUOMAX' THEN x.maxduo ELSE 0 END),0)::integer,
+        COALESCE(SUM(CASE WHEN o.code_option='+5 DUO+' THEN x.duoplus ELSE 0 END),0)::integer,
+        COALESCE(SUM(CASE WHEN o.code_option='+2 FAMILLE' THEN x.famille ELSE 0 END),0)::integer
+ INTO v_option_maxduo,v_option_duoplus,v_option_famille
+ FROM public.paiement_commandes pc
+ JOIN public.aboreza_paniers pan ON pan.idpanier=pc.idpanier
+ JOIN public.aboreza_options o ON o.idpanier=pan.idpanier
+ JOIN public.prixabo x ON x.idprixabo=o.idprixabo AND x.typeabo=o.code_option
+ WHERE pc.idabo=v_abo.idabo AND pc.idmembre=v_abo.idmembre
+ AND pc.orderid=v_abo.orderid AND pc.statut='paye'
+ AND pan.idmembre=v_abo.idmembre AND pan.statut='finalise'
+ AND pan.options_confirmees=true;
+
+ -- Ajustements propres à l'abonnement, sans changer le tarif partagé.
+ SELECT * INTO v_override FROM public.abo_privileges_override WHERE idabo=v_abo.idabo;
+ v_maxduo := COALESCE(v_override.maxduo,v_prix.maxduo) + v_option_maxduo;
+ v_duoplus := COALESCE(v_override.duoplus,v_prix.duoplus) + v_option_duoplus;
+ -- Les options commerciales n'augmentent jamais la fréquence mensuelle.
+ v_freqduoplus := COALESCE(v_override.freqduoplus,v_prix.freqduoplus);
+ v_famille := COALESCE(v_override.famille,v_prix.famille) + v_option_famille;
+
+ SELECT count(*) FILTER (WHERE categorie='duo'),
+        count(*) FILTER (WHERE categorie='famille')
+ INTO v_duo_carnet,v_famille_carnet
+ FROM public.inviteabo WHERE idabo=v_abo.idabo;
+
+ SELECT count(*) FILTER (WHERE b.categorie='duo'),
+        count(*) FILTER (WHERE b.categorie='famille')
+ INTO v_duo_acces,v_famille_acces
+ FROM public.inviteacces ia
+ JOIN public.inviteabo b ON b.idinviteabo=ia.idinviteabo AND b.idabo=v_abo.idabo
+ WHERE ia.idflux=p_idflux AND ia.statut<>'cancd';
+
+ SELECT count(*) INTO v_plus_mois_autres
+ FROM (
+  SELECT ia.idflux
+  FROM public.inviteacces ia
+  JOIN public.inviteabo b ON b.idinviteabo=ia.idinviteabo
+    AND b.idabo=v_abo.idabo AND b.categorie='duo'
+  JOIN public.fluxm f ON f.idflux=ia.idflux AND f.idmembre=p_idmembre
+    AND f.invitation=false AND f.statut IN ('bookd','chekd','full')
+  WHERE ia.statut<>'cancd' AND ia.idflux<>p_idflux
+    AND date_trunc('month',f.datebookd AT TIME ZONE 'Europe/Paris')
+       =date_trunc('month',v_source.datebookd AT TIME ZONE 'Europe/Paris')
+  GROUP BY ia.idflux
+  HAVING count(DISTINCT ia.idinviteabo)>1
+ ) u;
+
+ RETURN jsonb_build_object(
+  'idabo',v_abo.idabo,
+  'privileges',jsonb_build_object('maxduo',v_maxduo,'duoplus',v_duoplus,
+      'freqduoplus',v_freqduoplus,'famille',v_famille),
+  'utilisation',jsonb_build_object('duoCarnet',v_duo_carnet,
+      'familleCarnet',v_famille_carnet,
+      'duoplusUtilisesMois',v_plus_mois_autres,
+      'duoSelectionnesAcces',v_duo_acces,
+      'familleSelectionnesAcces',v_famille_acces),
+  'moisAcces',to_char(v_source.datebookd AT TIME ZONE 'Europe/Paris','YYYY-MM')
+ );
+END;
+$function$;
+REVOKE ALL ON FUNCTION public.lcdp_quotas_invites_abonnement(uuid,uuid) FROM PUBLIC,anon,authenticated;
+GRANT EXECUTE ON FUNCTION public.lcdp_quotas_invites_abonnement(uuid,uuid) TO service_role;
+
+-- Sélection transactionnelle d'invités : contrôle des quotas avant toute écriture.
+CREATE OR REPLACE FUNCTION public.lcdp_enregistrer_invites_abonnement(p_idflux uuid, p_idmembre uuid, p_selection jsonb)
+ RETURNS jsonb
+ LANGUAGE plpgsql
+ SECURITY DEFINER
+ SET search_path TO 'public', 'pg_temp'
 AS $function$
 DECLARE
   v_source public.fluxm%ROWTYPE;
@@ -55,6 +185,9 @@ DECLARE
   v_duoplus integer;
   v_freqduoplus integer;
   v_famille integer;
+  v_droits jsonb;
+  v_nouveaux_duo integer;
+  v_nouveaux_famille integer;
   v_option record;
   v_facteur_attendu integer;
   v_cat text;
@@ -155,8 +288,34 @@ BEGIN
       IF v_cat='duo' THEN v_nbduo:=v_nbduo+1; ELSE v_nbfamille:=v_nbfamille+1; END IF;
     END LOOP;
   END LOOP;
-  -- Première activation : conserver la validation des e-mails et des
-  -- appartenances, sans appliquer encore les quotas DUO/FAMILLE ni DUO+.
+  -- Après validation des e-mails et catégories, contrôle des droits effectifs
+  -- de la commande payée et des éventuels ajustements propres à l'abonnement.
+  -- L'abonnement est déjà verrouillé FOR UPDATE : sérialisation des ajouts.
+  v_droits := public.lcdp_quotas_invites_abonnement(p_idflux,p_idmembre);
+  v_maxduo := (v_droits->'privileges'->>'maxduo')::integer;
+  v_duoplus := (v_droits->'privileges'->>'duoplus')::integer;
+  v_freqduoplus := (v_droits->'privileges'->>'freqduoplus')::integer;
+  v_famille := (v_droits->'privileges'->>'famille')::integer;
+  v_duo_mois := (v_droits->'utilisation'->>'duoplusUtilisesMois')::integer;
+  SELECT count(*) FILTER (WHERE c='duo'),
+         count(*) FILTER (WHERE c='famille')
+    INTO v_nouveaux_duo,v_nouveaux_famille
+  FROM unnest(v_new_categories) AS c;
+  IF (v_droits->'utilisation'->>'duoCarnet')::integer + v_nouveaux_duo > v_maxduo THEN
+    RAISE EXCEPTION 'Le maximum d’invités DUO est atteint sur cet abonnement.' USING ERRCODE='22023';
+  END IF;
+  IF (v_droits->'utilisation'->>'familleCarnet')::integer + v_nouveaux_famille > v_famille THEN
+    RAISE EXCEPTION 'Le maximum d’invités FAMILLE est atteint sur cet abonnement.' USING ERRCODE='22023';
+  END IF;
+  IF v_nbduo > GREATEST(1,v_duoplus) THEN
+    RAISE EXCEPTION 'Le nombre maximum d’invités DUO+ est atteint pour cet accès.' USING ERRCODE='22023';
+  END IF;
+  IF v_nbduo>1 AND v_duo_mois>=v_freqduoplus THEN
+    RAISE EXCEPTION 'L’option DUO+ n’est plus valable pour ce mois.' USING ERRCODE='22023';
+  END IF;
+  IF v_nbfamille>v_famille THEN
+    RAISE EXCEPTION 'Le nombre maximum d’invités FAMILLE est atteint pour cet accès.' USING ERRCODE='22023';
+  END IF;
   v_limite := (((v_source.datebookd AT TIME ZONE 'Europe/Paris')::date - 1) + time '14:00') AT TIME ZONE 'Europe/Paris';
   IF now() >= v_limite AND EXISTS (
     SELECT 1 FROM public.inviteacces ia
