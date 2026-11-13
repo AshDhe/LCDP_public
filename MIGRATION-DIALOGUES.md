@@ -408,3 +408,8 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **Nettoyage CSS** : aucun ancien CSS supprimé ; `02-alerte.html` et `02-dialogue-bouton.html` restent requis par des consommateurs vérifiés. Une seule nouvelle déclaration CSS, la convergence sur accueil PARC.
 
 **Vérifications** : sept fichiers JavaScript relus après commit et valides syntaxiquement (`reserver-membre.js`, `accueil-membre.js`, `accueil-public.js`, `fiche-parc.js`, `accueil-parc.js`, `box-menu-burger-parc.js`, `box-menu-burger-coach.js`). Aucun parcours testé dans un navigateur, aucun test réseau des Workers et aucune revue exhaustive de l'ensemble des consommateurs CSS.
+
+
+### Complément INFORMATION COACH — fermeture cohérente avec PARC (13 novembre 2026)
+- `LCDP_coach/ESPACE-COACH/accueil-coach.js`, branche déjà migrée INFORMATION : la fermeture ne répondait qu'au bouton Fermer. Mise en cohérence avec PARC : bouton Fermer, Échap et clic sur fond, nettoyage de l'écouteur et résolution unique. Commit `17ebb351`. Aucun message, contrat d'alerte, Worker ni voie d'erreur modifié.
+- Contrôle : huit fichiers JS au total sont modifiés dans ce rapprochement prioritaire, dont `accueil-coach.js`. Le profil ERREUR n'est pas traité et les CSS historiques restent conservés.
