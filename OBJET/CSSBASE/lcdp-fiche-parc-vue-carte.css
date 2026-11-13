@@ -1,5 +1,5 @@
 /*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] > .lcdp-box-shift-detail-parc__card > .lcdp-box-shift-detail-parc__close {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] > .lcdp-box-shift-detail-parc__card > .lcdp-box-shift-detail-parc__close {
   position: absolute;
   top: 28px !important;
   right: 21px !important;
@@ -8,27 +8,27 @@
   margin: 0 !important;
   float: none !important;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] .lcdp-box-fiche-parc__card--organisee {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] .lcdp-box-fiche-parc__card--organisee {
   display: flex !important;
   min-width: calc(var(--spacing, 0.25rem) * 0);
   flex-direction: column !important;
   align-items: stretch !important;
   gap: calc(var(--spacing, 0.25rem) * 4) !important;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] .lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__header {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] .lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__header {
   flex: none;
   padding: 14px 62px 16px 16px !important;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] .lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__section--map {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] .lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__section--map {
   min-width: calc(var(--spacing, 0.25rem) * 0);
   flex: none;
   padding: calc(var(--spacing, 0.25rem) * 4) !important;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-carte-dynamique--vue-fiche {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche {
   width: 100%;
   min-width: calc(var(--spacing, 0.25rem) * 0);
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-planifier-carte-cartouche {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-planifier-carte-cartouche {
   position: static !important;
   margin-top: calc(var(--spacing, 0.25rem) * 4) !important;
   display: grid;
@@ -45,7 +45,7 @@
   border: 0;
   box-shadow: none;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul {
   margin-inline: auto;
   box-sizing: border-box;
   display: block;
@@ -53,14 +53,14 @@
   min-width: calc(var(--spacing, 0.25rem) * 0);
   max-width: 370px;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc-diaporama__scene {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc-diaporama__scene {
   aspect-ratio: var(--aspect-video, 16 / 9) !important;
   height: auto !important;
   min-height: calc(var(--spacing, 0.25rem) * 0) !important;
   width: 100% !important;
   max-height: none !important;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__media, :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__image {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__media, :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__image {
   height: 100% !important;
   width: 100%;
   object-fit: cover;
