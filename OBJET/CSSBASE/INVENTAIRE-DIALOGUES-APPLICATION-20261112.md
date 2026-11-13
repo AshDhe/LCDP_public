@@ -405,3 +405,13 @@ Huit fichiers JavaScript sont concernés par la passe MEMBRE/PUBLIC/COACH/PARC (
 | `box-menu-burger-membre.js` : changement d'espace | Ancien gabarit à plusieurs actions de navigation de comptes | **NON TRAITÉ — MULTI-ACTIONS**, gabarit et CSS à conserver | — |
 
 **Comparaison et dépendances :** une référence à l'ancien `02-dialogue-bouton.html` a été supprimée dans `mes-informations.js`, sans supprimer le composant partagé. Le CSS de convergence était déjà inclus sur la page. Aucun CSS supprimé ; vérification statique, sans parcours navigateur.
+
+
+### K.4 CHOIX — confirmation de transfert navigateur MEMBRE, 13 novembre 2026
+| Source / cas | Avant | Après / statut | Commit |
+|---|---|---|---|
+| `LCDP_membre/ESPACE-MEMBRE/accueil-membre.js`, `proposerTransfertNavigateur()` | Dialogue générique à un seul bouton de transfert + fermeture, avertissement sur la révocation du navigateur précédent ; puis saisie CODA | **TRAITÉ — CHOIX** : référence CHOIX, même avertissement, Annuler / « Utiliser ce navigateur à la place » ; formulaire CODA, règles de sécurité et requête `/browser-transfer` conservés | `5d346631` |
+| Même fichier, helper `ouvrirDialogueBoutons(options)` | Une déclaration et un seul appel local (celui du transfert) avant migration | **RETIRÉ — code orphelin**, 65 lignes en moins, sans supprimer les autres dialogues métier | `5d346631` |
+| Même fichier, dépendances restantes à `02-dialogue-bouton.html` | Trois références littérales initiales | **2 références restantes** après migration : paiement et saisie CODA ; **NON TRAITÉ — CONSERVER** l'ancien gabarit/CSS | — |
+
+Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Aucune suppression CSS globale ; test navigateur non effectué.
