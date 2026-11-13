@@ -469,6 +469,20 @@
         border-radius:12px !important;font-size:10px !important;font-weight:400 !important;
         line-height:1.1 !important;white-space:nowrap !important;
       }
+      /* Mêmes couleurs que les deux actions du verso Parc dans lcdp-planifier.css.
+         Les variantes c059 ne s'appliquent pas à la page Mes accès. */
+      #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite
+      .lcdp-planning-verso-liens .lcdp-box-card-parc__action {
+        background:#55733f !important;
+        border-color:#55733f !important;
+        color:#fff !important;
+        opacity:1 !important;
+        filter:none !important;
+      }
+      #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite
+      .lcdp-planning-verso-liens .lcdp-box-card-parc__action-icone {
+        filter:brightness(0) invert(1);
+      }
       /* Raccourcis du parc : réutiliser les classes CSS de la carte Parc,
          sans recréer la taille, les couleurs, les bordures ou les pictogrammes. */
       #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens {
