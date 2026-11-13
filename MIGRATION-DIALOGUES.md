@@ -376,3 +376,10 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **TRAITÉ — migration statique**, commit `f867df3f` : remplacement de l'ancien gabarit par `02-dialogue-reference-suppression.html`, chargement de `lcdp-lightbox-convergence.css`, textes et réponses booléennes Non/Oui conservés. Escape, clic extérieur et erreur de chargement ferment ou bloquent le processus sans retirer le titre.
 - **Métier conservé** : retrait local via `titres.filter`, marquage `modifier()`, enregistrement séparé via `/admin/a-propos` et verrouillage `busy`/commandes. Pas de changement Worker.
 - **Nettoyage** : l'unique référence locale à `02-dialogue-bouton.html` est retirée de ce fichier. Aucun ancien gabarit ou CSS central supprimé, car d'autres consommateurs existent. Aucun test navigateur.
+
+
+### Convergence / nettoyage des dépendances héritées — quatre éditeurs légaux ADMIN (13 novembre 2026)
+- **Contrôle des branches** : `LCDP_admin/ESPACE-ADMIN/B_ADMIN/cgv-admin.js`, `mentions-legales-admin.js`, `reglement-app-admin.js`, `reglement-club-admin.js`. Les quatre `demanderConfirmationPublication()` utilisent déjà `02-dialogue-reference-choix.html` ; après l'appel actif, les chemins se terminent systématiquement par un retour booléen, un retour `false` si slot manquant, ou une exception. Les blocs suivants chargeant `02-dialogue-bouton.html` sont donc inatteignables.
+- **RETIRÉ — nettoyage statique** : branche ancienne à boutons supprimée de chaque fichier, sans modifier le gestionnaire CHOIX actif, les appels de publication, les Workers ni les CSS. Commits `9bd3e3d4` (CGV), `8d000213` (mentions légales), `38511e0d` (règlement application), `3e9970ec` (règlement club).
+- **Bilan ciblé** : zéro référence littérale à l'ancien fragment `02-dialogue-bouton.html` dans ces quatre fichiers après nettoyage ; la référence CHOIX y subsiste. Ce sont des retraits de code mort de publication, **pas** quatre migrations SUPPRESSION supplémentaires.
+- **Limites** : ni CSS partagé ni fichier gabarit supprimé ; d'autres consommateurs du dialogue ancien demeurent ailleurs. Pas de test navigateur.
