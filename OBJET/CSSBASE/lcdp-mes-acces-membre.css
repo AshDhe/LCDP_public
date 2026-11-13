@@ -418,14 +418,69 @@
         border-radius:12px !important;font-size:10px !important;font-weight:400 !important;
         line-height:1.1 !important;white-space:nowrap !important;
       }
-      /* Raccourcis du parc : réutiliser les classes CSS de la carte Parc,
-         sans recréer la taille, les couleurs, les bordures ou les pictogrammes. */
-      #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens {
+      /* Les boutons Fiche parc et Carte reprennent le calibrage du composant
+         Planifier Parc (module c077), sans altérer ses règles mutualisées. */
+      #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite
+      .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens {
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        width:100%;
+        gap:6px;
         margin:0;
       }
-      #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens .lcdp-box-card-parc__action,
-      #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens .lcdp-box-card-parc__action-libelle {
+      #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite
+      .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens > .lcdp-button {
+        box-sizing:border-box;
+        width:100%;
+        min-width:0;
+        max-width:none;
+        min-height:36px;
+        margin:0;
+        padding:6px 9px;
+        gap:5px;
+        font-size:0.78rem;
         font-weight:400 !important;
+        white-space:nowrap;
+        overflow-wrap:normal;
+      }
+      #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite
+      .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens .lcdp-box-card-parc__action-libelle {
+        font-weight:400 !important;
+        white-space:nowrap;
+        overflow-wrap:normal;
+      }
+      #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite
+      .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens .lcdp-box-card-parc__action-icone {
+        width:17px;
+        height:17px;
+        flex:0 0 17px;
+      }
+      @media (max-width:767px) {
+        #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite
+        .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens {
+          display:flex;
+          flex-direction:row;
+          flex-wrap:nowrap;
+          align-items:stretch;
+        }
+        #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite
+        .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens > .lcdp-button {
+          flex:1 1 0;
+          width:0;
+          min-height:38px;
+          padding:6px 5px;
+          font-size:0.78rem;
+          gap:4px;
+        }
+      }
+      @media (min-width:768px) {
+        #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite
+        .lcdp-box-card-parc__actions--reserver.lcdp-planning-verso-liens > .lcdp-button {
+          min-height:34px;
+          padding:5px 8px;
+          font-size:0.73rem;
+          gap:4px;
+        }
       }
       #lcdp-planning-calendrier-slot .lcdp-planning-carte-visite .lcdp-planning-verso-action--consulter {
         border-color:rgba(123,74,184,.4) !important;color:#7b4ab8 !important;
