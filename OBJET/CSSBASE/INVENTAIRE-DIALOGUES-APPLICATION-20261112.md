@@ -284,3 +284,14 @@ Aucun test navigateur effectué.
 | `OBJET/HTMLBASE/02-dialogue-bouton.html` et CSS historiques | Composants partagés avec d'autres consommateurs documentés | **CONSERVÉS**, contrôle inter-dépôts préalable au nettoyage | **NON SUPPRIMÉS** |
 
 La ligne de J.1 concernant les helpers remplace le statut « à qualifier » de I.7 pour **ces deux fonctions locales seulement**. Aucun test navigateur ; n'en déduire aucune inutilisation globale du gabarit historique ou de ses styles.
+
+
+### I.8 Comparaison SUPPRESSION — opérations du planning ADMIN, 13 novembre 2026
+| Source et cas | Comportement antérieur | Traitement / statut | Commit |
+|---|---|---|---|
+| `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js`, suppression d'opération ponctuelle (`[data-delete]`) | `confirm()` natif, avec avertissement « Les réservations annulées restent annulées. » puis `POST /supprimer-operation` | **TRAITÉ — migration statique** : référence SUPPRESSION Conserver/Supprimer, avertissement préservé, refus sans écriture ; requête inchangée | `6092e8c6` |
+| Même fichier : `nouvelleBase` et bouton `annuler-base` | Confirmations d'abandon d'une base non enregistrée | **NON TRAITÉ — À QUALIFIER** : perte de brouillon local, ne pas confondre avec suppression d'opération serveur | — |
+| Même fichier : `appliquerIA` | Confirmation d'enregistrement d'une opération pouvant annuler des réservations | **NON TRAITÉ — IMPACTS À QUALIFIER** : écriture et annulations induites | — |
+| Même fichier : dialogue de sortie | Plusieurs issues, sauvegarder/rester/ignorer | **REPORTÉ — MULTI-ACTIONS** | — |
+
+**Nettoyage CSS** : `lcdp-lightbox-convergence.css` déjà chargé par `planning-parc.html`. Aucun CSS ancien supprimé dans ce lot. Aucun test navigateur.
