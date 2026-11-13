@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invitation à un accès - La Clé du Parc</title>
+  <!-- Gabarit source hors Worker. Les styles réutilisent les CSSBASE existants. -->
+  <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-central-module-13-editorial-email.css">
+  <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-email-invitation.css">
+</head>
+<body class="lcdp-email-invitation-preview">
+  <main class="lcdp-email-editorial lcdp-email-invitation">
+    <header class="lcdp-email-editorial__entete">
+      <p class="lcdp-email-editorial__marque">La Clé du Parc</p>
+    </header>
+    <section class="lcdp-email-editorial__corps" aria-label="Votre invitation">
+      <p class="lcdp-email-editorial__sous-titre">Invitation à un accès</p>
+      <h1 class="lcdp-email-editorial__titre">Vous êtes invité(e)</h1>
+      <p class="lcdp-email-editorial__paragraphe">{{SALUTATION}}</p>
+      <p class="lcdp-email-editorial__paragraphe">{{NOM_INVITANT}} vous invite à profiter d’un accès à La Clé du Parc.</p>
+      <div class="lcdp-email-invitation__details">
+        <p class="lcdp-email-invitation__detail-label">Parc</p>
+        <p class="lcdp-email-invitation__detail-valeur lcdp-email-invitation__detail-valeur--parc">{{NOM_PARC}}</p>
+        <p class="lcdp-email-invitation__detail-label">Date de l’accès</p>
+        <p class="lcdp-email-invitation__detail-valeur">{{DATE_ACCES}}</p>
+      </div>
+      <p class="lcdp-email-editorial__paragraphe">Votre invitation est enregistrée. Vous pouvez la consulter ou demander son annulation.</p>
+      <div class="lcdp-email-invitation__actions">
+        <a class="lcdp-email-editorial__bouton lcdp-email-invitation__bouton" href="{{LIEN_VOIR}}">Voir mon invitation</a>
+        <a class="lcdp-email-editorial__bouton lcdp-email-invitation__bouton lcdp-email-invitation__bouton--secondaire" href="{{LIEN_ANNULER}}">Annuler mon invitation</a>
+      </div>
+      <div class="lcdp-email-invitation__information-compte">{{INFORMATION_COMPTE_HTML}}</div>
+    </section>
+    <footer class="lcdp-email-editorial__pied">
+      <p>À bientôt dans les parcs,</p>
+      <p>L’équipe La Clé du Parc.</p>
+    </footer>
+  </main>
+</body>
+</html>
