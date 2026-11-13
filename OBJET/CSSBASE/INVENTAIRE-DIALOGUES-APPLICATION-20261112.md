@@ -256,3 +256,12 @@ Aucun test navigateur effectué.
 **Bilan vérifiable :** six fichiers JavaScript modifiés, zéro fichier entier supprimé par ces six commits. Le gabarit partagé `OBJET/HTMLBASE/02-dialogue-bouton.html` reste nécessaire pour d'autres consommateurs documentés (CHOIX complexes, tunnels et écrans métiers) ; **NE PAS SUPPRIMER**. Les styles hérités doivent également être conservés tant que leurs consommateurs résiduels existent.
 
 **Non traité / non prouvé :** retrait exhaustif de tous les appels anciens dans les cinq dépôts ; inutilisation à l'exécution des anciens gabarits ; tests navigateur ; absence de régression fonctionnelle. Les annulations `planning-membre.js`, `abonnement-membre.js` et autres cas ouverts restent à rapprocher. Aucune suppression de données de production n'a été effectuée par ces commits de migration.
+
+
+### I.6 Comparaison SUPPRESSION — abonnement MEMBRE, 13 novembre 2026
+| Cas | Avant | Après / statut | Commit |
+|---|---|---|---|
+| `LCDP_membre/ESPACE-MEMBRE/abonnement-membre.js` : première confirmation « Voulez-vous annuler l'abonnement ? » | `afficherAlerte` sur `02-alerte.html`, confirmation OK ou fermeture négative | **TRAITÉ — migration statique** : référence SUPPRESSION, Conserver / Oui, annuler, booléen, refus si gabarit indisponible ; Worker inchangé | `623e9bd0` |
+| Même source : deuxième confirmation « Des frais de traitement d’annulation s’appliquent… » | `afficherAlerte` sur `02-alerte.html`, OK nécessaire avant enregistrement | **NON TRAITÉ — À QUALIFIER** : validation explicite des frais, ne pas supprimer le second verrou ni le classer simple INFORMATION | — |
+
+**Nettoyage CSS** : aucun fichier CSS supprimé dans ce lot. `02-alerte.html` reste consommé par d'autres alertes et par la seconde validation. Conserver ses styles. Tests navigateur non réalisés.
