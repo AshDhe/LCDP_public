@@ -1783,9 +1783,9 @@
         if (titreComplet) titreComplet.textContent = titreClassique;
         else titre.textContent = titreClassique;
       }
-      // Dans le parcours membre, ce cartouche reprend le recto photo du diaporama,
-      // avec nom court superposé à l'image plutôt qu'un second titre sous la photo.
-      if (normaliserModeUsagePlanning(options) === MODE_USAGE_MEMBRE && media) {
+      // Modèle de cartouche identique à PLANIFIER, quel que soit l'espace :
+      // photo et nom court, sans second contenu divergent pour le public.
+      if (media) {
         media.classList.add("lcdp-box-card-parc__media--avec-nom");
         const nomImage = card.querySelector("[data-lcdp-card-parc-nom-image]");
         if (nomImage) {
