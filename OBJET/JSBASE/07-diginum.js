@@ -92,6 +92,34 @@
     let resoudre;
     const resultat = new Promise(resolve => { resoudre = resolve; });
 
+    // Touches optionnelles : aucun changement aux autres usages du Diginum.
+    const codesSpeciaux = Array.isArray(options.codesSpeciaux)
+      ? [...new Set(options.codesSpeciaux.map(valeur => String(valeur).toUpperCase())
+        .filter(valeur => /^[0-9][A-Z]$/.test(valeur)))]
+      : [];
+    if (codesSpeciaux.length) {
+      const zoneSpeciaux = document.createElement("div");
+      zoneSpeciaux.className = "lcdp-box-diginum__speciaux";
+      zoneSpeciaux.setAttribute("role", "group");
+      zoneSpeciaux.setAttribute("aria-label", "Codes de département spéciaux");
+      codesSpeciaux.forEach(valeur => {
+        const bouton = document.createElement("button");
+        bouton.type = "button";
+        bouton.className = "lcdp-box-diginum__touche";
+        bouton.textContent = valeur;
+        bouton.addEventListener("click", () => {
+          if (ferme || verificationEnCours) return;
+          code = valeur;
+          affichage.value = code;
+          montrerMessage("");
+          void valider();
+        });
+        zoneSpeciaux.appendChild(bouton);
+        boutons.push(bouton);
+      });
+      racine.querySelector(".lcdp-box-diginum__touches").insertAdjacentElement("afterend", zoneSpeciaux);
+    }
+
     function montrerMessage(message) {
       zoneMessage.textContent = String(message || "");
       zoneMessage.hidden = !message;
