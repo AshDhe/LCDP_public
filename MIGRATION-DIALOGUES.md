@@ -363,3 +363,9 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js`, `appliquerIA()` : ancienne confirmation native « Enregistrer cette opération ... ? Une réduction d’accès annule les réservations concernées. » n'est **pas une suppression** ; elle autorise un enregistrement pouvant provoquer des annulations.
 - **TRAITÉ — classification CHOIX et migration statique**, commit `636b04f8` : réutilisation du helper CHOIX `demanderChoixPlanningAdmin` déjà en place, titre « Enregistrer cette opération ? », message d'avertissement conservé, bouton « Enregistrer ». Le Worker `POST /operation` et les conséquences métier sont inchangés.
 - **Résultat ciblé** : plus aucun appel natif `confirm(...)` dans ce fichier après les migrations SUPPRESSION (opération et deux abandons de base) et la migration CHOIX (opération IA). Aucune suppression de CSS ou de fragment partagé, aucun test navigateur.
+
+
+### Contrôle résiduel de dépendances après frais d'annulation (13 novembre 2026)
+- Vérification statique et syntaxique des deux fichiers modifiés : `LCDP_membre/ESPACE-MEMBRE/abonnement-membre.js` et `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js` compilent syntaxiquement en JavaScript.
+- Dans `abonnement-membre.js`, **trois consommateurs littéraux subsistent** pour `02-dialogue-bouton.html` : `afficherEtapePaiement()` (mode de paiement), `ouvrirDialogueChoix(options)` (choix dans le workflow), et l'affichage « Paiement en attente » (échéances non payées). Ce sont des usages métiers distincts des deux confirmations d'annulation traitées. Ne pas supprimer ce gabarit ni ses CSS pour ce fichier.
+- Dans `planning-parc.js`, zéro référence littérale à `02-dialogue-bouton.html` et zéro appel natif `confirm()` ; profil SUPPRESSION et profil CHOIX utilisés. Ces constats locaux ne préjugent pas d'autres consommateurs inter-dépôts.
