@@ -6,7 +6,7 @@
   const chemin = {
     planifier: '/ESPACE-MEMBRE/reserver-membre.html',
     mes_acces: '/ESPACE-MEMBRE/planning-membre.html',
-    ma_cle: '/ESPACE-MEMBRE/lacleduparc.html?v=20261113-wrapper-v3',
+    ma_cle: '/ESPACE-MEMBRE/lacleduparc.html?v=20261113-wrapper-v4',
     regulariser: '/ESPACE-MEMBRE/abonnement-membre.html'
   };
   const libelles = {planifier:'PLANIFIER',mes_acces:'MES ACCÈS',ma_cle:'MA CLÉ'};
