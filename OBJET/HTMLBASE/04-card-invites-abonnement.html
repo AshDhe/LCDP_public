@@ -26,8 +26,16 @@
     [data-lcdp-invitation-categorie="famille"] .lcdp-invites-ajouter {
       border:1px solid #acbda1!important;background:#edf3e9!important;color:#465f35!important;
     }
+    [data-lcdp-invitation-abonnement] .lcdp-invites-ajouter:hover {
+      filter:brightness(.975);box-shadow:0 1px 3px rgba(0,0,0,.08);
+    }
     [data-lcdp-invitation-abonnement] .lcdp-invites-ajouter:focus-visible {
       outline:2px solid currentColor;outline-offset:2px;
+    }
+    [data-lcdp-invitation-categorie="duo"] {border-color:#e9d9b2!important;background:#fffcf5!important;}
+    [data-lcdp-invitation-categorie="famille"] {border-color:#c4d3ba!important;background:#f8faf6!important;}
+    [data-lcdp-invitation-abonnement] .lcdp-invites-ajouter[aria-disabled="true"] {
+      filter:none;box-shadow:none;
     }
   </style>
   <div class="lcdp-page-container">
@@ -50,7 +58,7 @@
               <button type="button" class="lcdp-button lcdp-button-secondary lcdp-invites-ajouter" data-lcdp-invitation-ajouter="duo"><span aria-hidden="true">＋</span> Ajouter</button>
             </section>
             <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-famille" data-lcdp-invitation-categorie="famille" style="display:flex;flex-direction:column;gap:0;min-width:0;padding:14px 12px 16px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
-              <h3 class="lcdp-box-champ-formulaire__label lcdp-invites-categorie" id="lcdp-invitation-titre-famille"><span aria-hidden="true">🏠</span> FAMILLE</h3>
+              <h3 class="lcdp-box-champ-formulaire__label lcdp-invites-categorie" id="lcdp-invitation-titre-famille"><span aria-hidden="true">🏠</span> + FAMILLE</h3>
               <p class="lcdp-box-champ-formulaire__description" data-lcdp-invitation-quota="famille" role="status" hidden></p>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="famille" style="display:none;margin:0 0 8px;padding:0;list-style:none;"></ul>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="famille" style="margin:0;padding:0;list-style:none;"></ul>
