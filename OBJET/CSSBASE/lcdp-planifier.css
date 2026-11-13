@@ -2424,11 +2424,12 @@ body.lcdp-page-reserver .lcdp-planifier-carte-cartouche.lcdp-planifier-parcs-dia
   padding-top: 10px !important;
 }
 
-/* Identité visuelle des deux actions, sans annuler le refus des parcs PROJET. */
+/* Le vert des boutons est défini dans cssbase.css pour toutes les cartes.
+   Maintenir uniquement l'ancienne couleur effective du bouton Planning. */
 body.lcdp-page-reserver .lcdp-planifier-parcs-diaporama
-.lcdp-box-card-parc__actions--reserver .lcdp-box-card-parc__action {
-  background: #55733f !important;
-  border-color: #55733f !important;
+.lcdp-box-card-parc__actions--reserver .lcdp-box-card-parc__action--orange-plein {
+  background: var(--lcdp-color-logo-green) !important;
+  border-color: var(--lcdp-color-logo-green) !important;
   color: #fff !important;
   opacity: 1 !important;
   filter: none !important;
