@@ -149,3 +149,36 @@ Aucun gabarit ne peut être déclaré inutilisé par la seule présence de son f
 
 ## G. Exhaustivité : limite de cette photographie
 L'inventaire couvre les cinq dépôts nommés et les 261 fichiers HTML/JS sur leurs branches main, pour les constructions et appels statiquement repérables. Il ne prétend pas dénombrer chaque texte de message, chaque chemin d'exécution, ni certifier quels fichiers sont actifs sur le site déployé. Aucun Worker ni dépôt supplémentaire n'a été inventorié. La couverture de tous les appels à partir de noms construits dynamiquement n'est pas démontrée.
+
+## H. Suivi opérationnel CHOIX au 13 novembre 2026 — rapprochement avec les migrations
+
+L'inventaire ci-dessus est une photographie statique du 12 novembre ; il reste inchangé dans ses sections A–G. Ce complément constitue le **statut de traitement** demandé, et non un nouvel audit exhaustif des instances runtime. Les commits sont détaillés dans `/MIGRATION-DIALOGUES.md`.
+
+| Source/cas de l'inventaire initial et vérifications complémentaires | Statut CHOIX au 13/11 | Référence / décision |
+|---|---|---|
+| MEMBRE `abonnement-membre.js` : prolongation, sortie, commande et régularisation | **TRAITÉ** | `9b1b73c9`, `9cad9dd0` ; annulations destructrices hors CHOIX |
+| MEMBRE `accueil-membre.js`, `inviter-membre.js` : confirmation abonnement/paiement | **TRAITÉ** | `08c80640`, `0a4d48a1` |
+| MEMBRE `mes-informations.js` : régularisation, géolocalisation, demande CODR | **TRAITÉ** | `8e5124d3`, `8e11983a` |
+| MEMBRE `reserver-membre.js` : régularisation, déclaration Duo Actif, microphone IA, parc et couverture partielle | **TRAITÉ** | `caef48ab`, `52e44023`, `32d17481`, `4abc5c22` |
+| PUBLIC et MEMBRE `fiche-parc.js` : confirmation de l'heure d'arrivée | **TRAITÉ** | `870e909f`, `273434dc` |
+| MEMBRE `da-membre.js` : « DA terminée ? », « Quitter ma DA ? » | **TRAITÉ** | `d287e085` |
+| MEMBRE `box-menu-burger-membre.js` : déconnexion | **TRAITÉ** | `4185b8fa`, `604ee044` |
+| ADMIN `B_ADMIN/admin-actualite.js` : publication/dépublication, sélection pop-up | **TRAITÉ** | `e80219de` ; suppression d'article reportée |
+| ADMIN `B_ADMIN/faq-admin.js` : publication | **TRAITÉ** | `34fefd7f` ; suppression FAQ reportée |
+| ADMIN `B_ADMIN/cgv-admin.js`, `mentions-legales-admin.js`, `reglement-app-admin.js`, `reglement-club-admin.js` : publications | **TRAITÉ** | `f0c10770`, `bd9d8226`, `d847509f`, `cef68291` |
+| ADMIN `B_ADMIN/CalculPoints.js` : lancer le calcul | **TRAITÉ** | `df0504b2` |
+| ADMIN `C_MEMBRES/suspension-membres.js` : suspendre/lever la suspension | **TRAITÉ** | `02aa7aa4` |
+| ADMIN `B_PARCS/AjustCoach.js`, `AjustDuo.js`, `AjustFamille.js`, `InsertFamille.js` : validation des ajustements | **TRAITÉ** | `8e38e0a6`, `ab661ec3`, `52bb5c54`, `0b572c4a` |
+| ADMIN `B_PARCS/planning-parc.js` : ancienne journée, enregistrement d'une nouvelle base | **TRAITÉ** | `5e62eb13`, `e5997331`, CSS `cb28ac04` |
+| MEMBRE/PUBLIC/PARC/COACH : menus de changement d'espace connecté avec trois comptes | **REPORTÉ — MULTI-CHOIX** | Contenu spécifique, trois destinations. Arbitrage utilisateur, pas de conversion binaire |
+| MEMBRE `reserver-membre.js` : choix d'abonnement, panneau « Votre planning », récapitulatif de réservation | **REPORTÉ — WORKFLOW COMPLEXE** | Plusieurs actions, données dynamiques ; arbitrage utilisateur |
+| MEMBRE `aboreza-membre.js`, `abonnement-membre.js` : conteneurs de tunnels | **REPORTÉ — WORKFLOW COMPLEXE** | Ne pas substituer un gabarit binaire au flux |
+| MEMBRE `mes-informations.js`, `abonnement-membre.js`, `reserver-membre.js` : échéances multiples | **REPORTÉ — ÉCRAN MÉTIER** | Plusieurs actions « Payer », pas une confirmation Oui/Non |
+| MEMBRE `reserver-membre.js` : « Choisir un parc » (un bouton) ; « Planning en cours » (actions et cartes) | **REPORTÉ — À REQUALIFIER** | Respectivement INFORMATION à action unique et écran métier avec annulations |
+| MEMBRE `mes-informations.js` : message « Sécurité du compte » OK/Annuler à action identique | **REPORTÉ — À REQUALIFIER** | Une seule issue ; classer INFORMATION ou ERREUR suivant le contenu dynamique |
+| PUBLIC `accueil-public.js` : helper `ouvrirDialogueBoutons` historique | **REPORTÉ — AUCUN APPEL INTERNE CONSTATÉ** | Fonction déclarée, pas d'appel repéré dans ce fichier ; ne pas présumer qu'elle est inutilisée à l'exécution |
+| ADMIN `B_PARCS/planning-parc.js` : sortie avec sauvegarde/brouillon et opérations susceptibles d'annuler des réservations | **REPORTÉ — IMPACTS À QUALIFIER** | Sortie à plusieurs issues ; écritures et annulations possibles |
+| MEMBRE `planning-membre.js`, `mes-acces-membre.js`, `abonnement-membre.js`, ADMIN `B_ADMIN/Cle.js`, `list-points.js`, `PrixAbo.js`, `faq-admin.js`, `admin-actualite.js` | **REPORTÉ — SUPPRESSION** | Confirmations d'annulation/suppression explicites, à traiter au profil SUPPRESSION |
+| Les autres sources inventoriées en section C sans classification unitaire de leurs messages | **REPORTÉ — À QUALIFIER** | Inventaire par source, pas preuve d'une instance CHOIX simple résiduelle |
+
+**Pense-bête à conserver :** retourner vers l'utilisateur pour les décisions sur les menus multi-comptes et workflows multi-actions, sans perdre le tableau. **Règle d'avancement :** ne marquer TRAITÉ que les cas avec code migré/commit vérifié ; les statuts REPORTÉ sont des exceptions documentées. La migration de code ne vaut pas validation navigateur. Aucun test desktop/mobile attesté pour ces lots.
