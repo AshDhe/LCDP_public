@@ -824,6 +824,11 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] > .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__lecture { display: block; }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] .lcdp-compte-action-prioritaire:active { transform: scale(.95); }
 
+/* La DA explicitement refusée masque complètement la rubrique Abonnement. */
+body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-abonnement[hidden] {
+  display: none !important;
+}
+
 /* Statut membre : listes Invité / Invitant, sous les badges Points club. */
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations {
   display: flex;
