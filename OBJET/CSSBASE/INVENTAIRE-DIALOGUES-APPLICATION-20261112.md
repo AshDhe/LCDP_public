@@ -592,3 +592,31 @@ Recherche après les commits K.17. Unité de comptage : occurrence littérale da
 | CSS/HTML/autres dépôts/chemins non littéraux | **NON AUDITÉS exhaustivement dans ce contrôle** | Interdit de retirer le gabarit `02-alerte.html`, `02-dialogue-bouton.html` ou des CSS partagés sur la seule base du compteur JS |
 
 Contrôle effectué après les commits K.19, sans erreur de lecture des 34 fichiers. Aucune suppression CSS ni vérification fonctionnelle navigateur.
+
+
+### K.21 Consolidation des cinq dépôts et du code inline HTML (13 novembre 2026)
+
+**Corrections réalisées depuis K.20 :**
+| Source / cas | Changement | Statut | Commit |
+|---|---|---|---|
+| MEMBRE `da-membre.js` | Dernier `02-alerte.html` remplacé par ERREUR, réussite d'envoi explicitement INFORMATION, retours métier conservés | **TRAITÉ — ERREUR/INFORMATION** | `5b59f997` |
+| MEMBRE `config.js` | Alerte de session remplacée réellement affichée (et non préchargée) => ERREUR, CSS de convergence et même redirection après OK/fond | **TRAITÉ — ERREUR, rectification K.18** | `53c1c6db` |
+| MEMBRE `box-menu-burger-membre.js` | Erreurs ERREUR, date DA INFORMATION, navigation/régularisation CHOIX ; action Payer/M'abonner/Être invité(e) conservée | **TRAITÉ — trois profils** ; sélection multi-compte toujours sur ancien gabarit | `e35e0bbe` |
+| ADMIN `AccesDetail.js` + `AccesDetail.html` | `window.confirm` d'abandon => CHOIX asynchrone, deux handlers de retour modifiés, CSS déclaré ; refus conserve le brouillon | **TRAITÉ — CHOIX** | `7d586887`, `15441051` |
+| PUBLIC `association.html` | Erreur d'accès du script inline => ERREUR, CSS déclaré et repli natif | **TRAITÉ — ERREUR** | `f61e1b6f` |
+| PUBLIC `le-club.html` | Idem, erreur d'accès du script inline | **TRAITÉ — ERREUR** | `81615a5a` |
+
+**Inventaire de références littérales `02-alerte.html` et `02-dialogue-bouton.html`, après modifications (106 JS + 168 HTML relus dans cinq dépôts) :**
+
+| Dépôt | JS | HTML | Ancienne alerte (JS + HTML) | Ancien dialogue à boutons (JS + HTML) |
+|---|---:|---:|---:|---:|
+| MEMBRE | 30 | 25 | 0 | 12 |
+| PUBLIC | 34 | 88 | 0 | 17 (2 JS, 15 inline HTML) |
+| COACH | 5 | 5 | 0 | 1 |
+| PARC | 5 | 5 | 0 | 1 |
+| ADMIN | 32 | 45 | 19 (12 JS, 7 HTML) | 0 |
+| **TOTAL** | **106** | **168** | **19** | **31** |
+
+**Périmètre résiduel** : 19 références directes de l'ancienne alerte uniquement dans ADMIN, à classifier selon les contextes avant migration ; 31 références de l'ancien dialogue à boutons, dont des workflows de paiement et des choix multiples sur les pages membres/publiques. Les 15 références HTML publiques ne figurent pas dans les compteurs antérieurs portant uniquement sur les JS : ne pas les omettre. Contrôle des chemins littéraux, sans interpréter les 31 références comme 31 suppressions possibles.
+
+**CSS** : zéro fichier CSS supprimé. Les fichiers `.css` et les dépendances implicites (classes, thèmes, composants, imports) nécessitent encore audit et tests navigateur. Conserver `02-alerte.html`, `02-dialogue-bouton.html` et les styles hérités pour les usages restants. Contrôles de syntaxe statiques sur les JS modifiés et scripts inline, pas de recette UI ou Worker.
