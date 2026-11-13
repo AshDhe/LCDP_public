@@ -466,3 +466,12 @@ Les profils SUPPRESSION et INFORMATION des autres sources restent inchangés. Au
 | `ESPACE-PUBLIC/formulaire-inscription-membre.js`, échecs de formulaire | `02-alerte.html`, fermeture libre ; confirmation du succès INFORMATION avec acquittement avant redirection | **TRAITÉ — ERREUR** : référence ERREUR pour les échecs, confirmation INFORMATION et redirection obligatoires conservées | `c82ddc48` |
 
 **Périmètre vérifié** : sept fichiers JS publics comprenant `codes-securite.js`, `hello.js`, les deux connexions coach/parc et les trois formulaires ci-dessus ; syntaxe valide et zéro référence littérale résiduelle à `02-alerte.html` dans **ces sept fichiers**. Les pages de formulaire suivantes chargent déjà `lcdp-lightbox-convergence.css` : `mdp-perdu-membre.html`, `formulaire-liste-attente.html`, `formulaire-inscription-membre.html`. Le CSS central et `02-alerte.html` restent consommés ailleurs, donc **NE PAS SUPPRIMER**. Aucun test navigateur.
+
+
+### K.10 PUBLIC — accueil et connexion membre (13 novembre 2026)
+| Fichier / cas | Avant | Après / statut | Commit |
+|---|---|---|---|
+| `ESPACE-PUBLIC/accueil-public-alertes.js`, erreurs de contrôle des droits | `02-alerte.html`, ancien bouton OK masqué sans `actionLibelle` ; invitation de connexion déjà en INFORMATION | **TRAITÉ — ERREUR** : gabarit de référence, bouton Fermer visible, messages conservés ; invitation INFORMATION et redirection inchangées | `3bde8972` |
+| `ESPACE-PUBLIC/connexion-membre.js`, validation et erreurs de connexion | `02-alerte.html`, titre et message concaténés ; INFORMATION pour les autres messages, CHOIX pour le renvoi d'email | **TRAITÉ — ERREUR** : titre et message distincts, gabarit de référence ; autres profils, requêtes et navigations conservés | `f1bd0922` |
+
+**Rapprochement technique** : neuf fichiers publics nommés dans le registre ne possèdent plus de référence littérale `02-alerte.html`, avec validation de syntaxe. Le reste du dépôt PUBLIC et les quatre autres dépôts ne sont **pas** couverts par cette conclusion ; le composant `02-alerte.html` et ses CSS doivent rester jusqu'à épuisement de leurs consommateurs. Aucun CSS supprimé ni test navigateur.
