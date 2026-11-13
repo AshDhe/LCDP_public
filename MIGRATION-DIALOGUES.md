@@ -468,3 +468,23 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **TRAITÉ — ERREUR**, commit `8b7fe8d3` : branche erreur raccordée à `02-dialogue-reference-erreur.html`, titre « Erreur » par défaut et texte d'origine, bouton « Fermer ». Comme avant, le dialogue attend le clic explicite avant de résoudre. Le profil INFORMATION conserve son gabarit. Le chargement du CSS de convergence couvre désormais les deux profils.
 - **Harmonisation et sécurité de rendu**, commit `9b1456b0` : simplification du chargement CSS, masquage de navigation affiché sans exception si `.lcdp-setup-loading__text` est absent. Le masque, l'absence de renvoi métier en cas d'erreur, la redirection `redirectUrl` après clic ainsi que les secours `alert` restent préservés.
 - **Nettoyage local** : zéro référence littérale à `02-alerte.html` dans `codes-securite.js`. Ce constat ne permet pas de supprimer globalement le gabarit ou ses CSS : d'autres écrans des cinq dépôts en dépendent. Syntaxe JavaScript contrôlée ; pas de test navigateur.
+
+
+### ERREUR — mot de passe perdu, liste d'attente et inscription membre (13 novembre 2026)
+
+**Mot de passe perdu — `ESPACE-PUBLIC/mdp-perdu-membre.js`**
+- Avant : `afficherMessage(titre,message,options)`, branche `options.type === "erreur"` sur `02-alerte.html`, branche validation déjà sur `02-dialogue-reference-information.html`.
+- **TRAITÉ — migration statique**, commit `930865a2` : erreurs sur `02-dialogue-reference-erreur.html`, titre et message séparés, bouton Fermer, fermeture par fond conservée ; validation INFORMATION, envoi `POST /mdp-perdu` et redirection éventuelle après fermeture inchangés. CSS de convergence déjà déclaré dans `mdp-perdu-membre.html`. Le fallback natif `alert` reste disponible en cas de problème de chargement.
+- Nettoyage local : 0 référence littérale `02-alerte.html` restante dans ce fichier.
+
+**Liste d'attente — `ESPACE-PUBLIC/formulaire-liste-attente.js`**
+- Avant : `afficherInformationListeAttente` utilisait `02-alerte.html` pour les erreurs (configuration/protection/validation/envoi), alors que les messages de validation utilisaient déjà INFORMATION. Fermeture par bouton/croix/fond, Échap attaché avec `{once:true}` donc écouteur invalidé par une première touche non Échap.
+- **TRAITÉ — migration statique**, commit `91060d5d` : profil ERREUR pour les messages d'erreur ; titre dédié « Erreur » si titre non fourni, texte métier intact, bouton Fermer et clic extérieur. Échap reste disponible tant que le dialogue est ouvert, puis l'écouteur est retiré. Validation INFORMATION, redirection après fermeture, soumission de la liste d'attente, protection Turnstile et renouvellement de son état sont conservés. CSS de convergence déjà déclaré dans `formulaire-liste-attente.html`.
+- Nettoyage local : 0 référence `02-alerte.html` restante dans ce fichier.
+
+**Inscription — `ESPACE-PUBLIC/formulaire-inscription-membre.js`**
+- Avant : `afficherAlerte(message,redirectUrl,profil)` utilisait `02-alerte.html` pour toutes les erreurs et `02-dialogue-reference-information.html` pour la réussite. En succès, le bouton « Continuer » est obligatoire avant la redirection ; les erreurs restent simplement fermables.
+- **TRAITÉ — migration statique**, commit `c82ddc48` : profil `02-dialogue-reference-erreur.html` pour les erreurs, message intact et titre « Erreur » ; confirmation de réussite INFORMATION et bouton « Continuer » conservés. La fermeture obligatoire avant redirection reste en place, les erreurs acceptent Échap et clic extérieur sans effet métier. Aucun changement à la requête d'inscription ni à la protection du formulaire. CSS de convergence déjà déclaré dans `formulaire-inscription-membre.html`.
+- Nettoyage local : 0 référence `02-alerte.html` restante dans ce fichier.
+
+**Contrôles transverses** : les sept fichiers publics examinés dans cette passe (`codes-securite.js`, `hello.js`, `connexion-parc.js`, `connexion-coach.js`, `mdp-perdu-membre.js`, `formulaire-liste-attente.js`, `formulaire-inscription-membre.js`) sont syntaxiquement valides et ne contiennent plus de référence littérale `02-alerte.html`. Ce sont des constats **locaux**, non un inventaire global des cinq dépôts. Aucun CSS ni gabarit partagé supprimé ; aucun parcours navigateur testé.
