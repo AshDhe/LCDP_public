@@ -87,6 +87,18 @@
   letter-spacing: -.025em;
   white-space: nowrap;
 }
+/* Recto : reprendre l'indicateur rose du verso uniquement pour les invitations reçues. */
+.lcdp-carte-acces-visuel:has(.lcdp-box-card-reservation-membre__date > [aria-label="Invitation reçue"]) .lcdp-carte-acces-visuel__horaire::after {
+  content: "";
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: #e78db3;
+  vertical-align: middle;
+}
+
 @media (min-width:640px) {
   .lcdp-carte-acces-visuel__bloc-horaire {padding:10px 16px;}
 }
