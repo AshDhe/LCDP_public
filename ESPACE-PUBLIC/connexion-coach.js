@@ -32,31 +32,57 @@
   async function message(t) {
     if (!slot) { window.alert(t); return; }
     let zone;
+    const focusInitial = document.activeElement;
     try {
-      const response = await fetch(objetUrl('/HTMLBASE/02-alerte.html'), { cache: 'no-cache' });
-      if (!response.ok) throw new Error('Boîte d’alerte indisponible.');
+      const hrefCss = objetUrl('/CSSBASE/lcdp-lightbox-convergence.css');
+      if (!Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(link => link.href === new URL(hrefCss, document.baseURI).href)) {
+        await new Promise((resolve, reject) => {
+          const feuille = document.createElement('link');
+          feuille.rel = 'stylesheet';
+          feuille.href = hrefCss;
+          feuille.onload = resolve;
+          feuille.onerror = () => { feuille.remove(); reject(new Error('CSS ERREUR indisponible.')); };
+          document.head.appendChild(feuille);
+        });
+      }
+      const response = await fetch(objetUrl('/HTMLBASE/02-dialogue-reference-erreur.html'), { cache: 'no-cache' });
+      if (!response.ok) throw new Error('Dialogue ERREUR indisponible.');
       const template = document.createElement('template');
       template.innerHTML = (await response.text()).trim();
       zone = document.createElement('div');
       zone.append(template.content.cloneNode(true));
       slot.append(zone);
-      const cible = zone.querySelector('[data-lcdp-alerte-message]');
-      const actions = zone.querySelectorAll('[data-lcdp-alerte-ok], [data-lcdp-alerte-close]');
-      if (!cible || !actions.length) throw new Error('Boîte d’alerte incomplète.');
-      cible.textContent = t;
+      const dialogue = zone.querySelector('[data-lcdp-dialogue-reference="erreur"]');
+      const titre = zone.querySelector('[data-lcdp-dialogue-titre]');
+      const texte = zone.querySelector('[data-lcdp-dialogue-message]');
+      const bouton = zone.querySelector('[data-lcdp-dialogue-action="fermer"]');
+      if (!dialogue || !titre || !texte || !bouton) throw new Error('Dialogue ERREUR incomplet.');
+      titre.textContent = 'Connexion impossible';
+      texte.textContent = t;
+      bouton.textContent = 'Fermer';
       await new Promise(resolve => {
         let fermee = false;
         const fermer = () => {
           if (fermee) return;
           fermee = true;
+          document.removeEventListener('keydown', gererClavier);
           zone.remove();
+          if (focusInitial?.isConnected && typeof focusInitial.focus === 'function') focusInitial.focus();
           resolve();
         };
-        actions.forEach(b => b.addEventListener('click', fermer, { once: true }));
-        const overlay = zone.querySelector('[data-lcdp-box-alerte]');
-        overlay?.addEventListener('click', event => { if (event.target === overlay) fermer(); });
+        const gererClavier = event => {
+          if (event.key === 'Escape') { event.preventDefault(); fermer(); }
+        };
+        bouton.addEventListener('click', fermer, { once: true });
+        dialogue.addEventListener('click', event => { if (event.target === dialogue) fermer(); });
+        document.addEventListener('keydown', gererClavier);
+        bouton.focus();
       });
-    } catch (error) { zone?.remove(); window.alert(t); }
+    } catch (error) {
+      zone?.remove();
+      console.warn('Dialogue ERREUR connexion indisponible :', error);
+      window.alert(t);
+    }
   }
 
   form.addEventListener('submit', async event => {
