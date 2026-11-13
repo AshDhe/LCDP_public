@@ -164,7 +164,7 @@
       accesPublic = fiche.acces || null;
 
       parcActif = parc;
-      await afficherFicheParc(parc);
+      await afficherFicheParc(parc, fiche);
 
       // Ouverture ciblée de la carte depuis le verso MES ACCÈS.
       if (new URLSearchParams(window.location.search).get("vue") === "carte") {
@@ -286,7 +286,7 @@
     };
   }
 
-  async function afficherFicheParc(parc) {
+  async function afficherFicheParc(parc, ficheInitiale = null) {
     const slot = document.getElementById("lcdp-fiche-parc-slot");
 
     if (!slot) {
@@ -342,20 +342,33 @@
     shift.classList.add("lcdp-fiche-parc-public__en-chargement");
     slot.replaceChildren(shift);
 
-    await rendreFicheParcDansConteneur(
+    // Même contrôleur et même rendu de fiche que dans PLANIFIER.
+    // La réponse déjà chargée est réutilisée pour éviter un second appel au Worker.
+    await monterParcoursFicheParcDansConteneur(
       contenuShift,
       parc,
       {
-        templateCardParc: etatInteraction.templateCardParc,
-        masquerBoutonFermer: true,
+        vueInitiale: "fiche",
         modeUsage: MODE_USAGE_PUBLIC,
+        templateCardParc: etatInteraction.templateCardParc,
+        chargerFicheParc: (idparc) =>
+          ficheInitiale &&
+          nettoyerTexte(idparc) === nettoyerTexte(parc.idparc || parc.id)
+            ? ficheInitiale
+            : chargerFicheParc(idparc),
         onReserver: afficherBlocageReservationPublique,
         onPlanning: ouvrirPlanningPublic,
-        onPartager: (parcCible) =>
-          partagerFicheParc(parcCible, "fiche"),
+        onPartager: (parcCible, typePartage) =>
+          partagerFicheParc(parcCible, typePartage),
         onOuvrirFicheParc: ouvrirFicheParcDepuisCarte,
         onOuvrirPlanningParc: ouvrirPlanningPublic,
-        onReserverParc: afficherBlocageReservationPublique
+        onReserverParc: afficherBlocageReservationPublique,
+        onVueChange: (vue, parcCible) => {
+          shift.dataset.lcdpShiftVue = vue;
+          document.title =
+            nomParcAffiche(parcCible?.nom || parcCible?.nomparc || "Parc") +
+            " - La Clé du Parc";
+        }
       }
     );
 
@@ -770,6 +783,20 @@
       );
     }
 
+    // Les commandes de la fiche passent par le même contrôleur dans tous
+    // les espaces ; seuls les gestionnaires d'accès diffèrent.
+    async function ouvrirPlanningSelonDroits(parcCible) {
+      if (
+        normaliserModeUsagePlanning(options) === MODE_USAGE_PUBLIC &&
+        typeof options.onPlanning === "function"
+      ) {
+        await options.onPlanning(actualiserParc(parcCible));
+        return;
+      }
+
+      await afficherVueSecurisee("planning", parcCible);
+    }
+
     async function informerChoixJour(parc) {
       const parcCible = actualiserParc(parc);
 
@@ -867,24 +894,20 @@
             ...options,
             masquerBoutonFermer: true,
             onReserver: ouvrirPlanningPourPlanification,
-            onPlanning: (parcCible) =>
-              afficherVueSecurisee(
-                "planning",
-                parcCible
-              ),
+            onPlanning: ouvrirPlanningSelonDroits,
             onPartager: (parcCible) =>
               partager(parcCible, "fiche"),
             onOuvrirFicheParc: (parcCible) =>
-              afficherVueSecurisee(
-                "fiche",
-                parcCible
-              ),
-            onOuvrirPlanningParc: (parcCible) =>
-              afficherVueSecurisee(
-                "planning",
-                parcCible
-              ),
-            onReserverParc: ouvrirPlanningPourPlanification
+              normaliserModeUsagePlanning(options) === MODE_USAGE_PUBLIC &&
+              typeof options.onOuvrirFicheParc === "function"
+                ? options.onOuvrirFicheParc(parcCible)
+                : afficherVueSecurisee("fiche", parcCible),
+            onOuvrirPlanningParc: ouvrirPlanningSelonDroits,
+            onReserverParc:
+              normaliserModeUsagePlanning(options) === MODE_USAGE_PUBLIC &&
+              typeof options.onReserverParc === "function"
+                ? options.onReserverParc
+                : ouvrirPlanningPourPlanification
           }
         );
       } else if (vue === "planning") {
