@@ -142,7 +142,7 @@
     pageInitialisee = true;
     appliquerRoutesSite(document);
     // Préchargement non bloquant : l’alerte Planning doit apparaître immédiatement.
-    promesseAlertePublique = chargerFragmentObjetFiche({}, "/HTMLBASE/02-alerte.html").catch(() => null);
+    promesseAlertePublique = chargerFragmentObjetFiche({}, "/HTMLBASE/02-dialogue-reference-erreur.html").catch(() => null);
 
     const promesseBandeau = initialiserBandeau().catch((erreur) => {
       console.warn("Bandeau public indisponible.", erreur);
@@ -4831,75 +4831,60 @@
     }
 
     const conteneur = document.createElement("div");
-    document.body.appendChild(conteneur);
+    const focusInitial = document.activeElement;
+    try {
+      const fragmentPrecharge = promesseAlertePublique ? await promesseAlertePublique : null;
+      const fragment = fragmentPrecharge
+        ? fragmentPrecharge.cloneNode(true)
+        : await chargerFragmentObjetFiche({}, "/HTMLBASE/02-dialogue-reference-erreur.html");
+      conteneur.appendChild(fragment);
 
-    const fragmentPrecharge = promesseAlertePublique ? await promesseAlertePublique : null;
-    const fragment = fragmentPrecharge
-      ? fragmentPrecharge.cloneNode(true)
-      : await chargerFragmentObjetFiche({}, "/HTMLBASE/02-alerte.html");
-    conteneur.appendChild(fragment);
+      const dialogue = conteneur.querySelector('[data-lcdp-dialogue-reference="erreur"]');
+      const titre = conteneur.querySelector("[data-lcdp-dialogue-titre]");
+      const texte = conteneur.querySelector("[data-lcdp-dialogue-message]");
+      const bouton = conteneur.querySelector('[data-lcdp-dialogue-action="fermer"]');
 
-    const alerte = conteneur.querySelector(
-      "[data-lcdp-box-alerte]"
-    );
-    const texte = conteneur.querySelector(
-      "[data-lcdp-alerte-message]"
-    );
-    const boutonFermer = conteneur.querySelector(
-      "[data-lcdp-alerte-close]"
-    );
-    const boutonOk = conteneur.querySelector(
-      "[data-lcdp-alerte-ok]"
-    );
-
-    if (!alerte || !texte || !boutonFermer || !boutonOk) {
-      conteneur.remove();
-      throw new Error("Structure de l’alerte incomplète.");
-    }
-
-    texte.textContent = message || "";
-    boutonOk.textContent = libelleBouton;
-
-    boutonOk.classList.remove(
-      "lcdp-button-primary",
-      "lcdp-button-secondary",
-      "lcdp-button-orange"
-    );
-    boutonOk.classList.add(
-      couleurAction === "vert-plein"
-        ? "lcdp-button-primary"
-        : couleurAction === "vert"
-          ? "lcdp-button-secondary"
-          : "lcdp-button-orange"
-    );
-
-    return new Promise((resolve) => {
-      let resolu = false;
-
-      function fermer(valeur) {
-        if (resolu) {
-          return;
-        }
-
-        resolu = true;
-        conteneur.remove();
-        resolve(valeur);
+      if (!dialogue || !titre || !texte || !bouton) {
+        throw new Error("Structure ERREUR de la fiche parc incomplète.");
       }
 
-      boutonFermer.addEventListener(
-        "click",
-        () => fermer(false)
-      );
-      boutonOk.addEventListener(
-        "click",
-        () => fermer(true)
-      );
-      alerte.addEventListener("click", (event) => {
-        if (event.target === alerte) {
-          fermer(false);
-        }
+      titre.textContent = options.titre || "Erreur";
+      texte.textContent = String(message || "");
+      bouton.textContent = libelleBouton;
+      if (couleurAction === "vert") {
+        bouton.classList.remove("lcdp-dialogue-ref__bouton--principal");
+        bouton.classList.add("lcdp-dialogue-ref__bouton--secondaire");
+      } else if (couleurAction === "orange") {
+        bouton.classList.add("lcdp-button-orange");
+      }
+
+      document.body.appendChild(conteneur);
+      return await new Promise(resolve => {
+        let termine = false;
+        const fermer = valeur => {
+          if (termine) return;
+          termine = true;
+          document.removeEventListener("keydown", clavier);
+          conteneur.remove();
+          if (focusInitial?.isConnected && typeof focusInitial.focus === "function") {
+            focusInitial.focus({ preventScroll: true });
+          }
+          resolve(valeur);
+        };
+        const clavier = event => {
+          if (event.key === "Escape") { event.preventDefault(); fermer(false); }
+        };
+        bouton.addEventListener("click", () => fermer(true), { once: true });
+        dialogue.addEventListener("click", event => {
+          if (event.target === dialogue) fermer(false);
+        });
+        document.addEventListener("keydown", clavier);
+        bouton.focus();
       });
-    });
+    } catch (erreur) {
+      conteneur.remove();
+      throw erreur;
+    }
   }
 
   function changerMois(etat, delta) {
