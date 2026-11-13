@@ -342,3 +342,11 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **TRAITÉ — migration statique**, commit `6092e8c6`. Annulation/Échap/clic extérieur et absence de ressources => refus sans requête. La feuille `lcdp-lightbox-convergence.css` était déjà déclarée dans `planning-parc.html`. L'appel `api('/supprimer-operation',{...contexte(),id})`, son traitement et les notifications restent inchangés.
 - **NON TRAITÉ — distinct** : `nouvelleBase` et `annuler-base` conservent des confirmations `confirm` concernant l'abandon du brouillon de base (sans suppression serveur), `appliquerIA` concerne un enregistrement pouvant annuler des réservations. Les dialogues de sortie à plusieurs actions restent hors profil binaire.
 - Aucun fichier CSS/gabarit supprimé. Aucune validation navigateur.
+
+
+### SUPPRESSION — abandon de base non enregistrée, planning ADMIN (13 novembre 2026)
+- **Comparaison ciblée** : `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js`, deux `confirm()` natifs : (1) dans `nouvelleBase()` lorsqu'une nouvelle base est déjà modifiée, message « Abandonner la nouvelle base en cours ? » ; (2) bouton `annuler-base`, message « Abandonner la nouvelle base ? ».
+- **TRAITÉ — migration statique**, commit `23fab949` : les deux chemins réutilisent le gabarit SUPPRESSION via le helper `demanderSuppressionOperation` paramétré (titre, message et libellé « Abandonner »). La confirmation de suppression d'opération existante conserve ses textes et ses appels. Refus, Escape, clic extérieur ou impossibilité de charger le fragment donnent `false` et n'abandonnent pas la base. `nouvelleBase()` devient asynchrone ; son écouteur attend la promesse, sans modifier les règles de préparation de base.
+- **Conséquence métier vérifiée au niveau du code** : abandon d'un brouillon local, aucune suppression serveur dans ces deux chemins ; la méthode `annulerBase()` et l'enregistrement de base ne sont pas modifiés.
+- **NON TRAITÉ** : confirmation native d'enregistrement d'opération IA pouvant annuler des réservations, dialogue de sortie à plusieurs issues, autres cas recensés dans les cinq dépôts.
+- **Nettoyage** : deux appels natifs `confirm()` en moins dans ce fichier (de trois à un). Aucun CSS ni gabarit historique supprimé. Pas de test navigateur.
