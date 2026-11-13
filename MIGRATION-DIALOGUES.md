@@ -574,3 +574,22 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - Les deux accueils chargeaient déjà `lcdp-lightbox-convergence.css` ; aucun changement CSS, aucun changement des appels de connexion/déconnexion, aucun test navigateur. **Les menus burger coach/parc consomment toujours `02-dialogue-bouton.html` pour la sélection multi-compte ; conserver ce composant et ses styles.**
 
 **Contrôle après commit** : trois fichiers JS syntaxiquement valides, tous avec 0 référence `02-alerte.html`. Ne pas en déduire que le gabarit ou les CSS anciens sont inutilisés dans les cinq dépôts.
+
+
+## Balayage ciblé des références héritées — quatre dépôts prioritaires (13 novembre 2026)
+
+### Périmètre et méthode
+Après les commits `e4fe6bcc` (PLANIFIER MEMBRE), `4e94b9c9` (accueil COACH) et `6cfc5023` (accueil PARC), lecture de la liste GitHub des fichiers `.js` des dépôts `LCDP_membre`, `LCDP_public`, `LCDP_coach` et `LCDP_parc`, puis lecture du contenu de **74 fichiers JavaScript** au total : MEMBRE 30, PUBLIC 34, COACH 5, PARC 5. Recherche statique des références littérales `02-alerte.html`, `02-dialogue-bouton.html` et des `confirm()` natifs. Aucun `window.confirm()` repéré dans ces 74 fichiers. Recherche limitée aux sources JavaScript et chaînes littérales de ces formes, non exhaustive pour HTML, CSS, templates, chemins construits dynamiquement ou dépôt ADMIN.
+
+### Références littérales restant après cette passe
+| Dépôt | Fichiers JS inspectés | `02-alerte.html` | `02-dialogue-bouton.html` | Consommateurs / décisions |
+|---|---:|---:|---:|---|
+| MEMBRE | 30 | 3 | 12 | Alerte : `box-menu-burger-membre.js` (dialogue pouvant proposer une action supplémentaire « Payer »), `da-membre.js` (branche générique), `config.js` (liste d'assets/préchargement). Boutons : abonnements, workflow ABO-RÉZA, accueil, formulaire PLANIFIER, burger, invitations, informations (échéances), réservations |
+| PUBLIC | 34 | 5 | 2 | Alertes : `controle-acces-accueil.js` (navigation conditionnelle), `fiche-parc.js` (préchargement et dialogue), `OBJET/JSBASE/02-footer.js` (validation de vérification et erreurs), `OBJET/JSBASE/03-formulaire-protege.js` (confirmation de formulaire). Boutons : burger public et FAQ, sélecteurs de destinations |
+| COACH | 5 | 0 | 1 | `box-menu-burger-coach.js` : sélection multi-compte, **CONSERVER** |
+| PARC | 5 | 0 | 1 | `box-menu-burger-parc.js` : sélection multi-compte, **CONSERVER** |
+| **TOTAL** | **74** | **8** | **16** | 24 occurrences littérales, sans inférer le nombre total de consommateurs indirects |
+
+**Conséquence** : les anciens gabarits `02-alerte.html` et `02-dialogue-bouton.html` restent utilisés. **Aucun CSS historique ni gabarit ne doit être supprimé** sur la base de cette recherche. Les éléments multi-actions, les formulaires et les étapes de paiement ne peuvent pas être automatiquement remplacés par ERREUR/INFORMATION/CHOIX binaires. Prochaines qualifications techniques : `controle-acces-accueil.js`, `fiche-parc.js`, le module footer de vérification, et `03-formulaire-protege.js`. Les modules croisant success/error, retour de paiement, fermeture obligatoire ou redirection exigent une analyse par appel.
+
+**Contrôles du code modifié** : `reserver-membre.js`, `accueil-coach.js` et `accueil-parc.js` relus après commits et valides syntaxiquement ; tous trois ont 0 référence littérale `02-alerte.html`. Les sources HTML `reserver-membre.html`, `accueil-coach.html` et `accueil-parc.html` chargent `lcdp-lightbox-convergence.css`. Aucune modification de Worker, aucun test navigateur réalisé.
