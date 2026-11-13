@@ -1435,6 +1435,36 @@ html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) { display: none !impor
   font-family: var(--lcdp-font-main) !important;
 }
 
+/* Dimensions et typographie communes, reprises du verso Parc existant. */
+.lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: 36px !important;
+  padding: 6px 8px !important;
+  margin: 0 !important;
+  gap: 5px !important;
+  border-radius: var(--lcdp-radius-button);
+  font-size: .82rem !important;
+  line-height: 1.2 !important;
+  font-weight: 400 !important;
+  text-align: center;
+  white-space: normal !important;
+}
+.lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action .lcdp-box-card-parc__action-libelle {
+  font-weight: inherit !important;
+}
+.lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action .lcdp-box-card-parc__action-icone {
+  width: 16px !important;
+  height: 16px !important;
+  flex: 0 0 16px !important;
+  object-fit: contain;
+}
+
 /* Boutons communs des cartes Parc (dont les cartes de MES ACCÈS).
    Une même variante impose les mêmes couleurs et le même pictogramme sur toutes les cartes. */
 .lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action--vert-plein {
