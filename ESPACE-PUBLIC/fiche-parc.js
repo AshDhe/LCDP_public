@@ -631,7 +631,8 @@
     );
     remplirBlocAccesMaCle(
       acces,
-      construireTexteEntreeParc(parcAvecAccesFiche)
+      construireTexteEntreeParc(parcAvecAccesFiche),
+      parc?.entreeparc
     );
     afficherImageEntreeParc(
       fiche.querySelector("[data-lcdp-fiche-parc-entree-image]"),
@@ -1204,20 +1205,52 @@
     }
   }
 
-  function remplirBlocAccesMaCle(conteneur, texteEntree) {
+  function remplirBlocAccesMaCle(conteneur, texteEntree, entreeParc) {
     if (!conteneur) return;
     conteneur.replaceChildren();
-    const lignes = [
-      String(texteEntree || "").trim() || "Information non renseignée.",
-      "L’accès détaillé au parc est communiqué avec votre CLÉ.",
-      "Votre contact La Clé du Parc dans l'application : @camille."
-    ];
-    const paragraphe = document.createElement("p");
-    lignes.forEach((ligne, index) => {
-      if (index) paragraphe.appendChild(document.createElement("br"));
-      paragraphe.appendChild(document.createTextNode(ligne));
+
+    // Brief Accès Ma Clé : une seule indication fixe, le texte du parc
+    // conservé, puis son contact. Des versions antérieures avaient injecté
+    // les indications fixes dans entreeparc : ne pas les afficher deux fois.
+    const indication = "L’accès est indiqué avec votre clé.";
+    const contactDefaut =
+      "Votre contact La Clé du Parc : camille@lacleduparc.fr - Standard téléphonique : 02.34.46.51.14";
+    const textes = [];
+    const vus = new Set();
+    let contact = "";
+
+    // La première source provient de la réponse publique autorisée, la
+    // seconde du champ historique entreeparc et de ses coordonnées.
+    [texteEntree, entreeParc].forEach((source) => {
+      const lignes = String(source || "")
+        .replace(/\\n/g, "\n")
+        .replace(/(L[’']accès est indiqué avec votre clé\.)\s*(Votre contact La Clé du Parc\s*:)/gi, "$1\n$2")
+        .split(/\r?\n/)
+        .map((ligne) => ligne.trim())
+        .filter(Boolean);
+
+      lignes.forEach((ligne) => {
+        if (/^L[’']accès est indiqué avec votre clé\.?$/i.test(ligne) ||
+            /^L[’']accès détaillé au parc est communiqué avec votre clé\.?$/i.test(ligne)) return;
+        if (/^Votre contact La Clé du Parc\s*:/i.test(ligne)) {
+          // Conserver les coordonnées enregistrées plutôt que l'ancien @camille.
+          if (!contact || source === entreeParc) contact = ligne;
+          return;
+        }
+        const cle = ligne.toLocaleLowerCase("fr").replace(/\s+/g, " ");
+        if (vus.has(cle)) return;
+        vus.add(cle);
+        textes.push(ligne);
+      });
     });
-    conteneur.appendChild(paragraphe);
+
+    const paragraphes = [indication, ...textes, contact || contactDefaut];
+    paragraphes.forEach((ligne, index) => {
+      const paragraphe = document.createElement("p");
+      paragraphe.textContent = ligne;
+      paragraphe.style.margin = index ? "12px 0 0" : "0";
+      conteneur.appendChild(paragraphe);
+    });
   }
 
   function afficherImageEntreeParc(image, parc, options) {
