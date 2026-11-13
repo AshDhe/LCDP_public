@@ -625,3 +625,35 @@ Après les commits `e4fe6bcc` (PLANIFIER MEMBRE), `4e94b9c9` (accueil COACH) et 
 - Arbre GitHub `main` relu, puis contenu des **34 fichiers JavaScript** du dépôt `LCDP_public` inspecté après les commits `59b2ed84`, `69ac1dc0`, `48daae8f` et `f1bc2400`.
 - **Résultat dans les JS du dépôt PUBLIC** : **0 occurrence littérale** de `02-alerte.html` ; **2 occurrences littérales** de `02-dialogue-bouton.html`, dans `ESPACE-PUBLIC/box-menu-burger-public.js` (sélecteur de comptes) et `ESPACE-PUBLIC/faq.js` (Me connecter / Être invité(e)). Aucun échec de lecture pendant le balayage.
 - **Décision** : conserver les deux gabarits historiques et leurs CSS, car un audit JS ne couvre pas les références HTML/CSS, les chemins calculés dynamiquement, les éventuels consommateurs indirects et les quatre autres dépôts. Les deux dialogues à boutons sont toujours utilisés pour des choix de destination non binaires. Aucun test navigateur.
+
+
+## Audit de consolidation après convergence prioritaire (13 novembre 2026)
+
+### Dernières migrations du périmètre MEMBRE
+- `LCDP_membre/ESPACE-MEMBRE/da-membre.js` — commit `5b59f997` : une réussite d'envoi de DA auparavant présentée par le dernier chemin générique `02-alerte.html` porte désormais `{profil:"information"}`. La branche générique devient ERREUR, sans croix ni fermeture par fond/Échap comme dans la branche précédente. Le retour `confirmationLue === true`, la fermeture du workflow, `onTerminee` et le rechargement qui suit restent présents. CHOIX déjà actif pour « Votre DA est terminée ? » / sortie du workflow, sans modification du Worker.
+- `LCDP_membre/config.js` — commit `53c1c6db` : l'ancien `02-alerte.html` affichait effectivement « Session remplacée », **ce n'était pas un préchargement** (rectification explicite de l'ancien inventaire K.18). Il est remplacé par `02-dialogue-reference-erreur.html`; le CSS `02-box-alerte.css` chargé uniquement pour cette alerte est remplacé dans ce code par le CSS de convergence. Comme avant, le clic OK ou sur le fond résout l'affichage, puis `window.location.replace` renvoie vers la racine publique ; pas de fermeture supplémentaire par Échap. En cas de ressource indisponible, le message natif `window.alert` et la redirection restent. Aucun CSS partagé supprimé.
+- `LCDP_membre/ESPACE-MEMBRE/box-menu-burger-membre.js` — commit `e35e0bbe` : suppression de sa dernière référence `02-alerte.html`. `afficherAlerteBurger` utilise ERREUR pour les échecs, INFORMATION pour l'indication de date de DA, CHOIX pour la régularisation (continuer/fermer) et CHOIX pour les options `boutonAction` (action distincte « Payer », « M'abonner » ou « Être invité(e) » et annulation « Fermer »). Les callbacks métier, le retour `"action"` pour ce bouton, la navigation après régularisation et le chargement CSS à la demande sont conservés. Le dialogue de sélection multi-comptes `02-dialogue-bouton.html` reste nécessaire. **Une option de fermeture redondante de l'ancienne alerte (croix/OK) est maintenant regroupée sous Fermer** lorsqu'un autre bouton exécute l'action ; vérifier visuellement.
+
+### ADMIN — confirmation d'abandon de brouillon
+- `LCDP_admin/ESPACE-ADMIN/B_PARCS/AccesDetail.js` — commit `7d586887` : seul `window.confirm()` trouvé dans la recherche JS admin (forme explicite) remplacé par CHOIX « Conserver » / « Abandonner ». Les deux handlers « Retour à la sélection » attendent désormais le booléen asynchrone avant `fermerEdition()`. Si la ressource CHOIX manque, aucune fermeture/perte de texte n'a lieu. Aucun appel Worker modifié.
+- `LCDP_admin/ESPACE-ADMIN/B_PARCS/AccesDetail.html` — commit `15441051` : CSS de convergence déclaré.
+
+### PUBLIC — alertes inline hors fichiers JS
+- `LCDP_public/ESPACE-PUBLIC/association.html` — commit `f61e1b6f`, et `le-club.html` — commit `81615a5a` : scripts intégrés aux HTML signalant les erreurs d'accès (email, mot de passe, enregistrement). Référence `02-alerte.html` remplacée par `02-dialogue-reference-erreur.html`, CSS chargé par lien sur chaque page, texte séparé du titre, Fermer/Échap/fond, repli `alert` en cas de panne ; pas de redirection ni de soumission changée. Les scripts inline modifiés se parsèrent correctement (deux scripts contrôlés dans association, trois dans le-club).
+
+### Inventaire inter-dépôts des références littérales
+La lecture des arbres GitHub puis des fichiers `.js` et `.html` des cinq dépôts représente **106 fichiers JS et 168 fichiers HTML**. La lecture initiale des JS MEMBRE et des HTML PUBLIC a été complétée par la relecture des seuls fichiers ensuite modifiés. Recherche portant sur les chaînes `02-alerte.html`, `02-dialogue-bouton.html` et `02-box-alerte.css`, sans prétendre détecter les constructions de chemins dynamiques ou les consommateurs CSS implicites.
+
+| Dépôt | JS | HTML | `02-alerte.html` JS + HTML après les migrations | `02-dialogue-bouton.html` JS + HTML |
+|---|---:|---:|---:|---:|
+| MEMBRE | 30 | 25 | **0** | **12** (JS) |
+| PUBLIC | 34 | 88 | **0** | **17** (2 JS, 15 HTML) |
+| COACH | 5 | 5 | **0** | **1** (JS) |
+| PARC | 5 | 5 | **0** | **1** (JS) |
+| ADMIN | 32 | 45 | **19** (12 JS, 7 HTML) | **0** |
+| **Total** | **106** | **168** | **19**, toutes dans ADMIN | **31** |
+
+- Les **15 dialogues historiques PUBLIC dans les HTML** sont principalement liés aux scripts intégrés de navigation « Mon compte » et aux destinations « Me connecter » / « Être invité(e) » (exemples contrôlés `FAQ-public.html` et `responsable-parc.html`). Ces sélecteurs ne doivent pas être remplacés aveuglément par des boîtes CHOIX binaires. `02-dialogue-bouton.html` doit rester distribué avec son CSS.
+- En ADMIN, les références restantes à l'ancienne alerte sont dans les fichiers JS `CalculPoints.js`, `Cle.js`, `PrixAbo.js`, `admin-actualite.js`, `cgv-admin.js`, `faq-admin.js`, `list-points.js`, `mentions-legales-admin.js`, `reglement-app-admin.js`, `reglement-club-admin.js`, `PlanningParc.js`, `upload-img-admin.js`, et les HTML `CardParc.html`, `CarteParc.html`, `MiseAJourParc.html`, `statutparc.html`, `SuiviDA.html`, `accueil-admin.html`, `connexion-admin.html`. Ce sont **19 références littérales**, pas 19 migrations nécessairement équivalentes.
+- **Décision CSS** : aucun CSS ni gabarit partagé supprimé. Le contrôle ne porte pas sur l'ensemble des `.css`, le code dans d'autres extensions ni les dépendances indirectes. Ne retirer `02-alerte.html`, `02-dialogue-bouton.html` ni leurs styles avant l'épuisement contrôlé de ces consommateurs et des essais navigateur.
+- **Tests** : contrôles de syntaxe JS sur les quatre fichiers JS modifiés (DA, config, burger et AccesDetail), des scripts inline des deux pages publiques, et du HTML AccesDetail ; aucun test navigateur, de sécurité réseau, de paiement ou de redirection réelle. **Ne pas déclarer la recette fonctionnelle complète**.
