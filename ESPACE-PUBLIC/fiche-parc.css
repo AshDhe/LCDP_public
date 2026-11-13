@@ -43,6 +43,13 @@
   align-items: center;
   justify-content: center;
 }
-.lcdp-fiche-parc-public__attente img { display: block; width: 64px; height: 64px; object-fit: contain; }
+/* Spinner commun identique à celui de benevolat.html. */
+.lcdp-fiche-parc-public__attente .lcdp-loading-spinner { position:relative; box-sizing:border-box; width:64px; height:64px; display:flex; align-items:center; justify-content:center; }
+.lcdp-fiche-parc-public__attente .lcdp-loading-spinner > svg { position:absolute; inset:0; width:100%; height:100%; display:block; }
+.lcdp-fiche-parc-public__attente .lcdp-loading-spinner__track { color:rgba(6,95,70,.10); }
+.lcdp-fiche-parc-public__attente .lcdp-loading-spinner__arc { color:#e59834; animation:lcdp-fiche-parc-rotation .8s linear infinite; }
+.lcdp-fiche-parc-public__attente .lcdp-loading-spinner__dot { width:8px; height:8px; border-radius:50%; background:#4e6838; }
+@keyframes lcdp-fiche-parc-rotation { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .lcdp-fiche-parc-public__attente .lcdp-loading-spinner__arc { animation:none; } }
 .lcdp-fiche-parc-public__en-chargement .lcdp-box-shift-detail-parc__content { display: none; }
 .lcdp-fiche-parc-public__en-chargement .lcdp-fiche-parc-public__attente { display: flex; }
