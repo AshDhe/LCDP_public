@@ -323,3 +323,12 @@ Aucun test navigateur ; ne pas déduire qu'une confirmation des frais vaut une a
 | `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js`, `appliquerIA()` | Ancien `confirm` natif avant **enregistrement** d'une opération, avertissant des possibles annulations de réservations. Nouveau gabarit CHOIX déjà disponible dans ce fichier ; texte et requête `/operation` conservés. | **TRAITÉ — CHOIX**, reclasse le « NON TRAITÉ — IMPACTS À QUALIFIER » de I.8 et I.9 ; ne pas compter comme SUPPRESSION | `636b04f8` |
 
 **Contrôle local de source** : zéro appel `confirm()` natif restant dans `planning-parc.js`. Cela ne prouve pas leur disparition dans les autres fichiers ou dépôts. Aucun CSS supprimé. Test navigateur non réalisé.
+
+
+### J.2 Contrôle des consommateurs CSS/gabarits encore actifs (13 novembre 2026)
+| Fichier inspecté | Consommateurs de `02-dialogue-bouton.html` restants | Conséquence |
+|---|---|---|
+| `LCDP_membre/ESPACE-MEMBRE/abonnement-membre.js` | **3** : mode de paiement (`afficherEtapePaiement`), `ouvrirDialogueChoix` du workflow d'abonnement, « Paiement en attente » et échéances non payées | **GABARIT ET CSS À CONSERVER** ; trois parcours non migrés / de nature différente |
+| `LCDP_admin/ESPACE-ADMIN/B_PARCS/planning-parc.js` | **0 référence littérale** à l'ancien dialogue ; **0 appel natif** `confirm()` | Contrôle limité au fichier ; aucune autorisation globale de suppression CSS |
+
+Les deux fichiers sont syntaxiquement valides lors de la vérification statique. Les parcours d'abonnement, leur mise en page, les dépendances indirectes et les cinq dépôts dans leur ensemble ne sont pas testés au navigateur ; aucune suppression CSS dans ce contrôle.
