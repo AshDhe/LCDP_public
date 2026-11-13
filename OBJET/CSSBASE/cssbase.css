@@ -1434,3 +1434,21 @@ html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) { display: none !impor
 ) {
   font-family: var(--lcdp-font-main) !important;
 }
+
+/* Boutons communs des cartes Parc (dont les cartes de MES ACCÈS).
+   Une même variante impose les mêmes couleurs et le même pictogramme sur toutes les cartes. */
+.lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action--vert-plein {
+  background: var(--lcdp-color-logo-green) !important;
+  border-color: var(--lcdp-color-logo-green) !important;
+  color: #fff !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+.lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action--vert-plein:hover {
+  background: var(--lcdp-color-primary) !important;
+  border-color: var(--lcdp-color-primary) !important;
+  color: #fff !important;
+}
+.lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action--vert-plein .lcdp-box-card-parc__action-icone {
+  filter: brightness(0) invert(1);
+}
