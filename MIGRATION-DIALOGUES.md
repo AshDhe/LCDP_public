@@ -619,3 +619,9 @@ Après les commits `e4fe6bcc` (PLANIFIER MEMBRE), `4e94b9c9` (accueil COACH) et 
 - **Contrôle** : 1 référence à l'ancienne alerte avant, 0 après ; syntaxe vérifiée, sans test navigateur ni session réelle.
 
 **Bilan ciblé** : ces quatre fichiers publics relus après commit sont syntaxiquement valides et ne contiennent plus aucune référence littérale à `02-alerte.html`. Cela clôt les cinq occurrences relevées pour ces quatre sources lors du balayage JS antérieur, sans prouver qu'aucun consommateur HTML/CSS ou chargement indirect n'existe. `02-alerte.html` et les styles historiques restent en place. Le gabarit multi-actions `02-dialogue-bouton.html` reste notamment utilisé dans le burger public et la FAQ.
+
+
+### Vérification du dépôt PUBLIC après la convergence des quatre modules (13 novembre 2026)
+- Arbre GitHub `main` relu, puis contenu des **34 fichiers JavaScript** du dépôt `LCDP_public` inspecté après les commits `59b2ed84`, `69ac1dc0`, `48daae8f` et `f1bc2400`.
+- **Résultat dans les JS du dépôt PUBLIC** : **0 occurrence littérale** de `02-alerte.html` ; **2 occurrences littérales** de `02-dialogue-bouton.html`, dans `ESPACE-PUBLIC/box-menu-burger-public.js` (sélecteur de comptes) et `ESPACE-PUBLIC/faq.js` (Me connecter / Être invité(e)). Aucun échec de lecture pendant le balayage.
+- **Décision** : conserver les deux gabarits historiques et leurs CSS, car un audit JS ne couvre pas les références HTML/CSS, les chemins calculés dynamiquement, les éventuels consommateurs indirects et les quatre autres dépôts. Les deux dialogues à boutons sont toujours utilisés pour des choix de destination non binaires. Aucun test navigateur.
