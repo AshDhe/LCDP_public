@@ -278,3 +278,9 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 ### SUPPRESSION — première migration ADMIN (13 novembre 2026)
 - `LCDP_admin/ESPACE-ADMIN/B_ADMIN/PrixAbo.js` : remplacement de la confirmation native « Supprimer définitivement cette version de l’abonnement » par `02-dialogue-reference-suppression.html` et le CSS de convergence. Boutons Conserver / Supprimer ; refus, Escape, clic extérieur ou indisponibilité du fragment/CSS renvoient `false` et empêchent la requête. Retour du focus géré ; requête POST `/abonnement` avec `action: "delete"`, validations et rechargement de liste inchangés. Commit `49224c72`.
 - Contrôle : relecture de source et commit GitHub ; aucun test navigateur effectué. Les autres suppressions identifiées (Cle, list-points, FAQ, actualités, annulations membre) restent ouvertes et ne sont pas présumées migrées.
+
+
+### SUPPRESSION — entrée de points ADMIN (13 novembre 2026)
+- `LCDP_admin/ESPACE-ADMIN/B_ADMIN/list-points.js` : comparaison avec l'ancien `02-dialogue-bouton.html`, lequel affichait « Supprimer l’entrée » / « Cette suppression est définitive. » avec Annuler et Supprimer ; migration du seul dialogue vers `02-dialogue-reference-suppression.html` (mêmes textes et retours booléens). CSS de convergence chargé à la demande ; refus, Escape, clic extérieur ou échec de chargement => `false`. Code `supprimerPoint` et requêtes Worker inchangés. Commit `b1bb145e`.
+- Comparaisons complémentaires : `Cle.js` (ancien dialogue + secours `window.confirm`) non traité ; `faq-admin.js` (suppression de bloc brouillon avec relance du clic) non traité ; `admin-actualite.js` (suppression article public/pop-up) non traité ; `mes-acces-membre.js` (annulations et notifications) non traité ; autres cas à qualifier.
+- Aucun test navigateur. Les cas non traités restent inscrits dans l'inventaire.
