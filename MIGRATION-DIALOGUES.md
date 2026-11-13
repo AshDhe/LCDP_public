@@ -442,3 +442,22 @@ Une fois tous les consommateurs INFORMATION migrés, un contrôle ciblé de clô
 - **TRAITÉ — migration statique**, commit `dbefdff7` : `02-dialogue-reference-choix.html`, même titre/message/actions ; retour booléen, Échap/clic extérieur/Annuler => `false` et aucun renvoi d'email ; bouton « Renvoyer l'email » => `true`, requête Worker et redirection inchangées. Le secours d'affichage INFORMATION en cas d'indisponibilité du gabarit est conservé et ne déclenche pas de renvoi.
 - **Nettoyage** : l'unique appel de `02-dialogue-bouton.html` est retiré de ce fichier ; `connexion-membre.html` chargeait déjà `lcdp-lightbox-convergence.css`, aucun CSS supplémentaire. Vérification syntaxique passée, sans test navigateur ni test du Worker.
 - **À QUALIFIER — PUBLIC** : `hello.js`, `codes-securite.js` conservent `02-alerte.html` avec des contenus de nature variable et parfois des redirections. `connexion-parc.js` / `connexion-coach.js` conservent le dialogue d'erreur `02-alerte.html` et des secours natifs. Ne pas assimiler leurs messages à des INFORMATIONS simples sans comparer les effets de fermeture.
+
+
+## Convergence PUBLIC — codes de sécurité, hello et connexions coach/parc (13 novembre 2026)
+
+### INFORMATION — `ESPACE-PUBLIC/codes-securite.js`
+- **Avant** : `afficherInformation(titre,message,type,redirectUrl)` utilisait `02-alerte.html` pour les messages d'erreur ET le message de réussite des codes. Pour la réussite, le bouton OK déclenchait la fermeture, l'affichage éventuel du masque « Ouverture de la page… » et ensuite la redirection vers `hello.html`. Le type `information` est employé sur la réussite de l'enregistrement des codes.
+- **TRAITÉ — migration statique**, commit `6c39ec59` : branche `type === "information"` raccordée à `02-dialogue-reference-information.html` (titre « Information » si vide, message inchangé, bouton « Fermer »), avec chargement à la demande du CSS `lcdp-lightbox-convergence.css`. L'attente de la décision utilisateur et la redirection `redirectUrl` **après** fermeture sont conservées, de même que le masque de navigation. Branches `type === "erreur"` encore sur `02-alerte.html` et fallback natif `alert` : **NON TRAITÉ — ERREUR à qualifier**. Aucun changement au service d'enregistrement des codes.
+
+### ERREUR — `ESPACE-PUBLIC/hello.js`
+- **Avant** : les appels à `afficherAlerte(titre,message)` identifiés concernent l'email invalide, le mot de passe absent et les erreurs d'accès public. Ils utilisaient `02-alerte.html` avec titre et message concaténés, fermeture par bouton/croix/fond et secours natif `alert`.
+- **TRAITÉ — migration statique**, commit `3412581e` : profil `02-dialogue-reference-erreur.html`, titre et message rendus dans leurs champs dédiés, bouton « Fermer », Échap et clic extérieur, restauration du focus, CSS de convergence chargé à la demande. Le secours `window.alert` reste seulement pour la panne du composant/absence de slot. Aucun traitement de formulaire ni appel Worker modifié.
+- **Nettoyage local** : zéro référence résiduelle à `02-alerte.html` dans `hello.js` ; ne pas supprimer le gabarit partagé car d'autres consommateurs persistent.
+
+### ERREUR — `ESPACE-PUBLIC/connexion-parc.js` et `connexion-coach.js`
+- **Avant** : un gestionnaire `message(t)` par fichier affichait les erreurs de saisie/connexion/session dans `02-alerte.html`, avec bouton OK, croix et clic extérieur. Les erreurs bloquent/relancent le formulaire et peuvent libérer le bouton de connexion après affichage.
+- **TRAITÉ — migration statique**, commits `b7c388e1` (PARC) et `09fc3bc1` (COACH) : profil `02-dialogue-reference-erreur.html`, titre « Connexion impossible », message inchangé, bouton Fermer, Échap/clic extérieur, focus restitué, CSS de convergence chargé à la demande. Maintien du secours natif `window.alert` si la ressource n'est pas disponible.
+- **Métier inchangé** : `POST /login`, `GET /session`, contrôle de compte, champs envoyés au Worker, redirections vers les espaces correspondants, état du bouton lors de la connexion. Aucun changement au Worker.
+
+**Contrôles** : les quatre fichiers JS sont syntaxiquement valides à la relecture des sources GitHub. Aucun ancien CSS n'est supprimé. Le CSS de convergence central existe et est chargé à la demande uniquement par ces profils. Aucun essai navigateur/réseau ni validation sur les cinq dépôts complets. Ne pas interpréter la disparition des références locales comme une autorisation de retirer `02-alerte.html` ou `lcdp-central-module-06.css`.
