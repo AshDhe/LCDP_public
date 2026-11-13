@@ -109,51 +109,8 @@ BEGIN
       AND (a.debut AT TIME ZONE 'Europe/Paris')::date <= (v_source.datebookd AT TIME ZONE 'Europe/Paris')::date
       AND (a.fin AT TIME ZONE 'Europe/Paris')::date >= (v_source.datebookd AT TIME ZONE 'Europe/Paris')::date
     FOR UPDATE;
-  SELECT * INTO STRICT v_prix FROM public.prixabo WHERE idprixabo = v_abo.idprixabo;
-  v_maxduo := v_prix.maxduo;
-  v_duoplus := v_prix.duoplus;
-  v_freqduoplus := v_prix.freqduoplus;
-  v_famille := v_prix.famille;
-  IF LEAST(v_maxduo,v_duoplus,v_freqduoplus,v_famille) < 0 OR
-     v_maxduo IS NULL OR v_duoplus IS NULL OR v_freqduoplus IS NULL OR v_famille IS NULL THEN
-    RAISE EXCEPTION 'Privilèges non configurés.' USING ERRCODE='22023';
-  END IF;
-  IF (SELECT count(*) FROM public.paiement_commandes WHERE idabo=v_abo.idabo AND statut='paye') > 1 THEN
-    RAISE EXCEPTION 'Commandes d’abonnement ambiguës.' USING ERRCODE='22023';
-  END IF;
-  FOR v_option IN
-    SELECT opt.code_option,opt.multiplicateur, opt.prix_unitaire_ttc,opt.montant_ttc,
-      opt.idprixabo, tarif.nomworker, tarif.maxduo, tarif.duoplus, tarif.freqduoplus, tarif.famille,
-      pan.formule, pan.options_confirmees, pan.statut AS panier_statut,
-      pan.idmembre AS idmembre_panier, c.idmembre AS idmembre_commande, c.orderid
-    FROM public.paiement_commandes c
-    JOIN public.aboreza_paniers pan ON pan.idpanier=c.idpanier
-    JOIN public.aboreza_options opt ON opt.idpanier=pan.idpanier
-    JOIN public.prixabo tarif ON tarif.idprixabo=opt.idprixabo
-    WHERE c.idabo=v_abo.idabo AND c.statut='paye'
-  LOOP
-    v_facteur_attendu:=1;
-    IF v_option.code_option<>'+5 DUOMAX' AND v_option.formule<>'1J' THEN
-      v_facteur_attendu:=replace(v_option.formule,'M','')::int;
-    END IF;
-    IF v_option.prix_unitaire_ttc IS NULL OR v_option.montant_ttc IS NULL
-       OR v_option.maxduo IS NULL OR v_option.duoplus IS NULL OR v_option.freqduoplus IS NULL OR v_option.famille IS NULL
-       OR v_option.panier_statut <> 'finalise' OR v_option.options_confirmees IS DISTINCT FROM TRUE
-       OR v_option.idmembre_panier <> p_idmembre OR v_option.idmembre_commande <> p_idmembre
-       OR v_option.orderid IS DISTINCT FROM v_abo.orderid
-       OR v_option.formule IS DISTINCT FROM v_abo.typabo
-       OR v_option.nomworker IS DISTINCT FROM v_option.code_option
-       OR v_option.code_option NOT IN ('+5 DUOMAX','+5 DUO+','+2 FAMILLE')
-       OR v_option.multiplicateur IS NULL
-       OR v_option.multiplicateur <> v_facteur_attendu
-       OR round(v_option.prix_unitaire_ttc*100)::bigint*v_option.multiplicateur <> round(v_option.montant_ttc*100)::bigint
-    THEN RAISE EXCEPTION 'Option commandée non vérifiée.' USING ERRCODE='22023'; END IF;
-    v_maxduo := v_maxduo+v_option.maxduo;
-    v_duoplus := v_duoplus+v_option.duoplus;
-    v_freqduoplus := v_freqduoplus+v_option.freqduoplus;
-    v_famille := v_famille+v_option.famille;
-  END LOOP;
-
+  -- Les privilèges de prixabo ne bloquent pas l'enregistrement pendant
+  -- cette première étape. La réservation et l'abonnement payé restent vérifiés.
   -- Construire les cibles, sans écrire avant validation de la sélection.
   FOREACH v_cat IN ARRAY ARRAY['duo','famille'] LOOP
     v_liste := p_selection->v_cat;
@@ -198,36 +155,8 @@ BEGIN
       IF v_cat='duo' THEN v_nbduo:=v_nbduo+1; ELSE v_nbfamille:=v_nbfamille+1; END IF;
     END LOOP;
   END LOOP;
-  IF (SELECT count(*) FROM public.inviteabo WHERE idabo=v_abo.idabo AND categorie='duo') +
-     (SELECT count(*) FROM unnest(v_emails,v_new_categories) x(email,cat) WHERE cat='duo') > v_maxduo THEN
-    RAISE EXCEPTION 'Le MAXDUO de votre abonnement est atteint.' USING ERRCODE='22023';
-  END IF;
-  IF (SELECT count(*) FROM public.inviteabo WHERE idabo=v_abo.idabo AND categorie='famille') +
-     (SELECT count(*) FROM unnest(v_emails,v_new_categories) x(email,cat) WHERE cat='famille') > v_famille THEN
-    RAISE EXCEPTION 'Le MAXFAMILL de votre abonnement est atteint.' USING ERRCODE='22023';
-  END IF;
-  IF v_nbfamille>v_famille OR v_nbduo>v_maxduo THEN
-    RAISE EXCEPTION 'Quota d’invités dépassé.' USING ERRCODE='22023';
-  END IF;
-  IF v_nbduo>greatest(1,v_duoplus) THEN
-    RAISE EXCEPTION 'Quota DUO+ simultané dépassé.' USING ERRCODE='22023';
-  END IF;
-  IF v_nbduo>1 THEN
-    SELECT count(*) INTO v_duo_mois FROM (
-      SELECT ia.idflux FROM public.inviteacces ia
-      JOIN public.inviteabo ib ON ib.idinviteabo=ia.idinviteabo
-      JOIN public.fluxm f ON f.idflux=ia.idflux
-      WHERE ib.idabo=v_abo.idabo AND ib.categorie='duo'
-        AND ia.statut IN ('selectionne','en_attente','envoye','erreur')
-        AND f.statut IN ('bookd','chekd','full') AND ia.idflux<>p_idflux
-        AND date_trunc('month',f.datebookd AT TIME ZONE 'Europe/Paris')=
-            date_trunc('month',v_source.datebookd AT TIME ZONE 'Europe/Paris')
-      GROUP BY ia.idflux HAVING count(DISTINCT ia.idinviteabo)>1
-    ) t;
-    IF v_duo_mois >= v_freqduoplus THEN
-      RAISE EXCEPTION 'La fréquence DUO+ de votre abonnement est atteinte pour ce mois.' USING ERRCODE='22023';
-    END IF;
-  END IF;
+  -- Première activation : conserver la validation des e-mails et des
+  -- appartenances, sans appliquer encore les quotas DUO/FAMILLE ni DUO+.
   v_limite := (((v_source.datebookd AT TIME ZONE 'Europe/Paris')::date - 1) + time '14:00') AT TIME ZONE 'Europe/Paris';
   IF now() >= v_limite AND EXISTS (
     SELECT 1 FROM public.inviteacces ia
