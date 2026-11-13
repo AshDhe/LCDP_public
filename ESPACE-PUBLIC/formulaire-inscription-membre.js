@@ -445,54 +445,49 @@
       const information = profil === "information";
       const fragment = await window.LCDP_chargerFragmentObjet(information
         ? "/HTMLBASE/02-dialogue-reference-information.html"
-        : "/HTMLBASE/02-alerte.html");
+        : "/HTMLBASE/02-dialogue-reference-erreur.html");
       slot.appendChild(fragment);
 
       const alerte = slot.querySelector(information
         ? '[data-lcdp-dialogue-reference="information"]'
-        : "[data-lcdp-box-alerte]");
-      const messageElement = slot.querySelector(information
-        ? "[data-lcdp-dialogue-message]"
-        : "[data-lcdp-alerte-message]");
-      const boutonFermer = information ? null : slot.querySelector("[data-lcdp-alerte-close]");
+        : '[data-lcdp-dialogue-reference="erreur"]');
+      const messageElement = slot.querySelector("[data-lcdp-dialogue-message]");
+      const titre = slot.querySelector("[data-lcdp-dialogue-titre]");
       const boutonOk = slot.querySelector(information
         ? '[data-lcdp-dialogue-action="compris"]'
-        : "[data-lcdp-alerte-ok]");
+        : '[data-lcdp-dialogue-action="fermer"]');
 
-      if (!alerte || !messageElement || !boutonOk || (!information && !boutonFermer)) {
+      if (!alerte || !messageElement || !titre || !boutonOk) {
         throw new Error("Structure du dialogue incomplète.");
       }
 
-      if (information) {
-        const titre = slot.querySelector("[data-lcdp-dialogue-titre]");
-        if (titre) titre.textContent = "Inscription enregistrée";
-        boutonOk.textContent = "Continuer";
-      }
+      titre.textContent = information ? "Inscription enregistrée" : "Erreur";
       messageElement.textContent = texteMessage;
-
-      if (alerteObligatoire) {
-        if (boutonFermer) boutonFermer.hidden = true;
-        boutonFermer?.setAttribute("aria-hidden", "true");
-        if (boutonFermer) boutonFermer.tabIndex = -1;
-      }
+      boutonOk.textContent = information ? "Continuer" : "Fermer";
 
       await new Promise((resolve) => {
+        let termine = false;
         const fermer = () => {
-          slot.innerHTML = "";
+          if (termine) return;
+          termine = true;
+          document.removeEventListener("keydown", gererClavier);
+          slot.replaceChildren();
           resolve();
         };
-
+        const gererClavier = event => {
+          if (!alerteObligatoire && event.key === "Escape") {
+            event.preventDefault();
+            fermer();
+          }
+        };
         boutonOk.addEventListener("click", fermer, { once: true });
-
         if (!alerteObligatoire) {
-          boutonFermer.addEventListener("click", fermer, { once: true });
-
-          alerte.addEventListener("click", (event) => {
-            if (event.target === alerte) {
-              fermer();
-            }
+          alerte.addEventListener("click", event => {
+            if (event.target === alerte) fermer();
           }, { once: true });
+          document.addEventListener("keydown", gererClavier);
         }
+        boutonOk.focus();
       });
 
       if (redirectUrl) {
