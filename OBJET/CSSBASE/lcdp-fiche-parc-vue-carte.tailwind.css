@@ -148,3 +148,32 @@ body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[
     animation: none;
   }
 }
+
+/* Spinner des autres boxes du wrapper MES ACCÈS : même dessin et
+   même défilement unique, sans apparition de boîte partiellement montée. */
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire > .lcdp-mes-acces-calque-attente {
+  @apply absolute inset-0 z-40 flex items-center justify-center;
+  background: var(--lcdp-color-background, #f7f9fb);
+}
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner {
+  @apply relative flex w-16 h-16 items-center justify-center;
+}
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner > svg {
+  @apply absolute inset-0 w-full h-full;
+}
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__track {
+  color: rgba(6, 95, 70, .1);
+}
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__arc {
+  color: #e59834;
+  animation: lcdp-mes-acces-calque-rotation .8s linear infinite;
+}
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__dot {
+  @apply w-2 h-2 rounded-full;
+  background: #4e6838;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__arc {
+    animation: none;
+  }
+}
