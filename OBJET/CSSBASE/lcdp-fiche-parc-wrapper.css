@@ -457,57 +457,91 @@ body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fich
 }
 
 
-/* Recto carte d'un parc voisin depuis la fiche : même présentation photo +
-   légende courte sous l'image que la Card Parc du diaporama. */
-body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
-.lcdp-box-card-parc--carte-publique {
+/* Vue CARTE de la Fiche Parc : même coque publique/membre,
+ * cartes et espacements issus des jetons de présentation Tailwind LCDP.
+ * Aucun ancien panneau en surimpression : le recto officiel est dans le flux.
+ */
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] > .lcdp-box-shift-detail-parc__card
+> .lcdp-box-shift-detail-parc__close {
+  position: absolute !important;
+  top: 28px !important;
+  right: 21px !important;
+  width: 32px;
+  height: 32px;
+  margin: 0 !important;
+  float: none !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"]
+.lcdp-box-fiche-parc__card--organisee {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: var(--lcdp-space-3, 16px) !important;
+  min-width: 0;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"]
+.lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__header {
+  padding: 14px 62px 16px 16px !important;
+  flex: 0 0 auto;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"]
+.lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__section--map {
+  flex: 0 0 auto;
+  padding: 14px !important;
+  min-width: 0;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche {
+  width: 100%;
+  min-width: 0;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche .lcdp-planifier-carte-cartouche {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  box-sizing: border-box;
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: var(--lcdp-space-3, 16px) auto 0 !important;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  gap: var(--lcdp-space-2, 12px);
+  overflow: visible;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul {
   box-sizing: border-box;
   display: block;
-  width: 100%;
+  width: min(100%, 370px);
+  max-width: 370px;
   min-width: 0;
-  overflow: hidden;
-  border-radius: 13px;
+  margin-inline: auto;
 }
-body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
-.lcdp-box-card-parc--carte-publique .lcdp-box-card-parc__media--avec-nom {
-  position: relative;
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
-  width: 100%;
-  min-width: 0;
-  height: auto;
-  overflow: hidden;
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc-diaporama__scene {
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
 }
-body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
-.lcdp-box-card-parc--carte-publique .lcdp-box-card-parc__media--avec-nom
-.lcdp-box-card-parc__image {
-  display: block;
-  grid-row: 1;
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__media,
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
+.lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__image {
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: 100% !important;
   object-fit: cover;
-  border-radius: 11px 11px 0 0;
 }
-body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot)
-.lcdp-box-card-parc--carte-publique .lcdp-box-card-parc__media--avec-nom
-.lcdp-box-card-parc__nom-image {
-  position: static;
-  display: block;
-  grid-row: 2;
-  min-height: 22px;
-  margin: 0;
-  padding: 9px 10px 11px;
-  background: #fff;
-  color: #202b23;
-  font-family: Arial, system-ui, sans-serif;
-  font-size: clamp(.74rem, 3vw, .9rem);
-  line-height: 1.3;
-  font-weight: 700;
-  text-align: left;
-  overflow-wrap: anywhere;
-}
-
 body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
   display: grid !important; grid-template-columns: minmax(0, 1fr) !important;
   width: 100% !important; gap: 12px !important;
@@ -517,8 +551,7 @@ body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fich
   min-width: 0 !important; margin: 0 !important; padding: 0 !important;
   order: initial !important;
 }
-body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__image,
-body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-card-parc--carte-publique .lcdp-box-card-parc__image {
+body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot) .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__image {
   display: block !important; width: 100% !important; max-width: 100% !important;
   height: auto !important; min-height: 0 !important;
   aspect-ratio: 16 / 9 !important; object-fit: cover !important;
