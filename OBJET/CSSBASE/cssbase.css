@@ -1457,6 +1457,8 @@ html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) { display: none !impor
 }
 .lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action .lcdp-box-card-parc__action-libelle {
   font-weight: inherit !important;
+  text-transform: uppercase;
+  white-space: normal;
 }
 .lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action .lcdp-box-card-parc__action-icone {
   width: 16px !important;
