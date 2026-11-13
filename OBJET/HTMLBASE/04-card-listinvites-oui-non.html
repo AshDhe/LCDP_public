@@ -1,34 +1,37 @@
-<div class="lcdp-box-card-listinvites-oui-non lcdp-box-card-listinvites-oui-non--simple" data-lcdp-box-card-listinvites-oui-non role="dialog" aria-modal="true" aria-labelledby="lcdp-listinvites-title">
-  <article class="lcdp-box-card-listinvites-oui-non__card">
-    <header class="lcdp-box-card-listinvites-oui-non__header">
-      <p class="lcdp-box-card-listinvites-oui-non__eyebrow">Réservation</p>
-      <h2 class="lcdp-box-card-listinvites-oui-non__title" id="lcdp-listinvites-title" data-lcdp-listinvites-title>Inviter</h2>
-    </header>
+<section class="lcdp-page-section" data-lcdp-box-card-listinvites-oui-non role="region" aria-labelledby="lcdp-listinvites-title">
+  <div class="lcdp-page-container">
+    <div class="lcdp-page-content">
+      <header class="lcdp-page-header">
+        <p class="lcdp-text-muted">RÉSERVATION</p>
+        <h2 class="lcdp-title-page-center" id="lcdp-listinvites-title" data-lcdp-listinvites-title>Inviter</h2>
+      </header>
 
-    <p class="lcdp-box-card-listinvites-oui-non__message" data-lcdp-listinvites-message role="status" aria-live="polite" hidden></p>
+      <form class="lcdp-box-dialogue-champ-inviter__form" data-lcdp-invitation-form novalidate>
+        <p class="lcdp-box-dialogue-champ-inviter__erreur" data-lcdp-listinvites-message role="status" aria-live="polite" hidden></p>
 
-    <ul class="lcdp-box-card-listinvites-oui-non__list" data-lcdp-listinvites-list hidden></ul>
+        <ul class="lcdp-box-card-listinvites-oui-non__list" data-lcdp-listinvites-list hidden></ul>
 
-    <section class="lcdp-box-card-listinvites-oui-non__ajout" data-lcdp-listinvites-ajout>
-      <label class="lcdp-box-card-listinvites-oui-non__ajout-title" for="lcdp-listinvites-email">Adresse e-mail de l'invité</label>
-      <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-listinvites-emails>
-        <li class="lcdp-box-card-listinvites-oui-non__email-item" data-lcdp-invite-email-row>
-          <input id="lcdp-listinvites-email" type="email" class="lcdp-box-card-listinvites-oui-non__email-input" data-lcdp-invite-email autocomplete="email" inputmode="email" placeholder="nom@exemple.fr" aria-label="Adresse e-mail de l'invité">
-          <button type="button" class="lcdp-box-card-listinvites-oui-non__effacer" data-lcdp-invite-effacer aria-label="Effacer l'adresse e-mail" title="Effacer">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 6 6 18M6 6l12 12"/>
-            </svg>
-          </button>
-        </li>
-      </ul>
-      <button class="lcdp-button lcdp-button-secondary lcdp-box-card-listinvites-oui-non__ajouter" type="button" data-lcdp-listinvites-add-email>Ajouter</button>
-      <p class="lcdp-box-card-listinvites-oui-non__limite">Une invitation maximum par accès actuellement.</p>
-    </section>
+        <label class="lcdp-box-dialogue-champ-inviter__label" for="lcdp-listinvites-email">Adresse e-mail de l'invité</label>
+        <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-listinvites-emails>
+          <li class="lcdp-box-card-listinvites-oui-non__item" data-lcdp-invite-email-row>
+            <input id="lcdp-listinvites-email" type="email" class="lcdp-box-dialogue-champ-inviter__input" data-lcdp-invite-email autocomplete="email" inputmode="email" placeholder="nom@exemple.fr" aria-label="Adresse e-mail de l'invité">
+            <button type="button" class="lcdp-button lcdp-button-secondary" data-lcdp-invite-effacer aria-label="Effacer l'adresse e-mail" title="Effacer">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 6 6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </li>
+        </ul>
 
-    <div class="lcdp-box-card-listinvites-oui-non__actions">
-      <button class="lcdp-button lcdp-button-primary" type="button" data-lcdp-listinvites-update>Inviter et mettre à jour</button>
-      <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-sans-email>Inviter sans e-mail</button>
-      <button class="lcdp-button lcdp-button-secondary lcdp-box-card-listinvites-oui-non__annuler" type="button" data-lcdp-listinvites-cancel>Annuler</button>
+        <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-add-email>Ajouter</button>
+        <p class="lcdp-text-muted">Une invitation maximum par accès actuellement.</p>
+
+        <div class="lcdp-box-dialogue-champ-inviter__actions">
+          <button class="lcdp-button lcdp-button-primary" type="button" data-lcdp-listinvites-update>Inviter et mettre à jour</button>
+          <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-sans-email>Inviter sans e-mail</button>
+          <button class="lcdp-button lcdp-button-secondary" type="button" data-lcdp-listinvites-cancel>Annuler</button>
+        </div>
+      </form>
     </div>
-  </article>
-</div>
+  </div>
+</section>
