@@ -620,3 +620,20 @@ Contrôle effectué après les commits K.19, sans erreur de lecture des 34 fichi
 **Périmètre résiduel** : 19 références directes de l'ancienne alerte uniquement dans ADMIN, à classifier selon les contextes avant migration ; 31 références de l'ancien dialogue à boutons, dont des workflows de paiement et des choix multiples sur les pages membres/publiques. Les 15 références HTML publiques ne figurent pas dans les compteurs antérieurs portant uniquement sur les JS : ne pas les omettre. Contrôle des chemins littéraux, sans interpréter les 31 références comme 31 suppressions possibles.
 
 **CSS** : zéro fichier CSS supprimé. Les fichiers `.css` et les dépendances implicites (classes, thèmes, composants, imports) nécessitent encore audit et tests navigateur. Conserver `02-alerte.html`, `02-dialogue-bouton.html` et les styles hérités pour les usages restants. Contrôles de syntaxe statiques sur les JS modifiés et scripts inline, pas de recette UI ou Worker.
+
+
+### K.22 ADMIN — recensement nominatif des 19 références et première migration (13 novembre 2026)
+
+Contrôle direct des fichiers de la branche `main` via GitHub. Les **19 références historiques** de K.21 correspondent à **12 fichiers JS et 7 HTML**, une occurrence littérale par fichier. Inventaire nominatif avant le nouveau commit :
+
+| Type / espace | Sources contenant l'ancien chemin avant K.22 | Lecture / traitement |
+|---|---|---|
+| ADMIN B_ADMIN (JS, 10) | `CalculPoints.js`, `Cle.js`, `PrixAbo.js`, `list-points.js`, `admin-actualite.js`, `cgv-admin.js`, `faq-admin.js`, `mentions-legales-admin.js`, `reglement-app-admin.js`, `reglement-club-admin.js` | `CalculPoints.js` = erreurs exclusivement, traité ; autres helpers à messages mixtes réussite/échec, à classer par appel |
+| ADMIN B_PARCS (JS, 2) | `PlanningParc.js`, `upload-img-admin.js` | `PlanningParc.js` : condition de chargement avec repli de gabarit, appel de cette branche non prouvé ; `upload-img-admin.js` : message de progression verrouillé, à préserver |
+| ADMIN (HTML, 7) | `accueil-admin.html`, `connexion-admin.html`, `B_PARCS/CardParc.html`, `B_PARCS/CarteParc.html`, `B_PARCS/MiseAJourParc.html`, `B_PARCS/statutparc.html`, `C_MEMBRES/SuiviDA.html` | Scripts intégrés ; vérifier messages, fermeture, suite de parcours et CSS individuellement |
+
+**Migration vérifiée par le connecteur GitHub :** `LCDP_admin/ESPACE-ADMIN/B_ADMIN/CalculPoints.js` commit `f73f70c6`. Les erreurs de date invalide, date future, calcul et chargement utilisent désormais `02-dialogue-reference-erreur.html`. La confirmation CHOIX du calcul reste inchangée ; CSS de convergence chargé avant la nouvelle alerte ; repli natif en cas d'indisponibilité. Contrôle de syntaxe JavaScript réussi et absence du chemin ancien dans ce fichier après commit.
+
+**Compteurs sur la photographie K.21 ajustés après ce seul commit :** ADMIN `02-alerte.html` **18** (11 JS + 7 HTML), autres dépôts **0**, soit 18 au total ; `02-dialogue-bouton.html` **31**, sans changement. Ce delta est fondé sur les 19 références nommément retrouvées et la disparition de la référence dans le fichier modifié, non sur une nouvelle relecture exhaustive des 274 JS/HTML.
+
+**Règle :** ne pas migrer le message verrouillé « UploadIMG en cours » vers un dialogue ERREUR fermable ; ne pas supprimer le repli intégré à `PlanningParc.js` sans démontrer qu'il est inutilisé. Aucun CSS ni gabarit partagé supprimé ; CSS indirect et tests navigateur toujours ouverts.
