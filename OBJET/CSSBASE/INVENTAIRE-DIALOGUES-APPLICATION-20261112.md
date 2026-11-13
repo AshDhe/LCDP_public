@@ -555,3 +555,19 @@ Ces deux consommateurs empêchent de déclarer `02-alerte.html` inutilisé. Aucu
 | COACH/PARC `box-menu-burger-*.js`, sélection de comptes | Choix de plusieurs espaces : `02-dialogue-bouton.html` | **CONSERVER — multi-actions**, hors migration binaire | — |
 
 **Vérifications** : contrôle syntaxique de trois fichiers JavaScript après commits, zéro référence littérale `02-alerte.html` dans ces trois fichiers et CSS de convergence présent dans les trois pages d'accueil correspondantes. Aucun CSS historique supprimé. Aucun test navigateur ; aucune conclusion globale sur les autres consommateurs des cinq dépôts.
+
+
+### K.18 Inventaire des références résiduelles JS, quatre dépôts (13 novembre 2026)
+Recherche après les commits K.17. Unité de comptage : occurrence littérale dans les fichiers JavaScript, non nombre de dialogues réellement ouverts.
+
+| Dépôt | Fichiers JS relus | Ancienne alerte `02-alerte.html` | Ancien dialogue `02-dialogue-bouton.html` | Qualification |
+|---|---:|---:|---:|---|
+| `LCDP_membre` | 30 | 3 | 12 | Paiement, formulaires, sécurité, DA et workflow ; classification individuelle requise |
+| `LCDP_public` | 34 | 5 | 2 | Contrôle des droits, fiche parc, footer partagé, formulaire protégé ; FAQ et burger multi-actions |
+| `LCDP_coach` | 5 | 0 | 1 | Ancien gabarit nécessaire au burger multi-compte |
+| `LCDP_parc` | 5 | 0 | 1 | Ancien gabarit nécessaire au burger multi-compte |
+| **Total** | **74** | **8** | **16** | **CONSERVER** les ressources communes tant que dépendances actives |
+
+**Sources ciblées à qualifier** : `LCDP_membre/ESPACE-MEMBRE/box-menu-burger-membre.js` (une alerte à deuxième bouton optionnel « Payer »), `LCDP_membre/ESPACE-MEMBRE/da-membre.js` (branche alerte), `LCDP_membre/config.js` (référence de préchargement) ; `LCDP_public/ESPACE-PUBLIC/controle-acces-accueil.js`, `fiche-parc.js`, `OBJET/JSBASE/02-footer.js`, `OBJET/JSBASE/03-formulaire-protege.js`. Les derniers sélecteurs `02-dialogue-bouton.html` des burgers coach/parc ne sont pas binaires.
+
+**Portée stricte** : recherche statique des formes littérales `02-alerte.html`, `02-dialogue-bouton.html` et `confirm()` dans les seuls JS listés par les arbres GitHub des quatre dépôts. Aucune confirmation native `window.confirm()` trouvée dans ce périmètre. Les fichiers HTML, feuilles CSS, chargements dynamiques, autres extensions et le dépôt ADMIN ne sont pas couverts par ce comptage ; pas de conclusion de non-utilisation globale. Aucun CSS supprimé et aucun test navigateur.
