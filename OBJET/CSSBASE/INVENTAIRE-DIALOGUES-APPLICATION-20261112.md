@@ -526,3 +526,19 @@ Aucune modification fonctionnelle ni CSS dans ce fichier ; contrôle statique un
 | Même fichier, `afficherAlerteSuperposee(message)` | Ancien `02-alerte.html`, affichage de secours de certains résultats de sécurité | **NON TRAITÉ — secours à préserver**, ne pas supprimer le gabarit ou CSS |
 
 Ces deux consommateurs empêchent de déclarer `02-alerte.html` inutilisé. Aucun code applicatif modifié au titre de ce constat.
+
+
+### K.16 MEMBRE — classification des alertes mixtes et du wrapper planning (13 novembre 2026)
+| Source / cas | Ancien comportement | Statut actuel / après | Commits |
+|---|---|---|---|
+| `mes-informations.js`, alertes ordinaires | `02-alerte.html` pour erreurs et validations refusées | **TRAITÉ — ERREUR**, texte/retour booléen conservés | `1914f43c` |
+| `mes-informations.js`, résultats superposés Wi-Fi / CODA | `02-alerte.html` avec contenu succès ou échec selon la réponse | **TRAITÉ — INFORMATION ou ERREUR** selon `r.ok && d.ok` / `succes`, secours d'information classé explicitement ; aucun effet Worker modifié | `1914f43c` |
+| `accueil-membre.js`, retour paiement et résultats Ma clé | Alerte V3 même pour résultats positifs, bien que INFORMATION/CHOIX déjà existants | **TRAITÉ — profils par état** : paiement confirmé/en vérification INFORMATION, incident/annulation ERREUR ; réponse Ma clé réussie INFORMATION | `f43f0153` |
+| `abonnement-membre.js`, retrait invité famille | Ancienne confirmation par alerte superposée | **TRAITÉ — SUPPRESSION** : référence superposée, même retrait du brouillon local après Oui | `47f33ac4` |
+| `abonnement-membre.js`, alertes de saisie, tarification, paiement | `02-alerte.html` superposée ou ordinaire | **TRAITÉ — ERREUR**, même gestionnaire booléen et conteneur de superposition | `6c9388dc` |
+| `planning-membre.js`, erreurs dans le wrapper | `02-alerte.html` dans une vue secondaire, booléen à la fermeture | **TRAITÉ — ERREUR** : référence dans le même wrapper, `surface.fermer()` inchangé | `aaed8770` |
+| `reserver-membre.js`, action « M'abonner » pour suivre les coachs | Alerte superposée avec bouton de navigation unique | **TRAITÉ — CHOIX** : M'abonner/Annuler, même ouverture ABO-RÉZA après validation | `b763bf0b` |
+| `reserver-membre.js`, anciennes alertes | Deux références `02-alerte.html` avec effets sur calendrier/superposition | **NON TRAITÉ — options et effets à préserver** | — |
+| `abonnement-membre.js`, paiement et workflow | Trois références `02-dialogue-bouton.html` | **CONSERVER — écrans métier** ; pas de suppression CSS | — |
+
+**Contrôle après commits** : cinq fichiers JS syntaxiquement valides ; `02-alerte.html` : 0 occurrence dans les quatre premiers fichiers traités, 2 occurrences dans `reserver-membre.js`. Aucun CSS historique supprimé. Les modules de paiement/sécurité et panneaux du calendrier restent à vérifier fonctionnellement.
