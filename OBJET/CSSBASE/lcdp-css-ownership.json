@@ -380,6 +380,20 @@
       "source_unique": false
     }
   ],
+  "feuilles_emails": {
+    "principe": "Sources CSS en dehors des Workers. Ne pas modifier le CSS central compilé ni la logique des Workers pour une correction visuelle.",
+    "base_editoriale": "lcdp-central-module-13-editorial-email.css",
+    "base_transactionnelle": "lcdp-email-transactionnel.css",
+    "variantes": [
+      {
+        "source": "lcdp-email-invitation.css",
+        "gabarit": "OBJET/HTMLBASE/04-email-invitation.html",
+        "responsabilite": "Variantes visuelles propres aux invitations"
+      }
+    ],
+    "statut_integration": "Gabarit non raccordé au Worker : les e-mails existants restent inchangés",
+    "compatibilite_messageries": "Prévoir une transformation des feuilles CSS en styles du HTML final hors Worker avant l'envoi. La référence externe aux feuilles suffit pour les aperçus web, pas pour garantir le rendu dans les messageries."
+  },
   "regles_de_propriete": {
     "central": "tokens, composants partagés, variantes activées par data-lcdp-css",
     "da": "spécifique au flux DA; injecté également dans le CSS central pour compatibilité d anciens consommateurs",
