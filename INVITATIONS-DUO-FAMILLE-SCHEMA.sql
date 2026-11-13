@@ -141,6 +141,7 @@ BEGIN
        OR v_option.panier_statut <> 'finalise' OR v_option.options_confirmees IS DISTINCT FROM TRUE
        OR v_option.idmembre_panier <> p_idmembre OR v_option.idmembre_commande <> p_idmembre
        OR v_option.orderid IS DISTINCT FROM v_abo.orderid
+       OR v_option.formule IS DISTINCT FROM v_abo.typabo
        OR v_option.nomworker IS DISTINCT FROM v_option.code_option
        OR v_option.code_option NOT IN ('+5 DUOMAX','+5 DUO+','+2 FAMILLE')
        OR v_option.multiplicateur IS NULL
