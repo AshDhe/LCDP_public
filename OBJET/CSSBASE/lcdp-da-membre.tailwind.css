@@ -223,3 +223,75 @@
 #lcdp-da-membre-overlay-slot .lcdp-da-formulaire-section input:focus-visible {
   outline-color: var(--lcdp-color-primary, #4e6838);
 }
+
+/* DA intégrée au wrapper membre : header/footer restent présents,
+   pas de masque, pas de positionnement modal. Sélecteurs strictement dédiés. */
+.lcdp-site-page .lcdp-site-main > .lcdp-da-membre-page {
+  display: block;
+  min-width: 0;
+  width: 100%;
+}
+#lcdp-da-membre-overlay-slot {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto !important;
+  display: block !important;
+  overflow: visible !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__card {
+  position: relative !important;
+  inset: auto !important;
+  box-sizing: border-box;
+  width: min(100%, 880px) !important;
+  max-width: 880px !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  margin: 0 auto !important;
+  padding: clamp(18px, 3.2vw, 32px) !important;
+  border: 1px solid var(--lcdp-color-border, #d9dfd5);
+  border-radius: 18px;
+  box-shadow: none !important;
+  background: var(--lcdp-color-surface, #fff);
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: visible;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack {
+  gap: 16px;
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack > h2 {
+  margin: 0 36px 14px;
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+}
+#lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack section {
+  padding: clamp(15px, 2.5vw, 21px);
+}
+@media (max-width: 600px) {
+  #lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__card {
+    padding: 16px 13px 20px !important;
+    border-radius: 15px;
+  }
+  #lcdp-da-membre-overlay-slot .lcdp-box-workflow-abonnement__content > .lcdp-stack > h2 {
+    margin: 0 32px 11px;
+    font-size: 1.3rem;
+  }
+}
