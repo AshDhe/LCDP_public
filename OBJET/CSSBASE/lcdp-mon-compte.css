@@ -1070,3 +1070,14 @@ body.lcdp-page-mon-compte #lcdp-lightbox-slot > .lcdp-compte-dialogue-alias .lcd
     transition: none;
   }
 }
+
+
+/* Mes points : non présenté tant que le compte n'est pas explicitement autorisé. */
+body.lcdp-page-mon-compte #form-mes-informations-membre:not(.lcdp-compte-points-visibles)
+  [data-lcdp-box-champ-formulaire]:has(#champ-points-club-membre),
+body.lcdp-page-mon-compte #form-mes-informations-membre:not(.lcdp-compte-points-visibles)
+  .lcdp-compte-actions-adresse:has(#voir-mes-points),
+body.lcdp-page-mon-compte #form-mes-informations-membre:not(.lcdp-compte-points-visibles)
+  #lcdp-mon-compte-points-resume {
+  display: none !important;
+}
