@@ -21,7 +21,6 @@
   async function enregistrer(page) {
     if (!production || !PAGES.has(page)) return;
     try {
-      const evenement = crypto.randomUUID();
       const response = await fetch(endpoint.replace(/\/+$/, "") + "/affichage", {
         method: "POST",
         mode: "cors",
@@ -29,7 +28,7 @@
         cache: "no-store",
         keepalive: true,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ page, evenement })
+        body: JSON.stringify({ page })
       });
       if (!response.ok) {
         console.warn("Comptage Affichage légal indisponible :", response.status);
