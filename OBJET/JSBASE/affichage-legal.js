@@ -11,8 +11,8 @@
   ]);
   const cfg = window.SITE_CONFIG || {};
   const endpoint = typeof cfg.apiUrl === "function"
-    ? cfg.apiUrl("affichage-legal-api")
-    : "https://affichage-legal-api.lacleduparc.fr";
+    ? cfg.apiUrl("w-compteur-page-api")
+    : "https://w-compteur-page-api.lacleduparc.fr";
 
   // Les prévisualisations GitHub ne polluent pas les statistiques réelles.
   const production = ["lacleduparc.fr", "membre.lacleduparc.fr"]
