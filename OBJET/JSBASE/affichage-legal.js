@@ -9,7 +9,9 @@
     "mentions-legales", "reglement-app", "reglement-club",
     "cgv", "demande-abonnement",
     "nav-accueil-public", "nav-inscription", "nav-association",
-    "nav-responsable-parc", "nav-coach"
+    "nav-responsable-parc", "nav-coach",
+    "insc-formulaire-membre", "insc-coda", "insc-codr",
+    "insc-preparer-acces-parc"
   ]);
   const cfg = window.SITE_CONFIG || {};
   const endpoint = typeof cfg.apiUrl === "function"
