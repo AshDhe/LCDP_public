@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Devenir membre invité de La Clé du Parc.">
   <script src="../config.js"></script>
+  <script src="../OBJET/JSBASE/affichage-legal.js" defer></script>
   <script>
     window.SITE_BASE = window.SITE_CONFIG?.publicBaseUrl || window.SITE_CONFIG?.siteBase || "";
   </script>
   <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
 </head>
-<body class="lcdp-app-page lcdp-typographie-editoriale-commune lcdp-page-inscription-membre">
+<body data-lcdp-affichage-legal="nav-inscription" data-lcdp-affichage-legal-mode="auto" class="lcdp-app-page lcdp-typographie-editoriale-commune lcdp-page-inscription-membre">
   <div class="lcdp-site-page lcdp-app-wrapper">
     <div id="lcdp-bandeau-slot"></div>
     <main class="lcdp-site-main">
