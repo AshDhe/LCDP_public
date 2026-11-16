@@ -15,7 +15,9 @@
     "compte-mes-informations", "compte-abonnement-membre", "compte-mes-factures",
     "compte-facture-abonnement", "compte-avoir-abonnement", "compte-mes-points",
     "vt-membre-abonne", "vt-reserver-membre", "vt-alerte-planifier",
-    "vt-paiement-membre", "vt-paiement-stripe-membre", "vt-paiement-cb"
+    "vt-paiement-membre", "vt-paiement-stripe-membre", "vt-paiement-cb",
+    "invitation-planning-membre", "invitation-inviter-membre",
+    "cle-lacleduparc"
   ]);
   const cfg = window.SITE_CONFIG || {};
   const endpoint = typeof cfg.apiUrl === "function"
@@ -72,6 +74,11 @@
     // Pages du parcours VT ABO, distinctes des six pages Mon compte.
     const codeVT = corps?.dataset?.lcdpSuiviVtAbo;
     if (codeVT && PAGES.has(codeVT)) void enregistrer(codeVT);
+    // Slots 21 et 22 : invitation et Ma clé, indépendants de VT ABO.
+    const codeInvitation = corps?.dataset?.lcdpSuiviInvitation;
+    if (codeInvitation && PAGES.has(codeInvitation)) void enregistrer(codeInvitation);
+    const codeCle = corps?.dataset?.lcdpSuiviCle;
+    if (codeCle && PAGES.has(codeCle)) void enregistrer(codeCle);
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", auto, { once: true });
