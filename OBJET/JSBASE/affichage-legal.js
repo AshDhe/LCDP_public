@@ -11,7 +11,9 @@
     "nav-accueil-public", "nav-inscription", "nav-association",
     "nav-responsable-parc", "nav-coach",
     "insc-formulaire-membre", "insc-coda", "insc-codr",
-    "insc-preparer-acces-parc"
+    "insc-preparer-acces-parc",
+    "compte-mes-informations", "compte-abonnement-membre", "compte-mes-factures",
+    "compte-facture-abonnement", "compte-avoir-abonnement", "compte-mes-points"
   ]);
   const cfg = window.SITE_CONFIG || {};
   const endpoint = typeof cfg.apiUrl === "function"
@@ -56,9 +58,15 @@
   viderFile();
 
   function auto() {
-    if (document.body?.dataset?.lcdpAffichageLegalMode !== "auto") return;
-    const code = document.body.dataset.lcdpAffichageLegal;
-    if (PAGES.has(code)) void enregistrer(code);
+    const corps = document.body;
+    // Parcours légaux/publics existants : comportement préservé.
+    if (corps?.dataset?.lcdpAffichageLegalMode === "auto") {
+      const code = corps.dataset.lcdpAffichageLegal;
+      if (PAGES.has(code)) void enregistrer(code);
+    }
+    // Pages Mon compte : compteur séparé de la demande d'abonnement.
+    const codeCompte = corps?.dataset?.lcdpSuiviCompte;
+    if (codeCompte && PAGES.has(codeCompte)) void enregistrer(codeCompte);
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", auto, { once: true });
