@@ -7,7 +7,9 @@
 
   const PAGES = new Set([
     "mentions-legales", "reglement-app", "reglement-club",
-    "cgv", "demande-abonnement"
+    "cgv", "demande-abonnement",
+    "nav-accueil-public", "nav-inscription", "nav-association",
+    "nav-responsable-parc", "nav-coach"
   ]);
   const cfg = window.SITE_CONFIG || {};
   const endpoint = typeof cfg.apiUrl === "function"
