@@ -13,7 +13,9 @@
     "insc-formulaire-membre", "insc-coda", "insc-codr",
     "insc-preparer-acces-parc",
     "compte-mes-informations", "compte-abonnement-membre", "compte-mes-factures",
-    "compte-facture-abonnement", "compte-avoir-abonnement", "compte-mes-points"
+    "compte-facture-abonnement", "compte-avoir-abonnement", "compte-mes-points",
+    "vt-membre-abonne", "vt-reserver-membre", "vt-alerte-planifier",
+    "vt-paiement-membre", "vt-paiement-stripe-membre", "vt-paiement-cb"
   ]);
   const cfg = window.SITE_CONFIG || {};
   const endpoint = typeof cfg.apiUrl === "function"
@@ -67,6 +69,9 @@
     // Pages Mon compte : compteur séparé de la demande d'abonnement.
     const codeCompte = corps?.dataset?.lcdpSuiviCompte;
     if (codeCompte && PAGES.has(codeCompte)) void enregistrer(codeCompte);
+    // Pages du parcours VT ABO, distinctes des six pages Mon compte.
+    const codeVT = corps?.dataset?.lcdpSuiviVtAbo;
+    if (codeVT && PAGES.has(codeVT)) void enregistrer(codeVT);
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", auto, { once: true });
