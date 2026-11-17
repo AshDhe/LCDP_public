@@ -76,7 +76,7 @@
       if (cadre) {
         titreDiapositive = document.createElement("h2");
         titreDiapositive.className = "lcdp-box-carousel__slide-title";
-        cadre.before(titreDiapositive);
+        cadre.prepend(titreDiapositive);
         carrousel.setAttribute("data-lcdp-carousel-slide-titles", "");
       }
     }
