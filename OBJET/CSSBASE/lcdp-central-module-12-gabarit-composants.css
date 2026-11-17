@@ -1664,6 +1664,23 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   min-height: 44px;
   padding: 10px 16px;
 }
+/* Variante générique des boutons d'action hauts et étroits, activée par une classe. */
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper :is(.lcdp-actions-centrees,.lcdp-box-formulaire__actions) > :is(a,button).lcdp-button.lcdp-button--haut-etroit {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 50%;
+  min-width: min(100%, 140px);
+  max-width: min(100%, 220px);
+  min-height: 84px;
+  margin-inline: auto;
+  padding: 12px 10px;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
 :where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__note {
   padding-top: 8px;
   line-height: 1.4;
