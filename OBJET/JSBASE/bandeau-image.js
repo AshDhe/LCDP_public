@@ -33,10 +33,14 @@
     const fenetre=el('div','lcdp-bandeau-image__fenetre'),piste=el('div','lcdp-bandeau-image__piste');
     const groupe=el('div','lcdp-bandeau-image__groupe'),copie=el('div','lcdp-bandeau-image__groupe');
     copie.setAttribute('aria-hidden','true');
-    const commandes=el('div','lcdp-bandeau-image__commandes'),pause=el('button','lcdp-bandeau-image__pause');pause.type='button';
-    function label(){pause.textContent=zone.dataset.pause==='true'?'Reprendre le défilement':'Mettre le défilement en pause';}
-    pause.onclick=()=>{const stop=zone.dataset.pause!=='true';zone.dataset.pause=String(stop);zone.dataset.mouvement='true';label();};
-    label();commandes.append(pause);piste.append(groupe,copie);fenetre.append(piste);zone.append(fenetre,commandes);
+    const commandes=el('div','lcdp-bandeau-image__commandes');
+    if(!zone.hasAttribute('data-lcdp-bandeau-galerie')){
+      const pause=el('button','lcdp-bandeau-image__pause');pause.type='button';
+      function label(){pause.textContent=zone.dataset.pause==='true'?'Reprendre le défilement':'Mettre le défilement en pause';}
+      pause.onclick=()=>{const stop=zone.dataset.pause!=='true';zone.dataset.pause=String(stop);zone.dataset.mouvement='true';label();};
+      label();commandes.append(pause);
+    }
+    piste.append(groupe,copie);fenetre.append(piste);zone.append(fenetre,commandes);
     const faireImage=(im,decorative)=>{const img=el('img','lcdp-bandeau-image__image');img.src=im.src;img.alt=decorative?'':String(im.alt||'');img.decoding='async';img.draggable=false;return img;};
     groupe.append(faireImage(images[0],false));
     let repetitions=0;
