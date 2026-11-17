@@ -764,10 +764,11 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-page-heading > .lcdp-editorial-page-signature {
   margin: -8px 0 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 14px;
-  line-height: 18px;
-  font-weight: 400;
-  letter-spacing: normal;
+  font-weight: 600;
+  letter-spacing: .025em;
+  line-height: 1.25;
   text-align: center;
   color: var(--lcdp-color-text-muted);
 }
