@@ -91,8 +91,8 @@
     }
 
     // Une légende individuelle est optionnelle. Les carrousels historiques gardent leur légende commune.
-    const legendesIndividuelles = items.some(item => item.hasAttribute("data-lcdp-carousel-legend"));
-    const legendesDiapositives = items.map(item => item.dataset.lcdpCarouselLegend || "");
+    const legendesIndividuelles = items.some(item => item.hasAttribute("data-lcdp-slide-legend"));
+    const legendesDiapositives = items.map(item => item.dataset.lcdpSlideLegend || "");
 
     // Navigation sous la légende : les contrôles restent les mêmes éléments DOM.
     const navigation = document.createElement("div");

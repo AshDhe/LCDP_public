@@ -369,7 +369,7 @@
       configCarrousel.images.forEach((image, index) => {
         const figure = document.createElement("figure");
         figure.className = "lcdp-box-carousel__item";
-        figure.dataset.lcdpCarouselLegend = String(image.legende || "");
+        figure.dataset.lcdpSlideLegend = String(image.legende || "");
 
         if (index === 0) {
           figure.classList.add("is-active");
