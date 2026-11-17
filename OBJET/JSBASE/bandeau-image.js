@@ -7,10 +7,13 @@
   function nettoyer(zone){const state=states.get(zone);if(state){state.observer?.disconnect();states.delete(zone);}if(state?.dialogue?.open){state.dialogue.close();document.documentElement.classList.remove('lcdp-bandeau-galerie-ouverte');}zone.replaceChildren();}
   function ajouterGalerie(zone,images,commandes){
     if(!zone.hasAttribute('data-lcdp-bandeau-galerie'))return null;
-    const bouton=el('button','lcdp-bandeau-image__galerie-bouton public-home__more');bouton.type='button';bouton.textContent='Galerie IA';bouton.setAttribute('aria-haspopup','dialog');
-    const dialogue=el('dialog','lcdp-bandeau-image__galerie');dialogue.setAttribute('aria-label','Galerie IA');
+    const bouton=el('button','lcdp-bandeau-image__galerie-bouton public-home__more');bouton.type='button';bouton.textContent='Galerie ';bouton.setAttribute('aria-haspopup','dialog');
+    const fleche=el('span');fleche.textContent='›';fleche.setAttribute('aria-hidden','true');bouton.append(fleche);
+    const dialogue=el('dialog','lcdp-bandeau-image__galerie');dialogue.setAttribute('aria-label','Galerie');
     const entete=el('div','lcdp-bandeau-image__galerie-entete'),titre=el('h2','lcdp-bandeau-image__galerie-titre'),fermer=el('button','lcdp-bandeau-image__galerie-fermer');
-    titre.textContent='Galerie IA';fermer.type='button';fermer.textContent='×';fermer.setAttribute('aria-label','Fermer la galerie IA');entete.append(titre,fermer);
+    const titres=el('div','lcdp-bandeau-image__galerie-titres'),legende=el('p','lcdp-bandeau-image__galerie-legende lcdp-text-muted');
+    titre.textContent='Galerie';legende.textContent='Illustrations IA';titres.append(titre,legende);
+    fermer.type='button';fermer.textContent='×';fermer.setAttribute('aria-label','Fermer la galerie');entete.append(titres,fermer);
     const liste=el('div','lcdp-bandeau-image__galerie-liste');dialogue.append(entete,liste);zone.append(dialogue);commandes.prepend(bouton);
     let pauseAvant;
     bouton.addEventListener('click',()=>{
