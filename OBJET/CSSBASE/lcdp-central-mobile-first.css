@@ -31134,7 +31134,7 @@ html[data-lcdp-css~="c085"] body.public-home .public-home__editorial-links {
   width: 100%;
   margin: 8px 0 0;
 }
-html[data-lcdp-css~="c085"] body.public-home .public-home__editorial-links .public-home__more {
+html[data-lcdp-css~="c085"] body.public-home :is(.public-home__editorial-links, .lcdp-bandeau-image__commandes) .public-home__more {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -31206,7 +31206,7 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   display: none;
 }
 html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-home__phrase:focus-visible,
-html[data-lcdp-css~="c085"] body.public-home .public-home__editorial-links a:focus-visible {
+html[data-lcdp-css~="c085"] body.public-home :is(.public-home__editorial-links, .lcdp-bandeau-image__commandes) .public-home__more:focus-visible {
   outline: 2px solid #4e6838;
   outline-offset: 2px;
 }
