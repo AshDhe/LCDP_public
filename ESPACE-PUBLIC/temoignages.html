@@ -10,7 +10,7 @@
   <script src="../OBJET/JSBASE/02-footer.js" data-lcdp-footer-autonome defer></script>
   <script src="./pages-listes-public.js" defer></script>
 </head>
-<body class="lcdp-app-page lcdp-typographie-editoriale-commune" data-lcdp-liste-publique="temoignages">
+<body class="lcdp-app-page lcdp-typographie-editoriale-commune">
   <div id="lcdp-attente-arrivee" class="lcdp-attente-plein-ecran" role="status" aria-label="Chargement de la page" hidden>
     <div class="lcdp-loading-spinner" aria-hidden="true">
       <svg class="lcdp-loading-spinner__track" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></circle></svg>
@@ -37,5 +37,47 @@
     <div id="lcdp-footer-slot"></div>
     <div id="lcdp-lightbox-slot"></div>
   </div>
+  <script>
+    (async () => {
+      "use strict";
+      const liste = document.getElementById("lcdp-liste-publique");
+      const etat = document.getElementById("lcdp-liste-etat");
+      const roles = new Map([["membre", "Membre"], ["coach", "Coach"], ["parc", "Parc"]]);
+      try {
+        const endpoint = String(window.SITE_CONFIG?.workerEditingAdminUrl || "").replace(/\/+$/, "");
+        if (!endpoint) throw new Error("API témoignages non configurée.");
+        const reponse = await fetch(endpoint + "/public/temoignages", {
+          method: "GET", credentials: "omit", cache: "no-store",
+          headers: { Accept: "application/json" }
+        });
+        if (!reponse.ok) throw new Error("Témoignages indisponibles.");
+        const data = await reponse.json();
+        if (data?.success !== true || !Array.isArray(data.temoignages)) {
+          throw new Error("Liste des témoignages invalide.");
+        }
+        const fragment = document.createDocumentFragment();
+        for (const item of data.temoignages) {
+          if (!item || !roles.has(item.auteur) ||
+              typeof item.texte !== "string" || !item.texte.trim()) continue;
+          const carte = document.createElement("blockquote");
+          carte.className = "lcdp-cartouche-citation lcdp-cartouche-citation--" + item.auteur;
+          const citation = document.createElement("p");
+          citation.textContent = "« " + item.texte + " »";
+          const signature = document.createElement("footer");
+          signature.textContent = "— " + roles.get(item.auteur);
+          carte.append(citation, signature);
+          fragment.append(carte);
+        }
+        const contientTemoignages = fragment.childElementCount > 0;
+        liste.replaceChildren(fragment);
+        etat.textContent = contientTemoignages ? "" : "Aucun témoignage publié pour le moment.";
+        etat.hidden = contientTemoignages;
+      } catch (erreur) {
+        console.error(erreur);
+        etat.hidden = false;
+        etat.textContent = "Le contenu est momentanément indisponible.";
+      }
+    })();
+  </script>
 </body>
 </html>
