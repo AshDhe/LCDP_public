@@ -31473,10 +31473,10 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 }
 :where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-page-heading > .lcdp-editorial-page-signature {
   margin: -8px 0 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 14px;
+  font-family: var(--lcdp-font-main);
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: .025em;
+  letter-spacing: -.025em;
   line-height: 1.25;
   text-align: center;
   color: var(--lcdp-color-text-muted);
