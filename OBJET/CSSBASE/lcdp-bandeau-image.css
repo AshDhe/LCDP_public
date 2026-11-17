@@ -32,3 +32,6 @@ dialog.lcdp-bandeau-image__galerie[open] { display:flex; flex-direction:column; 
 .lcdp-bandeau-image__galerie-fermer:focus-visible { outline:2px solid #4e6838; outline-offset:2px; }
 @media(min-width:640px){ .lcdp-bandeau-image__galerie-entete { width:min(100%,1200px); margin-inline:auto; } .lcdp-bandeau-image__galerie-liste { grid-template-columns:repeat(2,minmax(0,1fr)); width:min(100%,1200px); margin-inline:auto; padding:16px; } }
 @media(min-width:1024px){ .lcdp-bandeau-image__galerie-liste { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+
+/* Galerie dans le wrapper : le scroll reste celui du contenu principal. */
+.lcdp-galerie-defilante { display:grid; grid-template-columns:minmax(0,1fr); gap:12px; width:100%; min-width:0; }
