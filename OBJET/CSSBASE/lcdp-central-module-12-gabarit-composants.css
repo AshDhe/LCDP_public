@@ -1162,9 +1162,12 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  text-align: center;
+  text-align: right;
   color: #94a3b8;
   font: italic 400 10px/1.5 Arial,system-ui,sans-serif;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__frame + .lcdp-image-legend {
+  margin-top: -12px;
 }
 @media (prefers-reduced-motion:reduce) {
   :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__image {

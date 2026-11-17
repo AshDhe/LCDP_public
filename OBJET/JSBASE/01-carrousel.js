@@ -62,8 +62,13 @@
       return;
     }
 
-    if (legendElement && !legendElement.textContent.trim()) {
-      legendElement.textContent = "Photos non contractuelles.";
+    if (legendElement) {
+      const legende = legendElement.textContent.trim();
+      if (!legende) {
+        legendElement.textContent = "Photos non contractuelles.";
+      } else if (legende === "Illustration recomposée par IA - Non contractuelle") {
+        legendElement.textContent = "Illustration IA";
+      }
     }
 
     // Navigation sous la légende : les contrôles restent les mêmes éléments DOM.
