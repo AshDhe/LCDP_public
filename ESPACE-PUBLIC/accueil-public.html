@@ -12,7 +12,7 @@
   <script src="../OBJET/JSBASE/affichage-legal.js" defer></script>
   <script src="/OBJET/JSBASE/02-footer.js" data-lcdp-footer-autonome defer></script>
   <script src="./actualite.js?v=20261117-fondu-875ms" defer></script>
-  <script src="./box-menu-burger-public.js?v=20261117-menu-public" defer></script>
+  <script src="./box-menu-burger-public.js?v=20261117-session-header" defer></script>
   <script src="./controle-acces-accueil.js" defer></script>
   <script src="./accueil-public-alertes.js" defer></script>
 </head>
@@ -145,11 +145,12 @@
 
     function menuCharge() {
       const burger = document.querySelector("#lcdp-bandeau-slot [data-lcdp-burger-slot]");
-      return Boolean(burger && burger.dataset.lcdpBurgerInitialise === "true");
+      return Boolean(burger && burger.dataset.lcdpBurgerInitialise === "true" && burger.dataset.lcdpBurgerType === "public");
     }
 
     function terminer() {
-      if (termine) return;
+      // Ne jamais dévoiler l’accueil avant confirmation du statut non connecté.
+      if (termine || !menuCharge()) return;
       termine = true;
       if (observateur) observateur.disconnect();
       clearTimeout(delaiSecours);
@@ -181,7 +182,23 @@
       verifier();
     }, { once: true });
     window.addEventListener("load", verifier, { once: true });
-    delaiSecours = setTimeout(terminer, 7000);
+    // Une page en cache arrière ne doit jamais réapparaître avec un ancien état de session.
+    window.addEventListener("pageshow", event => {
+      if (event.persisted) window.location.reload();
+    });
+    delaiSecours = setTimeout(() => {
+      if (menuCharge()) { terminer(); return; }
+      const zone = document.querySelector(".public-home__loading-inner");
+      if (!zone) return;
+      const message = document.createElement("p");
+      message.textContent = "Vérification de session indisponible.";
+      const bouton = document.createElement("button");
+      bouton.type = "button";
+      bouton.className = "lcdp-button";
+      bouton.textContent = "Réessayer";
+      bouton.addEventListener("click", () => window.location.reload());
+      zone.replaceChildren(message, bouton);
+    }, 7000);
     verifier();
   })();
   </script>
