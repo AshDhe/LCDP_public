@@ -435,9 +435,10 @@
     }
 
     initialisationEnCours = (async () => {
-      // La session est validée avant tout rendu pour éviter le flash du menu public.
+      // L’accueil public conserve son menu public même si une session membre existe.
+      // Les autres pages gardent leur comportement historique.
       slot.replaceChildren();
-      if (await essayerInitialiserMenuMembre(slot)) return;
+      if (!document.body.classList.contains("public-home") && await essayerInitialiserMenuMembre(slot)) return;
 
       const fragment = await chargerFragment("/OBJET/HTMLBASE/02-menu-burger.html");
       slot.appendChild(fragment);
