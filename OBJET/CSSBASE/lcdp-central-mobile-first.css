@@ -31479,7 +31479,7 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   letter-spacing: -.025em;
   line-height: 1.25;
   text-align: center;
-  color: var(--lcdp-color-text-muted);
+  color: var(--lcdp-color-orange);
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card {
   box-sizing: border-box;
