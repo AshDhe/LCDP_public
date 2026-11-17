@@ -31747,7 +31747,7 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] > .lcdp-box-carousel__title:not(:empty) + .lcdp-box-carousel__frame .lcdp-box-carousel__viewport {
   border-radius: 0;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__frame > .lcdp-box-carousel__slide-title {
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__item > .lcdp-box-carousel__slide-title {
   position: absolute;
   z-index: 4;
   box-sizing: border-box;
@@ -31765,7 +31765,7 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   overflow-wrap: anywhere;
   pointer-events: none;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__frame > .lcdp-box-carousel__slide-title[hidden] {
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__item > .lcdp-box-carousel__slide-title[hidden] {
   display: none;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel][data-lcdp-carousel-slide-titles] .lcdp-box-carousel__viewport {

@@ -62,23 +62,22 @@
       return;
     }
 
-    // Les titres de diapositive sont distincts du titre fixe éventuel du carrousel.
-    const titresDiapositives = items.map(item => {
+    // Le bandeau appartient à chaque diapositive et partage son fondu d’opacité.
+    let avecTitres = false;
+    items.forEach(item => {
       const titre = item.querySelector(".lcdp-box-carousel__overlay-title");
-      const texte = titre ? titre.textContent.trim() : "";
-      if (titre) titre.remove();
       item.classList.remove("lcdp-box-carousel__item--with-title");
-      return texte;
-    });
-    let titreDiapositive = null;
-    if (titresDiapositives.some(Boolean)) {
-      const cadre = carrousel.querySelector("[data-lcdp-carousel-frame]");
-      if (cadre) {
-        titreDiapositive = document.createElement("h2");
-        titreDiapositive.className = "lcdp-box-carousel__slide-title";
-        cadre.prepend(titreDiapositive);
-        carrousel.setAttribute("data-lcdp-carousel-slide-titles", "");
+      if (!titre) return;
+      if (!titre.textContent.trim()) {
+        titre.remove();
+        return;
       }
+      titre.classList.remove("lcdp-box-carousel__overlay-title");
+      titre.classList.add("lcdp-box-carousel__slide-title");
+      avecTitres = true;
+    });
+    if (avecTitres) {
+      carrousel.setAttribute("data-lcdp-carousel-slide-titles", "");
     }
 
     if (legendElement) {
@@ -142,12 +141,6 @@
         const legende = legendesDiapositives[indexActif];
         legendElement.textContent = legende;
         legendElement.hidden = !legende.trim();
-      }
-
-      if (titreDiapositive) {
-        const texte = titresDiapositives[indexActif];
-        titreDiapositive.textContent = texte;
-        titreDiapositive.hidden = !texte;
       }
 
       items.forEach((item, itemIndex) => {
