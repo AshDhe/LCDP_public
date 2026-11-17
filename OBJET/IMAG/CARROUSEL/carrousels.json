@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": "hello-initial",
+  "revision": "06082bf7-e2f0-4560-8880-6fb2114b765f",
   "carrousels": [
     {
       "id": "page-hello",
@@ -10,7 +10,7 @@
       "images": [
         {
           "id": "hello-1",
-          "titre": "Des lieux d'exception",
+          "titre": "Le plein aire vous fait du bien",
           "legende": "Illustration IA",
           "alt": "Lieux remarquables et parcs d'exception avec La Clé du Parc"
         },
