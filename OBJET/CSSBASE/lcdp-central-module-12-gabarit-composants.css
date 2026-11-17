@@ -1039,7 +1039,7 @@
   border-radius: 0;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] > .lcdp-box-carousel__slide-title {
-  margin: 16px 20px -6px;
+  margin: 16px 20px -12px 12px;
   color: var(--lcdp-color-text, #1f2a24);
   font: 900 24px/1.15 Arial,system-ui,sans-serif;
   letter-spacing: -.025em;
@@ -1050,7 +1050,7 @@
   display: none;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel][data-lcdp-carousel-slide-titles] .lcdp-box-carousel__viewport {
-  border-radius: 0;
+  border-radius: 6px;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel][data-lcdp-carousel-slide-titles] .lcdp-box-carousel__item--with-title::after {
   content: none;
