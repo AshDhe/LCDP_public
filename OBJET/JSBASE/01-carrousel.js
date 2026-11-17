@@ -62,6 +62,25 @@
       return;
     }
 
+    // Les titres de diapositive sont distincts du titre fixe éventuel du carrousel.
+    const titresDiapositives = items.map(item => {
+      const titre = item.querySelector(".lcdp-box-carousel__overlay-title");
+      const texte = titre ? titre.textContent.trim() : "";
+      if (titre) titre.remove();
+      item.classList.remove("lcdp-box-carousel__item--with-title");
+      return texte;
+    });
+    let titreDiapositive = null;
+    if (titresDiapositives.some(Boolean)) {
+      const cadre = carrousel.querySelector("[data-lcdp-carousel-frame]");
+      if (cadre) {
+        titreDiapositive = document.createElement("h2");
+        titreDiapositive.className = "lcdp-box-carousel__slide-title";
+        cadre.before(titreDiapositive);
+        carrousel.setAttribute("data-lcdp-carousel-slide-titles", "");
+      }
+    }
+
     if (legendElement) {
       const legende = legendElement.textContent.trim();
       if (!legende) {
@@ -114,6 +133,12 @@
       }
 
       indexActif = index;
+
+      if (titreDiapositive) {
+        const texte = titresDiapositives[indexActif];
+        titreDiapositive.textContent = texte;
+        titreDiapositive.hidden = !texte;
+      }
 
       items.forEach((item, itemIndex) => {
         const actif = itemIndex === indexActif;
@@ -169,6 +194,7 @@
     carrousel.addEventListener("mouseenter", arreterAutoplay);
     carrousel.addEventListener("mouseleave", lancerAutoplay);
 
+    afficherIndex(0);
     lancerAutoplay();
   }
 
