@@ -1157,6 +1157,8 @@
   width: calc(100% - 40px);
   min-width: 0;
   margin-top: -10px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 4px;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__navigation > .lcdp-box-carousel__button {
   position: relative;
@@ -1215,12 +1217,18 @@
   background: #e2e8f0;
   box-shadow: none;
   cursor: pointer;
-  transition: background-color .2s ease;
+  transition: background-color .2s ease, transform .2s ease;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot.is-active {
   border: 0;
   background: #4e6838;
   box-shadow: none;
+  transform: scale(1.25);
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot {
+    transition: none;
+  }
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-image-legend {
   box-sizing: border-box;
