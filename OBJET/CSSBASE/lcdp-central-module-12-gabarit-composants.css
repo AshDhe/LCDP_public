@@ -518,7 +518,7 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   background: transparent;
   box-shadow: none;
   color: var(--home-slate-900,#0f172a);
-  font-family: inherit;
+  font-family: Arial, system-ui, sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 2rem;
