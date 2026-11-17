@@ -5,7 +5,7 @@
 .lcdp-bandeau-image__fenetre { width:100%; min-width:0; overflow:hidden; }
 .lcdp-bandeau-image__piste { display:flex; width:max-content; will-change:transform; animation:lcdp-bandeau-image-glisse var(--lcdp-bandeau-duree,40s) linear infinite; }
 .lcdp-bandeau-image__groupe { display:flex; flex:none; gap:var(--lcdp-bandeau-espace); padding-inline-end:var(--lcdp-bandeau-espace); box-sizing:content-box; }
-.lcdp-bandeau-image__image { display:block; flex:0 0 auto; width:auto; height:var(--lcdp-bandeau-taille); aspect-ratio:1672 / 941; max-width:none; object-fit:cover; }
+.lcdp-bandeau-image__image { display:block; flex:0 0 calc(var(--lcdp-bandeau-taille) * 1672 / 941); width:calc(var(--lcdp-bandeau-taille) * 1672 / 941); min-width:calc(var(--lcdp-bandeau-taille) * 1672 / 941); max-width:none; height:var(--lcdp-bandeau-taille); aspect-ratio:1672 / 941; object-fit:contain; }
 .lcdp-bandeau-image[data-pause="true"] .lcdp-bandeau-image__piste { animation-play-state:paused; }
 .lcdp-bandeau-image__commandes { display:flex; justify-content:flex-end; margin-top:4px; }
 .lcdp-bandeau-image__pause { appearance:none; border:0; background:transparent; color:inherit; font:inherit; font-size:.75rem; cursor:pointer; padding:4px 6px; }
