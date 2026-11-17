@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": "a0636e41-802e-4e9d-81d1-1adbb961df3a",
+  "revision": "3e8423a0-926e-4de1-97e1-31fd227ad4dc",
   "images": [
     {
       "id": "c0b6e1ac-d278-4969-9b04-f1551fe0f549",
@@ -8,6 +8,10 @@
     },
     {
       "id": "f8e2de67-53f4-47e6-ae80-680b28a40fba",
+      "alt": ""
+    },
+    {
+      "id": "4931b935-167e-44c5-b171-0ed1791d05eb",
       "alt": ""
     }
   ]
