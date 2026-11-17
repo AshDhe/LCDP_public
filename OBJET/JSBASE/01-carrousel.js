@@ -241,6 +241,62 @@
       relancerAutoplay();
     });
 
+    // Balayage tactile sur l'image : même navigation que les flèches.
+    // Ne jamais intercepter le défilement vertical ni le pincement de zoom.
+    const viewport = liste.closest(".lcdp-box-carousel__viewport") || liste;
+    if (items.length > 1) {
+      let geste = null;
+      const retrouverToucher = (touches, identifiant) =>
+        Array.from(touches).find(toucher => toucher.identifier === identifiant);
+
+      function terminerGeste() {
+        if (!geste) return;
+        geste = null;
+        relancerAutoplay();
+      }
+
+      viewport.addEventListener("touchstart", event => {
+        if (event.touches.length !== 1) {
+          terminerGeste();
+          return;
+        }
+        const toucher = event.touches[0];
+        geste = { id: toucher.identifier, x: toucher.clientX, y: toucher.clientY, axe: null };
+        arreterAutoplay();
+      }, { passive: true });
+
+      viewport.addEventListener("touchmove", event => {
+        if (!geste) return;
+        if (event.touches.length !== 1) {
+          terminerGeste();
+          return;
+        }
+        const toucher = retrouverToucher(event.touches, geste.id);
+        if (!toucher) return;
+        const dx = toucher.clientX - geste.x;
+        const dy = toucher.clientY - geste.y;
+        if (!geste.axe && Math.max(Math.abs(dx), Math.abs(dy)) >= 10) {
+          geste.axe = Math.abs(dx) > Math.abs(dy) * 1.25 ? "horizontal" : "vertical";
+        }
+        if (geste.axe === "horizontal" && event.cancelable) event.preventDefault();
+      }, { passive: false });
+
+      viewport.addEventListener("touchend", event => {
+        if (!geste) return;
+        const toucher = retrouverToucher(event.changedTouches, geste.id);
+        if (!toucher) return;
+        const dx = toucher.clientX - geste.x;
+        const dy = toucher.clientY - geste.y;
+        if (geste.axe !== "vertical" && Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+          if (dx < 0) afficherSuivant();
+          else afficherPrecedent();
+        }
+        terminerGeste();
+      }, { passive: true });
+
+      viewport.addEventListener("touchcancel", terminerGeste, { passive: true });
+    }
+
     carrousel.addEventListener("mouseenter", arreterAutoplay);
     carrousel.addEventListener("mouseleave", lancerAutoplay);
 
