@@ -1593,76 +1593,54 @@
     font-size: clamp(1.08rem, 4vw, 1.6rem);
   }
 }
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouches-citation {
+/* c079 — Cartouche de citation : composant unique, tous les espaces. */
+.lcdp-cartouches-citation {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
-  width: min(100%, 480px);
-  margin: 0 auto;
+  gap: 12px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation {
+.lcdp-cartouches-citation > .lcdp-cartouche-citation {
   box-sizing: border-box;
   width: 100%;
   margin: 0;
-  padding: 0.85rem 1rem 0.7rem;
-  border: 1px solid currentColor;
+  padding: 14px;
+  border: 0;
+  border-left: 4px solid var(--lcdp-citation-accent, #57754c);
   border-radius: 12px;
-  font-size: 1rem;
-  line-height: 1.45;
+  background: #f8fafc;
+  box-shadow: none;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.625;
 }
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation p {
+.lcdp-cartouches-citation > .lcdp-cartouche-citation > p {
   margin: 0;
   color: inherit;
-  font: inherit;
-}
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation footer {
-  margin-top: 0.4rem;
-  text-align: right;
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1.4;
-}
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--membre {
-  color: #57754c;
-  background: #f2f5ef;
-}
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--coach {
-  color: #8660c8;
-  background: #f7f3fc;
-}
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--parc {
-  color: #d64b68;
-  background: #fff1f4;
-}
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation {
-  margin-bottom: 1rem;
-}
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--membre footer {
-  color: #57754c;
-}
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--coach footer {
-  color: #8660c8;
-}
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--parc footer {
-  color: #d64b68;
-}
-/* Variante compacte : citations à 12px, comme les citations éditoriales ; corps courant à 13px. */
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouches-citation--compact {
-  gap: 8px;
-}
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouches-citation--compact > .lcdp-cartouche-citation {
-  margin: 0;
-  padding: 8px 10px;
   font-size: 12px;
-  line-height: 1.5;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.625;
 }
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouches-citation--compact > .lcdp-cartouche-citation > p {
-  font: inherit;
-}
-:where(html[data-lcdp-css~="c079"]) .lcdp-cartouches-citation--compact > .lcdp-cartouche-citation footer {
-  margin-top: 3px;
+.lcdp-cartouches-citation > .lcdp-cartouche-citation > footer {
+  display: block;
+  margin-top: 4px;
+  color: #94a3b8;
   font-size: 10px;
+  font-weight: 700;
   line-height: 1.35;
+  text-align: right;
+}
+.lcdp-cartouche-citation--membre {
+  --lcdp-citation-accent: #57754c;
+}
+.lcdp-cartouche-citation--coach {
+  --lcdp-citation-accent: #8660c8;
+}
+.lcdp-cartouche-citation--parc {
+  --lcdp-citation-accent: #d64b68;
 }
 :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc {
   position: fixed;
