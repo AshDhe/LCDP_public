@@ -1646,20 +1646,23 @@
 :where(html[data-lcdp-css~="c079"]) .lcdp-cartouche-citation--parc footer {
   color: #d64b68;
 }
-/* Variante compacte des cartouches : corps éditorial commun (13px), sans double espacement. */
+/* Variante compacte : citations à 12px, comme les citations éditoriales ; corps courant à 13px. */
 :where(html[data-lcdp-css~="c079"]) .lcdp-cartouches-citation--compact {
-  gap: 10px;
+  gap: 8px;
 }
 :where(html[data-lcdp-css~="c079"]) .lcdp-cartouches-citation--compact > .lcdp-cartouche-citation {
   margin: 0;
-  padding: 10px 12px;
-  font-size: 13px;
-  line-height: 1.625;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+:where(html[data-lcdp-css~="c079"]) .lcdp-cartouches-citation--compact > .lcdp-cartouche-citation > p {
+  font: inherit;
 }
 :where(html[data-lcdp-css~="c079"]) .lcdp-cartouches-citation--compact > .lcdp-cartouche-citation footer {
   margin-top: 3px;
-  font-size: 11px;
-  line-height: 1.4;
+  font-size: 10px;
+  line-height: 1.35;
 }
 :where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc {
   position: fixed;
