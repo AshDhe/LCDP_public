@@ -16,7 +16,6 @@
 
 /* Galerie optionnelle du bandeau public : dialogue natif en plein écran. */
 .lcdp-bandeau-image__commandes:has(.lcdp-bandeau-image__galerie-bouton) { position:relative; justify-content:center; align-items:center; min-height:36px; }
-.lcdp-bandeau-image__galerie-bouton { display:inline-flex; align-items:center; justify-content:center; min-height:36px; padding:5px 16px; border:1px solid #d7ddd5; border-radius:999px; background:#fff; color:#374534; font:600 .8125rem/1.2 Arial,sans-serif; cursor:pointer; }
 .lcdp-bandeau-image__commandes:has(.lcdp-bandeau-image__galerie-bouton) .lcdp-bandeau-image__pause { position:absolute; right:0; max-width:30%; font-size:0; min-width:32px; min-height:32px; }
 .lcdp-bandeau-image__commandes:has(.lcdp-bandeau-image__galerie-bouton) .lcdp-bandeau-image__pause::before { content:"Pause"; font-size:11px; }
 .lcdp-bandeau-image[data-pause="true"] .lcdp-bandeau-image__commandes:has(.lcdp-bandeau-image__galerie-bouton) .lcdp-bandeau-image__pause::before { content:"Reprendre"; }
@@ -30,6 +29,6 @@ dialog.lcdp-bandeau-image__galerie[open] { display:flex; flex-direction:column; 
 .lcdp-bandeau-image__galerie-fermer { width:44px; height:44px; border:0; border-radius:50%; background:#f5f6f3; color:#1f2a24; font:400 30px/1 Arial,sans-serif; cursor:pointer; }
 .lcdp-bandeau-image__galerie-liste { flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain; display:grid; grid-template-columns:minmax(0,1fr); align-content:start; gap:12px; padding:12px 12px max(16px,env(safe-area-inset-bottom)); }
 .lcdp-bandeau-image__galerie-photo { display:block; width:100%; height:auto; border-radius:6px; }
-.lcdp-bandeau-image__galerie-bouton:focus-visible,.lcdp-bandeau-image__galerie-fermer:focus-visible { outline:2px solid #4e6838; outline-offset:2px; }
+.lcdp-bandeau-image__galerie-fermer:focus-visible { outline:2px solid #4e6838; outline-offset:2px; }
 @media(min-width:640px){ .lcdp-bandeau-image__galerie-liste { grid-template-columns:repeat(2,minmax(0,1fr)); width:min(100%,1200px); margin-inline:auto; padding:16px; } }
 @media(min-width:1024px){ .lcdp-bandeau-image__galerie-liste { grid-template-columns:repeat(3,minmax(0,1fr)); } }
