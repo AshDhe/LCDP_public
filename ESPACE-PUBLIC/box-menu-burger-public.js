@@ -88,26 +88,22 @@
   }
 
   async function obtenirSessionMembreActive() {
-    try {
-      const reponse = await fetch(obtenirWorkerIndexMembreUrl() + "/index", {
-        method: "GET",
-        credentials: "include",
-        cache: "no-store",
-        headers: { "Accept": "application/json" }
-      });
-      if (!reponse.ok) return null;
-      const donnees = await reponse.json().catch(() => null);
-      return donnees?.success === true && donnees?.connected === true
-        ? donnees : null;
-    } catch (erreur) {
-      console.warn("Menu public : vérification de session membre indisponible.", erreur);
-      return null;
-    }
+    const reponse = await fetch(obtenirWorkerIndexMembreUrl() + "/index", {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+      headers: { "Accept": "application/json" }
+    });
+    const donnees = await reponse.json().catch(() => null);
+    if (reponse.ok && donnees?.success === true && donnees?.connected === true) return donnees;
+    if ((reponse.status === 401 && donnees?.connected === false) ||
+        (reponse.ok && donnees?.success === true && donnees?.connected === false)) return null;
+    // Une panne de l’API ne constitue pas une preuve d’absence de session.
+    throw new Error("Impossible de vérifier la session membre.");
   }
 
-  function construireUrlScriptMenuMembre() {
+  function construireUrlMembre(chemin) {
     const config = window.SITE_CONFIG || {};
-    const chemin = "/ESPACE-MEMBRE/box-menu-burger-membre.js";
     if (typeof window.LCDP_urlMembre === "function") {
       return window.LCDP_urlMembre(chemin);
     }
@@ -121,6 +117,10 @@
         : "https://membre.lacleduparc.fr")
     ).replace(/\/+$/, "");
     return base + chemin;
+  }
+
+  function construireUrlScriptMenuMembre() {
+    return construireUrlMembre("/ESPACE-MEMBRE/box-menu-burger-membre.js?v=20261117-deconnexion");
   }
 
   let chargementScriptMenuMembre = null;
@@ -147,6 +147,11 @@
   async function essayerInitialiserMenuMembre(slot) {
     const etat = await obtenirSessionMembreActive();
     if (!etat) return false;
+    const accueilMembre = construireUrlMembre("/ESPACE-MEMBRE/accueil-membre.html");
+    if (document.body.classList.contains("public-home")) {
+      window.location.replace(accueilMembre);
+      return true;
+    }
     try {
       await assurerScriptMenuMembre();
       await window.LCDP_initialiserMenuBurgerMembre({
@@ -161,13 +166,15 @@
           datenext: etat.datenext || null
         }
       });
-      slot.dataset.lcdpBurgerInitialise = "true";
+      const logo = slot.closest("[data-lcdp-box-bandeau-nav]")?.querySelector(".lcdp-box-bandeau-nav__logo-link");
+      if (logo) logo.href = accueilMembre;
       slot.dataset.lcdpBurgerType = "membre";
+      slot.dataset.lcdpBurgerInitialise = "true";
       return true;
     } catch (erreur) {
       console.error("Menu membre indisponible sur la page publique :", erreur);
       slot.replaceChildren();
-      return false;
+      throw erreur;
     }
   }
 
@@ -435,10 +442,11 @@
     }
 
     initialisationEnCours = (async () => {
-      // L’accueil public conserve son menu public même si une session membre existe.
-      // Les autres pages gardent leur comportement historique.
+      // Une seule sélection de menu pour toutes les pages portant le header public.
       slot.replaceChildren();
-      if (!document.body.classList.contains("public-home") && await essayerInitialiserMenuMembre(slot)) return;
+      if (await essayerInitialiserMenuMembre(slot)) return;
+      const logo = slot.closest("[data-lcdp-box-bandeau-nav]")?.querySelector(".lcdp-box-bandeau-nav__logo-link");
+      if (logo) logo.href = construireUrlSite("/ESPACE-PUBLIC/accueil-public.html");
 
       const fragment = await chargerFragment("/OBJET/HTMLBASE/02-menu-burger.html");
       slot.appendChild(fragment);
@@ -529,8 +537,8 @@
         }
       });
 
-      slot.dataset.lcdpBurgerInitialise = "true";
       slot.dataset.lcdpBurgerType = "public";
+      slot.dataset.lcdpBurgerInitialise = "true";
     })();
 
     try {
