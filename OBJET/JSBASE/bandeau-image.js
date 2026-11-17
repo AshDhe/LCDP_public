@@ -18,6 +18,7 @@
     pause.onclick=()=>{const stop=zone.dataset.pause!=='true';zone.dataset.pause=String(stop);zone.dataset.mouvement='true';label();};
     label();commandes.append(pause);piste.append(groupe,copie);fenetre.append(piste);zone.append(fenetre,commandes);
     const faireImage=(im,decorative)=>{const img=el('img','lcdp-bandeau-image__image');img.src=im.src;img.alt=decorative?'':String(im.alt||'');img.decoding='async';img.draggable=false;return img;};
+    groupe.append(faireImage(images[0],false));
     let repetitions=0;
     function remplir(){
       const size=parseFloat(getComputedStyle(zone).getPropertyValue('--lcdp-bandeau-espace'))||8;
