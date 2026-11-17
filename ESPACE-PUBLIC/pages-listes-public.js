@@ -172,6 +172,7 @@
 
       async function initialiserListe() {
         const type = document.body.dataset.lcdpListePublique;
+        if (!type) return; // Pages éditoriales statiques : wrapper commun uniquement.
         const liste = document.getElementById("lcdp-liste-publique");
         const etat = document.getElementById("lcdp-liste-etat");
         const fragment = document.createDocumentFragment();
