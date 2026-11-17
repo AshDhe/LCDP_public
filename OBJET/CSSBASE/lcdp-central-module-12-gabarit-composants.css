@@ -1635,6 +1635,39 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
     padding: 20px;
   }
 }
+/* Variante compacte facultative : mêmes contrôles et même charte. */
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact {
+  gap: 12px;
+  padding: 16px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire {
+  gap: 12px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__subtitle:not(.lcdp-box-formulaire__subtitle--accent) {
+  max-width: 100%;
+  line-height: 1.45;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__fields {
+  gap: 10px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-champ-formulaire__label-zone:has(> :is(input,select,textarea)) {
+  gap: 6px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-champ-formulaire :is(input[type="email"],input[type="password"],input[type="text"]) {
+  min-height: 44px;
+  padding: 9px 12px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__actions {
+  padding-top: 0;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button) {
+  min-height: 44px;
+  padding: 10px 16px;
+}
+:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__note {
+  padding-top: 8px;
+  line-height: 1.4;
+}
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--code > .lcdp-box-champ-formulaire__label {
   display: block;
   margin: 0 0 8px;
