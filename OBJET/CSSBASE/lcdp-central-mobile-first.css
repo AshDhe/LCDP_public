@@ -30769,6 +30769,18 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   background: #cc8125;
   color: #fff;
 }
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button.lcdp-editorial-action-button.lcdp-button-compte--parc,
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button.lcdp-editorial-action-button.lcdp-button-compte--parc:is(:hover, :focus-visible) {
+  background: var(--lcdp-color-parc);
+  border-color: var(--lcdp-color-parc);
+  color: #fff;
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button.lcdp-editorial-action-button.lcdp-button-compte--coach,
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button.lcdp-editorial-action-button.lcdp-button-compte--coach:is(:hover, :focus-visible) {
+  background: var(--lcdp-color-coach);
+  border-color: var(--lcdp-color-coach);
+  color: #fff;
+}
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-primary {
   width: 100%;
   padding: 13px 16px;
