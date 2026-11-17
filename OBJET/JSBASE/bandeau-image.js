@@ -43,7 +43,7 @@
     function remplir(){
       const size=parseFloat(getComputedStyle(zone).getPropertyValue('--lcdp-bandeau-espace'))||8;
       const sample=groupe.firstElementChild;
-      const width=sample?.getBoundingClientRect().width||Math.max(72,Math.min(innerWidth*.12,144));
+      const width=sample?.getBoundingClientRect().width||Math.max(72,Math.min(innerWidth*.12,144))*1672/941;
       const n=Math.max(1,Math.ceil(fenetre.clientWidth/(images.length*(width+size))));
       if(n!==repetitions){
         repetitions=n;groupe.replaceChildren();copie.replaceChildren();
