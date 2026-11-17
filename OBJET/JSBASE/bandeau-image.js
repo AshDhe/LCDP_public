@@ -4,7 +4,27 @@
   const states=new WeakMap();
   const el=(tag,cls)=>{const e=document.createElement(tag);if(cls)e.className=cls;return e;};
   const objet=path=>{const cfg=window.SITE_CONFIG||{};return typeof cfg.objetUrl==='function'?cfg.objetUrl(path):'/OBJET'+path;};
-  function nettoyer(zone){const state=states.get(zone);if(state){state.observer?.disconnect();states.delete(zone);}zone.replaceChildren();}
+  function nettoyer(zone){const state=states.get(zone);if(state){state.observer?.disconnect();states.delete(zone);}if(state?.dialogue?.open){state.dialogue.close();document.documentElement.classList.remove('lcdp-bandeau-galerie-ouverte');}zone.replaceChildren();}
+  function ajouterGalerie(zone,images,commandes){
+    if(!zone.hasAttribute('data-lcdp-bandeau-galerie'))return null;
+    const bouton=el('button','lcdp-bandeau-image__galerie-bouton');bouton.type='button';bouton.textContent='Galerie';bouton.setAttribute('aria-haspopup','dialog');
+    const dialogue=el('dialog','lcdp-bandeau-image__galerie');dialogue.setAttribute('aria-label','Galerie');
+    const entete=el('div','lcdp-bandeau-image__galerie-entete'),titre=el('h2','lcdp-bandeau-image__galerie-titre'),fermer=el('button','lcdp-bandeau-image__galerie-fermer');
+    titre.textContent='Galerie';fermer.type='button';fermer.textContent='×';fermer.setAttribute('aria-label','Fermer la galerie');entete.append(titre,fermer);
+    const liste=el('div','lcdp-bandeau-image__galerie-liste');dialogue.append(entete,liste);zone.append(dialogue);commandes.prepend(bouton);
+    let pauseAvant;
+    bouton.addEventListener('click',()=>{
+      if(dialogue.open)return;
+      if(!liste.childElementCount)for(const im of images){
+        const img=el('img','lcdp-bandeau-image__galerie-photo');img.src=im.src;img.alt=String(im.alt||'');img.loading='lazy';img.decoding='async';liste.append(img);
+      }
+      pauseAvant=zone.dataset.pause;zone.dataset.pause='true';
+      dialogue.showModal();document.documentElement.classList.add('lcdp-bandeau-galerie-ouverte');liste.scrollTop=0;fermer.focus();
+    });
+    fermer.addEventListener('click',()=>dialogue.close());
+    dialogue.addEventListener('close',()=>{document.documentElement.classList.remove('lcdp-bandeau-galerie-ouverte');zone.dataset.pause=pauseAvant||'false';bouton.focus();});
+    return dialogue;
+  }
   function rendre(zone,images){
     nettoyer(zone);zone.classList.add('lcdp-bandeau-image');
     zone.hidden=!images.length;if(!images.length)return;
@@ -35,8 +55,9 @@
       piste.style.setProperty('--lcdp-bandeau-duree',Math.max(8,distance/30)+'s');
     }
     remplir();
+    const dialogue=ajouterGalerie(zone,images,commandes);
     const observer=typeof ResizeObserver==='function'?new ResizeObserver(remplir):null;
-    observer?.observe(fenetre);states.set(zone,{observer});
+    observer?.observe(fenetre);states.set(zone,{observer,dialogue});
   }
   async function init(){
     const zone=document.querySelector('[data-lcdp-bandeau-image-public]');if(!zone)return;

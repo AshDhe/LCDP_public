@@ -92,60 +92,55 @@
     for(let i=0;i<tours;i++)diffusion.push(titresAPropos[i%titresAPropos.length],actualites[i%actualites.length]);
     return diffusion;
   }
-  // Défilement vertical réservé à l’accueil public ; les autres pages gardent leur bandeau.
+  // Une seule phrase dans le DOM : pas de juxtaposition si le CSS est indisponible.
   function phrasesVerticales(slot,articles){
     slot.replaceChildren();
     slot.hidden=!articles.length;
     if(!articles.length)return;
-    const distincts=[...new Map(articles.map(a=>[JSON.stringify([a.type,a.id,a.titre]),a])).values()];
     const fenetre=node('div',null,'public-home__phrases-window');
-    const piste=node('div',null,'public-home__phrases-track');
-    const slides=distincts.map(article=>{
-      const a=link(String(article.titre),article.type==='a-propos'?url('/ESPACE-PUBLIC/le-club.html'):articleUrl(article.id),'public-home__phrase');
-      a.dataset.type=article.type==='a-propos'?'apropos':'actualite';
-      a.setAttribute('aria-hidden','true');a.tabIndex=-1;
-      piste.append(a);return a;
-    });
-    const indexes=new Map(distincts.map((a,i)=>[JSON.stringify([a.type,a.id,a.titre]),i]));
-    const ordre=articles.map(a=>indexes.get(JSON.stringify([a.type,a.id,a.titre])));
-    fenetre.append(piste);slot.append(fenetre);
+    const phrase=node('p',null,'public-home__phrase');
+    fenetre.append(phrase);slot.append(fenetre);
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-    let index=0,actif=slides[ordre[0]],timer,paused=reduced.matches,stopped=false;
-    actif.classList.add('is-active');actif.setAttribute('aria-hidden','false');actif.tabIndex=0;
-    if(distincts.length<2)return;
-    const pause=node('button','Ⅱ','public-home__phrases-pause');pause.type='button';slot.append(pause);
+    let index=0,timer,paused=reduced.matches,stopped=false;
+    function afficher(){
+      const article=articles[index];
+      phrase.textContent=String(article.titre);
+      phrase.dataset.type=article.type==='a-propos'?'apropos':'actualite';
+    }
+    afficher();
+    if(articles.length<2)return;
+    const pause=node('button','Ⅱ','public-home__phrases-pause');
+    pause.type='button';slot.append(pause);
     function label(){
       pause.textContent=paused?'▶':'Ⅱ';
       pause.setAttribute('aria-label',paused?'Reprendre le défilement des phrases':'Mettre les phrases en pause');
       pause.title=pause.getAttribute('aria-label');
     }
-    function planifier(){
+    function reset(){
       clearTimeout(timer);
-      if(!paused&&!stopped&&!document.hidden&&!fenetre.contains(document.activeElement))timer=setTimeout(suivant,reduced.matches?2000:2450);
+      phrase.classList.remove('is-entering','is-leaving');
+    }
+    function disponible(){return !paused&&!stopped&&!document.hidden;}
+    function planifier(){
+      reset();
+      if(disponible())timer=setTimeout(suivant,2000);
     }
     function suivant(){
-      if(paused||stopped||document.hidden||fenetre.contains(document.activeElement))return;
-      index=(index+1)%ordre.length;
-      const entrant=slides[ordre[index]];
-      if(entrant!==actif){
-        slides.forEach(s=>s.classList.remove('is-leaving','is-entering'));
-        actif.classList.remove('is-active');actif.classList.add('is-leaving');
-        actif.setAttribute('aria-hidden','true');actif.tabIndex=-1;
-        entrant.classList.add('is-active','is-entering');
-        entrant.setAttribute('aria-hidden','false');entrant.tabIndex=0;
-        actif=entrant;
-      }
-      planifier();
+      if(!disponible())return;
+      if(reduced.matches){index=(index+1)%articles.length;afficher();planifier();return;}
+      phrase.classList.add('is-leaving');
+      timer=setTimeout(()=>{
+        if(!disponible()){reset();return;}
+        index=(index+1)%articles.length;afficher();
+        phrase.classList.remove('is-leaving');phrase.classList.add('is-entering');
+        timer=setTimeout(planifier,400);
+      },400);
     }
-    pause.addEventListener('click',()=>{
-      paused=!paused;slides.forEach(s=>s.classList.remove('is-leaving','is-entering'));label();planifier();
-    });
-    fenetre.addEventListener('focusin',()=>{clearTimeout(timer);slides.forEach(s=>s.classList.remove('is-leaving','is-entering'));});
-    fenetre.addEventListener('focusout',()=>queueMicrotask(planifier));
+    pause.addEventListener('click',()=>{paused=!paused;label();planifier();});
     document.addEventListener('visibilitychange',planifier);
-    window.addEventListener('pagehide',()=>{stopped=true;clearTimeout(timer);});
+    window.addEventListener('pagehide',()=>{stopped=true;reset();});
     window.addEventListener('pageshow',e=>{if(e.persisted){stopped=false;planifier();}});
-    reduced.addEventListener?.('change',e=>{if(e.matches){paused=true;slides.forEach(s=>s.classList.remove('is-leaving','is-entering'));label();planifier();}});
+    reduced.addEventListener?.('change',e=>{if(e.matches){paused=true;label();planifier();}});
     label();planifier();
   }
   function bandeau(articles){

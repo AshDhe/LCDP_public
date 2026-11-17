@@ -6,7 +6,8 @@
   <title>La Clé du Parc - Accueil public</title>
   <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
   <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-lightbox-convergence.css">
-  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-bandeau-image.css">
+  <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-bandeau-image.css">
+  <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-accueil-public-editorial.css">
   <script src="../config.js"></script>
   <script src="../OBJET/JSBASE/bandeau-image.js" defer></script>
   <script src="../OBJET/JSBASE/affichage-legal.js" defer></script>
@@ -32,17 +33,17 @@
 
     <!-- CONTENU -->
     <main class="public-home__main" id="contenu-principal">
-      <section class="lcdp-bandeau-image" data-lcdp-bandeau-image-public aria-label="Images du réseau La Clé du Parc" hidden></section>
-
-      <nav class="public-home__editorial-links" aria-label="Découvrir La Clé du Parc">
-        <a class="public-home__more" href="/ESPACE-PUBLIC/le-club.html">En savoir plus <span aria-hidden="true">›</span></a>
-        <a class="public-home__more" href="/ESPACE-PUBLIC/actualites-liste.html">Actualité <span aria-hidden="true">›</span></a>
-      </nav>
+      <section class="lcdp-bandeau-image" data-lcdp-bandeau-image-public data-lcdp-bandeau-galerie aria-label="Images du réseau La Clé du Parc" hidden></section>
 
       <!-- Phrases éditoriales : alimentées par actualite.js. -->
       <section id="lcdp-actualite-bandeau" class="public-home__actualite" data-lcdp-phrases-verticales aria-label="À découvrir">
         <div class="lcdp-actu-bandeau-placeholder" aria-hidden="true"></div>
       </section>
+
+      <nav class="public-home__editorial-links" aria-label="Découvrir La Clé du Parc">
+        <a class="public-home__more" href="/ESPACE-PUBLIC/le-club.html">En savoir plus <span aria-hidden="true">›</span></a>
+        <a class="public-home__more" href="/ESPACE-PUBLIC/actualites-liste.html">Actualité <span aria-hidden="true">›</span></a>
+      </nav>
 
       <div class="public-home__actions">
         <button class="public-home__action public-home__action--plan" type="button">
