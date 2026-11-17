@@ -37,6 +37,37 @@
     }
   }
 
+  // Chevrons géométriques : même centre que le cercle CSS de navigation.
+  // Aucun décalage lié à la police, à la ligne de base ou au navigateur.
+  function centrerChevron(bouton, direction) {
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 12 12");
+    svg.setAttribute("width", "10");
+    svg.setAttribute("height", "10");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    Object.assign(svg.style, {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      width: "10px",
+      height: "10px",
+      display: "block",
+      transform: "translate(-50%, -50%)",
+      pointerEvents: "none"
+    });
+    const trace = document.createElementNS(ns, "path");
+    trace.setAttribute("d", direction === "prev" ? "M 8 2 L 4 6 L 8 10" : "M 4 2 L 8 6 L 4 10");
+    trace.setAttribute("fill", "none");
+    trace.setAttribute("stroke", "currentColor");
+    trace.setAttribute("stroke-width", "1.7");
+    trace.setAttribute("stroke-linecap", "round");
+    trace.setAttribute("stroke-linejoin", "round");
+    svg.appendChild(trace);
+    bouton.replaceChildren(svg);
+  }
+
   function initialiserCarrousel(carrousel) {
     if (!carrousel || carrousel.dataset.lcdpCarouselInitialise === "true") {
       return;
@@ -104,6 +135,8 @@
     const navigation = document.createElement("div");
     navigation.className = "lcdp-box-carousel__navigation";
     dotsContainer.before(navigation);
+    centrerChevron(boutonPrecedent, "prev");
+    centrerChevron(boutonSuivant, "next");
     navigation.append(boutonPrecedent, dotsContainer, boutonSuivant);
     if (zoneTitres) navigation.before(zoneTitres);
 
