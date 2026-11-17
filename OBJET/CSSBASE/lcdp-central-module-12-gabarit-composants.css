@@ -449,7 +449,7 @@ html[data-lcdp-css~="c085"] body.public-home .public-home__main::before {
   display: none;
 }
 html[data-lcdp-css~="c085"] body.public-home .public-home__bandeau-reserve {
-  --lcdp-home-image-size: clamp(84px,24vw,144px);
+  --lcdp-home-image-size: clamp(42px,12vw,72px);
   flex: 0 0 auto;
   min-width: 0;
   width: 100%;
@@ -555,7 +555,7 @@ html[data-lcdp-css~="c085"] body.public-home .public-home__editorial-links a:foc
 }
 @media (max-height:610px) {
   html[data-lcdp-css~="c085"] body.public-home .public-home__bandeau-reserve {
-    --lcdp-home-image-size: clamp(64px,18vh,104px);
+    --lcdp-home-image-size: clamp(32px,9vh,52px);
     margin-bottom: .5rem;
   }
 }
