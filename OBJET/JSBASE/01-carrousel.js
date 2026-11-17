@@ -66,6 +66,12 @@
       legendElement.textContent = "Photos non contractuelles.";
     }
 
+    // Navigation sous la légende : les contrôles restent les mêmes éléments DOM.
+    const navigation = document.createElement("div");
+    navigation.className = "lcdp-box-carousel__navigation";
+    dotsContainer.before(navigation);
+    navigation.append(boutonPrecedent, dotsContainer, boutonSuivant);
+
     carrousel.dataset.lcdpCarouselInitialise = "true";
 
     let indexActif = 0;

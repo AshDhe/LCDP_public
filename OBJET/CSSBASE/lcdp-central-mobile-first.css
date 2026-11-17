@@ -31820,6 +31820,19 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   outline: 2px solid #4e6838;
   outline-offset: 2px;
 }
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__navigation {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__navigation > .lcdp-box-carousel__button {
+  position: static;
+  inset: auto;
+  transform: none;
+}
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dots {
   display: flex;
   align-items: center;
@@ -31827,22 +31840,28 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   gap: 8px;
   min-height: 16px;
   margin: 0;
-  padding-top: 4px;
+  flex-wrap: wrap;
+  min-width: 0;
+  padding: 0;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot {
+  box-sizing: border-box;
+  flex: 0 0 8px;
   width: 8px;
   height: 8px;
+  min-width: 8px;
+  min-height: 8px;
+  max-width: 8px;
+  max-height: 8px;
   padding: 0;
   border: 0;
-  border-radius: 99px;
+  border-radius: 50%;
   background: #e2e8f0;
   box-shadow: none;
   cursor: pointer;
-  transition: width .2s ease,height .2s ease,background-color .2s ease;
+  transition: background-color .2s ease;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot.is-active {
-  width: 14px;
-  height: 6px;
   border: 0;
   background: #4e6838;
   box-shadow: none;
