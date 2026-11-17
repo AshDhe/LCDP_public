@@ -136,7 +136,7 @@
                           Mot de passe perdu ?
                         </a>
                         <span aria-hidden="true"> · </span>
-                        <a href="./inscription.html">Je ne suis pas inscrit</a>
+                        <a id="lien-non-inscrit" href="https://lacleduparc.fr/ESPACE-PUBLIC/hello.html">Je ne suis pas inscrit</a>
                       </p>
                     </div>
                   </div>
@@ -231,6 +231,14 @@
         racine.querySelectorAll("[data-site-src]").forEach((element) => {
           element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
         });
+      }
+
+      // Depuis Hello, aucun lien d'inscription ne doit ouvrir l'espace public.
+      // Hors de ce parcours, l'inscription passe toujours par le domaine protégé.
+      const lienNonInscrit = document.getElementById("lien-non-inscrit");
+      if (lienNonInscrit &&
+          new URLSearchParams(window.location.search).get("source") !== "hello") {
+        lienNonInscrit.href = "https://lacleduparc.fr/ESPACE-PUBLIC/inscription.html";
       }
 
       window.LCDP_construireUrlSite = construireUrlSite;
