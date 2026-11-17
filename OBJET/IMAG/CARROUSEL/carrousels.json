@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": "9b5a55e4-7921-4a32-ab36-d5de77adaafe",
+  "revision": "f7e3b0d4-c8f6-4df5-ab94-6edf9ecb58f7",
   "carrousels": [
     {
       "id": "page-hello",
@@ -12,7 +12,7 @@
           "id": "hello-1",
           "titre": "Le plein air vous fait du bien",
           "legende": "Illustration IA",
-          "alt": "Lieux remarquables et parcs d'exception avec La Clé du Parc"
+          "alt": ""
         },
         {
           "id": "hello-2",
