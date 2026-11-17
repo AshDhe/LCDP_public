@@ -6,7 +6,7 @@
 .lcdp-bandeau-image__piste { display:flex; width:max-content; will-change:transform; animation:lcdp-bandeau-image-glisse var(--lcdp-bandeau-duree,40s) linear infinite; }
 .lcdp-bandeau-image__groupe { display:flex; flex:none; gap:var(--lcdp-bandeau-espace); padding-inline-end:var(--lcdp-bandeau-espace); box-sizing:content-box; }
 .lcdp-bandeau-image__image { display:block; flex:0 0 var(--lcdp-bandeau-taille); width:var(--lcdp-bandeau-taille); height:var(--lcdp-bandeau-taille); aspect-ratio:1; object-fit:cover; }
-.lcdp-bandeau-image[data-pause="true"] .lcdp-bandeau-image__piste,.lcdp-bandeau-image:hover .lcdp-bandeau-image__piste,.lcdp-bandeau-image:focus-within .lcdp-bandeau-image__piste { animation-play-state:paused; }
+.lcdp-bandeau-image[data-pause="true"] .lcdp-bandeau-image__piste { animation-play-state:paused; }
 .lcdp-bandeau-image__commandes { display:flex; justify-content:flex-end; margin-top:4px; }
 .lcdp-bandeau-image__pause { appearance:none; border:0; background:transparent; color:inherit; font:inherit; font-size:.75rem; cursor:pointer; padding:4px 6px; }
 .lcdp-bandeau-image__pause:focus-visible { outline:2px solid currentColor; outline-offset:2px; }
