@@ -393,12 +393,8 @@
 
         figure.appendChild(img);
 
-        // Titre éditorial superposé à l'image : six mots maximum.
+        // Titre éditorial de l'image.
         // Le contenu est inséré comme texte, jamais comme HTML.
-        const motsTitre = String(image.texte || "").trim().split(/\s+/u).filter(mot => /[\p{L}\p{N}]/u.test(mot));
-        if (motsTitre.length > 6) {
-          console.warn("Carrousel Hello : titre limité à six mots pour l'image", index + 1);
-        }
         const titre = String(image.texte || "").trim();
         if (titre) {
           const legende = document.createElement("figcaption");
