@@ -31109,6 +31109,117 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   flex: 0 0 auto;
   align-self: stretch;
 }
+/* Accueil public : bandeau d'images, liens fixes et phrases verticales. */
+.public-home .public-home__main::before {
+  display: none;
+}
+.public-home .public-home__main > .lcdp-bandeau-image {
+  --lcdp-bandeau-taille: clamp(84px, 24vw, 144px);
+  margin: .25rem 0 1rem;
+}
+.public-home .public-home__editorial-links {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  margin: 0 0 .75rem;
+}
+.public-home .public-home__editorial-links .public-home__more {
+  text-decoration: none;
+  justify-content: center;
+  min-height: 36px;
+  padding: .4rem .8rem;
+  color: var(--home-slate-800);
+}
+.public-home #lcdp-actualite-bandeau[data-lcdp-phrases-verticales] {
+  position: relative;
+  padding: 0 24px;
+}
+.public-home #lcdp-actualite-bandeau[data-lcdp-phrases-verticales][hidden] {
+  display: none !important;
+}
+.public-home .public-home__phrases-window {
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.public-home .public-home__phrases-track {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  min-height: 3.6rem;
+}
+.public-home .public-home__phrase {
+  grid-area: 1 / 1;
+  display: block;
+  align-content: center;
+  text-decoration: none;
+  text-align: center;
+  color: #1f2a24;
+  font-size: clamp(1.25rem, 4.5vw, 2rem);
+  font-weight: 900;
+  line-height: 1.22;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+  visibility: hidden;
+  pointer-events: none;
+}
+.public-home .public-home__phrase[data-type="apropos"] {
+  color: #4e6838;
+}
+.public-home .public-home__phrase.is-active {
+  visibility: visible;
+  pointer-events: auto;
+}
+.public-home .public-home__phrase.is-entering {
+  animation: lcdp-public-phrase-in 450ms ease both;
+}
+.public-home .public-home__phrase.is-leaving {
+  visibility: visible;
+  animation: lcdp-public-phrase-out 450ms ease both;
+}
+.public-home .public-home__phrases-pause {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #687268;
+  font-size: 12px;
+}
+.public-home .public-home__phrases-pause:focus-visible,
+.public-home .public-home__phrase:focus-visible,
+.public-home .public-home__editorial-links a:focus-visible {
+  outline: 2px solid #4e6838;
+  outline-offset: -2px;
+}
+@keyframes lcdp-public-phrase-in {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes lcdp-public-phrase-out {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100%); opacity: 0; visibility: hidden; }
+}
+@media (max-height: 610px) {
+  .public-home .public-home__main > .lcdp-bandeau-image {
+    --lcdp-bandeau-taille: clamp(64px, 18vh, 104px);
+    margin-bottom: .5rem;
+  }
+  .public-home .public-home__editorial-links { margin-bottom: .4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .public-home .public-home__phrase.is-entering,
+  .public-home .public-home__phrase.is-leaving { animation: none; }
+  .public-home .public-home__phrase.is-leaving { visibility: hidden; }
+}
 :where(html[data-lcdp-css~="c085"]) .public-home__actualite .lcdp-page-container, :where(html[data-lcdp-css~="c085"]) .public-home__actualite .lcdp-page-content {
   box-sizing: border-box;
   width: 100%;

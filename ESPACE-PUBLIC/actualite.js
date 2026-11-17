@@ -92,9 +92,66 @@
     for(let i=0;i<tours;i++)diffusion.push(titresAPropos[i%titresAPropos.length],actualites[i%actualites.length]);
     return diffusion;
   }
-  function bandeau(articles){
+  // Défilement vertical réservé à l’accueil public ; les autres pages gardent leur bandeau.
+  function phrasesVerticales(slot,articles){
+    slot.replaceChildren();
+    slot.hidden=!articles.length;
     if(!articles.length)return;
+    const distincts=[...new Map(articles.map(a=>[JSON.stringify([a.type,a.id,a.titre]),a])).values()];
+    const fenetre=node('div',null,'public-home__phrases-window');
+    const piste=node('div',null,'public-home__phrases-track');
+    const slides=distincts.map(article=>{
+      const a=link(String(article.titre),article.type==='a-propos'?url('/ESPACE-PUBLIC/le-club.html'):articleUrl(article.id),'public-home__phrase');
+      a.dataset.type=article.type==='a-propos'?'apropos':'actualite';
+      a.setAttribute('aria-hidden','true');a.tabIndex=-1;
+      piste.append(a);return a;
+    });
+    const indexes=new Map(distincts.map((a,i)=>[JSON.stringify([a.type,a.id,a.titre]),i]));
+    const ordre=articles.map(a=>indexes.get(JSON.stringify([a.type,a.id,a.titre])));
+    fenetre.append(piste);slot.append(fenetre);
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    let index=0,actif=slides[ordre[0]],timer,paused=reduced.matches,stopped=false;
+    actif.classList.add('is-active');actif.setAttribute('aria-hidden','false');actif.tabIndex=0;
+    if(distincts.length<2)return;
+    const pause=node('button','Ⅱ','public-home__phrases-pause');pause.type='button';slot.append(pause);
+    function label(){
+      pause.textContent=paused?'▶':'Ⅱ';
+      pause.setAttribute('aria-label',paused?'Reprendre le défilement des phrases':'Mettre les phrases en pause');
+      pause.title=pause.getAttribute('aria-label');
+    }
+    function planifier(){
+      clearTimeout(timer);
+      if(!paused&&!stopped&&!document.hidden&&!fenetre.contains(document.activeElement))timer=setTimeout(suivant,reduced.matches?2000:2450);
+    }
+    function suivant(){
+      if(paused||stopped||document.hidden||fenetre.contains(document.activeElement))return;
+      index=(index+1)%ordre.length;
+      const entrant=slides[ordre[index]];
+      if(entrant!==actif){
+        slides.forEach(s=>s.classList.remove('is-leaving','is-entering'));
+        actif.classList.remove('is-active');actif.classList.add('is-leaving');
+        actif.setAttribute('aria-hidden','true');actif.tabIndex=-1;
+        entrant.classList.add('is-active','is-entering');
+        entrant.setAttribute('aria-hidden','false');entrant.tabIndex=0;
+        actif=entrant;
+      }
+      planifier();
+    }
+    pause.addEventListener('click',()=>{
+      paused=!paused;slides.forEach(s=>s.classList.remove('is-leaving','is-entering'));label();planifier();
+    });
+    fenetre.addEventListener('focusin',()=>{clearTimeout(timer);slides.forEach(s=>s.classList.remove('is-leaving','is-entering'));});
+    fenetre.addEventListener('focusout',()=>queueMicrotask(planifier));
+    document.addEventListener('visibilitychange',planifier);
+    window.addEventListener('pagehide',()=>{stopped=true;clearTimeout(timer);});
+    window.addEventListener('pageshow',e=>{if(e.persisted){stopped=false;planifier();}});
+    reduced.addEventListener?.('change',e=>{if(e.matches){paused=true;slides.forEach(s=>s.classList.remove('is-leaving','is-entering'));label();planifier();}});
+    label();planifier();
+  }
+  function bandeau(articles){
     const slot=document.getElementById('lcdp-actualite-bandeau');if(!slot)return;
+    if(slot.hasAttribute('data-lcdp-phrases-verticales')){phrasesVerticales(slot,articles);return;}
+    if(!articles.length)return;
     const container=node('div',null,'lcdp-page-container'),width=node('div',null,'lcdp-page-content');
     // Le bandeau et ses espacements sont définis exclusivement par l'objet CSS partagé.
     const bar=node('nav',null,'lcdp-boxtext__text--center');bar.setAttribute('aria-label','Actualité');
