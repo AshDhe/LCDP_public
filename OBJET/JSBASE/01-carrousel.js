@@ -62,21 +62,28 @@
       return;
     }
 
-    // Le bandeau appartient à chaque diapositive et partage son fondu d’opacité.
-    let avecTitres = false;
-    items.forEach(item => {
-      const titre = item.querySelector(".lcdp-box-carousel__overlay-title");
+    // Titres hors image, avec une zone stable et un fondu synchronisé.
+    const textesTitres = items.map(item => {
+      const titre = item.querySelector(".lcdp-box-carousel__overlay-title, .lcdp-box-carousel__slide-title");
+      const texte = titre ? titre.textContent.trim() : "";
+      if (titre) titre.remove();
       item.classList.remove("lcdp-box-carousel__item--with-title");
-      if (!titre) return;
-      if (!titre.textContent.trim()) {
-        titre.remove();
-        return;
-      }
-      titre.classList.remove("lcdp-box-carousel__overlay-title");
-      titre.classList.add("lcdp-box-carousel__slide-title");
-      avecTitres = true;
+      return texte;
     });
-    if (avecTitres) {
+    const titresDiapositives = [];
+    let zoneTitres = null;
+    if (textesTitres.some(Boolean)) {
+      zoneTitres = document.createElement("div");
+      zoneTitres.className = "lcdp-box-carousel__slide-titles";
+      textesTitres.forEach((texte, index) => {
+        const titre = document.createElement("p");
+        titre.className = "lcdp-box-carousel__slide-title";
+        titre.textContent = texte;
+        titre.classList.toggle("is-active", index === 0);
+        titre.setAttribute("aria-hidden", index === 0 ? "false" : "true");
+        zoneTitres.appendChild(titre);
+        titresDiapositives.push(titre);
+      });
       carrousel.setAttribute("data-lcdp-carousel-slide-titles", "");
     }
 
@@ -98,6 +105,7 @@
     navigation.className = "lcdp-box-carousel__navigation";
     dotsContainer.before(navigation);
     navigation.append(boutonPrecedent, dotsContainer, boutonSuivant);
+    if (zoneTitres) navigation.before(zoneTitres);
 
     carrousel.dataset.lcdpCarouselInitialise = "true";
 
@@ -147,6 +155,12 @@
         const actif = itemIndex === indexActif;
         item.classList.toggle("is-active", actif);
         item.setAttribute("aria-hidden", actif ? "false" : "true");
+      });
+
+      titresDiapositives.forEach((titre, titreIndex) => {
+        const actif = titreIndex === indexActif;
+        titre.classList.toggle("is-active", actif);
+        titre.setAttribute("aria-hidden", actif ? "false" : "true");
       });
 
       dots.forEach((dot, dotIndex) => {

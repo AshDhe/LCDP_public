@@ -1038,32 +1038,39 @@
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] > .lcdp-box-carousel__title:not(:empty) + .lcdp-box-carousel__frame .lcdp-box-carousel__viewport {
   border-radius: 0;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__item > .lcdp-box-carousel__slide-title,
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__frame > .lcdp-box-carousel__slide-title {
-  position: absolute;
-  z-index: 4;
-  display: block;
-  box-sizing: border-box;
-  top: auto;
-  bottom: 10px;
-  left: 10px;
-  right: auto;
-  width: fit-content;
-  max-width: calc(100% - 20px);
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] > .lcdp-box-carousel__slide-titles {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-self: center;
+  width: calc(100% - 40px);
+  min-width: 0;
+  margin: -8px 0 0;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__slide-titles > .lcdp-box-carousel__slide-title {
+  grid-area: 1 / 1;
+  align-self: start;
+  min-width: 0;
   margin: 0;
-  padding: 5px 10px;
-  border-radius: 6px;
-  background: #fff;
+  padding: 0;
   color: var(--lcdp-color-text, #1f2a24);
-  font: 800 16px/1.2 Arial,system-ui,sans-serif;
-  letter-spacing: -.015em;
+  font: 900 22px/1.2 Arial,system-ui,sans-serif;
+  letter-spacing: -.025em;
   text-align: left;
   overflow-wrap: anywhere;
+  opacity: 0;
+  transition: opacity 1.2s ease;
   pointer-events: none;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__item > .lcdp-box-carousel__slide-title[hidden],
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__frame > .lcdp-box-carousel__slide-title[hidden] {
-  display: none;
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__slide-titles > .lcdp-box-carousel__slide-title.is-active {
+  opacity: 1;
+}
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] > .lcdp-box-carousel__slide-titles + .lcdp-box-carousel__navigation {
+  margin-top: -12px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__slide-titles > .lcdp-box-carousel__slide-title {
+    transition: none;
+  }
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel][data-lcdp-carousel-slide-titles] .lcdp-box-carousel__viewport {
   border-radius: 6px;
