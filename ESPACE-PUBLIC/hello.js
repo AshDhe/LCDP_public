@@ -395,7 +395,7 @@
 
         // Titre éditorial superposé à l'image : six mots maximum.
         // Le contenu est inséré comme texte, jamais comme HTML.
-        const motsTitre = String(image.texte || "").trim().split(/\s+/).filter(Boolean);
+        const motsTitre = String(image.texte || "").trim().split(/\s+/u).filter(mot => /[\p{L}\p{N}]/u.test(mot));
         if (motsTitre.length > 6) {
           console.warn("Carrousel Hello : titre limité à six mots pour l'image", index + 1);
         }
