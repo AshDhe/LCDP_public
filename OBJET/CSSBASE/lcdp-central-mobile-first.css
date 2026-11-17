@@ -31803,19 +31803,19 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   min-height: 32px;
   margin: 0;
   padding: 0;
-  border: 0;
+  border: 1px solid #8b9a84;
   border-radius: 999px;
-  background: rgb(255 255 255 / 90%);
-  color: #334155;
+  background: #fff;
+  color: #4e6838;
   font: 700 18px/1 Arial,system-ui,sans-serif;
   cursor: pointer;
   box-shadow: 0 1px 2px rgb(15 23 42 / 8%);
   transform: translateY(-50%);
-  transition: background-color .2s ease;
+  transition: background-color .2s ease, border-color .2s ease;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button:hover {
-  background: #fff;
-  border: 0;
+  background: #f5f7f2;
+  border-color: #4e6838;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button--prev {
   left: 12px;

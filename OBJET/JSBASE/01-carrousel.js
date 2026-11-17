@@ -66,7 +66,7 @@
       const legende = legendElement.textContent.trim();
       if (!legende) {
         legendElement.textContent = "Photos non contractuelles.";
-      } else if (legende === "Illustration recomposée par IA - Non contractuelle") {
+      } else if (/^illustration\b.*\bIA\b/iu.test(legende.replace(/\s+/g, " "))) {
         legendElement.textContent = "Illustration IA";
       }
     }
