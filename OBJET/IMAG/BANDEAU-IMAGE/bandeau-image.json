@@ -1,5 +1,10 @@
 {
   "schema": 1,
-  "revision": "bandeau-image-initial",
-  "images": []
+  "revision": "782d2c57-01df-4ccb-991c-c73da2eb90ef",
+  "images": [
+    {
+      "id": "c0b6e1ac-d278-4969-9b04-f1551fe0f549",
+      "alt": ""
+    }
+  ]
 }
