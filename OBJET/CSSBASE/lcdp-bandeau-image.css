@@ -1,0 +1,15 @@
+/* Bandeau image LCDP : composant autonome, à l'intérieur du wrapper. */
+.lcdp-bandeau-image { box-sizing:border-box; min-width:0; max-width:100%; width:100%; flex:0 0 auto; --lcdp-bandeau-taille:clamp(72px,12vw,144px); --lcdp-bandeau-espace:8px; }
+.lcdp-bandeau-image[hidden] { display:none !important; }
+.public-home__main > .lcdp-bandeau-image { margin:1rem 0 0; }
+.lcdp-bandeau-image__fenetre { width:100%; min-width:0; overflow:hidden; }
+.lcdp-bandeau-image__piste { display:flex; width:max-content; will-change:transform; animation:lcdp-bandeau-image-glisse var(--lcdp-bandeau-duree,40s) linear infinite; }
+.lcdp-bandeau-image__groupe { display:flex; flex:none; gap:var(--lcdp-bandeau-espace); padding-inline-end:var(--lcdp-bandeau-espace); box-sizing:content-box; }
+.lcdp-bandeau-image__image { display:block; flex:0 0 var(--lcdp-bandeau-taille); width:var(--lcdp-bandeau-taille); height:var(--lcdp-bandeau-taille); aspect-ratio:1; object-fit:cover; }
+.lcdp-bandeau-image[data-pause="true"] .lcdp-bandeau-image__piste,.lcdp-bandeau-image:hover .lcdp-bandeau-image__piste,.lcdp-bandeau-image:focus-within .lcdp-bandeau-image__piste { animation-play-state:paused; }
+.lcdp-bandeau-image__commandes { display:flex; justify-content:flex-end; margin-top:4px; }
+.lcdp-bandeau-image__pause { appearance:none; border:0; background:transparent; color:inherit; font:inherit; font-size:.75rem; cursor:pointer; padding:4px 6px; }
+.lcdp-bandeau-image__pause:focus-visible { outline:2px solid currentColor; outline-offset:2px; }
+@keyframes lcdp-bandeau-image-glisse { to { transform:translateX(-50%); } }
+@media(max-height:610px){ .public-home__main > .lcdp-bandeau-image { --lcdp-bandeau-taille:clamp(60px,10vh,100px); margin-top:.5rem; } }
+@media(prefers-reduced-motion:reduce){ .lcdp-bandeau-image:not([data-mouvement="true"]) .lcdp-bandeau-image__piste { animation:none; will-change:auto; } .lcdp-bandeau-image:not([data-mouvement="true"]) .lcdp-bandeau-image__fenetre { overflow-x:auto; } .lcdp-bandeau-image:not([data-mouvement="true"]) .lcdp-bandeau-image__groupe[aria-hidden="true"] { display:none; } }
