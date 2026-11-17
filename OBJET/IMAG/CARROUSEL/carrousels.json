@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": "f7e3b0d4-c8f6-4df5-ab94-6edf9ecb58f7",
+  "revision": "d35ac5f9-e2a4-4683-9317-5441af244ede",
   "carrousels": [
     {
       "id": "page-hello",
@@ -18,31 +18,31 @@
           "id": "hello-2",
           "titre": "Prendre soin de soi",
           "legende": "Illustration IA",
-          "alt": "Prendre soin de soi et de ses proches La Clé du Parc"
+          "alt": ""
         },
         {
           "id": "hello-3",
-          "titre": "Se réunir en famille",
+          "titre": "Créer du lien",
           "legende": "Illustration IA",
-          "alt": "Se réunir en famille avec La Clé du Parc"
+          "alt": ""
         },
         {
           "id": "hello-4",
-          "titre": "Réunir ses amis",
+          "titre": "Ancrer ses habitudes",
           "legende": "Illustration IA",
-          "alt": "Réunir ses amis avec La Clé du Parc"
+          "alt": ""
         },
         {
           "id": "hello-5",
-          "titre": "Organiser son activité",
+          "titre": "Partager sa routine",
           "legende": "Illustration IA",
-          "alt": "Activités de loisir plein air avec La Clé du Parc"
+          "alt": ""
         },
         {
           "id": "hello-6",
-          "titre": "Un parc près de chez vous ?",
+          "titre": "Sortir",
           "legende": "Illustration IA",
-          "alt": "Un parc près de chez soi avec La Clé du Parc"
+          "alt": ""
         }
       ]
     }
