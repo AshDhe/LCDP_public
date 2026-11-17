@@ -31211,12 +31211,12 @@ html[data-lcdp-css~="c085"] body.public-home :is(.public-home__editorial-links, 
   outline-offset: 2px;
 }
 @keyframes lcdp-public-phrase-in {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 @keyframes lcdp-public-phrase-out {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-100%); opacity: 0; }
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 @media (max-height:610px) {
   html[data-lcdp-css~="c085"] body.public-home .public-home__bandeau-reserve {
