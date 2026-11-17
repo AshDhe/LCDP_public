@@ -92,15 +92,18 @@
     for(let i=0;i<tours;i++)diffusion.push(titresAPropos[i%titresAPropos.length],actualites[i%actualites.length]);
     return diffusion;
   }
-  // Une seule phrase dans le DOM : pas de juxtaposition si le CSS est indisponible.
+  // Une seule phrase visible ; le clic sur le texte permet de suspendre le défilement.
   function phrasesVerticales(slot,articles){
     slot.replaceChildren();
     slot.hidden=!articles.length;
     if(!articles.length)return;
     const fenetre=node('div',null,'public-home__phrases-window');
-    const phrase=node('p',null,'public-home__phrase');
+    const plusieurs=articles.length>1;
+    const phrase=node(plusieurs?'button':'p',null,'public-home__phrase lcdp-actu-bandeau-texte');
+    if(plusieurs)phrase.type='button';
     fenetre.append(phrase);slot.append(fenetre);
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    const lecture=3000,transition=700;
     let index=0,timer,paused=reduced.matches,stopped=false;
     function afficher(){
       const article=articles[index];
@@ -108,13 +111,10 @@
       phrase.dataset.type=article.type==='a-propos'?'apropos':'actualite';
     }
     afficher();
-    if(articles.length<2)return;
-    const pause=node('button','Ⅱ','public-home__phrases-pause');
-    pause.type='button';slot.append(pause);
+    if(!plusieurs)return;
     function label(){
-      pause.textContent=paused?'▶':'Ⅱ';
-      pause.setAttribute('aria-label',paused?'Reprendre le défilement des phrases':'Mettre les phrases en pause');
-      pause.title=pause.getAttribute('aria-label');
+      phrase.setAttribute('aria-pressed',String(paused));
+      phrase.title=paused?'Reprendre le défilement des phrases':'Mettre les phrases en pause';
     }
     function reset(){
       clearTimeout(timer);
@@ -123,7 +123,7 @@
     function disponible(){return !paused&&!stopped&&!document.hidden;}
     function planifier(){
       reset();
-      if(disponible())timer=setTimeout(suivant,2000);
+      if(disponible())timer=setTimeout(suivant,lecture);
     }
     function suivant(){
       if(!disponible())return;
@@ -133,10 +133,10 @@
         if(!disponible()){reset();return;}
         index=(index+1)%articles.length;afficher();
         phrase.classList.remove('is-leaving');phrase.classList.add('is-entering');
-        timer=setTimeout(planifier,400);
-      },400);
+        timer=setTimeout(planifier,transition);
+      },transition);
     }
-    pause.addEventListener('click',()=>{paused=!paused;label();planifier();});
+    phrase.addEventListener('click',()=>{paused=!paused;label();planifier();});
     document.addEventListener('visibilitychange',planifier);
     window.addEventListener('pagehide',()=>{stopped=true;reset();});
     window.addEventListener('pageshow',e=>{if(e.persisted){stopped=false;planifier();}});

@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
   <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-lightbox-convergence.css">
   <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-bandeau-image.css">
-  <link rel="stylesheet" href="/OBJET/CSSBASE/lcdp-accueil-public-editorial.css">
   <script src="../config.js"></script>
   <script src="../OBJET/JSBASE/bandeau-image.js" defer></script>
   <script src="../OBJET/JSBASE/affichage-legal.js" defer></script>
@@ -33,7 +32,9 @@
 
     <!-- CONTENU -->
     <main class="public-home__main" id="contenu-principal">
-      <section class="lcdp-bandeau-image" data-lcdp-bandeau-image-public data-lcdp-bandeau-galerie aria-label="Images du réseau La Clé du Parc" hidden></section>
+      <div class="public-home__bandeau-reserve">
+        <section class="lcdp-bandeau-image" data-lcdp-bandeau-image-public data-lcdp-bandeau-galerie aria-label="Images du réseau La Clé du Parc" hidden></section>
+      </div>
 
       <!-- Phrases éditoriales : alimentées par actualite.js. -->
       <section id="lcdp-actualite-bandeau" class="public-home__actualite" data-lcdp-phrases-verticales aria-label="À découvrir">
