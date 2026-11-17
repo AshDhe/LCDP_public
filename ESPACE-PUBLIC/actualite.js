@@ -103,7 +103,7 @@
     if(plusieurs)phrase.type='button';
     fenetre.append(phrase);slot.append(fenetre);
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-    const lecture=4000,transition=700;
+    const lecture=4000,transition=875;
     let index=0,timer,paused=reduced.matches,stopped=false;
     function afficher(){
       const article=articles[index];
