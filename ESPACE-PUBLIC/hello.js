@@ -300,11 +300,53 @@
     }
   }
 
+  // Le manifeste et les images sont publiés ensemble dans LCDP_public.
+  async function lireCarrouselHello() {
+    try {
+      const r = await fetch(construireUrlSite("/OBJET/IMAG/CARROUSEL/carrousels.json"), {
+        cache: "no-cache", credentials: "same-origin"
+      });
+      if (!r.ok) throw new Error("Inventaire carrousels indisponible");
+      const data = await r.json();
+      if (data.schema !== 1 || !Array.isArray(data.carrousels) || typeof data.revision !== "string") {
+        throw new Error("Inventaire carrousels invalide");
+      }
+      const carrousel = data.carrousels.find(c => c.id === "page-hello");
+      if (!carrousel) return null;
+      if (!/^[A-Z0-9][A-Z0-9_-]{0,63}$/.test(carrousel.dossier) ||
+          !Array.isArray(carrousel.images) || !carrousel.images.length) throw new Error("Carrousel Hello invalide");
+      return {
+        titre: carrousel.titre,
+        images: carrousel.images.map((im,index) => ({
+          src: "/OBJET/IMAG/CARROUSEL/" + carrousel.dossier + "/IMAG_" + (index+1) + ".webp?v=" + encodeURIComponent(data.revision),
+          alt: String(im.alt || ""), texte: String(im.titre || ""), legende: String(im.legende || "")
+        }))
+      };
+    } catch (error) {
+      // Conserver le rendu historique en cas d'indisponibilité temporaire.
+      console.warn("Inventaire carrousels Hello :", error);
+      return {titre:"Demandez La Clé",images:IMAGES_CARROUSEL_HELLO.map(im=>({...im,legende:"Illustration IA"}))};
+    }
+  }
+
   async function initialiserCarrouselHello() {
     const slot = document.getElementById("lcdp-carrousel-hello-slot");
 
     if (!slot) {
       return;
+    }
+
+    const configCarrousel = await lireCarrouselHello();
+    const section = slot.closest(".lcdp-editorial-feature");
+    if (!configCarrousel) {
+      if (section) section.hidden = true;
+      else slot.hidden = true;
+      return;
+    }
+    const titreGeneral = section?.querySelector("[data-lcdp-boxtext-title]");
+    if (titreGeneral) {
+      titreGeneral.textContent = String(configCarrousel.titre || "");
+      titreGeneral.hidden = !titreGeneral.textContent.trim();
     }
 
     slot.innerHTML =
@@ -324,9 +366,10 @@
     const liste = slot.querySelector("[data-lcdp-carousel-list]");
 
     if (liste) {
-      IMAGES_CARROUSEL_HELLO.forEach((image, index) => {
+      configCarrousel.images.forEach((image, index) => {
         const figure = document.createElement("figure");
         figure.className = "lcdp-box-carousel__item";
+        figure.dataset.lcdpCarouselLegend = String(image.legende || "");
 
         if (index === 0) {
           figure.classList.add("is-active");

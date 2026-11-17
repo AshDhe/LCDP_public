@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "revision": "hello-initial",
+  "carrousels": [
+    {
+      "id": "page-hello",
+      "nom": "Page Hello",
+      "dossier": "PAGE-HELLO",
+      "titre": "Demandez La Clé",
+      "images": [
+        {
+          "id": "hello-1",
+          "titre": "Des lieux d'exception",
+          "legende": "Illustration IA",
+          "alt": "Lieux remarquables et parcs d'exception avec La Clé du Parc"
+        },
+        {
+          "id": "hello-2",
+          "titre": "Prendre soin de soi",
+          "legende": "Illustration IA",
+          "alt": "Prendre soin de soi et de ses proches La Clé du Parc"
+        },
+        {
+          "id": "hello-3",
+          "titre": "Se réunir en famille",
+          "legende": "Illustration IA",
+          "alt": "Se réunir en famille avec La Clé du Parc"
+        },
+        {
+          "id": "hello-4",
+          "titre": "Réunir ses amis",
+          "legende": "Illustration IA",
+          "alt": "Réunir ses amis avec La Clé du Parc"
+        },
+        {
+          "id": "hello-5",
+          "titre": "Organiser son activité",
+          "legende": "Illustration IA",
+          "alt": "Activités de loisir plein air avec La Clé du Parc"
+        },
+        {
+          "id": "hello-6",
+          "titre": "Un parc près de chez vous ?",
+          "legende": "Illustration IA",
+          "alt": "Un parc près de chez soi avec La Clé du Parc"
+        }
+      ]
+    }
+  ]
+}
