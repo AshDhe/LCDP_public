@@ -75,12 +75,21 @@
     const affichagePret = Promise.all([page.stylesPrets, navigationPrete]).then(() => {
       clearTimeout(window.LCDP_FAQ_SECOURS);
       document.documentElement.classList.remove("lcdp-faq-preparation");
+      window.LCDP_terminerAttenteArrivee?.();
     });
     const api = endpoint("workerEditingAdminUrl", "WORKER_EDITING_ADMIN_URL", "editing-admin-api") || "https://editing-admin-api.lacleduparc.fr";
     if (!api) throw Error("Le service FAQ n’est pas configuré.");
-    const response = await fetch(api + "/public/faq", { credentials:"omit", cache:"no-store", headers:{Accept:"application/json"} });
+    const response = await fetch(api + (page.membre ? "/membre/faq" : "/public/faq"), {
+      credentials: page.membre ? "include" : "omit", cache:"no-store", headers:{Accept:"application/json"}
+    });
+    if (page.membre && response.status === 401) {
+      location.replace(page.publicUrl("/ESPACE-PUBLIC/connexion-membre.html?source=faq&session=inactive")); return;
+    }
     const data = await response.json();
     if (!response.ok || data.success !== true) throw Error(data.message || "Les FAQ sont temporairement indisponibles.");
+    if (page.membre && (data.code !== "faq-membre" || data.espace !== "membre" || !Array.isArray(data.blocs))) {
+      throw Error("Les FAQ membres sont temporairement indisponibles.");
+    }
     await affichagePret;
     window.LCDP_FAQ.afficher(document.getElementById("lcdp-faq-liste"), data.blocs);
     status.textContent = ""; status.hidden = true;
@@ -94,5 +103,6 @@
     document.getElementById("lcdp-faq-liste").setAttribute("aria-busy", "false");
     clearTimeout(window.LCDP_FAQ_SECOURS);
     document.documentElement.classList.remove("lcdp-faq-preparation");
+    window.LCDP_terminerAttenteArrivee?.();
   });
 })();
