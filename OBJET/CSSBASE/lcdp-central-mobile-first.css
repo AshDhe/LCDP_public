@@ -31503,17 +31503,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   background: none;
   box-shadow: none;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-eyebrow {
-  margin: 0;
-  padding: 0 4px;
-  color: #94a3b8;
-  font-size: 12px;
-  line-height: 1.35;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .075em;
-  text-align: left;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-feature > .lcdp-boxtext {
   padding: 0;
   margin: 0;
@@ -31655,22 +31644,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   line-height: 1.45;
   text-align: center;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card {
-  align-items: stretch;
-  gap: 12px;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card > .lcdp-boxtext__title {
-  color: #1e293b;
-  font-size: 14px;
-  line-height: 1.4;
-  font-weight: 700;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card > .lcdp-editorial-copy {
-  gap: 12px;
-  text-align: center;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card .lcdp-editorial-cta {
   display: flex;
   flex-direction: column;
@@ -31698,46 +31671,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   text-decoration: none;
   box-shadow: 0 4px 6px -1px rgb(15 23 42 / 10%);
   transition: background-color .2s ease, border-color .2s ease, color .2s ease;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card .lcdp-editorial-action-note {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: #94a3b8;
-  font-size: 11px;
-  line-height: 1.45;
-  font-weight: 400;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card .lcdp-editorial-action-note strong {
-  color: inherit;
-  font-weight: 600;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card--team .lcdp-editorial-cta > a.lcdp-editorial-outline-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 10px 16px;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  background: #fff;
-  color: #334155;
-  font-size: 12px;
-  line-height: 1.35;
-  font-weight: 600;
-  letter-spacing: normal;
-  text-transform: none;
-  box-shadow: none;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card--team .lcdp-editorial-cta > a.lcdp-editorial-outline-button:hover {
-  border-color: #1e293b;
-  background: #0f172a;
-  color: #fff;
 }
 @media (prefers-reduced-motion: reduce) {
   :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper figure.lcdp-editorial-hero > img.lcdp-editorial-hero__image {
@@ -33738,63 +33671,11 @@ body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__note {
   :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-editorial-back-link { display: none; }
 }
 
-/* Page Inscription membre invité : mise au niveau typographique des pages
-   éditoriales (Hello, Association et Le Club), sans changer le composant
-   galerie générique ni les autres pages qui emploient c042. */
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-contenu-editorial .lcdp-box-galerie__card-title {
-  font-size: 15px;
-  line-height: 1.35;
-  font-weight: 700;
-  color: #0f172a;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-contenu-editorial .lcdp-box-galerie__text {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #475569;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-contenu-editorial .lcdp-box-galerie__legend {
-  font-size: 11px;
-  line-height: 1.4;
-  color: #64748b;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-contenu-editorial .lcdp-box-galerie__image {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
 /* Maintien de la taille commune aussi sur PC malgré l'ancienne règle c042
    qui imposait 10px à tous les paragraphes de la galerie. */
 @media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-contenu-editorial .lcdp-box-galerie__text {
-    font-size: 13px;
-  }
 }
 
-/* Inscription membre invité — étapes numérotées automatiquement.
-   Style isolé : ne modifie pas les listes du règlement ni les autres pages. */
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-inscription-etapes {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: lcdp-inscription-etape;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-inscription-etapes > li {
-  counter-increment: lcdp-inscription-etape;
-  margin: 0;
-  padding: 0;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #475569;
-}
-:where(html[data-lcdp-css~="c042"]) body.lcdp-page-inscription-membre .lcdp-inscription-etapes > li::before {
-  content: "Étape " counter(lcdp-inscription-etape) " : ";
-  font-weight: 700;
-  color: #0f172a;
-}
 
 /* Tunnel inscription sécurité : correctifs ciblés, sans impact sur les autres formulaires. */
 .lcdp-setup-loading[hidden] { display: none !important; }

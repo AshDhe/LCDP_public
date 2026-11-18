@@ -855,17 +855,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   background: none;
   box-shadow: none;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-eyebrow {
-  margin: 0;
-  padding: 0 4px;
-  color: #94a3b8;
-  font-size: 12px;
-  line-height: 1.35;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .075em;
-  text-align: left;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-feature > .lcdp-boxtext {
   padding: 0;
   margin: 0;
@@ -1007,22 +996,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   line-height: 1.45;
   text-align: center;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card {
-  align-items: stretch;
-  gap: 12px;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card > .lcdp-boxtext__title {
-  color: #1e293b;
-  font-size: 14px;
-  line-height: 1.4;
-  font-weight: 700;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card > .lcdp-editorial-copy {
-  gap: 12px;
-  text-align: center;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card .lcdp-editorial-cta {
   display: flex;
   flex-direction: column;
@@ -1050,46 +1023,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   text-decoration: none;
   box-shadow: 0 4px 6px -1px rgb(15 23 42 / 10%);
   transition: background-color .2s ease, border-color .2s ease, color .2s ease;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card .lcdp-editorial-action-note {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: #94a3b8;
-  font-size: 11px;
-  line-height: 1.45;
-  font-weight: 400;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card .lcdp-editorial-action-note strong {
-  color: inherit;
-  font-weight: 600;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card--team .lcdp-editorial-cta > a.lcdp-editorial-outline-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 10px 16px;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  background: #fff;
-  color: #334155;
-  font-size: 12px;
-  line-height: 1.35;
-  font-weight: 600;
-  letter-spacing: normal;
-  text-transform: none;
-  box-shadow: none;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card--team .lcdp-editorial-cta > a.lcdp-editorial-outline-button:hover {
-  border-color: #1e293b;
-  background: #0f172a;
-  color: #fff;
 }
 @media (prefers-reduced-motion: reduce) {
   :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper figure.lcdp-editorial-hero > img.lcdp-editorial-hero__image {
