@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const BASE='/IMAG/BANDEAU-IMAGE/';
+  const MAX_IMAGES_BANDEAU=20;
   const states=new WeakMap();
   const el=(tag,cls)=>{const e=document.createElement(tag);if(cls)e.className=cls;return e;};
   const objet=path=>{const cfg=window.SITE_CONFIG||{};return typeof cfg.objetUrl==='function'?cfg.objetUrl(path):'/OBJET'+path;};
@@ -31,6 +32,8 @@
   function rendre(zone,images){
     nettoyer(zone);zone.classList.add('lcdp-bandeau-image');
     zone.hidden=!images.length;if(!images.length)return;
+    // Seul le défilement est limité ; la galerie conserve l’inventaire complet.
+    const imagesBandeau=images.slice(0,MAX_IMAGES_BANDEAU);
     const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     zone.dataset.pause=reduced?'true':'false';zone.dataset.mouvement='false';
     const fenetre=el('div','lcdp-bandeau-image__fenetre'),piste=el('div','lcdp-bandeau-image__piste');
@@ -45,16 +48,16 @@
     }
     piste.append(groupe,copie);fenetre.append(piste);zone.append(fenetre,commandes);
     const faireImage=(im,decorative)=>{const img=el('img','lcdp-bandeau-image__image');img.src=im.src;img.alt=decorative?'':String(im.alt||'');img.decoding='async';img.draggable=false;return img;};
-    groupe.append(faireImage(images[0],false));
+    groupe.append(faireImage(imagesBandeau[0],false));
     let repetitions=0;
     function remplir(){
       const size=parseFloat(getComputedStyle(zone).getPropertyValue('--lcdp-bandeau-espace'))||8;
       const sample=groupe.firstElementChild;
       const width=sample?.getBoundingClientRect().width||Math.max(72,Math.min(innerWidth*.12,144))*1672/941;
-      const n=Math.max(1,Math.ceil(fenetre.clientWidth/(images.length*(width+size))));
+      const n=Math.max(1,Math.ceil(fenetre.clientWidth/(imagesBandeau.length*(width+size))));
       if(n!==repetitions){
         repetitions=n;groupe.replaceChildren();copie.replaceChildren();
-        for(let k=0;k<n;k++)for(const im of images){
+        for(let k=0;k<n;k++)for(const im of imagesBandeau){
           const original=faireImage(im,k>0);if(k>0)original.setAttribute('aria-hidden','true');groupe.append(original);copie.append(faireImage(im,true));
         }
       }
