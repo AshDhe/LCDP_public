@@ -139,7 +139,7 @@
     initialiserBandeau().catch((erreur) => console.error("Erreur bandeau inscription :", erreur));
     initialiserFooter().catch((erreur) => console.error("Erreur footer inscription :", erreur));
     // Même image de remplacement que la galerie existante, sans recréer ses cartes.
-    document.querySelectorAll(".lcdp-box-galerie__image").forEach((image) => {
+    document.querySelectorAll("[data-lcdp-galerie-list] img.lcdp-illustration").forEach((image) => {
       image.addEventListener("error", () => {
         image.src = construireUrlObjet("/OBJET/IMAG/PARC/galeriedefaut.jpg");
       }, { once: true });
