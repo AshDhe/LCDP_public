@@ -95,7 +95,7 @@
     // Touches optionnelles : aucun changement aux autres usages du Diginum.
     const codesSpeciaux = Array.isArray(options.codesSpeciaux)
       ? [...new Set(options.codesSpeciaux.map(valeur => String(valeur).toUpperCase())
-        .filter(valeur => /^[0-9][A-Z]$/.test(valeur)))]
+        .filter(valeur => /^[0-9][A-Z]$/.test(valeur) && valeur !== "2A" && valeur !== "2B"))]
       : [];
     if (codesSpeciaux.length) {
       const zoneSpeciaux = document.createElement("div");
