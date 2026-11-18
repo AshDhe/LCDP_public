@@ -31462,6 +31462,25 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   letter-spacing: -.025em;
   text-align: left;
 }
+/* Variante commune : titre éditorial avec signature chromatique. */
+:where(html[data-lcdp-css~="c085"]) .lcdp-boxtext__title[data-lcdp-title-accent="duo"] {
+  --lcdp-title-accent: var(--lcdp-color-orange);
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-boxtext__title[data-lcdp-title-accent="parc"] {
+  --lcdp-title-accent: var(--lcdp-color-parc);
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-boxtext__title[data-lcdp-title-accent="coach"] {
+  --lcdp-title-accent: var(--lcdp-color-coach);
+}
+:where(html[data-lcdp-css~="c085"]) .lcdp-boxtext__title[data-lcdp-title-accent]::after {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 4px;
+  margin: 8px auto 0;
+  border-radius: 2px;
+  background: var(--lcdp-title-accent);
+}
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card .lcdp-editorial-copy {
   display: flex;
   flex-direction: column;
