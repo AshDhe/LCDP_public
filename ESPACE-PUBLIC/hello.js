@@ -246,18 +246,6 @@
 
     const focusInitial = document.activeElement;
     try {
-      const css = construireUrlObjet("/CSSBASE/lcdp-lightbox-convergence.css");
-      if (!Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(link => link.href === new URL(css, document.baseURI).href)) {
-        await new Promise((resolve, reject) => {
-          const feuille = document.createElement("link");
-          feuille.rel = "stylesheet";
-          feuille.href = css;
-          feuille.onload = resolve;
-          feuille.onerror = () => { feuille.remove(); reject(new Error("CSS ERREUR indisponible.")); };
-          document.head.appendChild(feuille);
-        });
-      }
-
       slot.replaceChildren(await chargerFragmentObjet("/HTMLBASE/02-dialogue-reference-erreur.html"));
       const dialogue = slot.querySelector('[data-lcdp-dialogue-reference="erreur"]');
       const titreElement = slot.querySelector("[data-lcdp-dialogue-titre]");

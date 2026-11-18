@@ -33730,12 +33730,7 @@ body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__note {
   margin-inline: auto;
 }
 :where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-contenu-editorial figure.lcdp-editorial-inline-figure > img.lcdp-illustration {
-  display: block;
   box-sizing: border-box;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
 }
 
 /* Harmonisation des pages de règlement : navigation non imprimable. */
