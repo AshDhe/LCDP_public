@@ -120,7 +120,7 @@
   }
 
   function construireUrlScriptMenuMembre() {
-    return construireUrlMembre("/ESPACE-MEMBRE/box-menu-burger-membre.js?v=20261117-abonnement");
+    return construireUrlMembre("/ESPACE-MEMBRE/box-menu-burger-membre.js?v=20261118-galerie-menu");
   }
 
   let chargementScriptMenuMembre = null;
@@ -396,7 +396,42 @@
     );
   }
 
+  // Charger le composant commun uniquement à la demande, sans changer de page.
+  async function ouvrirGalerieDepuisMenu(focus) {
+    if (typeof window.LCDP_BANDEAU_IMAGE?.ouvrirGalerie !== "function") {
+      if (!window.LCDP_chargementGalerieCommune) {
+        window.LCDP_chargementGalerieCommune = new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = window.SITE_CONFIG.objetUrl("/JSBASE/bandeau-image.js?v=20261118-galerie-menu");
+          script.onload = () => typeof window.LCDP_BANDEAU_IMAGE?.ouvrirGalerie === "function"
+            ? resolve() : reject(new Error("Galerie indisponible."));
+          script.onerror = () => { script.remove(); reject(new Error("Galerie indisponible.")); };
+          document.head.appendChild(script);
+        }).catch(error => { delete window.LCDP_chargementGalerieCommune; throw error; });
+      }
+      await window.LCDP_chargementGalerieCommune;
+    }
+    await window.LCDP_BANDEAU_IMAGE.ouvrirGalerie(focus);
+  }
+
   function creerLienMenu(item, boutonBurger, navBurger) {
+    if (item.action === "galerie") {
+      const bouton = document.createElement("button");
+      bouton.type = "button";
+      bouton.className = "lcdp-box-menu-burger__button-link";
+      bouton.textContent = item.label;
+      bouton.setAttribute("aria-haspopup", "dialog");
+      bouton.addEventListener("click", () => {
+        fermerMenu(boutonBurger, navBurger);
+        boutonBurger.focus({ preventScroll: true });
+        ouvrirGalerieDepuisMenu(boutonBurger).catch(error => {
+          console.error("Galerie indisponible :", error);
+          window.alert("La galerie est momentanément indisponible.");
+        });
+      });
+      return bouton;
+    }
+
     if (item.action === "mon-compte") {
       const bouton = document.createElement("button");
       bouton.type = "button";
@@ -486,7 +521,7 @@
         },
         {
           label: "Galerie",
-          href: "/ESPACE-PUBLIC/galerie.html"
+          action: "galerie"
         },
         {
           label: "Témoignages",

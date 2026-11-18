@@ -3,31 +3,42 @@
   const BASE='/IMAG/BANDEAU-IMAGE/';
   const MAX_IMAGES_BANDEAU=20;
   const states=new WeakMap();
+  let inventaireEnCours, cssEnCours, ouvertureEnCours, galerieAutonome;
   const el=(tag,cls)=>{const e=document.createElement(tag);if(cls)e.className=cls;return e;};
   const objet=path=>{const cfg=window.SITE_CONFIG||{};return typeof cfg.objetUrl==='function'?cfg.objetUrl(path):'/OBJET'+path;};
   function nettoyer(zone){const state=states.get(zone);if(state){state.observer?.disconnect();state.arreterChargement?.();states.delete(zone);}if(state?.dialogue?.open){state.dialogue.close();document.documentElement.classList.remove('lcdp-bandeau-galerie-ouverte');}zone.replaceChildren();delete zone.dataset.chargement;}
-  function ajouterGalerie(zone,images,commandes){
-    if(!zone.hasAttribute('data-lcdp-bandeau-galerie'))return null;
-    const bouton=el('button','lcdp-bandeau-image__galerie-bouton public-home__more');bouton.type='button';bouton.textContent='Galerie ';bouton.setAttribute('aria-haspopup','dialog');
-    const fleche=el('span');fleche.textContent='›';fleche.setAttribute('aria-hidden','true');bouton.append(fleche);
+  function creerGalerie(images,zone=null,bouton=null){
     const dialogue=el('dialog','lcdp-bandeau-image__galerie');dialogue.setAttribute('aria-label','Galerie');
     const entete=el('div','lcdp-bandeau-image__galerie-entete'),titre=el('h2','lcdp-bandeau-image__galerie-titre'),fermer=el('button','lcdp-bandeau-image__galerie-fermer');
     const titres=el('div','lcdp-bandeau-image__galerie-titres'),legende=el('p','lcdp-bandeau-image__galerie-legende lcdp-text-muted');
     titre.textContent='Galerie';legende.textContent='Illustrations IA';titres.append(titre,legende);
     fermer.type='button';fermer.textContent='×';fermer.setAttribute('aria-label','Fermer la galerie');entete.append(titres,fermer);
-    const liste=el('div','lcdp-bandeau-image__galerie-liste');dialogue.append(entete,liste);zone.append(dialogue);commandes.prepend(bouton);
-    let pauseAvant;
-    bouton.addEventListener('click',()=>{
+    const liste=el('div','lcdp-bandeau-image__galerie-liste');dialogue.append(entete,liste);(zone||document.body).append(dialogue);
+    let pauseAvant, focusAvant;
+    function ouvrir(focus=bouton||document.activeElement){
       if(dialogue.open)return;
       if(!liste.childElementCount)for(const im of images){
         const img=el('img','lcdp-bandeau-image__galerie-photo');img.alt=String(im.alt||'');img.loading='lazy';img.decoding='async';img.width=1672;img.height=941;img.src=im.src;liste.append(img);
       }
-      pauseAvant=zone.dataset.pause;zone.dataset.pause='true';
+      focusAvant=focus;
+      if(zone){pauseAvant=zone.dataset.pause;zone.dataset.pause='true';}
       dialogue.showModal();document.documentElement.classList.add('lcdp-bandeau-galerie-ouverte');liste.scrollTop=0;fermer.focus();
-    });
+    }
     fermer.addEventListener('click',()=>dialogue.close());
-    dialogue.addEventListener('close',()=>{document.documentElement.classList.remove('lcdp-bandeau-galerie-ouverte');zone.dataset.pause=pauseAvant||'false';bouton.focus();});
-    return dialogue;
+    dialogue.addEventListener('close',()=>{
+      document.documentElement.classList.remove('lcdp-bandeau-galerie-ouverte');
+      if(zone)zone.dataset.pause=pauseAvant||'false';
+      if(focusAvant?.isConnected)focusAvant.focus({preventScroll:true});
+    });
+    return {dialogue,ouvrir};
+  }
+  function ajouterGalerie(zone,images,commandes){
+    if(!zone.hasAttribute('data-lcdp-bandeau-galerie'))return null;
+    const bouton=el('button','lcdp-bandeau-image__galerie-bouton public-home__more');bouton.type='button';bouton.textContent='Galerie ';bouton.setAttribute('aria-haspopup','dialog');
+    const fleche=el('span');fleche.textContent='›';fleche.setAttribute('aria-hidden','true');bouton.append(fleche);
+    const galerie=creerGalerie(images,zone,bouton);
+    commandes.prepend(bouton);bouton.addEventListener('click',()=>galerie.ouvrir(bouton));
+    return galerie;
   }
   function rendre(zone,images){
     nettoyer(zone);zone.classList.add('lcdp-bandeau-image');
@@ -78,12 +89,12 @@
       piste.style.setProperty('--lcdp-bandeau-duree',Math.max(8,distance/30)+'s');
     }
     remplir();
-    const dialogue=ajouterGalerie(zone,images,commandes);
+    const galerie=ajouterGalerie(zone,images,commandes);
     const arreterChargement=progressif
       ? chargerBandeauProgressif(zone,fenetre,groupe,piste,imagesBandeau,charges)
       : null;
     const observer=typeof ResizeObserver==='function'?new ResizeObserver(remplir):null;
-    observer?.observe(fenetre);states.set(zone,{observer,dialogue,arreterChargement});
+    observer?.observe(fenetre);states.set(zone,{observer,dialogue:galerie?.dialogue,galerie,arreterChargement});
   }
   // Charger par ordre d’apparition, sans faire attendre toute la page.
   // Les deux groupes du défilement partagent les mêmes URL et le cache du navigateur.
@@ -154,16 +165,55 @@
       arrete=true;observation?.disconnect();if(timer!==null)clearInterval(timer);
     };
   }
-  async function init(){
-    const zone=document.querySelector('[data-lcdp-bandeau-image-public]');if(!zone)return;
-    try{
+  function chargerInventaire(){
+    if(!inventaireEnCours)inventaireEnCours=(async()=>{
       const r=await fetch(objet(BASE+'bandeau-image.json'),{cache:'no-cache'});
       if(!r.ok)throw Error('Inventaire indisponible');
       const data=await r.json();if(data.schema!==1||!Array.isArray(data.images))throw Error('Inventaire invalide');
-      if(data.images.length<8)return;
-      rendre(zone,data.images.map((im,i)=>({src:objet(BASE+'IMAG_'+(i+1)+'.webp'),alt:im.alt})));
+      return data.images.map((im,i)=>({src:objet(BASE+'IMAG_'+(i+1)+'.webp'),alt:im.alt}));
+    })().catch(e=>{inventaireEnCours=null;throw e;});
+    return inventaireEnCours;
+  }
+  function chargerCssGalerie(){
+    const href=new URL(objet('/CSSBASE/lcdp-bandeau-image.css'),document.baseURI);
+    if([...document.querySelectorAll('link[rel="stylesheet"]')].some(lien=>{
+      const url=new URL(lien.href,document.baseURI);
+      return url.origin===href.origin&&url.pathname===href.pathname&&lien.sheet;
+    }))return Promise.resolve();
+    if(!cssEnCours)cssEnCours=new Promise((resolve,reject)=>{
+      const lien=el('link');lien.rel='stylesheet';lien.href=href.href;
+      lien.onload=resolve;lien.onerror=()=>{lien.remove();reject(Error('Style de la galerie indisponible'));};
+      document.head.append(lien);
+    }).catch(e=>{cssEnCours=null;throw e;});
+    return cssEnCours;
+  }
+  function ouvrirGalerie(focus=document.activeElement){
+    if(ouvertureEnCours)return ouvertureEnCours;
+    ouvertureEnCours=(async()=>{
+      const zone=document.querySelector('[data-lcdp-bandeau-image-public][data-lcdp-bandeau-galerie]');
+      let galerie=zone&&states.get(zone)?.galerie;
+      if(!galerie){
+        const [images]=await Promise.all([chargerInventaire(),chargerCssGalerie()]);
+        // Le bandeau peut terminer son initialisation pendant le chargement.
+        galerie=zone&&states.get(zone)?.galerie;
+        if(!galerie){
+          if(!images.length)throw Error('La galerie est vide');
+          if(!galerieAutonome||!galerieAutonome.dialogue.isConnected)galerieAutonome=creerGalerie(images);
+          galerie=galerieAutonome;
+        }
+      }
+      galerie.ouvrir(focus);
+    })().finally(()=>{ouvertureEnCours=null;});
+    return ouvertureEnCours;
+  }
+  async function init(){
+    const zone=document.querySelector('[data-lcdp-bandeau-image-public]');if(!zone)return;
+    try{
+      const images=await chargerInventaire();
+      if(images.length<8)return;
+      rendre(zone,images);
     }catch(e){zone.hidden=true;console.warn('Bandeau image LCDP :',e);}
   }
-  window.LCDP_BANDEAU_IMAGE=Object.freeze({rendre,nettoyer});
+  window.LCDP_BANDEAU_IMAGE=Object.freeze({rendre,nettoyer,ouvrirGalerie});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
