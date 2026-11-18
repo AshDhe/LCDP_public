@@ -1,11 +1,7 @@
 {
   "schema": 1,
-  "revision": "121f6cdc-c8a9-4a4a-b399-41fcc38cb2f3",
+  "revision": "1d8776ee-b3d6-4c76-b04d-4b6e8b9423d0",
   "images": [
-    {
-      "id": "cc38c893-bfe2-4033-a7c9-a85fd7436c67",
-      "alt": ""
-    },
     {
       "id": "c0b6e1ac-d278-4969-9b04-f1551fe0f549",
       "alt": ""
@@ -28,6 +24,10 @@
     },
     {
       "id": "80610eb9-0ae3-4523-9954-9e55f068c83a",
+      "alt": ""
+    },
+    {
+      "id": "cc38c893-bfe2-4033-a7c9-a85fd7436c67",
       "alt": ""
     },
     {
