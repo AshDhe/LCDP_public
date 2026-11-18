@@ -31,6 +31,11 @@ dialog.lcdp-bandeau-image__galerie[open] { display:flex; flex-direction:column; 
 .lcdp-bandeau-image__galerie-fermer { width:44px; height:44px; border:0; border-radius:50%; background:#f5f6f3; color:#1f2a24; font:400 30px/1 Arial,sans-serif; cursor:pointer; }
 .lcdp-bandeau-image__galerie-liste { flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain; display:grid; grid-template-columns:minmax(0,1fr); align-content:start; gap:12px; padding:12px 12px max(16px,env(safe-area-inset-bottom)); }
 .lcdp-bandeau-image__galerie-photo { display:block; width:100%; height:auto; border-radius:6px; }
+.lcdp-bandeau-image__galerie-emplacement { box-sizing:border-box; aspect-ratio:1672 / 941; min-width:0; overflow:hidden; border-radius:6px; background:#f5f6f3; display:grid; place-items:center; }
+.lcdp-bandeau-image__galerie-emplacement .lcdp-bandeau-image__galerie-photo { width:100%; height:100%; object-fit:contain; }
+.lcdp-bandeau-image__galerie-emplacement[data-etat="chargement"] .lcdp-bandeau-image__galerie-photo { visibility:hidden; }
+.lcdp-bandeau-image__galerie-emplacement[data-etat="echec"] { font-size:.85rem; color:#525b50; text-align:center; }
+.lcdp-bandeau-image__galerie-etat { grid-column:1 / -1; text-align:center; margin:1rem 0; }
 .lcdp-bandeau-image__galerie-fermer:focus-visible { outline:2px solid #4e6838; outline-offset:2px; }
 @media(min-width:640px){ .lcdp-bandeau-image__galerie-entete { width:min(100%,1200px); margin-inline:auto; } .lcdp-bandeau-image__galerie-liste { grid-template-columns:repeat(2,minmax(0,1fr)); width:min(100%,1200px); margin-inline:auto; padding:16px; } }
 @media(min-width:1024px){ .lcdp-bandeau-image__galerie-liste { grid-template-columns:repeat(3,minmax(0,1fr)); } }

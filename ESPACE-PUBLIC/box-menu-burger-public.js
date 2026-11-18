@@ -120,7 +120,7 @@
   }
 
   function construireUrlScriptMenuMembre() {
-    return construireUrlMembre("/ESPACE-MEMBRE/box-menu-burger-membre.js?v=20261118-galerie-menu");
+    return construireUrlMembre("/ESPACE-MEMBRE/box-menu-burger-membre.js?v=20261118-galerie-progressive");
   }
 
   let chargementScriptMenuMembre = null;
@@ -402,7 +402,7 @@
       if (!window.LCDP_chargementGalerieCommune) {
         window.LCDP_chargementGalerieCommune = new Promise((resolve, reject) => {
           const script = document.createElement("script");
-          script.src = window.SITE_CONFIG.objetUrl("/JSBASE/bandeau-image.js?v=20261118-galerie-menu");
+          script.src = window.SITE_CONFIG.objetUrl("/JSBASE/bandeau-image.js?v=20261118-galerie-progressive");
           script.onload = () => typeof window.LCDP_BANDEAU_IMAGE?.ouvrirGalerie === "function"
             ? resolve() : reject(new Error("Galerie indisponible."));
           script.onerror = () => { script.remove(); reject(new Error("Galerie indisponible.")); };

@@ -7,30 +7,104 @@
   const el=(tag,cls)=>{const e=document.createElement(tag);if(cls)e.className=cls;return e;};
   const objet=path=>{const cfg=window.SITE_CONFIG||{};return typeof cfg.objetUrl==='function'?cfg.objetUrl(path):'/OBJET'+path;};
   function nettoyer(zone){const state=states.get(zone);if(state){state.observer?.disconnect();state.arreterChargement?.();states.delete(zone);}if(state?.dialogue?.open){state.dialogue.close();document.documentElement.classList.remove('lcdp-bandeau-galerie-ouverte');}zone.replaceChildren();delete zone.dataset.chargement;}
+  // Les emplacements sont réservés sans URL ; trois créneaux au maximum.
   function creerGalerie(images,zone=null,bouton=null){
+    const MAX_SIMULTANES=3, AVANCE=.65;
     const dialogue=el('dialog','lcdp-bandeau-image__galerie');dialogue.setAttribute('aria-label','Galerie');
     const entete=el('div','lcdp-bandeau-image__galerie-entete'),titre=el('h2','lcdp-bandeau-image__galerie-titre'),fermer=el('button','lcdp-bandeau-image__galerie-fermer');
     const titres=el('div','lcdp-bandeau-image__galerie-titres'),legende=el('p','lcdp-bandeau-image__galerie-legende lcdp-text-muted');
     titre.textContent='Galerie';legende.textContent='Illustrations IA';titres.append(titre,legende);
     fermer.type='button';fermer.textContent='×';fermer.setAttribute('aria-label','Fermer la galerie');entete.append(titres,fermer);
     const liste=el('div','lcdp-bandeau-image__galerie-liste');dialogue.append(entete,liste);(zone||document.body).append(dialogue);
-    let pauseAvant, focusAvant;
+    let pauseAvant,focusAvant,emplacements=null,enCours=0,initial=false,quota=3,raf=null;
+    function statut(message){
+      const p=el('p','lcdp-bandeau-image__galerie-etat');p.setAttribute('role','status');p.textContent=message;liste.replaceChildren(p);
+    }
+    function definirImages(donnees){
+      if(emplacements)return;
+      if(!donnees.length){statut('Aucune image disponible.');return;}
+      emplacements=donnees.map(im=>{
+        const caseImage=el('div','lcdp-bandeau-image__galerie-emplacement');caseImage.dataset.etat='attente';
+        return {im,caseImage,etat:'attente'};
+      });
+      liste.replaceChildren(...emplacements.map(item=>item.caseImage));
+      if(dialogue.open)planifier();
+    }
+    function erreurInventaire(){if(!emplacements)statut('La galerie est momentanément indisponible.');}
+    function planifier(){
+      if(!dialogue.open||!emplacements||raf!==null)return;
+      raf=window.requestAnimationFrame(()=>{raf=null;lancer();});
+    }
+    function lancer(){
+      if(!dialogue.open||!emplacements||enCours>=MAX_SIMULTANES)return;
+      let candidats;
+      if(initial){
+        const premiers=emplacements.slice(0,quota);
+        if(premiers.every(item=>item.etat==='prete'||item.etat==='echec'))initial=false;
+        else candidats=premiers.filter(item=>item.etat==='attente');
+      }
+      if(!initial){
+        const cadre=liste.getBoundingClientRect(),hauteur=liste.clientHeight||cadre.height;
+        if(!hauteur)return;
+        const marge=hauteur*AVANCE;
+        candidats=emplacements.filter(item=>item.etat==='attente').map(item=>{
+          const r=item.caseImage.getBoundingClientRect();
+          const visible=r.bottom>cadre.top&&r.top<cadre.bottom;
+          const distance=Math.max(0,cadre.top-r.bottom,r.top-cadre.bottom);
+          return {item,visible,distance};
+        }).filter(c=>c.visible||c.distance<=marge)
+          .sort((a,b)=>Number(b.visible)-Number(a.visible)||a.distance-b.distance).map(c=>c.item);
+      }
+      for(const item of candidats||[]){
+        if(enCours>=MAX_SIMULTANES)break;
+        charger(item);
+      }
+    }
+    function charger(item){
+      if(item.etat!=='attente')return;
+      item.etat='chargement';item.caseImage.dataset.etat='chargement';enCours++;
+      const img=el('img','lcdp-bandeau-image__galerie-photo');
+      img.alt=String(item.im.alt||'');img.width=1672;img.height=941;
+      // Seul le planificateur fixe les URL ; pas de requête native non contrôlée.
+      img.loading='eager';img.decoding='async';img.fetchPriority='high';
+      let termine=false;
+      const fin=ok=>{
+        if(termine)return;termine=true;img.onload=null;img.onerror=null;enCours--;
+        item.etat=ok?'prete':'echec';item.caseImage.dataset.etat=item.etat;
+        if(!ok){const texte=el('span');texte.textContent='Image indisponible';item.caseImage.replaceChildren(texte);}
+        planifier();
+      };
+      img.onload=()=>fin(true);img.onerror=()=>fin(false);
+      item.caseImage.replaceChildren(img);img.src=item.im.src;
+    }
+    function defilement(){initial=false;planifier();}
+    function redimensionnement(){quota=window.matchMedia('(min-width: 1024px)').matches?6:3;initial=false;planifier();}
+    liste.addEventListener('scroll',defilement,{passive:true});
     function ouvrir(focus=bouton||document.activeElement){
       if(dialogue.open)return;
-      if(!liste.childElementCount)for(const im of images){
-        const img=el('img','lcdp-bandeau-image__galerie-photo');img.alt=String(im.alt||'');img.loading='lazy';img.decoding='async';img.width=1672;img.height=941;img.src=im.src;liste.append(img);
-      }
       focusAvant=focus;
       if(zone){pauseAvant=zone.dataset.pause;zone.dataset.pause='true';}
+      if(emplacements){
+        for(const item of emplacements)if(item.etat==='echec'){
+          item.etat='attente';item.caseImage.dataset.etat='attente';item.caseImage.replaceChildren();
+        }
+      }else statut('Chargement des images…');
+      quota=window.matchMedia('(min-width: 1024px)').matches?6:3;initial=true;
       dialogue.showModal();document.documentElement.classList.add('lcdp-bandeau-galerie-ouverte');liste.scrollTop=0;fermer.focus();
+      window.addEventListener('resize',redimensionnement,{passive:true});
+      planifier();
     }
     fermer.addEventListener('click',()=>dialogue.close());
     dialogue.addEventListener('close',()=>{
+      if(raf!==null){window.cancelAnimationFrame(raf);raf=null;}
+      window.removeEventListener('resize',redimensionnement);
       document.documentElement.classList.remove('lcdp-bandeau-galerie-ouverte');
       if(zone)zone.dataset.pause=pauseAvant||'false';
       if(focusAvant?.isConnected)focusAvant.focus({preventScroll:true});
+      // Les requêtes déjà lancées finissent, sans en lancer de nouvelles.
     });
-    return {dialogue,ouvrir};
+    if(images)definirImages(images);
+    return {dialogue,ouvrir,definirImages,erreurInventaire};
   }
   function ajouterGalerie(zone,images,commandes){
     if(!zone.hasAttribute('data-lcdp-bandeau-galerie'))return null;
@@ -143,7 +217,7 @@
       image.src=im.src;
     }
     function lancer(){
-      if(arrete)return;
+      if(arrete||document.documentElement.classList.contains('lcdp-bandeau-galerie-ouverte'))return;
       minInitial=nombreInitial();
       const ouverture=document.body?.classList.contains('public-home--loading');
       // Avant la fin du spinner : seulement la portion visible et son avance.
@@ -175,10 +249,10 @@
     return inventaireEnCours;
   }
   function chargerCssGalerie(){
-    const href=new URL(objet('/CSSBASE/lcdp-bandeau-image.css'),document.baseURI);
+    const href=new URL(objet('/CSSBASE/lcdp-bandeau-image.css?v=20261118-galerie-progressive'),document.baseURI);
     if([...document.querySelectorAll('link[rel="stylesheet"]')].some(lien=>{
       const url=new URL(lien.href,document.baseURI);
-      return url.origin===href.origin&&url.pathname===href.pathname&&lien.sheet;
+      return url.href===href.href&&lien.sheet;
     }))return Promise.resolve();
     if(!cssEnCours)cssEnCours=new Promise((resolve,reject)=>{
       const lien=el('link');lien.rel='stylesheet';lien.href=href.href;
@@ -193,13 +267,17 @@
       const zone=document.querySelector('[data-lcdp-bandeau-image-public][data-lcdp-bandeau-galerie]');
       let galerie=zone&&states.get(zone)?.galerie;
       if(!galerie){
-        const [images]=await Promise.all([chargerInventaire(),chargerCssGalerie()]);
-        // Le bandeau peut terminer son initialisation pendant le chargement.
+        // CSS et inventaire en parallèle, sans attendre les images ni l'inventaire pour ouvrir.
+        const inventaire=chargerInventaire();
+        inventaire.catch(()=>{});
+        await chargerCssGalerie();
         galerie=zone&&states.get(zone)?.galerie;
         if(!galerie){
-          if(!images.length)throw Error('La galerie est vide');
-          if(!galerieAutonome||!galerieAutonome.dialogue.isConnected)galerieAutonome=creerGalerie(images);
+          if(!galerieAutonome||!galerieAutonome.dialogue.isConnected)galerieAutonome=creerGalerie(null);
           galerie=galerieAutonome;
+          galerie.ouvrir(focus);
+          inventaire.then(galerie.definirImages,galerie.erreurInventaire);
+          return;
         }
       }
       galerie.ouvrir(focus);
