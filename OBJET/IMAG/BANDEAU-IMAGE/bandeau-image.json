@@ -1,7 +1,11 @@
 {
   "schema": 1,
-  "revision": "83fa4673-6628-4f1f-a131-e1e5a1663187",
+  "revision": "121f6cdc-c8a9-4a4a-b399-41fcc38cb2f3",
   "images": [
+    {
+      "id": "cc38c893-bfe2-4033-a7c9-a85fd7436c67",
+      "alt": ""
+    },
     {
       "id": "c0b6e1ac-d278-4969-9b04-f1551fe0f549",
       "alt": ""
