@@ -816,13 +816,12 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 }
 /* Zoom photo commun : +5 %, dans le cadre d'origine et sans mouvement sur écran tactile. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  :where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image),
+  :where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):not(.lcdp-box-carousel *),
   :where(html[data-lcdp-css~="c085"]) .lcdp-editorial-hero > img.lcdp-editorial-hero__image,
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__image,
   :where(html[data-lcdp-css~="c085"]) .lcdp-actu-image-frame > img.lcdp-actu-image {
     transition: scale .7s ease, clip-path .7s ease;
   }
-  :where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image) {
+  :where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):not(.lcdp-box-carousel *) {
     /* Un cadre autonome conserve son emprise : (1 - 1/1.05) / 2. */
     clip-path: inset(0 round var(--lcdp-photo-zoom-radius, 0px));
   }
@@ -838,12 +837,11 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   :where(html[data-lcdp-css~="c042"]) img.lcdp-box-galerie__image {
     --lcdp-photo-zoom-radius: 12px;
   }
-  :where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):hover {
+  :where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):not(.lcdp-box-carousel *):hover {
     scale: 1.05;
     clip-path: inset(2.380953% round calc(var(--lcdp-photo-zoom-radius, 0px) / 1.05));
   }
   :where(html[data-lcdp-css~="c085"]) .lcdp-editorial-hero:hover > img.lcdp-editorial-hero__image,
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__viewport:hover .lcdp-box-carousel__item.is-active .lcdp-box-carousel__image,
   :where(html[data-lcdp-css~="c085"]) .lcdp-actu-image-frame:hover > img.lcdp-actu-image {
     scale: 1.05;
   }
@@ -1187,6 +1185,11 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   object-fit: cover;
   object-position: center;
   transition: transform .7s ease;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__viewport:hover .lcdp-box-carousel__item.is-active .lcdp-box-carousel__image {
+    transform: scale(1.05);
+  }
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__item--with-title::after {
   content: "";
