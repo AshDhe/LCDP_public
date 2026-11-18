@@ -6,19 +6,6 @@ window.SITE_BASE = window.SITE_CONFIG?.publicBaseUrl || window.SITE_CONFIG?.site
 (() => {
   "use strict";
 
-  const page = document.documentElement.dataset.lcdpEditorialPage;
-  if (page !== "association" && page !== "club") return;
-
-  function initialiserAttente() {
-    const attente = document.getElementById("lcdp-attente-arrivee");
-    if (!attente) return;
-    const terminer = () => attente.remove();
-    window.LCDP_terminerAttenteArrivee = terminer;
-    attente.hidden = false;
-    window.setTimeout(terminer, 15000);
-    window.addEventListener("pageshow", event => { if (event.persisted) terminer(); });
-  }
-
   const IMAGES_CARROUSEL_HELLO = [
     {
       src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_1.webp",
@@ -51,6 +38,22 @@ window.SITE_BASE = window.SITE_CONFIG?.publicBaseUrl || window.SITE_CONFIG?.site
       texte: "Un parc près de chez vous\u00a0?"
     },
   ];
+
+  // Source et rendu uniques, y compris pour la page Hello.
+  window.LCDP_initialiserCarrouselHello = initialiserCarrouselHello;
+
+  const page = document.documentElement.dataset.lcdpEditorialPage;
+  if (page !== "association" && page !== "club") return;
+
+  function initialiserAttente() {
+    const attente = document.getElementById("lcdp-attente-arrivee");
+    if (!attente) return;
+    const terminer = () => attente.remove();
+    window.LCDP_terminerAttenteArrivee = terminer;
+    attente.hidden = false;
+    window.setTimeout(terminer, 15000);
+    window.addEventListener("pageshow", event => { if (event.persisted) terminer(); });
+  }
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initialiserHello);
@@ -289,11 +292,55 @@ window.SITE_BASE = window.SITE_CONFIG?.publicBaseUrl || window.SITE_CONFIG?.site
     }
   }
 
+  async function lireCarrouselHello() {
+    try {
+      const r = await fetch(construireUrlSite("/OBJET/IMAG/CARROUSEL/carrousels.json"), {
+        cache: "no-cache", credentials: "same-origin"
+      });
+      if (!r.ok) throw new Error("Inventaire carrousels indisponible");
+      const data = await r.json();
+      if (data.schema !== 1 || !Array.isArray(data.carrousels) || typeof data.revision !== "string") {
+        throw new Error("Inventaire carrousels invalide");
+      }
+      const carrousel = data.carrousels.find(c => c.id === "page-hello");
+      if (!carrousel) return null;
+      if (!/^[A-Z0-9][A-Z0-9_-]{0,63}$/.test(carrousel.dossier) ||
+          !Array.isArray(carrousel.images) || !carrousel.images.length) throw new Error("Carrousel Hello invalide");
+      return {
+        titre: carrousel.titre,
+        images: carrousel.images.map((im,index) => ({
+          src: "/OBJET/IMAG/CARROUSEL/" + carrousel.dossier + "/IMAG_" + (index+1) + ".webp?v=" + encodeURIComponent(data.revision),
+          alt: String(im.alt || ""), texte: String(im.titre || ""), legende: String(im.legende || "")
+        }))
+      };
+    } catch (error) {
+      // Conserver le rendu historique en cas d'indisponibilité temporaire.
+      console.warn("Inventaire carrousels Hello :", error);
+      return {titre:"Demandez La Clé",images:IMAGES_CARROUSEL_HELLO.map(im=>({...im,legende:"Illustration IA"}))};
+    }
+  }
+
   async function initialiserCarrouselHello() {
     const slot = document.getElementById("lcdp-carrousel-hello-slot");
 
     if (!slot) {
       return;
+    }
+
+    const configCarrousel = await lireCarrouselHello();
+    const section = slot.closest(".lcdp-editorial-feature");
+    const titreGeneral = slot.previousElementSibling?.matches("[data-lcdp-boxtext-title]")
+      ? slot.previousElementSibling
+      : null;
+    if (!configCarrousel) {
+      if (section) section.hidden = true;
+      else slot.hidden = true;
+      if (titreGeneral) titreGeneral.hidden = true;
+      return;
+    }
+    if (titreGeneral) {
+      titreGeneral.textContent = String(configCarrousel.titre || "");
+      titreGeneral.hidden = !titreGeneral.textContent.trim();
     }
 
     slot.innerHTML =
@@ -313,9 +360,10 @@ window.SITE_BASE = window.SITE_CONFIG?.publicBaseUrl || window.SITE_CONFIG?.site
     const liste = slot.querySelector("[data-lcdp-carousel-list]");
 
     if (liste) {
-      IMAGES_CARROUSEL_HELLO.forEach((image, index) => {
+      configCarrousel.images.forEach((image, index) => {
         const figure = document.createElement("figure");
         figure.className = "lcdp-box-carousel__item";
+        figure.dataset.lcdpSlideLegend = String(image.legende || "");
 
         if (index === 0) {
           figure.classList.add("is-active");
@@ -339,7 +387,7 @@ window.SITE_BASE = window.SITE_CONFIG?.publicBaseUrl || window.SITE_CONFIG?.site
 
         figure.appendChild(img);
 
-        // Conserver le titre complet et ses espaces insécables.
+        // Titre éditorial de l'image.
         // Le contenu est inséré comme texte, jamais comme HTML.
         const titre = String(image.texte || "").trim();
         if (titre) {

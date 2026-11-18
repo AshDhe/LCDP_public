@@ -1,39 +1,6 @@
 (() => {
   "use strict";
 
-  const IMAGES_CARROUSEL_HELLO = [
-    {
-      src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_1.webp",
-      alt: "Lieux remarquables et parcs d'exception avec La Clé du Parc",
-      texte: "Des lieux d'exception"
-    },
-    {
-      src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_2.webp",
-      alt: "Prendre soin de soi et de ses proches La Clé du Parc",
-      texte: "Prendre soin de soi"
-    },
-    {
-      src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_3.webp",
-      alt: "Se réunir en famille avec La Clé du Parc",
-      texte: "Se réunir en famille"
-    },
-    {
-      src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_4.webp",
-      alt: "Réunir ses amis avec La Clé du Parc",
-      texte: "Réunir ses amis"
-    },
-    {
-      src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_5.webp",
-      alt: "Activités de loisir plein air avec La Clé du Parc",
-      texte: "Organiser son activité"
-    },
-    {
-      src: "/OBJET/IMAG/CARROUSEL/PAGE-HELLO/IMAG_6.webp",
-      alt: "Un parc près de chez soi avec La Clé du Parc",
-      texte: "Un parc près de chez vous\u00a0?"
-    },
-  ];
-
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initialiserHello);
   } else {
@@ -52,7 +19,7 @@
     initialiserFooterHello().catch((erreur) => {
       console.error("Erreur footer hello :", erreur);
     });
-    initialiserCarrouselHello().catch((erreur) => {
+    window.LCDP_initialiserCarrouselHello().catch((erreur) => {
       console.error("Erreur carrousel hello :", erreur);
     });
     afficherErreurAccesSiNecessaire();
@@ -289,152 +256,6 @@
   }
 
   // Le manifeste et les images sont publiés ensemble dans LCDP_public.
-  async function lireCarrouselHello() {
-    try {
-      const r = await fetch(construireUrlSite("/OBJET/IMAG/CARROUSEL/carrousels.json"), {
-        cache: "no-cache", credentials: "same-origin"
-      });
-      if (!r.ok) throw new Error("Inventaire carrousels indisponible");
-      const data = await r.json();
-      if (data.schema !== 1 || !Array.isArray(data.carrousels) || typeof data.revision !== "string") {
-        throw new Error("Inventaire carrousels invalide");
-      }
-      const carrousel = data.carrousels.find(c => c.id === "page-hello");
-      if (!carrousel) return null;
-      if (!/^[A-Z0-9][A-Z0-9_-]{0,63}$/.test(carrousel.dossier) ||
-          !Array.isArray(carrousel.images) || !carrousel.images.length) throw new Error("Carrousel Hello invalide");
-      return {
-        titre: carrousel.titre,
-        images: carrousel.images.map((im,index) => ({
-          src: "/OBJET/IMAG/CARROUSEL/" + carrousel.dossier + "/IMAG_" + (index+1) + ".webp?v=" + encodeURIComponent(data.revision),
-          alt: String(im.alt || ""), texte: String(im.titre || ""), legende: String(im.legende || "")
-        }))
-      };
-    } catch (error) {
-      // Conserver le rendu historique en cas d'indisponibilité temporaire.
-      console.warn("Inventaire carrousels Hello :", error);
-      return {titre:"Demandez La Clé",images:IMAGES_CARROUSEL_HELLO.map(im=>({...im,legende:"Illustration IA"}))};
-    }
-  }
-
-  async function initialiserCarrouselHello() {
-    const slot = document.getElementById("lcdp-carrousel-hello-slot");
-
-    if (!slot) {
-      return;
-    }
-
-    const configCarrousel = await lireCarrouselHello();
-    const section = slot.closest(".lcdp-editorial-feature");
-    if (!configCarrousel) {
-      if (section) section.hidden = true;
-      else slot.hidden = true;
-      return;
-    }
-    const titreGeneral = section?.querySelector("[data-lcdp-boxtext-title]");
-    if (titreGeneral) {
-      titreGeneral.textContent = String(configCarrousel.titre || "");
-      titreGeneral.hidden = !titreGeneral.textContent.trim();
-    }
-
-    slot.innerHTML =
-      '<section class="lcdp-component lcdp-box-carousel" data-lcdp-box-carousel>' +
-        '<div class="lcdp-box-carousel__frame" data-lcdp-carousel-frame>' +
-          '<div class="lcdp-box-carousel__viewport">' +
-            '<div class="lcdp-box-carousel__list" data-lcdp-carousel-list></div>' +
-          '</div>' +
-          '<button class="lcdp-box-carousel__button lcdp-box-carousel__button--prev" type="button" aria-label="Image précédente" data-lcdp-carousel-prev>‹</button>' +
-          '<button class="lcdp-box-carousel__button lcdp-box-carousel__button--next" type="button" aria-label="Image suivante" data-lcdp-carousel-next>›</button>' +
-        '</div>' +
-        '<p class="lcdp-image-legend" data-lcdp-carousel-legend>Illustration IA</p>' +
-        '<div class="lcdp-box-carousel__dots" aria-label="Navigation carrousel" data-lcdp-carousel-dots></div>' +
-      '</section>';
-
-    const carrousel = slot.querySelector("[data-lcdp-box-carousel]");
-    const liste = slot.querySelector("[data-lcdp-carousel-list]");
-
-    if (liste) {
-      configCarrousel.images.forEach((image, index) => {
-        const figure = document.createElement("figure");
-        figure.className = "lcdp-box-carousel__item";
-        figure.dataset.lcdpSlideLegend = String(image.legende || "");
-
-        if (index === 0) {
-          figure.classList.add("is-active");
-          figure.setAttribute("aria-hidden", "false");
-        } else {
-          figure.setAttribute("aria-hidden", "true");
-        }
-
-        const img = document.createElement("img");
-        img.className = "lcdp-box-carousel__image";
-        img.alt = image.alt || "";
-        img.decoding = "async";
-        appliquerFallbackImage(img, image.src);
-
-        if (index === 0) {
-          img.loading = "eager";
-          img.setAttribute("fetchpriority", "high");
-        } else {
-          img.loading = "lazy";
-        }
-
-        figure.appendChild(img);
-
-        // Titre éditorial de l'image.
-        // Le contenu est inséré comme texte, jamais comme HTML.
-        const titre = String(image.texte || "").trim();
-        if (titre) {
-          const legende = document.createElement("figcaption");
-          legende.className = "lcdp-box-carousel__overlay-title";
-          legende.textContent = titre;
-          figure.appendChild(legende);
-          figure.classList.add("lcdp-box-carousel__item--with-title");
-        }
-
-        liste.appendChild(figure);
-      });
-    }
-
-    if (carrousel && typeof window.LCDP_initialiserCarrousels === "function") {
-      window.LCDP_initialiserCarrousels(slot);
-    }
-  }
-
-  function construireVariantesImage(src) {
-    const valeur = String(src || "");
-
-    if (!valeur.toLowerCase().endsWith(".jpg")) {
-      return [src];
-    }
-
-    const base = valeur.slice(0, -4);
-
-    return [
-      valeur,
-      base + ".JPG",
-      base + ".jpeg",
-      base + ".JPEG",
-      base + ".webp",
-      base + ".WEBP"
-    ];
-  }
-
-  function appliquerFallbackImage(imageElement, srcInitial) {
-    const variantes = construireVariantesImage(srcInitial);
-    let indexTentative = 0;
-
-    imageElement.addEventListener("error", () => {
-      indexTentative += 1;
-
-      if (variantes[indexTentative]) {
-        imageElement.src = construireUrlSite(variantes[indexTentative]);
-      }
-    });
-
-    imageElement.src = construireUrlSite(variantes[indexTentative]);
-  }
-
   function emailValidePourAccesPublic(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
   }
