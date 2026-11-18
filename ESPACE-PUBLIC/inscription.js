@@ -135,6 +135,7 @@
 
   function initialiserPage() {
     appliquerRoutesSite(document);
+    window.LCDP_initialiserCarrouselHello?.().catch((erreur) => console.error("Erreur carrousel inscription :", erreur));
     // Une erreur du bandeau ne doit pas empêcher le chargement du footer.
     initialiserBandeau().catch((erreur) => console.error("Erreur bandeau inscription :", erreur));
     initialiserFooter().catch((erreur) => console.error("Erreur footer inscription :", erreur));
