@@ -2,224 +2,40 @@
 <html lang="fr" data-lcdp-css="c085 c034 c038 c032 c083 c036 c033 c037 c041 c040 p0fdefe76cf13">
 <head>
   <meta charset="utf-8">
-
-  <title>Page en cours de mise à jour - La Clé du Parc</title>
-
+  <title>FAQ - La Clé du Parc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Cette page est en cours de mise à jour.">
-
-  <script src="../config.js"></script>
-
-  <script>
-    window.SITE_BASE =
-      window.SITE_CONFIG?.publicBaseUrl ||
-      window.SITE_CONFIG?.siteBase ||
-      "";
-  </script>
-
+  <meta name="description" content="Les réponses aux questions fréquentes sur La Clé du Parc.">
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
+  <link rel="stylesheet" href="./faq-accordeon.css">
+  <script src="../config.js"></script>
+  <script>
+    (() => {
+      "use strict";
+      const c = window.SITE_CONFIG || {};
+      const joindre = (base, chemin) => String(base || "").replace(/\/+$/, "") + "/" + String(chemin).replace(/^\/+/, "");
+      const publicUrl = path => typeof c.publicUrl === "function" ? c.publicUrl(path) : joindre(c.publicBaseUrl || c.PUBLIC_BASE || c.siteBase || "", path);
+      const objetUrl = path => typeof c.objetUrl === "function" ? c.objetUrl(path) : (c.objetBaseUrl || c.OBJET_BASE) ? joindre(c.objetBaseUrl || c.OBJET_BASE, path) : publicUrl("/OBJET/" + String(path).replace(/^\/+/, ""));
+      window.LCDP_FAQ_PAGE = { membre: false, publicUrl, objetUrl, stylesPrets: Promise.resolve() };
+    })();
+  </script>
+  <script src="./faq-accordeon.js" defer></script>
+  <script src="./faq.js?v=20261118-faq-membre" defer></script>
 </head>
-
-<body class="lcdp-page-document-legal lcdp-app-page">
+<body class="lcdp-page-document-legal lcdp-app-page lcdp-page-faq">
   <div class="lcdp-site-page lcdp-app-wrapper">
-
     <div id="lcdp-bandeau-slot"></div>
-
-    <main class="lcdp-site-main">
-      <section class="lcdp-page-section" aria-label="Page en cours de mise à jour">
+    <main class="lcdp-site-main" id="contenu-principal">
+      <section class="lcdp-page-section" aria-labelledby="lcdp-faq-titre">
         <div class="lcdp-page-container">
-          <h2 class="lcdp-boxtext__title lcdp-boxtext__title--center" style="margin-bottom: 24px;">FAQ espace public</h2>
-          <div class="lcdp-section-sommeil" role="status" aria-labelledby="lcdp-section-sommeil-titre">
-              <div class="lcdp-section-sommeil__icone" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
-                  <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4" />
-                </svg>
-              </div>
-              <h1 id="lcdp-section-sommeil-titre" class="lcdp-section-sommeil__titre">Page inactive</h1>
-              <p class="lcdp-section-sommeil__texte">Nous ne diffusons pas cette page pour le moment. Cette page est inactive.</p>
-            </div>
+          <h1 id="lcdp-faq-titre" class="lcdp-boxtext__title lcdp-boxtext__title--center" style="margin-bottom: 24px;">FAQ espace public</h1>
+          <p id="lcdp-faq-status" role="status">Chargement des FAQ…</p>
+          <div id="lcdp-faq-liste" aria-busy="true"></div>
+          <noscript><p>Activez JavaScript pour consulter les FAQ.</p></noscript>
         </div>
       </section>
     </main>
-
     <div id="lcdp-footer-slot"></div>
     <div id="lcdp-lightbox-slot"></div>
-
   </div>
-
-<script>
-    (() => {
-      "use strict";
-
-      const siteBase = (
-        window.SITE_BASE ||
-        window.SITE_CONFIG?.publicBaseUrl ||
-        window.SITE_CONFIG?.siteBase ||
-        ""
-      ).replace(/\/$/, "");
-
-      function construireUrlSite(chemin) {
-        if (!chemin) return chemin;
-
-        if (
-          chemin.startsWith("#") ||
-          chemin.startsWith("mailto:") ||
-          chemin.startsWith("tel:") ||
-          chemin.startsWith("http://") ||
-          chemin.startsWith("https://") ||
-          chemin.startsWith("data:")
-        ) {
-          return chemin;
-        }
-
-        if (siteBase) {
-          return chemin.startsWith("/")
-            ? siteBase + chemin
-            : siteBase + "/" + chemin.replace(/^\.\//, "");
-        }
-
-        return chemin.startsWith("/") ? ".." + chemin : chemin;
-      }
-
-      function appliquerRoutesSite(racine = document) {
-        racine.querySelectorAll("[data-site-href]").forEach((element) => {
-          element.setAttribute("href", construireUrlSite(element.dataset.siteHref));
-        });
-
-        racine.querySelectorAll("[data-site-src]").forEach((element) => {
-          element.setAttribute("src", construireUrlSite(element.dataset.siteSrc));
-        });
-      }
-
-      async function chargerFragment(chemin) {
-        const reponse = await fetch(construireUrlSite(chemin), {
-          method: "GET",
-          credentials: "same-origin",
-          cache: "no-cache"
-        });
-
-        if (!reponse.ok) {
-          throw new Error("Fragment introuvable : " + chemin);
-        }
-
-        const html = await reponse.text();
-        const template = document.createElement("template");
-        template.innerHTML = html.trim();
-
-        return template.content.cloneNode(true);
-      }
-
-      function chargerScriptUneFois(chemin) {
-        const src = construireUrlSite(chemin);
-
-        if (document.querySelector(`script[data-lcdp-script="${chemin}"]`)) {
-          return Promise.resolve();
-        }
-
-        return new Promise((resolve, reject) => {
-          const script = document.createElement("script");
-          script.src = src;
-          script.defer = true;
-          script.dataset.lcdpScript = chemin;
-          script.onload = resolve;
-          script.onerror = () => reject(new Error("Script introuvable : " + chemin));
-          document.body.appendChild(script);
-        });
-      }
-
-      async function afficherDialogueMonCompte() {
-        const slot = document.getElementById("lcdp-lightbox-slot");
-        slot.innerHTML = "";
-
-        const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-bouton.html");
-        slot.appendChild(fragment);
-
-        const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
-
-        dialogue.querySelector("[data-lcdp-dialogue-title]").textContent = "Mon compte";
-        dialogue.querySelector("[data-lcdp-dialogue-text]").textContent =
-          "Choisissez l’espace de connexion adapté à votre situation.";
-
-        const actions = dialogue.querySelector("[data-lcdp-dialogue-actions]");
-
-        const boutons = [
-          {
-            label: "Me connecter",
-            href: "/ESPACE-PUBLIC/connexion-membre.html",
-            style: "lcdp-button-primary"
-          },
-          {
-            label: "Être invité(e)",
-            href: "/ESPACE-PUBLIC/inscription.html",
-            style: "lcdp-button-secondary"
-          }
-        ];
-
-        boutons.forEach((bouton) => {
-          const lien = document.createElement("a");
-          lien.className = "lcdp-button " + bouton.style;
-          lien.textContent = bouton.label;
-          lien.href = construireUrlSite(bouton.href);
-          actions.appendChild(lien);
-        });
-
-        const fermer = () => {
-          slot.innerHTML = "";
-        };
-
-        dialogue.querySelector("[data-lcdp-dialogue-close]").addEventListener("click", fermer);
-
-        dialogue.addEventListener("click", (event) => {
-          if (event.target === dialogue) {
-            fermer();
-          }
-        });
-      }
-
-      window.LCDP_ouvrirDialogueMonCompte = afficherDialogueMonCompte;
-
-      document.addEventListener("lcdp:ouvrir-dialogue-mon-compte", () => {
-        afficherDialogueMonCompte().catch(console.error);
-      });
-
-      async function initialiserBandeau() {
-        const slot = document.getElementById("lcdp-bandeau-slot");
-        slot.innerHTML = "";
-
-        const bandeau = await chargerFragment("/ESPACE-PUBLIC/box-bandeau-nav-public.html");
-        slot.appendChild(bandeau);
-
-        appliquerRoutesSite(slot);
-
-        await chargerScriptUneFois("/ESPACE-PUBLIC/box-menu-burger-public.js");
-
-        if (typeof window.LCDP_initialiserMenuBurgerPublic === "function") {
-          await window.LCDP_initialiserMenuBurgerPublic();
-        }
-      }
-
-      async function initialiserFooter() {
-        const slot = document.getElementById("lcdp-footer-slot");
-        slot.innerHTML = "";
-
-        const footer = await chargerFragment("/OBJET/HTMLBASE/02-footer.html");
-        slot.appendChild(footer);
-
-        appliquerRoutesSite(slot);
-      }
-
-      async function initialiserPage() {
-        appliquerRoutesSite(document);
-
-        await initialiserBandeau();
-
-        await initialiserFooter();
-      }
-
-      initialiserPage().catch((erreur) => {
-        console.error(erreur);
-      });
-    })();
-  </script>
 </body>
 </html>
