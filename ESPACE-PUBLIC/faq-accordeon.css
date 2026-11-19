@@ -8,11 +8,37 @@
 .lcdp-faq__question:focus-visible { outline:none; background:#55733f15; }
 .lcdp-faq__panel { overflow:hidden; }
 .lcdp-faq__panel[hidden] { display:none; }
-.lcdp-faq__reponse { padding:0 24px 24px; overflow-wrap:anywhere; }
-.lcdp-faq__reponse > :first-child { margin-top:0; }
-.lcdp-faq__reponse > :last-child { margin-bottom:0; }
-.lcdp-faq__reponse a { color:inherit; text-decoration:underline; }
+.lcdp-faq__reponse {
+  display:block;
+  min-width:0;
+  padding:var(--lcdp-space-3,18px) var(--lcdp-space-4,24px) var(--lcdp-space-4,24px);
+  color:var(--lcdp-color-text,#1f2a24);
+  font-family:var(--lcdp-font-main,system-ui,sans-serif);
+  font-size:var(--lcdp-font-size-paragraph-desktop,15.3px);
+  font-weight:400;
+  line-height:1.58;
+  text-align:left;
+  overflow-wrap:anywhere;
+}
+/* Le contenu FAQ est indépendant de la typographie des documents légaux. */
+.lcdp-faq .lcdp-faq__reponse :is(p,ul,ol,li,strong,em,a) {
+  font-family:inherit;
+  font-size:inherit;
+  line-height:inherit;
+  color:inherit;
+}
+.lcdp-faq .lcdp-faq__reponse :is(p,ul,ol) { margin:0; }
+.lcdp-faq .lcdp-faq__reponse > :is(p,ul,ol) + :is(p,ul,ol) { margin-top:0.9rem; }
+.lcdp-faq .lcdp-faq__reponse :is(ul,ol) { padding-inline-start:1.55rem; }
+.lcdp-faq .lcdp-faq__reponse ul { list-style:disc outside; }
+.lcdp-faq .lcdp-faq__reponse ol { list-style:decimal outside; }
+.lcdp-faq .lcdp-faq__reponse li { margin:0; padding-inline-start:0.12rem; }
+.lcdp-faq .lcdp-faq__reponse li + li { margin-top:0.18rem; }
+.lcdp-faq .lcdp-faq__reponse strong { font-weight:700; }
+.lcdp-faq .lcdp-faq__reponse em { font-style:italic; }
+.lcdp-faq .lcdp-faq__reponse a { color:var(--lcdp-color-primary,#234438); text-decoration:underline; text-underline-offset:3px; }
+.lcdp-faq__reponse > br { display:none; }
 .lcdp-faq > p { padding:20px 24px; }
-@media(max-width:600px) { .lcdp-faq__question { padding:18px 16px; font-size:1rem; gap:14px; } .lcdp-faq__reponse { padding:0 16px 20px; } }
+@media(max-width:600px) { .lcdp-faq__question { padding:18px 16px; font-size:1rem; gap:14px; } .lcdp-faq__reponse { padding:var(--lcdp-space-2,12px) 16px 20px; } }
 
 .lcdp-faq__item { scroll-margin-top: 110px; }
