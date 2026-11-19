@@ -32153,6 +32153,11 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   font: 500 12px/1.5 Arial,system-ui,sans-serif;
   cursor: pointer;
 }
+/* Champ de mot de passe : léger espace avant la commande d'affichage.
+   autocomplete conserve le ciblage quand le mot de passe devient visible. */
+.lcdp-box-champ-formulaire :is(input[type="password"],input[autocomplete="current-password"],input[autocomplete="new-password"]) + .lcdp-box-champ-formulaire__checkbox-line {
+  margin-top: 6px;
+}
 :where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-champ-formulaire__checkbox-line input[type="checkbox"] {
   box-sizing: border-box;
   display: block;
@@ -33492,13 +33497,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 }
 
 
-/* Ajustements generiques de connexion et de changement de compte.
-   Portee limitee aux trois formulaires de connexion et aux boutons
-   de choix de compte dans le dialogue commun. */
-body:is(.lcdp-connexion-membre, .lcdp-connexion-parc, .lcdp-connexion-coach)
-  .lcdp-box-champ-formulaire__control > .lcdp-box-champ-formulaire__checkbox-line {
-  margin-top: 12px;
-}
 
 /* Reutilise les couleurs de compte existantes et les regles communes
    de bouton (y compris hover) via les variables generiques. */
