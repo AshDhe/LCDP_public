@@ -71,7 +71,13 @@
     }
     async function cibler(item, defiler = false, donnerFocus = false) {
       const sequence = ++navigation;
-      await Promise.all(elements.map(autre => ouvrir(autre, autre === item)));
+      // Fermer les autres panneaux avant de déployer celui demandé, même en cours d'animation.
+      for (const autre of elements) {
+        if (autre !== item && (!autre.panel.hidden || autre.button.getAttribute("aria-expanded") === "true")) {
+          void ouvrir(autre, false, false);
+        }
+      }
+      await ouvrir(item, true);
       if (sequence !== navigation || !defiler) return;
       item.article.scrollIntoView({ behavior: "auto", block: "start" });
       if (donnerFocus) item.button.focus({ preventScroll: true });
@@ -111,7 +117,7 @@
           if (liensDirects && window.location.hash === "#" + item.ancre) {
             const url = new URL(window.location.href); url.hash = ""; window.history.replaceState(null, "", url.href);
           }
-        } else { ++navigation; actualiserAdresse(item); void ouvrir(item, true); }
+        } else { actualiserAdresse(item); void cibler(item); }
       });
     }
     function suivreLien(event) {
