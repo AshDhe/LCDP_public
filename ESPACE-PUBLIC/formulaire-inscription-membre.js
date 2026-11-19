@@ -106,20 +106,8 @@
     },
     noteHtml: `
       * Votre réponse nécessaire.<br>
-      Ce formulaire est soumis au
-      <a
-        href="../ESPACE-PUBLIC/reglement-club.html"
-        data-site-href="/ESPACE-PUBLIC/reglement-club.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >règlement du club</a>
-      et au
-      <a
-        href="../ESPACE-PUBLIC/reglement-app.html"
-        data-site-href="/ESPACE-PUBLIC/reglement-app.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >règlement de l'application</a>.
+      Ce formulaire est soumis au règlement du club<br>
+      et au règlement de l'application.
     `
   };
 
