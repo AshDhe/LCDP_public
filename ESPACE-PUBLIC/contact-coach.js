@@ -77,6 +77,7 @@
     "label": "Envoyer ma demande",
     "style": "lcdp-button-primary"
   },
+  "noteHtml": "Les informations que vous partagez dans ce formulaire sont soumises à l'application des <a href=\"#mentions-legales\" data-lcdp-ouvrir-mentions-legales>mentions légales</a> et exclusivement réservées au club La Clé du Parc dans le cadre de votre demande.",
   "introHtml": `<div class="lcdp-box-formulaire__note" style="text-align: center !important;">Cette demande ne crée pas de compte COACH. Notre équipe vous recontacte pour étudier votre demande.</div>
     <section class="lcdp-boxtext__content" aria-labelledby="contact-coach-compte-title">
       <h2 id="contact-coach-compte-title" class="lcdp-text-strong-left" style="font-weight: 700 !important; text-align: center !important;">Le compte COACH La Clé du Parc</h2>

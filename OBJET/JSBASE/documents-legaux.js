@@ -313,7 +313,9 @@
 
   function estPageRestreinteMentions() {
     return document.body?.classList.contains("lcdp-page-hello") ||
-      document.body?.classList.contains("lcdp-page-formulaire-liste-attente");
+      document.body?.classList.contains("lcdp-page-formulaire-liste-attente") ||
+      document.body?.classList.contains("lcdp-page-contact-coach") ||
+      document.body?.classList.contains("lcdp-page-contact-parc");
   }
 
   function endpointEditingAdmin() {
@@ -719,7 +721,8 @@
 
     const lien = element.closest(
       "[data-lcdp-box-footer] a[href*='mentions-legales'], " +
-      "[data-lcdp-box-footer] a[data-site-href*='mentions-legales']"
+      "[data-lcdp-box-footer] a[data-site-href*='mentions-legales'], " +
+      "a[data-lcdp-ouvrir-mentions-legales]"
     );
 
     return lien || false;

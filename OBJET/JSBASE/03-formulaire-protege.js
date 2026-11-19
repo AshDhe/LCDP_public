@@ -186,7 +186,7 @@
     const confirme=await message(confirmation,{retourAccueil:contact});
     if(contact && confirme){
      const c=window.SITE_CONFIG||{};
-     const chemin='/ESPACE-PUBLIC/accueil-public.html';
+     const chemin='/ESPACE-PUBLIC/hello.html';
      const base=String(c.publicBaseUrl||c.PUBLIC_BASE||window.SITE_BASE||c.siteBase||'').replace(/\/+$/,'');
      window.location.assign(typeof c.publicUrl==='function'?c.publicUrl(chemin):base+chemin);
     }

@@ -31,18 +31,6 @@
     });
   }
 
-  async function chargerFragment(chemin) {
-    const reponse = await fetch(construireUrlSite(chemin), {
-      method: "GET",
-      credentials: "same-origin",
-      cache: "no-cache"
-    });
-    if (!reponse.ok) throw new Error("Fragment introuvable : " + chemin);
-    const template = document.createElement("template");
-    template.innerHTML = (await reponse.text()).trim();
-    return template.content.cloneNode(true);
-  }
-
   function chargerScriptUneFois(chemin) {
     const src = construireUrlSite(chemin);
     if (document.querySelector(`script[data-lcdp-script="${chemin}"]`)) return Promise.resolve();
@@ -58,69 +46,12 @@
     });
   }
 
-  async function afficherDialogueMonCompte() {
-    const slot = document.getElementById("lcdp-lightbox-slot");
-    slot.innerHTML = "";
-
-    const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-bouton.html");
-    slot.appendChild(fragment);
-
-    const dialogue = slot.querySelector("[data-lcdp-box-dialogue-bouton]");
-    dialogue.querySelector("[data-lcdp-dialogue-title]").textContent = "Mon compte";
-    dialogue.querySelector("[data-lcdp-dialogue-text]").textContent = "Choisissez l’espace de connexion adapté à votre situation.";
-
-    const actions = dialogue.querySelector("[data-lcdp-dialogue-actions]");
-
-    [
-      { label: "Me connecter", href: "/ESPACE-PUBLIC/connexion-membre.html", style: "lcdp-button-primary" },
-      { label: "Être invité(e)", href: "/ESPACE-PUBLIC/inscription.html", style: "lcdp-button-secondary" }
-    ].forEach((bouton) => {
-      const lien = document.createElement("a");
-      lien.className = "lcdp-button " + bouton.style;
-      lien.textContent = bouton.label;
-      lien.href = construireUrlSite(bouton.href);
-      actions.appendChild(lien);
-    });
-
-    const fermer = () => {
-      slot.innerHTML = "";
-    };
-
-    dialogue.querySelector("[data-lcdp-dialogue-close]").addEventListener("click", fermer);
-    dialogue.addEventListener("click", (event) => {
-      if (event.target === dialogue) fermer();
-    });
-  }
-
-  window.LCDP_ouvrirDialogueMonCompte = afficherDialogueMonCompte;
-  document.addEventListener("lcdp:ouvrir-dialogue-mon-compte", () => {
-    afficherDialogueMonCompte().catch(console.error);
-  });
-
-  async function initialiserBandeau() {
-    const slot = document.getElementById("lcdp-bandeau-slot");
-    slot.innerHTML = "";
-    slot.appendChild(await chargerFragment("/ESPACE-PUBLIC/box-bandeau-nav-public.html"));
-    appliquerRoutesSite(slot);
-    await chargerScriptUneFois("/ESPACE-PUBLIC/box-menu-burger-public.js");
-    if (typeof window.LCDP_initialiserMenuBurgerPublic === "function") {
-      await window.LCDP_initialiserMenuBurgerPublic();
-    }
-  }
-
-  async function initialiserFooter() {
-    const slot = document.getElementById("lcdp-footer-slot");
-    slot.innerHTML = "";
-    slot.appendChild(await chargerFragment("/OBJET/HTMLBASE/02-footer.html"));
-    appliquerRoutesSite(slot);
-  }
-
   async function initialiserDemande() {
     await chargerScriptUneFois("/OBJET/JSBASE/03-formulaire.js");
-    await chargerScriptUneFois("/OBJET/JSBASE/03-formulaire-protege.js");
+    await chargerScriptUneFois("/OBJET/JSBASE/03-formulaire-protege.js?v=20261119-contact-isole");
     await chargerScriptUneFois(estCoach
-      ? "/ESPACE-PUBLIC/contact-coach.js"
-      : "/ESPACE-PUBLIC/contact-resparc.js");
+      ? "/ESPACE-PUBLIC/contact-coach.js?v=20261119-contact-isole"
+      : "/ESPACE-PUBLIC/contact-resparc.js?v=20261119-contact-isole");
     const initialiser = estCoach
       ? window.LCDP_initialiserContactCoach
       : window.LCDP_initialiserContactResparc;
@@ -162,8 +93,6 @@
 
   async function initialiserPage() {
     appliquerRoutesSite(document);
-    initialiserBandeau().catch(console.error);
-    initialiserFooter().catch(console.error);
     await initialiserDemande();
     afficherFormulaireContact();
   }
