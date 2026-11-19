@@ -48,7 +48,7 @@
     const liensDirects = /\/FAQ-(?:public|membre)\.html$/i.test(window.location.pathname);
     const prefixe = "lcdp-faq-" + (++compteur);
     let navigation = 0;
-    function ouvrir(item, ouvert) {
+    function ouvrir(item, ouvert, animer = true) {
       item.terminer?.();
       const hauteurInitiale = item.panel.hidden ? 0 : item.panel.getBoundingClientRect().height;
       item.button.setAttribute("aria-expanded", String(ouvert));
@@ -63,24 +63,26 @@
           if (item.animation) { item.animation.onfinish = null; item.animation.cancel(); item.animation = null; }
           item.panel.hidden = !ouvert; item.panel.style.height = ""; resolve();
         };
-        if (reduit || !item.panel.animate) { finir(); return; }
+        if (!animer || reduit || !item.panel.animate) { finir(); return; }
         item.animation = item.panel.animate([{ height: hauteurInitiale + "px" }, { height: hauteurFinale + "px" }], { duration: 220, easing: "ease-out" });
         item.terminer = finir;
         item.animation.onfinish = finir;
       });
     }
-    async function cibler(item, defiler = false) {
+    async function cibler(item, defiler = false, donnerFocus = false) {
       const sequence = ++navigation;
       await Promise.all(elements.map(autre => ouvrir(autre, autre === item)));
       if (sequence !== navigation || !defiler) return;
       item.article.scrollIntoView({ behavior: "auto", block: "start" });
-      item.button.focus({ preventScroll: true });
+      if (donnerFocus) item.button.focus({ preventScroll: true });
     }
     function depuisHash() {
       let id;
-      try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
+      try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return false; }
       const item = elements.find(element => element.ancre === id);
-      if (item) void cibler(item, true);
+      if (!item) return false;
+      void cibler(item, true);
+      return true;
     }
     function actualiserAdresse(item, ajouter = true) {
       if (!liensDirects || !item.ancre) return;
@@ -121,13 +123,15 @@
       const local = lien.getAttribute("href").startsWith("#") || (url.origin === window.location.origin && url.pathname === window.location.pathname && url.search === window.location.search);
       const item = local && elements.find(element => element.ancre === id);
       if (!item) return;
-      event.preventDefault(); actualiserAdresse(item); void cibler(item, true);
+      event.preventDefault(); actualiserAdresse(item); void cibler(item, true, event.detail === 0);
     }
     racine.addEventListener("click", suivreLien);
     if (liensDirects) {
       window.addEventListener("hashchange", depuisHash);
       window.addEventListener("popstate", depuisHash);
-      depuisHash();
+    }
+    if ((!liensDirects || !depuisHash()) && elements.length) {
+      void ouvrir(elements[0], true, false);
     }
     controles.set(racine, () => {
       ++navigation;
