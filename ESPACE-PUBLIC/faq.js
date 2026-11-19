@@ -72,11 +72,7 @@
     let etat = null;
     if (page.membre) { etat = await sessionMembre(); if (!etat) return; }
     const navigationPrete = navigation(etat).catch(error => console.error("Navigation FAQ :", error));
-    const affichagePret = Promise.all([page.stylesPrets, navigationPrete]).then(() => {
-      clearTimeout(window.LCDP_FAQ_SECOURS);
-      document.documentElement.classList.remove("lcdp-faq-preparation");
-      window.LCDP_terminerAttenteArrivee?.();
-    });
+    const affichagePret = Promise.all([page.stylesPrets, navigationPrete]);
     const api = endpoint("workerEditingAdminUrl", "WORKER_EDITING_ADMIN_URL", "editing-admin-api") || "https://editing-admin-api.lacleduparc.fr";
     if (!api) throw Error("Le service FAQ n’est pas configuré.");
     const response = await fetch(api + (page.membre ? "/membre/faq" : "/public/faq"), {
@@ -94,6 +90,9 @@
     window.LCDP_FAQ.afficher(document.getElementById("lcdp-faq-liste"), data.blocs);
     status.textContent = ""; status.hidden = true;
     document.getElementById("lcdp-faq-liste").setAttribute("aria-busy", "false");
+    clearTimeout(window.LCDP_FAQ_SECOURS);
+    document.documentElement.classList.remove("lcdp-faq-preparation");
+    window.LCDP_terminerAttenteArrivee?.();
   }
   initialiser().catch(async error => {
     await page.stylesPrets;

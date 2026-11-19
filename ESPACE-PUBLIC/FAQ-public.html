@@ -19,9 +19,33 @@
     })();
   </script>
   <script src="./faq-accordeon.js?v=20261119-gabarit-editorial-commun" defer></script>
-  <script src="./faq.js?v=20261118-faq-membre" defer></script>
+  <script src="./faq.js?v=20261119-spinner" defer></script>
 </head>
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune lcdp-page-faq">
+  <template id="lcdp-attente-modele">
+  <div id="lcdp-attente-arrivee" class="public-home__loading" role="status" aria-live="polite" aria-label="Chargement de la page">
+    <div class="public-home__loading-inner">
+      <div class="lcdp-loading-spinner" aria-hidden="true">
+        <svg viewBox="0 0 36 36" class="lcdp-loading-spinner__track"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" /></svg>
+        <svg viewBox="0 0 36 36" class="lcdp-loading-spinner__arc"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75" /></svg>
+        <span class="lcdp-loading-spinner__dot"></span>
+      </div>
+    </div>
+  </div>
+  </template>
+  <script>
+    (() => {
+      const modele = document.getElementById("lcdp-attente-modele");
+      modele.replaceWith(modele.content.cloneNode(true));
+      const terminer = () => {
+        window.clearTimeout(window.LCDP_FAQ_SECOURS);
+        document.getElementById("lcdp-attente-arrivee")?.remove();
+      };
+      window.LCDP_terminerAttenteArrivee = terminer;
+      window.LCDP_FAQ_SECOURS = window.setTimeout(terminer, 15000);
+      window.addEventListener("pageshow", event => { if (event.persisted) terminer(); });
+    })();
+  </script>
   <div class="lcdp-site-page lcdp-app-wrapper">
     <div id="lcdp-bandeau-slot"></div>
     <main class="lcdp-site-main" id="contenu-principal">
@@ -31,7 +55,7 @@
             <header class="lcdp-editorial-page-heading">
               <h1 id="lcdp-faq-titre" class="lcdp-title-page-center">FAQ espace public</h1>
             </header>
-            <p id="lcdp-faq-status" role="status">Chargement des FAQ…</p>
+            <p id="lcdp-faq-status" role="status" hidden></p>
             <div id="lcdp-faq-liste" aria-busy="true"></div>
             <noscript><p>Activez JavaScript pour consulter les FAQ.</p></noscript>
           </div>
