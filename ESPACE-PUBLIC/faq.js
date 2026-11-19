@@ -88,6 +88,12 @@
     }
     await affichagePret;
     window.LCDP_FAQ.afficher(document.getElementById("lcdp-faq-liste"), data.blocs);
+    // Le défilement de l'application se trouve dans le main, pas uniquement dans la fenêtre.
+    if (!window.location.hash) {
+      const principal = document.getElementById("contenu-principal");
+      if (principal) principal.scrollTop = 0;
+      if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+    }
     status.textContent = ""; status.hidden = true;
     document.getElementById("lcdp-faq-liste").setAttribute("aria-busy", "false");
     clearTimeout(window.LCDP_FAQ_SECOURS);

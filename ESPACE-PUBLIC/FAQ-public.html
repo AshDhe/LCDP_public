@@ -11,6 +11,17 @@
   <script>
     (() => {
       "use strict";
+      // Au rechargement, repartir de la première FAQ et du haut de page.
+      const rechargement = (window.performance?.getEntriesByType?.("navigation")?.[0]?.type === "reload")
+        || (!window.performance?.getEntriesByType?.("navigation")?.length && window.performance?.navigation?.type === 1);
+      if (rechargement || !window.location.hash) {
+        if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+      }
+      if (rechargement && window.location.hash) {
+        const url = new URL(window.location.href);
+        url.hash = "";
+        window.history.replaceState(window.history.state, "", url.href);
+      }
       const c = window.SITE_CONFIG || {};
       const joindre = (base, chemin) => String(base || "").replace(/\/+$/, "") + "/" + String(chemin).replace(/^\/+/, "");
       const publicUrl = path => typeof c.publicUrl === "function" ? c.publicUrl(path) : joindre(c.publicBaseUrl || c.PUBLIC_BASE || c.siteBase || "", path);
@@ -19,7 +30,7 @@
     })();
   </script>
   <script src="./faq-accordeon.js?v=20261119-faq-exclusive" defer></script>
-  <script src="./faq.js?v=20261119-spinner" defer></script>
+  <script src="./faq.js?v=20261119-faq-rechargement" defer></script>
 </head>
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune lcdp-page-faq">
   <template id="lcdp-attente-modele">
