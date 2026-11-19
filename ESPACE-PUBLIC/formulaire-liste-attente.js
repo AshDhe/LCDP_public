@@ -96,7 +96,7 @@
     },
     noteHtml: `
       * Votre réponse est nécessaire pour enregistrer votre pré-inscription.<br>
-      Les informations que vous partagez dans ce formulaire sont soumises à l'application des mentions légales et sont exclusivement réservées au club La Clé du Parc. Consultez les mentions légales pour en savoir plus sur le traitement de vos données personnelles par La Clé du Parc.
+      Les informations que vous partagez dans ce formulaire sont soumises à l'application des mentions légales et sont exclusivement réservées au club La Clé du Parc. Consultez les <a href="#mentions-legales" data-lcdp-ouvrir-mentions-legales>mentions légales</a> pour en savoir plus sur le traitement de vos données personnelles par La Clé du Parc.
     `
   };
 
