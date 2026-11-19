@@ -68,7 +68,7 @@
   }
   function eligibles(rows) {
     return (Array.isArray(rows) ? rows : []).filter(r =>
-      String(r?.statut || '').toLowerCase() === 'bookd' && Number.isFinite(dateDebut(r)));
+      String(r?.statut || '').toLowerCase() === 'bookd' && r.droitExercable !== false && Number.isFinite(dateDebut(r)));
   }
   function hh(t) {return new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',hour:'2-digit',minute:'2-digit'}).format(new Date(t)).replace(':',' h ');}
   function fin(r) {
@@ -219,13 +219,14 @@
       if(etatSanction(etat)) {
         await alerte('Votre compte est suspendu. Vos droits sont bloqués.');return 'refuse';
       }
-      if(etatImpaye(etat)) {
+      // La dette d’un abonnement ne bloque ni la consultation ni MA CLÉ par un autre droit.
+      if(action === 'planifier' && options.planifierMode === 'ia' && etatImpaye(etat)) {
         await alerte('Votre abonnement est impayé. Vous devez le régulariser pour utiliser la fonction '+libelles[action]+'.',regulariser());
         return 'refuse';
       }
       if(action==='planifier') {const destination=urlMembre(chemin.planifier);window.location.href=options.planifierMode==='ia' ? destination+'?mode=ia' : destination;return 'ouvert';}
       // MES ACCÈS reste consultable même sans accès futur (onglet Passés).
-      // Le contrôle serveur de connexion, suspension et impayés reste inchangé.
+      // La connexion et la sanction du compte restent contrôlées ; les actions sont contrôlées par droit côté serveur.
       if(action==='mes_acces') {window.location.href=urlMembre(chemin.mes_acces);return 'ouvert';}
       return await gererMaCle(options);
     } finally {traitementEnCours=false;}
