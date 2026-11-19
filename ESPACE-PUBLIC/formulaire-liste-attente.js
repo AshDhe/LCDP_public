@@ -5,7 +5,8 @@
     id: "formulaire-liste-attente",
     ariaLabel: "Formulaire de pré-inscription",
     titre: "Pré-inscription",
-    sousTitre: "",
+    sousTitre: "La Clé du Parc",
+    sousTitreClasse: "lcdp-text-muted",
     introHtml: `
       <p>
         Partagez dès maintenant votre passion du plein air d'exception et soyez informé(e) de l'actualité du club avant l'ouverture de la prochaine saison.
@@ -126,7 +127,6 @@
       FORMULAIRE_LISTE_ATTENTE_CONFIG
     );
 
-    appliquerSousTitreOrangeListeAttente();
     await initialiserFormulaireListeAttente();
   }
 
@@ -413,15 +413,6 @@
     return String(value || "").replace(/\/+$/, "");
   }
 
-  function appliquerSousTitreOrangeListeAttente() {
-    const sousTitre = document.querySelector(
-      "#lcdp-formulaire-liste-attente-slot [data-lcdp-formulaire-subtitle]"
-    );
-
-    if (!sousTitre) return;
-
-    sousTitre.classList.add("lcdp-formulaire-liste-attente__subtitle--orange");
-  }
 
   async function initialiserBandeauListeAttente() {
     const slot = document.getElementById("lcdp-bandeau-slot");
