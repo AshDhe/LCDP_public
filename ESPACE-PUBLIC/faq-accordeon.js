@@ -103,7 +103,7 @@
       article.id = idAncre || id;
       const titre = document.createElement("h2"); titre.className = "lcdp-faq__heading lcdp-box-carousel__title lcdp-boxtext__title--center"; titre.setAttribute("data-lcdp-boxtext-title", "");
       const button = document.createElement("button"); button.type = "button"; button.className = "lcdp-faq__question";
-      button.id = id + "-question"; button.textContent = bloc.titre;
+      button.id = id + "-question"; button.textContent = String(bloc.titre).replace(/([^\s?])\s*\?/gu, "$1\u00a0?");
       button.setAttribute("aria-expanded", "false"); button.setAttribute("aria-controls", id + "-reponse");
       const panel = document.createElement("div"); panel.id = id + "-reponse"; panel.className = "lcdp-faq__panel";
       panel.hidden = true; panel.inert = true; panel.setAttribute("aria-hidden", "true");
