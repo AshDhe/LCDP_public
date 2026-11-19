@@ -17,6 +17,14 @@
 @media(prefers-reduced-motion:reduce){ .lcdp-bandeau-image:not([data-mouvement="true"]) .lcdp-bandeau-image__piste { animation:none; will-change:auto; } .lcdp-bandeau-image:not([data-mouvement="true"]) .lcdp-bandeau-image__fenetre { overflow-x:auto; } .lcdp-bandeau-image:not([data-mouvement="true"]) .lcdp-bandeau-image__groupe[aria-hidden="true"] { display:none; } }
 
 /* Galerie optionnelle du bandeau public : dialogue natif en plein écran. */
+/* Hors accueil, fournir les mêmes jetons au bouton commun .public-home__more. */
+.lcdp-bandeau-image:not(.public-home *) .lcdp-bandeau-image__galerie-bouton {
+  --home-slate-200:#e2e8f0;
+  --home-slate-300:#cbd5e1;
+  --home-slate-500:#64748b;
+  --home-slate-800:#1e293b;
+  cursor:pointer;
+}
 .lcdp-bandeau-image__commandes:has(.lcdp-bandeau-image__galerie-bouton) { position:relative; justify-content:center; align-items:center; min-height:36px; }
 .lcdp-bandeau-image[data-lcdp-bandeau-galerie] .lcdp-bandeau-image__pause { display:none; }
 html.lcdp-bandeau-galerie-ouverte { overflow:hidden; }
