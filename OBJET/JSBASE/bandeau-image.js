@@ -249,7 +249,7 @@
     return inventaireEnCours;
   }
   function chargerCssGalerie(){
-    const href=new URL(objet('/CSSBASE/lcdp-bandeau-image.css?v=20261118-galerie-progressive'),document.baseURI);
+    const href=new URL(objet('/CSSBASE/lcdp-bandeau-image.css?v=20261119-galerie-mobile'),document.baseURI);
     if([...document.querySelectorAll('link[rel="stylesheet"]')].some(lien=>{
       const url=new URL(lien.href,document.baseURI);
       return url.href===href.href&&lien.sheet;
