@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="fr" data-lcdp-css="c085 c034 c038 c032 c083 c036 c033 c037 c041 c040 p0fdefe76cf13">
+<html lang="fr" data-lcdp-css="c085 c034 c038 c032 c083 c036 c033 c037 c041 c040">
 <head>
   <meta charset="utf-8">
   <title>FAQ - La Clé du Parc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Les réponses aux questions fréquentes sur La Clé du Parc.">
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
-  <link rel="stylesheet" href="./faq-accordeon.css?v=20261119-faq-typographie">
+  <link rel="stylesheet" href="./faq-accordeon.css?v=20261119-gabarit-editorial-commun">
   <script src="../config.js"></script>
   <script>
     (() => {
@@ -18,19 +18,23 @@
       window.LCDP_FAQ_PAGE = { membre: false, publicUrl, objetUrl, stylesPrets: Promise.resolve() };
     })();
   </script>
-  <script src="./faq-accordeon.js?v=20261119-faq-typographie" defer></script>
+  <script src="./faq-accordeon.js?v=20261119-gabarit-editorial-commun" defer></script>
   <script src="./faq.js?v=20261118-faq-membre" defer></script>
 </head>
-<body class="lcdp-page-document-legal lcdp-app-page lcdp-page-faq">
+<body class="lcdp-app-page lcdp-typographie-editoriale-commune lcdp-page-faq">
   <div class="lcdp-site-page lcdp-app-wrapper">
     <div id="lcdp-bandeau-slot"></div>
     <main class="lcdp-site-main" id="contenu-principal">
       <section class="lcdp-page-section" aria-labelledby="lcdp-faq-titre">
         <div class="lcdp-page-container">
-          <h1 id="lcdp-faq-titre" class="lcdp-boxtext__title lcdp-boxtext__title--center" style="margin-bottom: 24px;">FAQ espace public</h1>
-          <p id="lcdp-faq-status" role="status">Chargement des FAQ…</p>
-          <div id="lcdp-faq-liste" aria-busy="true"></div>
-          <noscript><p>Activez JavaScript pour consulter les FAQ.</p></noscript>
+          <div class="lcdp-page-content lcdp-stack-large lcdp-contenu-editorial">
+            <header class="lcdp-editorial-page-heading">
+              <h1 id="lcdp-faq-titre" class="lcdp-title-page-center">FAQ espace public</h1>
+            </header>
+            <p id="lcdp-faq-status" role="status">Chargement des FAQ…</p>
+            <div id="lcdp-faq-liste" aria-busy="true"></div>
+            <noscript><p>Activez JavaScript pour consulter les FAQ.</p></noscript>
+          </div>
         </div>
       </section>
     </main>

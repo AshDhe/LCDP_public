@@ -43,7 +43,7 @@
   function afficher(racine, blocs) {
     controles.get(racine)?.();
     racine.replaceChildren();
-    racine.classList.add("lcdp-faq");
+    racine.classList.add("lcdp-faq", "lcdp-stack-large");
     const elements = [];
     const liensDirects = /\/FAQ-(?:public|membre)\.html$/i.test(window.location.pathname);
     const prefixe = "lcdp-faq-" + (++compteur);
@@ -91,16 +91,16 @@
       if (!String(bloc.titre || "").trim()) continue;
       const idAncre = ancre(bloc);
       const id = prefixe + "-" + elements.length;
-      const article = document.createElement("section"); article.className = "lcdp-faq__item";
+      const article = document.createElement("section"); article.className = "lcdp-faq__item lcdp-component lcdp-box-carousel lcdp-editorial-card";
       article.id = idAncre || id;
-      const titre = document.createElement("h2"); titre.className = "lcdp-faq__heading";
+      const titre = document.createElement("h2"); titre.className = "lcdp-faq__heading lcdp-box-carousel__title lcdp-boxtext__title--center"; titre.setAttribute("data-lcdp-boxtext-title", "");
       const button = document.createElement("button"); button.type = "button"; button.className = "lcdp-faq__question";
       button.id = id + "-question"; button.textContent = bloc.titre;
       button.setAttribute("aria-expanded", "false"); button.setAttribute("aria-controls", id + "-reponse");
       const panel = document.createElement("div"); panel.id = id + "-reponse"; panel.className = "lcdp-faq__panel";
       panel.hidden = true; panel.inert = true; panel.setAttribute("aria-hidden", "true");
       panel.setAttribute("role", "region"); panel.setAttribute("aria-labelledby", button.id);
-      const inner = document.createElement("div"); inner.className = "lcdp-faq__reponse"; inner.appendChild(nettoyer(bloc.html));
+      const inner = document.createElement("div"); inner.className = "lcdp-faq__reponse lcdp-boxtext__content lcdp-editorial-copy"; inner.setAttribute("data-lcdp-boxtext-content", ""); inner.appendChild(nettoyer(bloc.html));
       panel.appendChild(inner); titre.appendChild(button); article.append(titre, panel); racine.appendChild(article);
       const item = { button, panel, inner, article, ancre: idAncre, animation: null, terminer: null }; elements.push(item);
       button.addEventListener("click", () => {
