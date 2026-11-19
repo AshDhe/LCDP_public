@@ -79,7 +79,15 @@
       }
       await ouvrir(item, true);
       if (sequence !== navigation || !defiler) return;
-      item.article.scrollIntoView({ behavior: "auto", block: "start" });
+      const principal = liensDirects ? racine.closest("#contenu-principal") : null;
+      if (principal) {
+        // Le bandeau reste hors du conteneur défilant : aligner le bloc sur le haut de main.
+        const haut = principal.scrollTop + item.article.getBoundingClientRect().top
+          - principal.getBoundingClientRect().top - principal.clientTop;
+        principal.scrollTo({ top: Math.max(0, haut), behavior: "auto" });
+      } else {
+        item.article.scrollIntoView({ behavior: "auto", block: "start" });
+      }
       if (donnerFocus) item.button.focus({ preventScroll: true });
     }
     function depuisHash() {
@@ -117,7 +125,7 @@
           if (liensDirects && window.location.hash === "#" + item.ancre) {
             const url = new URL(window.location.href); url.hash = ""; window.history.replaceState(null, "", url.href);
           }
-        } else { actualiserAdresse(item); void cibler(item); }
+        } else { actualiserAdresse(item); void cibler(item, liensDirects); }
       });
     }
     function suivreLien(event) {
