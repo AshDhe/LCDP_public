@@ -87,7 +87,60 @@
     appliquerRoutesSite(slot);
   }
 
+  function urlMembre(chemin) {
+    const config = window.SITE_CONFIG || {};
+    if (typeof config.membreUrl === "function") return config.membreUrl(chemin);
+    const base = String(config.membreBaseUrl || config.MEMBRE_BASE || "").replace(/\/+$/, "");
+    if (!base) throw new Error("L'espace membre n'est pas configuré.");
+    return base + "/" + String(chemin).replace(/^\/+/, "");
+  }
+
+  async function ouvrirDaDepuisPresentation() {
+    if (typeof window.LCDP_ouvrirPremiereDaMembre !== "function") {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = urlMembre("/ESPACE-MEMBRE/da-membre.js");
+        script.onload = resolve;
+        script.onerror = () => reject(new Error("Module DA membre indisponible."));
+        document.body.appendChild(script);
+      });
+    }
+    if (typeof window.LCDP_ouvrirPremiereDaMembre !== "function") {
+      throw new Error("Module DA membre indisponible.");
+    }
+    await window.LCDP_ouvrirPremiereDaMembre();
+  }
+
+  function initialiserActionsMembre() {
+    const planifier = document.getElementById("lcdp-acces-planifier-abonnement");
+    const souscrire = document.getElementById("lcdp-demarrer-abonnement");
+    const boutonDa = document.getElementById("lcdp-ouvrir-da-abonnement");
+
+    try {
+      planifier.href = urlMembre("/ESPACE-MEMBRE/reserver-membre.html");
+      souscrire.href = urlMembre("/ESPACE-MEMBRE/abonnement-membre.html?demarrer=1");
+    } catch (error) {
+      console.error(error);
+      planifier.removeAttribute("href");
+      souscrire.removeAttribute("href");
+    }
+
+    boutonDa.addEventListener("click", async () => {
+      if (boutonDa.disabled) return;
+      boutonDa.disabled = true;
+      try {
+        await ouvrirDaDepuisPresentation();
+      } catch (error) {
+        console.error("Ouverture de la DA impossible :", error);
+        window.alert("La demande d'abonnement est momentanément indisponible.");
+      } finally {
+        boutonDa.disabled = false;
+      }
+    });
+  }
+
   appliquerRoutesSite(document);
+  initialiserActionsMembre();
   initialiserBandeau().catch(console.error);
   initialiserFooter().catch(console.error);
 })();
