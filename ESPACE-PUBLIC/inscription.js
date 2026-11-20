@@ -133,8 +133,29 @@
     appliquerRoutesSite(slot);
   }
 
+  // Le lien signé reste dans le fragment d'URL et suit uniquement les liens vers le formulaire.
+  function transmettreInvitationAuFormulaire() {
+    const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    const invitation = params.get("invitation") || "";
+    const service = params.get("service") || "";
+    if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(invitation)) return;
+    let origine;
+    try {
+      const u = new URL(service);
+      if (u.protocol !== "https:" || !u.hostname.endsWith(".lacleduparc.fr") ||
+          u.username || u.password || u.pathname !== "/" || u.search || u.hash) return;
+      origine = u.origin;
+    } catch { return; }
+    document.querySelectorAll('a[href*="formulaire-inscription-membre.html"]').forEach(lien => {
+      const cible = new URL(lien.href, window.location.href);
+      cible.hash = new URLSearchParams({ invitation, service: origine }).toString();
+      lien.href = cible.toString();
+    });
+  }
+
   function initialiserPage() {
     appliquerRoutesSite(document);
+    transmettreInvitationAuFormulaire();
     window.LCDP_initialiserCarrouselHello?.().catch((erreur) => console.error("Erreur carrousel inscription :", erreur));
     // Une erreur du bandeau ne doit pas empêcher le chargement du footer.
     initialiserBandeau().catch((erreur) => console.error("Erreur bandeau inscription :", erreur));
