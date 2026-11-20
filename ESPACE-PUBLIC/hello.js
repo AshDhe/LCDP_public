@@ -23,56 +23,6 @@
       console.error("Erreur carrousel hello :", erreur);
     });
     afficherErreurAccesSiNecessaire();
-    surveillerAttenteMentionsLegalesHello();
-  }
-
-  // Sécurité propre à Hello : la requête du document légal partagé peut
-  // rester en attente sans limite. Ne jamais laisser une fenêtre invisible
-  // masquer indéfiniment Hello lorsque le service ne répond pas.
-  function surveillerAttenteMentionsLegalesHello() {
-    const slot = document.getElementById("lcdp-lightbox-slot");
-    if (!slot) return;
-
-    let minuteur = null;
-    let overlaySurveille = null;
-
-    function arreterMinuteur() {
-      if (minuteur !== null) {
-        window.clearTimeout(minuteur);
-        minuteur = null;
-      }
-    }
-
-    function verifierChargement() {
-      const overlay = slot.querySelector(":scope > [data-lcdp-legal-lightbox]");
-      const attente = overlay?.querySelector(
-        ".lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error)"
-      );
-
-      if (!attente) {
-        arreterMinuteur();
-        overlaySurveille = null;
-        return;
-      }
-      if (overlay === overlaySurveille) return;
-
-      arreterMinuteur();
-      overlaySurveille = overlay;
-      minuteur = window.setTimeout(() => {
-        minuteur = null;
-        if (!overlay.isConnected || !attente.isConnected ||
-            attente.classList.contains("lcdp-legal-lightbox__status--error")) return;
-
-        // Le statut erreur désactive le spinner CSS et réaffiche la carte
-        // avec sa commande de fermeture native, sans modifier le JS partagé.
-        attente.classList.add("lcdp-legal-lightbox__status--error");
-        attente.textContent = "Le chargement des mentions légales ne répond pas. Fermez cette fenêtre puis réessayez.";
-      }, 8000);
-    }
-
-    const observateur = new MutationObserver(verifierChargement);
-    observateur.observe(slot, {childList: true, subtree: true});
-    verifierChargement();
   }
 
   async function initialiserBandeauRestreint() {
