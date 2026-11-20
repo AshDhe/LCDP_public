@@ -3,4 +3,3 @@
 .lcdp-faq__question[aria-expanded="true"]::after { content:"−"; }
 .lcdp-faq__panel { overflow:hidden; }
 .lcdp-faq__panel[hidden] { display:none; }
-.lcdp-faq__item { scroll-margin-top: 110px; }
