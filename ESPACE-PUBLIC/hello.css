@@ -184,3 +184,31 @@ body.lcdp-page-hello > dialog.lcdp-contact-info[data-lcdp-contact-info="juridiqu
     transform: none;
   }
 }
+
+/* Spinner indépendant pendant le chargement des mentions légales depuis Hello.
+   L'état de chargement est déjà placé dans le contenu par documents-legaux.js :
+   aucune modification du composant commun ni des interactions de fermeture. */
+body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error)) > .lcdp-legal-lightbox__card {
+  opacity: 0;
+  pointer-events: none;
+}
+body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error))::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
+  margin: auto;
+  border: 3px solid rgb(6 95 70 / 10%);
+  border-top-color: #e59834;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #4e6838 0 4px, transparent 4.5px);
+  animation: lcdp-hello-legal-spinner-tourne .8s linear infinite;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error))::before {
+    animation: none;
+  }
+}
