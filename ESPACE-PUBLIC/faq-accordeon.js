@@ -35,19 +35,12 @@
     copier(template.content, fragment);
     return fragment;
   }
-  function ancre(bloc) {
-    const id = String(bloc?.id || "").trim().toLowerCase()
-      .replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 64);
-    return id ? "faq-" + id : "";
-  }
   function afficher(racine, blocs) {
     controles.get(racine)?.();
     racine.replaceChildren();
     racine.classList.add("lcdp-faq", "lcdp-stack-large");
     const elements = [];
-    const liensDirects = /\/FAQ-(?:public|membre)\.html$/i.test(window.location.pathname);
     const prefixe = "lcdp-faq-" + (++compteur);
-    let navigation = 0;
     function ouvrir(item, ouvert, animer = true) {
       item.terminer?.();
       const hauteurInitiale = item.panel.hidden ? 0 : item.panel.getBoundingClientRect().height;
@@ -69,46 +62,21 @@
         item.animation.onfinish = finir;
       });
     }
-    async function cibler(item, defiler = false, donnerFocus = false) {
-      const sequence = ++navigation;
-      // Fermer les autres panneaux avant de déployer celui demandé, même en cours d'animation.
+    function cibler(item) {
+      // Une seule réponse ouverte, sans modifier l'URL ni faire défiler la page.
+      // Fermer avec la même transition que l'ouverture évite un saut de mise en page.
       for (const autre of elements) {
         if (autre !== item && (!autre.panel.hidden || autre.button.getAttribute("aria-expanded") === "true")) {
-          void ouvrir(autre, false, false);
+          void ouvrir(autre, false);
         }
       }
-      await ouvrir(item, true);
-      if (sequence !== navigation || !defiler) return;
-      const principal = liensDirects ? racine.closest("#contenu-principal") : null;
-      if (principal) {
-        // Le bandeau reste hors du conteneur défilant : aligner le bloc sur le haut de main.
-        const haut = principal.scrollTop + item.article.getBoundingClientRect().top
-          - principal.getBoundingClientRect().top - principal.clientTop;
-        principal.scrollTo({ top: Math.max(0, haut), behavior: "auto" });
-      } else {
-        item.article.scrollIntoView({ behavior: "auto", block: "start" });
-      }
-      if (donnerFocus) item.button.focus({ preventScroll: true });
-    }
-    function depuisHash() {
-      let id;
-      try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return false; }
-      const item = elements.find(element => element.ancre === id);
-      if (!item) return false;
-      void cibler(item, true);
-      return true;
-    }
-    function actualiserAdresse(item, ajouter = true) {
-      if (!liensDirects || !item.ancre) return;
-      const url = new URL(window.location.href); url.hash = item.ancre;
-      if (url.href !== window.location.href) window.history[ajouter ? "pushState" : "replaceState"](null, "", url.href);
+      void ouvrir(item, true);
     }
     for (const bloc of Array.isArray(blocs) ? blocs : []) {
       if (!String(bloc.titre || "").trim()) continue;
-      const idAncre = ancre(bloc);
       const id = prefixe + "-" + elements.length;
       const article = document.createElement("section"); article.className = "lcdp-faq__item lcdp-component lcdp-box-carousel lcdp-editorial-card";
-      article.id = idAncre || id;
+      article.id = id;
       const titre = document.createElement("h2"); titre.className = "lcdp-faq__heading lcdp-box-carousel__title lcdp-boxtext__title--center"; titre.setAttribute("data-lcdp-boxtext-title", "");
       const button = document.createElement("button"); button.type = "button"; button.className = "lcdp-faq__question";
       button.id = id + "-question"; button.textContent = String(bloc.titre).replace(/([^\s?])\s*\?/gu, "$1\u00a0?");
@@ -118,43 +86,22 @@
       panel.setAttribute("role", "region"); panel.setAttribute("aria-labelledby", button.id);
       const inner = document.createElement("div"); inner.className = "lcdp-faq__reponse lcdp-boxtext__content lcdp-editorial-copy"; inner.setAttribute("data-lcdp-boxtext-content", ""); inner.appendChild(nettoyer(bloc.html));
       panel.appendChild(inner); titre.appendChild(button); article.append(titre, panel); racine.appendChild(article);
-      const item = { button, panel, inner, article, ancre: idAncre, animation: null, terminer: null }; elements.push(item);
+      const item = { button, panel, inner, article, animation: null, terminer: null }; elements.push(item);
       button.addEventListener("click", () => {
         if (button.getAttribute("aria-expanded") === "true") {
-          ++navigation; void ouvrir(item, false);
-          if (liensDirects && window.location.hash === "#" + item.ancre) {
-            const url = new URL(window.location.href); url.hash = ""; window.history.replaceState(null, "", url.href);
-          }
-        } else { actualiserAdresse(item); void cibler(item, liensDirects); }
+          void ouvrir(item, false);
+        } else {
+          cibler(item);
+        }
       });
     }
-    function suivreLien(event) {
-      if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-      const lien = event.target.closest?.("a[href]");
-      if (!lien || (lien.target && lien.target !== "_self") || lien.hasAttribute("download")) return;
-      let url, id;
-      try { url = new URL(lien.href, window.location.href); id = decodeURIComponent(url.hash.slice(1)); } catch { return; }
-      const local = lien.getAttribute("href").startsWith("#") || (url.origin === window.location.origin && url.pathname === window.location.pathname && url.search === window.location.search);
-      const item = local && elements.find(element => element.ancre === id);
-      if (!item) return;
-      event.preventDefault(); actualiserAdresse(item); void cibler(item, true, event.detail === 0);
-    }
-    racine.addEventListener("click", suivreLien);
-    if (liensDirects) {
-      window.addEventListener("hashchange", depuisHash);
-      window.addEventListener("popstate", depuisHash);
-    }
-    if ((!liensDirects || !depuisHash()) && elements.length) {
+    if (elements.length) {
       void ouvrir(elements[0], true, false);
     }
     controles.set(racine, () => {
-      ++navigation;
       elements.forEach(item => item.terminer?.());
-      racine.removeEventListener("click", suivreLien);
-      window.removeEventListener("hashchange", depuisHash);
-      window.removeEventListener("popstate", depuisHash);
     });
     if (!elements.length) { const p = document.createElement("p"); p.textContent = "Aucune FAQ publiée pour le moment."; racine.appendChild(p); }
   }
-  window.LCDP_FAQ = Object.freeze({ afficher, ancre });
+  window.LCDP_FAQ = Object.freeze({ afficher });
 })();
