@@ -41,37 +41,73 @@
     racine.classList.add("lcdp-faq", "lcdp-stack-large");
     const elements = [];
     const prefixe = "lcdp-faq-" + (++compteur);
-    function ouvrir(item, ouvert, animer = true) {
-      item.terminer?.();
-      const hauteurInitiale = item.panel.hidden ? 0 : item.panel.getBoundingClientRect().height;
+    // Le contenu de la FAQ défile dans le main du wrapper.
+    const defilement = racine.closest(".lcdp-site-main") || document.scrollingElement;
+    const paddingInitial = racine.style.paddingTop;
+    const paddingCalcule = Number.parseFloat(window.getComputedStyle(racine).paddingTop) || 0;
+    let espaceReserve = 0;
+    let imageDeCorrection = 0;
+
+    function ouvrir(item, ouvert) {
       item.button.setAttribute("aria-expanded", String(ouvert));
-      item.panel.hidden = false;
+      item.panel.hidden = !ouvert;
       item.panel.inert = !ouvert;
       item.panel.setAttribute("aria-hidden", String(!ouvert));
-      const hauteurFinale = ouvert ? item.inner.scrollHeight : 0;
-      const reduit = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-      return new Promise(resolve => {
-        const finir = () => {
-          item.terminer = null;
-          if (item.animation) { item.animation.onfinish = null; item.animation.cancel(); item.animation = null; }
-          item.panel.hidden = !ouvert; item.panel.style.height = ""; resolve();
-        };
-        if (!animer || reduit || !item.panel.animate) { finir(); return; }
-        item.animation = item.panel.animate([{ height: hauteurInitiale + "px" }, { height: hauteurFinale + "px" }], { duration: 220, easing: "ease-out" });
-        item.terminer = finir;
-        item.animation.onfinish = finir;
+    }
+
+    function reserverEspace(hauteur) {
+      espaceReserve = Math.max(0, hauteur);
+      racine.style.paddingTop = espaceReserve > 0.5
+        ? (paddingCalcule + espaceReserve) + "px"
+        : paddingInitial;
+    }
+
+    function maintenirQuestion(item, positionInitiale) {
+      // Compenser dans le main la réduction de hauteur d'une réponse précédente.
+      let ecart = item.button.getBoundingClientRect().top - positionInitiale;
+      if (defilement && Math.abs(ecart) > 0.5) defilement.scrollTop += ecart;
+
+      ecart = item.button.getBoundingClientRect().top - positionInitiale;
+      // Quand le défilement est déjà à zéro, réserver temporairement
+      // l'espace qui manque pour conserver la question sous les yeux.
+      if (ecart < -0.5) reserverEspace(espaceReserve - ecart);
+      else if (ecart > 0.5 && espaceReserve > 0) {
+        reserverEspace(Math.max(0, espaceReserve - ecart));
+      }
+
+      ecart = item.button.getBoundingClientRect().top - positionInitiale;
+      if (defilement && Math.abs(ecart) > 0.5) defilement.scrollTop += ecart;
+    }
+
+    function libererEspaceAuDefilement() {
+      if (!defilement || espaceReserve <= 0.5 || defilement.scrollTop < espaceReserve) return;
+      const position = defilement.scrollTop;
+      const espace = espaceReserve;
+      reserverEspace(0);
+      defilement.scrollTop = Math.max(0, position - espace);
+    }
+
+    function basculer(item) {
+      const position = item.button.getBoundingClientRect().top;
+      const estOuvert = item.button.getAttribute("aria-expanded") === "true";
+
+      // Le nouvel élément s'ouvre et le précédent se ferme sans
+      // deux animations de hauteur qui déplacent la position à l'écran.
+      if (!estOuvert) ouvrir(item, true);
+      for (const autre of elements) {
+        if (autre !== item && !autre.panel.hidden) ouvrir(autre, false);
+      }
+      if (estOuvert) ouvrir(item, false);
+
+      maintenirQuestion(item, position);
+      if (imageDeCorrection) window.cancelAnimationFrame(imageDeCorrection);
+      imageDeCorrection = window.requestAnimationFrame(() => {
+        imageDeCorrection = 0;
+        maintenirQuestion(item, position);
       });
     }
-    function cibler(item) {
-      // Une seule réponse ouverte, sans modifier l'URL ni faire défiler la page.
-      // Fermer avec la même transition que l'ouverture évite un saut de mise en page.
-      for (const autre of elements) {
-        if (autre !== item && (!autre.panel.hidden || autre.button.getAttribute("aria-expanded") === "true")) {
-          void ouvrir(autre, false);
-        }
-      }
-      void ouvrir(item, true);
-    }
+
+    defilement?.addEventListener("scroll", libererEspaceAuDefilement, { passive: true });
     for (const bloc of Array.isArray(blocs) ? blocs : []) {
       if (!String(bloc.titre || "").trim()) continue;
       const id = prefixe + "-" + elements.length;
@@ -86,20 +122,16 @@
       panel.setAttribute("role", "region"); panel.setAttribute("aria-labelledby", button.id);
       const inner = document.createElement("div"); inner.className = "lcdp-faq__reponse lcdp-boxtext__content lcdp-editorial-copy"; inner.setAttribute("data-lcdp-boxtext-content", ""); inner.appendChild(nettoyer(bloc.html));
       panel.appendChild(inner); titre.appendChild(button); article.append(titre, panel); racine.appendChild(article);
-      const item = { button, panel, inner, article, animation: null, terminer: null }; elements.push(item);
-      button.addEventListener("click", () => {
-        if (button.getAttribute("aria-expanded") === "true") {
-          void ouvrir(item, false);
-        } else {
-          cibler(item);
-        }
-      });
+      const item = { button, panel, inner, article }; elements.push(item);
+      button.addEventListener("click", () => basculer(item));
     }
     if (elements.length) {
-      void ouvrir(elements[0], true, false);
+      ouvrir(elements[0], true);
     }
     controles.set(racine, () => {
-      elements.forEach(item => item.terminer?.());
+      if (imageDeCorrection) window.cancelAnimationFrame(imageDeCorrection);
+      defilement?.removeEventListener("scroll", libererEspaceAuDefilement);
+      racine.style.paddingTop = paddingInitial;
     });
     if (!elements.length) { const p = document.createElement("p"); p.textContent = "Aucune FAQ publiée pour le moment."; racine.appendChild(p); }
   }
