@@ -432,45 +432,68 @@
       return ETAT_BOX_MENTIONS.contenu;
     }
 
-    const endpoint = endpointEditingAdmin();
+    // Même liste de Workers que la page autonome, uniquement depuis Hello.
+    // Les autres pages conservent strictement leur requête précédente.
+    const surHello = document.body?.classList.contains("lcdp-page-hello");
+    const config = window.SITE_CONFIG || {};
+    const endpoints = surHello
+      ? Array.from(new Set([
+          endpointEditingAdmin(),
+          config.workerEditingAdminFallbackUrl,
+          config.WORKER_EDITING_ADMIN_FALLBACK_URL
+        ].map(value => String(value || "").replace(/\/+$/, "")).filter(Boolean)))
+      : [endpointEditingAdmin()];
 
-    if (!endpoint) {
+    if (!endpoints.length || !endpoints[0]) {
       throw new Error("Service des mentions légales non configuré.");
     }
 
-    const response = await fetch(
-      endpoint + "/public/mentions-legales",
-      {
-        method: "GET",
-        credentials: "omit",
-        cache: "no-store",
-        headers: {
-          Accept: "application/json"
+    let derniereErreur = null;
+    for (const endpoint of endpoints) {
+      const controleur = surHello ? new AbortController() : null;
+      const minuteur = controleur
+        ? window.setTimeout(() => controleur.abort(), 5000)
+        : null;
+      try {
+        const response = await fetch(
+          endpoint + "/public/mentions-legales",
+          {
+            method: "GET",
+            credentials: "omit",
+            cache: "no-store",
+            headers: { Accept: "application/json" },
+            ...(controleur ? { signal: controleur.signal } : {})
+          }
+        );
+        const data = await response.json().catch(() => null);
+        if (
+          !response.ok ||
+          !data ||
+          data.success !== true ||
+          !Array.isArray(data.blocs) ||
+          (surHello && data.blocs.length < 1)
+        ) {
+          throw new Error(
+            data?.message ||
+            data?.detail ||
+            "Les mentions légales ne peuvent pas être chargées."
+          );
         }
+
+        ETAT_BOX_MENTIONS.contenu = {
+          titre: String(data.titre || "Mentions légales"),
+          blocs: data.blocs
+        };
+        return ETAT_BOX_MENTIONS.contenu;
+      } catch (error) {
+        derniereErreur = error;
+        if (!surHello) throw error;
+      } finally {
+        if (minuteur !== null) window.clearTimeout(minuteur);
       }
-    );
-
-    const data = await response.json().catch(() => null);
-
-    if (
-      !response.ok ||
-      !data ||
-      data.success !== true ||
-      !Array.isArray(data.blocs)
-    ) {
-      throw new Error(
-        data?.message ||
-        data?.detail ||
-        "Les mentions légales ne peuvent pas être chargées."
-      );
     }
 
-    ETAT_BOX_MENTIONS.contenu = {
-      titre: String(data.titre || "Mentions légales"),
-      blocs: data.blocs
-    };
-
-    return ETAT_BOX_MENTIONS.contenu;
+    throw new Error("Les mentions légales ne peuvent pas être chargées.", { cause: derniereErreur });
   }
 
   function creerStructureBoxMentions() {
