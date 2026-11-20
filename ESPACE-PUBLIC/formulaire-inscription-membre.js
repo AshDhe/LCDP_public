@@ -171,6 +171,7 @@
     let widgetId=null;
     let envoiEnCours = false;
     let libelleBoutonInitial = "Devenir membre invité";
+    let invitation = null;
 
     if (!racineFormulaire || !form) {
       console.error("Formulaire introuvable.");
@@ -196,6 +197,7 @@
     submitButton.addEventListener("click", envoyerFormulaire);
     submitButton.disabled=true;
     try {
+      invitation = await preparerInscriptionInvitee(form);
       const url=obtenirWorkerInscriptionMembreUrl();
       if(!url)throw new Error("Service non configuré.");
       const response=await fetch(url,{credentials:"omit",cache:"no-store"});
@@ -210,8 +212,8 @@
         "expired-callback"(){turnstileToken="";submitButton.disabled=true;},
         "error-callback"(){turnstileToken="";submitButton.disabled=true;}
       });
-    } catch {
-      await afficherAlerte("La protection du formulaire est indisponible. Rechargez la page pour réessayer.");
+    } catch (erreur) {
+      await afficherAlerte(erreur?.message || "La protection du formulaire est indisponible. Rechargez la page pour réessayer.");
     }
     function renouvelerProtection(){
       envoiEnCours=false;turnstileToken="";submitButton.disabled=true;submitButton.textContent=libelleBoutonInitial;
@@ -248,6 +250,7 @@
       submitButton.textContent = "Envoi en cours...";
 
       const data = {...lireDonneesFormulaire(form),turnstileToken};
+      if (invitation) data.invitationToken = invitation.token;
 
       try {
         const response = await fetch(workerUrl, {
@@ -289,6 +292,35 @@
         renouvelerProtection();
       }
     }
+  }
+
+  // L'adresse de l'invité vient du Worker, jamais du texte transmis dans le lien.
+  async function preparerInscriptionInvitee(form) {
+    const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    const token = params.get("invitation");
+    if (!token) return null;
+    const service = params.get("service") || "";
+    if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(token))
+      throw new Error("Lien d'invitation invalide.");
+    let origin;
+    try {
+      const url = new URL(service);
+      if (url.protocol !== "https:" || !url.hostname.endsWith(".lacleduparc.fr") ||
+          url.username || url.password || url.pathname !== "/" || url.search || url.hash)
+        throw new Error("Service invalide.");
+      origin = url.origin;
+    } catch { throw new Error("Service d'invitation invalide."); }
+    const response = await fetch(origin + "/invitation/inscription/contexte?token=" + encodeURIComponent(token),
+      { method:"GET", credentials:"omit", cache:"no-store", referrerPolicy:"no-referrer" });
+    const result = await response.json().catch(() => null);
+    if (!response.ok || result?.success !== true || !result.emailmembre)
+      throw new Error("Le lien d'invitation est invalide ou expiré.");
+    const email = form.querySelector('[name="emailmembre"]');
+    if (!email) throw new Error("Champ e-mail introuvable.");
+    email.value = String(result.emailmembre).trim().toLowerCase();
+    email.readOnly = true;
+    email.setAttribute("aria-readonly", "true");
+    return { token };
   }
 
   function obtenirWorkerInscriptionMembreUrl() {
