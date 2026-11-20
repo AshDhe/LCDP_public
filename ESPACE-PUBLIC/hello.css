@@ -209,21 +209,6 @@ body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-
   pointer-events: none;
   z-index: 1;
 }
-body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error))::after {
-  content: "Chargement des mentions légales…";
-  position: absolute;
-  top: calc(50% + 58px);
-  left: 50%;
-  box-sizing: border-box;
-  width: min(90vw, 340px);
-  transform: translateX(-50%);
-  color: #fff;
-  font: 600 14px/1.5 Arial, system-ui, sans-serif;
-  text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  pointer-events: none;
-  z-index: 1;
-}
 @media (prefers-reduced-motion: reduce) {
   body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error))::before {
     animation: none;
