@@ -195,17 +195,34 @@ body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-
 body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error))::before {
   content: "";
   position: absolute;
-  inset: 0;
+  top: calc(50% - 38px);
+  left: calc(50% - 38px);
   box-sizing: border-box;
-  width: 64px;
-  height: 64px;
-  margin: auto;
-  border: 3px solid rgb(6 95 70 / 10%);
+  width: 76px;
+  height: 76px;
+  border: 5px solid #dce8d9;
   border-top-color: #e59834;
   border-radius: 50%;
-  background: radial-gradient(circle at center, #4e6838 0 4px, transparent 4.5px);
+  background: radial-gradient(circle at center, #4e6838 0 5px, #fff 5.5px);
+  box-shadow: 0 0 0 8px rgba(255,255,255,.17), 0 12px 28px rgba(0,0,0,.23);
   animation: lcdp-hello-legal-spinner-tourne .8s linear infinite;
   pointer-events: none;
+  z-index: 1;
+}
+body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error))::after {
+  content: "Chargement des mentions légales…";
+  position: absolute;
+  top: calc(50% + 58px);
+  left: 50%;
+  box-sizing: border-box;
+  width: min(90vw, 340px);
+  transform: translateX(-50%);
+  color: #fff;
+  font: 600 14px/1.5 Arial, system-ui, sans-serif;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  pointer-events: none;
+  z-index: 1;
 }
 @media (prefers-reduced-motion: reduce) {
   body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error))::before {
