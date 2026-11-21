@@ -37,6 +37,14 @@
     [data-lcdp-invitation-abonnement] .lcdp-invites-ajouter[aria-disabled="true"] {
       filter:none;box-shadow:none;
     }
+    [data-lcdp-duoactif-zone] { margin-top:16px;padding-top:14px;border-top:1px solid var(--lcdp-color-border,#d7ddd5); }
+    [data-lcdp-duoactif-zone] [data-lcdp-duoactif-liste] { list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px; }
+    [data-lcdp-duoactif-zone] .lcdp-duoactif-ligne { display:flex;align-items:center;gap:10px;min-width:0;padding:9px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:11px;background:var(--lcdp-color-surface,#fff); }
+    [data-lcdp-duoactif-zone] .lcdp-duoactif-avatar { width:42px;height:42px;flex:0 0 42px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--lcdp-color-surface-soft,#edf0ed);overflow:hidden;font-weight:700; }
+    [data-lcdp-duoactif-zone] .lcdp-duoactif-avatar img { display:block;width:100%;height:100%;object-fit:cover; }
+    [data-lcdp-duoactif-zone] .lcdp-duoactif-identite { flex:1;min-width:0;overflow-wrap:anywhere; }
+    [data-lcdp-duoactif-zone] .lcdp-duoactif-ligne .lcdp-button { min-width:84px;width:auto;max-width:100%;margin:0; }
+    @media (max-width:390px) { [data-lcdp-duoactif-zone] .lcdp-duoactif-ligne { flex-wrap:wrap; } [data-lcdp-duoactif-zone] .lcdp-duoactif-identite { flex-basis:calc(100% - 55px); } }
   </style>
   <div class="lcdp-page-container">
     <div class="lcdp-page-content">
@@ -56,6 +64,12 @@
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="duo" style="display:none;margin:0 0 8px;padding:0;list-style:none;"></ul>
               <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="duo" style="margin:0;padding:0;list-style:none;"></ul>
               <button type="button" class="lcdp-button lcdp-button-secondary lcdp-invites-ajouter" data-lcdp-invitation-ajouter="duo"><span aria-hidden="true">＋</span> Ajouter</button>
+              <section data-lcdp-duoactif-zone aria-labelledby="lcdp-invitation-titre-duoactif">
+                <h4 class="lcdp-box-champ-formulaire__label" id="lcdp-invitation-titre-duoactif">DUO ACTIF</h4>
+                <p class="lcdp-box-champ-formulaire__description">Les cinq demandes les plus anciennes disponibles pour ce parc. Une invitation DUO ACTIF utilise les droits DUO de votre abonnement.</p>
+                <p class="lcdp-box-champ-formulaire__description" data-lcdp-duoactif-etat role="status" aria-live="polite">Chargement des demandes…</p>
+                <ul data-lcdp-duoactif-liste aria-label="Demandes DUO ACTIF"></ul>
+              </section>
             </section>
             <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-famille" data-lcdp-invitation-categorie="famille" style="display:flex;flex-direction:column;gap:0;min-width:0;padding:14px 12px 16px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
               <h3 class="lcdp-box-champ-formulaire__label lcdp-invites-categorie" id="lcdp-invitation-titre-famille"><span aria-hidden="true">🏠</span> + FAMILLE</h3>
