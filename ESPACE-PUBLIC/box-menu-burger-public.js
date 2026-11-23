@@ -539,6 +539,10 @@
         {
           label: "Membre bienfaiteur",
           href: "/ESPACE-PUBLIC/membre-bienfaiteur.html"
+        },
+        {
+          label: "Boutique",
+          href: "/ESPACE-PUBLIC/boutique.html"
         }
       ];
 
