@@ -1,0 +1,62 @@
+/* La Clé du Parc — accent discret pour « Boutique club » dans les menus burger.
+   Feuille dédiée : ne modifie aucun autre lien du composant commun c038. */
+
+.lcdp-box-menu-burger .lcdp-box-menu-burger__link--boutique,
+.lcdp-box-menu-burger .lcdp-box-menu-burger__link--boutique:last-child {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 2px 0;
+  padding: 12px 13px;
+  border: 1px solid rgba(78, 104, 56, .12);
+  border-radius: 12px;
+  background: rgba(78, 104, 56, .065);
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--lcdp-burger-accent, #4e6838) 9%, white),
+    color-mix(in srgb, var(--lcdp-burger-accent, #4e6838) 3%, white));
+  color: #334155;
+  font-weight: 700;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+/* Court repère vertical, intégré à la ligne et non placé sous le libellé. */
+.lcdp-box-menu-burger .lcdp-box-menu-burger__link--boutique::before {
+  content: "";
+  display: block;
+  flex: 0 0 4px;
+  width: 4px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--lcdp-burger-accent, #4e6838);
+  opacity: .72;
+}
+
+/* Petit point de rappel, sans flèche, badge ni animation. */
+.lcdp-box-menu-burger .lcdp-box-menu-burger__link--boutique::after {
+  content: "";
+  flex: 0 0 6px;
+  width: 6px;
+  height: 6px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: var(--lcdp-burger-accent, #4e6838);
+  opacity: .6;
+}
+
+.lcdp-box-menu-burger .lcdp-box-menu-burger__link--boutique:hover,
+.lcdp-box-menu-burger .lcdp-box-menu-burger__link--boutique:focus-visible {
+  background: rgba(78, 104, 56, .11);
+  border-color: rgba(78, 104, 56, .22);
+  color: #1f2937;
+}
+
+.lcdp-box-menu-burger .lcdp-box-menu-burger__link--boutique:focus-visible {
+  outline: 2px solid var(--lcdp-burger-accent, #4e6838);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lcdp-box-menu-burger .lcdp-box-menu-burger__link--boutique {
+    transition: none;
+  }
+}
