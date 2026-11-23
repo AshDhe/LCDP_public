@@ -141,7 +141,7 @@
 
         appliquerRoutesSite(slot);
 
-        await chargerScriptUneFois("/ESPACE-PUBLIC/box-menu-burger-public.js?v=20261123-boutique-club-2");
+        await chargerScriptUneFois("/ESPACE-PUBLIC/box-menu-burger-public.js?v=20261123-boutique-cadre");
 
         if (typeof window.LCDP_initialiserMenuBurgerPublic === "function") {
           await window.LCDP_initialiserMenuBurgerPublic();
