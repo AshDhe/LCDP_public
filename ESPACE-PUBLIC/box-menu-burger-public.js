@@ -452,12 +452,6 @@
     const lien = document.createElement("a");
     lien.className = "lcdp-box-menu-burger__link";
     lien.textContent = item.label;
-    if (item.label === "Boutique Club") {
-      const repere = document.createElement("span");
-      repere.setAttribute("aria-hidden", "true");
-      repere.style.cssText = "display:block;width:34px;height:2px;margin:5px auto 0;border-radius:999px;background:var(--lcdp-color-orange,#eaa03b)";
-      lien.appendChild(repere);
-    }
     lien.href = construireUrlSite(item.href);
 
     lien.addEventListener("click", () => {
@@ -547,7 +541,7 @@
           href: "/ESPACE-PUBLIC/membre-bienfaiteur.html"
         },
         {
-          label: "Boutique Club",
+          label: "Boutique club",
           href: "/ESPACE-PUBLIC/boutique.html"
         }
       ];
