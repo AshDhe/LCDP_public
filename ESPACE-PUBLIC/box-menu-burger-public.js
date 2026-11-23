@@ -451,6 +451,7 @@
 
     const lien = document.createElement("a");
     lien.className = "lcdp-box-menu-burger__link";
+    if (item.label === "Boutique club") lien.classList.add("lcdp-box-menu-burger__link--boutique");
     lien.textContent = item.label;
     lien.href = construireUrlSite(item.href);
 
@@ -459,6 +460,16 @@
     });
 
     return lien;
+  }
+
+  // Feuille de style commune aux deux menus, hébergée dans OBJET/CSSBASE.
+  function assurerStyleBoutique() {
+    if (document.getElementById("lcdp-css-boutique-club")) return;
+    const lien = document.createElement("link");
+    lien.id = "lcdp-css-boutique-club";
+    lien.rel = "stylesheet";
+    lien.href = construireUrlSite("/OBJET/CSSBASE/lcdp-menu-burger-boutique.css?v=20261123-boutique-cadre");
+    document.head.appendChild(lien);
   }
 
   async function initialiserMenuBurgerPublic() {
@@ -477,6 +488,7 @@
     }
 
     initialisationEnCours = (async () => {
+      assurerStyleBoutique();
       // Une seule sélection de menu pour toutes les pages portant le header public.
       slot.replaceChildren();
       if (await essayerInitialiserMenuMembre(slot)) return;
