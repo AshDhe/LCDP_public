@@ -144,9 +144,9 @@
       operation = resultat.operation || "creation";
       if (operation === "modification") {
         const titre=document.querySelector(".lcdp-box-formulaire__title");
-        if (titre) titre.textContent="Modifier le code d’accès (CODA)";
+        if (titre) titre.textContent=type==="coda"?"Modifier le code d’accès (CODA)":"Redéfinir le code de récupération (CODR)";
         const note=document.getElementById("note-creation-code");
-        if (note) note.textContent="Gardez ce code personnel. Ce lien sert uniquement à la modification autorisée de votre CODA.";
+        if (note) note.textContent="Gardez ce code personnel. Ce lien sert uniquement à la modification autorisée de votre "+(type==="coda"?"CODA.":"CODR.");
       }
       autorise = true; etat(true); afficher("Choisissez votre code, puis confirmez-le avec le bouton La Clé.");
     } catch { await afficherInformation("", "La vérification est indisponible. Rouvrez le lien reçu par e-mail pour réessayer.", "erreur"); }
@@ -184,7 +184,7 @@
         token = ""; autorise = false;
         [...saisie,...confirmation].forEach(champ => { champ.value = ""; });
         const nom=type==="coda"?"CODA":"CODR";
-        const texte=operation==="modification" ? "Votre CODA est mis à jour. Vous pouvez vous reconnecter à votre compte." : "Votre " + nom + " est enregistré. Retrouvez les informations relatives à vos codes de sécurité depuis votre page Mon Compte dans l’application.";
+        const texte=operation==="modification" ? "Votre "+nom+" est mis à jour. Vous pouvez vous reconnecter à votre compte." : "Votre " + nom + " est enregistré. Retrouvez les informations relatives à vos codes de sécurité depuis votre page Mon Compte dans l’application.";
         await afficherInformation("",texte,"information",construireUrlPublique("/ESPACE-PUBLIC/hello.html"));
       } catch { autorise = false; await afficherInformation("","La réponse n’a pas pu être confirmée. Rouvrez le lien reçu par e-mail pour vérifier si le code a été enregistré.","erreur"); }
       finally { enCours = false; afficherAttente(false); }
