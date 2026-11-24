@@ -436,7 +436,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   height: 8px;
   flex: 0 0 8px;
   border-radius: 50%;
-  background: #10b981;
+  background: #eab308;
   animation: lcdp-compte-da-pulse 2s cubic-bezier(.4,0,.6,1) infinite;
 }
 @keyframes lcdp-compte-da-pulse { 50% { opacity: .45; } }
@@ -465,12 +465,23 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-da__statut 
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre
 [data-lcdp-compte-section="participation"] > .lcdp-compte-da--non-validee[data-lcdp-box-champ-formulaire] {
+  border-color: #f1f5f9;
+  background: rgba(248,250,252,.8);
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="participation"] > .lcdp-compte-da--non-validee .lcdp-box-champ-formulaire__label { color: #64748b; }
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-da--non-validee .lcdp-compte-da__statut {
+  background: #e2e8f0; color: #64748b;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="participation"] > .lcdp-compte-da--en-cours[data-lcdp-box-champ-formulaire] {
   border-color: #fde68a;
   background: rgba(255,251,235,.55);
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre
-[data-lcdp-compte-section="participation"] > .lcdp-compte-da--non-validee .lcdp-box-champ-formulaire__label { color: #92400e; }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-da--non-validee .lcdp-compte-da__statut {
+[data-lcdp-compte-section="participation"] > .lcdp-compte-da--en-cours .lcdp-box-champ-formulaire__label { color: #92400e; }
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="participation"] > .lcdp-compte-da--en-cours .lcdp-compte-da__statut {
   background: #fef3c7; color: #92400e;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre
