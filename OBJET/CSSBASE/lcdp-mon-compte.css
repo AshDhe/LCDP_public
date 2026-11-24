@@ -805,7 +805,8 @@ body.lcdp-page-mon-compte #form-mes-informations-membre #zone-selfie .lcdp-selfi
   .lcdp-compte-action-prioritaire { transition: none; }
 }
 
-/* Mention DA identique pour remboursement et facturation (fond, graisse, italique). */
+/* Mention de disponibilité : même typographie pour tous les états vides du compte. */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-placeholder-da,
 body.lcdp-page-mon-compte #form-mes-informations-membre
 :is([data-lcdp-compte-section="remboursement"], [data-lcdp-compte-section="facturation"])
 .lcdp-box-champ-formulaire__lecture.lcdp-compte-placeholder-da {
@@ -824,7 +825,8 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] > .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__lecture { display: block; }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] .lcdp-compte-action-prioritaire:active { transform: scale(.95); }
 
-/* La DA explicitement refusée masque complètement la rubrique Abonnement. */
+/* Respect des états masqués du compteur et de la rubrique Abonnement. */
+body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-abonnement-compteur[hidden],
 body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-abonnement[hidden] {
   display: none !important;
 }
