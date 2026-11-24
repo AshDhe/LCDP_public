@@ -653,7 +653,7 @@ body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] {
   margin: 0;
   padding: 0;
 }
-body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] > .lcdp-box-dialogue-champ {
+body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] > :is(.lcdp-box-dialogue-champ,.lcdp-dialogue-ref) {
   box-sizing: border-box;
   position: static;
   inset: auto;
@@ -669,7 +669,7 @@ body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] > .lcdp-box-dialog
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
-body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] .lcdp-box-dialogue-champ__card {
+body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] :is(.lcdp-box-dialogue-champ__card,.lcdp-dialogue-ref__card) {
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
@@ -746,7 +746,7 @@ body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] [hidden] {
   line-height: 1;
   cursor: pointer;
 }
-.lcdp-page-mon-compte .lcdp-box-champ-formulaire__code-cases {
+.lcdp-page-mon-compte .lcdp-box-champ-formulaire__code-cases:not(.lcdp-security-tunnel *) {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--lcdp-space-2, 8px);
@@ -754,7 +754,7 @@ body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] [hidden] {
   max-width: 340px;
   min-width: 0;
 }
-.lcdp-page-mon-compte .lcdp-box-champ-formulaire__code-cases > input {
+.lcdp-page-mon-compte .lcdp-box-champ-formulaire__code-cases:not(.lcdp-security-tunnel *) > input {
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
