@@ -77,7 +77,7 @@
     return Number.isFinite(date) && date > dateDebut(r) ? date : NaN;
   }
 
-  async function alerte(message, action = null, profil = 'erreur') {
+  async function alerte(message, action = null, profil = 'erreur', options = {}) {
     const slot = document.getElementById('lcdp-lightbox-slot');
     if (!slot) throw new Error('Emplacement de lightbox introuvable.');
     const mode = action ? 'choix' : profil === 'information' ? 'information' : 'erreur';
@@ -121,11 +121,23 @@
       slot.replaceChildren();
       throw new Error('Structure de lightbox incomplète.');
     }
-    titre.textContent = mode === 'choix' ? 'Accès à votre espace' :
-      mode === 'information' ? 'Information' : 'Accès indisponible';
+    titre.textContent = options.titre || (mode === 'choix' ? 'Accès à votre espace' :
+      mode === 'information' ? 'Information' : 'Accès indisponible');
     texte.textContent = message;
     confirmer.textContent = action ? action.libelle : 'Fermer';
     if (annuler) annuler.textContent = 'Fermer';
+    let boutonAbonner = null;
+    if (mode === 'choix' && options.mabonner === true) {
+      const actions = boite.querySelector('.lcdp-dialogue-ref__actions');
+      if (!actions) throw new Error('Actions du dialogue introuvables.');
+      // Conserver uniquement les composants et styles génériques existants.
+      actions.classList.remove('lcdp-dialogue-ref__actions--choix');
+      boutonAbonner = document.createElement('button');
+      boutonAbonner.type = 'button';
+      boutonAbonner.className = 'lcdp-dialogue-ref__bouton lcdp-dialogue-ref__bouton--secondaire';
+      boutonAbonner.textContent = "M'abonner";
+      actions.appendChild(boutonAbonner);
+    }
 
     const focusInitial = document.activeElement;
     const controller = new AbortController();
@@ -141,16 +153,22 @@
       if (action) window.location.href = urlMembre(chemin[action.destination]);
     }, {signal:controller.signal});
     annuler?.addEventListener('click',fermer,{signal:controller.signal});
+    boutonAbonner?.addEventListener('click', () => {
+      fermer();
+      window.location.href = urlMembre(chemin.planifier) + '?mode=aboreza';
+    }, {signal:controller.signal});
     boite.addEventListener('click',event=>{
       if (event.target === boite) fermer();
     },{signal:controller.signal});
     document.addEventListener('keydown',event=>{
       if (event.key === 'Escape') {event.preventDefault();fermer();}
       if (mode === 'choix' && event.key === 'Tab') {
-        if (event.shiftKey && document.activeElement === annuler) {
-          event.preventDefault();confirmer.focus();
-        } else if (!event.shiftKey && document.activeElement === confirmer) {
-          event.preventDefault();annuler.focus();
+        const boutons = [annuler, confirmer, boutonAbonner].filter(Boolean);
+        const premier = boutons[0], dernier = boutons[boutons.length - 1];
+        if (event.shiftKey && document.activeElement === premier) {
+          event.preventDefault(); dernier.focus();
+        } else if (!event.shiftKey && document.activeElement === dernier) {
+          event.preventDefault(); premier.focus();
         }
       }
     },{signal:controller.signal});
@@ -165,7 +183,7 @@
     return eligibles(data.reservations);
   }
 
-  async function gererMaCle(options) {
+  async function gererMaCle(options, etatMembre) {
     if(typeof options.avantMaCle === 'function') options.avantMaCle();
     const rep=await requete('cle','/access');
     if(rep.nonConnecte) return 'non_connecte';
@@ -205,7 +223,13 @@
     if(pendant && motif !== 'no_current_access' && motif !== 'no_reservation' && motif !== 'no_invitation') {
       await alerte(String(rep.message || 'Votre clé n’est pas active actuellement.'));return 'refuse';
     }
-    await alerte("Vous n'avez pas d'accès en cours",planifier());
+    const daValidee = String(etatMembre?.statuda || '').trim().toLowerCase() === 'oui';
+    const sansAbonnement = !vraie(etatMembre?.abonne);
+    await alerte("Vous n'avez pas d'accès en cours.\nPlanifier un nouvel accès ou demander une invitation.",
+      planifier(), 'information', {
+        titre: 'Ouvrir MA CLÉ',
+        mabonner: daValidee && sansAbonnement
+      });
     return 'refuse';
   }
 
@@ -228,7 +252,7 @@
       // MES ACCÈS reste consultable même sans accès futur (onglet Passés).
       // La connexion et la sanction du compte restent contrôlées ; les actions sont contrôlées par droit côté serveur.
       if(action==='mes_acces') {window.location.href=urlMembre(chemin.mes_acces);return 'ouvert';}
-      return await gererMaCle(options);
+      return await gererMaCle(options, etat);
     } finally {traitementEnCours=false;}
   }
   window.LCDP_AccueilDroits=Object.freeze({executer});
