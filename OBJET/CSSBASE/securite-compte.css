@@ -130,13 +130,13 @@ body.lcdp-security-tunnel #titre-preparation {
   padding: 0;
   margin: 0;
 }
-:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #formulaire-code-securite .lcdp-box-champ-formulaire--code {
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) :is(#formulaire-code-securite,[data-lcdp-fermeture-codr]) .lcdp-box-champ-formulaire--code {
   width: 100%;
   padding: 0;
   margin: 0;
   border: 0;
 }
-:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #formulaire-code-securite .lcdp-box-champ-formulaire__label {
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) :is(#formulaire-code-securite,[data-lcdp-fermeture-codr]) .lcdp-box-champ-formulaire__label {
   margin: 0 0 10px;
   padding: 0;
   color: #94a3b8;
@@ -152,7 +152,7 @@ body.lcdp-security-tunnel #titre-preparation {
   grid-template-columns: repeat(4,minmax(0,1fr));
   gap: 9px;
 }
-:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #formulaire-code-securite .lcdp-box-champ-formulaire__code-cases input {
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) :is(#formulaire-code-securite,[data-lcdp-fermeture-codr]) .lcdp-box-champ-formulaire__code-cases input {
   width: 100%;
   min-width: 0;
   height: 54px;
@@ -167,19 +167,19 @@ body.lcdp-security-tunnel #titre-preparation {
   text-align: center;
   transition: border-color .2s ease,background-color .2s ease;
 }
-:is(body.lcdp-security-tunnel[data-security-step="2"], div.lcdp-security-tunnel[data-security-step="2"]) #formulaire-code-securite .lcdp-box-champ-formulaire__code-cases input {
+:is(body.lcdp-security-tunnel[data-security-step="2"], div.lcdp-security-tunnel[data-security-step="2"]) :is(#formulaire-code-securite,[data-lcdp-fermeture-codr]) .lcdp-box-champ-formulaire__code-cases input {
   height: 48px;
   min-height: 48px;
   font: 700 14px/1.25 ui-monospace,Consolas,monospace;
   text-transform: uppercase;
 }
-:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #formulaire-code-securite .lcdp-box-champ-formulaire__code-cases input:focus {
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) :is(#formulaire-code-securite,[data-lcdp-fermeture-codr]) .lcdp-box-champ-formulaire__code-cases input:focus {
   outline: none;
   border-color: #e59834;
   background: #fff !important;
   box-shadow: 0 0 0 2px rgba(229,152,52,.14);
 }
-:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #formulaire-code-securite .lcdp-box-champ-formulaire__checkbox-line {
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) :is(#formulaire-code-securite,[data-lcdp-fermeture-codr]) .lcdp-box-champ-formulaire__checkbox-line {
   display: flex;
   align-items: center;
   gap: 9px;
@@ -188,7 +188,7 @@ body.lcdp-security-tunnel #titre-preparation {
   font-size: 12px;
   font-weight: 500;
 }
-:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #formulaire-code-securite input[type="checkbox"] { accent-color: #4e6838; }
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) :is(#formulaire-code-securite,[data-lcdp-fermeture-codr]) input[type="checkbox"] { accent-color: #4e6838; }
 :is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #formulaire-code-securite > .lcdp-box-formulaire__note:not(.lcdp-security-rules) {
   margin: 14px 0;
   color: #94a3b8;
