@@ -866,7 +866,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 
 /* Les deux selfies : libellé, portrait, action sur une même ligne. */
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > :is(#zone-selfie, #zone-selfie-duoday).lcdp-box-champ-formulaire--modifiable {
-  grid-template-columns: minmax(0, 1fr) 64px 32px;
+  grid-template-columns: max-content minmax(64px, 1fr) 32px;
   align-items: center;
   gap: 12px;
   padding: 10px 12px;
