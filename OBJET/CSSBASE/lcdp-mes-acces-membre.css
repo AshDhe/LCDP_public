@@ -1011,3 +1011,45 @@ body.lcdp-mes-acces-page .lcdp-planning-carte-visite .lcdp-planning-verso-pastil
 body.lcdp-mes-acces-page .lcdp-planning-carte-visite .lcdp-planning-verso-pastille--coach {
   background:#8660c8!important;
 }
+/* MES ACCÈS — actions de l'état réellement vide (Liste / À venir uniquement).
+   Aucun changement des cartes, filtres ou autres onglets. */
+#lcdp-planning-calendrier-slot .lcdp-mes-acces-vide {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+#lcdp-planning-calendrier-slot .lcdp-mes-acces-vide > .lcdp-box-liste-card__message {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+#lcdp-planning-calendrier-slot .lcdp-mes-acces-vide__texte {
+  width: 100%;
+  margin: 0;
+  color: var(--lcdp-color-text, #292524);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  text-align: center;
+}
+#lcdp-planning-calendrier-slot .lcdp-mes-acces-vide__bouton {
+  width: min(100%, 220px);
+  min-height: 42px;
+  margin: 0;
+}
+#lcdp-planning-calendrier-slot .lcdp-mes-acces-vide__souscription {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 4px;
+}
+#lcdp-planning-calendrier-slot .lcdp-mes-acces-vide__souscription[hidden] {
+  display: none;
+}
