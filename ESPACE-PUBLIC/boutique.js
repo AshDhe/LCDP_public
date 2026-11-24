@@ -27,6 +27,11 @@
     });
   });
 
+  // Lien direct depuis Mon compte : ouvrir la liste des témoins sans clic supplémentaire.
+  const cibleInitiale = window.location.hash;
+  const lienInitial = listes.find(lien => lien.getAttribute("href") === cibleInitiale);
+  if (lienInitial) lienInitial.click();
+
   // Point de raccordement du futur tunnel w-don-parc.js.
   // Son URL d'entrée reste à définir dans SITE_CONFIG : aucun appel API anticipé.
   don.addEventListener("click", event => {

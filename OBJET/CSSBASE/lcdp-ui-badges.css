@@ -65,6 +65,15 @@
   color: #fff;
 }
 .lcdp-ui-badge--action[hidden] { display: none !important; }
+.lcdp-ui-badge--action.lcdp-ui-badge--amber {
+  background: #fef3c7;
+  color: #92400e;
+}
+.lcdp-ui-badge--action.lcdp-ui-badge--amber:hover,
+.lcdp-ui-badge--action.lcdp-ui-badge--amber:focus-visible {
+  background: #fde68a;
+  color: #78350f;
+}
 
 /* Conserve la métrique exacte du surtitre d'accueil. */
 .lcdp-ui-badge--eyebrow {
