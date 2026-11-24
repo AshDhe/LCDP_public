@@ -620,14 +620,14 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   font-size: .875rem;
   margin: 12px 0;
 }
-.lcdp-page-mon-compte #dialogue-selfie[data-etape="capture"] {
+.lcdp-page-mon-compte #dialogue-selfie:is([data-etape="capture"], [data-etape="apercu"]) {
   width: min(calc(100% - 24px), 440px);
   padding: 20px 12px;
 }
-.lcdp-page-mon-compte #dialogue-selfie[data-etape="capture"]::backdrop {
+.lcdp-page-mon-compte #dialogue-selfie:is([data-etape="capture"], [data-etape="apercu"])::backdrop {
   background: #111827;
 }
-.lcdp-page-mon-compte #dialogue-selfie video {
+.lcdp-page-mon-compte #dialogue-selfie :is(video, [data-selfie-apercu]) {
   display: block;
   width: 100%;
   max-height: min(56dvh, 420px);
