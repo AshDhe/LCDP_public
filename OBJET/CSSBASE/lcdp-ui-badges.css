@@ -125,3 +125,23 @@ body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header
     padding: 7px 16px;
   }
 }
+
+/* Variantes d'action compactes : rouge et neutre informatif. */
+.lcdp-ui-badge--action.lcdp-ui-badge--red {
+  background: #fff1f2;
+  color: #be123c;
+}
+.lcdp-ui-badge--action.lcdp-ui-badge--red:hover,
+.lcdp-ui-badge--action.lcdp-ui-badge--red:focus-visible {
+  background: #ffe4e6;
+  color: #9f1239;
+}
+.lcdp-ui-badge--action.lcdp-ui-badge--neutral {
+  background: #f1f5f9;
+  color: #64748b;
+}
+.lcdp-ui-badge--action.lcdp-ui-badge--neutral:hover,
+.lcdp-ui-badge--action.lcdp-ui-badge--neutral:focus-visible {
+  background: #e2e8f0;
+  color: #475569;
+}
