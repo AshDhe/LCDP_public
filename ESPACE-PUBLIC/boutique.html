@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-lcdp-css="c085 c034 c038 c032 c083 c036 c033 c037 c041 c040">
+<html lang="fr" data-lcdp-css="c085 c034 c038 c032 c083 c036 c033 c037 c041 c040 c073">
 <head>
   <meta charset="utf-8">
   <title>Boutique club - La Clé du Parc</title>
@@ -9,6 +9,7 @@
   <script src="../config.js"></script>
   <script src="../OBJET/JSBASE/02-footer.js" data-lcdp-footer-autonome defer></script>
   <script src="./pages-listes-public.js?v=20261123-boutique-cadre" defer></script>
+  <script src="./boutique.js?v=20261124-boutique-editorial" defer></script>
 </head>
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune">
   <div id="lcdp-attente-arrivee" class="lcdp-attente-plein-ecran" role="status" aria-label="Chargement de la page" hidden>
@@ -27,6 +28,78 @@
             <header class="lcdp-editorial-page-heading">
               <h1 id="lcdp-page-titre" class="lcdp-title-page-center">Boutique club</h1>
             </header>
+
+            <section class="lcdp-component lcdp-box-carousel lcdp-editorial-card" aria-labelledby="lcdp-boutique-souscrire-titre">
+              <h2 id="lcdp-boutique-souscrire-titre" class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-boxtext-title>Souscrire un abonnement</h2>
+              <div class="lcdp-boxtext__content lcdp-editorial-copy" data-lcdp-boxtext-content>
+                <p>Lorem ipsum dolor sit amet.<br>Consectetur adipiscing elit.</p>
+                <div class="lcdp-actions-centrees lcdp-editorial-cta" aria-label="Actions de la boutique">
+                  <a id="lcdp-boutique-abonnement" class="lcdp-button lcdp-button--haut-etroit lcdp-button-primary lcdp-editorial-action-button" href="https://membre.lacleduparc.fr/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza">Abonnement</a>
+                  <a class="lcdp-button lcdp-button--haut-etroit lcdp-button-secondary lcdp-editorial-action-button" href="#lcdp-boutique-temoins" data-lcdp-boutique-liste aria-controls="lcdp-boutique-temoins" aria-expanded="false">Témoin La Clé du Parc</a>
+                  <a class="lcdp-button lcdp-button--haut-etroit lcdp-button-orange lcdp-editorial-action-button" href="#lcdp-boutique-goodies" data-lcdp-boutique-liste aria-controls="lcdp-boutique-goodies" aria-expanded="false">Goodies</a>
+                </div>
+                <div id="lcdp-boutique-temoins" hidden>
+                  <section class="lcdp-box-liste-card" data-lcdp-box-liste-card>
+                    <div class="lcdp-box-liste-card__header">
+                      <div class="lcdp-box-liste-card__heading">
+                        <h2 class="lcdp-box-liste-card__title" data-lcdp-liste-card-title>Témoin La Clé du Parc</h2>
+                      </div>
+                  
+                      <div
+                        class="lcdp-box-liste-card__commande"
+                        data-lcdp-liste-card-commande
+                      ></div>
+                    </div>
+                  
+                    <div class="lcdp-box-liste-card__tools" data-lcdp-liste-card-tools hidden></div>
+                  
+                    <p
+                      class="lcdp-box-liste-card__message"
+                      data-lcdp-liste-card-message
+                      hidden
+                    ></p>
+                  
+                    <div class="lcdp-box-liste-card__list" data-lcdp-liste-card-list></div>
+                  </section>
+                </div>
+                <div id="lcdp-boutique-goodies" hidden>
+                  <section class="lcdp-box-liste-card" data-lcdp-box-liste-card>
+                    <div class="lcdp-box-liste-card__header">
+                      <div class="lcdp-box-liste-card__heading">
+                        <h2 class="lcdp-box-liste-card__title" data-lcdp-liste-card-title>Goodies</h2>
+                      </div>
+                  
+                      <div
+                        class="lcdp-box-liste-card__commande"
+                        data-lcdp-liste-card-commande
+                      ></div>
+                    </div>
+                  
+                    <div class="lcdp-box-liste-card__tools" data-lcdp-liste-card-tools hidden></div>
+                  
+                    <p
+                      class="lcdp-box-liste-card__message"
+                      data-lcdp-liste-card-message
+                      hidden
+                    ></p>
+                  
+                    <div class="lcdp-box-liste-card__list" data-lcdp-liste-card-list></div>
+                  </section>
+                </div>
+              </div>
+            </section>
+
+            <section class="lcdp-component lcdp-box-carousel lcdp-editorial-card" aria-labelledby="lcdp-boutique-don-titre">
+              <h2 id="lcdp-boutique-don-titre" class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-boxtext-title>Faire un don PARC</h2>
+              <div class="lcdp-boxtext__content lcdp-editorial-copy" data-lcdp-boxtext-content>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="lcdp-actions-centrees lcdp-editorial-cta">
+                  <a id="lcdp-boutique-don" class="lcdp-button lcdp-button--haut-etroit lcdp-button-orange lcdp-editorial-action-button" href="#lcdp-boutique-don-etat">Faire un don</a>
+                </div>
+                <p id="lcdp-boutique-don-etat" role="status" hidden>Le service de don n’est pas encore disponible.</p>
+              </div>
+            </section>
+
           </div>
         </div>
       </section>
