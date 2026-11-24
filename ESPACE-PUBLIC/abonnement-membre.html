@@ -2,7 +2,7 @@
 <html lang="fr" data-lcdp-css="c085 c034 c038 c032 c031 c036 c037 c083 c033 c041 c040 c073 c079 c080">
 <head>
   <meta charset="utf-8">
-  <title>Les abonnements - La Clé du Parc</title>
+  <title>Abonnement - La Clé du Parc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Découvrez les durées, les dates de démarrage et les privilèges des abonnements La Clé du Parc.">
   <script src="../config.js"></script>
@@ -12,12 +12,42 @@
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune">
   <div class="lcdp-site-page lcdp-app-wrapper">
     <div id="lcdp-bandeau-slot"></div>
-    <main class="lcdp-site-main lcdp-main-presentation">
-      <section class="lcdp-page-section" aria-label="Présentation des abonnements">
+    <main class="lcdp-site-main" id="contenu-principal">
+      <section class="lcdp-page-section" aria-labelledby="lcdp-page-titre">
         <div class="lcdp-page-container">
           <div class="lcdp-page-content lcdp-stack-large lcdp-contenu-editorial">
-            <section class="lcdp-component lcdp-editorial-card" aria-label="Les formules et leurs privilèges">
+
+            <header class="lcdp-editorial-page-heading">
+              <h1 id="lcdp-page-titre" class="lcdp-title-page-center">Abonnement</h1>
+            </header>
+
+            <section class="lcdp-component lcdp-box-carousel lcdp-editorial-card" aria-labelledby="lcdp-souscrire-titre">
+              <h2 id="lcdp-souscrire-titre" class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-boxtext-title>Souscrire un abonnement</h2>
               <div class="lcdp-boxtext__content lcdp-editorial-copy" data-lcdp-boxtext-content>
+                <p>Lorem ipsum dolor sit amet.<br>Consectetur adipiscing elit.</p>
+                <p><a id="lcdp-afficher-tableaux-abonnements" href="#lcdp-tableaux-abonnements" aria-controls="lcdp-tableaux-abonnements" aria-expanded="false">Consulter les formules et privilèges d’abonnement</a></p>
+                <div class="lcdp-actions-centrees lcdp-editorial-cta" aria-label="Actions d'abonnement">
+                  <a id="lcdp-acces-planifier-abonnement" class="lcdp-button lcdp-button--haut-etroit lcdp-button-primary lcdp-editorial-action-button" href="https://membre.lacleduparc.fr/ESPACE-MEMBRE/reserver-membre.html">Planifier</a>
+                  <a id="lcdp-demarrer-abonnement" class="lcdp-button lcdp-button--haut-etroit lcdp-button-secondary lcdp-editorial-action-button" href="https://membre.lacleduparc.fr/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza" aria-disabled="true">Souscrire</a>
+                </div>
+              </div>
+            </section>
+
+            <section class="lcdp-component lcdp-box-carousel lcdp-editorial-card" aria-labelledby="lcdp-da-titre">
+              <h2 id="lcdp-da-titre" class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-boxtext-title>Droit d’abonnement (DA)</h2>
+              <div class="lcdp-boxtext__content lcdp-editorial-copy" data-lcdp-boxtext-content>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p><a id="lcdp-ouvrir-da-abonnement" href="#">Faire ma demande d’abonnement (DA)</a></p>
+                <div class="lcdp-actions-centrees lcdp-editorial-cta">
+                  <a id="lcdp-acces-boutique-abonnement" class="lcdp-button lcdp-button--haut-etroit lcdp-button-orange lcdp-editorial-action-button" href="/ESPACE-PUBLIC/boutique.html" data-site-href="ESPACE-PUBLIC/boutique.html">Boutique</a>
+                </div>
+              </div>
+            </section>
+
+            <div id="lcdp-tableaux-abonnements" hidden>
+              <section class="lcdp-component lcdp-box-carousel lcdp-editorial-card" aria-labelledby="lcdp-formules-titre">
+                <h2 id="lcdp-formules-titre" class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-boxtext-title>Formules et privilèges d’abonnement</h2>
+                <div class="lcdp-boxtext__content lcdp-editorial-copy" data-lcdp-boxtext-content>
                 <p>Pour une journée, quelques mois ou une année, <strong>La Clé du Parc propose plusieurs formules d’abonnement</strong> pour profiter des parcs du réseau et retrouver vos proches.</p>
                 <div class="lcdp-table-lecture">
                   <div class="lcdp-table-lecture__scroll">
@@ -91,13 +121,9 @@
                   </div>
                 </div>
                 <p>Les capacités et les ajouts disponibles varient selon l’abonnement. Les conditions détaillées et les options applicables à votre formule sont présentées dans votre espace membre.</p>
-                <div class="lcdp-actions-centrees" aria-label="Accéder aux démarches d’abonnement">
-                  <button id="lcdp-ouvrir-da-abonnement" class="lcdp-button lcdp-button--haut-etroit lcdp-button-orange" type="button">Faire ma demande d’abonnement (DA)</button>
-                  <a id="lcdp-acces-planifier-abonnement" class="lcdp-button lcdp-button--haut-etroit lcdp-button-primary" href="https://membre.lacleduparc.fr/ESPACE-MEMBRE/reserver-membre.html">Planifier un accès</a>
-                  <a id="lcdp-demarrer-abonnement" class="lcdp-button lcdp-button--haut-etroit lcdp-button-secondary" href="https://membre.lacleduparc.fr/ESPACE-MEMBRE/abonnement-membre.html?demarrer=1">Choisir un abonnement</a>
                 </div>
-              </div>
-            </section>
+              </section>
+            </div>
           </div>
         </div>
       </section>
@@ -106,6 +132,6 @@
     <div id="lcdp-lightbox-slot"></div>
   </div>
   <script src="../OBJET/JSBASE/documents-legaux.js" data-site-src="/OBJET/JSBASE/documents-legaux.js"></script>
-  <script src="./abonnement-membre.js?v=20261120-actions-membre"></script>
+  <script src="./abonnement-membre.js?v=20261124-aboreza-editorial"></script>
 </body>
 </html>
