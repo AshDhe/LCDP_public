@@ -745,7 +745,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 body.lcdp-page-mon-compte #form-mes-informations-membre
 .lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
 .lcdp-box-champ-formulaire__action-edit.lcdp-compte-action-prioritaire:active {
-  transform: translateY(-50%) scale(.95);
+  transform: scale(.95);
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre
 .lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
