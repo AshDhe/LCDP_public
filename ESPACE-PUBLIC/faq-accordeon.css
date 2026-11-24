@@ -1,5 +1,18 @@
+/* Rythme commun aux FAQ publique et membre. */
+.lcdp-page-faq .lcdp-app-wrapper .lcdp-page-content.lcdp-stack-large {
+  gap: var(--lcdp-space-2);
+}
+
 .lcdp-faq__question { display:flex; align-items:center; justify-content:space-between; gap:20px; width:100%; border:0; background:transparent; font:inherit; text-align:left; cursor:pointer; }
 .lcdp-faq__question::after { content:"+"; flex:none; font-size:1.55rem; font-weight:400; }
 .lcdp-faq__question[aria-expanded="true"]::after { content:"−"; }
 .lcdp-faq__panel { overflow:hidden; }
 .lcdp-faq__panel[hidden] { display:none; }
+
+/* Pas de cadre autour d'une question ; repère clavier conservé. */
+.lcdp-faq__question:focus-visible {
+  outline: none;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}

@@ -43,9 +43,6 @@
     const prefixe = "lcdp-faq-" + (++compteur);
     // Le contenu de la FAQ défile dans le main du wrapper.
     const defilement = racine.closest(".lcdp-site-main") || document.scrollingElement;
-    const paddingInitial = racine.style.paddingTop;
-    const paddingCalcule = Number.parseFloat(window.getComputedStyle(racine).paddingTop) || 0;
-    let espaceReserve = 0;
     let imageDeCorrection = 0;
 
     function ouvrir(item, ouvert) {
@@ -55,36 +52,11 @@
       item.panel.setAttribute("aria-hidden", String(!ouvert));
     }
 
-    function reserverEspace(hauteur) {
-      espaceReserve = Math.max(0, hauteur);
-      racine.style.paddingTop = espaceReserve > 0.5
-        ? (paddingCalcule + espaceReserve) + "px"
-        : paddingInitial;
-    }
-
     function maintenirQuestion(item, positionInitiale) {
-      // Compenser dans le main la réduction de hauteur d'une réponse précédente.
-      let ecart = item.button.getBoundingClientRect().top - positionInitiale;
+      // Conserver la position de la question lorsque le conteneur peut défiler,
+      // sans créer d'espace artificiel au-dessus de la FAQ.
+      const ecart = item.button.getBoundingClientRect().top - positionInitiale;
       if (defilement && Math.abs(ecart) > 0.5) defilement.scrollTop += ecart;
-
-      ecart = item.button.getBoundingClientRect().top - positionInitiale;
-      // Quand le défilement est déjà à zéro, réserver temporairement
-      // l'espace qui manque pour conserver la question sous les yeux.
-      if (ecart < -0.5) reserverEspace(espaceReserve - ecart);
-      else if (ecart > 0.5 && espaceReserve > 0) {
-        reserverEspace(Math.max(0, espaceReserve - ecart));
-      }
-
-      ecart = item.button.getBoundingClientRect().top - positionInitiale;
-      if (defilement && Math.abs(ecart) > 0.5) defilement.scrollTop += ecart;
-    }
-
-    function libererEspaceAuDefilement() {
-      if (!defilement || espaceReserve <= 0.5 || defilement.scrollTop < espaceReserve) return;
-      const position = defilement.scrollTop;
-      const espace = espaceReserve;
-      reserverEspace(0);
-      defilement.scrollTop = Math.max(0, position - espace);
     }
 
     function basculer(item) {
@@ -107,7 +79,6 @@
       });
     }
 
-    defilement?.addEventListener("scroll", libererEspaceAuDefilement, { passive: true });
     for (const bloc of Array.isArray(blocs) ? blocs : []) {
       if (!String(bloc.titre || "").trim()) continue;
       const id = prefixe + "-" + elements.length;
@@ -130,8 +101,6 @@
     }
     controles.set(racine, () => {
       if (imageDeCorrection) window.cancelAnimationFrame(imageDeCorrection);
-      defilement?.removeEventListener("scroll", libererEspaceAuDefilement);
-      racine.style.paddingTop = paddingInitial;
     });
     if (!elements.length) { const p = document.createElement("p"); p.textContent = "Aucune FAQ publiée pour le moment."; racine.appendChild(p); }
   }
