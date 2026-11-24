@@ -1214,17 +1214,22 @@ body.lcdp-page-mon-compte #form-mes-informations-membre:not(.lcdp-compte-points-
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements {
   display: flex;
   flex-direction: column;
-  gap: var(--lcdp-space-2, 8px);
+  gap: 5px;
   width: 100%;
   min-width: 0;
-  margin-top: var(--lcdp-space-4, 16px);
+  margin-top: 8px;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements__titre {
-  margin: 0 0 var(--lcdp-space-2, 8px);
-  color: var(--lcdp-color-text, #1f2a24);
-  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  color: var(--compte-texte, #1e293b);
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 13px;
   line-height: 1.35;
   font-weight: 700;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-align: left;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements__liste {
   display: flex;
@@ -1253,6 +1258,9 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service .lc
   border-radius: 0;
   background: transparent;
   padding: 0;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service .lcdp-compte-alerte--vide {
+  min-height: 0;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service .lcdp-compte-alerte__nom {
   padding: 0;
