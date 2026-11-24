@@ -372,7 +372,26 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adr
 }
 /* Règlements : lecture et acceptation restent distinctes, sans toucher aux URL. */
 body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="reglements"] > [data-lcdp-box-champ-formulaire] {
-  row-gap: 4px;
+  row-gap: 3px;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="reglements"] .lcdp-box-champ-formulaire__label-zone,
+body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-equipements-temoins > [data-lcdp-box-champ-formulaire] > .lcdp-box-champ-formulaire__label-zone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="reglements"] .lcdp-box-champ-formulaire__label-zone > a,
+body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-equipements-temoins > [data-lcdp-box-champ-formulaire] > .lcdp-box-champ-formulaire__label-zone > a,
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service .lcdp-compte-alerte > .lcdp-ui-badge {
+  flex: 0 0 auto;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-abonnement .lcdp-box-champ-formulaire__label {
+  text-transform: uppercase;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-abonnement-resume {
+  display: block;
+  overflow-wrap: anywhere;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="reglements"] .lcdp-box-champ-formulaire__lecture {
   font-size: 12px;
@@ -935,10 +954,10 @@ body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-abonnement[
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
   width: 100%;
   min-width: 0;
-  margin-top: 8px;
+  margin-top: 0;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__ligne {
   box-sizing: border-box;
@@ -1217,16 +1236,16 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements
   gap: 5px;
   width: 100%;
   min-width: 0;
-  margin-top: 8px;
+  margin-top: 0;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements__titre {
   margin: 0;
   padding: 0;
-  color: var(--compte-texte, #1e293b);
+  color: var(--compte-texte-libelle);
   font-family: Arial, system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.35;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: normal;
   text-transform: uppercase;
   text-align: left;
@@ -1234,7 +1253,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements__liste {
   display: flex;
   flex-direction: column;
-  gap: var(--lcdp-space-2, 8px);
+  gap: 5px;
   min-width: 0;
 }
 /* Services : seuls les éléments de liste actifs conservent leurs réglages propres. */
