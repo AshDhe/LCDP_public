@@ -135,7 +135,11 @@
       boutonAbonner = document.createElement('button');
       boutonAbonner.type = 'button';
       boutonAbonner.className = 'lcdp-dialogue-ref__bouton lcdp-dialogue-ref__bouton--secondaire';
-      boutonAbonner.textContent = "M'abonner";
+      const introductionAbonnement = document.createElement('p');
+      introductionAbonnement.className = 'lcdp-dialogue-ref__message';
+      introductionAbonnement.textContent = 'Souscrire directement un nouvel abonnement.';
+      actions.appendChild(introductionAbonnement);
+      boutonAbonner.textContent = 'SOUSCRIRE';
       actions.appendChild(boutonAbonner);
     }
 
@@ -225,7 +229,7 @@
     }
     const daValidee = String(etatMembre?.statuda || '').trim().toLowerCase() === 'oui';
     const sansAbonnement = !vraie(etatMembre?.abonne);
-    await alerte("Vous n'avez pas d'accès en cours.\nPlanifier un nouvel accès ou demander une invitation.",
+    await alerte("Vous n'avez pas d'accès en cours.\nPlanifier un nouvel accès ou une demande d'invitation.",
       planifier(), 'information', {
         titre: 'Ouvrir MA CLÉ',
         mabonner: daValidee && sansAbonnement
