@@ -1295,3 +1295,38 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipement-
   max-width: 100%;
   overflow-wrap: anywhere;
 }
+
+/* Fermeture volontaire : même gabarit de rubrique, tonalité rouge discrète.
+   Les dialogues et les deux couleurs d'action proviennent de la convergence. */
+body.lcdp-page-mon-compte #form-mes-informations-membre
+.lcdp-mon-compte-section[data-lcdp-compte-section="fermeture"] > .lcdp-title-section {
+  color: #be123c;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre
+.lcdp-mon-compte-section[data-lcdp-compte-section="fermeture"] > [data-lcdp-box-champ-formulaire] {
+  border-color: rgba(251,113,133,.3);
+  background: #fff1f2;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__message {
+  margin: 3px 0;
+  color: var(--compte-texte-secondaire);
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton {
+  width: auto;
+  min-height: 36px;
+  padding: 8px 20px;
+  border-radius: 12px;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton--suppression {
+  color: #be123c;
+  background: #fff;
+  border-color: rgba(251,113,133,.5);
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton--suppression:hover {
+  background: #fff1f2;
+  border-color: #be123c;
+}
