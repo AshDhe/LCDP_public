@@ -1237,19 +1237,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements
   gap: var(--lcdp-space-2, 8px);
   min-width: 0;
 }
-/* Services dans Club : mêmes cartes, mêmes libellés et même rythme que les autres lignes. */
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service {
-  margin-top: var(--lcdp-space-2, 8px);
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service > .lcdp-compte-equipements__titre {
-  margin: 0;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service > .lcdp-compte-relations__ligne {
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  gap: 3px;
-}
+/* Services : seuls les éléments de liste actifs conservent leurs réglages propres. */
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service .lcdp-compte-alertes-liste {
   gap: 4px;
 }
@@ -1258,9 +1246,6 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service .lc
   border-radius: 0;
   background: transparent;
   padding: 0;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service .lcdp-compte-alerte--vide {
-  min-height: 0;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-service .lcdp-compte-alerte__nom {
   padding: 0;
