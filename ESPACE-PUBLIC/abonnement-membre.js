@@ -3,6 +3,7 @@
 
   window.SITE_BASE = window.SITE_CONFIG?.publicBaseUrl || window.SITE_CONFIG?.siteBase || "";
   const siteBase = String(window.SITE_BASE || "").replace(/\/+$/, "");
+  let controleDaNumero = 0;
 
   function construireUrlSite(chemin) {
     if (!chemin) return chemin;
@@ -111,35 +112,130 @@
     await window.LCDP_ouvrirPremiereDaMembre();
   }
 
+  // Le même service et la même valeur statuda que sur la page Abonnement membre.
+  // Sans confirmation explicite "oui", le bouton reste visuellement indisponible.
+  async function actualiserDroitSouscription() {
+    const bouton = document.getElementById("lcdp-demarrer-abonnement");
+    if (!bouton) return;
+    const numero = ++controleDaNumero;
+    bouton.setAttribute("aria-disabled", "true");
+    const config = window.SITE_CONFIG || {};
+    const baseApi = config.workerAboMembreUrl || config.WORKER_ABO_MEMBRE_URL ||
+      (typeof config.apiUrl === "function" ? config.apiUrl("abo-membre-api") : "");
+    if (!baseApi) return;
+
+    try {
+      const reponse = await fetch(String(baseApi).replace(/\/+$/, "") + "/mes-abonnements", {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+        headers: { "Accept": "application/json" }
+      });
+      const data = await reponse.json().catch(() => null);
+      if (numero !== controleDaNumero) return;
+      const daValidee = reponse.ok && (data?.ok === true || data?.success === true) &&
+        String(data?.statuda || "").trim().toLowerCase() === "oui";
+      bouton.setAttribute("aria-disabled", daValidee ? "false" : "true");
+    } catch (error) {
+      if (numero === controleDaNumero) bouton.setAttribute("aria-disabled", "true");
+      console.warn("Statut DA non vérifiable :", error);
+    }
+  }
+
+  async function ouvrirInformationSouscription() {
+    const slot = document.getElementById("lcdp-lightbox-slot");
+    const elementActif = document.activeElement;
+    slot.replaceChildren(await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-information.html"));
+    const dialogue = slot.querySelector('[data-lcdp-dialogue-reference="information"]');
+    if (!dialogue) throw new Error("Dialogue INFORMATION indisponible.");
+    dialogue.querySelector("[data-lcdp-dialogue-titre]").textContent = "Souscription indisponible";
+    dialogue.querySelector("[data-lcdp-dialogue-message]").textContent =
+      "Vous ne pouvez pas souscrire actuellement.";
+    const compris = dialogue.querySelector('[data-lcdp-dialogue-action="compris"]');
+    if (!compris) throw new Error("Bouton de fermeture INFORMATION introuvable.");
+
+    const fermer = () => {
+      document.removeEventListener("keydown", gererClavier);
+      slot.replaceChildren();
+      if (elementActif?.isConnected && typeof elementActif.focus === "function") elementActif.focus();
+    };
+    const gererClavier = event => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        fermer();
+      } else if (event.key === "Tab") {
+        event.preventDefault();
+        compris.focus();
+      }
+    };
+    document.addEventListener("keydown", gererClavier);
+    compris.addEventListener("click", fermer, { once: true });
+    dialogue.addEventListener("click", event => {
+      if (event.target === dialogue) fermer();
+    });
+    compris.focus();
+  }
+
+  function initialiserTableauxAbonnements() {
+    const lien = document.getElementById("lcdp-afficher-tableaux-abonnements");
+    const contenu = document.getElementById("lcdp-tableaux-abonnements");
+    if (!lien || !contenu) return;
+    lien.addEventListener("click", event => {
+      event.preventDefault();
+      const afficher = contenu.hidden;
+      contenu.hidden = !afficher;
+      lien.setAttribute("aria-expanded", String(afficher));
+      lien.textContent = afficher
+        ? "Masquer les formules et privilèges d’abonnement"
+        : "Consulter les formules et privilèges d’abonnement";
+      if (afficher) contenu.scrollIntoView({ behavior: "auto", block: "start" });
+    });
+  }
+
   function initialiserActionsMembre() {
     const planifier = document.getElementById("lcdp-acces-planifier-abonnement");
     const souscrire = document.getElementById("lcdp-demarrer-abonnement");
-    const boutonDa = document.getElementById("lcdp-ouvrir-da-abonnement");
+    const lienDa = document.getElementById("lcdp-ouvrir-da-abonnement");
 
     try {
       planifier.href = urlMembre("/ESPACE-MEMBRE/reserver-membre.html");
-      souscrire.href = urlMembre("/ESPACE-MEMBRE/abonnement-membre.html?demarrer=1");
+      souscrire.href = urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza");
     } catch (error) {
       console.error(error);
       planifier.removeAttribute("href");
       souscrire.removeAttribute("href");
     }
 
-    boutonDa.addEventListener("click", async () => {
-      if (boutonDa.disabled) return;
-      boutonDa.disabled = true;
+    souscrire.addEventListener("click", event => {
+      if (souscrire.getAttribute("aria-disabled") !== "false" || !souscrire.hasAttribute("href")) {
+        event.preventDefault();
+        ouvrirInformationSouscription().catch(console.error);
+      }
+    });
+
+    lienDa.addEventListener("click", async event => {
+      event.preventDefault();
+      if (lienDa.dataset.ouvertureDa === "true") return;
+      lienDa.dataset.ouvertureDa = "true";
       try {
         await ouvrirDaDepuisPresentation();
       } catch (error) {
         console.error("Ouverture de la DA impossible :", error);
         window.alert("La demande d'abonnement est momentanément indisponible.");
       } finally {
-        boutonDa.disabled = false;
+        delete lienDa.dataset.ouvertureDa;
       }
+    });
+
+    actualiserDroitSouscription();
+    window.addEventListener("pageshow", actualiserDroitSouscription);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) actualiserDroitSouscription();
     });
   }
 
   appliquerRoutesSite(document);
+  initialiserTableauxAbonnements();
   initialiserActionsMembre();
   initialiserBandeau().catch(console.error);
   initialiserFooter().catch(console.error);
