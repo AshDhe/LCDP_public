@@ -172,6 +172,7 @@
     let envoiEnCours = false;
     let libelleBoutonInitial = "Devenir membre invité";
     let invitation = null;
+    let publications = null;
 
     if (!racineFormulaire || !form) {
       console.error("Formulaire introuvable.");
@@ -203,6 +204,24 @@
       const response=await fetch(url,{credentials:"omit",cache:"no-store"});
       const configuration=await response.json();
       if(!response.ok||!configuration.sitekey)throw new Error("Protection indisponible.");
+      // Compatibilité durant le déploiement du Worker : seules les versions effectivement
+      // fournies par le serveur peuvent être enregistrées comme acceptées.
+      if (configuration.publications !== undefined) {
+        const refs=configuration.publications;
+        if(!Array.isArray(refs)||refs.length!==2)throw Error("Les règlements sont indisponibles.");
+        publications={};
+        for(const [doc,champ] of [["reglement-app","regleapp_v1"],["reglement-club","regleclub_v1"]]){
+          const p=refs.find(x=>x.document===doc);
+          if(!p||!String(p.version||"").trim()||! /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p.idpublication||""))throw Error("Référence du règlement indisponible.");
+          const input=form.querySelector("#"+champ);
+          const lien=input?.closest(".lcdp-box-champ-formulaire__checkbox-line")?.querySelector("a");
+          if(!input||!lien)throw Error("Lien du règlement indisponible.");
+          input.checked=false;
+          lien.href=url+"/reglement-publication?id="+encodeURIComponent(p.idpublication);
+          lien.textContent += " ("+p.version+")";
+          publications[doc]=p.idpublication;
+        }
+      }
       await chargerTurnstile();
       const emplacement=document.createElement("div");
       emplacement.setAttribute("aria-label","Protection du formulaire");
@@ -250,6 +269,10 @@
       submitButton.textContent = "Envoi en cours...";
 
       const data = {...lireDonneesFormulaire(form),turnstileToken};
+      if(publications) {
+        data.publication_app=publications["reglement-app"];
+        data.publication_club=publications["reglement-club"];
+      }
       if (invitation) data.invitationToken = invitation.token;
 
       try {
@@ -271,6 +294,12 @@
 
           await afficherAlerte(messageErreur);
 
+          if(result?.reason==="reglements_modifies") {
+            // Aucun consentement n'est reporté vers une version nouvelle.
+            for(const id of ["regleapp_v1","regleclub_v1"]){const c=form.querySelector("#"+id);if(c)c.checked=false;}
+            window.location.reload();
+            return;
+          }
           renouvelerProtection();
           return;
         }
