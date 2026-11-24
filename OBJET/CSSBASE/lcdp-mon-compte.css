@@ -672,6 +672,7 @@ body.lcdp-page-mon-compte #dialogue-selfie .lcdp-box-dialogue-champ__card {
   min-width: 0;
   max-width: 100%;
   margin: 0;
+  box-shadow: none;
 }
 body.lcdp-page-mon-compte #dialogue-selfie :is(video, [data-selfie-apercu]) {
   display: block;
