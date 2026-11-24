@@ -534,9 +534,9 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 .lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-control {
   position: relative;
   box-sizing: border-box;
-  min-height: 42px;
+  min-height: 64px;
   width: 100%;
-  padding: 5px 38px 5px 0;
+  padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -565,18 +565,20 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   display: none;
 }
 .lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge) {
-  display: block;
   box-sizing: border-box;
-  width: 42px;
-  height: 42px;
-  min-width: 42px;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: transparent;
+  background: #e2e8f0;
+  color: var(--compte-texte-libelle);
   overflow: hidden;
   flex-shrink: 0;
   cursor: zoom-in;
+  display: grid;
+  place-items: center;
 }
 .lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge):focus-visible {
   outline: 3px solid var(--compte-accent);
@@ -589,6 +591,13 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   object-fit: cover;
 }
 .lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge)[hidden], .lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-photo, #selfie-duoday-photo)[hidden] {
+  display: none !important;
+}
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge):disabled {
+  cursor: default;
+  opacity: 1;
+}
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) [data-selfie-silhouette][hidden] {
   display: none !important;
 }
 /* Selfie : seul le placement dans le wrapper est spécifique.
@@ -855,27 +864,39 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   border-color: #e2e8f0;
 }
 
-/* Le selfie sans photo ne présente qu'un seul texte ; avec photo, sa vignette. */
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="securite"] :is(#zone-selfie, #zone-selfie-duoday) {
-  grid-template-columns: minmax(0,1fr);
-  gap: 3px;
+/* Les deux selfies : libellé, portrait, action sur une même ligne. */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > :is(#zone-selfie, #zone-selfie-duoday).lcdp-box-champ-formulaire--modifiable {
+  grid-template-columns: minmax(0, 1fr) 64px 32px;
+  align-items: center;
+  gap: 12px;
   padding: 10px 12px;
 }
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > :is(#zone-selfie, #zone-selfie-duoday).lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__label-zone {
+  padding: 0;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > :is(#zone-selfie, #zone-selfie-duoday).lcdp-box-champ-formulaire--modifiable > .lcdp-box-champ-formulaire__action-edit {
+  position: static;
+  inset: auto;
+  transform: none;
+  align-self: center;
+  justify-self: end;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > :is(#zone-selfie, #zone-selfie-duoday).lcdp-box-champ-formulaire--modifiable > .lcdp-box-champ-formulaire__action-edit:active {
+  transform: scale(.95);
+}
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-texte {
-  color: var(--compte-texte);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 400;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-libelle, #selfie-duoday-libelle)[hidden] {
   display: none !important;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-control {
-  min-height: 32px;
-  padding: 0 38px 0 0;
+  min-height: 64px;
+  padding: 0;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-contenu {
-  min-height: 32px;
+  min-height: 64px;
 }
 
 @media (prefers-reduced-motion: reduce) {
