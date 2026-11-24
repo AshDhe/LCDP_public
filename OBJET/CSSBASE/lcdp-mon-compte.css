@@ -593,24 +593,48 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 }
 .lcdp-page-mon-compte #dialogue-selfie {
   box-sizing: border-box;
-  width: min(92vw, 440px);
-  max-height: 90dvh;
+  width: min(calc(100% - 32px), 440px);
+  max-width: 100%;
+  max-height: calc(100dvh - 32px);
   overflow: auto;
+  margin: auto;
   border: 1px solid var(--lcdp-ui-dialog-border, rgba(31,42,36,.14));
   border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  padding: 22px 17px;
-  background: var(--compte-fond-carte, #fff);
+  padding: 24px 20px;
+  background: var(--lcdp-color-surface, #fff);
   color: var(--compte-texte, #1f2a24);
   box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31,42,36,.12));
 }
 .lcdp-page-mon-compte #dialogue-selfie::backdrop {
-  background: var(--lcdp-ui-overlay, rgba(31,42,36,.46));
+  background: #f8fafc;
+}
+.lcdp-page-mon-compte #dialogue-selfie .lcdp-title-section {
+  text-align: center;
+  margin: 0 0 16px;
+}
+.lcdp-page-mon-compte #dialogue-selfie .lcdp-box-champ-formulaire__code-cases {
+  margin: 8px auto;
+}
+.lcdp-page-mon-compte #dialogue-selfie [data-selfie-message] {
+  text-align: center;
+  font-size: .875rem;
+  margin: 12px 0;
+}
+.lcdp-page-mon-compte #dialogue-selfie[data-etape="capture"] {
+  width: min(calc(100% - 24px), 440px);
+  padding: 20px 12px;
+}
+.lcdp-page-mon-compte #dialogue-selfie[data-etape="capture"]::backdrop {
+  background: #111827;
 }
 .lcdp-page-mon-compte #dialogue-selfie video {
   display: block;
   width: 100%;
-  max-height: 50dvh;
-  object-fit: contain;
+  max-height: min(56dvh, 420px);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #111827;
   transform: scaleX(-1);
 }
 .lcdp-page-mon-compte #dialogue-selfie .lcdp-selfie-actions {
@@ -618,7 +642,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 .lcdp-page-mon-compte #dialogue-selfie-agrandi {
   box-sizing: border-box;
