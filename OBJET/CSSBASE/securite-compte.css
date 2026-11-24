@@ -351,3 +351,23 @@ body.lcdp-security-tunnel #lcdp-footer-slot { display: none !important; }
   :is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #bouton-valider-code,
   body.lcdp-security-tunnel .lcdp-step-progress__fill { transition: none; }
 }
+
+/* Fermeture du compte : consigne CODR centrée et compacte. */
+div.lcdp-security-tunnel :is(#formulaire-code-securite,[data-lcdp-fermeture-codr])[data-lcdp-fermeture-codr] .lcdp-box-champ-formulaire--code {
+  display: block;
+  min-width: 0;
+  text-align: center;
+}
+div.lcdp-security-tunnel :is(#formulaire-code-securite,[data-lcdp-fermeture-codr])[data-lcdp-fermeture-codr] .lcdp-box-champ-formulaire--code > legend {
+  display: block;
+  float: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+div.lcdp-security-tunnel [data-lcdp-fermeture-codr] .lcdp-box-champ-formulaire--code > .lcdp-dialogue-ref__message {
+  margin: 0 0 6px;
+  padding: 0;
+  text-align: center;
+}
