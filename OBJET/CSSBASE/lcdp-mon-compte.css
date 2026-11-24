@@ -762,6 +762,39 @@ body.lcdp-page-mon-compte #dialogue-selfie [hidden] {
   font-size: 1.15rem;
   padding-inline: 3px;
 }
+
+/* Changement du CODA : deux étapes, consignes lisibles et une seule saisie. */
+body.lcdp-page-mon-compte #lcdp-lightbox-slot [data-lcdp-modification-coda] .lcdp-box-dialogue-champ__content {
+  gap: var(--lcdp-space-2, 8px);
+}
+body.lcdp-page-mon-compte #lcdp-lightbox-slot [data-lcdp-modification-coda] .lcdp-box-dialogue-champ__content > .lcdp-box-dialogue-champ__label {
+  margin: 0;
+  color: var(--compte-texte);
+  font: 500 14px/1.5 Arial, system-ui, sans-serif;
+  text-align: left;
+}
+body.lcdp-page-mon-compte #lcdp-lightbox-slot [data-lcdp-modification-coda] .lcdp-box-dialogue-champ__content > .lcdp-box-dialogue-champ__label:first-child {
+  color: var(--compte-texte-secondaire);
+  font-weight: 700;
+}
+body.lcdp-page-mon-compte #lcdp-lightbox-slot [data-lcdp-modification-coda] .lcdp-box-champ-formulaire__code-cases {
+  max-width: 100%;
+}
+body.lcdp-page-mon-compte #lcdp-lightbox-slot [data-lcdp-modification-coda] .lcdp-box-champ-formulaire__checkbox-line {
+  color: var(--compte-texte-secondaire);
+  font-size: 13px;
+}
+body.lcdp-page-mon-compte #lcdp-lightbox-slot [data-lcdp-modification-coda] .lcdp-box-dialogue-champ__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: var(--lcdp-space-2, 8px);
+}
+body.lcdp-page-mon-compte #lcdp-lightbox-slot [data-lcdp-modification-coda] .lcdp-box-dialogue-champ__actions > .lcdp-button {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
 @media (min-width: 540px) {
   .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section {
     padding: 19px 20px 20px;
