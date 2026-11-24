@@ -1296,21 +1296,17 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipement-
   overflow-wrap: anywhere;
 }
 
-/* Fermeture volontaire : même gabarit de rubrique, tonalité rouge discrète.
-   Les dialogues et les deux couleurs d'action proviennent de la convergence. */
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="fermeture"] > .lcdp-title-section {
-  color: #be123c;
+/* Fermeture volontaire : titre gris du gabarit existant et bouton discret.
+   L’avertissement rouge est réservé au dialogue de fermeture. */
+body.lcdp-page-mon-compte
+[data-lcdp-avertissement-fermeture] .lcdp-dialogue-ref__message {
+  color: var(--lcdp-ref-rose-hover);
+  text-align: left;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="fermeture"] > [data-lcdp-box-champ-formulaire] {
-  border-color: rgba(251,113,133,.3);
-  background: #fff1f2;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre
-[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__message {
-  margin: 3px 0;
-  color: var(--compte-texte-secondaire);
+body.lcdp-page-mon-compte
+[data-lcdp-avertissement-fermeture] .lcdp-dialogue-ref__message a {
+  color: inherit;
+  text-decoration: underline;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre
 [data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton {
