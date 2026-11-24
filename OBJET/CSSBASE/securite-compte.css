@@ -202,7 +202,7 @@ body.lcdp-security-tunnel #titre-preparation {
   color: #64748b;
   font-weight: 600;
 }
-:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #formulaire-code-securite .lcdp-box-formulaire__actions {
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #formulaire-code-securite :is(.lcdp-box-formulaire__actions,.lcdp-box-dialogue-champ__actions) {
   width: 100%;
   padding: 16px 0 0;
   margin: 12px 0 0;
@@ -267,7 +267,7 @@ body.lcdp-security-tunnel .lcdp-setup-flow__legend {
   font-weight: 600;
   text-align: center;
 }
-body.lcdp-security-tunnel .lcdp-setup-flow__note {
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) .lcdp-setup-flow__note {
   padding: 13px 14px;
   border: 1px solid #fde7be;
   border-radius: 12px;
