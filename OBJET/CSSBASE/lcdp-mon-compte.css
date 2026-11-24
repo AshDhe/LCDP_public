@@ -591,58 +591,64 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 .lcdp-page-mon-compte #zone-selfie #selfie-badge[hidden], .lcdp-page-mon-compte #zone-selfie #selfie-photo[hidden] {
   display: none !important;
 }
-.lcdp-page-mon-compte #dialogue-selfie {
+/* Selfie : parcours intégré à la section centrale du wrapper membre.
+   Le CODA utilise le fragment dialogue-champ et les cases de Ma clé. */
+body.lcdp-page-mon-compte .lcdp-site-main > [data-lcdp-selfie-page] {
+  padding: 20px 0;
+}
+body.lcdp-page-mon-compte .lcdp-site-main > .lcdp-page-section[hidden] {
+  display: none !important;
+}
+body.lcdp-page-mon-compte #dialogue-selfie > .lcdp-box-dialogue-champ {
+  position: static;
+  inset: auto;
+  padding: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+body.lcdp-page-mon-compte #dialogue-selfie .lcdp-box-dialogue-champ__card {
   box-sizing: border-box;
-  width: min(calc(100% - 32px), 440px);
-  max-width: 100%;
-  max-height: calc(100dvh - 32px);
-  overflow: auto;
-  margin: auto;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31,42,36,.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  padding: 24px 20px;
-  background: var(--lcdp-color-surface, #fff);
-  color: var(--compte-texte, #1f2a24);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31,42,36,.12));
+  width: 100%;
+  max-width: 460px;
+  margin-inline: auto;
 }
-.lcdp-page-mon-compte #dialogue-selfie::backdrop {
-  background: #f8fafc;
-}
-.lcdp-page-mon-compte #dialogue-selfie .lcdp-title-section {
-  text-align: center;
-  margin: 0 0 16px;
-}
-.lcdp-page-mon-compte #dialogue-selfie .lcdp-box-champ-formulaire__code-cases {
-  margin: 8px auto;
-}
-.lcdp-page-mon-compte #dialogue-selfie [data-selfie-message] {
-  text-align: center;
-  font-size: .875rem;
-  margin: 12px 0;
-}
-.lcdp-page-mon-compte #dialogue-selfie:is([data-etape="capture"], [data-etape="apercu"]) {
-  width: min(calc(100% - 24px), 440px);
-  padding: 20px 12px;
-}
-.lcdp-page-mon-compte #dialogue-selfie:is([data-etape="capture"], [data-etape="apercu"])::backdrop {
-  background: #111827;
-}
-.lcdp-page-mon-compte #dialogue-selfie :is(video, [data-selfie-apercu]) {
+body.lcdp-page-mon-compte #dialogue-selfie :is(video, [data-selfie-apercu]) {
   display: block;
   width: 100%;
   max-height: min(56dvh, 420px);
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: 12px;
-  background: #111827;
+  border-radius: var(--lcdp-radius-small);
+  background: var(--lcdp-color-text);
   transform: scaleX(-1);
 }
-.lcdp-page-mon-compte #dialogue-selfie .lcdp-selfie-actions {
-  display: flex;
+body.lcdp-page-mon-compte #dialogue-selfie [data-selfie-message] {
+  text-align: center;
+}
+body.lcdp-page-mon-compte #dialogue-selfie .lcdp-box-dialogue-champ__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 16px;
+}
+body.lcdp-page-mon-compte #dialogue-selfie .lcdp-box-dialogue-champ__actions .lcdp-button {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  min-height: 44px;
+  margin: 0;
+  padding: 10px;
+  border-radius: 12px;
+  font: 700 13px/1.3 Arial, system-ui, sans-serif;
+  text-transform: none;
+}
+body.lcdp-page-mon-compte #dialogue-selfie [data-selfie-fermer][data-selfie-annulation-seule] {
+  grid-column: 1 / -1;
+}
+body.lcdp-page-mon-compte #dialogue-selfie [hidden] {
+  display: none !important;
 }
 .lcdp-page-mon-compte #dialogue-selfie-agrandi {
   box-sizing: border-box;
