@@ -186,12 +186,12 @@ body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-sec
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable:hover {
   border-color: #fcd9a6;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire--modifiable:not(.lcdp-mon-compte-action-courte) .lcdp-box-champ-formulaire__lecture {
-  padding-right: 0 !important;
+body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable:not(.lcdp-mon-compte-action-courte) .lcdp-box-champ-formulaire__lecture {
+  padding-right: 40px !important;
   text-align: left;
 }
 
-/* Édition : position en haut du bloc, à droite du libellé (1re ligne). */
+/* Édition : aligner le pictogramme à droite sur le bas de la valeur. */
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable {
   position: relative;
 }
@@ -199,9 +199,23 @@ body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-sec
   position: static;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__action-edit {
-  top: 10px;
+  top: auto;
+  bottom: 10px;
   right: 12px;
   transform: none;
+}
+/* Les actions imbriquées (téléphone et témoins) restent ancrées à leur
+   valeur, et non aux commandes Wi-Fi éventuellement placées en dessous. */
+body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable > [data-lcdp-champ-control]:has(> .lcdp-box-champ-formulaire__action-edit) {
+  position: relative;
+}
+body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable > [data-lcdp-champ-control] > .lcdp-box-champ-formulaire__action-edit {
+  bottom: 0;
+  right: 0;
+}
+/* Services : les actions d'une ligne sur plusieurs lignes restent en bas. */
+body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-alerte__actions {
+  align-self: flex-end;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__label-zone {
   padding-right: 40px;
@@ -971,6 +985,17 @@ body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias,
   background: #fff;
   box-shadow: 0 20px 35px -8px rgba(15, 23, 42, .24);
   text-align: left;
+}
+/* Téléphone : animer uniquement la carte, sans recalculer le fond flouté
+   ni modifier les dimensions, les commandes ou les écouteurs. */
+@media (prefers-reduced-motion: no-preference) {
+  body.lcdp-page-mon-compte #lcdp-lightbox-slot > .lcdp-compte-dialogue-telephone .lcdp-box-dialogue-champ__card {
+    animation: lcdp-compte-telephone-entree 160ms ease-out both;
+  }
+}
+@keyframes lcdp-compte-telephone-entree {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
 }
 body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__title {
   max-width: calc(100% - 40px);
