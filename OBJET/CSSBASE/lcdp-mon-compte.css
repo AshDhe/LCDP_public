@@ -395,6 +395,9 @@ body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-abonnement-
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="reglements"] .lcdp-box-champ-formulaire__lecture {
   font-size: 12px;
+  color: var(--compte-texte-secondaire) !important;
+  -webkit-text-fill-color: var(--compte-texte-secondaire);
+  font-weight: 500;
 }
 /* Identifiants et coordonnées longues toujours lisibles sur écran étroit. */
 body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="remboursement"] .lcdp-box-champ-formulaire__lecture,
@@ -980,6 +983,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__libelle {
   flex: 1 1 auto;
   min-width: 0;
+  color: var(--compte-texte-secondaire);
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__precision {
   color: #64748b;
@@ -1242,11 +1246,11 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements__titre {
   margin: 0;
   padding: 0;
-  color: var(--compte-texte-libelle);
+  color: var(--compte-texte-secondaire);
   font-family: Arial, system-ui, sans-serif;
   font-size: 12px;
   line-height: 1.35;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: normal;
   text-transform: uppercase;
   text-align: left;
