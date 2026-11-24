@@ -531,7 +531,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 
 /* Styles de dialogues selfie et codes conservés de la feuille précédente. */
 
-.lcdp-page-mon-compte #zone-selfie .lcdp-selfie-control {
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-control {
   position: relative;
   box-sizing: border-box;
   min-height: 42px;
@@ -542,13 +542,13 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   background: transparent;
   box-shadow: none;
 }
-.lcdp-page-mon-compte #zone-selfie .lcdp-selfie-contenu {
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-contenu {
   display: flex;
   align-items: center;
   gap: 9px;
   min-width: 0;
 }
-.lcdp-page-mon-compte #zone-selfie .lcdp-selfie-texte {
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-texte {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -557,14 +557,14 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   font-size: .76rem;
   color: var(--compte-texte-secondaire);
 }
-.lcdp-page-mon-compte #zone-selfie #selfie-etat {
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-etat, #selfie-duoday-etat) {
   font-size: .86rem;
   color: var(--compte-texte);
 }
-.lcdp-page-mon-compte #zone-selfie #selfie-etat:empty {
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-etat, #selfie-duoday-etat):empty {
   display: none;
 }
-.lcdp-page-mon-compte #zone-selfie #selfie-badge {
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge) {
   display: block;
   box-sizing: border-box;
   width: 42px;
@@ -578,17 +578,17 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
   flex-shrink: 0;
   cursor: zoom-in;
 }
-.lcdp-page-mon-compte #zone-selfie #selfie-badge:focus-visible {
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge):focus-visible {
   outline: 3px solid var(--compte-accent);
   outline-offset: 3px;
 }
-.lcdp-page-mon-compte #zone-selfie #selfie-photo {
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-photo, #selfie-duoday-photo) {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.lcdp-page-mon-compte #zone-selfie #selfie-badge[hidden], .lcdp-page-mon-compte #zone-selfie #selfie-photo[hidden] {
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge)[hidden], .lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-photo, #selfie-duoday-photo)[hidden] {
   display: none !important;
 }
 /* Selfie : seul le placement dans le wrapper est spécifique.
@@ -857,24 +857,24 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 
 /* Le selfie sans photo ne présente qu'un seul texte ; avec photo, sa vignette. */
 body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="securite"] #zone-selfie {
+.lcdp-mon-compte-section[data-lcdp-compte-section="securite"] :is(#zone-selfie, #zone-selfie-duoday) {
   grid-template-columns: minmax(0,1fr);
   gap: 3px;
   padding: 10px 12px;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre #zone-selfie .lcdp-selfie-texte {
+body.lcdp-page-mon-compte #form-mes-informations-membre :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-texte {
   color: var(--compte-texte);
   font-size: 13px;
   font-weight: 700;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre #zone-selfie #selfie-libelle[hidden] {
+body.lcdp-page-mon-compte #form-mes-informations-membre :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-libelle, #selfie-duoday-libelle)[hidden] {
   display: none !important;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre #zone-selfie .lcdp-selfie-control {
+body.lcdp-page-mon-compte #form-mes-informations-membre :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-control {
   min-height: 32px;
   padding: 0 38px 0 0;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre #zone-selfie .lcdp-selfie-contenu {
+body.lcdp-page-mon-compte #form-mes-informations-membre :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-contenu {
   min-height: 32px;
 }
 
