@@ -195,7 +195,6 @@
   function initialiserActionsMembre() {
     const planifier = document.getElementById("lcdp-acces-planifier-abonnement");
     const souscrire = document.getElementById("lcdp-demarrer-abonnement");
-    const lienDa = document.getElementById("lcdp-ouvrir-da-abonnement");
 
     try {
       planifier.href = urlMembre("/ESPACE-MEMBRE/reserver-membre.html");
@@ -213,19 +212,13 @@
       }
     });
 
-    lienDa.addEventListener("click", async event => {
-      event.preventDefault();
-      if (lienDa.dataset.ouvertureDa === "true") return;
-      lienDa.dataset.ouvertureDa = "true";
-      try {
-        await ouvrirDaDepuisPresentation();
-      } catch (error) {
+    // Le lien DA ouvre un nouvel onglet ; la présentation s'initialise dans cet onglet.
+    if (new URLSearchParams(window.location.search).get("mode") === "da") {
+      ouvrirDaDepuisPresentation().catch(error => {
         console.error("Ouverture de la DA impossible :", error);
         window.alert("La demande d'abonnement est momentanément indisponible.");
-      } finally {
-        delete lienDa.dataset.ouvertureDa;
-      }
-    });
+      });
+    }
 
     actualiserDroitSouscription();
     window.addEventListener("pageshow", actualiserDroitSouscription);
