@@ -195,16 +195,51 @@
   function initialiserTableauxAbonnements() {
     const lien = document.getElementById("lcdp-afficher-tableaux-abonnements");
     const contenu = document.getElementById("lcdp-tableaux-abonnements");
-    if (!lien || !contenu) return;
-    lien.addEventListener("click", event => {
+    const slot = document.getElementById("lcdp-lightbox-slot");
+    if (!lien || !contenu || !slot) return;
+    let chargement = false;
+    lien.addEventListener("click", async event => {
       event.preventDefault();
-      const afficher = contenu.hidden;
-      contenu.hidden = !afficher;
-      lien.setAttribute("aria-expanded", String(afficher));
-      lien.textContent = afficher
-        ? "MASQUER L’OFFRE DES ABONNEMENTS"
-        : "OFFRE DES ABONNEMENTS";
-      if (afficher) contenu.scrollIntoView({ behavior: "auto", block: "start" });
+      if (chargement || slot.children.length) return;
+      chargement = true;
+      try {
+        const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-information.html");
+        const dialogue = fragment.querySelector('[data-lcdp-dialogue-reference="information"]');
+        const titre = dialogue?.querySelector("[data-lcdp-dialogue-titre]");
+        const message = dialogue?.querySelector("[data-lcdp-dialogue-message]");
+        const fermer = dialogue?.querySelector('[data-lcdp-dialogue-action="compris"]');
+        if (!dialogue || !titre || !message || !fermer) throw new Error("Dialogue INFORMATION incomplet.");
+        dialogue.dataset.lcdpDialogueContext = "conteneur";
+        dialogue.setAttribute("role", "dialog");
+        dialogue.removeAttribute("aria-describedby");
+        dialogue.querySelector(".lcdp-dialogue-ref__icone")?.remove();
+        titre.textContent = "Offre des abonnements";
+        message.replaceWith(contenu.content.cloneNode(true));
+        fermer.textContent = "Fermer";
+        const zones = Array.from(slot.parentElement.children).filter(element => element !== slot && element.tagName !== "TEMPLATE");
+        const etats = zones.map(element => [element, element.inert]);
+        const clore = () => {
+          document.removeEventListener("keydown", clavier);
+          dialogue.remove();
+          etats.forEach(([element, inert]) => { element.inert = inert; });
+          lien.setAttribute("aria-expanded", "false");
+          lien.focus();
+        };
+        const clavier = event => {
+          if (event.key === "Escape") { event.preventDefault(); clore(); }
+          else if (event.key === "Tab") { event.preventDefault(); fermer.focus(); }
+        };
+        fermer.addEventListener("click", clore, { once: true });
+        dialogue.addEventListener("click", event => { if (event.target === dialogue) clore(); });
+        slot.replaceChildren(fragment);
+        etats.forEach(([element]) => { element.inert = true; });
+        lien.setAttribute("aria-expanded", "true");
+        document.addEventListener("keydown", clavier);
+        titre.setAttribute("tabindex", "-1");
+        titre.focus();
+      } catch (error) {
+        console.error("Offre des abonnements indisponible :", error);
+      } finally { chargement = false; }
     });
   }
 
