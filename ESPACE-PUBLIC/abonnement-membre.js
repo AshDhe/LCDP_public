@@ -97,19 +97,19 @@
   }
 
   async function ouvrirDaDepuisPresentation() {
-    if (typeof window.LCDP_ouvrirPremiereDaMembre !== "function") {
+    if (typeof window.LCDP_ouvrirPresentationDaMembre !== "function") {
       await new Promise((resolve, reject) => {
         const script = document.createElement("script");
-        script.src = urlMembre("/ESPACE-MEMBRE/da-membre.js");
+        script.src = urlMembre("/ESPACE-MEMBRE/da-membre.js?v=20261125-presentation-da");
         script.onload = resolve;
         script.onerror = () => reject(new Error("Module DA membre indisponible."));
         document.body.appendChild(script);
       });
     }
-    if (typeof window.LCDP_ouvrirPremiereDaMembre !== "function") {
+    if (typeof window.LCDP_ouvrirPresentationDaMembre !== "function") {
       throw new Error("Module DA membre indisponible.");
     }
-    await window.LCDP_ouvrirPremiereDaMembre();
+    await window.LCDP_ouvrirPresentationDaMembre();
   }
 
   // Le même service et la même valeur statuda que sur la page Abonnement membre.
