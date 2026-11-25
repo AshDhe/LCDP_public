@@ -4,6 +4,7 @@
   window.SITE_BASE = window.SITE_CONFIG?.publicBaseUrl || window.SITE_CONFIG?.siteBase || "";
   const siteBase = String(window.SITE_BASE || "").replace(/\/+$/, "");
   let controleDaNumero = 0;
+  let statutDaSouscription = "inconnu";
 
   function construireUrlSite(chemin) {
     if (!chemin) return chemin;
@@ -113,12 +114,13 @@
   }
 
   // Le même service et la même valeur statuda que sur la page Abonnement membre.
-  // Sans confirmation explicite "oui", le bouton reste visuellement indisponible.
+  // Le bouton reste orange ; seul l’accès au tunnel dépend du statut DA.
   async function actualiserDroitSouscription() {
     const bouton = document.getElementById("lcdp-demarrer-abonnement");
     if (!bouton) return;
     const numero = ++controleDaNumero;
     bouton.dataset.daValidee = "false";
+    statutDaSouscription = "inconnu";
     const config = window.SITE_CONFIG || {};
     const baseApi = config.workerAboMembreUrl || config.WORKER_ABO_MEMBRE_URL ||
       (typeof config.apiUrl === "function" ? config.apiUrl("abo-membre-api") : "");
@@ -133,9 +135,12 @@
       });
       const data = await reponse.json().catch(() => null);
       if (numero !== controleDaNumero) return;
-      const daValidee = reponse.ok && (data?.ok === true || data?.success === true) &&
-        String(data?.statuda || "").trim().toLowerCase() === "oui";
-      bouton.dataset.daValidee = String(daValidee);
+      if (reponse.ok && (data?.ok === true || data?.success === true) &&
+          Object.prototype.hasOwnProperty.call(data, "statuda")) {
+        const statut = String(data.statuda || "").trim().toLowerCase();
+        statutDaSouscription = ["oui", "non", "encours"].includes(statut) ? statut : statut === "" ? null : "inconnu";
+      }
+      bouton.dataset.daValidee = String(statutDaSouscription === "oui");
     } catch (error) {
       if (numero === controleDaNumero) bouton.dataset.daValidee = "false";
       console.warn("Statut DA non vérifiable :", error);
@@ -148,12 +153,17 @@
     slot.replaceChildren(await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-information.html"));
     const dialogue = slot.querySelector('[data-lcdp-dialogue-reference="information"]');
     if (!dialogue) throw new Error("Dialogue INFORMATION indisponible.");
-    dialogue.querySelector("[data-lcdp-dialogue-titre]").textContent = "Souscription indisponible";
+    const proposerDa = statutDaSouscription === null || statutDaSouscription === "inconnu";
+    dialogue.dataset.lcdpDialogueContext = "conteneur";
+    dialogue.querySelector("[data-lcdp-dialogue-titre]").textContent = "Abonnement nécessaire";
     dialogue.querySelector("[data-lcdp-dialogue-message]").textContent =
-      "Vous ne pouvez pas souscrire actuellement.";
+      statutDaSouscription === null ? "Vous ne disposez pas encore d'un droit d'abonnement."
+        : statutDaSouscription === "inconnu" ? "Votre droit d'abonnement doit être validé pour souscrire."
+        : "Vous ne disposez pas actuellement d'un droit d'abonnement.";
     const compris = dialogue.querySelector('[data-lcdp-dialogue-action="compris"]');
     if (!compris) throw new Error("Bouton de fermeture INFORMATION introuvable.");
 
+    compris.textContent = proposerDa ? "Faire ma demande" : "Fermer";
     const fermer = () => {
       document.removeEventListener("keydown", gererClavier);
       slot.replaceChildren();
@@ -169,7 +179,13 @@
       }
     };
     document.addEventListener("keydown", gererClavier);
-    compris.addEventListener("click", fermer, { once: true });
+    compris.addEventListener("click", () => {
+      if (proposerDa) {
+        const lienDa = document.getElementById("lcdp-ouvrir-da-abonnement");
+        if (lienDa) lienDa.click();
+      }
+      fermer();
+    }, { once: true });
     dialogue.addEventListener("click", event => {
       if (event.target === dialogue) fermer();
     });
