@@ -30624,6 +30624,7 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   line-height: 1.5;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;

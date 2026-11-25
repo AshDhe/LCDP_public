@@ -209,34 +209,53 @@
   }
 
   function initialiserExemplesAbonnements() {
-    const dialogue = document.getElementById("lcdp-exemple-abonnement-dialogue");
-    if (!dialogue) return;
-    const titre = dialogue.querySelector("#lcdp-exemple-abonnement-titre");
-    const contenu = dialogue.querySelector("[data-lcdp-contenu-exemple]");
-    let declencheur = null;
+    const slot = document.getElementById("lcdp-lightbox-slot");
+    if (!slot) return;
+    let ouvertureEnCours = false;
     document.querySelectorAll("[data-lcdp-exemple-abonnement]").forEach(bouton => {
-      bouton.addEventListener("click", () => {
+      bouton.addEventListener("click", async () => {
+        if (ouvertureEnCours || slot.children.length) return;
         const code = bouton.dataset.lcdpExempleAbonnement;
         const template = document.getElementById("lcdp-exemple-" + code);
-        if (!template || dialogue.open) return;
-        declencheur = bouton;
-        titre.textContent = "Abonnement " + code;
-        contenu.replaceChildren(template.content.cloneNode(true));
-        bouton.setAttribute("aria-expanded", "true");
-        dialogue.showModal();
+        if (!template) return;
+        ouvertureEnCours = true;
+        try {
+          const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-information.html");
+          const dialogue = fragment.querySelector('[data-lcdp-dialogue-reference="information"]');
+          const titre = dialogue?.querySelector("[data-lcdp-dialogue-titre]");
+          const message = dialogue?.querySelector("[data-lcdp-dialogue-message]");
+          const fermer = dialogue?.querySelector('[data-lcdp-dialogue-action="compris"]');
+          if (!dialogue || !titre || !message || !fermer) throw new Error("Dialogue INFORMATION incomplet.");
+          dialogue.dataset.lcdpDialogueContext = "conteneur";
+          titre.textContent = "Abonnement " + code;
+          const contenu = document.createElement("div");
+          contenu.id = message.id;
+          contenu.className = "lcdp-dialogue-ref__message lcdp-boxtext__content lcdp-editorial-copy";
+          contenu.appendChild(template.content.cloneNode(true));
+          message.replaceWith(contenu);
+          fermer.textContent = "Fermer";
+          const clore = () => {
+            document.removeEventListener("keydown", clavier);
+            dialogue.remove();
+            bouton.setAttribute("aria-expanded", "false");
+            bouton.focus();
+          };
+          const clavier = event => {
+            if (event.key === "Escape") { event.preventDefault(); clore(); }
+            else if (event.key === "Tab") { event.preventDefault(); fermer.focus(); }
+          };
+          fermer.addEventListener("click", clore, { once: true });
+          dialogue.addEventListener("click", event => { if (event.target === dialogue) clore(); });
+          slot.replaceChildren(fragment);
+          bouton.setAttribute("aria-expanded", "true");
+          document.addEventListener("keydown", clavier);
+          fermer.focus();
+        } catch (error) {
+          console.error("Exemple tarifaire indisponible :", error);
+        } finally {
+          ouvertureEnCours = false;
+        }
       });
-    });
-    dialogue.querySelector("[data-lcdp-fermer-exemple]").addEventListener("click", () => dialogue.close());
-    dialogue.addEventListener("click", event => {
-      if (event.target !== dialogue) return;
-      const rect = dialogue.getBoundingClientRect();
-      if (event.clientX < rect.left || event.clientX > rect.right ||
-          event.clientY < rect.top || event.clientY > rect.bottom) dialogue.close();
-    });
-    dialogue.addEventListener("close", () => {
-      contenu.replaceChildren();
-      declencheur?.setAttribute("aria-expanded", "false");
-      declencheur?.focus();
     });
   }
 
