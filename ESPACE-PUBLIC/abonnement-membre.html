@@ -8,6 +8,7 @@
   <script src="../config.js"></script>
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-lightbox-convergence.css">
+  <link rel="stylesheet" href="./faq-accordeon.css">
 </head>
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune">
   <div class="lcdp-site-page lcdp-app-wrapper">
@@ -137,10 +138,22 @@
 
             <section class="lcdp-component lcdp-box-carousel lcdp-editorial-card" aria-labelledby="lcdp-cout-titre">
               <h2 id="lcdp-cout-titre" class="lcdp-box-carousel__title lcdp-boxtext__title--center" data-lcdp-boxtext-title>Coût de revient d’un abonnement</h2>
-              <div class="lcdp-stack-small" aria-label="Exemples de coût de revient">
-                <button type="button" class="lcdp-button lcdp-button-secondary lcdp-button-mini" data-lcdp-exemple-abonnement="1J" aria-haspopup="dialog">Abonnement 1J</button>
-                <button type="button" class="lcdp-button lcdp-button-secondary lcdp-button-mini" data-lcdp-exemple-abonnement="1M" aria-haspopup="dialog">Abonnement 1M</button>
-                <button type="button" class="lcdp-button lcdp-button-secondary lcdp-button-mini" data-lcdp-exemple-abonnement="1A" aria-haspopup="dialog">Abonnement 1A</button>
+              <div class="lcdp-faq lcdp-stack-small" aria-label="Exemples de coût de revient">
+                <section class="lcdp-faq__item lcdp-component lcdp-box-carousel lcdp-editorial-card">
+                  <h3 class="lcdp-faq__heading lcdp-box-carousel__title lcdp-boxtext__title--center">
+                    <button type="button" class="lcdp-faq__question" data-lcdp-exemple-abonnement="1J" aria-haspopup="dialog" aria-expanded="false">Abonnement 1J</button>
+                  </h3>
+                </section>
+                <section class="lcdp-faq__item lcdp-component lcdp-box-carousel lcdp-editorial-card">
+                  <h3 class="lcdp-faq__heading lcdp-box-carousel__title lcdp-boxtext__title--center">
+                    <button type="button" class="lcdp-faq__question" data-lcdp-exemple-abonnement="1M" aria-haspopup="dialog" aria-expanded="false">Abonnement 1M</button>
+                  </h3>
+                </section>
+                <section class="lcdp-faq__item lcdp-component lcdp-box-carousel lcdp-editorial-card">
+                  <h3 class="lcdp-faq__heading lcdp-box-carousel__title lcdp-boxtext__title--center">
+                    <button type="button" class="lcdp-faq__question" data-lcdp-exemple-abonnement="1A" aria-haspopup="dialog" aria-expanded="false">Abonnement 1A</button>
+                  </h3>
+                </section>
               </div>
               <template id="lcdp-exemple-1J">
                 <p>Le tarif d’un abonnement 1J (1 jour) sans extension d’invitation est à 90€ brut TTC la journée, pour 5 accès maximum planifiés dans les parcs pour la journée et 3 membres maximum par accès (vous + 1 membre invité DUO + 1 membre invité FAMILLE).<br>Soit 6€ TTC par unité d’accès (UA) max (en effet, votre abonnement 1J sans extension d’invitation a 5 x 3 = 15 UA).</p>
