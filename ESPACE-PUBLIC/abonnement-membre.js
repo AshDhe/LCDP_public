@@ -222,6 +222,7 @@
         declencheur = bouton;
         titre.textContent = "Abonnement " + code;
         contenu.replaceChildren(template.content.cloneNode(true));
+        bouton.setAttribute("aria-expanded", "true");
         dialogue.showModal();
       });
     });
@@ -234,6 +235,7 @@
     });
     dialogue.addEventListener("close", () => {
       contenu.replaceChildren();
+      declencheur?.setAttribute("aria-expanded", "false");
       declencheur?.focus();
     });
   }
