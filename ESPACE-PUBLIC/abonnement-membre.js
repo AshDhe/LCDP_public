@@ -202,9 +202,39 @@
       contenu.hidden = !afficher;
       lien.setAttribute("aria-expanded", String(afficher));
       lien.textContent = afficher
-        ? "Masquer les formules et privilèges d’abonnement"
-        : "Consulter les formules et privilèges d’abonnement";
+        ? "MASQUER L’OFFRE DES ABONNEMENTS"
+        : "OFFRE DES ABONNEMENTS";
       if (afficher) contenu.scrollIntoView({ behavior: "auto", block: "start" });
+    });
+  }
+
+  function initialiserExemplesAbonnements() {
+    const dialogue = document.getElementById("lcdp-exemple-abonnement-dialogue");
+    if (!dialogue) return;
+    const titre = dialogue.querySelector("#lcdp-exemple-abonnement-titre");
+    const contenu = dialogue.querySelector("[data-lcdp-contenu-exemple]");
+    let declencheur = null;
+    document.querySelectorAll("[data-lcdp-exemple-abonnement]").forEach(bouton => {
+      bouton.addEventListener("click", () => {
+        const code = bouton.dataset.lcdpExempleAbonnement;
+        const template = document.getElementById("lcdp-exemple-" + code);
+        if (!template || dialogue.open) return;
+        declencheur = bouton;
+        titre.textContent = "Abonnement " + code;
+        contenu.replaceChildren(template.content.cloneNode(true));
+        dialogue.showModal();
+      });
+    });
+    dialogue.querySelector("[data-lcdp-fermer-exemple]").addEventListener("click", () => dialogue.close());
+    dialogue.addEventListener("click", event => {
+      if (event.target !== dialogue) return;
+      const rect = dialogue.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right ||
+          event.clientY < rect.top || event.clientY > rect.bottom) dialogue.close();
+    });
+    dialogue.addEventListener("close", () => {
+      contenu.replaceChildren();
+      declencheur?.focus();
     });
   }
 
@@ -245,6 +275,7 @@
 
   appliquerRoutesSite(document);
   initialiserTableauxAbonnements();
+  initialiserExemplesAbonnements();
   initialiserActionsMembre();
   initialiserBandeau().catch(console.error);
   initialiserFooter().catch(console.error);
