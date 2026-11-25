@@ -82,9 +82,9 @@
     for (const bloc of Array.isArray(blocs) ? blocs : []) {
       if (!String(bloc.titre || "").trim()) continue;
       const id = prefixe + "-" + elements.length;
-      const article = document.createElement("section"); article.className = "lcdp-faq__item lcdp-component lcdp-box-carousel lcdp-editorial-card";
+      const article = document.createElement("section"); article.className = "lcdp-faq__item";
       article.id = id;
-      const titre = document.createElement("h2"); titre.className = "lcdp-faq__heading lcdp-box-carousel__title lcdp-boxtext__title--center"; titre.setAttribute("data-lcdp-boxtext-title", "");
+      const titre = document.createElement("h2"); titre.className = "lcdp-faq__heading"; titre.setAttribute("data-lcdp-boxtext-title", "");
       const button = document.createElement("button"); button.type = "button"; button.className = "lcdp-faq__question";
       button.id = id + "-question"; button.textContent = String(bloc.titre).replace(/([^\s?])\s*\?/gu, "$1\u00a0?");
       button.setAttribute("aria-expanded", "false"); button.setAttribute("aria-controls", id + "-reponse");
