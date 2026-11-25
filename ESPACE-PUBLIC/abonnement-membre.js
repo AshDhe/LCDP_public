@@ -118,7 +118,7 @@
     const bouton = document.getElementById("lcdp-demarrer-abonnement");
     if (!bouton) return;
     const numero = ++controleDaNumero;
-    bouton.setAttribute("aria-disabled", "true");
+    bouton.dataset.daValidee = "false";
     const config = window.SITE_CONFIG || {};
     const baseApi = config.workerAboMembreUrl || config.WORKER_ABO_MEMBRE_URL ||
       (typeof config.apiUrl === "function" ? config.apiUrl("abo-membre-api") : "");
@@ -135,9 +135,9 @@
       if (numero !== controleDaNumero) return;
       const daValidee = reponse.ok && (data?.ok === true || data?.success === true) &&
         String(data?.statuda || "").trim().toLowerCase() === "oui";
-      bouton.setAttribute("aria-disabled", daValidee ? "false" : "true");
+      bouton.dataset.daValidee = String(daValidee);
     } catch (error) {
-      if (numero === controleDaNumero) bouton.setAttribute("aria-disabled", "true");
+      if (numero === controleDaNumero) bouton.dataset.daValidee = "false";
       console.warn("Statut DA non vérifiable :", error);
     }
   }
@@ -206,7 +206,7 @@
     }
 
     souscrire.addEventListener("click", event => {
-      if (souscrire.getAttribute("aria-disabled") !== "false" || !souscrire.hasAttribute("href")) {
+      if (souscrire.dataset.daValidee !== "true" || !souscrire.hasAttribute("href")) {
         event.preventDefault();
         ouvrirInformationSouscription().catch(console.error);
       }
