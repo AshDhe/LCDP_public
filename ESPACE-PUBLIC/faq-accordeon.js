@@ -35,7 +35,7 @@
     copier(template.content, fragment);
     return fragment;
   }
-  function afficher(racine, blocs) {
+  function afficher(racine, blocs, options = {}) {
     controles.get(racine)?.();
     racine.replaceChildren();
     racine.classList.add("lcdp-faq", "lcdp-stack-large");
@@ -96,7 +96,7 @@
       const item = { button, panel, inner, article }; elements.push(item);
       button.addEventListener("click", () => basculer(item));
     }
-    if (elements.length) {
+    if (elements.length && options.ouvrirPremier !== false) {
       ouvrir(elements[0], true);
     }
     controles.set(racine, () => {
