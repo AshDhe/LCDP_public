@@ -298,38 +298,30 @@
 }
 
 
-/* Confirmation de dépôt de DA : trois informations dans la box INFORMATION de référence. */
-.lcdp-da-information-fin .lcdp-dialogue-ref__card {
-  width: min(100%, 460px);
-  max-width: 460px;
-  padding: clamp(18px, 4vw, 28px);
-}
-.lcdp-da-information-fin .lcdp-da-information-fin__textes {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  width: 100%;
-  max-width: 100%;
-  margin: 0 0 16px;
-  gap: 14px;
-  font-size: .94rem;
-  line-height: 1.5;
-  color: var(--lcdp-color-text, #23362b);
-}
-.lcdp-da-information-fin .lcdp-da-information-fin__texte {
+/* Hôte DA : le masque et la carte sont bornés au wrapper, jamais au viewport.
+   Les dimensions, couleurs et typographies du dialogue restent celles de la référence. */
+.lcdp-site-page.lcdp-app-wrapper.lcdp-da-dialogue-actif {
   position: relative;
-  margin: 0;
-  padding-left: 20px;
+  overflow: hidden;
 }
-.lcdp-da-information-fin .lcdp-da-information-fin__texte::before {
-  content: "";
+.lcdp-site-page.lcdp-app-wrapper > .lcdp-da-dialogue-hote {
   position: absolute;
-  top: .58em;
-  left: 0;
-  width: 7px;
-  height: 7px;
-  border-radius: 9999px;
-  background: var(--lcdp-color-primary, #4e6838);
+  inset: 0;
+  z-index: 9500;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.lcdp-da-dialogue-hote > .lcdp-dialogue-ref[data-lcdp-dialogue-context="conteneur"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.lcdp-da-dialogue-hote > .lcdp-dialogue-ref > .lcdp-dialogue-ref__card {
+  max-height: 100%;
+  min-height: 0;
 }
 
 /* DA : même hauteur pour les trois réponses libres. */
