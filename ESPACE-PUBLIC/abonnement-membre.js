@@ -206,7 +206,7 @@
   async function chargerOffresAbonnements(dialogue) {
     const etat = dialogue.querySelector(".lcdp-offre-abonnement__etat");
     const scroll = dialogue.querySelector(".lcdp-offre-abonnement__scroll");
-    const corps = scroll.querySelector("tbody");
+    const corps = scroll.querySelector(".lcdp-offre-abonnement__liste");
     const config = window.SITE_CONFIG || {};
     const base = String(config.workerAboRezaUrl || config.WORKER_ABOREZA_URL ||
       (typeof config.apiUrl === "function" ? config.apiUrl("aboreza-api") : "https://aboreza-api.lacleduparc.fr")).replace(/\/+$/, "");
@@ -225,18 +225,32 @@
       for (const [code,[duree,vente,debut]] of Object.entries(CALENDRIER_OFFRES)) {
         const o = parCode.get(code);
         if (!o) continue;
-        const tr = document.createElement("tr");
-        const nom = document.createElement("th");
-        nom.scope = "row";
-        for (const [classe,valeur] of [["nom",o.nomabo.toLocaleUpperCase("fr-FR")],["duree",duree+" ("+code+")"]]) {
-          const span=document.createElement("span");span.className="lcdp-offre-abonnement__"+classe;span.textContent=valeur;nom.append(span);
+        const creer = (tag, classe, valeur, role) => {
+          const el = document.createElement(tag);
+          if (classe) el.className = "lcdp-offre-abonnement__" + classe;
+          if (valeur != null) el.textContent = String(valeur);
+          if (role) el.setAttribute("role", role);
+          return el;
+        };
+        const ligne = creer("div","ligne",null,"row");
+        const abo = creer("div","abonnement",null,"rowheader");
+        const identite = creer("div","identite");
+        identite.append(creer("span","nom",o.nomabo.toLocaleUpperCase("fr-FR")));
+        abo.append(identite,creer("span","duree",duree+" ("+code+")"));
+        const venteCell = creer("div","vente",null,"cell");
+        venteCell.append(creer("span","label-mobile","Vente"),creer("span","detail",vente));
+        const debutCell = creer("div","demarrage",null,"cell");
+        debutCell.append(creer("span","label-mobile","Date de démarrage"),creer("span","debut",debut));
+        const privileges = creer("div","privileges",null,"presentation");
+        const quotas = creer("div","quotas",null,"presentation");
+        for (const [label,valeur] of [["Duo",1],["Famille",o.famille],["MaxDuo",o.maxduo]]) {
+          const cellule = creer("div","quota",null,"cell");
+          cellule.append(creer("span","label-mobile",label),creer("span","badge",valeur));
+          quotas.append(cellule);
         }
-        tr.append(nom);
-        [vente,debut,1,o.famille,o.maxduo].forEach(v=>{
-          const td=document.createElement("td");
-          td.textContent=String(v);tr.append(td);
-        });
-        fragment.append(tr);
+        privileges.append(quotas);
+        ligne.append(abo,venteCell,debutCell,privileges);
+        fragment.append(ligne);
       }
       if (!parCode.size) {etat.textContent="Aucune offre en vigueur.";return;}
       corps.replaceChildren(fragment);scroll.hidden=false;
@@ -283,7 +297,8 @@
         message.replaceWith(contenu.content.cloneNode(true));
         await chargerOffresAbonnements(dialogue);
         if (slot.children.length) return;
-        fermer.textContent = "Fermer";
+        fermer.closest(".lcdp-dialogue-ref__actions")?.remove();
+        fermer.remove();
         const croix = document.createElement("button");
         croix.type = "button";
         croix.className = "lcdp-box-dialogue-bouton__close";
@@ -291,14 +306,13 @@
         croix.textContent = "×";
         dialogue.appendChild(croix);
         croix.addEventListener("click", clore, { once: true });
-        fermer.addEventListener("click", clore, { once: true });
         dialogue.addEventListener("click", event => { if (event.target === dialogue) clore(); });
         clavier = event => {
           if (event.key === "Escape") { event.preventDefault(); clore(); }
           else if (event.key === "Tab") {
             event.preventDefault();
             const scroll = dialogue.querySelector(".lcdp-offre-abonnement__scroll:not([hidden])");
-            const cibles = [croix,scroll,fermer].filter(Boolean);
+            const cibles = [croix,scroll].filter(Boolean);
             const i = cibles.indexOf(document.activeElement);
             cibles[(i + (event.shiftKey ? -1 : 1) + cibles.length) % cibles.length].focus();
           }
