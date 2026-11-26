@@ -292,12 +292,14 @@
   function raccorderDfa(bouton, etat, mode) {
     if (!bouton || !etat) return;
     protegerActionBoutique(bouton, async () => {
-      if (mode === "bienfaiteur") {
-        const situation = await lireSituationDaSouscription();
-        if (situation.type !== "validee") {
-          await ouvrirDialogueBoutique(situation);
-          return;
-        }
+      const situation = await lireSituationDaSouscription();
+      if (situation.type !== "validee") {
+        await ouvrirDialogueBoutique(situation);
+        return;
+      }
+      if (mode !== "bienfaiteur") {
+        window.location.assign(urlMembre("/ESPACE-MEMBRE/dfa-membre.html"));
+        return;
       }
       const entree = config.donParcTunnelUrl;
       if (typeof entree === "string" && entree.trim()) {
