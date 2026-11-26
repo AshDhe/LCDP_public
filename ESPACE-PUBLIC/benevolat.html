@@ -5,19 +5,51 @@
   <title>Bénévolat - La Clé du Parc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Le bénévolat à La Clé du Parc.">
-  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
+  <style>
+    /* Voile initial : affichage stable avant le chargement du socle CSS. */
+    #lcdp-attente-arrivee:not([hidden]) { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; background: #f8fafc; font-family: Arial, sans-serif; }
+    #lcdp-attente-arrivee[hidden] { display: none !important; }
+    #lcdp-attente-arrivee:not([hidden]) ~ .lcdp-app-wrapper { visibility: hidden; }
+    #lcdp-attente-arrivee .lcdp-loading-spinner { position: relative; display: flex; align-items: center; justify-content: center; width: 4rem; height: 4rem; }
+    #lcdp-attente-arrivee .lcdp-loading-spinner > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #lcdp-attente-arrivee .lcdp-loading-spinner__track { color: rgb(6 95 70 / 10%); }
+    #lcdp-attente-arrivee .lcdp-loading-spinner__arc { color: #e59834; animation: lcdp-loading-spinner-tourne .8s linear infinite; }
+    #lcdp-attente-arrivee .lcdp-loading-spinner__dot { width: .5rem; height: .5rem; border-radius: 50%; background: #4e6838; }
+    @keyframes lcdp-loading-spinner-tourne { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { #lcdp-attente-arrivee .lcdp-loading-spinner__arc { animation: none; } }
+  </style>
+  <noscript><style>#lcdp-attente-arrivee { display: none !important; } #lcdp-attente-arrivee ~ .lcdp-app-wrapper { visibility: visible !important; }</style></noscript>
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261126-da27f214" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261126-da27f214">
   <script src="../config.js"></script>
   <script src="../OBJET/JSBASE/02-footer.js" data-lcdp-footer-autonome defer></script>
-  <script src="./pages-listes-public.js" defer></script>
+  <script src="./pages-listes-public.js?v=20261126-attente-benevolat" defer></script>
 </head>
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune">
-  <div id="lcdp-attente-arrivee" class="lcdp-attente-plein-ecran" role="status" aria-label="Chargement de la page" hidden>
+  <div id="lcdp-attente-arrivee" class="lcdp-attente-plein-ecran" role="status" aria-label="Chargement de la page" data-lcdp-attente-rendu>
     <div class="lcdp-loading-spinner" aria-hidden="true">
       <svg class="lcdp-loading-spinner__track" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></circle></svg>
       <svg class="lcdp-loading-spinner__arc" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75"></circle></svg>
       <span class="lcdp-loading-spinner__dot"></span>
     </div>
   </div>
+  <script>
+    // Secours même si un script externe ne se charge pas.
+    (() => {
+      const attente = document.getElementById("lcdp-attente-arrivee");
+      window.LCDP_delaiAttenteBenevolat = setTimeout(() => {
+        if (attente.hidden) return;
+        const message = document.createElement("p");
+        message.textContent = "Impossible de charger la page. ";
+        const reessayer = document.createElement("a");
+        reessayer.href = window.location.href;
+        reessayer.textContent = "Réessayer";
+        message.appendChild(reessayer);
+        attente.replaceChildren(message);
+        attente.setAttribute("role", "alert");
+        attente.removeAttribute("aria-label");
+      }, 15000);
+    })();
+  </script>
   <div class="lcdp-site-page lcdp-app-wrapper">
     <div id="lcdp-bandeau-slot"></div>
     <main class="lcdp-site-main" id="contenu-principal">
