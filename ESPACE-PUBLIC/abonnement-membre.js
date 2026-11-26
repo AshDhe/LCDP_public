@@ -429,6 +429,53 @@
     }
   }
 
+  function calculerCout1M(offre) {
+    if (!offre || offre.groupeabo !== "1M" || !Number.isInteger(offre.famille) || offre.famille < 0 ||
+      !Number.isInteger(offre.maxduo) || offre.maxduo < 1 ||
+      typeof offre.nomabo !== "string" || !offre.nomabo.trim()) throw new Error("Pivot 1M indisponible.");
+    if (!(typeof offre.prixabottc === "number" || (typeof offre.prixabottc === "string" && /^\d+(?:\.\d+)?$/.test(offre.prixabottc)))) throw new Error("Prix 1M invalide.");
+    const prix = Number(offre.prixabottc);
+    if (!Number.isFinite(prix) || prix < 0) throw new Error("Prix 1M invalide.");
+    // Exemple commercial sur quatre semaines ; plafond hebdomadaire métier.
+    const accesSemaine = 15, acces = 4 * accesSemaine, duo = 1, famille = offre.famille;
+    const membres = 1 + duo + famille;
+    const ua = acces * membres;
+    return {prix, accesSemaine, acces, duo, famille, maxduo: offre.maxduo, membres, ua, coutUa: prix / ua};
+  }
+
+  async function actualiserExemple1M(racine) {
+    const article = racine.querySelectorAll(".lcdp-faq__item")[1];
+    const reponse = article?.querySelector(".lcdp-faq__reponse");
+    const nom = article?.querySelector(".lcdp-cout-abonnement__nom");
+    if (!reponse || !nom) return;
+    try {
+      const offres = await lireOffresAbonnements();
+      const offre = offres.get("1M");
+      const c = calculerCout1M(offre);
+      const nombre = new Intl.NumberFormat("fr-FR", {maximumFractionDigits:2});
+      nom.textContent = offre.nomabo.trim().toLocaleUpperCase("fr-FR") + " (1 mois)";
+      const famille = c.famille + " membre" + (c.famille > 1 ? "s" : "") + " invité" + (c.famille > 1 ? "s" : "") + " FAMILLE";
+      const comparaison = offres.get("1J")?.famille === c.famille
+        ? ", c’est-à-dire avec les mêmes privilèges par accès que le tarif 1J" : "";
+      const textes = [
+        "Le tarif 1M (1 mois) est à " + nombre.format(c.prix) + " € TTC sans extension d’invitation" + comparaison + " (soit " + c.duo + " membre invité DUO par accès planifié" + (c.famille ? " + " + famille : "") + ").",
+        "L’abonnement 1M se souscrit en M pour M+1 ou M+2 et bénéficie par conséquent d’un horizon de planification sur tout le mois de l’abonnement.",
+        "Il bénéficie également de " + c.acces + " accès maximum planifiés dans les parcs pour un exemple de quatre semaines (" + c.accesSemaine + " accès maximum par semaine du lundi au dimanche) et d’un privilège MAXDUO de " + c.maxduo + " membre" + (c.maxduo > 1 ? "s" : "") + " (soit le nombre d’invités DUO différents sur le mois).",
+        "Son coût de revient UA max est de " + nombre.format(c.coutUa) + " € par UA max (" + c.acces + " accès x " + c.membres + " membres par accès = " + c.ua + " UA max) pour MAXDUO=" + c.maxduo + "."
+      ];
+      reponse.replaceChildren(...textes.map(texte => {
+        const p = document.createElement("p");
+        p.textContent = texte;
+        return p;
+      }));
+    } catch (error) {
+      const p = document.createElement("p");
+      p.textContent = "Le tarif en vigueur est momentanément indisponible.";
+      reponse.replaceChildren(p);
+      console.warn("Exemple de coût 1M :",error);
+    }
+  }
+
   function initialiserExemplesAbonnements() {
     const racine = document.getElementById("lcdp-exemples-abonnements");
     if (!racine || typeof window.LCDP_FAQ?.afficher !== "function") return;
@@ -457,9 +504,13 @@
       bouton.replaceChildren(libelle);
     });
     void actualiserExemple1J(racine);
-    // En cas d'indisponibilité à l'arrivée, retenter à l'ouverture du 1J.
-    racine.querySelector(".lcdp-faq__question")?.addEventListener("click", event => {
-      if (event.currentTarget.getAttribute("aria-expanded") === "true") void actualiserExemple1J(racine);
+    void actualiserExemple1M(racine);
+    // Relire les pivots à l'ouverture de chaque exemple dynamique.
+    const questions = racine.querySelectorAll(".lcdp-faq__question");
+    [actualiserExemple1J, actualiserExemple1M].forEach((actualiser, index) => {
+      questions[index]?.addEventListener("click", event => {
+        if (event.currentTarget.getAttribute("aria-expanded") === "true") void actualiser(racine);
+      });
     });
   }
 
