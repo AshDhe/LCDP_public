@@ -33952,6 +33952,7 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
   letter-spacing: .015em;
   color: #fff;
   text-transform: uppercase;
+  white-space: nowrap;
   overflow-wrap: normal;
 }
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br):not(:has(> span > strong)) > span::first-line {
