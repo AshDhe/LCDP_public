@@ -181,6 +181,18 @@
     const slot = document.getElementById("lcdp-lightbox-slot");
     const wrapper = slot?.closest(".lcdp-site-page.lcdp-app-wrapper");
     if (!slot || !wrapper || slot.children.length) return;
+    if (situation.type === "impaye") {
+      if (!window.LCDP_DialogueImpaye) throw Error("Objet de régularisation indisponible.");
+      slot.classList.add("lcdp-souscription-dialogue-actif");
+      try {
+        await window.LCDP_DialogueImpaye.ouvrir({
+          hote: slot,
+          message: "Vous avez un impayé sur un abonnement. Vous devez le régulariser pour souscrire un nouvel abonnement.",
+          payer: () => window.location.assign(urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=impaye"))
+        });
+      } finally { slot.classList.remove("lcdp-souscription-dialogue-actif"); }
+      return;
+    }
     const elementActif = document.activeElement;
     const contenu = presentationSituationDa(situation);
     const choix = Boolean(contenu.action);
