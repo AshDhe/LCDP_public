@@ -101,7 +101,7 @@
     if (typeof window.LCDP_ouvrirPresentationDaMembre !== "function") {
       await new Promise((resolve, reject) => {
         const script = document.createElement("script");
-        script.src = urlMembre("/ESPACE-MEMBRE/da-membre.js?v=20261126-attente-da-v22");
+        script.src = urlMembre("/ESPACE-MEMBRE/da-membre.js?v=20261126-adresse-da-v23");
         script.onload = resolve;
         script.onerror = () => reject(new Error("Module DA membre indisponible."));
         document.body.appendChild(script);
