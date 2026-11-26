@@ -5,12 +5,56 @@
   <title>Abonnement - La Clé du Parc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Découvrez les durées, les dates de démarrage et les privilèges des abonnements La Clé du Parc.">
+  <script>
+    if (new URLSearchParams(window.location.search).get("mode") === "da") {
+      document.documentElement.setAttribute("data-lcdp-da-initialisation", "");
+      document.title = "Demande de droit d’abonnement (DA) - La Clé du Parc";
+    }
+  </script>
+  <style>
+    #lcdp-attente-da-public { display: none; }
+    html[data-lcdp-da-initialisation] body > .lcdp-site-page { visibility: hidden !important; }
+    html[data-lcdp-da-initialisation] #lcdp-attente-da-public {
+      position: fixed; inset: 0; z-index: 2147483646;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; padding: 24px; text-align: center; background: #fff;
+    }
+    #lcdp-attente-da-public [hidden] { display: none !important; }
+  </style>
   <script src="../config.js"></script>
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261126-offre-tableau" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261126-offre-tableau">
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-lightbox-convergence.css?v=20261126-conteneur">
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-offre-abonnement.css?v=20261126-souscrire-bleu-v14">
 </head>
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune">
+  <div id="lcdp-attente-da-public" role="status" aria-label="Chargement de la demande de DA">
+    <div class="lcdp-loading-spinner" aria-hidden="true">
+      <svg class="lcdp-loading-spinner__track" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></circle></svg>
+      <svg class="lcdp-loading-spinner__arc" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75"></circle></svg>
+      <span class="lcdp-loading-spinner__dot"></span>
+    </div>
+    <p data-lcdp-da-erreur hidden>La demande d’abonnement est momentanément indisponible.</p>
+    <a class="lcdp-button lcdp-button-secondary" href="./abonnement-membre.html" data-lcdp-da-retour hidden>Retour</a>
+  </div>
+  <script>
+    if (document.documentElement.hasAttribute("data-lcdp-da-initialisation")) {
+      const attente = document.getElementById("lcdp-attente-da-public");
+      const echec = () => {
+        attente.querySelector(".lcdp-loading-spinner").hidden = true;
+        attente.querySelector("[data-lcdp-da-erreur]").hidden = false;
+        attente.querySelector("[data-lcdp-da-retour]").hidden = false;
+        attente.setAttribute("aria-label", "Demande de DA indisponible");
+      };
+      const delai = window.setTimeout(echec, 25000);
+      window.LCDP_terminerInitialisationDa = (ok) => {
+        window.clearTimeout(delai);
+        if (ok) {
+          document.documentElement.removeAttribute("data-lcdp-da-initialisation");
+          attente.remove();
+        } else echec();
+      };
+    }
+  </script>
   <div class="lcdp-site-page lcdp-app-wrapper">
     <div id="lcdp-bandeau-slot"></div>
     <main class="lcdp-site-main" id="contenu-principal">
@@ -148,6 +192,6 @@
   </div>
   <script src="../OBJET/JSBASE/documents-legaux.js" data-site-src="/OBJET/JSBASE/documents-legaux.js"></script>
   <script src="./faq-accordeon.js?v=20261126-exemples"></script>
-  <script src="./abonnement-membre.js?v=20261126-da-affichage-v15"></script>
+  <script src="./abonnement-membre.js?v=20261126-da-transition-v16"></script>
 </body>
 </html>

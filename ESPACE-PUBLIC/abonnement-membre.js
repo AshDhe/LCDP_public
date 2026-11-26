@@ -381,14 +381,6 @@
       }
     });
 
-    // Le lien DA ouvre un nouvel onglet ; la présentation s'initialise dans cet onglet.
-    if (new URLSearchParams(window.location.search).get("mode") === "da") {
-      ouvrirDaDepuisPresentation().catch(error => {
-        console.error("Ouverture de la DA impossible :", error);
-        window.alert("La demande d'abonnement est momentanément indisponible.");
-      });
-    }
-
     actualiserDroitSouscription();
     window.addEventListener("pageshow", actualiserDroitSouscription);
     document.addEventListener("visibilitychange", () => {
@@ -400,6 +392,24 @@
   initialiserTableauxAbonnements();
   initialiserExemplesAbonnements();
   initialiserActionsMembre();
-  initialiserBandeau().catch(console.error);
-  initialiserFooter().catch(console.error);
+  const navigationPrete = Promise.allSettled([
+    initialiserBandeau(), initialiserFooter()
+  ]).then(resultats => {
+    for (const resultat of resultats) {
+      if (resultat.status === "rejected") console.error(resultat.reason);
+    }
+  });
+
+  // Le mode DA garde le pictogramme d'attente jusqu'à la vue complète.
+  if (new URLSearchParams(window.location.search).get("mode") === "da") {
+    Promise.all([ouvrirDaDepuisPresentation(), navigationPrete]).then(() => {
+      if (!document.querySelector("#lcdp-da-membre-overlay-slot .lcdp-document-legal")) {
+        throw new Error("Présentation DA non montée.");
+      }
+      window.LCDP_terminerInitialisationDa?.(true);
+    }).catch(error => {
+      console.error("Ouverture de la DA impossible :", error);
+      window.LCDP_terminerInitialisationDa?.(false);
+    });
+  }
 })();
