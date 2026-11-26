@@ -1384,7 +1384,7 @@ module.exports = QRCode;
   }
   function programmerRetourConnexion(){
     annulerRetourConnexion();
-    if(retourConnexionEnCours||!flow||mobile||panneauQr.hidden)return;
+    if(retourConnexionEnCours||modeActualisation||mobile||panneauQr.hidden)return;
     minuterieRetourConnexion=setTimeout(quitterParcoursOrdinateur,15000);
   }
   window.addEventListener("pagehide",annulerRetourConnexion);
@@ -1603,5 +1603,5 @@ module.exports = QRCode;
 
   autoriser.disabled=false;
   terminerInitialisation();
-  if(flow&&!mobile&&!panneauQr.hidden)programmerRetourConnexion();
+  programmerRetourConnexion();
 })();
