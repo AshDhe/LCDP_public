@@ -218,6 +218,7 @@
         const fermer = dialogue?.querySelector('[data-lcdp-dialogue-action="compris"]');
         if (!dialogue || !titre || !message || !fermer) throw new Error("Dialogue INFORMATION incomplet.");
         dialogue.dataset.lcdpDialogueContext = "conteneur";
+        dialogue.classList.add("lcdp-offre-abonnement__dialogue");
         dialogue.setAttribute("role", "dialog");
         dialogue.removeAttribute("aria-describedby");
         dialogue.querySelector(".lcdp-dialogue-ref__icone")?.remove();

@@ -8,6 +8,7 @@
   <script src="../config.js"></script>
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261126-offre-tableau" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261126-offre-tableau">
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-lightbox-convergence.css?v=20261126-conteneur">
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-offre-abonnement.css?v=20261126-v1">
 </head>
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune">
   <div class="lcdp-site-page lcdp-app-wrapper">
@@ -110,23 +111,20 @@
       <div class="lcdp-stack-small lcdp-boxtext__content lcdp-editorial-copy">
 
                     <p>Pour une journée, quelques mois ou une année, <strong>La Clé du Parc propose plusieurs formules d’abonnement</strong> pour profiter des parcs du réseau et retrouver vos proches.</p>
-                    <div class="lcdp-table-lecture">
-                      <div class="lcdp-table-lecture__scroll">
-                        <table class="lcdp-table-lecture__table" data-lcdp-table-lecture="offre-abonnements" aria-label="Formules d’abonnement, durée, démarrage et paiement">
-                          <thead>
-                            <tr><th scope="col">Formule / durée</th><th scope="col">Début</th><th scope="col">Paiement</th></tr>
-                          </thead>
-                          <tbody>
-                            <tr><td><strong>PASSION</strong><br>1 an (1A)</td><td>1er janvier (souscription en octobre, novembre ou décembre précédents)</td><td>3x max.</td></tr>
-                            <tr><td>PASSION 11M<br>11 mois (11M)</td><td>1er février (souscription en janvier)</td><td>3x max.</td></tr>
-                            <tr><td>PASSION 10M<br>10 mois (10M)</td><td>1er mars (souscription en février)</td><td>3x max.</td></tr>
-                            <tr><td><strong>MOTIVATION</strong><br>5 mois (5M)</td><td>M+1 à M+4, le 1er du mois</td><td>2x max.</td></tr>
-                            <tr><td><strong>SAISON</strong><br>3 mois (3M)</td><td>M+1 à M+3, le 1er du mois</td><td>2x max.</td></tr>
-                            <tr><td><strong>EXPLORATION</strong><br>1 mois (1M)</td><td>M+1 ou M+2, le 1er du mois</td><td>1x</td></tr>
-                            <tr><td><strong>DECOUVERTE</strong><br>1 jour (1J)</td><td>Jour choisi de M à M+2</td><td>1x</td></tr>
-                          </tbody>
-                        </table>
-                      </div>
+                    <div class="lcdp-offre-abonnement">
+                      <table class="lcdp-offre-abonnement__table" aria-label="Offre des abonnements et prix TTC">
+                        <colgroup><col><col><col></colgroup>
+                        <thead><tr><th scope="col">Abonnement et durée</th><th scope="col">Souscription et démarrage</th><th scope="col">Prix TTC</th></tr></thead>
+                        <tbody>
+                          <tr><td><span class="lcdp-offre-abonnement__nom">PASSION</span><span class="lcdp-offre-abonnement__code">(1A)</span><span class="lcdp-offre-abonnement__duree">1 an</span></td><td><span class="lcdp-offre-abonnement__debut">1er janvier</span><span class="lcdp-offre-abonnement__detail">Souscription en octobre, novembre ou décembre précédents</span></td><td><span class="lcdp-offre-abonnement__prix">840 €</span><span class="lcdp-offre-abonnement__detail">70 €/mois · 3x max.</span></td></tr>
+                          <tr><td><span class="lcdp-offre-abonnement__nom">PASSION 11M</span><span class="lcdp-offre-abonnement__code">(11M)</span><span class="lcdp-offre-abonnement__duree">11 mois</span></td><td><span class="lcdp-offre-abonnement__debut">1er février</span><span class="lcdp-offre-abonnement__detail">Souscription en janvier</span></td><td><span class="lcdp-offre-abonnement__prix lcdp-offre-abonnement__prix--inconnu">À renseigner</span><span class="lcdp-offre-abonnement__detail">3x max.</span></td></tr>
+                          <tr><td><span class="lcdp-offre-abonnement__nom">PASSION 10M</span><span class="lcdp-offre-abonnement__code">(10M)</span><span class="lcdp-offre-abonnement__duree">10 mois</span></td><td><span class="lcdp-offre-abonnement__debut">1er mars</span><span class="lcdp-offre-abonnement__detail">Souscription en février</span></td><td><span class="lcdp-offre-abonnement__prix lcdp-offre-abonnement__prix--inconnu">À renseigner</span><span class="lcdp-offre-abonnement__detail">3x max.</span></td></tr>
+                          <tr><td><span class="lcdp-offre-abonnement__nom">MOTIVATION</span><span class="lcdp-offre-abonnement__code">(5M)</span><span class="lcdp-offre-abonnement__duree">5 mois</span></td><td><span class="lcdp-offre-abonnement__debut">Le 1er du mois</span><span class="lcdp-offre-abonnement__detail">De M+1 à M+4</span></td><td><span class="lcdp-offre-abonnement__prix lcdp-offre-abonnement__prix--inconnu">À renseigner</span><span class="lcdp-offre-abonnement__detail">2x max.</span></td></tr>
+                          <tr><td><span class="lcdp-offre-abonnement__nom">SAISON</span><span class="lcdp-offre-abonnement__code">(3M)</span><span class="lcdp-offre-abonnement__duree">3 mois</span></td><td><span class="lcdp-offre-abonnement__debut">Le 1er du mois</span><span class="lcdp-offre-abonnement__detail">De M+1 à M+3</span></td><td><span class="lcdp-offre-abonnement__prix lcdp-offre-abonnement__prix--inconnu">À renseigner</span><span class="lcdp-offre-abonnement__detail">2x max.</span></td></tr>
+                          <tr><td><span class="lcdp-offre-abonnement__nom">EXPLORATION</span><span class="lcdp-offre-abonnement__code">(1M)</span><span class="lcdp-offre-abonnement__duree">1 mois</span></td><td><span class="lcdp-offre-abonnement__debut">Le 1er du mois</span><span class="lcdp-offre-abonnement__detail">M+1 ou M+2</span></td><td><span class="lcdp-offre-abonnement__prix">190 €</span><span class="lcdp-offre-abonnement__detail">1x</span></td></tr>
+                          <tr><td><span class="lcdp-offre-abonnement__nom">DÉCOUVERTE</span><span class="lcdp-offre-abonnement__code">(1J)</span><span class="lcdp-offre-abonnement__duree">1 jour</span></td><td><span class="lcdp-offre-abonnement__debut">Jour choisi</span><span class="lcdp-offre-abonnement__detail">De M à M+2</span></td><td><span class="lcdp-offre-abonnement__prix">90 €</span><span class="lcdp-offre-abonnement__detail">1x</span></td></tr>
+                        </tbody>
+                      </table>
                     </div>
                     <p class="lcdp-editorial-meta">M = mois de souscription. Pour PASSION, le démarrage est fixé au 1er janvier suivant la souscription.</p>
                     <h2 class="lcdp-boxtext__title lcdp-boxtext__title--center" data-lcdp-boxtext-title>Privilèges d’abonnement</h2>
@@ -154,6 +152,6 @@
   </div>
   <script src="../OBJET/JSBASE/documents-legaux.js" data-site-src="/OBJET/JSBASE/documents-legaux.js"></script>
   <script src="./faq-accordeon.js?v=20261126-exemples"></script>
-  <script src="./abonnement-membre.js?v=20261126-offre-tableau"></script>
+  <script src="./abonnement-membre.js?v=20261126-offre-design"></script>
 </body>
 </html>
