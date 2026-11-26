@@ -175,9 +175,12 @@
         const motifSession = String(parametresConnexion.get("session") || "").toLowerCase();
         const depuisPlanifier = parametresConnexion.get("source") === "reserver-membre";
         const repriseExpiration = depuisPlanifier && ["inactive", "expiree", "expirée"].includes(motifSession);
+        const inscriptionTerminee = parametresConnexion.get("source") === "inscription-terminee";
         const urlDestination = repriseExpiration
           ? construireUrlMembre("/ESPACE-MEMBRE/reserver-membre.html") + "?reprise=expiration"
-          : urlMonCompteMembre;
+          : inscriptionTerminee
+            ? construireUrlMembre("/ESPACE-MEMBRE/mes-informations.html")
+            : urlMonCompteMembre;
         effacerRetourMembreApresConnexion();
 
         window.location.href = urlDestination;

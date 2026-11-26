@@ -1353,13 +1353,16 @@ module.exports = QRCode;
     avertissement.hidden=d.mobile_detecte!==false;
   }
   let optinEnregistre=false;
+  let inscriptionTerminee=false;
   confirmation.querySelector('form[method="dialog"]')?.addEventListener("submit",()=>{
     if(optinEnregistre) afficherAttente(true,"Ouverture de votre connexion…");
   });
   confirmation.addEventListener("close",()=>{
     if(optinEnregistre){
       afficherAttente(true,"Ouverture de votre connexion…");
-      location.assign(new URL("/ESPACE-PUBLIC/connexion-membre.html",location.href).href);
+      const destination = new URL("/ESPACE-PUBLIC/connexion-membre.html",location.href);
+      if (inscriptionTerminee) destination.searchParams.set("source", "inscription-terminee");
+      location.assign(destination.href);
     }
   });
   function termine(){
@@ -1503,6 +1506,7 @@ module.exports = QRCode;
         casesCoda.forEach(champ=>{champ.value="";});
         demanderPermissionNavigateur();
         appliquerDetection(d);flow="";
+        inscriptionTerminee=true;
         termine();
       }
       catch(e){informerErreur(e.message||"L’enregistrement n’a pas pu être confirmé. Réessayez.");}
