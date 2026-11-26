@@ -1937,7 +1937,7 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
   display: block;
   min-width: 0;
   max-width: 100%;
-  font-size: clamp(.8125rem, 3.5vw, .9375rem);
+  font-size: .8125rem;
   line-height: 1.28;
   font-weight: 900;
   letter-spacing: .015em;
@@ -1946,7 +1946,7 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
   overflow-wrap: normal;
 }
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br):not(:has(> span > strong)) > span::first-line {
-  font-size: .8125rem;
+  font-size: .625rem;
   line-height: 1.6;
   font-weight: 700;
   letter-spacing: .055em;
@@ -1956,7 +1956,7 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
 /* Le premier niveau est le texte direct du span. Le second niveau est le strong.
    Pas de pseudo-classe de première ligne sur cette structure. */
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br):has(> span > strong) > span {
-  font-size: .8125rem;
+  font-size: .625rem;
   line-height: 1.6;
   font-weight: 700;
   letter-spacing: .055em;
@@ -1964,7 +1964,7 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
   -webkit-text-fill-color: var(--lcdp-button-fleche-color);
 }
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span > strong {
-  font-size: clamp(.8125rem, 3.5vw, .9375rem);
+  font-size: .8125rem;
   line-height: 1.28;
   font-weight: 900;
   letter-spacing: .015em;
