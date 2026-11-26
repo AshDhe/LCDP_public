@@ -476,6 +476,76 @@
     }
   }
 
+  function calculerCout1A(offre) {
+    if (!offre || offre.groupeabo !== "1A" || !Number.isInteger(offre.famille) || offre.famille < 0 ||
+      !Number.isInteger(offre.maxduo) || offre.maxduo < 1 ||
+      typeof offre.nomabo !== "string" || !offre.nomabo.trim()) throw new Error("Pivot 1A indisponible.");
+    if (!(typeof offre.prixabottc === "number" || (typeof offre.prixabottc === "string" && /^\d+(?:\.\d+)?$/.test(offre.prixabottc)))) throw new Error("Prix 1A invalide.");
+    const prix = Number(offre.prixabottc);
+    if (!Number.isFinite(prix) || prix < 0) throw new Error("Prix 1A invalide.");
+    // Les anciens workers ne publient pas les deux champs DUO+.
+    // Ne pas substituer des valeurs tarifaires historiques à des données manquantes.
+    const duoPlusDisponible = Number.isInteger(offre.duoplus) && offre.duoplus >= 0 &&
+      Number.isInteger(offre.freqduoplus) && offre.freqduoplus >= 0;
+    return {prix, prixMensuel: prix / 12, famille: offre.famille, duo: 1, maxduo: offre.maxduo,
+      duoplus: duoPlusDisponible ? offre.duoplus : null,
+      freqduoplus: duoPlusDisponible ? offre.freqduoplus : null};
+  }
+
+  function texteDuoPlus1A(c) {
+    if (c.duoplus === null || c.freqduoplus === null) return "Privilège DUO+ momentanément indisponible.";
+    if (!c.duoplus || !c.freqduoplus) return "Aucune extension DUO+ incluse.";
+    return c.freqduoplus + " extension" + (c.freqduoplus > 1 ? "s" : "") + " DUO+ à " +
+      c.duoplus + " invité" + (c.duoplus > 1 ? "s" : "") + " par mois (soit " +
+      c.duoplus + " invité" + (c.duoplus > 1 ? "s" : "") +
+      " DUO en + sur un même accès " + c.freqduoplus + " fois par mois)";
+  }
+
+  async function actualiserExemple1A(racine) {
+    const article = racine.querySelectorAll(".lcdp-faq__item")[2];
+    const reponse = article?.querySelector(".lcdp-faq__reponse");
+    const nom = article?.querySelector(".lcdp-cout-abonnement__nom");
+    if (!reponse || !nom) return;
+    try {
+      const offre = (await lireOffresAbonnements()).get("1A");
+      const c = calculerCout1A(offre);
+      const nombre = new Intl.NumberFormat("fr-FR", {maximumFractionDigits:2});
+      nom.textContent = offre.nomabo.trim().toLocaleUpperCase("fr-FR") + " (1 an)";
+      const p1 = document.createElement("p");
+      const tarif = document.createElement("strong");
+      tarif.textContent = "Le tarif 1A (1 an) est à " + nombre.format(c.prixMensuel) +
+        " € TTC par mois (" + nombre.format(c.prix) + " € TTC l’année)";
+      p1.append(tarif, ".");
+      const p2 = document.createElement("p");
+      p2.textContent = "Il bénéficie d’un horizon de planification à M+9.";
+      function paragraphe(titre, lignes) {
+        const p = document.createElement("p"), fort = document.createElement("strong");
+        fort.textContent = titre;
+        p.append(fort);
+        for (const ligne of lignes) p.append(document.createElement("br"), document.createTextNode(ligne));
+        return p;
+      }
+      const p3 = paragraphe("Ses privilèges d’invitation sans extension de privilèges sont :", [
+        c.duo + " invité DUO sur chaque accès",
+        c.famille + " invité" + (c.famille > 1 ? "s" : "") + " FAMILLE",
+        texteDuoPlus1A(c),
+        "Un MAXDUO=" + c.maxduo + "."
+      ]);
+      const p4 = paragraphe("L’abonnement 1A bénéficie également de privilèges fonctionnels :", [
+        "Extension du nombre de recherches de planification enregistrées",
+        "Recherche IA de planification",
+        "Accès au planning des coachs",
+        "Planification IG COACH."
+      ]);
+      reponse.replaceChildren(p1,p2,p3,p4);
+    } catch (error) {
+      const p = document.createElement("p");
+      p.textContent = "Le tarif en vigueur est momentanément indisponible.";
+      reponse.replaceChildren(p);
+      console.warn("Exemple de coût 1A :",error);
+    }
+  }
+
   function initialiserExemplesAbonnements() {
     const racine = document.getElementById("lcdp-exemples-abonnements");
     if (!racine || typeof window.LCDP_FAQ?.afficher !== "function") return;
@@ -505,9 +575,10 @@
     });
     void actualiserExemple1J(racine);
     void actualiserExemple1M(racine);
+    void actualiserExemple1A(racine);
     // Relire les pivots à l'ouverture de chaque exemple dynamique.
     const questions = racine.querySelectorAll(".lcdp-faq__question");
-    [actualiserExemple1J, actualiserExemple1M].forEach((actualiser, index) => {
+    [actualiserExemple1J, actualiserExemple1M, actualiserExemple1A].forEach((actualiser, index) => {
       questions[index]?.addEventListener("click", event => {
         if (event.currentTarget.getAttribute("aria-expanded") === "true") void actualiser(racine);
       });
