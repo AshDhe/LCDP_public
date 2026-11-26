@@ -15,7 +15,7 @@
       document.body.dataset.securityStep = type === "coda" ? "1" : "2";
       const feuille = document.createElement("link");
       feuille.rel = "stylesheet";
-      feuille.href = new URL("../OBJET/CSSBASE/securite-compte.css", location.href).href;
+      feuille.href = new URL("../OBJET/CSSBASE/securite-compte.css?v=20261126-tunnel", location.href).href;
       document.head.appendChild(feuille);
       const entete = document.querySelector("#formulaire-code-securite .lcdp-box-formulaire__header");
       if (entete) {
@@ -70,6 +70,10 @@
     attente.setAttribute("aria-live", "polite");
     attente.setAttribute("aria-label", "Traitement en cours");
     attente.innerHTML = '<div class="lcdp-loading-spinner" aria-hidden="true"><svg class="lcdp-loading-spinner__track" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></circle></svg><svg class="lcdp-loading-spinner__arc" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75"></circle></svg><span class="lcdp-loading-spinner__dot"></span></div><span class="lcdp-setup-loading__text" hidden aria-hidden="true"></span>';
+    if (flow) {
+      attente.classList.add("lcdp-tunnel-transition");
+      attente.innerHTML = '<img class="lcdp-tunnel-transition__picto" src="../OBJET/IMAG/PICTO/pictowait.svg" alt="" aria-hidden="true"><span class="lcdp-setup-loading__text" hidden aria-hidden="true"></span>';
+    }
     document.body.appendChild(attente);
     const afficherAttente = (actif, texte = "Validation en cours…") => {
       attente.querySelector(".lcdp-setup-loading__text").textContent = texte;
@@ -79,7 +83,7 @@
     const confirmation = [...document.querySelectorAll("[data-code-confirmation]")];
     const endpoint = nettoyerBaseUrl(window.SITE_CONFIG?.workerMdptokenzUrl || window.SITE_CONFIG?.WORKER_MDPTOKENZ_URL ||
       (typeof window.SITE_CONFIG?.apiUrl === "function" ? window.SITE_CONFIG.apiUrl("mdptokenz-api") : ""));
-    let enCours = false, autorise = false;
+    let enCours = false, autorise = false, redirectionEnCours = false;
     const normaliser = v => v;
     const afficher = texte => { message.textContent = texte; };
     const etat = actif => { [...saisie, ...confirmation].forEach(champ => { champ.disabled = !actif; }); bouton.disabled = !actif; };
@@ -135,7 +139,7 @@
       if(flow) {
         const state=await appeler("flow-state");
         if(!state.reponse.ok||!state.resultat.success) throw new Error("Parcours expiré.");
-        if(state.resultat.stage!==type) { window.location.replace(state.resultat.nextUrl); return; }
+        if(state.resultat.stage!==type) { window.location.replace(state.resultat.nextUrl); redirectionEnCours = true; return; }
       }
       const { reponse, resultat } = await appeler("setup-status");
       if (!reponse.ok || !resultat.success) {
@@ -150,7 +154,7 @@
       }
       autorise = true; etat(true); afficher("Choisissez votre code, puis confirmez-le avec le bouton La Clé.");
     } catch { await afficherInformation("", "La vérification est indisponible. Rouvrez le lien reçu par e-mail pour réessayer.", "erreur"); }
-    finally { afficherAttente(false); }
+    finally { if (!redirectionEnCours) afficherAttente(false); }
     form.addEventListener("submit", async event => {
       event.preventDefault();
       if (enCours || !autorise) return;
@@ -179,6 +183,7 @@
           token="";autorise=false;
           [...saisie,...confirmation].forEach(champ=>{champ.value="";});
           window.location.replace(resultat.nextUrl);
+          redirectionEnCours = true;
           return;
         }
         token = ""; autorise = false;
@@ -187,7 +192,7 @@
         const texte=operation==="modification" ? "Votre "+nom+" est mis à jour. Vous pouvez vous reconnecter à votre compte." : "Votre " + nom + " est enregistré. Retrouvez les informations relatives à vos codes de sécurité depuis votre page Mon Compte dans l’application.";
         await afficherInformation("",texte,"information",construireUrlPublique("/ESPACE-PUBLIC/hello.html"));
       } catch { autorise = false; await afficherInformation("","La réponse n’a pas pu être confirmée. Rouvrez le lien reçu par e-mail pour vérifier si le code a été enregistré.","erreur"); }
-      finally { enCours = false; afficherAttente(false); }
+      finally { if (!redirectionEnCours) { enCours = false; afficherAttente(false); } }
     });
   }
   function appliquerRoutesSite(racine = document) {

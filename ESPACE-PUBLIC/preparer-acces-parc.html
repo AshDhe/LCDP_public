@@ -7,18 +7,19 @@
   <meta name="referrer" content="no-referrer">
   <title>Préparez votre accès au parc — La Clé du Parc</title>
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css">
-  <link rel="stylesheet" href="../OBJET/CSSBASE/securite-compte.css">
+  <link rel="stylesheet" href="../OBJET/CSSBASE/securite-compte.css?v=20261126-tunnel">
   <script>
     window.LCDP_PAGE_MEMBRE_SANS_SESSION = true;
     const paramsPreparation = new URLSearchParams(location.hash.slice(1));
     window.LCDP_GEO_REFERENCE = paramsPreparation.get("r") || "";
     window.LCDP_GEO_FLOW = paramsPreparation.get("flow") || "";
     window.LCDP_GEO_CONFIRMATION = paramsPreparation.get("confirmation") || "";
+    if (window.LCDP_GEO_FLOW || window.LCDP_GEO_REFERENCE) document.documentElement.setAttribute("data-lcdp-geo-loading", "");
     if (location.hash) history.replaceState(null,"",location.pathname+location.search);
   </script>
   <script src="../config.js"></script>
   <script src="../OBJET/JSBASE/affichage-legal.js" defer></script>
-  <script src="preparer-acces-parc.js?v=20261126-mon-compte" defer></script>
+  <script src="preparer-acces-parc.js?v=20261126-tunnel" defer></script>
 </head>
 <body data-lcdp-affichage-legal="insc-preparer-acces-parc" data-lcdp-affichage-legal-mode="auto" class="lcdp-app-page">
   <div class="lcdp-site-page lcdp-app-wrapper lcdp-app-wriper--sans">
@@ -73,6 +74,7 @@
   </div>
   <div id="attente-preparation" class="lcdp-setup-loading" hidden role="status" aria-live="polite">
     <span class="lcdp-setup-loading__spinner" aria-hidden="true"></span>
+    <img class="lcdp-tunnel-transition__picto" src="../OBJET/IMAG/PICTO/pictowait.svg" alt="" aria-hidden="true" hidden>
     <span class="lcdp-setup-loading__text">Validation en cours…</span>
   </div>
   <dialog id="confirmation-geolocalisation" class="lcdp-box-dialogue-bouton__card lcdp-setup-dialog" aria-labelledby="titre-confirmation-optin">

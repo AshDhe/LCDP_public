@@ -371,3 +371,39 @@ div.lcdp-security-tunnel [data-lcdp-fermeture-codr] .lcdp-box-champ-formulaire--
   padding: 0;
   text-align: center;
 }
+
+/* Continuité visuelle du tunnel : le contenu de l'étape 3 ne peut pas
+   apparaître avant l'initialisation complète, même sur une connexion lente. */
+html[data-lcdp-geo-loading],
+html[data-lcdp-geo-loading] body { background: #f8fafc !important; }
+html[data-lcdp-geo-loading] body > .lcdp-site-page { visibility: hidden !important; }
+html[data-lcdp-geo-loading] #attente-preparation,
+body > .lcdp-setup-loading.lcdp-tunnel-transition:not([hidden]) {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: #f8fafc !important;
+  display: grid !important;
+  place-items: center !important;
+  z-index: 2147483000 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html[data-lcdp-geo-loading] #attente-preparation > :not(.lcdp-tunnel-transition__picto),
+.lcdp-tunnel-transition > :not(.lcdp-tunnel-transition__picto) { display: none !important; }
+html[data-lcdp-geo-loading] #attente-preparation > .lcdp-tunnel-transition__picto,
+.lcdp-tunnel-transition:not([hidden]) > .lcdp-tunnel-transition__picto {
+  display: block !important;
+  width: 72px;
+  height: 72px;
+}
+body > .lcdp-setup-loading.lcdp-tunnel-transition[hidden] { display: none !important; }
+html[data-lcdp-geo-loading] body > #attente-preparation[hidden] { display: grid !important; }
