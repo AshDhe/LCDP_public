@@ -373,8 +373,28 @@
   }
 
   if (accueil) {
+    // Le retour du tunnel désigne la rubrique et le bouton précis de départ.
+    const urlRetour = new URL(window.location.href);
+    const retour = urlRetour.searchParams.get("retour");
+    const cibleRetour = retour === "bienfaiteur" ? bienfaiteur : retour === "abonnement" ? souscrire : null;
+    if (cibleRetour) {
+      urlRetour.hash = retour === "bienfaiteur" ? "dfa" : "abonnement";
+      urlRetour.searchParams.delete("retour");
+      window.history.replaceState(window.history.state,"",urlRetour.href);
+    }
     window.addEventListener("hashchange", () => afficherVueBoutique());
     afficherVueBoutique(false);
+    if (cibleRetour) {
+      // Ne pas présélectionner le bouton ; le rendre simplement visible.
+      const repositionner = () => {
+        if (cibleRetour.isConnected && !cibleRetour.closest("[hidden]")) {
+          cibleRetour.scrollIntoView({block:"center",inline:"nearest",behavior:"instant"});
+        }
+      };
+      window.requestAnimationFrame(() => window.requestAnimationFrame(repositionner));
+      // Les images et le cadre peuvent encore changer les hauteurs au chargement.
+      if (document.readyState !== "complete") window.addEventListener("load",repositionner,{once:true});
+    }
   }
 
   // Lien direct depuis Mon compte : ouvrir la liste des témoins sans clic supplémentaire.
