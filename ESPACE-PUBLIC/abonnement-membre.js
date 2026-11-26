@@ -319,13 +319,19 @@
         croix.textContent = "×";
         dialogue.appendChild(croix);
         croix.addEventListener("click", clore, { once: true });
+        const souscrireOffre = dialogue.querySelector("[data-lcdp-offre-souscrire]");
+        souscrireOffre?.addEventListener("click", () => {
+          const souscrire = document.getElementById("lcdp-demarrer-abonnement");
+          clore();
+          souscrire?.click();
+        });
         dialogue.addEventListener("click", event => { if (event.target === dialogue) clore(); });
         clavier = event => {
           if (event.key === "Escape") { event.preventDefault(); clore(); }
           else if (event.key === "Tab") {
             event.preventDefault();
             const scroll = dialogue.querySelector(".lcdp-offre-abonnement__scroll:not([hidden])");
-            const cibles = [croix,scroll].filter(Boolean);
+            const cibles = [croix,scroll,scroll ? souscrireOffre : null].filter(Boolean);
             const i = cibles.indexOf(document.activeElement);
             cibles[(i + (event.shiftKey ? -1 : 1) + cibles.length) % cibles.length].focus();
           }
