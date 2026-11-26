@@ -34,27 +34,51 @@
     return "inconnu";
   }
 
-  function protegerActionBoutique(bouton, action) {
+  // DFA : réutiliser le voile SVG de la boutique, sans spinner dans le bouton.
+  const voileDfa = document.getElementById("lcdp-attente-arrivee");
+  let delaiNavigationDfa;
+  function attenteDfa(active) {
+    if (voileDfa) voileDfa.hidden = !active;
+    if (!active) window.clearTimeout(delaiNavigationDfa);
+  }
+  window.addEventListener("pageshow",event=>{
+    if (event.persisted) { attenteDfa(false); controleBoutiqueEnCours=false; }
+  });
+  function protegerActionBoutique(bouton, action, transitionDfa = false) {
     if (!bouton) return;
     bouton.addEventListener("click", async event => {
       event.preventDefault();
       if (controleBoutiqueEnCours || document.getElementById("lcdp-lightbox-slot")?.children.length) return;
       controleBoutiqueEnCours = true;
       const ancienLabel = bouton.getAttribute("aria-label");
-      bouton.setAttribute("aria-busy", "true");
-      bouton.setAttribute("aria-label", "Vérification en cours");
+      let navigationDfa = false;
+      if (transitionDfa) attenteDfa(true);
+      else {
+        bouton.setAttribute("aria-busy", "true");
+        bouton.setAttribute("aria-label", "Vérification en cours");
+      }
       try {
         const session = await lireSessionBoutique();
-        if (session === "connecte") await action();
-        else await ouvrirDialogueBoutique({type: session === "connexion" ? "connexion" : "session-inconnue"});
+        if (session === "connecte") navigationDfa = (await action()) === true && transitionDfa;
+        else {
+          if (transitionDfa) attenteDfa(false);
+          await ouvrirDialogueBoutique({type: session === "connexion" ? "connexion" : "session-inconnue"});
+        }
       } catch (error) {
         console.error("Contrôle boutique :", error);
+        if (transitionDfa) attenteDfa(false);
         await ouvrirDialogueBoutique({type: "session-inconnue"}).catch(console.error);
       } finally {
         if (ancienLabel === null) bouton.removeAttribute("aria-label");
         else bouton.setAttribute("aria-label", ancienLabel);
         bouton.removeAttribute("aria-busy");
-        controleBoutiqueEnCours = false;
+        if (navigationDfa) {
+          // Maintenir le même voile jusqu'au changement de document.
+          delaiNavigationDfa = window.setTimeout(()=>{attenteDfa(false);controleBoutiqueEnCours=false;},15000);
+        } else {
+          if (transitionDfa) attenteDfa(false);
+          controleBoutiqueEnCours = false;
+        }
       }
     });
   }
@@ -294,12 +318,13 @@
     protegerActionBoutique(bouton, async () => {
       const situation = await lireSituationDaSouscription();
       if (situation.type !== "validee") {
+        if (mode !== "bienfaiteur") attenteDfa(false);
         await ouvrirDialogueBoutique(situation);
         return;
       }
       if (mode !== "bienfaiteur") {
-        window.location.assign(urlMembre("/ESPACE-MEMBRE/dfa-membre.html"));
-        return;
+        window.location.assign(urlMembre("/ESPACE-MEMBRE/dfa-membre.html?v=20261126-dfa-direct-v9"));
+        return true;
       }
       const entree = config.donParcTunnelUrl;
       if (typeof entree === "string" && entree.trim()) {
@@ -313,7 +338,7 @@
         }
       }
       etat.hidden = false;
-    });
+    }, mode !== "bienfaiteur");
   }
 
   raccorderDfa(don, etatDon);
