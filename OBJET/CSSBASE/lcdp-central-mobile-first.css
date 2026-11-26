@@ -33935,3 +33935,51 @@ html .lcdp-button:is(.lcdp-button-orange, .lcdp-button-primary, .lcdp-button-acc
 html .lcdp-button:is(.lcdp-button-orange, .lcdp-button-primary, .lcdp-button-accueil-blue):not(:disabled, [aria-disabled="true"], .is-disabled):hover {
   box-shadow: 0 20px 25px -5px var(--lcdp-button-texture-shadow), 0 8px 10px -6px var(--lcdp-button-texture-shadow) !important;
 }
+
+/* Sous-variante facultative : bouton à deux niveaux, suivi d'une flèche.
+   Activable par .lcdp-button--deux-niveaux ; les accès existants de la boutique
+   l'utilisent via leurs identifiants, sans modifier leur HTML ni leur JS. */
+html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) {
+  width: min(100%, 310px);
+  max-width: 100%;
+  min-height: 84px;
+  padding: 12px 14px;
+  text-align: center;
+}
+html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  font-size: clamp(1.0625rem, 4.8vw, 1.375rem);
+  line-height: 1.28;
+  font-weight: 900;
+  letter-spacing: .015em;
+  color: #fff;
+  text-transform: uppercase;
+  overflow-wrap: normal;
+}
+html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span::first-line {
+  font-size: .8125rem;
+  line-height: 1.6;
+  font-weight: 700;
+  letter-spacing: .055em;
+  color: #fff;
+}
+html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span > strong {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span::after {
+  content: "";
+  display: inline-block;
+  width: .48em;
+  height: .48em;
+  margin-inline-start: .58em;
+  border-top: .11em solid currentColor;
+  border-right: .11em solid currentColor;
+  transform: translateY(-.13em) rotate(45deg);
+  vertical-align: baseline;
+}
