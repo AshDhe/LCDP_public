@@ -104,62 +104,40 @@
   const statut=document.createElement('p');statut.className='lcdp-box-formulaire__note';statut.setAttribute('role','status');form.append(statut);
   const widget=document.createElement('div');form.querySelector('[data-lcdp-formulaire-actions]')?.before(widget);
   if(!widget.isConnected)bouton.before(widget);
-  // Indicateur limité aux contacts parc et coach, sans changement des autres formulaires.
-  let attenteVerification=null,delaiVerification=null,libelleVerification=null;
+  // Objet CSS d'attente transversal : pas de pictogramme local.
+  const contactProtege=['coach','resparc'].includes(config.type);
+  let delaiVerification=null,attenteEnvoi=null;
   const ariaLabelInitial=bouton.getAttribute('aria-label');
-  if(['coach','resparc'].includes(config.type)){
-   libelleVerification=document.createElement('span');
-   while(bouton.firstChild)libelleVerification.append(bouton.firstChild);
-   bouton.append(libelleVerification);
-   bouton.style.position='relative';
-   attenteVerification=document.createElement('span');
-   attenteVerification.style.position='absolute';
-   attenteVerification.style.left='50%';
-   attenteVerification.style.top='50%';
-   attenteVerification.style.transform='translate(-50%, -50%)';
-   attenteVerification.style.lineHeight='0';
-   attenteVerification.style.pointerEvents='none';
-   attenteVerification.setAttribute('role','status');
-   attenteVerification.setAttribute('aria-label','Vérification du formulaire en cours');
-   const image=document.createElement('img');
-   image.width=24;image.height=24;image.alt='';image.setAttribute('aria-hidden','true');
+  const ariaBusyInitial=bouton.getAttribute('aria-busy');
+  if(contactProtege){
    const c=window.SITE_CONFIG||{};
-   const base=String(c.objetBaseUrl||c.OBJET_BASE||((window.SITE_BASE||'..')+'/OBJET')).replace(/\/$/,'');
-   image.src=typeof c.objetUrl==='function'?c.objetUrl('/IMAG/PICTO/pictowait.gif'):base+'/IMAG/PICTO/pictowait.gif';
-   attenteVerification.append(image);bouton.append(attenteVerification);
+   const base=String(c.objetBaseUrl||c.OBJET_BASE||((window.SITE_BASE||'..')+'/OBJET')).replace(/\/+$/,'');
+   const href=typeof c.objetUrl==='function'?c.objetUrl('/CSSBASE/lcdp-attente.css?v=20261126-v1'):base+'/CSSBASE/lcdp-attente.css?v=20261126-v1';
+   if(!document.querySelector('link[data-lcdp-attente-css]')){
+    const lien=document.createElement('link');lien.rel='stylesheet';lien.href=href;lien.setAttribute('data-lcdp-attente-css','');document.head.appendChild(lien);
+   }
+   attenteEnvoi=document.createElement('div');
+   attenteEnvoi.hidden=true;
+   attenteEnvoi.setAttribute('role','status');
+   attenteEnvoi.setAttribute('aria-label','Envoi de votre demande en cours');
+   attenteEnvoi.style.cssText='position:fixed;inset:0;z-index:2147483000;background:var(--lcdp-color-surface,#fff);display:none;align-items:center;justify-content:center;';
+   const icone=document.createElement('span');icone.className='lcdp-attente-indicateur';icone.setAttribute('aria-hidden','true');
+   attenteEnvoi.appendChild(icone);document.body.appendChild(attenteEnvoi);
   }
   function afficherAttenteVerification(active){
-   if(!attenteVerification)return;
+   if(!contactProtege)return;
    clearTimeout(delaiVerification);
-   attenteVerification.hidden=!active;
-   libelleVerification.style.visibility=active?'hidden':'';
-   if(active)bouton.setAttribute('aria-label','Vérification du formulaire en cours');
-   else if(ariaLabelInitial===null)bouton.removeAttribute('aria-label');
-   else bouton.setAttribute('aria-label',ariaLabelInitial);
-   if(active)delaiVerification=setTimeout(()=>{
-    afficherAttenteVerification(false);
-    statut.textContent='La vérification prend plus de temps que prévu. Si une case de vérification est affichée, cochez-la. Sinon, rechargez la page pour réessayer.';
-   },30000);
-  }
-  // Pictogramme SVG dédié à la soumission (distinct de la vérification Turnstile).
-  // Overlay retiré avant la boîte de confirmation ou le message d'erreur.
-  let attenteEnvoi = null;
-  if (['coach', 'resparc'].includes(config.type)) {
-   attenteEnvoi = document.createElement('div');
-   attenteEnvoi.hidden = true;
-   attenteEnvoi.setAttribute('role', 'status');
-   attenteEnvoi.setAttribute('aria-label', 'Envoi de votre demande en cours');
-   attenteEnvoi.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:var(--lcdp-color-surface,#fff);display:none;align-items:center;justify-content:center;';
-   const icone = document.createElement('img');
-   const site = window.SITE_CONFIG || {};
-   const objet = String(site.objetBaseUrl || site.OBJET_BASE || ((window.SITE_BASE || '..') + '/OBJET')).replace(/\/+$/, '');
-   icone.src = typeof site.objetUrl === 'function' ? site.objetUrl('/IMAG/PICTO/pictowait.svg') : objet + '/IMAG/PICTO/pictowait.svg';
-   icone.width = 64;
-   icone.height = 64;
-   icone.alt = '';
-   icone.setAttribute('aria-hidden', 'true');
-   attenteEnvoi.appendChild(icone);
-   document.body.appendChild(attenteEnvoi);
+   bouton.classList.toggle('lcdp-action-attente',active);
+   if(active){
+    bouton.setAttribute('aria-busy','true');bouton.setAttribute('aria-label','Vérification du formulaire en cours');
+    delaiVerification=setTimeout(()=>{
+     afficherAttenteVerification(false);
+     statut.textContent='La vérification prend plus de temps que prévu. Si une case de vérification est affichée, cochez-la. Sinon, rechargez la page pour réessayer.';
+    },30000);
+   }else{
+    if(ariaBusyInitial===null)bouton.removeAttribute('aria-busy');else bouton.setAttribute('aria-busy',ariaBusyInitial);
+    if(ariaLabelInitial===null)bouton.removeAttribute('aria-label');else bouton.setAttribute('aria-label',ariaLabelInitial);
+   }
   }
   function afficherAttenteEnvoi(active) {
    if (!attenteEnvoi) return;
