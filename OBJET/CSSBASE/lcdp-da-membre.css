@@ -331,3 +331,9 @@
   border-radius: 9999px;
   background: var(--lcdp-color-primary, #4e6838);
 }
+
+/* DA : deux hauteurs de champ standard pour la réponse libre sur les qualités. */
+#lcdp-da-membre-overlay-slot textarea[name="autoquali"] {
+  min-height: 92px;
+  resize: vertical;
+}

@@ -303,8 +303,8 @@
     return label;
   }
 
-  async function creerChamp(champ, modeFormulaire = "saisie") {
-    const fragment = await chargerFragmentObjet("/HTMLBASE/03-champ-formulaire.html");
+  async function creerChamp(champ, modeFormulaire = "saisie", modeleChamp = null) {
+    const fragment = modeleChamp ? modeleChamp.cloneNode(true) : await chargerFragmentObjet("/HTMLBASE/03-champ-formulaire.html");
 
     const element = fragment.querySelector("[data-lcdp-box-champ-formulaire]");
     const labelZone = fragment.querySelector("[data-lcdp-champ-label-zone]");
@@ -442,9 +442,13 @@
     actualiserEnteteFormulaire(header);
 
     if (Array.isArray(configuration.champs)) {
+      // Option locale : réutiliser le même fragment pour éviter une requête par champ.
+      const modeleChamp = configuration.reutiliserModeleChamp && configuration.champs.length
+        ? await chargerFragmentObjet("/HTMLBASE/03-champ-formulaire.html")
+        : null;
       for (const champ of configuration.champs) {
         fields.appendChild(
-          await creerChamp(champ, modeFormulaire)
+          await creerChamp(champ, modeFormulaire, modeleChamp)
         );
       }
     }
