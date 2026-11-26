@@ -10,7 +10,7 @@
   const siteBase = String(window.SITE_CONFIG?.publicBaseUrl || "").replace(/\/+$/, "");
   let controleBoutiqueEnCours = false;
 
-  // Vérification de session commune aux six actions réservées aux membres.
+  // Vérification de session commune aux actions réservées aux membres.
   // Une erreur réseau ou une réponse inattendue ne signifie pas une déconnexion.
   async function lireSessionBoutique() {
     const base = config.workerIndexMembreUrl || config.WORKER_INDEX_MEMBRE_URL ||
@@ -35,6 +35,7 @@
   }
 
   function protegerActionBoutique(bouton, action) {
+    if (!bouton) return;
     bouton.addEventListener("click", async event => {
       event.preventDefault();
       if (controleBoutiqueEnCours || document.getElementById("lcdp-lightbox-slot")?.children.length) return;
@@ -202,11 +203,13 @@
     fermerBouton.focus();
   }
 
-  try {
-    souscrire.href = urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza");
-  } catch (error) {
-    console.error(error);
-    souscrire.removeAttribute("href");
+  if (souscrire) {
+    try {
+      souscrire.href = urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza");
+    } catch (error) {
+      console.error(error);
+      souscrire.removeAttribute("href");
+    }
   }
 
   protegerActionBoutique(souscrire, async () => {
@@ -242,6 +245,7 @@
   let positionBoutique = 0;
 
   function afficherVueBoutique(focus = true) {
+    if (!accueil || !defilement) return;
     const hash = window.location.hash.slice(1);
     const cible = vues.find(vue => vue.dataset.lcdpBoutiqueVue === hash);
     const suivante = cible ? hash : "";
@@ -264,8 +268,10 @@
     }
   }
 
-  window.addEventListener("hashchange", () => afficherVueBoutique());
-  afficherVueBoutique(false);
+  if (accueil) {
+    window.addEventListener("hashchange", () => afficherVueBoutique());
+    afficherVueBoutique(false);
+  }
 
   // Lien direct depuis Mon compte : ouvrir la liste des témoins sans clic supplémentaire.
   const cibleInitiale = window.location.hash;
@@ -282,7 +288,15 @@
   const etatBienfaiteur = document.getElementById("lcdp-boutique-bienfaiteur-etat");
 
   function raccorderDfa(bouton, etat, mode) {
-    protegerActionBoutique(bouton, () => {
+    if (!bouton || !etat) return;
+    protegerActionBoutique(bouton, async () => {
+      if (mode === "bienfaiteur") {
+        const situation = await lireSituationDaSouscription();
+        if (situation.type !== "validee") {
+          await ouvrirDialogueBoutique(situation);
+          return;
+        }
+      }
       const entree = config.donParcTunnelUrl;
       if (typeof entree === "string" && entree.trim()) {
         try {
