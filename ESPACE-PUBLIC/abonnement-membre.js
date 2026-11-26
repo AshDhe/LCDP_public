@@ -461,7 +461,7 @@
         "Le tarif 1M (1 mois) est à " + nombre.format(c.prix) + " € TTC sans extension d’invitation" + comparaison + " (soit " + c.duo + " membre invité DUO par accès planifié" + (c.famille ? " + " + famille : "") + ").",
         "L’abonnement 1M se souscrit en M pour M+1 ou M+2 et bénéficie par conséquent d’un horizon de planification sur tout le mois de l’abonnement.",
         "Il bénéficie également de " + c.acces + " accès maximum planifiés dans les parcs pour un exemple de quatre semaines (" + c.accesSemaine + " accès maximum par semaine du lundi au dimanche) et d’un privilège MAXDUO de " + c.maxduo + " membre" + (c.maxduo > 1 ? "s" : "") + " (soit le nombre d’invités DUO différents sur le mois).",
-        "Son coût de revient UA max est de " + nombre.format(c.coutUa) + " € par UA max (" + c.acces + " accès x " + c.membres + " membres par accès = " + c.ua + " UA max) pour MAXDUO=" + c.maxduo + "."
+        "Son coût de revient est de " + nombre.format(c.coutUa) + " € par UA max (" + c.acces + " accès x " + c.membres + " membres par accès = " + c.ua + " UA max) pour MAXDUO=" + c.maxduo + "."
       ];
       reponse.replaceChildren(...textes.map(texte => {
         const p = document.createElement("p");
