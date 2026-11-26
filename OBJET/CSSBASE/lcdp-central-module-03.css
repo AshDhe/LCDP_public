@@ -1952,6 +1952,17 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     height: 48px;
   }
 }
+
+/* Lecture compacte de l’offre et des privilèges dans le wrapper. */
+:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__table:is([data-lcdp-table-lecture="offre-abonnements"],[data-lcdp-table-lecture="privileges-abonnements"]) { table-layout: fixed; font-size: .8125rem; line-height: 1.45; }
+:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__table:is([data-lcdp-table-lecture="offre-abonnements"],[data-lcdp-table-lecture="privileges-abonnements"]) :is(th,td) { padding: 10px 5px; vertical-align: top; white-space: normal; overflow-wrap: break-word; }
+:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__table:is([data-lcdp-table-lecture="offre-abonnements"],[data-lcdp-table-lecture="privileges-abonnements"]) th { font-size: .8125rem; }
+:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__table[data-lcdp-table-lecture="offre-abonnements"] :is(th,td):nth-child(1) { width: 36% !important; }
+:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__table[data-lcdp-table-lecture="offre-abonnements"] :is(th,td):nth-child(2) { width: 46% !important; }
+:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__table[data-lcdp-table-lecture="offre-abonnements"] :is(th,td):nth-child(3) { width: 18% !important; text-align: center; }
+:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__table[data-lcdp-table-lecture="privileges-abonnements"] :is(th,td):nth-child(1) { width: 24% !important; }
+:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__table[data-lcdp-table-lecture="privileges-abonnements"] :is(th,td):nth-child(2) { width: 40% !important; }
+:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__table[data-lcdp-table-lecture="privileges-abonnements"] :is(th,td):nth-child(3) { width: 36% !important; }
 :where(html[data-lcdp-css~="c073"]) .lcdp-box-liste-card {
   width: 100%;
   display: flex;
