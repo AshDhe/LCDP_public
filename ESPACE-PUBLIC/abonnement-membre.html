@@ -8,7 +8,7 @@
   <script src="../config.js"></script>
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261126-offre-tableau" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css?v=20261126-offre-tableau">
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-lightbox-convergence.css?v=20261126-conteneur">
-  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-offre-abonnement.css?v=20261126-v1">
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-offre-abonnement.css?v=20261126-pivots-v2">
 </head>
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune">
   <div class="lcdp-site-page lcdp-app-wrapper">
@@ -108,50 +108,24 @@
     </main>
     <div id="lcdp-footer-slot"></div>
     <template id="lcdp-tableaux-abonnements">
-      <div class="lcdp-stack-small lcdp-boxtext__content lcdp-editorial-copy">
-
-                    <p>Pour une journée, quelques mois ou une année, <strong>La Clé du Parc propose plusieurs formules d’abonnement</strong> pour profiter des parcs du réseau et retrouver vos proches.</p>
-                    <div class="lcdp-offre-abonnement">
-                      <table class="lcdp-offre-abonnement__table" aria-label="Offre des abonnements et prix TTC">
-                        <colgroup><col><col><col></colgroup>
-                        <thead><tr><th scope="col">Abonnement et durée</th><th scope="col">Souscription et démarrage</th><th scope="col">Prix TTC</th></tr></thead>
-                        <tbody>
-                          <tr><td><span class="lcdp-offre-abonnement__nom">PASSION</span><span class="lcdp-offre-abonnement__code">(1A)</span><span class="lcdp-offre-abonnement__duree">1 an</span></td><td><span class="lcdp-offre-abonnement__debut">1er janvier</span><span class="lcdp-offre-abonnement__detail">Souscription en octobre, novembre ou décembre précédents</span></td><td><span class="lcdp-offre-abonnement__prix">840 €</span><span class="lcdp-offre-abonnement__detail">70 €/mois · 3x max.</span></td></tr>
-                          <tr><td><span class="lcdp-offre-abonnement__nom">PASSION 11M</span><span class="lcdp-offre-abonnement__code">(11M)</span><span class="lcdp-offre-abonnement__duree">11 mois</span></td><td><span class="lcdp-offre-abonnement__debut">1er février</span><span class="lcdp-offre-abonnement__detail">Souscription en janvier</span></td><td><span class="lcdp-offre-abonnement__prix lcdp-offre-abonnement__prix--inconnu">À renseigner</span><span class="lcdp-offre-abonnement__detail">3x max.</span></td></tr>
-                          <tr><td><span class="lcdp-offre-abonnement__nom">PASSION 10M</span><span class="lcdp-offre-abonnement__code">(10M)</span><span class="lcdp-offre-abonnement__duree">10 mois</span></td><td><span class="lcdp-offre-abonnement__debut">1er mars</span><span class="lcdp-offre-abonnement__detail">Souscription en février</span></td><td><span class="lcdp-offre-abonnement__prix lcdp-offre-abonnement__prix--inconnu">À renseigner</span><span class="lcdp-offre-abonnement__detail">3x max.</span></td></tr>
-                          <tr><td><span class="lcdp-offre-abonnement__nom">MOTIVATION</span><span class="lcdp-offre-abonnement__code">(5M)</span><span class="lcdp-offre-abonnement__duree">5 mois</span></td><td><span class="lcdp-offre-abonnement__debut">Le 1er du mois</span><span class="lcdp-offre-abonnement__detail">De M+1 à M+4</span></td><td><span class="lcdp-offre-abonnement__prix lcdp-offre-abonnement__prix--inconnu">À renseigner</span><span class="lcdp-offre-abonnement__detail">2x max.</span></td></tr>
-                          <tr><td><span class="lcdp-offre-abonnement__nom">SAISON</span><span class="lcdp-offre-abonnement__code">(3M)</span><span class="lcdp-offre-abonnement__duree">3 mois</span></td><td><span class="lcdp-offre-abonnement__debut">Le 1er du mois</span><span class="lcdp-offre-abonnement__detail">De M+1 à M+3</span></td><td><span class="lcdp-offre-abonnement__prix lcdp-offre-abonnement__prix--inconnu">À renseigner</span><span class="lcdp-offre-abonnement__detail">2x max.</span></td></tr>
-                          <tr><td><span class="lcdp-offre-abonnement__nom">EXPLORATION</span><span class="lcdp-offre-abonnement__code">(1M)</span><span class="lcdp-offre-abonnement__duree">1 mois</span></td><td><span class="lcdp-offre-abonnement__debut">Le 1er du mois</span><span class="lcdp-offre-abonnement__detail">M+1 ou M+2</span></td><td><span class="lcdp-offre-abonnement__prix">190 €</span><span class="lcdp-offre-abonnement__detail">1x</span></td></tr>
-                          <tr><td><span class="lcdp-offre-abonnement__nom">DÉCOUVERTE</span><span class="lcdp-offre-abonnement__code">(1J)</span><span class="lcdp-offre-abonnement__duree">1 jour</span></td><td><span class="lcdp-offre-abonnement__debut">Jour choisi</span><span class="lcdp-offre-abonnement__detail">De M à M+2</span></td><td><span class="lcdp-offre-abonnement__prix">90 €</span><span class="lcdp-offre-abonnement__detail">1x</span></td></tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <p class="lcdp-editorial-meta">M = mois de souscription. Pour PASSION, le démarrage est fixé au 1er janvier suivant la souscription.</p>
-                    <h2 class="lcdp-boxtext__title lcdp-boxtext__title--center" data-lcdp-boxtext-title>Privilèges d’abonnement</h2>
-                    <p>Chaque formule comprend des <strong>droits d’invitation de base</strong>. Des ajouts permettent d’augmenter certaines capacités.</p>
-                    <div class="lcdp-table-lecture">
-                      <div class="lcdp-table-lecture__scroll">
-                        <table class="lcdp-table-lecture__table" data-lcdp-table-lecture="privileges-abonnements" aria-label="Privilèges d’abonnement inclus et ajouts possibles">
-                          <thead>
-                            <tr><th scope="col">Privilège</th><th scope="col">Base</th><th scope="col">Ajouts</th></tr>
-                          </thead>
-                          <tbody>
-                            <tr><td><strong>DUO</strong></td><td>1 invité par accès (DECOUVERTE : 1 invité sur la journée)</td><td>—</td></tr>
-                            <tr><td><strong>DUOMAX</strong></td><td>De 1 à 15 invités différents selon la formule</td><td>+5 invités différents</td></tr>
-                            <tr><td><strong>DUO+</strong></td><td>5 invités sur un même accès, 1 fois par mois (hors DECOUVERTE)</td><td>+5 places et 1 utilisation mensuelle supplémentaire</td></tr>
-                            <tr><td><strong>FAMILLE</strong></td><td>3 invités</td><td>+2 invités</td></tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <p>Les capacités et les ajouts disponibles varient selon l’abonnement. Les conditions détaillées et les options applicables à votre formule sont présentées dans votre espace membre.</p>
-                    
+      <div class="lcdp-offre-abonnement lcdp-stack-small">
+        <p class="lcdp-offre-abonnement__etat" role="status" aria-live="polite">Chargement des offres…</p>
+        <div class="lcdp-offre-abonnement__scroll" hidden role="region" aria-label="Tableau des offres d’abonnement" tabindex="0">
+          <table class="lcdp-offre-abonnement__table" aria-label="Offres d’abonnement">
+            <colgroup><col><col><col><col><col><col><col></colgroup>
+            <thead>
+              <tr><th rowspan="2" scope="col">Abonnement</th><th scope="col">Tarif</th><th rowspan="2" scope="col">Vente</th><th scope="col">Date de</th><th colspan="3" scope="colgroup">Privilèges invité</th></tr>
+              <tr><th scope="col">TTC</th><th scope="col">Démarrage</th><th scope="col">Duo</th><th scope="col">Famille</th><th scope="col">MaxDuo</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
     </template>
     <div id="lcdp-lightbox-slot"></div>
   </div>
   <script src="../OBJET/JSBASE/documents-legaux.js" data-site-src="/OBJET/JSBASE/documents-legaux.js"></script>
   <script src="./faq-accordeon.js?v=20261126-exemples"></script>
-  <script src="./abonnement-membre.js?v=20261126-offre-design"></script>
+  <script src="./abonnement-membre.js?v=20261126-pivots-v2"></script>
 </body>
 </html>

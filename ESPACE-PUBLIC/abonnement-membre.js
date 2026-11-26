@@ -192,6 +192,63 @@
     compris.focus();
   }
 
+  // Plaquette commerciale : les noms, tarifs et capacités sont lus dans les pivots
+  // applicables. Seules les fenêtres de vente/démarrage et le Duo de base sont fixes.
+  const CALENDRIER_OFFRES = {
+    "1J": ["1 jour", "Tous les\nmois", "M à M+2"],
+    "1M": ["1 mois", "Tous les\nmois", "M+1 à M+2"],
+    "3M": ["3 mois", "Tous les\nmois", "M+1 à M+3"],
+    "5M": ["5 mois", "Tous les\nmois", "M+1 à M+4"],
+    "1A": ["12 mois", "Juillet à\nDécembre", "1er janvier"],
+    "11M": ["11 mois", "Janvier", "1er février"],
+    "10M": ["10 mois", "Février", "1er mars"]
+  };
+  async function chargerOffresAbonnements(dialogue) {
+    const etat = dialogue.querySelector(".lcdp-offre-abonnement__etat");
+    const scroll = dialogue.querySelector(".lcdp-offre-abonnement__scroll");
+    const corps = scroll.querySelector("tbody");
+    const config = window.SITE_CONFIG || {};
+    const base = String(config.workerAboRezaUrl || config.WORKER_ABOREZA_URL ||
+      (typeof config.apiUrl === "function" ? config.apiUrl("aboreza-api") : "https://aboreza-api.lacleduparc.fr")).replace(/\/+$/, "");
+    try {
+      const r = await fetch(base + "/offres-abonnements", {credentials:"omit", cache:"no-store", signal:AbortSignal.timeout(15000), headers:{Accept:"application/json"}});
+      const data = await r.json();
+      if (!r.ok || data?.ok !== true || !Array.isArray(data.offres)) throw new Error("Offres indisponibles.");
+      const parCode = new Map();
+      for (const o of data.offres) {
+        if (!Object.hasOwn(CALENDRIER_OFFRES,o.groupeabo) || parCode.has(o.groupeabo) ||
+          typeof o.nomabo !== "string" || !o.nomabo.trim() ||
+          typeof o.prixabottc !== "number" || !Number.isFinite(o.prixabottc) || o.prixabottc <= 0 ||
+          !Number.isInteger(o.maxduo) || o.maxduo < 1 || !Number.isInteger(o.famille) || o.famille < 0) throw new Error("Offre incohérente.");
+        parCode.set(o.groupeabo,o);
+      }
+      const fragment = document.createDocumentFragment();
+      const format = new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",minimumFractionDigits:0,maximumFractionDigits:2});
+      for (const [code,[duree,vente,debut]] of Object.entries(CALENDRIER_OFFRES)) {
+        const o = parCode.get(code);
+        if (!o) continue;
+        const tr = document.createElement("tr");
+        const nom = document.createElement("th");
+        nom.scope = "row";
+        for (const [classe,valeur] of [["nom",o.nomabo.toLocaleUpperCase("fr-FR")],["duree",duree+" ("+code+")"]]) {
+          const span=document.createElement("span");span.className="lcdp-offre-abonnement__"+classe;span.textContent=valeur;nom.append(span);
+        }
+        tr.append(nom);
+        [format.format(o.prixabottc),vente,debut,1,o.famille,o.maxduo].forEach((v,i)=>{
+          const td=document.createElement("td");td.textContent=String(v);if(i===0)td.className="lcdp-offre-abonnement__prix";tr.append(td);
+        });
+        fragment.append(tr);
+      }
+      if (!parCode.size) {etat.textContent="Aucune offre tarifaire en vigueur.";return;}
+      corps.replaceChildren(fragment);scroll.hidden=false;
+      etat.hidden=true;
+    } catch (error) {
+      etat.textContent="Les offres sont momentanément indisponibles. Merci de réessayer.";
+      scroll.hidden=true;
+      console.warn("Offres non disponibles :",error);
+    }
+  }
+
   function initialiserTableauxAbonnements() {
     const lien = document.getElementById("lcdp-afficher-tableaux-abonnements");
     const contenu = document.getElementById("lcdp-tableaux-abonnements");
@@ -238,7 +295,10 @@
           if (event.key === "Escape") { event.preventDefault(); clore(); }
           else if (event.key === "Tab") {
             event.preventDefault();
-            (document.activeElement === croix ? fermer : croix).focus();
+            const scroll = dialogue.querySelector(".lcdp-offre-abonnement__scroll:not([hidden])");
+            const cibles = [croix,scroll,fermer].filter(Boolean);
+            const i = cibles.indexOf(document.activeElement);
+            cibles[(i + (event.shiftKey ? -1 : 1) + cibles.length) % cibles.length].focus();
           }
         };
         etats = Array.from(slot.parentElement.children)
@@ -249,6 +309,7 @@
         lien.setAttribute("aria-expanded", "true");
         document.addEventListener("keydown", clavier);
         croix.focus();
+        void chargerOffresAbonnements(dialogue);
       } catch (error) {
         clore();
         console.error("Offre des abonnements indisponible :", error);
