@@ -42,3 +42,6 @@
 .lcdp-offre-abonnement__libelle{font-size:.75rem;line-height:1rem;font-weight:500;text-align:left;overflow-wrap:normal;}
 .lcdp-offre-abonnement__extension{font-size:.75rem;line-height:1rem;font-weight:600;color:var(--lcdp-color-orange,#f2a23a);}
 .lcdp-offre-abonnement__note{margin:.5rem 0 0;font-size:.75rem;line-height:1rem;color:#6b7280;}
+
+/* Information discrète sous le titre du dialogue. */
+.lcdp-offre-abonnement .lcdp-offre-abonnement__intro{margin:0 0 .75rem;font-family:inherit;font-size:.875rem;line-height:1.4;font-weight:400;color:#6b7280;text-align:center;}
