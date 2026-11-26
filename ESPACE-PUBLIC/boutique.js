@@ -223,16 +223,7 @@
 
   listes.forEach(lien => {
     protegerActionBoutique(lien, () => {
-      const cible = document.getElementById(lien.getAttribute("aria-controls"));
-      const ouvrir = cible.hidden;
-
-      listes.forEach(autre => {
-        const panneau = document.getElementById(autre.getAttribute("aria-controls"));
-        const visible = autre === lien && ouvrir;
-        panneau.hidden = !visible;
-        autre.setAttribute("aria-expanded", String(visible));
-      });
-      if (ouvrir) cible.scrollIntoView({ behavior: "auto", block: "nearest" });
+      window.location.assign(lien.href);
     });
   });
 
@@ -275,7 +266,7 @@
 
   // Lien direct depuis Mon compte : ouvrir la liste des témoins sans clic supplémentaire.
   const cibleInitiale = window.location.hash;
-  const lienInitial = listes.find(lien => lien.getAttribute("href") === cibleInitiale);
+  const lienInitial = listes.find(lien => "#" + lien.dataset.lcdpBoutiqueListe === cibleInitiale);
   if (lienInitial) lienInitial.click();
 
   // Raccordement commun au futur tunnel DFA (w-don-parc.js).
@@ -319,4 +310,37 @@
   if (journee) protegerActionBoutique(journee, () => {
     window.location.assign(urlMembre("/ESPACE-MEMBRE/journee-benevole.html"));
   });
+
+  // La liste reste masquée tant que la session n'est pas confirmée,
+  // y compris à l'ouverture directe d'une URL ou au retour de l'historique.
+  const catalogue = document.querySelector("[data-lcdp-accessoires-reserves]");
+  if (catalogue) {
+    const etat = document.getElementById("lcdp-accessoires-etat");
+    let controle = 0;
+    async function initialiserCatalogue() {
+      const generation = ++controle;
+      catalogue.hidden = true;
+      if (etat) etat.hidden = false;
+      const [session] = await Promise.all([
+        lireSessionBoutique(),
+        window.LCDP_pagePubliquePrete || Promise.resolve()
+      ]);
+      if (generation !== controle) return;
+      window.LCDP_terminerAttentePagePublique?.();
+      if (session === "connecte") {
+        catalogue.hidden = false;
+        if (etat) etat.hidden = true;
+        return;
+      }
+      if (etat) etat.textContent = session === "connexion"
+        ? "Vous devez vous connecter à votre compte pour continuer."
+        : "Votre connexion ne peut pas être vérifiée. Veuillez réessayer.";
+      await ouvrirDialogueBoutique({type: session === "connexion" ? "connexion" : "session-inconnue"});
+    }
+    initialiserCatalogue().catch(console.error);
+    window.addEventListener("pagehide", () => { ++controle; catalogue.hidden = true; });
+    window.addEventListener("pageshow", event => {
+      if (event.persisted) initialiserCatalogue().catch(console.error);
+    });
+  }
 })();
