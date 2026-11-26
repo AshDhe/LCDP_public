@@ -33998,3 +33998,47 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br).lcdp-button-primary {
   --lcdp-button-fleche-color: #e0ebcf;
 }
+
+/* Composant commun : état de chargement des boutons d'action.
+   aria-busy est piloté par le traitement métier ; le libellé reste en place
+   pour conserver le gabarit et le nom accessible du bouton. */
+html .lcdp-button[aria-busy="true"] {
+  --lcdp-button-spinner-color: #4b6333;
+  --lcdp-button-spinner-track: rgba(75, 99, 51, .22);
+  position: relative;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+  cursor: wait;
+}
+html .lcdp-button:is(.lcdp-button-primary, .lcdp-button-orange, .lcdp-button-accueil-blue)[aria-busy="true"] {
+  --lcdp-button-spinner-color: #fff;
+  --lcdp-button-spinner-track: rgba(255, 255, 255, .30);
+}
+html .lcdp-button[aria-busy="true"] > * {
+  opacity: 0 !important;
+}
+html .lcdp-button[aria-busy="true"]::before {
+  opacity: 0 !important;
+}
+html .lcdp-button[aria-busy="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--lcdp-button-spinner-track);
+  border-top-color: var(--lcdp-button-spinner-color);
+  border-radius: 50%;
+  background: none;
+  pointer-events: none;
+  animation: lcdp-button-spinner-tourne .8s linear infinite;
+}
+@keyframes lcdp-button-spinner-tourne {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html .lcdp-button[aria-busy="true"]::after { animation: none; }
+}

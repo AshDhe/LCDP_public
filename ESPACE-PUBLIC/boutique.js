@@ -164,8 +164,8 @@
     if (controleSouscriptionEnCours) return;
     controleSouscriptionEnCours = true;
     souscrire.setAttribute("aria-busy", "true");
-    const libelle = Array.from(souscrire.childNodes);
-    souscrire.textContent = "Vérification…";
+    const ancienLabel = souscrire.getAttribute("aria-label");
+    souscrire.setAttribute("aria-label", "Vérification en cours");
     try {
       const situation = await lireSituationDaSouscription();
       if (situation.type === "validee" && souscrire.hasAttribute("href")) {
@@ -176,7 +176,8 @@
     } catch (error) {
       console.error("Contrôle DA :", error);
     } finally {
-      souscrire.replaceChildren(...libelle);
+      if (ancienLabel === null) souscrire.removeAttribute("aria-label");
+      else souscrire.setAttribute("aria-label", ancienLabel);
       souscrire.removeAttribute("aria-busy");
       controleSouscriptionEnCours = false;
     }
