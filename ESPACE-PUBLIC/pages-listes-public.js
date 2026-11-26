@@ -229,9 +229,29 @@
       }
 
       const attente = document.getElementById("lcdp-attente-arrivee");
+      const attenteRendu = attente.hasAttribute("data-lcdp-attente-rendu");
       const terminer = () => { attente.hidden = true; };
       attente.hidden = false;
-      const delai = window.setTimeout(terminer, 15000);
-      window.addEventListener("pageshow", event => { if (event.persisted) terminer(); });
-      initialiserPage().finally(() => { window.clearTimeout(delai); terminer(); });
+      if (attenteRendu) {
+        // La page reste voilée jusqu'au montage du cadre et au décodage des visuels.
+        async function attendreRenduPage() {
+          await initialiserPage();
+          const images = Array.from(document.querySelectorAll(".lcdp-app-wrapper img:not([loading='lazy'])"));
+          await Promise.all([
+            document.fonts?.ready || Promise.resolve(),
+            ...images.map(image => typeof image.decode === "function" ? image.decode().catch(() => {}) : Promise.resolve())
+          ]);
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          // En cas d'échec du cadre, conserver le voile et le lien de secours.
+          if (!document.querySelector("#lcdp-bandeau-slot [data-lcdp-burger-slot][data-lcdp-burger-initialise='true']") ||
+              !document.querySelector("#lcdp-footer-slot .lcdp-box-footer")) return;
+          window.clearTimeout(window.LCDP_delaiAttenteBenevolat);
+          terminer();
+        }
+        attendreRenduPage().catch(console.error);
+      } else {
+        const delai = window.setTimeout(terminer, 15000);
+        window.addEventListener("pageshow", event => { if (event.persisted) terminer(); });
+        initialiserPage().finally(() => { window.clearTimeout(delai); terminer(); });
+      }
     })();
