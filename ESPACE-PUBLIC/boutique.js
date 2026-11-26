@@ -142,6 +142,8 @@
         return { titre: "Connexion nécessaire", message: "Vous devez vous connecter à votre compte pour continuer.", action: "Mon compte", destination: "connexion" };
       case "session-inconnue":
         return { titre: "Vérification de connexion", message: "Votre connexion ne peut pas être vérifiée. Veuillez réessayer." };
+      case "commande-demo":
+        return { titre: "Commande de démonstration", message: "Cet accessoire et son prix sont fictifs. Aucun achat ni paiement n’est effectué." };
       default:
         return { titre: "Droit d’abonnement", message: "Votre droit d’abonnement ne peut pas être vérifié. Veuillez réessayer." };
     }
@@ -317,6 +319,54 @@
   if (catalogue) {
     const etat = document.getElementById("lcdp-accessoires-etat");
     let controle = 0;
+    let renduCatalogue;
+    // Articles fictifs uniquement : aucun catalogue commercial ni paiement.
+    const demonstrations = {
+      acces: { nom: "Bracelet de présence", prix: "12 € — prix indicatif fictif", description: "Bracelet fluorescent · réglable · témoin de présence nominatif.", image: "/OBJET/IMAG/BOUTIQUE/ACCES/bracelet-presence-demo.svg" },
+      cadeau: { nom: "Gourde La Clé du Parc", prix: "19 € — prix indicatif fictif", description: "Gourde inox · 500 ml · réutilisable en promenade.", image: "/OBJET/IMAG/BOUTIQUE/CADEAU/gourde-demo.svg" }
+    };
+    async function rendreCatalogueDemo() {
+      const produit = demonstrations[catalogue.dataset.lcdpAccessoiresReserves];
+      const liste = catalogue.querySelector("[data-lcdp-liste-card-diaporama-list]");
+      const message = catalogue.querySelector("[data-lcdp-liste-card-message]");
+      if (!produit || !liste || !message) throw new Error("Catalogue accessoire incomplet.");
+      const fragment = await chargerFragment("/OBJET/HTMLBASE/04-card-accessoire.html");
+      const carte = fragment.querySelector("[data-lcdp-card-accessoire]");
+      if (!carte) throw new Error("Gabarit accessoire introuvable.");
+      const recto = carte.querySelector("[data-lcdp-diaporama-retourner]");
+      const dos = carte.querySelector("[data-lcdp-diaporama-dos]");
+      const fermer = carte.querySelector("[data-lcdp-diaporama-fermer]");
+      const image = carte.querySelector("[data-lcdp-accessoire-image]");
+      const commander = carte.querySelector("[data-lcdp-accessoire-commander]");
+      image.alt = produit.nom + " — illustration de démonstration";
+      image.src = construireUrlSite(produit.image);
+      recto.setAttribute("aria-label", "Découvrir : " + produit.nom);
+      carte.querySelector("[data-lcdp-accessoire-nom-image]").textContent = produit.nom;
+      carte.querySelector("[data-lcdp-accessoire-nom]").textContent = produit.nom;
+      carte.querySelector("[data-lcdp-accessoire-prix]").textContent = produit.prix;
+      carte.querySelector("[data-lcdp-card-parc-description-texte]").textContent = produit.description;
+      function retourner(ouvert) {
+        carte.classList.toggle("is-retourne", ouvert);
+        recto.setAttribute("aria-expanded", String(ouvert));
+        recto.inert = ouvert;
+        dos.inert = !ouvert;
+        dos.setAttribute("aria-hidden", String(!ouvert));
+        (ouvert ? fermer : recto).focus({preventScroll:true});
+      }
+      recto.addEventListener("click", () => retourner(true));
+      fermer.addEventListener("click", () => retourner(false));
+      carte.addEventListener("keydown", event => {
+        if (event.key === "Escape" && carte.classList.contains("is-retourne")) {
+          event.preventDefault();
+          retourner(false);
+        }
+      });
+      protegerActionBoutique(commander, () => ouvrirDialogueBoutique({type:"commande-demo"}));
+      liste.replaceChildren(fragment);
+      carte.classList.add("is-ready");
+      message.textContent = "Catalogue de démonstration — articles et prix fictifs.";
+      if (typeof image.decode === "function") await image.decode().catch(() => {});
+    }
     async function initialiserCatalogue() {
       const generation = ++controle;
       catalogue.hidden = true;
@@ -326,12 +376,24 @@
         window.LCDP_pagePubliquePrete || Promise.resolve()
       ]);
       if (generation !== controle) return;
-      window.LCDP_terminerAttentePagePublique?.();
       if (session === "connecte") {
+        try {
+          renduCatalogue ||= rendreCatalogueDemo().catch(error => { renduCatalogue = null; throw error; });
+          await renduCatalogue;
+        } catch (error) {
+          console.error(error);
+          if (generation !== controle) return;
+          if (etat) etat.textContent = "Le catalogue est momentanément indisponible.";
+          window.LCDP_terminerAttentePagePublique?.();
+          return;
+        }
+        if (generation !== controle) return;
         catalogue.hidden = false;
         if (etat) etat.hidden = true;
+        window.LCDP_terminerAttentePagePublique?.();
         return;
       }
+      window.LCDP_terminerAttentePagePublique?.();
       if (etat) etat.textContent = session === "connexion"
         ? "Vous devez vous connecter à votre compte pour continuer."
         : "Votre connexion ne peut pas être vérifiée. Veuillez réessayer.";
