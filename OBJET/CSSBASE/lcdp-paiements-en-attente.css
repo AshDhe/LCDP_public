@@ -51,9 +51,12 @@ html body :is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main,#lcd
   background:var(--lcdp-color-surface,#fff);
   border:1px solid var(--lcdp-color-border,#e7e5e4);
 }
-[data-lcdp-impaye-liste] .lcdp-impaye-groupe > h2 {
-  margin:0 0 12px; font-size:14px; font-weight:800;
-  line-height:1.5; overflow-wrap:anywhere;
+[data-lcdp-impaye-liste] .lcdp-impaye-entete {display:grid;gap:3px;margin:0 0 12px;}
+[data-lcdp-impaye-liste] .lcdp-impaye-entete > h2 {
+  margin:0;font-size:15px;font-weight:800;line-height:1.4;overflow-wrap:anywhere;
+}
+[data-lcdp-impaye-liste] .lcdp-impaye-entete__commande {
+  margin:0;font-size:12px;font-weight:400;line-height:1.4;color:#475569;overflow-wrap:anywhere;
 }
 [data-lcdp-impaye-liste] .lcdp-impaye-lignes {
   display:grid; list-style:none; margin:0; padding:0;
@@ -64,7 +67,7 @@ html body :is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main,#lcd
   border-top:1px solid var(--lcdp-color-border,#e7e5e4);
 }
 [data-lcdp-impaye-liste] .lcdp-impaye-ligne > div {display:grid; gap:4px; min-width:0;}
-[data-lcdp-impaye-liste] .lcdp-impaye-ligne strong {font-size:13px; overflow-wrap:anywhere;}
+[data-lcdp-impaye-liste] .lcdp-impaye-ligne strong {font-size:13px;font-weight:600;overflow-wrap:anywhere;}
 [data-lcdp-impaye-liste] .lcdp-impaye-ligne span {font-size:15px; font-weight:700;}
 [data-lcdp-impaye-liste] .lcdp-impaye-ligne > button {width:auto; min-width:84px; gap:6px; padding-inline:14px;}
 [data-lcdp-impaye-liste] > button {max-width:460px; justify-self:center;}
@@ -72,3 +75,7 @@ html body :is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main,#lcd
   [data-lcdp-impaye-liste] .lcdp-impaye-ligne {grid-template-columns:1fr;}
   [data-lcdp-impaye-liste] .lcdp-impaye-ligne > button {width:100%;}
 }
+
+/* Action orange de la liste, même palette que les actions officielles LCDP. */
+[data-lcdp-impaye-liste] .lcdp-dialogue-ref__bouton--orange {background:#e59834;border:1px solid #e59834;color:#1c1917;font-weight:800;}
+[data-lcdp-impaye-liste] .lcdp-dialogue-ref__bouton--orange:hover:not(:disabled) {background:#cc8125;border-color:#cc8125;}
