@@ -419,7 +419,7 @@
       const p1 = document.createElement("p"), p2 = document.createElement("p");
       const famille = c.famille + " membre" + (c.famille > 1 ? "s" : "") + " invité" + (c.famille > 1 ? "s" : "") + " FAMILLE";
       p1.textContent = "Le tarif d’un abonnement 1J (1 jour) sans extension d’invitation est à " + euros(c.prix) + " la journée, pour " + c.acces + " accès maximum planifiés dans les parcs pour la journée et " + c.membres + " membres maximum par accès (vous + " + c.duo + " membre invité DUO" + (c.famille ? " + " + famille : "") + ").";
-      p2.textContent = "Soit " + euros(c.coutUa) + " par unité d’accès (UA) max (en effet, votre abonnement 1J sans extension d’invitation a " + c.acces + " x " + c.membres + " = " + c.ua + " UA).";
+      p2.textContent = "Soit " + euros(c.coutUa) + " par unité d’accès (UA) max (votre abonnement 1J sans extension d’invitation a " + c.acces + " x " + c.membres + " = " + c.ua + " UA).";
       reponse.replaceChildren(p1,p2);
     } catch (error) {
       const p = document.createElement("p");
