@@ -65,5 +65,77 @@
     .lcdp-stripe-page #dfa-abandon:hover {background:#f8fafc;border-color:#94a3b8;color:#0f172a;}
     .lcdp-stripe-page #dfa-abandon:focus-visible {outline:2px solid #4b6333;outline-offset:3px;}
   
-[data-lcdp-paiement-impaye-parcours]:has([data-lcdp-paiement-elements]) {align-items:flex-start;}
-[data-lcdp-paiement-impaye-parcours]:has([data-lcdp-paiement-elements]) > .lcdp-page-container {max-width:680px;}
+
+/* Intégration dans le wrapper applicatif : un seul conteneur défilant,
+   celui du contenu principal. Le bandeau et le pied restent en place. */
+:is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main):has(> [data-lcdp-compte-parcours] [data-lcdp-paiement-elements]) {
+  display:block !important;
+  flex:1 1 0% !important;
+  min-height:0 !important;
+  min-width:0;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
+  padding:0 !important;
+  background:#fff;
+}
+:is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main):has(> [data-lcdp-compte-parcours] [data-lcdp-paiement-elements])::before,
+:is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main):has(> [data-lcdp-compte-parcours] [data-lcdp-paiement-elements])::after {
+  content:none !important;
+  display:none !important;
+}
+:is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main):has(> [data-lcdp-compte-parcours] [data-lcdp-paiement-elements]) > [data-lcdp-compte-parcours] {
+  display:block !important;
+  flex:0 0 auto;
+  box-sizing:border-box;
+  width:100%;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  margin:0;
+  padding:0 !important;
+  overflow:visible !important;
+}
+:is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main) > [data-lcdp-compte-parcours]:has([data-lcdp-paiement-elements]) > .lcdp-page-container,
+[data-lcdp-compte-parcours-contenu]:has(> [data-lcdp-paiement-elements]) {
+  display:block;
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  max-width:none !important;
+  height:auto !important;
+  max-height:none !important;
+  min-height:0;
+  margin:0;
+  padding:0 !important;
+  overflow:visible !important;
+}
+[data-lcdp-paiement-elements].lcdp-stripe-page {
+  display:block;
+  width:100%;
+  height:auto;
+  min-height:0;
+  max-height:none;
+  padding:0;
+  background:#fff;
+}
+[data-lcdp-paiement-elements].lcdp-stripe-page > .lcdp-stripe {
+  display:block;
+  width:100%;
+  max-width:none;
+  height:auto;
+  min-height:0;
+  max-height:none;
+  margin:0;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  overflow:visible;
+}
+[data-lcdp-paiement-elements] .lcdp-stripe__entete {padding:16px 18px;}
+[data-lcdp-paiement-elements] .lcdp-stripe__corps {padding:20px 18px 24px;min-width:0;}
+[data-lcdp-paiement-elements] #paiement-formulaire,
+[data-lcdp-paiement-elements] #stripe-payment-element {width:100%;min-width:0;max-width:100%;height:auto;max-height:none;overflow:visible;}
+[data-lcdp-paiement-elements] .lcdp-stripe__resume > div > strong {min-width:0;}
