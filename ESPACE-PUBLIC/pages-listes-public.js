@@ -229,6 +229,25 @@
       }
 
       const attente = document.getElementById("lcdp-attente-arrivee");
+      // Pages catalogue : voile officiel de l'accueil, conservé jusqu'au contrôle de session.
+      if (attente?.hasAttribute("data-lcdp-attente-cadre")) {
+        let delaiCadre, delaiSecours;
+        let termine = false;
+        window.LCDP_terminerAttentePagePublique = () => {
+          if (termine) return;
+          termine = true;
+          window.clearTimeout(delaiSecours);
+          document.body.classList.remove("public-home--loading");
+          attente.remove();
+        };
+        window.LCDP_pagePubliquePrete = Promise.race([
+          initialiserPage().catch(console.error),
+          new Promise(resolve => { delaiCadre = window.setTimeout(resolve, 15000); })
+        ]).finally(() => window.clearTimeout(delaiCadre));
+        // Si le script catalogue échoue, l'enveloppe reste utilisable, liste masquée.
+        delaiSecours = window.setTimeout(window.LCDP_terminerAttentePagePublique, 25000);
+        return;
+      }
       const attenteRendu = attente.hasAttribute("data-lcdp-attente-rendu");
       const terminer = () => { attente.hidden = true; };
       attente.hidden = false;
