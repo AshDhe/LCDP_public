@@ -169,18 +169,13 @@
 
         programmerProchaineVerificationSessionMembre(data);
 
-        // Reprise uniquement après expiration automatique depuis PLANIFIER.
-        // Une connexion ordinaire (y compris après déconnexion volontaire) ouvre l’accueil.
+        // Seule la fin d'inscription dirige vers Mon compte.
+        // Toute autre connexion, y compris après expiration, ouvre l'accueil.
         const parametresConnexion = new URLSearchParams(window.location.search);
-        const motifSession = String(parametresConnexion.get("session") || "").toLowerCase();
-        const depuisPlanifier = parametresConnexion.get("source") === "reserver-membre";
-        const repriseExpiration = depuisPlanifier && ["inactive", "expiree", "expirée"].includes(motifSession);
         const inscriptionTerminee = parametresConnexion.get("source") === "inscription-terminee";
-        const urlDestination = repriseExpiration
-          ? construireUrlMembre("/ESPACE-MEMBRE/reserver-membre.html") + "?reprise=expiration"
-          : inscriptionTerminee
-            ? construireUrlMembre("/ESPACE-MEMBRE/mes-informations.html")
-            : urlMonCompteMembre;
+        const urlDestination = inscriptionTerminee
+          ? construireUrlMembre("/ESPACE-MEMBRE/mes-informations.html")
+          : urlMonCompteMembre;
         effacerRetourMembreApresConnexion();
 
         window.location.href = urlDestination;
