@@ -203,15 +203,33 @@
   const lienInitial = listes.find(lien => lien.getAttribute("href") === cibleInitiale);
   if (lienInitial) lienInitial.click();
 
-  // Point de raccordement du futur tunnel w-don-parc.js.
-  // Son URL d'entrée reste à définir dans SITE_CONFIG : aucun appel API anticipé.
-  don.addEventListener("click", event => {
-    event.preventDefault();
-    const url = config.donParcTunnelUrl;
-    if (typeof url === "string" && url.trim()) {
-      window.location.assign(url);
-      return;
-    }
-    etatDon.hidden = false;
-  });
+  // Raccordement commun au futur tunnel DFA (w-don-parc.js).
+  // L'URL d'entrée reste à définir dans SITE_CONFIG : aucun appel API anticipé.
+  // Mode bienfaiteur : commande simultanée d'un abonnement permanent 1A et
+  // d'une DFA personnelle de 150 EUR. Aucune garantie d'accès à planifier
+  // à la commande ; le club prend en charge son équivalent.
+  // Ces règles doivent être contrôlées par le tunnel et côté serveur.
+  const bienfaiteur = document.getElementById("lcdp-boutique-bienfaiteur");
+  const etatBienfaiteur = document.getElementById("lcdp-boutique-bienfaiteur-etat");
+
+  function raccorderDfa(bouton, etat, mode) {
+    bouton.addEventListener("click", event => {
+      event.preventDefault();
+      const entree = config.donParcTunnelUrl;
+      if (typeof entree === "string" && entree.trim()) {
+        try {
+          const url = new URL(entree, window.location.href);
+          if (mode) url.searchParams.set("mode", mode);
+          window.location.assign(url.href);
+          return;
+        } catch (error) {
+          console.error("Tunnel DFA indisponible :", error);
+        }
+      }
+      etat.hidden = false;
+    });
+  }
+
+  raccorderDfa(don, etatDon);
+  raccorderDfa(bienfaiteur, etatBienfaiteur, "bienfaiteur");
 })();
