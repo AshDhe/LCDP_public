@@ -230,14 +230,13 @@
     "11M": ["11 mois", "Démarrage le 1er février", "Souscription en janvier"],
     "10M": ["10 mois", "Démarrage le 1er mars", "Souscription en février"]
   };
-  async function chargerOffresAbonnements(dialogue) {
-    const etat = dialogue.querySelector(".lcdp-offre-abonnement__etat");
-    const scroll = dialogue.querySelector(".lcdp-offre-abonnement__scroll");
-    const corps = scroll.querySelector(".lcdp-offre-abonnement__liste");
+  let lectureOffresEnCours = null;
+  function lireOffresAbonnements() {
+    if (lectureOffresEnCours) return lectureOffresEnCours;
     const config = window.SITE_CONFIG || {};
     const base = String(config.workerAboRezaUrl || config.WORKER_ABOREZA_URL ||
       (typeof config.apiUrl === "function" ? config.apiUrl("aboreza-api") : "https://aboreza-api.lacleduparc.fr")).replace(/\/+$/, "");
-    try {
+    lectureOffresEnCours = (async () => {
       const r = await fetch(base + "/offres-abonnements", {credentials:"omit", cache:"no-store", signal:AbortSignal.timeout(15000), headers:{Accept:"application/json"}});
       const data = await r.json();
       if (!r.ok || data?.ok !== true || !Array.isArray(data.offres)) throw new Error("Offres indisponibles.");
@@ -248,6 +247,17 @@
           !Number.isInteger(o.maxduo) || o.maxduo < 1 || !Number.isInteger(o.famille) || o.famille < 0) throw new Error("Offre incohérente.");
         parCode.set(o.groupeabo,o);
       }
+      return parCode;
+    })().finally(() => { lectureOffresEnCours = null; });
+    return lectureOffresEnCours;
+  }
+
+  async function chargerOffresAbonnements(dialogue) {
+    const etat = dialogue.querySelector(".lcdp-offre-abonnement__etat");
+    const scroll = dialogue.querySelector(".lcdp-offre-abonnement__scroll");
+    const corps = scroll.querySelector(".lcdp-offre-abonnement__liste");
+    try {
+      const parCode = await lireOffresAbonnements();
       const fragment = document.createDocumentFragment();
       for (const [code,[duree,debut,detail]] of Object.entries(CALENDRIER_OFFRES)) {
         const o = parCode.get(code);
@@ -379,13 +389,53 @@
     });
   }
 
+  // Plafond général de planification : private.lcdp_garde_quotas_planification.
+  // Le DUO de base est un invité par accès, distinct du carnet MAXDUO.
+  function calculerCout1J(offre) {
+    if (!offre || offre.groupeabo !== "1J" || !Number.isInteger(offre.famille) || offre.famille < 0 ||
+      !Number.isInteger(offre.maxduo) || offre.maxduo < 1 ||
+      typeof offre.nomabo !== "string" || !offre.nomabo.trim()) throw new Error("Pivot 1J indisponible.");
+    if (!(typeof offre.prixabottc === "number" || (typeof offre.prixabottc === "string" && /^\d+(?:\.\d+)?$/.test(offre.prixabottc)))) throw new Error("Prix 1J invalide.");
+    const prix = Number(offre.prixabottc);
+    if (!Number.isFinite(prix) || prix < 0) throw new Error("Prix 1J invalide.");
+    const acces = 5, duo = 1, famille = offre.famille;
+    const membres = 1 + duo + famille;
+    const ua = acces * membres;
+    return {prix, acces, duo, famille, membres, ua, coutUa: prix / ua};
+  }
+
+  async function actualiserExemple1J(racine) {
+    const article = racine.querySelector(".lcdp-faq__item");
+    const reponse = article?.querySelector(".lcdp-faq__reponse");
+    const nom = article?.querySelector(".lcdp-cout-abonnement__nom");
+    if (!reponse || !nom) return;
+    try {
+      const offre = (await lireOffresAbonnements()).get("1J");
+      const c = calculerCout1J(offre);
+      const nombre = new Intl.NumberFormat("fr-FR", {maximumFractionDigits:2});
+      const euros = v => nombre.format(v) + " € TTC";
+      const nomPivot = offre.nomabo.trim().toLocaleUpperCase("fr-FR");
+      nom.textContent = (nomPivot === "DECOUVERTE" ? "DÉCOUVERTE" : nomPivot) + " (1 jour)";
+      const p1 = document.createElement("p"), p2 = document.createElement("p");
+      const famille = c.famille + " membre" + (c.famille > 1 ? "s" : "") + " invité" + (c.famille > 1 ? "s" : "") + " FAMILLE";
+      p1.textContent = "Le tarif d’un abonnement 1J (1 jour) sans extension d’invitation est à " + euros(c.prix) + " la journée, pour " + c.acces + " accès maximum planifiés dans les parcs pour la journée et " + c.membres + " membres maximum par accès (vous + " + c.duo + " membre invité DUO" + (c.famille ? " + " + famille : "") + ").";
+      p2.textContent = "Soit " + euros(c.coutUa) + " par unité d’accès (UA) max (en effet, votre abonnement 1J sans extension d’invitation a " + c.acces + " x " + c.membres + " = " + c.ua + " UA).";
+      reponse.replaceChildren(p1,p2);
+    } catch (error) {
+      const p = document.createElement("p");
+      p.textContent = "Le tarif en vigueur est momentanément indisponible.";
+      reponse.replaceChildren(p);
+      console.warn("Exemple de coût 1J :",error);
+    }
+  }
+
   function initialiserExemplesAbonnements() {
     const racine = document.getElementById("lcdp-exemples-abonnements");
     if (!racine || typeof window.LCDP_FAQ?.afficher !== "function") return;
     const exemples = [
-      ["1J", "Découverte (1 jour)"],
-      ["1M", "Exploration (1 mois)"],
-      ["1A", "Passion (1 an)"]
+      ["1J", "DÉCOUVERTE (1 jour)"],
+      ["1M", "EXPLORATION (1 mois)"],
+      ["1A", "PASSION (1 an)"]
     ];
     const blocs = exemples.map(([code, nom]) => ({
       titre: "Abonnement " + code + " — " + nom,
@@ -405,6 +455,11 @@
       sousTitre.textContent = nom;
       libelle.append(reference, sousTitre);
       bouton.replaceChildren(libelle);
+    });
+    void actualiserExemple1J(racine);
+    // En cas d'indisponibilité à l'arrivée, retenter à l'ouverture du 1J.
+    racine.querySelector(".lcdp-faq__question")?.addEventListener("click", event => {
+      if (event.currentTarget.getAttribute("aria-expanded") === "true") void actualiserExemple1J(racine);
     });
   }
 
