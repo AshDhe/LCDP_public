@@ -156,6 +156,8 @@
     switch (situation.type) {
       case "impaye":
         return { titre: "Abonnement impayé", message: "Vous avez un impayé sur un abonnement. Vous ne pouvez pas souscrire un nouvel abonnement tant que cet impayé n’est pas régularisé." };
+      case "compte-ferme":
+        return { titre: "Compte en cours de fermeture", message: "Vous avez demandé la fermeture de votre compte. Votre activité est limitée jusqu’à la fermeture définitive. Vous avez la possibilité de rouvrir votre compte avant sa fermeture définitive." };
       case "compte-suspendu":
         return { titre: "Souscription indisponible", message: "Votre compte ne permet pas actuellement de souscrire un abonnement." };
       case "absente":
@@ -185,7 +187,8 @@
     const contenu = presentationSituationDa(situation);
     const choix = Boolean(contenu.action);
     const impaye = situation.type === "impaye";
-    const type = impaye ? "abonnement-impaye" : choix ? "choix" : "information";
+    const fermeture = situation.type === "compte-ferme";
+    const type = fermeture ? "compte-ferme" : impaye ? "abonnement-impaye" : choix ? "choix" : "information";
     const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-" + type + ".html");
     if (slot.children.length) return;
     const dialogue = fragment.querySelector('[data-lcdp-dialogue-reference="' + type + '"]');
@@ -197,10 +200,20 @@
     dialogue.dataset.lcdpDialogueContext = "conteneur";
     titre.textContent = contenu.titre;
     // Le contenu reste du texte : seuls les retours entre phrases sont des éléments HTML.
-    const phrases = contenu.message.split(/(?<=[.!?])\s+(?=[A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜÇŒ])/u);
-    message.replaceChildren(...phrases.flatMap((phrase, index) =>
-      index ? [document.createElement("br"), document.createTextNode(phrase)] : [document.createTextNode(phrase)]));
-    fermerBouton.textContent = impaye ? "Payer" : choix ? "Annuler" : "Fermer";
+    if (fermeture) {
+      const limite = message.querySelector("[data-lcdp-fermeture-date-limite]");
+      const date = situation.dateLimite ? new Date(situation.dateLimite) : null;
+      if (limite && date && Number.isFinite(date.getTime())) {
+        limite.textContent = "avant le " + new Intl.DateTimeFormat("fr-FR", {
+          timeZone: "Europe/Paris", day: "numeric", month: "long", year: "numeric"
+        }).format(date);
+      }
+    } else {
+      const phrases = contenu.message.split(/(?<=[.!?])\s+(?=[A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜÇŒ])/u);
+      message.replaceChildren(...phrases.flatMap((phrase, index) =>
+        index ? [document.createElement("br"), document.createTextNode(phrase)] : [document.createTextNode(phrase)]));
+    }
+    fermerBouton.textContent = fermeture ? "Réouvrir" : impaye ? "Payer" : choix ? "Annuler" : "Fermer";
     if (confirmer) confirmer.textContent = contenu.action;
     const etats = Array.from(wrapper.children).filter(element => element !== slot).map(element => [element, element.inert]);
     const fermer = () => {
@@ -219,7 +232,8 @@
     };
     fermerBouton.addEventListener("click", () => {
       fermer();
-      if (impaye) window.location.assign(urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=impaye"));
+      if (fermeture) window.location.assign(urlMembre("/ESPACE-MEMBRE/mes-informations.html?mode=rouvrir"));
+      else if (impaye) window.location.assign(urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=impaye"));
     }, { once: true });
     confirmer?.addEventListener("click", () => {
       fermer();
@@ -253,6 +267,7 @@
     // Le statut global du compte prévaut sur le statut de l'abonnement du jour.
     if (!Array.isArray(session?.causesSuspension) || typeof session.ecritureAutorisee !== "boolean") return { type: "inconnu" };
     if (session.causesSuspension.includes("impaye")) return { type: "impaye" };
+    if (session.causesSuspension.includes("fermeture_volontaire")) return { type: "compte-ferme" };
     if (!session.ecritureAutorisee) return { type: "compte-suspendu" };
     if (!Object.hasOwn(session, "statuda")) return { type: "inconnu" };
     const statut = String(session.statuda ?? "").trim().toLowerCase();
@@ -262,8 +277,30 @@
     return { type: "inconnu" };
   }
 
+  async function lireDateLimiteFermetureBoutique() {
+    const base = config.workerMonCompteMembreUrl || config.WORKER_MON_COMPTE_MEMBRE_URL ||
+      (typeof config.apiUrl === "function" ? config.apiUrl("mon-compte-membre-api") : "");
+    if (!base) return null;
+    try {
+      const reponse = await fetch(String(base).replace(/\/+$/, "") + "/compte", {
+        credentials: "include", cache: "no-store", signal: AbortSignal.timeout(12000),
+        headers: { Accept: "application/json" }
+      });
+      const data = await reponse.json().catch(() => null);
+      const fermeture = data?.compte?.fermetureCompte;
+      if (!reponse.ok || data?.ok !== true || fermeture?.etat !== "suspendu") return null;
+      return fermeture.dateLimite || null;
+    } catch (error) {
+      console.warn("Date limite de fermeture non vérifiable :", error);
+      return null;
+    }
+  }
+
   protegerActionBoutique(souscrire, async session => {
     let situation = situationSouscriptionDepuisIndex(session);
+    if (situation.type === "compte-ferme") {
+      situation.dateLimite = await lireDateLimiteFermetureBoutique();
+    }
     if (situation.type === "contexte-da") {
       situation = await lireSituationDaSouscription();
       // Une divergence entre deux lectures n'est jamais présentée comme une DA en cours.
