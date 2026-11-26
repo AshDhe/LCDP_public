@@ -6,8 +6,7 @@
   const chemin = {
     planifier: '/ESPACE-MEMBRE/reserver-membre.html',
     mes_acces: '/ESPACE-MEMBRE/planning-membre.html',
-    ma_cle: '/ESPACE-MEMBRE/lacleduparc.html?v=20261113-invites-e4-v14',
-    regulariser: '/ESPACE-MEMBRE/abonnement-membre.html'
+    ma_cle: '/ESPACE-MEMBRE/lacleduparc.html?v=20261113-invites-e4-v14'
   };
   const libelles = {planifier:'PLANIFIER',mes_acces:'MES ACCÈS',ma_cle:'MA CLÉ'};
   const MINUTE = 60000;
@@ -154,7 +153,9 @@
     };
     confirmer.addEventListener('click', () => {
       fermer();
-      if (action) window.location.href = urlMembre(chemin[action.destination]);
+      if (action?.destination === 'regulariser') {
+        ouvrirRegularisation(action.etat).catch(error => alerte(error.message || 'Paiement indisponible.').catch(console.error));
+      } else if (action) window.location.href = urlMembre(chemin[action.destination]);
     }, {signal:controller.signal});
     annuler?.addEventListener('click',fermer,{signal:controller.signal});
     boutonAbonner?.addEventListener('click', () => {
@@ -179,7 +180,15 @@
     if (annuler) annuler.focus(); else confirmer.focus();
   }
   function planifier() {return {libelle:'PLANIFIER',destination:'planifier'};}
-  function regulariser() {return {libelle:'Régulariser',destination:'regulariser'};}
+  function regulariser(etat) {return {libelle:'Régulariser',destination:'regulariser',etat};}
+  async function ouvrirRegularisation(etat) {
+    if (!window.LCDP_PaiementImpaye) await new Promise((resolve,reject) => {
+      const script=document.createElement('script');
+      script.src=urlMembre('/ESPACE-MEMBRE/workflow-paiement-impaye.js?v=20261126-v2');
+      script.onload=resolve;script.onerror=reject;document.head.appendChild(script);
+    });
+    return window.LCDP_PaiementImpaye.ouvrir(etat || {});
+  }
   async function planning() {
     const data=await requete('planning','/mes-reservations');
     if(data.nonConnecte) return data;
@@ -199,7 +208,7 @@
     }
     const motif=String(rep.reason || '').toLowerCase();
     if(motif === 'subscription_unpaid') {
-      await alerte('Votre abonnement est impayé. Vous devez le régulariser pour utiliser la fonction MA CLÉ.',regulariser());
+      await alerte('Votre abonnement est impayé. Vous devez le régulariser pour utiliser la fonction MA CLÉ.',regulariser(etatMembre));
       return 'refuse';
     }
     if(motif === 'suspension') {await alerte('Votre compte est suspendu. Vos droits sont bloqués.');return 'refuse';}
@@ -249,7 +258,7 @@
       }
       // La dette d’un abonnement ne bloque ni la consultation ni MA CLÉ par un autre droit.
       if(action === 'planifier' && options.planifierMode === 'ia' && etatImpaye(etat)) {
-        await alerte('Votre abonnement est impayé. Vous devez le régulariser pour utiliser la fonction '+libelles[action]+'.',regulariser());
+        await alerte('Votre abonnement est impayé. Vous devez le régulariser pour utiliser la fonction '+libelles[action]+'.',regulariser(etat));
         return 'refuse';
       }
       if(action==='planifier') {const destination=urlMembre(chemin.planifier);window.location.href=options.planifierMode==='ia' ? destination+'?mode=ia' : destination;return 'ouvert';}
