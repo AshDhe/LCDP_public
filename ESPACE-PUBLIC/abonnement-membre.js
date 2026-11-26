@@ -150,20 +150,20 @@
   async function ouvrirInformationSouscription() {
     const slot = document.getElementById("lcdp-lightbox-slot");
     const elementActif = document.activeElement;
-    slot.replaceChildren(await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-information.html"));
-    const dialogue = slot.querySelector('[data-lcdp-dialogue-reference="information"]');
-    if (!dialogue) throw new Error("Dialogue INFORMATION indisponible.");
-    const proposerDa = statutDaSouscription === null || statutDaSouscription === "inconnu";
+    slot.replaceChildren(await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-choix.html"));
+    const dialogue = slot.querySelector('[data-lcdp-dialogue-reference="choix"]');
+    if (!dialogue) throw new Error("Dialogue CHOIX indisponible.");
     dialogue.dataset.lcdpDialogueContext = "conteneur";
     dialogue.querySelector("[data-lcdp-dialogue-titre]").textContent = "Droit d’abonnement (DA) nécessaire";
     dialogue.querySelector("[data-lcdp-dialogue-message]").textContent =
       statutDaSouscription === null ? "Vous ne disposez pas encore d'un droit d'abonnement."
         : statutDaSouscription === "inconnu" ? "Votre droit d'abonnement doit être validé pour souscrire."
         : "Vous ne disposez pas actuellement d'un droit d'abonnement.";
-    const compris = dialogue.querySelector('[data-lcdp-dialogue-action="compris"]');
-    if (!compris) throw new Error("Bouton de fermeture INFORMATION introuvable.");
-
-    compris.textContent = proposerDa ? "Faire ma demande" : "Fermer";
+    const annuler = dialogue.querySelector('[data-lcdp-dialogue-action="annuler"]');
+    const confirmer = dialogue.querySelector('[data-lcdp-dialogue-action="confirmer"]');
+    if (!annuler || !confirmer) throw new Error("Actions CHOIX introuvables.");
+    annuler.textContent = "Annuler";
+    confirmer.textContent = "Faire ma demande";
     const fermer = () => {
       document.removeEventListener("keydown", gererClavier);
       slot.replaceChildren();
@@ -175,21 +175,20 @@
         fermer();
       } else if (event.key === "Tab") {
         event.preventDefault();
-        compris.focus();
+        (document.activeElement === annuler ? confirmer : annuler).focus();
       }
     };
     document.addEventListener("keydown", gererClavier);
-    compris.addEventListener("click", () => {
-      if (proposerDa) {
-        const lienDa = document.getElementById("lcdp-ouvrir-da-abonnement");
-        if (lienDa) lienDa.click();
-      }
+    annuler.addEventListener("click", fermer, { once: true });
+    confirmer.addEventListener("click", () => {
+      const lienDa = document.getElementById("lcdp-ouvrir-da-abonnement");
       fermer();
+      lienDa?.click();
     }, { once: true });
     dialogue.addEventListener("click", event => {
       if (event.target === dialogue) fermer();
     });
-    compris.focus();
+    annuler.focus();
   }
 
   // Plaquette commerciale : les noms et capacités sont lus dans les pivots
