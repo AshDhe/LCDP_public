@@ -19,7 +19,7 @@
   </script>
   <script src="../config.js"></script>
   <script src="../OBJET/JSBASE/affichage-legal.js" defer></script>
-  <script src="preparer-acces-parc.js?v=20261126-tunnel-commun" defer></script>
+  <script src="preparer-acces-parc.js?v=20261126-sortie-qr" defer></script>
 </head>
 <body data-lcdp-affichage-legal="insc-preparer-acces-parc" data-lcdp-affichage-legal-mode="auto" class="lcdp-app-page">
   <div id="attente-preparation" class="lcdp-verification-envoi-attente lcdp-verification-envoi-actif" role="status" aria-live="polite" aria-label="Préparation de votre parcours">
@@ -69,8 +69,14 @@
                     <p id="confirmation-telephone" class="lcdp-setup-flow__phone-check">
                       <label class="lcdp-setup-flow__toggle"><input type="checkbox" id="utilise-telephone"> Je confirme utiliser ce téléphone</label>
                     </p>
-                    <div class="lcdp-box-formulaire__actions">
+                    <div class="lcdp-box-formulaire__actions" id="actions-autorisation">
                       <button type="button" class="lcdp-button" id="autoriser-geolocalisation">Autoriser</button>
+                    </div>
+                    <div id="actions-sortie-qr" hidden>
+                      <p>Terminez la configuration sur votre téléphone. Vous pouvez quitter cette page sur votre ordinateur.</p>
+                      <div class="lcdp-box-formulaire__actions">
+                        <button type="button" class="lcdp-button lcdp-button-secondary" id="quitter-parcours-qr">Quitter sur cet ordinateur</button>
+                      </div>
                     </div>
                   </div>
                   <p id="statut-geolocalisation" class="lcdp-setup-flow__status" role="status" aria-live="polite"></p>

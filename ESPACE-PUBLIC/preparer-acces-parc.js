@@ -1367,6 +1367,37 @@ module.exports = QRCode;
     const avertissement=document.getElementById("avertissement-appareil");
     avertissement.hidden=d.mobile_detecte!==false;
   }
+  function quitterParcoursOrdinateur(){
+    afficherAttente(true,"Retour à l’accueil…");
+    const accueil=typeof config.publicUrl==="function"
+      ? config.publicUrl("/ESPACE-PUBLIC/hello.html")
+      : new URL("/ESPACE-PUBLIC/hello.html",location.href).href;
+    flow="";
+    location.replace(accueil);
+  }
+  function surveillerFinSurTelephone(){
+    let arrete=false, minuterie, enVerification=false;
+    const arreter=()=>{arrete=true;clearTimeout(minuterie);};
+    window.addEventListener("pagehide",arreter,{once:true});
+    const verifier=async()=>{
+      if(arrete||enVerification||!flow)return;
+      enVerification=true;
+      try{
+        const d=await appeler("flow-state",{flow,completionOnly:true});
+        if(arrete||!flow)return;
+        // La version précédente du Worker ne fournit pas cet état.
+        if(typeof d.complete!=="boolean"){arreter();return;}
+        if(d.complete){arreter();quitterParcoursOrdinateur();return;}
+      }catch{
+        // Une erreur réseau n'est jamais interprétée comme une réussite.
+      }finally{
+        enVerification=false;
+        if(!arrete&&flow)minuterie=setTimeout(verifier,10000);
+      }
+    };
+    void verifier();
+    return arreter;
+  }
   let optinEnregistre=false;
   let inscriptionTerminee=false;
   confirmation.querySelector('form[method="dialog"]')?.addEventListener("submit",()=>{
@@ -1409,6 +1440,10 @@ module.exports = QRCode;
     document.getElementById("note-coda-actualisation").textContent="Vous disposez de deux essais pour cette validation. Après deux erreurs, patientez 30 minutes.";
     if(!mobile){
       identification.hidden=true;
+      confirmationTelephone.hidden=true;
+      document.getElementById("actions-autorisation").hidden=true;
+      document.getElementById("actions-sortie-qr").hidden=false;
+      document.getElementById("quitter-parcours-qr").addEventListener("click",quitterParcoursOrdinateur);
     }
     if(!mobile){
       document.getElementById("qr-geolocalisation").hidden=true;
@@ -1575,4 +1610,5 @@ module.exports = QRCode;
 
   autoriser.disabled=false;
   terminerInitialisation();
+  if(flow&&!mobile)surveillerFinSurTelephone();
 })();
