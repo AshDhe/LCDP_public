@@ -1,0 +1,31 @@
+/* DFA — source Tailwind 4, sans Preflight. CSS autonome, hors assemblage historique. */
+@reference "tailwindcss";
+#dfa-page { @apply box-border mx-auto w-full max-w-xl px-4 py-8; color:var(--lcdp-color-text,#1f2a24); font-family:var(--lcdp-font-main,system-ui,sans-serif); }
+#dfa-page [hidden] { display:none !important; }
+#dfa-page .dfa-header { @apply flex flex-col gap-3 mb-6 text-center; }
+#dfa-page h1 { margin:0; font-size:clamp(1.65rem,5vw,2.1rem); line-height:1.2; font-weight:650; color:var(--lcdp-color-primary,#234438); }
+#dfa-page .dfa-intro { margin:0; font-size:1rem; line-height:1.6; color:var(--lcdp-color-text,#1f2a24); }
+#dfa-page .dfa-card { @apply flex flex-col gap-5 rounded-2xl p-5; background:var(--lcdp-color-surface,#fff); border:1px solid var(--lcdp-color-border,#d9dfd5); }
+#dfa-page .dfa-form { @apply flex flex-col gap-4 m-0; }
+#dfa-page .dfa-label { @apply text-center m-0; font-size:1.125rem; font-weight:650; line-height:1.4; }
+#dfa-page .dfa-hint { @apply text-center m-0; font-size:.9375rem; line-height:1.5; color:var(--lcdp-color-text,#1f2a24); }
+#dfa-page .dfa-amount { @apply flex items-center justify-between gap-3 w-full rounded-xl px-4 py-4 text-left cursor-pointer; background:var(--lcdp-color-surface-soft,#f7f7f4); border:2px solid var(--lcdp-color-primary,#234438); color:var(--lcdp-color-text,#1f2a24); font:inherit; }
+#dfa-page .dfa-value { font-size:1.5rem; font-weight:650; font-variant-numeric:tabular-nums; }
+#dfa-page .dfa-amount svg { @apply size-7 shrink-0; }
+#dfa-page .dfa-button { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 min-h-12 w-full text-center cursor-pointer; border:1px solid; font:inherit; font-weight:650; line-height:1.35; text-transform:none; letter-spacing:normal; }
+#dfa-page .dfa-primary { background:var(--lcdp-color-primary,#234438); border-color:var(--lcdp-color-primary,#234438); color:white; }
+#dfa-page .dfa-primary:hover:not(:disabled) { background:var(--lcdp-color-primary-hover,#183229); }
+#dfa-page .dfa-secondary { background:var(--lcdp-color-surface,#fff); border-color:var(--lcdp-color-primary,#234438); color:var(--lcdp-color-primary,#234438); }
+#dfa-page .dfa-danger { border-color:#b91c1c; color:#991b1b; background:white; }
+#dfa-page .dfa-button:disabled { @apply opacity-50 cursor-not-allowed; }
+#dfa-page button:focus-visible { outline:2px solid var(--lcdp-color-primary,#234438); outline-offset:2px; }
+#dfa-page .dfa-actions { @apply flex flex-col gap-3; }
+#dfa-page .dfa-status { margin:0; font-size:1rem; line-height:1.6; color:var(--lcdp-color-text,#1f2a24); }
+#dfa-page .dfa-error { color:#991b1b; }
+#dfa-page .dfa-back { @apply mt-5; }
+.lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__card { width:min(100%,290px); padding:16px; }
+.lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__touches { @apply grid grid-cols-3 gap-2; }
+.lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__touche { aspect-ratio:auto; min-height:48px; }
+.lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__validate { @apply w-full min-h-12 rounded-xl mt-3 px-4 py-3 cursor-pointer; font:inherit; font-weight:650; background:var(--lcdp-color-primary,#234438); color:white; border:0; }
+.lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__cancel { @apply w-full min-h-12 rounded-xl mt-2 px-4 py-3 cursor-pointer; font:inherit; font-weight:650; background:white; color:var(--lcdp-color-primary,#234438); border:1px solid var(--lcdp-color-primary,#234438); }
+@media (min-width:640px) { #dfa-page .dfa-card { @apply p-7; } }

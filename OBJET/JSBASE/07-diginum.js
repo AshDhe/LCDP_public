@@ -27,7 +27,8 @@
    * ouvrir({ titre, placeholder, longueurMax, autoValider, verifier }) → Promise<string|null>
    * autoValider(code) : retourne true si la saisie doit être soumise.
    * verifier(code) : retourne null/false/"" si valide, sinon un message d'erreur.
-   * Aucune touche de validation ; le déclencheur est autoValider.
+   * modeMontant: true active la virgule, la validation explicite et la fermeture par bouton.
+   * En mode code, le déclencheur reste autoValider.
    */
   async function ouvrir(options = {}) {
     if (dialogueOuvert) return null;
@@ -86,11 +87,34 @@
     const ancienOverflow = html.style.overflow;
     const corps = document.body;
     const ancienOverflowBody = corps.style.overflow;
-    let code = "";
+    const modeMontant = options.modeMontant === true;
+    let code = modeMontant && /^\d{1,3}(?:,\d{1,2})?$/.test(String(options.valeurInitiale || "")) ? String(options.valeurInitiale) : "";
+    if (modeMontant) affichage.value = code;
     let verificationEnCours = false;
     let ferme = false;
     let resoudre;
     const resultat = new Promise(resolve => { resoudre = resolve; });
+
+    if (modeMontant) {
+      racine.setAttribute("data-lcdp-montant", "");
+      affichage.setAttribute("aria-label", "Montant saisi en euros");
+      const aide = racine.querySelector("#lcdp-diginum-hint");
+      if (aide) aide.textContent = "Saisissez un montant avec le pavé numérique, puis validez. La virgule permet de saisir les centimes.";
+      const creer = (classe, texte, action) => {
+        const bouton = document.createElement("button");
+        bouton.type = "button";
+        bouton.className = classe;
+        bouton.textContent = texte;
+        bouton.addEventListener("click", action);
+        boutons.push(bouton);
+        return bouton;
+      };
+      const virgule = creer("lcdp-box-diginum__touche", ",", () => ajouter(","));
+      virgule.setAttribute("aria-label", "Virgule");
+      racine.querySelector(".lcdp-box-diginum__touches").appendChild(virgule);
+      carte.insertBefore(creer("lcdp-box-diginum__validate", "Valider le montant", () => void valider()), zoneMessage);
+      carte.appendChild(creer("lcdp-box-diginum__cancel", "Fermer", () => fermer(null)));
+    }
 
     // Touches optionnelles : aucun changement aux autres usages du Diginum.
     const codesSpeciaux = Array.isArray(options.codesSpeciaux)
@@ -137,7 +161,7 @@
     }
     async function valider() {
       if (ferme || verificationEnCours) return;
-      if (!code) { montrerMessage("Saisissez un code."); return; }
+      if (!code) { montrerMessage(modeMontant ? "Saisissez un montant." : "Saisissez un code."); return; }
       verificationEnCours = true;
       boutons.forEach(bouton => { bouton.disabled = true; });
       racine.setAttribute("aria-busy", "true");
@@ -157,10 +181,11 @@
     }
     function ajouter(chiffre) {
       if (ferme || verificationEnCours || code.length >= longueurMax) return;
+      if (modeMontant && !/^\d{1,3}(?:,\d{0,2})?$/.test(code + chiffre)) return;
       code += chiffre;
       affichage.value = code;
       montrerMessage("");
-      if ((typeof options.autoValider === "function" && options.autoValider(code) === true) || (typeof options.autoValider !== "function" && code.length === longueurMax)) void valider();
+      if (!modeMontant && ((typeof options.autoValider === "function" && options.autoValider(code) === true) || (typeof options.autoValider !== "function" && code.length === longueurMax))) void valider();
     }
     function effacer() {
       if (ferme || verificationEnCours) return;
@@ -174,6 +199,11 @@
         event.preventDefault();
         event.stopPropagation();
         if (!verificationEnCours || options.bloquerFermeturePendantVerification !== true) fermer(null);
+        return;
+      }
+      if (modeMontant && (/^\d$/.test(event.key) || [",", ".", "Backspace"].includes(event.key))) {
+        event.preventDefault(); event.stopPropagation();
+        if (event.key === "Backspace") effacer(); else ajouter(event.key === "." ? "," : event.key);
         return;
       }
       // Ne jamais afficher le clavier natif : la saisie utilise les touches de la box.
