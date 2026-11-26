@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex">
   <meta name="referrer" content="no-referrer">
   <title>Préparez votre accès au parc — La Clé du Parc</title>
+  <style>html[data-lcdp-geo-loading] .lcdp-app-wrapper { visibility: hidden !important; } #preparation-qr[hidden], #identification-actualisation[hidden], #actions-sortie-qr[hidden], #confirmation-telephone[hidden], #actions-autorisation[hidden] { display: none !important; }</style>
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css">
   <link rel="stylesheet" href="../OBJET/CSSBASE/securite-compte.css?v=20261126">
   <script>
@@ -14,12 +15,39 @@
     window.LCDP_GEO_REFERENCE = paramsPreparation.get("r") || "";
     window.LCDP_GEO_FLOW = paramsPreparation.get("flow") || "";
     window.LCDP_GEO_CONFIRMATION = paramsPreparation.get("confirmation") || "";
-    if (window.LCDP_GEO_FLOW || window.LCDP_GEO_REFERENCE) document.documentElement.setAttribute("data-lcdp-geo-loading", "");
+    document.documentElement.setAttribute("data-lcdp-geo-loading", "");
+    // Filet de sécurité indépendant du script de préparation et de son initialisation.
+    (() => {
+      const mobile = /iPhone|iPod|Android.*Mobile|Windows Phone/i.test(navigator.userAgent);
+      const mode = new URLSearchParams(location.search).get("mode");
+      const actualisation = !window.LCDP_GEO_FLOW && !window.LCDP_GEO_REFERENCE && ["actualisation", "compte"].includes(mode);
+      if (mobile || actualisation) return;
+      let timer, observer;
+      const retour = () => location.replace(new URL("connexion-membre.html", location.href).href);
+      const armer = () => { clearTimeout(timer); timer = setTimeout(retour, 15000); };
+      armer();
+      document.addEventListener("DOMContentLoaded", () => {
+        const qr = document.getElementById("preparation-qr");
+        if (!qr) return;
+        const verifier = () => {
+          if (!qr.hidden && !document.documentElement.hasAttribute("data-lcdp-geo-loading")) {
+            observer.disconnect();
+            armer();
+          }
+        };
+        observer = new MutationObserver(verifier);
+        observer.observe(qr, {attributes:true, attributeFilter:["hidden"]});
+        observer.observe(document.documentElement, {attributes:true, attributeFilter:["data-lcdp-geo-loading"]});
+        verifier();
+      }, {once:true});
+      window.addEventListener("pagehide", () => { clearTimeout(timer); observer?.disconnect(); });
+      window.addEventListener("pageshow", event => { if (event.persisted) armer(); });
+    })();
     if (location.hash) history.replaceState(null,"",location.pathname+location.search);
   </script>
   <script src="../config.js"></script>
   <script src="../OBJET/JSBASE/affichage-legal.js" defer></script>
-  <script src="preparer-acces-parc.js?v=20261126-retour-connexion-qr-v2" defer></script>
+  <script src="preparer-acces-parc.js?v=20261126-retour-connexion-qr-v3" defer></script>
 </head>
 <body data-lcdp-affichage-legal="insc-preparer-acces-parc" data-lcdp-affichage-legal-mode="auto" class="lcdp-app-page">
   <div id="attente-preparation" class="lcdp-verification-envoi-attente lcdp-verification-envoi-actif" role="status" aria-live="polite" aria-label="Préparation de votre parcours">

@@ -1377,7 +1377,7 @@ module.exports = QRCode;
     retourConnexionEnCours=true;
     annulerRetourConnexion();
     afficherAttente(true,"Ouverture de votre connexion…");
-    const destination=new URL("/ESPACE-PUBLIC/connexion-membre.html",location.href);
+    const destination=new URL("connexion-membre.html",location.href);
     flow="";
     // Retour neutre : la connexion vérifie elle-même si l'inscription est terminée.
     location.replace(destination.href);
@@ -1483,7 +1483,12 @@ module.exports = QRCode;
     if(!flow&&!modeActualisation)document.getElementById("titre-preparation").hidden=true;
     
   }
-  if(!mobile&&!flow&&!tokenConfirmation&&!new URL(location.href).searchParams.has("via")) panneauQr.hidden=false;
+  if(!mobile&&!flow&&!modeActualisation&&!tokenConfirmation){
+    // Un rafraîchissement peut perdre le fragment du parcours : ne pas exposer le QR statique ni un formulaire inutilisable.
+    panneauQr.hidden=true;
+    afficherAttente(true,"Ouverture de votre connexion…");
+    return;
+  }
   if(tokenConfirmation){
     autoriser.disabled=true;
     if(initialisationTunnel) erreurInitialisation("Reprenez votre parcours depuis la connexion et utilisez le nouveau QR code.");
