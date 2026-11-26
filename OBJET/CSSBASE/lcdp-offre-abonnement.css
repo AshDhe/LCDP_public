@@ -1,6 +1,6 @@
 /* Modèle Tailwind fourni : transposition locale des utilitaires, sans reset global.
    Le dépôt compile ses modules CSS sans Tailwind ; aucun CDN ou runtime externe.
-   Adaptation : grille à 12 pistes (3+2+3+4), six colonnes de données. */
+   Adaptation : grille à 12 pistes (4+5+3) du modèle fourni : abonnement, démarrage, privilèges. */
 .lcdp-offre-abonnement,.lcdp-offre-abonnement *{box-sizing:border-box;}
 .lcdp-offre-abonnement{
   width:100%;max-width:48rem;min-width:0;margin-inline:auto;padding:1.5rem 1rem;
@@ -21,8 +21,9 @@
 @media(hover:hover){.lcdp-offre-abonnement__liste .lcdp-offre-abonnement__ligne:hover{background:#f6f8f5;}}
 .lcdp-offre-abonnement__abonnement{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.5rem;min-width:0;}
 .lcdp-offre-abonnement__nom{font-size:1rem;line-height:1.5rem;font-weight:700;color:#111827;overflow-wrap:anywhere;}
+.lcdp-offre-abonnement__code{margin-left:.375rem;font-size:.75rem;line-height:1rem;font-weight:500;color:#9ca3af;white-space:nowrap;}
 .lcdp-offre-abonnement__duree{display:inline-block;padding:.125rem .625rem;font-size:.75rem;line-height:1rem;font-weight:600;border-radius:9999px;background:#eef2ec;color:#4f6342;white-space:nowrap;flex-shrink:0;}
-.lcdp-offre-abonnement__vente,.lcdp-offre-abonnement__demarrage{min-width:0;margin-bottom:.75rem;}
+.lcdp-offre-abonnement__demarrage{min-width:0;margin-bottom:.75rem;}
 .lcdp-offre-abonnement__label-mobile{display:block;font-size:.75rem;line-height:1rem;color:#6b7280;font-weight:400;}
 .lcdp-offre-abonnement__detail{display:block;font-size:.75rem;line-height:1rem;color:#6b7280;white-space:pre-line;margin-top:.125rem;}
 .lcdp-offre-abonnement__debut{display:block;font-size:.875rem;line-height:1.25rem;font-weight:600;color:#1f2937;white-space:pre-line;}
@@ -39,11 +40,10 @@
  .lcdp-offre-abonnement__liste{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:0 0 .75rem .75rem;}
  .lcdp-offre-abonnement__liste .lcdp-offre-abonnement__ligne{display:grid;align-items:center;gap:1rem;padding:1rem 1.25rem;border:0;border-radius:0;}
  .lcdp-offre-abonnement__liste .lcdp-offre-abonnement__ligne+.lcdp-offre-abonnement__ligne{border-top:1px solid #e5e7eb;}
- .lcdp-offre-abonnement__abonnement{grid-column:span 3;display:block;margin-bottom:0;}
+ .lcdp-offre-abonnement__abonnement{grid-column:span 4;display:block;margin-bottom:0;}
  .lcdp-offre-abonnement__duree{margin-top:.25rem;}
- .lcdp-offre-abonnement__vente{grid-column:span 2;margin-bottom:0;}
- .lcdp-offre-abonnement__demarrage{grid-column:span 3;margin-bottom:0;}
- .lcdp-offre-abonnement__privileges{grid-column:span 4;border:0;padding-top:0;}
+ .lcdp-offre-abonnement__demarrage{grid-column:span 5;margin-bottom:0;}
+ .lcdp-offre-abonnement__privileges{grid-column:span 3;border:0;padding-top:0;}
  .lcdp-offre-abonnement__intitule{text-align:center;margin-bottom:.25rem;}
  .lcdp-offre-abonnement__label-mobile{display:none;}
 }
@@ -57,11 +57,10 @@
  .lcdp-offre-abonnement__liste{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:0 0 .75rem .75rem;}
  .lcdp-offre-abonnement__liste .lcdp-offre-abonnement__ligne{display:grid;align-items:center;gap:1rem;padding:1rem 1.25rem;border:0;border-radius:0;}
  .lcdp-offre-abonnement__liste .lcdp-offre-abonnement__ligne+.lcdp-offre-abonnement__ligne{border-top:1px solid #e5e7eb;}
- .lcdp-offre-abonnement__abonnement{grid-column:span 3;display:block;margin-bottom:0;}
+ .lcdp-offre-abonnement__abonnement{grid-column:span 4;display:block;margin-bottom:0;}
  .lcdp-offre-abonnement__duree{margin-top:.25rem;}
- .lcdp-offre-abonnement__vente{grid-column:span 2;margin-bottom:0;}
- .lcdp-offre-abonnement__demarrage{grid-column:span 3;margin-bottom:0;}
- .lcdp-offre-abonnement__privileges{grid-column:span 4;border:0;padding-top:0;}
+ .lcdp-offre-abonnement__demarrage{grid-column:span 5;margin-bottom:0;}
+ .lcdp-offre-abonnement__privileges{grid-column:span 3;border:0;padding-top:0;}
  .lcdp-offre-abonnement__intitule{text-align:center;margin-bottom:.25rem;}
  .lcdp-offre-abonnement__label-mobile{display:none;}
 }

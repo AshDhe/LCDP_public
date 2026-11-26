@@ -195,13 +195,13 @@
   // Plaquette commerciale : les noms et capacités sont lus dans les pivots
   // applicables. Seules les fenêtres de vente/démarrage et le Duo de base sont fixes.
   const CALENDRIER_OFFRES = {
-    "1J": ["1 jour", "Tous les\nmois", "M à M+2"],
-    "1M": ["1 mois", "Tous les\nmois", "M+1 à M+2"],
-    "3M": ["3 mois", "Tous les\nmois", "M+1 à M+3"],
-    "5M": ["5 mois", "Tous les\nmois", "M+1 à M+4"],
-    "1A": ["12 mois", "Juillet à\nDécembre", "1er janvier"],
-    "11M": ["11 mois", "Janvier", "1er février"],
-    "10M": ["10 mois", "Février", "1er mars"]
+    "1J": ["1 jour", "Jour choisi", "De M à M+2"],
+    "1M": ["1 mois", "Le 1er du mois", "M+1 ou M+2"],
+    "3M": ["3 mois", "Le 1er du mois", "De M+1 à M+3"],
+    "5M": ["5 mois", "Le 1er du mois", "De M+1 à M+4"],
+    "1A": ["12 mois", "1er janvier", "Souscription de juillet à décembre"],
+    "11M": ["11 mois", "1er février", "Souscription en janvier"],
+    "10M": ["10 mois", "1er mars", "Souscription en février"]
   };
   async function chargerOffresAbonnements(dialogue) {
     const etat = dialogue.querySelector(".lcdp-offre-abonnement__etat");
@@ -222,7 +222,7 @@
         parCode.set(o.groupeabo,o);
       }
       const fragment = document.createDocumentFragment();
-      for (const [code,[duree,vente,debut]] of Object.entries(CALENDRIER_OFFRES)) {
+      for (const [code,[duree,debut,detail]] of Object.entries(CALENDRIER_OFFRES)) {
         const o = parCode.get(code);
         if (!o) continue;
         const creer = (tag, classe, valeur, role) => {
@@ -235,12 +235,10 @@
         const ligne = creer("div","ligne",null,"row");
         const abo = creer("div","abonnement",null,"rowheader");
         const identite = creer("div","identite");
-        identite.append(creer("span","nom",o.nomabo.toLocaleUpperCase("fr-FR")));
-        abo.append(identite,creer("span","duree",duree+" ("+code+")"));
-        const venteCell = creer("div","vente",null,"cell");
-        venteCell.append(creer("span","label-mobile","Vente"),creer("span","detail",vente));
+        identite.append(creer("span","nom",o.nomabo.toLocaleUpperCase("fr-FR")),creer("span","code","("+code+")"));
+        abo.append(identite,creer("span","duree",duree));
         const debutCell = creer("div","demarrage",null,"cell");
-        debutCell.append(creer("span","label-mobile","Date de démarrage"),creer("span","debut",debut));
+        debutCell.append(creer("span","debut",debut),creer("span","detail",detail));
         const privileges = creer("div","privileges",null,"presentation");
         const quotas = creer("div","quotas",null,"presentation");
         for (const [label,valeur] of [["Duo",1],["Famille",o.famille],["MaxDuo",o.maxduo]]) {
@@ -249,7 +247,7 @@
           quotas.append(cellule);
         }
         privileges.append(quotas);
-        ligne.append(abo,venteCell,debutCell,privileges);
+        ligne.append(abo,debutCell,privileges);
         fragment.append(ligne);
       }
       if (!parCode.size) {etat.textContent="Aucune offre en vigueur.";return;}
