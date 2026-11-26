@@ -33940,6 +33940,7 @@ html .lcdp-button:is(.lcdp-button-orange, .lcdp-button-primary, .lcdp-button-acc
    Activable par .lcdp-button--deux-niveaux ; les accès existants de la boutique
    l'utilisent via leurs identifiants, sans modifier leur HTML ni leur JS. */
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) {
+  --lcdp-button-fleche-color: #ffebca;
   width: min(100%, 310px);
   max-width: 100%;
   min-height: 84px;
@@ -33958,27 +33959,39 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
   text-transform: uppercase;
   overflow-wrap: normal;
 }
-html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span::first-line {
+html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br):not(:has(> span > strong)) > span::first-line {
   font-size: .8125rem;
   line-height: 1.6;
   font-weight: 700;
   letter-spacing: .055em;
-  color: var(--lcdp-button-fleche-color, #ffebca);
+  color: var(--lcdp-button-fleche-color);
+  -webkit-text-fill-color: var(--lcdp-button-fleche-color);
+}
+/* Le premier niveau est le texte direct du span. Le second niveau est le strong.
+   Pas de pseudo-classe de première ligne sur cette structure. */
+html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br):has(> span > strong) > span {
+  font-size: .8125rem;
+  line-height: 1.6;
+  font-weight: 700;
+  letter-spacing: .055em;
+  color: var(--lcdp-button-fleche-color);
+  -webkit-text-fill-color: var(--lcdp-button-fleche-color);
 }
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span > strong {
-  font-size: inherit;
-  line-height: inherit;
-  font-weight: inherit;
-  letter-spacing: inherit;
-  color: inherit;
+  font-size: clamp(1.0625rem, 4.8vw, 1.375rem);
+  line-height: 1.28;
+  font-weight: 900;
+  letter-spacing: .015em;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
 }
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span::after {
   content: "";
   display: inline-block;
-  width: .68em;
-  height: .68em;
-  margin-inline-start: .55em;
-  background-color: var(--lcdp-button-fleche-color, #ffebca);
+  width: 14px;
+  height: 14px;
+  margin-inline-start: 9px;
+  background-color: var(--lcdp-button-fleche-color);
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E") center / contain no-repeat;
   vertical-align: .02em;
