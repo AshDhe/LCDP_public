@@ -1275,14 +1275,15 @@ module.exports = QRCode;
   const panneauQr=document.getElementById("preparation-qr");
   const attente=document.getElementById("attente-preparation");
   const afficherAttente=(actif,texte="Validation en cours…")=>{
-    attente.querySelector(".lcdp-setup-loading__text").textContent=texte;
+    attente.setAttribute("aria-label",texte);
     attente.hidden=!actif;
+    attente.classList.toggle("lcdp-verification-envoi-actif",actif);
   };
   const initialisationTunnel=document.documentElement.hasAttribute("data-lcdp-geo-loading");
-  if(initialisationTunnel) attente.classList.add("lcdp-tunnel-transition");
   function terminerInitialisation(){
     if(!initialisationTunnel)return;
     document.documentElement.removeAttribute("data-lcdp-geo-loading");
+    document.body.classList.remove("public-home--loading");
     afficherAttente(false);
   }
   function erreurInitialisation(texte){
@@ -1449,7 +1450,7 @@ module.exports = QRCode;
     document.getElementById("etape-securite").hidden=false;
     document.getElementById("titre-preparation").textContent="Préparer votre venue";
   }
-  if(mobile||(!flow&&new URL(location.href).searchParams.get("via")==="qr")||tokenConfirmation){
+  if(mobile||new URL(location.href).searchParams.get("via")==="qr"||tokenConfirmation){
     panneauQr.hidden=true;
     if(!flow&&!modeActualisation)document.getElementById("titre-preparation").hidden=true;
     

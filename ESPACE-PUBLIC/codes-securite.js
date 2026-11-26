@@ -15,7 +15,7 @@
       document.body.dataset.securityStep = type === "coda" ? "1" : "2";
       const feuille = document.createElement("link");
       feuille.rel = "stylesheet";
-      feuille.href = new URL("../OBJET/CSSBASE/securite-compte.css?v=20261126-tunnel", location.href).href;
+      feuille.href = new URL("../OBJET/CSSBASE/securite-compte.css?v=20261126", location.href).href;
       document.head.appendChild(feuille);
       const entete = document.querySelector("#formulaire-code-securite .lcdp-box-formulaire__header");
       if (entete) {
@@ -71,13 +71,17 @@
     attente.setAttribute("aria-label", "Traitement en cours");
     attente.innerHTML = '<div class="lcdp-loading-spinner" aria-hidden="true"><svg class="lcdp-loading-spinner__track" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></circle></svg><svg class="lcdp-loading-spinner__arc" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75"></circle></svg><span class="lcdp-loading-spinner__dot"></span></div><span class="lcdp-setup-loading__text" hidden aria-hidden="true"></span>';
     if (flow) {
-      attente.classList.add("lcdp-tunnel-transition");
-      attente.innerHTML = '<img class="lcdp-tunnel-transition__picto" src="../OBJET/IMAG/PICTO/pictowait.svg" alt="" aria-hidden="true"><span class="lcdp-setup-loading__text" hidden aria-hidden="true"></span>';
+      attente.classList.add("lcdp-verification-envoi-attente");
+      attente.innerHTML = '<div class="lcdp-pictowait"><img class="lcdp-pictowait__image" src="../OBJET/IMAG/PICTO/pictowait.svg" alt="" aria-hidden="true"></div><span class="lcdp-setup-loading__text" hidden aria-hidden="true"></span>';
     }
     document.body.appendChild(attente);
     const afficherAttente = (actif, texte = "Validation en cours…") => {
       attente.querySelector(".lcdp-setup-loading__text").textContent = texte;
       attente.hidden = !actif;
+      if (flow) {
+        attente.classList.toggle("lcdp-verification-envoi-actif", actif);
+        attente.setAttribute("aria-label", texte);
+      }
     };
     const saisie = [...document.querySelectorAll("[data-code-value]")];
     const confirmation = [...document.querySelectorAll("[data-code-confirmation]")];
@@ -286,6 +290,11 @@
 
   async function afficherInformation(titre, message, type = "information", redirectUrl = null) {
     const slot = document.getElementById("lcdp-lightbox-slot");
+    const attenteTunnel = document.querySelector(".lcdp-setup-loading.lcdp-verification-envoi-attente");
+    if (attenteTunnel) {
+      attenteTunnel.classList.remove("lcdp-verification-envoi-actif");
+      attenteTunnel.hidden = true;
+    }
 
     if (!slot) {
       alert(message || titre);
@@ -347,6 +356,7 @@
               const texte = masque.querySelector(".lcdp-setup-loading__text");
               if (texte) texte.textContent = "Ouverture de la page…";
               masque.hidden = false;
+              if (masque.classList.contains("lcdp-verification-envoi-attente")) masque.classList.add("lcdp-verification-envoi-actif");
             }
           }
           fermer();

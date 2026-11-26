@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-lcdp-css="c085 c032 c041 c040 c036 c066">
+<html lang="fr" data-lcdp-css="c085 c084 c032 c041 c040 c036 c066">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -7,7 +7,7 @@
   <meta name="referrer" content="no-referrer">
   <title>Préparez votre accès au parc — La Clé du Parc</title>
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css">
-  <link rel="stylesheet" href="../OBJET/CSSBASE/securite-compte.css?v=20261126-tunnel">
+  <link rel="stylesheet" href="../OBJET/CSSBASE/securite-compte.css?v=20261126">
   <script>
     window.LCDP_PAGE_MEMBRE_SANS_SESSION = true;
     const paramsPreparation = new URLSearchParams(location.hash.slice(1));
@@ -19,10 +19,22 @@
   </script>
   <script src="../config.js"></script>
   <script src="../OBJET/JSBASE/affichage-legal.js" defer></script>
-  <script src="preparer-acces-parc.js?v=20261126-tunnel" defer></script>
+  <script src="preparer-acces-parc.js?v=20261126-tunnel-commun" defer></script>
 </head>
 <body data-lcdp-affichage-legal="insc-preparer-acces-parc" data-lcdp-affichage-legal-mode="auto" class="lcdp-app-page">
-  <div class="lcdp-site-page lcdp-app-wrapper lcdp-app-wriper--sans">
+  <div id="attente-preparation" class="lcdp-verification-envoi-attente lcdp-verification-envoi-actif" role="status" aria-live="polite" aria-label="Préparation de votre parcours">
+    <div class="lcdp-pictowait"><img class="lcdp-pictowait__image" src="../OBJET/IMAG/PICTO/pictowait.svg" alt="" aria-hidden="true"></div>
+  </div>
+  <script>
+    if (!document.documentElement.hasAttribute("data-lcdp-geo-loading")) {
+      const attente = document.getElementById("attente-preparation");
+      attente.classList.remove("lcdp-verification-envoi-actif");
+      attente.hidden = true;
+    } else {
+      document.body.classList.add("public-home--loading");
+    }
+  </script>
+  <div class="lcdp-site-page lcdp-app-wrapper lcdp-app-wriper--sans public-home__app">
     <main class="lcdp-site-main">
       <section class="lcdp-page-section" aria-labelledby="titre-preparation">
         <div class="lcdp-page-container">
@@ -72,11 +84,7 @@
       </section>
     </main>
   </div>
-  <div id="attente-preparation" class="lcdp-setup-loading" hidden role="status" aria-live="polite">
-    <span class="lcdp-setup-loading__spinner" aria-hidden="true"></span>
-    <img class="lcdp-tunnel-transition__picto" src="../OBJET/IMAG/PICTO/pictowait.svg" alt="" aria-hidden="true" hidden>
-    <span class="lcdp-setup-loading__text">Validation en cours…</span>
-  </div>
+
   <dialog id="confirmation-geolocalisation" class="lcdp-box-dialogue-bouton__card lcdp-setup-dialog" aria-labelledby="titre-confirmation-optin">
     <h2 id="titre-confirmation-optin" class="lcdp-box-dialogue-bouton__title">Autorisation enregistrée.</h2>
     <p id="texte-confirmation-optin" class="lcdp-box-dialogue-bouton__text"></p>
