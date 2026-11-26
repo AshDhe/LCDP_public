@@ -33907,3 +33907,31 @@ body > .lcdp-attente-plein-ecran.lcdp-planifier-partage-attente:not([hidden]) {
   color: #fff !important; font-size: clamp(.95rem,3.1vw,1.32rem) !important;
   line-height: 1.2; font-weight: 700 !important; text-align: left;
 }
+
+/* Texture commune des boutons d'action colorés — référence : accueil public.
+   Les dimensions, les libellés, les variantes secondaires et les états désactivés
+   restent inchangés. La priorité porte uniquement sur le dégradé et le relief. */
+html .lcdp-button.lcdp-button-orange {
+  --lcdp-button-texture: linear-gradient(to bottom right, #e59834, #cc8125);
+  --lcdp-button-texture-shadow: rgb(245 158 11 / 10%);
+}
+html .lcdp-button.lcdp-button-primary {
+  --lcdp-button-texture: linear-gradient(to bottom right, #4e6838, #3d522c);
+  --lcdp-button-texture-shadow: rgb(16 185 129 / 10%);
+}
+html .lcdp-button.lcdp-button-accueil-blue {
+  --lcdp-button-texture: linear-gradient(to bottom right, #346cb2, #28548c);
+  --lcdp-button-texture-shadow: rgb(59 130 246 / 10%);
+}
+/* La commande de planning de la fiche parc utilise historiquement l'orange. */
+html .lcdp-fiche-parc__commande-detail .lcdp-button.lcdp-button-primary {
+  --lcdp-button-texture: linear-gradient(to bottom right, #e59834, #cc8125);
+  --lcdp-button-texture-shadow: rgb(245 158 11 / 10%);
+}
+html .lcdp-button:is(.lcdp-button-orange, .lcdp-button-primary, .lcdp-button-accueil-blue):not(:disabled, [aria-disabled="true"], .is-disabled) {
+  background-image: var(--lcdp-button-texture) !important;
+  box-shadow: 0 10px 15px -3px var(--lcdp-button-texture-shadow), 0 4px 6px -4px var(--lcdp-button-texture-shadow) !important;
+}
+html .lcdp-button:is(.lcdp-button-orange, .lcdp-button-primary, .lcdp-button-accueil-blue):not(:disabled, [aria-disabled="true"], .is-disabled):hover {
+  box-shadow: 0 20px 25px -5px var(--lcdp-button-texture-shadow), 0 8px 10px -6px var(--lcdp-button-texture-shadow) !important;
+}
