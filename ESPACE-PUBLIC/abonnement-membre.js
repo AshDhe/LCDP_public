@@ -382,11 +382,30 @@
   function initialiserExemplesAbonnements() {
     const racine = document.getElementById("lcdp-exemples-abonnements");
     if (!racine || typeof window.LCDP_FAQ?.afficher !== "function") return;
-    const blocs = ["1J", "1M", "1A"].map(code => ({
-      titre: "Abonnement " + code,
+    const exemples = [
+      ["1J", "Découverte (1 jour)"],
+      ["1M", "Exploration (1 mois)"],
+      ["1A", "Passion (1 an)"]
+    ];
+    const blocs = exemples.map(([code, nom]) => ({
+      titre: "Abonnement " + code + " — " + nom,
       html: document.getElementById("lcdp-exemple-" + code).innerHTML
     }));
     window.LCDP_FAQ.afficher(racine, blocs, { ouvrirPremier: false });
+    // Seuls les titres de ces exemples ont deux lignes ; la FAQ commune reste inchangée.
+    racine.querySelectorAll(".lcdp-faq__question").forEach((bouton, index) => {
+      const [code, nom] = exemples[index];
+      const libelle = document.createElement("span");
+      libelle.className = "lcdp-cout-abonnement__libelle";
+      const reference = document.createElement("span");
+      reference.className = "lcdp-cout-abonnement__reference";
+      reference.textContent = "Abonnement " + code;
+      const sousTitre = document.createElement("span");
+      sousTitre.className = "lcdp-cout-abonnement__nom";
+      sousTitre.textContent = nom;
+      libelle.append(reference, sousTitre);
+      bouton.replaceChildren(libelle);
+    });
   }
 
   function initialiserActionsMembre() {
