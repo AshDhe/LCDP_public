@@ -536,7 +536,7 @@
           }, { once: true });
           document.addEventListener("keydown", gererClavier);
         }
-        boutonOk.focus();
+        { const boiteFocus = boutonOk?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
       });
 
       if (redirectUrl) {

@@ -159,7 +159,7 @@
           dialogue.addEventListener("click", event => {
             if (event.target === dialogue) clore(false);
           });
-          fermer.focus();
+          { const boiteFocus = fermer?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
           return;
         }
         const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-erreur.html");
@@ -195,7 +195,7 @@
           if (event.target === dialogue) fermer(false);
         });
         document.addEventListener("keydown", gererClavier);
-        bouton.focus();
+        { const boiteFocus = bouton?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
       }
 
       function ouvrirDialogueConnexion() {

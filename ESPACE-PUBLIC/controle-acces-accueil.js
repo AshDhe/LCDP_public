@@ -177,7 +177,7 @@
         }
       }
     },{signal:controller.signal});
-    if (annuler) annuler.focus(); else confirmer.focus();
+    { const boiteFocus = (annuler || confirmer)?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
   }
   function planifier() {return {libelle:'PLANIFIER',destination:'planifier'};}
   function regulariser(etat) {return {libelle:'Régulariser',destination:'regulariser',etat};}

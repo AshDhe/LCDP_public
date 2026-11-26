@@ -4874,7 +4874,7 @@
         dialogue.addEventListener("click", event => {
           if (event.target === dialogue) fermer(false);
         });
-        confirmer.focus();
+        { const boiteFocus = confirmer?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
       });
     } catch (erreur) {
       hote.remove();
@@ -4934,7 +4934,7 @@
               if (event.target === dialogue) fermer(false);
             });
           }
-          bouton.focus();
+          { const boiteFocus = bouton?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
         });
       } catch (error) {
         conteneur.remove();
@@ -4991,7 +4991,7 @@
           if (event.target === dialogue) fermer(false);
         });
         document.addEventListener("keydown", clavier);
-        bouton.focus();
+        { const boiteFocus = bouton?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
       });
     } catch (erreur) {
       conteneur.remove();

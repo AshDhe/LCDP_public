@@ -235,7 +235,7 @@
         confirmer.addEventListener("click",()=>fermer(true),{once:true});
         dialogue.addEventListener("click",e=>{if(e.target===dialogue)fermer(false);});
         document.addEventListener("keydown",clavier);
-        annuler.focus();
+        { const boiteFocus = annuler?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
       });
     } catch(error) {
       slot?.replaceChildren();
@@ -385,7 +385,7 @@
         alerte.addEventListener("click", (event) => {
           if (event.target === alerte) fermer();
         });
-        boutonOk.focus();
+        { const boiteFocus = boutonOk?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
       });
 
       if (redirectUrl) window.location.href = redirectUrl;

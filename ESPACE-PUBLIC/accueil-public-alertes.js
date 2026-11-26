@@ -87,7 +87,7 @@
         fermer();
         if (configuration.destination) window.location.assign(configuration.destination);
       }, { signal: ecouteurs.signal });
-      validerBouton.focus();
+      { const boiteFocus = validerBouton?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
     } finally {
       chargementAlerteEnCours = false;
     }
