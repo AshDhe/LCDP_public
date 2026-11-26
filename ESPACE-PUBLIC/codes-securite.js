@@ -72,7 +72,7 @@
     attente.innerHTML = '<div class="lcdp-loading-spinner" aria-hidden="true"><svg class="lcdp-loading-spinner__track" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></circle></svg><svg class="lcdp-loading-spinner__arc" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75"></circle></svg><span class="lcdp-loading-spinner__dot"></span></div><span class="lcdp-setup-loading__text" hidden aria-hidden="true"></span>';
     if (flow) {
       attente.classList.add("lcdp-verification-envoi-attente");
-      attente.innerHTML = '<div class="lcdp-pictowait"><img class="lcdp-pictowait__image" src="../OBJET/IMAG/PICTO/pictowait.svg" alt="" aria-hidden="true"></div><span class="lcdp-setup-loading__text" hidden aria-hidden="true"></span>';
+
     }
     document.body.appendChild(attente);
     const afficherAttente = (actif, texte = "Validation en cours…") => {
