@@ -62,3 +62,6 @@
 #lcdp-exemples-abonnements .lcdp-cout-abonnement__nom{font-size:1rem;font-weight:700;overflow-wrap:anywhere;}
 #lcdp-exemples-abonnements .lcdp-faq__reponse p{margin:0 0 .75rem;padding:0;}
 #lcdp-exemples-abonnements .lcdp-faq__reponse p:last-child{margin-bottom:0;}
+
+/* Sous-titre discret des exemples de coût de revient. */
+section[aria-labelledby="lcdp-cout-titre"] > .lcdp-cout-abonnement__intro{margin:-8px 0 0;font-size:.8125rem;font-weight:400;line-height:1.4;color:#6b7280;text-align:center;}
