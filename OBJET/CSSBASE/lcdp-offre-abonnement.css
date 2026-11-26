@@ -1,23 +1,59 @@
-/* Plaquette des offres — styles limités à son dialogue. */
-.lcdp-offre-abonnement {width:100%;min-width:0;text-align:left;}
-.lcdp-offre-abonnement__scroll {width:100%;min-width:0;overflow-x:auto;overscroll-behavior-x:contain;border:1px solid #dfe5db;border-radius:8px;}
+/* Plaquette commerciale : déclinaison du gabarit de dialogue LCDP.
+   Jetons du design system central (assemblage CSS modulaire, sans Preflight). */
+.lcdp-offre-abonnement {
+  width:100%;min-width:0;text-align:left;
+  font-family:var(--lcdp-font-main);
+  margin-top:var(--lcdp-space-3);
+}
+.lcdp-offre-abonnement__scroll {
+  width:100%;min-width:0;overflow-x:auto;overscroll-behavior-x:contain;
+  border:1px solid var(--lcdp-color-border);
+  border-radius:var(--lcdp-radius-small);
+  background:var(--lcdp-color-surface);
+}
 .lcdp-offre-abonnement__scroll[hidden],.lcdp-offre-abonnement__etat[hidden]{display:none!important;}
-.lcdp-offre-abonnement__table {width:100%;min-width:540px;border-collapse:collapse;table-layout:fixed;color:#1f2937;font-variant-numeric:tabular-nums;}
-.lcdp-offre-abonnement__table col:nth-child(1){width:23%}
-.lcdp-offre-abonnement__table col:nth-child(2){width:12%}
-.lcdp-offre-abonnement__table col:nth-child(3){width:15%}
-.lcdp-offre-abonnement__table col:nth-child(4){width:20%}
-.lcdp-offre-abonnement__table col:nth-child(5){width:8%}
-.lcdp-offre-abonnement__table col:nth-child(6),.lcdp-offre-abonnement__table col:nth-child(7){width:11%}
-.lcdp-offre-abonnement__table th,.lcdp-offre-abonnement__table td {padding:7px 5px;vertical-align:middle;line-height:1.25;font-size:12px;border-bottom:1px solid #e5e7eb;text-align:left;white-space:pre-line;}
-.lcdp-offre-abonnement__table thead th {background:#eef2ec;color:#4f6342;font-weight:700;font-size:11px;}
-.lcdp-offre-abonnement__table thead tr:first-child th{border-bottom:0;}
-.lcdp-offre-abonnement__table thead tr:nth-child(2) th{padding-top:0;font-weight:500;}
-.lcdp-offre-abonnement__table thead tr:first-child th:nth-child(2),.lcdp-offre-abonnement__table thead tr:first-child th:last-child,.lcdp-offre-abonnement__table thead tr:nth-child(2) th:not(:nth-child(2)),.lcdp-offre-abonnement__table tbody td:nth-child(2),.lcdp-offre-abonnement__table tbody td:nth-child(n+5){text-align:center;}
-.lcdp-offre-abonnement__table tbody tr:last-child>*{border-bottom:0;}
-.lcdp-offre-abonnement__table tbody tr:nth-child(even){background:#f7f9f6;}
-.lcdp-offre-abonnement__nom {display:block;font-size:12px;font-weight:700;overflow-wrap:anywhere;}
-.lcdp-offre-abonnement__duree {display:block;font-size:10px;font-weight:400;color:#667085;margin-top:2px;}
-.lcdp-offre-abonnement__prix {font-weight:700;white-space:nowrap!important;}
-.lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card {box-sizing:border-box;width:min(100%,740px);max-width:min(100%,740px);min-width:0;max-height:100%;padding:18px 12px;}
-@media(max-width:600px){.lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card{padding-inline:8px;}}
+.lcdp-offre-abonnement__etat{color:var(--lcdp-color-text-muted);font-size:.875rem;text-align:center;}
+.lcdp-offre-abonnement__table {
+  width:100%;min-width:465px;border-collapse:separate;border-spacing:0;
+  table-layout:fixed;color:var(--lcdp-color-text);font-variant-numeric:tabular-nums;
+  font-family:inherit;
+}
+.lcdp-offre-abonnement__table col:nth-child(1){width:27%}
+.lcdp-offre-abonnement__table col:nth-child(2){width:17%}
+.lcdp-offre-abonnement__table col:nth-child(3){width:23%}
+.lcdp-offre-abonnement__table col:nth-child(4){width:9%}
+.lcdp-offre-abonnement__table col:nth-child(5),.lcdp-offre-abonnement__table col:nth-child(6){width:12%}
+.lcdp-offre-abonnement__table th,.lcdp-offre-abonnement__table td {
+  padding:var(--lcdp-space-2) 6px;vertical-align:middle;line-height:1.4;
+  font-size:12px;text-align:left;white-space:pre-line;
+}
+.lcdp-offre-abonnement__table thead th {
+  background:var(--lcdp-color-primary);color:var(--lcdp-color-surface);
+  font-size:11px;font-weight:700;
+}
+.lcdp-offre-abonnement__table thead tr:first-child th:not([rowspan]){padding-bottom:3px;}
+.lcdp-offre-abonnement__table thead tr:nth-child(2) th{padding-top:3px;font-weight:500;}
+.lcdp-offre-abonnement__table thead tr:first-child th:last-child,
+.lcdp-offre-abonnement__table thead tr:nth-child(2) th:nth-child(n+2),
+.lcdp-offre-abonnement__table tbody td:nth-child(n+4){text-align:center;}
+.lcdp-offre-abonnement__table tbody tr:nth-child(even){background:var(--lcdp-color-surface-soft);}
+.lcdp-offre-abonnement__table tbody tr+tr>*{border-top:1px solid color-mix(in srgb,var(--lcdp-color-border) 45%,transparent);}
+.lcdp-offre-abonnement__table tbody th{font-weight:600;}
+.lcdp-offre-abonnement__table tbody th:first-child,.lcdp-offre-abonnement__table thead tr:first-child th:first-child{padding-left:var(--lcdp-space-2);}
+.lcdp-offre-abonnement__nom{display:block;font-size:12px;font-weight:700;color:var(--lcdp-color-primary);overflow-wrap:anywhere;}
+.lcdp-offre-abonnement__duree{display:block;font-size:11px;font-weight:400;color:var(--lcdp-color-text-muted);margin-top:3px;}
+.lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card {
+  box-sizing:border-box;width:min(100%,700px);max-width:min(100%,700px);
+  min-width:0;max-height:100%;padding:var(--lcdp-space-3) var(--lcdp-space-2);
+  animation:lcdp-offre-apparition .24s ease-out both;
+}
+@keyframes lcdp-offre-apparition {from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+#lcdp-afficher-tableaux-abonnements[aria-busy="true"]{cursor:progress;opacity:.72;transition:opacity .18s ease;}
+@media(max-width:600px){
+ .lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card{padding-inline:var(--lcdp-space-1);}
+ .lcdp-offre-abonnement__table th,.lcdp-offre-abonnement__table td{padding-block:var(--lcdp-space-1);}
+}
+@media(prefers-reduced-motion:reduce){
+ .lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card{animation:none;}
+ #lcdp-afficher-tableaux-abonnements[aria-busy="true"]{transition:none;}
+}

@@ -192,7 +192,7 @@
     compris.focus();
   }
 
-  // Plaquette commerciale : les noms, tarifs et capacités sont lus dans les pivots
+  // Plaquette commerciale : les noms et capacités sont lus dans les pivots
   // applicables. Seules les fenêtres de vente/démarrage et le Duo de base sont fixes.
   const CALENDRIER_OFFRES = {
     "1J": ["1 jour", "Tous les\nmois", "M à M+2"],
@@ -218,12 +218,10 @@
       for (const o of data.offres) {
         if (!Object.hasOwn(CALENDRIER_OFFRES,o.groupeabo) || parCode.has(o.groupeabo) ||
           typeof o.nomabo !== "string" || !o.nomabo.trim() ||
-          typeof o.prixabottc !== "number" || !Number.isFinite(o.prixabottc) || o.prixabottc <= 0 ||
           !Number.isInteger(o.maxduo) || o.maxduo < 1 || !Number.isInteger(o.famille) || o.famille < 0) throw new Error("Offre incohérente.");
         parCode.set(o.groupeabo,o);
       }
       const fragment = document.createDocumentFragment();
-      const format = new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",minimumFractionDigits:0,maximumFractionDigits:2});
       for (const [code,[duree,vente,debut]] of Object.entries(CALENDRIER_OFFRES)) {
         const o = parCode.get(code);
         if (!o) continue;
@@ -234,12 +232,12 @@
           const span=document.createElement("span");span.className="lcdp-offre-abonnement__"+classe;span.textContent=valeur;nom.append(span);
         }
         tr.append(nom);
-        [format.format(o.prixabottc),vente,debut,1,o.famille,o.maxduo].forEach((v,i)=>{
-          const td=document.createElement("td");td.textContent=String(v);if(i===0)td.className="lcdp-offre-abonnement__prix";tr.append(td);
+        [vente,debut,1,o.famille,o.maxduo].forEach(v=>{
+          const td=document.createElement("td");td.textContent=String(v);tr.append(td);
         });
         fragment.append(tr);
       }
-      if (!parCode.size) {etat.textContent="Aucune offre tarifaire en vigueur.";return;}
+      if (!parCode.size) {etat.textContent="Aucune offre en vigueur.";return;}
       corps.replaceChildren(fragment);scroll.hidden=false;
       etat.hidden=true;
     } catch (error) {
@@ -259,6 +257,7 @@
       event.preventDefault();
       if (chargement || slot.children.length) return;
       chargement = true;
+      lien.setAttribute("aria-busy", "true");
       let dialogue, clavier, etats = [];
       const clore = () => {
         if (clavier) document.removeEventListener("keydown", clavier);
@@ -281,6 +280,8 @@
         dialogue.querySelector(".lcdp-dialogue-ref__icone")?.remove();
         titre.textContent = "Offre des abonnements";
         message.replaceWith(contenu.content.cloneNode(true));
+        await chargerOffresAbonnements(dialogue);
+        if (slot.children.length) return;
         fermer.textContent = "Fermer";
         const croix = document.createElement("button");
         croix.type = "button";
@@ -309,11 +310,11 @@
         lien.setAttribute("aria-expanded", "true");
         document.addEventListener("keydown", clavier);
         croix.focus();
-        void chargerOffresAbonnements(dialogue);
+
       } catch (error) {
         clore();
         console.error("Offre des abonnements indisponible :", error);
-      } finally { chargement = false; }
+      } finally { chargement = false; lien.removeAttribute("aria-busy"); }
     });
   }
 
