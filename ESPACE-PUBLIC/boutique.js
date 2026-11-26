@@ -231,9 +231,16 @@
       }
     };
     fermerBouton.addEventListener("click", () => {
+      if (impaye) {
+        // Garder le dialogue affiché jusqu'à la navigation, sans flash de la boutique.
+        fermerBouton.disabled = true;
+        fermerBouton.setAttribute("aria-busy","true");
+        window.addEventListener("pageshow", event => { if (event.persisted) fermer(); }, { once: true });
+        window.location.assign(urlMembre("/ESPACE-MEMBRE/paiements-en-attente.html?origine=boutique"));
+        return;
+      }
       fermer();
       if (fermeture) window.location.assign(urlMembre("/ESPACE-MEMBRE/mes-informations.html?mode=rouvrir"));
-      else if (impaye) window.location.assign(urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=impaye"));
     }, { once: true });
     confirmer?.addEventListener("click", () => {
       fermer();
