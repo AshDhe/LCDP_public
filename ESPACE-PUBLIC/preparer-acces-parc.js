@@ -1367,37 +1367,30 @@ module.exports = QRCode;
     const avertissement=document.getElementById("avertissement-appareil");
     avertissement.hidden=d.mobile_detecte!==false;
   }
+  let minuterieRetourConnexion;
+  let retourConnexionEnCours=false;
+  function annulerRetourConnexion(){
+    clearTimeout(minuterieRetourConnexion);
+  }
   function quitterParcoursOrdinateur(){
-    afficherAttente(true,"Retour à l’accueil…");
-    const accueil=typeof config.publicUrl==="function"
-      ? config.publicUrl("/ESPACE-PUBLIC/hello.html")
-      : new URL("/ESPACE-PUBLIC/hello.html",location.href).href;
+    if(retourConnexionEnCours)return;
+    retourConnexionEnCours=true;
+    annulerRetourConnexion();
+    afficherAttente(true,"Ouverture de votre connexion…");
+    const destination=new URL("/ESPACE-PUBLIC/connexion-membre.html",location.href);
     flow="";
-    location.replace(accueil);
+    // Retour neutre : la connexion vérifie elle-même si l'inscription est terminée.
+    location.replace(destination.href);
   }
-  function surveillerFinSurTelephone(){
-    let arrete=false, minuterie, enVerification=false;
-    const arreter=()=>{arrete=true;clearTimeout(minuterie);};
-    window.addEventListener("pagehide",arreter,{once:true});
-    const verifier=async()=>{
-      if(arrete||enVerification||!flow)return;
-      enVerification=true;
-      try{
-        const d=await appeler("flow-state",{flow,completionOnly:true});
-        if(arrete||!flow)return;
-        // La version précédente du Worker ne fournit pas cet état.
-        if(typeof d.complete!=="boolean"){arreter();return;}
-        if(d.complete){arreter();quitterParcoursOrdinateur();return;}
-      }catch{
-        // Une erreur réseau n'est jamais interprétée comme une réussite.
-      }finally{
-        enVerification=false;
-        if(!arrete&&flow)minuterie=setTimeout(verifier,10000);
-      }
-    };
-    void verifier();
-    return arreter;
+  function programmerRetourConnexion(){
+    annulerRetourConnexion();
+    if(retourConnexionEnCours||!flow||mobile||panneauQr.hidden)return;
+    minuterieRetourConnexion=setTimeout(quitterParcoursOrdinateur,15000);
   }
+  window.addEventListener("pagehide",annulerRetourConnexion);
+  window.addEventListener("pageshow",event=>{
+    if(event.persisted)programmerRetourConnexion();
+  });
   let optinEnregistre=false;
   let inscriptionTerminee=false;
   confirmation.querySelector('form[method="dialog"]')?.addEventListener("submit",()=>{
@@ -1610,5 +1603,5 @@ module.exports = QRCode;
 
   autoriser.disabled=false;
   terminerInitialisation();
-  if(flow&&!mobile)surveillerFinSurTelephone();
+  if(flow&&!mobile&&!panneauQr.hidden)programmerRetourConnexion();
 })();
