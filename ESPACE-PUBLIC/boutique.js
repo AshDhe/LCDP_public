@@ -265,7 +265,7 @@
   const boutonsSouscription = [souscrire, bienfaiteur].filter(Boolean);
   for (const bouton of boutonsSouscription) {
     try {
-      bouton.href = urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza&origine=boutique");
+      bouton.href = urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza&origine=boutique&vue=" + (bouton === bienfaiteur ? "dfa" : "abonnement"));
     } catch (error) {
       console.error(error);
       bouton.removeAttribute("href");
@@ -317,10 +317,11 @@
     }
     if (situation.type === "validee" && bouton.hasAttribute("href")) {
       window.location.assign(bouton.href);
-      return;
+      return true;
     }
+    attenteDfa(false);
     await ouvrirDialogueBoutique(situation.type === "validee" ? {type: "inconnu"} : situation);
-  });
+  }, true);
 
   const destinationsAccessoires = {
     "lcdp-boutique-temoins": "/ESPACE-MEMBRE/accessoires-acces.html",
