@@ -279,6 +279,11 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
   height: 100%;
   pointer-events: auto;
 }
+/* En mode conteneur, la carte reste dans la hauteur disponible du wrapper. */
+.lcdp-dialogue-ref[data-lcdp-dialogue-context="conteneur"] > .lcdp-dialogue-ref__card {
+  max-height: 100%;
+  min-height: 0;
+}
 .lcdp-dialogue-ref[hidden] { display: none !important; }
 .lcdp-dialogue-ref, .lcdp-dialogue-ref * { box-sizing: border-box; }
 .lcdp-dialogue-ref__card {
