@@ -6,6 +6,7 @@
   const listes = Array.from(document.querySelectorAll("[data-lcdp-boutique-liste]"));
   const don = document.getElementById("lcdp-boutique-don");
   const etatDon = document.getElementById("lcdp-boutique-don-etat");
+  const bienfaiteur = document.getElementById("lcdp-boutique-bienfaiteur");
 
   const siteBase = String(window.SITE_CONFIG?.publicBaseUrl || "").replace(/\/+$/, "");
   let controleBoutiqueEnCours = false;
@@ -261,12 +262,13 @@
     { const boiteFocus = fermerBouton?.closest('[data-lcdp-dialogue-reference], dialog, [role="dialog"], [role="alertdialog"], .lcdp-dialogue-ref'); if (boiteFocus) { const cibleFocus = boiteFocus.querySelector('[data-lcdp-dialogue-titre], h1, h2, h3') || boiteFocus; cibleFocus.tabIndex = -1; cibleFocus.focus({ preventScroll: true }); } }
   }
 
-  if (souscrire) {
+  const boutonsSouscription = [souscrire, bienfaiteur].filter(Boolean);
+  for (const bouton of boutonsSouscription) {
     try {
-      souscrire.href = urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza&origine=boutique");
+      bouton.href = urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza&origine=boutique");
     } catch (error) {
       console.error(error);
-      souscrire.removeAttribute("href");
+      bouton.removeAttribute("href");
     }
   }
 
@@ -303,7 +305,7 @@
     }
   }
 
-  protegerActionBoutique(souscrire, async session => {
+  for (const bouton of boutonsSouscription) protegerActionBoutique(bouton, async session => {
     let situation = situationSouscriptionDepuisIndex(session);
     if (situation.type === "compte-ferme") {
       situation.dateLimite = await lireDateLimiteFermetureBoutique();
@@ -313,8 +315,8 @@
       // Une divergence entre deux lectures n'est jamais présentée comme une DA en cours.
       if (situation.type === "encours" || situation.type === "validee") situation = { type: "inconnu" };
     }
-    if (situation.type === "validee" && souscrire.hasAttribute("href")) {
-      window.location.assign(souscrire.href);
+    if (situation.type === "validee" && bouton.hasAttribute("href")) {
+      window.location.assign(bouton.href);
       return;
     }
     await ouvrirDialogueBoutique(situation.type === "validee" ? {type: "inconnu"} : situation);
@@ -379,45 +381,18 @@
   const lienInitial = listes.find(lien => "#" + lien.dataset.lcdpBoutiqueListe === cibleInitiale);
   if (lienInitial) lienInitial.click();
 
-  // Raccordement commun au futur tunnel DFA (w-don-parc.js).
-  // L'URL d'entrée reste à définir dans SITE_CONFIG : aucun appel API anticipé.
-  // Mode bienfaiteur : commande simultanée d'un abonnement permanent 1A et
-  // d'une DFA personnelle de 150 EUR. Aucune garantie d'accès à planifier
-  // à la commande ; le club prend en charge son équivalent.
-  // Ces règles doivent être contrôlées par le tunnel et côté serveur.
-  const bienfaiteur = document.getElementById("lcdp-boutique-bienfaiteur");
-  const etatBienfaiteur = document.getElementById("lcdp-boutique-bienfaiteur-etat");
-
-  function raccorderDfa(bouton, etat, mode) {
-    if (!bouton || !etat) return;
-    protegerActionBoutique(bouton, async () => {
-      const situation = await lireSituationDaSouscription();
-      if (situation.type !== "validee") {
-        if (mode !== "bienfaiteur") attenteDfa(false);
-        await ouvrirDialogueBoutique(situation);
-        return;
-      }
-      if (mode !== "bienfaiteur") {
-        window.location.assign(urlMembre("/ESPACE-MEMBRE/dfa-membre.html?v=20261126-dfa-direct-v9"));
-        return true;
-      }
-      const entree = config.donParcTunnelUrl;
-      if (typeof entree === "string" && entree.trim()) {
-        try {
-          const url = new URL(entree, window.location.href);
-          if (mode) url.searchParams.set("mode", mode);
-          window.location.assign(url.href);
-          return;
-        } catch (error) {
-          console.error("Tunnel DFA indisponible :", error);
-        }
-      }
-      etat.hidden = false;
-    }, mode !== "bienfaiteur");
-  }
-
-  raccorderDfa(don, etatDon);
-  raccorderDfa(bienfaiteur, etatBienfaiteur, "bienfaiteur");
+  // La DFA individuelle conserve son propre tunnel ; les deux boutons
+  // de souscription utilisent le même contrôle et la même entrée ABO-RÉZA.
+  if (don && etatDon) protegerActionBoutique(don, async () => {
+    const situation = await lireSituationDaSouscription();
+    if (situation.type !== "validee") {
+      attenteDfa(false);
+      await ouvrirDialogueBoutique(situation);
+      return;
+    }
+    window.location.assign(urlMembre("/ESPACE-MEMBRE/dfa-membre.html?v=20261126-dfa-direct-v9"));
+    return true;
+  }, true);
 
   const journee = document.getElementById("lcdp-boutique-journee-benevole") || document.querySelector('a[href$="/journee-benevole.html"]');
   if (journee) protegerActionBoutique(journee, () => {
