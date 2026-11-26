@@ -195,13 +195,13 @@
   // Plaquette commerciale : les noms et capacités sont lus dans les pivots
   // applicables. Seules les fenêtres de vente/démarrage et le Duo de base sont fixes.
   const CALENDRIER_OFFRES = {
-    "1J": ["1 jour", "Jour choisi · M à M+2", "Souscription chaque mois"],
-    "1M": ["1 mois", "1er du mois · M+1 ou M+2", "Souscription chaque mois"],
-    "3M": ["3 mois", "1er du mois · M+1 à M+3", "Souscription chaque mois"],
-    "5M": ["5 mois", "1er du mois · M+1 à M+4", "Souscription chaque mois"],
-    "1A": ["12 mois", "1er janvier", "Souscription de juillet à décembre"],
-    "11M": ["11 mois", "1er février", "Souscription en janvier"],
-    "10M": ["10 mois", "1er mars", "Souscription en février"]
+    "1J": ["1 jour", "Démarrage le jour choisi · M à M+2", "Souscription chaque mois"],
+    "1M": ["1 mois", "Démarrage le 1er du mois · M+1 ou M+2", "Souscription chaque mois"],
+    "3M": ["3 mois", "Démarrage le 1er du mois · M+1 à M+3", "Souscription chaque mois"],
+    "5M": ["5 mois", "Démarrage le 1er du mois · M+1 à M+4", "Souscription chaque mois"],
+    "1A": ["12 mois", "Démarrage le 1er janvier", "Souscription de juillet à décembre"],
+    "11M": ["11 mois", "Démarrage le 1er février", "Souscription en janvier"],
+    "10M": ["10 mois", "Démarrage le 1er mars", "Souscription en février"]
   };
   async function chargerOffresAbonnements(dialogue) {
     const etat = dialogue.querySelector(".lcdp-offre-abonnement__etat");
@@ -241,11 +241,26 @@
         debutCell.append(creer("span","debut",debut),creer("span","detail",detail));
         const privileges = creer("div","privileges",null,"presentation");
         const quotas = creer("div","quotas",null,"presentation");
-        for (const [label,valeur] of [["Duo",1],["Famille",o.famille],["MaxDuo",o.maxduo]]) {
+        const labels = ["Duo","Famille","MaxDuo"];
+        const valeurs = [1,o.famille,o.maxduo];
+        quotas.append(creer("span","libelle-vide",null,"presentation"));
+        labels.forEach(label=>quotas.append(creer("span","label-mobile",label,"columnheader")));
+        quotas.append(creer("span","libelle","Invité par accès","rowheader"));
+        valeurs.forEach((valeur,i)=>{
           const cellule = creer("div","quota",null,"cell");
-          cellule.append(creer("span","label-mobile",label),creer("span","badge",valeur));
+          cellule.setAttribute("aria-label",labels[i]+" : "+valeur+(i===2?" invités Duo différents sur la durée":" invité(s) par accès"));
+          cellule.append(creer("span","badge",valeur));
           quotas.append(cellule);
-        }
+        });
+        // Possibilité de principe, pas une confirmation de disponibilité commerciale.
+        const libelleExtension = creer("span","libelle","Extension abonnement","rowheader");
+        libelleExtension.classList.add("lcdp-offre-abonnement__extension");
+        quotas.append(libelleExtension);
+        labels.forEach(label=>{
+          const cellule = creer("span","extension","Oui","cell");
+          cellule.setAttribute("aria-label","Extension "+label+" : oui, selon les offres disponibles");
+          quotas.append(cellule);
+        });
         privileges.append(quotas);
         ligne.append(abo,debutCell,privileges);
         fragment.append(ligne);
