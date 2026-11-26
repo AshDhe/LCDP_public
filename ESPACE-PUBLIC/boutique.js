@@ -143,7 +143,9 @@
       case "session-inconnue":
         return { titre: "Vérification de connexion", message: "Votre connexion ne peut pas être vérifiée. Veuillez réessayer." };
       case "commande-demo":
-        return { titre: "Commande de démonstration", message: "Cet accessoire et son prix sont fictifs. Aucun achat ni paiement n’est effectué." };
+        return { titre: "Commande indisponible", message: "La commande de cet accessoire n’est pas encore disponible." };
+      case "accessoire-details":
+        return { titre: situation.nom, message: situation.description };
       default:
         return { titre: "Droit d’abonnement", message: "Votre droit d’abonnement ne peut pas être vérifié. Veuillez réessayer." };
     }
@@ -320,57 +322,85 @@
     const etat = document.getElementById("lcdp-accessoires-etat");
     let controle = 0;
     let renduCatalogue;
-    // Articles fictifs uniquement : aucun catalogue commercial ni paiement.
+    // Jeu de données de maquettage : aucun article n’est commercialisé.
     const demonstrations = {
-      acces: { nom: "Bracelet de présence", prix: "12 € — prix indicatif fictif", description: "Bracelet fluorescent · réglable · témoin de présence nominatif.", image: "/OBJET/IMAG/BOUTIQUE/ACCES/bracelet-presence-demo.svg" },
-      cadeau: { nom: "Gourde La Clé du Parc", prix: "19 € — prix indicatif fictif", description: "Gourde inox · 500 ml · réutilisable en promenade.", image: "/OBJET/IMAG/BOUTIQUE/CADEAU/gourde-demo.svg" }
+      acces: [
+        { id:"bracelet-1", nom:"Bracelet de présence", prix:12, description:"Bracelet fluorescent · réglable · témoin de présence nominatif.", image:"/OBJET/IMAG/BOUTIQUE/ACCES/bracelet-presence-demo.svg" },
+        { id:"bracelet-2", nom:"Bracelet de présence – modèle 2", prix:15, description:"Bracelet fluorescent · réglable · témoin de présence nominatif.", image:"/OBJET/IMAG/BOUTIQUE/ACCES/bracelet-presence-demo.svg" }
+      ],
+      cadeau: [
+        { id:"gourde-1", nom:"Gourde La Clé du Parc", prix:19, description:"Gourde inox · 500 ml · réutilisable en promenade.", image:"/OBJET/IMAG/BOUTIQUE/CADEAU/gourde-demo.svg" },
+        { id:"gourde-2", nom:"Gourde La Clé du Parc – modèle 2", prix:24, description:"Gourde inox · 500 ml · réutilisable en promenade.", image:"/OBJET/IMAG/BOUTIQUE/CADEAU/gourde-demo.svg" }
+      ]
     };
     async function rendreCatalogueDemo() {
-      const produit = demonstrations[catalogue.dataset.lcdpAccessoiresReserves];
+      const produits = demonstrations[catalogue.dataset.lcdpAccessoiresReserves];
       const liste = catalogue.querySelector("[data-lcdp-liste-card-diaporama-list]");
-      const message = catalogue.querySelector("[data-lcdp-liste-card-message]");
-      if (!produit || !liste || !message) throw new Error("Catalogue accessoire incomplet.");
+      const filtres = catalogue.querySelector("[data-lcdp-accessoires-filtres]");
+      const modele = filtres?.querySelector('[data-lcdp-accessoire-filtre="modele"]');
+      const prix = filtres?.querySelector('[data-lcdp-accessoire-filtre="prix"]');
+      const resultat = filtres?.querySelector("[data-lcdp-accessoires-resultat]");
+      if (!produits || !liste || !modele || !prix || !resultat) throw new Error("Catalogue accessoire incomplet.");
       const fragment = await chargerFragment("/OBJET/HTMLBASE/04-card-accessoire.html");
-      const carte = fragment.querySelector("[data-lcdp-card-accessoire]");
-      if (!carte) throw new Error("Gabarit accessoire introuvable.");
-      const recto = carte.querySelector("[data-lcdp-diaporama-retourner]");
-      const dos = carte.querySelector("[data-lcdp-diaporama-dos]");
-      const fermer = carte.querySelector("[data-lcdp-diaporama-fermer]");
-      const image = carte.querySelector("[data-lcdp-accessoire-image]");
-      const commander = carte.querySelector("[data-lcdp-accessoire-commander]");
-      image.alt = produit.nom + " — illustration de démonstration";
-      image.src = construireUrlSite(produit.image);
-      recto.setAttribute("aria-label", "Découvrir : " + produit.nom);
-      carte.querySelector("[data-lcdp-accessoire-nom-image]").textContent = produit.nom;
-      carte.querySelector("[data-lcdp-accessoire-nom]").textContent = produit.nom;
-      carte.querySelector("[data-lcdp-accessoire-prix]").textContent = produit.prix;
-      carte.querySelector("[data-lcdp-card-parc-description-texte]").textContent = produit.description;
-      function retourner(ouvert) {
-        carte.classList.toggle("is-retourne", ouvert);
-        recto.setAttribute("aria-expanded", String(ouvert));
-        recto.inert = ouvert;
-        dos.inert = !ouvert;
-        dos.setAttribute("aria-hidden", String(!ouvert));
-        (ouvert ? fermer : recto).focus({preventScroll:true});
-      }
-      recto.addEventListener("click", () => retourner(true));
-      fermer.addEventListener("click", () => retourner(false));
-      carte.addEventListener("keydown", event => {
-        if (event.key === "Escape" && carte.classList.contains("is-retourne")) {
-          event.preventDefault();
-          retourner(false);
+      const template = fragment.querySelector("[data-lcdp-card-accessoire]");
+      if (!template) throw new Error("Gabarit accessoire introuvable.");
+      const cartes = produits.map(produit => {
+        const carte = template.cloneNode(true);
+        const recto = carte.querySelector("[data-lcdp-diaporama-retourner]");
+        const dos = carte.querySelector("[data-lcdp-diaporama-dos]");
+        const fermer = carte.querySelector("[data-lcdp-diaporama-fermer]");
+        const image = carte.querySelector("[data-lcdp-accessoire-image]");
+        const commander = carte.querySelector("[data-lcdp-accessoire-commander]");
+        const details = carte.querySelector("[data-lcdp-accessoire-details]");
+        image.alt = produit.nom;
+        image.src = construireUrlSite(produit.image);
+        recto.setAttribute("aria-label", "Découvrir : " + produit.nom);
+        carte.querySelector("[data-lcdp-accessoire-nom-image]").textContent = produit.nom;
+        carte.querySelector("[data-lcdp-accessoire-nom]").textContent = produit.nom;
+        carte.querySelector("[data-lcdp-accessoire-prix]").textContent = produit.prix + " €";
+        carte.querySelector("[data-lcdp-card-parc-description-texte]").textContent = produit.description;
+        function retourner(ouvert, focus = true) {
+          carte.classList.toggle("is-retourne", ouvert);
+          recto.setAttribute("aria-expanded", String(ouvert));
+          recto.inert = ouvert;
+          dos.inert = !ouvert;
+          dos.setAttribute("aria-hidden", String(!ouvert));
+          if (focus) (ouvert ? fermer : recto).focus({preventScroll:true});
         }
+        recto.addEventListener("click", () => retourner(true));
+        fermer.addEventListener("click", () => retourner(false));
+        carte.addEventListener("keydown", event => {
+          if (event.key === "Escape" && carte.classList.contains("is-retourne")) {
+            event.preventDefault();
+            retourner(false);
+          }
+        });
+        protegerActionBoutique(commander, () => ouvrirDialogueBoutique({type:"commande-demo"}));
+        details.addEventListener("click", () => ouvrirDialogueBoutique({type:"accessoire-details", nom:produit.nom, description:produit.description}).catch(console.error));
+        retourner(false,false);
+        const option = document.createElement("option");
+        option.value = produit.id;
+        option.textContent = produit.nom;
+        modele.appendChild(option);
+        return { produit, carte, image };
       });
-      protegerActionBoutique(commander, () => ouvrirDialogueBoutique({type:"commande-demo"}));
-      liste.replaceChildren(fragment);
-      carte.classList.add("is-ready");
-      message.textContent = "Catalogue de démonstration — articles et prix fictifs.";
-      if (typeof image.decode === "function") await image.decode().catch(() => {});
+      function afficher() {
+        let selection = cartes.filter(item => !modele.value || item.produit.id === modele.value);
+        if (prix.value) selection = selection.slice().sort((a,b) => (a.produit.prix-b.produit.prix)*(prix.value === "desc" ? -1 : 1));
+        liste.replaceChildren(...selection.map(item => item.carte));
+        resultat.textContent = selection.length + (selection.length === 1 ? " accessoire" : " accessoires");
+        requestAnimationFrame(() => requestAnimationFrame(() => selection.forEach(item => item.carte.classList.add("is-ready"))));
+      }
+      filtres.addEventListener("submit", event => event.preventDefault());
+      filtres.addEventListener("change", afficher);
+      filtres.addEventListener("reset", () => { setTimeout(afficher,0); });
+      afficher();
+      await Promise.all(cartes.map(({image}) => typeof image.decode === "function" ? image.decode().catch(() => {}) : Promise.resolve()));
     }
     async function initialiserCatalogue() {
       const generation = ++controle;
       catalogue.hidden = true;
-      if (etat) etat.hidden = false;
+      if (etat) etat.hidden = true;
       const [session] = await Promise.all([
         lireSessionBoutique(),
         window.LCDP_pagePubliquePrete || Promise.resolve()
@@ -383,7 +413,7 @@
         } catch (error) {
           console.error(error);
           if (generation !== controle) return;
-          if (etat) etat.textContent = "Le catalogue est momentanément indisponible.";
+          if (etat) { etat.textContent = "Le catalogue est momentanément indisponible."; etat.hidden = false; }
           window.LCDP_terminerAttentePagePublique?.();
           return;
         }
@@ -394,9 +424,12 @@
         return;
       }
       window.LCDP_terminerAttentePagePublique?.();
-      if (etat) etat.textContent = session === "connexion"
-        ? "Vous devez vous connecter à votre compte pour continuer."
-        : "Votre connexion ne peut pas être vérifiée. Veuillez réessayer.";
+      if (etat) {
+        etat.textContent = session === "connexion"
+          ? "Vous devez vous connecter à votre compte pour continuer."
+          : "Votre connexion ne peut pas être vérifiée. Veuillez réessayer.";
+        etat.hidden = false;
+      }
       await ouvrirDialogueBoutique({type: session === "connexion" ? "connexion" : "session-inconnue"});
     }
     initialiserCatalogue().catch(console.error);
