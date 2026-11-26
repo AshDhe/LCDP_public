@@ -1937,7 +1937,7 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
   display: block;
   min-width: 0;
   max-width: 100%;
-  font-size: clamp(.875rem, 3.6vw, 1rem);
+  font-size: clamp(.8125rem, 3.5vw, .9375rem);
   line-height: 1.28;
   font-weight: 900;
   letter-spacing: .015em;
@@ -1964,7 +1964,7 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
   -webkit-text-fill-color: var(--lcdp-button-fleche-color);
 }
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span > strong {
-  font-size: clamp(.875rem, 3.6vw, 1rem);
+  font-size: clamp(.8125rem, 3.5vw, .9375rem);
   line-height: 1.28;
   font-weight: 900;
   letter-spacing: .015em;
@@ -1974,9 +1974,9 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span::after {
   content: "";
   display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-inline-start: 5px;
+  width: 10px;
+  height: 10px;
+  margin-inline-start: 4px;
   background-color: var(--lcdp-button-fleche-color);
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E") center / contain no-repeat;
