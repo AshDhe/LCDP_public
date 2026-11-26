@@ -24,7 +24,9 @@
         <input class="lcdp-stripe__email" hidden id="email-paiement" name="email" type="email" autocomplete="email" inputmode="email" placeholder="email@exemple.com" required>
         <div id="stripe-payment-element" aria-label="Formulaire bancaire sécurisé Stripe"></div>
         <p class="lcdp-stripe__erreur" id="paiement-erreur" role="alert" hidden></p>
-        <button class="lcdp-stripe__payer" id="bouton-payer" type="submit" disabled>Payer</button>
+        <div class="lcdp-actions-centrees">
+          <button class="lcdp-button lcdp-button-primary lcdp-button--haut-etroit" id="bouton-payer" type="submit" disabled>Payer</button>
+        </div>
       </form>
       <button type="button" class="lcdp-stripe__reprendre" id="dfa-abandon">Retour à la demande</button>
     </section>
