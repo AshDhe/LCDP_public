@@ -33963,7 +33963,7 @@ html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-bo
   line-height: 1.6;
   font-weight: 700;
   letter-spacing: .055em;
-  color: #fff;
+  color: var(--lcdp-button-fleche-color, #ffebca);
 }
 html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span > strong {
   font-size: inherit;
