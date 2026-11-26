@@ -196,7 +196,10 @@
     if (!dialogue || !titre || !message || !fermerBouton || (choix && !confirmer)) throw new Error("Dialogue DA incomplet.");
     dialogue.dataset.lcdpDialogueContext = "conteneur";
     titre.textContent = contenu.titre;
-    message.textContent = contenu.message;
+    // Le contenu reste du texte : seuls les retours entre phrases sont des éléments HTML.
+    const phrases = contenu.message.split(/(?<=[.!?])\s+(?=[A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜÇŒ])/u);
+    message.replaceChildren(...phrases.flatMap((phrase, index) =>
+      index ? [document.createElement("br"), document.createTextNode(phrase)] : [document.createTextNode(phrase)]));
     fermerBouton.textContent = impaye ? "Payer" : choix ? "Annuler" : "Fermer";
     if (confirmer) confirmer.textContent = contenu.action;
     const etats = Array.from(wrapper.children).filter(element => element !== slot).map(element => [element, element.inert]);
