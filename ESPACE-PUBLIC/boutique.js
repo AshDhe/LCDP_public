@@ -8,7 +8,55 @@
   const etatDon = document.getElementById("lcdp-boutique-don-etat");
 
   const siteBase = String(window.SITE_CONFIG?.publicBaseUrl || "").replace(/\/+$/, "");
-  let controleSouscriptionEnCours = false;
+  let controleBoutiqueEnCours = false;
+
+  // Vérification de session commune aux six actions réservées aux membres.
+  // Une erreur réseau ou une réponse inattendue ne signifie pas une déconnexion.
+  async function lireSessionBoutique() {
+    const base = config.workerIndexMembreUrl || config.WORKER_INDEX_MEMBRE_URL ||
+      config.W_INDEX_MEMBRE_URL ||
+      (typeof config.apiUrl === "function" ? config.apiUrl("index-membre-api") : "");
+    if (!base) return "inconnu";
+    try {
+      const reponse = await fetch(String(base).replace(/\/+$/, "") + "/index", {
+        method: "GET", credentials: "include", cache: "no-store",
+        signal: AbortSignal.timeout(20000), headers: { Accept: "application/json" }
+      });
+      if (reponse.status === 401) return "connexion";
+      const data = await reponse.json().catch(() => null);
+      if (reponse.ok && data?.success === true) {
+        if (data.connected === true) return "connecte";
+        if (data.connected === false) return "connexion";
+      }
+    } catch (error) {
+      console.warn("Session boutique non vérifiable :", error);
+    }
+    return "inconnu";
+  }
+
+  function protegerActionBoutique(bouton, action) {
+    bouton.addEventListener("click", async event => {
+      event.preventDefault();
+      if (controleBoutiqueEnCours || document.getElementById("lcdp-lightbox-slot")?.children.length) return;
+      controleBoutiqueEnCours = true;
+      const ancienLabel = bouton.getAttribute("aria-label");
+      bouton.setAttribute("aria-busy", "true");
+      bouton.setAttribute("aria-label", "Vérification en cours");
+      try {
+        const session = await lireSessionBoutique();
+        if (session === "connecte") await action();
+        else await ouvrirDialogueBoutique({type: session === "connexion" ? "connexion" : "session-inconnue"});
+      } catch (error) {
+        console.error("Contrôle boutique :", error);
+        await ouvrirDialogueBoutique({type: "session-inconnue"}).catch(console.error);
+      } finally {
+        if (ancienLabel === null) bouton.removeAttribute("aria-label");
+        else bouton.setAttribute("aria-label", ancienLabel);
+        bouton.removeAttribute("aria-busy");
+        controleBoutiqueEnCours = false;
+      }
+    });
+  }
 
   function construireUrlSite(chemin) {
     if (!chemin) return chemin;
@@ -90,13 +138,15 @@
           ? "Votre demande de DA n’a pas été accordée. Vous pouvez faire une nouvelle demande à partir du " + new Date(situation.date).toLocaleDateString("fr-FR", {timeZone: "Europe/Paris", day: "2-digit", month: "2-digit", year: "numeric"}) + "."
           : "Votre demande de DA n’a pas été accordée. Vous ne pouvez pas faire de nouvelle demande actuellement." };
       case "connexion":
-        return { titre: "Connexion nécessaire", message: "Connectez-vous à votre compte membre pour vérifier votre droit d’abonnement.", action: "Me connecter", destination: "connexion" };
+        return { titre: "Connexion nécessaire", message: "Vous devez vous connecter à votre compte pour continuer.", action: "Mon compte", destination: "connexion" };
+      case "session-inconnue":
+        return { titre: "Vérification de connexion", message: "Votre connexion ne peut pas être vérifiée. Veuillez réessayer." };
       default:
         return { titre: "Droit d’abonnement", message: "Votre droit d’abonnement ne peut pas être vérifié. Veuillez réessayer." };
     }
   }
 
-  async function ouvrirInformationSouscription(situation) {
+  async function ouvrirDialogueBoutique(situation) {
     const slot = document.getElementById("lcdp-lightbox-slot");
     const wrapper = slot?.closest(".lcdp-site-page.lcdp-app-wrapper");
     if (!slot || !wrapper || slot.children.length) return;
@@ -159,33 +209,17 @@
     souscrire.removeAttribute("href");
   }
 
-  souscrire.addEventListener("click", async event => {
-    event.preventDefault();
-    if (controleSouscriptionEnCours) return;
-    controleSouscriptionEnCours = true;
-    souscrire.setAttribute("aria-busy", "true");
-    const ancienLabel = souscrire.getAttribute("aria-label");
-    souscrire.setAttribute("aria-label", "Vérification en cours");
-    try {
-      const situation = await lireSituationDaSouscription();
-      if (situation.type === "validee" && souscrire.hasAttribute("href")) {
-        window.location.assign(souscrire.href);
-        return;
-      }
-      await ouvrirInformationSouscription(situation.type === "validee" ? {type: "inconnu"} : situation);
-    } catch (error) {
-      console.error("Contrôle DA :", error);
-    } finally {
-      if (ancienLabel === null) souscrire.removeAttribute("aria-label");
-      else souscrire.setAttribute("aria-label", ancienLabel);
-      souscrire.removeAttribute("aria-busy");
-      controleSouscriptionEnCours = false;
+  protegerActionBoutique(souscrire, async () => {
+    const situation = await lireSituationDaSouscription();
+    if (situation.type === "validee" && souscrire.hasAttribute("href")) {
+      window.location.assign(souscrire.href);
+      return;
     }
+    await ouvrirDialogueBoutique(situation.type === "validee" ? {type: "inconnu"} : situation);
   });
 
   listes.forEach(lien => {
-    lien.addEventListener("click", event => {
-      event.preventDefault();
+    protegerActionBoutique(lien, () => {
       const cible = document.getElementById(lien.getAttribute("aria-controls"));
       const ouvrir = cible.hidden;
 
@@ -248,8 +282,7 @@
   const etatBienfaiteur = document.getElementById("lcdp-boutique-bienfaiteur-etat");
 
   function raccorderDfa(bouton, etat, mode) {
-    bouton.addEventListener("click", event => {
-      event.preventDefault();
+    protegerActionBoutique(bouton, () => {
       const entree = config.donParcTunnelUrl;
       if (typeof entree === "string" && entree.trim()) {
         try {
@@ -267,4 +300,9 @@
 
   raccorderDfa(don, etatDon);
   raccorderDfa(bienfaiteur, etatBienfaiteur, "bienfaiteur");
+
+  const journee = document.getElementById("lcdp-boutique-journee-benevole") || document.querySelector('a[href$="/journee-benevole.html"]');
+  if (journee) protegerActionBoutique(journee, () => {
+    window.location.assign(urlMembre("/ESPACE-MEMBRE/journee-benevole.html"));
+  });
 })();
