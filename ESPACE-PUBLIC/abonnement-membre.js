@@ -226,21 +226,15 @@
         const o = parCode.get(code);
         if (!o) continue;
         const tr = document.createElement("tr");
-        tr.setAttribute("role","row");
         const nom = document.createElement("th");
-        nom.setAttribute("role","rowheader");
         nom.scope = "row";
         for (const [classe,valeur] of [["nom",o.nomabo.toLocaleUpperCase("fr-FR")],["duree",duree+" ("+code+")"]]) {
           const span=document.createElement("span");span.className="lcdp-offre-abonnement__"+classe;span.textContent=valeur;nom.append(span);
         }
         tr.append(nom);
-        [vente,debut,1,o.famille,o.maxduo].forEach((v,i)=>{
+        [vente,debut,1,o.famille,o.maxduo].forEach(v=>{
           const td=document.createElement("td");
-          td.setAttribute("role","cell");
-          td.dataset.label=["Vente","Date de démarrage","Duo","Famille","MaxDuo"][i];
-          const valeur=document.createElement("span");
-          valeur.className="lcdp-offre-abonnement__valeur";valeur.textContent=String(v);
-          td.append(valeur);tr.append(td);
+          td.textContent=String(v);tr.append(td);
         });
         fragment.append(tr);
       }

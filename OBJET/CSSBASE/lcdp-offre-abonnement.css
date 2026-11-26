@@ -1,92 +1,38 @@
-/* Offre abonnement : équivalent CSS du gabarit Tailwind de référence.
-   max-w-3xl mx-auto px-4 py-6 font-sans ; cartes blanches border-gray-200
-   rounded-xl ; badge vert pâle ; transition-colors ; mobile empilé.
-   Styles strictement limités à l'objet offre et à son dialogue. */
-.lcdp-offre-abonnement {
-  box-sizing:border-box;width:100%;min-width:0;max-width:48rem;
-  margin:0 auto;padding:1.5rem 1rem;text-align:left;
-  font-family:var(--lcdp-font-main,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);
-  color:#1f2937;
+/* Objet offre abonnement — présentation autonome, confinée au wrapper. */
+.lcdp-offre-abonnement { width:100%; min-width:0; text-align:left; }
+.lcdp-offre-abonnement__table { width:100%; min-width:480px; border-collapse:separate; border-spacing:0; table-layout:fixed; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; text-align:left; }
+.lcdp-offre-abonnement__table col:nth-child(1) { width:27%; }
+.lcdp-offre-abonnement__table col:nth-child(2) { width:17%; }
+.lcdp-offre-abonnement__table col:nth-child(3) { width:23%; }
+.lcdp-offre-abonnement__table col:nth-child(4) { width:9%; }
+.lcdp-offre-abonnement__table col:nth-child(5),.lcdp-offre-abonnement__table col:nth-child(6) { width:12%; }
+.lcdp-offre-abonnement__table th { padding:10px 6px; background:#eef2ec; color:#4f6342; font-size:10px; font-weight:700; line-height:1.3; text-transform:uppercase; letter-spacing:.025em; text-align:left; }
+.lcdp-offre-abonnement__table tbody th,.lcdp-offre-abonnement__table td { padding:10px 6px; vertical-align:middle; font-size:12px; line-height:1.4; color:#1f2937; border-top:1px solid #eef0f2; overflow-wrap:break-word; white-space:pre-line; background:#fff; transition:background-color .18s ease; }
+.lcdp-offre-abonnement__table tbody tr:hover>* { background:#f6f8f5; }
+.lcdp-offre-abonnement__nom { display:block; font-weight:700; font-size:13px; color:#111827; }
+.lcdp-offre-abonnement__code { display:block; font-size:10px; color:#667085; font-weight:500; }
+.lcdp-offre-abonnement__duree { display:inline-block; margin-top:5px; padding:2px 7px; border-radius:999px; background:#eef2ec; color:#4f6342; font-size:11px; font-weight:600; }
+.lcdp-offre-abonnement__debut { display:block; font-weight:600; }
+.lcdp-offre-abonnement__detail { display:block; margin-top:3px; color:#667085; font-size:11px; line-height:1.4; }
+.lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card { box-sizing:border-box; width:min(100%,700px); max-width:min(100%,700px); max-height:100%; min-width:0; padding:18px 12px; }
+.lcdp-offre-abonnement__dialogue .lcdp-offre-abonnement__table td,.lcdp-offre-abonnement__dialogue .lcdp-offre-abonnement__table th { text-align:left; }
+.lcdp-offre-abonnement__dialogue .lcdp-offre-abonnement__table thead tr:first-child th:last-child,
+.lcdp-offre-abonnement__dialogue .lcdp-offre-abonnement__table thead tr:nth-child(2) th:nth-child(n+2),
+.lcdp-offre-abonnement__dialogue .lcdp-offre-abonnement__table tbody td:nth-child(n+4) { text-align:center; }
+.lcdp-offre-abonnement__table thead tr:first-child th:not([rowspan]) { padding-bottom:3px; }
+.lcdp-offre-abonnement__table thead tr:nth-child(2) th { padding-top:3px; }
+.lcdp-offre-abonnement__scroll { width:100%; min-width:0; overflow-x:auto; overscroll-behavior-x:contain; }
+.lcdp-offre-abonnement__scroll[hidden],.lcdp-offre-abonnement__etat[hidden] { display:none!important; }
+.lcdp-offre-abonnement__etat { text-align:center; font-size:12px; color:#667085; }
+.lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card { animation:lcdp-offre-apparition .24s ease-out both; }
+@keyframes lcdp-offre-apparition { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+#lcdp-afficher-tableaux-abonnements[aria-busy="true"] { cursor:progress; opacity:.75; transition:opacity .18s ease; }
+@media(prefers-reduced-motion:reduce) {
+ .lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card { animation:none; }
+ .lcdp-offre-abonnement__table tbody th,.lcdp-offre-abonnement__table td,#lcdp-afficher-tableaux-abonnements[aria-busy="true"] { transition:none; }
 }
-.lcdp-offre-abonnement__scroll{width:100%;min-width:0;container-type:inline-size;}
-.lcdp-offre-abonnement__scroll[hidden],.lcdp-offre-abonnement__etat[hidden]{display:none!important;}
-.lcdp-offre-abonnement__etat{font-size:.875rem;text-align:center;color:#6b7280;}
-.lcdp-offre-abonnement__table{
-  width:100%;border-collapse:separate;border-spacing:0 .5rem;
-  table-layout:fixed;font:inherit;font-variant-numeric:tabular-nums;
-}
-.lcdp-offre-abonnement__table col:nth-child(1){width:27%}
-.lcdp-offre-abonnement__table col:nth-child(2){width:17%}
-.lcdp-offre-abonnement__table col:nth-child(3){width:23%}
-.lcdp-offre-abonnement__table col:nth-child(4){width:9%}
-.lcdp-offre-abonnement__table col:nth-child(5),.lcdp-offre-abonnement__table col:nth-child(6){width:12%}
-.lcdp-offre-abonnement__table th,.lcdp-offre-abonnement__table td{
-  padding:.625rem .5rem;vertical-align:middle;text-align:left;line-height:1.4;font-size:.8125rem;
-}
-.lcdp-offre-abonnement__table thead th{
-  color:#6b7280;font-size:.6875rem;font-weight:700;letter-spacing:.015em;
-}
-.lcdp-offre-abonnement__table thead tr:first-child th{padding-bottom:0;}
-.lcdp-offre-abonnement__table thead tr:nth-child(2) th{padding-top:0;}
-.lcdp-offre-abonnement__table thead tr:first-child th:last-child,
-.lcdp-offre-abonnement__table thead tr:nth-child(2) th:nth-child(n+2),
-.lcdp-offre-abonnement__table tbody td:nth-child(n+4){text-align:center;}
-.lcdp-offre-abonnement__table tbody tr>*{
-  background:#fff;border-block:1px solid #e5e7eb;transition:background-color .18s ease;
-}
-.lcdp-offre-abonnement__table tbody tr>*:first-child{
-  border-left:1px solid #e5e7eb;border-radius:.75rem 0 0 .75rem;padding-left:.875rem;
-}
-.lcdp-offre-abonnement__table tbody tr>*:last-child{
-  border-right:1px solid #e5e7eb;border-radius:0 .75rem .75rem 0;
-}
-@media(hover:hover){.lcdp-offre-abonnement__table tbody tr:hover>*{background:#f6f8f5;}}
-.lcdp-offre-abonnement__nom{display:block;font-size:.8125rem;font-weight:700;color:#111827;overflow-wrap:anywhere;}
-.lcdp-offre-abonnement__duree{
-  display:inline-block;margin-top:.3rem;padding:.125rem .5rem;border-radius:9999px;
-  background:#eef2ec;color:#4f6342;font-size:.6875rem;font-weight:600;
-}
-.lcdp-offre-abonnement__valeur{white-space:pre-line;}
-.lcdp-offre-abonnement__table tbody td:nth-child(n+4) .lcdp-offre-abonnement__valeur{
-  display:inline-block;min-width:1.75rem;padding:.2rem .35rem;
-  border-radius:9999px;background:#eef2ec;color:#4f6342;font-weight:600;text-align:center;
-}
-.lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card{
-  box-sizing:border-box;width:min(100%,48rem);max-width:min(100%,48rem);min-width:0;
-  max-height:100%;padding:1rem .5rem;
-  animation:lcdp-offre-apparition .24s ease-out both;
-}
-@keyframes lcdp-offre-apparition{from{opacity:0;transform:translateY(6px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
-#lcdp-afficher-tableaux-abonnements[aria-busy="true"]{cursor:progress;opacity:.75;transition:opacity .18s ease;}
-/* Mobile dans le wrapper LCDP, y compris sur un écran de bureau étroit. */
-@container (max-width: 560px){
- .lcdp-offre-abonnement__table,.lcdp-offre-abonnement__table tbody{display:block;}
- .lcdp-offre-abonnement__table colgroup{display:none;}
- .lcdp-offre-abonnement__table thead{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
- .lcdp-offre-abonnement__table tbody tr{
-   display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.625rem .5rem;
-   margin:0 0 .625rem;padding:.875rem;border:1px solid #e5e7eb;border-radius:.75rem;
-   background:#fff;transition:background-color .18s ease;
- }
- .lcdp-offre-abonnement__table tbody tr>*,
- .lcdp-offre-abonnement__table tbody tr>*:first-child,
- .lcdp-offre-abonnement__table tbody tr>*:last-child{
-   border:0;border-radius:0;padding:0;background:transparent;
- }
- .lcdp-offre-abonnement__table tbody th{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:.5rem;}
- .lcdp-offre-abonnement__duree{margin:0;flex-shrink:0;}
- .lcdp-offre-abonnement__table tbody td{grid-column:span 3;}
- .lcdp-offre-abonnement__table tbody td::before{
-   content:attr(data-label);display:block;color:#6b7280;font-size:.6875rem;font-weight:600;margin-bottom:.2rem;
- }
- .lcdp-offre-abonnement__table tbody td:nth-child(n+4){
-   grid-column:span 2;text-align:center;border-top:1px solid #e5e7eb;padding-top:.5rem;
- }
- .lcdp-offre-abonnement__table tbody td:nth-child(2) .lcdp-offre-abonnement__valeur{white-space:normal;}
- @media(hover:hover){.lcdp-offre-abonnement__table tbody tr:hover{background:#f6f8f5;}}
-}
-@media(prefers-reduced-motion:reduce){
- .lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card{animation:none;}
- .lcdp-offre-abonnement__table tbody tr,.lcdp-offre-abonnement__table tbody tr>*,
- #lcdp-afficher-tableaux-abonnements[aria-busy="true"]{transition:none;}
+@media (max-width:360px) {
+ .lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card { padding-inline:8px; }
+ .lcdp-offre-abonnement__table td,.lcdp-offre-abonnement__table th { padding-inline:4px; }
+ .lcdp-offre-abonnement__nom { font-size:12px; }
 }
