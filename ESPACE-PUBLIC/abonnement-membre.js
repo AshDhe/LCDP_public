@@ -3,8 +3,7 @@
 
   window.SITE_BASE = window.SITE_CONFIG?.publicBaseUrl || window.SITE_CONFIG?.siteBase || "";
   const siteBase = String(window.SITE_BASE || "").replace(/\/+$/, "");
-  let controleDaNumero = 0;
-  let statutDaSouscription = "inconnu";
+  let controleSouscriptionEnCours = false;
 
   function construireUrlSite(chemin) {
     if (!chemin) return chemin;
@@ -113,82 +112,111 @@
     await window.LCDP_ouvrirPresentationDaMembre();
   }
 
-  // Le même service et la même valeur statuda que sur la page Abonnement membre.
-  // Le bouton reste orange ; seul l’accès au tunnel dépend du statut DA.
-  async function actualiserDroitSouscription() {
-    const bouton = document.getElementById("lcdp-demarrer-abonnement");
-    if (!bouton) return;
-    const numero = ++controleDaNumero;
-    bouton.dataset.daValidee = "false";
-    statutDaSouscription = "inconnu";
-    const config = window.SITE_CONFIG || {};
-    const baseApi = config.workerAboMembreUrl || config.WORKER_ABO_MEMBRE_URL ||
-      (typeof config.apiUrl === "function" ? config.apiUrl("abo-membre-api") : "");
-    if (!baseApi) return;
+  // Même contexte et mêmes conditions d'éligibilité que le worker DA.
+  // Ne jamais assimiler une session absente ou une erreur réseau à une DA absente.
+  function determinerSituationDa(data, maintenant = Date.now()) {
+    if (!data || !Object.hasOwn(data, "statuda") || !Object.hasOwn(data, "daactive")) return { type: "inconnu" };
+    const statut = String(data.statuda ?? "").trim().toLowerCase();
+    if (!["", "oui", "non", "encours"].includes(statut) || ![true, false, null].includes(data.daactive)) return { type: "inconnu" };
+    if (data.daactive === true) return { type: statut === "oui" ? "validee" : "encours" };
+    if (data.daactive === false) {
+      const date = data.datenext ? Date.parse(data.datenext) : NaN;
+      if (Number.isFinite(date) && date <= maintenant) return { type: "renouvelable" };
+      return { type: "refusee", date: Number.isFinite(date) ? date : null };
+    }
+    if (statut === "oui") return { type: "validee" };
+    if (statut === "encours") return { type: "encours" };
+    if (statut === "non") return { type: "refusee", date: null };
+    return { type: "absente" };
+  }
 
+  async function lireSituationDaSouscription() {
+    const config = window.SITE_CONFIG || {};
+    const base = config.workerDaMembreUrl || config.WORKER_DA_MEMBRE_URL ||
+      (typeof config.apiUrl === "function" ? config.apiUrl("da-membre-api") : "");
+    if (!base) return { type: "inconnu" };
     try {
-      const reponse = await fetch(String(baseApi).replace(/\/+$/, "") + "/mes-abonnements", {
-        method: "GET",
-        credentials: "include",
-        cache: "no-store",
-        headers: { "Accept": "application/json" }
+      const reponse = await fetch(String(base).replace(/\/+$/, "") + "/contexte", {
+        method: "GET", credentials: "include", cache: "no-store",
+        signal: AbortSignal.timeout(20000), headers: { Accept: "application/json" }
       });
+      if (reponse.status === 401) return { type: "connexion" };
       const data = await reponse.json().catch(() => null);
-      if (numero !== controleDaNumero) return;
-      if (reponse.ok && (data?.ok === true || data?.success === true) &&
-          Object.prototype.hasOwnProperty.call(data, "statuda")) {
-        const statut = String(data.statuda || "").trim().toLowerCase();
-        statutDaSouscription = ["oui", "non", "encours"].includes(statut) ? statut : statut === "" ? null : "inconnu";
-      }
-      bouton.dataset.daValidee = String(statutDaSouscription === "oui");
+      return reponse.ok && (data?.ok === true || data?.success === true)
+        ? determinerSituationDa(data) : { type: "inconnu" };
     } catch (error) {
-      if (numero === controleDaNumero) bouton.dataset.daValidee = "false";
       console.warn("Statut DA non vérifiable :", error);
+      return { type: "inconnu" };
     }
   }
 
-  async function ouvrirInformationSouscription() {
+  function presentationSituationDa(situation) {
+    switch (situation.type) {
+      case "absente":
+        return { titre: "Droit d’abonnement (DA) nécessaire", message: "Vous ne disposez pas encore d’un droit d’abonnement. Vous pouvez faire votre demande de DA.", action: "Faire ma demande", destination: "da" };
+      case "renouvelable":
+        return { titre: "Droit d’abonnement (DA) nécessaire", message: "Votre précédente demande de DA n’a pas été accordée. Vous pouvez faire une nouvelle demande.", action: "Faire ma demande", destination: "da" };
+      case "encours":
+        return { titre: "Demande de DA en cours", message: "Votre demande de DA est à l’étude. Nous vous tenons informé(e)." };
+      case "refusee":
+        return { titre: "Droit d’abonnement non accordé", message: situation.date !== null
+          ? "Votre demande de DA n’a pas été accordée. Vous pouvez faire une nouvelle demande à partir du " + new Date(situation.date).toLocaleDateString("fr-FR", {timeZone: "Europe/Paris", day: "2-digit", month: "2-digit", year: "numeric"}) + "."
+          : "Votre demande de DA n’a pas été accordée. Vous ne pouvez pas faire de nouvelle demande actuellement." };
+      case "connexion":
+        return { titre: "Connexion nécessaire", message: "Connectez-vous à votre compte membre pour vérifier votre droit d’abonnement.", action: "Me connecter", destination: "connexion" };
+      default:
+        return { titre: "Droit d’abonnement", message: "Votre droit d’abonnement ne peut pas être vérifié. Veuillez réessayer." };
+    }
+  }
+
+  async function ouvrirInformationSouscription(situation) {
     const slot = document.getElementById("lcdp-lightbox-slot");
+    const wrapper = slot?.closest(".lcdp-site-page.lcdp-app-wrapper");
+    if (!slot || !wrapper || slot.children.length) return;
     const elementActif = document.activeElement;
-    slot.replaceChildren(await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-choix.html"));
-    const dialogue = slot.querySelector('[data-lcdp-dialogue-reference="choix"]');
-    if (!dialogue) throw new Error("Dialogue CHOIX indisponible.");
+    const contenu = presentationSituationDa(situation);
+    const choix = Boolean(contenu.action);
+    const type = choix ? "choix" : "information";
+    const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-" + type + ".html");
+    if (slot.children.length) return;
+    const dialogue = fragment.querySelector('[data-lcdp-dialogue-reference="' + type + '"]');
+    const titre = dialogue?.querySelector("[data-lcdp-dialogue-titre]");
+    const message = dialogue?.querySelector("[data-lcdp-dialogue-message]");
+    const fermerBouton = dialogue?.querySelector('[data-lcdp-dialogue-action="' + (choix ? "annuler" : "compris") + '"]');
+    const confirmer = choix ? dialogue?.querySelector('[data-lcdp-dialogue-action="confirmer"]') : null;
+    if (!dialogue || !titre || !message || !fermerBouton || (choix && !confirmer)) throw new Error("Dialogue DA incomplet.");
     dialogue.dataset.lcdpDialogueContext = "conteneur";
-    dialogue.querySelector("[data-lcdp-dialogue-titre]").textContent = "Droit d’abonnement (DA) nécessaire";
-    dialogue.querySelector("[data-lcdp-dialogue-message]").textContent =
-      statutDaSouscription === null ? "Vous ne disposez pas encore d'un droit d'abonnement."
-        : statutDaSouscription === "inconnu" ? "Votre droit d'abonnement doit être validé pour souscrire."
-        : "Vous ne disposez pas actuellement d'un droit d'abonnement.";
-    const annuler = dialogue.querySelector('[data-lcdp-dialogue-action="annuler"]');
-    const confirmer = dialogue.querySelector('[data-lcdp-dialogue-action="confirmer"]');
-    if (!annuler || !confirmer) throw new Error("Actions CHOIX introuvables.");
-    annuler.textContent = "Annuler";
-    confirmer.textContent = "Faire ma demande";
+    titre.textContent = contenu.titre;
+    message.textContent = contenu.message;
+    fermerBouton.textContent = choix ? "Annuler" : "Fermer";
+    if (confirmer) confirmer.textContent = contenu.action;
+    const etats = Array.from(wrapper.children).filter(element => element !== slot).map(element => [element, element.inert]);
     const fermer = () => {
       document.removeEventListener("keydown", gererClavier);
-      slot.replaceChildren();
-      if (elementActif?.isConnected && typeof elementActif.focus === "function") elementActif.focus();
+      dialogue.remove();
+      slot.classList.remove("lcdp-souscription-dialogue-actif");
+      etats.forEach(([element, inert]) => { element.inert = inert; });
+      if (elementActif?.isConnected) elementActif.focus();
     };
     const gererClavier = event => {
-      if (event.key === "Escape") {
+      if (event.key === "Escape") { event.preventDefault(); fermer(); }
+      else if (event.key === "Tab") {
         event.preventDefault();
-        fermer();
-      } else if (event.key === "Tab") {
-        event.preventDefault();
-        (document.activeElement === annuler ? confirmer : annuler).focus();
+        (confirmer && document.activeElement === fermerBouton ? confirmer : fermerBouton).focus();
       }
     };
-    document.addEventListener("keydown", gererClavier);
-    annuler.addEventListener("click", fermer, { once: true });
-    confirmer.addEventListener("click", () => {
-      const lienDa = document.getElementById("lcdp-ouvrir-da-abonnement");
+    fermerBouton.addEventListener("click", fermer, { once: true });
+    confirmer?.addEventListener("click", () => {
       fermer();
-      lienDa?.click();
+      if (contenu.destination === "da") document.getElementById("lcdp-ouvrir-da-abonnement")?.click();
+      else if (contenu.destination === "connexion") window.location.assign(construireUrlSite("/ESPACE-PUBLIC/connexion-membre.html"));
     }, { once: true });
-    dialogue.addEventListener("click", event => {
-      if (event.target === dialogue) fermer();
-    });
-    annuler.focus();
+    dialogue.addEventListener("click", event => { if (event.target === dialogue) fermer(); });
+    slot.classList.add("lcdp-souscription-dialogue-actif");
+    slot.appendChild(fragment);
+    etats.forEach(([element]) => { element.inert = true; });
+    document.addEventListener("keydown", gererClavier);
+    fermerBouton.focus();
   }
 
   // Plaquette commerciale : les noms et capacités sont lus dans les pivots
@@ -374,17 +402,27 @@
       souscrire.removeAttribute("href");
     }
 
-    souscrire.addEventListener("click", event => {
-      if (souscrire.dataset.daValidee !== "true" || !souscrire.hasAttribute("href")) {
-        event.preventDefault();
-        ouvrirInformationSouscription().catch(console.error);
+    souscrire.addEventListener("click", async event => {
+      event.preventDefault();
+      if (controleSouscriptionEnCours) return;
+      controleSouscriptionEnCours = true;
+      souscrire.setAttribute("aria-busy", "true");
+      const libelle = souscrire.textContent;
+      souscrire.textContent = "Vérification…";
+      try {
+        const situation = await lireSituationDaSouscription();
+        if (situation.type === "validee" && souscrire.hasAttribute("href")) {
+          window.location.assign(souscrire.href);
+          return;
+        }
+        await ouvrirInformationSouscription(situation.type === "validee" ? {type: "inconnu"} : situation);
+      } catch (error) {
+        console.error("Contrôle DA :", error);
+      } finally {
+        souscrire.textContent = libelle;
+        souscrire.removeAttribute("aria-busy");
+        controleSouscriptionEnCours = false;
       }
-    });
-
-    actualiserDroitSouscription();
-    window.addEventListener("pageshow", actualiserDroitSouscription);
-    document.addEventListener("visibilitychange", () => {
-      if (!document.hidden) actualiserDroitSouscription();
     });
   }
 
