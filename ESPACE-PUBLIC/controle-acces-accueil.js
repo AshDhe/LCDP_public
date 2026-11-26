@@ -184,7 +184,7 @@
   async function ouvrirRegularisation(etat) {
     if (!window.LCDP_PaiementImpaye) await new Promise((resolve,reject) => {
       const script=document.createElement('script');
-      script.src=urlMembre('/ESPACE-MEMBRE/workflow-paiement-impaye.js?v=20261126-v13');
+      script.src=urlMembre('/ESPACE-MEMBRE/workflow-paiement-impaye.js?v=20261126-v14');
       script.onload=resolve;script.onerror=reject;document.head.appendChild(script);
     });
     return window.LCDP_PaiementImpaye.ouvrir(etat || {});
