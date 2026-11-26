@@ -181,22 +181,11 @@
     const slot = document.getElementById("lcdp-lightbox-slot");
     const wrapper = slot?.closest(".lcdp-site-page.lcdp-app-wrapper");
     if (!slot || !wrapper || slot.children.length) return;
-    if (situation.type === "impaye") {
-      if (!window.LCDP_DialogueImpaye) throw Error("Objet de régularisation indisponible.");
-      slot.classList.add("lcdp-souscription-dialogue-actif");
-      try {
-        await window.LCDP_DialogueImpaye.ouvrir({
-          hote: slot,
-          message: "Vous avez un impayé sur un abonnement. Vous devez le régulariser pour souscrire un nouvel abonnement.",
-          payer: () => window.location.assign(urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=impaye"))
-        });
-      } finally { slot.classList.remove("lcdp-souscription-dialogue-actif"); }
-      return;
-    }
     const elementActif = document.activeElement;
     const contenu = presentationSituationDa(situation);
     const choix = Boolean(contenu.action);
-    const type = choix ? "choix" : "information";
+    const impaye = situation.type === "impaye";
+    const type = impaye ? "abonnement-impaye" : choix ? "choix" : "information";
     const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-" + type + ".html");
     if (slot.children.length) return;
     const dialogue = fragment.querySelector('[data-lcdp-dialogue-reference="' + type + '"]');
@@ -208,7 +197,7 @@
     dialogue.dataset.lcdpDialogueContext = "conteneur";
     titre.textContent = contenu.titre;
     message.textContent = contenu.message;
-    fermerBouton.textContent = choix ? "Annuler" : "Fermer";
+    fermerBouton.textContent = impaye ? "Payer" : choix ? "Annuler" : "Fermer";
     if (confirmer) confirmer.textContent = contenu.action;
     const etats = Array.from(wrapper.children).filter(element => element !== slot).map(element => [element, element.inert]);
     const fermer = () => {
@@ -225,7 +214,10 @@
         (confirmer && document.activeElement === fermerBouton ? confirmer : fermerBouton).focus();
       }
     };
-    fermerBouton.addEventListener("click", fermer, { once: true });
+    fermerBouton.addEventListener("click", () => {
+      fermer();
+      if (impaye) window.location.assign(urlMembre("/ESPACE-MEMBRE/reserver-membre.html?mode=impaye"));
+    }, { once: true });
     confirmer?.addEventListener("click", () => {
       fermer();
       if (contenu.destination === "da") {
