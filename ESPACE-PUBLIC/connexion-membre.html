@@ -43,6 +43,29 @@
       height: var(--lcdp-button-logo-size-mobile, 76px) !important;
       margin: 0 !important;
     }
+    /* Inscription : action secondaire, distincte du bouton de connexion. */
+    #formulaire-connexion-membre #lien-non-inscrit {
+      box-sizing: border-box;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex: 0 0 auto !important;
+      width: 112px !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      padding: 4px 8px !important;
+      margin: 32px auto 0 !important;
+      border-radius: 7px !important;
+      font-size: 10px !important;
+      line-height: 1.1 !important;
+      text-align: center;
+    }
+    #formulaire-connexion-membre #lien-non-inscrit > span {
+      font-size: inherit !important;
+      line-height: inherit !important;
+    }
     @media (min-width: 768px) {
       #formulaire-connexion-membre .lcdp-box-formulaire__actions > .lcdp-button-logo {
         width: var(--lcdp-button-logo-size-desktop, 84px) !important;
