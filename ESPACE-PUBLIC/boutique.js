@@ -198,41 +198,39 @@
     });
   });
 
-  // Rubriques de services : accordéons statiques dans le main du wrapper,
-  // avec les classes visuelles de la FAQ et sans recréer les boutons métier.
+  // Navigation entre les vues dans le main existant, sans accordéon ni lightbox.
+  const accueil = document.getElementById("lcdp-boutique-accueil");
+  const vues = Array.from(document.querySelectorAll("[data-lcdp-boutique-vue]"));
   const services = Array.from(document.querySelectorAll("[data-lcdp-boutique-service]"));
-  const defilement = document.querySelector(".lcdp-site-main") || document.scrollingElement;
-  let correctionServices = 0;
+  const defilement = document.querySelector(".lcdp-site-main");
+  let vueActive = "";
+  let positionBoutique = 0;
 
-  function afficherService(bouton, ouvert) {
-    const panneau = document.getElementById(bouton.getAttribute("aria-controls"));
-    bouton.setAttribute("aria-expanded", String(ouvert));
-    panneau.hidden = !ouvert;
-    panneau.inert = !ouvert;
-    panneau.setAttribute("aria-hidden", String(!ouvert));
+  function afficherVueBoutique(focus = true) {
+    const hash = window.location.hash.slice(1);
+    const cible = vues.find(vue => vue.dataset.lcdpBoutiqueVue === hash);
+    const suivante = cible ? hash : "";
+    if (suivante === vueActive) return;
+    const precedente = vueActive;
+    if (!precedente) positionBoutique = defilement.scrollTop;
+    accueil.hidden = Boolean(cible);
+    accueil.inert = Boolean(cible);
+    vues.forEach(vue => {
+      vue.hidden = vue !== cible;
+      vue.inert = vue !== cible;
+    });
+    vueActive = suivante;
+    defilement.scrollTop = cible ? 0 : positionBoutique;
+    if (focus) {
+      const element = cible
+        ? cible.querySelector("h1")
+        : services.find(lien => lien.dataset.lcdpBoutiqueService === precedente);
+      element?.focus({ preventScroll: true });
+    }
   }
 
-  services.forEach(bouton => {
-    bouton.addEventListener("click", () => {
-      const position = bouton.getBoundingClientRect().top;
-      const ouvrir = bouton.getAttribute("aria-expanded") !== "true";
-      if (ouvrir) afficherService(bouton, true);
-      services.forEach(autre => {
-        if (autre !== bouton && autre.getAttribute("aria-expanded") === "true") afficherService(autre, false);
-      });
-      if (!ouvrir) afficherService(bouton, false);
-      const maintenirPosition = () => {
-        const ecart = bouton.getBoundingClientRect().top - position;
-        if (defilement && Math.abs(ecart) > 0.5) defilement.scrollTop += ecart;
-      };
-      maintenirPosition();
-      if (correctionServices) window.cancelAnimationFrame(correctionServices);
-      correctionServices = window.requestAnimationFrame(() => {
-        correctionServices = 0;
-        maintenirPosition();
-      });
-    });
-  });
+  window.addEventListener("hashchange", () => afficherVueBoutique());
+  afficherVueBoutique(false);
 
   // Lien direct depuis Mon compte : ouvrir la liste des témoins sans clic supplémentaire.
   const cibleInitiale = window.location.hash;

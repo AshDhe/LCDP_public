@@ -7,11 +7,10 @@
   <meta name="description" content="Boutique club La Clé du Parc.">
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-lightbox-convergence.css?v=20261126-conteneur">
-  <link rel="stylesheet" href="./faq-accordeon.css">
   <script src="../config.js"></script>
   <script src="../OBJET/JSBASE/02-footer.js" data-lcdp-footer-autonome defer></script>
   <script src="./pages-listes-public.js?v=20261123-boutique-cadre" defer></script>
-  <script src="./boutique.js?v=20261126-services-repliables" defer></script>
+  <script src="./boutique.js?v=20261126-services-vues" defer></script>
 </head>
 <body class="lcdp-app-page lcdp-typographie-editoriale-commune">
   <div id="lcdp-attente-arrivee" class="lcdp-attente-plein-ecran" role="status" aria-label="Chargement de la page" hidden>
@@ -24,7 +23,7 @@
   <div class="lcdp-site-page lcdp-app-wrapper">
     <div id="lcdp-bandeau-slot"></div>
     <main class="lcdp-site-main" id="contenu-principal">
-      <section class="lcdp-page-section" aria-labelledby="lcdp-page-titre">
+      <section class="lcdp-page-section" id="lcdp-boutique-accueil" aria-labelledby="lcdp-page-titre">
         <div class="lcdp-page-container">
           <div class="lcdp-page-content lcdp-stack-large lcdp-contenu-editorial">
             <header class="lcdp-editorial-page-heading">
@@ -100,46 +99,66 @@
               </div>
             </section>
 
-            <section class="lcdp-component lcdp-box-carousel lcdp-editorial-card" aria-labelledby="lcdp-boutique-don-titre">
-              <h2 id="lcdp-boutique-don-titre" class="lcdp-box-carousel__title" data-lcdp-boxtext-title>
-                <button type="button" id="lcdp-boutique-don-ouvrir" class="lcdp-faq__question" data-lcdp-boutique-service aria-expanded="false" aria-controls="lcdp-boutique-don-contenu">Dotation financière annuelle</button>
-              </h2>
-              <div id="lcdp-boutique-don-contenu" class="lcdp-faq__panel" role="region" aria-labelledby="lcdp-boutique-don-ouvrir" hidden inert aria-hidden="true">
-                <div class="lcdp-boxtext__content lcdp-editorial-copy" data-lcdp-boxtext-content>
-                  <p>Association de loi 1901, les bénéfices issus des abonnements La Clé du Parc sont alloués, à travers la dotation financière annuelle (DFA), au soutien financier ciblé de projets de préservation et de valorisation des parcs (patrimoine naturel et culturel) sélectionnés par l’association et portés par les parcs du réseau.</p>
-                  <p>Au sein du club, vous avez vous aussi la possibilité de compléter la DFA de l’association en participant financièrement et directement par votre dotation personnelle au soutien des parcs. Vous recevez par mail votre justificatif de versement et l’ensemble des DFA est tracé à l’unité et reversé aux parcs chaque année.</p>
-                  <div class="lcdp-actions-centrees lcdp-editorial-cta">
-                    <a id="lcdp-boutique-don" class="lcdp-button lcdp-button--haut-etroit lcdp-button-primary lcdp-editorial-action-button" href="#lcdp-boutique-don-etat">Faire une DFA</a>
-                  </div>
-                  <p id="lcdp-boutique-don-etat" role="status" hidden>Le service de don n’est pas encore disponible.</p>
-                  <p>Si nécessaire, le suivi de traçabilité La Clé du Parc vous permet de retrouver chaque année trace de votre dotation et de sa prise en compte dans la DFA, sans que ce suivi ne remette en cause la confidentialité de votre versement. La DFA La Clé du Parc peut être déductible de votre impôt sur le revenu. Conservez votre justificatif de versement.</p>
-                  <p>La participation individuelle directe à la DFA est comprise entre 10€ et 150€. Vous pouvez devenir membre bienfaiteur La Clé du Parc en effectuant simultanément la souscription à un abonnement permanent (1A) et le versement d’une DFA personnelle de 150€.</p>
-                  <div class="lcdp-actions-centrees lcdp-editorial-cta">
-                    <a id="lcdp-boutique-bienfaiteur" class="lcdp-button lcdp-button--haut-etroit lcdp-button-accueil-blue lcdp-editorial-action-button" href="#lcdp-boutique-bienfaiteur-etat"><span>Devenir membre<br>bienfaiteur</span></a>
-                  </div>
-                  <p id="lcdp-boutique-bienfaiteur-etat" role="status" hidden>La souscription membre bienfaiteur n’est pas encore disponible.</p>
-                  <p>Le soutien aux parcs de l’association ne se limite pas à la DFA. L’association organise par ailleurs les journées bénévoles qui proposent aux membres de contribuer logistiquement et bénévolement à la préservation et à la valorisation des parcs (patrimoine naturel et culturel).</p>
-                  <div class="lcdp-actions-centrees lcdp-editorial-cta">
-                    <a class="lcdp-button lcdp-button--haut-etroit lcdp-button-orange lcdp-editorial-action-button" href="./benevolat.html">Les journées bénévoles</a>
-                  </div>
+            <nav class="lcdp-box-menu-bouton" aria-label="Services du club">
+              <div class="lcdp-box-menu-bouton__list lcdp-box-menu-bouton__list--single">
+                <a id="lcdp-boutique-don-ouvrir" class="lcdp-button lcdp-button-secondary" href="#dfa" data-lcdp-boutique-service="dfa">Dotation financière annuelle</a>
+                <a id="lcdp-boutique-souscrire-ouvrir" class="lcdp-button lcdp-button-secondary" href="#abonnement" data-lcdp-boutique-service="abonnement">Abonnement</a>
+              </div>
+            </nav>
+
+          </div>
+        </div>
+      </section>
+      <section class="lcdp-page-section" id="lcdp-boutique-vue-dfa" data-lcdp-boutique-vue="dfa" aria-labelledby="lcdp-boutique-don-titre" hidden inert>
+        <div class="lcdp-page-container">
+          <div class="lcdp-page-content lcdp-stack-large lcdp-contenu-editorial">
+            <header class="lcdp-editorial-page-heading">
+              <h1 id="lcdp-boutique-don-titre" class="lcdp-title-page-center" tabindex="-1">Dotation financière annuelle</h1>
+            </header>
+            <div class="lcdp-box-menu-bouton__list lcdp-box-menu-bouton__list--single">
+              <a class="lcdp-button lcdp-button-secondary" href="#boutique" data-lcdp-boutique-retour>Retour à la boutique</a>
+            </div>
+            <section class="lcdp-component lcdp-box-carousel lcdp-editorial-card" aria-label="Dotation financière annuelle">
+              <div class="lcdp-boxtext__content lcdp-editorial-copy" data-lcdp-boxtext-content>
+                <p>Association de loi 1901, les bénéfices issus des abonnements La Clé du Parc sont alloués, à travers la dotation financière annuelle (DFA), au soutien financier ciblé de projets de préservation et de valorisation des parcs (patrimoine naturel et culturel) sélectionnés par l’association et portés par les parcs du réseau.</p>
+                <p>Au sein du club, vous avez vous aussi la possibilité de compléter la DFA de l’association en participant financièrement et directement par votre dotation personnelle au soutien des parcs. Vous recevez par mail votre justificatif de versement et l’ensemble des DFA est tracé à l’unité et reversé aux parcs chaque année.</p>
+                <div class="lcdp-actions-centrees lcdp-editorial-cta">
+                  <a id="lcdp-boutique-don" class="lcdp-button lcdp-button--haut-etroit lcdp-button-primary lcdp-editorial-action-button" href="#lcdp-boutique-don-etat">Faire une DFA</a>
+                </div>
+                <p id="lcdp-boutique-don-etat" role="status" hidden>Le service de don n’est pas encore disponible.</p>
+                <p>Si nécessaire, le suivi de traçabilité La Clé du Parc vous permet de retrouver chaque année trace de votre dotation et de sa prise en compte dans la DFA, sans que ce suivi ne remette en cause la confidentialité de votre versement. La DFA La Clé du Parc peut être déductible de votre impôt sur le revenu. Conservez votre justificatif de versement.</p>
+                <p>La participation individuelle directe à la DFA est comprise entre 10€ et 150€. Vous pouvez devenir membre bienfaiteur La Clé du Parc en effectuant simultanément la souscription à un abonnement permanent (1A) et le versement d’une DFA personnelle de 150€.</p>
+                <div class="lcdp-actions-centrees lcdp-editorial-cta">
+                  <a id="lcdp-boutique-bienfaiteur" class="lcdp-button lcdp-button--haut-etroit lcdp-button-accueil-blue lcdp-editorial-action-button" href="#lcdp-boutique-bienfaiteur-etat"><span>Devenir membre<br>bienfaiteur</span></a>
+                </div>
+                <p id="lcdp-boutique-bienfaiteur-etat" role="status" hidden>La souscription membre bienfaiteur n’est pas encore disponible.</p>
+                <p>Le soutien aux parcs de l’association ne se limite pas à la DFA. L’association organise par ailleurs les journées bénévoles qui proposent aux membres de contribuer logistiquement et bénévolement à la préservation et à la valorisation des parcs (patrimoine naturel et culturel).</p>
+                <div class="lcdp-actions-centrees lcdp-editorial-cta">
+                  <a class="lcdp-button lcdp-button--haut-etroit lcdp-button-orange lcdp-editorial-action-button" href="./benevolat.html">Les journées bénévoles</a>
                 </div>
               </div>
             </section>
+          </div>
+        </div>
+      </section>
 
-            <section class="lcdp-component lcdp-box-carousel lcdp-editorial-card" aria-labelledby="lcdp-boutique-souscrire-titre">
-              <h2 id="lcdp-boutique-souscrire-titre" class="lcdp-box-carousel__title" data-lcdp-boxtext-title>
-                <button type="button" id="lcdp-boutique-souscrire-ouvrir" class="lcdp-faq__question" data-lcdp-boutique-service aria-expanded="false" aria-controls="lcdp-boutique-souscrire-contenu">Abonnement</button>
-              </h2>
-              <div id="lcdp-boutique-souscrire-contenu" class="lcdp-faq__panel" role="region" aria-labelledby="lcdp-boutique-souscrire-ouvrir" hidden inert aria-hidden="true">
-                <div class="lcdp-boxtext__content lcdp-editorial-copy" data-lcdp-boxtext-content>
-                  <p>L’abonnement vous permet de planifier un(s) accès personnel dans un(s) parc du réseau La Clé du Parc sur une date couverte par votre abonnement et d’inviter un(s) membre du club sur cet accès planifié.</p>
-                  <div class="lcdp-actions-centrees lcdp-editorial-cta" aria-label="Actions de la boutique">
-                    <a id="lcdp-demarrer-abonnement" class="lcdp-button lcdp-button--haut-etroit lcdp-button-accueil-blue lcdp-editorial-action-button" href="https://membre.lacleduparc.fr/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza">SOUSCRIRE UN ABONNEMENT</a>
-                  </div>
+      <section class="lcdp-page-section" id="lcdp-boutique-vue-abonnement" data-lcdp-boutique-vue="abonnement" aria-labelledby="lcdp-boutique-souscrire-titre" hidden inert>
+        <div class="lcdp-page-container">
+          <div class="lcdp-page-content lcdp-stack-large lcdp-contenu-editorial">
+            <header class="lcdp-editorial-page-heading">
+              <h1 id="lcdp-boutique-souscrire-titre" class="lcdp-title-page-center" tabindex="-1">Abonnement</h1>
+            </header>
+            <div class="lcdp-box-menu-bouton__list lcdp-box-menu-bouton__list--single">
+              <a class="lcdp-button lcdp-button-secondary" href="#boutique" data-lcdp-boutique-retour>Retour à la boutique</a>
+            </div>
+            <section class="lcdp-component lcdp-box-carousel lcdp-editorial-card" aria-label="Abonnement">
+              <div class="lcdp-boxtext__content lcdp-editorial-copy" data-lcdp-boxtext-content>
+                <p>L’abonnement vous permet de planifier un(s) accès personnel dans un(s) parc du réseau La Clé du Parc sur une date couverte par votre abonnement et d’inviter un(s) membre du club sur cet accès planifié.</p>
+                <div class="lcdp-actions-centrees lcdp-editorial-cta" aria-label="Actions de la boutique">
+                  <a id="lcdp-demarrer-abonnement" class="lcdp-button lcdp-button--haut-etroit lcdp-button-accueil-blue lcdp-editorial-action-button" href="https://membre.lacleduparc.fr/ESPACE-MEMBRE/reserver-membre.html?mode=aboreza">SOUSCRIRE UN ABONNEMENT</a>
                 </div>
               </div>
             </section>
-
           </div>
         </div>
       </section>
