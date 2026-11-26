@@ -155,7 +155,7 @@
     if (!dialogue) throw new Error("Dialogue INFORMATION indisponible.");
     const proposerDa = statutDaSouscription === null || statutDaSouscription === "inconnu";
     dialogue.dataset.lcdpDialogueContext = "conteneur";
-    dialogue.querySelector("[data-lcdp-dialogue-titre]").textContent = "Abonnement nécessaire";
+    dialogue.querySelector("[data-lcdp-dialogue-titre]").textContent = "Droit d’abonnement (DA) nécessaire";
     dialogue.querySelector("[data-lcdp-dialogue-message]").textContent =
       statutDaSouscription === null ? "Vous ne disposez pas encore d'un droit d'abonnement."
         : statutDaSouscription === "inconnu" ? "Votre droit d'abonnement doit être validé pour souscrire."
