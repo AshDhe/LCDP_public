@@ -120,7 +120,7 @@
   }
 
   function construireUrlScriptMenuMembre() {
-    return construireUrlMembre("/ESPACE-MEMBRE/box-menu-burger-membre.js?v=20261126-workflow-impaye-v15");
+    return construireUrlMembre("/ESPACE-MEMBRE/box-menu-burger-membre.js?v=20261126-workflow-impaye-v16");
   }
 
   let chargementScriptMenuMembre = null;
