@@ -202,9 +202,17 @@
       event.preventDefault();
       if (chargement || slot.children.length) return;
       chargement = true;
+      let dialogue, clavier, etats = [];
+      const clore = () => {
+        if (clavier) document.removeEventListener("keydown", clavier);
+        dialogue?.remove();
+        etats.forEach(([element, inert]) => { element.inert = inert; });
+        lien.setAttribute("aria-expanded", "false");
+        lien.focus();
+      };
       try {
         const fragment = await chargerFragment("/OBJET/HTMLBASE/02-dialogue-reference-information.html");
-        const dialogue = fragment.querySelector('[data-lcdp-dialogue-reference="information"]');
+        dialogue = fragment.querySelector('[data-lcdp-dialogue-reference="information"]');
         const titre = dialogue?.querySelector("[data-lcdp-dialogue-titre]");
         const message = dialogue?.querySelector("[data-lcdp-dialogue-message]");
         const fermer = dialogue?.querySelector('[data-lcdp-dialogue-action="compris"]');
@@ -216,28 +224,32 @@
         titre.textContent = "Offre des abonnements";
         message.replaceWith(contenu.content.cloneNode(true));
         fermer.textContent = "Fermer";
-        const zones = Array.from(slot.parentElement.children).filter(element => element !== slot && element.tagName !== "TEMPLATE");
-        const etats = zones.map(element => [element, element.inert]);
-        const clore = () => {
-          document.removeEventListener("keydown", clavier);
-          dialogue.remove();
-          etats.forEach(([element, inert]) => { element.inert = inert; });
-          lien.setAttribute("aria-expanded", "false");
-          lien.focus();
-        };
-        const clavier = event => {
-          if (event.key === "Escape") { event.preventDefault(); clore(); }
-          else if (event.key === "Tab") { event.preventDefault(); fermer.focus(); }
-        };
+        const croix = document.createElement("button");
+        croix.type = "button";
+        croix.className = "lcdp-box-dialogue-bouton__close";
+        croix.setAttribute("aria-label", "Fermer");
+        croix.textContent = "×";
+        dialogue.appendChild(croix);
+        croix.addEventListener("click", clore, { once: true });
         fermer.addEventListener("click", clore, { once: true });
         dialogue.addEventListener("click", event => { if (event.target === dialogue) clore(); });
+        clavier = event => {
+          if (event.key === "Escape") { event.preventDefault(); clore(); }
+          else if (event.key === "Tab") {
+            event.preventDefault();
+            (document.activeElement === croix ? fermer : croix).focus();
+          }
+        };
+        etats = Array.from(slot.parentElement.children)
+          .filter(element => element !== slot && element.tagName !== "TEMPLATE")
+          .map(element => [element, element.inert]);
         slot.replaceChildren(fragment);
         etats.forEach(([element]) => { element.inert = true; });
         lien.setAttribute("aria-expanded", "true");
         document.addEventListener("keydown", clavier);
-        titre.setAttribute("tabindex", "-1");
-        titre.focus();
+        croix.focus();
       } catch (error) {
+        clore();
         console.error("Offre des abonnements indisponible :", error);
       } finally { chargement = false; }
     });
