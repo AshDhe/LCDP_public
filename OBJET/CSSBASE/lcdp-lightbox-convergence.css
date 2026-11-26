@@ -418,3 +418,10 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
   .lcdp-dialogue-ref__bouton { transition: none; }
   .lcdp-dialogue-ref__bouton:active { transform: none; }
 }
+
+/* Paiement CB : variante du dialogue officiel, sans style local. */
+[data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-details] {font-size:14px;line-height:1.6;color:#475569;margin:10px 0 0;overflow-wrap:anywhere;}
+[data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-message][hidden] {display:none!important;}
+[data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-payer] {min-height:64px;padding:14px 18px;font-size:15px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:#4b6333;background-image:linear-gradient(to bottom right,#4e6838,#3d522c);border-color:#4b6333;color:#fff;box-shadow:0 4px 10px rgb(75 99 51 / 15%);}
+[data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-payer]:hover:not(:disabled) {background:#3d5129;}
+[data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-payer][hidden] {display:none!important;}
