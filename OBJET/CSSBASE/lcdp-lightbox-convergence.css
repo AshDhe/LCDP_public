@@ -1,3 +1,5 @@
+@import url("./lcdp-attente.css?v=20261126-v1");
+
 /* LCDP — convergence progressive des dialogues / phase 1.
    Socle opt-in réservé à l'accueil membre et aux dialogues qu'il instancie.
    Inspiration Tailwind (tokens / surfaces / états), CSS navigateur sans Preflight.
@@ -487,21 +489,3 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
 }
 
 
-/* Objet transverse : état d'attente d'un bouton LCDP, variante du spinner c085. */
-button.lcdp-action-attente[aria-busy="true"]::before {
-  content:"";
-  display:inline-block;
-  box-sizing:border-box;
-  width:20px;height:20px;flex:0 0 20px;
-  margin-inline-end:8px;
-  vertical-align:middle;
-  border:2px solid rgba(6,95,70,.15);
-  border-top-color:#e59834;
-  border-radius:50%;
-  background:radial-gradient(circle,#4e6838 0 1.5px,transparent 1.6px);
-  animation:lcdp-action-attente-tourne .8s linear infinite;
-}
-@keyframes lcdp-action-attente-tourne {to {transform:rotate(360deg);}}
-@media(prefers-reduced-motion:reduce) {
-  button.lcdp-action-attente[aria-busy="true"]::before {animation:none;}
-}
