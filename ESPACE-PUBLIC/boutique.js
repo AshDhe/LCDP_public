@@ -25,7 +25,7 @@
       if (reponse.status === 401) return "connexion";
       const data = await reponse.json().catch(() => null);
       if (reponse.ok && data?.success === true) {
-        if (data.connected === true) return "connecte";
+        if (data.connected === true) return data;
         if (data.connected === false) return "connexion";
       }
     } catch (error) {
@@ -59,7 +59,7 @@
       }
       try {
         const session = await lireSessionBoutique();
-        if (session === "connecte") navigationDfa = (await action()) === true && transitionDfa;
+        if (session?.connected === true) navigationDfa = (await action(session)) === true && transitionDfa;
         else {
           if (transitionDfa) attenteDfa(false);
           await ouvrirDialogueBoutique({type: session === "connexion" ? "connexion" : "session-inconnue"});
@@ -118,7 +118,9 @@
     if (!data || !Object.hasOwn(data, "statuda") || !Object.hasOwn(data, "daactive")) return { type: "inconnu" };
     const statut = String(data.statuda ?? "").trim().toLowerCase();
     if (!["", "oui", "non", "encours"].includes(statut) || ![true, false, null].includes(data.daactive)) return { type: "inconnu" };
-    if (data.daactive === true) return { type: statut === "oui" ? "validee" : "encours" };
+    if (statut === "oui") return { type: "validee" };
+    if (data.daactive === true && statut !== "encours" && statut !== "non") return { type: "inconnu" };
+    if (data.daactive === true && statut === "encours") return { type: "encours" };
     if (data.daactive === false) {
       const date = data.datenext ? Date.parse(data.datenext) : NaN;
       if (Number.isFinite(date) && date <= maintenant) return { type: "renouvelable" };
@@ -152,6 +154,10 @@
 
   function presentationSituationDa(situation) {
     switch (situation.type) {
+      case "impaye":
+        return { titre: "Abonnement impayé", message: "Vous avez un impayé sur un abonnement. Vous ne pouvez pas souscrire un nouvel abonnement tant que cet impayé n’est pas régularisé." };
+      case "compte-suspendu":
+        return { titre: "Souscription indisponible", message: "Votre compte ne permet pas actuellement de souscrire un abonnement." };
       case "absente":
         return { titre: "Droit d’abonnement (DA) nécessaire", message: "Vous ne disposez pas encore d’un droit d’abonnement. Vous pouvez faire votre demande de DA.", action: "Faire ma demande", destination: "da" };
       case "renouvelable":
@@ -236,8 +242,26 @@
     }
   }
 
-  protegerActionBoutique(souscrire, async () => {
-    const situation = await lireSituationDaSouscription();
+  function situationSouscriptionDepuisIndex(session) {
+    // Le statut global du compte prévaut sur le statut de l'abonnement du jour.
+    if (!Array.isArray(session?.causesSuspension) || typeof session.ecritureAutorisee !== "boolean") return { type: "inconnu" };
+    if (session.causesSuspension.includes("impaye")) return { type: "impaye" };
+    if (!session.ecritureAutorisee) return { type: "compte-suspendu" };
+    if (!Object.hasOwn(session, "statuda")) return { type: "inconnu" };
+    const statut = String(session.statuda ?? "").trim().toLowerCase();
+    if (statut === "oui") return { type: "validee" };
+    if (statut === "encours") return { type: "encours" };
+    if (statut === "non" || statut === "") return { type: "contexte-da" };
+    return { type: "inconnu" };
+  }
+
+  protegerActionBoutique(souscrire, async session => {
+    let situation = situationSouscriptionDepuisIndex(session);
+    if (situation.type === "contexte-da") {
+      situation = await lireSituationDaSouscription();
+      // Une divergence entre deux lectures n'est jamais présentée comme une DA en cours.
+      if (situation.type === "encours" || situation.type === "validee") situation = { type: "inconnu" };
+    }
     if (situation.type === "validee" && souscrire.hasAttribute("href")) {
       window.location.assign(souscrire.href);
       return;
