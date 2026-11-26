@@ -195,10 +195,10 @@
   // Plaquette commerciale : les noms et capacités sont lus dans les pivots
   // applicables. Seules les fenêtres de vente/démarrage et le Duo de base sont fixes.
   const CALENDRIER_OFFRES = {
-    "1J": ["1 jour", "Jour choisi", "De M à M+2"],
-    "1M": ["1 mois", "Le 1er du mois", "M+1 ou M+2"],
-    "3M": ["3 mois", "Le 1er du mois", "De M+1 à M+3"],
-    "5M": ["5 mois", "Le 1er du mois", "De M+1 à M+4"],
+    "1J": ["1 jour", "Jour choisi · M à M+2", "Souscription chaque mois"],
+    "1M": ["1 mois", "1er du mois · M+1 ou M+2", "Souscription chaque mois"],
+    "3M": ["3 mois", "1er du mois · M+1 à M+3", "Souscription chaque mois"],
+    "5M": ["5 mois", "1er du mois · M+1 à M+4", "Souscription chaque mois"],
     "1A": ["12 mois", "1er janvier", "Souscription de juillet à décembre"],
     "11M": ["11 mois", "1er février", "Souscription en janvier"],
     "10M": ["10 mois", "1er mars", "Souscription en février"]
