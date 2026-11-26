@@ -131,7 +131,20 @@
 
 /* Gabarit commun Stripe : espace avant l'action officielle, sans modifier son CSS. */
 .lcdp-stripe-page {font-size:16px;line-height:1.5;}
-.lcdp-stripe-page #paiement-formulaire > .lcdp-actions-centrees {margin:24px 0 0;}
+/* La zone d'action réserve un espace réel après les champs Stripe, même
+   si la page appelante réinitialise les marges des boutons centrés. */
+.lcdp-stripe-page #paiement-formulaire > .lcdp-actions-centrees {
+  box-sizing:border-box;
+  margin:0 !important;
+  padding-block-start:32px !important;
+  padding-block-end:0 !important;
+}
+.lcdp-stripe-page #paiement-formulaire #bouton-payer.lcdp-button--deux-niveaux > span {
+  font-size:12px;
+}
+.lcdp-stripe-page #paiement-formulaire #bouton-payer.lcdp-button--deux-niveaux > span > strong {
+  font-size:16px;
+}
 /* Les pages autonomes utilisent également le conteneur officiel c085. */
 body.lcdp-stripe-page > main.lcdp-stripe.lcdp-app-wrapper {display:block;width:min(100%,448px);max-width:448px;height:auto;max-height:none;min-height:0;margin:0 auto;overflow:visible;}
 body.lcdp-stripe-page > main.lcdp-stripe.lcdp-app-wrapper .lcdp-stripe__entete {padding:16px 18px;}
