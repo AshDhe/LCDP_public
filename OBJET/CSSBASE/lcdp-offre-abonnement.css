@@ -7,7 +7,8 @@
   font-family:ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-size:1rem;line-height:1.5;text-align:left;color:#111827;
 }
-.lcdp-offre-abonnement__scroll{width:100%;min-width:0;max-height:min(54dvh,420px);overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;scrollbar-width:thin;scrollbar-gutter:stable;}
+/* Un seul défilement vertical : la carte du dialogue, jamais la liste interne. */
+.lcdp-offre-abonnement__scroll{width:100%;min-width:0;max-height:none;overflow:visible;}
 .lcdp-offre-abonnement__scroll[hidden],.lcdp-offre-abonnement__etat[hidden]{display:none!important;}
 .lcdp-offre-abonnement__etat{font-size:.875rem;line-height:1.25rem;color:#6b7280;text-align:center;}
 .lcdp-offre-abonnement__table{width:100%;min-width:0;}
@@ -31,7 +32,7 @@
 .lcdp-offre-abonnement__quotas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;text-align:center;align-items:center;}
 .lcdp-offre-abonnement__quota{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.25rem;min-width:0;}
 .lcdp-offre-abonnement__badge{display:inline-block;padding:.125rem .5rem;border-radius:.375rem;background:#f3f4f6;color:#374151;font-size:.75rem;line-height:1rem;font-weight:600;}
-.lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card{box-sizing:border-box;width:min(100%,32rem);max-width:min(100%,32rem);min-width:0;max-height:100%;padding:.75rem 0;animation:lcdp-offre-apparition .24s ease-out both;}
+.lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card{box-sizing:border-box;width:min(100%,32rem);max-width:min(100%,32rem);min-width:0;min-height:0;max-height:100%;max-height:min(100%,calc(100dvh - 16px));overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;padding:.75rem 0;animation:lcdp-offre-apparition .24s ease-out both;}
 @keyframes lcdp-offre-apparition{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 #lcdp-afficher-tableaux-abonnements[aria-busy="true"]{cursor:progress;opacity:.75;transition:opacity 150ms ease;}
 @media(prefers-reduced-motion:reduce){.lcdp-offre-abonnement__dialogue > .lcdp-dialogue-ref__card{animation:none;}.lcdp-offre-abonnement__liste .lcdp-offre-abonnement__ligne,#lcdp-afficher-tableaux-abonnements[aria-busy="true"]{transition:none;}}
