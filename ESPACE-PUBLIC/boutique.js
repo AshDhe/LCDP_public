@@ -164,7 +164,7 @@
     if (controleSouscriptionEnCours) return;
     controleSouscriptionEnCours = true;
     souscrire.setAttribute("aria-busy", "true");
-    const libelle = souscrire.textContent;
+    const libelle = Array.from(souscrire.childNodes);
     souscrire.textContent = "Vérification…";
     try {
       const situation = await lireSituationDaSouscription();
@@ -176,7 +176,7 @@
     } catch (error) {
       console.error("Contrôle DA :", error);
     } finally {
-      souscrire.textContent = libelle;
+      souscrire.replaceChildren(...libelle);
       souscrire.removeAttribute("aria-busy");
       controleSouscriptionEnCours = false;
     }
