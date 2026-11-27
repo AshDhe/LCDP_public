@@ -94,3 +94,37 @@ html.lcdp-planning-membre-ready #lcdp-planning-attente.lcdp-attente--active {dis
 
 /* Les éléments internes de l'attente respectent hidden, y compris le pictogramme. */
 #lcdp-attente-page-membre [hidden] {display:none!important;}
+
+/* Attente des mentions légales : seul l'indicateur extérieur est visible. */
+@keyframes lcdp-hello-legal-spinner-tourne {
+  to { transform: rotate(360deg); }
+}
+/* Spinner indépendant pendant le chargement des mentions légales depuis Hello.
+   L'état de chargement est déjà placé dans le contenu par documents-legaux.js :
+   aucune modification du composant commun ni des interactions de fermeture. */
+body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error)) > .lcdp-legal-lightbox__card {
+  opacity: 0;
+  pointer-events: none;
+}
+body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error))::before {
+  content: "";
+  position: absolute;
+  top: calc(50% - 38px);
+  left: calc(50% - 38px);
+  box-sizing: border-box;
+  width: 76px;
+  height: 76px;
+  border: 5px solid #dce8d9;
+  border-top-color: #e59834;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #4e6838 0 5px, #fff 5.5px);
+  box-shadow: 0 0 0 8px rgba(255,255,255,.17), 0 12px 28px rgba(0,0,0,.23);
+  animation: lcdp-hello-legal-spinner-tourne .8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-legal-lightbox__status:not(.lcdp-legal-lightbox__status--error))::before {
+    animation: none;
+  }
+}
