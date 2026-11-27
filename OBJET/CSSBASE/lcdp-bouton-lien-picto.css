@@ -4859,3 +4859,33 @@ html[data-lcdp-css~="c085"] .lcdp-boutique-services > .public-home__action {
     }
 
 .lcdp-page-accueil-membre #mention-suspension-abonnement-membre > button { margin: 0; }
+
+/* Commande Effacer du formulaire de filtrage des accès. */
+:is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__effacer {
+        flex:0 0 auto;
+        width:auto;
+        min-width:0;
+        min-height:0;
+        margin:0;
+        padding:2px 0;
+        border:0;
+        border-radius:0;
+        background:none;
+        box-shadow:none;
+        color:#a8a29e;
+        font-size:12px;
+        font-weight:700;
+        text-decoration:underline;
+        text-decoration-color:#d6d3d1;
+        text-underline-offset:2px;
+        cursor:pointer;
+      }
+
+:is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__effacer:hover:not(:disabled) {
+        color:var(--lcdp-color-logo-green);
+      }
+
+:is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__effacer:disabled {
+        opacity:.5;
+        cursor:not-allowed;
+      }

@@ -1,0 +1,53 @@
+/* TUNNEL DE COMMANDE — coque et transitions du parcours abonnement. */
+.lcdp-box-workflow-abonnement {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.46);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lcdp-box-workflow-abonnement__card {
+  position: relative;
+  width: min(100%, 560px);
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow: auto;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
+  transition: none;
+}
+
+.lcdp-box-workflow-abonnement--emails-famille .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 860px);
+}
+
+.lcdp-box-workflow-abonnement--calendrier-mois .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 760px);
+}
+
+.lcdp-box-workflow-abonnement--calendrier-an .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 820px);
+}
+
+.lcdp-box-workflow-abonnement--recapitulatif .lcdp-box-workflow-abonnement__card,
+.lcdp-box-workflow-abonnement--paiement .lcdp-box-workflow-abonnement__card {
+  width: min(100%, 760px);
+}
+
+.lcdp-box-workflow-abonnement__content {
+  width: 100%;
+  opacity: 1;
+  transition: opacity 70ms ease-out;
+}
+
+.lcdp-box-workflow-abonnement__content--transition {
+  opacity: 0;
+}

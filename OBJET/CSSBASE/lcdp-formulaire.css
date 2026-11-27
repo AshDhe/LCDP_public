@@ -1,4 +1,629 @@
-/* LCDP — FORMULAIRES : contenu et disposition, hors apparence des commandes. */
+/* FORMULAIRES — champs, saisie, sélection et filtrage ; commandes dans leur propriétaire. */
+
+/* OBJET : CHAMP DE FORMULAIRE */
+.lcdp-box-champ-formulaire {
+  width: 100%;
+  text-align: left;
+}
+
+.lcdp-box-champ-formulaire__label-zone {
+  width: 100%;
+  margin-bottom: var(--lcdp-space-2);
+}
+
+.lcdp-box-champ-formulaire__label,
+.lcdp-box-champ-formulaire__heading {
+  margin: 0;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--lcdp-color-text);
+  text-align: left;
+}
+
+.lcdp-box-champ-formulaire__required {
+  color: var(--lcdp-color-text-muted);
+  font-weight: 700;
+}
+
+.lcdp-box-champ-formulaire__description {
+  margin: 0 0 var(--lcdp-space-2);
+  color: var(--lcdp-color-text-muted);
+  text-align: left;
+}
+
+.lcdp-box-champ-formulaire__control {
+  width: 100%;
+}
+
+.lcdp-box-champ-formulaire input[type="text"],
+.lcdp-box-champ-formulaire input[type="email"],
+.lcdp-box-champ-formulaire input[type="password"],
+.lcdp-box-champ-formulaire input[type="tel"],
+.lcdp-box-champ-formulaire input[type="number"],
+.lcdp-box-champ-formulaire input[type="date"],
+.lcdp-box-champ-formulaire select,
+.lcdp-box-champ-formulaire textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  font-family: var(--lcdp-font-main);
+  font-size: 1rem;
+  line-height: 1.35;
+  color: var(--lcdp-color-text);
+  background: var(--lcdp-color-surface);
+  text-align: left;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lcdp-box-champ-formulaire textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Mode générique de consultation : valeur multiligne et responsive. */
+.lcdp-box-champ-formulaire__lecture {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid #d8c8b8;
+  border-radius: var(--lcdp-radius-medium);
+  background: #f3ede4;
+  box-shadow: inset 0 0 0 1px rgba(123, 105, 88, 0.10);
+  color: var(--lcdp-color-text);
+  font-family: var(--lcdp-font-main);
+  font-size: 1rem;
+  line-height: 1.35;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+}
+
+.lcdp-box-champ-formulaire input::placeholder,
+.lcdp-box-champ-formulaire textarea::placeholder {
+  color: rgba(31, 42, 36, 0.45);
+}
+
+.lcdp-box-champ-formulaire input:focus,
+.lcdp-box-champ-formulaire select:focus,
+.lcdp-box-champ-formulaire textarea:focus {
+  outline: none;
+  border-color: var(--lcdp-color-primary);
+  box-shadow: 0 0 0 3px var(--lcdp-color-focus);
+}
+
+.lcdp-box-champ-formulaire__checkbox-line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lcdp-space-2);
+  margin-top: var(--lcdp-space-2);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--lcdp-color-text-muted);
+  cursor: pointer;
+  text-align: left;
+}
+
+.lcdp-box-champ-formulaire__checkbox-line input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+  accent-color: var(--lcdp-color-primary);
+  cursor: pointer;
+}
+
+.lcdp-box-champ-formulaire__checkbox-line span {
+  display: inline-block;
+  text-align: left;
+}
+
+.lcdp-box-champ-formulaire__aide {
+  margin-top: var(--lcdp-space-1);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-champ-formulaire__label,
+  .lcdp-box-champ-formulaire__heading {
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+
+  .lcdp-box-champ-formulaire__description {
+    font-size: var(--lcdp-font-size-paragraph-desktop);
+  }
+
+  .lcdp-box-champ-formulaire input[type="text"],
+  .lcdp-box-champ-formulaire input[type="email"],
+  .lcdp-box-champ-formulaire input[type="password"],
+  .lcdp-box-champ-formulaire input[type="tel"],
+  .lcdp-box-champ-formulaire input[type="number"],
+  .lcdp-box-champ-formulaire input[type="date"],
+  .lcdp-box-champ-formulaire select {
+    min-height: 48px;
+    padding: 11px 14px;
+    font-size: 1rem;
+  }
+
+  .lcdp-box-champ-formulaire textarea {
+    min-height: 120px;
+    padding: 11px 14px;
+    font-size: 1rem;
+  }
+
+  .lcdp-box-champ-formulaire__lecture {
+    min-height: 48px;
+    padding: 11px 14px;
+    font-size: 1rem;
+  }
+
+  .lcdp-box-champ-formulaire__checkbox-line {
+    font-size: 1rem;
+  }
+}
+
+
+/* Variante générique : champ de donnée modifiable.
+   Utilisée pour une donnée déjà enregistrée, affichée en lecture seule,
+   avec action de modification intégrée à droite du champ. */
+.lcdp-box-champ-formulaire--modifiable {
+  --lcdp-champ-modifiable-action-size: 40px;
+  --lcdp-champ-modifiable-action-offset: 7px;
+  --lcdp-champ-modifiable-icon-size: 19px;
+}
+
+.lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__control {
+  position: relative;
+}
+
+.lcdp-box-champ-formulaire--modifiable input[type="text"],
+.lcdp-box-champ-formulaire--modifiable input[type="email"],
+.lcdp-box-champ-formulaire--modifiable input[type="password"],
+.lcdp-box-champ-formulaire--modifiable input[type="tel"],
+.lcdp-box-champ-formulaire--modifiable input[type="number"],
+.lcdp-box-champ-formulaire--modifiable input[type="date"],
+.lcdp-box-champ-formulaire--modifiable select,
+.lcdp-box-champ-formulaire--modifiable textarea,
+.lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__lecture {
+  padding-right: calc(var(--lcdp-champ-modifiable-action-size) + var(--lcdp-space-3)) !important;
+}
+
+
+
+
+
+
+
+@media (max-width: 380px) {
+  .lcdp-box-champ-formulaire--modifiable {
+    --lcdp-champ-modifiable-action-size: 38px;
+    --lcdp-champ-modifiable-action-offset: 6px;
+    --lcdp-champ-modifiable-icon-size: 18px;
+  }
+
+  .lcdp-box-champ-formulaire--modifiable input[type="text"],
+  .lcdp-box-champ-formulaire--modifiable input[type="email"],
+  .lcdp-box-champ-formulaire--modifiable input[type="password"],
+  .lcdp-box-champ-formulaire--modifiable input[type="tel"],
+  .lcdp-box-champ-formulaire--modifiable input[type="number"],
+  .lcdp-box-champ-formulaire--modifiable input[type="date"],
+  .lcdp-box-champ-formulaire--modifiable select,
+  .lcdp-box-champ-formulaire--modifiable textarea,
+  .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__lecture {
+    padding-right: calc(var(--lcdp-champ-modifiable-action-size) + var(--lcdp-space-2)) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-champ-formulaire--modifiable {
+    --lcdp-champ-modifiable-action-size: 44px;
+    --lcdp-champ-modifiable-action-offset: 8px;
+    --lcdp-champ-modifiable-icon-size: 21px;
+  }
+}
+
+
+
+
+/* Variante générique : champ de donnée avec badge.
+   Utilisée pour une donnée déjà enregistrée dont le statut est illustré
+   par une image non fonctionnelle placée au début du champ. */
+.lcdp-box-champ-formulaire--badge {
+  --lcdp-champ-badge-size: 40px;
+  --lcdp-champ-badge-offset: 7px;
+}
+
+
+
+
+
+.lcdp-box-champ-formulaire__badge {
+  width: var(--lcdp-champ-badge-size);
+  height: var(--lcdp-champ-badge-size);
+  min-width: 0;
+  min-height: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  position: absolute;
+  top: 50%;
+  left: var(--lcdp-champ-badge-offset);
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.lcdp-box-champ-formulaire__badge[hidden] {
+  display: none !important;
+}
+
+.lcdp-box-champ-formulaire__badge-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+@media (max-width: 380px) {
+  .lcdp-box-champ-formulaire--badge {
+    --lcdp-champ-badge-size: 38px;
+    --lcdp-champ-badge-offset: 6px;
+  }
+
+  
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-champ-formulaire--badge {
+    --lcdp-champ-badge-size: 44px;
+    --lcdp-champ-badge-offset: 8px;
+  }
+}
+
+/* Champs renseignés automatiquement / en lecture seule.
+   Règle placée en fin de fichier pour éviter qu'un style générique
+   d'input blanc reprenne le dessus. */
+.lcdp-box-champ-formulaire input[type="text"][readonly],
+.lcdp-box-champ-formulaire input[type="email"][readonly],
+.lcdp-box-champ-formulaire input[type="password"][readonly],
+.lcdp-box-champ-formulaire input[type="tel"][readonly],
+.lcdp-box-champ-formulaire input[type="number"][readonly],
+.lcdp-box-champ-formulaire input[type="date"][readonly],
+.lcdp-box-champ-formulaire textarea[readonly],
+.lcdp-box-champ-formulaire input[type="text"]:read-only,
+.lcdp-box-champ-formulaire input[type="email"]:read-only,
+.lcdp-box-champ-formulaire input[type="password"]:read-only,
+.lcdp-box-champ-formulaire input[type="tel"]:read-only,
+.lcdp-box-champ-formulaire input[type="number"]:read-only,
+.lcdp-box-champ-formulaire input[type="date"]:read-only,
+.lcdp-box-champ-formulaire textarea:read-only {
+  border-color: #d8c8b8 !important;
+  background: #f3ede4 !important;
+  color: var(--lcdp-color-text) !important;
+  cursor: default;
+  box-shadow: inset 0 0 0 1px rgba(123, 105, 88, 0.10) !important;
+}
+
+.lcdp-box-champ-formulaire input[readonly]:focus,
+.lcdp-box-champ-formulaire textarea[readonly]:focus,
+.lcdp-box-champ-formulaire input:read-only:focus,
+.lcdp-box-champ-formulaire textarea:read-only:focus {
+  border-color: #c7b6a6 !important;
+  box-shadow: inset 0 0 0 1px rgba(123, 105, 88, 0.14) !important;
+}
+
+/* Correctif de priorité : badge générique explicitement placé à gauche.
+   Cette règle doit rester après les règles read-only pour éviter toute reprise
+   d'une ancienne variante badge à droite. */
+.lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__control {
+  position: relative;
+}
+
+.lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__badge {
+  left: var(--lcdp-champ-badge-offset) !important;
+  right: auto !important;
+}
+
+.lcdp-box-champ-formulaire--badge input[type="text"],
+.lcdp-box-champ-formulaire--badge input[type="email"],
+.lcdp-box-champ-formulaire--badge input[type="password"],
+.lcdp-box-champ-formulaire--badge input[type="tel"],
+.lcdp-box-champ-formulaire--badge input[type="number"],
+.lcdp-box-champ-formulaire--badge input[type="date"],
+.lcdp-box-champ-formulaire--badge select,
+.lcdp-box-champ-formulaire--badge textarea,
+.lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
+  padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-3)) !important;
+  padding-right: 14px !important;
+}
+
+@media (max-width: 380px) {
+  .lcdp-box-champ-formulaire--badge input[type="text"],
+  .lcdp-box-champ-formulaire--badge input[type="email"],
+  .lcdp-box-champ-formulaire--badge input[type="password"],
+  .lcdp-box-champ-formulaire--badge input[type="tel"],
+  .lcdp-box-champ-formulaire--badge input[type="number"],
+  .lcdp-box-champ-formulaire--badge input[type="date"],
+  .lcdp-box-champ-formulaire--badge select,
+  .lcdp-box-champ-formulaire--badge textarea,
+  .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
+    padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-2)) !important;
+    padding-right: 14px !important;
+  }
+}
+
+/* Variante générique : saisie de code en quatre cases.
+   L’habillage et le focus restent ceux du champ commun. */
+.lcdp-box-champ-formulaire--code {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.lcdp-box-champ-formulaire__code-cases {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--lcdp-space-2);
+}
+.lcdp-box-champ-formulaire .lcdp-box-champ-formulaire__code-cases input {
+  min-width: 0;
+  padding-inline: 4px;
+  text-align: center;
+}
+
+/* OBJET : FORMULAIRE */
+.lcdp-box-formulaire-page {
+  width: 100%;
+  padding-top: var(--lcdp-space-4);
+  padding-bottom: var(--lcdp-space-4);
+}
+
+.lcdp-box-formulaire-page__inner {
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+.lcdp-box-formulaire {
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface-soft);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-box-formulaire__header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-formulaire__header[hidden],
+.lcdp-box-formulaire__header:not(:has(:not([hidden]))) {
+  display: none !important;
+}
+
+.lcdp-box-formulaire__title {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--lcdp-color-text);
+  font-size: 1.4rem;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.lcdp-box-formulaire__subtitle {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+  text-align: center;
+}
+
+.lcdp-box-formulaire__subtitle.lcdp-box-formulaire__subtitle--accent {
+  color: var(--lcdp-color-orange);
+}
+
+.lcdp-box-formulaire__intro {
+  color: var(--lcdp-color-text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-formulaire__intro p {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--lcdp-color-text);
+}
+
+/* Introduction : texte sans gras, y compris les balises internes. */
+.lcdp-box-formulaire .lcdp-box-formulaire__intro,
+.lcdp-box-formulaire .lcdp-box-formulaire__intro * {
+  font-weight: 400 !important;
+}
+
+.lcdp-box-formulaire__fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-box-formulaire__actions {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-box-formulaire__note {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.35;
+  color: var(--lcdp-color-text-muted);
+  text-align: left;
+}
+
+/* Champs fermés : fond gris clair lisible, non blanc, non beige. */
+.lcdp-box-formulaire input[readonly],
+.lcdp-box-formulaire textarea[readonly],
+.lcdp-box-formulaire select[readonly],
+.lcdp-box-formulaire input:disabled,
+.lcdp-box-formulaire textarea:disabled,
+.lcdp-box-formulaire select:disabled,
+.lcdp-box-formulaire [aria-readonly="true"] {
+  background: #f1f3f5 !important;
+  border-color: rgba(100, 116, 139, 0.34) !important;
+  color: var(--lcdp-color-text) !important;
+  -webkit-text-fill-color: var(--lcdp-color-text);
+  opacity: 1;
+}
+
+.lcdp-box-formulaire input[readonly]:focus,
+.lcdp-box-formulaire textarea[readonly]:focus,
+.lcdp-box-formulaire select[readonly]:focus,
+.lcdp-box-formulaire input:disabled:focus,
+.lcdp-box-formulaire textarea:disabled:focus,
+.lcdp-box-formulaire select:disabled:focus,
+.lcdp-box-formulaire [aria-readonly="true"]:focus {
+  border-color: rgba(100, 116, 139, 0.42) !important;
+  box-shadow: none !important;
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-formulaire-page {
+    padding-top: var(--lcdp-space-2);
+    padding-bottom: var(--lcdp-space-5);
+  }
+
+  .lcdp-box-formulaire-page__inner {
+    max-width: 540px;
+  }
+
+  .lcdp-box-formulaire {
+    padding: var(--lcdp-space-4);
+    padding-top: var(--lcdp-space-3);
+  }
+
+  .lcdp-box-formulaire__title {
+    font-size: 1.6rem;
+  }
+}
+
+/* Variantes génériques de formulaire */
+
+.lcdp-box-formulaire-page--compact .lcdp-box-formulaire-page__inner {
+  max-width: 440px;
+}
+
+.lcdp-box-formulaire__note--after-control {
+  margin-top: var(--lcdp-space-2);
+}
+
+.lcdp-box-formulaire__note--intro-center {
+  margin: -4px auto 0;
+  max-width: 360px;
+  font-size: 0.98rem;
+  line-height: 1.35;
+  font-weight: 400;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-formulaire-page--compact .lcdp-box-formulaire-page__inner {
+    max-width: 440px;
+  }
+}
+
+/* Mode générique de consultation : valeur multiligne responsive. */
+.lcdp-box-formulaire--lecture .lcdp-box-champ-formulaire__lecture {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid #d8c8b8;
+  border-radius: var(--lcdp-radius-medium);
+  background: #f3ede4;
+  box-shadow: inset 0 0 0 1px rgba(123, 105, 88, 0.10);
+  color: var(--lcdp-color-text);
+  font-family: var(--lcdp-font-main);
+  font-size: 1rem;
+  line-height: 1.35;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+}
+
+.lcdp-box-formulaire--lecture
+  .lcdp-box-champ-formulaire--modifiable
+  .lcdp-box-champ-formulaire__lecture {
+  padding-right: calc(var(--lcdp-champ-modifiable-action-size) + var(--lcdp-space-3)) !important;
+}
+
+.lcdp-box-formulaire--lecture
+  .lcdp-box-champ-formulaire--badge
+  .lcdp-box-champ-formulaire__lecture {
+  padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-3)) !important;
+}
+
+@media (max-width: 380px) {
+  .lcdp-box-formulaire--lecture
+    .lcdp-box-champ-formulaire--modifiable
+    .lcdp-box-champ-formulaire__lecture {
+    padding-right: calc(var(--lcdp-champ-modifiable-action-size) + var(--lcdp-space-2)) !important;
+  }
+
+  .lcdp-box-formulaire--lecture
+    .lcdp-box-champ-formulaire--badge
+    .lcdp-box-champ-formulaire__lecture {
+    padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-2)) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-formulaire--lecture .lcdp-box-champ-formulaire__lecture {
+    min-height: 48px;
+    padding: 11px 14px;
+  }
+}
+
 /* Disposition du formulaire de connexion. */
 #formulaire-connexion-membre .lcdp-box-formulaire__actions {
       display: flex !important;
@@ -16,3 +641,147 @@
 
 /* Champ de confirmation du code de préparation d'accès. */
 body:not(.lcdp-security-tunnel) #coda-actualisation.lcdp-setup-flow__fieldset {margin:24px 0 0;}
+
+/* OBJET : FORMULAIRE DE FILTRAGE DES ACCÈS */
+/* Grille de filtrage accès — composant CSS commun. */
+      /* MES ACCÈS : présentation unifiée avec les variables CSS communes. */
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres {
+        display:flex;
+        flex-direction:column;
+        width:100%;
+        min-width:0;
+        gap:14px;
+        margin:0;
+        padding:9.6px 16px;
+        border:1px solid #e7e5e4;
+        border-radius:var(--lcdp-radius-medium,16px);
+        background:#fafaf9;
+        color:var(--lcdp-color-text);
+        font-family:var(--lcdp-font-main);
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__champs {
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:12px 10px;
+        width:100%;
+        min-width:0;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__champ {
+        display:flex;
+        flex-direction:column;
+        gap:5px;
+        min-width:0;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__champ[data-lcdp-filtre-champ="mois"] {
+        grid-column:1;
+        grid-row:1;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__champ[data-lcdp-filtre-champ="parc"] {
+        grid-column:2;
+        grid-row:1;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__champ[data-lcdp-filtre-champ="departement"] {
+        grid-column:1 / -1;
+        grid-row:2;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__label {
+        color:#a8a29e;
+        font-size:10px;
+        font-weight:700;
+        line-height:1.4;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__select {
+        display:block;
+        appearance:none;
+        width:100%;
+        min-width:0;
+        height:37px;
+        margin:0;
+        padding:6px 32px 6px 13px;
+        border:1px solid #e7e5e4;
+        border-radius:12px;
+        background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a8a29e' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m19 9-7 7-7-7'/%3E%3C/svg%3E") no-repeat right 10px center;
+        color:#292524;
+        font-size:12px;
+        font-weight:700;
+        line-height:1.4;
+        cursor:pointer;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__select:focus-visible {
+        outline:2px solid var(--lcdp-color-focus);
+        outline-offset:2px;
+        border-color:var(--lcdp-color-logo-green);
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__invitations {
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+        min-width:0;
+        margin-top:4px;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__option {
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:8px;
+        min-width:0;
+        min-height:37px;
+        padding:6px 9px;
+        border:1px solid rgba(var(--lcdp-rgb-planifier-accent),.3);
+        border-radius:12px;
+        background:rgba(var(--lcdp-rgb-planifier-selection-surface),.5);
+        color:#292524;
+        font-size:12px;
+        font-weight:700;
+        line-height:1.3;
+        cursor:pointer;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__option:hover {
+        background:var(--lcdp-color-planifier-selection-surface);
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__option input[type="checkbox"] {
+        flex:0 0 16px;
+        width:16px;
+        height:16px;
+        min-height:16px;
+        margin:0;
+        accent-color:var(--lcdp-color-logo-green);
+        cursor:pointer;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__actions {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+        margin:0;
+        padding-top:12px;
+        border-top:1px solid #e7e5e4;
+      }
+      :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__resultat {
+        min-width:0;
+        color:#78716c;
+        font-size:12px;
+        font-weight:600;
+      }
+
+
+
+      
+/* Taille des contrôles : -20 % mobile, -10 % desktop, sur une base de 46 px. */
+@media (min-width:768px) {
+  :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__select {
+    height:41px;
+    padding-top:8px;
+    padding-bottom:8px;
+  }
+  :is(#lcdp-planning-calendrier-slot,#lcdp-alerte-planifier-slot,#lcdp-lightbox-slot .lcdp-alerte-planning-dialogue) .lcdp-planning-filtres__option {
+    min-height:41px;
+    padding-top:8px;
+    padding-bottom:8px;
+  }
+}
+
+
+#lcdp-planning-filtres-contenu[hidden] {display:none!important;}

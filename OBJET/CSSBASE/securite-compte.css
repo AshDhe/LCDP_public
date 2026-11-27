@@ -345,3 +345,7 @@ div.lcdp-security-tunnel [data-lcdp-fermeture-codr] .lcdp-box-champ-formulaire--
 body.lcdp-security-tunnel .lcdp-step-progress[aria-valuenow="1"] {--lcdp-step-progress-value:33.3333%;}
 body.lcdp-security-tunnel .lcdp-step-progress[aria-valuenow="2"] {--lcdp-step-progress-value:66.6667%;}
 body.lcdp-security-tunnel .lcdp-step-progress[aria-valuenow="3"] {--lcdp-step-progress-value:100%;}
+
+/* Préparation d'accès : états du parcours géolocalisé. */
+html[data-lcdp-geo-loading] .lcdp-app-wrapper {visibility:hidden!important;}
+#preparation-qr[hidden],#identification-actualisation[hidden],#actions-sortie-qr[hidden],#confirmation-telephone[hidden],#actions-autorisation[hidden] {display:none!important;}
