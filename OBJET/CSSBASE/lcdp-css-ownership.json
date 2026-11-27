@@ -231,14 +231,12 @@
         "LCDP_admin/ESPACE-ADMIN/A_STRUCTURE/css-admin.css",
         "LCDP_public/OBJET/BOX/04-box-card-prix-in-facture.css",
         "LCDP_public/OBJET/BOX/documents-legaux.css",
-        "LCDP_public/OBJET/BOX/02-box-footer.css",
         "LCDP_public/OBJET/BOX/04-box-card-facture.css"
       ],
       "modules_actives": [
         "c001",
         "c021",
         "c022",
-        "c037",
         "c050",
         "c060",
         "c068",
@@ -418,6 +416,14 @@
       "statut": "Design moderne unique sans variante ancienne ni condition c038.",
       "variantes": "Rôles accueil/compte/faq, boutique, accent coach, mouvement réduit.",
       "exceptions": "lcdp-menu-burger-boutique.css reste un fichier de compatibilité sans déclaration pour les anciens chargeurs JS. Aucun style concurrent dans les modules."
+    },
+    "footer": {
+      "html": "OBJET/HTMLBASE/02-footer.html",
+      "css": "lcdp-footer.css",
+      "charge_par": "lcdp-central-mobile-first.css",
+      "statut": "Design moderne unique, sans variante historique ni code c037 ; accueil public et membre sur les classes communes.",
+      "variantes": "Footer intégré au wrapper, footer hors wrapper, contexte juridique, attente de vérification.",
+      "exceptions": "Masquages multi-objets et barre d'actions de réservation dans leurs parcours ; boîte de contact commune distincte."
     }
   }
 }
