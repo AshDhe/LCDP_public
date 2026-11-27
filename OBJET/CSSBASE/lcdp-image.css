@@ -2,7 +2,7 @@
 
 /* Portrait et avatar */
 [data-lcdp-duoactif-zone] .lcdp-duoactif-avatar {
-  width:42px;height:42px;display:inline-flex;border-radius:50%;background:var(--lcdp-color-surface-soft,#edf0ed);overflow:hidden;
+  width:42px;aspect-ratio:1;display:inline-flex;border-radius:50%;background:var(--lcdp-color-surface-soft,#edf0ed);overflow:hidden;
 }
 
 [data-lcdp-duoactif-zone] .lcdp-duoactif-avatar img {
@@ -10,390 +10,92 @@
 }
 
 
-/* Image de galerie */
-.lcdp-box-fiche-parc .lcdp-box-fiche-parc__card--organisee .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__image {
+/* Photographies : un cadrage par contexte, sans surcharges historiques. */
+.lcdp-box-galerie__image,
+.lcdp-box-card-parc__image,
+.lcdp-box-card-reservation-membre__image,
+.lcdp-box-card-acces-parc__photo-image {
   display: block;
-      width: 100% !important;
-      height: auto !important;
-      max-width: 100% !important;
-      aspect-ratio: 16 / 9 !important;
-      object-fit: cover !important;
-      object-position: center center !important;
-      border-radius: 12px !important;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  background: var(--lcdp-color-surface-soft);
 }
 
-.lcdp-box-galerie__image {
-  width: 100%;
-  aspect-ratio: 1 / 1;
+.lcdp-box-galerie__image,
+.lcdp-box-card-acces-parc__photo-image {
   border-radius: var(--lcdp-radius-media);
-  object-fit: cover;
-  object-position: center center;
-  background: var(--lcdp-color-surface-soft);
 }
 
 :where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__image {
-  display: block;
-  height: 112px;
-  width: 100%;
-  aspect-ratio: auto;
   border: 0;
   border-radius: 12px;
-  object-fit: cover;
-  object-position: center;
-  background: #f1f5f9;
 }
 
+.lcdp-box-fiche-parc .lcdp-box-fiche-parc__card--organisee .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__image {
+  border-radius: 12px;
+}
 
-/* Image de carrousel */
+/* Carrousel : image entière par défaut, remplissage du cadre pour la variante dédiée. */
 .lcdp-box-carousel__image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  object-position: center center;
+  object-position: center;
   background: var(--lcdp-color-surface-soft);
-  display: block;
 }
 
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__image {
+  object-fit: cover;
+}
+
+/* Diaporama : le cadre pilote la taille de l'image. */
+.lcdp-box-card-parc-diaporama__image,
+.lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-
-/* Image de carte (Parc, Accès, Réservation, Accessoire) */
-.lcdp-box-card-parc__image {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  background: var(--lcdp-color-surface-soft);
-}
-
-@media (min-width: 768px) {
-.lcdp-box-card-parc__image {
-  height: 100%;
-    min-height: 210px;
-    aspect-ratio: auto;
-}
-}
-
-.lcdp-box-card-reservation-membre__image {
-  display: block;
-  
-  background: var(--lcdp-color-surface-soft);
-width: 100%;
-  height: auto;
   min-height: 0;
-  aspect-ratio: 16 / 10;
   object-fit: cover;
-}
-
-
-/* Portrait et avatar */
-.lcdp-dactif-portrait {
-  display:block;width:54px;height:54px;border-radius:50%;background:#bfc3c5;overflow:hidden;
-}
-
-.lcdp-dactif-portrait img {
-  display:block;width:100%;height:100%;object-fit:cover;
-}
-
-
-/* Image de carte (Parc, Accès, Réservation, Accessoire) */
-.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__image {
-  height: auto;
-  min-height: 0;
-  aspect-ratio: 16 / 10;
-}
-
-
-/* Image de galerie */
-@media (max-width: 767px) {
-.lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
-  display: block;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    border-radius: var(--lcdp-radius-media);
-}
-
-.lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
-  display: block;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    border-radius: var(--lcdp-radius-media);
-}
-}
-
-
-/* Illustration éditoriale */
-.lcdp-actu-image {
-  display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:var(--lcdp-color-surface-soft);
-}
-
-
-/* Image de carte (Parc, Accès, Réservation, Accessoire) */
-@media (min-width: 768px) {
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  min-height: 300px;
-}
-}
-
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  height: clamp(150px, 48vw, 220px) !important;
-  min-height: 0 !important;
-  max-height: 220px !important;
-  aspect-ratio: auto !important;
-  object-fit: cover !important;
-  object-position: center center !important;
-  border-radius: var(--lcdp-radius-media);
-}
-
-@media (max-width: 767px) {
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  height: clamp(132px, 46vw, 184px) !important;
-    max-height: 184px !important;
-}
-}
-
-@media (min-width: 768px) {
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  height: clamp(220px, 30vw, 340px) !important;
-    max-height: 340px !important;
-}
-}
-
-.lcdp-box-card-acces-parc__photo-image {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  height: clamp(132px, 46vw, 184px);
-  border-radius: var(--lcdp-radius-media);
-  background: #ffffff;
-  object-fit: cover;
-  object-position: center center;
-  box-sizing: border-box;
-}
-
-@media (min-width: 768px) {
-.lcdp-box-card-acces-parc__photo-image {
-  height: clamp(220px, 30vw, 340px);
-}
-}
-
-.lcdp-box-card-parc-diaporama__image {
-  display: block; width: 100%; height: 100%; object-fit: cover;
 }
 
 .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
-  display: block; width: 100%; height: 100%; min-height: 0; aspect-ratio: auto;
+  border-radius: inherit;
 }
 
-@media (max-width: 420px) {
-.lcdp-box-card-reservation-membre__image {
-  min-height: 104px;
-}
+.lcdp-dactif-portrait {
+  display: block;
+  width: 54px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #bfc3c5;
+  overflow: hidden;
 }
 
-@media (min-width: 768px) {
-.lcdp-box-card-reservation-membre__image {
+.lcdp-dactif-portrait img {
+  display: block;
+  width: 100%;
   height: 100%;
-    min-height: 210px;
-    aspect-ratio: auto;
-}
+  object-fit: cover;
 }
 
-
-/* Illustration éditoriale */
+/* Illustrations : conservation du contenu intégral. */
+.lcdp-actu-image,
 :where(html[data-lcdp-css~="c009"]) .lcdp-actualite-image {
   display: block;
   width: 100%;
-  aspect-ratio: 16/9;
   object-fit: contain;
   object-position: center;
   background: var(--lcdp-color-surface-soft);
 }
 
-
-/* Image de galerie */
-@media (max-width: 767px) {
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
-  display: block;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    border-radius: var(--lcdp-radius-media);
-}
-
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
-  display: block;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    border-radius: var(--lcdp-radius-media);
-}
-}
-
-
-/* Image de carte (Parc, Accès, Réservation, Accessoire) */
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__image {
-  height: auto;
-  min-height: 0;
-  aspect-ratio: 16 / 10;
-}
-
-
-/* Image de carrousel */
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center center;
-  background: var(--lcdp-color-surface-soft);
-  display: block;
-}
-
-
-/* Image de carte (Parc, Accès, Réservation, Accessoire) */
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__image {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  background: var(--lcdp-color-surface-soft);
-}
-
-@media (min-width: 768px) {
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__image {
-  height: 100%;
-    min-height: 210px;
-    aspect-ratio: auto;
-}
-}
-
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
-  display: block;
-  
-  
-  background: var(--lcdp-color-surface-soft);
-}
-
-@media (max-width: 420px) {
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
-  min-height: 104px;
-}
-}
-
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
-  width: 100%;
-  height: auto;
-  min-height: 0;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-}
-
-@media (min-width: 768px) {
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
-  height: 100%;
-    min-height: 210px;
-    aspect-ratio: auto;
-}
-
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  min-height: 300px;
-}
-}
-
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  height: clamp(150px, 48vw, 220px) !important;
-  min-height: 0 !important;
-  max-height: 220px !important;
-  aspect-ratio: auto !important;
-  object-fit: cover !important;
-  object-position: center center !important;
-  border-radius: var(--lcdp-radius-media);
-}
-
-@media (max-width: 767px) {
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  height: clamp(132px, 46vw, 184px) !important;
-    max-height: 184px !important;
-}
-}
-
-@media (min-width: 768px) {
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  height: clamp(220px, 30vw, 340px) !important;
-    max-height: 340px !important;
-}
-}
-
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photo-image {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  height: clamp(132px, 46vw, 184px);
-  border-radius: var(--lcdp-radius-media);
-  background: #ffffff;
-  object-fit: cover;
-  object-position: center center;
-  box-sizing: border-box;
-}
-
-@media (min-width: 768px) {
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photo-image {
-  height: clamp(220px, 30vw, 340px);
-}
-}
-
-
-/* Illustration éditoriale */
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  background: var(--lcdp-color-surface-soft);
-}
-
-
-/* Image de carte (Parc, Accès, Réservation, Accessoire) */
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  aspect-ratio: auto;
-  border-radius: 11px;
-  background: #f3f5f3;
-  object-fit: cover;
-}
-
+.lcdp-actu-image { height: 100%; }
+:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-image { aspect-ratio: 16 / 9; }
 
 /* Illustration éditoriale */
 :where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext .lcdp-illustration {
@@ -515,31 +217,6 @@ width: 100%;
 
 :where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-contenu-editorial figure.lcdp-editorial-inline-figure > img.lcdp-illustration {
   box-sizing: border-box;
-}
-
-
-/* Image de galerie */
-.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image,
-.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
-  display: block !important; width: 100% !important; max-width: 100% !important;
-  height: auto !important; min-height: 0 !important;
-  aspect-ratio: 16 / 9 !important; object-fit: cover !important;
-  object-position: center center;
-}
-
-
-/* Image de carte (Parc, Accès, Réservation, Accessoire) */
-.lcdp-box-card-parc__media .lcdp-box-card-parc__image,
-.lcdp-box-card-reservation-membre__media .lcdp-box-card-reservation-membre__image,
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  display: block; width: 100% !important; height: auto !important;
-  min-height: 0 !important; aspect-ratio: 16 / 9 !important; object-fit: cover !important;
-}
-
-.lcdp-box-card-parc-diaporama .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
-  display: block !important; width: 100% !important; height: 100% !important;
-  min-height: 0 !important; aspect-ratio: 16 / 9 !important;
-  object-fit: cover !important; border-radius: inherit;
 }
 
 
