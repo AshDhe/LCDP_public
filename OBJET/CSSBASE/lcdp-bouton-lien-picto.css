@@ -1464,3 +1464,219 @@ body.lcdp-page-mon-compte #lcdp-compte-relations-invitant .lcdp-compte-invitant_
 )[hidden] {
   display: none !important;
 }
+
+
+/* Commandes — lcdp-ma-cle.css */
+
+.lcdp-page-cle-du-parc .lcdp-acces-invites-form button[type="submit"] {
+  min-height: 44px;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.lcdp-acces-lightbox button:disabled { opacity: .5; cursor: default; }
+
+.lcdp-acces-invites-form > button[type="submit"] {align-self:center;}
+
+.lcdp-page-cle-du-parc .lcdp-ma-cle-detail__fermer {
+  flex: 0 0 44px;
+  width: 44px;
+  max-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 1px solid var(--lcdp-color-border);
+  background: var(--lcdp-color-surface);
+  border-radius: var(--lcdp-radius-small);
+  color: var(--lcdp-color-text);
+  font-size: 27px;
+  line-height: 1;
+}
+
+.lcdp-page-cle-du-parc .lcdp-ma-cle-detail__fermer:hover {
+  background: var(--lcdp-color-surface-soft);
+}
+
+body.lcdp-page-cle-du-parc .lcdp-acces[data-screen="codr_entry"] .lcdp-acces-form > .lcdp-button {
+  width: 100%;
+  min-height: 44px;
+}
+
+.lcdp-page-cle-du-parc .lcdp-cle-alerte-bouton {
+  align-self: center; width: auto; min-height: 44px; padding: 8px 18px;
+  margin: 6px 0 0; border: 1px solid #a52222; border-radius: 8px;
+  background: #fff; color: #a52222; font: inherit; font-size: .85rem;
+  font-weight: 700; cursor: pointer;
+}
+
+.lcdp-cle-alerte-dialogue .lcdp-cle-alerte-fermer {
+  min-height: 44px; padding: 8px 20px; border: 1px solid #999; border-radius: 8px;
+  background: #fff; color: #242424; font: inherit; cursor: pointer;
+}
+
+.lcdp-cle-alerte-bouton:focus-visible {
+  outline: 2px solid #222; outline-offset: 3px;
+}
+
+
+/* Commandes — lcdp-paiements-en-attente.css */
+
+[data-lcdp-impaye-liste] .lcdp-impaye-ligne > button {width:auto; min-width:84px; gap:6px; padding-inline:14px;}
+
+[data-lcdp-impaye-liste] > button {max-width:460px; justify-self:center;}
+
+@media(max-width:350px) {
+[data-lcdp-impaye-liste] .lcdp-impaye-ligne > button {width:100%;}
+}
+
+[data-lcdp-impaye-liste] .lcdp-dialogue-ref__bouton--orange {background:#e59834;border:1px solid #e59834;color:#1c1917;font-weight:800;}
+
+[data-lcdp-impaye-liste] .lcdp-dialogue-ref__bouton--orange:hover:not(:disabled) {background:#cc8125;border-color:#cc8125;}
+
+
+/* Commandes — lcdp-offre-abonnement.css */
+
+.lcdp-offre-abonnement__actions > .lcdp-offre-abonnement__souscrire.lcdp-button {box-sizing:border-box;border:0;border-radius:12px;background:var(--lcdp-color-blue,#2f6fb3);color:#fff;font:700 12px/1.35 Arial,system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;white-space:normal;box-shadow:0 4px 6px -1px rgb(15 23 42 / 10%);}
+
+.lcdp-offre-abonnement__actions > .lcdp-offre-abonnement__souscrire.lcdp-button:hover {background:var(--lcdp-color-blue-hover,#255c96);color:#fff;}
+
+
+/* Commandes — lcdp-paiement-elements.css */
+
+.lcdp-stripe-page #paiement-formulaire > .lcdp-actions-centrees > .lcdp-button--haut-etroit.lcdp-button--deux-niveaux {
+  box-sizing:border-box;
+  width:50% !important;
+  min-width:min(100%,140px) !important;
+  max-width:min(100%,220px) !important;
+  aspect-ratio:220 / 84;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  flex:0 0 auto;
+  padding:4px 8px !important;
+}
+
+.lcdp-stripe-page #paiement-formulaire #bouton-payer.lcdp-button--deux-niveaux > span {
+  font-size:12px;
+  line-height:1.6;
+}
+
+.lcdp-stripe-page #paiement-formulaire #bouton-payer.lcdp-button--deux-niveaux > span > strong {
+  font-size:16px;
+  line-height:1.28;
+}
+
+@media (max-width: 600px), (hover: none) and (pointer: coarse) {
+.lcdp-stripe-page #paiement-formulaire #bouton-payer.lcdp-button--deux-niveaux > span {
+    font-size:13.2px;
+  }
+}
+
+@media (max-width: 600px), (hover: none) and (pointer: coarse) {
+.lcdp-stripe-page #paiement-formulaire #bouton-payer.lcdp-button--deux-niveaux > span > strong {
+    font-size:17.6px;
+  }
+}
+
+
+/* Commandes — lcdp-paiement-bon.css */
+
+.lcdp-paiement-bon-fermer {font:inherit;font-size:1.8rem;border:0;background:transparent;color:#59635a;width:36px;height:36px;line-height:1;cursor:pointer;flex:none}
+
+.lcdp-paiement-bon-actions button {font:inherit;font-weight:680;font-size:.87rem;min-height:42px;padding:10px 15px;border-radius:7px;cursor:pointer}
+
+.lcdp-paiement-bon-retour {background:#fff;border:1px solid #becbc1;color:var(--lcdp-color-paiement-retour)}
+
+.lcdp-paiement-bon-valider {background:var(--lcdp-color-paiement-action);border:1px solid var(--lcdp-color-paiement-action);color:#fff}
+
+.lcdp-paiement-bon-valider:disabled {opacity:.52;cursor:not-allowed}
+
+.lcdp-paiement-bon-actions button:focus-visible,.lcdp-paiement-bon-fermer:focus-visible {outline:2px solid var(--lcdp-color-paiement-focus);outline-offset:2px}
+
+@media (max-width:520px) {
+.lcdp-paiement-bon-actions button {width:100%}
+}
+
+.lcdp-paiement-retractation-info__lien {
+  width:fit-content;max-width:100%;border:0;padding:4px 0;
+  background:none;color:var(--lcdp-color-paiement-lien);font:inherit;font-weight:650;
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;text-align:left
+}
+
+.lcdp-paiement-retractation-info__lien:focus-visible {
+  outline:2px solid var(--lcdp-color-paiement-lien-focus);outline-offset:2px;border-radius:3px
+}
+
+
+/* Commandes — hello.css */
+
+body.lcdp-page-hello > dialog.lcdp-contact-info[data-lcdp-contact-info="juridique"] .lcdp-contact-info__email {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0;
+  margin-top: 16px;
+  color: #4b6333;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  text-underline-offset: 3px;
+}
+
+body.lcdp-page-hello > dialog.lcdp-contact-info[data-lcdp-contact-info="juridique"] .lcdp-contact-info__actions .lcdp-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 10px;
+  margin: 0;
+  border: 1px solid #4b6333;
+  border-radius: 16px;
+  background: #4b6333;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, transform .15s ease;
+}
+
+body.lcdp-page-hello > dialog.lcdp-contact-info[data-lcdp-contact-info="juridique"] .lcdp-contact-info__actions .lcdp-button:hover {
+  background: #3d5129;
+  border-color: #3d5129;
+}
+
+body.lcdp-page-hello > dialog.lcdp-contact-info[data-lcdp-contact-info="juridique"] .lcdp-contact-info__actions .lcdp-button:active {
+  transform: scale(.98);
+}
+
+body.lcdp-page-hello > dialog.lcdp-contact-info[data-lcdp-contact-info="juridique"] :is(a, button):focus-visible {
+  outline: 3px solid var(--lcdp-color-focus, #b98c31);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+body.lcdp-page-hello > dialog.lcdp-contact-info[data-lcdp-contact-info="juridique"] .lcdp-contact-info__actions .lcdp-button {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+body.lcdp-page-hello > dialog.lcdp-contact-info[data-lcdp-contact-info="juridique"] .lcdp-contact-info__actions .lcdp-button:active {
+    transform: none;
+  }
+}
+
+
+/* Commandes — fiche-parc.css */
+
+.lcdp-box-shift-detail-parc--page .lcdp-box-fiche-parc__close {
+  display: none;
+}

@@ -142,34 +142,8 @@
 }
 /* Même variante LCDP haut-etroit sur les trois parcours.
    Référence c085 : 220 x 84 px ; conserver le rapport en réduisant la largeur. */
-.lcdp-stripe-page #paiement-formulaire > .lcdp-actions-centrees > .lcdp-button--haut-etroit.lcdp-button--deux-niveaux {
-  box-sizing:border-box;
-  width:50% !important;
-  min-width:min(100%,140px) !important;
-  max-width:min(100%,220px) !important;
-  aspect-ratio:220 / 84;
-  height:auto !important;
-  min-height:0 !important;
-  max-height:none !important;
-  flex:0 0 auto;
-  padding:4px 8px !important;
-}
-.lcdp-stripe-page #paiement-formulaire #bouton-payer.lcdp-button--deux-niveaux > span {
-  font-size:12px;
-  line-height:1.6;
-}
-.lcdp-stripe-page #paiement-formulaire #bouton-payer.lcdp-button--deux-niveaux > span > strong {
-  font-size:16px;
-  line-height:1.28;
-}
-@media (max-width: 600px), (hover: none) and (pointer: coarse) {
-  .lcdp-stripe-page #paiement-formulaire #bouton-payer.lcdp-button--deux-niveaux > span {
-    font-size:13.2px;
-  }
-  .lcdp-stripe-page #paiement-formulaire #bouton-payer.lcdp-button--deux-niveaux > span > strong {
-    font-size:17.6px;
-  }
-}
+
+
 /* Écrans autonomes : le conteneur et le défilement appartiennent au wrapper commun. */
 body.lcdp-stripe-page .lcdp-app-wrapper > main.lcdp-stripe .lcdp-stripe__entete {padding:16px 18px;}
 body.lcdp-stripe-page .lcdp-app-wrapper > main.lcdp-stripe .lcdp-stripe__corps {padding:20px 18px 24px;min-width:0;}

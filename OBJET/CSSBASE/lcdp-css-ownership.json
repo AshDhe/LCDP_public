@@ -435,9 +435,9 @@
     "bouton-lien-picto": {
       "css": "lcdp-bouton-lien-picto.css",
       "charge_par": "lcdp-central-mobile-first.css et cssbase.css (consommateurs autonomes)",
-      "statut": "Socle moderne des boutons, liens, pictogrammes et états communs ; suppression des doublons des sources traitées.",
+      "statut": "Socle des boutons, liens, pictogrammes et états communs ; commandes migrées des dialogues, de Ma Clé, des offres et paiements, de Hello et de la fiche Parc publique. Contrôles structurels uniquement.",
       "variantes": "Principale, secondaire, orange, mini, accueil, logo, compte, deux niveaux, haut et étroit, chargement, picto édition., boutons et pictogrammes de Mon compte (y compris les dialogues de compte)., boutons de référence des dialogues, fermeture, lien contact et paiement CB.",
-      "exceptions": "Mise en page et états propres aux composants ; variantes spécifiques des parcours à inventorier."
+      "exceptions": "PLANIFIER et ses commandes spécifiques hors périmètre de cette étape ; règles de disposition des conteneurs et états transversaux conservés. Inventaire des autres sources encore ouvert."
     }
   }
 }

@@ -182,12 +182,6 @@ body.lcdp-page-cle-du-parc.is-cle-active.is-cle-overstay .lcdp-ma-cle-wrapper > 
   min-height: 48px;
   align-items: center;
 }
-.lcdp-page-cle-du-parc .lcdp-acces-invites-form button[type="submit"] {
-  min-height: 44px;
-  width: 100%;
-  max-width: 100%;
-  border-radius: 12px;
-}
 .lcdp-cle-action--checkout {
   background: var(--lcdp-color-blue);
   border-color: var(--lcdp-color-blue);
@@ -296,7 +290,6 @@ body.lcdp-page-cle-du-parc.is-cle-active.is-cle-overstay .lcdp-ma-cle-wrapper > 
 .lcdp-acces-lightbox { position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; padding: 22px; background: rgba(0,0,0,.45); }
 .lcdp-acces-lightbox-contenu { width: 100%; padding: 28px 20px; border-radius: var(--lcdp-radius-medium); background: var(--lcdp-color-surface); display: flex; flex-direction: column; align-items: center; gap: 18px; }
 .lcdp-acces-refus { margin: 0 0 6px; color: var(--lcdp-color-text); text-align: center; }
-.lcdp-acces-lightbox button:disabled { opacity: .5; cursor: default; }
 @media (max-width: 359px) { .lcdp-acces { padding-left: 18px; padding-right: 18px; } .lcdp-acces-titre { font-size: 21px; } }
 
 /* Capture guidée et attente de l'analyse. */
@@ -320,7 +313,6 @@ body.lcdp-page-cle-du-parc.is-cle-active.is-cle-overstay .lcdp-ma-cle-wrapper > 
 .lcdp-acces-invites-liste {max-height:360px;max-height:min(45svh,360px);overflow-y:auto;overscroll-behavior-y:contain;min-width:0;}
 .lcdp-acces-invites-liste .lcdp-acces-instructions {margin:0;padding-left:26px;}
 .lcdp-acces-invites-form label {min-width:0;overflow-wrap:anywhere;}
-.lcdp-acces-invites-form > button[type="submit"] {align-self:center;}
 
 
 
@@ -476,23 +468,6 @@ body.lcdp-page-cle-du-parc .lcdp-ma-cle-wrapper > .lcdp-ma-cle-navigation-slot {
   font-size: clamp(1.4rem, 4vw, 1.8rem);
   margin: 0;
   line-height: 1.25;
-}
-.lcdp-page-cle-du-parc .lcdp-ma-cle-detail__fermer {
-  flex: 0 0 44px;
-  width: 44px;
-  max-width: 44px;
-  height: 44px;
-  min-height: 44px;
-  padding: 0;
-  border: 1px solid var(--lcdp-color-border);
-  background: var(--lcdp-color-surface);
-  border-radius: var(--lcdp-radius-small);
-  color: var(--lcdp-color-text);
-  font-size: 27px;
-  line-height: 1;
-}
-.lcdp-page-cle-du-parc .lcdp-ma-cle-detail__fermer:hover {
-  background: var(--lcdp-color-surface-soft);
 }
 .lcdp-page-cle-du-parc .lcdp-ma-cle-detail__contenu {
   display: flex;
@@ -700,10 +675,6 @@ body.lcdp-page-cle-du-parc .lcdp-acces[data-screen="codr_entry"] .lcdp-box-champ
   width: 18px;
   height: 18px;
 }
-body.lcdp-page-cle-du-parc .lcdp-acces[data-screen="codr_entry"] .lcdp-acces-form > .lcdp-button {
-  width: 100%;
-  min-height: 44px;
-}
 body.lcdp-page-cle-du-parc .lcdp-acces[data-screen^="codr_"] .lcdp-box-formulaire__note {
   margin: 10px 0;
   max-width: 100%;
@@ -711,14 +682,8 @@ body.lcdp-page-cle-du-parc .lcdp-acces[data-screen^="codr_"] .lcdp-box-formulair
   line-height: 1.45;
   text-align: center;
 }
-
 /* ALERTE PARC : commande compacte et dialogue natif au-dessus de la présence. */
-.lcdp-page-cle-du-parc .lcdp-cle-alerte-bouton {
-  align-self: center; width: auto; min-height: 44px; padding: 8px 18px;
-  margin: 6px 0 0; border: 1px solid #a52222; border-radius: 8px;
-  background: #fff; color: #a52222; font: inherit; font-size: .85rem;
-  font-weight: 700; cursor: pointer;
-}
+
 .lcdp-page-cle-du-parc .lcdp-cle-alerte-dialogue {
   box-sizing: border-box; width: min(360px, calc(100% - 32px));
   max-height: calc(100dvh - 32px); overflow: auto; padding: 20px;
@@ -740,10 +705,7 @@ body.lcdp-page-cle-du-parc .lcdp-acces[data-screen^="codr_"] .lcdp-box-formulair
   background: #eee; border-color: #ddd; color: #666; opacity: 1; cursor: default;
 }
 .lcdp-cle-alerte-dialogue .lcdp-cle-alerte-note { color: #555; font-size: .8rem; margin: 4px 0 12px; }
-.lcdp-cle-alerte-dialogue .lcdp-cle-alerte-fermer {
-  min-height: 44px; padding: 8px 20px; border: 1px solid #999; border-radius: 8px;
-  background: #fff; color: #242424; font: inherit; cursor: pointer;
-}
-.lcdp-cle-alerte-bouton:focus-visible,.lcdp-cle-alerte-dialogue :focus-visible {
+.lcdp-cle-alerte-dialogue :focus-visible {
   outline: 2px solid #222; outline-offset: 3px;
 }
+

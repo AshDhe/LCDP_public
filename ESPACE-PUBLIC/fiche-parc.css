@@ -31,10 +31,6 @@
   overflow: visible;
 }
 
-.lcdp-box-shift-detail-parc--page .lcdp-box-fiche-parc__close {
-  display: none;
-}
-
 /* Fiche partagée : le cadre définitif et le spinner SVG restent visibles pendant le chargement. */
 .lcdp-fiche-parc-public__attente {
   min-height: min(70dvh, 660px);
