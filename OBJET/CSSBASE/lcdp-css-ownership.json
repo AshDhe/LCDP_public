@@ -484,6 +484,16 @@
       "html": "ESPACE-PUBLIC/boutique.html",
       "charge_par": "lcdp-central-mobile-first.css",
       "statut": "Grille des commandes de navigation, indépendamment de leur apparence."
+    },
+    "objets-specifiques": {
+      "css": "lcdp-objets-specifiques.css",
+      "charge_par": "Chargement explicite sur Actualité, Galerie, Préparation accès parc et Membre bienfaiteur.",
+      "statut": "Variantes légères de contenu et états d'objets spécifiques ; aucun style de bouton, de dialogue ou de formulaire générique."
+    },
+    "attente": {
+      "css": "lcdp-attente.css",
+      "charge_par": "Chargements explicites existants ; Actualité, Boutique, Bénévolat, Fiche Parc et Galerie.",
+      "statut": "Voiles et pictogrammes d'attente, variantes de surface et de masquage de page. Les contrôleurs pilotent hidden."
     }
   }
 }

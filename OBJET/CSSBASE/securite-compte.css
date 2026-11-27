@@ -340,3 +340,8 @@ div.lcdp-security-tunnel [data-lcdp-fermeture-codr] .lcdp-box-champ-formulaire--
   padding: 0;
   text-align: center;
 }
+
+/* Progression déclarative : le contrôleur renseigne l'état ARIA, pas du CSS. */
+body.lcdp-security-tunnel .lcdp-step-progress[aria-valuenow="1"] {--lcdp-step-progress-value:33.3333%;}
+body.lcdp-security-tunnel .lcdp-step-progress[aria-valuenow="2"] {--lcdp-step-progress-value:66.6667%;}
+body.lcdp-security-tunnel .lcdp-step-progress[aria-valuenow="3"] {--lcdp-step-progress-value:100%;}

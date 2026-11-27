@@ -23,7 +23,6 @@
         const sousTitre = entete.querySelector(".lcdp-box-formulaire__subtitle");
         const progression = document.createElement("div");
         progression.className = "lcdp-step-progress";
-        progression.style.setProperty("--lcdp-step-progress-value", type === "coda" ? "33.3333%" : "66.6667%");
         progression.setAttribute("role", "progressbar");
         progression.setAttribute("aria-valuemin", "0");
         progression.setAttribute("aria-valuemax", "3");

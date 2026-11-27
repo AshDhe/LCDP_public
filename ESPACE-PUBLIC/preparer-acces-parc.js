@@ -1325,7 +1325,6 @@ module.exports = QRCode;
       titre.after(badge);
       const progression = document.createElement("div");
       progression.className = "lcdp-step-progress";
-      progression.style.setProperty("--lcdp-step-progress-value", "100%");
       progression.setAttribute("role", "progressbar");
       progression.setAttribute("aria-label", "Progression de la sécurisation du compte");
       progression.setAttribute("aria-valuemin", "0");
@@ -1428,7 +1427,6 @@ module.exports = QRCode;
     const email=document.getElementById("email-actualisation");
     email.remove();
     document.querySelector('label[for="email-actualisation"]')?.remove();
-    document.getElementById("coda-actualisation").style.removeProperty("margin");
     identification.querySelector("legend").textContent="Saisissez le CODA que vous venez de créer.";
     document.getElementById("note-coda-actualisation").textContent="Vous disposez de deux essais pour cette validation. Après deux erreurs, patientez 30 minutes.";
     if(!mobile){

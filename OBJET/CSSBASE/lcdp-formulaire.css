@@ -15,4 +15,4 @@
 #mdp-perdu .lcdp-box-formulaire__actions {align-items:center;}
 
 /* Champ de confirmation du code de préparation d'accès. */
-#coda-actualisation.lcdp-setup-flow__fieldset {margin:24px 0 0;}
+body:not(.lcdp-security-tunnel) #coda-actualisation.lcdp-setup-flow__fieldset {margin:24px 0 0;}
