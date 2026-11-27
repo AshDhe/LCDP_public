@@ -2532,13 +2532,13 @@ body.lcdp-fiche-parc-publique #lcdp-fiche-parc-slot
 
 /* FAQ — commandes de l'accordéon, compatibilité */
 
-.lcdp-faq__question { display:flex; align-items:center; justify-content:space-between; gap:20px; width:100%; border:0; background:transparent; font:inherit; text-align:left; cursor:pointer; }
+:where(html:not([data-lcdp-css~="c024"])) .lcdp-faq__question { display:flex; align-items:center; justify-content:space-between; gap:20px; width:100%; border:0; background:transparent; font:inherit; text-align:left; cursor:pointer; }
 
-.lcdp-faq__question::after { content:"+"; flex:none; font-size:1.55rem; font-weight:400; }
+:where(html:not([data-lcdp-css~="c024"])) .lcdp-faq__question::after { content:"+"; flex:none; font-size:1.55rem; font-weight:400; }
 
-.lcdp-faq__question[aria-expanded="true"]::after { content:"−"; }
+:where(html:not([data-lcdp-css~="c024"])) .lcdp-faq__question[aria-expanded="true"]::after { content:"−"; }
 
-.lcdp-faq__question:focus-visible {
+:where(html:not([data-lcdp-css~="c024"])) .lcdp-faq__question:focus-visible {
   outline: none;
   text-decoration: underline;
   text-decoration-thickness: 2px;
