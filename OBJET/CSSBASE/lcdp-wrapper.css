@@ -215,3 +215,10 @@ body.lcdp-app-page.lcdp-app-page--securite {
   color: inherit;
   text-align: center;
 }
+
+/* Paiement autonome : pas de réservation de place pour le footer de planification. */
+body.lcdp-stripe-page .lcdp-app-wrapper > .lcdp-site-main {
+  padding: 0;
+  background: #fff;
+}
+.lcdp-app-wrapper--securite > .lcdp-site-main > * { flex-shrink: 0; }
