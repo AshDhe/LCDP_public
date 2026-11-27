@@ -1204,12 +1204,6 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   }
 }
 
-:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-menu-burger__button,:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-menu-burger__nav {
-  border-color: var(--lcdp-color-coach);
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-menu-burger__button span {
-  background: var(--lcdp-color-coach);
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-actions > button.lcdp-button-accueil-coach {
   background: var(--lcdp-color-coach);
   border-color: var(--lcdp-color-coach);
