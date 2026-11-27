@@ -266,7 +266,7 @@
       messageErreur('');
       etat.phase = 'envoi'; envoyer.disabled = true; fermer.disabled = true; annuler.disabled = true;
       const token = etat.token; etat.token = '';
-      boite.style.display = 'none';
+      boite.hidden = true;
       const attente = window.LCDP_chargement.afficher();
       let succes = false;
       let message = '';
@@ -288,7 +288,7 @@
         etat.fermerBoite();
         await afficherAlerte(message,'validation',boutonRetour);
       } else {
-        boite.style.removeProperty('display');
+        boite.hidden = false;
         etat.phase = 'formulaire';
         envoyer.disabled = false; fermer.disabled = false; annuler.disabled = false;
         if (etat.widget !== null && window.turnstile) {
