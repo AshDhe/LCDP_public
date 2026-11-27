@@ -120,12 +120,12 @@
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-primary {
   width: 100%;
   padding: 13px 16px;
-  background: #4e6838;
-  border-color: #4e6838;
+  background: var(--lcdp-color-espace-accent, #4e6838);
+  border-color: var(--lcdp-color-espace-accent, #4e6838);
   color: #fff;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-primary:hover {
-  background: #3d522c;
+  background: var(--lcdp-color-espace-accent-hover, #3d522c);
   color: #fff;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-secondary {
@@ -142,7 +142,7 @@
   color: #0f172a;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button:focus-visible {
-  outline: 2px solid #4e6838;
+  outline: 2px solid var(--lcdp-color-espace-accent, #4e6838);
   outline-offset: 3px;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-box-carousel {
@@ -1907,8 +1907,8 @@ html .lcdp-button.lcdp-button-orange {
   --lcdp-button-texture-shadow: rgb(245 158 11 / 10%);
 }
 html .lcdp-button.lcdp-button-primary {
-  --lcdp-button-texture: linear-gradient(to bottom right, #4e6838, #3d522c);
-  --lcdp-button-texture-shadow: rgb(16 185 129 / 10%);
+  --lcdp-button-texture: linear-gradient(to bottom right, var(--lcdp-color-espace-accent, #4e6838), var(--lcdp-color-espace-accent-hover, #3d522c));
+  --lcdp-button-texture-shadow: var(--lcdp-espace-ombre-bouton, rgb(16 185 129 / 10%));
 }
 html .lcdp-button.lcdp-button-accueil-blue {
   --lcdp-button-texture: linear-gradient(to bottom right, #346cb2, #28548c);

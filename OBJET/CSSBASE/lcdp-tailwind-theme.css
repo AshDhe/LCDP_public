@@ -6,6 +6,8 @@
 @import "tailwindcss/theme.css";
 @import "tailwindcss/utilities.css";
 @theme inline {
+  --color-lcdp-espace: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green, #55733f));
+  --color-lcdp-espace-hover: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary, #234438));
   --color-lcdp-primary: var(--lcdp-color-primary, #234438);
   --color-lcdp-primary-hover: var(--lcdp-color-primary-hover, #183229);
   --color-lcdp-vert: var(--lcdp-color-logo-green, #55733f);

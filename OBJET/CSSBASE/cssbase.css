@@ -278,7 +278,7 @@ select:focus-visible {
 /* LIENS INTERNES SECONDAIRES */
 
 .lcdp-link-secondary {
-  color: var(--lcdp-color-logo-green);
+  color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -286,7 +286,7 @@ select:focus-visible {
 }
 
 .lcdp-link-secondary:hover {
-  color: var(--lcdp-color-primary);
+  color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
 }
 
 /* UTILITAIRES GENERIQUES */
@@ -336,9 +336,9 @@ select:focus-visible {
   max-width: 320px;
   min-height: 52px;
   padding: 12px 20px;
-  border: 2px solid var(--lcdp-color-logo-green);
+  border: 2px solid var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   border-radius: var(--lcdp-radius-button);
-  background: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   color: #ffffff;
   font-family: var(--lcdp-font-main);
   font-size: 17px;
@@ -355,34 +355,34 @@ select:focus-visible {
 }
 
 .lcdp-button:hover {
-  background: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
   color: #ffffff;
 }
 
 .lcdp-button-primary {
-  background: var(--lcdp-color-logo-green);
-  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   color: #ffffff;
 }
 
 .lcdp-button-primary:hover {
-  background: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
   color: #ffffff;
 }
 
 .lcdp-button-secondary {
   margin-top: var(--lcdp-space-2);
   background: #ffffff;
-  color: var(--lcdp-color-logo-green);
-  border-color: var(--lcdp-color-logo-green);
+  color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
 }
 
 .lcdp-button-secondary:hover {
   background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
+  color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
 }
 
 .lcdp-button-orange {
@@ -641,14 +641,14 @@ select:focus-visible {
 }
 
 .lcdp-button-accueil-green {
-  background: var(--lcdp-color-logo-green);
-  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   color: #ffffff;
 }
 
 .lcdp-button-accueil-green:hover {
-  background: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
   color: #ffffff;
 }
 
@@ -1470,15 +1470,15 @@ html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) { display: none !impor
 /* Boutons communs des cartes Parc (dont les cartes de MES ACCÈS).
    Une même variante impose les mêmes couleurs et le même pictogramme sur toutes les cartes. */
 .lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action--vert-plein {
-  background: var(--lcdp-color-logo-green) !important;
-  border-color: var(--lcdp-color-logo-green) !important;
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green)) !important;
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green)) !important;
   color: #fff !important;
   opacity: 1 !important;
   filter: none !important;
 }
 .lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action--vert-plein:hover {
-  background: var(--lcdp-color-primary) !important;
-  border-color: var(--lcdp-color-primary) !important;
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary)) !important;
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary)) !important;
   color: #fff !important;
 }
 .lcdp-box-card-parc__actions--reserver > .lcdp-box-card-parc__action--vert-plein .lcdp-box-card-parc__action-icone {

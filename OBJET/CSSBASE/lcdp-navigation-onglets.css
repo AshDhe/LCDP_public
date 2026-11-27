@@ -43,8 +43,8 @@
   color: #292524;
 }
 .lcdp-navigation-onglets__onglet[aria-pressed="true"] {
-  border-bottom-color: #4b6333;
-  color: #4b6333;
+  border-bottom-color: var(--lcdp-color-espace-accent, #4b6333);
+  color: var(--lcdp-color-espace-accent, #4b6333);
   font-weight: 800;
 }
 .lcdp-navigation-onglets__compteur {
@@ -65,12 +65,12 @@
 }
 .lcdp-navigation-onglets__onglet[aria-pressed="true"] .lcdp-navigation-onglets__compteur {
   background: #ecfdf5;
-  color: #4b6333;
+  color: var(--lcdp-color-espace-accent, #4b6333);
   box-shadow: inset 0 0 0 1px rgb(75 99 51 / 20%);
   font-weight: 800;
 }
 .lcdp-navigation-onglets__onglet:focus-visible {
-  outline: 2px solid #4b6333;
+  outline: 2px solid var(--lcdp-color-espace-accent, #4b6333);
   outline-offset: -4px;
 }
 @media (prefers-reduced-motion: reduce) {

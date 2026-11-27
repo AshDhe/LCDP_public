@@ -19,3 +19,21 @@
   --lcdp-color-paiement-lien: #236447;
   --lcdp-color-paiement-lien-focus: #31694b;
 }
+
+/* Identité de l'espace : un seul sélecteur sur html, aucune règle de composant. */
+html[data-lcdp-espace="coach"] {
+  --lcdp-rgb-espace-accent: 134, 96, 200;
+  --lcdp-color-espace-accent: rgb(var(--lcdp-rgb-espace-accent));
+  --lcdp-color-espace-accent-hover: #6d3fa7;
+  --lcdp-rgb-espace-accent-soft: 247, 243, 252;
+  --lcdp-color-espace-accent-soft: rgb(var(--lcdp-rgb-espace-accent-soft));
+  --lcdp-espace-ombre-bouton: rgba(var(--lcdp-rgb-espace-accent), .1);
+  --lcdp-rgb-planifier-accent: var(--lcdp-rgb-espace-accent);
+  --lcdp-color-planifier-selection: var(--lcdp-color-espace-accent);
+  --lcdp-color-planifier-date-active: var(--lcdp-color-espace-accent-hover);
+  --lcdp-rgb-planifier-selection-surface: var(--lcdp-rgb-espace-accent-soft);
+  --lcdp-color-planifier-accent-contrast-soft: var(--lcdp-color-espace-accent-soft);
+  --lcdp-color-paiement-etape: var(--lcdp-color-espace-accent);
+  --lcdp-color-paiement-lien: var(--lcdp-color-espace-accent-hover);
+  --lcdp-color-paiement-lien-focus: var(--lcdp-color-espace-accent-hover);
+}
