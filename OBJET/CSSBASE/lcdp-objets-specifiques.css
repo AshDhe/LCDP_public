@@ -1218,3 +1218,106 @@ body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header
 @media (prefers-reduced-motion:reduce) {
   .lcdp-carte-acces-visuel__image {transition:none;}
 }
+
+/* OBJET : VUE CARTOGRAPHIQUE DE LA FICHE PARC */
+
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] .lcdp-box-fiche-parc__card--organisee {
+  display: flex !important;
+  min-width: calc(var(--spacing, 0.25rem) * 0);
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: calc(var(--spacing, 0.25rem) * 4) !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] .lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__header {
+  flex: none;
+  padding: 14px 62px 16px 16px !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] .lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__section--map {
+  min-width: calc(var(--spacing, 0.25rem) * 0);
+  flex: none;
+  padding: calc(var(--spacing, 0.25rem) * 4) !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche {
+  width: 100%;
+  min-width: calc(var(--spacing, 0.25rem) * 0);
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-planifier-carte-cartouche {
+  position: static !important;
+  margin-top: calc(var(--spacing, 0.25rem) * 4) !important;
+  display: grid;
+  width: 100%;
+  min-width: calc(var(--spacing, 0.25rem) * 0);
+  gap: calc(var(--spacing, 0.25rem) * 3);
+  overflow: visible;
+  background-color: transparent;
+  padding: calc(var(--spacing, 0.25rem) * 0);
+  inset: auto !important;
+  transform: none !important;
+  max-width: 100%;
+  margin-inline: auto;
+  border: 0;
+  box-shadow: none;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul {
+  margin-inline: auto;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: calc(var(--spacing, 0.25rem) * 0);
+  max-width: 370px;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc-diaporama__scene {
+  aspect-ratio: var(--aspect-video, 16 / 9) !important;
+  height: auto !important;
+  min-height: calc(var(--spacing, 0.25rem) * 0) !important;
+  width: 100% !important;
+  max-height: none !important;
+}
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__media, :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-carte-dynamique--vue-fiche .lcdp-box-card-parc-diaporama--recto-seul .lcdp-box-card-parc__image {
+  height: 100% !important;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* MES ACCÈS — règles Tailwind de vue en calque ; cible uniquement cette page. */
+body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main {
+  position: relative;
+}
+body.lcdp-mes-acces-page.lcdp-mes-acces-calque-fiche-actif > .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
+  display: none !important;
+}
+body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces-fiche-slot {
+  /* Le main du wrapper défile déjà. Ce calque n'a AUCUN scroll propre. */
+  position: relative;
+  z-index: 30;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+  overflow: visible;
+  padding: 14px 12px 24px;
+  background: var(--lcdp-color-background, #f7f9fb);
+}
+body.lcdp-mes-acces-page > .lcdp-app-wrapper > .lcdp-site-main > #lcdp-mes-acces-fiche-slot[hidden] {
+  display: none !important;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-carte-dynamique--fiche-parc.lcdp-carte-dynamique--vue-fiche {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-inline: 0 !important;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-carte-dynamique--vue-fiche .lcdp-carte-dynamique__map-shell {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-fiche-parc__actions-barre {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  width: 100% !important;
+  gap: 8px !important;
+}
+#lcdp-mes-acces-fiche-slot [data-lcdp-shift-vue="carte"] [data-lcdp-fiche-parc-actions] {
+  display: none !important;
+}
+

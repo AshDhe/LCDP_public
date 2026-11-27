@@ -5203,3 +5203,38 @@ html[data-lcdp-css~="c085"] .lcdp-boutique-services > .public-home__action {
   background: #e2e8f0;
   color: #475569;
 }
+
+/* Commandes de la fiche Parc en vue secondaire */
+/*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
+
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-mes-acces-fiche-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] > .lcdp-box-shift-detail-parc__card > .lcdp-box-shift-detail-parc__close {
+  position: absolute;
+  top: 28px !important;
+  right: 21px !important;
+  width: 32px;
+  height: 32px;
+  margin: 0 !important;
+  float: none !important;
+}
+
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] :is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte]) {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  justify-content: center !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  border-radius: 8px !important;
+}
+
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-carte] {
+  background: var(--lcdp-color-logo-green, #536c3d) !important;
+  border-color: var(--lcdp-color-logo-green, #536c3d) !important;
+  color: #fff !important;
+}
+
+body.lcdp-mes-acces-page #lcdp-mes-acces-fiche-slot .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] [data-lcdp-fiche-parc-action-partager] {
+  background: #e59834 !important;
+  border-color: #e59834 !important;
+  color: #fff !important;
+}

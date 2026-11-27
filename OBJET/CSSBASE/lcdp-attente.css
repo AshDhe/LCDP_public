@@ -128,3 +128,93 @@ body.lcdp-page-hello #lcdp-lightbox-slot > [data-lcdp-legal-lightbox]:has(.lcdp-
     animation: none;
   }
 }
+
+/* Attente des vues secondaires de Mes accès */
+/* Pendant la préparation : couche opaque et spinner identique à MES ACCÈS. */
+#lcdp-mes-acces-fiche-slot > .lcdp-mes-acces-calque-attente {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lcdp-color-background, #f7f9fb);
+}
+#lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner {
+  position: relative;
+  display: flex;
+  width: 64px;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__track {
+  color: rgba(6, 95, 70, .1);
+}
+#lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__arc {
+  color: #e59834;
+  animation: lcdp-mes-acces-calque-rotation .8s linear infinite;
+}
+#lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4e6838;
+}
+@keyframes lcdp-mes-acces-calque-rotation {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #lcdp-mes-acces-fiche-slot .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__arc {
+    animation: none;
+  }
+}
+
+/* Spinner des autres boxes du wrapper MES ACCÈS. */
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire > .lcdp-mes-acces-calque-attente {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lcdp-color-background, #f7f9fb);
+}
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner {
+  position: relative;
+  display: flex;
+  width: 64px;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+}
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__track {
+  color: rgba(6, 95, 70, .1);
+}
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__arc {
+  color: #e59834;
+  animation: lcdp-mes-acces-calque-rotation .8s linear infinite;
+}
+body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4e6838;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.lcdp-mes-acces-page .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-mes-acces-calque-attente .lcdp-loading-spinner__arc {
+    animation: none;
+  }
+}
