@@ -1,6 +1,7 @@
-.lcdp-stripe-page { box-sizing:border-box; margin:0; min-height:0; background:#f5f5f4; color:#292524; padding:24px 12px; font-family:inherit; }
+.lcdp-stripe-page:where(:not(.lcdp-app-page)) { box-sizing:border-box; margin:0; min-height:0; background:#f5f5f4; color:#292524; padding:24px 12px; font-family:inherit; }
 .lcdp-stripe-page *,.lcdp-stripe-page *::before,.lcdp-stripe-page *::after {box-sizing:border-box}
-.lcdp-stripe-page .lcdp-stripe {width:min(100%,540px);margin:auto;background:#fff;border:1px solid #e7e5e4;border-radius:28px;overflow:hidden;box-shadow:0 18px 50px #1c19171a}
+
+.lcdp-stripe-page:where(:not(.lcdp-app-page)) .lcdp-stripe {width:min(100%,540px);margin:auto;background:#fff;border:1px solid #e7e5e4;border-radius:28px;overflow:hidden;box-shadow:0 18px 50px #1c19171a}
 .lcdp-stripe-page .lcdp-stripe__entete {display:flex;align-items:center;gap:12px;padding:21px 26px;border-bottom:1px solid #f5f5f4}
 .lcdp-stripe-page .lcdp-stripe__logo {width:46px;height:46px;flex:none;display:grid;place-items:center;border-radius:13px;background:#f1f7ed;color:#4b6333}
 .lcdp-stripe-page .lcdp-stripe__logo img {display:block;width:38px;height:38px;object-fit:contain}
@@ -31,8 +32,8 @@
 .lcdp-stripe-page :focus-visible {outline:2px solid #4b6333;outline-offset:3px}
 .lcdp-stripe-page [hidden] {display:none!important}
 @media(max-width:480px) {
-  .lcdp-stripe-page {padding:0;background:#fff}
-  .lcdp-stripe-page .lcdp-stripe {border:0;box-shadow:none;border-radius:0;min-height:0}
+  .lcdp-stripe-page:where(:not(.lcdp-app-page)) {padding:0;background:#fff}
+  .lcdp-stripe-page:where(:not(.lcdp-app-page)) .lcdp-stripe {border:0;box-shadow:none;border-radius:0;min-height:0}
   .lcdp-stripe-page .lcdp-stripe__entete {padding:18px}
   .lcdp-stripe-page .lcdp-stripe__corps {padding:22px 18px}
 }
@@ -130,7 +131,7 @@
 [data-lcdp-paiement-elements-main] .lcdp-stripe__resume > div > strong {min-width:0;}
 
 /* Gabarit commun Stripe : espace avant l'action officielle, sans modifier son CSS. */
-.lcdp-stripe-page {font-size:16px;line-height:1.5;}
+.lcdp-stripe-page .lcdp-stripe {font-size:16px;line-height:1.5;}
 /* La zone d'action réserve un espace réel après les champs Stripe, même
    si la page appelante réinitialise les marges des boutons centrés. */
 .lcdp-stripe-page #paiement-formulaire > .lcdp-actions-centrees {
@@ -169,9 +170,7 @@
     font-size:17.6px;
   }
 }
-/* Les pages autonomes utilisent également le conteneur officiel c085. */
-body.lcdp-stripe-page > main.lcdp-stripe.lcdp-app-wrapper {display:block;width:min(100%,448px);max-width:448px;height:auto;max-height:none;min-height:0;margin:0 auto;overflow:visible;}
-body.lcdp-stripe-page > main.lcdp-stripe.lcdp-app-wrapper .lcdp-stripe__entete {padding:16px 18px;}
-body.lcdp-stripe-page > main.lcdp-stripe.lcdp-app-wrapper .lcdp-stripe__corps {padding:20px 18px 24px;min-width:0;}
+/* Écrans autonomes : le conteneur et le défilement appartiennent au wrapper commun. */
+body.lcdp-stripe-page .lcdp-app-wrapper > main.lcdp-stripe .lcdp-stripe__entete {padding:16px 18px;}
+body.lcdp-stripe-page .lcdp-app-wrapper > main.lcdp-stripe .lcdp-stripe__corps {padding:20px 18px 24px;min-width:0;}
 .lcdp-stripe-page #paiement-formulaire,.lcdp-stripe-page #stripe-payment-element {width:100%;min-width:0;max-width:100%;}
-@media(max-width:480px){body.lcdp-stripe-page > main.lcdp-stripe.lcdp-app-wrapper {width:100%;max-width:none;}}
