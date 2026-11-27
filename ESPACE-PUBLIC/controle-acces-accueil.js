@@ -80,9 +80,9 @@
     const slot = document.getElementById('lcdp-lightbox-slot');
     if (!slot) throw new Error('Emplacement de lightbox introuvable.');
     const mode = action ? 'choix' : profil === 'information' ? 'information' : 'erreur';
-    const href = urlObjet('/CSSBASE/lcdp-lightbox-convergence.css');
+    const href = urlObjet('/CSSBASE/lcdp-boite-dialogue.css');
     if (![...document.querySelectorAll('link[rel="stylesheet"]')]
-      .some(lien => lien.href === new URL(href, document.baseURI).href)) {
+      .some(lien => /\/(?:lcdp-central-mobile-first|cssbase|lcdp-boite-dialogue)\.css$/.test(new URL(lien.href,document.baseURI).pathname))) {
       await new Promise((resolve,reject) => {
         const lien = document.createElement('link');
         lien.rel = 'stylesheet';
@@ -90,7 +90,7 @@
         lien.onload = resolve;
         lien.onerror = () => {
           lien.remove();
-          reject(new Error('CSS de convergence indisponible.'));
+          reject(new Error('CSS des dialogues indisponible.'));
         };
         document.head.appendChild(lien);
       });

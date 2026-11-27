@@ -78,9 +78,9 @@
     "style": "lcdp-button-primary"
   },
   "noteHtml": "Les informations que vous partagez dans ce formulaire sont soumises à l'application des <a href=\"#mentions-legales\" data-lcdp-ouvrir-mentions-legales>mentions légales</a> et exclusivement réservées au club La Clé du Parc dans le cadre de votre demande.",
-  "introHtml": `<div class="lcdp-box-formulaire__note" style="text-align: center !important;">Cette demande ne crée pas de compte COACH. Notre équipe vous recontacte pour étudier votre demande.</div>
+  "introHtml": `<div class="lcdp-box-formulaire__note lcdp-contact-intro">Cette demande ne crée pas de compte COACH. Notre équipe vous recontacte pour étudier votre demande.</div>
     <section class="lcdp-boxtext__content" aria-labelledby="contact-coach-compte-title">
-      <h2 id="contact-coach-compte-title" class="lcdp-text-strong-left" style="font-weight: 700 !important; text-align: center !important;">Le compte COACH La Clé du Parc</h2>
+      <h2 id="contact-coach-compte-title" class="lcdp-text-strong-left lcdp-contact-titre">Le compte COACH La Clé du Parc</h2>
       <ul>
         <li>Présentez votre activité et votre territoire de référence (département).</li>
         <li>Organisez pour vos clients des moments d'exception dans le réseau des parcs.</li>
@@ -102,30 +102,9 @@
       zone.hidden = true;
     }
   });
-  // Reprendre le gabarit standard des boutons, sans modifier les autres formulaires.
   const actions = form.querySelector(".lcdp-box-formulaire__actions");
-  const boutonEnvoyer = actions?.querySelector('button[type="submit"]');
-  if (actions) actions.style.setProperty("align-items", "center", "important");
-  if (boutonEnvoyer) {
-    const dimensions = {
-      "box-sizing": "border-box",
-      "width": "100%",
-      "max-width": "320px",
-      "min-height": "52px",
-      "padding": "12px 20px",
-      "border-width": "2px",
-      "border-style": "solid",
-      "border-radius": "var(--lcdp-radius-button)",
-      "font-size": "17px",
-      "font-weight": "600",
-      "line-height": "1.2",
-      "letter-spacing": "normal",
-      "text-transform": "none"
-    };
-    Object.entries(dimensions).forEach(([propriete, valeur]) => {
-      boutonEnvoyer.style.setProperty(propriete, valeur, "important");
-    });
-  }
+  actions?.classList.add("lcdp-contact-actions");
+  actions?.querySelector('button[type="submit"]')?.classList.add("lcdp-button--formulaire-contact");
   document.dispatchEvent(new CustomEvent("lcdp:contact-formulaire-pret", {detail: {type: "coach"}}));
   const endpoint=window.SITE_CONFIG?.workerContactCoachUrl || "https://lacleduparc.fr/api/contact-coach";
   await window.LCDP_brancherFormulaireProtege(form,{type:"coach",endpoint,champs:configuration.champs});

@@ -21,15 +21,15 @@
    const config = window.SITE_CONFIG || {};
    const base = String(config.objetBaseUrl || config.OBJET_BASE || ((window.SITE_BASE || '') + '/OBJET')).replace(/\/$/,'');
    const objet = chemin => base ? base + chemin : '../OBJET' + chemin;
-   const css = objet('/CSSBASE/lcdp-lightbox-convergence.css');
+   const css = objet('/CSSBASE/lcdp-boite-dialogue.css');
    if (![...document.querySelectorAll('link[rel="stylesheet"]')]
-    .some(lien => lien.href === new URL(css, document.baseURI).href)) {
+    .some(lien => /\/(?:lcdp-central-mobile-first|cssbase|lcdp-boite-dialogue)\.css$/.test(new URL(lien.href,document.baseURI).pathname))) {
     await new Promise((resolve,reject) => {
      const lien = document.createElement('link');
      lien.rel = 'stylesheet';
      lien.href = css;
      lien.onload = resolve;
-     lien.onerror = () => {lien.remove();reject(new Error('CSS de convergence indisponible.'));};
+     lien.onerror = () => {lien.remove();reject(new Error('CSS des dialogues indisponible.'));};
      document.head.appendChild(lien);
     });
    }
@@ -120,7 +120,7 @@
    attenteEnvoi.hidden=true;
    attenteEnvoi.setAttribute('role','status');
    attenteEnvoi.setAttribute('aria-label','Envoi de votre demande en cours');
-   attenteEnvoi.style.cssText='position:fixed;inset:0;z-index:2147483000;background:var(--lcdp-color-surface,#fff);display:none;align-items:center;justify-content:center;';
+   attenteEnvoi.className='lcdp-attente-envoi';
    const icone=document.createElement('span');icone.className='lcdp-attente-indicateur';icone.setAttribute('aria-hidden','true');
    attenteEnvoi.appendChild(icone);document.body.appendChild(attenteEnvoi);
   }
@@ -142,7 +142,6 @@
   function afficherAttenteEnvoi(active) {
    if (!attenteEnvoi) return;
    attenteEnvoi.hidden = !active;
-   attenteEnvoi.style.display = active ? 'flex' : 'none';
   }
   afficherAttenteVerification(true);
   let token='',id=crypto.randomUUID(),empreinte='',enCours=false,widgetId=null;

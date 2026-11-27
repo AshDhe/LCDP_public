@@ -16,3 +16,7 @@ button.lcdp-action-attente[aria-busy="true"]::before {margin-inline-end:8px;}
 @media(prefers-reduced-motion:reduce) {
   button.lcdp-action-attente[aria-busy="true"]::before,.lcdp-attente-indicateur {animation:none;}
 }
+
+/* Voile d'attente de l'envoi d'un formulaire. */
+.lcdp-attente-envoi {position:fixed;inset:0;z-index:2147483000;background:var(--lcdp-color-surface,#fff);display:flex;align-items:center;justify-content:center;}
+.lcdp-attente-envoi[hidden] {display:none!important;}

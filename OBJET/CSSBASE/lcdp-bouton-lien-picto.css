@@ -4646,3 +4646,11 @@ input[type="file"]::file-selector-button {min-height:36px;margin-right:var(--lcd
 .lcdp-page-accueil-membre :is(.lcdp-box-dialogue-bouton,.lcdp-box-alerte) :is(button,a):focus-visible{
   outline:3px solid var(--lcdp-modal-focus);outline-offset:3px;
 }
+
+/* Variante de dimension du bouton de formulaire. */
+.lcdp-button.lcdp-button--formulaire-contact {
+  box-sizing:border-box!important;width:100%!important;max-width:320px!important;min-height:52px!important;
+  padding:12px 20px!important;border-width:2px!important;border-style:solid!important;
+  border-radius:var(--lcdp-radius-button)!important;font-size:17px!important;font-weight:600!important;
+  line-height:1.2!important;letter-spacing:normal!important;text-transform:none!important;
+}

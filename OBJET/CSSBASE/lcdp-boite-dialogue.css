@@ -1210,3 +1210,20 @@ body.lcdp-page-mon-compte
   min-width: 0;
   overflow-wrap: anywhere;
 }
+
+/* Mode dialogue superposé et mode conteneur. */
+.lcdp-dialogue-ref.lcdp-boite-dialogue--superposee {z-index:12000;}
+.lcdp-dialogue-ref.lcdp-boite-dialogue--interactive {pointer-events:auto;}
+.lcdp-site-page.lcdp-app-wrapper.lcdp-da-dialogue-actif {position:relative!important;overflow:hidden;}
+.lcdp-site-page.lcdp-app-wrapper > .lcdp-da-dialogue-hote {
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  min-height:0!important;max-height:100%!important;z-index:9500!important;overflow:hidden!important;
+  border-radius:inherit!important;box-sizing:border-box!important;
+}
+.lcdp-da-dialogue-hote > [data-lcdp-dialogue-context="conteneur"] {
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  min-height:0!important;max-height:100%!important;display:flex!important;
+  align-items:center!important;justify-content:center!important;box-sizing:border-box!important;
+}
+.lcdp-da-dialogue-hote > .lcdp-dialogue-ref > .lcdp-dialogue-ref__card {max-height:100%;min-height:0;}
+.lcdp-da-dialogue-hote > [data-lcdp-dialogue-context="conteneur"][hidden] {display:none!important;}
