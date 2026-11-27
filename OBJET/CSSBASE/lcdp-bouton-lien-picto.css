@@ -4857,3 +4857,5 @@ html[data-lcdp-css~="c085"] .lcdp-boutique-services > .public-home__action {
       font-size: 1.35rem;
       color: #546354;
     }
+
+.lcdp-page-accueil-membre #mention-suspension-abonnement-membre > button { margin: 0; }

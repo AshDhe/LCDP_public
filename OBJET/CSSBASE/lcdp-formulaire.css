@@ -11,3 +11,5 @@
 .lcdp-contact-intro {text-align:center!important;}
 .lcdp-contact-titre {font-weight:700!important;text-align:center!important;}
 .lcdp-contact-actions {align-items:center!important;}
+
+#mdp-perdu .lcdp-box-formulaire__actions {align-items:center;}
