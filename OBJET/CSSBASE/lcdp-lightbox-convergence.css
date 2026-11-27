@@ -28,13 +28,8 @@
   border-color:var(--lcdp-modal-stroke);border-radius:var(--lcdp-modal-radius);
   box-shadow:var(--lcdp-modal-shadow);
 }
-.lcdp-page-accueil-membre :is(.lcdp-planifier-choix__close,.lcdp-box-dialogue-bouton__close,.lcdp-box-alerte__close){
-  border-radius:999px;background:var(--lcdp-modal-close-bg);
-  color:var(--lcdp-modal-muted);cursor:pointer;
-}
-.lcdp-page-accueil-membre :is(.lcdp-planifier-choix__close,.lcdp-box-dialogue-bouton__close,.lcdp-box-alerte__close):hover{
-  background:#e7e5e4;color:var(--lcdp-modal-ink);
-}
+
+
 .lcdp-page-accueil-membre :is(.lcdp-planifier-choix__title,.lcdp-box-dialogue-bouton__title){
   color:var(--lcdp-modal-ink);letter-spacing:-.025em;
 }
@@ -103,29 +98,7 @@
   background: var(--lcdp-modal-surface,var(--lcdp-dialogue-fond));
   box-shadow: var(--lcdp-modal-shadow,var(--lcdp-dialogue-ombre));
 }
-/* Un seul style pour les commandes de fermeture, sans retirer une commande
-   fonctionnelle : la décision croix/CTA relève du type de dialogue en JS. */
-:where(body.lcdp-app-page) :is(
-  .lcdp-box-alerte__close,
-  .lcdp-box-dialogue-bouton__close,
-  .lcdp-box-dialogue-champ__close,
-  .lcdp-box-dialogue-champ-inviter__close,
-  .lcdp-box-dialogue-upload-img__close
-) {
-  border-radius: 999px;
-  background: var(--lcdp-modal-close-bg,var(--lcdp-dialogue-fermeture));
-  color: var(--lcdp-modal-muted,var(--lcdp-dialogue-muted));
-  cursor: pointer;
-}
-:where(body.lcdp-app-page) :is(
-  .lcdp-box-alerte__close,
-  .lcdp-box-dialogue-bouton__close,
-  .lcdp-box-dialogue-champ__close,
-  .lcdp-box-dialogue-champ-inviter__close,
-  .lcdp-box-dialogue-upload-img__close
-):hover {
-  color: var(--lcdp-modal-ink,var(--lcdp-dialogue-texte));
-}
+
 :where(body.lcdp-app-page) :is(
   .lcdp-box-alerte,
   .lcdp-box-dialogue-bouton,
@@ -158,15 +131,6 @@
 ) {
   min-width: 0;
   overflow-wrap: anywhere;
-}
-:where(body.lcdp-app-page) :is(
-  .lcdp-box-alerte__close,
-  .lcdp-box-dialogue-bouton__close,
-  .lcdp-box-dialogue-champ__close,
-  .lcdp-box-dialogue-champ-inviter__close,
-  .lcdp-box-dialogue-upload-img__close
-)[hidden] {
-  display: none !important;
 }
 
 
@@ -367,61 +331,21 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
 .lcdp-dialogue-ref__actions--choix {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-.lcdp-dialogue-ref__bouton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-width: 0;
-  min-height: 48px;
-  padding: 12px 10px;
-  border-radius: 16px;
-  font: inherit;
-  font-size: 12px;
-  line-height: 1.3;
-  font-weight: 800;
-  cursor: pointer;
-  transition: background-color .15s ease, color .15s ease, transform .15s ease;
-}
-.lcdp-dialogue-ref__bouton--secondaire {
-  background: #fff;
-  color: #57534e;
-  border: 1px solid #e7e5e4;
-  font-weight: 700;
-}
-.lcdp-dialogue-ref__bouton--secondaire:hover { background: #fafaf9; color: #1c1917; }
-.lcdp-dialogue-ref__bouton--principal {
-  background: var(--lcdp-ref-vert);
-  border: 1px solid var(--lcdp-ref-vert);
-  color: #fff;
-  box-shadow: 0 1px 2px rgba(0,0,0,.05);
-}
-.lcdp-dialogue-ref__bouton--principal:hover { background: var(--lcdp-ref-vert-hover); border-color: var(--lcdp-ref-vert-hover); }
-.lcdp-dialogue-ref__bouton--suppression {
-  background: var(--lcdp-ref-rose);
-  border: 1px solid var(--lcdp-ref-rose);
-  color: #fff;
-  box-shadow: 0 1px 2px rgba(0,0,0,.05);
-}
-.lcdp-dialogue-ref__bouton--suppression:hover { background: var(--lcdp-ref-rose-hover); border-color: var(--lcdp-ref-rose-hover); }
-.lcdp-dialogue-ref__bouton:active { transform: scale(.98); }
-.lcdp-dialogue-ref__bouton:focus-visible {
-  outline: 3px solid var(--lcdp-color-focus, #b98c31);
-  outline-offset: 3px;
-}
-.lcdp-dialogue-ref__bouton:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-  transform: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .lcdp-dialogue-ref__bouton { transition: none; }
-  .lcdp-dialogue-ref__bouton:active { transform: none; }
-}
+
+
+
+
+
+
+
+
+
+
+
 
 /* Paiement CB : variante du dialogue officiel, sans style local. */
 [data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-details] {font-size:14px;line-height:1.6;color:#475569;margin:10px 0 0;overflow-wrap:anywhere;}
 [data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-message][hidden] {display:none!important;}
-[data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-payer] {min-height:64px;padding:14px 18px;font-size:15px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:#4b6333;background-image:linear-gradient(to bottom right,#4e6838,#3d522c);border-color:#4b6333;color:#fff;box-shadow:0 4px 10px rgb(75 99 51 / 15%);}
-[data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-payer]:hover:not(:disabled) {background:#3d5129;}
-[data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-payer][hidden] {display:none!important;}
+
+
+

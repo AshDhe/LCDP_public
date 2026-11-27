@@ -1616,15 +1616,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   overflow-y: auto;
   display: flex;
 }
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close {
-  z-index: 3;
-  font-family: inherit;
-  text-decoration: none;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close:focus-visible {
-  outline: 2px solid var(--lcdp-color-primary, #4e6838);
-  outline-offset: 2px;
-}
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire:has(> .lcdp-box-dialogue-bouton__close), :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext:has(> .lcdp-box-dialogue-bouton__close) {
   position: relative;
 }
