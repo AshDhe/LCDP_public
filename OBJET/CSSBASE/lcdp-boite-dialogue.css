@@ -454,13 +454,17 @@ body.lcdp-page-mon-compte
 .lcdp-box-dialogue-champ__field select,
 .lcdp-box-dialogue-champ__field textarea {
   width: 100%;
-  min-height: 48px;
   padding: 11px 14px;
   border: 1px solid var(--lcdp-color-border);
   border-radius: var(--lcdp-radius-small);
   background: var(--lcdp-color-surface);
   color: var(--lcdp-color-text);
   font: inherit;
+}
+
+.lcdp-box-dialogue-champ__input,
+.lcdp-box-dialogue-champ__field select {
+  min-height: 48px;
 }
 
 .lcdp-box-dialogue-champ__field textarea {
@@ -633,7 +637,6 @@ body.lcdp-page-mon-compte
   margin: 0;
   color: var(--lcdp-color-text-muted);
   line-height: 1.35;
-  text-align: left;
 }
 
 .lcdp-box-dialogue-upload-img__intro {
@@ -641,6 +644,7 @@ body.lcdp-page-mon-compte
 }
 
 .lcdp-box-dialogue-upload-img__help {
+  text-align: left;
   font-size: 0.88rem;
 }
 
@@ -661,7 +665,6 @@ body.lcdp-page-mon-compte
 .lcdp-box-dialogue-upload-img__input-file {
   width: 100%;
   min-height: 48px;
-  padding: 11px 14px;
   border: 1px solid var(--lcdp-color-border);
   border-radius: var(--lcdp-radius-small);
   background: var(--lcdp-color-surface);
@@ -681,6 +684,10 @@ body.lcdp-page-mon-compte
   border-color: rgba(100, 116, 139, 0.34);
   color: var(--lcdp-color-text);
   opacity: 1;
+}
+
+.lcdp-box-dialogue-upload-img__select {
+  padding: 11px 14px;
 }
 
 .lcdp-box-dialogue-upload-img__input-file {

@@ -95,7 +95,6 @@ body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option:h
 .lcdp-box-champ-formulaire select,
 .lcdp-box-champ-formulaire textarea {
   width: 100%;
-  min-height: 50px;
   padding: 12px 14px;
   border: 1px solid var(--lcdp-color-border);
   border-radius: var(--lcdp-radius-medium);
@@ -107,6 +106,16 @@ body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option:h
   text-align: left;
   appearance: none;
   -webkit-appearance: none;
+}
+
+.lcdp-box-champ-formulaire input[type="text"],
+.lcdp-box-champ-formulaire input[type="email"],
+.lcdp-box-champ-formulaire input[type="password"],
+.lcdp-box-champ-formulaire input[type="tel"],
+.lcdp-box-champ-formulaire input[type="number"],
+.lcdp-box-champ-formulaire input[type="date"],
+.lcdp-box-champ-formulaire select {
+  min-height: 50px;
 }
 
 .lcdp-box-champ-formulaire textarea {

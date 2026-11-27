@@ -3998,9 +3998,6 @@ body.lcdp-fiche-parc-publique #lcdp-fiche-parc-slot
   margin: 0;
 }
 
-:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content a {
-  color: var(--lcdp-color-primary);
-}
 
 :where(html[data-lcdp-css~="c027"]) .lcdp-restricted-lightbox :is(button, a):focus-visible,
 :where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche :is(button, a):focus-visible,

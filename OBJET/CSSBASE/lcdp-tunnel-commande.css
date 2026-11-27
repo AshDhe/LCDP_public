@@ -170,15 +170,8 @@ body.lcdp-page-reserver .lcdp-aboreza-suivi__champ {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   min-width: 0;
   gap: 3px;
-}
-
-body.lcdp-page-reserver .lcdp-aboreza-suivi__champ + .lcdp-aboreza-suivi__champ {
-  align-items: flex-end;
-  padding-left: 10px;
-  text-align: right;
 }
 
 body.lcdp-page-reserver .lcdp-aboreza-suivi__libelle {

@@ -23,10 +23,10 @@ body.lcdp-security-tunnel .lcdp-site-main {
 body.lcdp-security-tunnel .lcdp-page-section,
 body.lcdp-security-tunnel .lcdp-page-container {
   width: 100%;
-  max-width: none;
   margin: 0 auto;
   padding: 0;
 }
+body.lcdp-security-tunnel .lcdp-page-section { max-width: none; }
 body.lcdp-security-tunnel .lcdp-page-container { max-width: 448px; }
 :is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) .lcdp-box-formulaire-page,
 :is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) .lcdp-box-formulaire-page__inner {
