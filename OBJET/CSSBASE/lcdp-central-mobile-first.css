@@ -2878,21 +2878,9 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   --lcdp-champ-badge-offset: 7px;
 }
 
-.lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__control {
-  position: relative;
-}
 
-.lcdp-box-champ-formulaire--badge input[type="text"],
-.lcdp-box-champ-formulaire--badge input[type="email"],
-.lcdp-box-champ-formulaire--badge input[type="password"],
-.lcdp-box-champ-formulaire--badge input[type="tel"],
-.lcdp-box-champ-formulaire--badge input[type="number"],
-.lcdp-box-champ-formulaire--badge input[type="date"],
-.lcdp-box-champ-formulaire--badge select,
-.lcdp-box-champ-formulaire--badge textarea,
-.lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
-  padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-3)) !important;
-}
+
+
 
 .lcdp-box-champ-formulaire__badge {
   width: var(--lcdp-champ-badge-size);
@@ -2934,17 +2922,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
     --lcdp-champ-badge-offset: 6px;
   }
 
-  .lcdp-box-champ-formulaire--badge input[type="text"],
-  .lcdp-box-champ-formulaire--badge input[type="email"],
-  .lcdp-box-champ-formulaire--badge input[type="password"],
-  .lcdp-box-champ-formulaire--badge input[type="tel"],
-  .lcdp-box-champ-formulaire--badge input[type="number"],
-  .lcdp-box-champ-formulaire--badge input[type="date"],
-  .lcdp-box-champ-formulaire--badge select,
-  .lcdp-box-champ-formulaire--badge textarea,
-  .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture {
-    padding-left: calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-2)) !important;
-  }
+  
 }
 
 @media (min-width: 768px) {
@@ -4482,9 +4460,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
     max-height: 330px;
   }
 
-  .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map {
-    touch-action: none;
-  }
+  
 
   .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__localite-label {
     paint-order: stroke fill;
@@ -4700,59 +4676,26 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   margin-top: var(--lcdp-space-3);
 }
 
-.lcdp-box-fiche-parc__actions-list {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--lcdp-space-2);
-}
 
-.lcdp-box-fiche-parc__action-reserver,
-.lcdp-box-fiche-parc__action-planning {
-  width: 100%;
-  max-width: 260px;
-  min-height: 44px;
-}
+
+
 
 .lcdp-box-fiche-parc__partage {
-  width: auto;
+  
   margin-top: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--lcdp-space-2);
-  color: var(--lcdp-color-text);
-  cursor: pointer;
+  
+  
+  
+  
+  
+  
 }
 
-.lcdp-box-fiche-parc__partage-icone {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  min-height: 40px;
-  padding: 0;
-  border: 2px solid var(--lcdp-color-orange);
-  border-radius: 999px;
-  background: var(--lcdp-color-orange);
-  color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.lcdp-box-fiche-parc__partage:hover .lcdp-box-fiche-parc__partage-icone {
-  background: var(--lcdp-color-orange-hover);
-  border-color: var(--lcdp-color-orange-hover);
-  color: #ffffff;
-}
 
-.lcdp-box-fiche-parc__partage-libelle {
-  color: var(--lcdp-color-text);
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.25;
-}
+
+
+
 
 @media (min-width: 768px) {
   .lcdp-box-fiche-parc {
@@ -4781,26 +4724,26 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 /* Fiche parc : actions mobile en colonne, tablette/desktop sur une seule ligne. */
 .lcdp-box-fiche-parc__action-reserver {
   min-width: 112px;
-  padding: 8px 16px;
-  border: 2px solid var(--lcdp-color-orange);
-  border-radius: 999px;
-  background: #ffffff;
-  color: var(--lcdp-color-orange);
-  font-family: var(--lcdp-font-main);
-  font-size: 0.86rem;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: 0.045em;
-  text-align: center;
-  text-decoration: none !important;
-  text-transform: uppercase;
-  box-shadow: none;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }
 
 .lcdp-box-fiche-parc__action-reserver:hover {
-  background: rgba(242, 162, 58, 0.10);
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-orange);
+  
+  
+  
   text-decoration: none !important;
 }
 
@@ -4815,32 +4758,26 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: var(--lcdp-space-2);
+    
   }
 
   .lcdp-box-fiche-parc__actions-list .lcdp-button {
     width: auto;
     max-width: none;
     min-height: 40px;
-    margin: 0;
+    
     white-space: nowrap;
     flex: 0 0 auto;
   }
 
-  .lcdp-box-fiche-parc__action-planning {
-    min-width: 142px;
-    padding-left: 18px;
-    padding-right: 18px;
-  }
+  
 
   .lcdp-box-fiche-parc__partage {
-    width: auto;
+    
     flex: 0 0 auto;
   }
 
-  .lcdp-box-fiche-parc__partage-libelle {
-    white-space: nowrap;
-  }
+  
 }
 
 
@@ -5111,13 +5048,13 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,
 .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage {
   width: fit-content !important;
-  max-width: 100% !important;
-  min-height: 44px !important;
-  margin: 0 !important;
-  padding: 10px 18px !important;
-  flex: 0 0 auto !important;
-  box-sizing: border-box;
-  white-space: nowrap;
+  
+  
+  
+  
+  
+  
+  
 }
 
 @media (min-width: 768px) {
@@ -5329,7 +5266,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 /* Fiche parc : galerie sur trois colonnes en tablette et desktop. */
 @media (min-width: 768px) {
   .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
-    display: grid !important;
+    
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 }
@@ -6433,10 +6370,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 }
 
 /* Vue Planning Parc : titre toujours noir. */
-.lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
-  .lcdp-box-calendrier-mois__title {
-  color: var(--lcdp-color-text) !important;
-}
+
 
 /* Vue Planning Parc : ordre éditorial identique sur mobile, tablette et ordinateur. */
 .lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture="true"]
@@ -8093,20 +8027,20 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
     /* Règle de masquage PLANIFIER déplacée vers lcdp-planifier.css. */
     html:not(.lcdp-planifier-pret) #lcdp-planifier-attente-initiale { visibility: visible !important; }
     #lcdp-planifier-attente-initiale {
-      position: fixed;
-      inset: 0;
+      
+      
       z-index: 2147483646;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      
+      
+      
       background: #ffffff;
     }
     #lcdp-planifier-attente-initiale img {
       display: block;
-      width: 64px;
-      height: 64px;
+      
+      
       max-width: none;
-      object-fit: contain;
+      
     }
 
 
@@ -8291,7 +8225,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
       }
       .lcdp-planifier-parcs-card .lcdp-box-card-parc__actions--reserver > .lcdp-button {
         flex: 1 1 0; width: 0; min-width: 0; max-width: none; min-height: 38px;
-        padding: 6px 5px; font-size: 0.78rem; white-space: nowrap; overflow-wrap: normal; gap: 4px;
+        padding: 6px 5px;  white-space: nowrap; overflow-wrap: normal; gap: 4px;
       }
       .lcdp-planifier-parcs-card .lcdp-box-card-parc__actions--reserver .lcdp-box-card-parc__action-icone {
         width: 17px; height: 17px; flex: 0 0 17px;
@@ -8324,7 +8258,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
     body.lcdp-page-reserver #lcdp-lightbox-slot [data-lcdp-box-shift-detail-parc] { z-index: 5500; }
     .lcdp-planifier-parcs-card .lcdp-box-dialogue-champ__title { margin-bottom:4px; }
     .lcdp-planifier-parcs-departement { display:block; text-align:center; font-weight:400; margin:0 0 var(--lcdp-space-2); }
-    .lcdp-planifier-parcs-chargement { display:flex; align-items:center; justify-content:center; min-height:110px; }
+    .lcdp-planifier-parcs-chargement {    min-height:110px; }
     .lcdp-planifier-parcs-chargement .lcdp-pictowait { display:flex; align-items:center; justify-content:center; }
     .lcdp-planifier-parcs-card #bouton-voir-carte { color:#fff; }
     .lcdp-planifier-parcs-card #bouton-voir-carte:hover { color:#fff; }
@@ -8554,7 +8488,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 .lcdp-actu-modal {position:fixed;inset:0;z-index:6000;background:rgba(31,42,36,.35);display:grid;place-items:center;padding:12px;box-sizing:border-box;}
 .lcdp-actu-modal-card {position:relative;box-sizing:border-box;width:100%;max-width:760px;max-height:calc(100dvh - 24px);overflow:auto;background:white;padding:54px 20px 24px;border-radius:var(--lcdp-radius-large);}
 .lcdp-actu-fermer {position:absolute;right:8px;top:8px;width:44px;height:44px;font-size:28px;cursor:pointer;}
-.lcdp-actu-liste {display:grid;gap:16px;padding:0;list-style:none;}
+.lcdp-actu-liste {padding:0;list-style:none;}
 .lcdp-actu-liste a {display:block;padding:16px;border:1px solid var(--lcdp-color-border);border-radius:var(--lcdp-radius-button);}
 @media (prefers-reduced-motion:reduce){.lcdp-actu-bandeau.is-changing a{animation:none;}}
 
@@ -8613,7 +8547,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 }
 
 /* Titres de la liste en graisse normale. */
-.lcdp-actu-liste .lcdp-actu-liste-titre {font-weight:400;}
+
 
 /* Miniature à gauche, groupe au début du titre, intérieur blanc. */
 .lcdp-actu-liste .lcdp-actualite-lien-groupe,
@@ -9668,7 +9602,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 }
 
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
-  padding: var(--lcdp-space-2);
+  
   gap: var(--lcdp-space-1);
 }
 
@@ -10323,7 +10257,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 /* Diaporama : l'image reste au recto ; au verso, le composant Card Parc
    classique est réutilisé directement, sans redéfinir les boutons. */
 .lcdp-box-card-parc-diaporama { min-width: 0; perspective: 1200px; }
-.lcdp-box-card-parc-diaporama__scene { width: 100%; aspect-ratio: 16 / 10; }
+.lcdp-box-card-parc-diaporama__scene { width: 100%;  }
 .lcdp-box-card-parc-diaporama__faces { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
 /* La rotation porte sur chaque face et non sur leur parent : la face arrière
    conserve son rendu, notamment avec les contenus flex en desktop/tablette. */
@@ -10331,7 +10265,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--recto { transform: rotateY(-180deg); visibility: hidden; }
 .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(0deg); visibility: visible; }
 .lcdp-box-card-parc-diaporama__face { position: absolute; inset: 0; overflow: hidden; border: 1px solid var(--lcdp-color-border); border-radius: var(--lcdp-radius-large); background: var(--lcdp-color-surface); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-.lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(180deg); visibility: hidden; transition: none; padding: var(--lcdp-space-2); overflow-y: hidden; }
+.lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(180deg); visibility: hidden; transition: none; padding: var(--lcdp-space-2);  }
 .lcdp-box-card-parc-diaporama__ouvrir { position: relative; display: block; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; text-align: left; }
 .lcdp-box-card-parc-diaporama__image { display: block; width: 100%; height: 100%; object-fit: cover; }
 .lcdp-box-card-parc-diaporama__nom { position: absolute; inset: auto 0 0; padding: var(--lcdp-space-3); color: #fff; font-weight: 700; font-size: clamp(1.1rem, 3vw, 1.55rem); background: linear-gradient(transparent, rgba(0,0,0,.65)); }
@@ -10371,7 +10305,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 }
 .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body {
   display: flex; flex-direction: column; width: 100%; min-width: 0;
-  justify-content: flex-start; gap: var(--lcdp-space-3);
+   gap: var(--lcdp-space-3);
 }
 .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__actions--reserver {
   width: 100%; max-width: none; flex-shrink: 0;
@@ -10445,12 +10379,12 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--lcdp-space-3);
-  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
+  
 }
 
 .lcdp-box-card-reservation-membre--avec-image {
   grid-template-columns: 92px minmax(0, 1fr);
-  align-items: stretch;
+  
 }
 
 .lcdp-box-card-reservation-membre--invitation {
@@ -10466,8 +10400,8 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 }
 
 .lcdp-box-card-reservation-membre__media {
-  width: 100%;
-  min-width: 0;
+  
+  
   overflow: hidden;
   border-radius: var(--lcdp-radius-medium);
   background: var(--lcdp-color-surface-soft);
@@ -10479,10 +10413,10 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 
 .lcdp-box-card-reservation-membre__image {
   display: block;
-  width: 100%;
+  
   height: 100%;
   min-height: 108px;
-  object-fit: cover;
+  
   background: var(--lcdp-color-surface-soft);
 }
 
@@ -10534,7 +10468,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 }
 
 .lcdp-box-card-reservation-membre__park {
-  min-width: 0;
+  
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -10680,9 +10614,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
     justify-content: center;
   }
 
-  .lcdp-box-card-reservation-membre__content {
-    gap: var(--lcdp-space-2);
-  }
+  
 
   .lcdp-box-card-reservation-membre__date,
   .lcdp-box-card-reservation-membre__place {
@@ -10717,20 +10649,9 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 }
 
 /* Correction ferme : bouton Accès vert plein. */
-.lcdp-box-card-reservation-membre [data-action="adresse"],
-.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces {
-  border-color: var(--lcdp-color-logo-green) !important;
-  background: var(--lcdp-color-logo-green) !important;
-  color: #ffffff !important;
-  text-decoration: none !important;
-}
 
-.lcdp-box-card-reservation-membre [data-action="adresse"]:hover,
-.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces:hover {
-  border-color: var(--lcdp-color-primary) !important;
-  background: var(--lcdp-color-primary) !important;
-  color: #ffffff !important;
-}
+
+
 
 /* V3 planning membre : lignes propres pour parc, annulation et actions. */
 .lcdp-box-card-reservation-membre__body {
@@ -10742,10 +10663,10 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 }
 
 .lcdp-box-card-reservation-membre__place {
-  display: flex !important;
+  
   flex-direction: column;
-  align-items: flex-start !important;
-  justify-content: flex-start !important;
+  
+  
   gap: 10px;
   width: 100%;
   min-width: 0;
@@ -15105,30 +15026,17 @@ html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
   width: 100%;
   margin-top: var(--lcdp-space-3);
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__action-reserver,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__action-planning {
-  width: 100%;
-  max-width: 260px;
-  min-height: 44px;
-}
+
+
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage {
-  width: auto;
+  
   margin-top: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  cursor: pointer;
+  
+  
+  
+  
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage-icone {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
+
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc {
     padding: var(--lcdp-space-4);
@@ -15149,7 +15057,7 @@ html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__action-reserver {
   min-width: 112px;
-  text-align: center;
+  
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__action-reserver:hover {
   text-decoration: none !important;
@@ -15164,23 +15072,21 @@ html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: var(--lcdp-space-2);
+    
   }
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-button {
     width: auto;
     max-width: none;
     min-height: 40px;
-    margin: 0;
+    
     white-space: nowrap;
     flex: 0 0 auto;
   }
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage {
-    width: auto;
+    
     flex: 0 0 auto;
   }
-  :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__partage-libelle {
-    white-space: nowrap;
-  }
+  
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list {
   width: 100%;
@@ -15384,10 +15290,7 @@ html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
   flex-wrap: wrap;
   gap: var(--lcdp-space-2);
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-button,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage {
-  box-sizing: border-box;
-  white-space: nowrap;
-}
+
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-list,:where(html[data-lcdp-css~="c070"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc {
     flex-direction: row !important;
@@ -15490,7 +15393,7 @@ html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
 }
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list {
-    display: grid !important;
+    
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 }
@@ -16123,16 +16026,11 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) .lcdp-site-page {
 html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-initiale {
   visibility: visible !important;
 }
-:where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 :where(html[data-lcdp-css~="c077"]) #lcdp-planifier-attente-initiale img {
   display: block;
   max-width: none;
-  object-fit: contain;
+  
 }
 :where(html[data-lcdp-css~="c077"]) .lcdp-page-reserver #lcdp-planifier-jour-overlay-slot .lcdp-box-calendrier-jour__grid {
   display: grid;
@@ -16356,7 +16254,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     max-width: none;
     min-height: 38px;
     padding: 6px 5px;
-    font-size: 0.78rem;
+    
     white-space: nowrap;
     overflow-wrap: normal;
     gap: 4px;
@@ -16412,9 +16310,9 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   margin: 0 0 var(--lcdp-space-2);
 }
 :where(html[data-lcdp-css~="c077"]) .lcdp-planifier-parcs-chargement {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  
+  
+  
   min-height: 110px;
 }
 :where(html[data-lcdp-css~="c077"]) .lcdp-planifier-parcs-chargement .lcdp-pictowait {
@@ -18650,7 +18548,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--avec-image {
   grid-template-columns: 92px minmax(0, 1fr);
-  align-items: stretch;
+  
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--invitation {
   border-color: rgba(123, 90, 166, 0.42);
@@ -18660,7 +18558,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08), 0 0 0 1px rgba(242, 162, 58, 0.18);
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__media {
-  width: 100%;
+  
   overflow: hidden;
   background: var(--lcdp-color-surface-soft);
 }
@@ -18669,8 +18567,8 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
   display: block;
-  width: 100%;
-  object-fit: cover;
+  
+  
   background: var(--lcdp-color-surface-soft);
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
@@ -18810,9 +18708,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
     justify-content: center;
   }
-  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__content {
-    gap: var(--lcdp-space-2);
-  }
+  
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__date,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__place {
     justify-content: flex-start;
   }
@@ -18854,10 +18750,10 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   gap: var(--lcdp-space-2);
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__place {
-  display: flex !important;
+  
   flex-direction: column;
-  align-items: flex-start !important;
-  justify-content: flex-start !important;
+  
+  
   gap: 10px;
   width: 100%;
   min-width: 0;
@@ -22761,7 +22657,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   cursor: pointer;
 }
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste {
-  display: grid;
+  
   padding: 0;
   list-style: none;
 }
@@ -23406,9 +23302,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   --lcdp-champ-badge-size: 40px;
   --lcdp-champ-badge-offset: 7px;
 }
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__control {
-  position: relative;
-}
+
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__badge {
   width: var(--lcdp-champ-badge-size);
   height: var(--lcdp-champ-badge-size);
@@ -27760,41 +27654,20 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   }
 }
 :where(html[data-lcdp-css~="c085"]) html.lcdp-compte-bloque,:where(html[data-lcdp-css~="c085"]) html.lcdp-compte-bloque body {
-  background: #000 !important;
+  
   color: #fff !important;
 }
 :where(html[data-lcdp-css~="c085"]) html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) {
   display: none !important;
 }
-:where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque {
-  position: fixed;
-  inset: 0;
-  z-index: 2147483647;
-  overflow: auto;
-  background: #000;
-  color: #fff;
-  padding: 24px;
-  box-sizing: border-box;
-}
+
 :where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque p {
   color: #fff;
 }
-:where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque button {
-  display: block;
-  margin-top: 16px;
-}
-:where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque {
-  display: flex;
-  flex-direction: column;
-}
-:where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque p {
-  color: #fff !important;
-}
-:where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque .lcdp-compte-bloque-actions {
-  margin-top: auto;
-  padding-top: 24px;
-  padding-bottom: env(safe-area-inset-bottom);
-}
+
+
+
+
 :where(html[data-lcdp-css~="c085"]) .lcdp-navigation-fixe {
   position: fixed;
 }
