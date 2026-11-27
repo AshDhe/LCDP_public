@@ -1,4 +1,5 @@
 @import url("./lcdp-theme-espaces.css");
+@import url("./lcdp-bandeau-nav.css");
 
 /* ======================================================================
    OBJETS GENERIQUES ET COMPOSANTS — PRESENTATION CENTRALISEE
@@ -6,111 +7,6 @@
    Les règles de parcours encore présentes sont à extraire ultérieurement.
    Les classes historiques restent jusqu’à migration de leurs DOM/JS.
    ====================================================================== */
-
-/* ===================================================================
-   OBJET : BANDEAU NAV
-   SOURCE INTÉGRÉE : 02-box-bandeau-nav.css
-   Présentation intégrée — aucun chargement externe nécessaire.
-   =================================================================== */
-#lcdp-bandeau-slot {
-  min-height: 64px;
-}
-
-.lcdp-box-bandeau-nav {
-  --lcdp-header-icon-size: 44px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 4000;
-  width: 100%;
-  min-height: 64px;
-  background: var(--lcdp-color-logo-green);
-  border-bottom: none;
-  overflow: visible;
-}
-
-.lcdp-box-bandeau-nav__inner {
-  position: relative;
-  z-index: 4001;
-  width: 100%;
-  max-width: var(--lcdp-page-width);
-  min-height: 64px;
-  margin-inline: auto;
-  padding: 0 var(--lcdp-page-padding-mobile);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--lcdp-space-3);
-  overflow: visible;
-}
-
-.lcdp-box-bandeau-nav__logo-link {
-  min-width: 0;
-  color: #ffffff;
-  font-family: var(--lcdp-font-main);
-  font-size: 20px;
-  line-height: 1.2;
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.lcdp-box-bandeau-nav__logo-link:visited,
-.lcdp-box-bandeau-nav__logo-link:hover {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.lcdp-box-bandeau-nav__logo {
-  width: var(--lcdp-header-icon-size, 44px);
-  height: var(--lcdp-header-icon-size, 44px);
-  border-radius: 999px;
-  object-fit: contain;
-  flex: 0 0 var(--lcdp-header-icon-size, 44px);
-  display: block;
-}
-
-.lcdp-box-bandeau-nav__space-label {
-  color: #ffffff;
-  font-size: 20px;
-  line-height: 1.2;
-  font-weight: 700;
-}
-
-.lcdp-box-bandeau-nav__burger-slot {
-  position: relative;
-  z-index: 4002;
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  overflow: visible;
-}
-
-@media (min-width: 768px) {
-  #lcdp-bandeau-slot {
-    min-height: 72px;
-  }
-
-  .lcdp-box-bandeau-nav {
-    min-height: 72px;
-  }
-
-  .lcdp-box-bandeau-nav__inner {
-    min-height: 72px;
-    padding-inline: var(--lcdp-page-padding-desktop);
-  }
-
-  .lcdp-box-bandeau-nav__logo {
-    width: var(--lcdp-header-icon-size, 44px);
-    height: var(--lcdp-header-icon-size, 44px);
-    flex-basis: var(--lcdp-header-icon-size, 44px);
-  }
-}
 
 /* ===================================================================
    OBJET : MENU BURGER
@@ -12692,28 +12588,6 @@ body.lcdp-legal-lightbox-open {
     font-weight: 400 !important;
   }
 }
-:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-box-bandeau-nav__inner {
-  justify-content: flex-start;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-label {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  white-space: normal;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-title {
-  color: #ffffff;
-  font-size: 20px;
-  line-height: 1.08;
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-subtitle {
-  color: #ffffff;
-  font-size: 0.86rem;
-  line-height: 1.08;
-  font-weight: 400;
-}
 :where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-formulaire-liste-attente-main {
   padding-top: 0;
   padding-bottom: 72px;
@@ -14269,15 +14143,6 @@ body.lcdp-legal-lightbox-open {
   --lcdp-coach-ink: var(--lcdp-color-text, #253329);
   --lcdp-coach-border: var(--lcdp-color-border, #d8dbd5);
 }
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav {
-  background: var(--lcdp-coach-accent);
-}
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav__space-label {
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav__logo-link {
-  text-decoration: none;
-}
 :where(html[data-lcdp-css~="c020"]) #lcdp-accueil-attente:not([hidden]) {
   position: fixed;
   inset: 0;
@@ -14751,125 +14616,6 @@ body.lcdp-legal-lightbox-open {
   :where(html[data-lcdp-css~="c055"]) .lcdp-box-card-map-parc__placeholder {
     min-height: 240px;
     padding: var(--lcdp-space-4);
-  }
-}
-:where(html[data-lcdp-css~="c034"]) #lcdp-bandeau-slot {
-  min-height: 68px;
-}
-html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
-  --lcdp-header-icon-size: 36px;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 4000;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 68px;
-  background: var(--lcdp-color-espace-accent, #4e6838);
-  border-bottom: 0;
-  color: #fff;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.5;
-  overflow: visible;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__inner {
-  position: relative;
-  z-index: 4001;
-  box-sizing: border-box;
-  display: flex;
-  width: 100%;
-  max-width: var(--lcdp-page-width);
-  min-height: 68px;
-  margin-inline: auto;
-  padding: 1rem 1.5rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  overflow: visible;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link, :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:visited, :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:hover {
-  display: inline-flex;
-  min-width: 0;
-  align-items: center;
-  gap: .75rem;
-  color: #fff;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 700;
-  line-height: 1.5;
-  white-space: normal;
-  text-decoration: none;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo {
-  box-sizing: border-box;
-  display: block;
-  flex: 0 0 var(--lcdp-header-icon-size, 44px);
-  width: var(--lcdp-header-icon-size, 44px);
-  height: var(--lcdp-header-icon-size, 44px);
-  border-radius: 12px;
-  background: rgb(255 255 255 / 10%);
-  object-fit: contain;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label.lcdp-bandeau-restreint-label {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  white-space: normal;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label .lcdp-bandeau-restreint-title {
-  margin: 0;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -.025em;
-  line-height: 1;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label .lcdp-bandeau-restreint-subtitle {
-  display: block;
-  margin: 0;
-  color: rgb(167 243 208 / 80%);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .025em;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__burger-slot {
-  position: relative;
-  z-index: 4002;
-  display: flex;
-  flex: 0 0 auto;
-  margin-inline-start: auto;
-  align-items: center;
-  justify-content: flex-end;
-  overflow: visible;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > #lcdp-bandeau-slot, :where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > .lcdp-box-bandeau-nav {
-  display: block;
-  flex: 0 0 68px;
-  width: 100%;
-  min-height: 68px;
-  background: var(--lcdp-color-espace-accent, #4e6838);
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper .lcdp-box-bandeau-nav {
-  position: relative;
-  inset: auto;
-  width: 100%;
-  border: 0;
-  border-radius: 23px 23px 0 0;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper .lcdp-box-bandeau-nav__inner {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-}
-@media (max-width: 360px) {
-  :where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper .lcdp-box-bandeau-nav__inner {
-    padding-inline: 16px;
   }
 }
 :where(html[data-lcdp-css~="c049"]) .lcdp-box-card-coordonnees-facture {
@@ -27672,16 +27418,6 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
 :where(html[data-lcdp-css~="c085"]) .lcdp-navigation-fixe {
   position: fixed;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-box-bandeau-nav__inner:has(.lcdp-bandeau-restreint-label) {
-  justify-content: flex-start;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-bandeau-restreint-label {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  white-space: normal;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-main-presentation {
   padding-top: 0;
   padding-bottom: 72px;
@@ -28101,9 +27837,6 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
     min-height: 93px;
     gap: 12px;
   }
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-bandeau-nav {
-  background: var(--lcdp-color-coach);
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-menu-burger__button,:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-menu-burger__nav {
   border-color: var(--lcdp-color-coach);
@@ -29470,9 +29203,6 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ) {
   transform-origin: 96px 96px;
   animation: tourner 3.36s steps(12, end) infinite;
 }
-:where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav {
-  background: var(--lcdp-color-coach, #8660c8);
-}
 :where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #formulaire-coach-slot .lcdp-box-formulaire__title {
   color: var(--lcdp-color-coach, #8660c8);
 }
@@ -29495,18 +29225,12 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ) {
 :where(html[data-lcdp-css~="p8ffe07172f8c"]) #lcdp-contact-erreur {
   text-align: center;
 }
-:where(html[data-lcdp-css~="pdf3a1ec2b292"]) .lcdp-connexion-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav {
-  background: var(--lcdp-color-coach, #8660c8);
-}
 :where(html[data-lcdp-css~="pdf3a1ec2b292"]) .lcdp-connexion-coach .lcdp-box-formulaire__title {
   color: var(--lcdp-color-coach, #8660c8);
 }
 :where(html[data-lcdp-css~="pdf3a1ec2b292"]) .lcdp-connexion-coach #bouton-valider-formulaire,:where(html[data-lcdp-css~="pdf3a1ec2b292"]) .lcdp-connexion-coach #bouton-valider-formulaire:hover,:where(html[data-lcdp-css~="pdf3a1ec2b292"]) .lcdp-connexion-coach #bouton-valider-formulaire:focus-visible {
   background: #fff;
   border-color: #fff;
-}
-:where(html[data-lcdp-css~="pdbde8f380d75"]) .lcdp-connexion-parc #lcdp-bandeau-slot .lcdp-box-bandeau-nav {
-  background: var(--lcdp-color-parc, #d64b68);
 }
 :where(html[data-lcdp-css~="pdbde8f380d75"]) .lcdp-connexion-parc .lcdp-box-formulaire__title {
   color: var(--lcdp-color-parc, #d64b68);
@@ -29639,9 +29363,6 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ) {
   padding: 8px;
   text-align: center;
   font-size: 1.4rem;
-}
-:where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #lcdp-bandeau-slot .lcdp-box-bandeau-nav {
-  background: var(--lcdp-color-parc, #d64b68);
 }
 :where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #formulaire-resparc-slot .lcdp-box-formulaire__title {
   color: var(--lcdp-color-parc, #d64b68);
@@ -31261,10 +30982,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
     padding: .75rem;
     gap: .25rem;
   }
-  :where(html[data-lcdp-css~="c085"]) .public-home .lcdp-box-bandeau-nav__inner {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-  }
 }
 @media (max-height: 560px) {
   :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .public-home__main {
@@ -32239,9 +31956,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role-coach {
   --lcdp-role-accent: var(--lcdp-color-coach, #8660c8);
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-app-wrapper > #lcdp-bandeau-slot, :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-app-wrapper .lcdp-box-bandeau-nav {
-  background: var(--lcdp-role-accent);
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__title {
   color: var(--lcdp-role-accent);

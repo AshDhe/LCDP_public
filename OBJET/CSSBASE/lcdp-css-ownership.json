@@ -403,5 +403,15 @@
     "regle_cascade": "ne jamais trier les modules par thème sans valider la cascade",
     "assemblage": "node lcdp-assembler-css.mjs --check|--write ; modules classiques au même niveau que CSS central",
     "source_autoritaire": "lcdp-central-module-*.css + lcdp-da-membre.css ; modifier les modules et non le CSS central généré"
+  },
+  "objets_canoniques": {
+    "bandeau-nav": {
+      "html": "OBJET/HTMLBASE/02-bandeau-nav.html",
+      "css": "lcdp-bandeau-nav.css",
+      "charge_par": "lcdp-central-mobile-first.css",
+      "statut": "extrait du central ; validation visuelle requise",
+      "variantes": "base historique, c034, accès restreint et espaces",
+      "exceptions": "Masquage multi-objets dans les tunnels. Définitions historiques dans cssbase.css et modules non réconciliés conservées provisoirement."
+    }
   }
 }
