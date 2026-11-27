@@ -1,16 +1,8 @@
 /* DFA — source Tailwind 4. Le gabarit, les titres, le texte, les cartes et les boutons sont fournis par c085 ; aucune redéfinition. */
 @reference "./lcdp-tailwind-theme.css";
 #dfa-page [hidden] { display:none !important; }
-#dfa-page .dfa-amount { @apply box-border flex items-center justify-between gap-3 w-full rounded-xl px-4 py-3 text-left cursor-pointer; min-height:56px; background:#f8fafc; border:1px solid #cbd5e1; color:#334155; font:inherit; }
-#dfa-page .dfa-amount:hover:not(:disabled) { border-color:#4e6838; background:#f6f8f5; }
-#dfa-page .dfa-amount:focus-visible { outline:2px solid #4e6838; outline-offset:3px; }
-#dfa-page .dfa-amount:disabled { @apply opacity-50 cursor-not-allowed; }
 #dfa-page .dfa-value { font-size:1rem; font-weight:600; font-variant-numeric:tabular-nums; }
-#dfa-page .dfa-amount[data-montant-selectionne] .dfa-value { font-size:1.5rem; color:#0f172a; }
-#dfa-page .dfa-amount svg { @apply size-6 shrink-0; color:#4e6838; }
 #dfa-page .dfa-status.dfa-error { color:#991b1b; }
 .lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__card { width:min(100%,290px); padding:16px; }
 .lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__touches { @apply grid grid-cols-3 gap-2; }
 .lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__touche { aspect-ratio:auto; min-height:48px; }
-.lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__validate { @apply w-full min-h-12 rounded-xl mt-3 px-4 py-3 cursor-pointer; font:inherit; font-weight:650; background:var(--lcdp-color-primary,#234438); color:white; border:0; }
-.lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__cancel { @apply w-full min-h-12 rounded-xl mt-2 px-4 py-3 cursor-pointer; font:inherit; font-weight:650; background:white; color:var(--lcdp-color-primary,#234438); border:1px solid var(--lcdp-color-primary,#234438); }

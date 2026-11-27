@@ -22,12 +22,8 @@
 .lcdp-stripe-page .lcdp-stripe__label {display:block;margin:0 0 8px;color:#57534e;font-size:15px;font-weight:700}
 .lcdp-stripe-page .lcdp-stripe__email {width:100%;min-height:46px;border:1px solid #d6d3d1;border-radius:12px;background:#fff;color:#292524;font:inherit;padding:10px 13px;margin-bottom:19px}
 .lcdp-stripe-page #stripe-payment-element {min-height:110px}
-.lcdp-stripe-page .lcdp-stripe__payer {display:block;width:100%;margin:22px 0 0;padding:15px 18px;background:#4b6333;color:#fff;border:1px solid #4b6333;border-radius:16px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:800;box-shadow:0 3px 7px #1c19171a}
-.lcdp-stripe-page .lcdp-stripe__payer:hover:not(:disabled) {background:#3d5129}
-.lcdp-stripe-page .lcdp-stripe__payer:disabled {opacity:.55;cursor:not-allowed}
 .lcdp-stripe-page .lcdp-stripe__erreur {padding:12px;background:#fff1f2;border:1px solid #fecdd3;color:#9f1239;border-radius:10px;font-size:16px}
 .lcdp-stripe-page .lcdp-stripe__aide {margin:16px 0 0;font-size:11px;color:#78716c;text-align:center;line-height:1.45}
-.lcdp-stripe-page .lcdp-stripe__retour {display:block;margin-top:19px;color:#4b6333;text-align:center;font-size:13px;font-weight:750;text-decoration:underline;text-underline-offset:3px}
 .lcdp-stripe-page .lcdp-stripe__pied {padding:13px;border-top:1px solid #f5f5f4;color:#475569;font-size:14px;text-align:center}
 .lcdp-stripe-page :focus-visible {outline:2px solid #4b6333;outline-offset:3px}
 .lcdp-stripe-page [hidden] {display:none!important}
@@ -37,10 +33,6 @@
   .lcdp-stripe-page .lcdp-stripe__entete {padding:18px}
   .lcdp-stripe-page .lcdp-stripe__corps {padding:22px 18px}
 }
-
-
-
-.lcdp-stripe-page .lcdp-stripe__detail-lien{display:block;margin:11px 0 5px auto;padding:3px 0;border:0;background:none;color:#4b6333;text-decoration:underline;font:inherit;font-size:15px;font-weight:700;cursor:pointer}
 .lcdp-stripe-page .lcdp-stripe__detail{margin-top:12px;padding:15px 16px;border:1px solid #e7e5e4;border-radius:15px;background:#fafaf9;font-size:15px}
 .lcdp-stripe-page .lcdp-stripe__detail[hidden]{display:none!important}
 .lcdp-stripe-page .lcdp-stripe__detail p{margin:0 0 10px;line-height:1.5}
@@ -53,9 +45,6 @@
 .lcdp-stripe-page .lcdp-stripe__detail-reference span{color:#78716c}
 .lcdp-stripe-page .lcdp-stripe__detail-reference strong{text-align:right;overflow-wrap:anywhere}
 .lcdp-stripe-page .lcdp-stripe__email[hidden], .lcdp-stripe__label[hidden]{display:none!important}
-.lcdp-stripe-page .lcdp-stripe__reprendre{display:block;width:100%;margin:12px 0 0;padding:13px 15px;border:0;border-radius:12px;background:#4b6333;color:white;font:inherit;font-weight:750;cursor:pointer}
-.lcdp-stripe-page .lcdp-stripe__reprendre:disabled{opacity:.55;cursor:wait}
-.lcdp-stripe-page .lcdp-stripe__reprendre[hidden]{display:none!important}
     .lcdp-stripe-page #paiement-formulaire > h2 {margin-bottom:6px;}
     .lcdp-stripe-page #paiement-formulaire > .lcdp-stripe__aide {margin:0 0 10px;padding:10px 12px;border:1px solid transparent;border-radius:10px;font-size:16px;font-weight:500;line-height:1.55;text-align:left;}
     .lcdp-stripe-page #paiement-formulaire > .lcdp-stripe__aide--securite {background:#f0fdf4;border-color:#bbf7d0;color:#166534;}
