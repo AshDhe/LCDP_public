@@ -415,7 +415,7 @@
       "charge_par": "lcdp-central-mobile-first.css",
       "statut": "Design moderne unique sans variante ancienne ni condition c038.",
       "variantes": "Rôles accueil/compte/faq, boutique, accent coach, mouvement réduit.",
-      "exceptions": "lcdp-menu-burger-boutique.css reste un fichier de compatibilité sans déclaration pour les anciens chargeurs JS. Aucun style concurrent dans les modules."
+      "exceptions": "Aucun style concurrent dans les modules ; styles Boutique intégrés à la feuille commune."
     },
     "footer": {
       "html": "OBJET/HTMLBASE/02-footer.html",
