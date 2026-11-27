@@ -442,8 +442,24 @@
     "boite-dialogue": {
       "css": "lcdp-boite-dialogue.css",
       "charge_par": "lcdp-central-mobile-first.css et cssbase.css, après le socle bouton-lien-picto",
-      "statut": "Feuille propriétaire chargée dans main : modèles de référence, structures des dialogues communs, variantes de connexion et commandes propres ; boutons compacts et pictogrammes de signalisation dans bouton-lien-picto.",
-      "exceptions": "Adaptations propres à PLANIFIER, S’ABONNER et MA CLÉ ; objets métiers modaux et Shadow DOM."
+      "statut": "Feuille propriétaire des boîtes de dialogue : classe commune lcdp-boite-dialogue, structures, contenu et disposition. Les boutons et pictogrammes sont fournis par lcdp-bouton-lien-picto.css.",
+      "exceptions": "Adaptations propres à PLANIFIER, S’ABONNER et MA CLÉ ; objets métiers modaux et Shadow DOM.",
+      "html": [
+        "OBJET/HTMLBASE/02-alerte.html",
+        "OBJET/HTMLBASE/02-dialogue-bouton.html",
+        "OBJET/HTMLBASE/04-dialogue-champ.html",
+        "OBJET/HTMLBASE/04-dialogue-champ-inviter.html",
+        "OBJET/HTMLBASE/04-dialogue-upload-img.html",
+        "OBJET/HTMLBASE/02-dialogue-reference-information.html",
+        "OBJET/HTMLBASE/02-dialogue-reference-choix.html",
+        "OBJET/HTMLBASE/02-dialogue-reference-suppression.html",
+        "OBJET/HTMLBASE/02-dialogue-reference-erreur.html",
+        "OBJET/HTMLBASE/02-dialogue-reference-abonnement-impaye.html",
+        "OBJET/HTMLBASE/02-dialogue-reference-compte-ferme.html",
+        "OBJET/HTMLBASE/02-dialogue-reference-compte-suspendu-admin.html",
+        "OBJET/HTMLBASE/02-dialogue-reference-compte-suspendu-optin.html",
+        "OBJET/HTMLBASE/02-dialogue-reference-mise-a-jour-reglement.html"
+      ]
     }
   }
 }

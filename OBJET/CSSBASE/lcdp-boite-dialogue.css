@@ -1,4 +1,8 @@
+/* LCDP — BOÎTES DE DIALOGUE
+   Structure, voile, carte, contenu et disposition des commandes.
+   Boutons et pictogrammes : lcdp-bouton-lien-picto.css. */
 
+.lcdp-boite-dialogue[hidden] { display: none !important; }
 
 body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] .lcdp-box-dialogue-champ__actions > .lcdp-button {
   width: 100%;
@@ -18,21 +22,11 @@ body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias,
   margin: 0;
 }
 
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions .lcdp-button-secondary {
-  border: 1px solid var(--lcdp-color-espace-accent, #4e6838);
-  background: #fff;
-  color: var(--lcdp-color-espace-accent, #4e6838);
-}
 
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions .lcdp-button-primary {
-  border: 1px solid var(--lcdp-color-espace-accent, #4e6838);
-  background: var(--lcdp-color-espace-accent, #4e6838);
-  color: #fff;
-}
 
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions .lcdp-button-primary:hover {
-  background: var(--lcdp-color-espace-accent-hover, #3d522c);
-}
+
+
+
 
 .lcdp-box-dialogue-bouton__actions .lcdp-button {
   width: min(100%, 220px);
