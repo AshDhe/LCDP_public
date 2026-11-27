@@ -4485,3 +4485,109 @@ body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__actions .lcdp-button:ho
       margin-left: auto;
       margin-right: auto;
     }
+
+/* Boutons compacts génériques : couleurs et états indépendants du contenu. */
+:is(.lcdp-button--compact,.lcdp-dialogue-ref__bouton) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 10px;
+  border-radius: 16px;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, transform .15s ease;
+}
+
+:is(.lcdp-button--neutre,.lcdp-dialogue-ref__bouton--secondaire) {
+  background: #fff;
+  color: #57534e;
+  border: 1px solid #e7e5e4;
+  font-weight: 700;
+}
+
+:is(.lcdp-button--neutre,.lcdp-dialogue-ref__bouton--secondaire):hover { background: #fafaf9; color: #1c1917; }
+
+:is(.lcdp-button--foret,.lcdp-dialogue-ref__bouton--principal) {
+  background: var(--lcdp-button-foret,#4b6333);
+  border: 1px solid var(--lcdp-button-foret,#4b6333);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+:is(.lcdp-button--foret,.lcdp-dialogue-ref__bouton--principal):hover { background: var(--lcdp-button-foret-hover,#3d5129); border-color: var(--lcdp-button-foret-hover,#3d5129); }
+
+:is(.lcdp-button--destructif,.lcdp-dialogue-ref__bouton--suppression) {
+  background: var(--lcdp-button-destructif,#e90046);
+  border: 1px solid var(--lcdp-button-destructif,#e90046);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+:is(.lcdp-button--destructif,.lcdp-dialogue-ref__bouton--suppression):hover { background: var(--lcdp-button-destructif-hover,#be123c); border-color: var(--lcdp-button-destructif-hover,#be123c); }
+
+:is(.lcdp-button--compact,.lcdp-dialogue-ref__bouton):active { transform: scale(.98); }
+
+:is(.lcdp-button--compact,.lcdp-dialogue-ref__bouton):focus-visible {
+  outline: 3px solid var(--lcdp-color-focus, #b98c31);
+  outline-offset: 3px;
+}
+
+:is(.lcdp-button--compact,.lcdp-dialogue-ref__bouton):disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+:is(.lcdp-button--compact,.lcdp-dialogue-ref__bouton) { transition: none; }
+
+}
+@media (prefers-reduced-motion: reduce) {
+:is(.lcdp-button--compact,.lcdp-dialogue-ref__bouton):active { transform: none; }
+
+}
+
+/* Pictogrammes génériques de signalisation : information, question, alerte. */
+:is(.lcdp-picto,.lcdp-dialogue-ref__icone) {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:is(.lcdp-picto,.lcdp-dialogue-ref__icone) svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+:is(.lcdp-picto--information,.lcdp-dialogue-ref--information .lcdp-dialogue-ref__icone) {
+  background: #ecfdf5;
+  color: #4b6333;
+  border: 1px solid rgba(75, 99, 51, .2);
+}
+
+ :is(.lcdp-picto--alerte,.lcdp-dialogue-ref--erreur .lcdp-dialogue-ref__icone,.lcdp-dialogue-ref--suppression .lcdp-dialogue-ref__icone) {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid rgba(251, 113, 133, .3);
+}
+
+:is(.lcdp-picto--question,.lcdp-dialogue-ref--choix .lcdp-dialogue-ref__icone) {
+  background: #fffbeb;
+  color: #d97706;
+  border: 1px solid rgba(251, 191, 36, .5);
+}
+
