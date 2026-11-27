@@ -2,23 +2,7 @@
    FACTURES — PAGE A4 ET IMPRESSION — Styles de parcours, sources CSS GitHub 2026-11-05
    ======================================================================== */
 
-/* OBJET : 04-BOX-FACTURE-A4 */
-.lcdp-page-facture-a4 {
-  margin: 0;
-  min-height: 100vh;
-  background: #e6e9e4;
-  color: #1f2c24;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-.lcdp-page-facture-a4__main {
-  min-height: 100vh;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
+/* OBJET : 04-BOX-FACTURE-A4 — le conteneur de page relève de lcdp-wrapper.css. */
 .lcdp-page-facture-a4__message {
   width: min(100%, 34rem);
   margin: 4rem auto;

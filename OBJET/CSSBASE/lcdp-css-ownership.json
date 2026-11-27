@@ -429,7 +429,7 @@
       "css": "lcdp-wrapper.css",
       "charge_par": "lcdp-central-mobile-first.css",
       "statut": "Gabarit applicatif mobile-first unique, indépendant de c085 ; dimensions du wrapper moderne publié conservées.",
-      "variantes": "Écran sans navigation, accueil, document juridique et impression.",
+      "variantes": "Écran sans navigation, accueil, document juridique, document A4 imprimable, sécurité sombre ; paiement Stripe autonome sur le conteneur commun.",
       "exceptions": "Les règles du conteneur administratif .lcdp-site-page hors wrapper et les états de parcours restent distincts ; les objets internes sont hors périmètre."
     }
   }
