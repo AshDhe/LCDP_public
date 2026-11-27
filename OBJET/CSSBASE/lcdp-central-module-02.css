@@ -859,7 +859,7 @@
   background: var(--lcdp-color-surface);
   box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__close {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__close {
   position: sticky;
   top: var(--lcdp-space-2);
   float: right;
@@ -875,7 +875,7 @@
   line-height: 1;
   cursor: pointer;
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__close:hover {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__close:hover {
   background: var(--lcdp-color-surface-soft);
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__header {
@@ -1337,7 +1337,7 @@
   flex-wrap: wrap !important;
   gap: var(--lcdp-space-2) !important;
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action {
   width: auto !important;
   min-width: 0 !important;
   max-width: 100% !important;
@@ -1401,7 +1401,7 @@
     flex: 0 0 29.04px !important;
   }
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__contact-label {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__contact-label {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -1458,12 +1458,7 @@
     grid-template-columns: repeat(2, minmax(0,1fr)) !important;
   }
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-partager],:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] {
-  background: #f2a23a !important;
-  border-color: #f2a23a !important;
-  color: #fff !important;
-}
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-icone,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-icone,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] .lcdp-box-card-parc__action-icone {
+:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-icone {
   filter: brightness(0) invert(1) !important;
 }
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__departement {
@@ -1473,7 +1468,7 @@
   font-weight: 400;
   color: var(--lcdp-color-text-muted,#606b60);
 }
-:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-libelle,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] .lcdp-box-card-parc__action-libelle,:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-libelle {
+:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc--planifier-tunnel [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-libelle {
   color: #fff !important;
 }
 @media (max-width: 767px) {

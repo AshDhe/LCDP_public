@@ -1,5 +1,7 @@
+
 /*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] > .lcdp-box-shift-detail-parc__card > .lcdp-box-shift-detail-parc__close {
+
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-mes-acces-fiche-slot) [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] > .lcdp-box-shift-detail-parc__card > .lcdp-box-shift-detail-parc__close {
   position: absolute;
   top: 28px !important;
   right: 21px !important;

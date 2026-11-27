@@ -208,29 +208,6 @@ body.lcdp-security-tunnel #titre-preparation {
   margin: 12px 0 0;
   border-top: 1px solid #f1f5f9;
 }
-:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #bouton-valider-code.lcdp-security-submit {
-  width: 100%;
-  max-width: none;
-  height: auto;
-  min-height: 54px;
-  margin: 0;
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  border: 0;
-  border-radius: 16px;
-  background: #4e6838;
-  color: #fff;
-  font: 800 14px/1.2 Arial,system-ui,sans-serif;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: 0 5px 12px rgba(39,81,56,.14);
-}
-:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #bouton-valider-code.lcdp-security-submit:hover:not(:disabled) { background: #3d522c; }
-:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #bouton-valider-code.lcdp-security-submit:disabled { opacity: .55; cursor: wait; }
 /* Étape 3 : modèle commun ; QR uniquement selon le JS et les états hidden existants. */
 body.lcdp-security-tunnel .lcdp-setup-flow {
   display: flex;
@@ -307,13 +284,6 @@ body.lcdp-security-tunnel .lcdp-setup-flow__phone-check {
   background: #f8fafc;
   box-sizing: border-box;
 }
-body.lcdp-security-tunnel .lcdp-setup-flow__phone-check .lcdp-setup-flow__toggle {
-  width: 100%;
-  font-size: 12px;
-  line-height: 1.45;
-  font-weight: 600;
-  color: #475569;
-}
 body.lcdp-security-tunnel .lcdp-setup-flow .lcdp-box-formulaire__actions {
   border-top: 1px solid #f1f5f9;
   padding-top: 20px;
@@ -348,8 +318,7 @@ body.lcdp-security-tunnel #lcdp-footer-slot { display: none !important; }
   body.lcdp-security-tunnel .lcdp-setup-flow { padding: 20px 18px; border-radius: 22px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  :is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #bouton-valider-code,
-  body.lcdp-security-tunnel .lcdp-step-progress__fill { transition: none; }
+body.lcdp-security-tunnel .lcdp-step-progress__fill { transition: none; }
 }
 
 /* Fermeture du compte : consigne CODR centrée et compacte. */

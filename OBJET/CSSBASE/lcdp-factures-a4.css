@@ -33,10 +33,6 @@
   margin: 0 0 0.9rem;
 }
 
-.lcdp-box-facture-a4__actions .lcdp-button {
-  min-width: 15rem;
-}
-
 .lcdp-box-facture-a4__header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

@@ -1909,3 +1909,613 @@ body.lcdp-page-mon-compte
   transform: none;
   box-shadow: none;
 }
+
+
+/* Factures — lcdp-factures-modal.css */
+
+.lcdp-box-facture__close {
+  position: sticky;
+  top: 0;
+  float: right;
+  z-index: 5;
+  width: 2.35rem;
+  height: 2.35rem;
+  margin: 0 0 0.25rem 0.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(245, 247, 244, 0.96);
+  color: #1f2c24;
+  font-size: 1.6rem;
+  font-weight: 650;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lcdp-box-facture__actions .lcdp-button {
+  min-width: min(100%, 16rem);
+}
+
+
+/* Factures — lcdp-factures-a4.css */
+
+.lcdp-box-facture-a4__actions .lcdp-button {
+  min-width: 15rem;
+}
+
+
+/* Mon compte — ouverture des selfies et liens */
+
+body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="reglements"] .lcdp-box-champ-formulaire__label-zone > a,
+body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-equipements-temoins > [data-lcdp-box-champ-formulaire] > .lcdp-box-champ-formulaire__label-zone > a {
+  flex: 0 0 auto;
+}
+
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge) {
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: var(--compte-texte-libelle);
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: zoom-in;
+  display: grid;
+  place-items: center;
+}
+
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge):focus-visible {
+  outline: 3px solid var(--compte-accent);
+  outline-offset: 3px;
+}
+
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge)[hidden] {
+  display: none !important;
+}
+
+.lcdp-page-mon-compte :is(#zone-selfie, #zone-selfie-duoday) :is(#selfie-badge, #selfie-duoday-badge):disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+
+/* Mon compte — validation et commandes sécurité */
+
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #bouton-valider-code.lcdp-security-submit {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  min-height: 54px;
+  margin: 0;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 16px;
+  background: #4e6838;
+  color: #fff;
+  font: 800 14px/1.2 Arial,system-ui,sans-serif;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(39,81,56,.14);
+}
+
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #bouton-valider-code.lcdp-security-submit:hover:not(:disabled) { background: #3d522c; }
+
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #bouton-valider-code.lcdp-security-submit:disabled { opacity: .55; cursor: wait; }
+
+body.lcdp-security-tunnel .lcdp-setup-flow__phone-check .lcdp-setup-flow__toggle {
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: #475569;
+}
+
+@media (prefers-reduced-motion: reduce) {
+:is(body.lcdp-security-tunnel, div.lcdp-security-tunnel) #bouton-valider-code { transition: none; }
+}
+
+
+/* Fiche Parc publique — socle des boutons Card Parc (sans modifier les autres contextes) */
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  margin-top: 0;
+  padding: 10px 9px;
+  border: 2px solid currentColor;
+  border-radius: var(--lcdp-radius-button);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: clamp(0.9072rem, 4.32vw, 1.0584rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-transform: none;
+  box-shadow: none;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+  width: 27.72px;
+  height: 27.72px;
+  flex: 0 0 27.72px;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-libelle {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-plein {
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  color: #ffffff;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-plein:hover {
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  color: #ffffff;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-contour {
+  border-color: var(--lcdp-color-logo-green);
+  background: #ffffff;
+  color: var(--lcdp-color-logo-green);
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-contour:hover {
+  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-primary);
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-plein {
+  border-color: var(--lcdp-color-orange);
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-plein:hover {
+  border-color: var(--lcdp-color-orange-hover);
+  background: var(--lcdp-color-orange-hover);
+  color: #ffffff;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-contour {
+  border-color: var(--lcdp-color-orange);
+  background: #ffffff;
+  color: var(--lcdp-color-orange);
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-contour:hover {
+  border-color: var(--lcdp-color-orange-hover);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-orange-hover);
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+    min-height: 52px;
+    padding-inline: 13px;
+    font-size: 1.16424rem;
+  }
+}
+
+@media (min-width: 768px) {
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+    width: 29.04px;
+    height: 29.04px;
+    flex-basis: 29.04px;
+  }
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet,
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet:hover {
+  filter: saturate(0.35) brightness(1.18);
+  cursor: help;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein .lcdp-box-card-parc__action-icone--presentation {
+  filter: brightness(0) invert(1);
+}
+
+/* Commandes communes — factures, compte, fiche Parc publique */
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-fiche-parc__close {
+  position: sticky;
+  top: var(--lcdp-space-2);
+  float: right;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-fiche-parc__close:hover {
+  background: var(--lcdp-color-surface-soft);
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-fiche-parc__actions-barre
+  .lcdp-box-card-parc__action {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-fiche-parc__contact-label {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-partager],
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] {
+  background:#f2a23a !important; border-color:#f2a23a !important; color:#fff !important;
+}
+
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-icone,
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] .lcdp-box-card-parc__action-icone {
+  filter: brightness(0) invert(1) !important;
+}
+
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-partager] .lcdp-box-card-parc__action-libelle,
+.lcdp-box-fiche-parc--publique [data-lcdp-fiche-parc-action-planning] .lcdp-box-card-parc__action-libelle { color:#fff !important; }
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-shift-detail-parc__close {
+  position: sticky;
+  top: var(--lcdp-space-2);
+  float: right;
+  z-index: 4;
+  width: 40px;
+  height: 40px;
+  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
+  border: 0;
+  border-radius: 999px;
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font: inherit;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-shift-detail-parc__close:hover {
+  background: var(--lcdp-color-surface-soft);
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]
+  .lcdp-box-shift-detail-parc__close {
+  position: absolute;
+  top: var(--lcdp-space-4);
+  right: var(--lcdp-space-4);
+  float: none;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]
+    .lcdp-box-shift-detail-parc__close {
+    top: var(--lcdp-space-5);
+    right: var(--lcdp-space-5);
+  }
+}
+
+#zone-selfie #selfie-badge {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: zoom-in;
+}
+
+#zone-selfie #selfie-badge:focus-visible {
+  outline: 3px solid #557347;
+  outline-offset: 3px;
+}
+
+#zone-selfie #selfie-badge[hidden] {
+  display: none !important;
+}
+
+#dialogue-selfie-agrandi button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: #f0f2f4;
+  color: #202820;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+:where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25rem;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+:where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-back-link:hover,
+:where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-back-link:focus-visible {
+  color: #475569;
+}
+
+:where(html[data-lcdp-css~="c085"], html[data-lcdp-css~="c083"]) .lcdp-app-wrapper .lcdp-editorial-back-link svg {
+  display: block;
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.lcdp-compte-rdv-da__button {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 9px;
+  background: #edf3e9;
+  color: #4e6838;
+  cursor: pointer;
+}
+
+.lcdp-compte-rdv-da__button svg {
+  width: 21px;
+  height: 21px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lcdp-compte-rdv-da__button:focus-visible {
+  outline: 2px solid #4e6838;
+  outline-offset: 2px;
+}
+
+#lcdp-rdv-da-dialogue [data-rdv-da-actions] button {
+  box-sizing: border-box;
+  min-height: 42px;
+  padding: 8px 13px;
+  border: 1px solid #4e6838;
+  border-radius: 999px;
+  background: #fff;
+  color: #4e6838;
+  font: inherit;
+  font-size: .9rem;
+  cursor: pointer;
+}
+
+#lcdp-rdv-da-dialogue [data-rdv-da-actions] button[type=submit] {
+  background: #4e6838;
+  color: white;
+}
+
+#lcdp-rdv-da-dialogue [data-rdv-da-actions] button:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+
+
+/* Fiche Parc publique — commandes lcdp-fiche-parc-wrapper.css */
+
+#lcdp-fiche-parc-slot .lcdp-box-shift-detail-parc__close {
+  width: 30px;
+  height: 30px;
+  font-size: 1.3rem;
+  margin: 0 0 5px 5px;
+}
+
+#lcdp-fiche-parc-slot .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action {
+  min-width: 0;
+  min-height: 34px;
+  padding: 5px 9px;
+  font-size: .72rem;
+}
+
+#lcdp-fiche-parc-slot .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action-icone {
+  width: 18px;
+  height: 18px;
+}
+
+#lcdp-fiche-parc-slot
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]
+.lcdp-box-fiche-parc__actions-barre :is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte]),
+#lcdp-fiche-parc-slot
+.lcdp-box-shift-detail-parc[data-lcdp-shift-vue="carte"]
+.lcdp-box-fiche-parc__actions-barre [data-lcdp-fiche-parc-action-partager] {
+  box-sizing: border-box;
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 40px !important;
+  height: auto !important;
+  padding: 7px 12px !important;
+  margin: 0 !important;
+  border: 1px solid #e59834 !important;
+  border-radius: 8px !important;
+  background: #e59834 !important;
+  color: #fff !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  font-family: var(--lcdp-font-main) !important;
+  font-size: .82rem !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap !important;
+}
+
+#lcdp-fiche-parc-slot
+.lcdp-box-shift-detail-parc :is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte])
+.lcdp-box-card-parc__action-icone {
+  width: 20px !important;
+  height: 20px !important;
+  flex: 0 0 20px !important;
+  filter: brightness(0) invert(1);
+}
+
+body.lcdp-fiche-parc-publique #lcdp-fiche-parc-slot .lcdp-box-shift-detail-parc__close {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  z-index: 5;
+}
+
+body.lcdp-fiche-parc-publique #lcdp-fiche-parc-slot
+[data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="fiche"] > .lcdp-box-shift-detail-parc__card
+> .lcdp-box-shift-detail-parc__close {
+  position: absolute !important;
+  top: 28px !important;
+  right: 21px !important;
+  width: 32px;
+  height: 32px;
+  margin: 0 !important;
+  float: none !important;
+}
+
+
+/* Fiche Parc publique — commandes lcdp-fiche-parc-vue-carte.css */
+
+#lcdp-fiche-parc-slot [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="carte"] > .lcdp-box-shift-detail-parc__card > .lcdp-box-shift-detail-parc__close {
+  position: absolute;
+  top: 28px !important;
+  right: 21px !important;
+  width: 32px;
+  height: 32px;
+  margin: 0 !important;
+  float: none !important;
+}
+
+
+/* Mon compte — liens et boutons compacts (les badges informatifs restent dans leur feuille) */
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: #ecfdf5;
+  color: var(--lcdp-burger-accent, var(--lcdp-color-primary, #4e6838));
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action:hover,
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action:focus-visible {
+  background: var(--lcdp-burger-accent, var(--lcdp-color-primary, #4e6838));
+  color: #fff;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action[hidden] { display: none !important; }
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--amber {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--amber:hover,
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--amber:focus-visible {
+  background: #fde68a;
+  color: #78350f;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--red {
+  background: #fff1f2;
+  color: #be123c;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--red:hover,
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--red:focus-visible {
+  background: #ffe4e6;
+  color: #9f1239;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--neutral {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--neutral:hover,
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--neutral:focus-visible {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+/* Fiche Parc publique — dimension du picto de fermeture du gabarit organisé */
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-fiche-parc .lcdp-box-fiche-parc__card--organisee .lcdp-box-fiche-parc__close {
+      width: 32px;
+      height: 32px;
+      font-size: 1.35rem;
+      color: #546354;
+    }

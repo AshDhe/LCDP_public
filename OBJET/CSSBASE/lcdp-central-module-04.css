@@ -467,7 +467,7 @@
   gap: var(--lcdp-space-2);
   max-width: none;
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
   width: 100%;
   min-width: 0;
   min-height: 50px;
@@ -487,7 +487,7 @@
   text-transform: none;
   box-shadow: none;
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
   width: 27.72px;
   height: 27.72px;
   flex: 0 0 27.72px;
@@ -495,51 +495,51 @@
   object-fit: contain;
   pointer-events: none;
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-libelle {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-libelle {
   min-width: 0;
   overflow-wrap: anywhere;
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein {
   border-color: var(--lcdp-color-logo-green);
   background: var(--lcdp-color-logo-green);
   color: #ffffff;
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein:hover {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein:hover {
   border-color: var(--lcdp-color-primary);
   background: var(--lcdp-color-primary);
   color: #ffffff;
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-contour {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-contour {
   border-color: var(--lcdp-color-logo-green);
   background: #ffffff;
   color: var(--lcdp-color-logo-green);
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-contour:hover {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-contour:hover {
   border-color: var(--lcdp-color-primary);
   background: var(--lcdp-color-surface-soft);
   color: var(--lcdp-color-primary);
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-plein {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-plein {
   border-color: var(--lcdp-color-orange);
   background: var(--lcdp-color-orange);
   color: #ffffff;
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-plein:hover {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-plein:hover {
   border-color: var(--lcdp-color-orange-hover);
   background: var(--lcdp-color-orange-hover);
   color: #ffffff;
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-contour {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-contour {
   border-color: var(--lcdp-color-orange);
   background: #ffffff;
   color: var(--lcdp-color-orange);
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-contour:hover {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--orange-contour:hover {
   border-color: var(--lcdp-color-orange-hover);
   background: var(--lcdp-color-surface-soft);
   color: var(--lcdp-color-orange-hover);
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action:focus-visible {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action:focus-visible {
   outline: 3px solid var(--lcdp-color-focus);
   outline-offset: 3px;
 }
@@ -547,12 +547,12 @@
   :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__actions--reserver {
     max-width: 460px;
   }
-  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
     min-height: 52px;
     padding-inline: 13px;
     font-size: 1.16424rem;
   }
-  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
     width: 29.04px;
     height: 29.04px;
     flex-basis: 29.04px;
@@ -579,11 +579,12 @@
   background: #3C71B1;
   letter-spacing: 0.035em;
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet,:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet:hover {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet,
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet:hover {
   filter: saturate(0.35) brightness(1.18);
   cursor: help;
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein .lcdp-box-card-parc__action-icone--presentation {
+:where(html:not(:has(> body.lcdp-fiche-parc-publique))):where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein .lcdp-box-card-parc__action-icone--presentation {
   filter: brightness(0) invert(1);
 }
 :where(html[data-lcdp-css~="c051"]) .lcdp-box-card-heure-in-calendrier-jour {

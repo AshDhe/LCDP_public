@@ -497,31 +497,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   padding-top: 8px;
   text-align: center;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-back-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  color: #94a3b8;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.25rem;
-  text-decoration: none;
-  transition: color .2s ease;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-back-link:hover, :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-back-link:focus-visible {
-  color: #475569;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-back-link svg {
-  display: block;
-  width: 12px;
-  height: 12px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.5;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-page-heading > .lcdp-title-page-center {
   margin: 0;
 }
