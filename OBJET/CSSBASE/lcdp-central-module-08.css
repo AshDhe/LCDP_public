@@ -1529,26 +1529,8 @@
 :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext__content strong {
   color: var(--lcdp-color-text);
 }
-:where(html[data-lcdp-css~="c083"]) body.lcdp-app-page.lcdp-page-document-legal {
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-}
-:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper {
-  border-color: var(--lcdp-color-border);
-  box-shadow: 0 12px 32px rgba(31, 42, 36, 0.12);
-}
-:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper > .lcdp-site-main {
-  background: var(--lcdp-color-surface-soft);
-}
 :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext {
   border-color: var(--lcdp-color-border);
-}
-:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
-  padding-top: clamp(1.25rem, 4vw, 2.5rem);
-  padding-bottom: clamp(3rem, 8vw, 5rem);
-}
-:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-page-content.lcdp-document-legal {
-  gap: clamp(1rem, 2.4vw, 1.5rem);
 }
 :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-document-legal__title {
   margin: 0;
