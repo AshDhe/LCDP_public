@@ -185,37 +185,11 @@
   --lcdp-champ-modifiable-action-offset: 0px;
   --lcdp-champ-modifiable-icon-size: 17px;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit {
-  @apply box-border;
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
-  right: 0;
-  border: 1px solid var(--compte-bordure);
-  border-radius: var(--compte-rayon-ligne);
-  background: var(--compte-fond-carte);
-  color: var(--lcdp-color-orange, #f2a23a);
-  box-shadow: none;
-}
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit:hover {
-  background: var(--compte-fond-ligne);
-  border-color: var(--lcdp-color-orange, #f2a23a);
-  color: var(--lcdp-color-orange-hover, #e89223);
-}
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge,
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge:hover,
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge:focus-visible {
-  color: #b3261e;
-}
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit-icon,
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit-icon path {
-  fill: currentColor;
-  stroke: currentColor;
-}
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit[hidden] {
-  display: none !important;
-}
+
+
+
+
+
 .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide {
   margin: 6px 0 0;
   padding: 0;
@@ -246,30 +220,9 @@
   margin: 5px 0 0;
   padding: 0;
 }
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button {
-  @apply box-border;
-  @apply w-auto;
-  min-width: 155px;
-  @apply max-w-full;
-  min-height: 37px;
-  margin: 0;
-  padding: 7px 15px;
-  border-radius: 11px;
-  font-size: .86rem;
-  font-weight: 600;
-  line-height: 1.25;
-  @apply whitespace-normal;
-  @apply text-center;
-}
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: var(--compte-texte);
-}
-.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange:hover {
-  background: var(--lcdp-color-orange-hover);
-  border-color: var(--lcdp-color-orange-hover);
-}
+
+
+
 
 /* Ancien CSS central de mes-informations.js : neutraliser ses marges de groupes. */
 .lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-box-formulaire__actions,
@@ -356,21 +309,7 @@
 }
 .lcdp-page-mon-compte #dialogue-selfie-agrandi::backdrop { background: rgba(31,42,36,.78); }
 .lcdp-page-mon-compte #dialogue-selfie-agrandi img { @apply block; @apply max-w-full; max-height: calc(92dvh - 70px); @apply w-auto; @apply h-auto; @apply object-contain; margin: auto; border-radius: 8px; }
-.lcdp-page-mon-compte #dialogue-selfie-agrandi button {
-  @apply absolute;
-  top: 8px;
-  right: 8px;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: var(--lcdp-color-text, #1f2a24);
-  font-size: 24px;
-  line-height: 1;
-  @apply cursor-pointer;
-}
+
 
 /* 09 — SAISIE DE CODES : styles extraits de .style.cssText ------------------ */
 .lcdp-page-mon-compte .lcdp-box-champ-formulaire__code-cases {
@@ -410,13 +349,7 @@
 }
 
 /* 12 — ACCESSIBILITÉ ET ÉTATS ----------------------------------------------- */
-.lcdp-page-mon-compte #form-mes-informations-membre button:focus-visible,
-.lcdp-page-mon-compte #form-mes-informations-membre a:focus-visible,
-#dialogue-selfie button:focus-visible,
-.lcdp-page-mon-compte #dialogue-selfie-agrandi button:focus-visible {
-  outline: 2px solid var(--lcdp-color-primary, #55733f);
-  outline-offset: 3px;
-}
+
 @media (prefers-reduced-motion: reduce) {
   .lcdp-page-mon-compte #form-mes-informations-membre *,
   #dialogue-selfie *,
@@ -452,11 +385,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements
   gap: var(--lcdp-space-2, 8px);
   margin-top: var(--lcdp-space-2, 8px);
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements__actions .lcdp-button {
-  min-height: 36px;
-  padding: 6px 10px;
-  font-size: .82rem;
-}
+
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipement-temoin .lcdp-box-champ-formulaire__aide {
   max-width: 100%;
   overflow-wrap: anywhere;

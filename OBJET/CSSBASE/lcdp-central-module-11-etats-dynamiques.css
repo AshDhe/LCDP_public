@@ -377,13 +377,8 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   border-color: var(--lcdp-color-orange-hover);
   color: var(--lcdp-color-text);
 }
-#form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit--rouge, #form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit--rouge:hover, #form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit--rouge:focus-visible {
-  color: #b3261e;
-}
-#form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit--rouge .lcdp-box-champ-formulaire__action-edit-icon, #form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit--rouge .lcdp-box-champ-formulaire__action-edit-icon path {
-  fill: currentColor;
-  stroke: currentColor;
-}
+
+
 @media (max-width: 767px) {
   #mention-statut-membre {
     margin-top: 0.35rem;

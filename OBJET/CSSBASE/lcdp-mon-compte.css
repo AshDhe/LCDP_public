@@ -198,21 +198,13 @@ body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-sec
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable > [data-lcdp-champ-control] {
   position: static;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__action-edit {
-  top: auto;
-  bottom: 10px;
-  right: 12px;
-  transform: none;
-}
+
 /* Les actions imbriquées (téléphone et témoins) restent ancrées à leur
    valeur, et non aux commandes Wi-Fi éventuellement placées en dessous. */
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable > [data-lcdp-champ-control]:has(> .lcdp-box-champ-formulaire__action-edit) {
   position: relative;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable > [data-lcdp-champ-control] > .lcdp-box-champ-formulaire__action-edit {
-  bottom: 0;
-  right: 0;
-}
+
 /* Services : les actions d'une ligne sur plusieurs lignes restent en bas. */
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-alerte__actions {
   align-self: flex-end;
@@ -220,9 +212,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-alerte__act
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(.lcdp-mon-compte-section, .lcdp-compte-equipements, .lcdp-compte-equipements__liste) > .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__label-zone {
   padding-right: 40px;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] .lcdp-compte-action-prioritaire:active {
-  transform: scale(.95);
-}
+
 
 /* Actions CODA, CODR et géolocalisation : pas de valeur répétée sous l'intitulé. */
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > .lcdp-mon-compte-action-courte {
@@ -241,43 +231,10 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   --lcdp-champ-modifiable-action-offset: 0px;
   --lcdp-champ-modifiable-icon-size: 16px;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit,
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge {
-  box-sizing: border-box;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  min-width: 32px;
-  height: 32px;
-  min-height: 32px;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #ffedd5;
-  border-radius: 8px;
-  background: #fffbeb;
-  color: var(--compte-orange);
-  box-shadow: 0 1px 2px rgba(15,23,42,.07);
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit:hover,
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__action-edit--rouge:hover {
-  border-color: #fcd9a6;
-  background: #fef3c7;
-  color: #c77a16;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit-icon {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-  stroke: currentColor;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-box-champ-formulaire__action-edit[hidden] {
-  display: none !important;
-}
+
+
+
+
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide {
   grid-column: 1 / -1;
   margin: 3px 0 0;
@@ -349,27 +306,8 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adr
   padding: 0;
   width: 100%;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse > .lcdp-button {
-  width: auto;
-  min-width: 0;
-  min-height: 36px;
-  max-width: 100%;
-  margin: 0;
-  padding: 8px 20px;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  background: #fff;
-  color: #334155;
-  font: 700 12px/1.35 Arial,system-ui,sans-serif;
-  letter-spacing: normal;
-  text-transform: none;
-  box-shadow: 0 1px 2px rgba(15,23,42,.05);
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-actions-adresse > .lcdp-button:hover {
-  border-color: #334155;
-  background: #f8fafc;
-  color: #0f172a;
-}
+
+
 /* Règlements : lecture et acceptation restent distinctes, sans toucher aux URL. */
 body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-section="reglements"] > [data-lcdp-box-champ-formulaire] {
   row-gap: 3px;
@@ -405,10 +343,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre [data-lcdp-compte-sectio
   font-size: 12px;
   overflow-wrap: anywhere;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre :is(button,a):focus-visible {
-  outline: 2px solid var(--compte-accent);
-  outline-offset: 3px;
-}
+
 @media (max-width: 359px) {
   body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section {
     padding: 15px 13px;
@@ -695,11 +630,7 @@ body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] .lcdp-box-dialogue
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
 }
-body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] .lcdp-box-dialogue-champ__actions > .lcdp-button {
-  width: 100%;
-  min-width: 0;
-  max-width: none;
-}
+
 body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] [data-selfie-fermer][data-selfie-annulation-seule] {
   grid-column: 1 / -1;
 }
@@ -731,21 +662,7 @@ body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] [hidden] {
   margin: auto;
   border-radius: 8px;
 }
-.lcdp-page-mon-compte #dialogue-selfie-agrandi button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: var(--lcdp-color-text, #1f2a24);
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-}
+
 .lcdp-page-mon-compte .lcdp-box-champ-formulaire__code-cases:not(.lcdp-security-tunnel *) {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -785,10 +702,7 @@ body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] [hidden] {
     padding: 8px;
   }
 }
-.lcdp-page-mon-compte #form-mes-informations-membre button:focus-visible, .lcdp-page-mon-compte #form-mes-informations-membre a:focus-visible, [data-lcdp-compte-parcours-contenu] button:focus-visible, .lcdp-page-mon-compte #dialogue-selfie-agrandi button:focus-visible {
-  outline: 2px solid var(--lcdp-color-primary, #55733f);
-  outline-offset: 3px;
-}
+
 @media (prefers-reduced-motion: reduce) {
   .lcdp-page-mon-compte #form-mes-informations-membre *, [data-lcdp-compte-parcours-contenu] *, .lcdp-page-mon-compte #dialogue-selfie-agrandi * {
     transition: none !important;
@@ -836,52 +750,14 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 }
 
 /* Priorité haute : fond orange plein + cadenas visiblement ouvert. */
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
-.lcdp-box-champ-formulaire__action-edit.lcdp-compte-action-prioritaire {
-  width: 32px;
-  height: 32px;
-  border-color: #e59834;
-  background: #e59834;
-  color: #fff;
-  box-shadow: 0 4px 6px -1px rgba(245,158,11,.2);
-  transition: background-color .16s ease, transform .16s ease;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
-.lcdp-box-champ-formulaire__action-edit.lcdp-compte-action-prioritaire:hover {
-  border-color: #c97f26;
-  background: #c97f26;
-  color: #fff;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
-.lcdp-box-champ-formulaire__action-edit.lcdp-compte-action-prioritaire:active {
-  transform: scale(.95);
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
-.lcdp-box-champ-formulaire__action-edit.lcdp-compte-action-prioritaire .lcdp-box-champ-formulaire__action-edit-icon {
-  fill: none;
-  stroke: currentColor;
-}
+
+
+
+
 
 /* Priorité normale : boutons fantômes blancs et pictogrammes neutres. */
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section:not([data-lcdp-compte-section="securite"])
-.lcdp-box-champ-formulaire__action-edit {
-  border-color: #e2e8f0;
-  background: #fff;
-  color: #94a3b8;
-  box-shadow: 0 1px 2px rgba(15,23,42,.05);
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre
-.lcdp-mon-compte-section:not([data-lcdp-compte-section="securite"])
-.lcdp-box-champ-formulaire__action-edit:hover {
-  border-color: #cbd5e1;
-  background: #fff;
-  color: #475569;
-}
+
+
 body.lcdp-page-mon-compte #form-mes-informations-membre
 .lcdp-mon-compte-section:not([data-lcdp-compte-section="securite"])
 .lcdp-box-champ-formulaire--modifiable:hover {
@@ -898,16 +774,8 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > :is(#zone-selfie, #zone-selfie-duoday).lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__label-zone {
   padding: 0;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > :is(#zone-selfie, #zone-selfie-duoday).lcdp-box-champ-formulaire--modifiable > .lcdp-box-champ-formulaire__action-edit {
-  position: static;
-  inset: auto;
-  transform: none;
-  align-self: center;
-  justify-self: end;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section > :is(#zone-selfie, #zone-selfie-duoday).lcdp-box-champ-formulaire--modifiable > .lcdp-box-champ-formulaire__action-edit:active {
-  transform: scale(.95);
-}
+
+
 body.lcdp-page-mon-compte #form-mes-informations-membre :is(#zone-selfie, #zone-selfie-duoday) .lcdp-selfie-texte {
   font-size: 12px;
   font-weight: 400;
@@ -923,11 +791,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre :is(#zone-selfie, #zone-
   min-height: 64px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  body.lcdp-page-mon-compte #form-mes-informations-membre
-  .lcdp-mon-compte-section[data-lcdp-compte-section="securite"]
-  .lcdp-compte-action-prioritaire { transition: none; }
-}
+
 
 /* Mention de disponibilité : même typographie pour tous les états vides du compte. */
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-placeholder-da,
@@ -947,7 +811,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre
 
 /* La valeur bracelet et les masques CODA/CODR restent lisibles sous leur libellé. */
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] > .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__lecture { display: block; }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section[data-lcdp-compte-section="securite"] .lcdp-compte-action-prioritaire:active { transform: scale(.95); }
+
 
 /* Respect des états masqués du compteur et de la rubrique Abonnement. */
 body.lcdp-page-mon-compte #form-mes-informations-membre #lcdp-compte-abonnement-compteur[hidden],
@@ -1116,17 +980,7 @@ body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias,
   letter-spacing: -.025em;
   text-align: center;
 }
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__close {
-  top: 10px;
-  right: 10px;
-  width: 32px;
-  height: 32px;
-  border: 0;
-  border-radius: 999px;
-  background: #f1f5f9;
-  color: #334155;
-  font-size: 20px;
-}
+
 body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__content {
   margin-bottom: 20px;
 }
@@ -1170,31 +1024,10 @@ body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias,
   gap: 10px;
   width: 100%;
 }
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions .lcdp-button {
-  box-sizing: border-box;
-  width: 100%;
-  min-width: 0;
-  max-width: none;
-  min-height: 44px;
-  margin: 0;
-  padding: 10px;
-  border-radius: 12px;
-  font: 700 13px/1.3 Arial, system-ui, sans-serif;
-  text-transform: none;
-}
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions .lcdp-button-secondary {
-  border: 1px solid var(--lcdp-color-espace-accent, #4e6838);
-  background: #fff;
-  color: var(--lcdp-color-espace-accent, #4e6838);
-}
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions .lcdp-button-primary {
-  border: 1px solid var(--lcdp-color-espace-accent, #4e6838);
-  background: var(--lcdp-color-espace-accent, #4e6838);
-  color: #fff;
-}
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions .lcdp-button-primary:hover {
-  background: var(--lcdp-color-espace-accent-hover, #3d522c);
-}
+
+
+
+
 @media (max-width: 360px) {
   body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) {
     padding: 12px;
@@ -1286,11 +1119,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements
   gap: var(--lcdp-space-2, 8px);
   margin-top: var(--lcdp-space-2, 8px);
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipements__actions .lcdp-button {
-  min-height: 36px;
-  padding: 6px 10px;
-  font-size: .82rem;
-}
+
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipement-temoin .lcdp-box-champ-formulaire__aide {
   max-width: 100%;
   overflow-wrap: anywhere;
@@ -1308,31 +1137,11 @@ body.lcdp-page-mon-compte
   color: inherit;
   text-decoration: underline;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre
-[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton {
-  --lcdp-ref-vert: #4b6333;
-  --lcdp-ref-vert-hover: #3d5129;
-  width: auto;
-  min-height: 36px;
-  padding: 8px 20px;
-  border-radius: 12px;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre
-[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton--suppression {
-  color: #be123c;
-  background: #fff;
-  border-color: rgba(251,113,133,.5);
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre
-[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton--suppression:hover {
-  background: #fff1f2;
-  border-color: #be123c;
-}
 
-body.lcdp-page-mon-compte #form-mes-informations-membre
-[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton[hidden] {
-  display: none !important;
-}
+
+
+
+
 
 /* Mon compte — carte invitant, sur le socle des composants communs. */
 body.lcdp-page-mon-compte #lcdp-compte-relations-invitant .lcdp-compte-invitant {
@@ -1378,11 +1187,4 @@ body.lcdp-page-mon-compte #lcdp-compte-relations-invitant .lcdp-compte-invitant_
   flex-wrap: wrap;
   gap: 8px;
 }
-body.lcdp-page-mon-compte #lcdp-compte-relations-invitant .lcdp-compte-invitant__actions .lcdp-button {
-  width: auto;
-  min-width: 0;
-  max-width: 100%;
-  min-height: 36px;
-  padding: 6px 12px;
-  font-size: 12px;
-}
+

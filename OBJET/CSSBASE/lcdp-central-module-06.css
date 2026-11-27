@@ -1774,43 +1774,6 @@
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable input[type="text"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable input[type="email"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable input[type="password"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable input[type="tel"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable input[type="number"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable input[type="date"],:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable select,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable textarea,:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable .lcdp-box-champ-formulaire__lecture {
   padding-right: calc(var(--lcdp-champ-modifiable-action-size) + var(--lcdp-space-3)) !important;
 }
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__action-edit {
-  width: var(--lcdp-champ-modifiable-action-size);
-  height: var(--lcdp-champ-modifiable-action-size);
-  min-width: 0;
-  min-height: 0;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-  border: 2px solid var(--lcdp-color-orange);
-  border-radius: 999px;
-  background: var(--lcdp-color-orange);
-  color: #ffffff;
-  position: absolute;
-  top: 50%;
-  right: var(--lcdp-champ-modifiable-action-offset);
-  transform: translateY(-50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 2;
-  box-shadow: 0 3px 10px rgba(31, 42, 36, 0.16);
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__action-edit:hover {
-  background: var(--lcdp-color-orange-hover);
-  border-color: var(--lcdp-color-orange-hover);
-  color: #ffffff;
-}
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__action-edit-icon {
-  width: var(--lcdp-champ-modifiable-icon-size);
-  height: var(--lcdp-champ-modifiable-icon-size);
-  display: block;
-  fill: currentColor;
-  pointer-events: none;
-}
 @media (max-width: 380px) {
   :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire--modifiable {
     --lcdp-champ-modifiable-action-size: 38px;
