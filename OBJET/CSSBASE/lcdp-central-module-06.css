@@ -212,9 +212,6 @@
     font-size: 1.08rem;
   }
 }
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte [data-lcdp-alerte-ok][hidden] {
-  display: none !important;
-}
 :where(html[data-lcdp-css~="c033"]) .lcdp-alerte-droits--action-jaune [data-lcdp-alerte-ok],:where(html[data-lcdp-css~="c033"]) .lcdp-alerte-accueil-reserver [data-lcdp-alerte-ok] {
   background: var(--lcdp-color-orange);
   border-color: var(--lcdp-color-orange);

@@ -7795,7 +7795,6 @@ font-size: 1.45rem;
     max-width: 350px;
     font-size: 1.08rem;
   }}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte [data-lcdp-alerte-ok][hidden]{ display: none !important; }
 :where(html[data-lcdp-css~="c033"]) .lcdp-alerte-droits--action-jaune [data-lcdp-alerte-ok],:where(html[data-lcdp-css~="c033"]) .lcdp-alerte-accueil-reserver [data-lcdp-alerte-ok]{
   background: var(--lcdp-color-orange); border-color: var(--lcdp-color-orange); color: var(--lcdp-color-text);
 }
@@ -12322,10 +12321,7 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ){font-family:system-ui,Arial,sans-s
 :where(html[data-lcdp-css~="pb7e3b489417d"]) p{line-height:1.55;color:#e4e4e4;}
 :where(html[data-lcdp-css~="pb7e3b489417d"]) .cells{@apply grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:24px 0;}
 :where(html[data-lcdp-css~="pb7e3b489417d"]) .cells input{@apply box-border;min-width:0;@apply w-full;@apply text-center;padding:14px 2px;font-size:1.15rem;border:1px solid #9c9c9c;border-radius:8px;}
-:where(html[data-lcdp-css~="pb7e3b489417d"]) button{min-height:45px;padding:10px 20px;border-radius:8px;border:0;font-size:1rem;@apply cursor-pointer;margin:8px;}
-:where(html[data-lcdp-css~="pb7e3b489417d"]) button:disabled{opacity:.5;}
 :where(html[data-lcdp-css~="pb7e3b489417d"]) #message{color:#fff;}
-:where(html[data-lcdp-css~="pb7e3b489417d"]) a{color:#fff;}
 :where(html[data-lcdp-css~="pb7e3b489417d"]) label{@apply block;@apply text-left;}
 :where(html[data-lcdp-css~="pb7e3b489417d"]) form{margin-top:20px;}
 /* INLINE LCDP_parc/ESPACE-PARC/accueil-parc.html */

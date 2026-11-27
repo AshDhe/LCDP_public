@@ -975,22 +975,7 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ) {
   border: 1px solid #9c9c9c;
   border-radius: 8px;
 }
-:where(html[data-lcdp-css~="pb7e3b489417d"]) button {
-  min-height: 45px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 0;
-  font-size: 1rem;
-  cursor: pointer;
-  margin: 8px;
-}
-:where(html[data-lcdp-css~="pb7e3b489417d"]) button:disabled {
-  opacity: .5;
-}
 :where(html[data-lcdp-css~="pb7e3b489417d"]) #message {
-  color: #fff;
-}
-:where(html[data-lcdp-css~="pb7e3b489417d"]) a {
   color: #fff;
 }
 :where(html[data-lcdp-css~="pb7e3b489417d"]) label {
