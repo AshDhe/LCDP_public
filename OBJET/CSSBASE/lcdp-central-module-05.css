@@ -796,30 +796,6 @@
   overflow-wrap: anywhere;
   overflow-y: auto;
 }
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: 999px;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: var(--lcdp-color-text);
-  font-size: 1.35rem;
-  line-height: 1;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 150ms ease, border-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close:hover {
-  background: #ffffff;
-}
 :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__title {
   width: 100%;
   max-width: 350px;
@@ -889,12 +865,6 @@
   justify-content: center;
   gap: var(--lcdp-space-2);
 }
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions .lcdp-button {
-  width: min(100%, 210px);
-  min-width: 0;
-  max-width: 210px;
-  margin: 0 auto;
-}
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card {
     width: min(100%, 500px);
@@ -906,11 +876,6 @@
   :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions {
     flex-direction: row;
     gap: var(--lcdp-space-2);
-  }
-  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions .lcdp-button {
-    width: auto;
-    min-width: 160px;
-    max-width: 210px;
   }
 }
 :where(html[data-lcdp-css~="c081"]) [data-lcdp-wraper-onglets-slot],:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets,:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__contenu,:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__panneau,:where(html[data-lcdp-css~="c081"]) [data-lcdp-contenu-onglet] {

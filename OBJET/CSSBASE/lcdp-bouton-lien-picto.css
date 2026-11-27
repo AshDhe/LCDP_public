@@ -1430,3 +1430,24 @@ body.lcdp-page-mon-compte #lcdp-compte-relations-invitant .lcdp-compte-invitant_
 [data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-payer]:hover:not(:disabled) {background:#3d5129;}
 
 [data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-payer][hidden] {display:none!important;}
+
+/* États communs de fermeture des dialogues dans le wrapper. */
+:where(body.lcdp-app-page) :is(
+  .lcdp-box-alerte__close,
+  .lcdp-box-dialogue-bouton__close,
+  .lcdp-box-dialogue-champ__close,
+  .lcdp-box-dialogue-champ-inviter__close,
+  .lcdp-box-dialogue-upload-img__close
+):hover {
+  color: var(--lcdp-modal-ink,var(--lcdp-dialogue-texte));
+}
+
+:where(body.lcdp-app-page) :is(
+  .lcdp-box-alerte__close,
+  .lcdp-box-dialogue-bouton__close,
+  .lcdp-box-dialogue-champ__close,
+  .lcdp-box-dialogue-champ-inviter__close,
+  .lcdp-box-dialogue-upload-img__close
+)[hidden] {
+  display: none !important;
+}

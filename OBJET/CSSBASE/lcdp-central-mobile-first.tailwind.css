@@ -804,47 +804,9 @@ tr > td:nth-child(2) > button:focus-visible{
   box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
 }
 :where(html[data-lcdp-css~="c035"]) .lcdp-contact-info::backdrop{ background: rgba(31, 42, 36, 0.46); backdrop-filter: blur(4px); }
-:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__close{
-  @apply absolute;
-  top: 8px;
-  right: 8px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: 999px;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: inherit;
-  font: inherit;
-  font-size: 1.35rem;
-  @apply cursor-pointer;
-  line-height: 1;
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  transition: background-color 150ms ease, border-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__close[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__close:hover{
-  background: var(--lcdp-ui-close-hover, #e9eee6);
-}
 :where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__title{ margin: 0 30px 18px 0; font-size: clamp(23px, 5vw, 28px); line-height: 1.2; }
 :where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__text{ margin: 0 0 18px; font-size: 16px; line-height: 1.6; }
-:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__email{
-  @apply inline-block;
-  @apply max-w-full;
-  padding-block: 8px;
-  color: var(--lcdp-color-primary, #234438);
-  font-size: 16px;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  user-select: text;
-}
 :where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__actions{ @apply flex; @apply justify-center; margin-top: 20px; }
-:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info__actions .lcdp-button{ max-width: 180px; min-height: 48px; }
 @media  (min-width: 640px) {:where(html[data-lcdp-css~="c035"]) .lcdp-contact-info{ padding: 36px; }}
 :where(html[data-lcdp-css~="c035"]) .lcdp-contact-juridique-actions{ @apply flex; @apply justify-center; margin-top:24px; }
 /* LCDP_admin/ESPACE-ADMIN/B_PARCS/PlanningParc.css */
@@ -4205,30 +4167,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   max-height: calc(100svh - 36px);
   @apply overflow-y-auto;
 }
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close{
-  @apply absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: 999px;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: var(--lcdp-color-text);
-  font-size: 1.35rem;
-  line-height: 1;
-  @apply cursor-pointer;
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  transition: background-color 150ms ease, border-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close:hover{
-  background: #ffffff;
-}
 :where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__title{
   @apply w-full;
   max-width: 350px;
@@ -4263,12 +4201,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   grid-template-columns: 1fr;
   gap: var(--lcdp-space-2);
   justify-items: center;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__actions .lcdp-button{
-  width: min(100%, 220px);
-  min-width: 0;
-  max-width: 220px;
-  margin: 0 auto;
 }
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__card{
     width: min(100%, 500px);
@@ -4481,30 +4413,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 }
 :where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche__slot:empty{
   @apply hidden;
-}
-:where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche__close{
-  @apply absolute;
-  top: var(--lcdp-space-2);
-  right: var(--lcdp-space-2);
-  z-index: 2;
-  width: 38px;
-  height: 38px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font-size: 1.8rem;
-  line-height: 1;
-  @apply cursor-pointer;
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-}
-:where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche__close[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche__close:hover{
-  background: #ffffff;
 }
 @media  (max-width: 480px) {:where(html[data-lcdp-css~="c030"]) .lcdp-box-affiche{
     padding: var(--lcdp-space-2);
@@ -7322,30 +7230,6 @@ font-size: 1.45rem;
   overflow-wrap: anywhere;
   @apply overflow-y-auto;
 }
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close{
-  @apply absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: 999px;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: var(--lcdp-color-text);
-  font-size: 1.35rem;
-  line-height: 1;
-  @apply cursor-pointer;
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  transition: background-color 150ms ease, border-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__close:hover{
-  background: #ffffff;
-}
 :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__title{
   @apply w-full;
   max-width: 350px;
@@ -7414,12 +7298,6 @@ font-size: 1.45rem;
   @apply items-center;
   @apply justify-center;
   gap: var(--lcdp-space-2);
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions .lcdp-button{
-  width: min(100%, 210px);
-  min-width: 0;
-  max-width: 210px;
-  margin: 0 auto;
 }
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card{
     width: min(100%, 500px);
@@ -8728,34 +8606,6 @@ font-size: 1.45rem;
   max-height: calc(100svh - 36px);
   @apply overflow-y-auto;
 }
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__close{
-  @apply absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  min-height: 40px;
-  padding: 0;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: 999px;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: var(--lcdp-color-text);
-  font-family: var(--lcdp-font-main);
-  font-size: 1.35rem;
-  line-height: 1;
-  @apply cursor-pointer;
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  transition: background-color 150ms ease, border-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__close[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__close:hover{
-  background: #ffffff;
-}
 :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__message{
   @apply w-full;
   max-width: 330px;
@@ -9188,30 +9038,6 @@ line-height: 1.35;
   background: var(--lcdp-color-surface);
   box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
 }
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__close{
-  @apply absolute;
-  top: var(--lcdp-space-2);
-  right: var(--lcdp-space-2);
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: 999px;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: var(--lcdp-color-text);
-  font-size: 1.35rem;
-  line-height: 1;
-  @apply cursor-pointer;
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  transition: background-color 150ms ease, border-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__close[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__close:hover{
-  background: var(--lcdp-ui-close-hover, #e9eee6);
-}
 :where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__title{
   margin: 0 44px var(--lcdp-space-4) 0;
   color: var(--lcdp-color-text);
@@ -9251,11 +9077,6 @@ line-height: 1.35;
   grid-template-columns: 1fr;
   gap: var(--lcdp-space-2);
   justify-items: center;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__actions .lcdp-button{
-  @apply w-full;
-  max-width: 320px;
-  margin-top: 0;
 }
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__card{
     padding: var(--lcdp-space-5);
@@ -9396,30 +9217,6 @@ line-height: 1.35;
   background: var(--lcdp-color-surface);
   box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
 }
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__close{
-  @apply absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: 999px;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: var(--lcdp-color-text);
-  font-size: 1.35rem;
-  line-height: 1;
-  @apply cursor-pointer;
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  transition: background-color 150ms ease, border-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__close[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__close:hover{
-  background: #ffffff;
-}
 :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__title{
   @apply w-full;
   max-width: 350px;
@@ -9526,12 +9323,6 @@ line-height: 1.35;
   @apply items-center;
   @apply justify-center;
   gap: var(--lcdp-space-2);
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__actions .lcdp-button{
-  width: min(100%, 210px);
-  min-width: 0;
-  max-width: 210px;
-  margin: 0 auto;
 }
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__card{
     width: min(100%, 540px);
@@ -15694,15 +15485,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   margin: auto;
   @apply overflow-y-auto;
   @apply flex;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close {
-  z-index: 3;
-  font-family: inherit;
-  text-decoration: none;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__close:focus-visible {
-  outline: 2px solid var(--lcdp-color-primary, #4e6838);
-  outline-offset: 2px;
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire:has(> .lcdp-box-dialogue-bouton__close),
 :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext:has(> .lcdp-box-dialogue-bouton__close) {

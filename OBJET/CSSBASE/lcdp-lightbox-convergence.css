@@ -113,15 +113,6 @@
   cursor: pointer;
 }
 :where(body.lcdp-app-page) :is(
-  .lcdp-box-alerte__close,
-  .lcdp-box-dialogue-bouton__close,
-  .lcdp-box-dialogue-champ__close,
-  .lcdp-box-dialogue-champ-inviter__close,
-  .lcdp-box-dialogue-upload-img__close
-):hover {
-  color: var(--lcdp-modal-ink,var(--lcdp-dialogue-texte));
-}
-:where(body.lcdp-app-page) :is(
   .lcdp-box-alerte,
   .lcdp-box-dialogue-bouton,
   .lcdp-box-dialogue-champ,
@@ -153,15 +144,6 @@
 ) {
   min-width: 0;
   overflow-wrap: anywhere;
-}
-:where(body.lcdp-app-page) :is(
-  .lcdp-box-alerte__close,
-  .lcdp-box-dialogue-bouton__close,
-  .lcdp-box-dialogue-champ__close,
-  .lcdp-box-dialogue-champ-inviter__close,
-  .lcdp-box-dialogue-upload-img__close
-)[hidden] {
-  display: none !important;
 }
 
 
