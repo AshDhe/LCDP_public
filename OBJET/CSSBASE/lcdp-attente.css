@@ -22,19 +22,21 @@ button.lcdp-action-attente[aria-busy="true"]::before {margin-inline-end:8px;}
 .lcdp-attente-envoi[hidden] {display:none!important;}
 
 /* Voile initial des pages : les contrôleurs ne pilotent que hidden. */
-#lcdp-attente-arrivee:not([hidden]) { position:fixed;inset:0;z-index:2147483646;display:flex;align-items:center;justify-content:center;background:#fff; }
-#lcdp-attente-arrivee[hidden] {display:none!important;}
-#lcdp-attente-arrivee.lcdp-attente-arrivee--masque-page {font-family:Arial,sans-serif;}
-#lcdp-attente-arrivee.lcdp-attente-arrivee--masque-page:not([hidden]) ~ .lcdp-app-wrapper {visibility:hidden;}
-#lcdp-attente-arrivee.lcdp-attente-arrivee--surface-claire:not([hidden]) {z-index:10000;background:#f8fafc;}
-#lcdp-attente-arrivee .lcdp-loading-spinner {position:relative;box-sizing:border-box;display:flex;align-items:center;justify-content:center;width:4rem;height:4rem;}
-#lcdp-attente-arrivee .lcdp-loading-spinner > svg {position:absolute;inset:0;width:100%;height:100%;display:block;}
-#lcdp-attente-arrivee .lcdp-loading-spinner__track {color:rgb(6 95 70 / 10%);}
-#lcdp-attente-arrivee .lcdp-loading-spinner__arc {color:#e59834;animation:lcdp-action-attente-tourne .8s linear infinite;}
-#lcdp-attente-arrivee .lcdp-loading-spinner__dot {width:.5rem;height:.5rem;border-radius:50%;background:#4e6838;}
-#lcdp-attente-arrivee.lcdp-attente-arrivee--simple .lcdp-loading-spinner {width:64px;height:64px;}
-#lcdp-attente-arrivee.lcdp-attente-arrivee--simple .lcdp-loading-spinner__dot {width:8px;height:8px;}
-@media (prefers-reduced-motion:reduce) {#lcdp-attente-arrivee .lcdp-loading-spinner__arc {animation:none;}}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre):not([hidden]) { position:fixed;inset:0;z-index:2147483646;display:flex;align-items:center;justify-content:center;background:#fff; }
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre)[hidden] {display:none!important;}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre).lcdp-attente-arrivee--masque-page {font-family:Arial,sans-serif;}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre).lcdp-attente-arrivee--masque-page:not([hidden]) ~ .lcdp-app-wrapper {visibility:hidden;}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre).lcdp-attente-arrivee--surface-claire:not([hidden]) {z-index:10000;background:#f8fafc;}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre) .lcdp-loading-spinner {position:relative;box-sizing:border-box;display:flex;align-items:center;justify-content:center;width:4rem;height:4rem;}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre) .lcdp-loading-spinner > svg {position:absolute;inset:0;width:100%;height:100%;display:block;}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre) .lcdp-loading-spinner__track {color:rgb(6 95 70 / 10%);}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre) .lcdp-loading-spinner__arc {color:#e59834;animation:lcdp-action-attente-tourne .8s linear infinite;}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre) .lcdp-loading-spinner__dot {width:.5rem;height:.5rem;border-radius:50%;background:#4e6838;}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre).lcdp-attente-arrivee--simple .lcdp-loading-spinner {width:64px;height:64px;}
+:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre).lcdp-attente-arrivee--simple .lcdp-loading-spinner__dot {width:8px;height:8px;}
+@media (prefers-reduced-motion:reduce) {:is(#lcdp-attente-arrivee,#lcdp-attente-page-membre) .lcdp-loading-spinner__arc {animation:none;}}
+
+#lcdp-attente-page-membre:not([hidden]) {box-sizing:border-box;width:100%;height:100vh;height:100dvh;}
 
 /* Accessoires d'accès : couverture initiale avant chargement du socle. */
 html[data-lcdp-accessoires-acces]:not(.lcdp-accessoires-prets) {background:#fff;}
