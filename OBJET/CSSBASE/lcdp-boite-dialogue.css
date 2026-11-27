@@ -1439,3 +1439,20 @@ display:block!important;width:100%!important;max-width:none!important;margin-inl
 .lcdp-planifier-parcs-inline.lcdp-boite-dialogue--montage {display:none!important;opacity:0;}
 .lcdp-planifier-parcs-inline.lcdp-boite-dialogue--visible {opacity:1;}
 
+/* OBJET : DIALOGUE DU PANIER EXISTANT */
+.lcdp-panier-existant .lcdp-box-dialogue-bouton__card {box-sizing:border-box;position:relative;width:100%;max-width:480px;margin:auto;padding:16px 30px 15px;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;border:1px solid #eee;border-radius:28px;background:#fff;box-shadow:0 24px 50px #0002;text-align:center;color:#292524}
+
+.lcdp-panier-existant .lcdp-box-dialogue-bouton__title {box-sizing:border-box;display:block;width:fit-content;max-width:100%;margin:0 auto;padding:7px 13px;border:1px solid #bfd8bd;border-radius:14px;background:#e3f1e2;color:#1c1917!important;font-size:20px;font-weight:900;letter-spacing:-.5px;line-height:1.2;text-align:center;
+white-space:normal;overflow-wrap:break-word;word-break:normal}
+
+.lcdp-panier-existant .lcdp-box-dialogue-bouton__text {margin:4px 0 11px;max-width:none;color:#78716c;font-size:13px;font-weight:600;line-height:1.45}
+
+.lcdp-panier-existant .lcdp-box-dialogue-bouton__actions {display:grid;grid-template-columns:minmax(0,1fr);gap:6px;width:100%}
+
+@media(max-width:480px) {
+.lcdp-panier-existant .lcdp-box-dialogue-bouton__card {padding:13px 17px 13px;border-radius:23px}
+}
+
+@media(max-width:480px) {
+.lcdp-panier-existant .lcdp-box-dialogue-bouton__title {font-size:21px}
+}
