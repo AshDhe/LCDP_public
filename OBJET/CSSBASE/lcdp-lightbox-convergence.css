@@ -98,20 +98,7 @@
   background: var(--lcdp-modal-surface,var(--lcdp-dialogue-fond));
   box-shadow: var(--lcdp-modal-shadow,var(--lcdp-dialogue-ombre));
 }
-/* Un seul style pour les commandes de fermeture, sans retirer une commande
-   fonctionnelle : la décision croix/CTA relève du type de dialogue en JS. */
-:where(body.lcdp-app-page) :is(
-  .lcdp-box-alerte__close,
-  .lcdp-box-dialogue-bouton__close,
-  .lcdp-box-dialogue-champ__close,
-  .lcdp-box-dialogue-champ-inviter__close,
-  .lcdp-box-dialogue-upload-img__close
-) {
-  border-radius: 999px;
-  background: var(--lcdp-modal-close-bg,var(--lcdp-dialogue-fermeture));
-  color: var(--lcdp-modal-muted,var(--lcdp-dialogue-muted));
-  cursor: pointer;
-}
+
 :where(body.lcdp-app-page) :is(
   .lcdp-box-alerte,
   .lcdp-box-dialogue-bouton,

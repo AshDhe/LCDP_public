@@ -1438,8 +1438,21 @@ body.lcdp-page-mon-compte #lcdp-compte-relations-invitant .lcdp-compte-invitant_
   .lcdp-box-dialogue-champ__close,
   .lcdp-box-dialogue-champ-inviter__close,
   .lcdp-box-dialogue-upload-img__close
+) {
+  border-radius: 999px;
+  background: var(--lcdp-modal-close-bg,var(--lcdp-dialogue-fermeture,var(--lcdp-ui-close-bg,#f7f7f4)));
+  color: var(--lcdp-modal-muted,var(--lcdp-dialogue-muted,var(--lcdp-color-text-muted,#5f6861)));
+  cursor: pointer;
+}
+
+:where(body.lcdp-app-page) :is(
+  .lcdp-box-alerte__close,
+  .lcdp-box-dialogue-bouton__close,
+  .lcdp-box-dialogue-champ__close,
+  .lcdp-box-dialogue-champ-inviter__close,
+  .lcdp-box-dialogue-upload-img__close
 ):hover {
-  color: var(--lcdp-modal-ink,var(--lcdp-dialogue-texte));
+  color: var(--lcdp-modal-ink,var(--lcdp-dialogue-texte,var(--lcdp-color-text,#1f2a24)));
 }
 
 :where(body.lcdp-app-page) :is(
