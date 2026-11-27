@@ -720,10 +720,7 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
     padding: .75rem;
     gap: .25rem;
   }
-  :where(html[data-lcdp-css~="c085"]) .public-home .lcdp-box-bandeau-nav__inner {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-  }
+  
 }
 @media (max-height: 560px) {
   :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .public-home__main {
@@ -1699,9 +1696,7 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role-coach {
   --lcdp-role-accent: var(--lcdp-color-coach, #8660c8);
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-app-wrapper > #lcdp-bandeau-slot, :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-app-wrapper .lcdp-box-bandeau-nav {
-  background: var(--lcdp-role-accent);
-}
+
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__title {
   color: var(--lcdp-role-accent);
 }
