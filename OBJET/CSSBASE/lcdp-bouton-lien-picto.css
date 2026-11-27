@@ -1592,11 +1592,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__
   text-align: center;
 }
 
-#lcdp-da-membre-overlay-slot .lcdp-box-formulaire__note a {
-  color: var(--lcdp-color-primary, #4e6838);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
+
 
 
 /* Compatibilité Ma Clé — variante historique Brighta */
@@ -2259,33 +2255,15 @@ body.lcdp-fiche-parc-publique #lcdp-fiche-parc-slot
 }
 
 
-/* Liens de formulaire et commandes FAQ — socle commun */
+/* Commandes FAQ */
 
-.lcdp-box-champ-formulaire__description a {
-  color: var(--lcdp-color-primary);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1.5px;
-}
 
-.lcdp-box-champ-formulaire__description a:hover {
-  color: var(--lcdp-color-primary-hover);
-}
 
-.lcdp-box-formulaire__note a,
-.lcdp-box-formulaire__intro a {
-  color: var(--lcdp-color-primary);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1.5px;
-}
 
-.lcdp-box-formulaire__note a:hover,
-.lcdp-box-formulaire__intro a:hover {
-  color: var(--lcdp-color-primary-hover);
-}
+
+
+
+
 
 :where(html[data-lcdp-css~="c024"]) .lcdp-app-wrapper .lcdp-faq .lcdp-faq__question {
   box-sizing: border-box;
@@ -2349,12 +2327,7 @@ body.lcdp-fiche-parc-publique #lcdp-fiche-parc-slot
   color: #1e293b;
 }
 
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line a {
-  color: #334155;
-  font-weight: 500;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
+
 
 
 /* Commandes de base — accès restreint et accueil coach */
@@ -3857,11 +3830,7 @@ body.lcdp-fiche-parc-publique #lcdp-fiche-parc-slot
   }
 }
 
-.lcdp-page-document-legal .lcdp-boxtext__content a,
-.lcdp-restricted-legal-card .lcdp-boxtext__content a {
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
+
 
 
 
@@ -4411,13 +4380,7 @@ body.lcdp-fiche-parc-publique #lcdp-fiche-parc-slot
   text-align: left;
 }
 
-:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content a,
-:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content a {
-  color: #4e6838;
-  text-decoration: underline;
-  text-decoration-color: #a0ae96;
-  text-underline-offset: 3px;
-}
+
 
 
 
@@ -5132,3 +5095,15 @@ html[data-lcdp-css~="c085"] .lcdp-boutique-services > .public-home__action {
 
 /* Palette des commandes du règlement des impayés. */
 [data-lcdp-impaye-liste] {--lcdp-ref-vert:#4b6333;--lcdp-ref-vert-hover:#3d5129;}
+
+/* LIEN TEXTUEL — interne ou externe, même présentation dans les contenus. */
+:is(.lcdp-editorial-copy, .lcdp-boxtext__content, .lcdp-box-formulaire__note, .lcdp-box-formulaire__intro, .lcdp-box-champ-formulaire__description, .lcdp-box-champ-formulaire__checkbox-line) a[href]:not(:is(.lcdp-button, .lcdp-editorial-back-link, [role="button"], [class*="__bouton"], [class*="__button"], [class*="__close"])) {
+  color: var(--lcdp-color-primary, #4e6838);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+:is(.lcdp-editorial-copy, .lcdp-boxtext__content, .lcdp-box-formulaire__note, .lcdp-box-formulaire__intro, .lcdp-box-champ-formulaire__description, .lcdp-box-champ-formulaire__checkbox-line) a[href]:not(:is(.lcdp-button, .lcdp-editorial-back-link, [role="button"], [class*="__bouton"], [class*="__button"], [class*="__close"])):is(:hover, :focus-visible) {
+  color: var(--lcdp-color-primary-hover, #3d522c);
+}
