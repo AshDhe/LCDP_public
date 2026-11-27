@@ -1,3 +1,4 @@
+@import url("./lcdp-theme-espaces.css");
 
 /* ======================================================================
    OBJETS GENERIQUES ET COMPOSANTS — PRESENTATION CENTRALISEE
@@ -3887,15 +3888,15 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 
 .lcdp-box-card-parc--reserver
   .lcdp-box-card-parc__action--vert-plein {
-  border-color: var(--lcdp-color-logo-green);
-  background: var(--lcdp-color-logo-green);
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   color: #ffffff;
 }
 
 .lcdp-box-card-parc--reserver
   .lcdp-box-card-parc__action--vert-plein:hover {
-  border-color: var(--lcdp-color-primary);
-  background: var(--lcdp-color-primary);
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
   color: #ffffff;
 }
 
@@ -14767,7 +14768,7 @@ html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
   box-sizing: border-box;
   width: 100%;
   min-height: 68px;
-  background: #4e6838;
+  background: var(--lcdp-color-espace-accent, #4e6838);
   border-bottom: 0;
   color: #fff;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -14852,7 +14853,7 @@ html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
   flex: 0 0 68px;
   width: 100%;
   min-height: 68px;
-  background: #4e6838;
+  background: var(--lcdp-color-espace-accent, #4e6838);
 }
 :where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper .lcdp-box-bandeau-nav {
   position: relative;
@@ -18276,13 +18277,13 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   overflow-wrap: anywhere;
 }
 :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein {
-  border-color: var(--lcdp-color-logo-green);
-  background: var(--lcdp-color-logo-green);
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   color: #ffffff;
 }
 :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein:hover {
-  border-color: var(--lcdp-color-primary);
-  background: var(--lcdp-color-primary);
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
   color: #ffffff;
 }
 :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-contour {
@@ -24721,7 +24722,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger {
   position: relative;
   z-index: 4100;
-  --lcdp-burger-accent: var(--lcdp-color-membre, #4e6838);
+  --lcdp-burger-accent: var(--lcdp-color-espace-accent, var(--lcdp-color-membre, #4e6838));
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
 }
@@ -27088,14 +27089,14 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   padding-top: var(--lcdp-space-1);
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-link-secondary {
-  color: var(--lcdp-color-logo-green);
+  color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 1.5px;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-link-secondary:hover {
-  color: var(--lcdp-color-primary);
+  color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-component {
   width: 100%;
@@ -27134,9 +27135,9 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   max-width: 320px;
   min-height: 52px;
   padding: 12px 20px;
-  border: 1px solid var(--lcdp-color-logo-green);
+  border: 1px solid var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   border-radius: var(--lcdp-ui-button-radius, 12px);
-  background: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   color: #ffffff;
   font-family: var(--lcdp-font-main);
   font-size: 0.95rem;
@@ -27154,8 +27155,8 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button:hover {
-  background: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
   color: #ffffff;
   box-shadow: var(--lcdp-ui-button-shadow-hover, 0 4px 6px -2px rgba(31, 42, 36, 0.10));
 }
@@ -27166,29 +27167,29 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   transform: none;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button:focus-visible {
-  outline: 2px solid var(--lcdp-color-logo-green);
+  outline: 2px solid var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   outline-offset: 3px;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button-primary {
-  background: var(--lcdp-color-logo-green);
-  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   color: #ffffff;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button-primary:hover {
-  background: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
   color: #ffffff;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button-secondary {
   margin-top: var(--lcdp-space-2);
   background: #ffffff;
-  color: var(--lcdp-color-logo-green);
-  border-color: var(--lcdp-color-logo-green);
+  color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button-secondary:hover {
   background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
+  color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button-orange {
   background: var(--lcdp-color-orange);
@@ -27391,13 +27392,13 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   color: var(--lcdp-color-text);
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button-accueil-green {
-  background: var(--lcdp-color-logo-green);
-  border-color: var(--lcdp-color-logo-green);
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
   color: #ffffff;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button-accueil-green:hover {
-  background: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
   color: #ffffff;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-button-accueil-blue {
@@ -30616,12 +30617,12 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-primary {
   width: 100%;
   padding: 13px 16px;
-  background: #4e6838;
-  border-color: #4e6838;
+  background: var(--lcdp-color-espace-accent, #4e6838);
+  border-color: var(--lcdp-color-espace-accent, #4e6838);
   color: #fff;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-primary:hover {
-  background: #3d522c;
+  background: var(--lcdp-color-espace-accent-hover, #3d522c);
   color: #fff;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-secondary {
@@ -30638,7 +30639,7 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   color: #0f172a;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button:focus-visible {
-  outline: 2px solid #4e6838;
+  outline: 2px solid var(--lcdp-color-espace-accent, #4e6838);
   outline-offset: 3px;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-box-carousel {
@@ -33789,8 +33790,8 @@ html .lcdp-button.lcdp-button-orange {
   --lcdp-button-texture-shadow: rgb(245 158 11 / 10%);
 }
 html .lcdp-button.lcdp-button-primary {
-  --lcdp-button-texture: linear-gradient(to bottom right, #4e6838, #3d522c);
-  --lcdp-button-texture-shadow: rgb(16 185 129 / 10%);
+  --lcdp-button-texture: linear-gradient(to bottom right, var(--lcdp-color-espace-accent, #4e6838), var(--lcdp-color-espace-accent-hover, #3d522c));
+  --lcdp-button-texture-shadow: var(--lcdp-espace-ombre-bouton, rgb(16 185 129 / 10%));
 }
 html .lcdp-button.lcdp-button-accueil-blue {
   --lcdp-button-texture: linear-gradient(to bottom right, #346cb2, #28548c);

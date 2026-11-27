@@ -1329,7 +1329,7 @@
 :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger {
   position: relative;
   z-index: 4100;
-  --lcdp-burger-accent: var(--lcdp-color-membre, #4e6838);
+  --lcdp-burger-accent: var(--lcdp-color-espace-accent, var(--lcdp-color-membre, #4e6838));
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
 }

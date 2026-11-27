@@ -13,7 +13,7 @@ body.lcdp-page-mon-compte {
   --compte-texte-secondaire: #64748b;
   --compte-texte-libelle: #94a3b8;
   --compte-bordure: #f1f5f9;
-  --compte-accent: #4e6838;
+  --compte-accent: var(--lcdp-color-espace-accent, #4e6838);
   --compte-orange: #e59834;
   --compte-rayon-carte: 16px;
   --compte-rayon-ligne: 12px;
@@ -290,7 +290,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   text-underline-offset: 3px;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide a:hover {
-  color: #3d522c;
+  color: var(--lcdp-color-espace-accent-hover, #3d522c);
 }
 /* Espace Points passion : synthèse réelle alimentée par le JS et l'API. */
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-points-source-masque {
@@ -1014,7 +1014,7 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__
   border-color: #94a3b8;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__nombre:focus-visible {
-  outline: 2px solid #4e6838;
+  outline: 2px solid var(--lcdp-color-espace-accent, #4e6838);
   outline-offset: 2px;
 }
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__liste {
@@ -1160,7 +1160,7 @@ body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias,
 }
 body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) :is(#nouvel-alias-membre, #nouveau-telephone-membre):focus {
   outline: none;
-  border-color: #4e6838;
+  border-color: var(--lcdp-color-espace-accent, #4e6838);
   box-shadow: 0 0 0 3px rgba(78, 104, 56, .18);
 }
 body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions {
@@ -1183,17 +1183,17 @@ body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias,
   text-transform: none;
 }
 body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions .lcdp-button-secondary {
-  border: 1px solid #4e6838;
+  border: 1px solid var(--lcdp-color-espace-accent, #4e6838);
   background: #fff;
-  color: #4e6838;
+  color: var(--lcdp-color-espace-accent, #4e6838);
 }
 body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions .lcdp-button-primary {
-  border: 1px solid #4e6838;
-  background: #4e6838;
+  border: 1px solid var(--lcdp-color-espace-accent, #4e6838);
+  background: var(--lcdp-color-espace-accent, #4e6838);
   color: #fff;
 }
 body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions .lcdp-button-primary:hover {
-  background: #3d522c;
+  background: var(--lcdp-color-espace-accent-hover, #3d522c);
 }
 @media (max-width: 360px) {
   body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) {
