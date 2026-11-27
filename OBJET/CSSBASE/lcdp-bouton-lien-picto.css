@@ -709,17 +709,17 @@ body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__ferm
 
 
 
-html .lcdp-button.lcdp-button-orange {
+html .lcdp-button:is(.lcdp-button-orange,.lcdp-button-compte--parc,.lcdp-button-accueil-orange) {
   --lcdp-button-texture: linear-gradient(to bottom right, #e59834, #cc8125);
   --lcdp-button-texture-shadow: rgb(245 158 11 / 10%);
 }
 
-html .lcdp-button.lcdp-button-primary {
+html .lcdp-button:is(.lcdp-button-primary,.lcdp-button-compte--membre,.lcdp-button-accueil-green) {
   --lcdp-button-texture: linear-gradient(to bottom right, var(--lcdp-color-espace-accent, #4e6838), var(--lcdp-color-espace-accent-hover, #3d522c));
   --lcdp-button-texture-shadow: var(--lcdp-espace-ombre-bouton, rgb(16 185 129 / 10%));
 }
 
-html .lcdp-button.lcdp-button-accueil-blue {
+html .lcdp-button:is(.lcdp-button-accueil-blue,.lcdp-button-compte--coach,.lcdp-button-accueil-coach) {
   --lcdp-button-texture: linear-gradient(to bottom right, #346cb2, #28548c);
   --lcdp-button-texture-shadow: rgb(59 130 246 / 10%);
 }
@@ -729,12 +729,12 @@ html .lcdp-fiche-parc__commande-detail .lcdp-button.lcdp-button-primary {
   --lcdp-button-texture-shadow: rgb(245 158 11 / 10%);
 }
 
-html .lcdp-button:is(.lcdp-button-orange,.lcdp-button-primary,.lcdp-button-accueil-blue):not(:disabled,[aria-disabled="true"],.is-disabled) {
+html .lcdp-button:is(.lcdp-button-orange,.lcdp-button-primary,.lcdp-button-accueil-blue,.lcdp-button-compte--parc,.lcdp-button-compte--coach,.lcdp-button-compte--membre,.lcdp-button-accueil-orange,.lcdp-button-accueil-green,.lcdp-button-accueil-coach):not(:disabled,[aria-disabled="true"],.is-disabled) {
   background-image: var(--lcdp-button-texture) !important;
   box-shadow: 0 10px 15px -3px var(--lcdp-button-texture-shadow), 0 4px 6px -4px var(--lcdp-button-texture-shadow) !important;
 }
 
-html .lcdp-button:is(.lcdp-button-orange,.lcdp-button-primary,.lcdp-button-accueil-blue):not(:disabled,[aria-disabled="true"],.is-disabled):hover {
+html .lcdp-button:is(.lcdp-button-orange,.lcdp-button-primary,.lcdp-button-accueil-blue,.lcdp-button-compte--parc,.lcdp-button-compte--coach,.lcdp-button-compte--membre,.lcdp-button-accueil-orange,.lcdp-button-accueil-green,.lcdp-button-accueil-coach):not(:disabled,[aria-disabled="true"],.is-disabled):hover {
   box-shadow: 0 20px 25px -5px var(--lcdp-button-texture-shadow), 0 8px 10px -6px var(--lcdp-button-texture-shadow) !important;
 }
 
