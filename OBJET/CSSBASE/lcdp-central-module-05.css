@@ -700,116 +700,20 @@
     transform: translateY(-3px);
   }
 }
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ {
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card {
-  position: relative;
-  width: min(calc(100vw - 36px), 460px);
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-  text-align: center;
-  max-height: calc(100svh - 36px);
-  overflow-wrap: anywhere;
-  overflow-y: auto;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__title {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto var(--lcdp-space-3);
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  line-height: 1.22;
-  font-weight: 650;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__form,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-2);
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content {
-  margin-bottom: var(--lcdp-space-3);
-  text-align: left;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-1);
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__label {
-  font-weight: 600;
-  color: var(--lcdp-color-text);
-  text-align: left;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__input,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field select,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea {
-  width: 100%;
-  min-height: 48px;
-  padding: 11px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea {
-  min-height: 110px;
-  resize: vertical;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__input:focus,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field select:focus,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea:focus {
-  outline: none;
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__error {
-  margin: 0 auto var(--lcdp-space-3);
-  color: #8a2d2d;
-  font-size: 0.92rem;
-  line-height: 1.35;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--lcdp-space-2);
-}
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card {
-    width: min(100%, 500px);
-    padding: 32px 28px 26px;
-  }
-  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content {
-    font-size: var(--lcdp-font-size-paragraph-desktop);
-  }
-  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions {
-    flex-direction: row;
-    gap: var(--lcdp-space-2);
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :where(html[data-lcdp-css~="c081"]) [data-lcdp-wraper-onglets-slot],:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets,:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__contenu,:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__panneau,:where(html[data-lcdp-css~="c081"]) [data-lcdp-contenu-onglet] {
   width: 100%;
   max-width: 100%;

@@ -1391,19 +1391,8 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 :where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-parc .lcdp-box-formulaire .lcdp-text-strong-left, :where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-coach .lcdp-box-formulaire .lcdp-text-strong-left {
   font-weight: 700 !important;
 }
-:where(html[data-lcdp-css~="c036"]) dialog.lcdp-box-dialogue-bouton__card:not([open]) {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c036"]) dialog.lcdp-box-dialogue-bouton__card[open] {
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  box-sizing: border-box;
-  max-height: calc(100svh - 40px);
-  margin: auto;
-  overflow-y: auto;
-  display: flex;
-}
+
+
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire:has(> .lcdp-box-dialogue-bouton__close), :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext:has(> .lcdp-box-dialogue-bouton__close) {
   position: relative;
 }

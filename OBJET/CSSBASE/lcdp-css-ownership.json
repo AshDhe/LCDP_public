@@ -442,8 +442,8 @@
     "boite-dialogue": {
       "css": "lcdp-boite-dialogue.css",
       "charge_par": "lcdp-central-mobile-first.css et cssbase.css, après le socle bouton-lien-picto",
-      "statut": "Première extraction en brouillon : alertes, dialogues bouton/champ/invitation/import image et références. Contrôle de cascade et rapprochement des sources historiques non terminés.",
-      "exceptions": "Parcours PLANIFIER, S’ABONNER et MA CLÉ ; objets métiers modaux, règles mixtes, Shadow DOM et styles embarqués non migrés à ce stade."
+      "statut": "Feuille propriétaire chargée dans main : modèles de référence, structures des dialogues communs, variantes de connexion et commandes propres ; boutons compacts et pictogrammes de signalisation dans bouton-lien-picto.",
+      "exceptions": "Adaptations propres à PLANIFIER, S’ABONNER et MA CLÉ ; objets métiers modaux et Shadow DOM."
     }
   }
 }
