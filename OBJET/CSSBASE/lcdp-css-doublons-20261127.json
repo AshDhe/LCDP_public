@@ -1,0 +1,1524 @@
+{
+  "source_blob": "da27f2147f9e7897b8d839a709e5aebc419ac549",
+  "before_bytes": 1097669,
+  "after_bytes": 1090202,
+  "removed_bytes": 7467,
+  "removed_declarations": 167,
+  "removed_rules": 29,
+  "idempotent": true,
+  "only_deletions": true,
+  "visual_tests": false,
+  "scope": "Exact duplicate declarations covered by later declarations in the same or less restrictive conditions, with equal specificity; no changes to distinct values, custom properties, keyframes, or unknown at-rules.",
+  "proofs": [
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque .lcdp-compte-bloque-actions",
+      "property": "padding-bottom",
+      "value": "env(safe-area-inset-bottom)",
+      "at": 894808,
+      "coveredBy": [
+        962768
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque .lcdp-compte-bloque-actions",
+      "property": "padding-top",
+      "value": "24px",
+      "at": 894787,
+      "coveredBy": [
+        962747
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque .lcdp-compte-bloque-actions",
+      "property": "margin-top",
+      "value": "auto",
+      "at": 894767,
+      "coveredBy": [
+        962727
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque p",
+      "property": "color",
+      "value": "#fff !important",
+      "at": 894653,
+      "coveredBy": [
+        962649
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque",
+      "property": "flex-direction",
+      "value": "column",
+      "at": 894565,
+      "coveredBy": [
+        962597
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque",
+      "property": "display",
+      "value": "flex",
+      "at": 894548,
+      "coveredBy": [
+        962580
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque button",
+      "property": "margin-top",
+      "value": "16px",
+      "at": 894468,
+      "coveredBy": [
+        962864
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque button",
+      "property": "display",
+      "value": "block",
+      "at": 894450,
+      "coveredBy": [
+        962846
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque",
+      "property": "box-sizing",
+      "value": "border-box",
+      "at": 894280,
+      "coveredBy": [
+        962554
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque",
+      "property": "padding",
+      "value": "24px",
+      "at": 894263,
+      "coveredBy": [
+        962537
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque",
+      "property": "color",
+      "value": "#fff",
+      "at": 894248,
+      "coveredBy": [
+        962522
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque",
+      "property": "background",
+      "value": "#000",
+      "at": 894228,
+      "coveredBy": [
+        962502
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque",
+      "property": "overflow",
+      "value": "auto",
+      "at": 894210,
+      "coveredBy": [
+        962484
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque",
+      "property": "z-index",
+      "value": "2147483647",
+      "at": 894187,
+      "coveredBy": [
+        962461
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque",
+      "property": "inset",
+      "value": "0",
+      "at": 894175,
+      "coveredBy": [
+        962449
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) #lcdp-compte-bloque",
+      "property": "position",
+      "value": "fixed",
+      "at": 894156,
+      "coveredBy": [
+        962430
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c085\"]) html.lcdp-compte-bloque,:where(html[data-lcdp-css~=\"c085\"]) html.lcdp-compte-bloque body",
+      "property": "background",
+      "value": "#000 !important",
+      "at": 893913,
+      "coveredBy": [
+        962197,
+        962261
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c040\"]) .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__control",
+      "property": "position",
+      "value": "relative",
+      "at": 741394,
+      "coveredBy": [
+        744616
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c029\"]) .lcdp-actu-liste",
+      "property": "display",
+      "value": "grid",
+      "at": 718433,
+      "coveredBy": [
+        720878
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__place",
+      "property": "justify-content",
+      "value": "flex-start !important",
+      "at": 577730,
+      "coveredBy": [
+        964766
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__place",
+      "property": "align-items",
+      "value": "flex-start !important",
+      "at": 577692,
+      "coveredBy": [
+        964728
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__place",
+      "property": "display",
+      "value": "flex !important",
+      "at": 577638,
+      "coveredBy": [
+        964663
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__content",
+      "property": "gap",
+      "value": "var(--lcdp-space-2)",
+      "at": 575421,
+      "coveredBy": [
+        577529
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__image",
+      "property": "object-fit",
+      "value": "cover",
+      "at": 569840,
+      "coveredBy": [
+        581066
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__image",
+      "property": "width",
+      "value": "100%",
+      "at": 569825,
+      "coveredBy": [
+        580993
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre__media",
+      "property": "width",
+      "value": "100%",
+      "at": 569539,
+      "coveredBy": [
+        580844
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c063\"]) .lcdp-box-card-reservation-membre--avec-image",
+      "property": "align-items",
+      "value": "stretch",
+      "at": 568926,
+      "coveredBy": [
+        580739
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) .lcdp-planifier-parcs-chargement",
+      "property": "justify-content",
+      "value": "center",
+      "at": 495696,
+      "coveredBy": [
+        979170
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) .lcdp-planifier-parcs-chargement",
+      "property": "align-items",
+      "value": "center",
+      "at": 495673,
+      "coveredBy": [
+        979147
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) .lcdp-planifier-parcs-chargement",
+      "property": "display",
+      "value": "flex",
+      "at": 495656,
+      "coveredBy": [
+        979130
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) .lcdp-planifier-parcs-card .lcdp-box-card-parc__actions--reserver > .lcdp-button",
+      "property": "font-size",
+      "value": "0.78rem",
+      "at": 493857,
+      "coveredBy": [
+        494309
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) #lcdp-planifier-attente-initiale img",
+      "property": "object-fit",
+      "value": "contain",
+      "at": 485765,
+      "coveredBy": [
+        496446
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) #lcdp-planifier-attente-initiale",
+      "property": "justify-content",
+      "value": "center",
+      "at": 485624,
+      "coveredBy": [
+        496246
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) #lcdp-planifier-attente-initiale",
+      "property": "align-items",
+      "value": "center",
+      "at": 485601,
+      "coveredBy": [
+        496273
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) #lcdp-planifier-attente-initiale",
+      "property": "display",
+      "value": "flex",
+      "at": 485584,
+      "coveredBy": [
+        496229
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c077\"]) #lcdp-planifier-attente-initiale",
+      "property": "position",
+      "value": "fixed",
+      "at": 485565,
+      "coveredBy": [
+        496181
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list",
+      "property": "display",
+      "value": "grid !important",
+      "at": 459117,
+      "coveredBy": [
+        463996
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list .lcdp-button,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage",
+      "property": "white-space",
+      "value": "nowrap",
+      "at": 451921,
+      "coveredBy": [
+        453150
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list .lcdp-button,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage",
+      "property": "box-sizing",
+      "value": "border-box",
+      "at": 451895,
+      "coveredBy": [
+        452997
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage-libelle",
+      "property": "white-space",
+      "value": "nowrap",
+      "at": 443636,
+      "coveredBy": [
+        446840
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage",
+      "property": "width",
+      "value": "auto",
+      "at": 443517,
+      "coveredBy": [
+        444870
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list .lcdp-button",
+      "property": "margin",
+      "value": "0",
+      "at": 443383,
+      "coveredBy": [
+        443939
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list",
+      "property": "gap",
+      "value": "var(--lcdp-space-2)",
+      "at": 443201,
+      "coveredBy": [
+        443823
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__action-reserver",
+      "property": "text-align",
+      "value": "center",
+      "at": 442687,
+      "coveredBy": [
+        444359
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage-icone",
+      "property": "justify-content",
+      "value": "center",
+      "at": 441891,
+      "coveredBy": [
+        445391
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage-icone",
+      "property": "align-items",
+      "value": "center",
+      "at": 441868,
+      "coveredBy": [
+        445368
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage-icone",
+      "property": "display",
+      "value": "inline-flex",
+      "at": 441844,
+      "coveredBy": [
+        445344
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage",
+      "property": "cursor",
+      "value": "pointer",
+      "at": 441749,
+      "coveredBy": [
+        445037
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage",
+      "property": "justify-content",
+      "value": "flex-start",
+      "at": 441718,
+      "coveredBy": [
+        444945
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage",
+      "property": "align-items",
+      "value": "center",
+      "at": 441695,
+      "coveredBy": [
+        444922
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage",
+      "property": "display",
+      "value": "inline-flex",
+      "at": 441671,
+      "coveredBy": [
+        444898
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__partage",
+      "property": "width",
+      "value": "auto",
+      "at": 441639,
+      "coveredBy": [
+        444870
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__action-reserver,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__action-planning",
+      "property": "min-height",
+      "value": "44px",
+      "at": 441549,
+      "coveredBy": [
+        444065,
+        444780
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__action-reserver,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__action-planning",
+      "property": "max-width",
+      "value": "260px",
+      "at": 441529,
+      "coveredBy": [
+        444045,
+        444760
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__action-reserver,:where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__action-planning",
+      "property": "width",
+      "value": "100%",
+      "at": 441514,
+      "coveredBy": [
+        444030,
+        444745
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list",
+      "property": "align-items",
+      "value": "flex-start",
+      "at": 441335,
+      "coveredBy": [
+        443796
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list",
+      "property": "flex-direction",
+      "value": "column",
+      "at": 441309,
+      "coveredBy": [
+        443770
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list",
+      "property": "display",
+      "value": "flex",
+      "at": 441292,
+      "coveredBy": [
+        443753
+      ]
+    },
+    {
+      "selector": ":where(html[data-lcdp-css~=\"c070\"]) .lcdp-box-fiche-parc__actions-list",
+      "property": "width",
+      "value": "100%",
+      "at": 441277,
+      "coveredBy": [
+        443738
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre__place",
+      "property": "justify-content",
+      "value": "flex-start !important",
+      "at": 303186,
+      "coveredBy": [
+        964766
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre__place",
+      "property": "align-items",
+      "value": "flex-start !important",
+      "at": 303148,
+      "coveredBy": [
+        964728
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre__place",
+      "property": "display",
+      "value": "flex !important",
+      "at": 303094,
+      "coveredBy": [
+        964663
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre [data-action=\"adresse\"]:hover,\n.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces:hover",
+      "property": "color",
+      "value": "#ffffff !important",
+      "at": 302794,
+      "coveredBy": [
+        963483
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre [data-action=\"adresse\"]:hover,\n.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces:hover",
+      "property": "background",
+      "value": "var(--lcdp-color-primary) !important",
+      "at": 302742,
+      "coveredBy": [
+        963431
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre [data-action=\"adresse\"]:hover,\n.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces:hover",
+      "property": "border-color",
+      "value": "var(--lcdp-color-primary) !important",
+      "at": 302688,
+      "coveredBy": [
+        963377
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre [data-action=\"adresse\"],\n.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces",
+      "property": "text-decoration",
+      "value": "none !important",
+      "at": 302487,
+      "coveredBy": [
+        963177
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre [data-action=\"adresse\"],\n.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces",
+      "property": "color",
+      "value": "#ffffff !important",
+      "at": 302458,
+      "coveredBy": [
+        963148
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre [data-action=\"adresse\"],\n.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces",
+      "property": "background",
+      "value": "var(--lcdp-color-logo-green) !important",
+      "at": 302403,
+      "coveredBy": [
+        963093
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre [data-action=\"adresse\"],\n.lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces",
+      "property": "border-color",
+      "value": "var(--lcdp-color-logo-green) !important",
+      "at": 302346,
+      "coveredBy": [
+        963036
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre__content",
+      "property": "gap",
+      "value": "var(--lcdp-space-2)",
+      "at": 301212,
+      "coveredBy": [
+        303020
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre__park",
+      "property": "min-width",
+      "value": "0",
+      "at": 297478,
+      "coveredBy": [
+        303519
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre__image",
+      "property": "object-fit",
+      "value": "cover",
+      "at": 296419,
+      "coveredBy": [
+        305928
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre__image",
+      "property": "width",
+      "value": "100%",
+      "at": 296367,
+      "coveredBy": [
+        305855
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre__media",
+      "property": "min-width",
+      "value": "0",
+      "at": 296106,
+      "coveredBy": [
+        305756
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre__media",
+      "property": "width",
+      "value": "100%",
+      "at": 296091,
+      "coveredBy": [
+        305741
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre--avec-image",
+      "property": "align-items",
+      "value": "stretch",
+      "at": 295610,
+      "coveredBy": [
+        305671
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-reservation-membre",
+      "property": "box-shadow",
+      "value": "0 12px 30px rgba(31, 42, 36, 0.08)",
+      "at": 295463,
+      "coveredBy": [
+        305527
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body",
+      "property": "justify-content",
+      "value": "flex-start",
+      "at": 292896,
+      "coveredBy": [
+        294978
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-parc-diaporama__face--verso",
+      "property": "overflow-y",
+      "value": "hidden",
+      "at": 290078,
+      "coveredBy": [
+        292701
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-parc-diaporama__scene",
+      "property": "aspect-ratio",
+      "value": "16 / 10",
+      "at": 288972,
+      "coveredBy": [
+        292540
+      ]
+    },
+    {
+      "selector": ".lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card",
+      "property": "padding",
+      "value": "var(--lcdp-space-2)",
+      "at": 271832,
+      "coveredBy": [
+        276118
+      ]
+    },
+    {
+      "selector": ".lcdp-actu-liste .lcdp-actu-liste-titre",
+      "property": "font-weight",
+      "value": "400",
+      "at": 245935,
+      "coveredBy": [
+        246485
+      ]
+    },
+    {
+      "selector": ".lcdp-actu-liste",
+      "property": "gap",
+      "value": "16px",
+      "at": 242767,
+      "coveredBy": [
+        244658
+      ]
+    },
+    {
+      "selector": ".lcdp-actu-liste",
+      "property": "display",
+      "value": "grid",
+      "at": 242754,
+      "coveredBy": [
+        244645
+      ]
+    },
+    {
+      "selector": ".lcdp-planifier-parcs-chargement",
+      "property": "justify-content",
+      "value": "center",
+      "at": 231894,
+      "coveredBy": [
+        979170
+      ]
+    },
+    {
+      "selector": ".lcdp-planifier-parcs-chargement",
+      "property": "align-items",
+      "value": "center",
+      "at": 231874,
+      "coveredBy": [
+        979147
+      ]
+    },
+    {
+      "selector": ".lcdp-planifier-parcs-chargement",
+      "property": "display",
+      "value": "flex",
+      "at": 231860,
+      "coveredBy": [
+        979130
+      ]
+    },
+    {
+      "selector": ".lcdp-planifier-parcs-card .lcdp-box-card-parc__actions--reserver > .lcdp-button",
+      "property": "font-size",
+      "value": "0.78rem",
+      "at": 230147,
+      "coveredBy": [
+        230531
+      ]
+    },
+    {
+      "selector": "#lcdp-planifier-attente-initiale img",
+      "property": "object-fit",
+      "value": "contain",
+      "at": 221808,
+      "coveredBy": [
+        232547
+      ]
+    },
+    {
+      "selector": "#lcdp-planifier-attente-initiale img",
+      "property": "height",
+      "value": "64px",
+      "at": 221765,
+      "coveredBy": [
+        232533
+      ]
+    },
+    {
+      "selector": "#lcdp-planifier-attente-initiale img",
+      "property": "width",
+      "value": "64px",
+      "at": 221746,
+      "coveredBy": [
+        232520
+      ]
+    },
+    {
+      "selector": "#lcdp-planifier-attente-initiale",
+      "property": "justify-content",
+      "value": "center",
+      "at": 221617,
+      "coveredBy": [
+        232379
+      ]
+    },
+    {
+      "selector": "#lcdp-planifier-attente-initiale",
+      "property": "align-items",
+      "value": "center",
+      "at": 221590,
+      "coveredBy": [
+        232404
+      ]
+    },
+    {
+      "selector": "#lcdp-planifier-attente-initiale",
+      "property": "display",
+      "value": "flex",
+      "at": 221569,
+      "coveredBy": [
+        232364
+      ]
+    },
+    {
+      "selector": "#lcdp-planifier-attente-initiale",
+      "property": "inset",
+      "value": "0",
+      "at": 221526,
+      "coveredBy": [
+        232333
+      ]
+    },
+    {
+      "selector": "#lcdp-planifier-attente-initiale",
+      "property": "position",
+      "value": "fixed",
+      "at": 221503,
+      "coveredBy": [
+        232316
+      ]
+    },
+    {
+      "selector": ".lcdp-box-calendrier-mois[data-lcdp-planning-parc-lecture=\"true\"]\n  .lcdp-box-calendrier-mois__title",
+      "property": "color",
+      "value": "var(--lcdp-color-text) !important",
+      "at": 172508,
+      "coveredBy": [
+        173346
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__galerie .lcdp-box-galerie__list",
+      "property": "display",
+      "value": "grid !important",
+      "at": 141625,
+      "coveredBy": [
+        146370
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list .lcdp-button,\n.lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage",
+      "property": "white-space",
+      "value": "nowrap",
+      "at": 134927,
+      "coveredBy": [
+        136034
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list .lcdp-button,\n.lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage",
+      "property": "box-sizing",
+      "value": "border-box",
+      "at": 134901,
+      "coveredBy": [
+        135881
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list .lcdp-button,\n.lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage",
+      "property": "flex",
+      "value": "0 0 auto !important",
+      "at": 134872,
+      "coveredBy": [
+        135852
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list .lcdp-button,\n.lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage",
+      "property": "padding",
+      "value": "10px 18px !important",
+      "at": 134839,
+      "coveredBy": [
+        135782
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list .lcdp-button,\n.lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage",
+      "property": "margin",
+      "value": "0 !important",
+      "at": 134815,
+      "coveredBy": [
+        135758
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list .lcdp-button,\n.lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage",
+      "property": "min-height",
+      "value": "44px !important",
+      "at": 134784,
+      "coveredBy": [
+        135727
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list .lcdp-button,\n.lcdp-box-fiche-parc__actions-list .lcdp-box-fiche-parc__partage,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-button,\n.lcdp-fiche-parc__commande-detail .lcdp-box-calendrier-mois__actions-parc .lcdp-box-fiche-parc__partage",
+      "property": "max-width",
+      "value": "100% !important",
+      "at": 134754,
+      "coveredBy": [
+        135697
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-libelle",
+      "property": "white-space",
+      "value": "nowrap",
+      "at": 127364,
+      "coveredBy": [
+        130234
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage",
+      "property": "width",
+      "value": "auto",
+      "at": 127280,
+      "coveredBy": [
+        128474
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-planning",
+      "property": "padding-right",
+      "value": "18px",
+      "at": 127216,
+      "coveredBy": [
+        130038
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-planning",
+      "property": "padding-left",
+      "value": "18px",
+      "at": 127192,
+      "coveredBy": [
+        130014
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-planning",
+      "property": "min-width",
+      "value": "142px",
+      "at": 127170,
+      "coveredBy": [
+        129992
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list .lcdp-button",
+      "property": "margin",
+      "value": "0",
+      "at": 127063,
+      "coveredBy": [
+        127683
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list",
+      "property": "gap",
+      "value": "var(--lcdp-space-2)",
+      "at": 126916,
+      "coveredBy": [
+        127602
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver:hover",
+      "property": "color",
+      "value": "var(--lcdp-color-orange)",
+      "at": 126543,
+      "coveredBy": [
+        128306
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver:hover",
+      "property": "border-color",
+      "value": "var(--lcdp-color-orange)",
+      "at": 126501,
+      "coveredBy": [
+        128264
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver:hover",
+      "property": "background",
+      "value": "rgba(242, 162, 58, 0.10)",
+      "at": 126461,
+      "coveredBy": [
+        128224
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "box-shadow",
+      "value": "none",
+      "at": 126392,
+      "coveredBy": [
+        128155
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "text-transform",
+      "value": "uppercase",
+      "at": 126363,
+      "coveredBy": [
+        128126
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "text-decoration",
+      "value": "none !important",
+      "at": 126327,
+      "coveredBy": [
+        128090
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "text-align",
+      "value": "center",
+      "at": 126305,
+      "coveredBy": [
+        128068
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "letter-spacing",
+      "value": "0.045em",
+      "at": 126278,
+      "coveredBy": [
+        128041
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "font-weight",
+      "value": "700",
+      "at": 126258,
+      "coveredBy": [
+        128021
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "line-height",
+      "value": "1",
+      "at": 126240,
+      "coveredBy": [
+        128003
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "font-size",
+      "value": "0.86rem",
+      "at": 126218,
+      "coveredBy": [
+        127981
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "font-family",
+      "value": "var(--lcdp-font-main)",
+      "at": 126180,
+      "coveredBy": [
+        127943
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "color",
+      "value": "var(--lcdp-color-orange)",
+      "at": 126145,
+      "coveredBy": [
+        127908
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "background",
+      "value": "#ffffff",
+      "at": 126122,
+      "coveredBy": [
+        127885
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "border-radius",
+      "value": "999px",
+      "at": 126098,
+      "coveredBy": [
+        127861
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "border",
+      "value": "2px solid var(--lcdp-color-orange)",
+      "at": 126052,
+      "coveredBy": [
+        127815
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver",
+      "property": "padding",
+      "value": "8px 16px",
+      "at": 126031,
+      "coveredBy": [
+        127794
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-libelle",
+      "property": "line-height",
+      "value": "1.25",
+      "at": 125400,
+      "coveredBy": [
+        129291
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-libelle",
+      "property": "font-size",
+      "value": "1rem",
+      "at": 125381,
+      "coveredBy": [
+        129272
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-libelle",
+      "property": "font-weight",
+      "value": "600",
+      "at": 125361,
+      "coveredBy": [
+        129252
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-libelle",
+      "property": "color",
+      "value": "var(--lcdp-color-text)",
+      "at": 125328,
+      "coveredBy": [
+        129219
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage:hover .lcdp-box-fiche-parc__partage-icone",
+      "property": "color",
+      "value": "#ffffff",
+      "at": 125267,
+      "coveredBy": [
+        129158
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage:hover .lcdp-box-fiche-parc__partage-icone",
+      "property": "border-color",
+      "value": "var(--lcdp-color-orange-hover)",
+      "at": 125219,
+      "coveredBy": [
+        129110
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage:hover .lcdp-box-fiche-parc__partage-icone",
+      "property": "background",
+      "value": "var(--lcdp-color-orange-hover)",
+      "at": 125173,
+      "coveredBy": [
+        129064
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "justify-content",
+      "value": "center",
+      "at": 125069,
+      "coveredBy": [
+        128960
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "align-items",
+      "value": "center",
+      "at": 125046,
+      "coveredBy": [
+        128937
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "display",
+      "value": "inline-flex",
+      "at": 125022,
+      "coveredBy": [
+        128913
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "color",
+      "value": "#ffffff",
+      "at": 125004,
+      "coveredBy": [
+        128895
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "background",
+      "value": "var(--lcdp-color-orange)",
+      "at": 124964,
+      "coveredBy": [
+        128855
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "border-radius",
+      "value": "999px",
+      "at": 124940,
+      "coveredBy": [
+        128831
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "border",
+      "value": "2px solid var(--lcdp-color-orange)",
+      "at": 124894,
+      "coveredBy": [
+        128785
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "padding",
+      "value": "0",
+      "at": 124880,
+      "coveredBy": [
+        128771
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "min-height",
+      "value": "40px",
+      "at": 124860,
+      "coveredBy": [
+        128751
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "min-width",
+      "value": "40px",
+      "at": 124841,
+      "coveredBy": [
+        128732
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "height",
+      "value": "40px",
+      "at": 124825,
+      "coveredBy": [
+        128716
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage-icone",
+      "property": "width",
+      "value": "40px",
+      "at": 124810,
+      "coveredBy": [
+        128701
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage",
+      "property": "cursor",
+      "value": "pointer",
+      "at": 124750,
+      "coveredBy": [
+        128641
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage",
+      "property": "color",
+      "value": "var(--lcdp-color-text)",
+      "at": 124717,
+      "coveredBy": [
+        128608
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage",
+      "property": "gap",
+      "value": "var(--lcdp-space-2)",
+      "at": 124689,
+      "coveredBy": [
+        128580
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage",
+      "property": "justify-content",
+      "value": "flex-start",
+      "at": 124658,
+      "coveredBy": [
+        128549
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage",
+      "property": "align-items",
+      "value": "center",
+      "at": 124635,
+      "coveredBy": [
+        128526
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage",
+      "property": "display",
+      "value": "inline-flex",
+      "at": 124611,
+      "coveredBy": [
+        128502
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__partage",
+      "property": "width",
+      "value": "auto",
+      "at": 124579,
+      "coveredBy": [
+        128474
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver,\n.lcdp-box-fiche-parc__action-planning",
+      "property": "min-height",
+      "value": "44px",
+      "at": 124524,
+      "coveredBy": [
+        127774,
+        128419
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver,\n.lcdp-box-fiche-parc__action-planning",
+      "property": "max-width",
+      "value": "260px",
+      "at": 124504,
+      "coveredBy": [
+        127754,
+        128399
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__action-reserver,\n.lcdp-box-fiche-parc__action-planning",
+      "property": "width",
+      "value": "100%",
+      "at": 124489,
+      "coveredBy": [
+        127739,
+        128384
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list",
+      "property": "gap",
+      "value": "var(--lcdp-space-2)",
+      "at": 124379,
+      "coveredBy": [
+        127602
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list",
+      "property": "align-items",
+      "value": "flex-start",
+      "at": 124352,
+      "coveredBy": [
+        127575
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list",
+      "property": "flex-direction",
+      "value": "column",
+      "at": 124326,
+      "coveredBy": [
+        127549
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list",
+      "property": "display",
+      "value": "flex",
+      "at": 124309,
+      "coveredBy": [
+        127532
+      ]
+    },
+    {
+      "selector": ".lcdp-box-fiche-parc__actions-list",
+      "property": "width",
+      "value": "100%",
+      "at": 124294,
+      "coveredBy": [
+        127517
+      ]
+    },
+    {
+      "selector": ".lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__map",
+      "property": "touch-action",
+      "value": "none",
+      "at": 118503,
+      "coveredBy": [
+        119557
+      ]
+    },
+    {
+      "selector": ".lcdp-box-champ-formulaire--badge input[type=\"text\"],\n  .lcdp-box-champ-formulaire--badge input[type=\"email\"],\n  .lcdp-box-champ-formulaire--badge input[type=\"password\"],\n  .lcdp-box-champ-formulaire--badge input[type=\"tel\"],\n  .lcdp-box-champ-formulaire--badge input[type=\"number\"],\n  .lcdp-box-champ-formulaire--badge input[type=\"date\"],\n  .lcdp-box-champ-formulaire--badge select,\n  .lcdp-box-champ-formulaire--badge textarea,\n  .lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture",
+      "property": "padding-left",
+      "value": "calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-2)) !important",
+      "at": 80366,
+      "coveredBy": [
+        83666
+      ]
+    },
+    {
+      "selector": ".lcdp-box-champ-formulaire--badge input[type=\"text\"],\n.lcdp-box-champ-formulaire--badge input[type=\"email\"],\n.lcdp-box-champ-formulaire--badge input[type=\"password\"],\n.lcdp-box-champ-formulaire--badge input[type=\"tel\"],\n.lcdp-box-champ-formulaire--badge input[type=\"number\"],\n.lcdp-box-champ-formulaire--badge input[type=\"date\"],\n.lcdp-box-champ-formulaire--badge select,\n.lcdp-box-champ-formulaire--badge textarea,\n.lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__lecture",
+      "property": "padding-left",
+      "value": "calc(var(--lcdp-champ-badge-size) + var(--lcdp-space-3)) !important",
+      "at": 78938,
+      "coveredBy": [
+        83008
+      ]
+    },
+    {
+      "selector": ".lcdp-box-champ-formulaire--badge .lcdp-box-champ-formulaire__control",
+      "property": "position",
+      "value": "relative",
+      "at": 78425,
+      "coveredBy": [
+        82345
+      ]
+    }
+  ]
+}
