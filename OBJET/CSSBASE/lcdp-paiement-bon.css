@@ -5,7 +5,6 @@
 .lcdp-paiement-bon-entete h2 {font-size:clamp(1.28rem,3.5vw,1.55rem);line-height:1.25;margin:5px 0 7px;color:var(--lcdp-color-paiement-titre)}
 .lcdp-paiement-bon-entete .lcdp-paiement-bon-etape {font-size:.74rem;font-weight:750;letter-spacing:.09em;color:var(--lcdp-color-paiement-etape);margin:0}
 .lcdp-paiement-bon-sous-titre {font-size:.87rem;line-height:1.5;color:#58665c;margin:0}
-.lcdp-paiement-bon-fermer {font:inherit;font-size:1.8rem;border:0;background:transparent;color:#59635a;width:36px;height:36px;line-height:1;cursor:pointer;flex:none}
 .lcdp-paiement-bon-contenu {display:grid;gap:16px;padding:18px 24px 20px;overflow:auto;min-height:0;overscroll-behavior:contain}
 .lcdp-paiement-bon-section {border:1px solid #e2e9e3;border-radius:9px;padding:15px 16px;background:#fff}
 .lcdp-paiement-bon-section h3 {font-size:1.04rem;margin:0 0 12px;color:var(--lcdp-color-paiement-section)}
@@ -25,12 +24,7 @@
 .lcdp-paiement-bon-note {margin:9px 0 0;color:#657168;font-size:.81rem;line-height:1.48}
 .lcdp-paiement-bon-avertissement {padding:12px 14px;background:#fff8ee;border:1px solid #efd5ac;border-radius:8px;color:#755323;font-size:.85rem;line-height:1.5}
 .lcdp-paiement-bon-actions {flex:none;display:flex;gap:12px;align-items:center;justify-content:flex-end;padding:15px 24px 19px;border-top:1px solid #e8ece7;background:#fbfcfa}
-.lcdp-paiement-bon-actions button {font:inherit;font-weight:680;font-size:.87rem;min-height:42px;padding:10px 15px;border-radius:7px;cursor:pointer}
-.lcdp-paiement-bon-retour {background:#fff;border:1px solid #becbc1;color:var(--lcdp-color-paiement-retour)}
-.lcdp-paiement-bon-valider {background:var(--lcdp-color-paiement-action);border:1px solid var(--lcdp-color-paiement-action);color:#fff}
-.lcdp-paiement-bon-valider:disabled {opacity:.52;cursor:not-allowed}
-.lcdp-paiement-bon-actions button:focus-visible,.lcdp-paiement-bon-fermer:focus-visible {outline:2px solid var(--lcdp-color-paiement-focus);outline-offset:2px}
-@media (max-width:520px) {.lcdp-paiement-bon-voile{padding:8px}.lcdp-paiement-bon{max-height:calc(100dvh - 16px)}.lcdp-paiement-bon-entete{padding:17px 17px 14px}.lcdp-paiement-bon-contenu{padding:14px 15px;gap:12px}.lcdp-paiement-bon-section{padding:12px}.lcdp-paiement-bon-actions{padding:12px 15px;flex-direction:column-reverse;align-items:stretch}.lcdp-paiement-bon-actions button{width:100%}.lcdp-paiement-bon-lignes{grid-template-columns:minmax(100px,40%) 1fr;gap:6px 10px}}
+@media (max-width:520px) {.lcdp-paiement-bon-voile{padding:8px}.lcdp-paiement-bon{max-height:calc(100dvh - 16px)}.lcdp-paiement-bon-entete{padding:17px 17px 14px}.lcdp-paiement-bon-contenu{padding:14px 15px;gap:12px}.lcdp-paiement-bon-section{padding:12px}.lcdp-paiement-bon-actions{padding:12px 15px;flex-direction:column-reverse;align-items:stretch}.lcdp-paiement-bon-lignes{grid-template-columns:minmax(100px,40%) 1fr;gap:6px 10px}}
 
 /* Récapitulatif : information sans case ni choix supplémentaire. */
 .lcdp-paiement-retractation-info{
@@ -39,11 +33,3 @@
   font-size:.82rem;line-height:1.5
 }
 .lcdp-paiement-retractation-info p{margin:0}
-.lcdp-paiement-retractation-info__lien{
-  width:fit-content;max-width:100%;border:0;padding:4px 0;
-  background:none;color:var(--lcdp-color-paiement-lien);font:inherit;font-weight:650;
-  text-decoration:underline;text-underline-offset:3px;cursor:pointer;text-align:left
-}
-.lcdp-paiement-retractation-info__lien:focus-visible{
-  outline:2px solid var(--lcdp-color-paiement-lien-focus);outline-offset:2px;border-radius:3px
-}

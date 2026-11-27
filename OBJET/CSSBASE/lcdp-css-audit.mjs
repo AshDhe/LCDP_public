@@ -21,6 +21,24 @@ const owner=JSON.parse(load('lcdp-css-ownership.json'));
 const files=['lcdp-central-mobile-first','lcdp-da-membre','lcdp-mon-compte'];
 const records={};const errors=[];
 const normalized = value => value.replace(/\s+/g,' ').trim();
+// La feuille propriétaire des commandes ne doit jamais redéfinir un sélecteur
+// dans le même contexte de cascade. Les états et media queries restent distincts.
+try {
+ const name='lcdp-bouton-lien-picto.css';
+ const root=postcss.parse(load(name),{from:name});
+ const seen=new Map();
+ root.walkRules(rule=>{
+  const ctx=[];
+  for(let p=rule.parent;p&&p.type!=='root';p=p.parent)
+   ctx.unshift(p.type==='atrule'?'@'+p.name+' '+normalized(p.params):p.type+':'+p.selector);
+  if(ctx.some(x=>x.includes('keyframes')))return;
+  const selector=rule.selectors.map(s=>normalized(s)).sort().join(',');
+  const key=JSON.stringify([ctx,selector]);
+  if(seen.has(key))errors.push(name+': sélecteur redéfini '+selector+' (lignes '+seen.get(key)+' et '+rule.source.start.line+')');
+  else seen.set(key,rule.source.start.line);
+ });
+}catch(err){errors.push('lcdp-bouton-lien-picto.css : '+err.message);}
+
 for(const filename of files){
  let root;
  try{root=postcss.parse(load(filename+'.css'),{from:filename+'.css'});}catch(err){errors.push(filename+': syntaxe invalide '+err.message);continue;}

@@ -241,14 +241,6 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section
   padding: 0;
   font: 700 12px/1.5 Arial,system-ui,sans-serif;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide a {
-  color: var(--compte-accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-mon-compte-section .lcdp-box-champ-formulaire__aide a:hover {
-  color: var(--lcdp-color-espace-accent-hover, #3d522c);
-}
 /* Espace Points passion : synthèse réelle alimentée par le JS et l'API. */
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-points-source-masque {
   display: none !important;
@@ -854,33 +846,6 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__
   color: #64748b;
   font-weight: 500;
 }
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__nombre {
-  box-sizing: border-box;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  flex: none;
-  min-width: 28px;
-  min-height: 28px;
-  margin: 0;
-  padding: 4px 8px;
-  border: 1px solid #cbd5e1;
-  border-radius: 9px;
-  background: #e2e8f0;
-  color: #334155;
-  font: 700 12px/1.2 Arial,system-ui,sans-serif;
-  text-align: center;
-  cursor: pointer;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__nombre:hover,
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__nombre[aria-expanded="true"] {
-  background: #cbd5e1;
-  border-color: #94a3b8;
-}
-body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__nombre:focus-visible {
-  outline: 2px solid var(--lcdp-color-espace-accent, #4e6838);
-  outline-offset: 2px;
-}
 body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-relations__liste {
   margin: -4px 0 2px;
   padding: 10px 12px;
@@ -1131,11 +1096,6 @@ body.lcdp-page-mon-compte
 [data-lcdp-avertissement-fermeture] .lcdp-dialogue-ref__message {
   color: var(--lcdp-ref-rose-hover);
   text-align: left;
-}
-body.lcdp-page-mon-compte
-[data-lcdp-avertissement-fermeture] .lcdp-dialogue-ref__message a {
-  color: inherit;
-  text-decoration: underline;
 }
 
 

@@ -1,15 +1,7 @@
 /* DFA — utilitaires Tailwind transcrits en CSS navigateur ; gabarit partagé c085. */
 #dfa-page [hidden] {display:none!important;}
-#dfa-page .dfa-amount {box-sizing:border-box;display:flex;width:100%;cursor:pointer;align-items:center;justify-content:space-between;gap:calc(var(--spacing,.25rem)*3);border-radius:var(--radius-xl,.75rem);padding-inline:calc(var(--spacing,.25rem)*4);padding-block:calc(var(--spacing,.25rem)*3);text-align:left;min-height:56px;background:#f8fafc;border:1px solid #cbd5e1;color:#334155;font:inherit;}
-#dfa-page .dfa-amount:hover:not(:disabled) {border-color:#4e6838;background:#f6f8f5;}
-#dfa-page .dfa-amount:focus-visible {outline:2px solid #4e6838;outline-offset:3px;}
-#dfa-page .dfa-amount:disabled {cursor:not-allowed;opacity:50%;}
 #dfa-page .dfa-value {font-size:1rem;font-weight:600;font-variant-numeric:tabular-nums;}
-#dfa-page .dfa-amount[data-montant-selectionne] .dfa-value {font-size:1.5rem;color:#0f172a;}
-#dfa-page .dfa-amount svg {width:calc(var(--spacing,.25rem)*6);height:calc(var(--spacing,.25rem)*6);flex-shrink:0;color:#4e6838;}
 #dfa-page .dfa-status.dfa-error {color:#991b1b;}
 .lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__card {width:min(100%,290px);padding:16px;}
 .lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__touches {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:calc(var(--spacing,0.25rem)*2);}
 .lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__touche {aspect-ratio:auto;min-height:48px;}
-.lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__validate {margin-top:calc(var(--spacing,0.25rem)*3);min-height:calc(var(--spacing,0.25rem)*12);width:100%;cursor:pointer;border-radius:var(--radius-xl,0.75rem);padding-inline:calc(var(--spacing,0.25rem)*4);padding-block:calc(var(--spacing,0.25rem)*3);font:inherit;font-weight:650;background:var(--lcdp-color-primary,#234438);color:white;border:0;}
-.lcdp-box-diginum[data-lcdp-montant] .lcdp-box-diginum__cancel {margin-top:calc(var(--spacing,0.25rem)*2);min-height:calc(var(--spacing,0.25rem)*12);width:100%;cursor:pointer;border-radius:var(--radius-xl,0.75rem);padding-inline:calc(var(--spacing,0.25rem)*4);padding-block:calc(var(--spacing,0.25rem)*3);font:inherit;font-weight:650;background:white;color:var(--lcdp-color-primary,#234438);border:1px solid var(--lcdp-color-primary,#234438);}

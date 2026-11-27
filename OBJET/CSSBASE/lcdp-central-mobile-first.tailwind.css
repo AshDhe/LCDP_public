@@ -11354,40 +11354,6 @@ line-height: 1.35;
   @apply flex-col;
   gap: var(--lcdp-space-3, 16px);
 }
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-code-field{
-  @apply w-full;
-  min-height: 72px;
-  padding: 14px 16px;
-  border: 1px solid var(--lcdp-color-border-strong);
-  border-radius: var(--lcdp-radius-medium);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  @apply text-left;
-  @apply flex;
-  @apply flex-col;
-  @apply justify-center;
-  gap: 4px;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-code-field:hover,:where(html[data-lcdp-css~="c021"]) .lcdp-cle-code-field:focus-visible{
-  border-color: var(--lcdp-color-logo-green);
-  background: var(--lcdp-color-surface-soft);
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-code-field__label{
-  font-size: 0.92rem;
-  line-height: 1.2;
-  font-weight: 700;
-  color: var(--lcdp-color-text-muted);
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-code-field__value{
-  font-size: 1.18rem;
-  line-height: 1.25;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-code-field__value.is-filled{
-  color: var(--lcdp-color-blue);
-}
 :where(html[data-lcdp-css~="c021"]) .lcdp-cle-ecran--active .lcdp-box-formulaire-page__inner{
   background: var(--lcdp-color-logo-green);
 }
@@ -11415,45 +11381,6 @@ line-height: 1.35;
   @apply items-center;
   gap: var(--lcdp-space-3, 16px);
 }
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-action{
-  @apply w-full;
-  min-height: 72px;
-  border-width: 2px;
-  border-radius: var(--lcdp-radius-medium);
-  font-size: 1.25rem;
-  line-height: 1;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-action--brighta{
-  background: #ffffff;
-  border-color: var(--lcdp-color-blue);
-  color: var(--lcdp-color-blue);
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-action--brighta:hover{
-  background: var(--lcdp-color-surface-soft);
-  border-color: var(--lcdp-color-blue-hover);
-  color: var(--lcdp-color-blue-hover);
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-action--brighta:disabled{
-  background: #ffffff;
-  border-color: #b8c9d8;
-  color: #9db4c8;
-  opacity: 1;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-action--checkout{
-  background: var(--lcdp-color-blue);
-  border-color: var(--lcdp-color-blue);
-  color: #ffffff;
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-action--checkout:hover{
-  background: var(--lcdp-color-blue-hover);
-  border-color: var(--lcdp-color-blue-hover);
-  color: #ffffff;
-}
 :where(html[data-lcdp-css~="c021"]) .lcdp-cle-cooldown{
   margin: 0;
   color: var(--lcdp-color-text-muted);
@@ -11480,12 +11407,6 @@ line-height: 1.35;
   line-height: 1.35;
   @apply text-center;
 }
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c021"]) .lcdp-cle-code-field{
-    min-height: 76px;
-  }
-:where(html[data-lcdp-css~="c021"]) .lcdp-cle-action{
-    min-height: 78px;
-  }}
 :where(html[data-lcdp-css~="c021"]) .lcdp-page-cle-du-parc [data-lcdp-dialogue-champ-cancel]{
   border-color: var(--lcdp-color-blue);
   color: var(--lcdp-color-blue);
@@ -11545,7 +11466,6 @@ line-height: 1.35;
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-lightbox-contenu{ @apply w-full; padding: 28px 20px; border-radius: var(--lcdp-radius-medium); background: var(--lcdp-color-surface); @apply flex; @apply flex-col; @apply items-center; gap: 18px; }
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-refus{ margin: 0 0 6px; color: var(--lcdp-color-text); @apply text-center; }
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-lightbox .lcdp-button{ @apply w-full; }
-:where(html[data-lcdp-css~="c021"]) .lcdp-acces-lightbox button:disabled{ opacity: .5; @apply cursor-default; }
 @media  (max-width: 359px) {:where(html[data-lcdp-css~="c021"]) .lcdp-acces{ padding-left: 18px; padding-right: 18px; }
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-titre{ font-size: 21px; }}
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-video{@apply block;@apply w-full;max-width:420px;max-height:55vh;@apply object-contain;background:#000;margin:0 auto;}
@@ -11562,7 +11482,6 @@ line-height: 1.35;
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-invites-liste .lcdp-acces-instructions{margin:0;padding-left:26px;}
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-invites-form label{min-width:0;overflow-wrap:anywhere;}
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-invites-form input[type="checkbox"]{@apply shrink-0;}
-:where(html[data-lcdp-css~="c021"]) .lcdp-acces-invites-form > button[type="submit"]{@apply self-center;}
 /* LCDP_membre/ESPACE-MEMBRE/paiement-membre.css */
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-voile{@apply fixed;inset:0;z-index:16000;background:rgba(19,30,24,.58);@apply flex;@apply justify-center;@apply items-center;padding:14px;@apply box-border;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon{width:min(100%,700px);max-height:calc(100dvh - 28px);@apply flex;@apply flex-col;@apply overflow-hidden;@apply box-border;border-radius:13px;background:#fff;color:#263229;box-shadow:0 14px 55px #0003;font:inherit;outline:none;}
@@ -11570,7 +11489,6 @@ line-height: 1.35;
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-entete h2{font-size:clamp(1.28rem,3.5vw,1.55rem);line-height:1.25;margin:5px 0 7px;color:#182c20;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-entete .lcdp-paiement-bon-etape{font-size:.74rem;font-weight:750;letter-spacing:.09em;color:#55755b;margin:0;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-sous-titre{font-size:.87rem;line-height:1.5;color:#58665c;margin:0;}
-:where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-fermer{font:inherit;font-size:1.8rem;border:0;background:transparent;color:#59635a;width:36px;height:36px;line-height:1;@apply cursor-pointer;flex:none;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-contenu{@apply grid;gap:16px;padding:18px 24px 20px;@apply overflow-auto;min-height:0;overscroll-behavior:contain;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-section{border:1px solid #e2e9e3;border-radius:9px;padding:15px 16px;background:#fff;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-section h3{font-size:1.04rem;margin:0 0 12px;color:#254634;}
@@ -11590,18 +11508,12 @@ line-height: 1.35;
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-note{margin:9px 0 0;color:#657168;font-size:.81rem;line-height:1.48;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-avertissement{padding:12px 14px;background:#fff8ee;border:1px solid #efd5ac;border-radius:8px;color:#755323;font-size:.85rem;line-height:1.5;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-actions{flex:none;@apply flex;gap:12px;@apply items-center;@apply justify-end;padding:15px 24px 19px;border-top:1px solid #e8ece7;background:#fbfcfa;}
-:where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-actions button{font:inherit;font-weight:680;font-size:.87rem;min-height:42px;padding:10px 15px;border-radius:7px;@apply cursor-pointer;}
-:where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-retour{background:#fff;border:1px solid #becbc1;color:#2d4635;}
-:where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-valider{background:#df862b;border:1px solid #df862b;color:#fff;}
-:where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-valider:disabled{opacity:.52;cursor:not-allowed;}
-:where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-actions button:focus-visible,:where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-fermer:focus-visible{outline:2px solid #dc7d22;outline-offset:2px;}
 @media  (max-width:520px) {:where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-voile{padding:8px;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon{max-height:calc(100dvh - 16px);}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-entete{padding:17px 17px 14px;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-contenu{padding:14px 15px;gap:12px;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-section{padding:12px;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-actions{padding:12px 15px;@apply flex-col-reverse;@apply items-stretch;}
-:where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-actions button{@apply w-full;}
 :where(html[data-lcdp-css~="c022"]) .lcdp-paiement-bon-lignes{grid-template-columns:minmax(100px,40%) 1fr;gap:6px 10px;}}
 /* LCDP_admin/ESPACE-ADMIN/A_STRUCTURE/css-admin.css */
 :where(html[data-lcdp-css~="c001"]) .lcdp-menu-gauche-admin{
@@ -16197,25 +16109,6 @@ font-size: 13px;
   @apply w-full;
   gap: 10px;
 }
-#lcdp-da-membre-overlay-slot .lcdp-box-formulaire__actions .lcdp-button,
-#lcdp-da-membre-overlay-slot #bouton-transmettre-da {
-  @apply box-border;
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  width: min(100%, 216px);
-  max-width: 216px;
-  min-width: 0;
-  min-height: 48px;
-  margin-inline: auto;
-  padding: 10px 14px;
-  font-size: 1rem;
-  font-weight: 650;
-  line-height: 1.3;
-  letter-spacing: normal;
-  text-transform: none;
-  @apply text-center;
-}
 #lcdp-da-membre-overlay-slot .lcdp-box-formulaire__note {
   @apply box-border;
   max-width: 450px;
@@ -16228,11 +16121,6 @@ font-size: 13px;
   color: var(--lcdp-color-text-muted, #57645a);
   @apply text-left;
   overflow-wrap: anywhere;
-}
-#lcdp-da-membre-overlay-slot .lcdp-box-formulaire__note a {
-  color: var(--lcdp-color-primary, #4e6838);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 /* Boutons de confirmation : variante mutualisable du composant de base,

@@ -48,8 +48,6 @@
 
 /* Bouton bleu sur deux lignes : dimensions de la variante commune haut-etroit. */
 .lcdp-offre-abonnement .lcdp-offre-abonnement__actions{display:flex;justify-content:center;margin:1.5rem 0 .5rem;}
-.lcdp-offre-abonnement__actions > .lcdp-offre-abonnement__souscrire.lcdp-button{box-sizing:border-box;border:0;border-radius:12px;background:var(--lcdp-color-blue,#2f6fb3);color:#fff;font:700 12px/1.35 Arial,system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;white-space:normal;box-shadow:0 4px 6px -1px rgb(15 23 42 / 10%);}
-.lcdp-offre-abonnement__actions > .lcdp-offre-abonnement__souscrire.lcdp-button:hover{background:var(--lcdp-color-blue-hover,#255c96);color:#fff;}
 
 /* Dialogue DA : le masque est strictement borné au wrapper public. */
 .lcdp-site-page.lcdp-app-wrapper > #lcdp-lightbox-slot.lcdp-souscription-dialogue-actif{position:absolute;inset:0;z-index:9500;overflow:hidden;border-radius:inherit;}
