@@ -435,7 +435,7 @@
     "bouton-lien-picto": {
       "css": "lcdp-bouton-lien-picto.css",
       "charge_par": "lcdp-central-mobile-first.css et cssbase.css (consommateurs autonomes)",
-      "statut": "Centralisation en cours : commandes communes, Mon compte, paiements Stripe/CB/impayés, DA/DFA, factures, fiche Parc publique, formulaires, FAQ, carrousels, carte, clavier numérique, actualités, administration et bandeau image.",
+      "statut": "Centralisation des commandes standard : boutons et liens génériques, compte/sécurité, Stripe/CB/impayés, DA/DFA, factures, fiche Parc, formulaires, FAQ, carrousels, carte, clavier numérique, actualités, administration, accueil, bandeau image, invitations et onglets. Contrôle structurel des migrations.",
       "variantes": "Principale, secondaire, orange, mini, accueil, logo, compte, deux niveaux, haut et étroit, chargement, picto édition., boutons et pictogrammes de Mon compte (y compris les dialogues de compte)., boutons de référence des dialogues, fermeture, lien contact et paiement CB.",
       "exceptions": "PLANIFIER, S'ABONNER / ABORESA / RESA ABO et MA CLÉ : parcours spécifiques à revoir séparément. Styles de structure, impression, courriels et encapsulation Shadow DOM à distinguer des commandes globales. Pas de validation visuelle."
     }
