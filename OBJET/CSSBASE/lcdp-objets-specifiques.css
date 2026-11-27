@@ -838,7 +838,7 @@ figure.lcdp-editorial-inline-figure[hidden] {display:none!important;}
 
 /* OBJET : CARTE ACCÈS PLANIFIÉ */
 .lcdp-box-card-reservation-membre {
-  --lcdp-reservation-invitation-color: #7b5aa6;
+--lcdp-reservation-invitation-color: #7b5aa6;
   width: 100%;
   margin: 0 auto;
   padding: var(--lcdp-space-3);
@@ -849,12 +849,19 @@ figure.lcdp-editorial-inline-figure[hidden] {display:none!important;}
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--lcdp-space-3);
-  
+padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
 }
 
 .lcdp-box-card-reservation-membre--avec-image {
-  grid-template-columns: 92px minmax(0, 1fr);
-  
+grid-template-columns: 92px minmax(0, 1fr);
+display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .lcdp-box-card-reservation-membre--invitation {
@@ -870,11 +877,13 @@ figure.lcdp-editorial-inline-figure[hidden] {display:none!important;}
 }
 
 .lcdp-box-card-reservation-membre__media {
-  
-  
-  overflow: hidden;
+overflow: hidden;
   border-radius: var(--lcdp-radius-medium);
   background: var(--lcdp-color-surface-soft);
+width: 100%;
+  min-width: 0;
+  border-radius: 0;
+  display: flex;
 }
 
 .lcdp-box-card-reservation-membre__media[hidden] {
@@ -882,20 +891,30 @@ figure.lcdp-editorial-inline-figure[hidden] {display:none!important;}
 }
 
 .lcdp-box-card-reservation-membre__image {
-  display: block;
+display: block;
   
   height: 100%;
   min-height: 108px;
   
   background: var(--lcdp-color-surface-soft);
+width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
 }
 
 .lcdp-box-card-reservation-membre__body {
-  min-width: 0;
+min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--lcdp-space-3);
+gap: var(--lcdp-space-2);
+flex: 1;
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  justify-content: space-between;
 }
 
 .lcdp-box-card-reservation-membre__invitation {
@@ -905,11 +924,12 @@ figure.lcdp-editorial-inline-figure[hidden] {display:none!important;}
 }
 
 .lcdp-box-card-reservation-membre__content {
-  display: flex;
+display: flex;
   flex-direction: column;
   gap: var(--lcdp-space-1);
   width: 100%;
   min-width: 0;
+gap: var(--lcdp-space-2);
 }
 
 .lcdp-box-card-reservation-membre__date,

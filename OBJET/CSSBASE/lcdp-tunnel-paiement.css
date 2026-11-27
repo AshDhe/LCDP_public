@@ -36,16 +36,27 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-recapitulatif 
     }
 
 body.lcdp-page-reserver .lcdp-paiement-refonte__entete {
-      padding: 20px 24px 12px;
+padding: 20px 24px 12px;
       border-bottom: 0;
-    }
+padding: 25px 30px 22px;
+  border-bottom: 1px solid #f0efed;
+}
 
 body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__title {
-      font-size: 1.2rem !important;
+font-size: 1.2rem !important;
       line-height: 1.2 !important;
       letter-spacing: 0;
       text-transform: uppercase !important;
-    }
+margin: 0 !important;
+  padding: 0 !important;
+  color: #1c1917 !important;
+  font-size: clamp(1.28rem, 4.2vw, 1.55rem) !important;
+  font-weight: 850 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -.025em;
+  text-align: left !important;
+  text-transform: none !important;
+}
 
 body.lcdp-page-reserver .lcdp-paiement-refonte__abonnement {
       display: flex;
@@ -78,35 +89,66 @@ body.lcdp-page-reserver .lcdp-paiement-refonte__nombre-acces {
     }
 
 body.lcdp-page-reserver .lcdp-paiement-refonte__message.lcdp-box-card-recaporder__message {
-      white-space: pre-line;
+white-space: pre-line;
       text-align: left !important;
       font-size: .85rem !important;
       font-weight: 700 !important;
       margin-top: 8px !important;
-    }
+display: block !important;
+  margin: 14px 30px 0 !important;
+  padding: 10px 14px !important;
+  border: 1px solid #e9e6dc !important;
+  border-radius: 13px !important;
+  background: #fafaf9 !important;
+  color: #57534e !important;
+  font-size: .77rem !important;
+  line-height: 1.5 !important;
+  font-weight: 650 !important;
+  text-align: center !important;
+}
 
 body.lcdp-page-reserver .lcdp-paiement-refonte__contenu {
-      gap: 15px;
+gap: 15px;
       padding: 16px 24px 22px;
-    }
+display: flex;
+  flex-direction: column;
+  gap: 23px;
+  padding: 24px 30px 16px;
+}
 
 body.lcdp-page-reserver .lcdp-paiement-refonte__resume {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+grid-template-columns: repeat(2, minmax(0, 1fr));
+display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid #e7e5e4;
+  border-radius: 16px;
+  background: #fafaf9;
+  overflow: hidden;
+}
 
 body.lcdp-page-reserver .lcdp-paiement-refonte__acces {
-      border-radius: 10px;
-    }
+border-radius: 10px;
+overflow: hidden;
+  border: 1px solid #e7e5e4;
+  border-radius: 17px;
+  background: #fff;
+}
 
 body.lcdp-page-reserver .lcdp-paiement-refonte__acces-ligne {
-      display: grid;
+display: grid;
       grid-template-columns: minmax(100px, 1.1fr) minmax(80px, .8fr) minmax(0, 1fr);
       align-items: baseline;
       column-gap: 9px;
       padding: 7px 11px;
       font-size: .76rem;
       line-height: 1.35;
-    }
+display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f5f5f4;
+}
 
 body.lcdp-page-reserver .lcdp-paiement-refonte__acces-ligne span {
       min-width: 0;
@@ -131,28 +173,33 @@ body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-recapitulatif 
 
 @media (max-width: 560px) {
 body.lcdp-page-reserver .lcdp-paiement-refonte__entete {
-        padding: 16px 15px 10px;
-      }
+padding: 16px 15px 10px;
+padding: 20px 19px 18px;
+}
 }
 
 @media (max-width: 560px) {
 body.lcdp-page-reserver .lcdp-paiement-refonte__contenu {
-        padding: 12px 15px 18px;
-      }
+padding: 12px 15px 18px;
+padding: 19px 19px 15px; gap: 20px;
+}
 }
 
 @media (max-width: 560px) {
 body.lcdp-page-reserver .lcdp-paiement-refonte__message.lcdp-box-card-recaporder__message {
-        margin: 7px 15px 0 !important;
-      }
+margin: 7px 15px 0 !important;
+margin: 12px 19px 0 !important;
+    padding: 10px !important;
+}
 }
 
 @media (max-width: 560px) {
 body.lcdp-page-reserver .lcdp-paiement-refonte__acces-ligne {
-        grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
+grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
         row-gap: 2px;
         font-size: .75rem;
-      }
+padding: 11px 12px; gap: 8px;
+}
 }
 
 @media (max-width: 560px) {
