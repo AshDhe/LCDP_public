@@ -965,7 +965,7 @@ gap: var(--lcdp-space-2);
   .lcdp-box-card-impaye__ligne {grid-template-columns:1fr;}
 }
 
-/* Cartouches de citation — variantes membre, coach, parc. */
+/* OBJET : TÉMOIGNAGE — variantes membre, coach, parc. */
 .lcdp-cartouches-citation {
   display: flex;
   flex-direction: column;
