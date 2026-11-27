@@ -946,15 +946,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   vector-effect: non-scaling-stroke;
   pointer-events: none;
 }
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__marker {
-  stroke-width: 1.4;
-  vector-effect: non-scaling-stroke;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__marker:focus {
-  outline: none;
-  stroke-width: 2.4;
-}
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__localite-marker {
   fill: #111111;
   stroke: #ffffff;
@@ -972,22 +963,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   stroke-width: 0;
   pointer-events: none;
   user-select: none;
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__marker[data-statut="recherche"],:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__marker[data-statut="acreuserfautinfo"] {
-  fill: #d9d9d4;
-  stroke: #8f8f89;
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__marker[data-statut="prepa"] {
-  fill: #bdddaf;
-  stroke: #5f8d50;
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__marker[data-statut="oui"] {
-  fill: #b9dcef;
-  stroke: #4f84a2;
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__marker[data-statut="non"],:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__marker[data-statut="nonconforme"] {
-  fill: #f0c7c7;
-  stroke: #b97171;
 }
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__zoom {
   position: absolute;
@@ -1031,17 +1006,10 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   flex-direction: column;
   box-shadow: none;
 }
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__description {
-  display: none !important;
-}
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__actions {
   display: grid;
   grid-template-columns: 1fr;
   gap: 8px;
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__actions .lcdp-button {
-  width: 100%;
-  min-width: 0;
 }
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__media {
   width: 100%;
@@ -1085,14 +1053,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__departement-selection {
   fill: none;
   stroke: #587242;
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker {
-  fill: #ffffff !important;
-  stroke: #234438 !important;
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__marker--parc-actif {
-  fill: var(--lcdp-color-orange, #f2a23a) !important;
-  stroke: var(--lcdp-color-orange, #f2a23a) !important;
 }
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique--fiche-parc .lcdp-carte-dynamique__card-slot[hidden] {
   display: none !important;
@@ -1422,23 +1382,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   color: #94a3b8;
   text-align: center;
 }
-:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close {
-  top: 10px;
-  border-radius: 999px;
-  background: #f8fafc;
-  color: #94a3b8;
-  font-size: 1.35rem;
-  font-weight: 700;
-  line-height: 1;
-  transition: background-color .2s ease, color .2s ease;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-}
-:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__close:hover {
-  background: #f1f5f9;
-  color: #475569;
-}
 :where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__actions {
   width: 100%;
   display: grid;
@@ -1724,35 +1667,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   align-items: center;
   gap: 6px;
 }
-:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__month-button {
-  width: 38px;
-  height: 36px;
-  min-width: 0;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  border: 1px solid var(--lcdp-color-logo-green);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-logo-green);
-  font: inherit;
-  font-size: 1.4rem;
-  line-height: 1;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__month-button:hover:not(:disabled) {
-  background: var(--lcdp-color-surface-soft);
-  border-color: var(--lcdp-color-primary);
-  color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__month-button:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
 :where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__month-label {
   min-width: 0;
   margin: 0;
@@ -1790,10 +1704,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     grid-template-columns: 46px minmax(0, 1fr) 46px;
     gap: var(--lcdp-space-2);
     margin-bottom: var(--lcdp-space-3);
-  }
-  :where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__month-button {
-    width: 46px;
-    height: 42px;
   }
   :where(html[data-lcdp-css~="c080"]) .lcdp-table-lecture__month-label {
     font-size: 1rem;

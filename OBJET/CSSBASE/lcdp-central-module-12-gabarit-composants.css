@@ -1121,33 +1121,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   margin: 0;
   padding-top: 8px;
 }
-:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button) {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  min-width: 0;
-  min-height: 52px;
-  margin: 0;
-  padding: 14px 16px;
-  border: 0;
-  border-radius: 12px;
-  background: #4e6838;
-  color: #fff;
-  text-align: center;
-  font: 700 12px/1.5 Arial,system-ui,sans-serif;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  box-shadow: 0 4px 6px -1px rgb(6 78 59 / 10%);
-  cursor: pointer;
-  transition: background-color .2s ease,transform .2s ease;
-}
-:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button):hover {
-  background: #3d522c;
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button):active {
-  transform: scale(.99);
-}
 :where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__note {
   box-sizing: border-box;
   width: 100%;
@@ -1191,10 +1164,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__actions {
   padding-top: 0;
-}
-:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button) {
-  min-height: 44px;
-  padding: 10px 16px;
 }
 /* Variante générique des boutons d'action hauts et étroits, activée par une classe. */
 
@@ -1280,10 +1249,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__title {
   color: var(--lcdp-role-accent);
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__actions .lcdp-button-logo, :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__actions .lcdp-button-logo:is(:hover,:focus-visible) {
-  background: #fff;
-  border-color: #fff;
-}
 :where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow {
   text-align: center;
 }
@@ -1335,27 +1300,8 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   text-align: left;
   line-height: 1.5;
 }
-:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 14px;
-  cursor: pointer;
-  text-align: left;
-}
 :where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__phone-check {
   margin: 28px 0;
-}
-:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__phone-check .lcdp-setup-flow__toggle {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: fit-content;
-  max-width: 100%;
-  margin: 0 auto;
-  color: #1f2a24;
-  font: 400 14px/1.5 Arial, system-ui, sans-serif;
-  text-align: left;
 }
 :where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__phone-check input[type="checkbox"] {
   box-sizing: border-box;

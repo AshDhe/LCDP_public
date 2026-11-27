@@ -139,12 +139,6 @@
   font-size: 12px;
   line-height: 1.6;
 }
-:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content a, :where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__section .lcdp-boxtext__content a {
-  color: #4e6838;
-  text-decoration: underline;
-  text-decoration-color: #a0ae96;
-  text-underline-offset: 3px;
-}
 @media (max-width: 420px) {
   :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext {
     padding: 16px;

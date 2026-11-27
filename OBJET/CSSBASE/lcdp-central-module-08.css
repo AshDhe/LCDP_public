@@ -372,9 +372,6 @@
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-form .lcdp-cle-code-quatre-cases {
   margin: 0;
 }
-:where(html[data-lcdp-css~="c021"]) .lcdp-acces-form .lcdp-button {
-  width: 100%;
-}
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-erreur:empty {
   display: none;
 }
@@ -481,9 +478,6 @@
   margin: 0 0 6px;
   color: var(--lcdp-color-text);
   text-align: center;
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-acces-lightbox .lcdp-button {
-  width: 100%;
 }
 @media (max-width: 359px) {
   :where(html[data-lcdp-css~="c021"]) .lcdp-acces {
@@ -970,9 +964,6 @@
   gap: var(--lcdp-space-2);
   flex-wrap: wrap;
 }
-:where(html[data-lcdp-css~="c001"]) .lcdp-page-nouveauparc .lcdp-box-formulaire__actions .lcdp-button {
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c001"]) .lcdp-nouveauparc-status {
   width: 100%;
   margin-top: var(--lcdp-space-2);
@@ -1140,10 +1131,6 @@
 :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content br[data-lcdp-soft-break="true"],:where(html[data-lcdp-css~="c083"]) .lcdp-restricted-legal-card .lcdp-boxtext__content br[data-lcdp-soft-break="true"] {
   display: inline;
   margin: 0;
-}
-:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content a,:where(html[data-lcdp-css~="c083"]) .lcdp-restricted-legal-card .lcdp-boxtext__content a {
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
 }
 :where(html[data-lcdp-css~="c083"]) .lcdp-restricted-legal-card {
   width: min(100%, 900px);
@@ -1317,9 +1304,6 @@
 }
 :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__title, :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content {
   color: var(--lcdp-color-text);
-}
-:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content a {
-  color: var(--lcdp-color-primary);
 }
 :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-document-legal__title {
   color: var(--lcdp-color-text);

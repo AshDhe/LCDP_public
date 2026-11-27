@@ -23,28 +23,6 @@
   box-shadow: 0 20px 60px rgba(31, 42, 36, 0.22);
   padding: 24px 18px 18px;
 }
-:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__close {
-  position: absolute;
-  top: 12px;
-  right: 14px;
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
-  min-height: 40px;
-  border: 0;
-  border-radius: 999px;
-  background: rgba(31, 42, 36, 0.08);
-  color: #1f2a24;
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__close[hidden] {
-  display: none !important;
-}
 :where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__header {
   padding-right: 56px;
   margin-bottom: 16px;
@@ -106,54 +84,6 @@
   font-size: 15px;
   line-height: 1.32;
   overflow-wrap: anywhere;
-}
-:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__switch {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  user-select: none;
-}
-:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__switch-input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__switch-slider {
-  position: relative;
-  display: inline-block;
-  width: 48px;
-  height: 28px;
-  border-radius: 999px;
-  background: rgba(31, 42, 36, 0.22);
-  transition: background 0.18s ease;
-}
-:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__switch-slider::before {
-  content: "";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 2px 6px rgba(31, 42, 36, 0.25);
-  transition: transform 0.18s ease;
-}
-:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__switch-input:checked + .lcdp-box-card-listinvites-oui-non__switch-slider {
-  background: #2f6d45;
-}
-:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__switch-input:checked + .lcdp-box-card-listinvites-oui-non__switch-slider::before {
-  transform: translateX(20px);
-}
-:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__switch-input:focus-visible + .lcdp-box-card-listinvites-oui-non__switch-slider {
-  outline: 3px solid rgba(47, 109, 69, 0.28);
-  outline-offset: 3px;
-}
-:where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__switch-text {
-  min-width: 28px;
-  font-size: 13px;
-  color: #445047;
 }
 :where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non__actions {
   display: flex;
@@ -265,14 +195,6 @@
   display: flex;
   justify-content: center;
 }
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__card .lcdp-button {
-  width: min(100%, 190px);
-  max-width: 190px;
-  min-width: 0;
-  min-height: 44px;
-  margin-inline: auto;
-  padding-inline: 18px;
-}
 :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte[data-type="erreur"] .lcdp-box-alerte__card,:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte[data-type="error"] .lcdp-box-alerte__card {
   border-color: var(--lcdp-color-orange);
 }
@@ -288,10 +210,6 @@
   :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__message {
     max-width: 350px;
     font-size: 1.08rem;
-  }
-  :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__card .lcdp-button {
-    width: 180px;
-    max-width: 180px;
   }
 }
 :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte [data-lcdp-alerte-ok][hidden] {
@@ -494,27 +412,6 @@
   font-weight: 400;
   text-align: left;
   white-space: pre-line;
-}
-:where(html[data-lcdp-css~="c047"]) .lcdp-dialogue-echeances-impayees .lcdp-workflow-micro-action {
-  width: auto;
-  min-width: 0;
-  max-width: none;
-  min-height: 38px;
-  margin-top: 0;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 0.95rem;
-  line-height: 1.1;
-}
-:where(html[data-lcdp-css~="c047"]) .lcdp-dialogue-echeances-impayees .lcdp-workflow-micro-action--alerte-paiement {
-  border-color: rgba(198, 102, 34, 0.72);
-  color: #b45d1e;
-  background: rgba(198, 102, 34, 0.08);
-  font-weight: 600;
-}
-:where(html[data-lcdp-css~="c047"]) .lcdp-dialogue-echeances-impayees .lcdp-workflow-micro-action--alerte-paiement:hover {
-  border-color: rgba(198, 102, 34, 0.95);
-  background: rgba(198, 102, 34, 0.12);
 }
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c047"]) .lcdp-dialogue-echeances-impayees__row {

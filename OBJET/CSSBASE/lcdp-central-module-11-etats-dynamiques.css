@@ -100,29 +100,6 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   padding-top: 24px;
   padding-bottom: env(safe-area-inset-bottom);
 }
-.lcdp-box-card-reservation-membre [data-action="adresse"], .lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces {
-  border-color: var(--lcdp-color-logo-green) !important;
-  background: var(--lcdp-color-logo-green) !important;
-  color: #ffffff !important;
-  text-decoration: none !important;
-}
-.lcdp-box-card-reservation-membre [data-action="adresse"]:hover, .lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces:hover {
-  border-color: var(--lcdp-color-primary) !important;
-  background: var(--lcdp-color-primary) !important;
-  color: #ffffff !important;
-}
-.lcdp-box-card-reservation-membre [data-action="invitation"].lcdp-box-card-reservation-membre__micro-action--invit-recu {
-  border-color: #7b4ab8 !important;
-  background: #7b4ab8 !important;
-  color: #ffffff !important;
-  font-weight: 700 !important;
-  text-decoration: none !important;
-}
-.lcdp-box-card-reservation-membre [data-action="invitation"].lcdp-box-card-reservation-membre__micro-action--invit-recu:hover, .lcdp-box-card-reservation-membre [data-action="invitation"].lcdp-box-card-reservation-membre__micro-action--invit-recu:focus-visible {
-  border-color: #6d3fa7 !important;
-  background: #6d3fa7 !important;
-  color: #ffffff !important;
-}
 .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-calendrier-mois__close, .lcdp-box-workflow-reservation--planning-reservation [data-lcdp-calendrier-mois-close], .lcdp-box-workflow-reservation--planning-reservation > .lcdp-box-workflow-reservation__card > button[aria-label="Fermer"], .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-reservation-membre [data-lcdp-card-reservation-close] {
   display: none !important;
 }
@@ -141,36 +118,6 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   gap: 6px 10px !important;
   max-width: 100% !important;
 }
-.lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
-  align-self: flex-start !important;
-  flex: 0 0 auto !important;
-  margin: 0 !important;
-}
-.lcdp-box-card-reservation-membre__actions .lcdp-box-card-reservation-membre__micro-action--fermer {
-  border-color: var(--lcdp-color-border) !important;
-  background: var(--lcdp-color-surface) !important;
-  color: var(--lcdp-color-text) !important;
-}
-@media (max-width: 767px) {
-  .lcdp-box-card-reservation-membre__place .lcdp-box-card-reservation-membre__micro-action--annuler {
-    align-self: flex-start !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    white-space: normal !important;
-  }
-}
-.lcdp-box-card-reservation-membre__micro-action--delai-depasse {
-  border-color: var(--lcdp-color-border) !important;
-  background: var(--lcdp-color-surface-soft) !important;
-  color: var(--lcdp-color-text-muted) !important;
-  opacity: 0.58 !important;
-  cursor: not-allowed !important;
-}
-.lcdp-box-card-reservation-membre__micro-action--delai-depasse:hover {
-  border-color: var(--lcdp-color-border) !important;
-  background: var(--lcdp-color-surface-soft) !important;
-  color: var(--lcdp-color-text-muted) !important;
-}
 [data-lcdp-invitation-invites-overlay] {
   position: fixed !important;
   inset: 0 !important;
@@ -179,9 +126,6 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
 }
 [data-lcdp-invitation-invites-overlay] .lcdp-box-card-listinvites-oui-non {
   z-index: 11001 !important;
-}
-[data-lcdp-invitation-invites-overlay] .lcdp-box-card-listinvites-oui-non__close {
-  display: none !important;
 }
 [data-lcdp-invitation-invites-overlay] .lcdp-box-card-listinvites-oui-non__header {
   padding-right: 0 !important;
@@ -198,32 +142,6 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   margin-top: 18px !important;
   max-width: 100% !important;
   overflow: hidden !important;
-}
-[data-lcdp-invitation-invites-overlay] .lcdp-box-card-listinvites-oui-non__actions .lcdp-button {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  min-height: 54px !important;
-  margin: 0 !important;
-  padding: 10px 14px !important;
-  box-sizing: border-box !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  white-space: normal !important;
-}
-[data-lcdp-invitation-invites-overlay] [data-lcdp-listinvites-add-email] {
-  grid-column: 1 !important;
-  grid-row: 1 !important;
-}
-[data-lcdp-invitation-invites-overlay] [data-lcdp-listinvites-update] {
-  grid-column: 2 !important;
-  grid-row: 1 !important;
-}
-[data-lcdp-invitation-invites-overlay] [data-lcdp-listinvites-cancel] {
-  grid-column: 1 !important;
-  grid-row: 2 !important;
 }
 #zone-selfie .lcdp-selfie-control {
   position: relative;
@@ -598,10 +516,6 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
 }
 .lcdp-fiche-card-visible {
   display: block;
-}
-.lcdp-map-marker-interactif {
-  pointer-events: all;
-  cursor: pointer;
 }
 .lcdp-fiche-slot-invisible {
   visibility: hidden;
