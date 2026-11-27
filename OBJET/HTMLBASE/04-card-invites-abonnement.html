@@ -1,67 +1,5 @@
 <section class="lcdp-page-section" data-lcdp-invitation-abonnement role="region" aria-labelledby="lcdp-invitation-abonnement-titre">
-  <style>
-    [data-lcdp-invitation-abonnement] .lcdp-invites-titre {
-      font-size:27px!important;line-height:1.2!important;font-weight:800!important;letter-spacing:.02em;
-    }
-    [data-lcdp-invitation-abonnement] .lcdp-invites-categorie {
-      display:inline-flex;align-items:center;gap:7px;width:max-content;max-width:100%;
-      padding:5px 9px;margin:0 0 10px;border-radius:11px;
-      font-size:15px!important;line-height:1.3!important;font-weight:800!important;
-    }
-    [data-lcdp-invitation-categorie="duo"] .lcdp-invites-categorie {
-      border:1px solid #f6cb70;background:#fff8e9;color:#644021;
-    }
-    [data-lcdp-invitation-categorie="famille"] .lcdp-invites-categorie {
-      border:1px solid #b7c7ac;background:#f2f6ed;color:#425a33;
-    }
-    [data-lcdp-invitation-abonnement] .lcdp-invites-ajouter {
-      display:inline-flex!important;align-items:center;justify-content:center;gap:6px;
-      width:auto!important;max-width:100%!important;min-width:116px!important;
-      min-height:39px!important;margin-top:12px!important;padding:7px 14px!important;
-      border-radius:13px!important;font-size:14px!important;font-weight:700!important;
-    }
-    [data-lcdp-invitation-categorie="duo"] .lcdp-invites-ajouter {
-      border:1px solid #f6c84f!important;background:#fff3c7!important;color:#553319!important;
-    }
-    [data-lcdp-invitation-categorie="famille"] .lcdp-invites-ajouter {
-      border:1px solid #acbda1!important;background:#edf3e9!important;color:#465f35!important;
-    }
-    [data-lcdp-invitation-abonnement] .lcdp-invites-ajouter:hover {
-      filter:brightness(.975);box-shadow:0 1px 3px rgba(0,0,0,.08);
-    }
-    [data-lcdp-invitation-abonnement] .lcdp-invites-ajouter:focus-visible {
-      outline:2px solid currentColor;outline-offset:2px;
-    }
-    [data-lcdp-invitation-categorie="duo"] {border-color:#e9d9b2!important;background:#fffcf5!important;}
-    [data-lcdp-invitation-categorie="famille"] {border-color:#c4d3ba!important;background:#f8faf6!important;}
-    [data-lcdp-invitation-abonnement] .lcdp-invites-ajouter[aria-disabled="true"] {
-      filter:none;box-shadow:none;
-    }
-    [data-lcdp-duoactif-zone] { margin-top:16px;padding-top:14px;border-top:1px solid var(--lcdp-color-border,#d7ddd5); }
-    [data-lcdp-duoactif-zone] [data-lcdp-duoactif-liste] { list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px; }
-    [data-lcdp-duoactif-zone] .lcdp-duoactif-ligne { display:flex;align-items:center;gap:10px;min-width:0;padding:9px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:11px;background:var(--lcdp-color-surface,#fff); }
-    [data-lcdp-duoactif-zone] .lcdp-duoactif-avatar { width:42px;height:42px;flex:0 0 42px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--lcdp-color-surface-soft,#edf0ed);overflow:hidden;font-weight:700; }
-    [data-lcdp-duoactif-zone] .lcdp-duoactif-avatar img { display:block;width:100%;height:100%;object-fit:cover; }
-    [data-lcdp-duoactif-zone] .lcdp-duoactif-identite { flex:1;min-width:0;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:2px; }
-    [data-lcdp-duoactif-zone] .lcdp-duoactif-checkouts { color:var(--lcdp-color-text-muted,#747970);font-size:12px;line-height:1.4; }
-    [data-lcdp-duoactif-zone] .lcdp-duoactif-ligne .lcdp-button { min-width:84px;width:auto;max-width:100%;margin:0; }
-    @media (max-width:390px) { [data-lcdp-duoactif-zone] .lcdp-duoactif-ligne { flex-wrap:wrap; } [data-lcdp-duoactif-zone] .lcdp-duoactif-identite { flex-basis:calc(100% - 55px); } }
-    dialog.lcdp-mineurs-dialogue { box-sizing:border-box;width:min(94vw,520px);max-height:90vh;overflow:auto;margin:auto;padding:0;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:14px;background:var(--lcdp-color-surface,#fff);color:var(--lcdp-color-text,#26312a);box-shadow:0 18px 55px rgba(0,0,0,.16); }
-    dialog.lcdp-mineurs-dialogue::backdrop { background:rgba(19,31,23,.48); }
-    .lcdp-mineurs-contenu { padding:24px;display:flex;flex-direction:column;gap:18px; }
-    .lcdp-mineurs-titre { margin:0;font-size:21px;line-height:1.3;font-weight:600; }
-    .lcdp-mineurs-question { margin:0;line-height:1.55; }
-    .lcdp-mineurs-actions { display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap; }
-    .lcdp-mineurs-actions .lcdp-button { min-width:110px;min-height:44px; }
-    .lcdp-mineurs-tableau { display:flex;flex-direction:column;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:8px;overflow:hidden; }
-    .lcdp-mineurs-ligne { display:grid;grid-template-columns:minmax(0,1fr) 78px;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--lcdp-color-border,#d7ddd5); }
-    .lcdp-mineurs-ligne:last-child { border-bottom:0; }
-    .lcdp-mineurs-ligne--entete { font-weight:600;background:var(--lcdp-color-surface-soft,#f8faf7); }
-    .lcdp-mineurs-ligne > :last-child { justify-self:center; }
-    .lcdp-mineurs-ligne input[type=checkbox] { width:18px;height:18px;cursor:pointer; }
-    .lcdp-mineurs-adresse { overflow-wrap:anywhere; }
-    @media(max-width:480px) { .lcdp-mineurs-contenu { padding:18px 14px; } .lcdp-mineurs-ligne { padding:10px;grid-template-columns:minmax(0,1fr) 56px; } .lcdp-mineurs-actions .lcdp-button { flex:1;min-width:0; } }
-  </style>
+  
   <div class="lcdp-page-container">
     <div class="lcdp-page-content">
       <section class="lcdp-box-liste-card" data-lcdp-invitation-wrapper>
@@ -72,13 +10,13 @@
           <button type="button" class="lcdp-box-dialogue-champ-inviter__close" data-lcdp-listinvites-close aria-label="Fermer le formulaire Invités" title="Fermer">×</button>
         </div>
         <div class="lcdp-box-liste-card__list">
-          <form class="lcdp-box-dialogue-champ-inviter__form" data-lcdp-invitation-form data-lcdp-invitation-abonnement-form novalidate style="display:flex; flex-direction:column; gap:18px;">
+          <form class="lcdp-box-dialogue-champ-inviter__form" data-lcdp-invitation-form data-lcdp-invitation-abonnement-form novalidate>
             <p class="lcdp-text-muted" data-lcdp-invitation-abonnement-message role="status" aria-live="polite" hidden></p>
-            <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-duo" data-lcdp-invitation-categorie="duo" style="display:flex;flex-direction:column;gap:0;min-width:0;padding:14px 12px 16px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
+            <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-duo" data-lcdp-invitation-categorie="duo">
               <h3 class="lcdp-box-champ-formulaire__label lcdp-invites-categorie" id="lcdp-invitation-titre-duo"><span aria-hidden="true">👫</span> DUO / DUO+</h3>
               <p class="lcdp-box-champ-formulaire__description" data-lcdp-invitation-quota="duo" role="status" hidden></p>
-              <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="duo" style="display:none;margin:0 0 8px;padding:0;list-style:none;"></ul>
-              <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="duo" style="margin:0;padding:0;list-style:none;"></ul>
+              <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="duo" hidden></ul>
+              <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="duo"></ul>
               <button type="button" class="lcdp-button lcdp-button-secondary lcdp-invites-ajouter" data-lcdp-invitation-ajouter="duo"><span aria-hidden="true">＋</span> Ajouter</button>
               <section data-lcdp-duoactif-zone aria-labelledby="lcdp-invitation-titre-duoactif">
                 <h4 class="lcdp-box-champ-formulaire__label" id="lcdp-invitation-titre-duoactif">DUO ACTIF</h4>
@@ -87,16 +25,16 @@
                 <ul data-lcdp-duoactif-liste aria-label="Demandes DUO ACTIF"></ul>
               </section>
             </section>
-            <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-famille" data-lcdp-invitation-categorie="famille" style="display:flex;flex-direction:column;gap:0;min-width:0;padding:14px 12px 16px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
+            <section class="lcdp-box-champ-formulaire" aria-labelledby="lcdp-invitation-titre-famille" data-lcdp-invitation-categorie="famille">
               <h3 class="lcdp-box-champ-formulaire__label lcdp-invites-categorie" id="lcdp-invitation-titre-famille"><span aria-hidden="true">🏠</span> + FAMILLE</h3>
               <p class="lcdp-box-champ-formulaire__description" data-lcdp-invitation-quota="famille" role="status" hidden></p>
-              <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="famille" style="display:none;margin:0 0 8px;padding:0;list-style:none;"></ul>
-              <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="famille" style="margin:0;padding:0;list-style:none;"></ul>
+              <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-existants="famille" hidden></ul>
+              <ul class="lcdp-box-card-listinvites-oui-non__emails" data-lcdp-invitation-nouveaux="famille"></ul>
               <button type="button" class="lcdp-button lcdp-button-secondary lcdp-invites-ajouter" data-lcdp-invitation-ajouter="famille"><span aria-hidden="true">＋</span> Ajouter</button>
             </section>
-            <div class="lcdp-box-dialogue-champ-inviter__actions" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;justify-items:stretch;margin-top:0;padding:12px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);">
-              <button type="button" class="lcdp-button lcdp-button-secondary" aria-disabled="true" data-lcdp-invitation-groupe title="Fonction Groupe à venir" style="width:100%;max-width:none;min-width:0;min-height:44px;margin:0;">Groupe</button>
-              <button type="submit" class="lcdp-button lcdp-button-primary" data-lcdp-invitation-envoyer style="width:100%;max-width:none;min-width:0;min-height:44px;margin:0;">Mettre à jour</button>
+            <div class="lcdp-box-dialogue-champ-inviter__actions" data-lcdp-invitation-actions>
+              <button type="button" class="lcdp-button lcdp-button-secondary" aria-disabled="true" data-lcdp-invitation-groupe title="Fonction Groupe à venir">Groupe</button>
+              <button type="submit" class="lcdp-button lcdp-button-primary" data-lcdp-invitation-envoyer>Mettre à jour</button>
             </div>
           </form>
         </div>
