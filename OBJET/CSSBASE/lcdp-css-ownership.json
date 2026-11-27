@@ -408,10 +408,10 @@
     "bandeau-nav": {
       "html": "OBJET/HTMLBASE/02-bandeau-nav.html",
       "css": "lcdp-bandeau-nav.css",
-      "charge_par": "lcdp-central-mobile-first.css",
-      "statut": "Définitions retirées des modules historiques et de l'ancien artefact Tailwind ; validation visuelle requise.",
+      "charge_par": "lcdp-central-mobile-first.css ; chargement direct sur PlanningParc et FrequentationParc (admin, sans central)",
+      "statut": "Feuille propriétaire unique dans CSSBASE : règles transférées de cssbase, du central, des cinq modules et de l'ancien artefact Tailwind. Validation visuelle requise.",
       "variantes": "base historique, c034, accès restreint et espaces",
-      "exceptions": "Les états transversaux de masquage restent dans les parcours. Les styles de bandeau restreint dans cssbase.css restent à transférer après vérification des consommateurs autonomes."
+      "exceptions": "Les états transversaux de masquage restent dans les parcours. Aucun style du bandeau ne doit être ajouté dans cssbase ou les modules."
     }
   }
 }

@@ -2,6 +2,33 @@
    Base et variantes historiques conservées pendant la migration. Les tunnels restent
    propriétaires des états masquant plusieurs objets (impression, accès, sans navigation).
    Couleurs d'espace via le thème commun ; ne pas créer de CSS de bandeau par espace. */
+/* Variante de bandeau restreint : base commune, avant les variantes de contexte. */
+.lcdp-box-bandeau-nav__inner:has(.lcdp-bandeau-restreint-label) {
+  justify-content: flex-start;
+}
+
+.lcdp-bandeau-restreint-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  white-space: normal;
+}
+
+.lcdp-bandeau-restreint-title {
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1.08;
+  font-weight: 700;
+}
+
+.lcdp-bandeau-restreint-subtitle {
+  color: #ffffff;
+  font-size: 0.86rem;
+  line-height: 1.08;
+  font-weight: 400;
+}
+
 /* Base historique : utilisée aussi par les pages sans c034. */
 #lcdp-bandeau-slot {
   min-height: 64px;
@@ -245,7 +272,7 @@ html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
   white-space: normal;
 }
 
-:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-bandeau-nav {
+.lcdp-page-accueil-coach .lcdp-box-bandeau-nav {
   background: var(--lcdp-color-coach);
 }
 
