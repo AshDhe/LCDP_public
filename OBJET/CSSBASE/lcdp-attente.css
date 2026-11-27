@@ -35,3 +35,12 @@ button.lcdp-action-attente[aria-busy="true"]::before {margin-inline-end:8px;}
 #lcdp-attente-arrivee.lcdp-attente-arrivee--simple .lcdp-loading-spinner {width:64px;height:64px;}
 #lcdp-attente-arrivee.lcdp-attente-arrivee--simple .lcdp-loading-spinner__dot {width:8px;height:8px;}
 @media (prefers-reduced-motion:reduce) {#lcdp-attente-arrivee .lcdp-loading-spinner__arc {animation:none;}}
+
+/* Accessoires d'accès : couverture initiale avant chargement du socle. */
+html[data-lcdp-accessoires-acces]:not(.lcdp-accessoires-prets) {background:#fff;}
+html[data-lcdp-accessoires-acces]:not(.lcdp-accessoires-prets)::before {content:"";position:fixed;inset:0;z-index:2147483644;background:#fff;}
+html[data-lcdp-accessoires-acces]:not(.lcdp-accessoires-prets)::after {content:"";position:fixed;z-index:2147483645;top:50%;left:50%;width:64px;height:64px;transform:translate(-50%,-50%);background:url("../IMAG/PICTO/pictowait.svg") center / contain no-repeat;}
+html[data-lcdp-accessoires-acces]:not(.lcdp-accessoires-prets) .lcdp-site-page {visibility:hidden;}
+html[data-lcdp-accessoires-acces] #lcdp-attente-arrivee:not([hidden]) {flex-direction:column;gap:16px;padding:24px;box-sizing:border-box;text-align:center;}
+html[data-lcdp-accessoires-acces] #lcdp-attente-arrivee img {display:block;width:64px;height:64px;}
+html[data-lcdp-accessoires-acces] #lcdp-attente-arrivee [hidden] {display:none;}
