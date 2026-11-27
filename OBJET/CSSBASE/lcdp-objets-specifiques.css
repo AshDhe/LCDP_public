@@ -1,8 +1,5 @@
 /* OBJETS SPÉCIFIQUES — sections par objet ; commandes, dialogues et formulaires dans leurs propriétaires. */
 
-/* OBJET : BOX TEXTE */
-.lcdp-boxtext__title.lcdp-boxtext__title--espace-apres {margin-bottom:24px;}
-
 /* OBJET : ILLUSTRATION ÉDITORIALE */
 figure.lcdp-editorial-inline-figure[hidden] {display:none!important;}
 
@@ -589,3 +586,348 @@ figure.lcdp-editorial-inline-figure[hidden] {display:none!important;}
 @media (prefers-reduced-motion: reduce) {
 :where(html[data-lcdp-css~="c024"]) .lcdp-app-wrapper .lcdp-faq .lcdp-faq__item { transition: none; }
 }
+
+/* OBJET : LISTE DE CARTES */
+.lcdp-box-liste-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-box-liste-card__header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-box-liste-card__heading {
+  width: 100%;
+}
+
+.lcdp-box-liste-card__title {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-liste-card__tools {
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-liste-card__message {
+  width: 100%;
+  margin: 0;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+  font-weight: 400;
+}
+
+.lcdp-box-liste-card__message[data-lcdp-message-type="erreur"] {
+  border-color: var(--lcdp-color-orange);
+}
+
+.lcdp-box-liste-card__list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-3);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-liste-card__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+}
+
+/* OBJET : CARTE PARC */
+.lcdp-box-card-parc {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.lcdp-box-card-parc__media {
+  position: relative;
+  width: 100%;
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-card-parc__image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-card-parc__body {
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-box-card-parc__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+}
+
+.lcdp-box-card-parc__meta {
+  margin: 0;
+  color: var(--lcdp-color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.lcdp-box-card-parc__title {
+  margin: 0;
+  font-size: clamp(1.25rem, 5.5vw, 1.65rem);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-card-parc__actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--lcdp-space-2);
+}
+
+@media (min-width: 768px) {
+  .lcdp-box-card-parc {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .lcdp-box-card-parc__media {
+    width: 34%;
+    min-width: 220px;
+    max-width: 280px;
+    display: flex;
+  }
+
+  .lcdp-box-card-parc__image {
+    height: 100%;
+    min-height: 210px;
+    aspect-ratio: auto;
+  }
+
+  .lcdp-box-card-parc__body {
+    flex: 1;
+    padding: var(--lcdp-space-4);
+    justify-content: space-between;
+  }
+
+  .lcdp-box-card-parc__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 420px;
+  }
+}/* Ajustement typographie desktop — texte de lecture uniquement. */
+
+
+.lcdp-box-card-parc__badge-prepa {
+  position: absolute;
+  top: 14px;
+  left: -34px;
+  z-index: 1;
+  width: 120px;
+  padding: 5px 0;
+  transform: rotate(-45deg);
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+  font-size: 0.72rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* OBJET : CARTE ACCÈS PARC */
+.lcdp-box-card-acces-parc {
+  position: fixed;
+  inset: 0;
+  z-index: 5400;
+  padding: var(--lcdp-space-3);
+  background: rgba(31, 42, 36, 0.36);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lcdp-box-card-acces-parc__card {
+  position: relative;
+  width: min(100%, 760px);
+  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
+  overflow: auto;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-3);
+  box-sizing: border-box;
+}
+
+.lcdp-box-card-acces-parc__header {
+  padding-right: 44px;
+}
+
+.lcdp-box-card-acces-parc__title {
+  margin: 0;
+  font-size: clamp(1.35rem, 5.5vw, 2rem);
+  line-height: 1.12;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+}
+
+.lcdp-box-card-acces-parc__bloc {
+  width: 100%;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface);
+  box-sizing: border-box;
+}
+
+.lcdp-box-card-acces-parc__bloc-title {
+  margin: 0 0 var(--lcdp-space-1);
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--lcdp-color-logo-green, #587242);
+}
+
+.lcdp-box-card-acces-parc__text {
+  margin: 0;
+  color: var(--lcdp-color-text);
+  font-size: 0.98rem;
+  line-height: 1.38;
+  font-weight: 500;
+}
+
+.lcdp-box-card-acces-parc__text p {
+  margin: 0;
+}
+
+/* OBJET : CARTE ACCÈS PLANIFIÉ */
+.lcdp-box-card-reservation-membre {
+  --lcdp-reservation-invitation-color: #7b5aa6;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--lcdp-space-3);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  text-align: left;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--lcdp-space-3);
+  
+}
+
+.lcdp-box-card-reservation-membre--avec-image {
+  grid-template-columns: 92px minmax(0, 1fr);
+  
+}
+
+.lcdp-box-card-reservation-membre--invitation {
+  border-color: rgba(123, 90, 166, 0.42);
+}
+
+.lcdp-box-card-reservation-membre.lcdp-box-card-reservation-membre--prochaine,
+.lcdp-box-card-reservation-membre[data-lcdp-prochaine-reservation="true"] {
+  border: 2px solid var(--lcdp-color-orange, #f2a23a) !important;
+  box-shadow:
+    0 12px 30px rgba(31, 42, 36, 0.08),
+    0 0 0 1px rgba(242, 162, 58, 0.18);
+}
+
+.lcdp-box-card-reservation-membre__media {
+  
+  
+  overflow: hidden;
+  border-radius: var(--lcdp-radius-medium);
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-card-reservation-membre__media[hidden] {
+  display: none;
+}
+
+.lcdp-box-card-reservation-membre__image {
+  display: block;
+  
+  height: 100%;
+  min-height: 108px;
+  
+  background: var(--lcdp-color-surface-soft);
+}
+
+.lcdp-box-card-reservation-membre__body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--lcdp-space-3);
+}
+
+.lcdp-box-card-reservation-membre__invitation {
+  margin: 0;
+  color: var(--lcdp-reservation-invitation-color);
+  font-weight: 700;
+}
+
+.lcdp-box-card-reservation-membre__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-1);
+  width: 100%;
+  min-width: 0;
+}
+
+.lcdp-box-card-reservation-membre__date,
+.lcdp-box-card-reservation-membre__place {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--lcdp-space-2);
+  width: 100%;
+  min-width: 0;
+}
+
+.lcdp-box-card-reservation-membre__date {
+  font-weight: 700;
+}
+
+/* OBJET : LISTE DE CARTES DIAPORAMA */
+/* Variante dédiée au diaporama, indépendante des listes existantes. */
+.lcdp-box-liste-card-diaporama { width:100%; }
+.lcdp-box-liste-card-diaporama__list { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--lcdp-space-3); }
+@media (min-width:768px) { .lcdp-box-liste-card-diaporama__list { grid-template-columns:repeat(2,minmax(0,1fr)); } }

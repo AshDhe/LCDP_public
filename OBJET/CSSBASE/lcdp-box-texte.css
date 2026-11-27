@@ -1,0 +1,144 @@
+/* BOX TEXTE — contenu éditorial standard, titres, paragraphes et variantes. */
+.lcdp-boxtext {
+  width: 100%;
+  padding: var(--lcdp-space-4);
+  border: 1px solid var(--lcdp-color-border);
+  border-radius: var(--lcdp-radius-large);
+  background: var(--lcdp-color-surface);
+  box-shadow: var(--lcdp-shadow-soft);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcdp-space-2);
+}
+
+.lcdp-boxtext__title {
+  margin: 0;
+  font-size: clamp(1.25rem, 5vw, 1.75rem);
+  line-height: 1.18;
+  font-weight: 700;
+  color: var(--lcdp-color-text);
+  text-align: left;
+}
+
+.lcdp-boxtext__content {
+  color: var(--lcdp-color-text);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  line-height: 1.55;
+}
+
+.lcdp-boxtext__content > p,
+.lcdp-boxtext__content > ul,
+.lcdp-boxtext__content > ol {
+  margin: 0;
+}
+
+.lcdp-boxtext__content > ul,
+.lcdp-boxtext__content > ol {
+  padding-left: 1.55rem;
+}
+
+.lcdp-boxtext__content li {
+  padding-left: 0.12rem;
+}
+
+.lcdp-boxtext__content li + li {
+  margin-top: 0.18rem;
+}
+
+.lcdp-boxtext__content strong {
+  font-weight: 700;
+}
+
+.lcdp-boxtext__title.lcdp-boxtext__title--center,
+.lcdp-boxtext[data-lcdp-boxtext-align="center"] .lcdp-boxtext__title {
+  width: 100%;
+  text-align: center;
+  align-self: center;
+}
+
+.lcdp-boxtext__content .lcdp-boxtext__text--center,
+.lcdp-boxtext__text--center {
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .lcdp-boxtext {
+    padding: var(--lcdp-space-5);
+  }
+
+  .lcdp-boxtext__content {
+    font-size: var(--lcdp-font-size-paragraph-desktop);
+  }
+}
+
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 8%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__title {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: left;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.625;
+  gap: 16px;
+  min-width: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content > p,:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content > ul,:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content > ol {
+  margin: 0;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content > ul,:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content > ol {
+  padding-left: 1.55rem;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content li {
+  padding-left: 0.12rem;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content li + li {
+  margin-top: 0.18rem;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content strong {
+  font-weight: 700;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__title.lcdp-boxtext__title--center,:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext[data-lcdp-boxtext-align="center"] .lcdp-boxtext__title {
+  width: 100%;
+  text-align: center;
+  align-self: center;
+}
+:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content .lcdp-boxtext__text--center,:where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__text--center {
+  width: 100%;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext {
+    padding: 20px;
+  }
+  :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext__content {
+    font-size: 12px;
+  }
+}
+
+.lcdp-boxtext__title.lcdp-boxtext__title--espace-apres {margin-bottom:24px;}
