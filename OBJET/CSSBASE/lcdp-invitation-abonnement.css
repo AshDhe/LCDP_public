@@ -1,0 +1,39 @@
+/* LCDP — FICHE INVITATION : rubriques, liste et champs ; commandes dans leur CSS propriétaire. */
+/* Contenu de la fiche d'invitation. */
+[data-lcdp-invitation-abonnement] .lcdp-invites-titre {
+      font-size:27px!important;line-height:1.2!important;font-weight:800!important;letter-spacing:.02em;
+    }
+[data-lcdp-invitation-abonnement] .lcdp-invites-categorie {
+      display:inline-flex;align-items:center;gap:7px;width:max-content;max-width:100%;
+      padding:5px 9px;margin:0 0 10px;border-radius:11px;
+      font-size:15px!important;line-height:1.3!important;font-weight:800!important;
+    }
+[data-lcdp-invitation-categorie="duo"] .lcdp-invites-categorie {
+      border:1px solid #f6cb70;background:#fff8e9;color:#644021;
+    }
+[data-lcdp-invitation-categorie="famille"] .lcdp-invites-categorie {
+      border:1px solid #b7c7ac;background:#f2f6ed;color:#425a33;
+    }
+[data-lcdp-invitation-categorie="duo"] {border-color:#e9d9b2!important;background:#fffcf5!important;}
+[data-lcdp-invitation-categorie="famille"] {border-color:#c4d3ba!important;background:#f8faf6!important;}
+[data-lcdp-duoactif-zone] { margin-top:16px;padding-top:14px;border-top:1px solid var(--lcdp-color-border,#d7ddd5); }
+[data-lcdp-duoactif-zone] [data-lcdp-duoactif-liste] { list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px; }
+[data-lcdp-duoactif-zone] .lcdp-duoactif-ligne { display:flex;align-items:center;gap:10px;min-width:0;padding:9px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:11px;background:var(--lcdp-color-surface,#fff); }
+[data-lcdp-duoactif-zone] .lcdp-duoactif-avatar { width:42px;height:42px;flex:0 0 42px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--lcdp-color-surface-soft,#edf0ed);overflow:hidden;font-weight:700; }
+[data-lcdp-duoactif-zone] .lcdp-duoactif-avatar img { display:block;width:100%;height:100%;object-fit:cover; }
+[data-lcdp-duoactif-zone] .lcdp-duoactif-identite { flex:1;min-width:0;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:2px; }
+[data-lcdp-duoactif-zone] .lcdp-duoactif-checkouts { color:var(--lcdp-color-text-muted,#747970);font-size:12px;line-height:1.4; }
+@media (max-width:390px) { [data-lcdp-duoactif-zone] .lcdp-duoactif-ligne { flex-wrap:wrap; } [data-lcdp-duoactif-zone] .lcdp-duoactif-identite { flex-basis:calc(100% - 55px); } }
+[data-lcdp-invitation-abonnement-form] {display:flex;flex-direction:column;gap:18px;}
+[data-lcdp-invitation-categorie] {display:flex;flex-direction:column;gap:0;min-width:0;padding:14px 12px 16px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);}
+[data-lcdp-invitation-existants] {margin:0 0 8px;padding:0;list-style:none;}
+[data-lcdp-invitation-nouveaux] {margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+[data-lcdp-invitation-existants][hidden] {display:none!important;}
+
+
+.lcdp-box-dialogue-champ-inviter__actions[data-lcdp-invitation-actions] {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;justify-items:stretch;margin-top:0;padding:12px;border:1px solid var(--lcdp-color-border,#d7ddd5);border-radius:12px;background:var(--lcdp-color-surface-soft,#f8faf7);}
+
+/* Champs d'invitation : présentation statique, état géré dans le contrôleur. */
+[data-lcdp-invite-email][readonly] {background:var(--lcdp-color-surface-soft,#edf0ed);}
+[data-lcdp-invitation-nouveaux] > .lcdp-invite-nouvelle-ligne {display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;width:100%;min-width:0;}
+[data-lcdp-invitation-nouveaux] > .lcdp-invite-nouvelle-ligne--initiale {display:block;grid-template-columns:none;}

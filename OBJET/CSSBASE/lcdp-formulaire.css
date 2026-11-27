@@ -1,0 +1,13 @@
+/* LCDP — FORMULAIRES : contenu et disposition, hors apparence des commandes. */
+/* Disposition du formulaire de connexion. */
+#formulaire-connexion-membre .lcdp-box-formulaire__actions {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+/* Présentation du formulaire de contact (hors commandes). */
+.lcdp-contact-intro {text-align:center!important;}
+.lcdp-contact-titre {font-weight:700!important;text-align:center!important;}
+.lcdp-contact-actions {align-items:center!important;}

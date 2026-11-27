@@ -1,0 +1,7 @@
+/* LCDP — LISTE DE COMMANDES : grille de navigation ; apparence des commandes dans bouton-lien-picto. */
+.lcdp-boutique-services {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--lcdp-space-2, 12px);
+      width: 100%;
+    }

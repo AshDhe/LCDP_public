@@ -460,6 +460,30 @@
         "OBJET/HTMLBASE/02-dialogue-reference-compte-suspendu-optin.html",
         "OBJET/HTMLBASE/02-dialogue-reference-mise-a-jour-reglement.html"
       ]
+    },
+    "formulaire": {
+      "css": "lcdp-formulaire.css",
+      "html": "OBJET/HTMLBASE/03-formulaire.html",
+      "charge_par": "lcdp-central-mobile-first.css",
+      "statut": "Disposition des formulaires de connexion et contact ; commandes dans bouton-lien-picto."
+    },
+    "invitation-abonnement": {
+      "css": "lcdp-invitation-abonnement.css",
+      "html": "OBJET/HTMLBASE/04-card-invites-abonnement.html",
+      "charge_par": "lcdp-central-mobile-first.css",
+      "statut": "Présentation des rubriques et champs d'invitation ; boutons et dialogues restent propriétaires."
+    },
+    "fiche-parc": {
+      "css": "lcdp-fiche-parc.css",
+      "html": "OBJET/HTMLBASE/04-fiche-parc.html",
+      "charge_par": "lcdp-central-mobile-first.css",
+      "statut": "Présentation organisée des sections de fiche Parc ; commande de fermeture dans bouton-lien-picto."
+    },
+    "liste-commandes": {
+      "css": "lcdp-liste-commandes.css",
+      "html": "ESPACE-PUBLIC/boutique.html",
+      "charge_par": "lcdp-central-mobile-first.css",
+      "statut": "Grille des commandes de navigation, indépendamment de leur apparence."
     }
   }
 }
