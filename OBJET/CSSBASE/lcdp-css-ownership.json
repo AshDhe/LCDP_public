@@ -436,7 +436,7 @@
       "css": "lcdp-bouton-lien-picto.css",
       "charge_par": "lcdp-central-mobile-first.css et cssbase.css (consommateurs autonomes)",
       "statut": "Socle moderne des boutons, liens, pictogrammes et états communs ; suppression des doublons des sources traitées.",
-      "variantes": "Principale, secondaire, orange, mini, accueil, logo, compte, deux niveaux, haut et étroit, chargement, picto édition.",
+      "variantes": "Principale, secondaire, orange, mini, accueil, logo, compte, deux niveaux, haut et étroit, chargement, picto édition., boutons et pictogrammes de Mon compte (y compris les dialogues de compte).",
       "exceptions": "Mise en page et états propres aux composants ; variantes spécifiques des parcours à inventorier."
     }
   }
