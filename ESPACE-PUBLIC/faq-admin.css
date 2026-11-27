@@ -47,10 +47,6 @@
   flex-wrap: wrap;
 }
 
-.lcdp-mentions-admin__actions .lcdp-button {
-  margin: 0;
-}
-
 .lcdp-mentions-admin__preview {
   width: 100%;
   padding-top: var(--lcdp-space-3);
@@ -89,9 +85,5 @@
   .lcdp-mentions-admin__actions {
     align-items: stretch;
     flex-direction: column;
-  }
-
-  .lcdp-mentions-admin__actions .lcdp-button {
-    width: 100%;
   }
 }
