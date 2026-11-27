@@ -5096,14 +5096,20 @@ html[data-lcdp-css~="c085"] .lcdp-boutique-services > .public-home__action {
 /* Palette des commandes du règlement des impayés. */
 [data-lcdp-impaye-liste] {--lcdp-ref-vert:#4b6333;--lcdp-ref-vert-hover:#3d5129;}
 
-/* LIEN TEXTUEL — interne ou externe, même présentation dans les contenus. */
-:is(.lcdp-editorial-copy, .lcdp-boxtext__content, .lcdp-box-formulaire__note, .lcdp-box-formulaire__intro, .lcdp-box-champ-formulaire__description, .lcdp-box-champ-formulaire__checkbox-line) a[href]:not(:is(.lcdp-button, .lcdp-editorial-back-link, [role="button"], [class*="__bouton"], [class*="__button"], [class*="__close"])) {
-  color: var(--lcdp-color-primary, #4e6838);
+/* LIEN TEXTUEL — présentation commune des liens internes et externes. */
+:is(.lcdp-editorial-copy, .lcdp-boxtext__content, .lcdp-box-formulaire__note, .lcdp-box-formulaire__intro, .lcdp-box-champ-formulaire__description, .lcdp-box-champ-formulaire__checkbox-line) a[href]:not(:is(.lcdp-button, .lcdp-editorial-back-link, [role="button"], [class*="__bouton"], [class*="__button"], [class*="__close"])),
+.lcdp-app-wrapper :is(.lcdp-editorial-copy, .lcdp-boxtext__content, .lcdp-box-formulaire__note, .lcdp-box-formulaire__intro, .lcdp-box-champ-formulaire__description, .lcdp-box-champ-formulaire__checkbox-line) a[href]:not(:is(.lcdp-button, .lcdp-editorial-back-link, [role="button"], [class*="__bouton"], [class*="__button"], [class*="__close"])) {
+  color: var(--lcdp-color-logo-green, #4e6838);
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 1.5px;
 }
-:is(.lcdp-editorial-copy, .lcdp-boxtext__content, .lcdp-box-formulaire__note, .lcdp-box-formulaire__intro, .lcdp-box-champ-formulaire__description, .lcdp-box-champ-formulaire__checkbox-line) a[href]:not(:is(.lcdp-button, .lcdp-editorial-back-link, [role="button"], [class*="__bouton"], [class*="__button"], [class*="__close"])):is(:hover, :focus-visible) {
+:is(.lcdp-editorial-copy, .lcdp-boxtext__content, .lcdp-box-formulaire__note, .lcdp-box-formulaire__intro, .lcdp-box-champ-formulaire__description, .lcdp-box-champ-formulaire__checkbox-line) a[href]:not(:is(.lcdp-button, .lcdp-editorial-back-link, [role="button"], [class*="__bouton"], [class*="__button"], [class*="__close"])):is(:hover, :focus-visible),
+.lcdp-app-wrapper :is(.lcdp-editorial-copy, .lcdp-boxtext__content, .lcdp-box-formulaire__note, .lcdp-box-formulaire__intro, .lcdp-box-champ-formulaire__description, .lcdp-box-champ-formulaire__checkbox-line) a[href]:not(:is(.lcdp-button, .lcdp-editorial-back-link, [role="button"], [class*="__bouton"], [class*="__button"], [class*="__close"])):is(:hover, :focus-visible) {
   color: var(--lcdp-color-primary-hover, #3d522c);
+}
+.lcdp-app-wrapper :is(.lcdp-editorial-copy, .lcdp-boxtext__content, .lcdp-box-formulaire__note, .lcdp-box-formulaire__intro, .lcdp-box-champ-formulaire__description, .lcdp-box-champ-formulaire__checkbox-line) a[href]:not(:is(.lcdp-button, .lcdp-editorial-back-link, [role="button"], [class*="__bouton"], [class*="__button"], [class*="__close"])) :is(strong, b, span) {
+  color: inherit;
+  font-weight: inherit;
 }
