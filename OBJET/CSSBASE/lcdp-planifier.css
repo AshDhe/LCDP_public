@@ -5228,3 +5228,30 @@ body.lcdp-page-reserver .lcdp-planifier-dialogue-etat .lcdp-box-dialogue-bouton_
     gap: 14px;
   }
 }
+
+/* OBJET : PLANNING — MES ACCÈS */
+#lcdp-planning-calendrier-slot .lcdp-planning-carte-visite.is-retourne .lcdp-planning-verso-actions {margin-top:3px !important;}
+
+#lcdp-planning-calendrier-slot .lcdp-planning-carte-visite .lcdp-planning-verso-actions {
+        display:flex !important;align-items:center;flex-wrap:wrap;gap:8px !important;margin-top:8px !important;
+      
+
+      display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
+      align-items:stretch!important;width:100%!important;min-width:0!important;
+      gap:7px!important;
+    }
+
+#mention-statut-membre[hidden] { display:none !important; }
+
+#lcdp-planning-calendrier-slot[hidden], #lcdp-mes-acces-fiche-slot[hidden] { display:none !important; }
+
+html:not(.lcdp-planning-membre-ready) body.lcdp-mes-acces-page > .lcdp-app-wrapper {
+      visibility: hidden !important;
+    }
+
+#lcdp-planning-calendrier-slot .lcdp-planning-carte-visite :is(
+      .lcdp-planning-verso-ligne-acces,.lcdp-planning-verso-ligne-invites
+    ) {
+      display:flex!important;align-items:center!important;gap:7px!important;
+      width:100%!important;min-width:0!important;flex-wrap:nowrap!important;
+    }

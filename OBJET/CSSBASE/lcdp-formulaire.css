@@ -785,3 +785,6 @@ body:not(.lcdp-security-tunnel) #coda-actualisation.lcdp-setup-flow__fieldset {m
 
 
 #lcdp-planning-filtres-contenu[hidden] {display:none!important;}
+
+/* OBJET : FORMULAIRE D-ACTIF */
+.lcdp-dactif-ligne input {width:21px;height:21px;accent-color:#4b6333;}
