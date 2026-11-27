@@ -197,7 +197,7 @@ html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
   line-height: 1.5;
   text-transform: uppercase;
 }
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__burger-slot {
+.lcdp-box-bandeau-nav__burger-slot {
   margin-inline-start: auto;
 }
 :where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > #lcdp-bandeau-slot, :where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > .lcdp-box-bandeau-nav {

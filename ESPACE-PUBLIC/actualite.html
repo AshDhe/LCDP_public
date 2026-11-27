@@ -17,22 +17,12 @@
       "";
   </script>
   <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-central-mobile-first.css" data-site-href="/OBJET/CSSBASE/lcdp-central-mobile-first.css">
-  <!-- Spinner d'arrivée : pictogramme SVG commun, sans nouvelle feuille CSS. -->
-  <style>
-    #lcdp-attente-arrivee { position:fixed; inset:0; z-index:2147483646; display:flex; align-items:center; justify-content:center; background:#fff; }
-    #lcdp-attente-arrivee .lcdp-loading-spinner { position:relative; box-sizing:border-box; width:64px; height:64px; display:flex; align-items:center; justify-content:center; }
-    #lcdp-attente-arrivee .lcdp-loading-spinner > svg { position:absolute; inset:0; width:100%; height:100%; display:block; }
-    #lcdp-attente-arrivee .lcdp-loading-spinner__track { color:rgba(6,95,70,.10); }
-    #lcdp-attente-arrivee .lcdp-loading-spinner__arc { color:#e59834; animation:lcdp-arrivee-rotation .8s linear infinite; }
-    #lcdp-attente-arrivee .lcdp-loading-spinner__dot { width:8px; height:8px; border-radius:50%; background:#4e6838; }
-    @keyframes lcdp-arrivee-rotation { to { transform:rotate(360deg); } }
-    @media (prefers-reduced-motion: reduce) { #lcdp-attente-arrivee .lcdp-loading-spinner__arc { animation:none; } }
-  </style>
-  <noscript><style>#lcdp-attente-arrivee { display:none !important; }</style></noscript>
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-attente.css?v=20261127-arrivee-proprietaire">
+  <link rel="stylesheet" href="../OBJET/CSSBASE/lcdp-objets-specifiques.css?v=20261127-1">
 </head>
 
 <body class="lcdp-page-document-legal lcdp-app-page">
-  <div id="lcdp-attente-arrivee" role="status" aria-label="Chargement de la page">
+  <div id="lcdp-attente-arrivee" class="lcdp-attente-arrivee--simple" hidden role="status" aria-label="Chargement de la page">
     <div class="lcdp-loading-spinner" aria-hidden="true">
       <svg class="lcdp-loading-spinner__track" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></circle></svg>
       <svg class="lcdp-loading-spinner__arc" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="75"></circle></svg>
@@ -41,6 +31,7 @@
   </div>
   <script>
     (() => {
+      document.getElementById('lcdp-attente-arrivee').hidden = false;
       const terminer = () => document.getElementById('lcdp-attente-arrivee')?.remove();
       window.LCDP_terminerAttenteArrivee = terminer;
       // Sécurité : ne pas bloquer définitivement l'accès en cas d'échec d'un fragment/API.
@@ -56,7 +47,7 @@
     <main class="lcdp-site-main">
       <section class="lcdp-page-section" aria-label="Page en cours de mise à jour">
         <div class="lcdp-page-container">
-          <h2 class="lcdp-boxtext__title lcdp-boxtext__title--center" style="margin-bottom: 24px;">Actualité</h2>
+          <h2 class="lcdp-boxtext__title lcdp-boxtext__title--center lcdp-boxtext__title--espace-apres">Actualité</h2>
           <div class="lcdp-section-sommeil" role="status" aria-labelledby="lcdp-section-sommeil-titre">
               <div class="lcdp-section-sommeil__icone" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
