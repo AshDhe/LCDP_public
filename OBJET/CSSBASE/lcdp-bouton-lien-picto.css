@@ -127,13 +127,13 @@
   border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
 }
 
-.lcdp-button-orange {
+.lcdp-button-orange, .lcdp-dialogue-ref__bouton--orange {
   background: var(--lcdp-color-orange);
   border-color: var(--lcdp-color-orange);
   color: var(--lcdp-color-text);
 }
 
-.lcdp-button-orange:hover {
+.lcdp-button-orange:hover, .lcdp-dialogue-ref__bouton--orange:hover {
   background: var(--lcdp-color-orange-hover);
   border-color: var(--lcdp-color-orange-hover);
   color: var(--lcdp-color-text);
@@ -4591,3 +4591,31 @@ body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__actions .lcdp-button:ho
   border: 1px solid rgba(251, 191, 36, .5);
 }
 
+
+/* Picto de fermeture générique : le conteneur fixe son emplacement. */
+:is(.lcdp-picto-fermer,.lcdp-box-alerte__close,.lcdp-box-dialogue-bouton__close,.lcdp-box-dialogue-champ__close,.lcdp-box-dialogue-champ-inviter__close,.lcdp-box-dialogue-upload-img__close) {
+  box-sizing:border-box; width:34px; height:34px; min-width:34px; min-height:34px; margin:0; padding:0;
+  display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:50%;
+  background:var(--lcdp-color-surface-soft,#f7f7f4); color:var(--lcdp-color-text,#1f2a24);
+  font:inherit; font-size:1.45rem; line-height:1; cursor:pointer;
+}
+:is(.lcdp-picto-fermer,.lcdp-box-alerte__close,.lcdp-box-dialogue-bouton__close,.lcdp-box-dialogue-champ__close,.lcdp-box-dialogue-champ-inviter__close,.lcdp-box-dialogue-upload-img__close):hover { background:#e7e5e4; }
+:is(.lcdp-picto-fermer,.lcdp-box-alerte__close,.lcdp-box-dialogue-bouton__close,.lcdp-box-dialogue-champ__close,.lcdp-box-dialogue-champ-inviter__close,.lcdp-box-dialogue-upload-img__close):focus-visible { outline:2px solid var(--lcdp-color-focus,#b98c31); outline-offset:2px; }
+:is(.lcdp-picto-fermer,.lcdp-box-alerte__close,.lcdp-box-dialogue-bouton__close,.lcdp-box-dialogue-champ__close,.lcdp-box-dialogue-champ-inviter__close,.lcdp-box-dialogue-upload-img__close)[hidden], :is(.lcdp-button,.lcdp-button--compact,.lcdp-dialogue-ref__bouton)[hidden] {display:none!important;}
+
+/* Bouton de compte avec pictogramme et deux niveaux de texte. */
+.lcdp-button.lcdp-button-compte:has(> .lcdp-button-compte__icone) {
+  box-sizing:border-box; width:100%; min-width:0; max-width:none; min-height:82px; margin:0; padding:14px 15px;
+  display:flex; flex-direction:row; align-items:center; justify-content:flex-start; gap:13px;
+  border:1px solid #edf0f5; border-left:4px solid var(--lcdp-compte-color); border-radius:15px;
+  background:#f8fafc; box-shadow:none; color:#1e293b; text-align:left; font:inherit; font-size:14px; line-height:1.3;
+}
+.lcdp-button.lcdp-button-compte:has(> .lcdp-button-compte__icone):hover {background:#f1f5f9; border-left-color:var(--lcdp-compte-color); box-shadow:none; color:#1e293b;}
+.lcdp-button.lcdp-button-compte:has(> .lcdp-button-compte__icone):focus-visible {outline:2px solid var(--lcdp-compte-color); outline-offset:2px;}
+.lcdp-button-compte__icone {box-sizing:border-box; width:40px;height:40px;flex:0 0 40px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.14);font-size:17px;}
+.lcdp-button-compte__details {min-width:0;display:flex;flex-direction:column;gap:7px;text-align:left;}
+.lcdp-button-compte__libelle {display:block;color:#1e293b;font-size:14px;font-weight:700;line-height:1.2;}
+.lcdp-button-compte__description {display:block;color:#8da0ba;font-size:12px;font-weight:400;line-height:1.3;}
+
+/* Commande native de sélection d'un fichier. */
+input[type="file"]::file-selector-button {min-height:36px;margin-right:var(--lcdp-space-2);padding:7px 12px;border:1px solid var(--lcdp-color-logo-green);border-radius:var(--lcdp-radius-small);background:var(--lcdp-color-logo-green);color:#fff;font:inherit;font-weight:600;cursor:pointer;}

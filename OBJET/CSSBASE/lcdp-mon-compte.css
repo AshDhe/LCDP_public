@@ -1122,3 +1122,32 @@ body.lcdp-page-mon-compte #lcdp-compte-relations-invitant .lcdp-compte-invitant_
   gap: 8px;
 }
 
+
+/* Disposition des commandes dans la section de fermeture du compte (hors dialogue). */
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton {
+  --lcdp-ref-vert: #4b6333;
+  --lcdp-ref-vert-hover: #3d5129;
+  width: auto;
+  min-height: 36px;
+  padding: 8px 20px;
+  border-radius: 12px;
+}
+
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton--suppression {
+  color: #be123c;
+  background: #fff;
+  border-color: rgba(251,113,133,.5);
+}
+
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton--suppression:hover {
+  background: #fff1f2;
+  border-color: #be123c;
+}
+
+body.lcdp-page-mon-compte #form-mes-informations-membre
+[data-lcdp-compte-section="fermeture"] .lcdp-dialogue-ref__bouton[hidden] {
+  display: none !important;
+}
