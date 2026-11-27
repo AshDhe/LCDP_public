@@ -2519,3 +2519,126 @@ body.lcdp-fiche-parc-publique #lcdp-fiche-parc-slot
       font-size: 1.35rem;
       color: #546354;
     }
+
+
+/* Stripe — retour / abandon du paiement DFA et impayé */
+
+.lcdp-stripe-page #dfa-abandon {box-sizing:border-box;min-height:48px;margin:32px 0 0;background:#fff;border:1px solid #e2e8f0;color:#334155;font-weight:500;box-shadow:none;}
+
+.lcdp-stripe-page #dfa-abandon:hover {background:#f8fafc;border-color:#94a3b8;color:#0f172a;}
+
+.lcdp-stripe-page #dfa-abandon:focus-visible {outline:2px solid #4b6333;outline-offset:3px;}
+
+
+/* FAQ — commandes de l'accordéon, compatibilité */
+
+.lcdp-faq__question { display:flex; align-items:center; justify-content:space-between; gap:20px; width:100%; border:0; background:transparent; font:inherit; text-align:left; cursor:pointer; }
+
+.lcdp-faq__question::after { content:"+"; flex:none; font-size:1.55rem; font-weight:400; }
+
+.lcdp-faq__question[aria-expanded="true"]::after { content:"−"; }
+
+.lcdp-faq__question:focus-visible {
+  outline: none;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+
+/* Liens de formulaire et commandes FAQ — socle commun */
+
+.lcdp-box-champ-formulaire__description a {
+  color: var(--lcdp-color-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+
+.lcdp-box-champ-formulaire__description a:hover {
+  color: var(--lcdp-color-primary-hover);
+}
+
+.lcdp-box-formulaire__note a,
+.lcdp-box-formulaire__intro a {
+  color: var(--lcdp-color-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+
+.lcdp-box-formulaire__note a:hover,
+.lcdp-box-formulaire__intro a:hover {
+  color: var(--lcdp-color-primary-hover);
+}
+
+:where(html[data-lcdp-css~="c024"]) .lcdp-app-wrapper .lcdp-faq .lcdp-faq__question {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  margin: 0;
+  padding: 16px 20px;
+  border: 0;
+  background: transparent;
+  color: #1f2937;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+}
+
+:where(html[data-lcdp-css~="c024"]) .lcdp-app-wrapper .lcdp-faq .lcdp-faq__question::after {
+  content: "";
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #eef2ec url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234f6342' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / 16px 16px no-repeat;
+  transition: transform .3s, background-color .3s;
+}
+
+:where(html[data-lcdp-css~="c024"]) .lcdp-app-wrapper .lcdp-faq .lcdp-faq__question[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+  background-color: #4f6342;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+:where(html[data-lcdp-css~="c024"]) .lcdp-app-wrapper .lcdp-faq .lcdp-faq__question:focus-visible {
+  outline: 2px solid #4f6342;
+  outline-offset: -3px;
+  border-radius: 12px;
+}
+
+:where(html[data-lcdp-css~="c024"]) .lcdp-faq__reponse a { color: inherit; text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+:where(html[data-lcdp-css~="c024"]) .lcdp-app-wrapper .lcdp-faq .lcdp-faq__question::after { transition: none; }
+}
+
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__password-recovery,
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options > a {
+  margin-left: auto;
+  color: #94a3b8;
+  font: 500 12px/1.5 Arial,system-ui,sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__password-recovery:hover,
+:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options > a:hover {
+  color: #1e293b;
+}
+
+:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line a {
+  color: #334155;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
