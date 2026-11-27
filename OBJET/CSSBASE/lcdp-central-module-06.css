@@ -1547,16 +1547,6 @@
   font: 400 10px/1.5 Arial,system-ui,sans-serif;
   text-align: left;
 }
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__description a {
-  color: var(--lcdp-color-primary);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1.5px;
-}
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__description a:hover {
-  color: var(--lcdp-color-primary-hover);
-}
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__control {
   box-sizing: border-box;
   width: 100%;
@@ -1618,12 +1608,6 @@
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire:has(input[type="checkbox"]) > .lcdp-box-champ-formulaire__label-zone {
   display: none;
-}
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line a {
-  color: #334155;
-  font-weight: 500;
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line {
   display: flex;

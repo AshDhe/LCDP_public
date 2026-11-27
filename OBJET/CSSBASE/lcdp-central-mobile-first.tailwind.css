@@ -2032,7 +2032,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
 :where(html[data-lcdp-css~="c024"]) .lcdp-faq__reponse{ padding:0 24px 24px; overflow-wrap:anywhere; }
 :where(html[data-lcdp-css~="c024"]) .lcdp-faq__reponse > :first-child{ margin-top:0; }
 :where(html[data-lcdp-css~="c024"]) .lcdp-faq__reponse > :last-child{ margin-bottom:0; }
-:where(html[data-lcdp-css~="c024"]) .lcdp-faq__reponse a{ color:inherit; text-decoration:underline; }
 :where(html[data-lcdp-css~="c024"]) .lcdp-faq > p{ padding:20px 24px; }
 @media (max-width:600px) {:where(html[data-lcdp-css~="c024"]) .lcdp-faq__question{ padding:18px 16px; font-size:1rem; gap:14px; }
 :where(html[data-lcdp-css~="c024"]) .lcdp-faq__reponse{ padding:0 16px 20px; }}
@@ -6573,15 +6572,6 @@ background: var(--lcdp-color-surface);
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options .lcdp-box-champ-formulaire__checkbox-line input[type="checkbox"]{
   margin:0;flex:0 0 16px;
 }
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__password-recovery,
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options > a{
-  margin-left:auto;color:#94a3b8;font:500 12px/1.5 Arial,system-ui,sans-serif;
-  text-decoration:underline;text-underline-offset:2px;
-}
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__password-recovery:hover,
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__options > a:hover{
-  color:#1e293b;
-}
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__actions{
   @apply w-full;@apply flex;@apply flex-col;@apply items-center;gap:8px;
   padding-top:12px;
@@ -6611,16 +6601,6 @@ background: var(--lcdp-color-surface);
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note{
   margin:0;@apply text-center;
   color:#94a3b8;font:400 10px/1.5 Arial,system-ui,sans-serif;
-}
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note a,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro a{
-  color: var(--lcdp-color-primary);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1.5px;
-}
-:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__note a:hover,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire__intro a:hover{
-  color: var(--lcdp-color-primary-hover);
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire input[readonly],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire textarea[readonly],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire select[readonly],:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire input:disabled,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire textarea:disabled,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire select:disabled,:where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire [aria-readonly="true"]{
   background: #f1f3f5 !important;
@@ -9649,16 +9629,6 @@ line-height: 1.35;
   font:400 10px/1.5 Arial,system-ui,sans-serif;
   @apply text-left;
 }
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__description a{
-  color: var(--lcdp-color-primary);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1.5px;
-}
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__description a:hover{
-  color: var(--lcdp-color-primary-hover);
-}
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__control{
 @apply box-border;@apply w-full;min-width:0;
 }
@@ -9707,7 +9677,6 @@ line-height: 1.35;
   outline:2px solid #4e6838;outline-offset:2px;
 }
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire:has(input[type="checkbox"]) > .lcdp-box-champ-formulaire__label-zone {@apply hidden;}
-:where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line a {color:#334155;font-weight:500;text-decoration:underline;text-underline-offset:2px;}
 :where(html[data-lcdp-css~="c040"]) .lcdp-box-champ-formulaire__checkbox-line{
   @apply flex;@apply items-start;gap:12px;
   margin-top:4px;@apply cursor-pointer;@apply text-left;

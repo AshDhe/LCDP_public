@@ -435,9 +435,9 @@
     "bouton-lien-picto": {
       "css": "lcdp-bouton-lien-picto.css",
       "charge_par": "lcdp-central-mobile-first.css et cssbase.css (consommateurs autonomes)",
-      "statut": "Socle des commandes communes, dialogues, Mon compte (y compris sécurité et RDV DA), Ma Clé, offres et paiements, Hello, DA, DFA, factures et fiche Parc publique. Contrôles structurels uniquement.",
+      "statut": "Socle des commandes communes, dialogues, Mon compte, Ma Clé, offres et paiements (y compris les commandes Stripe DFA et impayés), Hello, DA, DFA, factures, fiche Parc publique, liens de formulaire et FAQ. Contrôles structurels uniquement.",
       "variantes": "Principale, secondaire, orange, mini, accueil, logo, compte, deux niveaux, haut et étroit, chargement, picto édition., boutons et pictogrammes de Mon compte (y compris les dialogues de compte)., boutons de référence des dialogues, fermeture, lien contact et paiement CB.",
-      "exceptions": "PLANIFIER, ABORESA/réservation et prise de commande hors périmètre ; les sélecteurs partagés avec la fiche Parc publique restent distincts par contexte. Conteneurs, états transversaux et impression conservés dans leurs feuilles. Inventaire des dialogues à reprendre."
+      "exceptions": "PLANIFIER, S'ABONNER / ABORESA / RESA ABO et MA CLÉ : parcours spécifiques à revoir séparément. Conteneurs, états transversaux et impression conservés. Les dialogues sont la prochaine étape ; les autres parcours restent à vérifier visuellement."
     }
   }
 }
