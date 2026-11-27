@@ -92,16 +92,6 @@
       overflow: hidden;
       box-shadow: none;
     }
-    .lcdp-box-fiche-parc .lcdp-box-fiche-parc__card--organisee .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__image {
-      display: block;
-      width: 100% !important;
-      height: auto !important;
-      max-width: 100% !important;
-      aspect-ratio: 16 / 9 !important;
-      object-fit: cover !important;
-      object-position: center center !important;
-      border-radius: 12px !important;
-    }
     .lcdp-box-fiche-parc .lcdp-box-fiche-parc__card--organisee > .lcdp-box-fiche-parc__section--map .lcdp-box-fiche-parc__map {
       width: 100%;
       min-height: 0;

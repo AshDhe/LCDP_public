@@ -10,6 +10,7 @@
 @import url("./lcdp-liste-commandes.css");
 @import url("./lcdp-box-texte.css");
 @import url("./lcdp-objets-specifiques.css");
+@import url("./lcdp-image.css");
 @import url("./lcdp-tunnel-commande.css");
 /* ======================================================================
    OBJETS GENERIQUES ET COMPOSANTS — PRESENTATION CENTRALISEE
@@ -2587,12 +2588,6 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   max-width: none;
 }
 
-.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__image {
-  height: auto;
-  min-height: 0;
-  aspect-ratio: 16 / 10;
-}
-
 .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__body {
   padding: 12px;
 }
@@ -3665,15 +3660,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
     overflow: hidden;
   }
   .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
-    display: block;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    object-fit: cover !important;
-    object-position: center center !important;
     margin-inline: auto;
-    border-radius: var(--lcdp-radius-media);
   }
   .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(1) { order: 1; margin-top: var(--lcdp-space-3); }
   .lcdp-box-fiche-parc__section[aria-label="Présentation du parc"] { order: 2; }
@@ -3742,16 +3729,6 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
     width: 100%;
     min-width: 0;
     max-width: 100%;
-  }
-  .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
-    display: block;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    border-radius: var(--lcdp-radius-media);
   }
 }
 
@@ -6632,7 +6609,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 
 /* OBJET : 01-ACTUALITE | CSS source rationalise */
 /* Image unique : mêmes règles que le carrousel générique existant. */
-.lcdp-actu-image {display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:var(--lcdp-color-surface-soft);}
+
 .lcdp-actu-image-frame {width:100%;aspect-ratio:16/9;min-height:180px;overflow:hidden;border-radius:var(--lcdp-radius-button);background:var(--lcdp-color-surface-soft);box-shadow:0 10px 24px rgba(31,42,36,.08);}
 .lcdp-actu-header {display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;}
 .lcdp-actu-header h1,.lcdp-actu-header h2 {margin:0;}
@@ -7082,10 +7059,6 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   font-size: 0.95rem;
 }
 
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  aspect-ratio: 16 / 10;
-}
-
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__text,
 .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__legend {
   font-size: 0.78rem;
@@ -7236,22 +7209,10 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   padding: var(--lcdp-space-2);
 }
 
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  width: 100%;
-  min-height: 220px;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: center center;
-}
-
 @media (min-width: 768px) {
   .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list {
     grid-template-columns: 1fr !important;
     gap: var(--lcdp-space-4);
-  }
-
-  .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-    min-height: 300px;
   }
 }
 
@@ -7299,20 +7260,6 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   border-radius: var(--lcdp-radius-large);
 }
 
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  height: clamp(150px, 48vw, 220px) !important;
-  min-height: 0 !important;
-  max-height: 220px !important;
-  aspect-ratio: auto !important;
-  object-fit: cover !important;
-  object-position: center center !important;
-  border-radius: var(--lcdp-radius-media);
-}
-
 @media (max-width: 767px) {
   .lcdp-box-card-acces-parc {
     align-items: center;
@@ -7341,11 +7288,6 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
     padding: var(--lcdp-space-1) !important;
   }
-
-  .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-    height: clamp(132px, 46vw, 184px) !important;
-    max-height: 184px !important;
-  }
 }
 
 @supports not (height: 100dvh) {
@@ -7360,12 +7302,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   }
 }
 
-@media (min-width: 768px) {
-  .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-    height: clamp(220px, 30vw, 340px) !important;
-    max-height: 340px !important;
-  }
-}
+ 
 
 
 /* Accès parc : photos d’entrée directes dans le bloc Entrée du parc. */
@@ -7397,24 +7334,7 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   box-sizing: border-box;
 }
 
-.lcdp-box-card-acces-parc__photo-image {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  height: clamp(132px, 46vw, 184px);
-  border-radius: var(--lcdp-radius-media);
-  background: #ffffff;
-  object-fit: cover;
-  object-position: center center;
-  box-sizing: border-box;
-}
-
-@media (min-width: 768px) {
-  .lcdp-box-card-acces-parc__photo-image {
-    height: clamp(220px, 30vw, 340px);
-  }
-}
+ 
 
 /* Accès parc : retour aligné à gauche et rapproché du titre. */
 .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__retour-row {
@@ -7662,7 +7582,6 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
 .lcdp-box-card-parc-diaporama.is-retourne .lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(0deg); visibility: visible; }
 .lcdp-box-card-parc-diaporama__face { position: absolute; inset: 0; overflow: hidden; border: 1px solid var(--lcdp-color-border); border-radius: var(--lcdp-radius-large); background: var(--lcdp-color-surface); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .lcdp-box-card-parc-diaporama__face--verso { transform: rotateY(180deg); visibility: hidden; transition: none; padding: var(--lcdp-space-2);  }
-.lcdp-box-card-parc-diaporama__image { display: block; width: 100%; height: 100%; object-fit: cover; }
 .lcdp-box-card-parc-diaporama__nom { position: absolute; inset: auto 0 0; padding: var(--lcdp-space-3); color: #fff; font-weight: 700; font-size: clamp(1.1rem, 3vw, 1.55rem); background: linear-gradient(transparent, rgba(0,0,0,.65)); }
 /* La croix reste sur la ligne du titre, sans décaler tout le verso. */
 
@@ -7675,9 +7594,6 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
    est adaptée à la face diaporama ; le bandeau PREPA conserve le CSS partagé. */
 .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media {
   width: 100%; max-width: none; min-width: 0; height: 100%; display: block;
-}
-.lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
-  display: block; width: 100%; height: 100%; min-height: 0; aspect-ratio: auto;
 }
 
 /* Le verso reste masqué et aucune rotation ne s’anime au premier montage. */
@@ -7807,10 +7723,6 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
     gap: var(--lcdp-space-2);
   }
 
-  .lcdp-box-card-reservation-membre__image {
-    min-height: 104px;
-  }
-
   .lcdp-box-card-reservation-membre__date-label {
     font-size: 0.98rem;
   }
@@ -7836,10 +7748,6 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   .lcdp-box-card-reservation-membre--avec-image {
     grid-template-columns: 150px minmax(0, 1fr);
     gap: var(--lcdp-space-4);
-  }
-
-  .lcdp-box-card-reservation-membre__image {
-    min-height: 150px;
   }
 
   .lcdp-box-card-reservation-membre__body {
@@ -7976,12 +7884,6 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
     width: 34%;
     min-width: 220px;
     max-width: 280px;
-  }
-
-  .lcdp-box-card-reservation-membre__image {
-    height: 100%;
-    min-height: 210px;
-    aspect-ratio: auto;
   }
 
   .lcdp-box-card-reservation-membre__body {
@@ -8809,14 +8711,6 @@ body.lcdp-legal-lightbox-open {
 }
 :where(html[data-lcdp-css~="c009"]) .lcdp-actualite-editeur textarea {
   min-height: 180px;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-image {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16/9;
-  object-fit: contain;
-  object-position: center;
-  background: var(--lcdp-color-surface-soft);
 }
 :where(html[data-lcdp-css~="c009"]) .lcdp-actualite-actions {
   display: flex;
@@ -11649,15 +11543,7 @@ body.lcdp-legal-lightbox-open {
     overflow: hidden;
   }
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
-    display: block;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    object-fit: cover !important;
-    object-position: center center !important;
     margin-inline: auto;
-    border-radius: var(--lcdp-radius-media);
   }
   :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__card:nth-child(1) {
     order: 1;
@@ -11739,16 +11625,6 @@ body.lcdp-legal-lightbox-open {
     width: 100%;
     min-width: 0;
     max-width: 100%;
-  }
-  :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
-    display: block;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    border-radius: var(--lcdp-radius-media);
   }
 }
 :where(html[data-lcdp-css~="c077"]) .lcdp-box-workflow-reservation {
@@ -12765,11 +12641,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   min-width: 0;
   max-width: none;
 }
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__image {
-  height: auto;
-  min-height: 0;
-  aspect-ratio: 16 / 10;
-}
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__body {
   padding: 12px;
 }
@@ -13631,14 +13502,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   z-index: 1;
   pointer-events: auto;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center center;
-  background: var(--lcdp-color-surface-soft);
-  display: block;
-}
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dots {
   min-height: 16px;
   margin-top: var(--lcdp-space-1);
@@ -13754,12 +13617,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   width: 100%;
   background: var(--lcdp-color-surface-soft);
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__image {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  background: var(--lcdp-color-surface-soft);
-}
 :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__body {
   width: 100%;
   padding: var(--lcdp-space-3);
@@ -13802,11 +13659,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     min-width: 220px;
     max-width: 280px;
     display: flex;
-  }
-  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__image {
-    height: 100%;
-    min-height: 210px;
-    aspect-ratio: auto;
   }
   :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__body {
     flex: 1;
@@ -14163,12 +14015,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__media[hidden] {
   display: none;
 }
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
-  display: block;
-  
-  
-  background: var(--lcdp-color-surface-soft);
-}
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
   min-width: 0;
   display: flex;
@@ -14252,9 +14098,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre--avec-image {
     grid-template-columns: 78px minmax(0, 1fr);
     gap: var(--lcdp-space-2);
-  }
-  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
-    min-height: 104px;
   }
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__date-label {
     font-size: 0.98rem;
@@ -14368,13 +14211,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   border-radius: 0;
   display: flex;
 }
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
-  width: 100%;
-  height: auto;
-  min-height: 0;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-}
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
   flex: 1;
   width: 100%;
@@ -14399,11 +14235,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     width: 34%;
     min-width: 220px;
     max-width: 280px;
-  }
-  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
-    height: 100%;
-    min-height: 210px;
-    aspect-ratio: auto;
   }
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
     padding: var(--lcdp-space-4);
@@ -14593,20 +14424,10 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   max-width: none;
   padding: var(--lcdp-space-2);
 }
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  width: 100%;
-  min-height: 220px;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: center center;
-}
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__list {
     grid-template-columns: 1fr !important;
     gap: var(--lcdp-space-4);
-  }
-  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-    min-height: 300px;
   }
 }
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc,:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc *,:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline,:where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline * {
@@ -14639,19 +14460,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   padding: var(--lcdp-space-2) !important;
   border-radius: var(--lcdp-radius-large);
 }
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  height: clamp(150px, 48vw, 220px) !important;
-  min-height: 0 !important;
-  max-height: 220px !important;
-  aspect-ratio: auto !important;
-  object-fit: cover !important;
-  object-position: center center !important;
-  border-radius: var(--lcdp-radius-media);
-}
 @media (max-width: 767px) {
   :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc {
     align-items: center;
@@ -14675,10 +14483,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__card {
     padding: var(--lcdp-space-1) !important;
   }
-  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-    height: clamp(132px, 46vw, 184px) !important;
-    max-height: 184px !important;
-  }
 }
 @supports not (height: 100dvh) {
   @media (max-width: 767px) {
@@ -14690,12 +14494,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     }
   }
 }
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-    height: clamp(220px, 30vw, 340px) !important;
-    max-height: 340px !important;
-  }
-}
+ 
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photos {
   width: 100%;
   min-width: 0;
@@ -14721,23 +14520,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   overflow: hidden;
   box-sizing: border-box;
 }
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photo-image {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  height: clamp(132px, 46vw, 184px);
-  border-radius: var(--lcdp-radius-media);
-  background: #ffffff;
-  object-fit: cover;
-  object-position: center center;
-  box-sizing: border-box;
-}
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photo-image {
-    height: clamp(220px, 30vw, 340px);
-  }
-}
+ 
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-workflow-reservation--planning-reservation .lcdp-box-card-acces-parc--inline .lcdp-box-card-acces-parc__retour-row {
   width: 100% !important;
   max-width: 100% !important;
@@ -17246,32 +17029,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     justify-content: center;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  background: var(--lcdp-color-surface-soft);
-}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-image-frame {
   width: 100%;
   aspect-ratio: 16/9;
@@ -18656,15 +18413,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   background: transparent;
 }
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
-  display: block;
   grid-row: 1;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  aspect-ratio: auto;
-  border-radius: 11px;
-  background: #f3f5f3;
-  object-fit: cover;
   transition: transform 260ms ease;
 }
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--recto .lcdp-box-card-parc__media--avec-nom .lcdp-box-card-parc__nom-image {
@@ -21117,13 +20866,6 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   margin-inline: auto;
   align-self: center;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext .lcdp-illustration {
-  display: block;
-  height: auto;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext figure > .lcdp-illustration {
-  width: 100%;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext figure > .lcdp-illustration + .lcdp-illustration {
   margin-top: var(--lcdp-space-2);
 }
@@ -21136,9 +20878,6 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext .lcdp-illustration,:where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext figure {
     width: 56%;
-  }
-  :where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext figure > .lcdp-illustration {
-    width: 100%;
   }
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-ancre-formulaire {
@@ -22945,14 +22684,7 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   background: rgba(0,0,0,.82);
 }
 #dialogue-selfie-agrandi img {
-  display: block;
-  max-width: 100%;
-  max-height: calc(92vh - 70px);
-  width: auto;
-  height: auto;
-  object-fit: contain;
   margin: auto;
-  border-radius: 8px;
 }
 #form-mes-informations-membre .lcdp-title-section {
   margin: 1.15rem 0 0.55rem;
@@ -23933,37 +23665,7 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   text-align: left;
 }
 /* Zoom photo commun : +5 %, dans le cadre d'origine et sans mouvement sur écran tactile. */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  :where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):not(.lcdp-box-carousel *),
-  :where(html[data-lcdp-css~="c085"]) .lcdp-editorial-hero > img.lcdp-editorial-hero__image,
-  :where(html[data-lcdp-css~="c085"]) .lcdp-actu-image-frame > img.lcdp-actu-image {
-    transition: scale .7s ease, clip-path .7s ease;
-  }
-  :where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):not(.lcdp-box-carousel *) {
-    /* Un cadre autonome conserve son emprise : (1 - 1/1.05) / 2. */
-    clip-path: inset(0 round var(--lcdp-photo-zoom-radius, 0px));
-  }
-  :where(html[data-lcdp-css~="c085"]) img.lcdp-illustration {
-    --lcdp-photo-zoom-radius: 12px;
-  }
-  :where(html[data-lcdp-css~="c085"]) img.lcdp-box-galerie__image {
-    --lcdp-photo-zoom-radius: var(--lcdp-radius-media, 18px);
-  }
-  :where(html[data-lcdp-css~="c085"]) img.lcdp-bandeau-image__galerie-photo {
-    --lcdp-photo-zoom-radius: 6px;
-  }
-  :where(html[data-lcdp-css~="c042"]) img.lcdp-box-galerie__image {
-    --lcdp-photo-zoom-radius: 12px;
-  }
-  :where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):not(.lcdp-box-carousel *):hover {
-    scale: 1.05;
-    clip-path: inset(2.380953% round calc(var(--lcdp-photo-zoom-radius, 0px) / 1.05));
-  }
-  :where(html[data-lcdp-css~="c085"]) .lcdp-editorial-hero:hover > img.lcdp-editorial-hero__image,
-  :where(html[data-lcdp-css~="c085"]) .lcdp-actu-image-frame:hover > img.lcdp-actu-image {
-    scale: 1.05;
-  }
-}
+ 
 
 /* Variante commune : titre éditorial avec signature chromatique. */
 :where(html[data-lcdp-css~="c085"]) .lcdp-boxtext__title[data-lcdp-title-accent="duo"] {
@@ -24065,11 +23767,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   box-shadow: 0 4px 6px -1px rgb(15 23 42 / 12%);
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper figure.lcdp-editorial-hero > img.lcdp-editorial-hero__image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
   transform: scale(1);
   transition: transform .7s ease;
 }
@@ -24116,14 +23813,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   max-width: none;
   margin: 0;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-inline-figure > .lcdp-illustration {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  border-radius: 12px;
-  object-fit: contain;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-inline-figure > .lcdp-image-legend {
   width: 100%;
   margin: 4px 0 0;
@@ -24147,13 +23836,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   border: 1px solid #d1fae5;
   border-radius: 12px;
   background: rgb(236 253 245 / 50%);
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper figure.lcdp-editorial-map > img.lcdp-editorial-map__image {
-  display: block;
-  width: 100%;
-  height: 136px;
-  max-width: 100%;
-  object-fit: contain;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper figure.lcdp-editorial-map > .lcdp-editorial-map__caption {
   margin: 0;
@@ -25452,13 +25134,6 @@ body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__note {
   max-width: none;
   margin-inline: auto;
 }
-:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-contenu-editorial figure.lcdp-editorial-inline-figure > img.lcdp-illustration {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-}
 
 /* Harmonisation vérifiée des illustrations des pages Hello, Association et Le Club.
    La largeur d'une illustration dans une section sans carte est alignée sur celle
@@ -25476,9 +25151,6 @@ body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__note {
   width: 100%;
   max-width: none;
   margin-inline: auto;
-}
-:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-contenu-editorial figure.lcdp-editorial-inline-figure > img.lcdp-illustration {
-  box-sizing: border-box;
 }/* Harmonisation des pages de règlement : navigation non imprimable. */
 
 /* Maintien de la taille commune aussi sur PC malgré l'ancienne règle c042
@@ -25608,21 +25280,9 @@ body > .lcdp-attente-plein-ecran.lcdp-planifier-partage-attente:not([hidden]) {
   margin: 0 !important; padding: 0 !important;
   order: initial !important; justify-self: stretch !important;
 }
-.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image,
-.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
-  display: block !important; width: 100% !important; max-width: 100% !important;
-  height: auto !important; min-height: 0 !important;
-  aspect-ratio: 16 / 9 !important; object-fit: cover !important;
-  object-position: center center;
-}
 
 /* LCDP 2026-11-10 : format 16:9 des vignettes photographiques Parc. */
-.lcdp-box-card-parc__media .lcdp-box-card-parc__image,
-.lcdp-box-card-reservation-membre__media .lcdp-box-card-reservation-membre__image,
-.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
-  display: block; width: 100% !important; height: auto !important;
-  min-height: 0 !important; aspect-ratio: 16 / 9 !important; object-fit: cover !important;
-}
+
 
 /* LCDP 2026-11-10 : diaporama Parc photo et faces au format 16:9. */
 .lcdp-box-card-parc-diaporama .lcdp-box-card-parc-diaporama__scene,
@@ -25633,11 +25293,6 @@ body > .lcdp-attente-plein-ecran.lcdp-planifier-partage-attente:not([hidden]) {
 .lcdp-box-card-parc-diaporama .lcdp-box-card-parc-diaporama__face--recto { padding: 0 !important; }
 .lcdp-box-card-parc-diaporama .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media {
   display: block !important; width: 100% !important; height: 100% !important;
-}
-.lcdp-box-card-parc-diaporama .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
-  display: block !important; width: 100% !important; height: 100% !important;
-  min-height: 0 !important; aspect-ratio: 16 / 9 !important;
-  object-fit: cover !important; border-radius: inherit;
 }
 .lcdp-box-card-parc-diaporama .lcdp-box-card-parc-diaporama__face--recto .lcdp-box-card-parc__media--avec-nom .lcdp-box-card-parc__nom-image {
   position: absolute !important; display: block !important; inset: auto 0 0 !important;

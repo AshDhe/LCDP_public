@@ -1,0 +1,613 @@
+/* LCDP — IMAGES PHOTOGRAPHIQUES. Formats, cadrage, proportions et états visuels. Les grilles, l’ordre, la navigation et les transitions propres aux objets restent dans leurs propriétaires. */
+
+/* Portrait et avatar */
+[data-lcdp-duoactif-zone] .lcdp-duoactif-avatar {
+  width:42px;height:42px;display:inline-flex;border-radius:50%;background:var(--lcdp-color-surface-soft,#edf0ed);overflow:hidden;
+}
+
+[data-lcdp-duoactif-zone] .lcdp-duoactif-avatar img {
+  display:block;width:100%;height:100%;object-fit:cover;
+}
+
+
+/* Image de galerie */
+.lcdp-box-fiche-parc .lcdp-box-fiche-parc__card--organisee .lcdp-box-fiche-parc__galerie .lcdp-box-galerie__image {
+  display: block;
+      width: 100% !important;
+      height: auto !important;
+      max-width: 100% !important;
+      aspect-ratio: 16 / 9 !important;
+      object-fit: cover !important;
+      object-position: center center !important;
+      border-radius: 12px !important;
+}
+
+.lcdp-box-galerie__image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--lcdp-radius-media);
+  object-fit: cover;
+  object-position: center center;
+  background: var(--lcdp-color-surface-soft);
+}
+
+:where(html[data-lcdp-css~="c042"]) .lcdp-box-galerie__image {
+  display: block;
+  height: 112px;
+  width: 100%;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center;
+  background: #f1f5f9;
+}
+
+
+/* Image de carrousel */
+.lcdp-box-carousel__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  background: var(--lcdp-color-surface-soft);
+  display: block;
+}
+
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* Image de carte (Parc, Accès, Réservation, Accessoire) */
+.lcdp-box-card-parc__image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--lcdp-color-surface-soft);
+}
+
+@media (min-width: 768px) {
+.lcdp-box-card-parc__image {
+  height: 100%;
+    min-height: 210px;
+    aspect-ratio: auto;
+}
+}
+
+.lcdp-box-card-reservation-membre__image {
+  display: block;
+  
+  height: 100%;
+  min-height: 108px;
+  
+  background: var(--lcdp-color-surface-soft);
+width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+
+/* Portrait et avatar */
+.lcdp-dactif-portrait {
+  display:block;width:54px;height:54px;border-radius:50%;background:#bfc3c5;overflow:hidden;
+}
+
+.lcdp-dactif-portrait img {
+  display:block;width:100%;height:100%;object-fit:cover;
+}
+
+
+/* Image de carte (Parc, Accès, Réservation, Accessoire) */
+.lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__image {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+}
+
+
+/* Image de galerie */
+@media (max-width: 767px) {
+.lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
+  display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: var(--lcdp-radius-media);
+}
+}
+
+@media (max-width: 767px) {
+.lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
+  display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: var(--lcdp-radius-media);
+}
+}
+
+
+/* Illustration éditoriale */
+.lcdp-actu-image {
+  display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:var(--lcdp-color-surface-soft);
+}
+
+
+/* Image de carte (Parc, Accès, Réservation, Accessoire) */
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  aspect-ratio: 16 / 10;
+}
+
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  width: 100%;
+  min-height: 220px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center center;
+}
+
+@media (min-width: 768px) {
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  min-height: 300px;
+}
+}
+
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: clamp(150px, 48vw, 220px) !important;
+  min-height: 0 !important;
+  max-height: 220px !important;
+  aspect-ratio: auto !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: var(--lcdp-radius-media);
+}
+
+@media (max-width: 767px) {
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  height: clamp(132px, 46vw, 184px) !important;
+    max-height: 184px !important;
+}
+}
+
+@media (min-width: 768px) {
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  height: clamp(220px, 30vw, 340px) !important;
+    max-height: 340px !important;
+}
+}
+
+.lcdp-box-card-acces-parc__photo-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: clamp(132px, 46vw, 184px);
+  border-radius: var(--lcdp-radius-media);
+  background: #ffffff;
+  object-fit: cover;
+  object-position: center center;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+.lcdp-box-card-acces-parc__photo-image {
+  height: clamp(220px, 30vw, 340px);
+}
+}
+
+.lcdp-box-card-parc-diaporama__image {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+}
+
+.lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
+  display: block; width: 100%; height: 100%; min-height: 0; aspect-ratio: auto;
+}
+
+@media (max-width: 420px) {
+.lcdp-box-card-reservation-membre__image {
+  min-height: 104px;
+}
+}
+
+@media (min-width: 768px) {
+.lcdp-box-card-reservation-membre__image {
+  min-height: 150px;
+}
+}
+
+@media (min-width: 768px) {
+.lcdp-box-card-reservation-membre__image {
+  height: 100%;
+    min-height: 210px;
+    aspect-ratio: auto;
+}
+}
+
+
+/* Illustration éditoriale */
+:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+  object-position: center;
+  background: var(--lcdp-color-surface-soft);
+}
+
+
+/* Image de galerie */
+@media (max-width: 767px) {
+:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image {
+  display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: var(--lcdp-radius-media);
+}
+}
+
+@media (max-width: 767px) {
+:where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
+  display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: var(--lcdp-radius-media);
+}
+}
+
+
+/* Image de carte (Parc, Accès, Réservation, Accessoire) */
+:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc__image {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+}
+
+
+/* Image de carrousel */
+:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  background: var(--lcdp-color-surface-soft);
+  display: block;
+}
+
+
+/* Image de carte (Parc, Accès, Réservation, Accessoire) */
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--lcdp-color-surface-soft);
+}
+
+@media (min-width: 768px) {
+:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__image {
+  height: 100%;
+    min-height: 210px;
+    aspect-ratio: auto;
+}
+}
+
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
+  display: block;
+  
+  
+  background: var(--lcdp-color-surface-soft);
+}
+
+@media (max-width: 420px) {
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
+  min-height: 104px;
+}
+}
+
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__image {
+  height: 100%;
+    min-height: 210px;
+    aspect-ratio: auto;
+}
+}
+
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  width: 100%;
+  min-height: 220px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center center;
+}
+
+@media (min-width: 768px) {
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  min-height: 300px;
+}
+}
+
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: clamp(150px, 48vw, 220px) !important;
+  min-height: 0 !important;
+  max-height: 220px !important;
+  aspect-ratio: auto !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: var(--lcdp-radius-media);
+}
+
+@media (max-width: 767px) {
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  height: clamp(132px, 46vw, 184px) !important;
+    max-height: 184px !important;
+}
+}
+
+@media (min-width: 768px) {
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  height: clamp(220px, 30vw, 340px) !important;
+    max-height: 340px !important;
+}
+}
+
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photo-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: clamp(132px, 46vw, 184px);
+  border-radius: var(--lcdp-radius-media);
+  background: #ffffff;
+  object-fit: cover;
+  object-position: center center;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__photo-image {
+  height: clamp(220px, 30vw, 340px);
+}
+}
+
+
+/* Illustration éditoriale */
+:where(html[data-lcdp-css~="c029"]) .lcdp-actu-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: var(--lcdp-color-surface-soft);
+}
+
+
+/* Image de carte (Parc, Accès, Réservation, Accessoire) */
+:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+  border-radius: 11px;
+  background: #f3f5f3;
+  object-fit: cover;
+}
+
+
+/* Illustration éditoriale */
+:where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext .lcdp-illustration {
+  display: block;
+  height: auto;
+}
+
+:where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext figure > .lcdp-illustration {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+:where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext figure > .lcdp-illustration {
+  width: 100%;
+}
+}
+
+
+/* Portrait et avatar */
+#dialogue-selfie-agrandi img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(92vh - 70px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+
+/* Zoom photo commun */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+:where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):not(.lcdp-box-carousel *),
+  :where(html[data-lcdp-css~="c085"]) .lcdp-editorial-hero > img.lcdp-editorial-hero__image,
+  :where(html[data-lcdp-css~="c085"]) .lcdp-actu-image-frame > img.lcdp-actu-image {
+  transition: scale .7s ease, clip-path .7s ease;
+}
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+:where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):not(.lcdp-box-carousel *) {
+  /* Un cadre autonome conserve son emprise : (1 - 1/1.05) / 2. */
+    clip-path: inset(0 round var(--lcdp-photo-zoom-radius, 0px));
+}
+}
+
+
+/* Illustration éditoriale */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+:where(html[data-lcdp-css~="c085"]) img.lcdp-illustration {
+  --lcdp-photo-zoom-radius: 12px;
+}
+}
+
+
+/* Image de galerie */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+:where(html[data-lcdp-css~="c085"]) img.lcdp-box-galerie__image {
+  --lcdp-photo-zoom-radius: var(--lcdp-radius-media, 18px);
+}
+}
+
+
+/* Galerie du bandeau en plein écran */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+:where(html[data-lcdp-css~="c085"]) img.lcdp-bandeau-image__galerie-photo {
+  --lcdp-photo-zoom-radius: 6px;
+}
+}
+
+
+/* Image de galerie */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+:where(html[data-lcdp-css~="c042"]) img.lcdp-box-galerie__image {
+  --lcdp-photo-zoom-radius: 12px;
+}
+}
+
+
+/* Zoom photo commun */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+:where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):not(.lcdp-box-carousel *):hover {
+  scale: 1.05;
+    clip-path: inset(2.380953% round calc(var(--lcdp-photo-zoom-radius, 0px) / 1.05));
+}
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+:where(html[data-lcdp-css~="c085"]) .lcdp-editorial-hero:hover > img.lcdp-editorial-hero__image,
+  :where(html[data-lcdp-css~="c085"]) .lcdp-actu-image-frame:hover > img.lcdp-actu-image {
+  scale: 1.05;
+}
+}
+
+
+/* Illustration éditoriale */
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper figure.lcdp-editorial-hero > img.lcdp-editorial-hero__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-inline-figure > .lcdp-illustration {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper figure.lcdp-editorial-map > img.lcdp-editorial-map__image {
+  display: block;
+  width: 100%;
+  height: 136px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-contenu-editorial figure.lcdp-editorial-inline-figure > img.lcdp-illustration {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+:where(html[data-lcdp-css~="c085"]) body.lcdp-typographie-editoriale-commune .lcdp-app-wrapper .lcdp-contenu-editorial figure.lcdp-editorial-inline-figure > img.lcdp-illustration {
+  box-sizing: border-box;
+}
+
+
+/* Image de galerie */
+.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie .lcdp-box-galerie__image,
+.lcdp-box-fiche-parc .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
+  display: block !important; width: 100% !important; max-width: 100% !important;
+  height: auto !important; min-height: 0 !important;
+  aspect-ratio: 16 / 9 !important; object-fit: cover !important;
+  object-position: center center;
+}
+
+
+/* Image de carte (Parc, Accès, Réservation, Accessoire) */
+.lcdp-box-card-parc__media .lcdp-box-card-parc__image,
+.lcdp-box-card-reservation-membre__media .lcdp-box-card-reservation-membre__image,
+.lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
+  display: block; width: 100% !important; height: auto !important;
+  min-height: 0 !important; aspect-ratio: 16 / 9 !important; object-fit: cover !important;
+}
+
+.lcdp-box-card-parc-diaporama .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media > .lcdp-box-card-parc__image {
+  display: block !important; width: 100% !important; height: 100% !important;
+  min-height: 0 !important; aspect-ratio: 16 / 9 !important;
+  object-fit: cover !important; border-radius: inherit;
+}
+
+
+/* Bandeau photographique */
+.lcdp-bandeau-image__image {
+  display:block; width:calc(var(--lcdp-bandeau-taille) * 1672 / 941); min-width:calc(var(--lcdp-bandeau-taille) * 1672 / 941); max-width:none; height:var(--lcdp-bandeau-taille); aspect-ratio:1672 / 941; object-fit:contain;
+}
+
+.lcdp-bandeau-image__image[data-index-bandeau]:not([src]) {
+  visibility:hidden;
+}
+
+
+/* Galerie du bandeau en plein écran */
+.lcdp-bandeau-image__galerie-photo {
+  display:block; width:100%; height:auto; border-radius:6px;
+}
+
+.lcdp-bandeau-image__galerie-emplacement .lcdp-bandeau-image__galerie-photo {
+  width:100%; height:100%; object-fit:contain;
+}
+
+.lcdp-bandeau-image__galerie-emplacement[data-etat="chargement"] .lcdp-bandeau-image__galerie-photo {
+  visibility:hidden;
+}
+
