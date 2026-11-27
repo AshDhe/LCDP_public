@@ -3,7 +3,7 @@
 @import url("./lcdp-menu-burger.css");
 @import url("./lcdp-footer.css");
 @import url("./lcdp-wrapper.css");
-@import url("./lcdp-boite-dialogue.css?v=20261127-texture-boutons");
+@import url("./lcdp-boite-dialogue.css?v=20261127-radius8");
 @import url("./lcdp-formulaire.css");
 @import url("./lcdp-invitation-abonnement.css");
 @import url("./lcdp-fiche-parc.css");
@@ -18480,7 +18480,7 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   min-height: 42px;
   padding: 7px 10px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--lcdp-radius-button);
   font-family: Arial, system-ui, sans-serif;
   font-size: 0.73rem;
   font-weight: 700;
@@ -20276,8 +20276,8 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   --lcdp-radius-medium: 16px;
   --lcdp-radius-large: 24px;
   --lcdp-radius-media: 18px;
-  --lcdp-radius-button: 14px;
-  --lcdp-ui-button-radius: 12px;
+  --lcdp-radius-button: 8px;
+  --lcdp-ui-button-radius: var(--lcdp-radius-button);
   --lcdp-ui-button-shadow: 0 1px 2px rgba(31, 42, 36, 0.08);
   --lcdp-ui-button-shadow-hover: 0 4px 6px -2px rgba(31, 42, 36, 0.10);
   --lcdp-ui-dialog-radius: 16px;
