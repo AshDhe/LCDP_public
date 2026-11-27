@@ -98,7 +98,7 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   outline: 3px solid #b98c31;
   outline-offset: 3px;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-site-page {
+:where(html[data-lcdp-css~="c085"]) .lcdp-site-page:where(:not(.lcdp-app-wrapper)) {
   width: 100%;
   min-height: 100vh;
   display: flex;

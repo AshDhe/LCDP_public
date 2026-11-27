@@ -424,6 +424,13 @@
       "statut": "Design moderne unique, sans variante historique ni code c037 ; accueil public et membre sur les classes communes.",
       "variantes": "Footer intégré au wrapper, footer hors wrapper, contexte juridique, attente de vérification.",
       "exceptions": "Masquages multi-objets et barre d'actions de réservation dans leurs parcours ; boîte de contact commune distincte."
+    },
+    "wrapper": {
+      "css": "lcdp-wrapper.css",
+      "charge_par": "lcdp-central-mobile-first.css",
+      "statut": "Gabarit applicatif mobile-first unique, indépendant de c085 ; dimensions du wrapper moderne publié conservées.",
+      "variantes": "Écran sans navigation, accueil, document juridique et impression.",
+      "exceptions": "Les règles du conteneur administratif .lcdp-site-page hors wrapper et les états de parcours restent distincts ; les objets internes sont hors périmètre."
     }
   }
 }

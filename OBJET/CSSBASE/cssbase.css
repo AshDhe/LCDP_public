@@ -144,7 +144,7 @@ select:focus-visible {
 
 /* STRUCTURE GENERIQUE DE PAGE */
 
-.lcdp-site-page {
+.lcdp-site-page:where(:not(.lcdp-app-wrapper)) {
   width: 100%;
   min-height: 100vh;
   display: flex;

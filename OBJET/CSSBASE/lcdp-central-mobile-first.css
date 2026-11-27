@@ -2,6 +2,7 @@
 @import url("./lcdp-bandeau-nav.css");
 @import url("./lcdp-menu-burger.css");
 @import url("./lcdp-footer.css");
+@import url("./lcdp-wrapper.css");
 
 /* ======================================================================
    OBJETS GENERIQUES ET COMPOSANTS — PRESENTATION CENTRALISEE
@@ -25621,26 +25622,8 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext__content strong {
   color: var(--lcdp-color-text);
 }
-:where(html[data-lcdp-css~="c083"]) body.lcdp-app-page.lcdp-page-document-legal {
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-}
-:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper {
-  border-color: var(--lcdp-color-border);
-  box-shadow: 0 12px 32px rgba(31, 42, 36, 0.12);
-}
-:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper > .lcdp-site-main {
-  background: var(--lcdp-color-surface-soft);
-}
 :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-document-legal__content .lcdp-boxtext {
   border-color: var(--lcdp-color-border);
-}
-:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
-  padding-top: clamp(1.25rem, 4vw, 2.5rem);
-  padding-bottom: clamp(3rem, 8vw, 5rem);
-}
-:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-page-content.lcdp-document-legal {
-  gap: clamp(1rem, 2.4vw, 1.5rem);
 }
 :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-document-legal__title {
   margin: 0;
@@ -25797,7 +25780,7 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
   outline: 3px solid #b98c31;
   outline-offset: 3px;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-site-page {
+:where(html[data-lcdp-css~="c085"]) .lcdp-site-page:where(:not(.lcdp-app-wrapper)) {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -29246,67 +29229,6 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   max-width: none;
   height: 1px;
 }
-:where(html[data-lcdp-css~="c085"]) body.lcdp-app-page {
-  min-height: 100dvh;
-  margin: 0;
-  padding: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background: #f8fafc;
-  color: #0f172a;
-  font-family: Arial, system-ui, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 448px;
-  height: calc(100dvh - 24px);
-  max-height: 850px;
-  min-height: 0;
-  margin: 0;
-  border: 1px solid #f1f5f9;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 20px 25px -5px rgb(226 232 240 / 50%), 0 8px 10px -6px rgb(226 232 240 / 50%);
-  overflow: hidden;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .lcdp-site-main {
-  width: 100%;
-  flex: 1 1 auto;
-  min-height: 0;
-  min-width: 0;
-  padding: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior: contain;
-  background: rgb(248 250 252 / 50%);
-  scrollbar-width: thin;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
-  box-sizing: border-box;
-  width: 100%;
-  min-width: 0;
-  margin: 0;
-  padding: 20px;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-page-container, :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-page-content {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: none;
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-page-content.lcdp-stack-large {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-title-page-center {
   margin: 8px 0 -12px;
   font-size: 24px;
@@ -29434,19 +29356,7 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-boxtext__content p strong {
   color: #334155;
 }
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c085"]) body.lcdp-app-page {
-    align-items: center;
-    padding: 16px;
-  }
-  :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper {
-    height: calc(100dvh - 32px);
-  }
-}
 @media (max-width: 360px) {
-  :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
-    padding: 14px;
-  }
   :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-box-galerie__list {
     gap: 10px;
   }
@@ -29500,17 +29410,6 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .public-home__main {
-  display: flex;
-  flex: 1 1 auto;
-  min-width: 0;
-  min-height: 0;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 0;
-  padding: 1.5rem;
-  background: rgb(248 250 252 / 50%);
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__main::before, :where(html[data-lcdp-css~="c085"]) .public-home__main::after {
   content: "";
@@ -29954,9 +29853,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   }
 }
 @media (max-height: 720px) {
-  :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .public-home__main {
-    padding: .75rem 1.5rem;
-  }
   :where(html[data-lcdp-css~="c085"]) .public-home__actions {
     gap: .75rem;
     margin-top: .975rem;
@@ -29967,10 +29863,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   }
 }
 @media (max-height: 560px) {
-  :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .public-home__main {
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-  }
   :where(html[data-lcdp-css~="c085"]) .public-home__actions {
     gap: .5rem;
     margin-top: .65rem;
@@ -31459,13 +31351,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   }
 }
 @media print {
-  :where(html[data-lcdp-css~="c083"]) body.lcdp-app-page, :where(html[data-lcdp-css~="c083"]) .lcdp-app-wrapper, :where(html[data-lcdp-css~="c083"]) .lcdp-app-wrapper > .lcdp-site-main {
-    overflow: visible !important;
-    height: auto !important;
-    max-height: none !important;
-    box-shadow: none !important;
-    background: #fff !important;
-  }
   :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-document-legal__content > div {
     break-inside: avoid;
   }
@@ -32067,28 +31952,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 }
 /* ======================================================================== */
 
-/* Gabarit sans navigation : tunnels de connexion, de sécurité et de formulaires.
-   La classe est ajoutée à .lcdp-app-wrapper ; aucune navigation n'est chargée.
-   Cette règle protège également le rendu si un ancien script réinsère un bandeau. */
-.lcdp-app-wrapper.lcdp-app-wriper--sans {
-  display: flex;
-  flex-direction: column;
-}
-.lcdp-app-wrapper.lcdp-app-wriper--sans > :is(
-  #lcdp-bandeau-slot,
-  #lcdp-footer-slot,
-  .lcdp-box-bandeau-nav,
-  .lcdp-box-footer
-) {
-  display: none !important;
-}
-.lcdp-app-wrapper.lcdp-app-wriper--sans > .lcdp-site-main {
-  flex: 1 1 auto;
-  min-height: 0;
-}
-
-
-
 /* Reutilise les couleurs de compte existantes et les regles communes
    de bouton (y compris hover) via les variables generiques. */
 .lcdp-box-dialogue-bouton .lcdp-button.lcdp-button-compte--membre {
@@ -32311,10 +32174,6 @@ body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__note {
 
 /* Maintien de la taille commune aussi sur PC malgré l'ancienne règle c042
    qui imposait 10px à tous les paragraphes de la galerie. */
-@media (min-width: 768px) {
-}
-
-
 /* Tunnel inscription sécurité : correctifs ciblés, sans impact sur les autres formulaires. */
 .lcdp-setup-loading[hidden] { display: none !important; }
 .lcdp-setup-loading:not([hidden]) {

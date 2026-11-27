@@ -1,0 +1,151 @@
+/* LCDP — WRAPPER MOBILE-FIRST. Feuille propriétaire du conteneur applicatif. */
+
+body.lcdp-app-page {
+  min-height: 100dvh;
+  margin: 0;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: Arial, system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.lcdp-app-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 448px;
+  height: calc(100dvh - 24px);
+  max-height: 850px;
+  min-height: 0;
+  margin: 0;
+  border: 1px solid #f1f5f9;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 20px 25px -5px rgb(226 232 240 / 50%), 0 8px 10px -6px rgb(226 232 240 / 50%);
+  overflow: hidden;
+}
+.lcdp-app-wrapper > .lcdp-site-main {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  background: rgb(248 250 252 / 50%);
+  scrollbar-width: thin;
+}
+.lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+}
+.lcdp-app-wrapper .lcdp-page-container, .lcdp-app-wrapper .lcdp-page-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+}
+.lcdp-app-wrapper .lcdp-page-content.lcdp-stack-large {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.lcdp-app-wrapper > .public-home__main {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 1.5rem;
+  background: rgb(248 250 252 / 50%);
+}
+
+@media (min-width: 768px) {
+  body.lcdp-app-page {
+  align-items: center;
+  padding: 16px;
+  }
+  .lcdp-app-wrapper {
+  height: calc(100dvh - 32px);
+  }
+}
+@media (max-width: 360px) {
+  .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
+  padding: 14px;
+  }
+}
+@media (max-height: 720px) {
+  .lcdp-app-wrapper > .public-home__main {
+  padding: .75rem 1.5rem;
+  }
+}
+@media (max-height: 560px) {
+  .lcdp-app-wrapper > .public-home__main {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  }
+}
+
+/* Documents juridiques : adaptation du même wrapper. */
+:where(html[data-lcdp-css~="c083"]) body.lcdp-app-page.lcdp-page-document-legal {
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-text);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper {
+  border-color: var(--lcdp-color-border);
+  box-shadow: 0 12px 32px rgba(31, 42, 36, 0.12);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper > .lcdp-site-main {
+  background: var(--lcdp-color-surface-soft);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper > .lcdp-site-main > .lcdp-page-section {
+  padding-top: clamp(1.25rem, 4vw, 2.5rem);
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+}
+:where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-app-wrapper .lcdp-page-content.lcdp-document-legal {
+  gap: clamp(1rem, 2.4vw, 1.5rem);
+}
+
+@media print {
+  :where(html[data-lcdp-css~="c083"]) body.lcdp-app-page, :where(html[data-lcdp-css~="c083"]) .lcdp-app-wrapper, :where(html[data-lcdp-css~="c083"]) .lcdp-app-wrapper > .lcdp-site-main {
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  box-shadow: none !important;
+  background: #fff !important;
+  }
+}
+
+/* Gabarit sans navigation : tunnels de connexion, de sécurité et de formulaires.
+   La classe est ajoutée à .lcdp-app-wrapper ; aucune navigation n'est chargée.
+   Cette règle protège également le rendu si un ancien script réinsère un bandeau. */
+.lcdp-app-wrapper.lcdp-app-wriper--sans {
+  display: flex;
+  flex-direction: column;
+}
+.lcdp-app-wrapper.lcdp-app-wriper--sans > :is(
+  #lcdp-bandeau-slot,
+  #lcdp-footer-slot,
+  .lcdp-box-bandeau-nav,
+  .lcdp-box-footer
+) {
+  display: none !important;
+}
+.lcdp-app-wrapper.lcdp-app-wriper--sans > .lcdp-site-main {
+  flex: 1 1 auto;
+  min-height: 0;
+}
