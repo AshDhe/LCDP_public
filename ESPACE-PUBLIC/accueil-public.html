@@ -75,12 +75,14 @@
 
     <!-- FOOTER -->
     <div id="lcdp-footer-slot">
-    <footer class="public-home__footer" data-lcdp-box-footer>
+    <footer class="lcdp-box-footer" data-lcdp-box-footer>
+      <div class="lcdp-box-footer__inner">
       <a href="/ESPACE-PUBLIC/mentions-legales.html"
          data-site-href="/ESPACE-PUBLIC/mentions-legales.html"
          data-lcdp-footer-mentions-legales>Mentions légales - Données</a>
-      <span class="public-home__footer-separator" aria-hidden="true">•</span>
+      <span class="lcdp-box-footer__separator" aria-hidden="true">•</span>
       <button type="button" popovertarget="lcdp-footer-verification-info">Vérification</button>
+      </div>
       <div id="lcdp-footer-verification-info" class="public-home__verification-info"
            popover="auto" role="dialog" aria-label="Vérification">
         <button type="button" class="public-home__verification-close"
@@ -120,7 +122,7 @@
     }
 
     // Le footer de l'accueil utilise le meme fragment partage que les autres pages publiques.
-    // Le footer historique reste visible en secours si le chargement echoue.
+    // Le même balisage commun reste visible si le chargement échoue.
     async function initialiserFooterCommun() {
       const slot = document.getElementById("lcdp-footer-slot");
       if (!slot) return;
