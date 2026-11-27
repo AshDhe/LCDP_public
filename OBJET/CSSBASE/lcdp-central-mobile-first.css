@@ -4,98 +4,23 @@
 @import url("./lcdp-footer.css");
 @import url("./lcdp-wrapper.css");
 @import url("./lcdp-bouton-lien-picto.css");
-
-/* ======================================================================
+@import url("./lcdp-boite-dialogue.css");/* ======================================================================
    OBJETS GENERIQUES ET COMPOSANTS — PRESENTATION CENTRALISEE
    29 feuilles CSS génériques précédemment séparées, ordre d’origine de PLANIFIER conservé.
    Les règles de parcours encore présentes sont à extraire ultérieurement.
    Les classes historiques restent jusqu’à migration de leurs DOM/JS.
    ====================================================================== */
-
 /* ===================================================================
    OBJET : ALERTE
    SOURCE INTÉGRÉE : 02-box-alerte.css
    Présentation intégrée — aucun chargement externe nécessaire.
    =================================================================== */
-.lcdp-box-alerte {
-  position: fixed;
-  inset: 0;
-  z-index: 6000;
-  width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lcdp-box-alerte[hidden] {
-  display: none !important;
-}
-
-.lcdp-box-alerte__card {
-  position: relative;
-  width: min(calc(100vw - 36px), 420px);
-  max-width: 420px;
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--lcdp-space-3);
-  text-align: center;
-}
 
 
 
 
 
-.lcdp-box-alerte__message {
-  width: 100%;
-  max-width: 330px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1rem, 4vw, 1.16rem);
-  line-height: 1.42;
-  font-weight: 500;
-  text-align: center;
-}
 
-.lcdp-box-alerte__actions {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.lcdp-box-alerte[data-type="erreur"] .lcdp-box-alerte__card,
-.lcdp-box-alerte[data-type="error"] .lcdp-box-alerte__card {
-  border-color: var(--lcdp-color-orange);
-}
-
-@media (min-width: 768px) {
-  .lcdp-box-alerte {
-    padding: var(--lcdp-space-4);
-  }
-
-  .lcdp-box-alerte__card {
-    width: min(100%, 440px);
-    max-width: 440px;
-    padding: 32px 28px 26px;
-  }
-
-  .lcdp-box-alerte__message {
-    max-width: 350px;
-    font-size: 1.08rem;
-  }
-}
 /* Variantes génériques des lightbox d'accueil. Tous les styles sont ici. */
 
 .lcdp-alerte-droits--action-jaune [data-lcdp-alerte-ok],
@@ -117,95 +42,16 @@
 }
 .lcdp-alerte-accueil-ouvrir [data-lcdp-alerte-ok]:hover {
   background: var(--lcdp-color-blue-hover); border-color: var(--lcdp-color-blue-hover); color: #fff;
-}
-
-/* ===================================================================
+}/* ===================================================================
    OBJET : DIALOGUE BOUTON
    SOURCE INTÉGRÉE : 02-box-dialogue-bouton.css
    Présentation intégrée — aucun chargement externe nécessaire.
    =================================================================== */
-.lcdp-box-dialogue-bouton {
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lcdp-box-dialogue-bouton__card {
-  position: relative;
-  width: min(calc(100vw - 36px), 460px);
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--lcdp-space-3);
-  text-align: center;
-}
 
 
 
 
 
-.lcdp-box-dialogue-bouton__title {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  line-height: 1.22;
-  font-weight: 650;
-  text-align: center;
-}
-
-.lcdp-box-dialogue-bouton__text {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--lcdp-color-text-muted);
-  font-size: 1rem;
-  line-height: 1.45;
-  font-weight: 400;
-  text-align: center;
-}
-
-.lcdp-box-dialogue-bouton__actions {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--lcdp-space-2);
-  justify-items: center;
-}
-
-
-
-@media (min-width: 768px) {
-  .lcdp-box-dialogue-bouton__card {
-    width: min(100%, 500px);
-    padding: 32px 28px 26px;
-  }
-
-  .lcdp-box-dialogue-bouton__text {
-    font-size: var(--lcdp-font-size-paragraph-desktop);
-  }
-
-  
-}
 
 /* ===================================================================
    OBJET : CARD ABONNEMENT
@@ -2518,144 +2364,23 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   .lcdp-box-galerie__text {
     font-size: var(--lcdp-font-size-paragraph-desktop);
   }
-}
-
-/* ===================================================================
+}/* ===================================================================
    OBJET : DIALOGUE CHAMP
    SOURCE INTÉGRÉE : 04-box-dialogue-champ.css
    Présentation intégrée — aucun chargement externe nécessaire.
    =================================================================== */
-.lcdp-box-dialogue-champ {
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lcdp-box-dialogue-champ__card {
-  position: relative;
-  width: min(calc(100vw - 36px), 460px);
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
-  background: var(--lcdp-color-surface);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
-  text-align: center;
-}
 
 
 
 
 
-.lcdp-box-dialogue-champ__title {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto var(--lcdp-space-3);
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  line-height: 1.22;
-  font-weight: 650;
-  text-align: center;
-}
-
-.lcdp-box-dialogue-champ__form,
-.lcdp-box-dialogue-champ__content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-2);
-}
-
-.lcdp-box-dialogue-champ__content {
-  margin-bottom: var(--lcdp-space-3);
-  text-align: left;
-}
-
-.lcdp-box-dialogue-champ__field {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-1);
-}
-
-.lcdp-box-dialogue-champ__label {
-  font-weight: 600;
-  color: var(--lcdp-color-text);
-  text-align: left;
-}
-
-.lcdp-box-dialogue-champ__input,
-.lcdp-box-dialogue-champ__field select,
-.lcdp-box-dialogue-champ__field textarea {
-  width: 100%;
-  min-height: 48px;
-  padding: 11px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-}
-
-.lcdp-box-dialogue-champ__field textarea {
-  min-height: 110px;
-  resize: vertical;
-}
-
-.lcdp-box-dialogue-champ__input:focus,
-.lcdp-box-dialogue-champ__field select:focus,
-.lcdp-box-dialogue-champ__field textarea:focus {
-  outline: none;
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
-}
-
-.lcdp-box-dialogue-champ__error {
-  margin: 0 auto var(--lcdp-space-3);
-  color: #8a2d2d;
-  font-size: 0.92rem;
-  line-height: 1.35;
-  text-align: center;
-}
-
-.lcdp-box-dialogue-champ__actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--lcdp-space-2);
-}
 
 
 
-@media (min-width: 768px) {
-  .lcdp-box-dialogue-champ__card {
-    width: min(100%, 500px);
-    padding: 32px 28px 26px;
-  }
 
-  .lcdp-box-dialogue-champ__content {
-    font-size: var(--lcdp-font-size-paragraph-desktop);
-  }
 
-  .lcdp-box-dialogue-champ__actions {
-    flex-direction: row;
-    gap: var(--lcdp-space-2);
-  }
 
-  
-}
+
 
 /* ===================================================================
    OBJET : LISTE CARD
@@ -9636,247 +9361,32 @@ body.lcdp-page-reserver .lcdp-box-wraper-footer__actions > * {
   .lcdp-box-card-reservation-membre__body {
     padding: var(--lcdp-space-4);
   }
-}
-
-/* OBJET : 04-DIALOGUE-CHAMP-INVITER | CSS source rationalise */
-.lcdp-box-dialogue-champ-inviter {
-  position: fixed;
-  inset: 0;
-  z-index: 5200;
-  padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lcdp-box-dialogue-champ-inviter__card {
-  position: relative;
-  width: min(100%, 480px);
-  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
-  overflow: auto;
-  padding: var(--lcdp-space-4);
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
-  background: var(--lcdp-color-surface);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
-}
+}/* OBJET : 04-DIALOGUE-CHAMP-INVITER | CSS source rationalise */
 
 
 
-.lcdp-box-dialogue-champ-inviter__title {
-  margin: 0 44px var(--lcdp-space-4) 0;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.45rem, 6vw, 2rem);
-  line-height: 1.15;
-  text-align: center;
-}
-
-.lcdp-box-dialogue-champ-inviter__form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-3);
-}
-
-.lcdp-box-dialogue-champ-inviter__label {
-  color: var(--lcdp-color-text);
-  font-weight: 700;
-}
-
-.lcdp-box-dialogue-champ-inviter__input {
-  width: 100%;
-  min-height: 48px;
-  padding: 10px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-medium);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-}
-
-.lcdp-box-dialogue-champ-inviter__erreur {
-  margin: 0;
-  padding: var(--lcdp-space-2);
-  border: 1px solid var(--lcdp-color-orange);
-  border-radius: var(--lcdp-radius-medium);
-  color: var(--lcdp-color-text);
-  font-weight: 700;
-}
-
-.lcdp-box-dialogue-champ-inviter__actions {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--lcdp-space-2);
-  justify-items: center;
-}
 
 
 
-@media (min-width: 768px) {
-  .lcdp-box-dialogue-champ-inviter__card {
-    padding: var(--lcdp-space-5);
-  }
-}
 
 /* OBJET : 04-DIALOGUE-UPLOAD-IMG | CSS source rationalise */
-.lcdp-box-dialogue-upload-img {
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  padding: var(--lcdp-space-3);
-  background: rgba(31, 42, 36, 0.46);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lcdp-box-dialogue-upload-img__card {
-  position: relative;
-  width: min(calc(100vw - 36px), 520px);
-  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
-  overflow: auto;
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-large);
-  background: var(--lcdp-color-surface);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
-}
 
 
 
 
 
-.lcdp-box-dialogue-upload-img__title {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto var(--lcdp-space-3);
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  line-height: 1.22;
-  font-weight: 650;
-  text-align: center;
-}
-
-.lcdp-box-dialogue-upload-img__form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-3);
-}
-
-.lcdp-box-dialogue-upload-img__intro,
-.lcdp-box-dialogue-upload-img__help {
-  margin: 0;
-  color: var(--lcdp-color-text-muted);
-  line-height: 1.35;
-  text-align: left;
-}
-
-.lcdp-box-dialogue-upload-img__intro {
-  text-align: center;
-}
-
-.lcdp-box-dialogue-upload-img__help {
-  font-size: 0.88rem;
-}
-
-.lcdp-box-dialogue-upload-img__field {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-1);
-}
-
-.lcdp-box-dialogue-upload-img__label {
-  color: var(--lcdp-color-text);
-  font-weight: 600;
-  text-align: left;
-}
-
-.lcdp-box-dialogue-upload-img__select,
-.lcdp-box-dialogue-upload-img__input-file {
-  width: 100%;
-  min-height: 48px;
-  padding: 11px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-}
-
-.lcdp-box-dialogue-upload-img__select:focus,
-.lcdp-box-dialogue-upload-img__input-file:focus {
-  outline: none;
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
-}
-
-.lcdp-box-dialogue-upload-img__select:disabled {
-  background: #f1f3f5;
-  border-color: rgba(100, 116, 139, 0.34);
-  color: var(--lcdp-color-text);
-  opacity: 1;
-}
-
-.lcdp-box-dialogue-upload-img__input-file {
-  padding: 8px 10px;
-  cursor: pointer;
-}
-
-.lcdp-box-dialogue-upload-img__files {
-  max-height: 150px;
-  margin: 0;
-  padding: var(--lcdp-space-2) var(--lcdp-space-2)
-    var(--lcdp-space-2) calc(var(--lcdp-space-3) + 10px);
-  overflow: auto;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font-size: 0.88rem;
-  line-height: 1.35;
-}
-
-.lcdp-box-dialogue-upload-img__files[hidden] {
-  display: none !important;
-}
-
-.lcdp-box-dialogue-upload-img__error {
-  margin: 0;
-  color: #8a2d2d;
-  font-size: 0.92rem;
-  line-height: 1.35;
-  font-weight: 700;
-  text-align: center;
-}
-
-.lcdp-box-dialogue-upload-img__actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--lcdp-space-2);
-}
 
 
 
-@media (min-width: 768px) {
-  .lcdp-box-dialogue-upload-img__card {
-    width: min(100%, 540px);
-    padding: 32px 28px 26px;
-  }
 
-  .lcdp-box-dialogue-upload-img__actions {
-    flex-direction: row;
-  }
 
-  
-}
+
+
+
+
+
+
+
 
 /* OBJET : 04-LISTE-CARD-DIAPORAMA | CSS source rationalise */
 /* Variante dédiée au diaporama, indépendante des listes existantes. */
@@ -14924,143 +14434,17 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     gap: 4px;
   }
 }
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton {
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__card {
-  position: relative;
-  width: min(calc(100vw - 36px), 460px);
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--lcdp-space-3);
-  text-align: center;
-  max-height: calc(100svh - 36px);
-  overflow-y: auto;
-}
 
 
 
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__title {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  line-height: 1.22;
-  font-weight: 650;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__text {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--lcdp-color-text-muted);
-  font-size: 1rem;
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-  white-space: pre-line;
-  font-weight: 400;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__actions {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--lcdp-space-2);
-  justify-items: center;
-}
 
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__card {
-    width: min(100%, 500px);
-    padding: 32px 28px 26px;
-  }
-  :where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__text {
-    font-size: var(--lcdp-font-size-paragraph-desktop);
-  }
-  
-}
-:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] {
-  box-sizing: border-box;
-  padding: 16px;
-  background: rgba(15,23,42,.4);
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-}
-:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__card {
-  box-sizing: border-box;
-  width: min(320px, 100%);
-  max-width: 320px;
-  max-height: calc(100dvh - 32px);
-  margin: auto;
-  padding: 24px;
-  overflow-y: auto;
-  background: #fff;
-  border: 1px solid #f1f5f9;
-  border-radius: 24px;
-  box-shadow: 0 25px 50px -12px rgba(15,23,42,.3);
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0;
-  animation: lcdp-dialogue-connexion-entree .2s ease-out both;
-}
-:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__title {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0 24px;
-  color: #0f172a;
-  font-size: 18px;
-  font-weight: 900;
-  line-height: 28px;
-  letter-spacing: -.025em;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__text {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: none;
-  margin: 4px 0 20px;
-  padding: 0;
-  font-size: 11px;
-  font-weight: 400;
-  line-height: 16px;
-  color: #94a3b8;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__actions {
-  width: 100%;
-  display: grid;
-  grid-template-columns: minmax(0,1fr);
-  gap: 12px;
-  justify-items: stretch;
-}
+
+
+
+
+
+
+
 @keyframes lcdp-dialogue-connexion-entree {
   from {
     opacity: 0;
@@ -15069,11 +14453,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   to {
     opacity: 1;
     transform: scale(1);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  :where(html[data-lcdp-css~="c036"]) body.public-home .lcdp-box-dialogue-bouton[data-lcdp-connexion] .lcdp-box-dialogue-bouton__card {
-    animation: none;
   }
 }
 :where(html[data-lcdp-css~="c045"]) .lcdp-box-calendrier-mois--abonnement .lcdp-box-calendrier-mois__header {
@@ -17792,121 +17171,19 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     transform: translateY(-3px);
   }
 }
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ {
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card {
-  position: relative;
-  width: min(calc(100vw - 36px), 460px);
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-  text-align: center;
-  max-height: calc(100svh - 36px);
-  overflow-wrap: anywhere;
-  overflow-y: auto;
-}
 
 
 
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__title {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto var(--lcdp-space-3);
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  line-height: 1.22;
-  font-weight: 650;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__form,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-2);
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content {
-  margin-bottom: var(--lcdp-space-3);
-  text-align: left;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-1);
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__label {
-  font-weight: 600;
-  color: var(--lcdp-color-text);
-  text-align: left;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__input,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field select,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea {
-  width: 100%;
-  min-height: 48px;
-  padding: 11px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea {
-  min-height: 110px;
-  resize: vertical;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__input:focus,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field select:focus,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea:focus {
-  outline: none;
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__error {
-  margin: 0 auto var(--lcdp-space-3);
-  color: #8a2d2d;
-  font-size: 0.92rem;
-  line-height: 1.35;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--lcdp-space-2);
-}
 
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card {
-    width: min(100%, 500px);
-    padding: 32px 28px 26px;
-  }
-  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content {
-    font-size: var(--lcdp-font-size-paragraph-desktop);
-  }
-  :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions {
-    flex-direction: row;
-    gap: var(--lcdp-space-2);
-  }
-  
-}
+
+
+
+
+
+
+
+
+
 :where(html[data-lcdp-css~="c081"]) [data-lcdp-wraper-onglets-slot],:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets,:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__contenu,:where(html[data-lcdp-css~="c081"]) .lcdp-wraper-onglets__panneau,:where(html[data-lcdp-css~="c081"]) [data-lcdp-contenu-onglet] {
   width: 100%;
   max-width: 100%;
@@ -19022,79 +18299,12 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non--lecture .lcdp-box-card-listinvites-oui-non__card {
   width: min(100%, 480px);
 }
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte {
-  position: fixed;
-  inset: 0;
-  z-index: 6000;
-  width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__card {
-  position: relative;
-  width: min(calc(100vw - 36px), 420px);
-  max-width: 420px;
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--lcdp-space-3);
-  text-align: center;
-  max-height: calc(100svh - 36px);
-  overflow-y: auto;
-}
 
 
 
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__message {
-  width: 100%;
-  max-width: 330px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1rem, 4vw, 1.16rem);
-  line-height: 1.42;
-  font-weight: 500;
-  text-align: center;
-  white-space: pre-line;
-  overflow-wrap: anywhere;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__actions {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte[data-type="erreur"] .lcdp-box-alerte__card,:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte[data-type="error"] .lcdp-box-alerte__card {
-  border-color: var(--lcdp-color-orange);
-}
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte {
-    padding: var(--lcdp-space-4);
-  }
-  :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__card {
-    width: min(100%, 440px);
-    max-width: 440px;
-    padding: 32px 28px 26px;
-  }
-  :where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__message {
-    max-width: 350px;
-    font-size: 1.08rem;
-  }
-}
+
+
+
 :where(html[data-lcdp-css~="c033"]) .lcdp-alerte-droits--action-jaune [data-lcdp-alerte-ok],:where(html[data-lcdp-css~="c033"]) .lcdp-alerte-accueil-reserver [data-lcdp-alerte-ok] {
   background: var(--lcdp-color-orange);
   border-color: var(--lcdp-color-orange);
@@ -19451,83 +18661,15 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     break-inside: avoid !important;
   }
 }
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter {
-  position: fixed;
-  inset: 0;
-  z-index: 5200;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__card {
-  position: relative;
-  width: min(100%, 480px);
-  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
-  max-height: calc(100svh - (var(--lcdp-space-3) * 2));
-  overflow-wrap: anywhere;
-  overflow: auto;
-  padding: var(--lcdp-space-4);
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-}
 
 
 
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__title {
-  margin: 0 44px var(--lcdp-space-4) 0;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.45rem, 6vw, 2rem);
-  line-height: 1.15;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-3);
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__label {
-  color: var(--lcdp-color-text);
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__input {
-  width: 100%;
-  min-height: 48px;
-  padding: 10px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-medium);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__erreur {
-  margin: 0;
-  padding: var(--lcdp-space-2);
-  border: 1px solid var(--lcdp-color-orange);
-  border-radius: var(--lcdp-radius-medium);
-  color: var(--lcdp-color-text);
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__actions {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--lcdp-space-2);
-  justify-items: center;
-}
 
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__card {
-    padding: var(--lcdp-space-5);
-  }
-}
+
+
+
+
+
 :where(html[data-lcdp-css~="c064"]) .lcdp-box-commande-bar {
   width: 100%;
   min-width: 0;
@@ -19636,142 +18778,24 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
     justify-content: center;
   }
 }
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img {
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__card {
-  position: relative;
-  width: min(calc(100vw - 36px), 520px);
-  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
-  max-height: calc(100svh - (var(--lcdp-space-3) * 2));
-  overflow-wrap: anywhere;
-  overflow: auto;
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-}
 
 
 
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__title {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto var(--lcdp-space-3);
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  line-height: 1.22;
-  font-weight: 650;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-3);
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__intro,:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__help {
-  margin: 0;
-  color: var(--lcdp-color-text-muted);
-  line-height: 1.35;
-  text-align: left;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__intro {
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__help {
-  font-size: 0.88rem;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__field {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-1);
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__label {
-  color: var(--lcdp-color-text);
-  font-weight: 600;
-  text-align: left;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__select,:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__input-file {
-  width: 100%;
-  min-height: 48px;
-  padding: 11px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__select:focus,:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__input-file:focus {
-  outline: none;
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__select:disabled {
-  background: #f1f3f5;
-  border-color: rgba(100, 116, 139, 0.34);
-  color: var(--lcdp-color-text);
-  opacity: 1;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__input-file {
-  padding: 8px 10px;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__files {
-  max-height: 150px;
-  margin: 0;
-  padding: var(--lcdp-space-2) var(--lcdp-space-2) var(--lcdp-space-2) calc(var(--lcdp-space-3) + 10px);
-  overflow: auto;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font-size: 0.88rem;
-  line-height: 1.35;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__files[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__error {
-  margin: 0;
-  color: #8a2d2d;
-  font-size: 0.92rem;
-  line-height: 1.35;
-  font-weight: 700;
-  text-align: center;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--lcdp-space-2);
-}
 
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__card {
-    width: min(100%, 540px);
-    padding: 32px 28px 26px;
-  }
-  :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__actions {
-    flex-direction: row;
-  }
-  
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-image {
   display: block;
   width: 100%;
@@ -27394,19 +26418,8 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 :where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-parc .lcdp-box-formulaire .lcdp-text-strong-left, :where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-coach .lcdp-box-formulaire .lcdp-text-strong-left {
   font-weight: 700 !important;
 }
-:where(html[data-lcdp-css~="c036"]) dialog.lcdp-box-dialogue-bouton__card:not([open]) {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c036"]) dialog.lcdp-box-dialogue-bouton__card[open] {
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  box-sizing: border-box;
-  max-height: calc(100svh - 40px);
-  margin: auto;
-  overflow-y: auto;
-  display: flex;
-}
+
+
 
 
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire:has(> .lcdp-box-dialogue-bouton__close), :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext:has(> .lcdp-box-dialogue-bouton__close) {
@@ -28068,103 +27081,20 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   --lcdp-ui-voile: rgba(31, 42, 36, .46);
   --lcdp-ui-rayon-dialogue: var(--lcdp-radius-large, 24px);
   --lcdp-ui-rayon-bouton: var(--lcdp-radius-button, 14px);
-}
-
-/* Famille DIALOGUE : même fond et même coque, sans modifier les choix de
+}/* Famille DIALOGUE : même fond et même coque, sans modifier les choix de
    compte « data-lcdp-connexion » ni les fenêtres de calendrier spécialisées. */
-:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
-    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
-    .lcdp-box-dialogue-upload-img) {
-  position: fixed;
-  inset: 0;
-  z-index: 6000;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  background: var(--lcdp-ui-voile);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton, .lcdp-box-dialogue-champ,
-    .lcdp-box-dialogue-champ-inviter, .lcdp-box-dialogue-upload-img)[hidden] {
-  display: none !important;
-}
-:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
-    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
-    .lcdp-box-dialogue-upload-img)
-  :is(.lcdp-box-alerte__card, .lcdp-box-dialogue-bouton__card,
-      .lcdp-box-dialogue-champ__card, .lcdp-box-dialogue-champ-inviter__card,
-      .lcdp-box-dialogue-upload-img__card) {
-  box-sizing: border-box;
-  position: relative;
-  width: min(100%, 480px);
-  max-width: 480px;
-  max-height: calc(100vh - 32px);  /* repli navigateur */
-  max-height: calc(100dvh - 32px);
-  overflow-x: hidden;
-  overflow-y: auto;
-  margin: 0;
-  padding: clamp(20px, 4vw, 28px);
-  border: 1px solid var(--lcdp-color-border, #d7ded2);
-  border-radius: var(--lcdp-ui-rayon-dialogue);
-  background: var(--lcdp-ui-surface);
-  color: var(--lcdp-ui-texte);
-  box-shadow: 0 18px 50px rgba(31, 42, 36, .18);
-}
+
+
 /* Le niveau d'erreur est un état métier, pas une nouvelle palette de fenêtre. */
-.lcdp-box-alerte:is([data-type="erreur"], [data-type="error"]) .lcdp-box-alerte__card {
-  border-color: var(--lcdp-color-border, #d7ded2);
-}
 /* Un formulaire d'envoi d'images a besoin de plus d'espace utile. */
-.lcdp-box-dialogue-upload-img .lcdp-box-dialogue-upload-img__card {
-  width: min(100%, 540px);
-  max-width: 540px;
-}
 /* Même bouton de fermeture pour toutes les fenêtres fermables. */
-
-
 /* Titres et messages des trois familles : alerte, choix, saisie. */
-:is(.lcdp-box-dialogue-bouton:not([data-lcdp-connexion]), .lcdp-box-dialogue-champ,
-    .lcdp-box-dialogue-champ-inviter, .lcdp-box-dialogue-upload-img)
-  :is(.lcdp-box-dialogue-bouton__title, .lcdp-box-dialogue-champ__title,
-      .lcdp-box-dialogue-champ-inviter__title, .lcdp-box-dialogue-upload-img__title) {
-  color: var(--lcdp-ui-texte);
-  font-size: clamp(1.18rem, 4vw, 1.55rem);
-  line-height: 1.24;
-  font-weight: 700;
-  text-align: center;
-}
-.lcdp-box-alerte .lcdp-box-alerte__message,
-.lcdp-box-dialogue-bouton:not([data-lcdp-connexion]) .lcdp-box-dialogue-bouton__text {
-  color: var(--lcdp-ui-texte);
-  font-size: 1rem;
-  line-height: 1.45;
-  text-align: center;
-}
+
 /* OBJET BOUTON : 2 présentations seulement, primaire vert / secondaire blanc.
    Les actions spéciales du tunnel PLANIFIER conservent leur CSS de parcours. */
-
 /* Le HTML « hidden » prime toujours sur les dispositions des composants. */
-
-
 /* Actions : même alignement et même grille, quel que soit le composant hérité. */
-:is(.lcdp-box-alerte, .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
-    .lcdp-box-dialogue-champ, .lcdp-box-dialogue-champ-inviter,
-    .lcdp-box-dialogue-upload-img)
-  :is(.lcdp-dialogue-actions, .lcdp-box-dialogue-bouton__actions,
-      .lcdp-box-dialogue-champ__actions, .lcdp-box-dialogue-champ-inviter__actions,
-      .lcdp-box-dialogue-upload-img__actions) {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  margin: 0;
-}
+
 /* ======================================================================== */
 
 /* Reutilise les couleurs de compte existantes et les regles communes

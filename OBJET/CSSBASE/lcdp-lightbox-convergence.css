@@ -209,127 +209,29 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
 ) {
   max-width: calc(100% - 24px);
   max-height: calc(100% - 24px);
-}
-
-/* ==========================================================================
+}/* ==========================================================================
    Références de dialogues — quatre objets génériques Tailwind, activation EXPLICITE.
    Ces classes ne modifient aucun dialogue existant : attribution progressive
    après contrôle du contexte et du mécanisme de fermeture.
    Coexistence avec les jetons du socle LCDP et sans Preflight.
    ========================================================================== */
-.lcdp-dialogue-ref {
-  --lcdp-ref-vert: #4b6333;
-  --lcdp-ref-vert-hover: #3d5129;
-  --lcdp-ref-rose: #e90046;
-  --lcdp-ref-rose-hover: #be123c;
-  box-sizing: border-box;
-  position: fixed;
-  inset: 0;
-  z-index: 9500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  background: rgba(28, 25, 23, .5);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  font-family: var(--lcdp-font-main, ui-sans-serif, system-ui, sans-serif);
-  -webkit-font-smoothing: antialiased;
-}
 /* Mode conteneur : même objet graphique, positionné dans une fenêtre hôte.
    Cette option générique ne dépend d'aucune page métier. */
-.lcdp-dialogue-ref[data-lcdp-dialogue-context="conteneur"] {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: auto;
-}
 /* En mode conteneur, la carte reste dans la hauteur disponible du wrapper. */
-.lcdp-dialogue-ref[data-lcdp-dialogue-context="conteneur"] > .lcdp-dialogue-ref__card {
-  max-height: 100%;
-  min-height: 0;
-}
-.lcdp-dialogue-ref[hidden] { display: none !important; }
-.lcdp-dialogue-ref, .lcdp-dialogue-ref * { box-sizing: border-box; }
-.lcdp-dialogue-ref__card {
-  width: 100%;
-  max-width: 384px;
-  max-height: calc(100dvh - 32px);
-  overflow-y: auto;
-  padding: 24px;
-  border-radius: 24px;
-  border: 1px solid rgba(0, 0, 0, .05);
-  background: #fff;
-  color: #1c1917;
-  text-align: center;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .25);
-}
-.lcdp-dialogue-ref__icone {
-  width: 48px;
-  height: 48px;
-  margin-inline: auto;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.lcdp-dialogue-ref__icone svg {
-  width: 24px;
-  height: 24px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.lcdp-dialogue-ref--information .lcdp-dialogue-ref__icone {
-  background: #ecfdf5;
-  color: var(--lcdp-ref-vert);
-  border: 1px solid rgba(75, 99, 51, .2);
-}
+
+
+
+
+
+
 /* ERREUR : même gabarit, une action, signal visuel rouge. Aucune règle par page. */
-.lcdp-dialogue-ref--erreur .lcdp-dialogue-ref__icone {
-  background: #fff1f2;
-  color: #e11d48;
-  border: 1px solid rgba(251, 113, 133, .3);
-}
-.lcdp-dialogue-ref--choix .lcdp-dialogue-ref__icone {
-  background: #fffbeb;
-  color: #d97706;
-  border: 1px solid rgba(251, 191, 36, .5);
-}
-.lcdp-dialogue-ref--suppression .lcdp-dialogue-ref__icone {
-  background: #fff1f2;
-  color: #e11d48;
-  border: 1px solid rgba(251, 113, 133, .3);
-}
-.lcdp-dialogue-ref__titre {
-  margin: 16px 0 0;
-  color: #1c1917;
-  font-size: 18px;
-  font-weight: 900;
-  line-height: 1.4;
-  letter-spacing: -.025em;
-  overflow-wrap: anywhere;
-}
-.lcdp-dialogue-ref__message {
-  margin: 6px 0 0;
-  color: #78716c;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1.625;
-  overflow-wrap: anywhere;
-  white-space: pre-line;
-}
-.lcdp-dialogue-ref__actions {
-  margin-top: 24px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-.lcdp-dialogue-ref__actions--choix {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
+
+
+
+
+
+
+
 
 
 
