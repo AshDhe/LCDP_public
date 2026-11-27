@@ -1227,3 +1227,134 @@ body.lcdp-page-mon-compte
 }
 .lcdp-da-dialogue-hote > .lcdp-dialogue-ref > .lcdp-dialogue-ref__card {max-height:100%;min-height:0;}
 .lcdp-da-dialogue-hote > [data-lcdp-dialogue-context="conteneur"][hidden] {display:none!important;}
+
+/* Dialogues des parcours de compte et de préparation d'accès. */
+:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #confirmation-geolocalisation .lcdp-box-dialogue-bouton__title {
+  font-weight: 700;
+}
+
+:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #avertissement-appareil .lcdp-box-dialogue-bouton__text {
+  margin-top: 0;
+}
+
+:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #identification-actualisation .lcdp-box-dialogue-champ__input {
+  box-sizing: border-box;
+}
+
+:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__title {
+  font-weight: 700;
+}
+
+:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__text {
+  line-height: 1.6;
+}
+
+:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning .lcdp-box-dialogue-bouton__text {
+  margin-top: 0;
+}
+
+body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] > :is(.lcdp-box-dialogue-champ,.lcdp-dialogue-ref) {
+  box-sizing: border-box;
+  position: static;
+  inset: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] :is(.lcdp-box-dialogue-champ__card,.lcdp-dialogue-ref__card) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  box-shadow: none;
+}
+
+body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] .lcdp-box-dialogue-champ__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+body.lcdp-page-mon-compte #lcdp-lightbox-slot > .lcdp-box-dialogue-champ:is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) {
+  position: absolute;
+  inset: 0;
+  z-index: 5000;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  background: rgba(15, 23, 42, .40);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 396px;
+  max-height: 100%;
+  padding: 28px 20px 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 20px 35px -8px rgba(15, 23, 42, .24);
+  text-align: left;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+body.lcdp-page-mon-compte #lcdp-lightbox-slot > .lcdp-compte-dialogue-telephone .lcdp-box-dialogue-champ__card {
+    animation: lcdp-compte-telephone-entree 160ms ease-out both;
+  }
+}
+
+body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__title {
+  max-width: calc(100% - 40px);
+  margin: 0 auto 20px;
+  color: #0f172a;
+  font: 800 19px/1.3 Arial, system-ui, sans-serif;
+  letter-spacing: -.025em;
+  text-align: center;
+}
+
+body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__content {
+  margin-bottom: 20px;
+}
+
+body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+@media (max-width: 360px) {
+body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__card {
+    padding: 26px 16px 16px;
+  }
+}
+
+body.lcdp-page-mon-compte
+[data-lcdp-avertissement-fermeture] .lcdp-dialogue-ref__message {
+  color: var(--lcdp-ref-rose-hover);
+  text-align: left;
+}
+@keyframes lcdp-compte-telephone-entree {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}

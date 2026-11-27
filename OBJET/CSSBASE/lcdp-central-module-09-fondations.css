@@ -370,25 +370,8 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
 :where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre.lcdp-mention-connexion + * {
   margin-top: 0;
 }
-:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button-secondary,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-workflow-micro-action,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button-secondary,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action {
-  width: auto;
-  min-width: 0;
-  max-width: none;
-  min-height: 34px;
-  margin-top: 0;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  line-height: 1.1;
-  background: #ffffff;
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-orange);
-}
-:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button:hover,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button-secondary:hover,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-workflow-micro-action:hover,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button:hover,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button-secondary:hover,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action:hover {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: #ffffff;
-}
+
+
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c085"]) .lcdp-page-content--avec-entete {
     gap: var(--lcdp-space-2);

@@ -22536,25 +22536,8 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
 :where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre.lcdp-mention-connexion + * {
   margin-top: 0;
 }
-:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button-secondary,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-workflow-micro-action,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button-secondary,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action {
-  width: auto;
-  min-width: 0;
-  max-width: none;
-  min-height: 34px;
-  margin-top: 0;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  line-height: 1.1;
-  background: #ffffff;
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-orange);
-}
-:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button:hover,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button-secondary:hover,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-workflow-micro-action:hover,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button:hover,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button-secondary:hover,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action:hover {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: #ffffff;
-}
+
+
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c085"]) .lcdp-page-content--avec-entete {
     gap: var(--lcdp-space-2);
@@ -24272,21 +24255,15 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ) {
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #confirmation-geolocalisation::backdrop {
   background: #fff;
 }
-:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #confirmation-geolocalisation .lcdp-box-dialogue-bouton__title {
-  font-weight: 700;
-}
+
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #avertissement-appareil {
   width: 100%;
 }
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #avertissement-appareil[hidden] {
   display: none !important;
 }
-:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #avertissement-appareil .lcdp-box-dialogue-bouton__text {
-  margin-top: 0;
-}
-:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #identification-actualisation .lcdp-box-dialogue-champ__input {
-  box-sizing: border-box;
-}
+
+
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #identification-actualisation label {
   line-height: 1.5;
 }
@@ -26394,26 +26371,16 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 :where(html[data-lcdp-css~="c036"]) dialog.lcdp-setup-dialog::backdrop {
   background: #fff;
 }
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__title {
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__text {
-  line-height: 1.6;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
+
+
 :where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning {
   width: 100%;
 }
 :where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning[hidden] {
   display: none !important;
 }
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning .lcdp-box-dialogue-bouton__text {
-  margin-top: 0;
-}
+
 :where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-parc .lcdp-box-formulaire .lcdp-text-strong-left, :where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-coach .lcdp-box-formulaire .lcdp-text-strong-left {
   font-weight: 700 !important;
 }

@@ -1368,26 +1368,16 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 :where(html[data-lcdp-css~="c036"]) dialog.lcdp-setup-dialog::backdrop {
   background: #fff;
 }
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__title {
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__text {
-  line-height: 1.6;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
+
+
 :where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning {
   width: 100%;
 }
 :where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning[hidden] {
   display: none !important;
 }
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning .lcdp-box-dialogue-bouton__text {
-  margin-top: 0;
-}
+
 :where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-parc .lcdp-box-formulaire .lcdp-text-strong-left, :where(html[data-lcdp-css~="c041"]) .lcdp-page-contact-coach .lcdp-box-formulaire .lcdp-text-strong-left {
   font-weight: 700 !important;
 }

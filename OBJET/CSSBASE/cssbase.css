@@ -517,36 +517,7 @@ select:focus-visible {
   margin-top: 0;
 }
 
-#mention-suspension-abonnement-membre .lcdp-button,
-#mention-suspension-abonnement-membre .lcdp-button-secondary,
-#mention-suspension-abonnement-membre .lcdp-workflow-micro-action,
-.lcdp-mention-suspension-abonnement .lcdp-button,
-.lcdp-mention-suspension-abonnement .lcdp-button-secondary,
-.lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action {
-  width: auto;
-  min-width: 0;
-  max-width: none;
-  min-height: 34px;
-  margin-top: 0;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  line-height: 1.1;
-  background: #ffffff;
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-orange);
-}
 
-#mention-suspension-abonnement-membre .lcdp-button:hover,
-#mention-suspension-abonnement-membre .lcdp-button-secondary:hover,
-#mention-suspension-abonnement-membre .lcdp-workflow-micro-action:hover,
-.lcdp-mention-suspension-abonnement .lcdp-button:hover,
-.lcdp-mention-suspension-abonnement .lcdp-button-secondary:hover,
-.lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action:hover {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: #ffffff;
-}
 
 
 @media (min-width: 768px) {

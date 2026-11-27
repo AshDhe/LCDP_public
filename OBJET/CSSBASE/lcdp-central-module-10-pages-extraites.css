@@ -1255,21 +1255,15 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ) {
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #confirmation-geolocalisation::backdrop {
   background: #fff;
 }
-:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #confirmation-geolocalisation .lcdp-box-dialogue-bouton__title {
-  font-weight: 700;
-}
+
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #avertissement-appareil {
   width: 100%;
 }
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #avertissement-appareil[hidden] {
   display: none !important;
 }
-:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #avertissement-appareil .lcdp-box-dialogue-bouton__text {
-  margin-top: 0;
-}
-:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #identification-actualisation .lcdp-box-dialogue-champ__input {
-  box-sizing: border-box;
-}
+
+
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #identification-actualisation label {
   line-height: 1.5;
 }

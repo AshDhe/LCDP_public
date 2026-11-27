@@ -4654,3 +4654,35 @@ input[type="file"]::file-selector-button {min-height:36px;margin-right:var(--lcd
   border-radius:var(--lcdp-radius-button)!important;font-size:17px!important;font-weight:600!important;
   line-height:1.2!important;letter-spacing:normal!important;text-transform:none!important;
 }
+
+/* Variante de commande compacte de régularisation. */
+#mention-suspension-abonnement-membre .lcdp-button,
+#mention-suspension-abonnement-membre .lcdp-button-secondary,
+#mention-suspension-abonnement-membre .lcdp-workflow-micro-action,
+.lcdp-mention-suspension-abonnement .lcdp-button,
+.lcdp-mention-suspension-abonnement .lcdp-button-secondary,
+.lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action {
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  min-height: 34px;
+  margin-top: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  line-height: 1.1;
+  background: #ffffff;
+  border-color: var(--lcdp-color-orange);
+  color: var(--lcdp-color-orange);
+}
+
+#mention-suspension-abonnement-membre .lcdp-button:hover,
+#mention-suspension-abonnement-membre .lcdp-button-secondary:hover,
+#mention-suspension-abonnement-membre .lcdp-workflow-micro-action:hover,
+.lcdp-mention-suspension-abonnement .lcdp-button:hover,
+.lcdp-mention-suspension-abonnement .lcdp-button-secondary:hover,
+.lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action:hover {
+  background: var(--lcdp-color-orange);
+  border-color: var(--lcdp-color-orange);
+  color: #ffffff;
+}

@@ -554,30 +554,8 @@ body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] {
   margin: 0;
   padding: 0;
 }
-body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] > :is(.lcdp-box-dialogue-champ,.lcdp-dialogue-ref) {
-  box-sizing: border-box;
-  position: static;
-  inset: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-width: 0;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] :is(.lcdp-box-dialogue-champ__card,.lcdp-dialogue-ref__card) {
-  box-sizing: border-box;
-  width: 100%;
-  min-width: 0;
-  max-width: 100%;
-  margin: 0;
-  box-shadow: none;
-}
+
+
 body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] :is(video, [data-selfie-apercu]) {
   display: block;
   width: 100%;
@@ -591,11 +569,7 @@ body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] :is(video, [data-s
 body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] [data-selfie-message] {
   text-align: center;
 }
-body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] .lcdp-box-dialogue-champ__actions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: stretch;
-}
+
 
 body.lcdp-page-mon-compte [data-lcdp-compte-parcours-contenu] [data-selfie-fermer][data-selfie-annulation-seule] {
   grid-column: 1 / -1;
@@ -877,52 +851,14 @@ body.lcdp-page-mon-compte .lcdp-box-diginum__speciaux .lcdp-box-diginum__touche 
 body.lcdp-page-mon-compte .lcdp-app-wrapper {
   position: relative;
 }
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > .lcdp-box-dialogue-champ:is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) {
-  position: absolute;
-  inset: 0;
-  z-index: 5000;
-  width: 100%;
-  height: 100%;
-  padding: 16px;
-  background: rgba(15, 23, 42, .40);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__card {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 396px;
-  max-height: 100%;
-  padding: 28px 20px 20px;
-  border: 1px solid #e2e8f0;
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 20px 35px -8px rgba(15, 23, 42, .24);
-  text-align: left;
-}
+
+
 /* Téléphone : animer uniquement la carte, sans recalculer le fond flouté
    ni modifier les dimensions, les commandes ou les écouteurs. */
-@media (prefers-reduced-motion: no-preference) {
-  body.lcdp-page-mon-compte #lcdp-lightbox-slot > .lcdp-compte-dialogue-telephone .lcdp-box-dialogue-champ__card {
-    animation: lcdp-compte-telephone-entree 160ms ease-out both;
-  }
-}
-@keyframes lcdp-compte-telephone-entree {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: none; }
-}
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__title {
-  max-width: calc(100% - 40px);
-  margin: 0 auto 20px;
-  color: #0f172a;
-  font: 800 19px/1.3 Arial, system-ui, sans-serif;
-  letter-spacing: -.025em;
-  text-align: center;
-}
 
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__content {
-  margin-bottom: 20px;
-}
+
+
+
 body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-champ-formulaire {
   width: 100%;
   min-width: 0;
@@ -956,13 +892,7 @@ body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias,
   border-color: var(--lcdp-color-espace-accent, #4e6838);
   box-shadow: 0 0 0 3px rgba(78, 104, 56, .18);
 }
-body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__actions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: stretch;
-  gap: 10px;
-  width: 100%;
-}
+
 
 
 
@@ -971,9 +901,7 @@ body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias,
   body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) {
     padding: 12px;
   }
-  body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) .lcdp-box-dialogue-champ__card {
-    padding: 26px 16px 16px;
-  }
+
 }
 @media (prefers-reduced-motion: reduce) {
   body.lcdp-page-mon-compte #lcdp-lightbox-slot > :is(.lcdp-compte-dialogue-alias, .lcdp-compte-dialogue-telephone) :is(#nouvel-alias-membre, #nouveau-telephone-membre) {
@@ -1064,13 +992,6 @@ body.lcdp-page-mon-compte #form-mes-informations-membre .lcdp-compte-equipement-
   overflow-wrap: anywhere;
 }
 
-/* Fermeture volontaire : titre gris du gabarit existant et bouton discret.
-   L’avertissement rouge est réservé au dialogue de fermeture. */
-body.lcdp-page-mon-compte
-[data-lcdp-avertissement-fermeture] .lcdp-dialogue-ref__message {
-  color: var(--lcdp-ref-rose-hover);
-  text-align: left;
-}
 
 
 

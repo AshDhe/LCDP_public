@@ -3710,80 +3710,15 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
 :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__title{ margin-bottom: 8px; }
 :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__display{ height: 36px; margin-bottom: 8px; }
 :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touches{ gap: 4px; }}
-/* LCDP_public/OBJET/BOX/02-box-dialogue-bouton.css */
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton{
-  @apply fixed;
-  inset: 0;
-  z-index: 5000;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  @apply flex;
-  @apply items-center;
-  @apply justify-center;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__card{
-  @apply relative;
-  width: min(calc(100vw - 36px), 460px);
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-  @apply flex;
-  @apply flex-col;
-  @apply items-center;
-  gap: var(--lcdp-space-3);
-  @apply text-center;
-  max-height: calc(100svh - 36px);
-  @apply overflow-y-auto;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__title{
-  @apply w-full;
-  max-width: 350px;
-  margin: 0 auto;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  line-height: 1.22;
-  font-weight: 650;
-  @apply text-center;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__text{
-  @apply w-full;
-  max-width: 350px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--lcdp-color-text-muted);
-  font-size: 1rem;
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-  white-space: pre-line;
-  font-weight: 400;
-  @apply text-center;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__actions{
-  @apply w-full;
-  @apply grid;
-  grid-template-columns: 1fr;
-  gap: var(--lcdp-space-2);
-  justify-items: center;
-}
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__card{
-    width: min(100%, 500px);
-    padding: 32px 28px 26px;
-  }
-:where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__text{
-    font-size: var(--lcdp-font-size-paragraph-desktop);
-  }
+
+
+
+
+
+
+@media  (min-width: 768px) {
+
+
 :where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton__actions .lcdp-button{
     width: 200px;
     max-width: 200px;
@@ -6472,115 +6407,23 @@ font-size: 1.45rem;
 :where(html[data-lcdp-css~="c046"]) #lcdp-lightbox-slot [data-lcdp-box-calendrier-mois] [data-lcdp-card-jour-mois-slot]:not([hidden]){
     transform: translateY(-3px);
   }}
-/* LCDP_public/OBJET/BOX/04-box-dialogue-champ.css */
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ{
-  @apply fixed;
-  inset: 0;
-  z-index: 5000;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  @apply flex;
-  @apply items-center;
-  @apply justify-center;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card{
-  @apply relative;
-  width: min(calc(100vw - 36px), 460px);
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-  @apply text-center;
-  max-height: calc(100svh - 36px);
-  overflow-wrap: anywhere;
-  @apply overflow-y-auto;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__title{
-  @apply w-full;
-  max-width: 350px;
-  margin: 0 auto var(--lcdp-space-3);
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  line-height: 1.22;
-  font-weight: 650;
-  @apply text-center;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__form,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content{
-  @apply w-full;
-  @apply flex;
-  @apply flex-col;
-  gap: var(--lcdp-space-2);
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content{
-  margin-bottom: var(--lcdp-space-3);
-  @apply text-left;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field{
-  @apply w-full;
-  @apply flex;
-  @apply flex-col;
-  gap: var(--lcdp-space-1);
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__label{
-  font-weight: 600;
-  color: var(--lcdp-color-text);
-  @apply text-left;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__input,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field select,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea{
-  @apply w-full;
-  min-height: 48px;
-  padding: 11px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea{
-  min-height: 110px;
-  resize: vertical;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__input:focus,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field select:focus,:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__field textarea:focus{
-  outline: none;
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__error{
-  margin: 0 auto var(--lcdp-space-3);
-  color: #8a2d2d;
-  font-size: 0.92rem;
-  line-height: 1.35;
-  @apply text-center;
-}
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions{
-  @apply flex;
-  @apply flex-col;
-  @apply items-center;
-  @apply justify-center;
-  gap: var(--lcdp-space-2);
-}
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__card{
-    width: min(100%, 500px);
-    padding: 32px 28px 26px;
-  }
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__content{
-    font-size: var(--lcdp-font-size-paragraph-desktop);
-  }
-:where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions{
-    @apply flex-row;
-    gap: var(--lcdp-space-2);
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media  (min-width: 768px) {
+
+
+
 :where(html[data-lcdp-css~="c066"]) .lcdp-box-dialogue-champ__actions .lcdp-button{
     @apply w-auto;
     min-width: 160px;
@@ -7726,75 +7569,13 @@ font-size: 1.45rem;
 :where(html[data-lcdp-css~="c054"]) .lcdp-box-card-listinvites-oui-non--lecture .lcdp-box-card-listinvites-oui-non__card{
   width: min(100%, 480px);
 }
-/* LCDP_public/OBJET/BOX/02-box-alerte.css */
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte{
-  @apply fixed;
-  inset: 0;
-  z-index: 6000;
-  @apply w-full;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  @apply flex;
-  @apply items-center;
-  @apply justify-center;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte[hidden]{
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__card{
-  @apply relative;
-  width: min(calc(100vw - 36px), 420px);
-  max-width: 420px;
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-  @apply flex;
-  @apply flex-col;
-  @apply items-center;
-  gap: var(--lcdp-space-3);
-  @apply text-center;
-  max-height: calc(100svh - 36px);
-  @apply overflow-y-auto;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__message{
-  @apply w-full;
-  max-width: 330px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1rem, 4vw, 1.16rem);
-  line-height: 1.42;
-  font-weight: 500;
-  @apply text-center;
-  white-space: pre-line;
-  overflow-wrap: anywhere;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__actions{
-  @apply w-full;
-  @apply flex;
-  @apply justify-center;
-}
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte[data-type="erreur"] .lcdp-box-alerte__card,:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte[data-type="error"] .lcdp-box-alerte__card{
-  border-color: var(--lcdp-color-orange);
-}
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte{
-    padding: var(--lcdp-space-4);
-  }
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__card{
-    width: min(100%, 440px);
-    max-width: 440px;
-    padding: 32px 28px 26px;
-  }
-:where(html[data-lcdp-css~="c033"]) .lcdp-box-alerte__message{
-    max-width: 350px;
-    font-size: 1.08rem;
-  }}
+
+
+
+
+
+
+
 :where(html[data-lcdp-css~="c033"]) .lcdp-alerte-droits--action-jaune [data-lcdp-alerte-ok],:where(html[data-lcdp-css~="c033"]) .lcdp-alerte-accueil-reserver [data-lcdp-alerte-ok]{
   background: var(--lcdp-color-orange); border-color: var(--lcdp-color-orange); color: var(--lcdp-color-text);
 }
@@ -8131,78 +7912,16 @@ line-height: 1.35;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }}
-/* LCDP_public/OBJET/BOX/04-box-dialogue-champ-inviter.css */
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter{
-  @apply fixed;
-  inset: 0;
-  z-index: 5200;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  @apply flex;
-  @apply items-center;
-  @apply justify-center;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__card{
-  @apply relative;
-  width: min(100%, 480px);
-  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
-  max-height: calc(100svh - (var(--lcdp-space-3) * 2));
-  overflow-wrap: anywhere;
-  @apply overflow-auto;
-  padding: var(--lcdp-space-4);
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__title{
-  margin: 0 44px var(--lcdp-space-4) 0;
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.45rem, 6vw, 2rem);
-  line-height: 1.15;
-  @apply text-center;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__form{
-  @apply flex;
-  @apply flex-col;
-  gap: var(--lcdp-space-3);
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__label{
-  color: var(--lcdp-color-text);
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__input{
-  @apply w-full;
-  min-height: 48px;
-  padding: 10px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-medium);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__erreur{
-  margin: 0;
-  padding: var(--lcdp-space-2);
-  border: 1px solid var(--lcdp-color-orange);
-  border-radius: var(--lcdp-radius-medium);
-  color: var(--lcdp-color-text);
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__actions{
-  @apply grid;
-  grid-template-columns: 1fr;
-  gap: var(--lcdp-space-2);
-  justify-items: center;
-}
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c065"]) .lcdp-box-dialogue-champ-inviter__card{
-    padding: var(--lcdp-space-5);
-  }}
+
+
+
+
+
+
+
+
+
+
 /* LCDP_public/OBJET/BOX/04-box-commande-bar.css */
 :where(html[data-lcdp-css~="c064"]) .lcdp-box-commande-bar{
   @apply w-full;
@@ -8310,137 +8029,27 @@ line-height: 1.35;
 @media  (max-width: 767px) {:where(html[data-lcdp-css~="c064"]) body.lcdp-page-reserver .lcdp-box-commande-bar__actions{
     @apply justify-center;
   }}
-/* LCDP_public/OBJET/BOX/04-box-dialogue-upload-img.css */
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img{
-  @apply fixed;
-  inset: 0;
-  z-index: 5000;
-  padding: var(--lcdp-space-3);
-  background: var(--lcdp-ui-overlay, rgba(31, 42, 36, 0.42));
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  @apply flex;
-  @apply items-center;
-  @apply justify-center;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__card{
-  @apply relative;
-  width: min(calc(100vw - 36px), 520px);
-  max-height: calc(100vh - (var(--lcdp-space-3) * 2));
-  max-height: calc(100svh - (var(--lcdp-space-3) * 2));
-  overflow-wrap: anywhere;
-  @apply overflow-auto;
-  padding: 30px 24px 24px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: var(--lcdp-ui-dialog-radius, 16px);
-  background: var(--lcdp-color-surface);
-  box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__title{
-  @apply w-full;
-  max-width: 350px;
-  margin: 0 auto var(--lcdp-space-3);
-  color: var(--lcdp-color-text);
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  line-height: 1.22;
-  font-weight: 650;
-  @apply text-center;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__form{
-  @apply w-full;
-  @apply flex;
-  @apply flex-col;
-  gap: var(--lcdp-space-3);
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__intro,:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__help{
-  margin: 0;
-  color: var(--lcdp-color-text-muted);
-  line-height: 1.35;
-  @apply text-left;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__intro{
-  @apply text-center;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__help{
-  font-size: 0.88rem;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__field{
-  @apply w-full;
-  @apply flex;
-  @apply flex-col;
-  gap: var(--lcdp-space-1);
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__label{
-  color: var(--lcdp-color-text);
-  font-weight: 600;
-  @apply text-left;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__select,:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__input-file{
-  @apply w-full;
-  min-height: 48px;
-  padding: 11px 14px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__select:focus,:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__input-file:focus{
-  outline: none;
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 0 0 3px rgba(85, 115, 63, 0.16);
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__select:disabled{
-  background: #f1f3f5;
-  border-color: rgba(100, 116, 139, 0.34);
-  color: var(--lcdp-color-text);
-  opacity: 1;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__input-file{
-  padding: 8px 10px;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__files{
-  max-height: 150px;
-  margin: 0;
-  padding: var(--lcdp-space-2) var(--lcdp-space-2)
-    var(--lcdp-space-2) calc(var(--lcdp-space-3) + 10px);
-  @apply overflow-auto;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font-size: 0.88rem;
-  line-height: 1.35;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__files[hidden]{
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__error{
-  margin: 0;
-  color: #8a2d2d;
-  font-size: 0.92rem;
-  line-height: 1.35;
-  font-weight: 700;
-  @apply text-center;
-}
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__actions{
-  @apply flex;
-  @apply flex-col;
-  @apply items-center;
-  @apply justify-center;
-  gap: var(--lcdp-space-2);
-}
-@media  (min-width: 768px) {:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__card{
-    width: min(100%, 540px);
-    padding: 32px 28px 26px;
-  }
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__actions{
-    @apply flex-row;
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media  (min-width: 768px) {
+
+
 :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__actions .lcdp-button{
     @apply w-auto;
     min-width: 160px;
@@ -11486,25 +11095,8 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
 :where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre.lcdp-mention-connexion + *{
   margin-top: 0;
 }
-:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button-secondary,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-workflow-micro-action,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button-secondary,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action{
-  @apply w-auto;
-  min-width: 0;
-  @apply max-w-none;
-  min-height: 34px;
-  margin-top: 0;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  line-height: 1.1;
-  background: #ffffff;
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-orange);
-}
-:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button:hover,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-button-secondary:hover,:where(html[data-lcdp-css~="c085"]) #mention-suspension-abonnement-membre .lcdp-workflow-micro-action:hover,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button:hover,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-button-secondary:hover,:where(html[data-lcdp-css~="c085"]) .lcdp-mention-suspension-abonnement .lcdp-workflow-micro-action:hover{
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: #ffffff;
-}
+
+
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c085"]) .lcdp-page-content--avec-entete{
     gap: var(--lcdp-space-2);
   }
@@ -12533,11 +12125,11 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ){font-family:system-ui,Arial,sans-s
       background: #fff;
     }
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #confirmation-geolocalisation::backdrop{ background: #fff; }
-:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #confirmation-geolocalisation .lcdp-box-dialogue-bouton__title{ font-weight: 700; }
+
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #avertissement-appareil{ @apply w-full; }
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #avertissement-appareil[hidden]{ display: none !important; }
-:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #avertissement-appareil .lcdp-box-dialogue-bouton__text{ margin-top: 0; }
-:where(html[data-lcdp-css~="pc7d2c1f1f705"]) #identification-actualisation .lcdp-box-dialogue-champ__input{ @apply box-border; }
+
+
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #identification-actualisation label{ line-height: 1.5; }
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #preparation-contenu #note-coda-actualisation{ line-height: 1.5; }
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) .geo-coda-cases{ @apply grid;grid-template-columns:repeat(4,minmax(0,54px));gap:12px;@apply justify-center; }
@@ -13791,26 +13383,16 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 :where(html[data-lcdp-css~="c036"]) dialog.lcdp-setup-dialog::backdrop {
   background: #fff;
 }
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__title {
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__text {
-  line-height: 1.6;
-}
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog .lcdp-box-dialogue-bouton__actions {
-  @apply flex;
-  @apply justify-center;
-  @apply items-center;
-}
+
+
+
 :where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning {
   @apply w-full;
 }
 :where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning[hidden] {
   display: none !important;
 }
-:where(html[data-lcdp-css~="c036"]) .lcdp-setup-dialog__warning .lcdp-box-dialogue-bouton__text {
-  margin-top: 0;
-}
+
 
 /* Formulaires publics PARC et COACH : titres explicatifs de l'introduction.
    Remplace les attributs style inline des scripts de contact, sans modifier les autres formulaires. */
@@ -13819,21 +13401,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   font-weight: 700 !important;
 }
 
-/* c036/c041/c032 — Fermeture commune : pages de formulaire, boxes de texte,
-   dialogues HTML natifs. Les boutons doivent exister dans le HTML. */
-:where(html[data-lcdp-css~="c036"]) dialog.lcdp-box-dialogue-bouton__card:not([open]) {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c036"]) dialog.lcdp-box-dialogue-bouton__card[open] {
-  @apply fixed;
-  inset: 0;
-  z-index: 5000;
-  @apply box-border;
-  max-height: calc(100svh - 40px);
-  margin: auto;
-  @apply overflow-y-auto;
-  @apply flex;
-}
+
 :where(html[data-lcdp-css~="c041"]) .lcdp-box-formulaire:has(> .lcdp-box-dialogue-bouton__close),
 :where(html[data-lcdp-css~="c032"]) .lcdp-boxtext:has(> .lcdp-box-dialogue-bouton__close) {
   @apply relative;
