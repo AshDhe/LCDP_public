@@ -1578,3 +1578,156 @@ body.lcdp-page-hello > dialog.lcdp-contact-info[data-lcdp-contact-info="juridiqu
 }
 
 
+
+
+/* DIALOGUES EN VUE INTÉGRÉE */
+#lcdp-lightbox-slot .lcdp-planning-jour-workflow .lcdp-box-workflow-reservation__card {
+        box-sizing:border-box !important;
+        width:min(94vw,640px) !important;
+        max-width:640px !important;
+        max-height:min(88dvh,850px) !important;
+        overflow-y:auto !important;
+        padding:20px 18px !important;
+        border-radius:22px !important;
+      }
+
+@media(max-width:520px) {
+#lcdp-lightbox-slot .lcdp-planning-jour-workflow .lcdp-box-workflow-reservation__card {
+          width:calc(100vw - 24px) !important;padding:16px 12px !important;
+        }
+}
+
+#lcdp-planning-calendrier-slot .lcdp-planning-jour-workflow-inline,
+      #lcdp-planning-calendrier-slot .lcdp-planning-jour-workflow-inline > .lcdp-box-workflow-reservation__card {
+        position:static !important;inset:auto !important;
+        display:block !important;box-sizing:border-box;
+        width:100% !important;max-width:100% !important;min-width:0 !important;
+        height:auto !important;max-height:none !important;min-height:0 !important;
+        margin:0 !important;padding:0 !important;border:0 !important;
+        background:transparent !important;box-shadow:none !important;
+        overflow:visible !important;transform:none !important;
+        backdrop-filter:none !important;
+      }
+
+#lcdp-planning-calendrier-slot .lcdp-planning-jour-workflow-inline::backdrop {
+        display:none !important;
+      }
+
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire[data-lcdp-invitation-invites-overlay],
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire[data-lcdp-invitation-emails-overlay] {
+  position: relative !important;
+  inset: auto !important;
+  z-index: auto !important;
+  pointer-events: auto !important;
+}
+
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire :is(
+  .lcdp-box-card-listinvites-oui-non,
+  .lcdp-box-card-listemails,
+  .lcdp-dialogue-ref,
+  .lcdp-box-alerte,
+  .lcdp-box-workflow-reservation
+) {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  overflow: visible !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire :is(
+  .lcdp-box-card-listinvites-oui-non__card,
+  .lcdp-box-card-listemails__card,
+  .lcdp-dialogue-ref__card,
+  .lcdp-box-alerte__card
+) {
+  position: static !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 18px 14px !important;
+  overflow: visible !important;
+  background: var(--lcdp-color-surface, #fff) !important;
+  border: 1px solid var(--lcdp-color-border, #e7e5e4) !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+}
+
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-box-workflow-reservation__card,
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire .lcdp-box-workflow-reservation__content {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire :is(
+  .lcdp-box-card-listinvites-oui-non,
+  .lcdp-box-card-listemails,
+  .lcdp-dialogue-ref,
+  .lcdp-box-alerte,
+  .lcdp-box-workflow-reservation
+)::backdrop {
+  display: none !important;
+}
+
+@media (max-width: 520px) {
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire :is(
+    .lcdp-box-card-listinvites-oui-non__card,
+    .lcdp-box-card-listemails__card,
+    .lcdp-dialogue-ref__card,
+    .lcdp-box-alerte__card
+  ) { padding: 14px 10px !important; }
+}
+
+body.lcdp-mes-acces-page .lcdp-app-wrapper > .lcdp-site-main > .lcdp-planning-vue-secondaire.lcdp-box-card-listinvites-oui-non {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  overflow: visible !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
