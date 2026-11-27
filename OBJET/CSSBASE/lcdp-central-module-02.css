@@ -293,15 +293,9 @@
   --lcdp-coach-ink: var(--lcdp-color-text, #253329);
   --lcdp-coach-border: var(--lcdp-color-border, #d8dbd5);
 }
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav {
-  background: var(--lcdp-coach-accent);
-}
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav__space-label {
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav__logo-link {
-  text-decoration: none;
-}
+
+
+
 :where(html[data-lcdp-css~="c020"]) #lcdp-accueil-attente:not([hidden]) {
   position: fixed;
   inset: 0;
@@ -777,122 +771,19 @@
     padding: var(--lcdp-space-4);
   }
 }
-:where(html[data-lcdp-css~="c034"]) #lcdp-bandeau-slot {
-  min-height: 68px;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 4000;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 68px;
-  background: var(--lcdp-color-espace-accent, #4e6838);
-  border-bottom: 0;
-  color: #fff;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.5;
-  overflow: visible;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__inner {
-  position: relative;
-  z-index: 4001;
-  box-sizing: border-box;
-  display: flex;
-  width: 100%;
-  max-width: var(--lcdp-page-width);
-  min-height: 68px;
-  margin-inline: auto;
-  padding: 1rem 1.5rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  overflow: visible;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link, :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:visited, :where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:hover {
-  display: inline-flex;
-  min-width: 0;
-  align-items: center;
-  gap: .75rem;
-  color: #fff;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 700;
-  line-height: 1.5;
-  white-space: normal;
-  text-decoration: none;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo {
-  box-sizing: border-box;
-  display: block;
-  flex: 0 0 36px;
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  background: rgb(255 255 255 / 10%);
-  object-fit: contain;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label.lcdp-bandeau-restreint-label {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  white-space: normal;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label .lcdp-bandeau-restreint-title {
-  margin: 0;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -.025em;
-  line-height: 1;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label .lcdp-bandeau-restreint-subtitle {
-  display: block;
-  margin: 0;
-  color: rgb(167 243 208 / 80%);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .025em;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__burger-slot {
-  position: relative;
-  z-index: 4002;
-  display: flex;
-  flex: 0 0 auto;
-  margin-inline-start: auto;
-  align-items: center;
-  justify-content: flex-end;
-  overflow: visible;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > #lcdp-bandeau-slot, :where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > .lcdp-box-bandeau-nav {
-  display: block;
-  flex: 0 0 68px;
-  width: 100%;
-  min-height: 68px;
-  background: var(--lcdp-color-espace-accent, #4e6838);
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper .lcdp-box-bandeau-nav {
-  position: relative;
-  inset: auto;
-  width: 100%;
-  border: 0;
-  border-radius: 23px 23px 0 0;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper .lcdp-box-bandeau-nav__inner {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-}
-@media (max-width: 360px) {
-  :where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper .lcdp-box-bandeau-nav__inner {
-    padding-inline: 16px;
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 :where(html[data-lcdp-css~="c049"]) .lcdp-box-card-coordonnees-facture {
   border: 1px solid rgba(31, 44, 36, 0.16);
   border-radius: 0.85rem;

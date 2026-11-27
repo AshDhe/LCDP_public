@@ -782,16 +782,8 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
 :where(html[data-lcdp-css~="c085"]) .lcdp-navigation-fixe {
   position: fixed;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-box-bandeau-nav__inner:has(.lcdp-bandeau-restreint-label) {
-  justify-content: flex-start;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-bandeau-restreint-label {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  white-space: normal;
-}
+
+
 :where(html[data-lcdp-css~="c085"]) .lcdp-main-presentation {
   padding-top: 0;
   padding-bottom: 72px;
@@ -1211,9 +1203,7 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body {
     gap: 12px;
   }
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-bandeau-nav {
-  background: var(--lcdp-color-coach);
-}
+
 :where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-menu-burger__button,:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-menu-burger__nav {
   border-color: var(--lcdp-color-coach);
 }

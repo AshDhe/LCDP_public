@@ -678,28 +678,10 @@ tr > td:nth-child(2) > button:focus-visible{
     font-weight: 400 !important;
   }}
 /* LCDP_public/ESPACE-PUBLIC/formulaire-liste-attente.css */
-:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-box-bandeau-nav__inner{
-  @apply justify-start;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-label{
-  @apply flex;
-  @apply flex-col;
-  @apply items-start;
-  gap: 2px;
-  @apply whitespace-normal;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-title{
-  color: #ffffff;
-  font-size: 20px;
-  line-height: 1.08;
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-bandeau-restreint-subtitle{
-  color: #ffffff;
-  font-size: 0.86rem;
-  line-height: 1.08;
-  font-weight: 400;
-}
+
+
+
+
 :where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente .lcdp-formulaire-liste-attente-main{
   padding-top: 0;
   padding-bottom: 72px;
@@ -1994,15 +1976,9 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   --lcdp-coach-ink: var(--lcdp-color-text, #253329);
   --lcdp-coach-border: var(--lcdp-color-border, #d8dbd5);
 }
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav{
-  background: var(--lcdp-coach-accent);
-}
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav__space-label{
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav__logo-link{
-  text-decoration: none;
-}
+
+
+
 :where(html[data-lcdp-css~="c020"]) #lcdp-accueil-attente:not([hidden]){
   @apply fixed; inset: 0; z-index: 10000; @apply flex;
 @apply justify-center; @apply items-center; background: #fff;
@@ -2329,126 +2305,20 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
     padding: var(--lcdp-space-4);
   }}
 /* LCDP_public/OBJET/BOX/02-box-bandeau-nav.css — bandeau public commun, design home */
-:where(html[data-lcdp-css~="c034"]) #lcdp-bandeau-slot {
-  min-height: 68px;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav {
-  @apply fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 4000;
-  @apply box-border;
-  @apply w-full;
-  min-height: 68px;
-  background: #4e6838;
-  border-bottom: 0;
-  color: #fff;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.5;
-  @apply overflow-visible;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__inner {
-  @apply relative;
-  z-index: 4001;
-  @apply box-border;
-  @apply flex;
-  @apply w-full;
-  max-width: var(--lcdp-page-width);
-  min-height: 68px;
-  margin-inline: auto;
-  padding: 1rem 1.5rem;
-  @apply items-center;
-  @apply justify-between;
-  gap: 1rem;
-  @apply overflow-visible;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link,
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:visited,
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo-link:hover {
-  @apply inline-flex;
-  min-width: 0;
-  @apply items-center;
-  gap: .75rem;
-  color: #fff;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 700;
-  line-height: 1.5;
-  @apply whitespace-normal;
-  text-decoration: none;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__logo {
-  @apply box-border;
-  @apply block;
-  flex: 0 0 36px;
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  background: rgb(255 255 255 / 10%);
-  @apply object-contain;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label.lcdp-bandeau-restreint-label {
-  @apply flex;
-  @apply flex-col;
-  @apply items-start;
-  gap: 4px;
-  @apply whitespace-normal;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label .lcdp-bandeau-restreint-title {
-  margin: 0;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -.025em;
-  line-height: 1;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__space-label .lcdp-bandeau-restreint-subtitle {
-  @apply block;
-  margin: 0;
-  color: rgb(167 243 208 / 80%);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .025em;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-box-bandeau-nav__burger-slot {
-  @apply relative;
-  z-index: 4002;
-  @apply flex;
-  flex: 0 0 auto;
-  margin-inline-start: auto;
-  @apply items-center;
-  @apply justify-end;
-  @apply overflow-visible;
-}
+
+
+
+
+
+
+
+
+
 /* c034 — bandeau dans le gabarit public réutilisable. */
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > #lcdp-bandeau-slot,
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper > .lcdp-box-bandeau-nav {
-  @apply block;
-  flex: 0 0 68px;
-  @apply w-full;
-  min-height: 68px;
-  background: #4e6838;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper .lcdp-box-bandeau-nav {
-  @apply relative;
-  inset: auto;
-  @apply w-full;
-  border: 0;
-  border-radius: 23px 23px 0 0;
-}
-:where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper .lcdp-box-bandeau-nav__inner {
-  @apply w-full;
-  @apply max-w-none;
-  margin: 0;
-}
-@media (max-width: 360px) {
-  :where(html[data-lcdp-css~="c034"]) .lcdp-app-wrapper .lcdp-box-bandeau-nav__inner {
-    padding-inline: 16px;
-  }
-}
+
+
+
+
 /* LCDP_public/OBJET/BOX/04-box-card-coordonnees-facture.css */
 :where(html[data-lcdp-css~="c049"]) .lcdp-box-card-coordonnees-facture{
   border: 1px solid rgba(31, 44, 36, 0.16);
@@ -13967,16 +13837,8 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
 :where(html[data-lcdp-css~="c085"]) .lcdp-navigation-fixe{
   @apply fixed;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-box-bandeau-nav__inner:has(.lcdp-bandeau-restreint-label){
-  @apply justify-start;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-bandeau-restreint-label{
-  @apply flex;
-  @apply flex-col;
-  @apply items-start;
-  gap: 2px;
-  @apply whitespace-normal;
-}
+
+
 
 
 :where(html[data-lcdp-css~="c085"]) .lcdp-main-presentation{
@@ -14326,7 +14188,7 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
 :where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-intro > .lcdp-accueil-mention,:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-intro > #mention-statut-coach.lcdp-mention-connexion{ margin: 0 auto; }
 @media  (max-width: 350px) {:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-intro{ min-height: 110px; }}
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-intro{ min-height: 93px; gap: 12px; }}
-:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-bandeau-nav{ background: var(--lcdp-color-coach); }
+
 :where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-menu-burger__button,:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-menu-burger__nav{ border-color: var(--lcdp-color-coach); }
 :where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-box-menu-burger__button span{ background: var(--lcdp-color-coach); }
 :where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-actions > button.lcdp-button-accueil-coach{
@@ -15054,9 +14916,7 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ){font-family:system-ui,Arial,sans-s
 @media  (prefers-reduced-motion: reduce) {:where(html[data-lcdp-css~="pd40b46a0ac10"]) .rotation{ animation: none; }}
 :where(html[data-lcdp-css~="pd40b46a0ac10"]) .rotation{ transform-origin: 96px 96px; animation: tourner 3.36s steps(12, end) infinite; }
 /* INLINE LCDP_public/ESPACE-PUBLIC/coach.html */
-:where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav{
-      background: var(--lcdp-color-coach, #8660c8);
-    }
+
 :where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #formulaire-coach-slot .lcdp-box-formulaire__title{
       color: var(--lcdp-color-coach, #8660c8);
     }
@@ -15078,11 +14938,11 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ){font-family:system-ui,Arial,sans-s
     }
 :where(html[data-lcdp-css~="p8ffe07172f8c"]) #lcdp-contact-erreur{ @apply text-center; }
 /* INLINE LCDP_public/ESPACE-PUBLIC/connexion-coach.html */
-:where(html[data-lcdp-css~="pdf3a1ec2b292"]) .lcdp-connexion-coach #lcdp-bandeau-slot .lcdp-box-bandeau-nav{ background: var(--lcdp-color-coach, #8660c8); }
+
 :where(html[data-lcdp-css~="pdf3a1ec2b292"]) .lcdp-connexion-coach .lcdp-box-formulaire__title{ color: var(--lcdp-color-coach, #8660c8); }
 :where(html[data-lcdp-css~="pdf3a1ec2b292"]) .lcdp-connexion-coach #bouton-valider-formulaire,:where(html[data-lcdp-css~="pdf3a1ec2b292"]) .lcdp-connexion-coach #bouton-valider-formulaire:hover,:where(html[data-lcdp-css~="pdf3a1ec2b292"]) .lcdp-connexion-coach #bouton-valider-formulaire:focus-visible{ background: #fff; border-color: #fff; }
 /* INLINE LCDP_public/ESPACE-PUBLIC/connexion-parc.html */
-:where(html[data-lcdp-css~="pdbde8f380d75"]) .lcdp-connexion-parc #lcdp-bandeau-slot .lcdp-box-bandeau-nav{ background: var(--lcdp-color-parc, #d64b68); }
+
 :where(html[data-lcdp-css~="pdbde8f380d75"]) .lcdp-connexion-parc .lcdp-box-formulaire__title{ color: var(--lcdp-color-parc, #d64b68); }
 :where(html[data-lcdp-css~="pdbde8f380d75"]) .lcdp-connexion-parc #bouton-valider-formulaire,:where(html[data-lcdp-css~="pdbde8f380d75"]) .lcdp-connexion-parc #bouton-valider-formulaire:hover,:where(html[data-lcdp-css~="pdbde8f380d75"]) .lcdp-connexion-parc #bouton-valider-formulaire:focus-visible{ background: #fff; border-color: #fff; }
 /* INLINE LCDP_public/ESPACE-PUBLIC/mentions-legales.html */
@@ -15157,9 +15017,7 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ){font-family:system-ui,Arial,sans-s
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) .geo-coda-cases{ @apply grid;grid-template-columns:repeat(4,minmax(0,54px));gap:12px;@apply justify-center; }
 :where(html[data-lcdp-css~="pc7d2c1f1f705"]) #identification-actualisation .geo-coda-cases input{ @apply w-full;min-width:0;height:54px;padding:8px;@apply text-center;font-size:1.4rem; }
 /* INLINE LCDP_public/ESPACE-PUBLIC/responsable-parc.html */
-:where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #lcdp-bandeau-slot .lcdp-box-bandeau-nav{
-      background: var(--lcdp-color-parc, #d64b68);
-    }
+
 :where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #formulaire-resparc-slot .lcdp-box-formulaire__title{
       color: var(--lcdp-color-parc, #d64b68);
     }
@@ -16091,7 +15949,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper > .public-home__main { padding: .75rem 1.5rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__actions { gap: .75rem; margin-top: 1.5rem; }
   :where(html[data-lcdp-css~="c085"]) .public-home__action { padding: .75rem; gap: .25rem; }
-  :where(html[data-lcdp-css~="c085"]) .public-home .lcdp-box-bandeau-nav__inner { padding-top: .75rem; padding-bottom: .75rem; }
+  
 
 }
 @media (max-height: 560px) {
@@ -16724,10 +16582,7 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role-coach {
   --lcdp-role-accent: var(--lcdp-color-coach, #8660c8);
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-app-wrapper > #lcdp-bandeau-slot,
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-app-wrapper .lcdp-box-bandeau-nav {
-  background: var(--lcdp-role-accent);
-}
+
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__title {
   color: var(--lcdp-role-accent);
 }
