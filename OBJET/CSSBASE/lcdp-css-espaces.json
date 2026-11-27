@@ -1,0 +1,31 @@
+{
+  "strategie": "Sources autonomes communes chargées à la demande, hors assemblage historique tant que sa réconciliation n'est pas terminée.",
+  "theme": "lcdp-theme-espaces.css",
+  "modules": [
+    {
+      "source": "lcdp-abonnement-retractation.css",
+      "provenance": "LCDP_membre/ESPACE-MEMBRE/abonnement-retractation.css"
+    },
+    {
+      "source": "lcdp-alerte-planifier.css",
+      "provenance": "LCDP_membre/ESPACE-MEMBRE/alerte-planifier.css"
+    },
+    {
+      "source": "lcdp-grille-filtrage-acces.css",
+      "provenance": "LCDP_membre/ESPACE-MEMBRE/grille-filtrage-acces.css"
+    },
+    {
+      "source": "lcdp-ma-cle.css",
+      "provenance": "LCDP_membre/ESPACE-MEMBRE/lcdp-ma-cle.css"
+    },
+    {
+      "source": "lcdp-paiement-bon.css",
+      "provenance": "LCDP_membre/ESPACE-MEMBRE/paiement-membre.css"
+    },
+    {
+      "source": "lcdp-planifier-choix.css",
+      "provenance": "LCDP_membre/ESPACE-MEMBRE/planifier-choix.css"
+    }
+  ],
+  "ordre": "Charger le thème avant les composants; conserver l'ordre historique des feuilles sur chaque page."
+}
