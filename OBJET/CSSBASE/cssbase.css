@@ -1381,9 +1381,6 @@ html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque) { display: none !impor
 @media (max-width: 350px) { .lcdp-page-accueil-coach .lcdp-accueil-intro { min-height: 110px; } }
 @media (min-width: 768px) { .lcdp-page-accueil-coach .lcdp-accueil-intro { min-height: 93px; gap: 12px; } }
 /* La couleur de l'espace COACH remplace les accents de l'espace MEMBRE. */
-.lcdp-page-accueil-coach .lcdp-box-menu-burger__button,
-.lcdp-page-accueil-coach .lcdp-box-menu-burger__nav { border-color: var(--lcdp-color-coach); }
-.lcdp-page-accueil-coach .lcdp-box-menu-burger__button span { background: var(--lcdp-color-coach); }
 .lcdp-page-accueil-coach .lcdp-accueil-actions > button.lcdp-button-accueil-coach {
   background: var(--lcdp-color-coach); border-color: var(--lcdp-color-coach); color: #fff;
 }

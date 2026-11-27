@@ -208,12 +208,10 @@
         "LCDP_public/OBJET/BOX/04-box-card-parc-diaporama.css",
         "LCDP_public/OBJET/BOX/04-box-liste-card-diaporama.css",
         "LCDP_public/OBJET/BOX/02-box-wraper-footer.css",
-        "LCDP_public/OBJET/BOX/04-box-card-recaporder.css",
-        "LCDP_public/OBJET/BOX/02-box-menu-burger.css — composant c038 existant"
+        "LCDP_public/OBJET/BOX/04-box-card-recaporder.css"
       ],
       "modules_actives": [
         "c032",
-        "c038",
         "c039",
         "c043",
         "c058",
@@ -412,6 +410,14 @@
       "statut": "Feuille propriétaire unique dans CSSBASE : règles transférées de cssbase, du central, des cinq modules et de l'ancien artefact Tailwind. Validation visuelle requise.",
       "variantes": "base historique, c034, accès restreint et espaces",
       "exceptions": "Les états transversaux de masquage restent dans les parcours. Aucun style du bandeau ne doit être ajouté dans cssbase ou les modules."
+    },
+    "menu-burger": {
+      "html": "OBJET/HTMLBASE/02-menu-burger.html",
+      "css": "lcdp-menu-burger.css",
+      "charge_par": "lcdp-central-mobile-first.css",
+      "statut": "Source unique CSSBASE ; design moderne c038 du central publié, variantes conservées ; validation visuelle requise.",
+      "variantes": "Compatibilité sans c038, rôles accueil/compte/faq, boutique, accent coach, mouvement réduit.",
+      "exceptions": "lcdp-menu-burger-boutique.css reste un fichier de compatibilité sans déclaration pour les anciens chargeurs JS. Aucun style concurrent dans les modules."
     }
   }
 }
