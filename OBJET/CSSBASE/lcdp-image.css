@@ -243,3 +243,11 @@
   visibility:hidden;
 }
 
+
+/* Photo de la carte d’accès : animation dans l’objet. */
+.lcdp-carte-acces-visuel__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}

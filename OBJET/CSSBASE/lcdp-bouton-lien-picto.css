@@ -5113,3 +5113,93 @@ html[data-lcdp-css~="c085"] .lcdp-boutique-services > .public-home__action {
   color: inherit;
   font-weight: inherit;
 }
+
+/* COMMANDES : NAVIGATION PAR ONGLETS */
+/* OBJET GÉNÉRIQUE — navigation par onglets avec compteur.
+   Réutilisable par tout espace : une seule définition, aucun sélecteur de page.
+   Référence visuelle : onglet souligné, compteur en pastille. */
+.lcdp-navigation-onglets {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid #e7e5e4;
+  background: transparent;
+  text-align: center;
+}
+.lcdp-navigation-onglets__compteur {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: 25px;
+  padding: 3px 8px;
+  border: 0;
+  border-radius: 999px;
+  background: #f5f5f4;
+  color: #78716c;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* COMMANDES : BADGES D’ACTION */
+/* Label d'action compact : reprend la métrique du repère Espace personnel du menu. */
+
+.lcdp-ui-badge--action:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: #ecfdf5;
+  color: var(--lcdp-burger-accent, var(--lcdp-color-primary, #4e6838));
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.lcdp-ui-badge--action:hover:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)),
+.lcdp-ui-badge--action:focus-visible:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
+  background: var(--lcdp-burger-accent, var(--lcdp-color-primary, #4e6838));
+  color: #fff;
+}
+.lcdp-ui-badge--action[hidden]:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) { display: none !important; }
+.lcdp-ui-badge--action.lcdp-ui-badge--amber:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
+  background: #fef3c7;
+  color: #92400e;
+}
+.lcdp-ui-badge--action.lcdp-ui-badge--amber:hover:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)),
+.lcdp-ui-badge--action.lcdp-ui-badge--amber:focus-visible:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
+  background: #fde68a;
+  color: #78350f;
+}
+
+/* Variantes d'action compactes : rouge et neutre informatif. */
+
+.lcdp-ui-badge--action.lcdp-ui-badge--red:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
+  background: #fff1f2;
+  color: #be123c;
+}
+.lcdp-ui-badge--action.lcdp-ui-badge--red:hover:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)),
+.lcdp-ui-badge--action.lcdp-ui-badge--red:focus-visible:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
+  background: #ffe4e6;
+  color: #9f1239;
+}
+.lcdp-ui-badge--action.lcdp-ui-badge--neutral:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
+  background: #f1f5f9;
+  color: #64748b;
+}
+.lcdp-ui-badge--action.lcdp-ui-badge--neutral:hover:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)),
+.lcdp-ui-badge--action.lcdp-ui-badge--neutral:focus-visible:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
+  background: #e2e8f0;
+  color: #475569;
+}
