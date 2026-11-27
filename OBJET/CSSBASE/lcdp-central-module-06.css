@@ -947,18 +947,6 @@
   padding: 8px 10px;
   cursor: pointer;
 }
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__input-file::file-selector-button {
-  min-height: 36px;
-  margin-right: var(--lcdp-space-2);
-  padding: 7px 12px;
-  border: 1px solid var(--lcdp-color-logo-green);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-logo-green);
-  color: #ffffff;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
 :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__files {
   max-height: 150px;
   margin: 0;
@@ -1025,10 +1013,6 @@
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-header h1,:where(html[data-lcdp-css~="c029"]) .lcdp-actu-header h2 {
   margin: 0;
 }
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-header a,:where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-article {
   display: grid;
   gap: 20px;
@@ -1048,18 +1032,6 @@
   display: flex;
   align-items: center;
   gap: 12px;
-}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau a {
-  color: inherit;
-  flex: 1;
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau button {
-  font: inherit;
-  padding: 8px;
-  min-height: 44px;
-  cursor: pointer;
 }
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau.is-changing a {
   animation: lcdp-actu-remonte .35s ease;
@@ -1085,25 +1057,10 @@
   padding: 54px 20px 24px;
   border-radius: var(--lcdp-radius-large);
 }
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-fermer {
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  width: 44px;
-  height: 44px;
-  font-size: 28px;
-  cursor: pointer;
-}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste {
   display: grid;
   padding: 0;
   list-style: none;
-}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste a {
-  display: block;
-  padding: 16px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-button);
 }
 @media (prefers-reduced-motion:reduce) {
   :where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau.is-changing a {
@@ -1151,12 +1108,6 @@
   display: block;
   border-color: var(--actu-groupe);
   background: var(--actu-fond);
-}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actualite-picto svg {
-  display: block;
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
 }
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste {
   width: 100%;

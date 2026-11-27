@@ -155,27 +155,6 @@
   align-items: center;
   gap: 4px;
 }
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sort-button {
-  width: 30px;
-  height: 28px;
-  padding: 0;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  line-height: 1;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sort-button:hover {
-  border-color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sort-button[aria-pressed="true"] {
-  border-color: var(--lcdp-color-primary);
-  background: var(--lcdp-color-primary);
-  color: #ffffff;
-}
 :where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__filter-input {
   width: 100%;
   min-width: 120px;
@@ -202,39 +181,6 @@
   margin: 0 !important;
   border: 0 !important;
   box-shadow: none !important;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action {
-  width: auto;
-  max-width: 100%;
-  min-width: 0;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  border: 0 !important;
-  border-radius: 0;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  line-height: inherit;
-  text-align: left !important;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:hover,:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible {
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible {
-  outline: 2px solid var(--lcdp-color-primary);
-  outline-offset: 3px;
-  border-radius: 2px;
 }
 :where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot[hidden] {
   display: none !important;
@@ -306,29 +252,6 @@
   gap: var(--lcdp-space-2);
   flex-wrap: wrap;
 }
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button {
-  min-height: 34px;
-  padding: 7px 13px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:hover:not(:disabled),:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:focus-visible:not(:disabled) {
-  border-color: var(--lcdp-color-primary);
-  color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:focus-visible {
-  outline: 2px solid var(--lcdp-color-primary);
-  outline-offset: 2px;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
 @media (min-width: 700px) {
   :where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination {
     flex-direction: row;
@@ -338,31 +261,6 @@
     text-align: left;
   }
 }
-:where(html[data-lcdp-css~="c009"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button {
-  all: unset !important;
-  display: inline-block !important;
-  max-width: 100% !important;
-  color: var(--lcdp-color-text) !important;
-  font: inherit !important;
-  font-weight: 700 !important;
-  line-height: inherit !important;
-  text-align: left !important;
-  white-space: normal !important;
-  overflow-wrap: anywhere !important;
-  text-decoration: underline !important;
-  text-decoration-thickness: 1px !important;
-  text-underline-offset: 3px !important;
-  cursor: pointer !important;
-}
-:where(html[data-lcdp-css~="c009"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button:hover {
-  color: var(--lcdp-color-primary) !important;
-}
-:where(html[data-lcdp-css~="c009"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button:focus-visible {
-  color: var(--lcdp-color-primary) !important;
-  outline: 2px solid var(--lcdp-color-primary) !important;
-  outline-offset: 3px !important;
-  border-radius: 2px !important;
-}
 :where(html[data-lcdp-css~="c009"]) .lcdp-actualite-checkbox {
   display: flex !important;
   align-items: center;
@@ -371,9 +269,6 @@
 :where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin {
   box-sizing: border-box;
   margin-top: 20px;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-actions .lcdp-button {
-  white-space: normal;
 }
 :where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin {
   position: relative;
@@ -431,27 +326,6 @@
   align-items: center;
   gap: 4px;
 }
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sort-button {
-  width: 30px;
-  height: 28px;
-  padding: 0;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  line-height: 1;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sort-button:hover {
-  border-color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sort-button[aria-pressed="true"] {
-  border-color: var(--lcdp-color-primary);
-  background: var(--lcdp-color-primary);
-  color: #ffffff;
-}
 :where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__filter-input {
   width: 100%;
   min-width: 120px;
@@ -478,39 +352,6 @@
   margin: 0 !important;
   border: 0 !important;
   box-shadow: none !important;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action {
-  width: auto;
-  max-width: 100%;
-  min-width: 0;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  border: 0 !important;
-  border-radius: 0;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  line-height: inherit;
-  text-align: left !important;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:hover,:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible {
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible {
-  outline: 2px solid var(--lcdp-color-primary);
-  outline-offset: 3px;
-  border-radius: 2px;
 }
 :where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot[hidden] {
   display: none !important;
@@ -582,29 +423,6 @@
   gap: var(--lcdp-space-2);
   flex-wrap: wrap;
 }
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button {
-  min-height: 34px;
-  padding: 7px 13px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:hover:not(:disabled),:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:focus-visible:not(:disabled) {
-  border-color: var(--lcdp-color-primary);
-  color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:focus-visible {
-  outline: 2px solid var(--lcdp-color-primary);
-  outline-offset: 2px;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
 @media (min-width: 700px) {
   :where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination {
     flex-direction: row;
@@ -613,31 +431,6 @@
   :where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-info {
     text-align: left;
   }
-}
-:where(html[data-lcdp-css~="c005"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button {
-  all: unset !important;
-  display: inline-block !important;
-  max-width: 100% !important;
-  color: var(--lcdp-color-text) !important;
-  font: inherit !important;
-  font-weight: 700 !important;
-  line-height: inherit !important;
-  text-align: left !important;
-  white-space: normal !important;
-  overflow-wrap: anywhere !important;
-  text-decoration: underline !important;
-  text-decoration-thickness: 1px !important;
-  text-underline-offset: 3px !important;
-  cursor: pointer !important;
-}
-:where(html[data-lcdp-css~="c005"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button:hover {
-  color: var(--lcdp-color-primary) !important;
-}
-:where(html[data-lcdp-css~="c005"]) [data-lcdp-table-lecture-admin-body] tr > td:nth-child(2) > button:focus-visible {
-  color: var(--lcdp-color-primary) !important;
-  outline: 2px solid var(--lcdp-color-primary) !important;
-  outline-offset: 3px !important;
-  border-radius: 2px !important;
 }
 :where(html[data-lcdp-css~="c057"]) .lcdp-box-card-paiement-in-facture {
   border: 1px solid rgba(31, 44, 36, 0.13);
@@ -734,22 +527,6 @@
 :where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente [data-lcdp-formulaire-subtitle].lcdp-formulaire-liste-attente__subtitle--orange {
   color: var(--lcdp-color-orange);
 }
-:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-footer-button {
-  border: 0;
-  background: transparent;
-  color: var(--lcdp-color-text-muted);
-  font: inherit;
-  font-size: 0.95rem;
-  line-height: 1.3;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-footer-button:hover {
-  color: var(--lcdp-color-primary);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
 :where(html[data-lcdp-css~="c027"]) .lcdp-restricted-lightbox[hidden] {
   display: none !important;
 }
@@ -776,30 +553,6 @@
   background: rgba(255, 255, 255, 0.98);
   box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
   overflow-y: auto;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close {
-  position: absolute;
-  top: var(--lcdp-space-2);
-  right: var(--lcdp-space-2);
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: 999px;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: var(--lcdp-color-text);
-  font-size: 1.35rem;
-  line-height: 1;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 150ms ease, border-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close:hover {
-  background: var(--lcdp-ui-close-hover, #e9eee6);
 }
 :where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card .lcdp-box-liste-card__header {
   padding-right: 44px;
@@ -1170,18 +923,6 @@
   padding: 9px 10px;
   cursor: pointer;
 }
-:where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__input[type="file"]::file-selector-button {
-  min-height: 36px;
-  margin-right: var(--lcdp-space-2);
-  padding: 7px 12px;
-  border: 1px solid var(--lcdp-color-logo-green);
-  border-radius: 10px;
-  background: var(--lcdp-color-logo-green);
-  color: #ffffff;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
 :where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__aide {
   margin: 0;
   color: var(--lcdp-color-text-muted);
@@ -1252,23 +993,6 @@
   gap: var(--lcdp-space-1);
   justify-items: stretch;
 }
-:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-box-menu-bouton__list > .lcdp-button {
-  width: 100%;
-  max-width: none;
-  min-width: 0;
-  min-height: 40px;
-  margin: 0;
-  padding: 8px 12px;
-  justify-content: flex-start;
-  font-size: 0.9rem;
-  line-height: 1.15;
-  text-align: left;
-}
-:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-button[aria-pressed="true"],:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-button[aria-current="page"] {
-  background: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 6px 16px var(--lcdp-color-shadow);
-}
 @media (max-width: 899px) {
   :where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin {
     position: static;
@@ -1286,21 +1010,6 @@
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: var(--lcdp-space-1);
-}
-:where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__button {
-  width: 100%;
-  max-width: none;
-  min-width: 0;
-  min-height: 0;
-  aspect-ratio: 1 / 1;
-  margin: 0;
-  padding: 8px;
-  font-size: 0.8rem;
-  line-height: 1.1;
-}
-:where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__button[aria-disabled="true"] {
-  opacity: 0.62;
-  cursor: default;
 }
 @media (max-width: 1100px) {
   :where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__grid {
@@ -1388,12 +1097,6 @@
   gap: var(--lcdp-space-1);
   flex-wrap: wrap;
 }
-:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__petit-bouton {
-  min-height: 34px;
-  margin: 0;
-  padding: 6px 10px;
-  font-size: 0.82rem;
-}
 :where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre {
   width: 100%;
   padding: 6px;
@@ -1404,23 +1107,6 @@
   align-items: center;
   gap: 5px;
   flex-wrap: wrap;
-}
-:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre button {
-  min-height: 32px;
-  margin: 0;
-  padding: 5px 9px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: 7px;
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-size: 0.8rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre button:hover,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre button:focus-visible {
-  border-color: var(--lcdp-color-primary);
-  color: var(--lcdp-color-primary);
 }
 :where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien {
   width: 100%;
@@ -1446,11 +1132,6 @@
   align-items: center;
   gap: var(--lcdp-space-1);
   flex-wrap: wrap;
-}
-:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien-actions .lcdp-button {
-  min-height: 36px;
-  margin: 0;
-  padding: 7px 11px;
 }
 :where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone {
   width: 100%;
@@ -1735,9 +1416,6 @@
   gap: var(--lcdp-space-2);
   flex-wrap: wrap;
 }
-:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__actions .lcdp-button {
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__preview {
   width: 100%;
   padding-top: var(--lcdp-space-3);
@@ -1771,9 +1449,6 @@
   :where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__actions {
     align-items: stretch;
     flex-direction: column;
-  }
-  :where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__actions .lcdp-button {
-    width: 100%;
   }
 }
 :where(html[data-lcdp-css~="c010"]) .lcdp-page-faq-admin .lcdp-admin-page-content {
@@ -1813,9 +1488,6 @@
   gap: var(--lcdp-space-2);
   flex-wrap: wrap;
 }
-:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__actions .lcdp-button {
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__preview {
   width: 100%;
   padding-top: var(--lcdp-space-3);
@@ -1849,9 +1521,6 @@
   :where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__actions {
     align-items: stretch;
     flex-direction: column;
-  }
-  :where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__actions .lcdp-button {
-    width: 100%;
   }
 }
 :where(html[data-lcdp-css~="c010"]) .lcdp-faq-admin__liens {
@@ -1901,9 +1570,6 @@
   gap: var(--lcdp-space-2);
   flex-wrap: wrap;
 }
-:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__actions .lcdp-button {
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__preview {
   width: 100%;
   padding-top: var(--lcdp-space-3);
@@ -1937,8 +1603,5 @@
   :where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__actions {
     align-items: stretch;
     flex-direction: column;
-  }
-  :where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__actions .lcdp-button {
-    width: 100%;
   }
 }

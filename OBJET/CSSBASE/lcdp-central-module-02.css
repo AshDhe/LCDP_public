@@ -35,9 +35,6 @@
   gap: var(--lcdp-space-2);
   flex-wrap: wrap;
 }
-:where(html[data-lcdp-css~="c014"]) .lcdp-reglement-club-admin__actions .lcdp-button {
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c014"]) .lcdp-reglement-club-admin__preview {
   width: 100%;
   padding-top: var(--lcdp-space-3);
@@ -71,9 +68,6 @@
   :where(html[data-lcdp-css~="c014"]) .lcdp-reglement-club-admin__actions {
     align-items: stretch;
     flex-direction: column;
-  }
-  :where(html[data-lcdp-css~="c014"]) .lcdp-reglement-club-admin__actions .lcdp-button {
-    width: 100%;
   }
 }
 :where(html[data-lcdp-css~="c011"]) .lcdp-page-listpoints .lcdp-admin-page-content {
@@ -265,11 +259,6 @@
   gap: var(--lcdp-space-2);
   margin-block: var(--lcdp-space-3);
 }
-:where(html[data-lcdp-css~="c019"]) .lcdp-suspension-admin__resultats button {
-  text-align: left;
-  overflow-wrap: anywhere;
-  white-space: normal;
-}
 :where(html[data-lcdp-css~="c019"]) .lcdp-suspension-admin__recherche {
   display: grid;
   gap: var(--lcdp-space-2);
@@ -361,34 +350,6 @@
   padding: 0;
   list-style: none;
 }
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-menu-central-slot .lcdp-accueil-picto {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  width: 100%;
-  min-width: 0;
-  min-height: 190px;
-  padding: 24px 16px;
-  margin: 0;
-  border: 0;
-  border-radius: 12px;
-  color: #fff;
-  text-align: center;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-accueil-picto svg {
-  display: block;
-  width: 58px;
-  height: 58px;
-  flex: none;
-}
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-accueil-picto span {
-  font-size: .96rem;
-  line-height: 1.35;
-}
 :where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-action-orange {
   background: #e89423;
 }
@@ -398,26 +359,10 @@
 :where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-action-coach {
   background: #8660c8;
 }
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-accueil-picto:focus-visible {
-  outline: 3px solid var(--lcdp-coach-ink);
-  outline-offset: 3px;
-}
 @media (max-width: 760px) {
   :where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-menu-central-slot [data-lcdp-menu-bouton-list].lcdp-accueil-actions {
     grid-template-columns: 1fr;
     gap: 14px;
-  }
-  :where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-menu-central-slot .lcdp-accueil-picto {
-    min-height: 110px;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 20px;
-    padding: 20px 24px;
-    text-align: left;
-  }
-  :where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-accueil-picto svg {
-    width: 46px;
-    height: 46px;
   }
 }
 @media (max-width: 640px) {
@@ -532,9 +477,6 @@
   gap: var(--lcdp-space-2);
   flex-wrap: wrap;
 }
-:where(html[data-lcdp-css~="c025"]) .lcdp-mentions-admin__actions .lcdp-button {
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c025"]) .lcdp-mentions-admin__preview {
   width: 100%;
   padding-top: var(--lcdp-space-3);
@@ -568,9 +510,6 @@
   :where(html[data-lcdp-css~="c025"]) .lcdp-mentions-admin__actions {
     align-items: stretch;
     flex-direction: column;
-  }
-  :where(html[data-lcdp-css~="c025"]) .lcdp-mentions-admin__actions .lcdp-button {
-    width: 100%;
   }
 }
 :where(html[data-lcdp-css~="c026"]) .lcdp-fiche-parc-page-content {

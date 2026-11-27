@@ -1039,15 +1039,6 @@ html:where([data-lcdp-css~="p34e91f4dcc86"] ) {
   margin: 24px auto 0;
   align-items: stretch;
 }
-:where(html[data-lcdp-css~="p46d7f39dd376"]) .lcdp-paiement-cb__actions .lcdp-button {
-  width: 100%;
-  min-width: 0;
-  max-width: none;
-  min-height: 52px;
-  margin-top: 0;
-  padding: 12px 18px;
-  box-sizing: border-box;
-}
 @media (min-width: 640px) {
   :where(html[data-lcdp-css~="p46d7f39dd376"]) .lcdp-paiement-cb__actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1343,11 +1334,6 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ) {
 :where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #formulaire-coach-slot .lcdp-box-formulaire__title {
   color: var(--lcdp-color-coach, #8660c8);
 }
-:where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #formulaire-coach-slot button[type="submit"],:where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #formulaire-coach-slot button[type="submit"]:hover,:where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #formulaire-coach-slot button[type="submit"]:focus-visible {
-  background: var(--lcdp-color-coach, #8660c8);
-  border-color: var(--lcdp-color-coach, #8660c8);
-  color: #fff;
-}
 :where(html[data-lcdp-css~="p8ffe07172f8c"]) #lcdp-contact-attente:not([hidden]) {
   display: flex;
   align-items: center;
@@ -1506,11 +1492,6 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ) {
 
 :where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #formulaire-resparc-slot .lcdp-box-formulaire__title {
   color: var(--lcdp-color-parc, #d64b68);
-}
-:where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #formulaire-resparc-slot button[type="submit"],:where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #formulaire-resparc-slot button[type="submit"]:hover,:where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #formulaire-resparc-slot button[type="submit"]:focus-visible {
-  background: var(--lcdp-color-parc, #d64b68);
-  border-color: var(--lcdp-color-parc, #d64b68);
-  color: #fff;
 }
 :where(html[data-lcdp-css~="p155c9e29c5ec"]) #lcdp-contact-attente:not([hidden]) {
   display: flex;

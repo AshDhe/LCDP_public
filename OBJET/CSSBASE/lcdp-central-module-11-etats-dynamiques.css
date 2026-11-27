@@ -100,10 +100,6 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   padding-top: 24px;
   padding-bottom: env(safe-area-inset-bottom);
 }
-#lcdp-compte-bloque button {
-  display: block;
-  margin-top: 16px;
-}
 .lcdp-box-card-reservation-membre [data-action="adresse"], .lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces {
   border-color: var(--lcdp-color-logo-green) !important;
   background: var(--lcdp-color-logo-green) !important;
@@ -333,19 +329,6 @@ html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque) {
   flex-direction: column;
   align-items: center;
   gap: var(--lcdp-space-2);
-}
-#form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button {
-  margin-top: 0;
-}
-#form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-text);
-}
-#form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange:hover {
-  background: var(--lcdp-color-orange-hover);
-  border-color: var(--lcdp-color-orange-hover);
-  color: var(--lcdp-color-text);
 }
 
 

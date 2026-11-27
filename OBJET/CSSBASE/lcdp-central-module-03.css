@@ -997,21 +997,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   display: grid;
   gap: 5px;
 }
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__zoom-button {
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  border: 1px solid #bdbdb7;
-  border-radius: 9px;
-  background: rgba(255, 255, 255, 0.94);
-  color: #172126;
-  font: 700 1.25rem/1 sans-serif;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__zoom-button:hover,:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__zoom-button:focus-visible {
-  background: #ffffff;
-  border-color: #537440;
-}
 @media (max-width: 760px) {
   :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique {
     padding: 12px;
@@ -1019,9 +1004,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   }
   :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__filters {
     grid-template-columns: 1fr;
-  }
-  :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__actions .lcdp-button {
-    width: 100%;
   }
   :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__map-shell,:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__map {
     min-height: 430px;
@@ -1044,20 +1026,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 12px 32px rgba(31, 42, 36, 0.22);
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  border: 1px solid #bdbdb7;
-  border-radius: 50%;
-  background: #ffffff;
-  color: #172126;
-  font: 700 1rem/1 sans-serif;
-  cursor: pointer;
 }
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc {
   flex-direction: column;
@@ -1286,52 +1254,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 4px;
 }
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 0;
-  aspect-ratio: 1 / 1;
-  padding: 5px;
-  border: 1px solid #bdc4c9;
-  border-radius: 9px;
-  background: #f6f7f8;
-  box-shadow: 0 2px 3px rgba(21, 29, 34, .07);
-  color: #12171c;
-  font-family: inherit;
-  font-size: 22px;
-  line-height: 1;
-  font-weight: 650;
-  font-variant-numeric: tabular-nums;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche:active {
-  background: #e7eaec;
-  box-shadow: none;
-}
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche:focus-visible {
-  outline: 3px solid #527542;
-  outline-offset: 2px;
-}
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche:disabled {
-  opacity: .55;
-  cursor: wait;
-}
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  pointer-events: none;
-}
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche--effacer img {
-  width: 24px;
-  height: 24px;
-}
 :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__message {
   margin: 13px 0 0;
   color: #a12626;
@@ -1358,10 +1280,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touches {
     gap: 4px;
   }
-  :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche {
-    font-size: 24px;
-    border-radius: 10px;
-  }
 }
 @media (max-height: 590px) {
   :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__card {
@@ -1377,10 +1295,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   }
   :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touches {
     gap: 4px;
-  }
-  :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche {
-    min-height: 0;
-    max-height: none;
   }
 }
 :where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton {

@@ -116,27 +116,6 @@
   @apply items-center;
   gap: 4px;
 }
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sort-button{
-  width: 30px;
-  height: 28px;
-  padding: 0;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  line-height: 1;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sort-button:hover{
-  border-color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__sort-button[aria-pressed="true"]{
-  border-color: var(--lcdp-color-primary);
-  background: var(--lcdp-color-primary);
-  color: #ffffff;
-}
 :where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__filter-input{
   @apply w-full;
   min-width: 120px;
@@ -166,39 +145,6 @@
   margin: 0 !important;
   border: 0 !important;
   box-shadow: none !important;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action{
-  @apply w-auto;
-  @apply max-w-full;
-  min-width: 0;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  border: 0 !important;
-  border-radius: 0;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  line-height: inherit;
-  text-align: left !important;
-  @apply whitespace-normal;
-  overflow-wrap: anywhere;
-  @apply cursor-pointer;
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:hover,:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible{
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible{
-  outline: 2px solid var(--lcdp-color-primary);
-  outline-offset: 3px;
-  border-radius: 2px;
 }
 :where(html[data-lcdp-css~="c009"]) #lcdp-parc-edition-slot[hidden]{
   display: none !important;
@@ -268,29 +214,6 @@
   gap: var(--lcdp-space-2);
   @apply flex-wrap;
 }
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button{
-  min-height: 34px;
-  padding: 7px 13px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:hover:not(:disabled),:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:focus-visible:not(:disabled){
-  border-color: var(--lcdp-color-primary);
-  color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:focus-visible{
-  outline: 2px solid var(--lcdp-color-primary);
-  outline-offset: 2px;
-}
-:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination-button:disabled{
-  opacity: 0.45;
-  cursor: not-allowed;
-}
 @media  (min-width: 700px) {:where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin__pagination{
     @apply flex-row;
     @apply justify-between;
@@ -328,7 +251,6 @@ tr > td:nth-child(2) > button:focus-visible{
 }
 :where(html[data-lcdp-css~="c009"]) .lcdp-actualite-checkbox{display:flex!important;@apply items-center;gap:8px;}
 :where(html[data-lcdp-css~="c009"]) .lcdp-table-lecture-admin{@apply box-border;margin-top:20px;}
-:where(html[data-lcdp-css~="c009"]) .lcdp-actualite-actions .lcdp-button{@apply whitespace-normal;}
 /* LCDP_admin/ESPACE-ADMIN/A_STRUCTURE/table-lecture-admin.css */
 :where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin{
   @apply relative;
@@ -386,27 +308,6 @@ tr > td:nth-child(2) > button:focus-visible{
   @apply items-center;
   gap: 4px;
 }
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sort-button{
-  width: 30px;
-  height: 28px;
-  padding: 0;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  line-height: 1;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sort-button:hover{
-  border-color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__sort-button[aria-pressed="true"]{
-  border-color: var(--lcdp-color-primary);
-  background: var(--lcdp-color-primary);
-  color: #ffffff;
-}
 :where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__filter-input{
   @apply w-full;
   min-width: 120px;
@@ -436,39 +337,6 @@ tr > td:nth-child(2) > button:focus-visible{
   margin: 0 !important;
   border: 0 !important;
   box-shadow: none !important;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action{
-  @apply w-auto;
-  @apply max-w-full;
-  min-width: 0;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  border: 0 !important;
-  border-radius: 0;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  line-height: inherit;
-  text-align: left !important;
-  @apply whitespace-normal;
-  overflow-wrap: anywhere;
-  @apply cursor-pointer;
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:hover,:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible{
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__table button.lcdp-table-lecture-admin__cell-action:focus-visible{
-  outline: 2px solid var(--lcdp-color-primary);
-  outline-offset: 3px;
-  border-radius: 2px;
 }
 :where(html[data-lcdp-css~="c005"]) #lcdp-parc-edition-slot[hidden]{
   display: none !important;
@@ -537,29 +405,6 @@ tr > td:nth-child(2) > button:focus-visible{
   @apply justify-center;
   gap: var(--lcdp-space-2);
   @apply flex-wrap;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button{
-  min-height: 34px;
-  padding: 7px 13px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 700;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:hover:not(:disabled),:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:focus-visible:not(:disabled){
-  border-color: var(--lcdp-color-primary);
-  color: var(--lcdp-color-primary);
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:focus-visible{
-  outline: 2px solid var(--lcdp-color-primary);
-  outline-offset: 2px;
-}
-:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination-button:disabled{
-  opacity: 0.45;
-  cursor: not-allowed;
 }
 @media  (min-width: 700px) {:where(html[data-lcdp-css~="c005"]) .lcdp-table-lecture-admin__pagination{
     @apply flex-row;
@@ -689,22 +534,6 @@ tr > td:nth-child(2) > button:focus-visible{
 :where(html[data-lcdp-css~="c027"]) .lcdp-page-formulaire-liste-attente [data-lcdp-formulaire-subtitle].lcdp-formulaire-liste-attente__subtitle--orange{
   color: var(--lcdp-color-orange);
 }
-:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-footer-button{
-  border: 0;
-  background: transparent;
-  color: var(--lcdp-color-text-muted);
-  font: inherit;
-  font-size: 0.95rem;
-  line-height: 1.3;
-  font-weight: 500;
-  text-decoration: none;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-footer-button:hover{
-  color: var(--lcdp-color-primary);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
 :where(html[data-lcdp-css~="c027"]) .lcdp-restricted-lightbox[hidden]{
   display: none !important;
 }
@@ -731,30 +560,6 @@ tr > td:nth-child(2) > button:focus-visible{
   background: rgba(255, 255, 255, 0.98);
   box-shadow: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31, 42, 36, 0.12), 0 8px 10px -6px rgba(31, 42, 36, 0.10));
   @apply overflow-y-auto;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close{
-  @apply absolute;
-  top: var(--lcdp-space-2);
-  right: var(--lcdp-space-2);
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--lcdp-ui-dialog-border, rgba(31, 42, 36, 0.14));
-  border-radius: 999px;
-  background: var(--lcdp-ui-close-bg, #f7f7f4);
-  color: var(--lcdp-color-text);
-  font-size: 1.35rem;
-  line-height: 1;
-  @apply cursor-pointer;
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  transition: background-color 150ms ease, border-color 150ms ease;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close[hidden] {
-  display: none !important;
-}
-:where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-close:hover{
-  background: var(--lcdp-ui-close-hover, #e9eee6);
 }
 :where(html[data-lcdp-css~="c027"]) .lcdp-restricted-legal-card .lcdp-box-liste-card__header{
   padding-right: 44px;
@@ -923,18 +728,6 @@ tr > td:nth-child(2) > button:focus-visible{
   padding: 9px 10px;
   @apply cursor-pointer;
 }
-:where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__input[type="file"]::file-selector-button{
-  min-height: 36px;
-  margin-right: var(--lcdp-space-2);
-  padding: 7px 12px;
-  border: 1px solid var(--lcdp-color-logo-green);
-  border-radius: 10px;
-  background: var(--lcdp-color-logo-green);
-  color: #ffffff;
-  font: inherit;
-  font-weight: 600;
-  @apply cursor-pointer;
-}
 :where(html[data-lcdp-css~="c016"]) .lcdp-upload-img__aide{
   margin: 0;
   color: var(--lcdp-color-text-muted);
@@ -1006,23 +799,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   gap: var(--lcdp-space-1);
   justify-items: stretch;
 }
-:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-box-menu-bouton__list > .lcdp-button{
-  @apply w-full;
-  @apply max-w-none;
-  min-width: 0;
-  min-height: 40px;
-  margin: 0;
-  padding: 8px 12px;
-  @apply justify-start;
-  font-size: 0.9rem;
-  line-height: 1.15;
-  @apply text-left;
-}
-:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-button[aria-pressed="true"],:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin .lcdp-button[aria-current="page"]{
-  background: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 6px 16px var(--lcdp-color-shadow);
-}
 @media  (max-width: 899px) {:where(html[data-lcdp-css~="c003"]) .lcdp-menu-gauche-admin{
     @apply static;
     padding-right: 0;
@@ -1039,21 +815,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   @apply grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: var(--lcdp-space-1);
-}
-:where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__button{
-  @apply w-full;
-  @apply max-w-none;
-  min-width: 0;
-  min-height: 0;
-  aspect-ratio: 1 / 1;
-  margin: 0;
-  padding: 8px;
-  font-size: 0.8rem;
-  line-height: 1.1;
-}
-:where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__button[aria-disabled="true"]{
-  opacity: 0.62;
-  @apply cursor-default;
 }
 @media  (max-width: 1100px) {:where(html[data-lcdp-css~="c004"]) .lcdp-mini-galerie-menu-centre-admin__grid{
     grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -1136,12 +897,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   gap: var(--lcdp-space-1);
   @apply flex-wrap;
 }
-:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__petit-bouton{
-  min-height: 34px;
-  margin: 0;
-  padding: 6px 10px;
-  font-size: 0.82rem;
-}
 :where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre{
   @apply w-full;
   padding: 6px;
@@ -1152,23 +907,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   @apply items-center;
   gap: 5px;
   @apply flex-wrap;
-}
-:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre button{
-  min-height: 32px;
-  margin: 0;
-  padding: 5px 9px;
-  border: 1px solid var(--lcdp-color-border);
-  border-radius: 7px;
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-size: 0.8rem;
-  font-weight: 700;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre button:hover,:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__barre button:focus-visible{
-  border-color: var(--lcdp-color-primary);
-  color: var(--lcdp-color-primary);
 }
 :where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien{
   @apply w-full;
@@ -1194,11 +932,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   @apply items-center;
   gap: var(--lcdp-space-1);
   @apply flex-wrap;
-}
-:where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__lien-actions .lcdp-button{
-  min-height: 36px;
-  margin: 0;
-  padding: 7px 11px;
 }
 :where(html[data-lcdp-css~="c000"]) .lcdp-editeur-contenu__zone{
   @apply w-full;
@@ -1461,9 +1194,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   gap: var(--lcdp-space-2);
   @apply flex-wrap;
 }
-:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__actions .lcdp-button{
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__preview{
   @apply w-full;
   padding-top: var(--lcdp-space-3);
@@ -1496,9 +1226,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
 @media  (max-width: 620px) {:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__actions{
     @apply items-stretch;
     @apply flex-col;
-  }
-:where(html[data-lcdp-css~="c013"]) .lcdp-reglement-app-admin__actions .lcdp-button{
-    @apply w-full;
   }}
 /* LCDP_admin/ESPACE-ADMIN/B_ADMIN/faq-admin.css */
 :where(html[data-lcdp-css~="c010"]) .lcdp-page-faq-admin .lcdp-admin-page-content{
@@ -1538,9 +1265,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   gap: var(--lcdp-space-2);
   @apply flex-wrap;
 }
-:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__actions .lcdp-button{
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__preview{
   @apply w-full;
   padding-top: var(--lcdp-space-3);
@@ -1573,9 +1297,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
 @media  (max-width: 620px) {:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__actions{
     @apply items-stretch;
     @apply flex-col;
-  }
-:where(html[data-lcdp-css~="c010"]) .lcdp-mentions-admin__actions .lcdp-button{
-    @apply w-full;
   }}
 :where(html[data-lcdp-css~="c010"]) .lcdp-faq-admin__liens{ @apply flex; @apply flex-wrap; @apply items-center; gap:10px; margin-top:12px; }
 :where(html[data-lcdp-css~="c010"]) .lcdp-faq-admin__liens [role="status"]{ font-size:.9rem; }
@@ -1617,9 +1338,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   gap: var(--lcdp-space-2);
   @apply flex-wrap;
 }
-:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__actions .lcdp-button{
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__preview{
   @apply w-full;
   padding-top: var(--lcdp-space-3);
@@ -1652,9 +1370,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
 @media  (max-width: 620px) {:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__actions{
     @apply items-stretch;
     @apply flex-col;
-  }
-:where(html[data-lcdp-css~="c012"]) .lcdp-mentions-admin__actions .lcdp-button{
-    @apply w-full;
   }}
 /* LCDP_admin/ESPACE-ADMIN/B_ADMIN/reglement-club-admin.css */
 :where(html[data-lcdp-css~="c014"]) .lcdp-page-reglement-club-admin .lcdp-admin-page-content{
@@ -1694,9 +1409,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   gap: var(--lcdp-space-2);
   @apply flex-wrap;
 }
-:where(html[data-lcdp-css~="c014"]) .lcdp-reglement-club-admin__actions .lcdp-button{
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c014"]) .lcdp-reglement-club-admin__preview{
   @apply w-full;
   padding-top: var(--lcdp-space-3);
@@ -1729,9 +1441,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
 @media  (max-width: 620px) {:where(html[data-lcdp-css~="c014"]) .lcdp-reglement-club-admin__actions{
     @apply items-stretch;
     @apply flex-col;
-  }
-:where(html[data-lcdp-css~="c014"]) .lcdp-reglement-club-admin__actions .lcdp-button{
-    @apply w-full;
   }}
 /* LCDP_admin/ESPACE-ADMIN/B_ADMIN/list-points.css */
 :where(html[data-lcdp-css~="c011"]) .lcdp-page-listpoints .lcdp-admin-page-content{
@@ -1910,7 +1619,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   }}
 :where(html[data-lcdp-css~="c019"]) .lcdp-suspension-admin__actions{ @apply flex; @apply flex-wrap; gap:var(--lcdp-space-2); margin-block:var(--lcdp-space-3); }
 :where(html[data-lcdp-css~="c019"]) .lcdp-suspension-admin__resultats{ @apply grid; gap:var(--lcdp-space-2); margin-block:var(--lcdp-space-3); }
-:where(html[data-lcdp-css~="c019"]) .lcdp-suspension-admin__resultats button{ @apply text-left; overflow-wrap:anywhere; @apply whitespace-normal; }
 :where(html[data-lcdp-css~="c019"]) .lcdp-suspension-admin__recherche{ @apply grid; gap:var(--lcdp-space-2); }
 /* LCDP_admin/ESPACE-ADMIN/C_MEMBRES/parrains.css */
 :where(html[data-lcdp-css~="c018"]) .lcdp-page-parrains-admin .lcdp-admin-page-content,:where(html[data-lcdp-css~="c018"]) #lcdp-parrains-onglets-slot,:where(html[data-lcdp-css~="c018"]) .lcdp-parrains-admin__table{
@@ -1970,33 +1678,12 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   @apply items-stretch; gap: 18px; @apply w-full; @apply max-w-none;
   margin: 0; padding: 0; list-style: none;
 }
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-menu-central-slot .lcdp-accueil-picto{
-  @apply box-border; @apply flex; @apply flex-col;
-  @apply items-center; @apply justify-center; gap: 14px;
-  @apply w-full; min-width: 0; min-height: 190px;
-  padding: 24px 16px; margin: 0; border: 0; border-radius: 12px;
-  color: #fff; @apply text-center; @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-accueil-picto svg{
-  @apply block; width: 58px; height: 58px; flex: none;
-}
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-accueil-picto span{
-  font-size: .96rem; line-height: 1.35;
-}
 :where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-action-orange{ background: #e89423; }
 :where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-action-green{ background: #55733f; }
 :where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-action-coach{ background: #8660c8; }
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-accueil-picto:focus-visible{
-  outline: 3px solid var(--lcdp-coach-ink); outline-offset: 3px;
-}
 @media  (max-width: 760px) {:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-menu-central-slot [data-lcdp-menu-bouton-list].lcdp-accueil-actions{
     grid-template-columns: 1fr; gap: 14px;
-  }
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach #lcdp-menu-central-slot .lcdp-accueil-picto{
-    min-height: 110px; @apply flex-row; @apply justify-start;
-    gap: 20px; padding: 20px 24px; @apply text-left;
-  }
-:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-accueil-picto svg{ width: 46px; height: 46px; }}
+  }}
 @media  (max-width: 640px) {:where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-site-main .lcdp-page-container{ width: calc(100% - 32px); }
 :where(html[data-lcdp-css~="c020"]) .lcdp-page-accueil-coach .lcdp-accueil-coach-content{ padding: 30px 0 42px; }}
 /* LCDP_public/ESPACE-PUBLIC/codes-securite.css */
@@ -2074,9 +1761,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
   gap: var(--lcdp-space-2);
   @apply flex-wrap;
 }
-:where(html[data-lcdp-css~="c025"]) .lcdp-mentions-admin__actions .lcdp-button{
-  margin: 0;
-}
 :where(html[data-lcdp-css~="c025"]) .lcdp-mentions-admin__preview{
   @apply w-full;
   padding-top: var(--lcdp-space-3);
@@ -2109,9 +1793,6 @@ padding: var(--lcdp-space-2) var(--lcdp-space-2)
 @media  (max-width: 620px) {:where(html[data-lcdp-css~="c025"]) .lcdp-mentions-admin__actions{
     @apply items-stretch;
     @apply flex-col;
-  }
-:where(html[data-lcdp-css~="c025"]) .lcdp-mentions-admin__actions .lcdp-button{
-    @apply w-full;
   }}
 /* LCDP_public/ESPACE-PUBLIC/fiche-parc.css */
 :where(html[data-lcdp-css~="c026"]) .lcdp-fiche-parc-page-content{
@@ -3814,30 +3495,12 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   @apply grid;
   gap: 5px;
 }
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__zoom-button{
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  border: 1px solid #bdbdb7;
-  border-radius: 9px;
-  background: rgba(255, 255, 255, 0.94);
-  color: #172126;
-  font: 700 1.25rem/1 sans-serif;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__zoom-button:hover,:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__zoom-button:focus-visible{
-  background: #ffffff;
-  border-color: #537440;
-}
 @media  (max-width: 760px) {:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique{
     padding: 12px;
     border-radius: 14px;
   }
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__filters{
     grid-template-columns: 1fr;
-  }
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__actions .lcdp-button{
-    @apply w-full;
   }
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__map-shell,:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__map{
     min-height: 430px;
@@ -3859,20 +3522,6 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 12px 32px rgba(31, 42, 36, 0.22);
-}
-:where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-close{
-  @apply absolute;
-  top: 8px;
-  right: 8px;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  border: 1px solid #bdbdb7;
-  border-radius: 50%;
-  background: #ffffff;
-  color: #172126;
-  font: 700 1rem/1 sans-serif;
-  @apply cursor-pointer;
 }
 :where(html[data-lcdp-css~="c078"]) .lcdp-carte-dynamique__card-slot .lcdp-box-card-parc{
   @apply flex-col;
@@ -4093,44 +3742,14 @@ html[data-lcdp-css~="c077"]:not(.lcdp-planifier-pret) #lcdp-planifier-attente-in
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 4px;
 }
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche{
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  @apply box-border;
-  @apply w-full;
-  min-height: 0;
-  aspect-ratio: 1 / 1;
-  padding: 5px;
-  border: 1px solid #bdc4c9;
-  border-radius: 9px;
-  background: #f6f7f8;
-  box-shadow: 0 2px 3px rgba(21, 29, 34, .07);
-  color: #12171c;
-  font-family: inherit;
-  font-size: 22px;
-  line-height: 1;
-  font-weight: 650;
-  font-variant-numeric: tabular-nums;
-  @apply cursor-pointer;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche:active{ background: #e7eaec; box-shadow: none; }
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche:focus-visible{ outline: 3px solid #527542; outline-offset: 2px; }
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche:disabled{ opacity: .55; @apply cursor-wait; }
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche img{ @apply block; @apply max-w-full; @apply h-auto; @apply object-contain; @apply pointer-events-none; }
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche--effacer img{ width: 24px; height: 24px; }
 :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__message{ margin: 13px 0 0; color: #a12626; font-size: .84rem; line-height: 1.35; @apply text-center; }
 :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__sr-only{ @apply absolute; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; @apply overflow-hidden; clip-path: inset(50%); @apply whitespace-nowrap; }
 @media  (max-width: 360px) {:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__card{ padding: 10px 8px 12px; border-radius: 15px; }
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touches{ gap: 4px; }
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche{ font-size: 24px; border-radius: 10px; }}
+:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touches{ gap: 4px; }}
 @media  (max-height: 590px) {:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__card{ padding-top: 9px; padding-bottom: 9px; }
 :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__title{ margin-bottom: 8px; }
 :where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__display{ height: 36px; margin-bottom: 8px; }
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touches{ gap: 4px; }
-:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touche{ min-height: 0; max-height: none; }}
+:where(html[data-lcdp-css~="c082"]) .lcdp-box-diginum__touches{ gap: 4px; }}
 /* LCDP_public/OBJET/BOX/02-box-dialogue-bouton.css */
 :where(html[data-lcdp-css~="c036"]) .lcdp-box-dialogue-bouton{
   @apply fixed;
@@ -4806,11 +4425,6 @@ border: 1px solid var(--lcdp-color-border);
   gap: var(--lcdp-space-2);
   justify-items: center;
 }
-:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__actions .lcdp-button{
-  @apply w-full;
-  max-width: 320px;
-  margin-top: 0;
-}
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails{
     padding: var(--lcdp-space-4);
   }
@@ -4892,42 +4506,6 @@ border: 1px solid var(--lcdp-color-border);
   background: var(--lcdp-color-surface-soft);
   @apply block;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button{
-  @apply absolute;
-  top: 50%;
-  z-index: 2;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border: 1px solid rgba(31, 42, 36, 0.18);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--lcdp-color-text);
-  font-family: var(--lcdp-font-main);
-  font-size: 28px;
-  line-height: 1;
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  transform: translateY(-50%);
-  @apply cursor-pointer;
-  box-shadow: 0 2px 8px rgba(31, 42, 36, 0.14);
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--prev{
-  left: 10px;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--next{
-  right: 10px;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button:hover{
-  background: #ffffff;
-  border-color: var(--lcdp-color-border-strong);
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button:active{
-  opacity: 0.75;
-}
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dots{
   min-height: 16px;
   margin-top: var(--lcdp-space-1);
@@ -4936,43 +4514,12 @@ border: 1px solid var(--lcdp-color-border);
   @apply justify-center;
   gap: var(--lcdp-space-1);
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot{
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  border: 1px solid rgba(31, 42, 36, 0.18);
-  border-radius: 999px;
-  background: rgba(31, 42, 36, 0.35);
-  @apply cursor-pointer;
-  box-shadow: 0 1px 4px rgba(31, 42, 36, 0.12);
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot.is-active{
-  border-color: var(--lcdp-color-logo-green);
-  background: var(--lcdp-color-logo-green);
-}
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__viewport{
     border-radius: calc(var(--lcdp-radius-button) + 8px);
-  }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button{
-    width: 44px;
-    height: 44px;
-    font-size: 34px;
-  }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--prev{
-    left: 16px;
-  }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--next{
-    right: 16px;
   }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dots{
     min-height: 18px;
     gap: 9px;
-  }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot{
-    width: 10px;
-    height: 10px;
   }}
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__item--with-title::after{
   content: "";
@@ -5051,10 +4598,6 @@ border: 1px solid var(--lcdp-color-border);
   @apply flex-wrap;
   gap: var(--lcdp-space-2);
   @apply justify-end;
-}
-:where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item__actions .lcdp-button{
-  margin-top: 0;
-  min-width: 120px;
 }
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item{
     grid-template-columns: 1fr auto;
@@ -9259,18 +8802,6 @@ line-height: 1.35;
   padding: 8px 10px;
   @apply cursor-pointer;
 }
-:where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__input-file::file-selector-button{
-  min-height: 36px;
-  margin-right: var(--lcdp-space-2);
-  padding: 7px 12px;
-  border: 1px solid var(--lcdp-color-logo-green);
-  border-radius: var(--lcdp-radius-small);
-  background: var(--lcdp-color-logo-green);
-  color: #ffffff;
-  font: inherit;
-  font-weight: 600;
-  @apply cursor-pointer;
-}
 :where(html[data-lcdp-css~="c067"]) .lcdp-box-dialogue-upload-img__files{
   max-height: 150px;
   margin: 0;
@@ -9319,18 +8850,13 @@ line-height: 1.35;
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-image-frame{@apply w-full;aspect-ratio:16/9;min-height:180px;@apply overflow-hidden;border-radius:var(--lcdp-radius-button);background:var(--lcdp-color-surface-soft);box-shadow:0 10px 24px rgba(31,42,36,.08);}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-header{@apply flex;@apply items-baseline;@apply justify-between;gap:12px;@apply flex-wrap;}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-header h1,:where(html[data-lcdp-css~="c029"]) .lcdp-actu-header h2{margin:0;}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-header a,:where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau a{text-decoration:underline;text-underline-offset:3px;}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-article{@apply grid;gap:20px;min-width:0;}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-texte{@apply whitespace-pre-wrap;overflow-wrap:anywhere;line-height:1.6;}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau{@apply box-border;@apply w-full;padding:12px 16px;background:var(--lcdp-color-surface-soft);border-bottom:1px solid var(--lcdp-color-border);@apply flex;@apply items-center;gap:12px;}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau a{color:inherit;flex:1;min-width:0;overflow-wrap:anywhere;}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau button{font:inherit;padding:8px;min-height:44px;@apply cursor-pointer;}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau.is-changing a{animation:lcdp-actu-remonte .35s ease;}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-modal{@apply fixed;inset:0;z-index:6000;background:rgba(31,42,36,.35);@apply grid;place-items:center;padding:12px;@apply box-border;}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-modal-card{@apply relative;@apply box-border;@apply w-full;max-width:760px;max-height:calc(100dvh - 24px);@apply overflow-auto;background:white;padding:54px 20px 24px;border-radius:var(--lcdp-radius-large);}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-fermer{@apply absolute;right:8px;top:8px;width:44px;height:44px;font-size:28px;@apply cursor-pointer;}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste{@apply grid;gap:16px;padding:0;list-style:none;}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste a{@apply block;padding:16px;border:1px solid var(--lcdp-color-border);border-radius:var(--lcdp-radius-button);}
 @media  (prefers-reduced-motion:reduce){:where(html[data-lcdp-css~="c029"]) .lcdp-actu-bandeau.is-changing a{animation:none;}}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actualite-groupe,:where(html[data-lcdp-css~="c029"]) .lcdp-actualite-lien-groupe{
   --actu-groupe:var(--lcdp-color-parc,#d64b68);
@@ -9348,7 +8874,6 @@ line-height: 1.35;
 }
 :where(html[data-lcdp-css~="c029"]) .lcdp-actualite-groupe[data-groupe="ASSO"]{color:var(--lcdp-color-text,#1f2a24);background:var(--actu-groupe);}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actualite-lien-groupe{@apply block;border-color:var(--actu-groupe);background:var(--actu-fond);}
-:where(html[data-lcdp-css~="c029"]) .lcdp-actualite-picto svg{@apply block;width:18px;height:18px;@apply pointer-events-none;}
 :where(html[data-lcdp-css~="c029"]) .lcdp-actu-liste{
   @apply w-full;max-width:36rem;min-width:0;margin:0 auto;
   @apply grid;gap:16px;
@@ -10493,18 +10018,6 @@ line-height: 1.35;
   transform: rotateY(0deg);
   @apply visible;
 }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir {
-  @apply relative;
-  @apply block;
-  @apply w-full;
-  @apply h-full;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  @apply cursor-pointer;
-  @apply text-left;
-}
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir > .lcdp-box-card-parc__media {
   @apply relative;
   @apply box-border;
@@ -10569,11 +10082,6 @@ line-height: 1.35;
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--recto .lcdp-box-card-parc__badge-prepa.lcdp-box-card-parc__badge--nouveau:not([hidden]) {
   background: #526a40;
 }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__ouvrir:focus-visible {
-  outline: 2px solid #526a40;
-  outline-offset: -3px;
-  border-radius: 11px;
-}
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso {
   padding: 10px 12px 11px;
   transform: rotateY(180deg);
@@ -10588,28 +10096,6 @@ line-height: 1.35;
   transform: rotateY(0deg);
   @apply visible;
 }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__fermer {
-  @apply absolute;
-  top: 9px;
-  right: 9px;
-  z-index: 3;
-  @apply grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #f4f6f4;
-  color: #67766a;
-  font-family: Arial, system-ui, sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 1;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__fermer:hover { background: #e8ece7; color: #37493a; }
-:where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__fermer:focus-visible { outline: 2px solid #526a40; outline-offset: 2px; }
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__contenu { @apply w-full; @apply h-full; min-width: 0; }
 :where(html[data-lcdp-css~="c058"]) .lcdp-box-card-parc-diaporama__face--verso .lcdp-box-card-parc__body {
   @apply box-border;
@@ -11477,23 +10963,6 @@ line-height: 1.35;
   gap: var(--lcdp-space-1);
   justify-items: stretch;
 }
-:where(html[data-lcdp-css~="c001"]) .lcdp-menu-gauche-admin .lcdp-box-menu-bouton__list > .lcdp-button{
-  @apply w-full;
-  @apply max-w-none;
-  min-width: 0;
-  min-height: 40px;
-  margin: 0;
-  padding: 8px 12px;
-  @apply justify-start;
-  font-size: 0.9rem;
-  line-height: 1.15;
-  @apply text-left;
-}
-:where(html[data-lcdp-css~="c001"]) .lcdp-menu-gauche-admin .lcdp-button[aria-pressed="true"],:where(html[data-lcdp-css~="c001"]) .lcdp-menu-gauche-admin .lcdp-button[aria-current="page"]{
-  background: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 6px 16px var(--lcdp-color-shadow);
-}
 @media  (max-width: 899px) {:where(html[data-lcdp-css~="c001"]) .lcdp-menu-gauche-admin{
     @apply static;
     padding-right: 0;
@@ -11539,33 +11008,12 @@ line-height: 1.35;
   grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: var(--lcdp-space-1);
 }
-:where(html[data-lcdp-css~="c001"]) .lcdp-mini-galerie-menu-centre-admin__button{
-  @apply w-full;
-  @apply max-w-none;
-  min-width: 0;
-  min-height: 0;
-  aspect-ratio: 1 / 1;
-  margin: 0;
-  padding: 8px;
-  font-size: 0.8rem;
-  line-height: 1.1;
-}
-:where(html[data-lcdp-css~="c001"]) .lcdp-mini-galerie-menu-centre-admin__button[aria-disabled="true"]{
-  opacity: 0.62;
-  @apply cursor-default;
-}
-:where(html[data-lcdp-css~="c001"]) .lcdp-mini-galerie-menu-centre-admin__grid
-  > .lcdp-mini-galerie-menu-centre-admin__button:nth-child(n/**/+17):nth-child(-n/**/+24){
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-text);
-}
-:where(html[data-lcdp-css~="c001"]) .lcdp-mini-galerie-menu-centre-admin__grid
-  > .lcdp-mini-galerie-menu-centre-admin__button:nth-child(n/**/+17):nth-child(-n/**/+24):hover{
-  background: var(--lcdp-color-orange-hover);
-  border-color: var(--lcdp-color-orange-hover);
-  color: var(--lcdp-color-text);
-}
+/**/
+/**/
+
+/**/
+/**/
+
 @media  (max-width: 1100px) {:where(html[data-lcdp-css~="c001"]) .lcdp-mini-galerie-menu-centre-admin__grid{
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }}
@@ -11926,26 +11374,6 @@ font-weight: 700;
   font-size: clamp(1.45rem, 4vw, 2rem);
   line-height: 1.18;
 }
-:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__close{
-  @apply sticky;
-  top: 0;
-  z-index: 2;
-  float: right;
-  width: 42px;
-  height: 42px;
-  margin: 0 0 0.5rem 0.75rem;
-  border: 0;
-  border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-size: 1.9rem;
-  line-height: 1;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__close:hover,:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__close:focus-visible{
-  background: var(--lcdp-color-border);
-}
 :where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__content{
   @apply grid;
   gap: clamp(0.85rem, 2.2vw, 1.2rem);
@@ -12011,13 +11439,6 @@ font-weight: 700;
     align-items: start;
     column-gap: 12px;
     padding: 12px;
-  }
-:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__close{
-    grid-column: 2;
-    grid-row: 1;
-    float: none;
-    margin: 0;
-    justify-self: end;
   }
 :where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__header{
     grid-column: 1;
@@ -12674,7 +12095,6 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
 :where(html[data-lcdp-css~="c085"]) html.lcdp-compte-bloque body > *:not(#lcdp-compte-bloque){ display: none !important; }
 :where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque{ @apply fixed; inset: 0; z-index: 2147483647; @apply overflow-auto; background: #000; color: #fff; padding: 24px; @apply box-border; }
 :where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque p{ color: #fff; }
-:where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque button{ @apply block; margin-top: 16px; }
 :where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque{ @apply flex; @apply flex-col; }
 :where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque p{ color: #fff !important; }
 :where(html[data-lcdp-css~="c085"]) #lcdp-compte-bloque .lcdp-compte-bloque-actions{ margin-top: auto; padding-top: 24px; padding-bottom: env(safe-area-inset-bottom); }
@@ -12763,22 +12183,6 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
   line-height: 0;
   vertical-align: super;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-restricted-footer-button{
-  border: 0;
-  background: transparent;
-  color: var(--lcdp-color-text-muted);
-  font: inherit;
-  font-size: 0.95rem;
-  line-height: 1.3;
-  font-weight: 500;
-  text-decoration: none;
-  @apply cursor-pointer;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-restricted-footer-button:hover{
-  color: var(--lcdp-color-primary);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-restricted-lightbox{
   @apply fixed;
   inset: 0;
@@ -12802,20 +12206,6 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 18px 50px rgba(31, 42, 36, 0.18);
   @apply overflow-y-auto;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-restricted-legal-close{
-  @apply absolute;
-  top: var(--lcdp-space-2);
-  right: var(--lcdp-space-2);
-  width: 38px;
-  height: 38px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font-size: 1.8rem;
-  line-height: 1;
-  @apply cursor-pointer;
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-restricted-legal-card .lcdp-box-liste-card__header{
   padding-right: 44px;
@@ -12985,13 +12375,6 @@ html:where([data-lcdp-css~="c085"] ),:where(html[data-lcdp-css~="c085"]) body{
 :where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-intro > .lcdp-accueil-mention,:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-intro > #mention-statut-coach.lcdp-mention-connexion{ margin: 0 auto; }
 @media  (max-width: 350px) {:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-intro{ min-height: 110px; }}
 @media  (min-width: 768px) {:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-intro{ min-height: 93px; gap: 12px; }}
-
-:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-actions > button.lcdp-button-accueil-coach{
-  background: var(--lcdp-color-coach); border-color: var(--lcdp-color-coach); color: #fff;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach .lcdp-accueil-actions > button.lcdp-button-accueil-coach:hover{
-  background: var(--lcdp-color-coach); border-color: var(--lcdp-color-coach); color: #fff;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-page-accueil-coach #mention-statut-coach.lcdp-mention-connexion{
   margin-bottom: 0; font-size: 1.08rem; line-height: 1.25;
   font-weight: 700; letter-spacing: 0.035em; text-transform: uppercase;
@@ -13489,15 +12872,6 @@ html:where([data-lcdp-css~="p34e91f4dcc86"] ){font-family:system-ui,Arial,sans-s
       margin: 24px auto 0;
       @apply items-stretch;
     }
-:where(html[data-lcdp-css~="p46d7f39dd376"]) .lcdp-paiement-cb__actions .lcdp-button{
-      @apply w-full;
-      min-width: 0;
-      @apply max-w-none;
-      min-height: 52px;
-      margin-top: 0;
-      padding: 12px 18px;
-      @apply box-border;
-    }
 @media  (min-width: 640px) {:where(html[data-lcdp-css~="p46d7f39dd376"]) .lcdp-paiement-cb__actions{
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -13715,11 +13089,6 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ){font-family:system-ui,Arial,sans-s
 :where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #formulaire-coach-slot .lcdp-box-formulaire__title{
       color: var(--lcdp-color-coach, #8660c8);
     }
-:where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #formulaire-coach-slot button[type="submit"],:where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #formulaire-coach-slot button[type="submit"]:hover,:where(html[data-lcdp-css~="p8ffe07172f8c"]) .lcdp-page-contact-coach #formulaire-coach-slot button[type="submit"]:focus-visible{
-      background: var(--lcdp-color-coach, #8660c8);
-      border-color: var(--lcdp-color-coach, #8660c8);
-      color: #fff;
-    }
 :where(html[data-lcdp-css~="p8ffe07172f8c"]) #lcdp-contact-attente:not([hidden]){
       @apply flex;
       @apply items-center;
@@ -13816,11 +13185,6 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ){font-family:system-ui,Arial,sans-s
 :where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #formulaire-resparc-slot .lcdp-box-formulaire__title{
       color: var(--lcdp-color-parc, #d64b68);
     }
-:where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #formulaire-resparc-slot button[type="submit"],:where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #formulaire-resparc-slot button[type="submit"]:hover,:where(html[data-lcdp-css~="p155c9e29c5ec"]) .lcdp-page-contact-parc #formulaire-resparc-slot button[type="submit"]:focus-visible{
-      background: var(--lcdp-color-parc, #d64b68);
-      border-color: var(--lcdp-color-parc, #d64b68);
-      color: #fff;
-    }
 :where(html[data-lcdp-css~="p155c9e29c5ec"]) #lcdp-contact-attente:not([hidden]){
       @apply flex;
       @apply items-center;
@@ -13858,7 +13222,7 @@ html:where([data-lcdp-css~="pb7e3b489417d"] ){font-family:system-ui,Arial,sans-s
 [data-lcdp-external-style="sf7c3b9c70b16"] {@apply block;@apply max-w-full;@apply h-auto;margin:24px auto}
 [data-lcdp-external-style="sfb5ec070f2bf"] {@apply text-center;}
 /* Extrait de LCDP_membre/config.js */
-html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compte-bloque{background:#000!important}html.lcdp-compte-bloque body{background:#000!important;color:#fff!important}html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque){display:none!important}#lcdp-compte-bloque{@apply fixed;inset:0;z-index:2147483647;@apply overflow-auto;background:#000;color:#fff;padding:24px;@apply box-border;@apply flex;@apply flex-col}#lcdp-compte-bloque p{color:#fff!important}#lcdp-compte-bloque .lcdp-compte-bloque-actions{margin-top:auto;padding-top:24px;padding-bottom:env(safe-area-inset-bottom)}#lcdp-compte-bloque button{@apply block;margin-top:16px}
+html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compte-bloque{background:#000!important}html.lcdp-compte-bloque body{background:#000!important;color:#fff!important}html.lcdp-compte-bloque body>*:not(#lcdp-compte-bloque){display:none!important}#lcdp-compte-bloque{@apply fixed;inset:0;z-index:2147483647;@apply overflow-auto;background:#000;color:#fff;padding:24px;@apply box-border;@apply flex;@apply flex-col}#lcdp-compte-bloque p{color:#fff!important}#lcdp-compte-bloque .lcdp-compte-bloque-actions{margin-top:auto;padding-top:24px;padding-bottom:env(safe-area-inset-bottom)}
 /* Extrait de LCDP_membre/ESPACE-MEMBRE/planning-membre.js */
 
       .lcdp-box-card-reservation-membre [data-action="adresse"],
@@ -14041,22 +13405,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
         @apply flex-col;
         @apply items-center;
         gap: var(--lcdp-space-2);
-      }
-
-      #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button {
-        margin-top: 0;
-      }
-
-      #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange {
-        background: var(--lcdp-color-orange);
-        border-color: var(--lcdp-color-orange);
-        color: var(--lcdp-color-text);
-      }
-
-      #form-mes-informations-membre .lcdp-compte-actions-adresse .lcdp-button-orange:hover {
-        background: var(--lcdp-color-orange-hover);
-        border-color: var(--lcdp-color-orange-hover);
-        color: var(--lcdp-color-text);
       }
 
       
@@ -14276,7 +13624,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 .public-home *,
 .public-home *::before,
 :where(html[data-lcdp-css~="c085"]) .public-home *::after { @apply box-border; }
-:where(html[data-lcdp-css~="c085"]) .public-home button { font: inherit; @apply cursor-pointer; }
 :where(html[data-lcdp-css~="c085"]) .public-home svg { @apply block; }
 
 /* Bandeau de l’accueil : géométrie assurée par le composant partagé c034. */
@@ -14376,20 +13723,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__verification-info::backdrop {
   background: rgba(31,42,36,.46);
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__verification-close {
-  @apply absolute;
-  top: 8px;
-  right: 8px;
-  width: 40px;
-  height: 40px;
-  border: 0;
-  border-radius: 50%;
-  background: #f7f7f4;
-  color: #1f2a24;
-  font: inherit;
-  font-size: 28px;
-  @apply cursor-pointer;
 }
 
 /* Accueil public — insertion du bandeau d'actualités existant (c029). */
@@ -14821,24 +14154,6 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   @apply max-w-none;
   margin: 0;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card .lcdp-editorial-cta > a.lcdp-button {
-  @apply box-border;
-  @apply inline-flex;
-  @apply w-full;
-  @apply max-w-none;
-  min-height: 0;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-size: 12px;
-  line-height: 1.35;
-  font-weight: 700;
-  letter-spacing: .05em;
-  @apply text-center;
-  text-transform: uppercase;
-  text-decoration: none;
-  box-shadow: 0 4px 6px -1px rgb(15 23 42 / 10%);
-  transition: background-color .2s ease, border-color .2s ease, color .2s ease;
-}
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-action-card .lcdp-editorial-action-note {
   margin: 0;
   padding: 0;
@@ -14928,32 +14243,9 @@ html.lcdp-controle-cle-en-cours body{visibility:hidden!important}html.lcdp-compt
   letter-spacing:-.025em; @apply text-left; text-shadow:none;
   overflow-wrap:normal; word-break:normal;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button {
-  @apply box-border; @apply absolute; top:50%; z-index:3;
-  @apply flex; @apply items-center; @apply justify-center;
-  width:32px; height:32px; min-width:32px; min-height:32px;
-  margin:0; padding:0; border:0; border-radius:999px;
-  background:rgb(255 255 255 / 90%); color:#334155;
-  font:700 18px/1 Arial,system-ui,sans-serif; @apply cursor-pointer;
-  box-shadow:0 1px 2px rgb(15 23 42 / 8%);
-  transform:translateY(-50%); transition:background-color .2s ease;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button:hover {background:#fff; border:0;}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button--prev {left:12px;}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button--next {right:12px;}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button:focus-visible,
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot:focus-visible {outline:2px solid #4e6838; outline-offset:2px;}
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dots {
   @apply flex; @apply items-center; @apply justify-center; gap:8px;
   min-height:16px; margin:0; padding-top:4px;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot {
-  width:8px; height:8px; padding:0; border:0; border-radius:99px;
-  background:#e2e8f0; box-shadow:none; @apply cursor-pointer;
-  transition:width .2s ease,height .2s ease,background-color .2s ease;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot.is-active {
-  width:14px; height:6px; border:0; background:#4e6838; box-shadow:none;
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-image-legend {
   @apply block; @apply w-full; margin:0; padding:0; @apply text-center;

@@ -62,11 +62,6 @@
   gap: var(--lcdp-space-2);
   justify-items: center;
 }
-:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__actions .lcdp-button {
-  width: 100%;
-  max-width: 320px;
-  margin-top: 0;
-}
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails {
     padding: var(--lcdp-space-4);
@@ -149,42 +144,6 @@
   background: var(--lcdp-color-surface-soft);
   display: block;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button {
-  position: absolute;
-  top: 50%;
-  z-index: 2;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border: 1px solid rgba(31, 42, 36, 0.18);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--lcdp-color-text);
-  font-family: var(--lcdp-font-main);
-  font-size: 28px;
-  line-height: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateY(-50%);
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(31, 42, 36, 0.14);
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--prev {
-  left: 10px;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--next {
-  right: 10px;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button:hover {
-  background: #ffffff;
-  border-color: var(--lcdp-color-border-strong);
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button:active {
-  opacity: 0.75;
-}
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dots {
   min-height: 16px;
   margin-top: var(--lcdp-space-1);
@@ -193,44 +152,13 @@
   justify-content: center;
   gap: var(--lcdp-space-1);
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot {
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  border: 1px solid rgba(31, 42, 36, 0.18);
-  border-radius: 999px;
-  background: rgba(31, 42, 36, 0.35);
-  cursor: pointer;
-  box-shadow: 0 1px 4px rgba(31, 42, 36, 0.12);
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot.is-active {
-  border-color: var(--lcdp-color-logo-green);
-  background: var(--lcdp-color-logo-green);
-}
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__viewport {
     border-radius: calc(var(--lcdp-radius-button) + 8px);
   }
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button {
-    width: 44px;
-    height: 44px;
-    font-size: 34px;
-  }
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--prev {
-    left: 16px;
-  }
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--next {
-    right: 16px;
-  }
   :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dots {
     min-height: 18px;
     gap: 9px;
-  }
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot {
-    width: 10px;
-    height: 10px;
   }
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__item--with-title::after {
@@ -309,10 +237,6 @@
   flex-wrap: wrap;
   gap: var(--lcdp-space-2);
   justify-content: flex-end;
-}
-:where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item__actions .lcdp-button {
-  margin-top: 0;
-  min-width: 120px;
 }
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item {
