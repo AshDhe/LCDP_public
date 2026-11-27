@@ -431,6 +431,13 @@
       "statut": "Gabarit applicatif mobile-first unique, indépendant de c085 ; dimensions du wrapper moderne publié conservées.",
       "variantes": "Écran sans navigation, accueil, document juridique, document A4 imprimable, sécurité sombre ; paiement Stripe autonome sur le conteneur commun.",
       "exceptions": "Les règles du conteneur administratif .lcdp-site-page hors wrapper et les états de parcours restent distincts ; les objets internes sont hors périmètre."
+    },
+    "bouton-lien-picto": {
+      "css": "lcdp-bouton-lien-picto.css",
+      "charge_par": "lcdp-central-mobile-first.css et cssbase.css (consommateurs autonomes)",
+      "statut": "Socle moderne des boutons, liens, pictogrammes et états communs ; suppression des doublons des sources traitées.",
+      "variantes": "Principale, secondaire, orange, mini, accueil, logo, compte, deux niveaux, haut et étroit, chargement, picto édition.",
+      "exceptions": "Mise en page et états propres aux composants ; variantes spécifiques des parcours à inventorier."
     }
   }
 }

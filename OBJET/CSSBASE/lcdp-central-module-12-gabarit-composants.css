@@ -15,75 +15,16 @@
   width: 100%;
   margin: 0;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button {
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-  min-height: 0;
-  max-width: 100%;
-  width: auto;
-  padding: 12px 16px;
-  border: 0;
-  border-radius: 12px;
-  font: 700 12px/1.35 Arial,system-ui,sans-serif;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0 2px 4px rgb(15 23 42 / 10%);
-  transition: background-color .2s ease, box-shadow .2s ease, transform .2s ease;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-orange {
-  background: #e59834;
-  border-color: #e59834;
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-orange:hover {
-  background: #cc8125;
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button.lcdp-editorial-action-button.lcdp-button-compte--parc,
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button.lcdp-editorial-action-button.lcdp-button-compte--parc:is(:hover, :focus-visible) {
-  background: var(--lcdp-color-parc);
-  border-color: var(--lcdp-color-parc);
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button.lcdp-editorial-action-button.lcdp-button-compte--coach,
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button.lcdp-editorial-action-button.lcdp-button-compte--coach:is(:hover, :focus-visible) {
-  background: var(--lcdp-color-coach);
-  border-color: var(--lcdp-color-coach);
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-primary {
-  width: 100%;
-  padding: 13px 16px;
-  background: var(--lcdp-color-espace-accent, #4e6838);
-  border-color: var(--lcdp-color-espace-accent, #4e6838);
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-primary:hover {
-  background: var(--lcdp-color-espace-accent-hover, #3d522c);
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-secondary {
-  width: 100%;
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  color: #334155;
-  font-weight: 500;
-  text-transform: none;
-  box-shadow: none;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button-secondary:hover {
-  border-color: #334155;
-  color: #0f172a;
-}
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper a.lcdp-button:focus-visible {
-  outline: 2px solid var(--lcdp-color-espace-accent, #4e6838);
-  outline-offset: 3px;
-}
+
+
+
+
+
+
+
+
+
+
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-box-carousel {
   display: flex;
   flex-direction: column;
@@ -235,60 +176,15 @@
   flex-direction: column;
   gap: 1rem;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home__action {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  padding: 1.25rem;
-  border: 0;
-  border-radius: 1rem;
-  color: #fff;
-  box-shadow: 0 10px 15px -3px var(--action-shadow), 0 4px 6px -4px var(--action-shadow);
-  transition: transform 300ms ease, box-shadow 300ms ease;
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__action--plan {
-  background: linear-gradient(to bottom right, #e59834, #cc8125);
-  --action-shadow: rgb(245 158 11 / 10%);
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__action--access {
-  background: linear-gradient(to bottom right, #4e6838, #3d522c);
-  --action-shadow: rgb(16 185 129 / 10%);
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__action--key {
-  background: linear-gradient(to bottom right, #346cb2, #28548c);
-  --action-shadow: rgb(59 130 246 / 10%);
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__action:hover {
-  transform: translateY(-.125rem);
-  box-shadow: 0 20px 25px -5px var(--action-shadow), 0 8px 10px -6px var(--action-shadow);
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__action:active {
-  transform: scale(.99);
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__action-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: .75rem;
-  background: rgb(255 255 255 / 10%);
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__action-icon svg {
-  width: 1.25rem;
-  height: 1.25rem;
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__action-label {
-  font-size: .75rem;
-  line-height: 1rem;
-  font-weight: 800;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
+
+
+
+
+
+
+
+
+
 :where(html[data-lcdp-css~="c085"]) .public-home__verification-info {
   box-sizing: border-box;
   width: min(560px, calc(100% - 36px));
@@ -582,10 +478,7 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
     gap: .75rem;
     margin-top: .975rem;
   }
-  :where(html[data-lcdp-css~="c085"]) .public-home__action {
-    padding: .75rem;
-    gap: .25rem;
-  }
+  
   
 }
 @media (max-height: 560px) {
@@ -593,9 +486,7 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
     gap: .5rem;
     margin-top: .65rem;
   }
-  :where(html[data-lcdp-css~="c085"]) .public-home__action {
-    padding: .5rem;
-  }
+  
 }
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-page-heading {
   display: flex;
@@ -1464,22 +1355,7 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   padding: 10px 16px;
 }
 /* Variante générique des boutons d'action hauts et étroits, activée par une classe. */
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper :is(.lcdp-actions-centrees,.lcdp-box-formulaire__actions) > :is(a,button).lcdp-button.lcdp-button--haut-etroit {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  width: 50%;
-  min-width: min(100%, 140px);
-  max-width: min(100%, 220px);
-  min-height: 84px;
-  margin-inline: auto;
-  padding: 12px 10px;
-  text-align: center;
-  white-space: normal;
-  overflow-wrap: anywhere;
-}
+
 :where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__note {
   padding-top: 8px;
   line-height: 1.4;
@@ -1759,134 +1635,35 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 /* Texture commune des boutons d'action colorés — référence : accueil public.
    Les dimensions, les libellés, les variantes secondaires et les états désactivés
    restent inchangés. La priorité porte uniquement sur le dégradé et le relief. */
-html .lcdp-button.lcdp-button-orange {
-  --lcdp-button-texture: linear-gradient(to bottom right, #e59834, #cc8125);
-  --lcdp-button-texture-shadow: rgb(245 158 11 / 10%);
-}
-html .lcdp-button.lcdp-button-primary {
-  --lcdp-button-texture: linear-gradient(to bottom right, var(--lcdp-color-espace-accent, #4e6838), var(--lcdp-color-espace-accent-hover, #3d522c));
-  --lcdp-button-texture-shadow: var(--lcdp-espace-ombre-bouton, rgb(16 185 129 / 10%));
-}
-html .lcdp-button.lcdp-button-accueil-blue {
-  --lcdp-button-texture: linear-gradient(to bottom right, #346cb2, #28548c);
-  --lcdp-button-texture-shadow: rgb(59 130 246 / 10%);
-}
+
+
+
 /* La commande de planning de la fiche parc utilise historiquement l'orange. */
-html .lcdp-fiche-parc__commande-detail .lcdp-button.lcdp-button-primary {
-  --lcdp-button-texture: linear-gradient(to bottom right, #e59834, #cc8125);
-  --lcdp-button-texture-shadow: rgb(245 158 11 / 10%);
-}
-html .lcdp-button:is(.lcdp-button-orange, .lcdp-button-primary, .lcdp-button-accueil-blue):not(:disabled, [aria-disabled="true"], .is-disabled) {
-  background-image: var(--lcdp-button-texture) !important;
-  box-shadow: 0 10px 15px -3px var(--lcdp-button-texture-shadow), 0 4px 6px -4px var(--lcdp-button-texture-shadow) !important;
-}
-html .lcdp-button:is(.lcdp-button-orange, .lcdp-button-primary, .lcdp-button-accueil-blue):not(:disabled, [aria-disabled="true"], .is-disabled):hover {
-  box-shadow: 0 20px 25px -5px var(--lcdp-button-texture-shadow), 0 8px 10px -6px var(--lcdp-button-texture-shadow) !important;
-}
+
+
+
 
 /* Sous-variante facultative : bouton à deux niveaux, suivi d'une flèche.
    Activable par .lcdp-button--deux-niveaux ; les accès existants de la boutique
    l'utilisent via leurs identifiants, sans modifier leur HTML ni leur JS. */
-html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) {
-  --lcdp-button-fleche-color: #ffebca;
-}
-html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span {
-  display: block;
-  min-width: 0;
-  max-width: 100%;
-  font-size: .8125rem;
-  line-height: 1.28;
-  font-weight: 900;
-  letter-spacing: .015em;
-  color: #fff;
-  text-transform: uppercase;
-  white-space: nowrap;
-  overflow-wrap: normal;
-}
-html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br):not(:has(> span > strong)) > span::first-line {
-  font-size: .625rem;
-  line-height: 1.6;
-  font-weight: 700;
-  letter-spacing: .055em;
-  color: var(--lcdp-button-fleche-color);
-  -webkit-text-fill-color: var(--lcdp-button-fleche-color);
-}
+
+
+
 /* Le premier niveau est le texte direct du span. Le second niveau est le strong.
    Pas de pseudo-classe de première ligne sur cette structure. */
-html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br):has(> span > strong) > span {
-  font-size: .625rem;
-  line-height: 1.6;
-  font-weight: 700;
-  letter-spacing: .055em;
-  color: var(--lcdp-button-fleche-color);
-  -webkit-text-fill-color: var(--lcdp-button-fleche-color);
-}
-html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span > strong {
-  font-size: .8125rem;
-  line-height: 1.28;
-  font-weight: 900;
-  letter-spacing: .015em;
-  color: #fff;
-  -webkit-text-fill-color: #fff;
-}
-html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br) > span::after {
-  content: "";
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-inline-start: 4px;
-  background-color: var(--lcdp-button-fleche-color);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E") center / contain no-repeat;
-  vertical-align: .02em;
-}
-html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br).lcdp-button-accueil-blue {
-  --lcdp-button-fleche-color: #c9def6;
-}
-html .lcdp-app-wrapper .lcdp-button:is(.lcdp-button--deux-niveaux, [data-lcdp-boutique-liste], #lcdp-boutique-bienfaiteur):has(> span > br).lcdp-button-primary {
-  --lcdp-button-fleche-color: #e0ebcf;
-}
+
+
+
+
+
 
 /* Composant commun : état de chargement des boutons d'action.
    aria-busy est piloté par le traitement métier ; le libellé reste en place
    pour conserver le gabarit et le nom accessible du bouton. */
-html .lcdp-button[aria-busy="true"] {
-  --lcdp-button-spinner-color: #4b6333;
-  --lcdp-button-spinner-track: rgba(75, 99, 51, .22);
-  position: relative;
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-  text-shadow: none !important;
-  cursor: wait;
-}
-html .lcdp-button:is(.lcdp-button-primary, .lcdp-button-orange, .lcdp-button-accueil-blue)[aria-busy="true"] {
-  --lcdp-button-spinner-color: #fff;
-  --lcdp-button-spinner-track: rgba(255, 255, 255, .30);
-}
-html .lcdp-button[aria-busy="true"] > * {
-  opacity: 0 !important;
-}
-html .lcdp-button[aria-busy="true"]::before {
-  opacity: 0 !important;
-}
-html .lcdp-button[aria-busy="true"]::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  box-sizing: border-box;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--lcdp-button-spinner-track);
-  border-top-color: var(--lcdp-button-spinner-color);
-  border-radius: 50%;
-  background: none;
-  pointer-events: none;
-  animation: lcdp-button-spinner-tourne .8s linear infinite;
-}
-@keyframes lcdp-button-spinner-tourne {
-  to { transform: rotate(360deg); }
-}
-@media (prefers-reduced-motion: reduce) {
-  html .lcdp-button[aria-busy="true"]::after { animation: none; }
-}
+
+
+
+
+
+
+
