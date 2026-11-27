@@ -1,117 +1,12 @@
-/* LCDP — objet commun MENU BURGER (HTMLBASE/02-menu-burger.html).
-   Source : CSS central publié, variante moderne c038 et rôles graphiques.
-   Compatibilité des pages sans c038, puis accent coach et variante Boutique club.
-   Pas de définitions concurrentes dans les modules historiques. */
-
-/* Compatibilité : uniquement pour les pages sans c038. */
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger {
-  position: relative;
-  z-index: 4100;
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__button {
-  position: relative;
-  z-index: 4101;
-  box-sizing: border-box;
-  width: var(--lcdp-header-icon-size, 44px);
-  height: var(--lcdp-header-icon-size, 44px);
-  padding: 0;
-  border: 2px solid #587242;
-  border-radius: 999px;
-  background: #ffffff;
-  box-shadow: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  cursor: pointer;
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__button span {
-  width: 18px;
-  height: 2px;
-  background: #EBA042;
-  border-radius: 999px;
-  transition: transform 180ms ease, opacity 180ms ease, background 180ms ease;
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1),
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(3) {
-  background: #4a4a4a;
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(2) {
-  opacity: 0;
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__nav {
-  position: absolute;
-  top: calc(100% + var(--lcdp-space-2));
-  right: 0;
-  z-index: 4102;
-  width: min(320px, calc(100vw - 36px));
-  min-width: 220px;
-  max-height: calc(100vh - 120px);
-  padding: var(--lcdp-space-2);
-  border: 2px solid #587242;
-  border-radius: var(--lcdp-radius-large);
-  background: #ffffff;
-  box-shadow: var(--lcdp-shadow-soft);
-  overflow-y: auto;
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__nav[hidden] {
-  display: none !important;
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcdp-space-1);
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__link,
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__button-link {
-  width: 100%;
-  min-height: 44px;
-  padding: var(--lcdp-space-2);
-  border: 0;
-  border-radius: var(--lcdp-radius-small);
-  background: transparent;
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-weight: 600;
-  text-align: left;
-  text-decoration: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__link:hover,
-:where(html:not([data-lcdp-css~="c038"])) .lcdp-box-menu-burger__button-link:hover {
-  background: var(--lcdp-color-surface-soft);
-}
-
-
-/* Design moderne publié — déclarations conservées. */
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger {
+/* LCDP — objet commun MENU BURGER. Design moderne unique, tous espaces. */
+.lcdp-box-menu-burger {
   position: relative;
   z-index: 4100;
   --lcdp-burger-accent: var(--lcdp-color-espace-accent, var(--lcdp-color-membre, #4e6838));
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button {
+.lcdp-box-menu-burger__button {
   position: relative;
   z-index: 4101;
   box-sizing: border-box;
@@ -131,26 +26,26 @@
   cursor: pointer;
   transition: background-color 200ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button:hover, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] {
+.lcdp-box-menu-burger__button:hover, .lcdp-box-menu-burger__button[aria-expanded="true"] {
   background: rgba(255,255,255,.3);
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button span {
+.lcdp-box-menu-burger__button span {
   width: 18px;
   height: 2px;
   background: currentColor;
   border-radius: 999px;
   transition: transform 180ms ease, opacity 180ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1) {
+.lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(2) {
+.lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(2) {
   opacity: 0;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(3) {
+.lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav {
+.lcdp-box-menu-burger__nav {
   box-sizing: border-box;
   position: absolute;
   top: calc(100% + 16px);
@@ -170,15 +65,15 @@
   overscroll-behavior: contain;
   animation: lcdp-burger-menu-enter 200ms ease-out both;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav[hidden] {
+.lcdp-box-menu-burger__nav[hidden] {
   display: none !important;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__list {
+.lcdp-box-menu-burger__list {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link {
+.lcdp-box-menu-burger__link, .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link {
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -200,24 +95,24 @@
   cursor: pointer;
   transition: background-color 200ms ease, color 200ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:hover, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:hover, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__link:focus-visible, :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:focus-visible {
+.lcdp-box-menu-burger__link:hover, .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:hover, .lcdp-box-menu-burger__link:focus-visible, .lcdp-box-menu-burger .lcdp-box-menu-burger__button-link:focus-visible {
   background: rgba(248,250,252,.8);
   color: #0f172a;
 }
 /* Quatre rôles communs, indépendants de la position et du type a/button. */
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="accueil"] {
+.lcdp-box-menu-burger [data-lcdp-menu-role="accueil"] {
   border-left: 4px solid var(--lcdp-burger-accent);
   background: #f8fafc;
   color: #0f172a;
   font-weight: 800;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="compte"] {
+.lcdp-box-menu-burger [data-lcdp-menu-role="compte"] {
   justify-content: space-between;
   gap: 6px;
   color: #334155;
   font-weight: 700;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="compte"]::after {
+.lcdp-box-menu-burger [data-lcdp-menu-role="compte"]::after {
   content: "Espace personnel";
   display: inline-block;
   flex: 0 0 auto;
@@ -231,12 +126,12 @@
   letter-spacing: normal;
   transition: background-color 200ms ease, color 200ms ease;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="compte"]:hover::after,
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="compte"]:focus-visible::after {
+.lcdp-box-menu-burger [data-lcdp-menu-role="compte"]:hover::after,
+.lcdp-box-menu-burger [data-lcdp-menu-role="compte"]:focus-visible::after {
   background: var(--lcdp-burger-accent);
   color: #fff;
 }
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger [data-lcdp-menu-role="faq"] {
+.lcdp-box-menu-burger [data-lcdp-menu-role="faq"] {
   margin-top: 5px;
   padding-top: 9px;
   border-top: 1px solid #f1f5f9;
@@ -257,14 +152,14 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  :where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__nav {
+  .lcdp-box-menu-burger__nav {
     animation: none;
   }
 }
 
 /* Couleur de la croix ouverte, auparavant héritée de la règle historique plus spécifique. */
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1),
-:where(html[data-lcdp-css~="c038"]) .lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(3) {
+.lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(1),
+.lcdp-box-menu-burger__button[aria-expanded="true"] span:nth-child(3) {
   background: #4a4a4a;
 }
 

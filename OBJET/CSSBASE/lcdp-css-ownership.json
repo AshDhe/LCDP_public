@@ -415,8 +415,8 @@
       "html": "OBJET/HTMLBASE/02-menu-burger.html",
       "css": "lcdp-menu-burger.css",
       "charge_par": "lcdp-central-mobile-first.css",
-      "statut": "Source unique CSSBASE ; design moderne c038 du central publié, variantes conservées ; validation visuelle requise.",
-      "variantes": "Compatibilité sans c038, rôles accueil/compte/faq, boutique, accent coach, mouvement réduit.",
+      "statut": "Design moderne unique sans variante ancienne ni condition c038.",
+      "variantes": "Rôles accueil/compte/faq, boutique, accent coach, mouvement réduit.",
       "exceptions": "lcdp-menu-burger-boutique.css reste un fichier de compatibilité sans déclaration pour les anciens chargeurs JS. Aucun style concurrent dans les modules."
     }
   }
