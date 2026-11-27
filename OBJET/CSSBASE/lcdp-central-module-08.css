@@ -372,9 +372,6 @@
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-form .lcdp-cle-code-quatre-cases {
   margin: 0;
 }
-:where(html[data-lcdp-css~="c021"]) .lcdp-acces-form .lcdp-button {
-  width: 100%;
-}
 :where(html[data-lcdp-css~="c021"]) .lcdp-acces-erreur:empty {
   display: none;
 }
@@ -481,9 +478,6 @@
   margin: 0 0 6px;
   color: var(--lcdp-color-text);
   text-align: center;
-}
-:where(html[data-lcdp-css~="c021"]) .lcdp-acces-lightbox .lcdp-button {
-  width: 100%;
 }
 @media (max-width: 359px) {
   :where(html[data-lcdp-css~="c021"]) .lcdp-acces {
@@ -798,23 +792,6 @@
   gap: var(--lcdp-space-1);
   justify-items: stretch;
 }
-:where(html[data-lcdp-css~="c001"]) .lcdp-menu-gauche-admin .lcdp-box-menu-bouton__list > .lcdp-button {
-  width: 100%;
-  max-width: none;
-  min-width: 0;
-  min-height: 40px;
-  margin: 0;
-  padding: 8px 12px;
-  justify-content: flex-start;
-  font-size: 0.9rem;
-  line-height: 1.15;
-  text-align: left;
-}
-:where(html[data-lcdp-css~="c001"]) .lcdp-menu-gauche-admin .lcdp-button[aria-pressed="true"],:where(html[data-lcdp-css~="c001"]) .lcdp-menu-gauche-admin .lcdp-button[aria-current="page"] {
-  background: var(--lcdp-color-primary);
-  border-color: var(--lcdp-color-primary);
-  box-shadow: 0 6px 16px var(--lcdp-color-shadow);
-}
 @media (max-width: 899px) {
   :where(html[data-lcdp-css~="c001"]) .lcdp-menu-gauche-admin {
     position: static;
@@ -863,31 +840,6 @@
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: var(--lcdp-space-1);
-}
-:where(html[data-lcdp-css~="c001"]) .lcdp-mini-galerie-menu-centre-admin__button {
-  width: 100%;
-  max-width: none;
-  min-width: 0;
-  min-height: 0;
-  aspect-ratio: 1 / 1;
-  margin: 0;
-  padding: 8px;
-  font-size: 0.8rem;
-  line-height: 1.1;
-}
-:where(html[data-lcdp-css~="c001"]) .lcdp-mini-galerie-menu-centre-admin__button[aria-disabled="true"] {
-  opacity: 0.62;
-  cursor: default;
-}
-:where(html[data-lcdp-css~="c001"]) .lcdp-mini-galerie-menu-centre-admin__grid > .lcdp-mini-galerie-menu-centre-admin__button:nth-child(n+17):nth-child(-n+24) {
-  background: var(--lcdp-color-orange);
-  border-color: var(--lcdp-color-orange);
-  color: var(--lcdp-color-text);
-}
-:where(html[data-lcdp-css~="c001"]) .lcdp-mini-galerie-menu-centre-admin__grid > .lcdp-mini-galerie-menu-centre-admin__button:nth-child(n+17):nth-child(-n+24):hover {
-  background: var(--lcdp-color-orange-hover);
-  border-color: var(--lcdp-color-orange-hover);
-  color: var(--lcdp-color-text);
 }
 @media (max-width: 1100px) {
   :where(html[data-lcdp-css~="c001"]) .lcdp-mini-galerie-menu-centre-admin__grid {
@@ -1011,9 +963,6 @@
 :where(html[data-lcdp-css~="c001"]) .lcdp-page-nouveauparc .lcdp-box-formulaire__actions {
   gap: var(--lcdp-space-2);
   flex-wrap: wrap;
-}
-:where(html[data-lcdp-css~="c001"]) .lcdp-page-nouveauparc .lcdp-box-formulaire__actions .lcdp-button {
-  margin: 0;
 }
 :where(html[data-lcdp-css~="c001"]) .lcdp-nouveauparc-status {
   width: 100%;
@@ -1183,10 +1132,6 @@
   display: inline;
   margin: 0;
 }
-:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content a,:where(html[data-lcdp-css~="c083"]) .lcdp-restricted-legal-card .lcdp-boxtext__content a {
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
 :where(html[data-lcdp-css~="c083"]) .lcdp-restricted-legal-card {
   width: min(100%, 900px);
 }
@@ -1259,26 +1204,6 @@
   font-size: clamp(1.45rem, 4vw, 2rem);
   line-height: 1.18;
 }
-:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__close {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  float: right;
-  width: 42px;
-  height: 42px;
-  margin: 0 0 0.5rem 0.75rem;
-  border: 0;
-  border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-size: 1.9rem;
-  line-height: 1;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__close:hover,:where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__close:focus-visible {
-  background: var(--lcdp-color-border);
-}
 :where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__content {
   display: grid;
   gap: clamp(0.85rem, 2.2vw, 1.2rem);
@@ -1346,13 +1271,6 @@
     column-gap: 12px;
     padding: 12px;
   }
-  :where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__close {
-    grid-column: 2;
-    grid-row: 1;
-    float: none;
-    margin: 0;
-    justify-self: end;
-  }
   :where(html[data-lcdp-css~="c083"]) .lcdp-legal-lightbox__header {
     grid-column: 1;
     grid-row: 1;
@@ -1386,9 +1304,6 @@
 }
 :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__title, :where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content {
   color: var(--lcdp-color-text);
-}
-:where(html[data-lcdp-css~="c083"]) .lcdp-page-document-legal .lcdp-boxtext__content a {
-  color: var(--lcdp-color-primary);
 }
 :where(html[data-lcdp-css~="c083"]) body.lcdp-page-document-legal .lcdp-document-legal__title {
   color: var(--lcdp-color-text);

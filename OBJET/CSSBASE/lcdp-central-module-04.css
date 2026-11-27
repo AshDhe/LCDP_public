@@ -62,11 +62,6 @@
   gap: var(--lcdp-space-2);
   justify-items: center;
 }
-:where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails__actions .lcdp-button {
-  width: 100%;
-  max-width: 320px;
-  margin-top: 0;
-}
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c074"]) .lcdp-box-card-listemails {
     padding: var(--lcdp-space-4);
@@ -149,42 +144,6 @@
   background: var(--lcdp-color-surface-soft);
   display: block;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button {
-  position: absolute;
-  top: 50%;
-  z-index: 2;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border: 1px solid rgba(31, 42, 36, 0.18);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--lcdp-color-text);
-  font-family: var(--lcdp-font-main);
-  font-size: 28px;
-  line-height: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateY(-50%);
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(31, 42, 36, 0.14);
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--prev {
-  left: 10px;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--next {
-  right: 10px;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button:hover {
-  background: #ffffff;
-  border-color: var(--lcdp-color-border-strong);
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button:active {
-  opacity: 0.75;
-}
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dots {
   min-height: 16px;
   margin-top: var(--lcdp-space-1);
@@ -193,44 +152,13 @@
   justify-content: center;
   gap: var(--lcdp-space-1);
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot {
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  border: 1px solid rgba(31, 42, 36, 0.18);
-  border-radius: 999px;
-  background: rgba(31, 42, 36, 0.35);
-  cursor: pointer;
-  box-shadow: 0 1px 4px rgba(31, 42, 36, 0.12);
-  appearance: none;
-  -webkit-appearance: none;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot.is-active {
-  border-color: var(--lcdp-color-logo-green);
-  background: var(--lcdp-color-logo-green);
-}
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__viewport {
     border-radius: calc(var(--lcdp-radius-button) + 8px);
   }
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button {
-    width: 44px;
-    height: 44px;
-    font-size: 34px;
-  }
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--prev {
-    left: 16px;
-  }
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__button--next {
-    right: 16px;
-  }
   :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dots {
     min-height: 18px;
     gap: 9px;
-  }
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__dot {
-    width: 10px;
-    height: 10px;
   }
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel__item--with-title::after {
@@ -310,10 +238,6 @@
   gap: var(--lcdp-space-2);
   justify-content: flex-end;
 }
-:where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item__actions .lcdp-button {
-  margin-top: 0;
-  min-width: 120px;
-}
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c053"]) .lcdp-box-card-listemails-item {
     grid-template-columns: 1fr auto;
@@ -367,49 +291,11 @@
   font-weight: 700;
   color: var(--lcdp-color-text);
 }
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__description {
-  display: block;
-  width: 100%;
-  margin: var(--lcdp-space-1) 0 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-size: 0.98rem;
-  line-height: 1.4;
-  text-align: left;
-  text-transform: none;
-  appearance: none;
-  box-shadow: none;
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__description:focus-visible {
-  outline: 3px solid var(--lcdp-color-focus);
-  outline-offset: 3px;
-}
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__description-icone {
-  width: 1em;
-  height: 1em;
-  margin-left: 5px;
-  display: inline-block;
-  vertical-align: -2px;
-  filter: brightness(0) saturate(100%);
-  opacity: 0.65;
-  object-fit: contain;
-  pointer-events: none;
-}
 :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__actions {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--lcdp-space-2);
-}
-:where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__actions .lcdp-button {
-  width: 100%;
-  max-width: none;
-  margin-top: 0;
 }
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc {
@@ -435,14 +321,6 @@
   :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     max-width: 420px;
-  }
-  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__actions .lcdp-button {
-    min-width: 0;
-  }
-}
-@media (min-width: 768px) {
-  :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__description {
-    font-size: var(--lcdp-font-size-paragraph-desktop);
   }
 }
 :where(html[data-lcdp-css~="c059"]) .lcdp-box-card-parc__badge-prepa {
@@ -845,7 +723,7 @@
   justify-content: flex-start;
   flex-wrap: wrap;
 }
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
   min-height: 38px;
   padding: 8px 14px;
   border: 1px solid var(--lcdp-color-border);
@@ -855,37 +733,6 @@
   font: inherit;
   font-size: 0.95rem;
   line-height: 1.1;
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action {
-  cursor: pointer;
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action {
-  min-width: 54px;
-  font-weight: 700;
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action:hover,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action:hover {
-  border-color: var(--lcdp-color-border-strong);
-  background: var(--lcdp-color-surface-soft);
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action[data-action="adresse"] {
-  border-color: var(--lcdp-color-logo-green);
-  background: var(--lcdp-color-logo-green);
-  color: #ffffff;
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action[data-action="adresse"]:hover {
-  border-color: var(--lcdp-color-primary);
-  background: var(--lcdp-color-primary);
-  color: #ffffff;
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action--inviter {
-  border-color: var(--lcdp-reservation-invitation-color);
-  color: var(--lcdp-reservation-invitation-color);
-  background: var(--lcdp-color-surface);
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action--inviter:hover {
-  border-color: var(--lcdp-reservation-invitation-color);
-  background: rgba(123, 90, 166, 0.08);
-  color: var(--lcdp-reservation-invitation-color);
 }
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
   display: inline-flex;
@@ -949,27 +796,6 @@
     justify-content: flex-start;
   }
 }
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action[data-action="adresse"] {
-  border-color: var(--lcdp-color-logo-green) !important;
-  background: var(--lcdp-color-logo-green) !important;
-  color: #ffffff !important;
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action[data-action="adresse"]:hover {
-  border-color: var(--lcdp-color-primary) !important;
-  background: var(--lcdp-color-primary) !important;
-  color: #ffffff !important;
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre [data-action="adresse"],:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces {
-  border-color: var(--lcdp-color-logo-green) !important;
-  background: var(--lcdp-color-logo-green) !important;
-  color: #ffffff !important;
-  text-decoration: none !important;
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre [data-action="adresse"]:hover,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre .lcdp-box-card-reservation-membre__micro-action--acces:hover {
-  border-color: var(--lcdp-color-primary) !important;
-  background: var(--lcdp-color-primary) !important;
-  color: #ffffff !important;
-}
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
   gap: var(--lcdp-space-2);
 }
@@ -1004,27 +830,9 @@
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__department {
   flex: 0 0 auto;
 }
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action--annuler {
-  align-self: flex-start;
-  margin: 0 !important;
-  min-height: 34px;
-  padding: 7px 13px;
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
 :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__actions {
   margin-top: 2px;
   gap: 8px;
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__actions .lcdp-box-card-reservation-membre__micro-action--fermer {
-  border-color: var(--lcdp-color-border);
-  background: var(--lcdp-color-surface);
-  color: var(--lcdp-color-text);
-}
-:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__actions .lcdp-box-card-reservation-membre__micro-action--fermer:hover {
-  border-color: var(--lcdp-color-border-strong);
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
 }
 @media (max-width: 420px) {
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__body {
@@ -1033,22 +841,17 @@
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__place {
     gap: 8px;
   }
-  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
     min-height: 32px;
     padding: 6px 10px;
     font-size: 0.86rem;
-  }
-  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action--annuler {
-    max-width: 100%;
-    white-space: normal;
-    text-align: center;
   }
 }
 @media (min-width: 768px) {
   :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__place {
     gap: 10px;
   }
-  :where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__micro-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__picto-action,:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
+:where(html[data-lcdp-css~="c063"]) .lcdp-box-card-reservation-membre__invitation-badge {
     min-height: 36px;
     padding: 7px 13px;
   }
@@ -1139,25 +942,6 @@
   flex-direction: column;
   gap: var(--lcdp-space-3);
   box-sizing: border-box;
-}
-:where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__close {
-  position: sticky;
-  top: var(--lcdp-space-2);
-  right: var(--lcdp-space-2);
-  margin-left: auto;
-  z-index: 2;
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  min-height: 38px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-size: 1.65rem;
-  line-height: 1;
-  cursor: pointer;
 }
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__header {
   padding-right: 44px;

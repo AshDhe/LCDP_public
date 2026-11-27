@@ -97,10 +97,6 @@
 .public-home *, .public-home *::before, :where(html[data-lcdp-css~="c085"]) .public-home *::after {
   box-sizing: border-box;
 }
-:where(html[data-lcdp-css~="c085"]) .public-home button {
-  font: inherit;
-  cursor: pointer;
-}
 :where(html[data-lcdp-css~="c085"]) .public-home svg {
   display: block;
 }
@@ -199,20 +195,6 @@
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__verification-info::backdrop {
   background: rgba(31,42,36,.46);
-}
-:where(html[data-lcdp-css~="c085"]) .public-home__verification-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 40px;
-  height: 40px;
-  border: 0;
-  border-radius: 50%;
-  background: #f7f7f4;
-  color: #1f2a24;
-  font: inherit;
-  font-size: 28px;
-  cursor: pointer;
 }
 :where(html[data-lcdp-css~="c085"]) .public-home__actualite {
   box-sizing: border-box;
@@ -781,24 +763,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   max-width: none;
   margin: 0;
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper .lcdp-editorial-card .lcdp-editorial-cta > a.lcdp-button {
-  box-sizing: border-box;
-  display: inline-flex;
-  width: 100%;
-  max-width: none;
-  min-height: 0;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-size: 12px;
-  line-height: 1.35;
-  font-weight: 700;
-  letter-spacing: .05em;
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration: none;
-  box-shadow: 0 4px 6px -1px rgb(15 23 42 / 10%);
-  transition: background-color .2s ease, border-color .2s ease, color .2s ease;
-}
 @media (prefers-reduced-motion: reduce) {
   :where(html[data-lcdp-css~="c085"]) .lcdp-app-wrapper figure.lcdp-editorial-hero > img.lcdp-editorial-hero__image {
     transition: none;
@@ -943,44 +907,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   overflow-wrap: normal;
   word-break: normal;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button {
-  box-sizing: border-box;
-  position: absolute;
-  top: 50%;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #8b9a84;
-  border-radius: 999px;
-  background: #fff;
-  color: #4e6838;
-  font: 700 18px/1 Arial,system-ui,sans-serif;
-  cursor: pointer;
-  box-shadow: 0 1px 2px rgb(15 23 42 / 8%);
-  transform: translateY(-50%);
-  transition: background-color .2s ease, border-color .2s ease;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button:hover {
-  background: #f5f7f2;
-  border-color: #4e6838;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button--prev {
-  left: 12px;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button--next {
-  right: 12px;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__button:focus-visible, :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot:focus-visible {
-  outline: 2px solid #4e6838;
-  outline-offset: 2px;
-}
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__navigation {
   display: grid;
   grid-template-columns: 24px minmax(0, 1fr) 24px;
@@ -993,37 +919,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   border-top: 1px solid #e2e8f0;
   padding-top: 4px;
 }
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__navigation > .lcdp-box-carousel__button {
-  position: relative;
-  inset: auto;
-  transform: none;
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
-  min-height: 24px;
-  max-width: 24px;
-  max-height: 24px;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-  font-size: 14px;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__navigation > .lcdp-box-carousel__button::before {
-  content: "";
-  position: absolute;
-  box-sizing: border-box;
-  top: 50%;
-  left: 50%;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #8b9a84;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__navigation > .lcdp-box-carousel__button:hover::before {
-  border-color: #4e6838;
-}
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dots {
   display: flex;
   align-items: center;
@@ -1034,34 +929,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   flex-wrap: wrap;
   min-width: 0;
   padding: 0;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot {
-  box-sizing: border-box;
-  flex: 0 0 8px;
-  width: 8px;
-  height: 8px;
-  min-width: 8px;
-  min-height: 8px;
-  max-width: 8px;
-  max-height: 8px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #e2e8f0;
-  box-shadow: none;
-  cursor: pointer;
-  transition: background-color .2s ease, transform .2s ease;
-}
-:where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot.is-active {
-  border: 0;
-  background: #4e6838;
-  box-shadow: none;
-  transform: scale(1.25);
-}
-@media (prefers-reduced-motion: reduce) {
-  :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-box-carousel__dot {
-    transition: none;
-  }
 }
 :where(html[data-lcdp-css~="c031"]) .lcdp-box-carousel[data-lcdp-box-carousel] .lcdp-image-legend {
   box-sizing: border-box;
@@ -1254,33 +1121,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   margin: 0;
   padding-top: 8px;
 }
-:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button) {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  min-width: 0;
-  min-height: 52px;
-  margin: 0;
-  padding: 14px 16px;
-  border: 0;
-  border-radius: 12px;
-  background: #4e6838;
-  color: #fff;
-  text-align: center;
-  font: 700 12px/1.5 Arial,system-ui,sans-serif;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  box-shadow: 0 4px 6px -1px rgb(6 78 59 / 10%);
-  cursor: pointer;
-  transition: background-color .2s ease,transform .2s ease;
-}
-:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button):hover {
-  background: #3d522c;
-  color: #fff;
-}
-:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button):active {
-  transform: scale(.99);
-}
 :where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre .lcdp-box-formulaire__note {
   box-sizing: border-box;
   width: 100%;
@@ -1324,10 +1164,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 }
 :where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__actions {
   padding-top: 0;
-}
-:where(html[data-lcdp-css~="c041"]) .lcdp-formulaire-encadre.lcdp-formulaire-encadre--compact .lcdp-box-formulaire__actions > :is(button[type="submit"],input[type="submit"],.lcdp-button) {
-  min-height: 44px;
-  padding: 10px 16px;
 }
 /* Variante générique des boutons d'action hauts et étroits, activée par une classe. */
 
@@ -1413,10 +1249,6 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__title {
   color: var(--lcdp-role-accent);
 }
-:where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__actions .lcdp-button-logo, :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-box-formulaire__actions .lcdp-button-logo:is(:hover,:focus-visible) {
-  background: #fff;
-  border-color: #fff;
-}
 :where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow {
   text-align: center;
 }
@@ -1468,27 +1300,8 @@ html[data-lcdp-css~="c085"] body.public-home #lcdp-actualite-bandeau .public-hom
   text-align: left;
   line-height: 1.5;
 }
-:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 14px;
-  cursor: pointer;
-  text-align: left;
-}
 :where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__phone-check {
   margin: 28px 0;
-}
-:where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__phone-check .lcdp-setup-flow__toggle {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: fit-content;
-  max-width: 100%;
-  margin: 0 auto;
-  color: #1f2a24;
-  font: 400 14px/1.5 Arial, system-ui, sans-serif;
-  text-align: left;
 }
 :where(html[data-lcdp-css~="c032"]) .lcdp-setup-flow__phone-check input[type="checkbox"] {
   box-sizing: border-box;

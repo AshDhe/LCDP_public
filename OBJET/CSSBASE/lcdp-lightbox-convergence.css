@@ -98,14 +98,13 @@
   background: var(--lcdp-modal-surface,var(--lcdp-dialogue-fond));
   box-shadow: var(--lcdp-modal-shadow,var(--lcdp-dialogue-ombre));
 }
-
 :where(body.lcdp-app-page) :is(
   .lcdp-box-alerte,
   .lcdp-box-dialogue-bouton,
   .lcdp-box-dialogue-champ,
   .lcdp-box-dialogue-champ-inviter,
   .lcdp-box-dialogue-upload-img
-) :is(button,a,input,select,textarea):focus-visible {
+) :is(input,select,textarea):focus-visible {
   outline: 3px solid var(--lcdp-modal-focus,var(--lcdp-dialogue-focus));
   outline-offset: 3px;
 }
