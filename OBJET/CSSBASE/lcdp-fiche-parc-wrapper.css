@@ -19,7 +19,7 @@
 :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-box-shift-detail-parc {
   padding: 10px;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-box-shift-detail-parc__close {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-mes-acces-fiche-slot) .lcdp-box-shift-detail-parc__close {
   width: 30px;
   height: 30px;
   font-size: 1.3rem;
@@ -69,13 +69,13 @@
 :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-box-fiche-parc__actions-barre {
   gap: 6px;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-mes-acces-fiche-slot) .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action {
   min-width: 0;
   min-height: 34px;
   padding: 5px 9px;
   font-size: .72rem;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action-icone {
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-mes-acces-fiche-slot) .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action-icone {
   width: 18px;
   height: 18px;
 }
@@ -219,10 +219,11 @@
  * couleur orange conservée pour Partager et Carte.
  * Cette règle est locale : ne modifie aucune autre Command Bar.
  */
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot)
+
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-mes-acces-fiche-slot)
 .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]
 .lcdp-box-fiche-parc__actions-barre :is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte]),
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot)
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-mes-acces-fiche-slot)
 .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="carte"]
 .lcdp-box-fiche-parc__actions-barre [data-lcdp-fiche-parc-action-partager] {
   box-sizing: border-box;
@@ -249,7 +250,7 @@
   letter-spacing: 0 !important;
   white-space: nowrap !important;
 }
-:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot)
+:is(#lcdp-planifier-fiche-overlay-slot, #lcdp-mes-acces-fiche-slot)
 .lcdp-box-shift-detail-parc :is([data-lcdp-fiche-parc-action-partager], [data-lcdp-fiche-parc-action-carte])
 .lcdp-box-card-parc__action-icone {
   width: 20px !important;
@@ -417,15 +418,15 @@ body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique, .lcdp-mes-acces-page) :i
   max-height: none !important;
   overflow: visible;
 }
-body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique, .lcdp-mes-acces-page) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot) .lcdp-box-shift-detail-parc__close {
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-mes-acces-fiche-slot) .lcdp-box-shift-detail-parc__close {
   position: absolute;
   top: 11px;
   right: 11px;
   z-index: 5;
 }
-
 /* Fiche intégrée : croix alignée avec le titre, sans chevaucher l'en-tête. */
-body:is(.lcdp-page-reserver, .lcdp-fiche-parc-publique, .lcdp-mes-acces-page) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-fiche-parc-slot, #lcdp-mes-acces-fiche-slot)
+
+body:is(.lcdp-page-reserver, .lcdp-mes-acces-page) :is(#lcdp-planifier-fiche-overlay-slot, #lcdp-mes-acces-fiche-slot)
 [data-lcdp-box-shift-detail-parc][data-lcdp-shift-vue="fiche"] > .lcdp-box-shift-detail-parc__card
 > .lcdp-box-shift-detail-parc__close {
   position: absolute !important;
