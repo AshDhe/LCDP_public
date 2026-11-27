@@ -2023,6 +2023,130 @@ body.lcdp-security-tunnel .lcdp-setup-flow__phone-check .lcdp-setup-flow__toggle
 }
 
 
+/* Fiche Parc publique — socle des boutons Card Parc (sans modifier les autres contextes) */
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  margin-top: 0;
+  padding: 10px 9px;
+  border: 2px solid currentColor;
+  border-radius: var(--lcdp-radius-button);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: clamp(0.9072rem, 4.32vw, 1.0584rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-transform: none;
+  box-shadow: none;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+  width: 27.72px;
+  height: 27.72px;
+  flex: 0 0 27.72px;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-libelle {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-plein {
+  border-color: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  background: var(--lcdp-color-espace-accent, var(--lcdp-color-logo-green));
+  color: #ffffff;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-plein:hover {
+  border-color: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  background: var(--lcdp-color-espace-accent-hover, var(--lcdp-color-primary));
+  color: #ffffff;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-contour {
+  border-color: var(--lcdp-color-logo-green);
+  background: #ffffff;
+  color: var(--lcdp-color-logo-green);
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--vert-contour:hover {
+  border-color: var(--lcdp-color-primary);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-primary);
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-plein {
+  border-color: var(--lcdp-color-orange);
+  background: var(--lcdp-color-orange);
+  color: #ffffff;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-plein:hover {
+  border-color: var(--lcdp-color-orange-hover);
+  background: var(--lcdp-color-orange-hover);
+  color: #ffffff;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-contour {
+  border-color: var(--lcdp-color-orange);
+  background: #ffffff;
+  color: var(--lcdp-color-orange);
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver
+  .lcdp-box-card-parc__action--orange-contour:hover {
+  border-color: var(--lcdp-color-orange-hover);
+  background: var(--lcdp-color-surface-soft);
+  color: var(--lcdp-color-orange-hover);
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action:focus-visible {
+  outline: 3px solid var(--lcdp-color-focus);
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action {
+    min-height: 52px;
+    padding-inline: 13px;
+    font-size: 1.16424rem;
+  }
+}
+
+@media (min-width: 768px) {
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action-icone {
+    width: 29.04px;
+    height: 29.04px;
+    flex-basis: 29.04px;
+  }
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet,
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--projet:hover {
+  filter: saturate(0.35) brightness(1.18);
+  cursor: help;
+}
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-card-parc--reserver .lcdp-box-card-parc__action--vert-plein .lcdp-box-card-parc__action-icone--presentation {
+  filter: brightness(0) invert(1);
+}
+
 /* Commandes communes — factures, compte, fiche Parc publique */
 
 :where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-fiche-parc__close {
@@ -2107,77 +2231,6 @@ body.lcdp-security-tunnel .lcdp-setup-flow__phone-check .lcdp-setup-flow__toggle
 @media (min-width: 768px) {
 :where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"]
     .lcdp-box-shift-detail-parc__close {
-    top: var(--lcdp-space-5);
-    right: var(--lcdp-space-5);
-  }
-}
-
-:where(html:has(> body.lcdp-fiche-parc-publique)):where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__close {
-  position: sticky;
-  top: var(--lcdp-space-2);
-  float: right;
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
-  border: 0;
-  border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font-size: 1.8rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-:where(html:has(> body.lcdp-fiche-parc-publique)):where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__close:hover {
-  background: var(--lcdp-color-surface-soft);
-}
-
-:where(html:has(> body.lcdp-fiche-parc-publique)):where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__actions-barre .lcdp-box-card-parc__action {
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  flex: 0 0 auto !important;
-  white-space: nowrap !important;
-}
-
-:where(html:has(> body.lcdp-fiche-parc-publique)):where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__contact-label {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-:where(html:has(> body.lcdp-fiche-parc-publique)):where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__close {
-  position: sticky;
-  top: var(--lcdp-space-2);
-  float: right;
-  z-index: 4;
-  width: 40px;
-  height: 40px;
-  margin: 0 0 var(--lcdp-space-2) var(--lcdp-space-2);
-  border: 0;
-  border-radius: 999px;
-  background: var(--lcdp-color-surface-soft);
-  color: var(--lcdp-color-text);
-  font: inherit;
-  font-size: 1.8rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-:where(html:has(> body.lcdp-fiche-parc-publique)):where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc__close:hover {
-  background: var(--lcdp-color-surface-soft);
-}
-
-:where(html:has(> body.lcdp-fiche-parc-publique)):where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-shift-detail-parc__close {
-  position: absolute;
-  top: var(--lcdp-space-4);
-  right: var(--lcdp-space-4);
-  float: none;
-  margin: 0;
-}
-
-@media (min-width: 768px) {
-:where(html:has(> body.lcdp-fiche-parc-publique)):where(html[data-lcdp-css~="c075"]) .lcdp-box-shift-detail-parc[data-lcdp-shift-vue="fiche"] .lcdp-box-shift-detail-parc__close {
     top: var(--lcdp-space-5);
     right: var(--lcdp-space-5);
   }
@@ -2396,3 +2449,73 @@ body.lcdp-fiche-parc-publique #lcdp-fiche-parc-slot
   margin: 0 !important;
   float: none !important;
 }
+
+
+/* Mon compte — liens et boutons compacts (les badges informatifs restent dans leur feuille) */
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: #ecfdf5;
+  color: var(--lcdp-burger-accent, var(--lcdp-color-primary, #4e6838));
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action:hover,
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action:focus-visible {
+  background: var(--lcdp-burger-accent, var(--lcdp-color-primary, #4e6838));
+  color: #fff;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action[hidden] { display: none !important; }
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--amber {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--amber:hover,
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--amber:focus-visible {
+  background: #fde68a;
+  color: #78350f;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--red {
+  background: #fff1f2;
+  color: #be123c;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--red:hover,
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--red:focus-visible {
+  background: #ffe4e6;
+  color: #9f1239;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--neutral {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--neutral:hover,
+:where(body.lcdp-page-mon-compte) :is(a,button).lcdp-ui-badge.lcdp-ui-badge--action.lcdp-ui-badge--neutral:focus-visible {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+/* Fiche Parc publique — dimension du picto de fermeture du gabarit organisé */
+
+:where(html:has(> body.lcdp-fiche-parc-publique)) .lcdp-box-fiche-parc .lcdp-box-fiche-parc__card--organisee .lcdp-box-fiche-parc__close {
+      width: 32px;
+      height: 32px;
+      font-size: 1.35rem;
+      color: #546354;
+    }

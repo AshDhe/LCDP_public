@@ -43,7 +43,8 @@
   --lcdp-badge-texte: #8a430c;
 }
 /* Label d'action compact : reprend la métrique du repère Espace personnel du menu. */
-.lcdp-ui-badge--action {
+
+.lcdp-ui-badge--action:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
   flex: 0 0 auto;
   padding: 4px 8px;
   border: 0;
@@ -59,18 +60,18 @@
   white-space: nowrap;
   transition: background-color 200ms ease, color 200ms ease;
 }
-.lcdp-ui-badge--action:hover,
-.lcdp-ui-badge--action:focus-visible {
+.lcdp-ui-badge--action:hover:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)),
+.lcdp-ui-badge--action:focus-visible:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
   background: var(--lcdp-burger-accent, var(--lcdp-color-primary, #4e6838));
   color: #fff;
 }
-.lcdp-ui-badge--action[hidden] { display: none !important; }
-.lcdp-ui-badge--action.lcdp-ui-badge--amber {
+.lcdp-ui-badge--action[hidden]:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) { display: none !important; }
+.lcdp-ui-badge--action.lcdp-ui-badge--amber:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
   background: #fef3c7;
   color: #92400e;
 }
-.lcdp-ui-badge--action.lcdp-ui-badge--amber:hover,
-.lcdp-ui-badge--action.lcdp-ui-badge--amber:focus-visible {
+.lcdp-ui-badge--action.lcdp-ui-badge--amber:hover:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)),
+.lcdp-ui-badge--action.lcdp-ui-badge--amber:focus-visible:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
   background: #fde68a;
   color: #78350f;
 }
@@ -125,23 +126,23 @@ body.lcdp-page-reserver .lcdp-planifier-wrapper .lcdp-page-header
     padding: 7px 16px;
   }
 }
-
 /* Variantes d'action compactes : rouge et neutre informatif. */
-.lcdp-ui-badge--action.lcdp-ui-badge--red {
+
+.lcdp-ui-badge--action.lcdp-ui-badge--red:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
   background: #fff1f2;
   color: #be123c;
 }
-.lcdp-ui-badge--action.lcdp-ui-badge--red:hover,
-.lcdp-ui-badge--action.lcdp-ui-badge--red:focus-visible {
+.lcdp-ui-badge--action.lcdp-ui-badge--red:hover:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)),
+.lcdp-ui-badge--action.lcdp-ui-badge--red:focus-visible:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
   background: #ffe4e6;
   color: #9f1239;
 }
-.lcdp-ui-badge--action.lcdp-ui-badge--neutral {
+.lcdp-ui-badge--action.lcdp-ui-badge--neutral:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
   background: #f1f5f9;
   color: #64748b;
 }
-.lcdp-ui-badge--action.lcdp-ui-badge--neutral:hover,
-.lcdp-ui-badge--action.lcdp-ui-badge--neutral:focus-visible {
+.lcdp-ui-badge--action.lcdp-ui-badge--neutral:hover:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)),
+.lcdp-ui-badge--action.lcdp-ui-badge--neutral:focus-visible:not(:where(body.lcdp-page-mon-compte :is(a,button).lcdp-ui-badge)) {
   background: #e2e8f0;
   color: #475569;
 }
