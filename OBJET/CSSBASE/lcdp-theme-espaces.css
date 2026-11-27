@@ -1,0 +1,21 @@
+/* Jetons chromatiques communs aux espaces. Valeurs historiques membre conservées.
+   Les thèmes d'espace sur html peuvent redéfinir ces jetons sans modifier les composants.
+   Les états d'erreur, d'avertissement et de sécurité ne dépendent pas de la palette d'espace. */
+:root {
+  --lcdp-rgb-planifier-accent: 75, 99, 51;
+  --lcdp-color-planifier-accent: rgb(var(--lcdp-rgb-planifier-accent));
+  --lcdp-color-planifier-selection: #4e6838;
+  --lcdp-color-planifier-date-active: #35583c;
+  --lcdp-rgb-planifier-selection-surface: 236, 253, 245;
+  --lcdp-color-planifier-selection-surface: rgb(var(--lcdp-rgb-planifier-selection-surface));
+  --lcdp-color-planifier-accent-contrast-soft: #d1fae5;
+  --lcdp-color-paiement-action: #df862b;
+  --lcdp-color-paiement-focus: #dc7d22;
+  --lcdp-color-paiement-titre: #182c20;
+  --lcdp-color-paiement-etape: #55755b;
+  --lcdp-color-paiement-section: #254634;
+  --lcdp-color-paiement-mois: #2c503b;
+  --lcdp-color-paiement-retour: #2d4635;
+  --lcdp-color-paiement-lien: #236447;
+  --lcdp-color-paiement-lien-focus: #31694b;
+}
