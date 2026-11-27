@@ -5146,3 +5146,10 @@ html:not(.lcdp-planning-membre-ready) body.lcdp-mes-acces-page > .lcdp-app-wrapp
       display:flex!important;align-items:center!important;gap:7px!important;
       width:100%!important;min-width:0!important;flex-wrap:nowrap!important;
     }
+
+/* États de visibilité des filtres et disposition du verso des accès. */
+#lcdp-planifier-calendrier-slot .lcdp-planifier-entete-filtres :is(.lcdp-box-legende__ligne,[data-lcdp-information-coach])[hidden],
+.lcdp-planifier-legende-planning .lcdp-box-legende__item[hidden],
+.lcdp-planifier-legende-horaires .lcdp-box-legende__item[hidden] {display:none!important;}
+#lcdp-planning-calendrier-slot .lcdp-planning-verso-parc-titre {margin-bottom:0;}
+#lcdp-planning-calendrier-slot .lcdp-planning-verso-date {margin-top:0;}

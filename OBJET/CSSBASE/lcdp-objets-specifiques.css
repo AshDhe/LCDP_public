@@ -950,3 +950,10 @@ figure.lcdp-editorial-inline-figure[hidden] {display:none!important;}
 .lcdp-dactif-portrait img {display:block;width:100%;height:100%;object-fit:cover;}
 
 .lcdp-dactif-nom {flex:1;min-width:0;font-weight:650;overflow-wrap:anywhere;}
+
+/* OBJET : LISTE DE CARTES DIAPORAMA — état vide et contenu. */
+.lcdp-box-liste-card-diaporama__message {box-sizing:border-box;width:100%;margin:12px auto;padding:16px 12px;border:1px solid #dce4da;border-radius:14px;background:#fff;box-shadow:0 3px 12px rgba(35,55,35,.08);color:#263e2f;font-weight:600;text-align:center;line-height:1.5;}
+.lcdp-box-card-parc-diaporama [data-lcdp-diaporama-image][hidden] {display:none!important;}
+.lcdp-box-card-parc-diaporama [data-lcdp-diaporama-description] {margin:2px 0 8px;}
+/* OBJET : CARTE LISTE INVITÉS — titre en consultation. */
+#lcdp-listinvites-lecture-title {font-size:24px;font-weight:800;}

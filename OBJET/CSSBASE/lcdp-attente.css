@@ -89,3 +89,6 @@ html.lcdp-planning-membre-ready #lcdp-planning-attente { display: none; }
 #lcdp-planning-attente .lcdp-loading-spinner__arc,
       .lcdp-invitation-attente .lcdp-loading-spinner__arc { animation:none; }
 }
+
+/* Réactivation temporaire de l'attente lors de l'ouverture des invitations. */
+html.lcdp-planning-membre-ready #lcdp-planning-attente.lcdp-attente--active {display:flex;}

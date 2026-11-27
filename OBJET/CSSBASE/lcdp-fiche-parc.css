@@ -121,3 +121,6 @@
         grid-template-columns: minmax(0, 1fr) !important;
       }
     }
+
+/* État de construction de la fiche avant son affichage atomique. */
+.lcdp-box-shift-detail-parc--page[aria-hidden="true"] {visibility:hidden!important;}

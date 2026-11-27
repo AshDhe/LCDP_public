@@ -837,3 +837,6 @@ body:not(.lcdp-security-tunnel) #coda-actualisation.lcdp-setup-flow__fieldset {m
 
 /* OBJET : FORMULAIRE D-ACTIF */
 .lcdp-dactif-ligne input {width:21px;height:21px;accent-color:#4b6333;}
+
+/* Variante pleine largeur des champs de filtrage. */
+.lcdp-alerte-filtres .lcdp-planning-filtres__champ--pleine-largeur {grid-column:1 / -1;}
