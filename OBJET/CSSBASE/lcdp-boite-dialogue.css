@@ -1,4 +1,53 @@
 @import url("./lcdp-bouton-lien-picto.css");
+
+/* Règles du parcours Réserver — ancien style HTML, avant variantes existantes. */
+.lcdp-aboreza-preparation__dialogue [data-lcdp-dialogue-title] {
+      margin-bottom: 0 !important;
+    }
+
+.lcdp-aboreza-privileges-information .lcdp-dialogue-ref__message {
+      white-space: pre-line;
+      text-align: left;
+      line-height: 1.7;
+      max-width: 100%;
+    }
+
+.lcdp-aboreza-privileges-information .lcdp-dialogue-ref__card {
+      text-align: left;
+    }
+
+.lcdp-aboreza-privileges-information .lcdp-dialogue-ref__titre {
+      text-align: center;
+    }
+
+.lcdp-aboreza-confirmation-information .lcdp-dialogue-ref__message { white-space: pre-line; }
+
+.lcdp-aboreza-dialogue-transition {
+      animation: lcdp-privileges-apparition .16s ease-out both;
+    }
+
+.lcdp-aboreza-dialogue-transition.lcdp-aboreza-dialogue-sortie {
+      animation: lcdp-privileges-disparition .13s ease-in both;
+      pointer-events: none;
+    }
+
+@keyframes lcdp-privileges-apparition {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+@keyframes lcdp-privileges-disparition {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+@media (prefers-reduced-motion: reduce) {
+.lcdp-aboreza-dialogue-transition,
+      .lcdp-aboreza-dialogue-transition.lcdp-aboreza-dialogue-sortie {
+        animation: none !important;
+      }
+}
+
 /* LCDP — BOÎTES DE DIALOGUE
    Structure, voile, carte, contenu et disposition des commandes.
    Boutons et pictogrammes : lcdp-bouton-lien-picto.css. */
@@ -1376,7 +1425,17 @@ body.lcdp-page-mon-compte
     .lcdp-mineurs-adresse { overflow-wrap:anywhere; }
     @media(max-width:480px) { .lcdp-mineurs-contenu { padding:18px 14px; } .lcdp-mineurs-ligne { padding:10px;grid-template-columns:minmax(0,1fr) 56px; }  }
   
-.lcdp-aboreza-preparation__dialogue [data-lcdp-dialogue-text] {display:block!important;width:100%!important;max-width:none!important;margin-inline:auto!important;text-align:center!important;align-self:stretch!important;}
+.lcdp-aboreza-preparation__dialogue [data-lcdp-dialogue-text] {
+display: block;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: none;
+      margin: -12px auto 0 !important;
+      padding: 0;
+      text-align: center !important;
+      font-size: 0.875rem;
+      line-height: 1.35;
+display:block!important;width:100%!important;max-width:none!important;margin-inline:auto!important;text-align:center!important;align-self:stretch!important;}
 .lcdp-planifier-parcs-inline.lcdp-boite-dialogue--montage {display:none!important;opacity:0;}
 .lcdp-planifier-parcs-inline.lcdp-boite-dialogue--visible {opacity:1;}
 

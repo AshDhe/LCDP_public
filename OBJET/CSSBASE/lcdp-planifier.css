@@ -1,3 +1,44 @@
+
+/* Règles du parcours Réserver — ancien style HTML, avant variantes existantes. */
+body.lcdp-express-ouverture-jour:not(.lcdp-planifier-vue-jour-active) #lcdp-planifier-calendrier-slot { visibility:hidden; }
+
+body.lcdp-planifier-origine-alerte #lcdp-commande-bar-reserver-slot {
+      margin: 14px 0 20px;
+    }
+
+body.lcdp-planifier-origine-alerte #lcdp-commande-bar-reserver-slot .lcdp-box-commande-bar {
+      border: 0 !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+    }
+
+body.lcdp-planifier-origine-alerte #lcdp-commande-bar-reserver-slot .lcdp-box-commande-bar__actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+    }
+
+body.lcdp-planifier-commande-active
+    #lcdp-planifier-calendrier-slot [data-lcdp-calendrier-mois-current] {
+      box-sizing: border-box;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+      width: fit-content;
+      max-width: 100%;
+      margin-inline: auto;
+      padding: 6px 14px;
+      border: 1px solid #bfd8bd;
+      border-radius: 14px;
+      background: #e3f1e2;
+      color: #4e6838;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
 /* PLANIFIER : masquage du contenu uniquement sur ce parcours, jamais dans le CSS global. */
 html:not(.lcdp-planifier-pret) .lcdp-site-page { visibility: hidden !important; }
 
@@ -74,6 +115,8 @@ html:not(.lcdp-planifier-pret) .lcdp-site-page { visibility: hidden !important; 
 
 /* 2026-11-05 — Spinners auparavant écrits dans le HTML : CSS source externe. */
 #lcdp-planifier-attente-initiale .lcdp-loading-spinner {
+position: relative; display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; box-sizing: border-box;
+
   position: relative;
   display: flex;
   align-items: center;
@@ -95,6 +138,8 @@ html:not(.lcdp-planifier-pret) .lcdp-site-page { visibility: hidden !important; 
   animation: lcdp-planifier-spinner-tourne .8s linear infinite;
 }
 #lcdp-planifier-attente-initiale .lcdp-loading-spinner__dot {
+width: 8px; height: 8px; border-radius: 50%; background: #4e6838;
+
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -132,6 +177,8 @@ body > .lcdp-planifier-partage-attente:has(> .lcdp-loading-spinner) {
   animation: lcdp-planifier-spinner-tourne .8s linear infinite;
 }
 .lcdp-planifier-partage-attente .lcdp-loading-spinner__dot {
+width: 8px; height: 8px; border-radius: 50%; background: #4e6838;
+
   width: 8px;
   height: 8px;
   border-radius: 50%;

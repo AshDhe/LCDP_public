@@ -1,3 +1,366 @@
+
+/* Règles du parcours Réserver — ancien style HTML, avant variantes existantes. */
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-recapitulatif {
+      position: static !important;
+      inset: auto !important;
+      display: block !important;
+      width: 100% !important;
+      max-height: none !important;
+      padding: 0 !important;
+      background: transparent !important;
+    }
+
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-recapitulatif > .lcdp-box-workflow-abonnement__card {
+      display: block !important;
+      box-sizing: border-box;
+      width: min(100%, 720px) !important;
+      max-width: 720px !important;
+      max-height: min(78dvh, 820px) !important;
+      height: auto !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+      border-radius: 20px !important;
+    }
+
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-recapitulatif .lcdp-box-workflow-abonnement__content {
+      display: block !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__entete {
+      padding: 20px 24px 12px;
+      border-bottom: 0;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-box-card-recaporder__title {
+      font-size: 1.2rem !important;
+      line-height: 1.2 !important;
+      letter-spacing: 0;
+      text-transform: uppercase !important;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__abonnement {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: .94rem;
+      color: #57534e;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__abonnement strong {
+      font-size: 1.08rem;
+      color: #4e6838;
+      font-weight: 800;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__privileges {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 18px;
+      row-gap: 5px;
+      margin-top: 8px;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__nombre-acces {
+      margin: 5px 0 0 !important;
+      color: #292524;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__message.lcdp-box-card-recaporder__message {
+      white-space: pre-line;
+      text-align: left !important;
+      font-size: .85rem !important;
+      font-weight: 700 !important;
+      margin-top: 8px !important;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__contenu {
+      gap: 15px;
+      padding: 16px 24px 22px;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__resume {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces {
+      border-radius: 10px;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-ligne {
+      display: grid;
+      grid-template-columns: minmax(100px, 1.1fr) minmax(80px, .8fr) minmax(0, 1fr);
+      align-items: baseline;
+      column-gap: 9px;
+      padding: 7px 11px;
+      font-size: .76rem;
+      line-height: 1.35;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-ligne span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-heure {
+      color: #57534e;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-parc {
+      color: #4e6838;
+      font-weight: 650;
+    }
+
+@media (max-width: 560px) {
+body.lcdp-page-reserver #lcdp-aboreza-workflow-slot .lcdp-aboreza-recapitulatif > .lcdp-box-workflow-abonnement__card {
+        max-height: calc(100dvh - 125px) !important;
+        border-radius: 15px !important;
+      }
+}
+
+@media (max-width: 560px) {
+body.lcdp-page-reserver .lcdp-paiement-refonte__entete {
+        padding: 16px 15px 10px;
+      }
+}
+
+@media (max-width: 560px) {
+body.lcdp-page-reserver .lcdp-paiement-refonte__contenu {
+        padding: 12px 15px 18px;
+      }
+}
+
+@media (max-width: 560px) {
+body.lcdp-page-reserver .lcdp-paiement-refonte__message.lcdp-box-card-recaporder__message {
+        margin: 7px 15px 0 !important;
+      }
+}
+
+@media (max-width: 560px) {
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-ligne {
+        grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
+        row-gap: 2px;
+        font-size: .75rem;
+      }
+}
+
+@media (max-width: 560px) {
+body.lcdp-page-reserver .lcdp-paiement-refonte__acces-parc {
+        grid-column: 1 / -1;
+      }
+}
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__entete {
+      padding: 13px 18px 8px !important;
+    
+
+      position: relative;
+      padding-right: 52px !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-box-card-recaporder__title {
+      font-size: 1.08rem !important;
+      line-height: 1.18 !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__abonnement {
+      margin-top: 4px;
+      line-height: 1.24;
+      font-size: .88rem;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__nombre-acces {
+      margin: 3px 0 0 !important;
+      font-size: .85rem;
+      line-height: 1.3;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__privileges {
+      margin-top: 4px;
+      row-gap: 2px;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__message.lcdp-box-card-recaporder__message {
+      margin: 6px 18px 0 !important;
+      padding: 7px 10px !important;
+      line-height: 1.35 !important;
+      font-size: .79rem !important;
+      background: #e3f1e2 !important;
+      border-color: #bfd8bd !important;
+      color: #4e6838 !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__contenu {
+      gap: 10px !important;
+      padding: 10px 18px 15px !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__periode {
+      margin: 0 !important;
+      font-size: .83rem;
+      line-height: 1.4;
+      font-weight: 650;
+      color: #4e6838;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__section {
+      gap: 6px !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__acces-ligne {
+      padding: 5px 9px !important;
+      column-gap: 7px !important;
+      font-size: .72rem !important;
+      line-height: 1.3 !important;
+    
+
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      align-items: baseline !important;
+      justify-content: flex-start !important;
+      gap: 6px !important;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: thin;
+      white-space: nowrap !important;
+      font-size: clamp(.64rem, 1.7vw, .72rem) !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__prix {
+      padding: 11px 12px !important;
+      border-radius: 12px;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__list {
+      gap: 5px !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row {
+      font-size: .76rem !important;
+      line-height: 1.35 !important;
+      gap: 8px !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row dt {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow-wrap: normal;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row dd {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row:last-child {
+      margin-top: 5px !important;
+      padding-top: 7px !important;
+      border-top: 1px solid #e7e5e4 !important;
+      font-weight: 800;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row:last-child dt,
+    body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__prix .lcdp-box-card-recaporder__row:last-child dd {
+      font-weight: 850 !important;
+      font-size: .91rem !important;
+      color: #292524 !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__echeance {
+      display: block;
+      line-height: 1.4;
+    }
+
+@media(max-width:560px) {
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__entete {
+        padding: 12px 13px 7px !important;
+      }
+}
+
+@media(max-width:560px) {
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__contenu {
+        padding: 9px 13px 14px !important;
+      }
+}
+
+@media(max-width:560px) {
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__message.lcdp-box-card-recaporder__message {
+        margin: 5px 13px 0 !important;
+      }
+}
+
+@media(max-width:560px) {
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__acces-ligne {
+        padding: 4px 7px !important;
+        font-size: .71rem !important;
+      }
+}
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__echeance {
+      display: flex !important;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: .76rem;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__echeance strong {
+      font-size: .76rem;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__echeance--immediate strong {
+      color: #4e6838;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__echeance--future,
+    body.lcdp-page-reserver .lcdp-paiement-refonte__echeance--future strong {
+      color: #78716c !important;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__option-prix--echeances {
+      display: none !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__acces-ligne > * {
+      flex: 0 0 auto;
+      white-space: nowrap !important;
+      overflow-wrap: normal !important;
+      grid-column: auto !important;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__acces-parc {
+      margin-left: 3px;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__erreur-paiement {
+      margin: 8px 18px 0 !important;
+      padding: 10px 12px !important;
+      border: 1px solid #f4b7a7;
+      border-radius: 10px;
+      background: #fff3ef;
+      color: #963b2c;
+      font-size: .82rem;
+      line-height: 1.4;
+      font-weight: 650;
+    }
+
 /* TUNNEL PAIEMENT — structure du bon de commande et de l'écran Stripe. */
 
 /* ÉTAPE : BON DE COMMANDE */

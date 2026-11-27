@@ -1,3 +1,52 @@
+
+/* Règles du parcours Réserver — ancien style HTML, avant variantes existantes. */
+.lcdp-aboreza-options-choix .lcdp-aboreza-options-liste {
+      width: 100%;
+      display: grid;
+      gap: 11px;
+      margin: 4px 0 16px;
+      text-align: left;
+    }
+
+.lcdp-aboreza-options-choix .lcdp-aboreza-options-ligne {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: .875rem;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+
+.lcdp-aboreza-options-choix .lcdp-aboreza-options-ligne input {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 2px;
+      accent-color: #4e6838;
+    }
+
+.lcdp-aboreza-options-choix .lcdp-aboreza-options-ligne span {
+      min-width: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+.lcdp-aboreza-options-choix .lcdp-aboreza-options-ligne strong {
+      font-weight: 700;
+      color: #4e6838;
+    }
+
+.lcdp-aboreza-options-choix .lcdp-aboreza-options-ligne:has(input:disabled) {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte .lcdp-workflow-paiement__option:has(.lcdp-paiement-refonte__option-prix--echeances) {
+      grid-template-columns: 23px minmax(0, 1fr) !important;
+    }
+
 /* FORMULAIRES — champs, saisie, sélection et filtrage ; commandes dans leur propriétaire. */
 
 /* OBJET : CHAMP DE FORMULAIRE */

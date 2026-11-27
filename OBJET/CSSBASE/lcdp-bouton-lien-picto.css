@@ -1,3 +1,129 @@
+
+/* Règles du parcours Réserver — ancien style HTML, avant variantes existantes. */
+body.lcdp-planifier-origine-alerte #lcdp-commande-bar-reserver-slot #bouton-changer-departement {
+      display: none !important;
+    }
+
+body.lcdp-planifier-origine-alerte #lcdp-commande-bar-reserver-slot #bouton-voir-carte {
+      flex: 0 1 220px;
+      width: min(220px, 100%);
+      margin: 0 auto;
+    }
+
+.lcdp-aboreza-privileges-information .lcdp-dialogue-ref__icone {
+      color: #4e6838;
+      border-color: #4e6838;
+      background: #eff7ed;
+    }
+
+.lcdp-aboreza-privileges-information .lcdp-aboreza-privileges-logo {
+      display: block;
+      flex: 0 0 17px;
+      width: 17px;
+      height: 17px;
+      object-fit: contain;
+      margin-top: 2px;
+    }
+
+.lcdp-aboreza-privileges-information .lcdp-aboreza-privileges-ajouter {
+      display: block;
+      margin: 0 0 17px;
+      color: #4e6838;
+      text-align: left;
+      font-size: .875rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+.lcdp-aboreza-catalogue__privileges {
+      display: inline;
+      flex: 0 0 auto;
+      margin: 0;
+      color: #4e6838;
+      font-size: 0.73rem;
+      font-weight: 600;
+      line-height: 1.35;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      cursor: pointer;
+    }
+
+.lcdp-aboreza-catalogue__privileges:hover,
+    .lcdp-aboreza-catalogue__privileges:focus-visible {
+      color: #334d26;
+      text-decoration-thickness: 2px;
+    }
+
+.lcdp-aboreza-confirmation-information .lcdp-dialogue-ref__icone {
+      color: #4e6838 !important;
+      border-color: #4e6838 !important;
+    }
+
+.lcdp-aboreza-confirmation-information .lcdp-dialogue-ref__icone svg {
+      color: #4e6838 !important;
+      stroke: #4e6838 !important;
+    }
+
+.lcdp-aboreza-demarrage .lcdp-box-calendrier-an__month[aria-pressed="false"] {
+      background: #fff;
+      color: inherit;
+      border-color: #d9dfd7;
+      box-shadow: none;
+    }
+
+.lcdp-aboreza-demarrage .lcdp-box-calendrier-an__month[aria-pressed="false"]:hover {
+      background: #edf3e8;
+      border-color: #4e6838;
+      box-shadow: 0 2px 8px rgba(31, 55, 25, .12);
+    }
+
+.lcdp-aboreza-demarrage .lcdp-box-calendrier-an__month[aria-pressed="false"]:focus-visible {
+      outline: 2px solid #4e6838;
+      outline-offset: 2px;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__privileges-lien {
+      color: #4e6838;
+      font-size: .79rem;
+      font-weight: 650;
+      line-height: 1.4;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      cursor: pointer;
+    }
+
+body.lcdp-page-reserver .lcdp-paiement-refonte__privileges-lien:focus-visible {
+      outline: 2px solid #4e6838;
+      outline-offset: 3px;
+    }
+
+body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__fermer {
+      position: absolute !important;
+      top: 10px;
+      right: 12px;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      width: 32px !important;
+      min-width: 32px !important;
+      height: 32px !important;
+      min-height: 32px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 1px solid #d6dcd3 !important;
+      border-radius: 50% !important;
+      background: #f4f7f2 !important;
+      color: #4e6838 !important;
+      font-size: 25px !important;
+      font-weight: 400 !important;
+      line-height: 1 !important;
+      box-shadow: none !important;
+      cursor: pointer;
+    }
+
 /* LCDP — BOUTONS, LIENS ET PICTOGRAMMES CLIQUABLES. Socle commun. */
 
 @keyframes lcdp-button-logo-loading {

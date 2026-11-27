@@ -1,3 +1,67 @@
+
+/* Règles du parcours Réserver — ancien style HTML, avant variantes existantes. */
+.lcdp-aboreza-privileges-information .lcdp-aboreza-privileges-liste {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      margin: 6px 0 14px;
+      padding-left: 0;
+      list-style: none;
+      color: #57534e;
+      text-align: left !important;
+      font-size: .875rem;
+      line-height: 1.55;
+    }
+
+.lcdp-aboreza-privileges-information .lcdp-aboreza-privileges-liste li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 0 0 10px;
+      padding-left: 0;
+      text-align: left !important;
+    }
+
+.lcdp-aboreza-privileges-information .lcdp-aboreza-privileges-liste li span {
+      flex: 1;
+      min-width: 0;
+    }
+
+.lcdp-aboreza-catalogue__privileges--ajoutes {
+      color: #9ca3af !important;
+      text-decoration: none !important;
+      cursor: default !important;
+    }
+
+.lcdp-aboreza-catalogue__liens-privileges {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      column-gap: 14px;
+      margin-top: 5px;
+      white-space: nowrap;
+    }
+
+.lcdp-aboreza-suivi {
+      box-sizing: border-box;
+      border: 2px solid #4e6838;
+      border-radius: 18px;
+      margin-top: -8px;
+    }
+
+.lcdp-aboreza-suivi__details {
+      padding-right: 34px;
+    }
+
+.lcdp-aboreza-catalogue__option--indisponible .lcdp-aboreza-catalogue__option-ligne {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+.lcdp-aboreza-catalogue__option--indisponible .lcdp-aboreza-catalogue__statut {
+      white-space: normal;
+    }
+
 /* TUNNEL DE COMMANDE — coque et transitions du parcours abonnement. */
 .lcdp-box-workflow-abonnement {
   position: fixed;
