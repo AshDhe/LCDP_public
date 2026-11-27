@@ -3,7 +3,6 @@
 @import url("./lcdp-menu-burger.css");
 @import url("./lcdp-footer.css");
 @import url("./lcdp-wrapper.css");
-@import url("./lcdp-bouton-lien-picto.css");
 @import url("./lcdp-boite-dialogue.css");/* ======================================================================
    OBJETS GENERIQUES ET COMPOSANTS — PRESENTATION CENTRALISEE
    29 feuilles CSS génériques précédemment séparées, ordre d’origine de PLANIFIER conservé.
@@ -27489,3 +27488,11 @@ body > .lcdp-attente-plein-ecran.lcdp-planifier-partage-attente:not([hidden]) {
 
 
 
+
+/* Disposition du formulaire de connexion. */
+#formulaire-connexion-membre .lcdp-box-formulaire__actions {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }

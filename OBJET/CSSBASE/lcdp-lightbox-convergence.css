@@ -19,28 +19,28 @@
   --lcdp-modal-close-bg:var(--lcdp-ui-close-bg,#f7f7f4);
 }
 /* Les trois familles utilisent les mêmes fondations, leurs contenus restent propres. */
-.lcdp-page-accueil-membre :is(.lcdp-planifier-choix,.lcdp-box-dialogue-bouton,.lcdp-box-alerte){
+.lcdp-page-accueil-membre .lcdp-planifier-choix{
   box-sizing:border-box;background:var(--lcdp-modal-backdrop);
   backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
 }
-.lcdp-page-accueil-membre :is(.lcdp-planifier-choix__card,.lcdp-box-dialogue-bouton__card,.lcdp-box-alerte__card){
+.lcdp-page-accueil-membre .lcdp-planifier-choix__card{
   box-sizing:border-box;background:var(--lcdp-modal-surface);
   border-color:var(--lcdp-modal-stroke);border-radius:var(--lcdp-modal-radius);
   box-shadow:var(--lcdp-modal-shadow);
 }
 
 
-.lcdp-page-accueil-membre :is(.lcdp-planifier-choix__title,.lcdp-box-dialogue-bouton__title){
+.lcdp-page-accueil-membre .lcdp-planifier-choix__title{
   color:var(--lcdp-modal-ink);letter-spacing:-.025em;
 }
-.lcdp-page-accueil-membre :is(.lcdp-planifier-choix__subtitle,.lcdp-box-dialogue-bouton__text){
+.lcdp-page-accueil-membre .lcdp-planifier-choix__subtitle{
   color:var(--lcdp-modal-muted);
 }
-.lcdp-page-accueil-membre :is(.lcdp-planifier-choix,.lcdp-box-dialogue-bouton,.lcdp-box-alerte) :is(button,a):focus-visible{
+.lcdp-page-accueil-membre .lcdp-planifier-choix :is(button,a):focus-visible{
   outline:3px solid var(--lcdp-modal-focus);outline-offset:3px;
 }
 @media(prefers-reduced-motion:reduce){
-  .lcdp-page-accueil-membre :is(.lcdp-planifier-choix,.lcdp-box-dialogue-bouton,.lcdp-box-alerte) *{transition:none!important}
+  .lcdp-page-accueil-membre .lcdp-planifier-choix *{transition:none!important}
 }
 
 /* ==========================================================================
@@ -50,88 +50,6 @@
    interactions, ni les boîtes internes des workflows d'abonnement/réservation.
    Le fichier est chargé après le CSS central par les pages opt-in.
    ========================================================================== */
-:where(body.lcdp-app-page) {
-  --lcdp-dialogue-fond: var(--lcdp-color-surface, #fff);
-  --lcdp-dialogue-texte: var(--lcdp-color-text, #1f2a24);
-  --lcdp-dialogue-muted: var(--lcdp-color-text-muted, #5f6861);
-  --lcdp-dialogue-bordure: var(--lcdp-ui-dialog-border, rgba(31,42,36,.14));
-  --lcdp-dialogue-ombre: var(--lcdp-ui-dialog-shadow, 0 20px 25px -5px rgba(31,42,36,.12));
-  --lcdp-dialogue-rayon: var(--lcdp-radius-large,24px);
-  --lcdp-dialogue-focus: var(--lcdp-color-focus,#b98c31);
-  --lcdp-dialogue-fermeture: var(--lcdp-ui-close-bg,#f7f7f4);
-}
-/* Alertes, boutons, champs, invitation et ajout d'images partagent les
-   mêmes fondamentaux visuels ; leurs largeurs restent propres à chaque objet. */
-:where(body.lcdp-app-page) :is(
-  .lcdp-box-alerte,
-  .lcdp-box-dialogue-bouton:not([data-lcdp-connexion]),
-  .lcdp-box-dialogue-champ,
-  .lcdp-box-dialogue-champ-inviter,
-  .lcdp-box-dialogue-upload-img
-) {
-  --lcdp-modal-surface: var(--lcdp-dialogue-fond);
-  --lcdp-modal-ink: var(--lcdp-dialogue-texte);
-  --lcdp-modal-muted: var(--lcdp-dialogue-muted);
-  --lcdp-modal-stroke: var(--lcdp-dialogue-bordure);
-  --lcdp-modal-shadow: var(--lcdp-dialogue-ombre);
-  --lcdp-modal-radius: var(--lcdp-dialogue-rayon);
-  --lcdp-modal-focus: var(--lcdp-dialogue-focus);
-  --lcdp-modal-close-bg: var(--lcdp-dialogue-fermeture);
-}
-/* Cartes autonomes seulement : exclure les contenus internes des workflows. */
-:where(body.lcdp-app-page) :is(
-  .lcdp-box-alerte,
-  .lcdp-box-dialogue-bouton,
-  .lcdp-box-dialogue-champ,
-  .lcdp-box-dialogue-champ-inviter,
-  .lcdp-box-dialogue-upload-img
-):not(.lcdp-box-workflow-abonnement__content *):not(.lcdp-box-workflow-reservation__content *) > :is(
-  .lcdp-box-alerte__card,
-  .lcdp-box-dialogue-bouton__card,
-  .lcdp-box-dialogue-champ__card,
-  .lcdp-box-dialogue-champ-inviter__card,
-  .lcdp-box-dialogue-upload-img__card
-) {
-  box-sizing: border-box;
-  border-color: var(--lcdp-modal-stroke,var(--lcdp-dialogue-bordure));
-  border-radius: var(--lcdp-modal-radius,var(--lcdp-dialogue-rayon));
-  background: var(--lcdp-modal-surface,var(--lcdp-dialogue-fond));
-  box-shadow: var(--lcdp-modal-shadow,var(--lcdp-dialogue-ombre));
-}
-:where(body.lcdp-app-page) :is(
-  .lcdp-box-alerte,
-  .lcdp-box-dialogue-bouton,
-  .lcdp-box-dialogue-champ,
-  .lcdp-box-dialogue-champ-inviter,
-  .lcdp-box-dialogue-upload-img
-) :is(input,select,textarea):focus-visible {
-  outline: 3px solid var(--lcdp-modal-focus,var(--lcdp-dialogue-focus));
-  outline-offset: 3px;
-}
-@media (prefers-reduced-motion: reduce) {
-  :where(body.lcdp-app-page) :is(
-    .lcdp-box-alerte,
-    .lcdp-box-dialogue-bouton,
-    .lcdp-box-dialogue-champ,
-    .lcdp-box-dialogue-champ-inviter,
-    .lcdp-box-dialogue-upload-img
-  ) * { transition-duration: 0s !important; }
-}
-
-
-/* Phase 4 — robustesse des dialogues sur petits écrans et libellés longs.
-   Les gabarits fonctionnels conservent leurs dimensions et leur mise en page. */
-:where(body.lcdp-app-page) :is(
-  .lcdp-box-alerte__message,
-  .lcdp-box-dialogue-bouton__text,
-  .lcdp-box-dialogue-champ__title,
-  .lcdp-box-dialogue-champ-inviter__title,
-  .lcdp-box-dialogue-upload-img__title
-) {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
 
 /* Phase 5 — PLANIFIER : toutes les réponses sont contenues dans le wrapper.
    Un portail dédié accueille les dialogues JavaScript ; le slot historique
@@ -209,42 +127,7 @@ body.lcdp-page-reserver #lcdp-planifier-dialogues-slot :is(
 ) {
   max-width: calc(100% - 24px);
   max-height: calc(100% - 24px);
-}/* ==========================================================================
-   Références de dialogues — quatre objets génériques Tailwind, activation EXPLICITE.
-   Ces classes ne modifient aucun dialogue existant : attribution progressive
-   après contrôle du contexte et du mécanisme de fermeture.
-   Coexistence avec les jetons du socle LCDP et sans Preflight.
-   ========================================================================== */
-/* Mode conteneur : même objet graphique, positionné dans une fenêtre hôte.
-   Cette option générique ne dépend d'aucune page métier. */
-/* En mode conteneur, la carte reste dans la hauteur disponible du wrapper. */
-
-
-
-
-
-
-/* ERREUR : même gabarit, une action, signal visuel rouge. Aucune règle par page. */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Paiement CB : variante du dialogue officiel, sans style local. */
+}/* Paiement CB : variante du dialogue officiel, sans style local. */
 [data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-details] {font-size:14px;line-height:1.6;color:#475569;margin:10px 0 0;overflow-wrap:anywhere;}
 [data-lcdp-paiement-cb-dialogue] [data-lcdp-paiement-cb-message][hidden] {display:none!important;}
 

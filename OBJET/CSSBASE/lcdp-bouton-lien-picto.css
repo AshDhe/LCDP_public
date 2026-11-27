@@ -4619,3 +4619,30 @@ body.lcdp-formulaire-public-unifie .lcdp-box-formulaire__actions .lcdp-button:ho
 
 /* Commande native de sélection d'un fichier. */
 input[type="file"]::file-selector-button {min-height:36px;margin-right:var(--lcdp-space-2);padding:7px 12px;border:1px solid var(--lcdp-color-logo-green);border-radius:var(--lcdp-radius-small);background:var(--lcdp-color-logo-green);color:#fff;font:inherit;font-weight:600;cursor:pointer;}
+
+/* Action secondaire de connexion et focus des dialogues. */
+#formulaire-connexion-membre #lien-non-inscrit {
+      box-sizing: border-box;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex: 0 0 auto !important;
+      width: 112px !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      padding: 4px 8px !important;
+      margin: 32px auto 0 !important;
+      border-radius: 7px !important;
+      font-size: 10px !important;
+      line-height: 1.1 !important;
+      text-align: center;
+    }
+#formulaire-connexion-membre #lien-non-inscrit > span {
+      font-size: inherit !important;
+      line-height: inherit !important;
+    }
+.lcdp-page-accueil-membre :is(.lcdp-box-dialogue-bouton,.lcdp-box-alerte) :is(button,a):focus-visible{
+  outline:3px solid var(--lcdp-modal-focus);outline-offset:3px;
+}

@@ -141,9 +141,9 @@
   let cssDialogueReference = null;
   async function assurerCssDialogueReference() {
     if (cssDialogueReference) return cssDialogueReference;
-    const href = urlObjet('/CSSBASE/lcdp-lightbox-convergence.css');
+    const href = urlObjet('/CSSBASE/lcdp-boite-dialogue.css');
     if ([...document.querySelectorAll('link[rel="stylesheet"]')]
-      .some(lien => lien.href === new URL(href, document.baseURI).href)) return;
+      .some(lien => /\/(?:lcdp-central-mobile-first|cssbase|lcdp-boite-dialogue)\.css$/.test(new URL(lien.href, document.baseURI).pathname))) return;
     cssDialogueReference = new Promise((resolve,reject) => {
       const lien = document.createElement('link');
       lien.rel = 'stylesheet';

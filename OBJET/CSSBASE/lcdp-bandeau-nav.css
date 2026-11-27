@@ -266,3 +266,14 @@ html[data-lcdp-css~="c034"] .lcdp-box-bandeau-nav {
 :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-app-wrapper > #lcdp-bandeau-slot, :where(html[data-lcdp-css~="c085"]) .lcdp-app-page--role .lcdp-app-wrapper .lcdp-box-bandeau-nav {
   background: var(--lcdp-role-accent);
 }
+
+/* Position du bandeau sur la connexion membre. */
+body.lcdp-connexion-membre #lcdp-bandeau-slot .lcdp-box-bandeau-nav__inner {
+      position: relative;
+    }
+body.lcdp-connexion-membre #lcdp-bandeau-slot .lcdp-box-bandeau-nav__logo-link {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
