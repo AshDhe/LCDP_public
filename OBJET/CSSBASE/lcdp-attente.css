@@ -92,3 +92,6 @@ html.lcdp-planning-membre-ready #lcdp-planning-attente { display: none; }
 
 /* Réactivation temporaire de l'attente lors de l'ouverture des invitations. */
 html.lcdp-planning-membre-ready #lcdp-planning-attente.lcdp-attente--active {display:flex;}
+
+/* Les éléments internes de l'attente respectent hidden, y compris le pictogramme. */
+#lcdp-attente-page-membre [hidden] {display:none!important;}

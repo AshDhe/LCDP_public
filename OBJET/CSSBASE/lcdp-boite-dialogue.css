@@ -1456,3 +1456,14 @@ white-space:normal;overflow-wrap:break-word;word-break:normal}
 @media(max-width:480px) {
 .lcdp-panier-existant .lcdp-box-dialogue-bouton__title {font-size:21px}
 }
+
+/* Dialogue de référence intégré au parcours de règlement. */
+[data-lcdp-paiement-impaye-parcours] [data-lcdp-compte-parcours-contenu] > .lcdp-dialogue-ref {
+  box-sizing:border-box;position:static;inset:auto;display:flex;align-items:center;justify-content:center;
+  width:100%;min-width:0;height:auto;margin:0;padding:0;background:transparent;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+
+[data-lcdp-paiement-impaye-parcours] .lcdp-dialogue-ref__card {
+  box-sizing:border-box;width:100%;min-width:0;max-width:100%;margin:0;box-shadow:none;
+}

@@ -584,3 +584,12 @@ body.lcdp-page-reserver .lcdp-aboreza-recapitulatif .lcdp-paiement-refonte__erre
 body.lcdp-stripe-page .lcdp-app-wrapper > main.lcdp-stripe .lcdp-stripe__entete {padding:16px 18px;}
 body.lcdp-stripe-page .lcdp-app-wrapper > main.lcdp-stripe .lcdp-stripe__corps {padding:20px 18px 24px;min-width:0;}
 .lcdp-stripe-page #paiement-formulaire,.lcdp-stripe-page #stripe-payment-element {width:100%;min-width:0;max-width:100%;}
+
+/* ÉTAPE FACULTATIVE : sélection d'une échéance à régler avant le paiement. */
+html body :is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main,#lcdp-accueil-contenu) > [data-lcdp-paiement-impaye-parcours]:has([data-lcdp-impaye-liste]) {
+  align-items:flex-start;
+}
+
+html body :is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main,#lcdp-accueil-contenu) > [data-lcdp-paiement-impaye-parcours]:has([data-lcdp-impaye-liste]) > .lcdp-impaye-conteneur {
+  max-width:680px;
+}

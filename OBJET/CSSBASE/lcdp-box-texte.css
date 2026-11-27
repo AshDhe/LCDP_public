@@ -142,3 +142,7 @@
 }
 
 .lcdp-boxtext__title.lcdp-boxtext__title--espace-apres {margin-bottom:24px;}
+
+/* Variante des titres et textes introductifs de liste. */
+.lcdp-boxtext__title.lcdp-boxtext__title--liste {margin:0;text-align:center;font-size:24px;line-height:32px;font-weight:900;letter-spacing:-.025em;color:#0f172a;}
+.lcdp-boxtext__text--intro-liste {margin:0;text-align:center;font-size:14px;line-height:1.5;}

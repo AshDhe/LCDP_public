@@ -222,3 +222,34 @@ body.lcdp-stripe-page .lcdp-app-wrapper > .lcdp-site-main {
   background: #fff;
 }
 .lcdp-app-wrapper--securite > .lcdp-site-main > * { flex-shrink: 0; }
+
+/* Accueil d'un parcours intégré dans le wrapper. */
+html body :is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main,#lcdp-accueil-contenu):has(> [data-lcdp-paiement-impaye-parcours]) > [hidden] {
+  display:none !important;
+}
+
+html body :is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main,#lcdp-accueil-contenu) > [data-lcdp-paiement-impaye-parcours] {
+  box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+  width:100%;min-width:0;min-height:100%;margin:0;padding:16px;
+}
+
+html body :is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main,#lcdp-accueil-contenu) > [data-lcdp-paiement-impaye-parcours] > .lcdp-impaye-conteneur {
+  box-sizing:border-box;width:100%;min-width:0;max-width:460px;margin:0 auto;padding:0;
+}
+
+[data-lcdp-paiement-impaye-parcours] [data-lcdp-compte-parcours-contenu] {
+  box-sizing:border-box;width:100%;min-width:0;margin:0;padding:0;
+}
+
+[data-lcdp-paiement-impaye-parcours] [hidden] {
+  display:none !important;
+}
+
+html body :is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main,#lcdp-accueil-contenu):has(> [data-lcdp-paiement-impaye-parcours]) {
+  display:block; min-width:0; min-height:0; padding:0; overflow-x:hidden; overflow-y:auto;
+  background:#f8fafc; box-sizing:border-box;
+}
+
+html body :is(.lcdp-app-wrapper,.lcdp-site-page) > :is(main,.lcdp-site-main,#lcdp-accueil-contenu) > [data-lcdp-paiement-impaye-parcours] [data-lcdp-compte-parcours-contenu] {
+  display:block;max-width:none;
+}

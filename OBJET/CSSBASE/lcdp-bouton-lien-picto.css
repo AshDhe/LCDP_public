@@ -1242,12 +1242,12 @@ body.lcdp-page-cle-du-parc .lcdp-acces[data-screen="codr_entry"] .lcdp-acces-for
 
 /* Commandes — lcdp-paiements-en-attente.css */
 
-[data-lcdp-impaye-liste] .lcdp-impaye-ligne > button {width:auto; min-width:84px; gap:6px; padding-inline:14px;}
+.lcdp-box-card-impaye__ligne > button {width:auto; min-width:84px; gap:6px; padding-inline:14px;}
 
 [data-lcdp-impaye-liste] > button {max-width:460px; justify-self:center;}
 
 @media(max-width:350px) {
-[data-lcdp-impaye-liste] .lcdp-impaye-ligne > button {width:100%;}
+.lcdp-box-card-impaye__ligne > button {width:100%;}
 }
 
 
@@ -5132,3 +5132,6 @@ html[data-lcdp-css~="c085"] .lcdp-boutique-services > .public-home__action {
 .lcdp-panier-existant .lcdp-box-dialogue-bouton__actions .lcdp-button-secondary:hover {background:#fff1f2;border-color:#fecdd3;color:#be123c}
 
 .lcdp-panier-existant .lcdp-button:focus-visible,.lcdp-panier-existant .lcdp-box-dialogue-bouton__close:focus-visible {outline:2px solid #4b6333;outline-offset:3px}
+
+/* Palette des commandes du règlement des impayés. */
+[data-lcdp-impaye-liste] {--lcdp-ref-vert:#4b6333;--lcdp-ref-vert-hover:#3d5129;}

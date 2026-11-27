@@ -977,3 +977,51 @@ gap: var(--lcdp-space-2);
 .lcdp-box-card-parc-diaporama [data-lcdp-diaporama-description] {margin:2px 0 8px;}
 /* OBJET : CARTE LISTE INVITÉS — titre en consultation. */
 #lcdp-listinvites-lecture-title {font-size:24px;font-weight:800;}
+
+/* OBJET : LISTE DE CARTES — variante échéances à régler. */
+.lcdp-box-liste-card.lcdp-box-liste-card--impayes {box-sizing:border-box;min-width:0;gap:16px;color:var(--lcdp-color-text,#1c1917);font:400 14px/1.5 Arial,system-ui,sans-serif;}
+.lcdp-box-liste-card--impayes > .lcdp-box-liste-card__list {gap:16px;min-width:0;}
+
+/* OBJET : CARTE IMPAYÉ — commande existante et échéances. */
+.lcdp-box-card-impaye {
+  min-width:0; padding:16px; border-radius:16px;
+  background:var(--lcdp-color-surface,#fff);
+  border:1px solid var(--lcdp-color-border,#e7e5e4);
+}
+
+.lcdp-box-card-impaye__entete {
+  display:grid;gap:3px;margin:0 0 12px;
+}
+
+.lcdp-box-card-impaye__entete > h2 {
+  margin:0;font-size:15px;font-weight:800;line-height:1.4;overflow-wrap:anywhere;
+}
+
+.lcdp-box-card-impaye__commande {
+  margin:0;font-size:12px;font-weight:400;line-height:1.4;color:#475569;overflow-wrap:anywhere;
+}
+
+.lcdp-box-card-impaye__echeances {
+  display:grid; list-style:none; margin:0; padding:0;
+}
+
+.lcdp-box-card-impaye__ligne {
+  display:grid; grid-template-columns:minmax(0,1fr) auto;
+  align-items:center; gap:12px; padding:12px 0;
+  border-top:1px solid var(--lcdp-color-border,#e7e5e4);
+}
+
+.lcdp-box-card-impaye__ligne > div {
+  display:grid; gap:4px; min-width:0;
+}
+
+.lcdp-box-card-impaye__ligne strong {
+  font-size:13px;font-weight:600;overflow-wrap:anywhere;
+}
+
+.lcdp-box-card-impaye__ligne span {
+  font-size:15px; font-weight:700;
+}
+@media(max-width:350px) {
+  .lcdp-box-card-impaye__ligne {grid-template-columns:1fr;}
+}
