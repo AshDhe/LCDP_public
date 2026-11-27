@@ -121,9 +121,7 @@ width: 100%;
     object-position: center center !important;
     border-radius: var(--lcdp-radius-media);
 }
-}
 
-@media (max-width: 767px) {
 .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
   display: block;
     width: 100% !important;
@@ -243,9 +241,7 @@ width: 100%;
     object-position: center center !important;
     border-radius: var(--lcdp-radius-media);
 }
-}
 
-@media (max-width: 767px) {
 :where(html[data-lcdp-css~="c070"]) .lcdp-box-fiche-parc__section--galerie-suite .lcdp-box-galerie__image {
   display: block;
     width: 100% !important;
@@ -321,9 +317,7 @@ width: 100%;
     min-height: 210px;
     aspect-ratio: auto;
 }
-}
 
-@media (min-width: 768px) {
 :where(html[data-lcdp-css~="c048"]) .lcdp-box-card-acces-parc__galerie .lcdp-box-galerie__image {
   min-height: 300px;
 }
@@ -411,12 +405,6 @@ width: 100%;
   width: 100%;
 }
 
-@media (min-width: 768px) {
-:where(html[data-lcdp-css~="c085"]) .lcdp-contenu-editorial .lcdp-boxtext figure > .lcdp-illustration {
-  width: 100%;
-}
-}
-
 
 /* Portrait et avatar */
 #dialogue-selfie-agrandi img {
@@ -437,9 +425,7 @@ width: 100%;
   :where(html[data-lcdp-css~="c085"]) .lcdp-actu-image-frame > img.lcdp-actu-image {
   transition: scale .7s ease, clip-path .7s ease;
 }
-}
 
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
 :where(html[data-lcdp-css~="c085"]) :is(img.lcdp-illustration:not(.lcdp-editorial-map__image), img.lcdp-box-galerie__image, img.lcdp-bandeau-image__galerie-photo, img.lcdp-bandeau-image__image, img.lcdp-actualite-image, img.lcdp-box-card-parc__image, img.lcdp-box-card-reservation-membre__image):not(.lcdp-box-carousel *) {
   /* Un cadre autonome conserve son emprise : (1 - 1/1.05) / 2. */
     clip-path: inset(0 round var(--lcdp-photo-zoom-radius, 0px));
@@ -485,9 +471,7 @@ width: 100%;
   scale: 1.05;
     clip-path: inset(2.380953% round calc(var(--lcdp-photo-zoom-radius, 0px) / 1.05));
 }
-}
 
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
 :where(html[data-lcdp-css~="c085"]) .lcdp-editorial-hero:hover > img.lcdp-editorial-hero__image,
   :where(html[data-lcdp-css~="c085"]) .lcdp-actu-image-frame:hover > img.lcdp-actu-image {
   scale: 1.05;
