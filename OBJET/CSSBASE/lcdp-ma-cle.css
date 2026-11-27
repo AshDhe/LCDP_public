@@ -627,3 +627,36 @@ body.lcdp-page-cle-du-parc .lcdp-acces[data-screen^="codr_"] .lcdp-box-formulair
   outline: 2px solid #222; outline-offset: 3px;
 }
 
+
+/* MA CLÉ — appel des invités : disposition de l'objet, sans redéfinir les
+   switches ni les dialogues partagés. */
+.lcdp-acces-appel-tableau {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align: left;
+}
+.lcdp-acces-appel-tableau th,
+.lcdp-acces-appel-tableau td {
+  padding: .5rem .25rem;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--lcdp-color-border, rgba(31,42,36,.16));
+}
+.lcdp-acces-appel-tableau thead th {
+  font-size: .875rem;
+  font-weight: 600;
+}
+.lcdp-acces-appel-tableau tbody th {font-weight: 400;}
+.lcdp-acces-appel-tableau th:nth-child(2),
+.lcdp-acces-appel-tableau td:nth-child(2) {width: 4.5rem; text-align:center;}
+.lcdp-acces-appel-tableau th:nth-child(3),
+.lcdp-acces-appel-tableau td:nth-child(3) {width: 3.75rem; text-align:center;}
+.lcdp-acces-appel-tableau td label {
+  display: inline-flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+.lcdp-acces-appel-tableau td label:has(input:disabled) {cursor: default;}
+.lcdp-acces-appel-tableau td input[name="minorite"] {vertical-align: middle; margin: 0;}
